@@ -1,0 +1,84 @@
+import { query, queryOne } from "../../db/client";
+
+export interface CardForStudy {
+  id: string;
+  content: { front: string; back: string };
+  category: string | null;
+}
+
+export function getDueAndNewCards(
+  userId: string,
+  deckId: string,
+  limit: number,
+) {
+  return query<CardForStudy>(
+    `SELECT c.id, c.content, c.category
+     FROM cards c
+     LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
+     WHERE c.deck_id = $2 AND c.user_id = $1
+       AND (p.id IS NULL OR p.due_at <= now())
+     ORDER BY (p.id IS NULL) ASC, p.due_at ASC NULLS LAST, c.position ASC
+     LIMIT $3`,
+    [userId, deckId, limit],
+  );
+}
+
+export function getProgressRow(userId: string, cardId: string) {
+  return queryOne<{
+    repetitions: number;
+    ease_factor: number;
+    interval_days: number;
+  }>(
+    `SELECT repetitions, ease_factor, interval_days
+     FROM card_progress WHERE user_id = $1 AND card_id = $2`,
+    [userId, cardId],
+  );
+}
+
+export function cardBelongsToUser(userId: string, cardId: string) {
+  return queryOne<{ id: string }>(
+    "SELECT id FROM cards WHERE id = $1 AND user_id = $2",
+    [cardId, userId],
+  );
+}
+
+export function upsertProgress(
+  userId: string,
+  cardId: string,
+  s: {
+    repetitions: number;
+    easeFactor: number;
+    intervalDays: number;
+    dueAt: Date;
+  },
+) {
+  return query(
+    `INSERT INTO card_progress
+       (user_id, card_id, repetitions, ease_factor, interval_days, due_at, last_reviewed_at)
+     VALUES ($1, $2, $3, $4, $5, $6, now())
+     ON CONFLICT (user_id, card_id) DO UPDATE
+       SET repetitions = EXCLUDED.repetitions, ease_factor = EXCLUDED.ease_factor,
+           interval_days = EXCLUDED.interval_days, due_at = EXCLUDED.due_at,
+           last_reviewed_at = now(), updated_at = now()`,
+    [userId, cardId, s.repetitions, s.easeFactor, s.intervalDays, s.dueAt],
+  );
+}
+
+export function getStats(userId: string, deckId: string) {
+  return queryOne<{
+    total: string;
+    new: string;
+    due: string;
+    learned: string;
+  }>(
+    `SELECT
+       count(c.*) AS total,
+       count(*) FILTER (WHERE p.id IS NULL) AS new,
+       count(*) FILTER (WHERE p.id IS NULL OR p.due_at <= now()) AS due,
+       count(*) FILTER (WHERE p.repetitions >= 1) AS learned
+     FROM cards c
+     LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
+     WHERE c.deck_id = $2 AND c.user_id = $1`,
+    [userId, deckId],
+  );
+}
