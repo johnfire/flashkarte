@@ -12,7 +12,7 @@ import com.flashmd.ui.screens.study.StudyScreen
 import com.flashmd.ui.screens.summary.SessionSummaryScreen
 
 @Composable
-fun NavGraph() {
+fun NavGraph(onLogout: () -> Unit = {}) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "decks") {
@@ -21,6 +21,7 @@ fun NavGraph() {
             DeckListScreen(
                 onStudyDeck = { deckId -> navController.navigate("study/$deckId") },
                 onStatsDeck = { deckId -> navController.navigate("stats/$deckId") },
+                onLogout = onLogout,
             )
         }
 

@@ -3,6 +3,8 @@ package com.flashmd.ui.screens.study
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.flashmd.data.remote.ApiException
+import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
 import com.flashmd.data.repository.StudyRepository
 import com.flashmd.domain.model.DueCard
@@ -22,12 +24,15 @@ data class StudyUiState(
     val isDone: Boolean = false,
     val nothingDue: Boolean = false,
     val ratingCounts: Map<Int, Int> = emptyMap(),
+    val isLoading: Boolean = true,
+    val error: String? = null,
 )
 
 @HiltViewModel
 class StudyViewModel @Inject constructor(
     private val deckRepo: DeckRepository,
     private val studyRepo: StudyRepository,
+    private val errorReporter: ErrorReporter,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -42,21 +47,33 @@ class StudyViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val deck = deckRepo.getDeckById(deckId)
-            val due = studyRepo.getDueCards(deckId)
-            queue.addAll(due)
+            try {
+                val deck = deckRepo.getDeckById(deckId)
+                val due = studyRepo.getDueCards(deckId)
+                queue.addAll(due)
 
-            if (queue.isEmpty()) {
+                if (queue.isEmpty()) {
+                    _uiState.value = _uiState.value.copy(
+                        deckTitle = deck?.title ?: "",
+                        nothingDue = true,
+                        isDone = true,
+                        isLoading = false,
+                    )
+                } else {
+                    _uiState.value = _uiState.value.copy(
+                        deckTitle = deck?.title ?: "",
+                        currentCard = queue.peek(),
+                        remaining = queue.size,
+                        isLoading = false,
+                    )
+                }
+            } catch (e: ApiException) {
+                _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
+            } catch (e: Exception) {
+                errorReporter.report(e.message ?: "study load failed", "Study.init", e)
                 _uiState.value = _uiState.value.copy(
-                    deckTitle = deck?.title ?: "",
-                    nothingDue = true,
-                    isDone = true,
-                )
-            } else {
-                _uiState.value = _uiState.value.copy(
-                    deckTitle = deck?.title ?: "",
-                    currentCard = queue.peek(),
-                    remaining = queue.size,
+                    isLoading = false,
+                    error = "Couldn't load this study session.",
                 )
             }
         }
@@ -72,8 +89,16 @@ class StudyViewModel @Inject constructor(
         if (!_uiState.value.isFlipped) return
 
         viewModelScope.launch {
-            studyRepo.applyRating(card.card.id, rating)
-            deckRepo.updateLastStudied(deckId)
+            try {
+                studyRepo.applyRating(card.card.id, rating)
+            } catch (e: ApiException) {
+                _uiState.value = _uiState.value.copy(error = e.message)
+                return@launch
+            } catch (e: Exception) {
+                errorReporter.report(e.message ?: "review failed", "Study.rate", e)
+                _uiState.value = _uiState.value.copy(error = "Couldn't save that rating.")
+                return@launch
+            }
 
             queue.poll()
             ratingCounts[rating] = (ratingCounts[rating] ?: 0) + 1

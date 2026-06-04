@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun DeckListScreen(
     onStudyDeck: (String) -> Unit,
     onStatsDeck: (String) -> Unit,
+    onLogout: () -> Unit = {},
     viewModel: DeckListViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -49,29 +50,14 @@ fun DeckListScreen(
         )
     }
 
-    // Conflict dialog
-    if (state.importConflict != null) {
-        AlertDialog(
-            onDismissRequest = { viewModel.cancelReplace() },
-            title = { Text("Deck Already Exists") },
-            text = {
-                Text(
-                    "\"${state.importConflict}\" already exists.\n" +
-                    "Replace it? Progress for unchanged cards will be kept."
-                )
-            },
-            confirmButton = {
-                TextButton(onClick = { viewModel.confirmReplace() }) { Text("Replace") }
-            },
-            dismissButton = {
-                TextButton(onClick = { viewModel.cancelReplace() }) { Text("Cancel") }
-            },
-        )
-    }
-
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("FlashMD", fontWeight = FontWeight.Bold) })
+            TopAppBar(
+                title = { Text("FlashMD", fontWeight = FontWeight.Bold) },
+                actions = {
+                    TextButton(onClick = onLogout) { Text("Log out") }
+                },
+            )
         },
         floatingActionButton = {
             FloatingActionButton(onClick = { filePicker.launch(arrayOf("text/*", "text/markdown")) }) {
@@ -79,7 +65,27 @@ fun DeckListScreen(
             }
         },
     ) { padding ->
-        if (state.decks.isEmpty()) {
+        if (state.decks.isEmpty() && state.isLoading) {
+            Box(
+                Modifier.fillMaxSize().padding(padding),
+                contentAlignment = Alignment.Center,
+            ) {
+                CircularProgressIndicator()
+            }
+        } else if (state.decks.isEmpty() && state.listError != null) {
+            Column(
+                Modifier.fillMaxSize().padding(padding).padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
+            ) {
+                Text(
+                    state.listError!!,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+                Button(onClick = { viewModel.refresh() }) { Text("Retry") }
+            }
+        } else if (state.decks.isEmpty()) {
             Box(
                 Modifier.fillMaxSize().padding(padding),
                 contentAlignment = Alignment.Center,

@@ -4,8 +4,9 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flashmd.data.parser.MdParser
+import com.flashmd.data.remote.ApiException
+import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
-import com.flashmd.data.repository.StudyRepository
 import com.flashmd.domain.model.Deck
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,64 +26,81 @@ data class DeckRow(
 
 data class DeckListUiState(
     val decks: List<DeckRow> = emptyList(),
+    val isLoading: Boolean = true,
+    val listError: String? = null,
     val importError: String? = null,
-    val importConflict: String? = null,   // deck title awaiting replace confirmation
-    val pendingParsed: Any? = null,        // ParsedDeck held while confirm dialog shown
 )
 
 @HiltViewModel
 class DeckListViewModel @Inject constructor(
     private val deckRepo: DeckRepository,
-    private val studyRepo: StudyRepository,
+    private val errorReporter: ErrorReporter,
 ) : ViewModel() {
 
+    private val _isLoading = MutableStateFlow(true)
+    private val _listError = MutableStateFlow<String?>(null)
     private val _importError = MutableStateFlow<String?>(null)
-    private val _importConflict = MutableStateFlow<String?>(null)
-    private val _pendingParsed = MutableStateFlow<com.flashmd.data.parser.ParsedDeck?>(null)
 
     val uiState: StateFlow<DeckListUiState> = combine(
         deckRepo.getAllDecksFlow(),
+        _isLoading,
+        _listError,
         _importError,
-        _importConflict,
-    ) { decks, error, conflict ->
-        val rows = decks.map { deck ->
-            val stats = studyRepo.getStats(deck.id)
-            DeckRow(deck, stats.total, stats.due)
-        }
-        DeckListUiState(rows, error, conflict)
+    ) { decks, loading, listError, importError ->
+        DeckListUiState(
+            decks = decks.map { DeckRow(it, it.totalCards, it.dueCount) },
+            isLoading = loading,
+            listError = listError,
+            importError = importError,
+        )
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), DeckListUiState())
+
+    init {
+        refresh()
+    }
+
+    fun refresh() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _listError.value = null
+            try {
+                deckRepo.refresh()
+            } catch (e: ApiException) {
+                _listError.value = e.message
+            } catch (e: Exception) {
+                _listError.value = "Something went wrong loading your decks."
+                errorReporter.report(e.message ?: "deck refresh failed", "DeckList.refresh", e)
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
 
     fun importFromStream(stream: InputStream, fileName: String, context: Context) {
         viewModelScope.launch {
-            val text = stream.bufferedReader().readText()
-            val parsed = MdParser.parse(text, fileName)
+            val text = try {
+                stream.bufferedReader().use { it.readText() }
+            } catch (e: Exception) {
+                _importError.value = "Couldn't read that file."
+                return@launch
+            }
 
+            // Fast local check so we don't round-trip an obviously empty file.
+            val parsed = MdParser.parse(text, fileName)
             if (parsed.cards.isEmpty()) {
                 _importError.value = "No flashcards found in this file."
                 return@launch
             }
 
-            if (deckRepo.deckExistsByTitle(parsed.title)) {
-                _pendingParsed.value = parsed
-                _importConflict.value = parsed.title
-            } else {
-                deckRepo.importDeck(parsed)
+            try {
+                deckRepo.importMarkdown(text, parsed.title)
+            } catch (e: ApiException) {
+                _importError.value = e.message
+            } catch (e: Exception) {
+                _importError.value = "Import failed. Please try again."
+                errorReporter.report(e.message ?: "import failed", "DeckList.import", e)
             }
         }
-    }
-
-    fun confirmReplace() {
-        val parsed = _pendingParsed.value ?: return
-        viewModelScope.launch {
-            deckRepo.importDeck(parsed)
-            _pendingParsed.value = null
-            _importConflict.value = null
-        }
-    }
-
-    fun cancelReplace() {
-        _pendingParsed.value = null
-        _importConflict.value = null
     }
 
     fun clearError() { _importError.value = null }

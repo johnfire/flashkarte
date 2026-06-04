@@ -3,6 +3,8 @@ package com.flashmd.ui.screens.stats
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.flashmd.data.remote.ApiException
+import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
 import com.flashmd.data.repository.DeckStudyStats
 import com.flashmd.data.repository.StudyRepository
@@ -16,12 +18,15 @@ import javax.inject.Inject
 data class StatsUiState(
     val deck: Deck? = null,
     val stats: DeckStudyStats? = null,
+    val isLoading: Boolean = true,
+    val error: String? = null,
 )
 
 @HiltViewModel
 class StatsViewModel @Inject constructor(
     private val deckRepo: DeckRepository,
     private val studyRepo: StudyRepository,
+    private val errorReporter: ErrorReporter,
     savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -32,9 +37,17 @@ class StatsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val deck = deckRepo.getDeckById(deckId)
-            val stats = studyRepo.getStats(deckId)
-            _uiState.value = StatsUiState(deck, stats)
+            try {
+                val deck = deckRepo.getDeckById(deckId)
+                val stats = studyRepo.getStats(deckId)
+                _uiState.value = StatsUiState(deck, stats, isLoading = false)
+            } catch (e: ApiException) {
+                _uiState.value = StatsUiState(isLoading = false, error = e.message)
+            } catch (e: Exception) {
+                errorReporter.report(e.message ?: "stats load failed", "Stats.init", e)
+                _uiState.value =
+                    StatsUiState(isLoading = false, error = "Couldn't load stats.")
+            }
         }
     }
 }

@@ -4,6 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flashmd.ui.auth.AuthScreen
+import com.flashmd.ui.auth.SessionViewModel
 import com.flashmd.ui.navigation.NavGraph
 import com.flashmd.ui.theme.FlashMdTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +26,18 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FlashMdTheme {
-                NavGraph()
+                val session: SessionViewModel = hiltViewModel()
+                val loggedIn by session.isLoggedIn.collectAsStateWithLifecycle()
+
+                when (loggedIn) {
+                    null -> Surface(Modifier.fillMaxSize()) {
+                        Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            CircularProgressIndicator()
+                        }
+                    }
+                    false -> AuthScreen()
+                    true -> NavGraph(onLogout = { session.logout() })
+                }
             }
         }
     }
