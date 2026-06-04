@@ -1,0 +1,61 @@
+services:
+  app:
+    build: .
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=flashkarte
+      - POSTGRES_USER=flashkarte
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - CORS_ORIGIN=https://${NGINX_HOST}
+      - LOG_DIR=/logs
+    ports:
+      - "127.0.0.1:${APP_PORT:-8090}:3001"
+    volumes:
+      - ${FLASHKARTE_LOG_PATH:-./logs}:/logs
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_DB=flashkarte
+      - POSTGRES_USER=flashkarte
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - flashkarte_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flashkarte"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  db-backup:
+    image: prodrigestivill/postgres-backup-local:16-alpine
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=flashkarte
+      - POSTGRES_USER=flashkarte
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_EXTRA_OPTS=--clean --if-exists
+      - SCHEDULE=@daily
+      - BACKUP_KEEP_DAYS=7
+      - BACKUP_KEEP_WEEKS=4
+      - BACKUP_KEEP_MONTHS=3
+      - TZ=${TZ:-UTC}
+    volumes:
+      - ./backups:/backups
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  flashkarte_pgdata:
