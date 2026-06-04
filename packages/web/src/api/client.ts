@@ -5,6 +5,8 @@ import {
   StudyCard,
   ReviewResult,
   DeckStats,
+  ApiKey,
+  CreatedApiKey,
 } from "./types";
 
 const APP_VERSION = "0.1.0";
@@ -129,5 +131,15 @@ export const api = {
         method: "POST",
         body: JSON.stringify({ card_id: cardId, rating }),
       }),
+  },
+  keys: {
+    list: () => request<ApiKey[]>("/keys"),
+    create: (name: string) =>
+      request<CreatedApiKey>("/keys", {
+        method: "POST",
+        body: JSON.stringify({ name }),
+      }),
+    revoke: (prefix: string) =>
+      request<void>(`/keys/${prefix}`, { method: "DELETE" }),
   },
 };

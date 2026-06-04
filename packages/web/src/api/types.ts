@@ -51,3 +51,13 @@ export interface DeckStats {
   due: number;
   learned: number;
 }
+
+export interface ApiKey {
+  name: string;
+  key_prefix: string;
+  created_at: string;
+}
+
+export interface CreatedApiKey extends ApiKey {
+  key: string;
+}

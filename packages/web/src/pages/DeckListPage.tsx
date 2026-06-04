@@ -54,6 +54,9 @@ export function DeckListPage() {
           >
             New deck
           </Link>
+          <Link to="/settings" className="self-center text-sm text-gray-500">
+            Settings
+          </Link>
           <button
             onClick={async () => {
               await logout();
