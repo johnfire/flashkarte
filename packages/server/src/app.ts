@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -72,6 +73,15 @@ export function createApp() {
   app.use("/api", requireAuth);
   app.use("/api/decks", decksRouter);
   app.use("/api/study", studyRouter);
+
+  // Serve the built web SPA in production (Dockerfile copies web/dist → public).
+  if (process.env.NODE_ENV === "production") {
+    const webDist = path.join(__dirname, "..", "public");
+    app.use(express.static(webDist));
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(webDist, "index.html"));
+    });
+  }
 
   app.use(errorHandler);
   return app;
