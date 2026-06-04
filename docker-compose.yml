@@ -1,6 +1,8 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+      target: production
     environment:
       - NODE_ENV=production
       - PORT=3001
@@ -19,6 +21,20 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    restart: unless-stopped
+
+  mcp:
+    build:
+      context: .
+      target: mcp
+    environment:
+      - NODE_ENV=production
+      - MCP_PORT=3002
+      - FLASHKARTE_API_URL=http://app:3001
+    ports:
+      - "127.0.0.1:${MCP_PORT:-8091}:3002"
+    depends_on:
+      - app
     restart: unless-stopped
 
   db:

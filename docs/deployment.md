@@ -1,10 +1,11 @@
 # Deployment
 
 flashkarte deploys as a Docker Compose stack: one **app** container (Express,
-serves the built web SPA + the `/api` routes), a **postgres** container, and a
-daily **db-backup** sidecar. The app publishes only to `127.0.0.1:${APP_PORT}`;
-the VPS's existing reverse proxy (Apache/nginx) terminates TLS for
-`flashkarte.christopherrehm.de` and forwards to that port.
+serves the built web SPA + the `/api` routes), an **mcp** container (the hosted
+MCP server for users' AI clients), a **postgres** container, and a daily
+**db-backup** sidecar. The app and mcp publish only to `127.0.0.1` (`${APP_PORT}`
+and `${MCP_PORT}`); the VPS's reverse proxy terminates TLS and forwards
+`flashkarte.christopherrehm.de` → app and the MCP endpoint → mcp.
 
 > **Going live is a manual step.** It touches live infra (DNS + VPS) and should
 > be performed deliberately by the maintainer.
@@ -14,6 +15,7 @@ the VPS's existing reverse proxy (Apache/nginx) terminates TLS for
 1. **DNS** — add an `A` record for `flashkarte.christopherrehm.de` → the VPS IP.
 2. **Clone** the repo on the VPS.
 3. **Env** — copy and fill `.env` (never commit it):
+
    ```bash
    cp .env.example .env
    ```
@@ -43,6 +45,16 @@ Point a vhost for `flashkarte.christopherrehm.de` at `http://127.0.0.1:8090`
 (same pattern as the other apps on the VPS), then issue a certificate with
 certbot. The app sets `CORS_ORIGIN=https://flashkarte.christopherrehm.de` from
 `NGINX_HOST`.
+
+### MCP server
+
+The hosted MCP server publishes to `127.0.0.1:${MCP_PORT}` (default `8091`).
+Expose it at a stable URL — either a subdomain (`mcp.flashkarte.christopherrehm.de`)
+or a path the reverse proxy maps to `http://127.0.0.1:8091/mcp`. Users add that
+URL plus a personal API key (generated at `/settings` in the web app) to their AI
+client (e.g. Claude Desktop). Their AI then calls the MCP tools
+(`create_deck`, `add_cards`, `list_decks`, `get_deck`, `delete_deck`), which act
+on that user's account — the AI compute runs on the user's own account, not ours.
 
 ## Logs
 
