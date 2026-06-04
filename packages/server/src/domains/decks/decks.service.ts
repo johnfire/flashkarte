@@ -20,6 +20,24 @@ export async function importDeck(
   return { ...deck, card_count: parsed.cards.length };
 }
 
+export async function appendCards(
+  userId: string,
+  deckId: string,
+  markdown: unknown,
+) {
+  if (typeof markdown !== "string" || !markdown.trim()) {
+    throw new ValidationError("Markdown content is required");
+  }
+  const deck = await repo.getDeck(userId, deckId);
+  if (!deck) throw new NotFoundError("Deck not found");
+  const parsed = parseDeck(markdown, "");
+  if (parsed.cards.length === 0) {
+    throw new ValidationError("No cards found — check the Markdown format");
+  }
+  await repo.appendCards(userId, deckId, parsed.cards);
+  return { deck_id: deckId, added: parsed.cards.length };
+}
+
 export function list(userId: string) {
   return repo.listDecksWithCounts(userId);
 }

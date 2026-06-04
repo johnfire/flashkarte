@@ -14,6 +14,7 @@ decksRouter.post("/", upload.single("file"), ctrl.create);
 decksRouter.get("/:id", ctrl.get);
 decksRouter.patch("/:id", ctrl.rename);
 decksRouter.delete("/:id", ctrl.remove);
+decksRouter.post("/:id/cards", ctrl.addCards);
 
 // Deck-scoped study + stats
 decksRouter.get("/:id/study", study.studyBatch);

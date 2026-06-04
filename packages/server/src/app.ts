@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import { authRouter } from "./domains/auth/auth.routes";
 import { decksRouter } from "./domains/decks/decks.routes";
 import { studyRouter } from "./domains/study/study.routes";
+import { keysRouter } from "./domains/keys/keys.routes";
 import { clientErrorsRouter } from "./domains/client-errors/client-errors.routes";
 import { requireAuth } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
@@ -73,6 +74,7 @@ export function createApp() {
   app.use("/api", requireAuth);
   app.use("/api/decks", decksRouter);
   app.use("/api/study", studyRouter);
+  app.use("/api/keys", keysRouter);
 
   // Serve the built web SPA in production (Dockerfile copies web/dist → public).
   if (process.env.NODE_ENV === "production") {

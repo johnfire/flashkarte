@@ -43,6 +43,31 @@ export async function insertCards(
   }
 }
 
+export async function appendCards(
+  userId: string,
+  deckId: string,
+  cards: ParsedCard[],
+) {
+  const maxRow = await queryOne<{ max: number | null }>(
+    "SELECT max(position) AS max FROM cards WHERE deck_id = $1 AND user_id = $2",
+    [deckId, userId],
+  );
+  let i = (maxRow?.max ?? -1) + 1;
+  for (const c of cards) {
+    await query(
+      `INSERT INTO cards (user_id, deck_id, type, content, category, position)
+       VALUES ($1, $2, 'basic', $3, $4, $5)`,
+      [
+        userId,
+        deckId,
+        JSON.stringify({ front: c.front, back: c.back }),
+        c.category,
+        i++,
+      ],
+    );
+  }
+}
+
 export function listDecksWithCounts(userId: string) {
   return query<DeckRow & { card_count: string; due_count: string }>(
     `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at,

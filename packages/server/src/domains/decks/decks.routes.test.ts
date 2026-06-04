@@ -75,4 +75,26 @@ describe("decks routes", () => {
     expect(res.status).toBe(404);
     expect(res.body.error.code).toBe("NOT_FOUND");
   });
+
+  test("POST /api/decks/:id/cards appends -> 201", async () => {
+    mock.appendCards.mockResolvedValue({ deck_id: "d1", added: 2 } as never);
+    const res = await request(app)
+      .post("/api/decks/d1/cards")
+      .send({ markdown: "**1. Q**\nA\n\n**2. Q2**\nA2" });
+    expect(res.status).toBe(201);
+    expect(res.body.added).toBe(2);
+    expect(mock.appendCards).toHaveBeenCalledWith(
+      "u1",
+      "d1",
+      "**1. Q**\nA\n\n**2. Q2**\nA2",
+    );
+  });
+
+  test("POST /api/decks/:id/cards on missing deck -> 404", async () => {
+    mock.appendCards.mockRejectedValue(new NotFoundError("Deck not found"));
+    const res = await request(app)
+      .post("/api/decks/nope/cards")
+      .send({ markdown: "**1. Q**\nA" });
+    expect(res.status).toBe(404);
+  });
 });

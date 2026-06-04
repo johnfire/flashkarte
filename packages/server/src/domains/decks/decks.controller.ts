@@ -11,6 +11,15 @@ export const create = wrapAsync(async (req: Request, res: Response) => {
   res.status(201).json(deck);
 });
 
+export const addCards = wrapAsync(async (req: Request, res: Response) => {
+  const result = await service.appendCards(
+    req.userId!,
+    req.params.id,
+    req.body.markdown,
+  );
+  res.status(201).json(result);
+});
+
 export const list = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.list(req.userId!));
 });
