@@ -277,11 +277,11 @@ React + Vite + Tailwind SPA. Screens:
   `~/logs/`).
 - Push-to-main CI/CD: build + test + deploy.
 
-## 12. Open questions
+## 12. Decisions & deferrals
 
-- Email verification on signup for v1, or defer? (Lean: defer — allow signup,
-  add verification before any real marketing push.)
-- Password reset flow in v1, or defer to a fast-follow? (Lean: defer to
-  fast-follow; needs email sending infra.)
-- Rate-limit store: in-memory (single container) is fine for v1; revisit if we
+- **Email verification on signup** — deferred from v1, tracked as #4. Users can
+  sign up and use the app immediately; verification lands before any marketing push.
+- **Password reset** — deferred from v1, tracked as #5 (needs email infra, shared
+  with #4).
+- **Rate-limit store** — in-memory (single container) is fine for v1; revisit if we
   scale horizontally (same lesson as notes-world).
