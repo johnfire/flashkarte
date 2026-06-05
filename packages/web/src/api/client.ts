@@ -1,5 +1,7 @@
 import {
   User,
+  AdminUser,
+  AccountType,
   DeckWithCounts,
   DeckDetail,
   StudyCard,
@@ -161,5 +163,18 @@ export const api = {
       }),
     revoke: (prefix: string) =>
       request<void>(`/keys/${prefix}`, { method: "DELETE" }),
+  },
+  admin: {
+    listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),
+    createUser: (email: string, password: string, accountType: AccountType) =>
+      request<{ user: AdminUser }>("/admin/users", {
+        method: "POST",
+        body: JSON.stringify({ email, password, accountType }),
+      }),
+    setAccountType: (id: string, accountType: AccountType) =>
+      request<{ user: AdminUser }>(`/admin/users/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ accountType }),
+      }),
   },
 };

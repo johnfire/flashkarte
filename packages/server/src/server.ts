@@ -3,6 +3,7 @@ import { validateEnv } from "./config/env";
 import { createApp } from "./app";
 import { getPool } from "./db/client";
 import { runMigrations } from "./db/migrate";
+import { bootstrapAdmins } from "./db/bootstrap";
 import { logger } from "./utils/logger";
 
 const env = validateEnv();
@@ -23,6 +24,7 @@ async function start() {
   const pool = getPool();
   await pool.query("SELECT 1");
   await runMigrations(pool);
+  await bootstrapAdmins(pool);
   createApp().listen(env.PORT, () =>
     logger.info(`flashkarte server on ${env.PORT} (${env.NODE_ENV})`),
   );

@@ -1,5 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AdminRoute } from "./components/AdminRoute";
+import { AdminPage } from "./pages/AdminPage";
 import { AuthPage } from "./pages/AuthPage";
 import { DeckListPage } from "./pages/DeckListPage";
 import { CreateDeckPage } from "./pages/CreateDeckPage";
@@ -28,6 +30,9 @@ export default function App() {
           <Route path="/decks/new" element={<CreateDeckPage />} />
           <Route path="/decks/:id/study" element={<StudyPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+        </Route>
+        <Route element={<AdminRoute />}>
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

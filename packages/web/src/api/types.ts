@@ -8,6 +8,15 @@ export interface User {
   emailVerifiedAt: string | null;
 }
 
+export interface AdminUser {
+  id: string;
+  email: string;
+  role: string;
+  accountType: AccountType;
+  emailVerifiedAt: string | null;
+  createdAt: string;
+}
+
 export interface DeckWithCounts {
   id: string;
   title: string;

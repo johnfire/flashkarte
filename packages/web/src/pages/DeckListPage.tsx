@@ -5,7 +5,7 @@ import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 
 export function DeckListPage() {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [decks, setDecks] = useState<DeckWithCounts[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -54,7 +54,18 @@ export function DeckListPage() {
           >
             New deck
           </Link>
-          <Link to="/settings" className="self-center text-sm text-gray-500 dark:text-gray-400">
+          {user?.accountType === "admin" && (
+            <Link
+              to="/admin"
+              className="self-center text-sm text-gray-500 dark:text-gray-400"
+            >
+              Admin
+            </Link>
+          )}
+          <Link
+            to="/settings"
+            className="self-center text-sm text-gray-500 dark:text-gray-400"
+          >
             Settings
           </Link>
           <button
@@ -71,7 +82,9 @@ export function DeckListPage() {
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
 
-      {decks === null && !error && <p className="text-gray-500 dark:text-gray-400">Loading…</p>}
+      {decks === null && !error && (
+        <p className="text-gray-500 dark:text-gray-400">Loading…</p>
+      )}
 
       {decks && decks.length === 0 && !error && (
         <p className="text-gray-500 dark:text-gray-400">

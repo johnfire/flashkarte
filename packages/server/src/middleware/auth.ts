@@ -1,7 +1,10 @@
 import { Request, Response, NextFunction } from "express";
-import { verifyAccessToken } from "../domains/auth/auth.service";
+import {
+  verifyAccessToken,
+  getCurrentUser,
+} from "../domains/auth/auth.service";
 import { resolveKey } from "../domains/keys/keys.service";
-import { AuthError } from "../utils/errors";
+import { AuthError, ForbiddenError } from "../utils/errors";
 
 export function requireAuth(
   req: Request,
@@ -34,4 +37,26 @@ export function requireAuth(
   } catch (err) {
     next(err);
   }
+}
+
+// Gate admin-only routes. Runs after requireAuth: looks up the authenticated
+// user and requires account_type === 'admin'.
+export function requireAdmin(
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+): void {
+  if (!req.userId) {
+    next(new AuthError());
+    return;
+  }
+  getCurrentUser(req.userId)
+    .then((user) => {
+      if (user.accountType !== "admin") {
+        next(new ForbiddenError("Admin access required"));
+        return;
+      }
+      next();
+    })
+    .catch(next);
 }
