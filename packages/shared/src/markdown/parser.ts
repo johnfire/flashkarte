@@ -14,6 +14,11 @@ const H1 = /^# (.+)/;
 const H2 = /^## (.+)/;
 const FRONT = /^\*\*\d+\.\s(.+?)\*\*/;
 const HR = /^---+$/;
+// Alternative "Q:/A:" card format. `Q:` opens a card (front); the following
+// `A:` line becomes the first paragraph of the back, with any further lines as
+// additional paragraphs.
+const QFRONT = /^Q:\s*(.+)/;
+const ABACK = /^A:\s*(.+)/;
 
 /**
  * Parse Markdown deck text into a ParsedDeck.
@@ -26,6 +31,7 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
   let title = "";
   let currentCategory: string | null = null;
   let currentFront: string | null = null;
+  let currentIsQA = false;
   let backLines: string[] = [];
   const cards: ParsedCard[] = [];
 
@@ -45,6 +51,8 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
     const mH1 = H1.exec(line);
     const mH2 = H2.exec(line);
     const mFront = FRONT.exec(line);
+    const mQ = QFRONT.exec(line);
+    const mA = ABACK.exec(line);
 
     if (mH1 && !title) {
       title = mH1[1].trim();
@@ -56,6 +64,21 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
     } else if (mFront) {
       flush();
       currentFront = mFront[1].trim();
+      currentIsQA = false;
+    } else if (mQ) {
+      flush();
+      currentFront = mQ[1].trim();
+      currentIsQA = true;
+    } else if (
+      mA &&
+      currentFront !== null &&
+      currentIsQA &&
+      backLines.every((l) => !l.trim())
+    ) {
+      // First `A:` after a `Q:`: answer becomes its own paragraph, so any
+      // description lines that follow land in a separate paragraph.
+      backLines.push(mA[1].trim());
+      backLines.push("");
     } else if (currentFront !== null) {
       backLines.push(line);
     }

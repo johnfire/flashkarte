@@ -81,4 +81,44 @@ class MdParserTest {
         val deck = MdParser.parse("**1. FOO — Bar**\nDef.", "fallback.md")
         assertEquals("fallback.md", deck.title)
     }
+
+    @Test fun `Q and A format parses fronts`() {
+        val deck = MdParser.parse(QA_SAMPLE, "ai.md")
+        assertEquals("AI Terms", deck.title)
+        assertEquals(listOf("AI", "ML"), deck.cards.map { it.front })
+    }
+
+    @Test fun `Q and A answer and description split into paragraphs`() {
+        val back = MdParser.parse(QA_SAMPLE).cards[0].back
+        assertEquals(
+            listOf(
+                "Artificial Intelligence",
+                "The field of building systems that perform tasks normally requiring human intelligence."
+            ),
+            back.split("\n\n")
+        )
+    }
+
+    @Test fun `Q and A without description yields just the answer`() {
+        val deck = MdParser.parse("# D\n\nQ: HP\nA: Horsepower\n")
+        assertEquals(1, deck.cards.size)
+        assertEquals("Horsepower", deck.cards[0].back)
+    }
+
+    @Test fun `A colon line in bold format is preserved as back text`() {
+        val deck = MdParser.parse("# D\n\n**1. FOO**\nA: this is just back text.\n")
+        assertEquals("A: this is just back text.", deck.cards[0].back)
+    }
 }
+
+private val QA_SAMPLE = """
+# AI Terms
+
+Q: AI
+A: Artificial Intelligence
+The field of building systems that perform tasks normally requiring human intelligence.
+
+Q: ML
+A: Machine Learning
+A subfield of AI in which systems learn patterns from data.
+""".trimIndent()

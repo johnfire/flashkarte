@@ -97,3 +97,41 @@ def test_card_without_category():
     md = "# Deck\n\n**1. FOO — Bar**\nDefinition.\n"
     deck = parse(md, "x.md")
     assert deck.cards[0].category is None
+
+
+QA_SAMPLE_MD = """\
+# AI Terms
+
+Q: AI
+A: Artificial Intelligence
+The field of building systems that perform tasks normally requiring human intelligence.
+
+Q: ML
+A: Machine Learning
+A subfield of AI in which systems learn patterns from data.
+"""
+
+
+def test_qa_format_fronts():
+    deck = parse(QA_SAMPLE_MD, "ai.md")
+    assert deck.title == "AI Terms"
+    assert [c.front for c in deck.cards] == ["AI", "ML"]
+
+
+def test_qa_answer_and_description_split():
+    deck = parse(QA_SAMPLE_MD, "ai.md")
+    assert deck.cards[0].back.split("\n\n") == [
+        "Artificial Intelligence",
+        "The field of building systems that perform tasks normally requiring human intelligence.",
+    ]
+
+
+def test_qa_without_description():
+    deck = parse("# D\n\nQ: HP\nA: Horsepower\n", "d.md")
+    assert len(deck.cards) == 1
+    assert deck.cards[0].back == "Horsepower"
+
+
+def test_a_colon_line_in_bold_format_preserved():
+    deck = parse("# D\n\n**1. FOO**\nA: this is just back text.\n", "d.md")
+    assert deck.cards[0].back == "A: this is just back text."

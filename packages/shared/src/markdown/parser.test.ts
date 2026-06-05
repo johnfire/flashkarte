@@ -92,3 +92,53 @@ describe("Markdown deck parser parity with python/Kotlin", () => {
     expect(deck.cards[0].category).toBeNull();
   });
 });
+
+const QA_SAMPLE = `# AI Terms
+
+Q: AI
+A: Artificial Intelligence
+The field of building systems that perform tasks normally requiring human intelligence.
+
+Q: ML
+A: Machine Learning
+A subfield of AI in which systems learn patterns from data.
+`;
+
+describe("Markdown deck parser — Q:/A: format", () => {
+  test("title, count and fronts", () => {
+    const deck = parseDeck(QA_SAMPLE, "ai.md");
+    expect(deck.title).toBe("AI Terms");
+    expect(deck.cards.map((c) => c.front)).toEqual(["AI", "ML"]);
+  });
+
+  test("answer and description become separate paragraphs", () => {
+    const deck = parseDeck(QA_SAMPLE, "ai.md");
+    expect(deck.cards[0].back.split("\n\n")).toEqual([
+      "Artificial Intelligence",
+      "The field of building systems that perform tasks normally requiring human intelligence.",
+    ]);
+  });
+
+  test("Q:/A: with no description yields just the answer", () => {
+    const deck = parseDeck("# D\n\nQ: HP\nA: Horsepower\n", "d.md");
+    expect(deck.cards).toHaveLength(1);
+    expect(deck.cards[0].back).toBe("Horsepower");
+  });
+
+  test("a back line starting with A: in the bold format is preserved", () => {
+    const deck = parseDeck(
+      "# D\n\n**1. FOO**\nA: this is just back text.\n",
+      "d.md",
+    );
+    expect(deck.cards[0].back).toBe("A: this is just back text.");
+  });
+
+  test("mixed formats in one file both parse", () => {
+    const deck = parseDeck(
+      "# D\n\n**1. FOO — Bar**\nDefinition.\n\nQ: AI\nA: Artificial Intelligence\nDesc.\n",
+      "d.md",
+    );
+    expect(deck.cards.map((c) => c.front)).toEqual(["FOO — Bar", "AI"]);
+    expect(deck.cards[1].back).toBe("Artificial Intelligence\n\nDesc.");
+  });
+});
