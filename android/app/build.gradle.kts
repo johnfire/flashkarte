@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.play.publisher)
+    alias(libs.plugins.sqldelight)
 }
 
 // Upload keystore + Play service-account creds come from the environment in CI
@@ -77,6 +78,14 @@ android {
     }
 }
 
+sqldelight {
+    databases {
+        create("FlashkarteDb") {
+            packageName.set("com.flashmd.db")
+        }
+    }
+}
+
 // Gradle Play Publisher — uploads the signed AAB to the Internal testing track.
 // Only active in CI (when the service-account JSON is provided via env).
 play {
@@ -117,7 +126,15 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.datastore.preferences)
 
+    implementation(libs.sqldelight.android.driver)
+    implementation(libs.sqldelight.coroutines)
+    implementation(libs.sqldelight.primitive.adapters)
+    implementation(libs.androidx.work.runtime)
+    implementation(libs.androidx.hilt.work)
+    ksp(libs.androidx.hilt.compiler)
+
     testImplementation(libs.junit)
+    testImplementation(libs.sqldelight.sqlite.driver)
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.okhttp.mockwebserver)
