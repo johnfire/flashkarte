@@ -3,6 +3,8 @@ package com.flashmd.ui.screens.study
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.flashmd.data.local.StudyMode
+import com.flashmd.data.local.StudyModeStore
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
@@ -11,6 +13,7 @@ import com.flashmd.domain.model.DueCard
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.util.ArrayDeque
 import javax.inject.Inject
@@ -26,6 +29,10 @@ data class StudyUiState(
     val ratingCounts: Map<Int, Int> = emptyMap(),
     val isLoading: Boolean = true,
     val error: String? = null,
+    val mode: StudyMode = StudyMode.FLIP,
+    val options: List<String> = emptyList(),
+    val selectedOption: String? = null,
+    val correctAnswer: String? = null,
 )
 
 @HiltViewModel
@@ -34,6 +41,7 @@ class StudyViewModel @Inject constructor(
     private val studyRepo: StudyRepository,
     private val errorReporter: ErrorReporter,
     savedStateHandle: SavedStateHandle,
+    private val studyModeStore: StudyModeStore,
 ) : ViewModel() {
 
     private val deckId: String = checkNotNull(savedStateHandle["deckId"])
@@ -41,9 +49,14 @@ class StudyViewModel @Inject constructor(
     private val queue = ArrayDeque<DueCard>()
     private var reviewed = 0
     private val ratingCounts = mutableMapOf<Int, Int>()
+    private var pool: List<String> = emptyList()
+    private val random = kotlin.random.Random.Default
 
     private val _uiState = MutableStateFlow(StudyUiState())
     val uiState: StateFlow<StudyUiState> = _uiState
+
+    private fun optionsFor(card: DueCard): List<String> =
+        McOptions.build(card.card.back, pool, 4, random)
 
     init {
         viewModelScope.launch {
@@ -51,6 +64,8 @@ class StudyViewModel @Inject constructor(
                 val deck = deckRepo.getDeckById(deckId)
                 val due = studyRepo.getDueCards(deckId)
                 queue.addAll(due)
+                pool = due.map { it.card.back }
+                val savedMode = studyModeStore.mode.first()
 
                 if (queue.isEmpty()) {
                     _uiState.value = _uiState.value.copy(
@@ -58,13 +73,18 @@ class StudyViewModel @Inject constructor(
                         nothingDue = true,
                         isDone = true,
                         isLoading = false,
+                        mode = savedMode,
                     )
                 } else {
+                    val first = queue.peek()
                     _uiState.value = _uiState.value.copy(
                         deckTitle = deck?.title ?: "",
-                        currentCard = queue.peek(),
+                        currentCard = first,
                         remaining = queue.size,
                         isLoading = false,
+                        mode = savedMode,
+                        correctAnswer = first.card.back,
+                        options = if (savedMode == StudyMode.CHOICE) optionsFor(first) else emptyList(),
                     )
                 }
             } catch (e: ApiException) {
@@ -99,32 +119,75 @@ class StudyViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(error = "Couldn't save that rating.")
                 return@launch
             }
+            applyAndAdvance(card, rating)
+        }
+    }
 
-            queue.poll()
-            ratingCounts[rating] = (ratingCounts[rating] ?: 0) + 1
+    fun setMode(mode: StudyMode) {
+        viewModelScope.launch { studyModeStore.setMode(mode) }
+        val card = _uiState.value.currentCard
+        _uiState.value = _uiState.value.copy(
+            mode = mode,
+            selectedOption = null,
+            options = if (mode == StudyMode.CHOICE && card != null) optionsFor(card) else emptyList(),
+            correctAnswer = card?.card?.back,
+        )
+    }
 
-            if (rating < 3) {
-                queue.add(card) // re-queue at end
-            } else {
-                reviewed++
+    fun chooseAnswer(option: String) {
+        if (_uiState.value.selectedOption != null) return
+        _uiState.value = _uiState.value.copy(selectedOption = option)
+    }
+
+    fun next() {
+        val card = _uiState.value.currentCard ?: return
+        val selected = _uiState.value.selectedOption ?: return
+        val rating = if (selected == card.card.back) 4 else 1
+        viewModelScope.launch {
+            try {
+                studyRepo.applyRating(card.card.id, rating)
+            } catch (e: ApiException) {
+                _uiState.value = _uiState.value.copy(error = e.message)
+                return@launch
+            } catch (e: Exception) {
+                errorReporter.report(e.message ?: "review failed", "Study.next", e)
+                _uiState.value = _uiState.value.copy(error = "Couldn't save that answer.")
+                return@launch
             }
+            applyAndAdvance(card, rating)
+        }
+    }
 
-            if (queue.isEmpty()) {
-                _uiState.value = _uiState.value.copy(
-                    currentCard = null,
-                    isDone = true,
-                    reviewed = reviewed,
-                    ratingCounts = ratingCounts.toMap(),
-                )
-            } else {
-                _uiState.value = _uiState.value.copy(
-                    currentCard = queue.peek(),
-                    isFlipped = false,
-                    remaining = queue.size,
-                    reviewed = reviewed,
-                    ratingCounts = ratingCounts.toMap(),
-                )
-            }
+    private fun applyAndAdvance(card: DueCard, rating: Int) {
+        queue.poll()
+        ratingCounts[rating] = (ratingCounts[rating] ?: 0) + 1
+
+        if (rating < 3) {
+            queue.add(card) // re-queue at end
+        } else {
+            reviewed++
+        }
+
+        if (queue.isEmpty()) {
+            _uiState.value = _uiState.value.copy(
+                currentCard = null,
+                isDone = true,
+                reviewed = reviewed,
+                ratingCounts = ratingCounts.toMap(),
+                selectedOption = null,
+            )
+        } else {
+            val next = queue.peek()
+            _uiState.value = _uiState.value.copy(
+                currentCard = next,
+                isFlipped = false,
+                remaining = queue.size,
+                reviewed = reviewed,
+                ratingCounts = ratingCounts.toMap(),
+                selectedOption = null,
+                correctAnswer = next.card.back,
+                options = if (_uiState.value.mode == StudyMode.CHOICE) optionsFor(next) else emptyList(),
+            )
         }
     }
 }
