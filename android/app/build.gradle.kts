@@ -21,11 +21,11 @@ android {
     defaultConfig {
         applicationId = "de.christopherrehm.flashkarte"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         // Play requires a monotonically increasing versionCode; CI passes the
         // workflow run number. Defaults to 1 for local builds.
         versionCode = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
-        versionName = "0.1.0"
+        versionName = "1.0.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
