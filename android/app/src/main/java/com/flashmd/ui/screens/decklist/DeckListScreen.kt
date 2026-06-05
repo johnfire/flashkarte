@@ -17,6 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flashmd.ui.components.SyncStatusChip
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -29,6 +30,7 @@ fun DeckListScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val themeMode by themeViewModel.mode.collectAsStateWithLifecycle()
+    val pending by viewModel.pending.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     val filePicker = rememberLauncherForActivityResult(
@@ -57,6 +59,9 @@ fun DeckListScreen(
             TopAppBar(
                 title = { Text("flashkarte", fontWeight = FontWeight.Bold) },
                 actions = {
+                    if (pending > 0) {
+                        SyncStatusChip(pending, onRetry = { viewModel.onRetrySync() })
+                    }
                     val themeLabel = when (themeMode) {
                         com.flashmd.data.local.ThemeMode.SYSTEM -> "Theme: Auto"
                         com.flashmd.data.local.ThemeMode.LIGHT -> "Theme: Light"

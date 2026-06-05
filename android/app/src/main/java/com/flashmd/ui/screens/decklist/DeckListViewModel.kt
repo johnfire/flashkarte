@@ -7,7 +7,9 @@ import com.flashmd.data.parser.MdParser
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
+import com.flashmd.data.repository.OutboxRepository
 import com.flashmd.domain.model.Deck
+import com.flashmd.sync.SyncScheduler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -35,11 +37,18 @@ data class DeckListUiState(
 class DeckListViewModel @Inject constructor(
     private val deckRepo: DeckRepository,
     private val errorReporter: ErrorReporter,
+    private val outbox: OutboxRepository,
+    private val scheduler: SyncScheduler,
 ) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(true)
     private val _listError = MutableStateFlow<String?>(null)
     private val _importError = MutableStateFlow<String?>(null)
+
+    /** Count of review events waiting to sync to the server. */
+    val pending: StateFlow<Long> =
+        outbox.pendingCount()
+            .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), 0L)
 
     val uiState: StateFlow<DeckListUiState> = combine(
         deckRepo.getAllDecksFlow(),
@@ -57,6 +66,12 @@ class DeckListViewModel @Inject constructor(
 
     init {
         refresh()
+        // Drain any reviews queued while offline when the list comes into view.
+        scheduler.requestSync()
+    }
+
+    fun onRetrySync() {
+        scheduler.requestSync()
     }
 
     fun refresh() {
