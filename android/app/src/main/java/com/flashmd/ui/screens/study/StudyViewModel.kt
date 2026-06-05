@@ -50,6 +50,7 @@ class StudyViewModel @Inject constructor(
     private var reviewed = 0
     private val ratingCounts = mutableMapOf<Int, Int>()
     private var pool: List<String> = emptyList()
+    private var ordered = false
     private val random = kotlin.random.Random.Default
 
     private val _uiState = MutableStateFlow(StudyUiState())
@@ -65,6 +66,7 @@ class StudyViewModel @Inject constructor(
                 val due = studyRepo.getDueCards(deckId)
                 queue.addAll(due)
                 pool = due.map { it.card.back }
+                ordered = deck?.isOrdered == true
                 val savedMode = studyModeStore.mode.first()
 
                 if (queue.isEmpty()) {
@@ -163,7 +165,9 @@ class StudyViewModel @Inject constructor(
         ratingCounts[rating] = (ratingCounts[rating] ?: 0) + 1
 
         if (rating < 3) {
-            queue.add(card) // re-queue at end
+            // Ordered decks: keep the same card up front until it's passed, so the
+            // next card never unlocks early. Unordered: re-queue at the end.
+            if (ordered) queue.addFirst(card) else queue.add(card)
         } else {
             reviewed++
         }
@@ -177,7 +181,7 @@ class StudyViewModel @Inject constructor(
                 selectedOption = null,
             )
         } else {
-            val next = queue.peek()
+            val next = queue.first()
             _uiState.value = _uiState.value.copy(
                 currentCard = next,
                 isFlipped = false,
