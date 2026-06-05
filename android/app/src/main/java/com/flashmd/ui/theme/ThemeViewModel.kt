@@ -19,6 +19,10 @@ class ThemeViewModel @Inject constructor(
     val mode: StateFlow<ThemeMode> =
         store.mode.stateIn(viewModelScope, SharingStarted.Eagerly, ThemeMode.SYSTEM)
 
+    fun set(mode: ThemeMode) {
+        viewModelScope.launch { store.setMode(mode) }
+    }
+
     /** Cycle System → Light → Dark → System. */
     fun cycle() {
         viewModelScope.launch {

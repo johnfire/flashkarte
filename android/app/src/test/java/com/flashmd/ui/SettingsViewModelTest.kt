@@ -1,0 +1,49 @@
+package com.flashmd.ui
+
+import com.flashmd.data.remote.dto.UserDto
+import com.flashmd.data.repository.AuthRepository
+import com.flashmd.ui.screens.settings.SettingsViewModel
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Test
+
+@OptIn(ExperimentalCoroutinesApi::class)
+class SettingsViewModelTest {
+    private val auth = mockk<AuthRepository>(relaxed = true)
+
+    @Before fun setUp() = Dispatchers.setMain(StandardTestDispatcher())
+    @After fun tearDown() = Dispatchers.resetMain()
+
+    @Test fun loadsProfileAndSaves() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, "Ada")
+        coEvery { auth.updateProfile(any()) } returns UserDto("u1", "a@b.c", "user", "free", null, "Bob")
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+        assertEquals("Ada", vm.state.value.displayNameDraft)
+
+        vm.onDisplayNameChange("Bob")
+        vm.saveDisplayName(); advanceUntilIdle()
+        assertEquals("Bob", vm.state.value.user?.displayName)
+        assertEquals("Saved", vm.state.value.message)
+        coVerify { auth.updateProfile("Bob") }
+    }
+
+    @Test fun changePasswordUsesEmail() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+        vm.changePassword(); advanceUntilIdle()
+        coVerify { auth.forgotPassword("a@b.c") }
+    }
+}
