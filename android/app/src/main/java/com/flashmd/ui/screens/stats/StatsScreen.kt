@@ -1,6 +1,8 @@
 package com.flashmd.ui.screens.stats
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
@@ -54,16 +56,32 @@ fun StatsScreen(
         }
 
         Column(
-            Modifier.fillMaxSize().padding(padding).padding(16.dp),
+            Modifier.fillMaxSize().padding(padding).padding(16.dp)
+                .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                StatCard("Total", stats.total.toString(), Modifier.weight(1f))
-                StatCard("New", stats.new.toString(), Modifier.weight(1f))
+                StatCard("Viewed", stats.viewed.toString(), Modifier.weight(1f))
+                StatCard("Not viewed", stats.new.toString(), Modifier.weight(1f))
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                StatCard("Total", stats.total.toString(), Modifier.weight(1f))
                 StatCard("Due Today", stats.due.toString(), Modifier.weight(1f))
-                StatCard("Learned", stats.learned.toString(), Modifier.weight(1f))
+            }
+
+            Text(
+                "By last rating",
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(top = 8.dp),
+            )
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                StatCard("Again", stats.again.toString(), Modifier.weight(1f))
+                StatCard("Hard", stats.hard.toString(), Modifier.weight(1f))
+            }
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+                StatCard("Good", stats.good.toString(), Modifier.weight(1f))
+                StatCard("Easy", stats.easy.toString(), Modifier.weight(1f))
             }
 
             val learnedPct =

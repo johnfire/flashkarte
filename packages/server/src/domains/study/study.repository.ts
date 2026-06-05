@@ -50,17 +50,27 @@ export function upsertProgress(
     easeFactor: number;
     intervalDays: number;
     dueAt: Date;
+    lastRating: number;
   },
 ) {
   return query(
     `INSERT INTO card_progress
-       (user_id, card_id, repetitions, ease_factor, interval_days, due_at, last_reviewed_at)
-     VALUES ($1, $2, $3, $4, $5, $6, now())
+       (user_id, card_id, repetitions, ease_factor, interval_days, due_at, last_rating, last_reviewed_at)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, now())
      ON CONFLICT (user_id, card_id) DO UPDATE
        SET repetitions = EXCLUDED.repetitions, ease_factor = EXCLUDED.ease_factor,
            interval_days = EXCLUDED.interval_days, due_at = EXCLUDED.due_at,
+           last_rating = EXCLUDED.last_rating,
            last_reviewed_at = now(), updated_at = now()`,
-    [userId, cardId, s.repetitions, s.easeFactor, s.intervalDays, s.dueAt],
+    [
+      userId,
+      cardId,
+      s.repetitions,
+      s.easeFactor,
+      s.intervalDays,
+      s.dueAt,
+      s.lastRating,
+    ],
   );
 }
 
@@ -70,12 +80,22 @@ export function getStats(userId: string, deckId: string) {
     new: string;
     due: string;
     learned: string;
+    viewed: string;
+    again: string;
+    hard: string;
+    good: string;
+    easy: string;
   }>(
     `SELECT
        count(c.*) AS total,
        count(*) FILTER (WHERE p.id IS NULL) AS new,
        count(*) FILTER (WHERE p.id IS NULL OR p.due_at <= now()) AS due,
-       count(*) FILTER (WHERE p.repetitions >= 1) AS learned
+       count(*) FILTER (WHERE p.repetitions >= 1) AS learned,
+       count(*) FILTER (WHERE p.id IS NOT NULL) AS viewed,
+       count(*) FILTER (WHERE p.last_rating <= 2) AS again,
+       count(*) FILTER (WHERE p.last_rating = 3) AS hard,
+       count(*) FILTER (WHERE p.last_rating = 4) AS good,
+       count(*) FILTER (WHERE p.last_rating = 5) AS easy
      FROM cards c
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
      WHERE c.deck_id = $2 AND c.user_id = $1`,

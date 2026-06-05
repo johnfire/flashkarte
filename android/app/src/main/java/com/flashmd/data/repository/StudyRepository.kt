@@ -48,6 +48,11 @@ class StudyRepository @Inject constructor(
             new = s.newCount,
             due = s.due,
             learned = s.learned,
+            viewed = s.viewed,
+            again = s.again,
+            hard = s.hard,
+            good = s.good,
+            easy = s.easy,
         )
     }
 }
@@ -57,4 +62,9 @@ data class DeckStudyStats(
     val new: Int,
     val due: Int,
     val learned: Int,
+    val viewed: Int = 0,
+    val again: Int = 0,
+    val hard: Int = 0,
+    val good: Int = 0,
+    val easy: Int = 0,
 )

@@ -79,6 +79,11 @@ data class StatsDto(
     @SerialName("new") val newCount: Int = 0,
     val due: Int = 0,
     val learned: Int = 0,
+    val viewed: Int = 0,
+    val again: Int = 0,
+    val hard: Int = 0,
+    val good: Int = 0,
+    val easy: Int = 0,
 )
 
 @Serializable

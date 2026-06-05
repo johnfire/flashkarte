@@ -72,14 +72,44 @@ export async function appendCards(
   }
 }
 
+export interface DeckListRow extends DeckRow {
+  card_count: string;
+  due_count: string;
+  viewed_count: string;
+  new_count: string;
+  again_count: string;
+  hard_count: string;
+  good_count: string;
+  easy_count: string;
+}
+
 export function listDecksWithCounts(userId: string) {
-  return query<DeckRow & { card_count: string; due_count: string }>(
+  return query<DeckListRow>(
     `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public,
-       (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
-       (SELECT count(*) FROM cards c
-          LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
-          WHERE c.deck_id = d.id AND (p.id IS NULL OR p.due_at <= now())) AS due_count
-     FROM decks d WHERE d.user_id = $1 ORDER BY d.updated_at DESC`,
+       s.total AS card_count,
+       s.due AS due_count,
+       s.viewed AS viewed_count,
+       s.new_cards AS new_count,
+       s.again AS again_count,
+       s.hard AS hard_count,
+       s.good AS good_count,
+       s.easy AS easy_count
+     FROM decks d
+     LEFT JOIN LATERAL (
+       SELECT
+         count(*) AS total,
+         count(*) FILTER (WHERE p.id IS NULL OR p.due_at <= now()) AS due,
+         count(*) FILTER (WHERE p.id IS NOT NULL) AS viewed,
+         count(*) FILTER (WHERE p.id IS NULL) AS new_cards,
+         count(*) FILTER (WHERE p.last_rating <= 2) AS again,
+         count(*) FILTER (WHERE p.last_rating = 3) AS hard,
+         count(*) FILTER (WHERE p.last_rating = 4) AS good,
+         count(*) FILTER (WHERE p.last_rating = 5) AS easy
+       FROM cards c
+       LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
+       WHERE c.deck_id = d.id
+     ) s ON true
+     WHERE d.user_id = $1 ORDER BY d.updated_at DESC`,
     [userId],
   );
 }

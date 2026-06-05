@@ -39,6 +39,12 @@ export interface DeckWithCounts {
   card_count: string;
   due_count: string;
   is_public: boolean;
+  viewed_count: string;
+  new_count: string;
+  again_count: string;
+  hard_count: string;
+  good_count: string;
+  easy_count: string;
 }
 
 export interface Card {

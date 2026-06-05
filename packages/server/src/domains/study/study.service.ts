@@ -36,6 +36,7 @@ export async function review(userId: string, cardId: unknown, rating: unknown) {
     easeFactor: next.easiness,
     intervalDays: next.interval,
     dueAt,
+    lastRating: rating,
   });
   return { card_id: cardId, ...next, due_at: dueAt.toISOString() };
 }
@@ -47,5 +48,10 @@ export async function stats(userId: string, deckId: string) {
     new: parseInt(r?.new ?? "0", 10),
     due: parseInt(r?.due ?? "0", 10),
     learned: parseInt(r?.learned ?? "0", 10),
+    viewed: parseInt(r?.viewed ?? "0", 10),
+    again: parseInt(r?.again ?? "0", 10),
+    hard: parseInt(r?.hard ?? "0", 10),
+    good: parseInt(r?.good ?? "0", 10),
+    easy: parseInt(r?.easy ?? "0", 10),
   };
 }

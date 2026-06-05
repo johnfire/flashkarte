@@ -133,6 +133,26 @@ export function DeckListPage() {
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {d.card_count} cards · {d.due_count} due
               </p>
+              <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
+                <span className="rounded bg-gray-100 px-1.5 py-0.5 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                  Viewed {d.viewed_count}
+                </span>
+                <span className="rounded bg-gray-100 px-1.5 py-0.5 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                  New {d.new_count}
+                </span>
+                <span className="rounded bg-red-100 px-1.5 py-0.5 text-red-700 dark:bg-red-900/40 dark:text-red-300">
+                  Again {d.again_count}
+                </span>
+                <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                  Hard {d.hard_count}
+                </span>
+                <span className="rounded bg-green-100 px-1.5 py-0.5 text-green-700 dark:bg-green-900/40 dark:text-green-300">
+                  Good {d.good_count}
+                </span>
+                <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
+                  Easy {d.easy_count}
+                </span>
+              </div>
             </div>
             <div className="flex items-center gap-3">
               <Link
