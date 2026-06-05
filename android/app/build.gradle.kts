@@ -86,6 +86,25 @@ sqldelight {
     }
 }
 
+// SQLDelight generates per-variant sources, but KSP (Hilt) doesn't pick them up
+// as source roots on its own, so it can't resolve FlashkarteDb. Register each
+// variant's generated dir into the matching Kotlin source set, and make every
+// ksp*Kotlin task wait for the matching generate*FlashkarteDbInterface task.
+androidComponents {
+    onVariants(selector().all()) { variant ->
+        kotlin.sourceSets.findByName(variant.name)
+            ?.kotlin
+            ?.srcDir("build/generated/sqldelight/code/FlashkarteDb/${variant.name}")
+    }
+}
+afterEvaluate {
+    tasks.matching { it.name.startsWith("ksp") && it.name.endsWith("Kotlin") }
+        .configureEach {
+            val variant = if (name.contains("Release", ignoreCase = true)) "Release" else "Debug"
+            dependsOn("generate${variant}FlashkarteDbInterface")
+        }
+}
+
 // Gradle Play Publisher — uploads the signed AAB to the Internal testing track.
 // Only active in CI (when the service-account JSON is provided via env).
 play {
