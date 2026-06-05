@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import { VerifyBanner } from "./VerifyBanner";
 
 export function ProtectedRoute() {
   const { authed, loading } = useAuth();
@@ -11,5 +12,10 @@ export function ProtectedRoute() {
     );
   }
   if (!authed) return <Navigate to="/login" replace />;
-  return <Outlet />;
+  return (
+    <>
+      <VerifyBanner />
+      <Outlet />
+    </>
+  );
 }

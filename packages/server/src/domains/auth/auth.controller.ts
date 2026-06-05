@@ -41,3 +41,15 @@ export const logout = wrapAsync(async (req: Request, res: Response) => {
   res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
   res.status(204).end();
 });
+
+export const verifyEmail = wrapAsync(async (req: Request, res: Response) => {
+  await service.verifyEmail(req.body.token);
+  res.json({ status: "verified" });
+});
+
+export const resendVerification = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.resendVerification(req.userId!);
+    res.status(202).json({ status: "sent" });
+  },
+);

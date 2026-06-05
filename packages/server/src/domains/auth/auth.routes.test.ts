@@ -10,6 +10,7 @@ jest.mock("../../db/client", () => ({
 
 import * as service from "./auth.service";
 import { createApp } from "../../app";
+import { ValidationError } from "../../utils/errors";
 
 const mock = service as jest.Mocked<typeof service>;
 const app = createApp();
@@ -52,5 +53,31 @@ describe("auth routes", () => {
     mock.logout.mockResolvedValue(undefined as never);
     const res = await request(app).post("/api/auth/logout");
     expect(res.status).toBe(204);
+  });
+
+  test("POST /api/auth/verify-email -> 200 verified", async () => {
+    mock.verifyEmail.mockResolvedValue(undefined as never);
+    const res = await request(app)
+      .post("/api/auth/verify-email")
+      .send({ token: "raw-token" });
+    expect(res.status).toBe(200);
+    expect(res.body.status).toBe("verified");
+    expect(mock.verifyEmail).toHaveBeenCalledWith("raw-token");
+  });
+
+  test("POST /api/auth/verify-email -> 422 on bad token", async () => {
+    mock.verifyEmail.mockRejectedValue(
+      new ValidationError("This verification link is invalid or expired"),
+    );
+    const res = await request(app)
+      .post("/api/auth/verify-email")
+      .send({ token: "nope" });
+    expect(res.status).toBe(422);
+  });
+
+  test("POST /api/auth/resend-verification without auth -> 401", async () => {
+    const res = await request(app).post("/api/auth/resend-verification");
+    expect(res.status).toBe(401);
+    expect(mock.resendVerification).not.toHaveBeenCalled();
   });
 });

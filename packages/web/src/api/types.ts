@@ -2,6 +2,7 @@ export interface User {
   id: string;
   email: string;
   role: string;
+  emailVerifiedAt: string | null;
 }
 
 export interface DeckWithCounts {

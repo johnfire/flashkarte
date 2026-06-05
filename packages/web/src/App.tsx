@@ -6,12 +6,14 @@ import { CreateDeckPage } from "./pages/CreateDeckPage";
 import { StudyPage } from "./pages/StudyPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
+import { VerifyEmailPage } from "./pages/VerifyEmailPage";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/login" element={<AuthPage />} />
       <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/verify-email" element={<VerifyEmailPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<DeckListPage />} />
         <Route path="/decks/new" element={<CreateDeckPage />} />

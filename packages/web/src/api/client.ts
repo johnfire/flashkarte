@@ -99,6 +99,15 @@ export const api = {
     refresh: () =>
       request<{ accessToken: string }>("/auth/refresh", { method: "POST" }),
     logout: () => request<void>("/auth/logout", { method: "POST" }),
+    verifyEmail: (token: string) =>
+      request<{ status: string }>("/auth/verify-email", {
+        method: "POST",
+        body: JSON.stringify({ token }),
+      }),
+    resendVerification: () =>
+      request<{ status: string }>("/auth/resend-verification", {
+        method: "POST",
+      }),
   },
   decks: {
     list: () => request<DeckWithCounts[]>("/decks"),
