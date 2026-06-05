@@ -25,6 +25,9 @@ services:
       - APP_URL=${APP_URL:-https://${NGINX_HOST}}
       # Comma-separated emails auto-promoted to admin on startup (#19).
       - ADMIN_EMAILS=${ADMIN_EMAILS:-}
+      # Bug reports (#24) file GitHub issues. No-ops (logs only) if unset.
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - GITHUB_REPO=${GITHUB_REPO:-johnfire/flashkarte}
     ports:
       - "127.0.0.1:${APP_PORT:-8090}:3001"
     volumes:
