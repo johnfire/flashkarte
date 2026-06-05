@@ -4,6 +4,7 @@ export interface UserRow {
   id: string;
   email: string;
   role: string;
+  account_type: string;
   email_verified_at: Date | null;
 }
 
@@ -13,21 +14,21 @@ interface UserWithHash extends UserRow {
 
 export function findByEmailWithHash(email: string) {
   return queryOne<UserWithHash>(
-    "SELECT id, email, role, email_verified_at, password_hash FROM users WHERE email = $1",
+    "SELECT id, email, role, account_type, email_verified_at, password_hash FROM users WHERE email = $1",
     [email],
   );
 }
 
 export function findById(id: string) {
   return queryOne<UserRow>(
-    "SELECT id, email, role, email_verified_at FROM users WHERE id = $1",
+    "SELECT id, email, role, account_type, email_verified_at FROM users WHERE id = $1",
     [id],
   );
 }
 
 export function createUser(email: string, passwordHash: string) {
   return queryOne<UserRow>(
-    "INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id, email, role, email_verified_at",
+    "INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id, email, role, account_type, email_verified_at",
     [email, passwordHash],
   );
 }

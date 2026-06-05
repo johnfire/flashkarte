@@ -26,6 +26,7 @@ export interface PublicUser {
   id: string;
   email: string;
   role: string;
+  accountType: string;
   emailVerifiedAt: string | null;
 }
 
@@ -34,6 +35,7 @@ function toUser(row: UserRow): PublicUser {
     id: row.id,
     email: row.email,
     role: row.role,
+    accountType: row.account_type,
     emailVerifiedAt: row.email_verified_at
       ? new Date(row.email_verified_at).toISOString()
       : null,
@@ -163,6 +165,13 @@ export async function refresh(rawRefresh: string | undefined) {
 
 export async function logout(rawRefresh: string | undefined) {
   if (rawRefresh) await repo.deleteRefreshToken(hashToken(rawRefresh));
+}
+
+/** The current user's public profile (for restoring session state). */
+export async function getCurrentUser(userId: string): Promise<PublicUser> {
+  const user = await repo.findById(userId);
+  if (!user) throw new AuthError("Not found");
+  return toUser(user);
 }
 
 /**

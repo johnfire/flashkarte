@@ -55,6 +55,31 @@ describe("auth routes", () => {
     expect(res.status).toBe(204);
   });
 
+  test("GET /api/auth/me without auth -> 401", async () => {
+    const res = await request(app).get("/api/auth/me");
+    expect(res.status).toBe(401);
+  });
+
+  test("GET /api/auth/me -> 200 with current user", async () => {
+    mock.verifyAccessToken.mockReturnValue({
+      sub: "u1",
+      email: "a@b.com",
+    } as never);
+    mock.getCurrentUser.mockResolvedValue({
+      id: "u1",
+      email: "a@b.com",
+      role: "user",
+      accountType: "free",
+      emailVerifiedAt: null,
+    } as never);
+    const res = await request(app)
+      .get("/api/auth/me")
+      .set("Authorization", "Bearer access-token");
+    expect(res.status).toBe(200);
+    expect(res.body.user.accountType).toBe("free");
+    expect(mock.getCurrentUser).toHaveBeenCalledWith("u1");
+  });
+
   test("POST /api/auth/verify-email -> 200 verified", async () => {
     mock.verifyEmail.mockResolvedValue(undefined as never);
     const res = await request(app)

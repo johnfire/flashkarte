@@ -54,6 +54,11 @@ export const resendVerification = wrapAsync(
   },
 );
 
+export const me = wrapAsync(async (req: Request, res: Response) => {
+  const user = await service.getCurrentUser(req.userId!);
+  res.json({ user });
+});
+
 export const forgotPassword = wrapAsync(async (req: Request, res: Response) => {
   await service.forgotPassword(req.body.email);
   // Always the same response — never reveal whether the email exists.

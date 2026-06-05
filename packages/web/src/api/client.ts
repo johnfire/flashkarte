@@ -98,6 +98,7 @@ export const api = {
       ),
     refresh: () =>
       request<{ accessToken: string }>("/auth/refresh", { method: "POST" }),
+    me: () => request<{ user: User }>("/auth/me"),
     logout: () => request<void>("/auth/logout", { method: "POST" }),
     verifyEmail: (token: string) =>
       request<{ status: string }>("/auth/verify-email", {

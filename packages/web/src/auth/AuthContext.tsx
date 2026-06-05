@@ -27,9 +27,17 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     api.auth
       .refresh()
-      .then((r) => {
+      .then(async (r) => {
         setAccessToken(r.accessToken);
         setAuthed(true);
+        // Restore the full user profile so post-refresh sessions know who they
+        // are (verification status, account type, etc.).
+        try {
+          const { user } = await api.auth.me();
+          setUser(user);
+        } catch {
+          // non-fatal — session still works without the profile
+        }
       })
       .catch(() => {})
       .finally(() => setLoading(false));

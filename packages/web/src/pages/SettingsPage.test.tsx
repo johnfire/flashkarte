@@ -10,6 +10,10 @@ vi.mock("../api/client", () => ({
   ApiError: class ApiError extends Error {},
 }));
 
+vi.mock("../auth/AuthContext", () => ({
+  useAuth: () => ({ user: null }),
+}));
+
 const mockApi = api as unknown as {
   keys: {
     list: ReturnType<typeof vi.fn>;

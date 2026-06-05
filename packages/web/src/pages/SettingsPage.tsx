@@ -1,11 +1,20 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { api, ApiError } from "../api/client";
-import { ApiKey, CreatedApiKey } from "../api/types";
+import { ApiKey, CreatedApiKey, AccountType } from "../api/types";
+import { useAuth } from "../auth/AuthContext";
 
 const MCP_URL = `${typeof location !== "undefined" ? location.origin : ""}/mcp`;
 
+const PLAN_LABEL: Record<AccountType, string> = {
+  free: "Free",
+  paid: "Paid",
+  "admin-gifted": "Gifted",
+  admin: "Admin",
+};
+
 export function SettingsPage() {
+  const { user } = useAuth();
   const [keys, setKeys] = useState<ApiKey[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newName, setNewName] = useState("My AI");
@@ -60,6 +69,21 @@ export function SettingsPage() {
         </Link>
       </header>
 
+      {user && (
+        <section className="mb-8 rounded-lg border p-4">
+          <h2 className="mb-1 text-xl font-semibold">Account</h2>
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            {user.email}
+          </p>
+          <p className="mt-2 text-sm">
+            Plan:{" "}
+            <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
+              {PLAN_LABEL[user.accountType] ?? user.accountType}
+            </span>
+          </p>
+        </section>
+      )}
+
       <section className="mb-8 rounded-lg border p-4">
         <h2 className="mb-1 text-xl font-semibold">Connect your AI</h2>
         <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
@@ -69,7 +93,9 @@ export function SettingsPage() {
         </p>
         <p className="mb-4 text-sm">
           MCP server URL:{" "}
-          <code className="rounded bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5">{MCP_URL}</code>
+          <code className="rounded bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5">
+            {MCP_URL}
+          </code>
         </p>
 
         <div className="flex gap-2">
@@ -111,7 +137,9 @@ export function SettingsPage() {
       <section>
         <h2 className="mb-3 text-xl font-semibold">Your keys</h2>
         {error && <p className="mb-3 text-red-600">{error}</p>}
-        {keys === null && !error && <p className="text-gray-500 dark:text-gray-400">Loading…</p>}
+        {keys === null && !error && (
+          <p className="text-gray-500 dark:text-gray-400">Loading…</p>
+        )}
         {keys && keys.length === 0 && !error && (
           <p className="text-gray-500 dark:text-gray-400">No keys yet.</p>
         )}

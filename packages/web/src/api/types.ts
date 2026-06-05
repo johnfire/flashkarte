@@ -1,7 +1,10 @@
+export type AccountType = "free" | "paid" | "admin-gifted" | "admin";
+
 export interface User {
   id: string;
   email: string;
   role: string;
+  accountType: AccountType;
   emailVerifiedAt: string | null;
 }
 

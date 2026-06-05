@@ -7,6 +7,7 @@ authRouter.post("/signup", ctrl.signup);
 authRouter.post("/login", ctrl.login);
 authRouter.post("/refresh", ctrl.refresh);
 authRouter.post("/logout", ctrl.logout);
+authRouter.get("/me", requireAuth, ctrl.me);
 authRouter.post("/verify-email", ctrl.verifyEmail);
 authRouter.post("/resend-verification", requireAuth, ctrl.resendVerification);
 authRouter.post("/forgot-password", ctrl.forgotPassword);
