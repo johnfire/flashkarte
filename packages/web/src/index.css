@@ -14,3 +14,50 @@
     border-color: theme("colors.gray.700");
   }
 }
+
+@layer utilities {
+  /* Landing-page background motion: drifting aurora glows + floating cards. */
+  @keyframes fk-aurora {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    50% {
+      transform: translate3d(2rem, -1.5rem, 0) scale(1.15);
+    }
+  }
+  @keyframes fk-aurora-2 {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0) scale(1.1);
+    }
+    50% {
+      transform: translate3d(-2.5rem, 1.75rem, 0) scale(0.92);
+    }
+  }
+  @keyframes fk-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--fk-rot, 0deg));
+    }
+    50% {
+      transform: translateY(-1.25rem) rotate(var(--fk-rot, 0deg));
+    }
+  }
+  .animate-fk-aurora {
+    animation: fk-aurora 16s ease-in-out infinite;
+  }
+  .animate-fk-aurora-2 {
+    animation: fk-aurora-2 20s ease-in-out infinite;
+  }
+  .animate-fk-float {
+    animation: fk-float 7s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fk-aurora,
+    .animate-fk-aurora-2,
+    .animate-fk-float {
+      animation: none;
+    }
+  }
+}

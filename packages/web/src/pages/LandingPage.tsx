@@ -19,32 +19,104 @@ const FEATURES = [
   },
 ];
 
+// Decorative cards that drift behind the hero — "learning is happening here".
+const FLOATERS = [
+  {
+    q: "¿cómo?",
+    a: "how?",
+    pos: "left-[6%] top-[18%]",
+    rot: "-8deg",
+    delay: "0s",
+  },
+  {
+    q: "H₂O",
+    a: "water",
+    pos: "right-[8%] top-[14%]",
+    rot: "7deg",
+    delay: "1.2s",
+  },
+  {
+    q: "1066",
+    a: "Hastings",
+    pos: "left-[12%] bottom-[16%]",
+    rot: "5deg",
+    delay: "0.6s",
+  },
+  {
+    q: "∫x dx",
+    a: "x²/2 + C",
+    pos: "right-[11%] bottom-[20%]",
+    rot: "-6deg",
+    delay: "1.8s",
+  },
+];
+
 export function LandingPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-gray-50 dark:from-gray-900 dark:to-gray-950">
-      <div className="mx-auto max-w-5xl px-6 py-20 sm:py-28">
+    <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
+      {/* Animated background */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        {/* Aurora glows */}
+        <div className="animate-fk-aurora absolute -left-[10%] -top-[15%] h-[40rem] w-[40rem] rounded-full bg-indigo-600/30 blur-3xl" />
+        <div className="animate-fk-aurora-2 absolute -right-[12%] top-[10%] h-[34rem] w-[34rem] rounded-full bg-fuchsia-600/20 blur-3xl" />
+        <div className="animate-fk-aurora absolute bottom-[-15%] left-[25%] h-[36rem] w-[36rem] rounded-full bg-cyan-500/20 blur-3xl" />
+        {/* Faint grid */}
+        <div
+          className="absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, rgb(148 163 184 / 0.4) 1px, transparent 1px), linear-gradient(to bottom, rgb(148 163 184 / 0.4) 1px, transparent 1px)",
+            backgroundSize: "3rem 3rem",
+            maskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse at center, black 30%, transparent 75%)",
+          }}
+        />
+        {/* Floating flashcards */}
+        {FLOATERS.map((f) => (
+          <div
+            key={f.q}
+            className={`animate-fk-float absolute hidden rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm md:block ${f.pos}`}
+            style={
+              {
+                "--fk-rot": f.rot,
+                animationDelay: f.delay,
+              } as React.CSSProperties
+            }
+          >
+            <div className="text-sm font-semibold text-slate-200">{f.q}</div>
+            <div className="text-xs text-indigo-300">{f.a}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Content */}
+      <div className="relative mx-auto max-w-5xl px-6 py-20 sm:py-28">
         {/* Hero */}
         <div className="text-center">
-          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-2xl font-bold text-white shadow-lg">
+          <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-2xl font-bold text-white shadow-lg shadow-indigo-900/50">
             fk
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl dark:text-white">
+          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
             Learn anything, faster.
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-600 dark:text-gray-300">
-            flashkarte turns Markdown into spaced-repetition flashcards that
-            stick. Simple to write, smart about when you review.
+          <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
+            flashkarte is a spaced-repetition flashcard app. Write your cards in
+            plain Markdown — or let your own AI build them — and it schedules
+            each review for the moment right before you'd forget. Study on the
+            web or on Android, always in sync.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/login?mode=signup"
-              className="rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white shadow-sm transition hover:bg-indigo-700"
+              className="rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white shadow-lg shadow-indigo-900/40 transition hover:bg-indigo-500"
             >
-              Get started — it's free
+              Sign up — it's free
             </Link>
             <Link
               to="/login"
-              className="rounded-lg border border-gray-300 bg-white px-6 py-3 font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700"
+              className="rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-slate-200 backdrop-blur-sm transition hover:bg-white/10"
             >
               Sign in
             </Link>
@@ -56,12 +128,10 @@ export function LandingPage() {
           {FEATURES.map((f) => (
             <div
               key={f.title}
-              className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-800/60"
+              className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:border-indigo-400/30 hover:bg-white/[0.07]"
             >
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {f.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+              <h3 className="text-lg font-semibold text-white">{f.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-300">
                 {f.body}
               </p>
             </div>
@@ -69,18 +139,15 @@ export function LandingPage() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-20 text-center text-sm text-gray-500 dark:text-gray-400">
+        <footer className="mt-20 text-center text-sm text-slate-400">
           <Link
-            to="/login"
-            className="font-medium text-indigo-600 hover:underline"
+            to="/login?mode=signup"
+            className="font-medium text-indigo-300 hover:text-indigo-200 hover:underline"
           >
             Start studying →
           </Link>
-          <p className="mt-4 text-xs text-gray-400 dark:text-gray-500">
-            <Link
-              to="/privacy"
-              className="hover:text-gray-600 dark:hover:text-gray-300"
-            >
+          <p className="mt-4 text-xs text-slate-500">
+            <Link to="/privacy" className="hover:text-slate-300">
               Privacy Policy
             </Link>
           </p>
