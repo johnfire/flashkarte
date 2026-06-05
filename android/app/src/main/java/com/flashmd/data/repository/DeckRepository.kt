@@ -70,6 +70,22 @@ class DeckRepository @Inject constructor(
         decks.value = decks.value.filterNot { it.id == id }
     }
 
+    suspend fun renameDeck(id: String, title: String) {
+        apiCall { api.updateDeck(id, com.flashmd.data.remote.dto.UpdateDeckRequest(title = title)) }
+        refresh()
+    }
+
+    suspend fun setPublic(id: String, isPublic: Boolean) {
+        apiCall { api.updateDeck(id, com.flashmd.data.remote.dto.UpdateDeckRequest(isPublic = isPublic)) }
+        refresh()
+    }
+
+    suspend fun addCards(id: String, markdown: String): Int {
+        val res = apiCall { api.addCards(id, com.flashmd.data.remote.dto.AddCardsRequest(markdown)) }
+        refresh()
+        return res.added
+    }
+
     private fun DeckListItemDto.toDomain() = Deck(
         id = id,
         title = title,
@@ -78,5 +94,6 @@ class DeckRepository @Inject constructor(
         lastStudied = updatedAt,
         totalCards = cardCount.toIntOrNull() ?: 0,
         dueCount = dueCount.toIntOrNull() ?: 0,
+        isPublic = isPublic,
     )
 }

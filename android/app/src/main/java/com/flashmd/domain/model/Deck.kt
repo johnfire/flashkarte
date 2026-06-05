@@ -9,4 +9,5 @@ data class Deck(
     // Joined stats
     val totalCards: Int = 0,
     val dueCount: Int = 0,
+    val isPublic: Boolean = false,
 )
