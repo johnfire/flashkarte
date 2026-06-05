@@ -24,6 +24,7 @@ import com.flashmd.ui.screens.createdeck.CreateDeckScreen
 import com.flashmd.ui.screens.decklist.DeckListScreen
 import com.flashmd.ui.screens.library.LibraryDetailScreen
 import com.flashmd.ui.screens.library.LibraryScreen
+import com.flashmd.ui.screens.reportbug.ReportBugScreen
 import com.flashmd.ui.screens.settings.SettingsScreen
 import com.flashmd.ui.screens.stats.StatsScreen
 import com.flashmd.ui.screens.study.StudyScreen
@@ -103,7 +104,14 @@ fun NavGraph(onLogout: () -> Unit = {}) {
             }
 
             composable("settings") {
-                SettingsScreen(onLogout = onLogout)
+                SettingsScreen(
+                    onLogout = onLogout,
+                    onReportBug = { navController.navigate("report-bug") },
+                )
+            }
+
+            composable("report-bug") {
+                ReportBugScreen(onBack = { navController.popBackStack() })
             }
 
             composable(

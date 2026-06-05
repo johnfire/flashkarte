@@ -155,3 +155,17 @@ data class UpdateProfileRequest(val displayName: String)
 
 @Serializable
 data class ForgotPasswordRequest(val email: String)
+
+@Serializable
+data class BugReportRequest(
+    val title: String,
+    val description: String,
+    val appVersion: String? = null,
+    val platform: String? = null,
+    val device: String? = null,
+)
+
+@Serializable
+data class BugReportResponse(
+    val issueUrl: String? = null,
+)

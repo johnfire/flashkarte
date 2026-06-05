@@ -3,6 +3,8 @@ package com.flashmd.data.remote
 import com.flashmd.data.remote.dto.AddCardsRequest
 import com.flashmd.data.remote.dto.AddCardsResponse
 import com.flashmd.data.remote.dto.AuthResponse
+import com.flashmd.data.remote.dto.BugReportRequest
+import com.flashmd.data.remote.dto.BugReportResponse
 import com.flashmd.data.remote.dto.ClientErrorRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.DeckCreatedDto
@@ -101,4 +103,7 @@ interface FlashkarteApi {
 
     @POST("api/client-errors")
     suspend fun reportClientError(@Body body: ClientErrorRequest): Response<Unit>
+
+    @POST("api/bug-reports")
+    suspend fun reportBug(@Body body: BugReportRequest): BugReportResponse
 }

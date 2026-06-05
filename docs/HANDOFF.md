@@ -39,10 +39,15 @@ Issues #19–#23 **and #1** are closed. Migrations applied on prod: **006**
 (library), **007** (`card_progress.last_rating`), **008** (`review_events`
 idempotency ledger for sync).
 
-Test status (all green): server **50** Jest · shared **24** Jest · web **9**
-Vitest · Android `compileDebugKotlin` + **15 unit-test classes / 53 tests**
-(parser, sm2, api-contract ×4, db/outbox, local-store, and library/deck/settings/
-create ViewModel tests).
+Test status (all green): server **55** Jest · shared **24** Jest · web **9**
+Vitest · Android `compileDebugKotlin` + **64 unit tests** (parser, sm2,
+api-contract ×4, db/outbox, local-store, and library/deck/settings/create/
+study-choice/study-ordered/mc-options/report-bug ViewModel tests).
+
+Built since (committed on `main`, unpushed — batched for one Play build):
+#2 multiple-choice study mode, #3 ordered decks (`is_ordered`), #24 bug
+reporting (Android screen → `POST /api/bug-reports` → GitHub issue via
+`GITHUB_TOKEN`; no-op-logs when token unset).
 
 ## #1 Offline-first — shipped 2026-06-05
 

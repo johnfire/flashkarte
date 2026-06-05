@@ -17,6 +17,7 @@ import com.flashmd.ui.theme.ThemeViewModel
 @Composable
 fun SettingsScreen(
     onLogout: () -> Unit,
+    onReportBug: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
 ) {
@@ -68,6 +69,10 @@ fun SettingsScreen(
             HorizontalDivider()
             Text("Security", style = MaterialTheme.typography.titleMedium)
             OutlinedButton(onClick = { viewModel.changePassword() }) { Text("Change password (email link)") }
+
+            HorizontalDivider()
+            Text("Feedback", style = MaterialTheme.typography.titleMedium)
+            OutlinedButton(onClick = onReportBug) { Text("Report a bug") }
 
             HorizontalDivider()
             Button(
