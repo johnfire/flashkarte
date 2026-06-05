@@ -4,72 +4,90 @@ _Last updated: 2026-06-05_
 
 ## TL;DR
 
-10 commits sit on local `main`, **not yet pushed**. They clear the entire
-quick + medium issue backlog plus Android dark mode. The next step is a
-**push + live test** (deploy, wire email env on the VPS, verify the email
-flows). After that, the three large epics (#1, #2, #3) remain.
+Everything below is **shipped, pushed, and live** at
+https://flashkarte.christopherrehm.de (web + server) and published to Play
+internal (Android). `main` is clean and in sync with `origin/main`. The next
+piece of work is the first large epic: **#1 Offline-first support with
+background sync** — design-first, not yet started.
 
-## Done this session (committed on `main`, unpushed)
+## Live admin account
 
-| Issue | Commit    | Summary                                                                                                             |
-| ----- | --------- | ------------------------------------------------------------------------------------------------------------------- |
-| #6    | `e17fca3` | Bump vite 5→6.4; esbuild dedupes to 0.25 → `npm audit` clean (dev-only advisory)                                    |
-| #7    | `62b6ee7` | Remove dead Android Room layer (data/db, DatabaseModule, room deps)                                                 |
-| #8    | `8a0b5de` | Password show/hide eye toggle on AuthPage                                                                           |
-| #16   | `ba361a6` | On-brand SVG favicon + index.html link                                                                              |
-| #4    | `ea0b174` | Email verification: SMTP infra (nodemailer), 003 migration, verify link on signup, soft banner + resend             |
-| #5    | `6c81b91` | Password reset: 004 migration, forgot/reset endpoints (no enumeration, single-use, session invalidation), web pages |
-| #10   | `f64ae2e` | Web dark mode (class strategy, system default + toggle, no-flash)                                                   |
-| #12   | `45440b8` | Modern landing page at `/welcome`; unauth users routed there                                                        |
-| #14   | `6df504b` | `account_type` field (free/paid/admin-gifted/admin) + `GET /api/auth/me` + Settings plan badge                      |
-| #18   | `8743bbd` | Android light theme + follow system dark/light                                                                      |
+- URL: https://flashkarte.christopherrehm.de
+- Email: `car2187bus@pm.me` — `account_type=admin`, email pre-verified
+- Password: `kKJz4ayiUF-fk24` (change via Settings/forgot-password when convenient)
+- `ADMIN_EMAILS=car2187bus@pm.me` is set in `/opt/flashkarte/.env`, so this
+  account is re-promoted to admin on every server start (`bootstrapAdmins`).
 
-All ten issues are **closed on GitHub**. Test status when committed:
-server **31** Jest tests, web **9** Vitest tests, Android `:app:assembleDebug` OK.
+## Done this session (all deployed)
 
-Five redundant `anthropic-code-agent` WIP PRs (#9/#11/#13/#15/#17 — duplicates of
-the above) were closed; they were the source of the "approve workflow runs"
-prompts (PR runs from an app author require approval).
+| Issue | Commit               | Summary                                                                                                                                                                      |
+| ----- | -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| #19   | `bfab287`            | **Admin user management** — `requireAdmin`, `/api/admin/users` (list/create/set account_type), `/admin` web page, admin-created users auto-verified with an initial password |
+| —     | `733cf08`            | Dark animated landing page (aurora + floating cards), real description, free-signup CTA                                                                                      |
+| —     | `1cffa3f`            | German **Impressum** page (`/impressum`, §5 DDG) linked from landing + auth footers                                                                                          |
+| #20   | `02bb2c6`            | **Q:/A: import format** accepted alongside `**1. Front**`; mirrored in all 3 parser ports (TS/Kotlin/Python)                                                                 |
+| #21   | `17e68a5`            | **Public deck library** — publish/unpublish, browse `/library`, clone; `users.display_name`; admin unpublish                                                                 |
+| #22   | `1573fda`            | **Per-deck learning stats** — viewed / Again·Hard·Good·Easy / not-viewed; deck-list chips (web) + Android Stats screen                                                       |
+| #23   | `e9b3761`, `93f61a5` | **Theme** — web global toggle + dark form controls; **Settings → Appearance Light/Dark buttons**; Android System/Light/Dark in DataStore + deck-list toggle                  |
 
-## REQUIRED before/with the push: wire email env on the VPS
+Issues #19–#23 are closed. Migrations applied on prod: **006** (library:
+`users.display_name`, `decks.is_public`/`published_at`) and **007**
+(`card_progress.last_rating`).
 
-The email flows (#4/#5) no-op until SMTP is configured. Reuse the server's
-existing mail account (same as art-platform). Add to `/opt/flashkarte/.env`
-(owned by `chris`):
+Test status (all green): server **45** Jest · shared **24** Jest · web **9**
+Vitest · Android `compileDebugKotlin` + parser unit tests.
 
-```
-MAIL_HOST=mail.christopherrehm.de
-MAIL_PORT=587
-MAIL_USER=contact@christopherrehm.de
-MAIL_PASS=<reuse the value from /opt/art-platform/.env — do NOT commit>
-MAIL_FROM=flashkarte <contact@christopherrehm.de>
-APP_URL=https://flashkarte.christopherrehm.de
-```
+## Open issues
 
-Then redeploy (push to main runs CI → GHCR → VPS pull) and the migrations
-(003/004/005) auto-run on app start.
-
-## Live-test checklist after push
-
-- [ ] Sign up a fresh account → receive verification email → click link → `/verify-email` shows verified; banner disappears.
-- [ ] Resend verification works (banner button).
-- [ ] Forgot password → receive reset email → `/reset-password` sets a new password → old sessions logged out.
-- [ ] `forgot-password` returns the same response for unknown emails (no enumeration).
-- [ ] Visual: dark-mode toggle across all screens; `/welcome` landing; Settings "Plan" badge; favicon in tab.
-- [ ] Android: install debug build, toggle OS theme → app follows light/dark.
-
-## Remaining open issues (large epics — one session each)
-
-- **#1 Offline-first support with background sync** (web + Android) — _in progress (this is where we go next)._
+- **#1 Offline-first support with background sync** ← _next; see below_
 - **#2 Multiple-choice study mode**
 - **#3 Card series / branching follow-up questions**
+- **#24 bug reporting screen** (pre-existing, unstarted)
 
-## Key facts
+## Next up: #1 Offline-first (design-first)
 
-- Stack: Express+TS+Postgres (`packages/server`), React+Vite+Tailwind (`packages/web`),
-  MCP (`packages/mcp`), Kotlin/Compose Android (`android/`). Server tests = **Jest**;
-  web tests = **Vitest**. Migrations auto-run on app start (`src/db/migrate.ts`).
-- Deploy: push to `main` → GitHub Actions builds GHCR images → VPS pulls. Prod at
-  https://flashkarte.christopherrehm.de. Android auto-publishes to Play internal on `android/**` changes.
-- ValidationError → HTTP **422** (not 400). `/api/auth` is rate-limited.
-- Auth user payload shape: `{ id, email, role, accountType, emailVerifiedAt }`.
+**Goal:** study with no connection, sync progress on reconnect — Android
+especially; web optionally as a PWA.
+
+**Recommended approach when starting:** brainstorm/design before code. Key
+decisions to make:
+
+- **Android local store:** Room was _removed_ in `62b6ee7` (commit on the
+  notes-world-style cleanup) — it would be re-introduced for the offline cache,
+  or use SQLDelight/DataStore. Decide.
+- **Web:** IndexedDB + service worker (PWA), or skip web offline for v1.
+- **Sync engine:** queue review events locally, replay on reconnect with
+  backoff. The server owns SM-2; clients post ratings. Conflict policy for
+  `card_progress` (last-write-wins per card is likely fine since reviews are
+  monotonic, but confirm).
+- **What's cached** (decks + due cards) vs **always-online** (library browse,
+  AI/MCP generation).
+- **Sync status UI** + retry.
+
+The v1 API + data model it depends on are all in place now.
+
+## Architecture quick reference
+
+- **Stack:** Express+TS+Postgres (`packages/server`, **Jest**), React+Vite+Tailwind
+  (`packages/web`, **Vitest**), shared parser/SM-2 (`packages/shared`, **Jest**),
+  MCP (`packages/mcp`), Kotlin/Compose (`android/`), reference Python (`python/`).
+- **Parser parity:** the Markdown parser exists in 3 ports (TS/Kotlin/Python) and
+  the code comment requires them identical — change all three together.
+- **Migrations** auto-run on server start (`src/db/migrate.ts`, numbered `.sql`,
+  tracked in `_migrations`). Add the next as `008_*.sql`.
+- **Auth:** `ValidationError → 422`. `/api/auth` rate-limited. User payload:
+  `{ id, email, role, accountType, emailVerifiedAt, displayName }`.
+  `account_type` ∈ `free|paid|admin-gifted|admin`; admin access = `account_type='admin'`.
+- **Deploy:** push to `main` → GitHub Actions (CI test → GHCR build → SSH deploy to
+  VPS `docker compose pull && up -d`). Android publishes to Play internal on
+  `android/**` changes. Prod at https://flashkarte.christopherrehm.de.
+- **VPS:** `claude@82.165.32.162`, `/opt/flashkarte` owned by **claude**, passwordless
+  sudo. `.env` holds `ADMIN_EMAILS`, `MAIL_*`, secrets. Logs in `/home/claude/logs`.
+- **Theme:** web default follows system pref (inline script in `index.html`),
+  user choice persisted in `localStorage`; toggle component + Settings buttons.
+  Landing page is force-dark by design. Android theme mode in DataStore.
+
+## Study rating scale
+
+UI grades **1=Again, 3=Hard, 4=Good, 5=Easy** (no 2 used). `card_progress.last_rating`
+stores the most recent; stats bucket `≤2→Again, 3→Hard, 4→Good, 5→Easy`.
