@@ -1,66 +1,139 @@
 # Deployment
 
-flashkarte deploys as a Docker Compose stack: one **app** container (Express,
-serves the built web SPA + the `/api` routes), an **mcp** container (the hosted
-MCP server for users' AI clients), a **postgres** container, and a daily
-**db-backup** sidecar. The app and mcp publish only to `127.0.0.1` (`${APP_PORT}`
-and `${MCP_PORT}`); the VPS's reverse proxy terminates TLS and forwards
-`flashkarte.christopherrehm.de` → app and the MCP endpoint → mcp.
+flashkarte deploys to the VPS via **GitHub Actions → GHCR → SSH**. On every push
+to `main`, CI runs the test suite, builds the **app** and **mcp** Docker images,
+pushes them to the GitHub Container Registry, then SSHes to the VPS and restarts
+the stack from the freshly-pulled images. The VPS itself never builds — it only
+pulls.
 
-> **Going live is a manual step.** It touches live infra (DNS + VPS) and should
-> be performed deliberately by the maintainer.
+The stack (defined in `docker-compose.prod.yml`) is: one **app** container
+(Express, serves the built web SPA + `/api`), one **mcp** container (hosted MCP
+server), a **postgres** container, and a daily **db-backup** sidecar. The app and
+mcp publish only to `127.0.0.1` (`${APP_PORT:-8090}` / `${MCP_PORT:-8091}`); the
+VPS's **Apache** front proxy terminates TLS and reverse-proxies the public
+hostnames to them.
 
-## One-time setup
+| Public hostname                     | → localhost | Container |
+| ----------------------------------- | ----------- | --------- |
+| `flashkarte.christopherrehm.de`     | `8090`      | app       |
+| `mcp.flashkarte.christopherrehm.de` | `8091`      | mcp       |
 
-1. **DNS** — add an `A` record for `flashkarte.christopherrehm.de` → the VPS IP.
-2. **Clone** the repo on the VPS.
-3. **Env** — copy and fill `.env` (never commit it):
+> **Going live is a deliberate one-time setup** (DNS + VPS bootstrap + secrets +
+> Apache vhosts + certbot). After that, deploys are automatic on push to `main`.
 
-   ```bash
-   cp .env.example .env
-   ```
+## Images
 
-   - `POSTGRES_PASSWORD` — a strong random value.
-   - `JWT_SECRET` — a long random string (e.g. `openssl rand -hex 32`).
-   - `NGINX_HOST` — `flashkarte.christopherrehm.de`.
-   - `FLASHKARTE_LOG_PATH` — a host path under `~/logs/` so the master log
-     (`flashkarte.log`) survives container restarts, e.g. `/home/<user>/logs/flashkarte`.
-   - `APP_PORT` — the localhost port the reverse proxy targets (default `8090`).
+CI builds two images and tags each with `:latest` and `:<commit-sha>`:
 
-## Deploy / update
+- `ghcr.io/johnfire/flashkarte-app` (Dockerfile target `production`)
+- `ghcr.io/johnfire/flashkarte-mcp` (Dockerfile target `mcp`)
+
+Both packages are **public**, so the VPS pulls without authenticating. (They
+contain no secrets — secrets are injected at runtime from `.env`.) After the
+first CI build creates them, set each package's visibility to Public once in the
+GitHub package settings.
+
+## One-time VPS bootstrap
 
 ```bash
-docker compose up -d --build
+ssh claude@82.165.32.162
+sudo git clone https://github.com/johnfire/flashkarte.git /opt/flashkarte
+sudo chown -R claude:claude /opt/flashkarte
+cd /opt/flashkarte
+cp .env.example .env && nano .env        # fill in the values below
 ```
 
-Migrations run automatically on app startup (idempotent). Verify:
+`.env` (never committed):
+
+- `POSTGRES_PASSWORD` — `openssl rand -hex 24`
+- `JWT_SECRET` — `openssl rand -hex 32`
+- `NGINX_HOST` — `flashkarte.christopherrehm.de` (drives `CORS_ORIGIN`)
+- `FLASHKARTE_LOG_PATH` — a host path under `~/logs/`, e.g. `/home/claude/logs/flashkarte`
+- `APP_PORT` — `8090`
+- `MCP_PORT` — `8091`
+- `TZ` — `Europe/Berlin`
+
+First deploy (subsequent ones are automatic via CI):
 
 ```bash
+export IMAGE_TAG=latest
+docker compose -f docker-compose.prod.yml pull
+docker compose -f docker-compose.prod.yml up -d
 curl http://127.0.0.1:8090/health        # -> {"status":"ok"}
 ```
 
-## Reverse proxy + TLS
+Migrations run automatically on app startup (idempotent).
 
-Point a vhost for `flashkarte.christopherrehm.de` at `http://127.0.0.1:8090`
-(same pattern as the other apps on the VPS), then issue a certificate with
-certbot. The app sets `CORS_ORIGIN=https://flashkarte.christopherrehm.de` from
-`NGINX_HOST`.
+## GitHub Actions secrets
 
-### MCP server
+Set these in the repo (Settings → Secrets and variables → Actions) so the
+`deploy` job can reach the VPS:
 
-The hosted MCP server publishes to `127.0.0.1:${MCP_PORT}` (default `8091`).
-Expose it at a stable URL — either a subdomain (`mcp.flashkarte.christopherrehm.de`)
-or a path the reverse proxy maps to `http://127.0.0.1:8091/mcp`. Users add that
-URL plus a personal API key (generated at `/settings` in the web app) to their AI
-client (e.g. Claude Desktop). Their AI then calls the MCP tools
-(`create_deck`, `add_cards`, `list_decks`, `get_deck`, `delete_deck`), which act
-on that user's account — the AI compute runs on the user's own account, not ours.
+| Secret        | Value                                                                                                            |
+| ------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `VPS_HOST`    | `82.165.32.162`                                                                                                  |
+| `VPS_USER`    | `claude`                                                                                                         |
+| `VPS_PORT`    | `22`                                                                                                             |
+| `VPS_SSH_KEY` | private key of a dedicated deploy keypair whose public key is in `claude@`'s `~/.ssh/authorized_keys` on the VPS |
+
+`GITHUB_TOKEN` (used to push to GHCR) is provided automatically.
+
+## Apache reverse proxy + TLS
+
+Two vhosts (same pattern as the other apps on this VPS), then certbot issues the
+certs and rewrites them to `:443`.
+
+`/etc/apache2/sites-available/flashkarte.conf`:
+
+```apache
+<VirtualHost *:80>
+    ServerName flashkarte.christopherrehm.de
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:8090/
+    ProxyPassReverse / http://localhost:8090/
+    ErrorLog ${APACHE_LOG_DIR}/flashkarte-error.log
+    CustomLog ${APACHE_LOG_DIR}/flashkarte-access.log combined
+</VirtualHost>
+```
+
+`/etc/apache2/sites-available/mcp.flashkarte.conf`:
+
+```apache
+<VirtualHost *:80>
+    ServerName mcp.flashkarte.christopherrehm.de
+    ProxyPreserveHost On
+    ProxyPass / http://localhost:8091/
+    ProxyPassReverse / http://localhost:8091/
+    ErrorLog ${APACHE_LOG_DIR}/mcp-flashkarte-error.log
+    CustomLog ${APACHE_LOG_DIR}/mcp-flashkarte-access.log combined
+</VirtualHost>
+```
+
+```bash
+sudo a2ensite flashkarte mcp.flashkarte
+sudo apache2ctl configtest && sudo systemctl reload apache2
+sudo certbot --apache \
+  -d flashkarte.christopherrehm.de -d mcp.flashkarte.christopherrehm.de \
+  --non-interactive --agree-tos -m christopher.rehm.63@protonmail.com
+```
+
+## Rollback
+
+Each deploy pins images to a commit SHA. To roll back, on the VPS:
+
+```bash
+cd /opt/flashkarte
+export IMAGE_TAG=<previous-sha>
+docker compose -f docker-compose.prod.yml up -d
+```
+
+(Or re-run the GitHub Actions `deploy` job from an earlier green commit.)
 
 ## Logs
 
-The master log is JSON-lines at `${FLASHKARTE_LOG_PATH}/flashkarte.log` on the
-host. Unhandled server errors and all client-error reports
-(`POST /api/client-errors` from web/Android) land here. Tail it to debug:
+The master log is JSON-lines at `${FLASHKARTE_LOG_PATH}/flashkarte.log`.
+Unhandled server errors and all client-error reports (`POST /api/client-errors`
+from web/Android) land here:
 
 ```bash
 tail -f ~/logs/flashkarte/flashkarte.log
@@ -70,10 +143,3 @@ tail -f ~/logs/flashkarte/flashkarte.log
 
 The `db-backup` sidecar dumps the database daily to `./backups` (7 daily / 4
 weekly / 3 monthly retained).
-
-## CI
-
-`.github/workflows/ci.yml` runs the full test suite + builds on every push and
-PR to `main`. An automated VPS deploy job (SSH) can be added later once deploy
-secrets are provisioned; until then, deploy is the manual `docker compose` step
-above.
