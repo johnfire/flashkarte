@@ -86,3 +86,40 @@ export function findRefreshToken(tokenHash: string) {
 export function deleteRefreshToken(tokenHash: string) {
   return query("DELETE FROM refresh_tokens WHERE token_hash = $1", [tokenHash]);
 }
+
+export function deleteRefreshTokensForUser(userId: string) {
+  return query("DELETE FROM refresh_tokens WHERE user_id = $1", [userId]);
+}
+
+// --- Password reset tokens (#5) ---
+
+export function updatePasswordHash(userId: string, passwordHash: string) {
+  return query(
+    "UPDATE users SET password_hash = $2, updated_at = now() WHERE id = $1",
+    [userId, passwordHash],
+  );
+}
+
+export function insertPasswordResetToken(
+  userId: string,
+  tokenHash: string,
+  expiresAt: Date,
+) {
+  return query(
+    "INSERT INTO password_reset_tokens (user_id, token_hash, expires_at) VALUES ($1, $2, $3)",
+    [userId, tokenHash, expiresAt],
+  );
+}
+
+export function findPasswordResetToken(tokenHash: string) {
+  return queryOne<{ user_id: string; expires_at: Date }>(
+    "SELECT user_id, expires_at FROM password_reset_tokens WHERE token_hash = $1",
+    [tokenHash],
+  );
+}
+
+export function deletePasswordResetTokensForUser(userId: string) {
+  return query("DELETE FROM password_reset_tokens WHERE user_id = $1", [
+    userId,
+  ]);
+}

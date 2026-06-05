@@ -53,3 +53,17 @@ export const resendVerification = wrapAsync(
     res.status(202).json({ status: "sent" });
   },
 );
+
+export const forgotPassword = wrapAsync(async (req: Request, res: Response) => {
+  await service.forgotPassword(req.body.email);
+  // Always the same response — never reveal whether the email exists.
+  res.json({
+    status: "ok",
+    message: "If that email has an account, a reset link is on its way.",
+  });
+});
+
+export const resetPassword = wrapAsync(async (req: Request, res: Response) => {
+  await service.resetPassword(req.body.token, req.body.password);
+  res.json({ status: "reset" });
+});

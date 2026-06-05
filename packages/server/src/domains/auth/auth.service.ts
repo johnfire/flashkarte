@@ -3,7 +3,11 @@ import crypto from "crypto";
 import jwt from "jsonwebtoken";
 import { getJwtSecret } from "../../config/env";
 import { ValidationError, AuthError } from "../../utils/errors";
-import { getAppUrl, sendVerificationEmail } from "../../email/mailer";
+import {
+  getAppUrl,
+  sendVerificationEmail,
+  sendPasswordResetEmail,
+} from "../../email/mailer";
 import * as repo from "./auth.repository";
 import type { UserRow } from "./auth.repository";
 
@@ -11,6 +15,7 @@ const BCRYPT_ROUNDS = 12;
 export const ACCESS_TOKEN_TTL_SEC = 15 * 60;
 const REFRESH_TOKEN_TTL_DAYS = 30;
 const VERIFICATION_TOKEN_TTL_HOURS = 24;
+const PASSWORD_RESET_TOKEN_TTL_HOURS = 1;
 
 export interface JwtPayload {
   sub: string;
@@ -158,4 +163,53 @@ export async function refresh(rawRefresh: string | undefined) {
 
 export async function logout(rawRefresh: string | undefined) {
   if (rawRefresh) await repo.deleteRefreshToken(hashToken(rawRefresh));
+}
+
+/**
+ * Start a password reset. Always resolves the same way whether or not the
+ * email belongs to an account (no account enumeration).
+ */
+export async function forgotPassword(emailIn: unknown): Promise<void> {
+  if (typeof emailIn !== "string") return;
+  const email = emailIn.toLowerCase();
+  const user = await repo.findByEmailWithHash(email);
+  if (!user) return; // unknown email — succeed silently
+  try {
+    await repo.deletePasswordResetTokensForUser(user.id);
+    const rawToken = crypto.randomBytes(32).toString("hex");
+    const expiresAt = new Date(
+      Date.now() + PASSWORD_RESET_TOKEN_TTL_HOURS * 3600_000,
+    );
+    await repo.insertPasswordResetToken(
+      user.id,
+      hashToken(rawToken),
+      expiresAt,
+    );
+    const link = `${getAppUrl()}/reset-password?token=${rawToken}`;
+    await sendPasswordResetEmail(user.email, link);
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error("Failed to send password reset email:", err);
+  }
+}
+
+/** Complete a password reset from a reset-link token. Single-use. */
+export async function resetPassword(
+  rawToken: unknown,
+  passwordIn: unknown,
+): Promise<void> {
+  if (typeof rawToken !== "string" || !rawToken) {
+    throw new ValidationError("Reset token is required");
+  }
+  if (typeof passwordIn !== "string" || passwordIn.length < 8) {
+    throw new ValidationError("Password must be at least 8 characters");
+  }
+  const found = await repo.findPasswordResetToken(hashToken(rawToken));
+  if (!found || found.expires_at < new Date()) {
+    throw new ValidationError("This reset link is invalid or expired");
+  }
+  const hash = await bcrypt.hash(passwordIn, BCRYPT_ROUNDS);
+  await repo.updatePasswordHash(found.user_id, hash);
+  await repo.deletePasswordResetTokensForUser(found.user_id); // single-use
+  await repo.deleteRefreshTokensForUser(found.user_id); // invalidate sessions
 }

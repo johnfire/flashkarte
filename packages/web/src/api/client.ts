@@ -108,6 +108,16 @@ export const api = {
       request<{ status: string }>("/auth/resend-verification", {
         method: "POST",
       }),
+    forgotPassword: (email: string) =>
+      request<{ status: string; message: string }>("/auth/forgot-password", {
+        method: "POST",
+        body: JSON.stringify({ email }),
+      }),
+    resetPassword: (token: string, password: string) =>
+      request<{ status: string }>("/auth/reset-password", {
+        method: "POST",
+        body: JSON.stringify({ token, password }),
+      }),
   },
   decks: {
     list: () => request<DeckWithCounts[]>("/decks"),

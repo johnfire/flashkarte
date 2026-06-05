@@ -80,4 +80,33 @@ describe("auth routes", () => {
     expect(res.status).toBe(401);
     expect(mock.resendVerification).not.toHaveBeenCalled();
   });
+
+  test("POST /api/auth/forgot-password -> 200 (uniform response)", async () => {
+    mock.forgotPassword.mockResolvedValue(undefined as never);
+    const res = await request(app)
+      .post("/api/auth/forgot-password")
+      .send({ email: "a@b.com" });
+    expect(res.status).toBe(200);
+    expect(mock.forgotPassword).toHaveBeenCalledWith("a@b.com");
+  });
+
+  test("POST /api/auth/reset-password -> 200 reset", async () => {
+    mock.resetPassword.mockResolvedValue(undefined as never);
+    const res = await request(app)
+      .post("/api/auth/reset-password")
+      .send({ token: "raw", password: "newpassword123" });
+    expect(res.status).toBe(200);
+    expect(res.body.status).toBe("reset");
+    expect(mock.resetPassword).toHaveBeenCalledWith("raw", "newpassword123");
+  });
+
+  test("POST /api/auth/reset-password -> 422 on bad token", async () => {
+    mock.resetPassword.mockRejectedValue(
+      new ValidationError("This reset link is invalid or expired"),
+    );
+    const res = await request(app)
+      .post("/api/auth/reset-password")
+      .send({ token: "nope", password: "newpassword123" });
+    expect(res.status).toBe(422);
+  });
 });

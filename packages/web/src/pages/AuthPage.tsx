@@ -122,6 +122,15 @@ export function AuthPage() {
             : "Have an account? Sign in"}
         </button>
 
+        {mode === "login" && (
+          <Link
+            to="/forgot-password"
+            className="block text-center text-sm text-gray-500 hover:text-indigo-600"
+          >
+            Forgot password?
+          </Link>
+        )}
+
         <p className="text-center text-xs text-gray-400">
           <Link to="/privacy" className="hover:text-gray-600">
             Privacy Policy
