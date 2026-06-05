@@ -14,6 +14,9 @@ data class UserDto(
     val id: String,
     val email: String,
     val role: String,
+    val accountType: String? = null,
+    val emailVerifiedAt: String? = null,
+    val displayName: String? = null,
 )
 
 @Serializable
@@ -41,6 +44,7 @@ data class DeckListItemDto(
     @SerialName("updated_at") val updatedAt: String,
     @SerialName("card_count") val cardCount: String = "0",
     @SerialName("due_count") val dueCount: String = "0",
+    @SerialName("is_public") val isPublic: Boolean = false,
 )
 
 /** Response from POST /api/decks — here `card_count` is a real number. */
@@ -124,3 +128,27 @@ data class ApiErrorBody(
     val code: String = "ERROR",
     val message: String = "",
 )
+
+@Serializable
+data class UpdateDeckRequest(
+    val title: String? = null,
+    val isPublic: Boolean? = null,
+)
+
+@Serializable
+data class AddCardsRequest(val markdown: String)
+
+@Serializable
+data class AddCardsResponse(
+    @SerialName("deck_id") val deckId: String,
+    val added: Int = 0,
+)
+
+@Serializable
+data class MeResponse(val user: UserDto)
+
+@Serializable
+data class UpdateProfileRequest(val displayName: String)
+
+@Serializable
+data class ForgotPasswordRequest(val email: String)
