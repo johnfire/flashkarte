@@ -1,12 +1,18 @@
 package com.flashmd.data.remote
 
+import com.flashmd.data.remote.dto.AddCardsRequest
+import com.flashmd.data.remote.dto.AddCardsResponse
 import com.flashmd.data.remote.dto.AuthResponse
 import com.flashmd.data.remote.dto.ClientErrorRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.DeckCreatedDto
 import com.flashmd.data.remote.dto.DeckDetailDto
 import com.flashmd.data.remote.dto.DeckListItemDto
+import com.flashmd.data.remote.dto.ForgotPasswordRequest
 import com.flashmd.data.remote.dto.ImportRequest
+import com.flashmd.data.remote.dto.LibraryDeckDetailDto
+import com.flashmd.data.remote.dto.LibraryListResponse
+import com.flashmd.data.remote.dto.MeResponse
 import com.flashmd.data.remote.dto.RefreshResponse
 import com.flashmd.data.remote.dto.ReviewRequest
 import com.flashmd.data.remote.dto.ReviewResponseDto
@@ -14,12 +20,16 @@ import com.flashmd.data.remote.dto.StatsDto
 import com.flashmd.data.remote.dto.StudyCardDto
 import com.flashmd.data.remote.dto.SyncRequest
 import com.flashmd.data.remote.dto.SyncResponse
+import com.flashmd.data.remote.dto.UpdateDeckRequest
+import com.flashmd.data.remote.dto.UpdateProfileRequest
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface FlashkarteApi {
 
@@ -58,6 +68,36 @@ interface FlashkarteApi {
 
     @POST("api/study/sync")
     suspend fun syncReviews(@Body body: SyncRequest): SyncResponse
+
+    // Deck mutations
+    @PATCH("api/decks/{id}")
+    suspend fun updateDeck(@Path("id") id: String, @Body body: UpdateDeckRequest): DeckDetailDto
+
+    @POST("api/decks/{id}/cards")
+    suspend fun addCards(@Path("id") id: String, @Body body: AddCardsRequest): AddCardsResponse
+
+    // Library
+    @GET("api/library")
+    suspend fun listLibrary(@Query("q") q: String?): LibraryListResponse
+
+    @GET("api/library/{id}")
+    suspend fun getLibraryDeck(@Path("id") id: String): LibraryDeckDetailDto
+
+    @POST("api/library/{id}/clone")
+    suspend fun cloneLibraryDeck(@Path("id") id: String): DeckCreatedDto
+
+    // Account
+    @GET("api/auth/me")
+    suspend fun getMe(): MeResponse
+
+    @PATCH("api/auth/me")
+    suspend fun updateMe(@Body body: UpdateProfileRequest): MeResponse
+
+    @POST("api/auth/resend-verification")
+    suspend fun resendVerification(): Response<Unit>
+
+    @POST("api/auth/forgot-password")
+    suspend fun forgotPassword(@Body body: ForgotPasswordRequest): Response<Unit>
 
     @POST("api/client-errors")
     suspend fun reportClientError(@Body body: ClientErrorRequest): Response<Unit>
