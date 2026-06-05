@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../api/client";
 
@@ -78,6 +78,12 @@ export function AuthPage() {
             ? "Need an account? Sign up"
             : "Have an account? Sign in"}
         </button>
+
+        <p className="text-center text-xs text-gray-400">
+          <Link to="/privacy" className="hover:text-gray-600">
+            Privacy Policy
+          </Link>
+        </p>
       </form>
     </div>
   );
