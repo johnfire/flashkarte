@@ -80,4 +80,44 @@ describe("study routes", () => {
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ total: 3, new: 1, due: 2, learned: 1 });
   });
+
+  test("POST /api/study/sync -> 200 with acked + progress", async () => {
+    mock.sync.mockResolvedValue({
+      acked_event_ids: ["e1"],
+      progress: [
+        {
+          card_id: "c1",
+          easiness: 2.5,
+          interval: 1,
+          repetitions: 1,
+          due_at: "2026-06-06T00:00:00.000Z",
+          last_rating: 4,
+        },
+      ],
+    } as never);
+
+    const res = await request(app)
+      .post("/api/study/sync")
+      .send({
+        events: [
+          {
+            event_id: "e1",
+            card_id: "c1",
+            rating: 4,
+            reviewed_at: "2026-06-05T09:00:00.000Z",
+          },
+        ],
+      });
+
+    expect(res.status).toBe(200);
+    expect(res.body.acked_event_ids).toEqual(["e1"]);
+    expect(mock.sync).toHaveBeenCalledWith("u1", [
+      {
+        event_id: "e1",
+        card_id: "c1",
+        rating: 4,
+        reviewed_at: "2026-06-05T09:00:00.000Z",
+      },
+    ]);
+  });
 });

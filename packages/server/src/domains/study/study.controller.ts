@@ -19,3 +19,7 @@ export const review = wrapAsync(async (req: Request, res: Response) => {
     await service.review(req.userId!, req.body.card_id, req.body.rating),
   );
 });
+
+export const sync = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.sync(req.userId!, req.body.events));
+});
