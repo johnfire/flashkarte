@@ -74,6 +74,26 @@ class DeckListViewModel @Inject constructor(
         scheduler.requestSync()
     }
 
+    fun rename(id: String, title: String) = viewModelScope.launch {
+        try { deckRepo.renameDeck(id, title) }
+        catch (e: Exception) { _listError.value = "Rename failed." }
+    }
+
+    fun addCards(id: String, markdown: String) = viewModelScope.launch {
+        try { deckRepo.addCards(id, markdown) }
+        catch (e: Exception) { _listError.value = "Couldn't add cards." }
+    }
+
+    fun setPublic(id: String, isPublic: Boolean) = viewModelScope.launch {
+        try { deckRepo.setPublic(id, isPublic) }
+        catch (e: Exception) { _listError.value = "Couldn't update sharing." }
+    }
+
+    fun delete(id: String) = viewModelScope.launch {
+        try { deckRepo.deleteDeck(id) }
+        catch (e: Exception) { _listError.value = "Delete failed." }
+    }
+
     fun refresh() {
         viewModelScope.launch {
             _isLoading.value = true
