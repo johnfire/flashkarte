@@ -53,7 +53,7 @@ fun DeckListScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("FlashMD", fontWeight = FontWeight.Bold) },
+                title = { Text("flashkarte", fontWeight = FontWeight.Bold) },
                 actions = {
                     TextButton(onClick = onLogout) { Text("Log out") }
                 },
