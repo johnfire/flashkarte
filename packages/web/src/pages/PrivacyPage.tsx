@@ -17,11 +17,8 @@ export function PrivacyPage() {
             study, operated by Christopher Rehm (Germany). This policy explains
             what data the app collects, why, and your choices. Questions or
             requests:{" "}
-            <a
-              className="text-indigo-600"
-              href="mailto:christopher.rehm.63@protonmail.com"
-            >
-              christopher.rehm.63@protonmail.com
+            <a className="text-indigo-600" href="mailto:car2187bus@pm.me">
+              car2187bus@pm.me
             </a>
             .
           </p>
@@ -103,11 +100,8 @@ export function PrivacyPage() {
               We keep your account data for as long as your account exists. You
               can delete individual decks at any time in the app. To delete your
               entire account and associated data, email{" "}
-              <a
-                className="text-indigo-600"
-                href="mailto:christopher.rehm.63@protonmail.com"
-              >
-                christopher.rehm.63@protonmail.com
+              <a className="text-indigo-600" href="mailto:car2187bus@pm.me">
+                car2187bus@pm.me
               </a>{" "}
               from your account email address and we will remove it.
             </p>
