@@ -94,6 +94,11 @@ class DeckListViewModel @Inject constructor(
         catch (e: Exception) { _listError.value = "Delete failed." }
     }
 
+    fun setOrdered(id: String, isOrdered: Boolean) = viewModelScope.launch {
+        try { deckRepo.setOrdered(id, isOrdered) }
+        catch (e: Exception) { _listError.value = "Couldn't update study order." }
+    }
+
     fun refresh() {
         viewModelScope.launch {
             _isLoading.value = true

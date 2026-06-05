@@ -10,4 +10,5 @@ data class Deck(
     val totalCards: Int = 0,
     val dueCount: Int = 0,
     val isPublic: Boolean = false,
+    val isOrdered: Boolean = false,
 )

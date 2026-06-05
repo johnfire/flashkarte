@@ -50,6 +50,7 @@ class DeckRepository @Inject constructor(
                         sourceFile = it.sourceFilename ?: "",
                         createdAt = it.createdAt,
                         lastStudied = it.updatedAt,
+                        isOrdered = it.isOrdered,
                     )
                 }
             }.getOrNull()
@@ -86,6 +87,11 @@ class DeckRepository @Inject constructor(
         return res.added
     }
 
+    suspend fun setOrdered(id: String, isOrdered: Boolean) {
+        apiCall { api.updateDeck(id, com.flashmd.data.remote.dto.UpdateDeckRequest(isOrdered = isOrdered)) }
+        refresh()
+    }
+
     private fun DeckListItemDto.toDomain() = Deck(
         id = id,
         title = title,
@@ -95,5 +101,6 @@ class DeckRepository @Inject constructor(
         totalCards = cardCount.toIntOrNull() ?: 0,
         dueCount = dueCount.toIntOrNull() ?: 0,
         isPublic = isPublic,
+        isOrdered = isOrdered,
     )
 }

@@ -83,6 +83,7 @@ fun DeckListScreen(
                         onRename = { t -> viewModel.rename(row.deck.id, t) },
                         onAddCards = { md -> viewModel.addCards(row.deck.id, md) },
                         onTogglePublic = { viewModel.setPublic(row.deck.id, !row.deck.isPublic) },
+                        onToggleOrdered = { viewModel.setOrdered(row.deck.id, !row.deck.isOrdered) },
                         onDelete = { viewModel.delete(row.deck.id) },
                     )
                 }
@@ -99,6 +100,7 @@ private fun DeckCard(
     onRename: (String) -> Unit,
     onAddCards: (String) -> Unit,
     onTogglePublic: () -> Unit,
+    onToggleOrdered: () -> Unit,
     onDelete: () -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
@@ -134,6 +136,10 @@ private fun DeckCard(
                     DropdownMenuItem(
                         text = { Text(if (row.deck.isPublic) "Unpublish" else "Publish to library") },
                         onClick = { menuOpen = false; onTogglePublic() },
+                    )
+                    DropdownMenuItem(
+                        text = { Text(if (row.deck.isOrdered) "Unordered study" else "Study in order") },
+                        onClick = { menuOpen = false; onToggleOrdered() },
                     )
                     DropdownMenuItem(text = { Text("Delete") }, onClick = { menuOpen = false; confirmingDelete = true })
                 }

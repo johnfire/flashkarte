@@ -45,6 +45,7 @@ data class DeckListItemDto(
     @SerialName("card_count") val cardCount: String = "0",
     @SerialName("due_count") val dueCount: String = "0",
     @SerialName("is_public") val isPublic: Boolean = false,
+    @SerialName("is_ordered") val isOrdered: Boolean = false,
 )
 
 /** Response from POST /api/decks — here `card_count` is a real number. */
@@ -62,6 +63,7 @@ data class DeckDetailDto(
     @SerialName("source_filename") val sourceFilename: String? = null,
     @SerialName("created_at") val createdAt: String,
     @SerialName("updated_at") val updatedAt: String,
+    @SerialName("is_ordered") val isOrdered: Boolean = false,
 )
 
 @Serializable
@@ -133,6 +135,7 @@ data class ApiErrorBody(
 data class UpdateDeckRequest(
     val title: String? = null,
     val isPublic: Boolean? = null,
+    val isOrdered: Boolean? = null,
 )
 
 @Serializable
