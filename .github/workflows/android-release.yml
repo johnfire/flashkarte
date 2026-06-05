@@ -1,0 +1,69 @@
+name: Android Release
+
+# Publishes a signed AAB to the Play "internal" testing track. Runs when the
+# Android app changes on main, or on demand. Server/web-only commits don't
+# trigger a new Play release.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "android/**"
+      - ".github/workflows/android-release.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: android-release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip until Play service account is configured
+        id: guard
+        run: |
+          if [ -z "${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}" ]; then
+            echo "PLAY_SERVICE_ACCOUNT_JSON secret is not set — skipping Play publish."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.skip != 'true'
+
+      - uses: actions/setup-java@v4
+        if: steps.guard.outputs.skip != 'true'
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - uses: android-actions/setup-android@v3
+        if: steps.guard.outputs.skip != 'true'
+
+      - name: Decode upload keystore + Play credentials from secrets
+        if: steps.guard.outputs.skip != 'true'
+        working-directory: android
+        env:
+          UPLOAD_KEYSTORE_BASE64: ${{ secrets.UPLOAD_KEYSTORE_BASE64 }}
+          PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        run: |
+          echo "$UPLOAD_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.keystore"
+          printf '%s' "$PLAY_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/play-sa.json"
+
+      - name: Compute versionCode (run number + offset; must be monotonic)
+        if: steps.guard.outputs.skip != 'true'
+        run: echo "VERSION_CODE=$(( ${{ github.run_number }} + 10 ))" >> "$GITHUB_ENV"
+
+      - name: Build + publish AAB to Play (internal)
+        if: steps.guard.outputs.skip != 'true'
+        working-directory: android
+        env:
+          VERSION_CODE: ${{ env.VERSION_CODE }}
+          UPLOAD_KEYSTORE_FILE: ${{ runner.temp }}/upload.keystore
+          UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.UPLOAD_KEYSTORE_PASSWORD }}
+          UPLOAD_KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}
+          UPLOAD_KEY_PASSWORD: ${{ secrets.UPLOAD_KEY_PASSWORD }}
+          PLAY_SERVICE_ACCOUNT_FILE: ${{ runner.temp }}/play-sa.json
+        run: ./gradlew :app:publishReleaseBundle --no-daemon --stacktrace

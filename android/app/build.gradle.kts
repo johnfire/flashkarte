@@ -5,17 +5,26 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.play.publisher)
 }
+
+// Upload keystore + Play service-account creds come from the environment in CI
+// (decoded from secrets). Absent locally, so debug builds and the test job work
+// unchanged; release signing + publishing only engage when these are present.
+val uploadKeystore = System.getenv("UPLOAD_KEYSTORE_FILE")?.let { file(it) }
+val playCredentials = System.getenv("PLAY_SERVICE_ACCOUNT_FILE")?.let { file(it) }
 
 android {
     namespace = "com.flashmd"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.flashmd"
+        applicationId = "de.christopherrehm.flashkarte"
         minSdk = 26
         targetSdk = 34
-        versionCode = 1
+        // Play requires a monotonically increasing versionCode; CI passes the
+        // workflow run number. Defaults to 1 for local builds.
+        versionCode = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
         versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -29,6 +38,17 @@ android {
         )
     }
 
+    if (uploadKeystore != null && uploadKeystore.exists()) {
+        signingConfigs {
+            create("release") {
+                storeFile = uploadKeystore
+                storePassword = System.getenv("UPLOAD_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("UPLOAD_KEY_ALIAS")
+                keyPassword = System.getenv("UPLOAD_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -36,6 +56,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            if (uploadKeystore != null && uploadKeystore.exists()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
@@ -52,6 +75,18 @@ android {
         compose = true
         buildConfig = true
     }
+}
+
+// Gradle Play Publisher — uploads the signed AAB to the Internal testing track.
+// Only active in CI (when the service-account JSON is provided via env).
+play {
+    if (playCredentials != null) {
+        serviceAccountCredentials.set(playCredentials)
+    }
+    track.set("internal")
+    defaultToAppBundles.set(true)
+    // Don't fail local/test runs that lack credentials; only publish tasks need them.
+    enabled.set(playCredentials != null)
 }
 
 dependencies {
