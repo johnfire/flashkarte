@@ -1,12 +1,15 @@
 import { useState, FormEvent } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../api/client";
 
 export function AuthPage() {
   const { login, signup } = useAuth();
   const navigate = useNavigate();
-  const [mode, setMode] = useState<"login" | "signup">("login");
+  const [params] = useSearchParams();
+  const [mode, setMode] = useState<"login" | "signup">(
+    params.get("mode") === "signup" ? "signup" : "login",
+  );
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -132,7 +135,10 @@ export function AuthPage() {
         )}
 
         <p className="text-center text-xs text-gray-400 dark:text-gray-500">
-          <Link to="/privacy" className="hover:text-gray-600 dark:hover:text-gray-300">
+          <Link
+            to="/privacy"
+            className="hover:text-gray-600 dark:hover:text-gray-300"
+          >
             Privacy Policy
           </Link>
         </p>

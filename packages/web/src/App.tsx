@@ -10,12 +10,14 @@ import { VerifyEmailPage } from "./pages/VerifyEmailPage";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { ThemeToggle } from "./components/ThemeToggle";
+import { LandingPage } from "./pages/LandingPage";
 
 export default function App() {
   return (
     <>
       <ThemeToggle />
       <Routes>
+        <Route path="/welcome" element={<LandingPage />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />

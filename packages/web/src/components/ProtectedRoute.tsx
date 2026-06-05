@@ -11,7 +11,7 @@ export function ProtectedRoute() {
       </div>
     );
   }
-  if (!authed) return <Navigate to="/login" replace />;
+  if (!authed) return <Navigate to="/welcome" replace />;
   return (
     <>
       <VerifyBanner />
