@@ -12,6 +12,8 @@ import com.flashmd.data.remote.dto.ReviewRequest
 import com.flashmd.data.remote.dto.ReviewResponseDto
 import com.flashmd.data.remote.dto.StatsDto
 import com.flashmd.data.remote.dto.StudyCardDto
+import com.flashmd.data.remote.dto.SyncRequest
+import com.flashmd.data.remote.dto.SyncResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -53,6 +55,9 @@ interface FlashkarteApi {
 
     @POST("api/study/review")
     suspend fun review(@Body body: ReviewRequest): ReviewResponseDto
+
+    @POST("api/study/sync")
+    suspend fun syncReviews(@Body body: SyncRequest): SyncResponse
 
     @POST("api/client-errors")
     suspend fun reportClientError(@Body body: ClientErrorRequest): Response<Unit>
