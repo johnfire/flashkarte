@@ -146,9 +146,12 @@ export function LandingPage() {
           >
             Start studying →
           </Link>
-          <p className="mt-4 text-xs text-slate-500">
+          <p className="mt-4 space-x-4 text-xs text-slate-500">
             <Link to="/privacy" className="hover:text-slate-300">
               Privacy Policy
+            </Link>
+            <Link to="/impressum" className="hover:text-slate-300">
+              Impressum
             </Link>
           </p>
         </footer>

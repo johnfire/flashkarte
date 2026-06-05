@@ -134,12 +134,18 @@ export function AuthPage() {
           </Link>
         )}
 
-        <p className="text-center text-xs text-gray-400 dark:text-gray-500">
+        <p className="space-x-4 text-center text-xs text-gray-400 dark:text-gray-500">
           <Link
             to="/privacy"
             className="hover:text-gray-600 dark:hover:text-gray-300"
           >
             Privacy Policy
+          </Link>
+          <Link
+            to="/impressum"
+            className="hover:text-gray-600 dark:hover:text-gray-300"
+          >
+            Impressum
           </Link>
         </p>
       </form>

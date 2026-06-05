@@ -8,6 +8,7 @@ import { CreateDeckPage } from "./pages/CreateDeckPage";
 import { StudyPage } from "./pages/StudyPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { PrivacyPage } from "./pages/PrivacyPage";
+import { ImpressumPage } from "./pages/ImpressumPage";
 import { VerifyEmailPage } from "./pages/VerifyEmailPage";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/welcome" element={<LandingPage />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/impressum" element={<ImpressumPage />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
