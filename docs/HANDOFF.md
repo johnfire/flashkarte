@@ -7,9 +7,11 @@ _Last updated: 2026-06-05_
 Everything below is **shipped, pushed, and live** at
 https://flashkarte.christopherrehm.de (web + server) and published to Play
 internal (Android). `main` is clean and in sync with `origin/main`. **#1
-Offline-first (Android) shipped this session** — see below. Next candidates:
+Offline-first (Android)** AND **Android full-functionality (decks/library/
+settings)** both shipped this session — see below. Next candidates:
 **#2 Multiple-choice study mode**, **#3 card series**, **#24 bug-report screen**.
-On-device smoke test of #1 offline flow still pending (no emulator in the build
+On-device smoke tests of the offline flow + the new Android screens still
+pending (no emulator in the build
 session).
 
 ## Live admin account
@@ -38,8 +40,9 @@ Issues #19–#23 **and #1** are closed. Migrations applied on prod: **006**
 idempotency ledger for sync).
 
 Test status (all green): server **50** Jest · shared **24** Jest · web **9**
-Vitest · Android `compileDebugKotlin` + unit tests (parser, sm2, api-contract,
-db/outbox, local-store, sync-contract).
+Vitest · Android `compileDebugKotlin` + **15 unit-test classes / 53 tests**
+(parser, sm2, api-contract ×4, db/outbox, local-store, and library/deck/settings/
+create ViewModel tests).
 
 ## #1 Offline-first — shipped 2026-06-05
 
@@ -65,6 +68,36 @@ db/outbox, local-store, sync-contract).
   reconnect → outbox drains).
 - Spec: `docs/superpowers/specs/2026-06-05-offline-first-design.md`. Plan:
   `docs/superpowers/plans/2026-06-05-offline-first.md`.
+
+## Android full-functionality — shipped 2026-06-05
+
+Brought Android to web parity. **No server changes** — every endpoint already
+existed; this was UI + API-client wiring. Published to Play internal.
+
+- **Navigation:** `NavGraph.kt` now has a 3-tab bottom bar (Decks / Library /
+  Settings); study/stats/summary/create/library-detail are pushed routes that
+  hide the bar.
+- **Decks:** new `ui/screens/createdeck/` (paste-Markdown with live card count +
+  file import). Per-deck ⋮ menu on `DeckListScreen` → Rename / Add cards /
+  Publish-Unpublish (`isPublic`) / Delete. `DeckRepository` gained
+  `renameDeck`/`addCards`/`setPublic`; `Deck`/`DeckListItemDto` gained `isPublic`.
+- **Library:** `ui/screens/library/` — `LibraryScreen` (searchable list) +
+  `LibraryDetailScreen` (card preview + clone). `LibraryRepository` (list/get/
+  clone). Clone navigates straight into study.
+- **Settings:** `ui/screens/settings/` — display name (`PATCH /auth/me`), account
+  info, resend-verification, theme (moved off the deck-list bar into
+  `ThemeViewModel.set`), change-password (sends `forgot-password` email → finish
+  on web), logout. `AuthRepository` gained `getMe`/`updateProfile`/
+  `resendVerification`/`forgotPassword`.
+- **API casing (verified):** library + `/auth/me` are camelCase; deck-list +
+  clone (`card_count`) are snake_case.
+- **Out of scope (v1):** API-key mgmt (web-only), in-app email/password token
+  entry (use the emailed web links), offline for library/settings.
+- **Tests:** 7 new test classes (3 API-contract + 4 ViewModel). New ViewModels
+  back state with a plain `MutableStateFlow` so `.value` is unit-testable without
+  a collector.
+- Spec: `docs/superpowers/specs/2026-06-05-android-full-functionality-design.md`.
+  Plan: `docs/superpowers/plans/2026-06-05-android-full-functionality.md`.
 
 ## Open issues
 
