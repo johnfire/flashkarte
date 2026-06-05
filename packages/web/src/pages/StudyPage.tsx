@@ -66,7 +66,7 @@ export function StudyPage() {
   }
 
   if (cards === null) {
-    return <p className="p-8 text-center text-gray-500">Loading…</p>;
+    return <p className="p-8 text-center text-gray-500 dark:text-gray-400">Loading…</p>;
   }
 
   const done = idx >= cards.length;
@@ -74,7 +74,7 @@ export function StudyPage() {
     return (
       <div className="mx-auto max-w-xl p-8 text-center">
         <h1 className="mb-2 text-2xl font-bold">Session complete</h1>
-        <p className="mb-6 text-gray-600">
+        <p className="mb-6 text-gray-600 dark:text-gray-300">
           {reviewed === 0
             ? "Nothing due right now — great job staying on top of it!"
             : `You reviewed ${reviewed} ${reviewed === 1 ? "card" : "cards"}.`}
@@ -92,7 +92,7 @@ export function StudyPage() {
   const card = cards[idx];
   return (
     <div className="mx-auto max-w-xl p-4">
-      <div className="mb-4 flex items-center justify-between text-sm text-gray-500">
+      <div className="mb-4 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
         <Link to="/" className="text-indigo-600">
           ← Decks
         </Link>
@@ -103,13 +103,13 @@ export function StudyPage() {
 
       <div className="rounded-xl border p-8 shadow-sm">
         {card.category && (
-          <p className="mb-2 text-xs uppercase tracking-wide text-gray-400">
+          <p className="mb-2 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
             {card.category}
           </p>
         )}
         <p className="text-lg font-medium">{card.content.front}</p>
         {revealed && (
-          <p className="mt-6 whitespace-pre-wrap border-t pt-6 text-gray-700">
+          <p className="mt-6 whitespace-pre-wrap border-t pt-6 text-gray-700 dark:text-gray-300">
             {card.content.back}
           </p>
         )}

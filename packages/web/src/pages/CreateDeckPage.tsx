@@ -52,7 +52,7 @@ export function CreateDeckPage() {
   return (
     <div className="mx-auto max-w-2xl p-4">
       <h1 className="mb-2 text-3xl font-bold">New Deck</h1>
-      <p className="mb-4 text-sm text-gray-500">
+      <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
         Paste Markdown or upload a <code>.md</code>/<code>.txt</code> file. Use{" "}
         <code># Title</code>, <code>## Category</code>, and{" "}
         <code>**1. Question**</code> followed by the answer.
@@ -77,7 +77,7 @@ export function CreateDeckPage() {
           className="w-full rounded-lg border p-3 font-mono text-sm"
         />
 
-        <div className="rounded-lg bg-gray-50 p-3 text-sm" aria-live="polite">
+        <div className="rounded-lg bg-gray-50 dark:bg-gray-900 p-3 text-sm" aria-live="polite">
           {preview ? (
             preview.cards.length > 0 ? (
               <>
@@ -85,7 +85,7 @@ export function CreateDeckPage() {
                   {preview.title || "Untitled"} — {preview.cards.length}{" "}
                   {preview.cards.length === 1 ? "card" : "cards"}
                 </p>
-                <ul className="mt-1 list-disc pl-5 text-gray-600">
+                <ul className="mt-1 list-disc pl-5 text-gray-600 dark:text-gray-300">
                   {preview.cards.slice(0, 3).map((c, i) => (
                     <li key={i}>{c.front}</li>
                   ))}
@@ -97,7 +97,7 @@ export function CreateDeckPage() {
               </p>
             )
           ) : (
-            <p className="text-gray-400">Preview appears here.</p>
+            <p className="text-gray-400 dark:text-gray-500">Preview appears here.</p>
           )}
         </div>
 
@@ -114,7 +114,7 @@ export function CreateDeckPage() {
           <button
             type="button"
             onClick={() => navigate("/")}
-            className="text-sm text-gray-500"
+            className="text-sm text-gray-500 dark:text-gray-400"
           >
             Cancel
           </button>

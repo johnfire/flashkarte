@@ -21,12 +21,12 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-sm space-y-4 rounded-xl bg-white p-8 shadow">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
+      <div className="w-full max-w-sm space-y-4 rounded-xl bg-white dark:bg-gray-800 p-8 shadow">
         <h1 className="text-2xl font-bold">Reset password</h1>
         {sent ? (
           <>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               If that email has an account, a reset link is on its way. Check
               your inbox (and spam).
             </p>
@@ -36,7 +36,7 @@ export function ForgotPasswordPage() {
           </>
         ) : (
           <form onSubmit={onSubmit} className="space-y-4">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               Enter your email and we'll send you a link to reset your password.
             </p>
             <input

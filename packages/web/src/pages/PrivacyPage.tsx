@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 
 export function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-10">
-      <div className="mx-auto max-w-2xl rounded-xl bg-white px-6 py-8 shadow sm:px-10">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10">
+      <div className="mx-auto max-w-2xl rounded-xl bg-white dark:bg-gray-800 px-6 py-8 shadow sm:px-10">
         <Link to="/login" className="text-sm text-indigo-600">
           ← Back
         </Link>
 
         <h1 className="mt-4 text-2xl font-bold">flashkarte — Privacy Policy</h1>
-        <p className="mt-1 text-sm text-gray-500">Last updated: 5 June 2026</p>
+        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Last updated: 5 June 2026</p>
 
-        <div className="prose prose-sm mt-6 max-w-none space-y-6 text-gray-700">
+        <div className="prose prose-sm mt-6 max-w-none space-y-6 text-gray-700 dark:text-gray-300">
           <p>
             flashkarte is a Markdown-based flashcard app with spaced-repetition
             study, operated by Christopher Rehm (Germany). This policy explains
@@ -24,7 +24,7 @@ export function PrivacyPage() {
           </p>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               What we collect
             </h2>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -53,7 +53,7 @@ export function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               What we do not do
             </h2>
             <ul className="mt-2 list-disc space-y-1 pl-5">
@@ -67,7 +67,7 @@ export function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               AI / MCP connections
             </h2>
             <p className="mt-2">
@@ -81,7 +81,7 @@ export function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               How your data is stored and protected
             </h2>
             <p className="mt-2">
@@ -93,7 +93,7 @@ export function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               Retention and deletion
             </h2>
             <p className="mt-2">
@@ -108,7 +108,7 @@ export function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">Children</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Children</h2>
             <p className="mt-2">
               flashkarte is not directed at children under 13, and we do not
               knowingly collect data from them.
@@ -116,7 +116,7 @@ export function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">Your rights</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Your rights</h2>
             <p className="mt-2">
               Depending on where you live (for example under the EU GDPR), you
               may have the right to access, correct, export, or delete your
@@ -126,7 +126,7 @@ export function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900">Changes</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Changes</h2>
             <p className="mt-2">
               If this policy changes, we will update the date at the top of this
               page.

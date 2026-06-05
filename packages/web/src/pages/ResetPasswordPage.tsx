@@ -36,8 +36,8 @@ export function ResetPasswordPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-sm space-y-4 rounded-xl bg-white p-8 shadow">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
+      <div className="w-full max-w-sm space-y-4 rounded-xl bg-white dark:bg-gray-800 p-8 shadow">
         <h1 className="text-2xl font-bold">Choose a new password</h1>
         {done ? (
           <p className="text-sm text-green-600">
@@ -59,7 +59,7 @@ export function ResetPasswordPage() {
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
                 aria-label={showPassword ? "Hide password" : "Show password"}
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-gray-400 hover:text-gray-600"
+                className="absolute inset-y-0 right-0 flex items-center px-3 text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>

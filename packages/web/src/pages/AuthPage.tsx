@@ -29,13 +29,13 @@ export function AuthPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
       <form
         onSubmit={onSubmit}
-        className="w-full max-w-sm space-y-4 rounded-xl bg-white p-8 shadow"
+        className="w-full max-w-sm space-y-4 rounded-xl bg-white dark:bg-gray-800 p-8 shadow"
       >
         <h1 className="text-2xl font-bold">flashkarte</h1>
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-gray-500 dark:text-gray-400">
           {mode === "login" ? "Sign in to your account" : "Create an account"}
         </p>
 
@@ -63,7 +63,7 @@ export function AuthPage() {
             aria-label={showPassword ? "Hide password" : "Show password"}
             aria-pressed={showPassword}
             title={showPassword ? "Hide password" : "Show password"}
-            className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600"
+            className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
           >
             {showPassword ? (
               <svg
@@ -125,14 +125,14 @@ export function AuthPage() {
         {mode === "login" && (
           <Link
             to="/forgot-password"
-            className="block text-center text-sm text-gray-500 hover:text-indigo-600"
+            className="block text-center text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600"
           >
             Forgot password?
           </Link>
         )}
 
-        <p className="text-center text-xs text-gray-400">
-          <Link to="/privacy" className="hover:text-gray-600">
+        <p className="text-center text-xs text-gray-400 dark:text-gray-500">
+          <Link to="/privacy" className="hover:text-gray-600 dark:hover:text-gray-300">
             Privacy Policy
           </Link>
         </p>

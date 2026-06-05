@@ -33,7 +33,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
       return (
         <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-8 text-center">
           <h1 className="text-2xl font-semibold">Something went wrong</h1>
-          <p className="text-gray-500">
+          <p className="text-gray-500 dark:text-gray-400">
             The error was reported. Try reloading the page.
           </p>
           <button

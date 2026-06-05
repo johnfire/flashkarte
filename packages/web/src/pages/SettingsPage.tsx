@@ -62,14 +62,14 @@ export function SettingsPage() {
 
       <section className="mb-8 rounded-lg border p-4">
         <h2 className="mb-1 text-xl font-semibold">Connect your AI</h2>
-        <p className="mb-3 text-sm text-gray-600">
+        <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
           Generate an API key and add it to your AI client (e.g. Claude Desktop)
           along with the flashkarte MCP server URL. Your AI can then build decks
           from any topic and push them straight into your account.
         </p>
         <p className="mb-4 text-sm">
           MCP server URL:{" "}
-          <code className="rounded bg-gray-100 px-1.5 py-0.5">{MCP_URL}</code>
+          <code className="rounded bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5">{MCP_URL}</code>
         </p>
 
         <div className="flex gap-2">
@@ -94,7 +94,7 @@ export function SettingsPage() {
               Copy this key now — it won't be shown again.
             </p>
             <div className="flex items-center gap-2">
-              <code className="flex-1 break-all rounded bg-white px-2 py-1 text-sm">
+              <code className="flex-1 break-all rounded bg-white dark:bg-gray-800 px-2 py-1 text-sm">
                 {created.key}
               </code>
               <button
@@ -111,9 +111,9 @@ export function SettingsPage() {
       <section>
         <h2 className="mb-3 text-xl font-semibold">Your keys</h2>
         {error && <p className="mb-3 text-red-600">{error}</p>}
-        {keys === null && !error && <p className="text-gray-500">Loading…</p>}
+        {keys === null && !error && <p className="text-gray-500 dark:text-gray-400">Loading…</p>}
         {keys && keys.length === 0 && !error && (
-          <p className="text-gray-500">No keys yet.</p>
+          <p className="text-gray-500 dark:text-gray-400">No keys yet.</p>
         )}
         <ul className="space-y-2">
           {keys?.map((k) => (
@@ -123,7 +123,7 @@ export function SettingsPage() {
             >
               <div>
                 <p className="font-medium">{k.name}</p>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   <code>{k.key_prefix}…</code> · created{" "}
                   {new Date(k.created_at).toLocaleDateString()}
                 </p>

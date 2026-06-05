@@ -54,7 +54,7 @@ export function DeckListPage() {
           >
             New deck
           </Link>
-          <Link to="/settings" className="self-center text-sm text-gray-500">
+          <Link to="/settings" className="self-center text-sm text-gray-500 dark:text-gray-400">
             Settings
           </Link>
           <button
@@ -62,7 +62,7 @@ export function DeckListPage() {
               await logout();
               navigate("/login");
             }}
-            className="text-sm text-gray-500"
+            className="text-sm text-gray-500 dark:text-gray-400"
           >
             Sign out
           </button>
@@ -71,10 +71,10 @@ export function DeckListPage() {
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
 
-      {decks === null && !error && <p className="text-gray-500">Loading…</p>}
+      {decks === null && !error && <p className="text-gray-500 dark:text-gray-400">Loading…</p>}
 
       {decks && decks.length === 0 && !error && (
-        <p className="text-gray-500">
+        <p className="text-gray-500 dark:text-gray-400">
           No decks yet. Create one to start studying.
         </p>
       )}
@@ -87,7 +87,7 @@ export function DeckListPage() {
           >
             <div>
               <p className="font-medium">{d.title}</p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 {d.card_count} cards · {d.due_count} due
               </p>
             </div>

@@ -33,11 +33,11 @@ export function VerifyEmailPage() {
   }, [token]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-50 p-4">
-      <div className="w-full max-w-sm space-y-4 rounded-xl bg-white p-8 text-center shadow">
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
+      <div className="w-full max-w-sm space-y-4 rounded-xl bg-white dark:bg-gray-800 p-8 text-center shadow">
         <h1 className="text-2xl font-bold">flashkarte</h1>
         {status === "verifying" && (
-          <p className="text-gray-500">Verifying your email…</p>
+          <p className="text-gray-500 dark:text-gray-400">Verifying your email…</p>
         )}
         {status === "success" && (
           <>

@@ -24,7 +24,7 @@ export function VerifyBanner() {
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-center gap-2 bg-amber-50 px-4 py-2 text-center text-sm text-amber-800">
+    <div className="flex flex-wrap items-center justify-center gap-2 bg-amber-50 px-4 py-2 text-center text-sm text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
       <span>
         Please verify your email ({user.email}) to secure your account.
       </span>
@@ -35,7 +35,7 @@ export function VerifyBanner() {
           type="button"
           onClick={resend}
           disabled={busy}
-          className="font-medium text-amber-900 underline disabled:opacity-50"
+          className="font-medium text-amber-900 underline disabled:opacity-50 dark:text-amber-200"
         >
           {busy ? "Sending…" : "Resend email"}
         </button>
