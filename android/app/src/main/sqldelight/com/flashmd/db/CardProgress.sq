@@ -1,0 +1,25 @@
+CREATE TABLE progressEntity (
+  card_id TEXT NOT NULL PRIMARY KEY,
+  easiness REAL NOT NULL DEFAULT 2.5,
+  interval_days INTEGER NOT NULL DEFAULT 0,
+  repetitions INTEGER NOT NULL DEFAULT 0,
+  due_at TEXT,
+  last_reviewed_at TEXT,
+  last_rating INTEGER
+);
+
+upsertProgress:
+INSERT OR REPLACE INTO progressEntity(card_id, easiness, interval_days, repetitions, due_at, last_reviewed_at, last_rating)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+selectProgress:
+SELECT * FROM progressEntity WHERE card_id = ?;
+
+-- Due + new cards for a deck, mirroring the server ordering:
+-- progressed-and-due first (by due date), then new cards, then by position.
+selectDueCards:
+SELECT c.* FROM cardEntity c
+LEFT JOIN progressEntity p ON p.card_id = c.id
+WHERE c.deck_id = ?
+  AND (p.card_id IS NULL OR p.due_at <= ?)
+ORDER BY (p.card_id IS NULL) ASC, p.due_at ASC, c.position ASC;
