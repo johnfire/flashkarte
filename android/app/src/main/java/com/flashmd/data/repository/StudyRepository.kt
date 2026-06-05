@@ -6,20 +6,22 @@ import com.flashmd.data.remote.apiCall
 import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.CardProgress
 import com.flashmd.domain.model.DueCard
+import com.flashmd.sync.SyncScheduler
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
  * Offline-first study repository. When online, the due batch is fetched from the
  * server and cached locally; when offline, the cached batch is used. Ratings are
- * applied locally via SM-2 and enqueued to the outbox; the sync worker drains the
- * outbox to the server (the authoritative SM-2 source) on connectivity.
+ * applied locally via SM-2 and enqueued to the outbox, which the [SyncScheduler]
+ * drains to the server (the authoritative SM-2 source) on connectivity.
  */
 @Singleton
 class StudyRepository @Inject constructor(
     private val api: FlashkarteApi,
     private val local: LocalStudyStore,
     private val outbox: OutboxRepository,
+    private val scheduler: SyncScheduler,
 ) {
     suspend fun getDueCards(deckId: String): List<DueCard> {
         return try {
@@ -40,6 +42,8 @@ class StudyRepository @Inject constructor(
             }
             // Cache the fetched cards so this batch can be studied offline.
             local.cacheDeckCards(deckId, due.map { it.card })
+            // Opportunistically drain any pending offline reviews.
+            scheduler.requestSync()
             due
         } catch (e: Exception) {
             val cached = local.dueCards(deckId)
@@ -47,10 +51,11 @@ class StudyRepository @Inject constructor(
         }
     }
 
-    /** Offline-first: apply SM-2 locally and enqueue a sync event for the worker to drain. */
+    /** Offline-first: apply SM-2 locally, enqueue a sync event, and request a drain. */
     suspend fun applyRating(cardId: String, rating: Int) {
         val ev = outbox.enqueue(cardId, rating)
         local.applyRatingLocally(cardId, rating, ev.reviewedAt)
+        scheduler.requestSync()
     }
 
     suspend fun getStats(deckId: String): DeckStudyStats {
