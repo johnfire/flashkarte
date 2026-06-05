@@ -21,6 +21,16 @@ val AccentOrange = Color(0xFFCE9178)
 val AccentYellow = Color(0xFFDCDCAA)
 val AccentTeal = Color(0xFF4EC9B0)
 
+// FlashMD palette — light (Catppuccin Latte)
+val SurfaceLight = Color(0xFFFFFFFF)
+val BackgroundLight = Color(0xFFEFF1F5)
+val SurfaceVariantLight = Color(0xFFE6E9EF)
+val OnSurfaceLight = Color(0xFF4C4F69)
+val OnSurfaceVariantLight = Color(0xFF6C6F85)
+val AccentBlueLight = Color(0xFF1E66F5)
+val AccentTealLight = Color(0xFF179299)
+val AccentGreenLight = Color(0xFF40A02B)
+
 val RatingColor = mapOf(
     1 to AccentRed,
     2 to AccentOrange,
