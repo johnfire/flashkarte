@@ -74,6 +74,59 @@ export function upsertProgress(
   );
 }
 
+export async function insertReviewEvent(
+  userId: string,
+  ev: {
+    event_id: string;
+    card_id: string;
+    rating: number;
+    reviewed_at: string;
+  },
+): Promise<boolean> {
+  const rows = await query<{ event_id: string }>(
+    `INSERT INTO review_events (event_id, user_id, card_id, rating, reviewed_at)
+     VALUES ($1, $2, $3, $4, $5)
+     ON CONFLICT (event_id) DO NOTHING
+     RETURNING event_id`,
+    [ev.event_id, userId, ev.card_id, ev.rating, ev.reviewed_at],
+  );
+  return rows.length > 0;
+}
+
+export function upsertProgressAt(
+  userId: string,
+  cardId: string,
+  s: {
+    repetitions: number;
+    easeFactor: number;
+    intervalDays: number;
+    dueAt: Date;
+    lastRating: number;
+    lastReviewedAt: Date;
+  },
+) {
+  return query(
+    `INSERT INTO card_progress
+       (user_id, card_id, repetitions, ease_factor, interval_days, due_at, last_rating, last_reviewed_at)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+     ON CONFLICT (user_id, card_id) DO UPDATE
+       SET repetitions = EXCLUDED.repetitions, ease_factor = EXCLUDED.ease_factor,
+           interval_days = EXCLUDED.interval_days, due_at = EXCLUDED.due_at,
+           last_rating = EXCLUDED.last_rating,
+           last_reviewed_at = EXCLUDED.last_reviewed_at, updated_at = now()`,
+    [
+      userId,
+      cardId,
+      s.repetitions,
+      s.easeFactor,
+      s.intervalDays,
+      s.dueAt,
+      s.lastRating,
+      s.lastReviewedAt,
+    ],
+  );
+}
+
 export function getStats(userId: string, deckId: string) {
   return queryOne<{
     total: string;
