@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { api, ApiError } from "../api/client";
 import { ApiKey, CreatedApiKey, AccountType } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
+import { useTheme } from "../theme/useTheme";
 
 const MCP_URL = `${typeof location !== "undefined" ? location.origin : ""}/mcp`;
 
@@ -15,6 +16,7 @@ const PLAN_LABEL: Record<AccountType, string> = {
 
 export function SettingsPage() {
   const { user, updateUser } = useAuth();
+  const { theme, setTheme } = useTheme();
   const [keys, setKeys] = useState<ApiKey[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newName, setNewName] = useState("My AI");
@@ -128,6 +130,39 @@ export function SettingsPage() {
           {nameSaved && <p className="mt-1 text-sm text-green-600">Saved.</p>}
         </section>
       )}
+
+      <section className="mb-8 rounded-lg border p-4">
+        <h2 className="mb-1 text-xl font-semibold">Appearance</h2>
+        <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
+          Choose how flashkarte looks on this device.
+        </p>
+        <div className="inline-flex overflow-hidden rounded-lg border">
+          <button
+            type="button"
+            onClick={() => setTheme("light")}
+            aria-pressed={theme === "light"}
+            className={`px-4 py-2 text-sm font-medium ${
+              theme === "light"
+                ? "bg-indigo-600 text-white"
+                : "bg-transparent text-gray-600 dark:text-gray-300"
+            }`}
+          >
+            Light
+          </button>
+          <button
+            type="button"
+            onClick={() => setTheme("dark")}
+            aria-pressed={theme === "dark"}
+            className={`px-4 py-2 text-sm font-medium ${
+              theme === "dark"
+                ? "bg-indigo-600 text-white"
+                : "bg-transparent text-gray-600 dark:text-gray-300"
+            }`}
+          >
+            Dark
+          </button>
+        </div>
+      </section>
 
       <section className="mb-8 rounded-lg border p-4">
         <h2 className="mb-1 text-xl font-semibold">Connect your AI</h2>
