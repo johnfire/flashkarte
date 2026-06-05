@@ -19,6 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flashmd.data.local.StudyMode
 import com.flashmd.ui.theme.RatingColor
 
 private val RATING_LABELS = mapOf(1 to "Again", 2 to "Hard", 3 to "Good", 4 to "Easy", 5 to "Perfect")
@@ -97,31 +98,120 @@ fun StudyScreen(
                 modifier = Modifier.padding(top = 4.dp, bottom = 8.dp),
             )
 
+            SingleChoiceSegmentedButtonRow(Modifier.padding(bottom = 8.dp)) {
+                SegmentedButton(
+                    selected = state.mode == StudyMode.FLIP,
+                    onClick = { viewModel.setMode(StudyMode.FLIP) },
+                    shape = SegmentedButtonDefaults.itemShape(0, 2),
+                ) { Text("Flip") }
+                SegmentedButton(
+                    selected = state.mode == StudyMode.CHOICE,
+                    onClick = { viewModel.setMode(StudyMode.CHOICE) },
+                    shape = SegmentedButtonDefaults.itemShape(1, 2),
+                ) { Text("Choice") }
+            }
+
             // Card
             val card = state.currentCard
             if (card != null) {
-                FlipCard(
-                    front = card.card.front,
-                    back = card.card.back,
-                    isFlipped = state.isFlipped,
-                    onClick = { viewModel.flip() },
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(horizontal = 20.dp, vertical = 12.dp),
-                )
-
-                // Rating buttons — only shown after flip
-                if (state.isFlipped) {
-                    RatingRow(onRate = { viewModel.rate(it) })
-                } else {
-                    Text(
-                        "Tap card to reveal answer",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(bottom = 24.dp),
+                if (state.mode == StudyMode.CHOICE) {
+                    ChoicePanel(
+                        front = card.card.front,
+                        options = state.options,
+                        selected = state.selectedOption,
+                        correct = card.card.back,
+                        onChoose = { viewModel.chooseAnswer(it) },
+                        onContinue = { viewModel.next() },
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 20.dp, vertical = 12.dp),
                     )
+                } else {
+                    FlipCard(
+                        front = card.card.front,
+                        back = card.card.back,
+                        isFlipped = state.isFlipped,
+                        onClick = { viewModel.flip() },
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 20.dp, vertical = 12.dp),
+                    )
+
+                    // Rating buttons — only shown after flip
+                    if (state.isFlipped) {
+                        RatingRow(onRate = { viewModel.rate(it) })
+                    } else {
+                        Text(
+                            "Tap card to reveal answer",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            modifier = Modifier.padding(bottom = 24.dp),
+                        )
+                    }
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun ChoicePanel(
+    front: String,
+    options: List<String>,
+    selected: String?,
+    correct: String,
+    onChoose: (String) -> Unit,
+    onContinue: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Surface(
+            modifier = Modifier.fillMaxWidth().weight(1f),
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            tonalElevation = 4.dp,
+        ) {
+            Column(
+                Modifier.fillMaxSize().padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    "QUESTION",
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Spacer(Modifier.height(16.dp))
+                Text(
+                    front,
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
+                )
+            }
+        }
+        Spacer(Modifier.height(12.dp))
+        options.forEach { option ->
+            val answered = selected != null
+            val container = when {
+                !answered -> MaterialTheme.colorScheme.surfaceVariant
+                option == correct -> Color(0xFF2E7D32)
+                option == selected -> Color(0xFFC62828)
+                else -> MaterialTheme.colorScheme.surfaceVariant
+            }
+            Button(
+                onClick = { onChoose(option) },
+                enabled = !answered,
+                modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = container,
+                    disabledContainerColor = container,
+                ),
+            ) { Text(option, textAlign = TextAlign.Center) }
+        }
+        if (selected != null) {
+            Spacer(Modifier.height(8.dp))
+            Button(onClick = onContinue, modifier = Modifier.fillMaxWidth()) { Text("Continue") }
         }
     }
 }
