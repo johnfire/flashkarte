@@ -28,6 +28,7 @@ export interface PublicUser {
   role: string;
   accountType: string;
   emailVerifiedAt: string | null;
+  displayName: string | null;
 }
 
 function toUser(row: UserRow): PublicUser {
@@ -39,6 +40,7 @@ function toUser(row: UserRow): PublicUser {
     emailVerifiedAt: row.email_verified_at
       ? new Date(row.email_verified_at).toISOString()
       : null,
+    displayName: row.display_name ?? null,
   };
 }
 
@@ -170,6 +172,23 @@ export async function logout(rawRefresh: string | undefined) {
 /** The current user's public profile (for restoring session state). */
 export async function getCurrentUser(userId: string): Promise<PublicUser> {
   const user = await repo.findById(userId);
+  if (!user) throw new AuthError("Not found");
+  return toUser(user);
+}
+
+/** Update the caller's editable profile fields (currently display name). */
+export async function updateProfile(
+  userId: string,
+  displayNameIn: unknown,
+): Promise<PublicUser> {
+  if (displayNameIn !== undefined && typeof displayNameIn !== "string") {
+    throw new ValidationError("Display name must be text");
+  }
+  const trimmed = typeof displayNameIn === "string" ? displayNameIn.trim() : "";
+  if (trimmed.length > 60) {
+    throw new ValidationError("Display name must be 60 characters or fewer");
+  }
+  const user = await repo.updateDisplayName(userId, trimmed || null);
   if (!user) throw new AuthError("Not found");
   return toUser(user);
 }

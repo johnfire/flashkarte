@@ -22,3 +22,8 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
   );
   res.json({ user });
 });
+
+export const unpublishDeck = wrapAsync(async (req: Request, res: Response) => {
+  await service.unpublishDeck(req.params.id);
+  res.status(204).end();
+});

@@ -49,12 +49,26 @@ export async function get(userId: string, id: string) {
   return { ...deck, cards };
 }
 
-export async function rename(userId: string, id: string, title: unknown) {
-  if (typeof title !== "string" || !title.trim()) {
-    throw new ValidationError("Title is required");
-  }
-  const deck = await repo.renameDeck(userId, id, title.trim());
+export async function update(
+  userId: string,
+  id: string,
+  patch: { title?: unknown; isPublic?: unknown },
+) {
+  let deck = await repo.getDeck(userId, id);
   if (!deck) throw new NotFoundError("Deck not found");
+
+  if (patch.title !== undefined) {
+    if (typeof patch.title !== "string" || !patch.title.trim()) {
+      throw new ValidationError("Title is required");
+    }
+    deck = (await repo.renameDeck(userId, id, patch.title.trim())) ?? deck;
+  }
+  if (patch.isPublic !== undefined) {
+    if (typeof patch.isPublic !== "boolean") {
+      throw new ValidationError("isPublic must be a boolean");
+    }
+    deck = (await repo.setDeckPublic(userId, id, patch.isPublic)) ?? deck;
+  }
   return deck;
 }
 

@@ -14,6 +14,7 @@ import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { LandingPage } from "./pages/LandingPage";
+import { LibraryPage } from "./pages/LibraryPage";
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="/" element={<DeckListPage />} />
           <Route path="/decks/new" element={<CreateDeckPage />} />
           <Route path="/decks/:id/study" element={<StudyPage />} />
+          <Route path="/library" element={<LibraryPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
         <Route element={<AdminRoute />}>

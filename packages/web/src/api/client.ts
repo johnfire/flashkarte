@@ -9,6 +9,8 @@ import {
   DeckStats,
   ApiKey,
   CreatedApiKey,
+  LibraryDeck,
+  LibraryDeckDetail,
 } from "./types";
 
 const APP_VERSION = "0.1.0";
@@ -101,6 +103,11 @@ export const api = {
     refresh: () =>
       request<{ accessToken: string }>("/auth/refresh", { method: "POST" }),
     me: () => request<{ user: User }>("/auth/me"),
+    updateProfile: (displayName: string) =>
+      request<{ user: User }>("/auth/me", {
+        method: "PATCH",
+        body: JSON.stringify({ displayName }),
+      }),
     logout: () => request<void>("/auth/logout", { method: "POST" }),
     verifyEmail: (token: string) =>
       request<{ status: string }>("/auth/verify-email", {
@@ -143,7 +150,24 @@ export const api = {
         method: "PATCH",
         body: JSON.stringify({ title }),
       }),
+    setPublic: (id: string, isPublic: boolean) =>
+      request<DeckWithCounts>(`/decks/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ isPublic }),
+      }),
     remove: (id: string) => request<void>(`/decks/${id}`, { method: "DELETE" }),
+  },
+  library: {
+    list: (q?: string) =>
+      request<{ decks: LibraryDeck[] }>(
+        `/library${q ? `?q=${encodeURIComponent(q)}` : ""}`,
+      ),
+    get: (id: string) => request<LibraryDeckDetail>(`/library/${id}`),
+    clone: (id: string) =>
+      request<{ id: string; title: string; card_count: number }>(
+        `/library/${id}/clone`,
+        { method: "POST" },
+      ),
   },
   study: {
     batch: (deckId: string) => request<StudyCard[]>(`/decks/${deckId}/study`),

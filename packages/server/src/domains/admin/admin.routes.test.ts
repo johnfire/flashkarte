@@ -141,4 +141,23 @@ describe("admin routes", () => {
     expect(res.body.user.accountType).toBe("admin-gifted");
     expect(mock.setAccountType).toHaveBeenCalledWith("u2", "admin-gifted");
   });
+
+  test("POST /api/admin/decks/:id/unpublish as admin -> 204", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    mock.unpublishDeck.mockResolvedValue(undefined);
+    const res = await request(app)
+      .post("/api/admin/decks/d1/unpublish")
+      .set("Authorization", AUTH);
+    expect(res.status).toBe(204);
+    expect(mock.unpublishDeck).toHaveBeenCalledWith("d1");
+  });
+
+  test("POST /api/admin/decks/:id/unpublish as non-admin -> 403", async () => {
+    authMock.getCurrentUser.mockResolvedValue(REGULAR as never);
+    const res = await request(app)
+      .post("/api/admin/decks/d1/unpublish")
+      .set("Authorization", AUTH);
+    expect(res.status).toBe(403);
+    expect(mock.unpublishDeck).not.toHaveBeenCalled();
+  });
 });

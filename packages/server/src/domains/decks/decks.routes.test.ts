@@ -102,4 +102,24 @@ describe("decks routes", () => {
       .send({ markdown: "**1. Q**\nA" });
     expect(res.status).toBe(404);
   });
+
+  test("PATCH /api/decks/:id toggles isPublic -> 200", async () => {
+    mock.update.mockResolvedValue({
+      id: "d1",
+      title: "Deck",
+      source_filename: null,
+      created_at: "x",
+      updated_at: "x",
+      is_public: true,
+    } as never);
+    const res = await request(app)
+      .patch("/api/decks/d1")
+      .send({ isPublic: true });
+    expect(res.status).toBe(200);
+    expect(res.body.is_public).toBe(true);
+    expect(mock.update).toHaveBeenCalledWith("u1", "d1", {
+      title: undefined,
+      isPublic: true,
+    });
+  });
 });

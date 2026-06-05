@@ -7,7 +7,11 @@ export interface DeckRow {
   source_filename: string | null;
   created_at: string;
   updated_at: string;
+  is_public: boolean;
 }
+
+const DECK_COLS =
+  "id, title, source_filename, created_at, updated_at, is_public";
 
 export function createDeck(
   userId: string,
@@ -17,7 +21,7 @@ export function createDeck(
   return queryOne<DeckRow>(
     `INSERT INTO decks (user_id, title, source_filename)
      VALUES ($1, $2, $3)
-     RETURNING id, title, source_filename, created_at, updated_at`,
+     RETURNING ${DECK_COLS}`,
     [userId, title, sourceFilename],
   );
 }
@@ -70,7 +74,7 @@ export async function appendCards(
 
 export function listDecksWithCounts(userId: string) {
   return query<DeckRow & { card_count: string; due_count: string }>(
-    `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at,
+    `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public,
        (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
        (SELECT count(*) FROM cards c
           LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
@@ -82,8 +86,7 @@ export function listDecksWithCounts(userId: string) {
 
 export function getDeck(userId: string, id: string) {
   return queryOne<DeckRow>(
-    `SELECT id, title, source_filename, created_at, updated_at
-     FROM decks WHERE id = $1 AND user_id = $2`,
+    `SELECT ${DECK_COLS} FROM decks WHERE id = $1 AND user_id = $2`,
     [id, userId],
   );
 }
@@ -106,8 +109,29 @@ export function renameDeck(userId: string, id: string, title: string) {
   return queryOne<DeckRow>(
     `UPDATE decks SET title = $1, updated_at = now()
      WHERE id = $2 AND user_id = $3
-     RETURNING id, title, source_filename, created_at, updated_at`,
+     RETURNING ${DECK_COLS}`,
     [title, id, userId],
+  );
+}
+
+export function setDeckPublic(userId: string, id: string, isPublic: boolean) {
+  return queryOne<DeckRow>(
+    `UPDATE decks
+       SET is_public = $1,
+           published_at = CASE WHEN $1 THEN now() ELSE NULL END,
+           updated_at = now()
+     WHERE id = $2 AND user_id = $3
+     RETURNING ${DECK_COLS}`,
+    [isPublic, id, userId],
+  );
+}
+
+// Admin moderation: unpublish a deck regardless of owner.
+export function adminUnpublish(id: string) {
+  return queryOne<{ id: string }>(
+    `UPDATE decks SET is_public = false, published_at = NULL, updated_at = now()
+     WHERE id = $1 RETURNING id`,
+    [id],
   );
 }
 

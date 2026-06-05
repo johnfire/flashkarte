@@ -59,6 +59,11 @@ export const me = wrapAsync(async (req: Request, res: Response) => {
   res.json({ user });
 });
 
+export const updateMe = wrapAsync(async (req: Request, res: Response) => {
+  const user = await service.updateProfile(req.userId!, req.body.displayName);
+  res.json({ user });
+});
+
 export const forgotPassword = wrapAsync(async (req: Request, res: Response) => {
   await service.forgotPassword(req.body.email);
   // Always the same response — never reveal whether the email exists.

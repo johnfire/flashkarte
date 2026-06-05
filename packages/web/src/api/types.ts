@@ -6,6 +6,19 @@ export interface User {
   role: string;
   accountType: AccountType;
   emailVerifiedAt: string | null;
+  displayName: string | null;
+}
+
+export interface LibraryDeck {
+  id: string;
+  title: string;
+  author: string;
+  cardCount: number;
+  publishedAt: string | null;
+}
+
+export interface LibraryDeckDetail extends LibraryDeck {
+  cards: { front: string; back: string; category: string | null }[];
 }
 
 export interface AdminUser {
@@ -25,6 +38,7 @@ export interface DeckWithCounts {
   updated_at: string;
   card_count: string;
   due_count: string;
+  is_public: boolean;
 }
 
 export interface Card {

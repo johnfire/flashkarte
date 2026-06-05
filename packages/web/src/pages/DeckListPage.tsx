@@ -43,6 +43,23 @@ export function DeckListPage() {
     }
   }
 
+  async function onTogglePublic(id: string, makePublic: boolean) {
+    // optimistic
+    setDecks((d) =>
+      d ? d.map((x) => (x.id === id ? { ...x, is_public: makePublic } : x)) : d,
+    );
+    try {
+      await api.decks.setPublic(id, makePublic);
+    } catch {
+      setDecks((d) =>
+        d
+          ? d.map((x) => (x.id === id ? { ...x, is_public: !makePublic } : x))
+          : d,
+      );
+      window.alert("Couldn't update sharing. Try again.");
+    }
+  }
+
   return (
     <div className="mx-auto max-w-2xl p-4">
       <header className="mb-6 flex items-center justify-between">
@@ -53,6 +70,12 @@ export function DeckListPage() {
             className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"
           >
             New deck
+          </Link>
+          <Link
+            to="/library"
+            className="self-center text-sm text-gray-500 dark:text-gray-400"
+          >
+            Library
           </Link>
           {user?.accountType === "admin" && (
             <Link
@@ -99,7 +122,14 @@ export function DeckListPage() {
             className="flex items-center justify-between rounded-lg border p-4"
           >
             <div>
-              <p className="font-medium">{d.title}</p>
+              <p className="font-medium">
+                {d.title}
+                {d.is_public && (
+                  <span className="ml-2 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
+                    Public
+                  </span>
+                )}
+              </p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
                 {d.card_count} cards · {d.due_count} due
               </p>
@@ -111,6 +141,17 @@ export function DeckListPage() {
               >
                 Study
               </Link>
+              <button
+                onClick={() => onTogglePublic(d.id, !d.is_public)}
+                className="text-sm text-indigo-600"
+                title={
+                  d.is_public
+                    ? "Remove from the public library"
+                    : "Share to the public library"
+                }
+              >
+                {d.is_public ? "Unshare" : "Share"}
+              </button>
               <button
                 onClick={() => onDelete(d.id, d.title)}
                 className="text-sm text-red-600"

@@ -14,12 +14,32 @@ const PLAN_LABEL: Record<AccountType, string> = {
 };
 
 export function SettingsPage() {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
   const [keys, setKeys] = useState<ApiKey[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newName, setNewName] = useState("My AI");
   const [created, setCreated] = useState<CreatedApiKey | null>(null);
   const [busy, setBusy] = useState(false);
+  const [displayName, setDisplayName] = useState(user?.displayName ?? "");
+  const [savingName, setSavingName] = useState(false);
+  const [nameSaved, setNameSaved] = useState(false);
+
+  async function saveDisplayName() {
+    setSavingName(true);
+    setNameSaved(false);
+    setError(null);
+    try {
+      const { user } = await api.auth.updateProfile(displayName.trim());
+      updateUser(user);
+      setNameSaved(true);
+    } catch (err) {
+      setError(
+        err instanceof ApiError ? err.message : "Couldn't save display name",
+      );
+    } finally {
+      setSavingName(false);
+    }
+  }
 
   const load = useCallback(async () => {
     setError(null);
@@ -81,6 +101,31 @@ export function SettingsPage() {
               {PLAN_LABEL[user.accountType] ?? user.accountType}
             </span>
           </p>
+
+          <label className="mt-4 block text-sm font-medium">Display name</label>
+          <p className="mb-2 text-xs text-gray-500 dark:text-gray-400">
+            Shown as the author on decks you share to the public library.
+          </p>
+          <div className="flex gap-2">
+            <input
+              value={displayName}
+              onChange={(e) => {
+                setDisplayName(e.target.value);
+                setNameSaved(false);
+              }}
+              maxLength={60}
+              placeholder="e.g. Chris R."
+              className="flex-1 rounded-lg border px-3 py-2"
+            />
+            <button
+              onClick={saveDisplayName}
+              disabled={savingName}
+              className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
+            >
+              {savingName ? "…" : "Save"}
+            </button>
+          </div>
+          {nameSaved && <p className="mt-1 text-sm text-green-600">Saved.</p>}
         </section>
       )}
 

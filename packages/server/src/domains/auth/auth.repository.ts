@@ -6,30 +6,40 @@ export interface UserRow {
   role: string;
   account_type: string;
   email_verified_at: Date | null;
+  display_name: string | null;
 }
 
 interface UserWithHash extends UserRow {
   password_hash: string;
 }
 
+const USER_COLS =
+  "id, email, role, account_type, email_verified_at, display_name";
+
 export function findByEmailWithHash(email: string) {
   return queryOne<UserWithHash>(
-    "SELECT id, email, role, account_type, email_verified_at, password_hash FROM users WHERE email = $1",
+    `SELECT ${USER_COLS}, password_hash FROM users WHERE email = $1`,
     [email],
   );
 }
 
 export function findById(id: string) {
-  return queryOne<UserRow>(
-    "SELECT id, email, role, account_type, email_verified_at FROM users WHERE id = $1",
-    [id],
-  );
+  return queryOne<UserRow>(`SELECT ${USER_COLS} FROM users WHERE id = $1`, [
+    id,
+  ]);
 }
 
 export function createUser(email: string, passwordHash: string) {
   return queryOne<UserRow>(
-    "INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING id, email, role, account_type, email_verified_at",
+    `INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING ${USER_COLS}`,
     [email, passwordHash],
+  );
+}
+
+export function updateDisplayName(userId: string, displayName: string | null) {
+  return queryOne<UserRow>(
+    `UPDATE users SET display_name = $2, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
+    [userId, displayName],
   );
 }
 

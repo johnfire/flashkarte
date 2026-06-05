@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import { ValidationError, NotFoundError } from "../../utils/errors";
 import * as repo from "./admin.repository";
 import type { AdminUserRow } from "./admin.repository";
+import * as decksRepo from "../decks/decks.repository";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -82,4 +83,10 @@ export async function setAccountType(
   const user = await repo.updateAccountType(id, accountType);
   if (!user) throw new NotFoundError("User not found");
   return toAdminUser(user);
+}
+
+/** Moderation: remove any deck from the public library. */
+export async function unpublishDeck(id: string): Promise<void> {
+  const deck = await decksRepo.adminUnpublish(id);
+  if (!deck) throw new NotFoundError("Deck not found");
 }

@@ -11,6 +11,7 @@ import { studyRouter } from "./domains/study/study.routes";
 import { keysRouter } from "./domains/keys/keys.routes";
 import { clientErrorsRouter } from "./domains/client-errors/client-errors.routes";
 import { adminRouter } from "./domains/admin/admin.routes";
+import { libraryRouter } from "./domains/library/library.routes";
 import { requireAuth, requireAdmin } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
 
@@ -76,6 +77,7 @@ export function createApp() {
   app.use("/api/decks", decksRouter);
   app.use("/api/study", studyRouter);
   app.use("/api/keys", keysRouter);
+  app.use("/api/library", libraryRouter);
   app.use("/api/admin", requireAdmin, adminRouter);
 
   // Serve the built web SPA in production (Dockerfile copies web/dist → public).

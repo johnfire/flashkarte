@@ -28,8 +28,13 @@ export const get = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.get(req.userId!, req.params.id));
 });
 
-export const rename = wrapAsync(async (req: Request, res: Response) => {
-  res.json(await service.rename(req.userId!, req.params.id, req.body.title));
+export const update = wrapAsync(async (req: Request, res: Response) => {
+  res.json(
+    await service.update(req.userId!, req.params.id, {
+      title: req.body.title,
+      isPublic: req.body.isPublic,
+    }),
+  );
 });
 
 export const remove = wrapAsync(async (req: Request, res: Response) => {
