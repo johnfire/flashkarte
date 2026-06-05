@@ -6,9 +6,11 @@ _Last updated: 2026-06-05_
 
 Everything below is **shipped, pushed, and live** at
 https://flashkarte.christopherrehm.de (web + server) and published to Play
-internal (Android). `main` is clean and in sync with `origin/main`. The next
-piece of work is the first large epic: **#1 Offline-first support with
-background sync** — design-first, not yet started.
+internal (Android). `main` is clean and in sync with `origin/main`. **#1
+Offline-first (Android) shipped this session** — see below. Next candidates:
+**#2 Multiple-choice study mode**, **#3 card series**, **#24 bug-report screen**.
+On-device smoke test of #1 offline flow still pending (no emulator in the build
+session).
 
 ## Live admin account
 
@@ -29,42 +31,46 @@ background sync** — design-first, not yet started.
 | #21   | `17e68a5`            | **Public deck library** — publish/unpublish, browse `/library`, clone; `users.display_name`; admin unpublish                                                                 |
 | #22   | `1573fda`            | **Per-deck learning stats** — viewed / Again·Hard·Good·Easy / not-viewed; deck-list chips (web) + Android Stats screen                                                       |
 | #23   | `e9b3761`, `93f61a5` | **Theme** — web global toggle + dark form controls; **Settings → Appearance Light/Dark buttons**; Android System/Light/Dark in DataStore + deck-list toggle                  |
+| #1    | `6a929fc`→`830a777`  | **Offline-first (Android)** — see the dedicated section below                                                                                                                |
 
-Issues #19–#23 are closed. Migrations applied on prod: **006** (library:
-`users.display_name`, `decks.is_public`/`published_at`) and **007**
-(`card_progress.last_rating`).
+Issues #19–#23 **and #1** are closed. Migrations applied on prod: **006**
+(library), **007** (`card_progress.last_rating`), **008** (`review_events`
+idempotency ledger for sync).
 
-Test status (all green): server **45** Jest · shared **24** Jest · web **9**
-Vitest · Android `compileDebugKotlin` + parser unit tests.
+Test status (all green): server **50** Jest · shared **24** Jest · web **9**
+Vitest · Android `compileDebugKotlin` + unit tests (parser, sm2, api-contract,
+db/outbox, local-store, sync-contract).
+
+## #1 Offline-first — shipped 2026-06-05
+
+- **Server:** migration `008_review_events.sql`; `POST /api/study/sync`
+  (`study.service.ts::sync`) dedupes by `event_id` (insert-if-new on the ledger),
+  applies events per card in `reviewed_at` order, returns authoritative
+  `card_progress`. `/api/study/review` retained for back-compat but Android no
+  longer calls it.
+- **Android:** SQLDelight store (`data/local/db`, `*.sq` in
+  `src/main/sqldelight/com/flashmd/db`) — decks/cards/progress/outbox. Study
+  computes SM-2 locally (`domain/sm2/Sm2Algorithm`) and writes a
+  `ReviewEvent` to the outbox (`OutboxRepository`); `SyncWorker` (WorkManager,
+  Hilt-Work) drains it to `/sync` on connectivity and overwrites local progress.
+  Sync-status chip on the deck list; deck list + opened decks cached for offline.
+- **Build gotcha (fixed):** KSP doesn't pick up SQLDelight's per-variant
+  generated sources, so Hilt couldn't resolve `FlashkarteDb`. `app/build.gradle.kts`
+  now registers `build/generated/sqldelight/code/FlashkarteDb/<variant>` into the
+  matching Kotlin source set and orders `ksp*Kotlin` after
+  `generate*FlashkarteDbInterface`.
+- **Out of scope (v1):** web offline / PWA. Offline = study only (no offline
+  deck creation, AI/MCP gen, or library browse).
+- **Pending:** on-device smoke test (open deck online → airplane mode → study →
+  reconnect → outbox drains).
+- Spec: `docs/superpowers/specs/2026-06-05-offline-first-design.md`. Plan:
+  `docs/superpowers/plans/2026-06-05-offline-first.md`.
 
 ## Open issues
 
-- **#1 Offline-first support with background sync** ← _next; see below_
 - **#2 Multiple-choice study mode**
 - **#3 Card series / branching follow-up questions**
 - **#24 bug reporting screen** (pre-existing, unstarted)
-
-## Next up: #1 Offline-first (design-first)
-
-**Goal:** study with no connection, sync progress on reconnect — Android
-especially; web optionally as a PWA.
-
-**Recommended approach when starting:** brainstorm/design before code. Key
-decisions to make:
-
-- **Android local store:** Room was _removed_ in `62b6ee7` (commit on the
-  notes-world-style cleanup) — it would be re-introduced for the offline cache,
-  or use SQLDelight/DataStore. Decide.
-- **Web:** IndexedDB + service worker (PWA), or skip web offline for v1.
-- **Sync engine:** queue review events locally, replay on reconnect with
-  backoff. The server owns SM-2; clients post ratings. Conflict policy for
-  `card_progress` (last-write-wins per card is likely fine since reviews are
-  monotonic, but confirm).
-- **What's cached** (decks + due cards) vs **always-online** (library browse,
-  AI/MCP generation).
-- **Sync status UI** + retry.
-
-The v1 API + data model it depends on are all in place now.
 
 ## Architecture quick reference
 
@@ -74,7 +80,8 @@ The v1 API + data model it depends on are all in place now.
 - **Parser parity:** the Markdown parser exists in 3 ports (TS/Kotlin/Python) and
   the code comment requires them identical — change all three together.
 - **Migrations** auto-run on server start (`src/db/migrate.ts`, numbered `.sql`,
-  tracked in `_migrations`). Add the next as `008_*.sql`.
+  tracked in `_migrations`). Latest is `008_review_events.sql`; add the next as
+  `009_*.sql`.
 - **Auth:** `ValidationError → 422`. `/api/auth` rate-limited. User payload:
   `{ id, email, role, accountType, emailVerifiedAt, displayName }`.
   `account_type` ∈ `free|paid|admin-gifted|admin`; admin access = `account_type='admin'`.
