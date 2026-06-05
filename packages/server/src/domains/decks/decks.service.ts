@@ -52,7 +52,7 @@ export async function get(userId: string, id: string) {
 export async function update(
   userId: string,
   id: string,
-  patch: { title?: unknown; isPublic?: unknown },
+  patch: { title?: unknown; isPublic?: unknown; isOrdered?: unknown },
 ) {
   let deck = await repo.getDeck(userId, id);
   if (!deck) throw new NotFoundError("Deck not found");
@@ -68,6 +68,12 @@ export async function update(
       throw new ValidationError("isPublic must be a boolean");
     }
     deck = (await repo.setDeckPublic(userId, id, patch.isPublic)) ?? deck;
+  }
+  if (patch.isOrdered !== undefined) {
+    if (typeof patch.isOrdered !== "boolean") {
+      throw new ValidationError("isOrdered must be a boolean");
+    }
+    deck = (await repo.setDeckOrdered(userId, id, patch.isOrdered)) ?? deck;
   }
   return deck;
 }

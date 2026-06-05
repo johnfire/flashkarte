@@ -8,10 +8,11 @@ export interface DeckRow {
   created_at: string;
   updated_at: string;
   is_public: boolean;
+  is_ordered: boolean;
 }
 
 const DECK_COLS =
-  "id, title, source_filename, created_at, updated_at, is_public";
+  "id, title, source_filename, created_at, updated_at, is_public, is_ordered";
 
 export function createDeck(
   userId: string,
@@ -85,7 +86,7 @@ export interface DeckListRow extends DeckRow {
 
 export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
-    `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public,
+    `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_ordered,
        s.total AS card_count,
        s.due AS due_count,
        s.viewed AS viewed_count,
@@ -153,6 +154,15 @@ export function setDeckPublic(userId: string, id: string, isPublic: boolean) {
      WHERE id = $2 AND user_id = $3
      RETURNING ${DECK_COLS}`,
     [isPublic, id, userId],
+  );
+}
+
+export function setDeckOrdered(userId: string, id: string, isOrdered: boolean) {
+  return queryOne<DeckRow>(
+    `UPDATE decks SET is_ordered = $1, updated_at = now()
+     WHERE id = $2 AND user_id = $3
+     RETURNING ${DECK_COLS}`,
+    [isOrdered, id, userId],
   );
 }
 

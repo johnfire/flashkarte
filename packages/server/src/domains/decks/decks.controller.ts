@@ -33,6 +33,7 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
     await service.update(req.userId!, req.params.id, {
       title: req.body.title,
       isPublic: req.body.isPublic,
+      isOrdered: req.body.isOrdered,
     }),
   );
 });
