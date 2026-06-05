@@ -25,8 +25,10 @@ fun DeckListScreen(
     onStatsDeck: (String) -> Unit,
     onLogout: () -> Unit = {},
     viewModel: DeckListViewModel = hiltViewModel(),
+    themeViewModel: com.flashmd.ui.theme.ThemeViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val themeMode by themeViewModel.mode.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     val filePicker = rememberLauncherForActivityResult(
@@ -55,6 +57,12 @@ fun DeckListScreen(
             TopAppBar(
                 title = { Text("flashkarte", fontWeight = FontWeight.Bold) },
                 actions = {
+                    val themeLabel = when (themeMode) {
+                        com.flashmd.data.local.ThemeMode.SYSTEM -> "Theme: Auto"
+                        com.flashmd.data.local.ThemeMode.LIGHT -> "Theme: Light"
+                        com.flashmd.data.local.ThemeMode.DARK -> "Theme: Dark"
+                    }
+                    TextButton(onClick = { themeViewModel.cycle() }) { Text(themeLabel) }
                     TextButton(onClick = onLogout) { Text("Log out") }
                 },
             )

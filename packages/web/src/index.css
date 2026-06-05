@@ -13,6 +13,18 @@
   .dark ::after {
     border-color: theme("colors.gray.700");
   }
+  /* Form controls default to a white UA background, which blinds in dark mode.
+     Give bare inputs a dark surface; explicit bg-* utilities still win. */
+  .dark input,
+  .dark select,
+  .dark textarea {
+    background-color: theme("colors.gray.800");
+    color: theme("colors.gray.100");
+  }
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: theme("colors.gray.500");
+  }
 }
 
 @layer utilities {
