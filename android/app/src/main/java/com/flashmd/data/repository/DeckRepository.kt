@@ -1,5 +1,6 @@
 package com.flashmd.data.repository
 
+import com.flashmd.data.local.LocalStudyStore
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.DeckListItemDto
@@ -12,22 +13,31 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * API-backed deck repository. The server is the source of truth; the deck list
- * is cached in a [MutableStateFlow] and refreshed explicitly (online-first v1).
- * The list endpoint already returns per-deck card/due counts, so no per-deck
- * stats round-trips are needed.
+ * Deck repository. The server is the source of truth; the deck list is cached in
+ * a [MutableStateFlow] and refreshed explicitly. On a successful refresh the list
+ * is also mirrored to the local store so it survives offline; when the network is
+ * unavailable, [refresh] falls back to the cached decks.
  */
 @Singleton
 class DeckRepository @Inject constructor(
     private val api: FlashkarteApi,
+    private val local: LocalStudyStore,
 ) {
     private val decks = MutableStateFlow<List<Deck>>(emptyList())
 
     fun getAllDecksFlow(): Flow<List<Deck>> = decks.asStateFlow()
 
-    /** Reloads the deck list from the server into the cached flow. */
+    /** Reloads the deck list from the server, mirrors it locally, and falls back
+     *  to the local mirror when offline. */
     suspend fun refresh() {
-        decks.value = apiCall { api.listDecks() }.map { it.toDomain() }
+        try {
+            val fresh = apiCall { api.listDecks() }.map { it.toDomain() }
+            decks.value = fresh
+            local.cacheDecks(fresh)
+        } catch (e: Exception) {
+            val cached = local.cachedDecks()
+            if (cached.isNotEmpty()) decks.value = cached else throw e
+        }
     }
 
     suspend fun getDeckById(id: String): Deck? {
