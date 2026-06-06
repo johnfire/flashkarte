@@ -12,12 +12,19 @@ export function getDueAndNewCards(
   limit: number,
 ) {
   return query<CardForStudy>(
+    // Ordered decks (decks.is_ordered) study in strict global position order;
+    // unordered decks keep reviewed/due-first grouping (the CASE is NULL for
+    // every row, so the remaining keys stay in control). Regression fixture:
+    // scripts/verify-ordered-study-order.sql — update both together.
     `SELECT c.id, c.content, c.category
      FROM cards c
+     JOIN decks d ON d.id = c.deck_id
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
      WHERE c.deck_id = $2 AND c.user_id = $1
        AND (p.id IS NULL OR p.due_at <= now())
-     ORDER BY (p.id IS NULL) ASC, p.due_at ASC NULLS LAST, c.position ASC
+     ORDER BY
+       CASE WHEN d.is_ordered THEN c.position END ASC NULLS LAST,
+       (p.id IS NULL) ASC, p.due_at ASC NULLS LAST, c.position ASC
      LIMIT $3`,
     [userId, deckId, limit],
   );
