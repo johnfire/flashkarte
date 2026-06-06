@@ -112,6 +112,7 @@ export interface DeckListRow extends DeckRow {
   hard_count: string;
   good_count: string;
   easy_count: string;
+  is_branching: boolean;
 }
 
 export function listDecksWithCounts(userId: string) {
@@ -124,11 +125,13 @@ export function listDecksWithCounts(userId: string) {
        s.again AS again_count,
        s.hard AS hard_count,
        s.good AS good_count,
-       s.easy AS easy_count
+       s.easy AS easy_count,
+       s.is_branching
      FROM decks d
      LEFT JOIN LATERAL (
        SELECT
          count(*) AS total,
+         COALESCE(bool_or(c.type = 'branch'), false) AS is_branching,
          count(*) FILTER (WHERE p.id IS NULL OR p.due_at <= now()) AS due,
          count(*) FILTER (WHERE p.id IS NOT NULL) AS viewed,
          count(*) FILTER (WHERE p.id IS NULL) AS new_cards,

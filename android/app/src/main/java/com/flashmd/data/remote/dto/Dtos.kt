@@ -46,6 +46,7 @@ data class DeckListItemDto(
     @SerialName("due_count") val dueCount: String = "0",
     @SerialName("is_public") val isPublic: Boolean = false,
     @SerialName("is_ordered") val isOrdered: Boolean = false,
+    @SerialName("is_branching") val isBranching: Boolean = false,
 )
 
 /** Response from POST /api/decks — here `card_count` is a real number. */
@@ -64,6 +65,31 @@ data class DeckDetailDto(
     @SerialName("created_at") val createdAt: String,
     @SerialName("updated_at") val updatedAt: String,
     @SerialName("is_ordered") val isOrdered: Boolean = false,
+    val cards: List<DeckCardDto> = emptyList(),
+)
+
+@Serializable
+data class DeckCardDto(
+    val id: String,
+    val type: String = "basic",
+    val content: DeckCardContentDto = DeckCardContentDto(),
+    val category: String? = null,
+    val position: Int = 0,
+)
+
+@Serializable
+data class DeckCardContentDto(
+    val front: String = "",
+    val back: String = "",
+    val prompt: String = "",
+    val label: String? = null,
+    val options: List<BranchOptionDto> = emptyList(),
+)
+
+@Serializable
+data class BranchOptionDto(
+    val text: String = "",
+    val goto: String = "",
 )
 
 @Serializable

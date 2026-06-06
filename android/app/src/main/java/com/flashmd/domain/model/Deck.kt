@@ -11,4 +11,5 @@ data class Deck(
     val dueCount: Int = 0,
     val isPublic: Boolean = false,
     val isOrdered: Boolean = false,
+    val isBranching: Boolean = false,
 )

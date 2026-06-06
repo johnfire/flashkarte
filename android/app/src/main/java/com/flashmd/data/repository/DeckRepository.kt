@@ -5,7 +5,9 @@ import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.DeckListItemDto
 import com.flashmd.data.remote.dto.ImportRequest
+import com.flashmd.domain.model.BranchOption
 import com.flashmd.domain.model.Deck
+import com.flashmd.domain.model.DeckNode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,10 +53,24 @@ class DeckRepository @Inject constructor(
                         createdAt = it.createdAt,
                         lastStudied = it.updatedAt,
                         isOrdered = it.isOrdered,
+                        isBranching = it.cards.any { c -> c.type == "branch" },
                     )
                 }
             }.getOrNull()
     }
+
+    suspend fun getDeckGraph(id: String): List<DeckNode> =
+        apiCall { api.getDeck(id) }.cards.map { c ->
+            DeckNode(
+                id = c.id,
+                type = c.type,
+                label = c.content.label,
+                prompt = if (c.type == "branch") c.content.prompt else c.content.front,
+                back = c.content.back,
+                options = c.content.options.map { o -> BranchOption(o.text, o.goto) },
+                position = c.position,
+            )
+        }
 
     /**
      * Imports a deck from raw Markdown. The server parses it (single source of
@@ -102,5 +118,6 @@ class DeckRepository @Inject constructor(
         dueCount = dueCount.toIntOrNull() ?: 0,
         isPublic = isPublic,
         isOrdered = isOrdered,
+        isBranching = isBranching,
     )
 }
