@@ -142,3 +142,56 @@ describe("Markdown deck parser — Q:/A: format", () => {
     expect(deck.cards[1].back).toBe("Artificial Intelligence\n\nDesc.");
   });
 });
+
+describe("branching syntax", () => {
+  const md = `# Forest Path
+
+[start]
+**1. You reach a fork. Which way?**
+- Go left toward the cave -> cave
+- Go right -> meadow
+
+[cave]
+**2. A bear blocks the cave.**
+- Sneak past -> treasure
+- Retreat -> start
+
+[meadow]
+**3. A peaceful clearing.**
+You rest here.
+`;
+
+  it("parses anchors, prompts and options", () => {
+    const deck = parseDeck(md);
+    const byLabel = Object.fromEntries(deck.cards.map((c) => [c.label, c]));
+    expect(deck.cards).toHaveLength(3);
+    const start = byLabel["start"];
+    expect(start.type).toBe("branch");
+    expect(start.front).toBe("You reach a fork. Which way?");
+    expect(start.options).toEqual([
+      { text: "Go left toward the cave", goto: "cave" },
+      { text: "Go right", goto: "meadow" },
+    ]);
+    expect(byLabel["cave"].options[1]).toEqual({ text: "Retreat", goto: "start" });
+  });
+
+  it("treats a card with no options as a basic leaf", () => {
+    const deck = parseDeck(md);
+    const meadow = deck.cards.find((c) => c.label === "meadow")!;
+    expect(meadow.type).toBe("basic");
+    expect(meadow.back).toBe("You rest here.");
+    expect(meadow.options).toEqual([]);
+  });
+
+  it("supports the end target", () => {
+    const deck = parseDeck(`# T\n\n**1. Stop?**\n- Yes -> end\n`);
+    expect(deck.cards[0].options).toEqual([{ text: "Yes", goto: "end" }]);
+  });
+
+  it("is backward compatible with non-branching decks", () => {
+    const deck = parseDeck(`# Plain\n\n**1. Q**\nAn answer.\n`);
+    expect(deck.cards[0]).toMatchObject({
+      type: "basic", front: "Q", back: "An answer.", label: null, options: [],
+    });
+  });
+});
