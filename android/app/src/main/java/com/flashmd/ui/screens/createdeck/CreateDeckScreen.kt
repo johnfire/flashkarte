@@ -17,6 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun CreateDeckScreen(
     onDone: () -> Unit,
+    onHowTo: () -> Unit,
     viewModel: CreateDeckViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -89,6 +90,10 @@ fun CreateDeckScreen(
             ) {
                 if (state.isSaving) CircularProgressIndicator(Modifier.size(20.dp))
                 else Text("Create deck")
+            }
+
+            TextButton(onClick = onHowTo, modifier = Modifier.fillMaxWidth()) {
+                Text("How to make a branching deck")
             }
         }
     }
