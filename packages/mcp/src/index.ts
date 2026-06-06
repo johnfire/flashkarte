@@ -20,13 +20,14 @@ app.get("/health", (_req, res) => {
   res.send("ok");
 });
 
-// Auth: the user's fk_ key (Bearer / x-api-key / ?key=) is threaded to every
+// Auth: the user's fk_ key (x-api-key or Bearer header) is threaded to every
 // backend call so each tool acts as that user. Validation happens at the API.
+// Header-only — never accept the key in the query string, where it would leak
+// into access logs, proxies, and browser history.
 app.use((req, res, next) => {
   const raw =
     (req.headers["x-api-key"] as string | undefined) ??
-    req.headers.authorization?.replace(/^Bearer\s+/i, "") ??
-    (req.query["key"] as string | undefined);
+    req.headers.authorization?.replace(/^Bearer\s+/i, "");
 
   if (!raw) {
     res.status(401).json({ error: "API key required" });
