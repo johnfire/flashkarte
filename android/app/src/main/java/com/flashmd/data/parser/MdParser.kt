@@ -1,9 +1,17 @@
 package com.flashmd.data.parser
 
+data class ParsedOption(
+    val text: String,
+    val goto: String,
+)
+
 data class ParsedCard(
+    val type: String,           // "basic" | "branch"
     val front: String,
     val back: String,
     val category: String?,
+    val label: String?,
+    val options: List<ParsedOption>,
 )
 
 data class ParsedDeck(
@@ -22,6 +30,9 @@ object MdParser {
     // as additional paragraphs.
     private val QFRONT = Regex("""^Q:\s*(.+)""")
     private val ABACK = Regex("""^A:\s*(.+)""")
+    // Branching: an anchor line [label], and option lines "- text -> target".
+    private val ANCHOR = Regex("""^\[([A-Za-z0-9_-]+)\]\s*$""")
+    private val OPTION = Regex("""^-\s+(.+?)\s+->\s+(\S+)\s*$""")
 
     fun parse(text: String, sourceFile: String = ""): ParsedDeck {
         val lines = text.lines()
@@ -29,18 +40,34 @@ object MdParser {
         var currentCategory: String? = null
         var currentFront: String? = null
         var currentIsQA = false
+        var currentLabel: String? = null
+        var pendingLabel: String? = null
         val backLines = mutableListOf<String>()
+        var options = mutableListOf<ParsedOption>()
         val cards = mutableListOf<ParsedCard>()
 
         fun flushCard() {
             val front = currentFront ?: return
             cards += ParsedCard(
+                type = if (options.isNotEmpty()) "branch" else "basic",
                 front = front,
-                back = cleanBack(backLines.toList()),
+                back = if (options.isNotEmpty()) "" else cleanBack(backLines.toList()),
                 category = currentCategory,
+                label = currentLabel,
+                options = options.toList(),
             )
             currentFront = null
+            currentLabel = null
             backLines.clear()
+            options = mutableListOf()
+        }
+
+        fun openCard(front: String, isQA: Boolean) {
+            flushCard()
+            currentFront = front
+            currentIsQA = isQA
+            currentLabel = pendingLabel
+            pendingLabel = null
         }
 
         for (line in lines) {
@@ -49,24 +76,21 @@ object MdParser {
             val mFront = FRONT.find(line)
             val mQ = QFRONT.find(line)
             val mA = ABACK.find(line)
+            val mAnchor = ANCHOR.find(line)
+            val mOption = if (currentFront != null) OPTION.find(line) else null
 
             when {
                 mH1 != null && title.isEmpty() -> title = mH1.groupValues[1].trim()
+                mAnchor != null -> pendingLabel = mAnchor.groupValues[1]
                 mH2 != null -> {
                     flushCard()
                     currentCategory = mH2.groupValues[1].trim()
                 }
                 HR.matches(line) -> { /* separator, skip */ }
-                mFront != null -> {
-                    flushCard()
-                    currentFront = mFront.groupValues[1].trim()
-                    currentIsQA = false
-                }
-                mQ != null -> {
-                    flushCard()
-                    currentFront = mQ.groupValues[1].trim()
-                    currentIsQA = true
-                }
+                mFront != null -> openCard(mFront.groupValues[1].trim(), false)
+                mQ != null -> openCard(mQ.groupValues[1].trim(), true)
+                mOption != null ->
+                    options += ParsedOption(mOption.groupValues[1].trim(), mOption.groupValues[2].trim())
                 mA != null && currentFront != null && currentIsQA &&
                     backLines.all { it.isBlank() } -> {
                     // First `A:` after a `Q:`: answer becomes its own paragraph,
