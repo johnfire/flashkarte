@@ -22,8 +22,10 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.flashmd.ui.screens.createdeck.CreateDeckScreen
 import com.flashmd.ui.screens.decklist.DeckListScreen
+import com.flashmd.ui.screens.help.BranchingHelpScreen
 import com.flashmd.ui.screens.library.LibraryDetailScreen
 import com.flashmd.ui.screens.library.LibraryScreen
+import com.flashmd.ui.screens.play.BranchPlayScreen
 import com.flashmd.ui.screens.reportbug.ReportBugScreen
 import com.flashmd.ui.screens.settings.SettingsScreen
 import com.flashmd.ui.screens.stats.StatsScreen
@@ -77,13 +79,28 @@ fun NavGraph(onLogout: () -> Unit = {}) {
             composable("decks") {
                 DeckListScreen(
                     onStudyDeck = { deckId -> navController.navigate("study/$deckId") },
+                    onPlayDeck = { deckId -> navController.navigate("play/$deckId") },
                     onStatsDeck = { deckId -> navController.navigate("stats/$deckId") },
                     onCreateDeck = { navController.navigate("decks/new") },
                 )
             }
 
             composable("decks/new") {
-                CreateDeckScreen(onDone = { navController.popBackStack() })
+                CreateDeckScreen(
+                    onDone = { navController.popBackStack() },
+                    onHowTo = { navController.navigate("branching-help") },
+                )
+            }
+
+            composable("branching-help") {
+                BranchingHelpScreen(onBack = { navController.popBackStack() })
+            }
+
+            composable(
+                route = "play/{deckId}",
+                arguments = listOf(navArgument("deckId") { type = NavType.StringType }),
+            ) {
+                BranchPlayScreen(onBack = { navController.popBackStack() })
             }
 
             composable("library") {

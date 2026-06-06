@@ -20,6 +20,7 @@ import com.flashmd.ui.components.SyncStatusChip
 @Composable
 fun DeckListScreen(
     onStudyDeck: (String) -> Unit,
+    onPlayDeck: (String) -> Unit,
     onStatsDeck: (String) -> Unit,
     onCreateDeck: () -> Unit,
     viewModel: DeckListViewModel = hiltViewModel(),
@@ -79,6 +80,7 @@ fun DeckListScreen(
                     DeckCard(
                         row = row,
                         onStudy = { onStudyDeck(row.deck.id) },
+                        onPlay = { onPlayDeck(row.deck.id) },
                         onStats = { onStatsDeck(row.deck.id) },
                         onRename = { t -> viewModel.rename(row.deck.id, t) },
                         onAddCards = { md -> viewModel.addCards(row.deck.id, md) },
@@ -96,6 +98,7 @@ fun DeckListScreen(
 private fun DeckCard(
     row: DeckRow,
     onStudy: () -> Unit,
+    onPlay: () -> Unit,
     onStats: () -> Unit,
     onRename: (String) -> Unit,
     onAddCards: (String) -> Unit,
@@ -125,7 +128,11 @@ private fun DeckCard(
                 )
             }
             TextButton(onClick = onStats) { Text("Stats") }
-            Button(onClick = onStudy) { Text("Study") }
+            if (row.deck.isBranching) {
+                Button(onClick = onPlay) { Text("Play") }
+            } else {
+                Button(onClick = onStudy) { Text("Study") }
+            }
             Box {
                 IconButton(onClick = { menuOpen = true }) {
                     Icon(Icons.Default.MoreVert, contentDescription = "More")
