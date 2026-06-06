@@ -69,9 +69,38 @@ export function createApp() {
     next();
   });
 
+  const isTest = () => process.env.NODE_ENV === "test";
+
+  // Public, unauthenticated error sink — cap per IP so it can't be used to
+  // flood the log/disk.
+  const clientErrorsLimiter = rateLimit({
+    windowMs: 60_000,
+    limit: 30,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+    skip: isTest,
+  });
+
+  // Each bug report files a GitHub issue; cap per authenticated user so the
+  // tracker can't be spammed.
+  const bugReportLimiter = rateLimit({
+    windowMs: 60 * 60_000,
+    limit: 10,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+    keyGenerator: (req) => req.userId ?? req.ip ?? "anon",
+    skip: isTest,
+    message: {
+      error: {
+        code: "RATE_LIMIT_EXCEEDED",
+        message: "Too many bug reports — please try again later",
+      },
+    },
+  });
+
   // Public routes (no JWT)
   app.use("/api/auth", authRouter);
-  app.use("/api/client-errors", clientErrorsRouter);
+  app.use("/api/client-errors", clientErrorsLimiter, clientErrorsRouter);
 
   // Everything below requires a valid JWT
   app.use("/api", requireAuth);
@@ -79,7 +108,7 @@ export function createApp() {
   app.use("/api/study", studyRouter);
   app.use("/api/keys", keysRouter);
   app.use("/api/library", libraryRouter);
-  app.use("/api/bug-reports", bugReportsRouter);
+  app.use("/api/bug-reports", bugReportLimiter, bugReportsRouter);
   app.use("/api/admin", requireAdmin, adminRouter);
 
   // Serve the built web SPA in production (Dockerfile copies web/dist → public).
