@@ -5,18 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>flashkarte</title>
-    <script>
-      // Apply the saved/system theme before paint to avoid a flash.
-      (function () {
-        try {
-          var t = localStorage.getItem("theme");
-          var dark = t
-            ? t === "dark"
-            : window.matchMedia("(prefers-color-scheme: dark)").matches;
-          if (dark) document.documentElement.classList.add("dark");
-        } catch (e) {}
-      })();
-    </script>
+    <!-- External (not inline) so it's allowed by the production CSP
+         `script-src 'self'`; restores the saved theme before paint. -->
+    <script src="/theme-init.js"></script>
   </head>
   <body>
     <div id="root"></div>
