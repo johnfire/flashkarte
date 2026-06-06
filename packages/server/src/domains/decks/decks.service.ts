@@ -1,6 +1,7 @@
 import { parseDeck } from "@flashkarte/shared";
 import { ValidationError, NotFoundError } from "../../utils/errors";
 import * as repo from "./decks.repository";
+import { validateBranching } from "./branching";
 
 export async function importDeck(
   userId: string,
@@ -14,6 +15,7 @@ export async function importDeck(
   if (parsed.cards.length === 0) {
     throw new ValidationError("Deck has no cards — check the Markdown format");
   }
+  validateBranching(parsed.cards);
   const deck = await repo.createDeck(userId, parsed.title, filename);
   if (!deck) throw new Error("Failed to create deck");
   await repo.insertCards(userId, deck.id, parsed.cards);
@@ -34,6 +36,7 @@ export async function appendCards(
   if (parsed.cards.length === 0) {
     throw new ValidationError("No cards found — check the Markdown format");
   }
+  validateBranching(parsed.cards);
   await repo.appendCards(userId, deckId, parsed.cards);
   return { deck_id: deckId, added: parsed.cards.length };
 }

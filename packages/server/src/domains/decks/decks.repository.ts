@@ -1,5 +1,5 @@
 import { query, queryOne } from "../../db/client";
-import { ParsedCard } from "@flashkarte/shared";
+import { ParsedCard, ParsedOption } from "@flashkarte/shared";
 
 export interface DeckRow {
   id: string;
@@ -27,6 +27,48 @@ export function createDeck(
   );
 }
 
+/** Reconstruct a ParsedCard from a stored card row (inverse of cardContent). */
+export function rowToParsedCard(row: {
+  type: string;
+  content: Record<string, unknown>;
+  category: string | null;
+}): ParsedCard {
+  const content = row.content;
+  if (row.type === "branch") {
+    return {
+      type: "branch",
+      front: (content.prompt as string) ?? "",
+      back: "",
+      category: row.category,
+      label: (content.label as string | null) ?? null,
+      options: (content.options as ParsedOption[]) ?? [],
+    };
+  }
+  return {
+    type: "basic",
+    front: (content.front as string) ?? "",
+    back: (content.back as string) ?? "",
+    category: row.category,
+    label: (content.label as string | null) ?? null,
+    options: [],
+  };
+}
+
+function cardContent(c: ParsedCard): string {
+  if (c.type === "branch") {
+    return JSON.stringify({
+      label: c.label,
+      prompt: c.front,
+      options: c.options,
+    });
+  }
+  return JSON.stringify(
+    c.label
+      ? { front: c.front, back: c.back, label: c.label }
+      : { front: c.front, back: c.back },
+  );
+}
+
 export async function insertCards(
   userId: string,
   deckId: string,
@@ -36,14 +78,8 @@ export async function insertCards(
   for (const c of cards) {
     await query(
       `INSERT INTO cards (user_id, deck_id, type, content, category, position)
-       VALUES ($1, $2, 'basic', $3, $4, $5)`,
-      [
-        userId,
-        deckId,
-        JSON.stringify({ front: c.front, back: c.back }),
-        c.category,
-        i++,
-      ],
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [userId, deckId, c.type, cardContent(c), c.category, i++],
     );
   }
 }
@@ -61,14 +97,8 @@ export async function appendCards(
   for (const c of cards) {
     await query(
       `INSERT INTO cards (user_id, deck_id, type, content, category, position)
-       VALUES ($1, $2, 'basic', $3, $4, $5)`,
-      [
-        userId,
-        deckId,
-        JSON.stringify({ front: c.front, back: c.back }),
-        c.category,
-        i++,
-      ],
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [userId, deckId, c.type, cardContent(c), c.category, i++],
     );
   }
 }
@@ -126,7 +156,7 @@ export function getCards(userId: string, deckId: string) {
   return query<{
     id: string;
     type: string;
-    content: { front: string; back: string };
+    content: Record<string, unknown>;
     category: string | null;
     position: number;
   }>(

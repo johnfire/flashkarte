@@ -36,8 +36,8 @@ export async function get(id: string) {
   return {
     ...toLibraryDeck(deck),
     cards: cards.map((c) => ({
-      front: c.content.front,
-      back: c.content.back,
+      front: (c.content.front as string) ?? "",
+      back: (c.content.back as string) ?? "",
       category: c.category,
     })),
   };
@@ -52,11 +52,13 @@ export async function clone(userId: string, id: string) {
   const deck = await decksRepo.createDeck(userId, source.title, null);
   if (!deck) throw new Error("Failed to create deck");
 
-  const cards: ParsedCard[] = cardRows.map((c) => ({
-    front: c.content.front,
-    back: c.content.back,
-    category: c.category,
-  }));
+  const cards: ParsedCard[] = cardRows.map((c) =>
+    decksRepo.rowToParsedCard({
+      type: c.type,
+      content: c.content,
+      category: c.category,
+    }),
+  );
   await decksRepo.insertCards(userId, deck.id, cards);
 
   return { id: deck.id, title: deck.title, card_count: cards.length };

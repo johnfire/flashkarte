@@ -37,11 +37,12 @@ export function getPublicDeck(id: string) {
 
 export function getPublicCards(deckId: string) {
   return query<{
-    content: { front: string; back: string };
+    type: string;
+    content: Record<string, unknown>;
     category: string | null;
     position: number;
   }>(
-    `SELECT c.content, c.category, c.position
+    `SELECT c.type, c.content, c.category, c.position
      FROM cards c JOIN decks d ON d.id = c.deck_id
      WHERE c.deck_id = $1 AND d.is_public
      ORDER BY c.position ASC`,
