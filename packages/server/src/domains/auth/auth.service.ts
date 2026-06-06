@@ -62,13 +62,18 @@ async function createAndSendVerification(
 
 function signAccessToken(userId: string, email: string): string {
   return jwt.sign({ sub: userId, email } satisfies JwtPayload, getJwtSecret(), {
+    algorithm: "HS256",
     expiresIn: ACCESS_TOKEN_TTL_SEC,
   });
 }
 
 export function verifyAccessToken(token: string): JwtPayload {
   try {
-    return jwt.verify(token, getJwtSecret()) as JwtPayload;
+    // Pin the algorithm so a token can't be verified under a different scheme
+    // (defense against algorithm-confusion attacks).
+    return jwt.verify(token, getJwtSecret(), {
+      algorithms: ["HS256"],
+    }) as JwtPayload;
   } catch {
     throw new AuthError("Invalid or expired token");
   }
@@ -160,7 +165,7 @@ export async function refresh(rawRefresh: string | undefined) {
   const accessToken = jwt.sign(
     { sub: found.user_id, email: "" } satisfies JwtPayload,
     getJwtSecret(),
-    { expiresIn: ACCESS_TOKEN_TTL_SEC },
+    { algorithm: "HS256", expiresIn: ACCESS_TOKEN_TTL_SEC },
   );
   return { accessToken };
 }
