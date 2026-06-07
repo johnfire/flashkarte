@@ -1,5 +1,7 @@
 import bcrypt from "bcryptjs";
+import { z } from "zod";
 import { ValidationError, NotFoundError } from "../../utils/errors";
+import { parse, emailSchema, passwordSchema } from "../../utils/validate";
 import * as repo from "./admin.repository";
 import type { AdminUserRow } from "./admin.repository";
 import * as decksRepo from "../decks/decks.repository";
@@ -31,16 +33,12 @@ function toAdminUser(row: AdminUserRow): AdminUser {
   };
 }
 
+const accountTypeSchema = z.enum(ACCOUNT_TYPES, {
+  error: `Account type must be one of: ${ACCOUNT_TYPES.join(", ")}`,
+});
+
 function validateAccountType(value: unknown): AccountType {
-  if (
-    typeof value !== "string" ||
-    !ACCOUNT_TYPES.includes(value as AccountType)
-  ) {
-    throw new ValidationError(
-      `Account type must be one of: ${ACCOUNT_TYPES.join(", ")}`,
-    );
-  }
-  return value as AccountType;
+  return parse(accountTypeSchema, value);
 }
 
 export async function listUsers(): Promise<AdminUser[]> {
@@ -54,22 +52,14 @@ export async function createUser(
   passwordIn: unknown,
   accountTypeIn: unknown,
 ): Promise<AdminUser> {
-  if (
-    typeof emailIn !== "string" ||
-    !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailIn)
-  ) {
-    throw new ValidationError("A valid email is required");
-  }
-  if (typeof passwordIn !== "string" || passwordIn.length < 8) {
-    throw new ValidationError("Password must be at least 8 characters");
-  }
+  const email = parse(emailSchema, emailIn);
+  const password = parse(passwordSchema, passwordIn);
   const accountType = validateAccountType(accountTypeIn ?? "free");
-  const email = emailIn.toLowerCase();
 
   if (await repo.findByEmail(email)) {
     throw new ValidationError("An account with this email already exists");
   }
-  const hash = await bcrypt.hash(passwordIn, BCRYPT_ROUNDS);
+  const hash = await bcrypt.hash(password, BCRYPT_ROUNDS);
   const user = await repo.createUser(email, hash, accountType, true);
   if (!user) throw new Error("Failed to create user");
   return toAdminUser(user);

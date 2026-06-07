@@ -32,7 +32,10 @@ export const login = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const refresh = wrapAsync(async (req: Request, res: Response) => {
-  const { accessToken } = await service.refresh(req.cookies?.[REFRESH_COOKIE]);
+  const { accessToken, rawRefresh } = await service.refresh(
+    req.cookies?.[REFRESH_COOKIE],
+  );
+  res.cookie(REFRESH_COOKIE, rawRefresh, COOKIE_OPTS);
   res.json({ accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
 });
 

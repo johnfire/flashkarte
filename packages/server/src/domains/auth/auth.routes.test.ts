@@ -49,6 +49,22 @@ describe("auth routes", () => {
     expect(res.body.accessToken).toBe("tok");
   });
 
+  test("POST /api/auth/refresh -> 200 rotates refresh cookie", async () => {
+    mock.refresh.mockResolvedValue({
+      accessToken: "new-tok",
+      rawRefresh: "new-raw",
+    } as never);
+
+    const res = await request(app)
+      .post("/api/auth/refresh")
+      .set("Cookie", "fk_refresh=old-raw");
+
+    expect(res.status).toBe(200);
+    expect(res.body.accessToken).toBe("new-tok");
+    expect(res.headers["set-cookie"][0]).toMatch(/fk_refresh=new-raw/);
+    expect(mock.refresh).toHaveBeenCalledWith("old-raw");
+  });
+
   test("POST /api/auth/logout -> 204 clears cookie", async () => {
     mock.logout.mockResolvedValue(undefined as never);
     const res = await request(app).post("/api/auth/logout");

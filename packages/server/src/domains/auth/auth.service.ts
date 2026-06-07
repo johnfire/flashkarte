@@ -1,8 +1,10 @@
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
+import { z } from "zod";
 import jwt from "jsonwebtoken";
 import { getJwtSecret } from "../../config/env";
 import { ValidationError, AuthError } from "../../utils/errors";
+import { parse, emailSchema, passwordSchema } from "../../utils/validate";
 import {
   getAppUrl,
   sendVerificationEmail,
@@ -91,17 +93,20 @@ async function issueTokens(userId: string, email: string) {
   return { accessToken, rawRefresh };
 }
 
+const credentialsSchema = z.object({
+  email: emailSchema,
+  password: passwordSchema,
+});
+
 function validateCredentials(
   email: unknown,
   password: unknown,
 ): [string, string] {
-  if (typeof email !== "string" || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    throw new ValidationError("A valid email is required");
-  }
-  if (typeof password !== "string" || password.length < 8) {
-    throw new ValidationError("Password must be at least 8 characters");
-  }
-  return [email.toLowerCase(), password];
+  const { email: e, password: p } = parse(credentialsSchema, {
+    email,
+    password,
+  });
+  return [e, p];
 }
 
 export async function signup(emailIn: unknown, passwordIn: unknown) {
@@ -155,19 +160,19 @@ export async function login(emailIn: unknown, passwordIn: unknown) {
   return { user: toUser(row), accessToken, rawRefresh };
 }
 
-export async function refresh(rawRefresh: string | undefined) {
-  if (!rawRefresh) throw new AuthError("No refresh token");
-  const found = await repo.findRefreshToken(hashToken(rawRefresh));
+export async function refresh(oldRawRefresh: string | undefined) {
+  if (!oldRawRefresh) throw new AuthError("No refresh token");
+  const found = await repo.findRefreshToken(hashToken(oldRawRefresh));
   if (!found || found.expires_at < new Date()) {
     throw new AuthError("Invalid refresh token");
   }
-  // v1: re-sign access only (refresh rotation can come later).
-  const accessToken = jwt.sign(
-    { sub: found.user_id, email: "" } satisfies JwtPayload,
-    getJwtSecret(),
-    { algorithm: "HS256", expiresIn: ACCESS_TOKEN_TTL_SEC },
-  );
-  return { accessToken };
+  // Rotate: delete the consumed token before issuing a new one.
+  // A replayed rotated-away token will fail findRefreshToken above.
+  await repo.deleteRefreshToken(hashToken(oldRawRefresh));
+  const user = await repo.findById(found.user_id);
+  if (!user) throw new AuthError("Invalid refresh token");
+  const { accessToken, rawRefresh } = await issueTokens(user.id, user.email);
+  return { accessToken, rawRefresh };
 }
 
 export async function logout(rawRefresh: string | undefined) {
@@ -203,21 +208,22 @@ export async function updateProfile(
  * email belongs to an account (no account enumeration).
  */
 export async function forgotPassword(emailIn: unknown): Promise<void> {
+  // Generate token upfront so both paths do equivalent crypto work — partial
+  // normalization against account-enumeration via response-time oracle.
+  const rawToken = crypto.randomBytes(32).toString("hex");
+  const tokenHash = hashToken(rawToken);
+  const expiresAt = new Date(
+    Date.now() + PASSWORD_RESET_TOKEN_TTL_HOURS * 3600_000,
+  );
+
   if (typeof emailIn !== "string") return;
   const email = emailIn.toLowerCase();
   const user = await repo.findByEmailWithHash(email);
   if (!user) return; // unknown email — succeed silently
+
   try {
     await repo.deletePasswordResetTokensForUser(user.id);
-    const rawToken = crypto.randomBytes(32).toString("hex");
-    const expiresAt = new Date(
-      Date.now() + PASSWORD_RESET_TOKEN_TTL_HOURS * 3600_000,
-    );
-    await repo.insertPasswordResetToken(
-      user.id,
-      hashToken(rawToken),
-      expiresAt,
-    );
+    await repo.insertPasswordResetToken(user.id, tokenHash, expiresAt);
     const link = `${getAppUrl()}/reset-password?token=${rawToken}`;
     await sendPasswordResetEmail(user.email, link);
   } catch (err) {
@@ -234,14 +240,12 @@ export async function resetPassword(
   if (typeof rawToken !== "string" || !rawToken) {
     throw new ValidationError("Reset token is required");
   }
-  if (typeof passwordIn !== "string" || passwordIn.length < 8) {
-    throw new ValidationError("Password must be at least 8 characters");
-  }
+  const password = parse(passwordSchema, passwordIn);
   const found = await repo.findPasswordResetToken(hashToken(rawToken));
   if (!found || found.expires_at < new Date()) {
     throw new ValidationError("This reset link is invalid or expired");
   }
-  const hash = await bcrypt.hash(passwordIn, BCRYPT_ROUNDS);
+  const hash = await bcrypt.hash(password, BCRYPT_ROUNDS);
   await repo.updatePasswordHash(found.user_id, hash);
   await repo.deletePasswordResetTokensForUser(found.user_id); // single-use
   await repo.deleteRefreshTokensForUser(found.user_id); // invalidate sessions

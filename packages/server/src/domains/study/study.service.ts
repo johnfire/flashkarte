@@ -1,27 +1,38 @@
+import { z } from "zod";
 import { calculate } from "@flashkarte/shared";
 import { ValidationError, NotFoundError } from "../../utils/errors";
+import { parse } from "../../utils/validate";
 import * as repo from "./study.repository";
+
+const ratingSchema = z
+  .number({ error: "rating must be an integer 1-5" })
+  .int("rating must be an integer 1-5")
+  .min(1, "rating must be an integer 1-5")
+  .max(5, "rating must be an integer 1-5");
+
+const syncEventSchema = z.object({
+  event_id: z.string(),
+  card_id: z.string(),
+  rating: ratingSchema,
+  reviewed_at: z
+    .string()
+    .refine((s) => !Number.isNaN(Date.parse(s)), "Invalid reviewed_at date"),
+});
 
 export function getStudyBatch(userId: string, deckId: string, limit = 20) {
   return repo.getDueAndNewCards(userId, deckId, limit);
 }
 
 export async function review(userId: string, cardId: unknown, rating: unknown) {
-  if (typeof cardId !== "string") {
-    throw new ValidationError("card_id is required");
-  }
-  if (
-    typeof rating !== "number" ||
-    !Number.isInteger(rating) ||
-    rating < 1 ||
-    rating > 5
-  ) {
-    throw new ValidationError("rating must be an integer 1-5");
-  }
-  const owns = await repo.cardBelongsToUser(userId, cardId);
+  const validCardId = parse(
+    z.string({ error: "card_id is required" }).min(1, "card_id is required"),
+    cardId,
+  );
+  const validRating = parse(ratingSchema, rating);
+  const owns = await repo.cardBelongsToUser(userId, validCardId);
   if (!owns) throw new NotFoundError("Card not found");
 
-  const row = await repo.getProgressRow(userId, cardId);
+  const row = await repo.getProgressRow(userId, validCardId);
   const prev = row
     ? {
         easiness: row.ease_factor,
@@ -29,50 +40,23 @@ export async function review(userId: string, cardId: unknown, rating: unknown) {
         repetitions: row.repetitions,
       }
     : { easiness: 2.5, interval: 0, repetitions: 0 };
-  const next = calculate(prev, rating);
+  const next = calculate(prev, validRating);
   const dueAt = new Date(Date.now() + next.interval * 86400_000);
-  await repo.upsertProgress(userId, cardId, {
+  await repo.upsertProgress(userId, validCardId, {
     repetitions: next.repetitions,
     easeFactor: next.easiness,
     intervalDays: next.interval,
     dueAt,
-    lastRating: rating,
+    lastRating: validRating,
   });
-  return { card_id: cardId, ...next, due_at: dueAt.toISOString() };
+  return { card_id: validCardId, ...next, due_at: dueAt.toISOString() };
 }
 
-interface SyncEvent {
-  event_id: string;
-  card_id: string;
-  rating: number;
-  reviewed_at: string;
-}
+type SyncEvent = z.infer<typeof syncEventSchema>;
 
 function parseEvent(e: unknown): SyncEvent | null {
-  if (!e || typeof e !== "object") return null;
-  const o = e as Record<string, unknown>;
-  if (typeof o.event_id !== "string") return null;
-  if (typeof o.card_id !== "string") return null;
-  if (
-    typeof o.rating !== "number" ||
-    !Number.isInteger(o.rating) ||
-    o.rating < 1 ||
-    o.rating > 5
-  ) {
-    return null;
-  }
-  if (
-    typeof o.reviewed_at !== "string" ||
-    Number.isNaN(Date.parse(o.reviewed_at))
-  ) {
-    return null;
-  }
-  return {
-    event_id: o.event_id,
-    card_id: o.card_id,
-    rating: o.rating,
-    reviewed_at: o.reviewed_at,
-  };
+  const result = syncEventSchema.safeParse(e);
+  return result.success ? result.data : null;
 }
 
 export async function sync(userId: string, events: unknown) {

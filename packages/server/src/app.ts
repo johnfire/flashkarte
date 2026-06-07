@@ -1,4 +1,5 @@
 import path from "path";
+import net from "net";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -15,6 +16,18 @@ import { libraryRouter } from "./domains/library/library.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
 import { requireAuth, requireAdmin } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
+
+// For IPv6, bucket by the /64 prefix so a client can't trivially bypass rate
+// limits by rotating through addresses within their allocated /64 block.
+function normalizeIp(ip: string): string {
+  if (!net.isIPv6(ip)) return ip;
+  const parts = ip.split("::");
+  const left = parts[0].split(":").filter(Boolean);
+  if (left.length >= 4) return left.slice(0, 4).join(":");
+  const right = parts[1] ? parts[1].split(":").filter(Boolean) : [];
+  const missing = 8 - left.length - right.length;
+  return [...left, ...Array(missing).fill("0"), ...right].slice(0, 4).join(":");
+}
 
 export function createApp() {
   const app = express();
@@ -78,6 +91,8 @@ export function createApp() {
     limit: 30,
     standardHeaders: "draft-7",
     legacyHeaders: false,
+    keyGenerator: (req) =>
+      normalizeIp(req.ip ?? req.socket.remoteAddress ?? "unknown"),
     skip: isTest,
   });
 
@@ -88,7 +103,8 @@ export function createApp() {
     limit: 10,
     standardHeaders: "draft-7",
     legacyHeaders: false,
-    keyGenerator: (req) => req.userId ?? req.ip ?? "anon",
+    keyGenerator: (req) =>
+      req.userId ?? normalizeIp(req.ip ?? req.socket.remoteAddress ?? "anon"),
     skip: isTest,
     message: {
       error: {
