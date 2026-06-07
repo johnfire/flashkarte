@@ -12,6 +12,7 @@ export function AuthPage() {
   );
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -21,7 +22,7 @@ export function AuthPage() {
     setError(null);
     setBusy(true);
     try {
-      if (mode === "login") await login(email, password);
+      if (mode === "login") await login(email, password, rememberMe);
       else await signup(email, password);
       navigate("/");
     } catch (err) {
@@ -101,6 +102,18 @@ export function AuthPage() {
             )}
           </button>
         </div>
+
+        {mode === "login" && (
+          <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+              className="rounded"
+            />
+            Keep me logged in
+          </label>
+        )}
 
         {error && <p className="text-sm text-red-600">{error}</p>}
 

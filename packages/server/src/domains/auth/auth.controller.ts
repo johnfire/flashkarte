@@ -3,39 +3,44 @@ import { wrapAsync } from "../../utils/wrapAsync";
 import * as service from "./auth.service";
 
 const REFRESH_COOKIE = "fk_refresh";
-const COOKIE_OPTS = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "strict" as const,
-  maxAge: 30 * 86400_000,
-  path: "/api/auth",
-};
+
+function cookieOpts(persistent: boolean) {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict" as const,
+    // Persistent sessions survive browser restarts; session cookies don't.
+    ...(persistent ? { maxAge: 30 * 86400_000 } : {}),
+    path: "/api/auth",
+  };
+}
 
 export const signup = wrapAsync(async (req: Request, res: Response) => {
-  const { user, accessToken, rawRefresh } = await service.signup(
+  const { user, accessToken, rawRefresh, persistent } = await service.signup(
     req.body.email,
     req.body.password,
   );
-  res.cookie(REFRESH_COOKIE, rawRefresh, COOKIE_OPTS);
+  res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
   res
     .status(201)
     .json({ user, accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
 });
 
 export const login = wrapAsync(async (req: Request, res: Response) => {
-  const { user, accessToken, rawRefresh } = await service.login(
+  const { user, accessToken, rawRefresh, persistent } = await service.login(
     req.body.email,
     req.body.password,
+    req.body.rememberMe,
   );
-  res.cookie(REFRESH_COOKIE, rawRefresh, COOKIE_OPTS);
+  res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
   res.json({ user, accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
 });
 
 export const refresh = wrapAsync(async (req: Request, res: Response) => {
-  const { accessToken, rawRefresh } = await service.refresh(
+  const { accessToken, rawRefresh, persistent } = await service.refresh(
     req.cookies?.[REFRESH_COOKIE],
   );
-  res.cookie(REFRESH_COOKIE, rawRefresh, COOKIE_OPTS);
+  res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
   res.json({ accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
 });
 

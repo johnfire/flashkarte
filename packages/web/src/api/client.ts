@@ -95,10 +95,13 @@ export const api = {
         "/auth/signup",
         { method: "POST", body: JSON.stringify({ email, password }) },
       ),
-    login: (email: string, password: string) =>
+    login: (email: string, password: string, rememberMe: boolean) =>
       request<{ user: User; accessToken: string; expiresIn: number }>(
         "/auth/login",
-        { method: "POST", body: JSON.stringify({ email, password }) },
+        {
+          method: "POST",
+          body: JSON.stringify({ email, password, rememberMe }),
+        },
       ),
     refresh: () =>
       request<{ accessToken: string }>("/auth/refresh", { method: "POST" }),

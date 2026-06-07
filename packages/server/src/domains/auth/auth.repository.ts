@@ -80,16 +80,17 @@ export function storeRefreshToken(
   userId: string,
   tokenHash: string,
   expiresAt: Date,
+  persistent: boolean,
 ) {
   return query(
-    "INSERT INTO refresh_tokens (user_id, token_hash, expires_at) VALUES ($1, $2, $3)",
-    [userId, tokenHash, expiresAt],
+    "INSERT INTO refresh_tokens (user_id, token_hash, expires_at, persistent) VALUES ($1, $2, $3, $4)",
+    [userId, tokenHash, expiresAt, persistent],
   );
 }
 
 export function findRefreshToken(tokenHash: string) {
-  return queryOne<{ user_id: string; expires_at: Date }>(
-    "SELECT user_id, expires_at FROM refresh_tokens WHERE token_hash = $1",
+  return queryOne<{ user_id: string; expires_at: Date; persistent: boolean }>(
+    "SELECT user_id, expires_at, persistent FROM refresh_tokens WHERE token_hash = $1",
     [tokenHash],
   );
 }

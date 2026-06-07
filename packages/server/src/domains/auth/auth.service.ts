@@ -85,12 +85,17 @@ function hashToken(token: string): string {
   return crypto.createHash("sha256").update(token).digest("hex");
 }
 
-async function issueTokens(userId: string, email: string) {
+async function issueTokens(userId: string, email: string, persistent: boolean) {
   const accessToken = signAccessToken(userId, email);
   const rawRefresh = crypto.randomBytes(32).toString("hex");
   const expiresAt = new Date(Date.now() + REFRESH_TOKEN_TTL_DAYS * 86400_000);
-  await repo.storeRefreshToken(userId, hashToken(rawRefresh), expiresAt);
-  return { accessToken, rawRefresh };
+  await repo.storeRefreshToken(
+    userId,
+    hashToken(rawRefresh),
+    expiresAt,
+    persistent,
+  );
+  return { accessToken, rawRefresh, persistent };
 }
 
 const credentialsSchema = z.object({
@@ -118,7 +123,11 @@ export async function signup(emailIn: unknown, passwordIn: unknown) {
   const hash = await bcrypt.hash(password, BCRYPT_ROUNDS);
   const user = await repo.createUser(email, hash);
   if (!user) throw new Error("Failed to create user");
-  const { accessToken, rawRefresh } = await issueTokens(user.id, user.email);
+  const { accessToken, rawRefresh, persistent } = await issueTokens(
+    user.id,
+    user.email,
+    true,
+  );
   // Best-effort: don't fail signup if the verification email can't be sent.
   try {
     await createAndSendVerification(user.id, user.email);
@@ -126,7 +135,7 @@ export async function signup(emailIn: unknown, passwordIn: unknown) {
     // eslint-disable-next-line no-console
     console.error("Failed to send verification email on signup:", err);
   }
-  return { user: toUser(user), accessToken, rawRefresh };
+  return { user: toUser(user), accessToken, rawRefresh, persistent };
 }
 
 /** Confirm an email address from a verification-link token. */
@@ -150,14 +159,23 @@ export async function resendVerification(userId: string): Promise<void> {
   await createAndSendVerification(user.id, user.email);
 }
 
-export async function login(emailIn: unknown, passwordIn: unknown) {
+export async function login(
+  emailIn: unknown,
+  passwordIn: unknown,
+  rememberMeIn: unknown,
+) {
   const [email, password] = validateCredentials(emailIn, passwordIn);
+  const persistent = rememberMeIn === true;
   const row = await repo.findByEmailWithHash(email);
   if (!row || !(await bcrypt.compare(password, row.password_hash))) {
     throw new AuthError("Invalid email or password");
   }
-  const { accessToken, rawRefresh } = await issueTokens(row.id, row.email);
-  return { user: toUser(row), accessToken, rawRefresh };
+  const {
+    accessToken,
+    rawRefresh,
+    persistent: p,
+  } = await issueTokens(row.id, row.email, persistent);
+  return { user: toUser(row), accessToken, rawRefresh, persistent: p };
 }
 
 export async function refresh(oldRawRefresh: string | undefined) {
@@ -171,8 +189,12 @@ export async function refresh(oldRawRefresh: string | undefined) {
   await repo.deleteRefreshToken(hashToken(oldRawRefresh));
   const user = await repo.findById(found.user_id);
   if (!user) throw new AuthError("Invalid refresh token");
-  const { accessToken, rawRefresh } = await issueTokens(user.id, user.email);
-  return { accessToken, rawRefresh };
+  const { accessToken, rawRefresh, persistent } = await issueTokens(
+    user.id,
+    user.email,
+    found.persistent,
+  );
+  return { accessToken, rawRefresh, persistent };
 }
 
 export async function logout(rawRefresh: string | undefined) {

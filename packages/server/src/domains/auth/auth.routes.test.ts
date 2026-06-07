@@ -17,11 +17,12 @@ const app = createApp();
 beforeEach(() => jest.clearAllMocks());
 
 describe("auth routes", () => {
-  test("POST /api/auth/signup -> 201 with user + token, sets refresh cookie", async () => {
+  test("POST /api/auth/signup -> 201 with user + token, sets persistent refresh cookie", async () => {
     mock.signup.mockResolvedValue({
       user: { id: "u1", email: "a@b.com", role: "user" },
       accessToken: "tok",
       rawRefresh: "raw",
+      persistent: true,
     } as never);
 
     const res = await request(app)
@@ -34,11 +35,29 @@ describe("auth routes", () => {
     expect(res.headers["set-cookie"][0]).toMatch(/fk_refresh=/);
   });
 
-  test("POST /api/auth/login -> 200", async () => {
+  test("POST /api/auth/login -> 200, passes rememberMe to service", async () => {
     mock.login.mockResolvedValue({
       user: { id: "u1", email: "a@b.com", role: "user" },
       accessToken: "tok",
       rawRefresh: "raw",
+      persistent: true,
+    } as never);
+
+    const res = await request(app)
+      .post("/api/auth/login")
+      .send({ email: "a@b.com", password: "password123", rememberMe: true });
+
+    expect(res.status).toBe(200);
+    expect(res.body.accessToken).toBe("tok");
+    expect(mock.login).toHaveBeenCalledWith("a@b.com", "password123", true);
+  });
+
+  test("POST /api/auth/login without rememberMe -> session cookie (no Max-Age)", async () => {
+    mock.login.mockResolvedValue({
+      user: { id: "u1", email: "a@b.com", role: "user" },
+      accessToken: "tok",
+      rawRefresh: "raw",
+      persistent: false,
     } as never);
 
     const res = await request(app)
@@ -46,13 +65,15 @@ describe("auth routes", () => {
       .send({ email: "a@b.com", password: "password123" });
 
     expect(res.status).toBe(200);
-    expect(res.body.accessToken).toBe("tok");
+    expect(res.headers["set-cookie"][0]).toMatch(/fk_refresh=/);
+    expect(res.headers["set-cookie"][0]).not.toMatch(/Max-Age=/i);
   });
 
-  test("POST /api/auth/refresh -> 200 rotates refresh cookie", async () => {
+  test("POST /api/auth/refresh -> 200 rotates refresh cookie, inherits persistence", async () => {
     mock.refresh.mockResolvedValue({
       accessToken: "new-tok",
       rawRefresh: "new-raw",
+      persistent: true,
     } as never);
 
     const res = await request(app)
