@@ -77,4 +77,17 @@ describe("deck MCP tools", () => {
     await handlers.delete_deck({ deck_id: "d1" });
     expect(mockApi.del).toHaveBeenCalledWith("/api/decks/d1");
   });
+
+  test("create_deck description shows a concrete card example", () => {
+    const descriptions: Record<string, string> = {};
+    const server = {
+      tool: (...args: unknown[]) => {
+        descriptions[args[0] as string] = args[1] as string;
+      },
+    };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    registerDeckTools(server as any);
+    expect(descriptions["create_deck"]).toContain("**1.");
+    expect(descriptions["create_deck"]).toContain("# ");
+  });
 });

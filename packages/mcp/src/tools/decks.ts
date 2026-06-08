@@ -3,9 +3,12 @@ import { z } from "zod";
 import { get, post, del } from "../api";
 
 const MARKDOWN_HELP =
-  "Markdown deck format: a `# Title` line, optional `## Category` lines, and " +
-  "cards written as `**1. Question front**` followed by the answer on the next " +
-  "lines. Number the cards sequentially.";
+  "Markdown deck format — one `# Title` line, optional `## Category` lines to " +
+  "group cards, then numbered cards: a `**N. front**` line followed by the " +
+  "answer on the next line(s). Number cards sequentially from 1. Keep fronts " +
+  "as a single clear question and answers concise. Example:\n\n" +
+  '# French Basics\n## Greetings\n**1. How do you say "hello"?**\nBonjour\n' +
+  '**2. How do you say "thank you"?**\nMerci';
 
 function asText(data: unknown) {
   return {
