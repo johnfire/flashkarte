@@ -43,6 +43,9 @@ services:
       - NODE_ENV=production
       - MCP_PORT=3002
       - FLASHKARTE_API_URL=http://app:3001
+      - MCP_BASE_URL=https://mcp.flashkarte.christopherrehm.de
+      - MCP_OAUTH_CLIENT_ID=${MCP_OAUTH_CLIENT_ID}
+      - MCP_JWT_SECRET=${MCP_JWT_SECRET}
     ports:
       - "127.0.0.1:${MCP_PORT:-8091}:3002"
     depends_on:
