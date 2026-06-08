@@ -57,4 +57,12 @@ describe("SettingsPage", () => {
     renderPage();
     expect(await screen.findByText(/\/mcp$/)).toBeInTheDocument();
   });
+
+  test("shows the configured MCP connect URL", async () => {
+    mockApi.keys.list.mockResolvedValue([]);
+    renderPage();
+    expect(
+      await screen.findByText(/mcp\.flashkarte\.christopherrehm\.de\/mcp/),
+    ).toBeInTheDocument();
+  });
 });

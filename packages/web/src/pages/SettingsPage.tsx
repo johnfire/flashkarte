@@ -5,7 +5,9 @@ import { ApiKey, CreatedApiKey, AccountType } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 import { useTheme } from "../theme/useTheme";
 
-const MCP_URL = `${typeof location !== "undefined" ? location.origin : ""}/mcp`;
+const MCP_URL =
+  import.meta.env.VITE_MCP_URL ??
+  "https://mcp.flashkarte.christopherrehm.de/mcp";
 
 const PLAN_LABEL: Record<AccountType, string> = {
   free: "Free",
@@ -171,11 +173,16 @@ export function SettingsPage() {
           along with the flashkarte MCP server URL. Your AI can then build decks
           from any topic and push them straight into your account.
         </p>
-        <p className="mb-4 text-sm">
+        <p className="mb-2 text-sm">
           MCP server URL:{" "}
           <code className="rounded bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5">
             {MCP_URL}
           </code>
+        </p>
+        <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">
+          In claude.ai, add a custom connector with this URL, then log in with
+          your flashkarte account. Then ask, e.g.:{" "}
+          <em>"Turn this into a flashkarte deck: …"</em>
         </p>
 
         <div className="flex gap-2">
