@@ -94,4 +94,27 @@ describe("authorize POST", () => {
     expect(res.text).toContain("Invalid email or password");
     expect(mockApi.backendCreateKey).not.toHaveBeenCalled();
   });
+
+  test("missing email/password re-renders the form with a 400", async () => {
+    const res = await request(makeApp())
+      .post("/oauth/authorize")
+      .type("form")
+      .send({ ...goodQuery }); // no email/password
+    expect(res.status).toBe(400);
+    expect(res.text).toContain("<form");
+    expect(res.text).toContain("Email and password are required");
+    expect(mockApi.backendLogin).not.toHaveBeenCalled();
+  });
+
+  test("a backend key-creation failure re-renders the form with a 500", async () => {
+    mockApi.backendLogin.mockResolvedValue({ accessToken: "jwt" });
+    mockApi.backendCreateKey.mockRejectedValue(new Error("boom"));
+    const res = await request(makeApp())
+      .post("/oauth/authorize")
+      .type("form")
+      .send({ ...goodQuery, email: "a@b.com", password: "pw" });
+    expect(res.status).toBe(500);
+    expect(res.text).toContain("<form");
+    expect(res.text).toContain("Could not create an API key");
+  });
 });
