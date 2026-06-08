@@ -40,3 +40,46 @@ export const get = <T = unknown>(path: string) => api<T>("GET", path);
 export const post = <T = unknown>(path: string, body?: unknown) =>
   api<T>("POST", path, body);
 export const del = <T = unknown>(path: string) => api<T>("DELETE", path);
+
+interface LoginResult {
+  accessToken: string;
+}
+
+interface CreatedKey {
+  key: string;
+  key_prefix: string;
+}
+
+/** Authenticate against the flashkarte backend; null on bad credentials. */
+export async function backendLogin(
+  email: string,
+  password: string,
+): Promise<LoginResult | null> {
+  const res = await fetch(`${BASE_URL}/api/auth/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  if (!res.ok) return null;
+  return (await res.json()) as LoginResult;
+}
+
+/** Mint a personal fk_ key for the logged-in user, using their JWT. */
+export async function backendCreateKey(
+  accessToken: string,
+  name: string,
+): Promise<CreatedKey> {
+  const res = await fetch(`${BASE_URL}/api/keys`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify({ name }),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`create key failed ${res.status}: ${text}`);
+  }
+  return (await res.json()) as CreatedKey;
+}
