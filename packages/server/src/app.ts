@@ -33,7 +33,21 @@ export function createApp() {
   const app = express();
   app.set("trust proxy", 1);
 
-  app.use(helmet());
+  // Allowlist the Umami analytics origin in the CSP: it serves script.js
+  // (script-src) and receives event POSTs (connect-src). Mirrors the
+  // <script> tag in web/index.html. Everything else keeps helmet defaults.
+  const umamiOrigin = "https://stats.christopherrehm.de";
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+          "script-src": ["'self'", umamiOrigin],
+          "connect-src": ["'self'", umamiOrigin],
+        },
+      },
+    }),
+  );
   if (!process.env.CORS_ORIGIN && process.env.NODE_ENV === "production") {
     throw new Error("CORS_ORIGIN must be set in production");
   }
