@@ -106,10 +106,10 @@ export const api = {
     refresh: () =>
       request<{ accessToken: string }>("/auth/refresh", { method: "POST" }),
     me: () => request<{ user: User }>("/auth/me"),
-    updateProfile: (displayName: string) =>
+    updateProfile: (displayName?: string, language?: string) =>
       request<{ user: User }>("/auth/me", {
         method: "PATCH",
-        body: JSON.stringify({ displayName }),
+        body: JSON.stringify({ displayName, language }),
       }),
     logout: () => request<void>("/auth/logout", { method: "POST" }),
     verifyEmail: (token: string) =>

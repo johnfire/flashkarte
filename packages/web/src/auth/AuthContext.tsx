@@ -7,6 +7,8 @@ import {
 } from "react";
 import { api, setAccessToken } from "../api/client";
 import { User } from "../api/types";
+import i18n from "../i18n";
+import { resolveLocale } from "../i18n/resolveLocale";
 
 interface AuthValue {
   user: User | null;
@@ -40,6 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         try {
           const { user } = await api.auth.me();
           setUser(user);
+          applyUserLanguage(user);
         } catch {
           // non-fatal — session still works without the profile
         }
@@ -47,6 +50,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  function applyUserLanguage(u: User | null) {
+    if (u?.language) {
+      const loc = resolveLocale(u.language);
+      if (i18n.language !== loc) i18n.changeLanguage(loc);
+      try {
+        localStorage.setItem("lang", loc);
+      } catch {
+        // ignore storage failures (private mode etc.)
+      }
+    }
+  }
 
   const login = async (
     email: string,
@@ -56,6 +71,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const r = await api.auth.login(email, password, rememberMe);
     setAccessToken(r.accessToken);
     setUser(r.user);
+    applyUserLanguage(r.user);
     setAuthed(true);
   };
 
@@ -63,6 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const r = await api.auth.signup(email, password);
     setAccessToken(r.accessToken);
     setUser(r.user);
+    applyUserLanguage(r.user);
     setAuthed(true);
   };
 

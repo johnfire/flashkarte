@@ -7,6 +7,7 @@ export interface User {
   accountType: AccountType;
   emailVerifiedAt: string | null;
   displayName: string | null;
+  language: string | null;
 }
 
 export interface LibraryDeck {
