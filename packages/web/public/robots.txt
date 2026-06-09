@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /settings
+Disallow: /decks
+Disallow: /library
+Disallow: /study
+Disallow: /admin
+Disallow: /verify-email
+Disallow: /forgot-password
+Disallow: /reset-password
+
+Sitemap: https://flashkarte.christopherrehm.de/sitemap.xml
