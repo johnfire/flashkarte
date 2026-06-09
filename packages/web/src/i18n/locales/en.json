@@ -45,5 +45,21 @@
     "sent": "Verification email sent.",
     "resend": "Resend email",
     "sending": "Sending…"
+  },
+  "landing": {
+    "heroTitle": "Learn anything, faster.",
+    "heroBody": "flashkarte is a spaced-repetition flashcard app. Write your cards in plain Markdown — or let your own AI build them — and it schedules each review for the moment right before you'd forget. Study on the web or on Android, always in sync.",
+    "signupCta": "Sign up — it's free",
+    "signin": "Sign in",
+    "startStudying": "Start studying →",
+    "productOf": "A product of",
+    "feature1Title": "Markdown decks",
+    "feature1Body": "Write cards in plain Markdown — paste, import a file, or generate them. No clunky editors.",
+    "feature2Title": "Spaced repetition",
+    "feature2Body": "A proven SM-2 schedule shows you each card right before you'd forget it, so reviews stay short.",
+    "feature3Title": "Study anywhere",
+    "feature3Body": "Web and Android, in sync. Pick up your reviews on the bus and finish them at your desk.",
+    "feature4Title": "Bring your own AI",
+    "feature4Body": "Connect your own AI assistant over MCP to turn notes into decks — no extra subscription."
   }
 }

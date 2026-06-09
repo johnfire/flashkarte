@@ -45,5 +45,21 @@
     "sent": "E-mail de vérification envoyé.",
     "resend": "Renvoyer l'e-mail",
     "sending": "Envoi…"
+  },
+  "landing": {
+    "heroTitle": "Apprenez tout, plus vite.",
+    "heroBody": "flashkarte est une application de cartes mémoire à répétition espacée. Rédigez vos cartes en simple Markdown — ou laissez votre propre IA les créer — et l'application planifie chaque révision juste avant que vous n'oubliiez. Étudiez sur le web ou sur Android, toujours synchronisé.",
+    "signupCta": "Inscription gratuite",
+    "signin": "Se connecter",
+    "startStudying": "Commencer à apprendre →",
+    "productOf": "Un produit de",
+    "feature1Title": "Paquets en Markdown",
+    "feature1Body": "Rédigez des cartes en simple Markdown — collez, importez un fichier ou générez-les. Pas d'éditeurs encombrants.",
+    "feature2Title": "Répétition espacée",
+    "feature2Body": "Un algorithme SM-2 éprouvé vous montre chaque carte juste avant que vous ne l'oubliiez, pour des révisions courtes.",
+    "feature3Title": "Étudiez partout",
+    "feature3Body": "Web et Android, synchronisés. Commencez vos révisions dans le bus et terminez-les à votre bureau.",
+    "feature4Title": "Utilisez votre propre IA",
+    "feature4Body": "Connectez votre propre assistant IA via MCP pour transformer vos notes en paquets — sans abonnement supplémentaire."
   }
 }

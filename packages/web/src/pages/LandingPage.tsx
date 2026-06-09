@@ -1,23 +1,12 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 const FEATURES = [
-  {
-    title: "Markdown decks",
-    body: "Write cards in plain Markdown — paste, import a file, or generate them. No clunky editors.",
-  },
-  {
-    title: "Spaced repetition",
-    body: "A proven SM-2 schedule shows you each card right before you'd forget it, so reviews stay short.",
-  },
-  {
-    title: "Study anywhere",
-    body: "Web and Android, in sync. Pick up your reviews on the bus and finish them at your desk.",
-  },
-  {
-    title: "Bring your own AI",
-    body: "Connect your own AI assistant over MCP to turn notes into decks — no extra subscription.",
-  },
+  { titleKey: "landing.feature1Title", bodyKey: "landing.feature1Body" },
+  { titleKey: "landing.feature2Title", bodyKey: "landing.feature2Body" },
+  { titleKey: "landing.feature3Title", bodyKey: "landing.feature3Body" },
+  { titleKey: "landing.feature4Title", bodyKey: "landing.feature4Body" },
 ];
 
 // Decorative cards that drift behind the hero — "learning is happening here".
@@ -109,6 +98,7 @@ const FLOATERS = [
 ];
 
 export function LandingPage() {
+  const { t } = useTranslation();
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
       {/* Animated background */}
@@ -159,26 +149,23 @@ export function LandingPage() {
             fk
           </div>
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Learn anything, faster.
+            {t("landing.heroTitle")}
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
-            flashkarte is a spaced-repetition flashcard app. Write your cards in
-            plain Markdown — or let your own AI build them — and it schedules
-            each review for the moment right before you'd forget. Study on the
-            web or on Android, always in sync.
+            {t("landing.heroBody")}
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Link
               to="/login?mode=signup"
               className="rounded-lg bg-indigo-600 px-6 py-3 font-medium text-white shadow-lg shadow-indigo-900/40 transition hover:bg-indigo-500"
             >
-              Sign up — it's free
+              {t("landing.signupCta")}
             </Link>
             <Link
               to="/login"
               className="rounded-lg border border-white/15 bg-white/5 px-6 py-3 font-medium text-slate-200 backdrop-blur-sm transition hover:bg-white/10"
             >
-              Sign in
+              {t("landing.signin")}
             </Link>
           </div>
         </div>
@@ -187,12 +174,14 @@ export function LandingPage() {
         <div className="mt-20 grid gap-6 sm:grid-cols-2">
           {FEATURES.map((f) => (
             <div
-              key={f.title}
+              key={f.titleKey}
               className="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition hover:border-indigo-400/30 hover:bg-white/[0.07]"
             >
-              <h3 className="text-lg font-semibold text-white">{f.title}</h3>
+              <h3 className="text-lg font-semibold text-white">
+                {t(f.titleKey)}
+              </h3>
               <p className="mt-2 text-sm leading-relaxed text-slate-300">
-                {f.body}
+                {t(f.bodyKey)}
               </p>
             </div>
           ))}
@@ -204,18 +193,18 @@ export function LandingPage() {
             to="/login?mode=signup"
             className="font-medium text-indigo-300 hover:text-indigo-200 hover:underline"
           >
-            Start studying →
+            {t("landing.startStudying")}
           </Link>
           <p className="mt-4 space-x-4 text-xs text-slate-500">
             <Link to="/privacy" className="hover:text-slate-300">
-              Privacy Policy
+              {t("common.privacy")}
             </Link>
             <Link to="/impressum" className="hover:text-slate-300">
-              Impressum
+              {t("common.impressum")}
             </Link>
           </p>
           <p className="mt-4 text-xs text-slate-500">
-            A product of{" "}
+            {t("landing.productOf")}{" "}
             <a
               href="https://christopherrehm.de"
               target="_blank"

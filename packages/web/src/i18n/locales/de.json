@@ -45,5 +45,21 @@
     "sent": "Bestätigungs-E-Mail gesendet.",
     "resend": "E-Mail erneut senden",
     "sending": "Wird gesendet…"
+  },
+  "landing": {
+    "heroTitle": "Lerne alles – schneller.",
+    "heroBody": "flashkarte ist eine App für Karteikarten mit verteilter Wiederholung. Schreibe deine Karten in einfachem Markdown – oder lass sie von deiner eigenen KI erstellen – und die App plant jede Wiederholung genau für den Moment, bevor du es vergisst. Lerne im Web oder auf Android, immer synchron.",
+    "signupCta": "Kostenlos registrieren",
+    "signin": "Anmelden",
+    "startStudying": "Jetzt lernen →",
+    "productOf": "Ein Produkt von",
+    "feature1Title": "Markdown-Stapel",
+    "feature1Body": "Schreibe Karten in einfachem Markdown – einfügen, aus einer Datei importieren oder generieren. Keine umständlichen Editoren.",
+    "feature2Title": "Verteilte Wiederholung",
+    "feature2Body": "Ein bewährter SM-2-Plan zeigt dir jede Karte genau dann, bevor du sie vergisst – so bleiben die Wiederholungen kurz.",
+    "feature3Title": "Überall lernen",
+    "feature3Body": "Web und Android, synchron. Beginne deine Wiederholungen im Bus und beende sie am Schreibtisch.",
+    "feature4Title": "Nutze deine eigene KI",
+    "feature4Body": "Verbinde deinen eigenen KI-Assistenten über MCP, um Notizen in Stapel zu verwandeln – kein zusätzliches Abo."
   }
 }
