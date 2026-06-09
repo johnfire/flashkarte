@@ -153,5 +153,19 @@
     "nothingDue": "Gerade ist nichts fällig – super, dass du am Ball bleibst!",
     "reviewed_one": "Du hast {{count}} Karte wiederholt.",
     "reviewed_other": "Du hast {{count}} Karten wiederholt."
+  },
+  "library": {
+    "title": "Bibliothek",
+    "myDecks": "← Meine Stapel",
+    "searchPlaceholder": "Öffentliche Stapel suchen…",
+    "search": "Suchen",
+    "loadError": "Die Bibliothek konnte nicht geladen werden",
+    "cloneError": "Der Stapel konnte nicht kopiert werden",
+    "loading": "Wird geladen…",
+    "empty": "Keine öffentlichen Stapel gefunden.",
+    "cardsByAuthor_one": "{{count}} Karte · von {{author}}",
+    "cardsByAuthor_other": "{{count}} Karten · von {{author}}",
+    "clone": "Kopieren",
+    "cloning": "Wird kopiert…"
   }
 }

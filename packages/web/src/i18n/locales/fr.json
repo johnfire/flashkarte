@@ -153,5 +153,19 @@
     "nothingDue": "Rien à réviser pour l'instant — bravo de rester à jour !",
     "reviewed_one": "Tu as révisé {{count}} carte.",
     "reviewed_other": "Tu as révisé {{count}} cartes."
+  },
+  "library": {
+    "title": "Bibliothèque",
+    "myDecks": "← Mes paquets",
+    "searchPlaceholder": "Rechercher des paquets publics…",
+    "search": "Rechercher",
+    "loadError": "Impossible de charger la bibliothèque",
+    "cloneError": "Impossible de copier le paquet",
+    "loading": "Chargement…",
+    "empty": "Aucun paquet public trouvé.",
+    "cardsByAuthor_one": "{{count}} carte · par {{author}}",
+    "cardsByAuthor_other": "{{count}} cartes · par {{author}}",
+    "clone": "Copier",
+    "cloning": "Copie en cours…"
   }
 }

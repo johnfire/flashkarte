@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import { LibraryDeck } from "../api/types";
 
 export function LibraryPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [decks, setDecks] = useState<LibraryDeck[] | null>(null);
   const [q, setQ] = useState("");
@@ -16,9 +18,7 @@ export function LibraryPage() {
       const { decks } = await api.library.list(search.trim() || undefined);
       setDecks(decks);
     } catch (err) {
-      setError(
-        err instanceof ApiError ? err.message : "Couldn't load the library",
-      );
+      setError(err instanceof ApiError ? err.message : t("library.loadError"));
     }
   }, []);
 
@@ -39,7 +39,7 @@ export function LibraryPage() {
       const deck = await api.library.clone(id);
       navigate(`/decks/${deck.id}/study`);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Couldn't clone deck");
+      setError(err instanceof ApiError ? err.message : t("library.cloneError"));
       setCloning(null);
     }
   }
@@ -47,9 +47,9 @@ export function LibraryPage() {
   return (
     <div className="mx-auto max-w-2xl p-4">
       <header className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Library</h1>
+        <h1 className="text-3xl font-bold">{t("library.title")}</h1>
         <Link to="/" className="text-sm text-indigo-600">
-          ← My decks
+          {t("library.myDecks")}
         </Link>
       </header>
 
@@ -57,25 +57,25 @@ export function LibraryPage() {
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search public decks…"
+          placeholder={t("library.searchPlaceholder")}
           className="flex-1 rounded-lg border px-3 py-2"
         />
         <button
           type="submit"
           className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"
         >
-          Search
+          {t("library.search")}
         </button>
       </form>
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
       {decks === null && !error && (
-        <p className="text-gray-500 dark:text-gray-400">Loading…</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          {t("library.loading")}
+        </p>
       )}
       {decks && decks.length === 0 && !error && (
-        <p className="text-gray-500 dark:text-gray-400">
-          No public decks found.
-        </p>
+        <p className="text-gray-500 dark:text-gray-400">{t("library.empty")}</p>
       )}
 
       <ul className="space-y-2">
@@ -87,7 +87,10 @@ export function LibraryPage() {
             <div className="min-w-0">
               <p className="truncate font-medium">{d.title}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {d.cardCount} cards · by {d.author}
+                {t("library.cardsByAuthor", {
+                  count: d.cardCount,
+                  author: d.author,
+                })}
               </p>
             </div>
             <button
@@ -95,7 +98,7 @@ export function LibraryPage() {
               disabled={cloning === d.id}
               className="shrink-0 rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white disabled:opacity-50"
             >
-              {cloning === d.id ? "Cloning…" : "Clone"}
+              {cloning === d.id ? t("library.cloning") : t("library.clone")}
             </button>
           </li>
         ))}

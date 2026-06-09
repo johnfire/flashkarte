@@ -153,5 +153,19 @@
     "nothingDue": "Nothing due right now — great job staying on top of it!",
     "reviewed_one": "You reviewed {{count}} card.",
     "reviewed_other": "You reviewed {{count}} cards."
+  },
+  "library": {
+    "title": "Library",
+    "myDecks": "← My decks",
+    "searchPlaceholder": "Search public decks…",
+    "search": "Search",
+    "loadError": "Couldn't load the library",
+    "cloneError": "Couldn't clone deck",
+    "loading": "Loading…",
+    "empty": "No public decks found.",
+    "cardsByAuthor_one": "{{count}} card · by {{author}}",
+    "cardsByAuthor_other": "{{count}} cards · by {{author}}",
+    "clone": "Clone",
+    "cloning": "Cloning…"
   }
 }

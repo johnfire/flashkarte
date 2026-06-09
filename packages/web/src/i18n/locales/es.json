@@ -153,5 +153,19 @@
     "nothingDue": "Nada pendiente ahora mismo: ¡bien hecho por estar al día!",
     "reviewed_one": "Repasaste {{count}} tarjeta.",
     "reviewed_other": "Repasaste {{count}} tarjetas."
+  },
+  "library": {
+    "title": "Biblioteca",
+    "myDecks": "← Mis mazos",
+    "searchPlaceholder": "Buscar mazos públicos…",
+    "search": "Buscar",
+    "loadError": "No se pudo cargar la biblioteca",
+    "cloneError": "No se pudo copiar el mazo",
+    "loading": "Cargando…",
+    "empty": "No se encontraron mazos públicos.",
+    "cardsByAuthor_one": "{{count}} tarjeta · por {{author}}",
+    "cardsByAuthor_other": "{{count}} tarjetas · por {{author}}",
+    "clone": "Copiar",
+    "cloning": "Copiando…"
   }
 }
