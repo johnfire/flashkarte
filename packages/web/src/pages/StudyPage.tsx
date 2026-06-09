@@ -1,16 +1,18 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { api, ApiError, reportClientError } from "../api/client";
 import { StudyCard } from "../api/types";
 
 const RATINGS = [
-  { value: 1, label: "Again", className: "bg-red-600" },
-  { value: 3, label: "Hard", className: "bg-amber-600" },
-  { value: 4, label: "Good", className: "bg-green-600" },
-  { value: 5, label: "Easy", className: "bg-emerald-600" },
+  { value: 1, labelKey: "again", className: "bg-red-600" },
+  { value: 3, labelKey: "hard", className: "bg-amber-600" },
+  { value: 4, labelKey: "good", className: "bg-green-600" },
+  { value: 5, labelKey: "easy", className: "bg-emerald-600" },
 ];
 
 export function StudyPage() {
+  const { t } = useTranslation();
   const { id } = useParams<{ id: string }>();
   const [cards, setCards] = useState<StudyCard[] | null>(null);
   const [idx, setIdx] = useState(0);
@@ -28,7 +30,7 @@ export function StudyPage() {
         message: err instanceof Error ? err.message : String(err),
         context: "StudyPage.load",
       });
-      setError(err instanceof ApiError ? err.message : "Couldn't load cards");
+      setError(err instanceof ApiError ? err.message : t("study.loadError"));
     }
   }, [id]);
 
@@ -46,7 +48,7 @@ export function StudyPage() {
         message: err instanceof Error ? err.message : String(err),
         context: "StudyPage.grade",
       });
-      window.alert("Couldn't save your review. Try again.");
+      window.alert(t("study.saveReviewError"));
       return;
     }
     setReviewed((n) => n + 1);
@@ -59,31 +61,35 @@ export function StudyPage() {
       <div className="mx-auto max-w-xl p-8 text-center">
         <p className="mb-4 text-red-600">{error}</p>
         <Link to="/" className="text-indigo-600">
-          Back to decks
+          {t("study.backToDecks")}
         </Link>
       </div>
     );
   }
 
   if (cards === null) {
-    return <p className="p-8 text-center text-gray-500 dark:text-gray-400">Loading…</p>;
+    return (
+      <p className="p-8 text-center text-gray-500 dark:text-gray-400">
+        {t("study.loading")}
+      </p>
+    );
   }
 
   const done = idx >= cards.length;
   if (done) {
     return (
       <div className="mx-auto max-w-xl p-8 text-center">
-        <h1 className="mb-2 text-2xl font-bold">Session complete</h1>
+        <h1 className="mb-2 text-2xl font-bold">{t("study.complete")}</h1>
         <p className="mb-6 text-gray-600 dark:text-gray-300">
           {reviewed === 0
-            ? "Nothing due right now — great job staying on top of it!"
-            : `You reviewed ${reviewed} ${reviewed === 1 ? "card" : "cards"}.`}
+            ? t("study.nothingDue")
+            : t("study.reviewed", { count: reviewed })}
         </p>
         <Link
           to="/"
           className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"
         >
-          Back to decks
+          {t("study.backToDecks")}
         </Link>
       </div>
     );
@@ -94,10 +100,10 @@ export function StudyPage() {
     <div className="mx-auto max-w-xl p-4">
       <div className="mb-4 flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
         <Link to="/" className="text-indigo-600">
-          ← Decks
+          {t("study.decks")}
         </Link>
         <span>
-          {idx + 1} / {cards.length}
+          {t("study.progress", { current: idx + 1, total: cards.length })}
         </span>
       </div>
 
@@ -121,7 +127,7 @@ export function StudyPage() {
             onClick={() => setRevealed(true)}
             className="w-full rounded-lg bg-indigo-600 py-3 font-medium text-white"
           >
-            Show answer
+            {t("study.showAnswer")}
           </button>
         ) : (
           <div className="grid grid-cols-4 gap-2">
@@ -131,7 +137,7 @@ export function StudyPage() {
                 onClick={() => grade(r.value)}
                 className={`rounded-lg ${r.className} py-3 text-sm font-medium text-white`}
               >
-                {r.label}
+                {t(`study.${r.labelKey}`)}
               </button>
             ))}
           </div>

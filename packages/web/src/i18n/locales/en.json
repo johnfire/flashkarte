@@ -136,5 +136,22 @@
     "saving": "Saving…",
     "saveDeck": "Save deck",
     "cancel": "Cancel"
+  },
+  "study": {
+    "loadError": "Couldn't load cards",
+    "loading": "Loading…",
+    "saveReviewError": "Couldn't save your review. Try again.",
+    "backToDecks": "Back to decks",
+    "decks": "← Decks",
+    "progress": "{{current}} / {{total}}",
+    "showAnswer": "Show answer",
+    "again": "Again",
+    "hard": "Hard",
+    "good": "Good",
+    "easy": "Easy",
+    "complete": "Session complete",
+    "nothingDue": "Nothing due right now — great job staying on top of it!",
+    "reviewed_one": "You reviewed {{count}} card.",
+    "reviewed_other": "You reviewed {{count}} cards."
   }
 }

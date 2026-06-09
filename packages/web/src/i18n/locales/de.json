@@ -136,5 +136,22 @@
     "saving": "Wird gespeichert…",
     "saveDeck": "Stapel speichern",
     "cancel": "Abbrechen"
+  },
+  "study": {
+    "loadError": "Karten konnten nicht geladen werden",
+    "loading": "Wird geladen…",
+    "saveReviewError": "Deine Bewertung konnte nicht gespeichert werden. Versuche es erneut.",
+    "backToDecks": "Zurück zu den Stapeln",
+    "decks": "← Stapel",
+    "progress": "{{current}} / {{total}}",
+    "showAnswer": "Antwort anzeigen",
+    "again": "Nochmal",
+    "hard": "Schwer",
+    "good": "Gut",
+    "easy": "Einfach",
+    "complete": "Sitzung abgeschlossen",
+    "nothingDue": "Gerade ist nichts fällig – super, dass du am Ball bleibst!",
+    "reviewed_one": "Du hast {{count}} Karte wiederholt.",
+    "reviewed_other": "Du hast {{count}} Karten wiederholt."
   }
 }

@@ -136,5 +136,22 @@
     "saving": "Enregistrement…",
     "saveDeck": "Enregistrer le paquet",
     "cancel": "Annuler"
+  },
+  "study": {
+    "loadError": "Impossible de charger les cartes",
+    "loading": "Chargement…",
+    "saveReviewError": "Impossible d'enregistrer ta réponse. Réessaie.",
+    "backToDecks": "Retour aux paquets",
+    "decks": "← Paquets",
+    "progress": "{{current}} / {{total}}",
+    "showAnswer": "Afficher la réponse",
+    "again": "À refaire",
+    "hard": "Difficile",
+    "good": "Correct",
+    "easy": "Facile",
+    "complete": "Session terminée",
+    "nothingDue": "Rien à réviser pour l'instant — bravo de rester à jour !",
+    "reviewed_one": "Tu as révisé {{count}} carte.",
+    "reviewed_other": "Tu as révisé {{count}} cartes."
   }
 }

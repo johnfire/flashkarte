@@ -136,5 +136,22 @@
     "saving": "Guardando…",
     "saveDeck": "Guardar mazo",
     "cancel": "Cancelar"
+  },
+  "study": {
+    "loadError": "No se pudieron cargar las tarjetas",
+    "loading": "Cargando…",
+    "saveReviewError": "No se pudo guardar tu respuesta. Inténtalo de nuevo.",
+    "backToDecks": "Volver a los mazos",
+    "decks": "← Mazos",
+    "progress": "{{current}} / {{total}}",
+    "showAnswer": "Mostrar respuesta",
+    "again": "Repetir",
+    "hard": "Difícil",
+    "good": "Bien",
+    "easy": "Fácil",
+    "complete": "Sesión completada",
+    "nothingDue": "Nada pendiente ahora mismo: ¡bien hecho por estar al día!",
+    "reviewed_one": "Repasaste {{count}} tarjeta.",
+    "reviewed_other": "Repasaste {{count}} tarjetas."
   }
 }

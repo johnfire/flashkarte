@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { StudyPage } from "./StudyPage";
 import { api } from "../api/client";
+import "../i18n";
 
 vi.mock("../api/client", () => ({
   api: { study: { batch: vi.fn(), review: vi.fn() } },
