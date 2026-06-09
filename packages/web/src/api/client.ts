@@ -11,6 +11,7 @@ import {
   CreatedApiKey,
   LibraryDeck,
   LibraryDeckDetail,
+  PublicDeckPreview,
 } from "./types";
 
 const APP_VERSION = "0.1.0";
@@ -171,6 +172,14 @@ export const api = {
         `/library/${id}/clone`,
         { method: "POST" },
       ),
+  },
+  publicLibrary: {
+    list: (q?: string) =>
+      request<{ decks: LibraryDeck[] }>(
+        `/public/library${q ? `?q=${encodeURIComponent(q)}` : ""}`,
+      ),
+    preview: (id: string) =>
+      request<PublicDeckPreview>(`/public/library/${id}/preview`),
   },
   study: {
     batch: (deckId: string) => request<StudyCard[]>(`/decks/${deckId}/study`),

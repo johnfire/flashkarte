@@ -22,6 +22,15 @@ export interface LibraryDeckDetail extends LibraryDeck {
   cards: { front: string; back: string; category: string | null }[];
 }
 
+export interface PublicDeckPreview {
+  id: string;
+  title: string;
+  author: string;
+  cardCount: number;
+  publishedAt: string | null;
+  cards: { front: string; category: string | null }[];
+}
+
 export interface AdminUser {
   id: string;
   email: string;
