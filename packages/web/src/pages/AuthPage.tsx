@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../api/client";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 export function AuthPage() {
   const { login, signup } = useAuth();
@@ -39,6 +40,9 @@ export function AuthPage() {
         className="w-full max-w-sm space-y-4 rounded-xl bg-white dark:bg-gray-800 p-8 shadow"
       >
         <h1 className="text-2xl font-bold">flashkarte</h1>
+        <div className="flex justify-end">
+          <LanguageSwitcher compact />
+        </div>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           {mode === "login" ? "Sign in to your account" : "Create an account"}
         </p>

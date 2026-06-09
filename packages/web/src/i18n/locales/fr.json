@@ -13,5 +13,8 @@
     "de": "Deutsch",
     "fr": "Français",
     "es": "Español"
+  },
+  "settings": {
+    "languageHint": "Choisissez la langue de l'interface flashkarte."
   }
 }

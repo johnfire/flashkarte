@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { api, ApiError } from "../api/client";
 import { ApiKey, CreatedApiKey, AccountType } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 import { useTheme } from "../theme/useTheme";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 const MCP_URL =
   import.meta.env.VITE_MCP_URL ??
@@ -17,6 +19,7 @@ const PLAN_LABEL: Record<AccountType, string> = {
 };
 
 export function SettingsPage() {
+  const { t } = useTranslation();
   const { user, updateUser } = useAuth();
   const { theme, setTheme } = useTheme();
   const [keys, setKeys] = useState<ApiKey[] | null>(null);
@@ -164,6 +167,14 @@ export function SettingsPage() {
             Dark
           </button>
         </div>
+      </section>
+
+      <section className="mb-8 rounded-lg border p-4">
+        <h2 className="mb-1 text-xl font-semibold">{t("language.label")}</h2>
+        <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
+          {t("settings.languageHint")}
+        </p>
+        <LanguageSwitcher />
       </section>
 
       <section className="mb-8 rounded-lg border p-4">

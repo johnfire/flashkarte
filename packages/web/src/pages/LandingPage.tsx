@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 const FEATURES = [
   {
@@ -149,6 +150,9 @@ export function LandingPage() {
 
       {/* Content */}
       <div className="relative mx-auto max-w-5xl px-6 py-20 sm:py-28">
+        <div className="mb-4 flex justify-end">
+          <LanguageSwitcher compact />
+        </div>
         {/* Hero */}
         <div className="text-center">
           <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-2xl font-bold text-white shadow-lg shadow-indigo-900/50">
