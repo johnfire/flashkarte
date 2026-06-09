@@ -1,22 +1,24 @@
 import { Link } from "react-router-dom";
+import { Trans, useTranslation } from "react-i18next";
 
 export function ImpressumPage() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gray-50 py-10 dark:bg-gray-900">
       <div className="mx-auto max-w-2xl rounded-xl bg-white px-6 py-8 shadow sm:px-10 dark:bg-gray-800">
         <Link to="/login" className="text-sm text-indigo-600">
-          ← Back
+          {t("impressum.back")}
         </Link>
 
-        <h1 className="mt-4 text-2xl font-bold">Impressum</h1>
+        <h1 className="mt-4 text-2xl font-bold">{t("impressum.title")}</h1>
         <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Angaben gemäß § 5 DDG
+          {t("impressum.subtitle")}
         </p>
 
         <div className="mt-6 space-y-6 text-gray-700 dark:text-gray-300">
           <section>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              Diensteanbieter
+              {t("impressum.providerHeading")}
             </h2>
             <p className="mt-2">
               Christopher Rehm
@@ -30,15 +32,15 @@ export function ImpressumPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              Kontakt
+              {t("impressum.contactHeading")}
             </h2>
             <p className="mt-2">
-              Telefon:{" "}
+              {t("impressum.phoneLabel")}{" "}
               <a className="text-indigo-600" href="tel:+4982060154">
                 +49 8206 0154
               </a>
               <br />
-              E-Mail:{" "}
+              {t("impressum.emailLabel")}{" "}
               <a className="text-indigo-600" href="mailto:car2187bus@pm.me">
                 car2187bus@pm.me
               </a>
@@ -47,29 +49,28 @@ export function ImpressumPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
+              {t("impressum.responsibleHeading")}
             </h2>
-            <p className="mt-2">Christopher Rehm, Anschrift wie oben.</p>
+            <p className="mt-2">{t("impressum.responsibleBody")}</p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-              Streitschlichtung
+              {t("impressum.disputeHeading")}
             </h2>
             <p className="mt-2">
-              Die Europäische Kommission stellt eine Plattform zur
-              Online-Streitbeilegung (OS) bereit:{" "}
-              <a
-                className="text-indigo-600"
-                href="https://ec.europa.eu/consumers/odr/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                https://ec.europa.eu/consumers/odr/
-              </a>
-              . Wir sind nicht bereit oder verpflichtet, an
-              Streitbeilegungsverfahren vor einer Verbraucher­schlichtungsstelle
-              teilzunehmen.
+              <Trans
+                i18nKey="impressum.disputeBody"
+                components={[
+                  <a
+                    key="0"
+                    className="text-indigo-600"
+                    href="https://ec.europa.eu/consumers/odr/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />,
+                ]}
+              />
             </p>
           </section>
         </div>
