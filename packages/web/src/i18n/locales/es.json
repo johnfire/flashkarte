@@ -1,0 +1,17 @@
+{
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "loading": "Cargando…",
+    "saved": "Guardado.",
+    "decks": "Mazos",
+    "back": "Atrás"
+  },
+  "language": {
+    "label": "Idioma",
+    "en": "English",
+    "de": "Deutsch",
+    "fr": "Français",
+    "es": "Español"
+  }
+}

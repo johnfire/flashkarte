@@ -1,0 +1,17 @@
+{
+  "common": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "loading": "Chargement…",
+    "saved": "Enregistré.",
+    "decks": "Paquets",
+    "back": "Retour"
+  },
+  "language": {
+    "label": "Langue",
+    "en": "English",
+    "de": "Deutsch",
+    "fr": "Français",
+    "es": "Español"
+  }
+}

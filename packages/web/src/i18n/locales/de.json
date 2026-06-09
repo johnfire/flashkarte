@@ -1,0 +1,17 @@
+{
+  "common": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "loading": "Wird geladen…",
+    "saved": "Gespeichert.",
+    "decks": "Stapel",
+    "back": "Zurück"
+  },
+  "language": {
+    "label": "Sprache",
+    "en": "English",
+    "de": "Deutsch",
+    "fr": "Français",
+    "es": "Español"
+  }
+}
