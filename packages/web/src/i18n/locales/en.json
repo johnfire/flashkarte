@@ -125,10 +125,7 @@
   },
   "createDeck": {
     "title": "New Deck",
-    "instructionsPaste": "Paste Markdown or upload a",
-    "instructionsUse": "file. Use",
-    "instructionsAnd": "and",
-    "instructionsAnswer": "followed by the answer.",
+    "instructions": "Paste Markdown or upload a <0>.md</0>/<1>.txt</1> file. Use <2># Title</2>, <3>## Category</3>, and <4>**1. Question**</4> followed by the answer.",
     "placeholder": "# My Deck Title\n## Optional Category\n**1. What is the capital of France?**\nParis.\n\n**2. 2 + 2 = ?**\n4.",
     "untitled": "Untitled",
     "cardCount_one": "{{count}} card",

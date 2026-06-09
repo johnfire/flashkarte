@@ -1,6 +1,6 @@
 import { useState, useMemo, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { parseDeck } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";
 
@@ -47,10 +47,16 @@ export function CreateDeckPage() {
     <div className="mx-auto max-w-2xl p-4">
       <h1 className="mb-2 text-3xl font-bold">{t("createDeck.title")}</h1>
       <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
-        {t("createDeck.instructionsPaste")} <code>.md</code>/<code>.txt</code>{" "}
-        {t("createDeck.instructionsUse")} <code># Title</code>,{" "}
-        <code>## Category</code>, {t("createDeck.instructionsAnd")}{" "}
-        <code>**1. Question**</code> {t("createDeck.instructionsAnswer")}
+        <Trans
+          i18nKey="createDeck.instructions"
+          components={[
+            <code key="0" />,
+            <code key="1" />,
+            <code key="2" />,
+            <code key="3" />,
+            <code key="4" />,
+          ]}
+        />
       </p>
 
       <form onSubmit={onSubmit} className="space-y-4">

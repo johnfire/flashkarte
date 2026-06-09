@@ -125,10 +125,7 @@
   },
   "createDeck": {
     "title": "Neuer Stapel",
-    "instructionsPaste": "Füge Markdown ein oder lade eine",
-    "instructionsUse": "Datei hoch. Verwende",
-    "instructionsAnd": "und",
-    "instructionsAnswer": "gefolgt von der Antwort.",
+    "instructions": "Füge Markdown ein oder lade eine <0>.md</0>/<1>.txt</1>-Datei hoch. Verwende <2># Title</2>, <3>## Category</3> und <4>**1. Question**</4> gefolgt von der Antwort.",
     "placeholder": "# Mein Stapeltitel\n## Optionale Kategorie\n**1. Was ist die Hauptstadt von Frankreich?**\nParis.\n\n**2. 2 + 2 = ?**\n4.",
     "untitled": "Ohne Titel",
     "cardCount_one": "{{count}} Karte",

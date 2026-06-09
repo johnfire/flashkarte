@@ -125,10 +125,7 @@
   },
   "createDeck": {
     "title": "Nuevo mazo",
-    "instructionsPaste": "Pega Markdown o sube un archivo",
-    "instructionsUse": ". Usa",
-    "instructionsAnd": "y",
-    "instructionsAnswer": "seguido de la respuesta.",
+    "instructions": "Pega Markdown o sube un archivo <0>.md</0>/<1>.txt</1>. Usa <2># Title</2>, <3>## Category</3> y <4>**1. Question**</4> seguido de la respuesta.",
     "placeholder": "# Título de mi mazo\n## Categoría opcional\n**1. ¿Cuál es la capital de Francia?**\nParís.\n\n**2. 2 + 2 = ?**\n4.",
     "untitled": "Sin título",
     "cardCount_one": "{{count}} tarjeta",

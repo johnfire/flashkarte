@@ -125,10 +125,7 @@
   },
   "createDeck": {
     "title": "Nouveau paquet",
-    "instructionsPaste": "Colle du Markdown ou importe un fichier",
-    "instructionsUse": ". Utilise",
-    "instructionsAnd": "et",
-    "instructionsAnswer": "suivi de la réponse.",
+    "instructions": "Colle du Markdown ou importe un fichier <0>.md</0>/<1>.txt</1>. Utilise <2># Title</2>, <3>## Category</3> et <4>**1. Question**</4> suivi de la réponse.",
     "placeholder": "# Titre de mon paquet\n## Catégorie facultative\n**1. Quelle est la capitale de la France ?**\nParis.\n\n**2. 2 + 2 = ?**\n4.",
     "untitled": "Sans titre",
     "cardCount_one": "{{count}} carte",
