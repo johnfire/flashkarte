@@ -78,6 +78,14 @@
     "resend": "E-Mail erneut senden",
     "sending": "Wird gesendet…"
   },
+  "verifyEmail": {
+    "verifying": "Deine E-Mail wird bestätigt…",
+    "success": "Deine E-Mail ist bestätigt. Danke!",
+    "goToApp": "Zu flashkarte",
+    "back": "Zurück zu flashkarte",
+    "missingToken": "Diesem Link fehlt sein Bestätigungs-Token.",
+    "genericError": "Deine E-Mail konnte nicht bestätigt werden. Bitte versuche es erneut."
+  },
   "landing": {
     "heroTitle": "Lerne alles – schneller.",
     "heroBody": "flashkarte ist eine App für Karteikarten mit verteilter Wiederholung. Schreibe deine Karten in einfachem Markdown – oder lass sie von deiner eigenen KI erstellen – und die App plant jede Wiederholung genau für den Moment, bevor du es vergisst. Lerne im Web oder auf Android, immer synchron.",

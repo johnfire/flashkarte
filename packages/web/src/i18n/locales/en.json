@@ -78,6 +78,14 @@
     "resend": "Resend email",
     "sending": "Sending…"
   },
+  "verifyEmail": {
+    "verifying": "Verifying your email…",
+    "success": "Your email is verified. Thanks!",
+    "goToApp": "Go to flashkarte",
+    "back": "Back to flashkarte",
+    "missingToken": "This link is missing its verification token.",
+    "genericError": "Could not verify your email. Please try again."
+  },
   "landing": {
     "heroTitle": "Learn anything, faster.",
     "heroBody": "flashkarte is a spaced-repetition flashcard app. Write your cards in plain Markdown — or let your own AI build them — and it schedules each review for the moment right before you'd forget. Study on the web or on Android, always in sync.",

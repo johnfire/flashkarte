@@ -78,6 +78,14 @@
     "resend": "Renvoyer l'e-mail",
     "sending": "Envoi…"
   },
+  "verifyEmail": {
+    "verifying": "Vérification de votre e-mail…",
+    "success": "Votre e-mail est vérifié. Merci !",
+    "goToApp": "Aller à flashkarte",
+    "back": "Retour à flashkarte",
+    "missingToken": "Ce lien n'a pas de jeton de vérification.",
+    "genericError": "Impossible de vérifier votre e-mail. Veuillez réessayer."
+  },
   "landing": {
     "heroTitle": "Apprenez tout, plus vite.",
     "heroBody": "flashkarte est une application de cartes mémoire à répétition espacée. Rédigez vos cartes en simple Markdown — ou laissez votre propre IA les créer — et l'application planifie chaque révision juste avant que vous n'oubliiez. Étudiez sur le web ou sur Android, toujours synchronisé.",
