@@ -1,10 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { api, ApiError, reportClientError } from "../api/client";
 import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 
 export function DeckListPage() {
+  const { t } = useTranslation();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [decks, setDecks] = useState<DeckWithCounts[] | null>(null);
@@ -19,18 +21,16 @@ export function DeckListPage() {
         message: err instanceof Error ? err.message : String(err),
         context: "DeckListPage.load",
       });
-      setError(
-        err instanceof ApiError ? err.message : "Couldn't load your decks",
-      );
+      setError(err instanceof ApiError ? err.message : t("decks.loadError"));
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     load();
   }, [load]);
 
   async function onDelete(id: string, title: string) {
-    if (!window.confirm(`Delete "${title}"? This cannot be undone.`)) return;
+    if (!window.confirm(t("decks.deleteConfirm", { title }))) return;
     try {
       await api.decks.remove(id);
       setDecks((d) => (d ? d.filter((x) => x.id !== id) : d));
@@ -39,7 +39,7 @@ export function DeckListPage() {
         message: err instanceof Error ? err.message : String(err),
         context: "DeckListPage.onDelete",
       });
-      window.alert("Couldn't delete the deck. Try again.");
+      window.alert(t("decks.deleteError"));
     }
   }
 
@@ -56,40 +56,40 @@ export function DeckListPage() {
           ? d.map((x) => (x.id === id ? { ...x, is_public: !makePublic } : x))
           : d,
       );
-      window.alert("Couldn't update sharing. Try again.");
+      window.alert(t("decks.togglePublicError"));
     }
   }
 
   return (
     <div className="mx-auto max-w-2xl p-4">
       <header className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">My Decks</h1>
+        <h1 className="text-3xl font-bold">{t("decks.title")}</h1>
         <div className="flex gap-3">
           <Link
             to="/decks/new"
             className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"
           >
-            New deck
+            {t("decks.newDeck")}
           </Link>
           <Link
             to="/library"
             className="self-center text-sm text-gray-500 dark:text-gray-400"
           >
-            Library
+            {t("decks.library")}
           </Link>
           {user?.accountType === "admin" && (
             <Link
               to="/admin"
               className="self-center text-sm text-gray-500 dark:text-gray-400"
             >
-              Admin
+              {t("decks.admin")}
             </Link>
           )}
           <Link
             to="/settings"
             className="self-center text-sm text-gray-500 dark:text-gray-400"
           >
-            Settings
+            {t("decks.settings")}
           </Link>
           <button
             onClick={async () => {
@@ -98,7 +98,7 @@ export function DeckListPage() {
             }}
             className="text-sm text-gray-500 dark:text-gray-400"
           >
-            Sign out
+            {t("decks.signOut")}
           </button>
         </div>
       </header>
@@ -106,13 +106,13 @@ export function DeckListPage() {
       {error && <p className="mb-4 text-red-600">{error}</p>}
 
       {decks === null && !error && (
-        <p className="text-gray-500 dark:text-gray-400">Loading…</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          {t("common.loading")}
+        </p>
       )}
 
       {decks && decks.length === 0 && !error && (
-        <p className="text-gray-500 dark:text-gray-400">
-          No decks yet. Create one to start studying.
-        </p>
+        <p className="text-gray-500 dark:text-gray-400">{t("decks.empty")}</p>
       )}
 
       <ul className="space-y-3">
@@ -126,31 +126,32 @@ export function DeckListPage() {
                 {d.title}
                 {d.is_public && (
                   <span className="ml-2 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
-                    Public
+                    {t("decks.public")}
                   </span>
                 )}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                {d.card_count} cards · {d.due_count} due
+                {t("decks.cardCount", { count: d.card_count })} ·{" "}
+                {t("decks.dueCount", { count: d.due_count })}
               </p>
               <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
                 <span className="rounded bg-gray-100 px-1.5 py-0.5 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
-                  Viewed {d.viewed_count}
+                  {t("decks.viewed", { count: d.viewed_count })}
                 </span>
                 <span className="rounded bg-gray-100 px-1.5 py-0.5 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
-                  New {d.new_count}
+                  {t("decks.new", { count: d.new_count })}
                 </span>
                 <span className="rounded bg-red-100 px-1.5 py-0.5 text-red-700 dark:bg-red-900/40 dark:text-red-300">
-                  Again {d.again_count}
+                  {t("decks.again", { count: d.again_count })}
                 </span>
                 <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-                  Hard {d.hard_count}
+                  {t("decks.hard", { count: d.hard_count })}
                 </span>
                 <span className="rounded bg-green-100 px-1.5 py-0.5 text-green-700 dark:bg-green-900/40 dark:text-green-300">
-                  Good {d.good_count}
+                  {t("decks.good", { count: d.good_count })}
                 </span>
                 <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
-                  Easy {d.easy_count}
+                  {t("decks.easy", { count: d.easy_count })}
                 </span>
               </div>
             </div>
@@ -159,24 +160,22 @@ export function DeckListPage() {
                 to={`/decks/${d.id}/study`}
                 className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-medium text-white"
               >
-                Study
+                {t("decks.study")}
               </Link>
               <button
                 onClick={() => onTogglePublic(d.id, !d.is_public)}
                 className="text-sm text-indigo-600"
                 title={
-                  d.is_public
-                    ? "Remove from the public library"
-                    : "Share to the public library"
+                  d.is_public ? t("decks.unshareTitle") : t("decks.shareTitle")
                 }
               >
-                {d.is_public ? "Unshare" : "Share"}
+                {d.is_public ? t("decks.unshare") : t("decks.share")}
               </button>
               <button
                 onClick={() => onDelete(d.id, d.title)}
                 className="text-sm text-red-600"
               >
-                Delete
+                {t("decks.delete")}
               </button>
             </div>
           </li>
