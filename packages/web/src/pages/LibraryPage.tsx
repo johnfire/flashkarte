@@ -12,15 +12,20 @@ export function LibraryPage() {
   const [error, setError] = useState<string | null>(null);
   const [cloning, setCloning] = useState<string | null>(null);
 
-  const load = useCallback(async (search: string) => {
-    setError(null);
-    try {
-      const { decks } = await api.library.list(search.trim() || undefined);
-      setDecks(decks);
-    } catch (err) {
-      setError(err instanceof ApiError ? err.message : t("library.loadError"));
-    }
-  }, []);
+  const load = useCallback(
+    async (search: string) => {
+      setError(null);
+      try {
+        const { decks } = await api.library.list(search.trim() || undefined);
+        setDecks(decks);
+      } catch (err) {
+        setError(
+          err instanceof ApiError ? err.message : t("library.loadError"),
+        );
+      }
+    },
+    [t],
+  );
 
   useEffect(() => {
     load("");
