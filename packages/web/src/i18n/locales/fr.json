@@ -16,5 +16,17 @@
   },
   "settings": {
     "languageHint": "Choisissez la langue de l'interface flashkarte."
+  },
+  "theme": {
+    "toLight": "Passer au mode clair",
+    "toDark": "Passer au mode sombre",
+    "light": "Mode clair",
+    "dark": "Mode sombre"
+  },
+  "verify": {
+    "message": "Veuillez vérifier votre adresse e-mail ({{email}}) pour sécuriser votre compte.",
+    "sent": "E-mail de vérification envoyé.",
+    "resend": "Renvoyer l'e-mail",
+    "sending": "Envoi…"
   }
 }

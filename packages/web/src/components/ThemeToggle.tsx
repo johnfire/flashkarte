@@ -1,15 +1,17 @@
+import { useTranslation } from "react-i18next";
 import { useTheme } from "../theme/useTheme";
 
 // Fixed light/dark toggle, available on every screen.
 export function ThemeToggle() {
+  const { t } = useTranslation();
   const { theme, toggle } = useTheme();
   const dark = theme === "dark";
   return (
     <button
       type="button"
       onClick={toggle}
-      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-      title={dark ? "Light mode" : "Dark mode"}
+      aria-label={dark ? t("theme.toLight") : t("theme.toDark")}
+      title={dark ? t("theme.light") : t("theme.dark")}
       className="fixed right-3 top-3 z-50 rounded-full border border-gray-200 bg-white/80 p-2 text-gray-600 shadow-sm backdrop-blur hover:text-gray-900 dark:border-gray-700 dark:bg-gray-800/80 dark:text-gray-300 dark:hover:text-white"
     >
       {dark ? (

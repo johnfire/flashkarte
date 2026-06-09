@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { api } from "../api/client";
 import { useAuth } from "../auth/AuthContext";
 
 // Soft email-verification nudge: shown in the app when the current user's
 // email isn't verified yet. Lets them resend the verification link.
 export function VerifyBanner() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -25,11 +27,9 @@ export function VerifyBanner() {
 
   return (
     <div className="flex flex-wrap items-center justify-center gap-2 bg-amber-50 px-4 py-2 text-center text-sm text-amber-800 dark:bg-amber-950/40 dark:text-amber-300">
-      <span>
-        Please verify your email ({user.email}) to secure your account.
-      </span>
+      <span>{t("verify.message", { email: user.email })}</span>
       {sent ? (
-        <span className="font-medium">Verification email sent.</span>
+        <span className="font-medium">{t("verify.sent")}</span>
       ) : (
         <button
           type="button"
@@ -37,7 +37,7 @@ export function VerifyBanner() {
           disabled={busy}
           className="font-medium text-amber-900 underline disabled:opacity-50 dark:text-amber-200"
         >
-          {busy ? "Sending…" : "Resend email"}
+          {busy ? t("verify.sending") : t("verify.resend")}
         </button>
       )}
     </div>
