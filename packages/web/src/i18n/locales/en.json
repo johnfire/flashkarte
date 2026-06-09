@@ -192,5 +192,28 @@
     "unverified": "unverified",
     "joined": "joined {{date}}",
     "updateTypeError": "Couldn't update account type"
+  },
+  "forgotPassword": {
+    "title": "Reset password",
+    "instructions": "Enter your email and we'll send you a link to reset your password.",
+    "emailPlaceholder": "Email",
+    "submit": "Send reset link",
+    "submitting": "…",
+    "backToSignIn": "Back to sign in",
+    "sent": "If that email has an account, a reset link is on its way. Check your inbox (and spam)."
+  },
+  "resetPassword": {
+    "title": "Choose a new password",
+    "passwordPlaceholder": "New password (min 8 chars)",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "show": "Show",
+    "hide": "Hide",
+    "submit": "Reset password",
+    "submitting": "…",
+    "backToSignIn": "Back to sign in",
+    "done": "Password updated. Redirecting to sign in…",
+    "missingToken": "This reset link is missing its token.",
+    "genericError": "Could not reset your password. Please try again."
   }
 }

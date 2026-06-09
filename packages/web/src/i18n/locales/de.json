@@ -192,5 +192,28 @@
     "unverified": "nicht verifiziert",
     "joined": "beigetreten {{date}}",
     "updateTypeError": "Der Kontotyp konnte nicht aktualisiert werden"
+  },
+  "forgotPassword": {
+    "title": "Passwort zurücksetzen",
+    "instructions": "Gib deine E-Mail-Adresse ein und wir schicken dir einen Link zum Zurücksetzen deines Passworts.",
+    "emailPlaceholder": "E-Mail",
+    "submit": "Link zum Zurücksetzen senden",
+    "submitting": "…",
+    "backToSignIn": "Zurück zur Anmeldung",
+    "sent": "Falls zu dieser E-Mail-Adresse ein Konto gehört, ist ein Link zum Zurücksetzen unterwegs. Sieh in deinem Posteingang nach (auch im Spam)."
+  },
+  "resetPassword": {
+    "title": "Neues Passwort wählen",
+    "passwordPlaceholder": "Neues Passwort (mind. 8 Zeichen)",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "show": "Anzeigen",
+    "hide": "Verbergen",
+    "submit": "Passwort zurücksetzen",
+    "submitting": "…",
+    "backToSignIn": "Zurück zur Anmeldung",
+    "done": "Passwort aktualisiert. Weiterleitung zur Anmeldung…",
+    "missingToken": "Diesem Link zum Zurücksetzen fehlt der Token.",
+    "genericError": "Dein Passwort konnte nicht zurückgesetzt werden. Bitte versuch es erneut."
   }
 }

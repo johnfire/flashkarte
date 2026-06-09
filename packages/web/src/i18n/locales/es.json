@@ -192,5 +192,28 @@
     "unverified": "sin verificar",
     "joined": "se unió el {{date}}",
     "updateTypeError": "No se pudo actualizar el tipo de cuenta"
+  },
+  "forgotPassword": {
+    "title": "Restablecer contraseña",
+    "instructions": "Escribe tu correo y te enviaremos un enlace para restablecer tu contraseña.",
+    "emailPlaceholder": "Correo electrónico",
+    "submit": "Enviar enlace de restablecimiento",
+    "submitting": "…",
+    "backToSignIn": "Volver a iniciar sesión",
+    "sent": "Si ese correo tiene una cuenta, un enlace de restablecimiento está en camino. Revisa tu bandeja de entrada (y el spam)."
+  },
+  "resetPassword": {
+    "title": "Elige una nueva contraseña",
+    "passwordPlaceholder": "Nueva contraseña (mín. 8 caracteres)",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "show": "Mostrar",
+    "hide": "Ocultar",
+    "submit": "Restablecer contraseña",
+    "submitting": "…",
+    "backToSignIn": "Volver a iniciar sesión",
+    "done": "Contraseña actualizada. Redirigiendo al inicio de sesión…",
+    "missingToken": "A este enlace de restablecimiento le falta el token.",
+    "genericError": "No se pudo restablecer tu contraseña. Inténtalo de nuevo."
   }
 }

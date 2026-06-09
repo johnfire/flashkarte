@@ -192,5 +192,28 @@
     "unverified": "non vérifié",
     "joined": "inscrit le {{date}}",
     "updateTypeError": "Impossible de mettre à jour le type de compte"
+  },
+  "forgotPassword": {
+    "title": "Réinitialiser le mot de passe",
+    "instructions": "Saisis ton e-mail et on t'enverra un lien pour réinitialiser ton mot de passe.",
+    "emailPlaceholder": "E-mail",
+    "submit": "Envoyer le lien de réinitialisation",
+    "submitting": "…",
+    "backToSignIn": "Retour à la connexion",
+    "sent": "Si un compte est associé à cet e-mail, un lien de réinitialisation est en route. Vérifie ta boîte de réception (et les spams)."
+  },
+  "resetPassword": {
+    "title": "Choisir un nouveau mot de passe",
+    "passwordPlaceholder": "Nouveau mot de passe (8 caractères min.)",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "show": "Afficher",
+    "hide": "Masquer",
+    "submit": "Réinitialiser le mot de passe",
+    "submitting": "…",
+    "backToSignIn": "Retour à la connexion",
+    "done": "Mot de passe mis à jour. Redirection vers la connexion…",
+    "missingToken": "Il manque le jeton à ce lien de réinitialisation.",
+    "genericError": "Impossible de réinitialiser ton mot de passe. Réessaie."
   }
 }
