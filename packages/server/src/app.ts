@@ -21,6 +21,8 @@ import { mountSeo } from "./seo/mount";
 import { loadTemplate } from "./seo/template";
 import { getSiteOrigin } from "./seo/siteOrigin";
 import { SitemapUrl } from "./seo/sitemap";
+import * as libraryService from "./domains/library/library.service";
+import { deckPath } from "@flashkarte/shared";
 
 // For IPv6, bucket by the /64 prefix so a client can't trivially bypass rate
 // limits by rotating through addresses within their allocated /64 block.
@@ -164,18 +166,30 @@ export function configureProductionWeb(
   webDist: string,
 ): void {
   const template = loadTemplate(webDist);
-  const sitemapUrls = (): SitemapUrl[] => {
+  const sitemapUrls = async (): Promise<SitemapUrl[]> => {
     const origin = getSiteOrigin();
-    return [
+    const base: SitemapUrl[] = [
       { loc: `${origin}/`, changefreq: "weekly", priority: "1.0" },
       { loc: `${origin}/explore`, changefreq: "daily", priority: "0.8" },
       { loc: `${origin}/privacy` },
       { loc: `${origin}/impressum` },
     ];
+    const decks = await libraryService.list(undefined);
+    for (const d of decks) {
+      base.push({
+        loc: `${origin}${deckPath(d.title, d.id)}`,
+        changefreq: "weekly",
+      });
+    }
+    return base;
   };
 
   if (template) {
-    mountSeo(app, { template, sitemapUrls });
+    mountSeo(app, {
+      template,
+      sitemapUrls,
+      getDeckPreview: (id) => libraryService.getPreview(id),
+    });
   }
   app.use(express.static(webDist, { index: false }));
   app.get("*", (_req, res) => {
