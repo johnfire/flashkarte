@@ -5,7 +5,24 @@
     "loading": "Loading…",
     "saved": "Saved.",
     "decks": "Decks",
-    "back": "Back"
+    "back": "Back",
+    "privacy": "Privacy Policy",
+    "impressum": "Impressum"
+  },
+  "auth": {
+    "signInToAccount": "Sign in to your account",
+    "createAccount": "Create an account",
+    "email": "Email",
+    "passwordPlaceholder": "Password (min 8 chars)",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "keepLoggedIn": "Keep me logged in",
+    "signIn": "Sign in",
+    "signUp": "Sign up",
+    "needAccount": "Need an account? Sign up",
+    "haveAccount": "Have an account? Sign in",
+    "forgotPassword": "Forgot password?",
+    "genericError": "Something went wrong"
   },
   "language": {
     "label": "Language",

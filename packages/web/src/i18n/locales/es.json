@@ -5,7 +5,24 @@
     "loading": "Cargando…",
     "saved": "Guardado.",
     "decks": "Mazos",
-    "back": "Atrás"
+    "back": "Atrás",
+    "privacy": "Privacidad",
+    "impressum": "Aviso legal"
+  },
+  "auth": {
+    "signInToAccount": "Inicia sesión en tu cuenta",
+    "createAccount": "Crear una cuenta",
+    "email": "Correo electrónico",
+    "passwordPlaceholder": "Contraseña (mín. 8 caracteres)",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "keepLoggedIn": "Mantener la sesión iniciada",
+    "signIn": "Iniciar sesión",
+    "signUp": "Registrarse",
+    "needAccount": "¿No tienes cuenta? Regístrate",
+    "haveAccount": "¿Ya tienes cuenta? Inicia sesión",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "genericError": "Algo salió mal"
   },
   "language": {
     "label": "Idioma",

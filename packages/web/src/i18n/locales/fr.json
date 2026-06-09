@@ -5,7 +5,24 @@
     "loading": "Chargement…",
     "saved": "Enregistré.",
     "decks": "Paquets",
-    "back": "Retour"
+    "back": "Retour",
+    "privacy": "Confidentialité",
+    "impressum": "Mentions légales"
+  },
+  "auth": {
+    "signInToAccount": "Connectez-vous à votre compte",
+    "createAccount": "Créer un compte",
+    "email": "E-mail",
+    "passwordPlaceholder": "Mot de passe (8 caractères min.)",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "keepLoggedIn": "Rester connecté",
+    "signIn": "Se connecter",
+    "signUp": "S'inscrire",
+    "needAccount": "Pas de compte ? Inscrivez-vous",
+    "haveAccount": "Déjà un compte ? Connectez-vous",
+    "forgotPassword": "Mot de passe oublié ?",
+    "genericError": "Une erreur s'est produite"
   },
   "language": {
     "label": "Langue",

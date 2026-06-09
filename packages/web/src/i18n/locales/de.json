@@ -5,7 +5,24 @@
     "loading": "Wird geladen…",
     "saved": "Gespeichert.",
     "decks": "Stapel",
-    "back": "Zurück"
+    "back": "Zurück",
+    "privacy": "Datenschutz",
+    "impressum": "Impressum"
+  },
+  "auth": {
+    "signInToAccount": "Melde dich bei deinem Konto an",
+    "createAccount": "Konto erstellen",
+    "email": "E-Mail",
+    "passwordPlaceholder": "Passwort (mind. 8 Zeichen)",
+    "showPassword": "Passwort anzeigen",
+    "hidePassword": "Passwort verbergen",
+    "keepLoggedIn": "Angemeldet bleiben",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "needAccount": "Noch kein Konto? Registrieren",
+    "haveAccount": "Bereits ein Konto? Anmelden",
+    "forgotPassword": "Passwort vergessen?",
+    "genericError": "Etwas ist schiefgelaufen"
   },
   "language": {
     "label": "Sprache",

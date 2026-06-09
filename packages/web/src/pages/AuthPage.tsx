@@ -1,11 +1,13 @@
 import { useState, FormEvent } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../api/client";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 export function AuthPage() {
   const { login, signup } = useAuth();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [mode, setMode] = useState<"login" | "signup">(
@@ -27,7 +29,7 @@ export function AuthPage() {
       else await signup(email, password);
       navigate("/");
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Something went wrong");
+      setError(err instanceof ApiError ? err.message : t("auth.genericError"));
     } finally {
       setBusy(false);
     }
@@ -44,13 +46,15 @@ export function AuthPage() {
           <LanguageSwitcher compact />
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400">
-          {mode === "login" ? "Sign in to your account" : "Create an account"}
+          {mode === "login"
+            ? t("auth.signInToAccount")
+            : t("auth.createAccount")}
         </p>
 
         <input
           type="email"
           required
-          placeholder="Email"
+          placeholder={t("auth.email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className="w-full rounded-lg border px-3 py-2"
@@ -60,7 +64,7 @@ export function AuthPage() {
             type={showPassword ? "text" : "password"}
             required
             minLength={8}
-            placeholder="Password (min 8 chars)"
+            placeholder={t("auth.passwordPlaceholder")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="w-full rounded-lg border px-3 py-2 pr-10"
@@ -68,9 +72,13 @@ export function AuthPage() {
           <button
             type="button"
             onClick={() => setShowPassword((v) => !v)}
-            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-label={
+              showPassword ? t("auth.hidePassword") : t("auth.showPassword")
+            }
             aria-pressed={showPassword}
-            title={showPassword ? "Hide password" : "Show password"}
+            title={
+              showPassword ? t("auth.hidePassword") : t("auth.showPassword")
+            }
             className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
           >
             {showPassword ? (
@@ -115,7 +123,7 @@ export function AuthPage() {
               onChange={(e) => setRememberMe(e.target.checked)}
               className="rounded"
             />
-            Keep me logged in
+            {t("auth.keepLoggedIn")}
           </label>
         )}
 
@@ -126,7 +134,7 @@ export function AuthPage() {
           disabled={busy}
           className="w-full rounded-lg bg-indigo-600 py-2 font-medium text-white disabled:opacity-50"
         >
-          {busy ? "…" : mode === "login" ? "Sign in" : "Sign up"}
+          {busy ? "…" : mode === "login" ? t("auth.signIn") : t("auth.signUp")}
         </button>
 
         <button
@@ -137,9 +145,7 @@ export function AuthPage() {
           }}
           className="w-full text-sm text-indigo-600"
         >
-          {mode === "login"
-            ? "Need an account? Sign up"
-            : "Have an account? Sign in"}
+          {mode === "login" ? t("auth.needAccount") : t("auth.haveAccount")}
         </button>
 
         {mode === "login" && (
@@ -147,7 +153,7 @@ export function AuthPage() {
             to="/forgot-password"
             className="block text-center text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600"
           >
-            Forgot password?
+            {t("auth.forgotPassword")}
           </Link>
         )}
 
@@ -156,13 +162,13 @@ export function AuthPage() {
             to="/privacy"
             className="hover:text-gray-600 dark:hover:text-gray-300"
           >
-            Privacy Policy
+            {t("common.privacy")}
           </Link>
           <Link
             to="/impressum"
             className="hover:text-gray-600 dark:hover:text-gray-300"
           >
-            Impressum
+            {t("common.impressum")}
           </Link>
         </p>
       </form>
