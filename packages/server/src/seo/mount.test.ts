@@ -91,4 +91,18 @@ describe("mountSeo deck pages", () => {
     const res = await request(deckApp()).get("/d/not-a-real-slug");
     expect(res.status).toBe(404);
   });
+  it("returns 500 when the deck lookup throws", async () => {
+    const a = express();
+    mountSeo(a, {
+      template: TEMPLATE,
+      sitemapUrls: () => [],
+      getDeckPreview: async () => {
+        throw new Error("db down");
+      },
+    });
+    const res = await request(a).get(
+      "/d/x-a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    );
+    expect(res.status).toBe(500);
+  });
 });
