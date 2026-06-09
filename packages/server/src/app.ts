@@ -13,6 +13,7 @@ import { keysRouter } from "./domains/keys/keys.routes";
 import { clientErrorsRouter } from "./domains/client-errors/client-errors.routes";
 import { adminRouter } from "./domains/admin/admin.routes";
 import { libraryRouter } from "./domains/library/library.routes";
+import { publicLibraryRouter } from "./domains/library/public.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
 import { requireAuth, requireAdmin } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
@@ -135,6 +136,7 @@ export function createApp() {
   // Public routes (no JWT)
   app.use("/api/auth", authRouter);
   app.use("/api/client-errors", clientErrorsLimiter, clientErrorsRouter);
+  app.use("/api/public/library", publicLibraryRouter);
 
   // Everything below requires a valid JWT
   app.use("/api", requireAuth);

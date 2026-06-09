@@ -43,6 +43,25 @@ export async function get(id: string) {
   };
 }
 
+export async function getPreview(id: string) {
+  const deck = await repo.getPublicDeck(id);
+  if (!deck) return null;
+  const cards = await repo.getPublicCards(id);
+  return {
+    id: deck.id,
+    title: deck.title,
+    author: deck.author,
+    cardCount: Number(deck.card_count),
+    publishedAt: deck.published_at
+      ? new Date(deck.published_at).toISOString()
+      : null,
+    cards: cards.map((c) => ({
+      front: (c.content.front as string) ?? "",
+      category: c.category,
+    })),
+  };
+}
+
 /** Deep-copy a public deck into the caller's account as a private deck. */
 export async function clone(userId: string, id: string) {
   const source = await repo.getPublicDeck(id);
