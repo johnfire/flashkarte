@@ -15,6 +15,7 @@ import { ThemeToggle } from "./components/ThemeToggle";
 import { HomeRoute } from "./components/HomeRoute";
 import { LibraryPage } from "./pages/LibraryPage";
 import { ExplorePage } from "./pages/ExplorePage";
+import { PublicDeckPage } from "./pages/PublicDeckPage";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/impressum" element={<ImpressumPage />} />
         <Route path="/explore" element={<ExplorePage />} />
+        <Route path="/d/:slug" element={<PublicDeckPage />} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
