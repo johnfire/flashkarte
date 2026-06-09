@@ -10,7 +10,7 @@ export function AdminRoute() {
       </div>
     );
   }
-  if (!authed) return <Navigate to="/welcome" replace />;
+  if (!authed) return <Navigate to="/" replace />;
   if (user?.accountType !== "admin") return <Navigate to="/" replace />;
   return <Outlet />;
 }
