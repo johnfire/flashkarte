@@ -21,7 +21,7 @@ i18n
       es: { translation: es },
     },
     fallbackLng: FALLBACK_LOCALE,
-    supportedLngs: SUPPORTED_LOCALES as unknown as string[],
+    supportedLngs: SUPPORTED_LOCALES,
     load: "languageOnly",
     nonExplicitSupportedLngs: true,
     detection: {

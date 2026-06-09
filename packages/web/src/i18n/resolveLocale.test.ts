@@ -2,8 +2,10 @@ import { describe, it, expect } from "vitest";
 import { resolveLocale, SUPPORTED_LOCALES } from "./resolveLocale";
 
 describe("resolveLocale", () => {
-  it("supports en, de, fr, es", () => {
-    expect(SUPPORTED_LOCALES).toEqual(["en", "de", "fr", "es"]);
+  it("resolves every supported locale to itself", () => {
+    for (const locale of SUPPORTED_LOCALES) {
+      expect(resolveLocale(locale)).toBe(locale);
+    }
   });
   it("returns an exact supported tag unchanged", () => {
     expect(resolveLocale("de")).toBe("de");
