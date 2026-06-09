@@ -68,7 +68,11 @@ export const me = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const updateMe = wrapAsync(async (req: Request, res: Response) => {
-  const user = await service.updateProfile(req.userId!, req.body.displayName);
+  const user = await service.updateProfile(
+    req.userId!,
+    req.body.displayName,
+    req.body.language,
+  );
   res.json({ user });
 });
 

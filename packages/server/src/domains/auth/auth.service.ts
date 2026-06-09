@@ -31,6 +31,7 @@ export interface PublicUser {
   accountType: string;
   emailVerifiedAt: string | null;
   displayName: string | null;
+  language: string | null;
 }
 
 function toUser(row: UserRow): PublicUser {
@@ -43,8 +44,11 @@ function toUser(row: UserRow): PublicUser {
       ? new Date(row.email_verified_at).toISOString()
       : null,
     displayName: row.display_name ?? null,
+    language: row.language ?? null,
   };
 }
+
+const SUPPORTED_LANGUAGES = ["en", "de", "fr", "es"] as const;
 
 // Create a fresh verification token (replacing any prior ones) and email the
 // link. Best-effort at call sites: a mail failure must not break signup.
@@ -212,6 +216,7 @@ export async function getCurrentUser(userId: string): Promise<PublicUser> {
 export async function updateProfile(
   userId: string,
   displayNameIn: unknown,
+  languageIn?: unknown,
 ): Promise<PublicUser> {
   if (displayNameIn !== undefined && typeof displayNameIn !== "string") {
     throw new ValidationError("Display name must be text");
@@ -220,8 +225,20 @@ export async function updateProfile(
   if (trimmed.length > 60) {
     throw new ValidationError("Display name must be 60 characters or fewer");
   }
-  const user = await repo.updateDisplayName(userId, trimmed || null);
+  let user = await repo.updateDisplayName(userId, trimmed || null);
   if (!user) throw new AuthError("Not found");
+  if (languageIn !== undefined) {
+    if (
+      typeof languageIn !== "string" ||
+      !SUPPORTED_LANGUAGES.includes(
+        languageIn as (typeof SUPPORTED_LANGUAGES)[number],
+      )
+    ) {
+      throw new ValidationError("Unsupported language");
+    }
+    user = await repo.updateLanguage(userId, languageIn);
+    if (!user) throw new AuthError("Not found");
+  }
   return toUser(user);
 }
 

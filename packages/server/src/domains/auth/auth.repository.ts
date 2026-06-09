@@ -7,6 +7,7 @@ export interface UserRow {
   account_type: string;
   email_verified_at: Date | null;
   display_name: string | null;
+  language: string | null;
 }
 
 interface UserWithHash extends UserRow {
@@ -14,7 +15,7 @@ interface UserWithHash extends UserRow {
 }
 
 const USER_COLS =
-  "id, email, role, account_type, email_verified_at, display_name";
+  "id, email, role, account_type, email_verified_at, display_name, language";
 
 export function findByEmailWithHash(email: string) {
   return queryOne<UserWithHash>(
@@ -40,6 +41,13 @@ export function updateDisplayName(userId: string, displayName: string | null) {
   return queryOne<UserRow>(
     `UPDATE users SET display_name = $2, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
     [userId, displayName],
+  );
+}
+
+export function updateLanguage(userId: string, language: string | null) {
+  return queryOne<UserRow>(
+    `UPDATE users SET language = $2, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
+    [userId, language],
   );
 }
 

@@ -117,6 +117,44 @@ describe("auth routes", () => {
     expect(mock.getCurrentUser).toHaveBeenCalledWith("u1");
   });
 
+  test("PATCH /api/auth/me with language -> 200, passes language to service", async () => {
+    mock.verifyAccessToken.mockReturnValue({
+      sub: "u1",
+      email: "a@b.com",
+    } as never);
+    mock.updateProfile.mockResolvedValue({
+      id: "u1",
+      email: "a@b.com",
+      role: "user",
+      accountType: "free",
+      emailVerifiedAt: null,
+      displayName: null,
+      language: "de",
+    } as never);
+    const res = await request(app)
+      .patch("/api/auth/me")
+      .set("Authorization", "Bearer access-token")
+      .send({ language: "de" });
+    expect(res.status).toBe(200);
+    expect(res.body.user.language).toBe("de");
+    expect(mock.updateProfile).toHaveBeenCalledWith("u1", undefined, "de");
+  });
+
+  test("PATCH /api/auth/me with unsupported language -> 422", async () => {
+    mock.verifyAccessToken.mockReturnValue({
+      sub: "u1",
+      email: "a@b.com",
+    } as never);
+    mock.updateProfile.mockRejectedValue(
+      new ValidationError("Unsupported language"),
+    );
+    const res = await request(app)
+      .patch("/api/auth/me")
+      .set("Authorization", "Bearer access-token")
+      .send({ language: "xx" });
+    expect(res.status).toBe(422);
+  });
+
   test("POST /api/auth/verify-email -> 200 verified", async () => {
     mock.verifyEmail.mockResolvedValue(undefined as never);
     const res = await request(app)
