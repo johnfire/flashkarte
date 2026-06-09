@@ -21,16 +21,16 @@ function row(overrides: Partial<UserRow> = {}): UserRow {
 
 beforeEach(() => {
   jest.clearAllMocks();
-  mockRepo.updateDisplayName.mockResolvedValue(row());
-  mockRepo.updateLanguage.mockImplementation((_id, language) =>
-    Promise.resolve(row({ language })),
+  mockRepo.updateProfileFields.mockImplementation(
+    (_id, _displayName, language) =>
+      Promise.resolve(row({ language: language ?? null })),
   );
 });
 
 describe("updateProfile language", () => {
   test("persists a supported language and returns it on the DTO", async () => {
     const user = await updateProfile("u1", undefined, "de");
-    expect(mockRepo.updateLanguage).toHaveBeenCalledWith("u1", "de");
+    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith("u1", null, "de");
     expect(user.language).toBe("de");
   });
 
@@ -38,12 +38,16 @@ describe("updateProfile language", () => {
     await expect(updateProfile("u1", undefined, "xx")).rejects.toBeInstanceOf(
       ValidationError,
     );
-    expect(mockRepo.updateLanguage).not.toHaveBeenCalled();
+    expect(mockRepo.updateProfileFields).not.toHaveBeenCalled();
   });
 
   test("leaves language untouched when not provided", async () => {
     const user = await updateProfile("u1", "Alice");
-    expect(mockRepo.updateLanguage).not.toHaveBeenCalled();
+    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith(
+      "u1",
+      "Alice",
+      undefined,
+    );
     expect(user.language).toBeNull();
   });
 });

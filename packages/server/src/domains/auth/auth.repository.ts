@@ -37,17 +37,20 @@ export function createUser(email: string, passwordHash: string) {
   );
 }
 
-export function updateDisplayName(userId: string, displayName: string | null) {
+export function updateProfileFields(
+  userId: string,
+  displayName: string | null,
+  language: string | null | undefined,
+) {
+  if (language !== undefined) {
+    return queryOne<UserRow>(
+      `UPDATE users SET display_name = $2, language = $3, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
+      [userId, displayName, language],
+    );
+  }
   return queryOne<UserRow>(
     `UPDATE users SET display_name = $2, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
     [userId, displayName],
-  );
-}
-
-export function updateLanguage(userId: string, language: string | null) {
-  return queryOne<UserRow>(
-    `UPDATE users SET language = $2, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
-    [userId, language],
   );
 }
 

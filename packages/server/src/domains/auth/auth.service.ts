@@ -225,20 +225,21 @@ export async function updateProfile(
   if (trimmed.length > 60) {
     throw new ValidationError("Display name must be 60 characters or fewer");
   }
-  let user = await repo.updateDisplayName(userId, trimmed || null);
-  if (!user) throw new AuthError("Not found");
-  if (languageIn !== undefined) {
-    if (
-      typeof languageIn !== "string" ||
+  if (
+    languageIn !== undefined &&
+    (typeof languageIn !== "string" ||
       !SUPPORTED_LANGUAGES.includes(
         languageIn as (typeof SUPPORTED_LANGUAGES)[number],
-      )
-    ) {
-      throw new ValidationError("Unsupported language");
-    }
-    user = await repo.updateLanguage(userId, languageIn);
-    if (!user) throw new AuthError("Not found");
+      ))
+  ) {
+    throw new ValidationError("Unsupported language");
   }
+  const user = await repo.updateProfileFields(
+    userId,
+    trimmed || null,
+    languageIn as string | undefined,
+  );
+  if (!user) throw new AuthError("Not found");
   return toUser(user);
 }
 
