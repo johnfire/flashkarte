@@ -24,6 +24,11 @@
     "forgotPassword": "Passwort vergessen?",
     "genericError": "Etwas ist schiefgelaufen"
   },
+  "errorBoundary": {
+    "title": "Etwas ist schiefgelaufen",
+    "body": "Der Fehler wurde gemeldet. Lade die Seite neu.",
+    "reload": "Neu laden"
+  },
   "language": {
     "label": "Sprache",
     "en": "English",

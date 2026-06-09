@@ -24,6 +24,11 @@
     "forgotPassword": "¿Olvidaste tu contraseña?",
     "genericError": "Algo salió mal"
   },
+  "errorBoundary": {
+    "title": "Algo salió mal",
+    "body": "El error se ha informado. Vuelve a cargar la página.",
+    "reload": "Recargar"
+  },
   "language": {
     "label": "Idioma",
     "en": "English",

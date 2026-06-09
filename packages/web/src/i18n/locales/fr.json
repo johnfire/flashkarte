@@ -24,6 +24,11 @@
     "forgotPassword": "Mot de passe oublié ?",
     "genericError": "Une erreur s'est produite"
   },
+  "errorBoundary": {
+    "title": "Une erreur s'est produite",
+    "body": "L'erreur a été signalée. Recharge la page.",
+    "reload": "Recharger"
+  },
   "language": {
     "label": "Langue",
     "en": "English",

@@ -24,6 +24,11 @@
     "forgotPassword": "Forgot password?",
     "genericError": "Something went wrong"
   },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "body": "The error was reported. Try reloading the page.",
+    "reload": "Reload"
+  },
   "language": {
     "label": "Language",
     "en": "English",
