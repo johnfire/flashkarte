@@ -11,11 +11,11 @@ const MCP_URL =
   import.meta.env.VITE_MCP_URL ??
   "https://mcp.flashkarte.christopherrehm.de/mcp";
 
-const PLAN_LABEL: Record<AccountType, string> = {
-  free: "Free",
-  paid: "Paid",
-  "admin-gifted": "Gifted",
-  admin: "Admin",
+const PLAN_LABEL_KEY: Record<AccountType, string> = {
+  free: "settings.plan_free",
+  paid: "settings.plan_paid",
+  "admin-gifted": "settings.plan_gifted",
+  admin: "settings.plan_admin",
 };
 
 export function SettingsPage() {
@@ -41,7 +41,9 @@ export function SettingsPage() {
       setNameSaved(true);
     } catch (err) {
       setError(
-        err instanceof ApiError ? err.message : "Couldn't save display name",
+        err instanceof ApiError
+          ? err.message
+          : t("settings.saveDisplayNameError"),
       );
     } finally {
       setSavingName(false);
@@ -53,9 +55,11 @@ export function SettingsPage() {
     try {
       setKeys(await api.keys.list());
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Couldn't load keys");
+      setError(
+        err instanceof ApiError ? err.message : t("settings.loadKeysError"),
+      );
     }
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     load();
@@ -69,49 +73,54 @@ export function SettingsPage() {
       setCreated(key);
       setKeys((k) => (k ? [{ ...key }, ...k] : [key]));
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : "Couldn't create key");
+      setError(
+        err instanceof ApiError ? err.message : t("settings.createKeyError"),
+      );
     } finally {
       setBusy(false);
     }
   }
 
   async function revoke(prefix: string) {
-    if (!window.confirm("Revoke this key? Any AI using it will lose access."))
-      return;
+    if (!window.confirm(t("settings.revokeConfirm"))) return;
     try {
       await api.keys.revoke(prefix);
       setKeys((k) => (k ? k.filter((x) => x.key_prefix !== prefix) : k));
       if (created?.key_prefix === prefix) setCreated(null);
     } catch {
-      window.alert("Couldn't revoke the key. Try again.");
+      window.alert(t("settings.revokeError"));
     }
   }
 
   return (
     <div className="mx-auto max-w-2xl p-4">
       <header className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Settings</h1>
+        <h1 className="text-3xl font-bold">{t("settings.title")}</h1>
         <Link to="/" className="text-sm text-indigo-600">
-          ← Decks
+          ← {t("common.decks")}
         </Link>
       </header>
 
       {user && (
         <section className="mb-8 rounded-lg border p-4">
-          <h2 className="mb-1 text-xl font-semibold">Account</h2>
+          <h2 className="mb-1 text-xl font-semibold">
+            {t("settings.account")}
+          </h2>
           <p className="text-sm text-gray-600 dark:text-gray-300">
             {user.email}
           </p>
           <p className="mt-2 text-sm">
-            Plan:{" "}
+            {t("settings.plan")}{" "}
             <span className="rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
-              {PLAN_LABEL[user.accountType] ?? user.accountType}
+              {t(PLAN_LABEL_KEY[user.accountType]) ?? user.accountType}
             </span>
           </p>
 
-          <label className="mt-4 block text-sm font-medium">Display name</label>
+          <label className="mt-4 block text-sm font-medium">
+            {t("settings.displayName")}
+          </label>
           <p className="mb-2 text-xs text-gray-500 dark:text-gray-400">
-            Shown as the author on decks you share to the public library.
+            {t("settings.displayNameHint")}
           </p>
           <div className="flex gap-2">
             <input
@@ -121,7 +130,7 @@ export function SettingsPage() {
                 setNameSaved(false);
               }}
               maxLength={60}
-              placeholder="e.g. Chris R."
+              placeholder={t("settings.displayNamePlaceholder")}
               className="flex-1 rounded-lg border px-3 py-2"
             />
             <button
@@ -129,17 +138,21 @@ export function SettingsPage() {
               disabled={savingName}
               className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
             >
-              {savingName ? "…" : "Save"}
+              {savingName ? "…" : t("common.save")}
             </button>
           </div>
-          {nameSaved && <p className="mt-1 text-sm text-green-600">Saved.</p>}
+          {nameSaved && (
+            <p className="mt-1 text-sm text-green-600">{t("common.saved")}</p>
+          )}
         </section>
       )}
 
       <section className="mb-8 rounded-lg border p-4">
-        <h2 className="mb-1 text-xl font-semibold">Appearance</h2>
+        <h2 className="mb-1 text-xl font-semibold">
+          {t("settings.appearance")}
+        </h2>
         <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
-          Choose how flashkarte looks on this device.
+          {t("settings.appearanceHint")}
         </p>
         <div className="inline-flex overflow-hidden rounded-lg border">
           <button
@@ -152,7 +165,7 @@ export function SettingsPage() {
                 : "bg-transparent text-gray-600 dark:text-gray-300"
             }`}
           >
-            Light
+            {t("settings.light")}
           </button>
           <button
             type="button"
@@ -164,7 +177,7 @@ export function SettingsPage() {
                 : "bg-transparent text-gray-600 dark:text-gray-300"
             }`}
           >
-            Dark
+            {t("settings.dark")}
           </button>
         </div>
       </section>
@@ -178,29 +191,27 @@ export function SettingsPage() {
       </section>
 
       <section className="mb-8 rounded-lg border p-4">
-        <h2 className="mb-1 text-xl font-semibold">Connect your AI</h2>
+        <h2 className="mb-1 text-xl font-semibold">
+          {t("settings.connectAI")}
+        </h2>
         <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
-          Generate an API key and add it to your AI client (e.g. Claude Desktop)
-          along with the flashkarte MCP server URL. Your AI can then build decks
-          from any topic and push them straight into your account.
+          {t("settings.connectAIHint")}
         </p>
         <p className="mb-2 text-sm">
-          MCP server URL:{" "}
+          {t("settings.mcpUrlLabel")}{" "}
           <code className="rounded bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5">
             {MCP_URL}
           </code>
         </p>
         <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">
-          In claude.ai, add a custom connector with this URL, then log in with
-          your flashkarte account. Then ask, e.g.:{" "}
-          <em>"Turn this into a flashkarte deck: …"</em>
+          {t("settings.claudeAiHint")} <em>{t("settings.claudeAiExample")}</em>
         </p>
 
         <div className="flex gap-2">
           <input
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
-            placeholder="Key name (e.g. My AI)"
+            placeholder={t("settings.keyNamePlaceholder")}
             className="flex-1 rounded-lg border px-3 py-2"
           />
           <button
@@ -208,14 +219,14 @@ export function SettingsPage() {
             disabled={busy}
             className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
           >
-            {busy ? "…" : "Generate key"}
+            {busy ? "…" : t("settings.generateKey")}
           </button>
         </div>
 
         {created && (
           <div className="mt-4 rounded-lg border border-amber-300 bg-amber-50 p-3">
             <p className="mb-1 text-sm font-medium text-amber-800">
-              Copy this key now — it won't be shown again.
+              {t("settings.copyKeyWarning")}
             </p>
             <div className="flex items-center gap-2">
               <code className="flex-1 break-all rounded bg-white dark:bg-gray-800 px-2 py-1 text-sm">
@@ -225,7 +236,7 @@ export function SettingsPage() {
                 onClick={() => navigator.clipboard?.writeText(created.key)}
                 className="rounded bg-amber-600 px-3 py-1 text-sm font-medium text-white"
               >
-                Copy
+                {t("settings.copy")}
               </button>
             </div>
           </div>
@@ -233,13 +244,17 @@ export function SettingsPage() {
       </section>
 
       <section>
-        <h2 className="mb-3 text-xl font-semibold">Your keys</h2>
+        <h2 className="mb-3 text-xl font-semibold">{t("settings.yourKeys")}</h2>
         {error && <p className="mb-3 text-red-600">{error}</p>}
         {keys === null && !error && (
-          <p className="text-gray-500 dark:text-gray-400">Loading…</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("common.loading")}
+          </p>
         )}
         {keys && keys.length === 0 && !error && (
-          <p className="text-gray-500 dark:text-gray-400">No keys yet.</p>
+          <p className="text-gray-500 dark:text-gray-400">
+            {t("settings.noKeys")}
+          </p>
         )}
         <ul className="space-y-2">
           {keys?.map((k) => (
@@ -250,7 +265,7 @@ export function SettingsPage() {
               <div>
                 <p className="font-medium">{k.name}</p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  <code>{k.key_prefix}…</code> · created{" "}
+                  <code>{k.key_prefix}…</code> · {t("settings.created")}{" "}
                   {new Date(k.created_at).toLocaleDateString()}
                 </p>
               </div>
@@ -258,7 +273,7 @@ export function SettingsPage() {
                 onClick={() => revoke(k.key_prefix)}
                 className="text-sm text-red-600"
               >
-                Revoke
+                {t("settings.revoke")}
               </button>
             </li>
           ))}
