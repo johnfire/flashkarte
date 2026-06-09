@@ -49,6 +49,62 @@ const FLOATERS = [
     rot: "-6deg",
     delay: "1.8s",
   },
+  {
+    q: "ありがとう",
+    a: "thank you",
+    pos: "left-[4%] top-[46%]",
+    rot: "6deg",
+    delay: "2.4s",
+  },
+  {
+    q: "Au",
+    a: "gold",
+    pos: "right-[5%] top-[44%]",
+    rot: "-7deg",
+    delay: "0.3s",
+  },
+  {
+    q: "299,792 km/s",
+    a: "speed of light",
+    pos: "left-[20%] top-[8%]",
+    rot: "-4deg",
+    delay: "1.5s",
+  },
+  {
+    q: "πr²",
+    a: "circle area",
+    pos: "right-[22%] top-[6%]",
+    rot: "8deg",
+    delay: "0.9s",
+  },
+  {
+    q: "1789",
+    a: "French Rev.",
+    pos: "left-[18%] bottom-[8%]",
+    rot: "-6deg",
+    delay: "2.1s",
+  },
+  {
+    q: "Mitochondrion",
+    a: "powerhouse",
+    pos: "right-[18%] bottom-[7%]",
+    rot: "5deg",
+    delay: "1.0s",
+  },
+  {
+    q: "Wie geht's?",
+    a: "how are you?",
+    pos: "left-[8%] top-[72%]",
+    rot: "7deg",
+    delay: "0.4s",
+  },
+  {
+    q: "E = mc²",
+    a: "mass–energy",
+    pos: "right-[7%] top-[70%]",
+    rot: "-5deg",
+    delay: "1.7s",
+  },
 ];
 
 export function LandingPage() {
@@ -153,6 +209,17 @@ export function LandingPage() {
             <Link to="/impressum" className="hover:text-slate-300">
               Impressum
             </Link>
+          </p>
+          <p className="mt-4 text-xs text-slate-500">
+            A product of{" "}
+            <a
+              href="https://christopherrehm.de"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-slate-300"
+            >
+              Rehm Consulting
+            </a>
           </p>
         </footer>
       </div>
