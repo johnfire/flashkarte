@@ -10,7 +10,7 @@
     "impressum": "Mentions légales"
   },
   "auth": {
-    "signInToAccount": "Connectez-vous à votre compte",
+    "signInToAccount": "Connecte-toi à ton compte",
     "createAccount": "Créer un compte",
     "email": "E-mail",
     "passwordPlaceholder": "Mot de passe (8 caractères min.)",
@@ -19,8 +19,8 @@
     "keepLoggedIn": "Rester connecté",
     "signIn": "Se connecter",
     "signUp": "S'inscrire",
-    "needAccount": "Pas de compte ? Inscrivez-vous",
-    "haveAccount": "Déjà un compte ? Connectez-vous",
+    "needAccount": "Pas de compte ? Inscris-toi",
+    "haveAccount": "Déjà un compte ? Connecte-toi",
     "forgotPassword": "Mot de passe oublié ?",
     "genericError": "Une erreur s'est produite"
   },
@@ -32,7 +32,7 @@
     "es": "Español"
   },
   "settings": {
-    "languageHint": "Choisissez la langue de l'interface flashkarte.",
+    "languageHint": "Choisis la langue de l'interface flashkarte.",
     "title": "Paramètres",
     "account": "Compte",
     "plan": "Forfait :",
@@ -73,34 +73,34 @@
     "dark": "Mode sombre"
   },
   "verify": {
-    "message": "Veuillez vérifier votre adresse e-mail ({{email}}) pour sécuriser votre compte.",
+    "message": "Vérifie ton adresse e-mail ({{email}}) pour sécuriser ton compte.",
     "sent": "E-mail de vérification envoyé.",
     "resend": "Renvoyer l'e-mail",
     "sending": "Envoi…"
   },
   "verifyEmail": {
-    "verifying": "Vérification de votre e-mail…",
-    "success": "Votre e-mail est vérifié. Merci !",
+    "verifying": "Vérification de ton e-mail…",
+    "success": "Ton e-mail est vérifié. Merci !",
     "goToApp": "Aller à flashkarte",
     "back": "Retour à flashkarte",
     "missingToken": "Ce lien n'a pas de jeton de vérification.",
-    "genericError": "Impossible de vérifier votre e-mail. Veuillez réessayer."
+    "genericError": "Impossible de vérifier ton e-mail. Réessaie."
   },
   "landing": {
-    "heroTitle": "Apprenez tout, plus vite.",
-    "heroBody": "flashkarte est une application de cartes mémoire à répétition espacée. Rédigez vos cartes en simple Markdown — ou laissez votre propre IA les créer — et l'application planifie chaque révision juste avant que vous n'oubliiez. Étudiez sur le web ou sur Android, toujours synchronisé.",
+    "heroTitle": "Apprends tout, plus vite.",
+    "heroBody": "flashkarte est une application de cartes mémoire à répétition espacée. Rédige tes cartes en simple Markdown — ou laisse ta propre IA les créer — et l'application planifie chaque révision juste avant que tu n'oublies. Étudie sur le web ou sur Android, toujours synchronisé.",
     "signupCta": "Inscription gratuite",
     "signin": "Se connecter",
     "startStudying": "Commencer à apprendre →",
     "productOf": "Un produit de",
     "feature1Title": "Paquets en Markdown",
-    "feature1Body": "Rédigez des cartes en simple Markdown — collez, importez un fichier ou générez-les. Pas d'éditeurs encombrants.",
+    "feature1Body": "Rédige des cartes en simple Markdown — colle, importe un fichier ou génère-les. Pas d'éditeurs encombrants.",
     "feature2Title": "Répétition espacée",
-    "feature2Body": "Un algorithme SM-2 éprouvé vous montre chaque carte juste avant que vous ne l'oubliiez, pour des révisions courtes.",
-    "feature3Title": "Étudiez partout",
-    "feature3Body": "Web et Android, synchronisés. Commencez vos révisions dans le bus et terminez-les à votre bureau.",
-    "feature4Title": "Utilisez votre propre IA",
-    "feature4Body": "Connectez votre propre assistant IA via MCP pour transformer vos notes en paquets — sans abonnement supplémentaire."
+    "feature2Body": "Un algorithme SM-2 éprouvé te montre chaque carte juste avant que tu ne l'oublies, pour des révisions courtes.",
+    "feature3Title": "Étudie partout",
+    "feature3Body": "Web et Android, synchronisés. Commence tes révisions dans le bus et termine-les à ton bureau.",
+    "feature4Title": "Utilise ta propre IA",
+    "feature4Body": "Connecte ton propre assistant IA via MCP pour transformer tes notes en paquets — sans abonnement supplémentaire."
   },
   "decks": {
     "title": "Mes paquets",
