@@ -16,6 +16,10 @@ import { libraryRouter } from "./domains/library/library.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
 import { requireAuth, requireAdmin } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
+import { mountSeo } from "./seo/mount";
+import { loadTemplate } from "./seo/template";
+import { getSiteOrigin } from "./seo/siteOrigin";
+import { SitemapUrl } from "./seo/sitemap";
 
 // For IPv6, bucket by the /64 prefix so a client can't trivially bypass rate
 // limits by rotating through addresses within their allocated /64 block.
@@ -143,13 +147,36 @@ export function createApp() {
 
   // Serve the built web SPA in production (Dockerfile copies web/dist → public).
   if (process.env.NODE_ENV === "production") {
-    const webDist = path.join(__dirname, "..", "public");
-    app.use(express.static(webDist));
-    app.get("*", (_req, res) => {
-      res.sendFile(path.join(webDist, "index.html"));
-    });
+    configureProductionWeb(app, path.join(__dirname, "..", "public"));
   }
 
   app.use(errorHandler);
   return app;
+}
+
+// Serve the built SPA + SEO routes. Exported so tests can point it at a
+// fixture web dir. Registers SEO HTML routes BEFORE static so "/" gets
+// injected meta rather than the raw index.html.
+export function configureProductionWeb(
+  app: import("express").Express,
+  webDist: string,
+): void {
+  const template = loadTemplate(webDist);
+  const sitemapUrls = (): SitemapUrl[] => {
+    const origin = getSiteOrigin();
+    return [
+      { loc: `${origin}/`, changefreq: "weekly", priority: "1.0" },
+      { loc: `${origin}/explore`, changefreq: "daily", priority: "0.8" },
+      { loc: `${origin}/privacy` },
+      { loc: `${origin}/impressum` },
+    ];
+  };
+
+  if (template) {
+    mountSeo(app, { template, sitemapUrls });
+  }
+  app.use(express.static(webDist, { index: false }));
+  app.get("*", (_req, res) => {
+    res.sendFile(path.join(webDist, "index.html"));
+  });
 }
