@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { useDocumentHead } from "../seo/useDocumentHead";
 
 export function PrivacyPage() {
+  useDocumentHead({
+    title: "Privacy Policy — flashkarte",
+    description:
+      "How flashkarte handles your data: what we collect, what we never do, and your rights.",
+  });
   const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10">

@@ -3,7 +3,6 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminRoute } from "./components/AdminRoute";
 import { AdminPage } from "./pages/AdminPage";
 import { AuthPage } from "./pages/AuthPage";
-import { DeckListPage } from "./pages/DeckListPage";
 import { CreateDeckPage } from "./pages/CreateDeckPage";
 import { StudyPage } from "./pages/StudyPage";
 import { SettingsPage } from "./pages/SettingsPage";
@@ -13,7 +12,7 @@ import { VerifyEmailPage } from "./pages/VerifyEmailPage";
 import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { ThemeToggle } from "./components/ThemeToggle";
-import { LandingPage } from "./pages/LandingPage";
+import { HomeRoute } from "./components/HomeRoute";
 import { LibraryPage } from "./pages/LibraryPage";
 
 export default function App() {
@@ -21,7 +20,8 @@ export default function App() {
     <>
       <ThemeToggle />
       <Routes>
-        <Route path="/welcome" element={<LandingPage />} />
+        <Route path="/" element={<HomeRoute />} />
+        <Route path="/welcome" element={<Navigate to="/" replace />} />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/impressum" element={<ImpressumPage />} />
@@ -29,7 +29,6 @@ export default function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<DeckListPage />} />
           <Route path="/decks/new" element={<CreateDeckPage />} />
           <Route path="/decks/:id/study" element={<StudyPage />} />
           <Route path="/library" element={<LibraryPage />} />

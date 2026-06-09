@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { useDocumentHead } from "../seo/useDocumentHead";
 
 export function ImpressumPage() {
+  useDocumentHead({
+    title: "Impressum — flashkarte",
+    description: "Legal provider information for flashkarte (Impressum).",
+  });
   const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-gray-50 py-10 dark:bg-gray-900">

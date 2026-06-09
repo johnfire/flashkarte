@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { useDocumentHead } from "../seo/useDocumentHead";
 
 const FEATURES = [
   { titleKey: "landing.feature1Title", bodyKey: "landing.feature1Body" },
@@ -98,6 +99,11 @@ const FLOATERS = [
 ];
 
 export function LandingPage() {
+  useDocumentHead({
+    title: "flashkarte — Learn anything with spaced-repetition flashcards",
+    description:
+      "flashkarte is a free spaced-repetition flashcard app. Write decks in plain Markdown or let your own AI build them, and study on web and Android — always in sync.",
+  });
   const { t } = useTranslation();
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
