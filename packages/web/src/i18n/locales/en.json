@@ -122,5 +122,22 @@
     "deleteError": "Couldn't delete the deck. Try again.",
     "delete": "Delete",
     "togglePublicError": "Couldn't update sharing. Try again."
+  },
+  "createDeck": {
+    "title": "New Deck",
+    "instructionsPaste": "Paste Markdown or upload a",
+    "instructionsUse": "file. Use",
+    "instructionsAnd": "and",
+    "instructionsAnswer": "followed by the answer.",
+    "placeholder": "# My Deck Title\n## Optional Category\n**1. What is the capital of France?**\nParis.\n\n**2. 2 + 2 = ?**\n4.",
+    "untitled": "Untitled",
+    "cardCount_one": "{{count}} card",
+    "cardCount_other": "{{count}} cards",
+    "noCards": "No cards detected — check the format.",
+    "previewHint": "Preview appears here.",
+    "saveError": "Couldn't save the deck",
+    "saving": "Saving…",
+    "saveDeck": "Save deck",
+    "cancel": "Cancel"
   }
 }

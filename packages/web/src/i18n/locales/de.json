@@ -122,5 +122,22 @@
     "deleteError": "Der Stapel konnte nicht gelöscht werden. Versuche es erneut.",
     "delete": "Löschen",
     "togglePublicError": "Die Freigabe konnte nicht aktualisiert werden. Versuche es erneut."
+  },
+  "createDeck": {
+    "title": "Neuer Stapel",
+    "instructionsPaste": "Füge Markdown ein oder lade eine",
+    "instructionsUse": "Datei hoch. Verwende",
+    "instructionsAnd": "und",
+    "instructionsAnswer": "gefolgt von der Antwort.",
+    "placeholder": "# Mein Stapeltitel\n## Optionale Kategorie\n**1. Was ist die Hauptstadt von Frankreich?**\nParis.\n\n**2. 2 + 2 = ?**\n4.",
+    "untitled": "Ohne Titel",
+    "cardCount_one": "{{count}} Karte",
+    "cardCount_other": "{{count}} Karten",
+    "noCards": "Keine Karten erkannt – prüfe das Format.",
+    "previewHint": "Hier erscheint die Vorschau.",
+    "saveError": "Der Stapel konnte nicht gespeichert werden",
+    "saving": "Wird gespeichert…",
+    "saveDeck": "Stapel speichern",
+    "cancel": "Abbrechen"
   }
 }

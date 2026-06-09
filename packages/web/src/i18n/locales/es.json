@@ -122,5 +122,22 @@
     "deleteError": "No se pudo eliminar el mazo. Inténtalo de nuevo.",
     "delete": "Eliminar",
     "togglePublicError": "No se pudo actualizar el uso compartido. Inténtalo de nuevo."
+  },
+  "createDeck": {
+    "title": "Nuevo mazo",
+    "instructionsPaste": "Pega Markdown o sube un archivo",
+    "instructionsUse": ". Usa",
+    "instructionsAnd": "y",
+    "instructionsAnswer": "seguido de la respuesta.",
+    "placeholder": "# Título de mi mazo\n## Categoría opcional\n**1. ¿Cuál es la capital de Francia?**\nParís.\n\n**2. 2 + 2 = ?**\n4.",
+    "untitled": "Sin título",
+    "cardCount_one": "{{count}} tarjeta",
+    "cardCount_other": "{{count}} tarjetas",
+    "noCards": "No se detectaron tarjetas: revisa el formato.",
+    "previewHint": "La vista previa aparece aquí.",
+    "saveError": "No se pudo guardar el mazo",
+    "saving": "Guardando…",
+    "saveDeck": "Guardar mazo",
+    "cancel": "Cancelar"
   }
 }

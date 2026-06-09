@@ -122,5 +122,22 @@
     "deleteError": "Impossible de supprimer le paquet. Réessaie.",
     "delete": "Supprimer",
     "togglePublicError": "Impossible de mettre à jour le partage. Réessaie."
+  },
+  "createDeck": {
+    "title": "Nouveau paquet",
+    "instructionsPaste": "Colle du Markdown ou importe un fichier",
+    "instructionsUse": ". Utilise",
+    "instructionsAnd": "et",
+    "instructionsAnswer": "suivi de la réponse.",
+    "placeholder": "# Titre de mon paquet\n## Catégorie facultative\n**1. Quelle est la capitale de la France ?**\nParis.\n\n**2. 2 + 2 = ?**\n4.",
+    "untitled": "Sans titre",
+    "cardCount_one": "{{count}} carte",
+    "cardCount_other": "{{count}} cartes",
+    "noCards": "Aucune carte détectée — vérifie le format.",
+    "previewHint": "L'aperçu apparaît ici.",
+    "saveError": "Impossible d'enregistrer le paquet",
+    "saving": "Enregistrement…",
+    "saveDeck": "Enregistrer le paquet",
+    "cancel": "Annuler"
   }
 }
