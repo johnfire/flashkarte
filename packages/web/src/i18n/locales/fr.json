@@ -167,5 +167,30 @@
     "cardsByAuthor_other": "{{count}} cartes · par {{author}}",
     "clone": "Copier",
     "cloning": "Copie en cours…"
+  },
+  "admin": {
+    "title": "Admin",
+    "backToDecks": "← Paquets",
+    "loadError": "Impossible de charger les utilisateurs",
+    "createUser": "Créer un utilisateur",
+    "emailPlaceholder": "E-mail",
+    "passwordPlaceholder": "Mot de passe initial (8 caractères min.)",
+    "creating": "…",
+    "create": "Créer un utilisateur",
+    "created": "{{email}} créé",
+    "createError": "Impossible de créer l'utilisateur",
+    "verifiedHint": "Les nouveaux utilisateurs sont créés déjà vérifiés.",
+    "users": "Utilisateurs",
+    "type_free": "Gratuit",
+    "type_paid": "Payant",
+    "type_gifted": "Offert",
+    "type_admin": "Admin",
+    "users_one": "Utilisateurs ({{count}})",
+    "users_other": "Utilisateurs ({{count}})",
+    "loading": "Chargement…",
+    "verified": "vérifié",
+    "unverified": "non vérifié",
+    "joined": "inscrit le {{date}}",
+    "updateTypeError": "Impossible de mettre à jour le type de compte"
   }
 }

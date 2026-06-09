@@ -167,5 +167,30 @@
     "cardsByAuthor_other": "{{count}} Karten · von {{author}}",
     "clone": "Kopieren",
     "cloning": "Wird kopiert…"
+  },
+  "admin": {
+    "title": "Admin",
+    "backToDecks": "← Stapel",
+    "loadError": "Nutzer konnten nicht geladen werden",
+    "createUser": "Nutzer anlegen",
+    "emailPlaceholder": "E-Mail",
+    "passwordPlaceholder": "Erstpasswort (mind. 8 Zeichen)",
+    "creating": "…",
+    "create": "Nutzer anlegen",
+    "created": "{{email}} angelegt",
+    "createError": "Der Nutzer konnte nicht angelegt werden",
+    "verifiedHint": "Neue Nutzer werden bereits verifiziert angelegt.",
+    "users": "Nutzer",
+    "type_free": "Kostenlos",
+    "type_paid": "Bezahlt",
+    "type_gifted": "Geschenkt",
+    "type_admin": "Admin",
+    "users_one": "Nutzer ({{count}})",
+    "users_other": "Nutzer ({{count}})",
+    "loading": "Wird geladen…",
+    "verified": "verifiziert",
+    "unverified": "nicht verifiziert",
+    "joined": "beigetreten {{date}}",
+    "updateTypeError": "Der Kontotyp konnte nicht aktualisiert werden"
   }
 }

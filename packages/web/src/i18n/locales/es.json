@@ -167,5 +167,30 @@
     "cardsByAuthor_other": "{{count}} tarjetas · por {{author}}",
     "clone": "Copiar",
     "cloning": "Copiando…"
+  },
+  "admin": {
+    "title": "Admin",
+    "backToDecks": "← Mazos",
+    "loadError": "No se pudieron cargar los usuarios",
+    "createUser": "Crear usuario",
+    "emailPlaceholder": "Correo electrónico",
+    "passwordPlaceholder": "Contraseña inicial (mín. 8 caracteres)",
+    "creating": "…",
+    "create": "Crear usuario",
+    "created": "{{email}} creado",
+    "createError": "No se pudo crear el usuario",
+    "verifiedHint": "Los nuevos usuarios se crean ya verificados.",
+    "users": "Usuarios",
+    "type_free": "Gratis",
+    "type_paid": "De pago",
+    "type_gifted": "Regalado",
+    "type_admin": "Admin",
+    "users_one": "Usuarios ({{count}})",
+    "users_other": "Usuarios ({{count}})",
+    "loading": "Cargando…",
+    "verified": "verificado",
+    "unverified": "sin verificar",
+    "joined": "se unió el {{date}}",
+    "updateTypeError": "No se pudo actualizar el tipo de cuenta"
   }
 }

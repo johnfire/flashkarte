@@ -167,5 +167,30 @@
     "cardsByAuthor_other": "{{count}} cards · by {{author}}",
     "clone": "Clone",
     "cloning": "Cloning…"
+  },
+  "admin": {
+    "title": "Admin",
+    "backToDecks": "← Decks",
+    "loadError": "Couldn't load users",
+    "createUser": "Create user",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Initial password (8+ chars)",
+    "creating": "…",
+    "create": "Create user",
+    "created": "Created {{email}}",
+    "createError": "Couldn't create the user",
+    "verifiedHint": "New users are created already verified.",
+    "users": "Users",
+    "type_free": "Free",
+    "type_paid": "Paid",
+    "type_gifted": "Gifted",
+    "type_admin": "Admin",
+    "users_one": "Users ({{count}})",
+    "users_other": "Users ({{count}})",
+    "loading": "Loading…",
+    "verified": "verified",
+    "unverified": "unverified",
+    "joined": "joined {{date}}",
+    "updateTypeError": "Couldn't update account type"
   }
 }
