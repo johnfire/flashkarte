@@ -1,15 +1,18 @@
 import type { Express } from "express";
-import { staticMeta, metaToHeadHtml } from "./meta";
+import { staticMeta, metaToHeadHtml, PageMeta } from "./meta";
 import { inject } from "./inject";
 import { buildSitemap, SitemapUrl } from "./sitemap";
+import { extractDeckId, deckSlug } from "@flashkarte/shared";
+import { deckMeta, deckBodyHtml, DeckPreview } from "./deck";
 
 export interface MountSeoOptions {
   template: string;
   sitemapUrls: () => SitemapUrl[] | Promise<SitemapUrl[]>;
+  getDeckPreview?: (id: string) => Promise<DeckPreview | null>;
 }
 
 // HTML routes that get server-injected meta. Phase 2 adds "/explore" + "/d/:slug".
-const STATIC_HTML_ROUTES = ["/", "/privacy", "/impressum"];
+const STATIC_HTML_ROUTES = ["/", "/explore", "/privacy", "/impressum"];
 
 export function mountSeo(app: Express, opts: MountSeoOptions): void {
   app.get("/welcome", (_req, res) => res.redirect(301, "/"));
@@ -25,6 +28,44 @@ export function mountSeo(app: Express, opts: MountSeoOptions): void {
         headHtml: metaToHeadHtml(staticMeta(req.path)),
       });
       res.type("html").send(html);
+    });
+  }
+
+  if (opts.getDeckPreview) {
+    const getDeckPreview = opts.getDeckPreview;
+    app.get("/d/:slug", async (req, res) => {
+      const id = extractDeckId(req.params.slug);
+      const preview = id ? await getDeckPreview(id) : null;
+      if (!preview) {
+        const notFound: PageMeta = {
+          title: "Deck not found — flashkarte",
+          description: "This deck is not available.",
+          canonical: "",
+          og: {
+            title: "Deck not found — flashkarte",
+            description: "",
+            image: "",
+            url: "",
+            type: "website",
+          },
+          robots: "noindex",
+        };
+        res
+          .status(404)
+          .send(inject(opts.template, { headHtml: metaToHeadHtml(notFound) }));
+        return;
+      }
+      const canonical = deckSlug(preview.title, preview.id);
+      if (req.params.slug !== canonical) {
+        res.redirect(301, `/d/${canonical}`);
+        return;
+      }
+      res.type("html").send(
+        inject(opts.template, {
+          headHtml: metaToHeadHtml(deckMeta(preview)),
+          bodyHtml: deckBodyHtml(preview),
+        }),
+      );
     });
   }
 }
