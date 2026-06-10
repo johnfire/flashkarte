@@ -19,7 +19,7 @@ describe("staticMeta", () => {
   it("guide has its own title and canonical, no JSON-LD", () => {
     const m = staticMeta("/guide");
     expect(m.title).toContain("Guide");
-    expect(m.canonical).toContain("/guide");
+    expect(m.canonical).toBe("https://flashkarte.christopherrehm.de/guide");
     expect(m.jsonLd).toBeUndefined();
   });
 });

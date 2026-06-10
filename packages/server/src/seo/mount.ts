@@ -11,7 +11,7 @@ export interface MountSeoOptions {
   getDeckPreview?: (id: string) => Promise<DeckPreview | null>;
 }
 
-// HTML routes that get server-injected meta. Phase 2 adds "/explore" + "/d/:slug".
+// HTML routes that get server-injected meta.
 const STATIC_HTML_ROUTES = [
   "/",
   "/explore",
