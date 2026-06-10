@@ -40,8 +40,17 @@ describe("GuidePage", () => {
   it("renders a table of contents that links to sections", () => {
     renderPage();
     const toc = screen.getByRole("navigation", { name: /on this page/i });
-    expect(toc.querySelector('a[href="#format"]')).not.toBeNull();
-    expect(toc.querySelector('a[href="#branching"]')).not.toBeNull();
+    for (const id of [
+      "start",
+      "create",
+      "format",
+      "branching",
+      "settings",
+      "study",
+      "ai",
+    ]) {
+      expect(toc.querySelector(`a[href="#${id}"]`)).not.toBeNull();
+    }
   });
 
   it("shows literal Markdown examples", () => {

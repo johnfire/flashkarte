@@ -38,6 +38,26 @@ const BRANCHING_EXAMPLE = `# Forest Path
 **3. A peaceful clearing.**
 You rest here.`;
 
+const SECTION_IDS = [
+  "start",
+  "create",
+  "format",
+  "branching",
+  "settings",
+  "study",
+  "ai",
+] as const;
+
+const SECTION_LABEL_KEYS: Record<(typeof SECTION_IDS)[number], string> = {
+  start: "guide.tocStart",
+  create: "guide.tocCreate",
+  format: "guide.tocFormat",
+  branching: "guide.tocBranching",
+  settings: "guide.tocSettings",
+  study: "guide.tocStudy",
+  ai: "guide.tocAI",
+};
+
 function Code({ children }: { children: string }) {
   return (
     <pre className="mt-3 overflow-x-auto rounded-lg bg-gray-100 p-4 text-xs leading-relaxed text-gray-800 dark:bg-gray-900 dark:text-gray-200">
@@ -53,18 +73,12 @@ export function GuidePage() {
     description: t("guide.metaDescription"),
   });
 
-  const toc: [string, string][] = [
-    ["start", t("guide.tocStart")],
-    ["create", t("guide.tocCreate")],
-    ["format", t("guide.tocFormat")],
-    ["branching", t("guide.tocBranching")],
-    ["settings", t("guide.tocSettings")],
-    ["study", t("guide.tocStudy")],
-    ["ai", t("guide.tocAI")],
-  ];
+  const toc: [string, string][] = SECTION_IDS.map((id) => [
+    id,
+    t(SECTION_LABEL_KEYS[id]),
+  ]);
 
-  const h2 =
-    "text-lg font-semibold text-gray-900 dark:text-gray-100 scroll-mt-6";
+  const h2 = "text-lg font-semibold text-gray-900 dark:text-gray-100";
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10">
