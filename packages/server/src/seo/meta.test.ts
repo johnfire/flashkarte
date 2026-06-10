@@ -16,6 +16,12 @@ describe("staticMeta", () => {
     );
     expect(staticMeta("/impressum").jsonLd).toBeUndefined();
   });
+  it("guide has its own title and canonical, no JSON-LD", () => {
+    const m = staticMeta("/guide");
+    expect(m.title).toContain("Guide");
+    expect(m.canonical).toContain("/guide");
+    expect(m.jsonLd).toBeUndefined();
+  });
 });
 
 describe("metaToHeadHtml", () => {

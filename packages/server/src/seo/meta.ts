@@ -45,6 +45,11 @@ const PAGES: Record<
     title: "Impressum — flashkarte",
     description: "Legal provider information for flashkarte (Impressum).",
   },
+  "/guide": {
+    title: "Guide — flashkarte",
+    description:
+      "How to use flashkarte: write Markdown flashcard decks, study with spaced repetition, share decks, and let your AI build decks for you.",
+  },
 };
 
 export function staticMeta(path: string): PageMeta {
