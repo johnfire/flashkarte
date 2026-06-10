@@ -12,7 +12,13 @@ export interface MountSeoOptions {
 }
 
 // HTML routes that get server-injected meta. Phase 2 adds "/explore" + "/d/:slug".
-const STATIC_HTML_ROUTES = ["/", "/explore", "/privacy", "/impressum"];
+const STATIC_HTML_ROUTES = [
+  "/",
+  "/explore",
+  "/privacy",
+  "/impressum",
+  "/guide",
+];
 
 export function mountSeo(app: Express, opts: MountSeoOptions): void {
   app.get("/welcome", (_req, res) => res.redirect(301, "/"));

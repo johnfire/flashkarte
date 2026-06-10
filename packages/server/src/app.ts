@@ -173,6 +173,7 @@ export function configureProductionWeb(
       { loc: `${origin}/explore`, changefreq: "daily", priority: "0.8" },
       { loc: `${origin}/privacy` },
       { loc: `${origin}/impressum` },
+      { loc: `${origin}/guide`, changefreq: "monthly", priority: "0.6" },
     ];
     const decks = await libraryService.list(undefined);
     for (const d of decks) {
