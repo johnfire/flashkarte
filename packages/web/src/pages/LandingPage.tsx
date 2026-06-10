@@ -202,6 +202,9 @@ export function LandingPage() {
             {t("landing.startStudying")}
           </Link>
           <p className="mt-4 space-x-4 text-xs text-slate-500">
+            <Link to="/guide" className="hover:text-slate-300">
+              {t("common.guide")}
+            </Link>
             <Link to="/privacy" className="hover:text-slate-300">
               {t("common.privacy")}
             </Link>

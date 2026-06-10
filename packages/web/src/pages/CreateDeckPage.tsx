@@ -1,5 +1,5 @@
 import { useState, useMemo, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
 import { parseDeck } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";
@@ -46,6 +46,11 @@ export function CreateDeckPage() {
   return (
     <div className="mx-auto max-w-2xl p-4">
       <h1 className="mb-2 text-3xl font-bold">{t("createDeck.title")}</h1>
+      <p className="mb-4 text-sm">
+        <Link to="/guide#format" className="text-indigo-600">
+          {t("common.guide")}
+        </Link>
+      </p>
       <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
         <Trans
           i18nKey="createDeck.instructions"

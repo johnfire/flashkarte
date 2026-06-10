@@ -53,9 +53,14 @@ export function LibraryPage() {
     <div className="mx-auto max-w-2xl p-4">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("library.title")}</h1>
-        <Link to="/" className="text-sm text-indigo-600">
-          {t("library.myDecks")}
-        </Link>
+        <div className="flex gap-4 text-sm">
+          <Link to="/guide" className="text-indigo-600">
+            {t("common.guide")}
+          </Link>
+          <Link to="/" className="text-indigo-600">
+            {t("library.myDecks")}
+          </Link>
+        </div>
       </header>
 
       <form onSubmit={onSearch} className="mb-6 flex gap-2">

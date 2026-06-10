@@ -159,6 +159,12 @@ export function AuthPage() {
 
         <p className="space-x-4 text-center text-xs text-gray-400 dark:text-gray-500">
           <Link
+            to="/guide"
+            className="hover:text-gray-600 dark:hover:text-gray-300"
+          >
+            {t("common.guide")}
+          </Link>
+          <Link
             to="/privacy"
             className="hover:text-gray-600 dark:hover:text-gray-300"
           >
