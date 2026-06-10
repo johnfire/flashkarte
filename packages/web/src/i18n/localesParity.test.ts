@@ -16,23 +16,32 @@ function keysOf(obj: Record<string, unknown>, prefix = ""): string[] {
 
 describe("guide i18n parity", () => {
   const enGuideKeys = keysOf(en.guide as Record<string, unknown>, "guide.");
+  const enGuideKeySet = new Set(enGuideKeys);
 
-  it("every locale has all guide keys", () => {
+  it("every locale has exactly the same guide keys as en", () => {
     for (const [name, loc] of Object.entries(locales)) {
-      const locKeys = new Set(
-        keysOf((loc.guide ?? {}) as Record<string, unknown>, "guide."),
+      const locKeys = keysOf(
+        (loc.guide ?? {}) as Record<string, unknown>,
+        "guide.",
       );
-      const missing = enGuideKeys.filter((k) => !locKeys.has(k));
+      const locKeySet = new Set(locKeys);
+      const missing = enGuideKeys.filter((k) => !locKeySet.has(k));
+      const extra = locKeys.filter((k) => !enGuideKeySet.has(k));
       expect(missing, `${name} missing: ${missing.join(", ")}`).toEqual([]);
+      expect(
+        extra,
+        `${name} has extra keys not in en: ${extra.join(", ")}`,
+      ).toEqual([]);
     }
   });
 
-  it("every locale has common.guide", () => {
+  it("every locale has a non-empty common.guide string", () => {
     for (const [name, loc] of Object.entries(locales)) {
+      const val = (loc.common as Record<string, unknown>)?.guide;
       expect(
-        (loc.common as Record<string, unknown>)?.guide,
+        typeof val === "string" && val.length > 0,
         `${name} missing common.guide`,
-      ).toBeTruthy();
+      ).toBe(true);
     }
   });
 });
