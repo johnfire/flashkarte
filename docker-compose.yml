@@ -31,6 +31,9 @@ services:
       - NODE_ENV=production
       - MCP_PORT=3002
       - FLASHKARTE_API_URL=http://app:3001
+      - MCP_STORE_PATH=/data/oauth-store.json
+    volumes:
+      - mcp_oauth_store:/data
     ports:
       - "127.0.0.1:${MCP_PORT:-8091}:3002"
     depends_on:
@@ -75,3 +78,4 @@ services:
 
 volumes:
   flashkarte_pgdata:
+  mcp_oauth_store:
