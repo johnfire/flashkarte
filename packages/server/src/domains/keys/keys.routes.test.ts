@@ -8,6 +8,11 @@ jest.mock("../../db/client", () => ({
   closePool: jest.fn(),
 }));
 jest.mock("../../middleware/auth", () => ({
+  requireFullScope: (
+    _req: import("express").Request,
+    _res: import("express").Response,
+    next: import("express").NextFunction,
+  ) => next(),
   requireAuth: (
     req: import("express").Request,
     _res: import("express").Response,
@@ -42,7 +47,7 @@ describe("keys routes", () => {
     const res = await request(app).post("/api/keys").send({ name: "MCP" });
     expect(res.status).toBe(201);
     expect(res.body.key).toBe("fk_abcdef");
-    expect(mock.createKey).toHaveBeenCalledWith("u1", "MCP");
+    expect(mock.createKey).toHaveBeenCalledWith("u1", "MCP", undefined);
   });
 
   test("GET /api/keys -> 200 never includes raw keys", async () => {

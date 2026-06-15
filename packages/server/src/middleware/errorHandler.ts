@@ -14,6 +14,14 @@ export function errorHandler(
     });
     return;
   }
+  // Postgres "invalid text representation" (22P02) — almost always a malformed
+  // :id route param hitting a ::uuid cast. Treat as not-found rather than a 500.
+  if ((err as { code?: string }).code === "22P02") {
+    res.status(404).json({
+      error: { code: "NOT_FOUND", message: "Resource not found" },
+    });
+    return;
+  }
   logger.error("Unhandled error", {
     method: req.method,
     path: req.originalUrl,

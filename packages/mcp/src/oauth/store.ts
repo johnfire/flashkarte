@@ -19,6 +19,11 @@ const REFRESH_TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
 const authCodes = new Map<string, AuthCodeEntry>();
 const refreshTokens = new Map<string, RefreshTokenEntry>();
+// Tombstones of already-rotated refresh tokens, kept until they would have
+// expired. A token's lineage is its fk_key (one OAuth connection mints one
+// fk_key and keeps it across rotations). Presenting a tombstoned token is a
+// replay, so we revoke the whole lineage — OAuth 2.1 refresh-reuse detection.
+const consumedTokens = new Map<string, RefreshTokenEntry>();
 
 // Restart survival: refresh tokens are write-through persisted to
 // MCP_STORE_PATH (a docker volume in prod). Without this every deploy
@@ -31,7 +36,9 @@ function loadStore(): void {
   try {
     const raw = JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
     for (const [k, v] of raw.refreshTokens ?? []) refreshTokens.set(k, v);
+    for (const [k, v] of raw.consumedTokens ?? []) consumedTokens.set(k, v);
     pruneExpired(refreshTokens);
+    pruneExpired(consumedTokens);
   } catch (e) {
     console.error("oauth store load failed, starting empty:", e);
   }
@@ -53,7 +60,10 @@ function persistNow(): void {
     const tmp = STORE_PATH + ".tmp";
     fs.writeFileSync(
       tmp,
-      JSON.stringify({ refreshTokens: [...refreshTokens] }),
+      JSON.stringify({
+        refreshTokens: [...refreshTokens],
+        consumedTokens: [...consumedTokens],
+      }),
       {
         mode: 0o600,
       },
@@ -95,6 +105,7 @@ export function consumeAuthCode(code: string): AuthCodeEntry | null {
 
 export function createRefreshToken(fk_key: string): string {
   pruneExpired(refreshTokens);
+  pruneExpired(consumedTokens);
   const token = crypto.randomBytes(48).toString("hex");
   refreshTokens.set(token, {
     fk_key,
@@ -105,9 +116,26 @@ export function createRefreshToken(fk_key: string): string {
 }
 
 export function consumeRefreshToken(token: string): { fk_key: string } | null {
+  pruneExpired(refreshTokens);
+  pruneExpired(consumedTokens);
   const entry = refreshTokens.get(token);
-  refreshTokens.delete(token);
-  persistStore();
-  if (!entry || entry.expires_at < Date.now()) return null;
-  return { fk_key: entry.fk_key };
+  if (entry) {
+    // Normal rotation: spend the token, tombstone it for reuse detection.
+    refreshTokens.delete(token);
+    consumedTokens.set(token, entry);
+    persistStore();
+    if (entry.expires_at < Date.now()) return null;
+    return { fk_key: entry.fk_key };
+  }
+  // Not live. If it was consumed before, this is a replay of a rotated-away
+  // token — revoke every live token in the same lineage (fk_key) so a stolen
+  // token can't outlive detection, then reject.
+  const replayed = consumedTokens.get(token);
+  if (replayed) {
+    for (const [t, e] of refreshTokens) {
+      if (e.fk_key === replayed.fk_key) refreshTokens.delete(t);
+    }
+    persistStore();
+  }
+  return null;
 }

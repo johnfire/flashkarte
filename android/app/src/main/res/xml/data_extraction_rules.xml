@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Keep credentials off cloud backups and device-to-device transfers. The
+  DataStore files (flashkarte_session, flashkarte_cookies) hold the access
+  token and refresh cookie; even though they are encrypted at rest with a
+  device-bound Keystore key, excluding them avoids shipping dead blobs.
+-->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="file" path="datastore/" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="file" path="datastore/" />
+    </device-transfer>
+</data-extraction-rules>

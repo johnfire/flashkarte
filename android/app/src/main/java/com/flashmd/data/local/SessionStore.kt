@@ -21,6 +21,9 @@ private val Context.dataStore by preferencesDataStore(name = "flashkarte_session
  * a volatile field so the OkHttp request interceptor can read it synchronously
  * without blocking on DataStore for every call. The long-lived refresh token is
  * NOT stored here — it lives in the httpOnly cookie managed by [AuthCookieJar].
+ *
+ * The access token is encrypted at rest via [CryptoBox] (Keystore-backed); the
+ * user id/email are non-secret and stored as-is.
  */
 @Singleton
 class SessionStore @Inject constructor(
@@ -36,9 +39,11 @@ class SessionStore @Inject constructor(
 
     init {
         // Prime the in-memory cache once at startup so the first request can
-        // attach a token without awaiting DataStore.
+        // attach a token without awaiting DataStore. Stored value is encrypted;
+        // decrypt fails (→ null) for legacy plaintext, forcing a clean re-login.
         runBlocking {
-            cachedAccessToken = context.dataStore.data.first()[accessTokenKey]
+            cachedAccessToken =
+                context.dataStore.data.first()[accessTokenKey]?.let(CryptoBox::decrypt)
         }
     }
 
@@ -52,8 +57,9 @@ class SessionStore @Inject constructor(
 
     suspend fun saveSession(token: String, user: UserDto) {
         cachedAccessToken = token
+        val encrypted = CryptoBox.encrypt(token)
         context.dataStore.edit {
-            it[accessTokenKey] = token
+            it[accessTokenKey] = encrypted
             it[userIdKey] = user.id
             it[userEmailKey] = user.email
         }
@@ -61,7 +67,8 @@ class SessionStore @Inject constructor(
 
     suspend fun updateAccessToken(token: String) {
         cachedAccessToken = token
-        context.dataStore.edit { it[accessTokenKey] = token }
+        val encrypted = CryptoBox.encrypt(token)
+        context.dataStore.edit { it[accessTokenKey] = encrypted }
     }
 
     suspend fun clear() {

@@ -3,7 +3,11 @@ import { wrapAsync } from "../../utils/wrapAsync";
 import * as service from "./keys.service";
 
 export const create = wrapAsync(async (req: Request, res: Response) => {
-  const key = await service.createKey(req.userId!, req.body.name);
+  const key = await service.createKey(
+    req.userId!,
+    req.body.name,
+    req.body.scope,
+  );
   res.status(201).json(key);
 });
 

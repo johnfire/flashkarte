@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { requireAuth } from "./auth";
+import { requireAuth, requireFullScope } from "./auth";
 import * as keysService from "../domains/keys/keys.service";
 import * as authService from "../domains/auth/auth.service";
 
@@ -20,12 +20,20 @@ function run(authorization?: string) {
 beforeEach(() => jest.clearAllMocks());
 
 describe("requireAuth", () => {
-  test("resolves an fk_ API key to its user", async () => {
-    mockKeys.resolveKey.mockResolvedValue("user-123");
+  test("resolves a full-scope fk_ API key to its user", async () => {
+    mockKeys.resolveKey.mockResolvedValue({ userId: "user-123", scope: "full" });
     const { req, err } = await run("Bearer fk_secretkey");
     expect(err).toBeUndefined();
     expect(req.userId).toBe("user-123");
+    expect(req.keyScope).toBe("full");
     expect(mockKeys.resolveKey).toHaveBeenCalledWith("fk_secretkey");
+  });
+
+  test("carries the deck scope through from a deck-scoped key", async () => {
+    mockKeys.resolveKey.mockResolvedValue({ userId: "user-123", scope: "deck" });
+    const { req, err } = await run("Bearer fk_deckkey");
+    expect(err).toBeUndefined();
+    expect(req.keyScope).toBe("deck");
   });
 
   test("rejects an unknown fk_ key", async () => {
@@ -42,10 +50,32 @@ describe("requireAuth", () => {
     const { req, err } = await run("Bearer some.jwt.token");
     expect(err).toBeUndefined();
     expect(req.userId).toBe("jwt-user");
+    expect(req.keyScope).toBe("full");
   });
 
   test("missing header errors", async () => {
     const { err } = await run(undefined);
     expect(err).toBeTruthy();
+  });
+});
+
+describe("requireFullScope", () => {
+  function scope(keyScope?: "full" | "deck") {
+    const req = { keyScope } as Request;
+    return new Promise<unknown>((resolve) => {
+      requireFullScope(req, {} as Response, (err?: unknown) => resolve(err));
+    });
+  }
+
+  test("blocks deck-scoped keys", async () => {
+    expect(await scope("deck")).toBeTruthy();
+  });
+
+  test("allows full-scope keys", async () => {
+    expect(await scope("full")).toBeUndefined();
+  });
+
+  test("allows JWT requests (no keyScope set to deck)", async () => {
+    expect(await scope(undefined)).toBeUndefined();
   });
 });

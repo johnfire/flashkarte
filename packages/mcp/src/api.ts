@@ -64,10 +64,15 @@ export async function backendLogin(
   return (await res.json()) as LoginResult;
 }
 
-/** Mint a personal fk_ key for the logged-in user, using their JWT. */
+/**
+ * Mint a deck-scoped fk_ key for the logged-in user, using their JWT. The key
+ * is limited to deck operations server-side, so a compromised MCP store can't
+ * be used to reach account-level routes.
+ */
 export async function backendCreateKey(
   accessToken: string,
   name: string,
+  scope: "full" | "deck" = "deck",
 ): Promise<CreatedKey> {
   const res = await fetch(`${BASE_URL}/api/keys`, {
     method: "POST",
@@ -75,7 +80,7 @@ export async function backendCreateKey(
       "Content-Type": "application/json",
       Authorization: `Bearer ${accessToken}`,
     },
-    body: JSON.stringify({ name }),
+    body: JSON.stringify({ name, scope }),
   });
   if (!res.ok) {
     const text = await res.text();

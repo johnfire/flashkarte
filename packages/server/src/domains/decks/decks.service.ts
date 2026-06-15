@@ -3,6 +3,11 @@ import { ValidationError, NotFoundError } from "../../utils/errors";
 import * as repo from "./decks.repository";
 import { validateBranching } from "./branching";
 
+// Cap cards per request: bounds the multi-row INSERT (well under Postgres'
+// 65535-parameter limit at 6 params/card) and prevents a huge upload from
+// becoming a soft DoS.
+export const MAX_CARDS_PER_DECK = 5000;
+
 export async function importDeck(
   userId: string,
   markdown: unknown,
@@ -15,10 +20,19 @@ export async function importDeck(
   if (parsed.cards.length === 0) {
     throw new ValidationError("Deck has no cards — check the Markdown format");
   }
+  if (parsed.cards.length > MAX_CARDS_PER_DECK) {
+    throw new ValidationError(
+      `A deck can have at most ${MAX_CARDS_PER_DECK} cards`,
+    );
+  }
   validateBranching(parsed.cards);
-  const deck = await repo.createDeck(userId, parsed.title, filename);
+  const deck = await repo.createDeckWithCards(
+    userId,
+    parsed.title,
+    filename,
+    parsed.cards,
+  );
   if (!deck) throw new Error("Failed to create deck");
-  await repo.insertCards(userId, deck.id, parsed.cards);
   return { ...deck, card_count: parsed.cards.length };
 }
 
@@ -35,6 +49,11 @@ export async function appendCards(
   const parsed = parseDeck(markdown, "");
   if (parsed.cards.length === 0) {
     throw new ValidationError("No cards found — check the Markdown format");
+  }
+  if (parsed.cards.length > MAX_CARDS_PER_DECK) {
+    throw new ValidationError(
+      `You can add at most ${MAX_CARDS_PER_DECK} cards at once`,
+    );
   }
   validateBranching(parsed.cards);
   await repo.appendCards(userId, deckId, parsed.cards);

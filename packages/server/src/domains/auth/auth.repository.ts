@@ -99,9 +99,15 @@ export function storeRefreshToken(
   );
 }
 
-export function findRefreshToken(tokenHash: string) {
+/**
+ * Atomically delete a refresh token and return its row. Used for rotation:
+ * doing the lookup and delete in one statement means two concurrent refreshes
+ * can't both consume the same token (only one DELETE returns a row).
+ */
+export function consumeRefreshToken(tokenHash: string) {
   return queryOne<{ user_id: string; expires_at: Date; persistent: boolean }>(
-    "SELECT user_id, expires_at, persistent FROM refresh_tokens WHERE token_hash = $1",
+    `DELETE FROM refresh_tokens WHERE token_hash = $1
+     RETURNING user_id, expires_at, persistent`,
     [tokenHash],
   );
 }

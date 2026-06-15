@@ -15,7 +15,7 @@ import { adminRouter } from "./domains/admin/admin.routes";
 import { libraryRouter } from "./domains/library/library.routes";
 import { publicLibraryRouter } from "./domains/library/public.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
-import { requireAuth, requireAdmin } from "./middleware/auth";
+import { requireAuth, requireAdmin, requireFullScope } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
 import { mountSeo } from "./seo/mount";
 import { loadTemplate } from "./seo/template";
@@ -140,12 +140,17 @@ export function createApp() {
   app.use("/api/client-errors", clientErrorsLimiter, clientErrorsRouter);
   app.use("/api/public/library", publicLibraryRouter);
 
-  // Everything below requires a valid JWT
+  // Everything below requires a valid JWT or API key
   app.use("/api", requireAuth);
+  // Deck data routes — reachable by deck-scoped MCP keys as well as full creds.
   app.use("/api/decks", decksRouter);
   app.use("/api/study", studyRouter);
-  app.use("/api/keys", keysRouter);
   app.use("/api/library", libraryRouter);
+  // Account-level routes below require a full-scope credential (JWT or personal
+  // key). Deck-scoped MCP keys are rejected here, so a leaked MCP key can't mint
+  // more keys, spam bug reports, or reach admin. New account routes belong here.
+  app.use("/api", requireFullScope);
+  app.use("/api/keys", keysRouter);
   app.use("/api/bug-reports", bugReportLimiter, bugReportsRouter);
   app.use("/api/admin", requireAdmin, adminRouter);
 

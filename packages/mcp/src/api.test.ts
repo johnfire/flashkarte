@@ -33,7 +33,7 @@ describe("backend helpers", () => {
     expect(await backendLogin("a@b.com", "pw")).toBeNull();
   });
 
-  test("backendCreateKey sends the JWT and returns the raw key", async () => {
+  test("backendCreateKey sends the JWT and requests a deck-scoped key", async () => {
     mockFetch.mockResolvedValue(
       jsonResponse(true, 201, { key: "fk_new", key_prefix: "fk_new" }),
     );
@@ -42,6 +42,7 @@ describe("backend helpers", () => {
     const [url, opts] = mockFetch.mock.calls[0];
     expect(String(url)).toContain("/api/keys");
     expect(opts.headers.Authorization).toBe("Bearer jwt123");
+    expect(JSON.parse(opts.body)).toEqual({ name: "claude.ai", scope: "deck" });
   });
 
   test("backendCreateKey throws on failure", async () => {

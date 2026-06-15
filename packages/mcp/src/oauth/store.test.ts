@@ -35,4 +35,14 @@ describe("oauth store", () => {
     expect(consumeRefreshToken(token)).toEqual({ fk_key: "fk_xyz" });
     expect(consumeRefreshToken(token)).toBeNull();
   });
+
+  test("replaying a rotated token revokes the whole lineage", () => {
+    const a = createRefreshToken("fk_lineage");
+    expect(consumeRefreshToken(a)).toEqual({ fk_key: "fk_lineage" }); // A -> B
+    const b = createRefreshToken("fk_lineage"); // B is the live token
+    // Attacker replays the already-consumed A: reuse is detected.
+    expect(consumeRefreshToken(a)).toBeNull();
+    // ...and the legitimate live token B is revoked too.
+    expect(consumeRefreshToken(b)).toBeNull();
+  });
 });

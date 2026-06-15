@@ -41,13 +41,32 @@ async function raw(path: string, opts: RequestInit = {}): Promise<Response> {
   return fetch(`/api${path}`, { ...opts, headers, credentials: "include" });
 }
 
+// A single shared refresh promise so concurrent 401s don't each POST
+// /auth/refresh. With rotating refresh tokens only the first rotation succeeds;
+// the rest would send the now-stale token and get logged out. Dedup avoids that.
+let refreshPromise: Promise<boolean> | null = null;
+
+function refreshAccessToken(): Promise<boolean> {
+  if (!refreshPromise) {
+    refreshPromise = raw("/auth/refresh", { method: "POST" })
+      .then(async (refreshed) => {
+        if (!refreshed.ok) return false;
+        const { accessToken: tok } = await refreshed.json();
+        setAccessToken(tok);
+        return true;
+      })
+      .catch(() => false)
+      .finally(() => {
+        refreshPromise = null;
+      });
+  }
+  return refreshPromise;
+}
+
 async function request<T>(path: string, opts: RequestInit = {}): Promise<T> {
   let res = await raw(path, opts);
   if (res.status === 401 && path !== "/auth/refresh") {
-    const refreshed = await raw("/auth/refresh", { method: "POST" });
-    if (refreshed.ok) {
-      const { accessToken: tok } = await refreshed.json();
-      setAccessToken(tok);
+    if (await refreshAccessToken()) {
       res = await raw(path, opts);
     }
   }

@@ -68,9 +68,6 @@ export async function clone(userId: string, id: string) {
   if (!source) throw new NotFoundError("Deck not found");
   const cardRows = await repo.getPublicCards(id);
 
-  const deck = await decksRepo.createDeck(userId, source.title, null);
-  if (!deck) throw new Error("Failed to create deck");
-
   const cards: ParsedCard[] = cardRows.map((c) =>
     decksRepo.rowToParsedCard({
       type: c.type,
@@ -78,7 +75,13 @@ export async function clone(userId: string, id: string) {
       category: c.category,
     }),
   );
-  await decksRepo.insertCards(userId, deck.id, cards);
+  const deck = await decksRepo.createDeckWithCards(
+    userId,
+    source.title,
+    null,
+    cards,
+  );
+  if (!deck) throw new Error("Failed to create deck");
 
   return { id: deck.id, title: deck.title, card_count: cards.length };
 }

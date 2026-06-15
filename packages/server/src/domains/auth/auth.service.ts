@@ -184,13 +184,13 @@ export async function login(
 
 export async function refresh(oldRawRefresh: string | undefined) {
   if (!oldRawRefresh) throw new AuthError("No refresh token");
-  const found = await repo.findRefreshToken(hashToken(oldRawRefresh));
+  // Rotate atomically: the consumed token is deleted and returned in one
+  // statement, so two concurrent refreshes (app + tab, or retried request)
+  // can't both succeed off the same token. The loser gets zero rows here.
+  const found = await repo.consumeRefreshToken(hashToken(oldRawRefresh));
   if (!found || found.expires_at < new Date()) {
     throw new AuthError("Invalid refresh token");
   }
-  // Rotate: delete the consumed token before issuing a new one.
-  // A replayed rotated-away token will fail findRefreshToken above.
-  await repo.deleteRefreshToken(hashToken(oldRawRefresh));
   const user = await repo.findById(found.user_id);
   if (!user) throw new AuthError("Invalid refresh token");
   const { accessToken, rawRefresh, persistent } = await issueTokens(

@@ -11,12 +11,13 @@ export function insertApiKey(
   userId: string,
   name: string,
   keyPrefix: string,
+  scope: string,
 ) {
   return queryOne<ApiKeyRow>(
-    `INSERT INTO user_api_keys (key_hash, user_id, name, key_prefix)
-     VALUES ($1, $2, $3, $4)
+    `INSERT INTO user_api_keys (key_hash, user_id, name, key_prefix, scope)
+     VALUES ($1, $2, $3, $4, $5)
      RETURNING name, key_prefix, created_at`,
-    [keyHash, userId, name, keyPrefix],
+    [keyHash, userId, name, keyPrefix, scope],
   );
 }
 
@@ -37,8 +38,8 @@ export function deleteApiKey(userId: string, keyPrefix: string) {
 }
 
 export function findUserByKeyHash(keyHash: string) {
-  return queryOne<{ user_id: string }>(
-    "SELECT user_id FROM user_api_keys WHERE key_hash = $1",
+  return queryOne<{ user_id: string; scope: string }>(
+    "SELECT user_id, scope FROM user_api_keys WHERE key_hash = $1",
     [keyHash],
   );
 }

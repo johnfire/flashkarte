@@ -1,5 +1,6 @@
-import { query, queryOne } from "../../db/client";
+import { query, queryOne, withTransaction } from "../../db/client";
 import { ParsedCard, ParsedOption } from "@flashkarte/shared";
+import type { PoolClient } from "pg";
 
 export interface DeckRow {
   id: string;
@@ -14,17 +15,52 @@ export interface DeckRow {
 const DECK_COLS =
   "id, title, source_filename, created_at, updated_at, is_public, is_ordered";
 
-export function createDeck(
+/**
+ * Insert many cards in a single multi-row statement on the given transaction
+ * client, numbering positions from `startPos`. One round-trip, all-or-nothing.
+ */
+async function insertCardsBatch(
+  client: PoolClient,
+  userId: string,
+  deckId: string,
+  cards: ParsedCard[],
+  startPos: number,
+): Promise<void> {
+  if (cards.length === 0) return;
+  const values: unknown[] = [];
+  const rows = cards.map((c, idx) => {
+    const b = idx * 6;
+    values.push(userId, deckId, c.type, cardContent(c), c.category, startPos + idx);
+    return `($${b + 1}, $${b + 2}, $${b + 3}, $${b + 4}, $${b + 5}, $${b + 6})`;
+  });
+  await client.query(
+    `INSERT INTO cards (user_id, deck_id, type, content, category, position)
+     VALUES ${rows.join(", ")}`,
+    values,
+  );
+}
+
+/**
+ * Create a deck and insert all its cards atomically. A failure mid-way rolls
+ * back the whole thing, so we never leave an empty or partially-filled deck.
+ */
+export function createDeckWithCards(
   userId: string,
   title: string,
   sourceFilename: string | null,
+  cards: ParsedCard[],
 ) {
-  return queryOne<DeckRow>(
-    `INSERT INTO decks (user_id, title, source_filename)
-     VALUES ($1, $2, $3)
-     RETURNING ${DECK_COLS}`,
-    [userId, title, sourceFilename],
-  );
+  return withTransaction(async (client) => {
+    const res = await client.query<DeckRow>(
+      `INSERT INTO decks (user_id, title, source_filename)
+       VALUES ($1, $2, $3)
+       RETURNING ${DECK_COLS}`,
+      [userId, title, sourceFilename],
+    );
+    const deck = res.rows[0];
+    await insertCardsBatch(client, userId, deck.id, cards, 0);
+    return deck;
+  });
 }
 
 /** Reconstruct a ParsedCard from a stored card row (inverse of cardContent). */
@@ -69,38 +105,30 @@ function cardContent(c: ParsedCard): string {
   );
 }
 
-export async function insertCards(
-  userId: string,
-  deckId: string,
-  cards: ParsedCard[],
-) {
-  let i = 0;
-  for (const c of cards) {
-    await query(
-      `INSERT INTO cards (user_id, deck_id, type, content, category, position)
-       VALUES ($1, $2, $3, $4, $5, $6)`,
-      [userId, deckId, c.type, cardContent(c), c.category, i++],
-    );
-  }
-}
-
+/**
+ * Append cards to an existing deck atomically. Locks the deck row so concurrent
+ * appends compute distinct starting positions (no duplicate positions), and
+ * inserts all new cards in a single statement.
+ */
 export async function appendCards(
   userId: string,
   deckId: string,
   cards: ParsedCard[],
 ) {
-  const maxRow = await queryOne<{ max: number | null }>(
-    "SELECT max(position) AS max FROM cards WHERE deck_id = $1 AND user_id = $2",
-    [deckId, userId],
-  );
-  let i = (maxRow?.max ?? -1) + 1;
-  for (const c of cards) {
-    await query(
-      `INSERT INTO cards (user_id, deck_id, type, content, category, position)
-       VALUES ($1, $2, $3, $4, $5, $6)`,
-      [userId, deckId, c.type, cardContent(c), c.category, i++],
+  await withTransaction(async (client) => {
+    // Serialize concurrent appends to the same deck.
+    const deck = await client.query(
+      "SELECT 1 FROM decks WHERE id = $1 AND user_id = $2 FOR UPDATE",
+      [deckId, userId],
     );
-  }
+    if (deck.rowCount === 0) return; // ownership already checked in the service
+    const maxRow = await client.query<{ max: number | null }>(
+      "SELECT max(position) AS max FROM cards WHERE deck_id = $1 AND user_id = $2",
+      [deckId, userId],
+    );
+    const start = (maxRow.rows[0]?.max ?? -1) + 1;
+    await insertCardsBatch(client, userId, deckId, cards, start);
+  });
 }
 
 export interface DeckListRow extends DeckRow {

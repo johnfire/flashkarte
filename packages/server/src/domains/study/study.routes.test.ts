@@ -9,6 +9,11 @@ jest.mock("../../db/client", () => ({
   closePool: jest.fn(),
 }));
 jest.mock("../../middleware/auth", () => ({
+  requireFullScope: (
+    _req: import("express").Request,
+    _res: import("express").Response,
+    next: import("express").NextFunction,
+  ) => next(),
   requireAuth: (
     req: import("express").Request,
     _res: import("express").Response,

@@ -18,12 +18,14 @@ export function requireAuth(
   }
   const token = header.slice(7);
 
-  // Personal API keys (fk_…) authenticate anywhere a JWT does.
+  // API keys (fk_…). 'full' keys authenticate anywhere a JWT does; 'deck' keys
+  // are restricted to deck data routes by requireFullScope.
   if (token.startsWith("fk_")) {
     resolveKey(token)
-      .then((userId) => {
-        if (!userId) return next(new AuthError("Invalid API key"));
-        req.userId = userId;
+      .then((result) => {
+        if (!result) return next(new AuthError("Invalid API key"));
+        req.userId = result.userId;
+        req.keyScope = result.scope;
         next();
       })
       .catch(next);
@@ -33,10 +35,26 @@ export function requireAuth(
   try {
     const payload = verifyAccessToken(token);
     req.userId = payload.sub;
+    req.keyScope = "full";
     next();
   } catch (err) {
     next(err);
   }
+}
+
+// Reject deck-scoped API keys (minted by the MCP/OAuth flow) from account-level
+// routes — key management, bug reports, admin. Runs after requireAuth. JWTs and
+// personal 'full' keys pass through.
+export function requireFullScope(
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+): void {
+  if (req.keyScope === "deck") {
+    next(new ForbiddenError("This API key is limited to deck operations"));
+    return;
+  }
+  next();
 }
 
 // Gate admin-only routes. Runs after requireAuth: looks up the authenticated

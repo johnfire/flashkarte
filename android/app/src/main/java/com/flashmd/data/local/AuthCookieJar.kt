@@ -36,6 +36,9 @@ private data class StoredCookie(
  * path `/api/auth`) survives process death — the Android equivalent of the
  * web client's `credentials: include`. Cookies are kept in memory and mirrored
  * to DataStore; expired ones are dropped on load.
+ *
+ * The serialized snapshot is encrypted at rest via [CryptoBox] (Keystore-backed)
+ * since it holds the long-lived refresh credential.
  */
 @Singleton
 class AuthCookieJar @Inject constructor(
@@ -48,7 +51,9 @@ class AuthCookieJar @Inject constructor(
 
     init {
         runBlocking {
-            val raw = context.cookieDataStore.data.first()[key]
+            // Stored value is encrypted; decrypt fails (→ null) for legacy
+            // plaintext, dropping stale cookies and forcing a clean re-login.
+            val raw = context.cookieDataStore.data.first()[key]?.let(CryptoBox::decrypt)
             if (raw != null) {
                 runCatching { json.decodeFromString<List<StoredCookie>>(raw) }
                     .getOrDefault(emptyList())
@@ -94,7 +99,7 @@ class AuthCookieJar @Inject constructor(
     }
 
     private fun persist() {
-        val snapshot = json.encodeToString(cookies.values.toList())
+        val snapshot = CryptoBox.encrypt(json.encodeToString(cookies.values.toList()))
         runBlocking { context.cookieDataStore.edit { it[key] = snapshot } }
     }
 
