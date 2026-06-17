@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import { AdminUser, AccountType } from "../api/types";
+import { PasswordInput } from "../components/PasswordInput";
 
 const ACCOUNT_TYPES: AccountType[] = ["free", "paid", "admin-gifted", "admin"];
 
@@ -21,7 +22,6 @@ export function AdminPage() {
   // create-user form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [accountType, setAccountType] = useState<AccountType>("free");
   const [creating, setCreating] = useState(false);
   const [createMsg, setCreateMsg] = useState<string | null>(null);
@@ -94,38 +94,27 @@ export function AdminPage() {
         <form onSubmit={createUser} className="space-y-3">
           <div className="flex flex-col gap-3 sm:flex-row">
             <input
+              id="new-user-email"
               type="email"
               required
+              autoComplete="off"
+              aria-label={t("admin.emailPlaceholder")}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder={t("admin.emailPlaceholder")}
               className="flex-1 rounded-lg border px-3 py-2"
             />
-            <div className="relative flex-1">
-              <input
-                type={showPassword ? "text" : "password"}
-                required
-                minLength={8}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={t("admin.passwordPlaceholder")}
-                className="w-full rounded-lg border px-3 py-2 pr-10"
-              />
-              <button
-                type="button"
-                onClick={() => setShowPassword((v) => !v)}
-                aria-label={
-                  showPassword ? t("auth.hidePassword") : t("auth.showPassword")
-                }
-                aria-pressed={showPassword}
-                title={
-                  showPassword ? t("auth.hidePassword") : t("auth.showPassword")
-                }
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
-              >
-                {showPassword ? t("auth.hidePassword") : t("auth.showPassword")}
-              </button>
-            </div>
+            <PasswordInput
+              id="new-user-password"
+              value={password}
+              onChange={setPassword}
+              autoComplete="new-password"
+              required
+              minLength={8}
+              ariaLabel={t("admin.passwordPlaceholder")}
+              placeholder={t("admin.passwordPlaceholder")}
+              wrapperClassName="relative flex-1"
+            />
           </div>
           <div className="flex items-center gap-3">
             <select

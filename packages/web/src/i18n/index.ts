@@ -33,4 +33,14 @@ i18n
     returnNull: false,
   });
 
+// Keep <html lang> in sync with the active language so screen readers and
+// translation tools narrate/handle the content in the right language.
+function syncDocumentLang(lng: string): void {
+  if (typeof document !== "undefined") {
+    document.documentElement.lang = (lng || FALLBACK_LOCALE).split("-")[0];
+  }
+}
+i18n.on("languageChanged", syncDocumentLang);
+syncDocumentLang(i18n.language || FALLBACK_LOCALE);
+
 export default i18n;
