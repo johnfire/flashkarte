@@ -27,6 +27,21 @@ const goodQuery = {
   state: "xyz",
 };
 
+// GET the form, lift its CSRF token, then POST — mirrors a real browser so the
+// stateless login-CSRF token validates.
+async function postAuthorize(
+  app: ReturnType<typeof makeApp>,
+  fields: Record<string, string> = {},
+) {
+  const form = await request(app).get("/oauth/authorize").query(goodQuery);
+  const ts = /name="csrf_ts" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+  const sig = /name="csrf_sig" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+  return request(app)
+    .post("/oauth/authorize")
+    .type("form")
+    .send({ ...goodQuery, csrf_ts: ts, csrf_sig: sig, ...fields });
+}
+
 describe("authorize GET", () => {
   test("renders a login form for a valid request", async () => {
     const res = await request(makeApp())
@@ -76,10 +91,10 @@ describe("authorize POST", () => {
       key: "fk_minted",
       key_prefix: "fk_minted",
     });
-    const res = await request(makeApp())
-      .post("/oauth/authorize")
-      .type("form")
-      .send({ ...goodQuery, email: "a@b.com", password: "pw" });
+    const res = await postAuthorize(makeApp(), {
+      email: "a@b.com",
+      password: "pw",
+    });
 
     expect(res.status).toBe(302);
     const loc = new URL(res.headers.location);
@@ -93,10 +108,10 @@ describe("authorize POST", () => {
 
   test("bad credentials re-render the form with an error", async () => {
     mockApi.backendLogin.mockResolvedValue(null);
-    const res = await request(makeApp())
-      .post("/oauth/authorize")
-      .type("form")
-      .send({ ...goodQuery, email: "a@b.com", password: "wrong" });
+    const res = await postAuthorize(makeApp(), {
+      email: "a@b.com",
+      password: "wrong",
+    });
     expect(res.status).toBe(401);
     expect(res.text).toContain("<form");
     expect(res.text).toContain("Invalid email or password");
@@ -104,10 +119,7 @@ describe("authorize POST", () => {
   });
 
   test("missing email/password re-renders the form with a 400", async () => {
-    const res = await request(makeApp())
-      .post("/oauth/authorize")
-      .type("form")
-      .send({ ...goodQuery }); // no email/password
+    const res = await postAuthorize(makeApp()); // valid CSRF, no credentials
     expect(res.status).toBe(400);
     expect(res.text).toContain("<form");
     expect(res.text).toContain("Email and password are required");
@@ -117,12 +129,36 @@ describe("authorize POST", () => {
   test("a backend key-creation failure re-renders the form with a 500", async () => {
     mockApi.backendLogin.mockResolvedValue({ accessToken: "jwt" });
     mockApi.backendCreateKey.mockRejectedValue(new Error("boom"));
-    const res = await request(makeApp())
-      .post("/oauth/authorize")
-      .type("form")
-      .send({ ...goodQuery, email: "a@b.com", password: "pw" });
+    const res = await postAuthorize(makeApp(), {
+      email: "a@b.com",
+      password: "pw",
+    });
     expect(res.status).toBe(500);
     expect(res.text).toContain("<form");
     expect(res.text).toContain("Could not create an API key");
+  });
+
+  // MCP-004: login CSRF + brute-force protection.
+  test("rejects a POST with no/invalid CSRF token (login CSRF)", async () => {
+    const res = await request(makeApp())
+      .post("/oauth/authorize")
+      .type("form")
+      .send({ ...goodQuery, email: "a@b.com", password: "pw" }); // no csrf
+    expect(res.status).toBe(400);
+    expect(mockApi.backendLogin).not.toHaveBeenCalled();
+  });
+
+  test("rate-limits repeated login attempts from one client", async () => {
+    mockApi.backendLogin.mockResolvedValue(null); // always "wrong"
+    const app = makeApp(); // shared instance -> shared limiter
+    let last = 0;
+    for (let i = 0; i < 12; i++) {
+      const res = await postAuthorize(app, {
+        email: "a@b.com",
+        password: "wrong",
+      });
+      last = res.status;
+    }
+    expect(last).toBe(429); // tripped the per-IP limit
   });
 });

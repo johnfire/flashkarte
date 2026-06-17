@@ -1,4 +1,5 @@
 import { Router } from "express";
+import crypto from "crypto";
 import { createAuthCode } from "./store";
 import { backendLogin, backendCreateKey } from "../api";
 
@@ -9,6 +10,37 @@ interface OAuthParams {
   code_challenge_method: string;
   state?: string;
 }
+
+// --- Login CSRF: a stateless signed token binding the form to its OAuth params.
+// Without it, an attacker can cross-site-submit their own credentials to log a
+// victim's connector into the attacker's account (login CSRF). 10-min validity.
+const CSRF_TTL_MS = 10 * 60 * 1000;
+
+function csrfSecret(): string {
+  return process.env.MCP_JWT_SECRET ?? "mcp-dev-csrf-secret";
+}
+
+function signCsrf(p: OAuthParams, ts: string): string {
+  return crypto
+    .createHmac("sha256", csrfSecret())
+    .update([ts, p.client_id, p.redirect_uri, p.code_challenge].join("\n"))
+    .digest("base64url");
+}
+
+function csrfValid(p: OAuthParams, ts?: string, sig?: string): boolean {
+  if (!ts || !sig) return false;
+  const tsNum = Number(ts);
+  if (!Number.isFinite(tsNum) || Date.now() - tsNum > CSRF_TTL_MS) return false;
+  const expected = signCsrf(p, ts);
+  const a = Buffer.from(sig);
+  const b = Buffer.from(expected);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+// --- Per-IP login rate limit (the authorize POST is an unauthenticated
+// password-guessing oracle against real flashkarte accounts otherwise).
+const ATTEMPT_LIMIT = 10;
+const ATTEMPT_WINDOW_MS = 15 * 60 * 1000;
 
 const HTML_ESCAPES: Record<string, string> = {
   "&": "&amp;",
@@ -27,6 +59,8 @@ function renderLoginForm(p: OAuthParams, error?: string): string {
     val
       ? `<input type="hidden" name="${name}" value="${escapeHtml(val)}">`
       : "";
+  const csrfTs = String(Date.now());
+  const csrfSig = signCsrf(p, csrfTs);
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -48,6 +82,8 @@ ${hidden("redirect_uri", p.redirect_uri)}
 ${hidden("code_challenge", p.code_challenge)}
 ${hidden("code_challenge_method", p.code_challenge_method)}
 ${hidden("state", p.state)}
+${hidden("csrf_ts", csrfTs)}
+${hidden("csrf_sig", csrfSig)}
 <input name="email" type="email" placeholder="Email" autocomplete="username" required>
 <input name="password" type="password" placeholder="Password" autocomplete="current-password" required>
 <button type="submit">Log in &amp; connect</button>
@@ -119,6 +155,20 @@ export function createAuthorizeRouter(
 ): Router {
   const router = Router();
 
+  // Per-instance so each app gets a fresh limiter (one instance in prod).
+  const attempts = new Map<string, { count: number; resetAt: number }>();
+  function rateLimited(ip: string | undefined): boolean {
+    const key = ip ?? "unknown";
+    const now = Date.now();
+    const e = attempts.get(key);
+    if (!e || e.resetAt < now) {
+      attempts.set(key, { count: 1, resetAt: now + ATTEMPT_WINDOW_MS });
+      return false;
+    }
+    e.count += 1;
+    return e.count > ATTEMPT_LIMIT;
+  }
+
   router.get("/oauth/authorize", (req, res) => {
     const v = validate(
       clientId,
@@ -139,12 +189,31 @@ export function createAuthorizeRouter(
       res.status(v.status).json(v.body);
       return;
     }
+    if (!csrfValid(v.params, body.csrf_ts, body.csrf_sig)) {
+      res
+        .status(400)
+        .type("html")
+        .send(renderLoginForm(v.params, "Your session expired. Please try again."));
+      return;
+    }
     const { email, password } = body;
     if (!email || !password) {
       res
         .status(400)
         .type("html")
         .send(renderLoginForm(v.params, "Email and password are required."));
+      return;
+    }
+    if (rateLimited(req.ip)) {
+      res
+        .status(429)
+        .type("html")
+        .send(
+          renderLoginForm(
+            v.params,
+            "Too many attempts. Please wait a few minutes and try again.",
+          ),
+        );
       return;
     }
 

@@ -43,13 +43,16 @@ export function registerDeckTools(server: McpServer) {
     "Append more cards (in the Markdown card format) to an existing deck. " +
       MARKDOWN_HELP,
     {
-      deck_id: z.string().describe("The deck's UUID."),
+      deck_id: z.string().uuid().describe("The deck's UUID."),
       markdown: z
         .string()
         .describe("Markdown containing the new `**N. front**` + answer cards."),
     },
     async ({ deck_id, markdown }) => {
-      const result = await post(`/api/decks/${deck_id}/cards`, { markdown });
+      const result = await post(
+        `/api/decks/${encodeURIComponent(deck_id)}/cards`,
+        { markdown },
+      );
       return asText(result);
     },
   );
@@ -64,16 +67,17 @@ export function registerDeckTools(server: McpServer) {
   server.tool(
     "get_deck",
     "Get a single deck and all of its cards by ID.",
-    { deck_id: z.string().describe("The deck's UUID.") },
-    async ({ deck_id }) => asText(await get(`/api/decks/${deck_id}`)),
+    { deck_id: z.string().uuid().describe("The deck's UUID.") },
+    async ({ deck_id }) =>
+      asText(await get(`/api/decks/${encodeURIComponent(deck_id)}`)),
   );
 
   server.tool(
     "delete_deck",
     "Permanently delete a deck and all of its cards.",
-    { deck_id: z.string().describe("The deck's UUID.") },
+    { deck_id: z.string().uuid().describe("The deck's UUID.") },
     async ({ deck_id }) => {
-      await del(`/api/decks/${deck_id}`);
+      await del(`/api/decks/${encodeURIComponent(deck_id)}`);
       return asText({ deleted: deck_id });
     },
   );

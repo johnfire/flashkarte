@@ -39,9 +39,13 @@ function buildServer(): McpServer {
 }
 
 const app = express();
-app.use(express.json());
-// OAuth authorize form + token endpoint use form-encoded bodies.
-app.use(express.urlencoded({ extended: false }));
+// Behind one reverse proxy (nginx) — trust it so req.ip is the real client for
+// the login rate limiter.
+app.set("trust proxy", 1);
+// JSON allows up to the backend's deck-import size (create_deck forwards
+// markdown); the OAuth form bodies are tiny, so cap them tightly.
+app.use(express.json({ limit: "5mb" }));
+app.use(express.urlencoded({ extended: false, limit: "64kb" }));
 
 app.get("/health", (_req, res) => {
   res.send("ok");

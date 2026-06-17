@@ -12,6 +12,8 @@ export function createTokenRouter(): Router {
   const router = Router();
 
   router.post("/oauth/token", (req, res) => {
+    // Token responses must never be cached by intermediaries (RFC 6749 §5.1).
+    res.set("Cache-Control", "no-store");
     const body = req.body as Record<string, string | undefined>;
     const {
       grant_type,
