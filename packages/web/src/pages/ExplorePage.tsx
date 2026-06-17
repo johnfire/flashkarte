@@ -1,11 +1,13 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { deckPath } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";
 import { LibraryDeck } from "../api/types";
 import { useDocumentHead } from "../seo/useDocumentHead";
 
 export function ExplorePage() {
+  const { t } = useTranslation();
   useDocumentHead({
     title: "Explore public flashcard decks — flashkarte",
     description:
@@ -15,19 +17,22 @@ export function ExplorePage() {
   const [q, setQ] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const load = useCallback(async (search: string) => {
-    setError(null);
-    try {
-      const { decks } = await api.publicLibrary.list(
-        search.trim() || undefined,
-      );
-      setDecks(decks);
-    } catch (err) {
-      setError(
-        err instanceof ApiError ? err.message : "Couldn't load the library",
-      );
-    }
-  }, []);
+  const load = useCallback(
+    async (search: string) => {
+      setError(null);
+      try {
+        const { decks } = await api.publicLibrary.list(
+          search.trim() || undefined,
+        );
+        setDecks(decks);
+      } catch (err) {
+        setError(
+          err instanceof ApiError ? err.message : t("explore.loadError"),
+        );
+      }
+    },
+    [t],
+  );
 
   useEffect(() => {
     load("");
@@ -42,30 +47,31 @@ export function ExplorePage() {
   return (
     <div className="mx-auto max-w-2xl p-4">
       <header className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Explore decks</h1>
+        <h1 className="text-3xl font-bold">{t("explore.title")}</h1>
         <Link to="/" className="text-sm text-indigo-600">
-          ← Home
+          {t("explore.home")}
         </Link>
       </header>
       <form onSubmit={onSearch} className="mb-4 flex gap-2">
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search public decks…"
+          aria-label={t("explore.searchPlaceholder")}
+          placeholder={t("explore.searchPlaceholder")}
           className="flex-1 rounded-lg border px-3 py-2"
         />
         <button className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white">
-          Search
+          {t("explore.search")}
         </button>
       </form>
       {error && <p className="mb-3 text-red-600">{error}</p>}
       {decks === null && !error && (
-        <p className="text-gray-500 dark:text-gray-400">Loading…</p>
+        <p className="text-gray-500 dark:text-gray-400">
+          {t("common.loading")}
+        </p>
       )}
       {decks && decks.length === 0 && (
-        <p className="text-gray-500 dark:text-gray-400">
-          No public decks found.
-        </p>
+        <p className="text-gray-500 dark:text-gray-400">{t("explore.empty")}</p>
       )}
       <ul className="space-y-2">
         {decks?.map((d) => (
@@ -77,7 +83,8 @@ export function ExplorePage() {
               {d.title}
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              {d.cardCount} cards · by {d.author}
+              {t("decks.cardCount", { count: d.cardCount })} ·{" "}
+              {t("explore.by", { author: d.author })}
             </p>
           </li>
         ))}

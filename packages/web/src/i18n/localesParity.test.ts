@@ -14,19 +14,25 @@ function keysOf(obj: Record<string, unknown>, prefix = ""): string[] {
   );
 }
 
-describe("guide i18n parity", () => {
-  const enGuideKeys = keysOf(en.guide as Record<string, unknown>, "guide.");
-  const enGuideKeySet = new Set(enGuideKeys);
+function valueAt(loc: Record<string, unknown>, dottedKey: string): unknown {
+  return dottedKey
+    .split(".")
+    .reduce<unknown>(
+      (o, part) => (o as Record<string, unknown> | undefined)?.[part],
+      loc,
+    );
+}
 
-  it("every locale has exactly the same guide keys as en", () => {
+describe("locale i18n parity", () => {
+  const enKeys = keysOf(en as Record<string, unknown>);
+  const enKeySet = new Set(enKeys);
+
+  it("every locale has exactly the same keys as en (whole file)", () => {
     for (const [name, loc] of Object.entries(locales)) {
-      const locKeys = keysOf(
-        (loc.guide ?? {}) as Record<string, unknown>,
-        "guide.",
-      );
+      const locKeys = keysOf(loc);
       const locKeySet = new Set(locKeys);
-      const missing = enGuideKeys.filter((k) => !locKeySet.has(k));
-      const extra = locKeys.filter((k) => !enGuideKeySet.has(k));
+      const missing = enKeys.filter((k) => !locKeySet.has(k));
+      const extra = locKeys.filter((k) => !enKeySet.has(k));
       expect(missing, `${name} missing: ${missing.join(", ")}`).toEqual([]);
       expect(
         extra,
@@ -35,13 +41,16 @@ describe("guide i18n parity", () => {
     }
   });
 
-  it("every locale has a non-empty common.guide string", () => {
-    for (const [name, loc] of Object.entries(locales)) {
-      const val = (loc.common as Record<string, unknown>)?.guide;
+  it("no locale has an empty string value", () => {
+    for (const [name, loc] of Object.entries({ en, ...locales })) {
+      const empties = keysOf(loc as Record<string, unknown>).filter((k) => {
+        const val = valueAt(loc as Record<string, unknown>, k);
+        return typeof val === "string" && val.trim() === "";
+      });
       expect(
-        typeof val === "string" && val.length > 0,
-        `${name} missing common.guide`,
-      ).toBe(true);
+        empties,
+        `${name} has empty values: ${empties.join(", ")}`,
+      ).toEqual([]);
     }
   });
 });

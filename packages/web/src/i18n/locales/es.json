@@ -313,5 +313,20 @@
     "aiStep1": "En Ajustes, genera una clave API y copia la URL del servidor MCP.",
     "aiStep2": "Añade la URL como conector personalizado en tu cliente de IA (por ejemplo claude.ai o Claude Desktop) e inicia sesión con tu cuenta de flashkarte.",
     "aiStep3": "Pídele que cree un mazo, p. ej. \"Turn this into a flashkarte deck: …\", y el nuevo mazo aparecerá en tu cuenta."
+  },
+  "explore": {
+    "title": "Explorar mazos",
+    "home": "← Inicio",
+    "searchPlaceholder": "Buscar mazos públicos…",
+    "search": "Buscar",
+    "loadError": "No se pudo cargar la biblioteca",
+    "empty": "No se encontraron mazos públicos.",
+    "by": "por {{author}}"
+  },
+  "publicDeck": {
+    "notFound": "Mazo no encontrado",
+    "explore": "← Explorar",
+    "cta": "Regístrate gratis para ver las respuestas y estudiar este mazo con repetición espaciada.",
+    "ctaButton": "Regístrate para estudiar"
   }
 }

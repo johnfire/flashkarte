@@ -313,5 +313,20 @@
     "aiStep1": "In Settings, generate an API key and copy the MCP server URL.",
     "aiStep2": "Add the URL as a custom connector in your AI client (for example claude.ai or Claude Desktop) and sign in with your flashkarte account.",
     "aiStep3": "Ask it to build a deck, e.g. \"Turn this into a flashkarte deck: …\", and the new deck appears in your account."
+  },
+  "explore": {
+    "title": "Explore decks",
+    "home": "← Home",
+    "searchPlaceholder": "Search public decks…",
+    "search": "Search",
+    "loadError": "Couldn’t load the library",
+    "empty": "No public decks found.",
+    "by": "by {{author}}"
+  },
+  "publicDeck": {
+    "notFound": "Deck not found",
+    "explore": "← Explore",
+    "cta": "Sign up free to reveal the answers and study this deck with spaced repetition.",
+    "ctaButton": "Sign up to study"
   }
 }

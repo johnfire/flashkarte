@@ -313,5 +313,20 @@
     "aiStep1": "Dans les Réglages, génère une clé API et copie l'URL du serveur MCP.",
     "aiStep2": "Ajoute l'URL comme connecteur personnalisé dans ton client IA (par exemple claude.ai ou Claude Desktop) et connecte-toi avec ton compte flashkarte.",
     "aiStep3": "Demande-lui de créer un paquet, p. ex. \"Turn this into a flashkarte deck: …\", et le nouveau paquet apparaît dans ton compte."
+  },
+  "explore": {
+    "title": "Explorer les paquets",
+    "home": "← Accueil",
+    "searchPlaceholder": "Rechercher des paquets publics…",
+    "search": "Rechercher",
+    "loadError": "Impossible de charger la bibliothèque",
+    "empty": "Aucun paquet public trouvé.",
+    "by": "par {{author}}"
+  },
+  "publicDeck": {
+    "notFound": "Paquet introuvable",
+    "explore": "← Explorer",
+    "cta": "Inscrivez-vous gratuitement pour révéler les réponses et étudier ce paquet avec la répétition espacée.",
+    "ctaButton": "S’inscrire pour étudier"
   }
 }

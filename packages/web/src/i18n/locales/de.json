@@ -313,5 +313,20 @@
     "aiStep1": "Erzeuge in den Einstellungen einen API-Schlüssel und kopiere die MCP-Server-URL.",
     "aiStep2": "Füge die URL als benutzerdefinierten Connector in deinem KI-Client hinzu (zum Beispiel claude.ai oder Claude Desktop) und melde dich mit deinem flashkarte-Konto an.",
     "aiStep3": "Bitte ihn, einen Stapel zu erstellen, z. B. \"Turn this into a flashkarte deck: …\", und der neue Stapel erscheint in deinem Konto."
+  },
+  "explore": {
+    "title": "Stapel entdecken",
+    "home": "← Start",
+    "searchPlaceholder": "Öffentliche Stapel suchen…",
+    "search": "Suchen",
+    "loadError": "Bibliothek konnte nicht geladen werden",
+    "empty": "Keine öffentlichen Stapel gefunden.",
+    "by": "von {{author}}"
+  },
+  "publicDeck": {
+    "notFound": "Stapel nicht gefunden",
+    "explore": "← Entdecken",
+    "cta": "Melde dich kostenlos an, um die Antworten zu sehen und diesen Stapel mit Spaced Repetition zu lernen.",
+    "ctaButton": "Anmelden zum Lernen"
   }
 }
