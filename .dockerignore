@@ -6,4 +6,6 @@ python
 docs
 backups
 logs
+.env
+**/.env
 *.md

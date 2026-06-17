@@ -21,6 +21,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Audit production dependencies (fail on High/Critical CVEs)
+        run: npm audit --omit=dev --audit-level=high
       - name: Build shared (server/web import its dist for types)
         run: npm run build --workspace=packages/shared
       - name: Test all workspaces
