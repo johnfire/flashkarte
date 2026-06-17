@@ -1,0 +1,105 @@
+{
+  "_comment": "Shared parser parity corpus. Every port (TS @flashkarte/shared, Python flashmd) must parse each `input` into `expected`. Scope is the COMMON feature set — basic cards, Q:/A: cards, categories, paragraph handling, title fallback. Branching (anchors + options) is NOT here because the Python reference parser does not implement it; branching parity is covered by the TS and Kotlin suites. Cards compare on {front, back, category} only.",
+  "cases": [
+    {
+      "name": "basic card, title from H1",
+      "input": "# Deck\n\n**1. FOO — Bar**\nDefinition.\n",
+      "source": "test.md",
+      "expected": {
+        "title": "Deck",
+        "cards": [{ "front": "FOO — Bar", "back": "Definition.", "category": null }]
+      }
+    },
+    {
+      "name": "categories carry to following cards",
+      "input": "# D\n\n## Cat A\n\n**1. X**\nx def.\n\n## Cat B\n\n**2. Y**\ny def.\n",
+      "source": "test.md",
+      "expected": {
+        "title": "D",
+        "cards": [
+          { "front": "X", "back": "x def.", "category": "Cat A" },
+          { "front": "Y", "back": "y def.", "category": "Cat B" }
+        ]
+      }
+    },
+    {
+      "name": "multi-line single paragraph joined with space",
+      "input": "# D\n\n**1. X**\nline one.\nline two.\n",
+      "source": "test.md",
+      "expected": {
+        "title": "D",
+        "cards": [{ "front": "X", "back": "line one. line two.", "category": null }]
+      }
+    },
+    {
+      "name": "multi-paragraph back split by blank line",
+      "input": "# D\n\n**1. X**\npara one.\n\npara two.\n",
+      "source": "test.md",
+      "expected": {
+        "title": "D",
+        "cards": [{ "front": "X", "back": "para one.\n\npara two.", "category": null }]
+      }
+    },
+    {
+      "name": "Q:/A: answer and description become separate paragraphs",
+      "input": "# AI\n\nQ: ML\nA: Machine Learning\nA subfield of AI.\n",
+      "source": "ai.md",
+      "expected": {
+        "title": "AI",
+        "cards": [
+          {
+            "front": "ML",
+            "back": "Machine Learning\n\nA subfield of AI.",
+            "category": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "Q:/A: with no description yields just the answer",
+      "input": "# D\n\nQ: HP\nA: Horsepower\n",
+      "source": "d.md",
+      "expected": {
+        "title": "D",
+        "cards": [{ "front": "HP", "back": "Horsepower", "category": null }]
+      }
+    },
+    {
+      "name": "a back line starting with A: in bold format is preserved",
+      "input": "# D\n\n**1. FOO**\nA: this is just back text.\n",
+      "source": "d.md",
+      "expected": {
+        "title": "D",
+        "cards": [
+          { "front": "FOO", "back": "A: this is just back text.", "category": null }
+        ]
+      }
+    },
+    {
+      "name": "no title falls back to the source filename",
+      "input": "**1. FOO — Bar**\nSome definition.\n",
+      "source": "fallback.md",
+      "expected": {
+        "title": "fallback.md",
+        "cards": [
+          { "front": "FOO — Bar", "back": "Some definition.", "category": null }
+        ]
+      }
+    },
+    {
+      "name": "no card patterns yields an empty deck",
+      "input": "# Empty Deck\nNo card patterns here.\n",
+      "source": "empty.md",
+      "expected": { "title": "Empty Deck", "cards": [] }
+    },
+    {
+      "name": "card without a category is null",
+      "input": "# D\n\n**1. FOO — Bar**\nDefinition.\n",
+      "source": "x.md",
+      "expected": {
+        "title": "D",
+        "cards": [{ "front": "FOO — Bar", "back": "Definition.", "category": null }]
+      }
+    }
+  ]
+}

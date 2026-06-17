@@ -116,8 +116,14 @@ existed; this was UI + API-client wiring. Published to Play internal.
 - **Stack:** Express+TS+Postgres (`packages/server`, **Jest**), React+Vite+Tailwind
   (`packages/web`, **Vitest**), shared parser/SM-2 (`packages/shared`, **Jest**),
   MCP (`packages/mcp`), Kotlin/Compose (`android/`), reference Python (`python/`).
-- **Parser parity:** the Markdown parser exists in 3 ports (TS/Kotlin/Python) and
-  the code comment requires them identical — change all three together.
+- **Parser parity:** the Markdown parser exists in 3 ports (TS/Kotlin/Python).
+  The **common** feature set (basic + `Q:/A:` cards, categories, paragraph
+  handling, title fallback) is identical across all three and locked by a shared
+  corpus — `fixtures/parser-cases.json`, exercised by TS
+  (`packages/shared/src/markdown/parser.corpus.test.ts`) and Python
+  (`python/tests/unit/test_md_parser_corpus.py`). **Branching (anchors `[label]`
+  + `-> target` options) is TS + Kotlin only; the Python reference parser does
+  not implement it.** Change the ports together for any common-subset behaviour.
 - **Migrations** auto-run on server start (`src/db/migrate.ts`, numbered `.sql`,
   tracked in `_migrations`). Latest is `008_review_events.sql`; add the next as
   `009_*.sql`.
