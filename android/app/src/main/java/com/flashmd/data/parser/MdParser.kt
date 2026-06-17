@@ -32,7 +32,22 @@ object MdParser {
     private val ABACK = Regex("""^A:\s*(.+)""")
     // Branching: an anchor line [label], and option lines "- text -> target".
     private val ANCHOR = Regex("""^\[([A-Za-z0-9_-]+)\]\s*$""")
-    private val OPTION = Regex("""^-\s+(.+?)\s+->\s+(\S+)\s*$""")
+
+    // Option line "- <text> -> <target>". Parsed with linear string ops, not one
+    // backtracking regex: the old ^-\s+(.+?)\s+->\s+(\S+)\s*$ backtracked
+    // catastrophically (ReDoS) on long whitespace runs. The "->" is anchored at
+    // end of line, preserving the original "target = final token" semantics.
+    // Keep in sync with packages/shared/src/markdown/parser.ts.
+    private val OPTION_TAIL = Regex("""\s->\s+(\S+)\s*$""")
+    private val OPTION_LEAD = Regex("""^-\s+""")
+
+    private fun matchOption(line: String): ParsedOption? {
+        if (line.length < 2 || line[0] != '-' || !line[1].isWhitespace()) return null
+        val tail = OPTION_TAIL.find(line) ?: return null
+        val text = line.substring(0, tail.range.first).replace(OPTION_LEAD, "").trim()
+        if (text.isEmpty()) return null
+        return ParsedOption(text, tail.groupValues[1])
+    }
 
     fun parse(text: String, sourceFile: String = ""): ParsedDeck {
         val lines = text.lines()
@@ -77,7 +92,7 @@ object MdParser {
             val mQ = QFRONT.find(line)
             val mA = ABACK.find(line)
             val mAnchor = ANCHOR.find(line)
-            val mOption = if (currentFront != null) OPTION.find(line) else null
+            val mOption = if (currentFront != null) matchOption(line) else null
 
             when {
                 mH1 != null && title.isEmpty() -> title = mH1.groupValues[1].trim()
@@ -89,8 +104,7 @@ object MdParser {
                 HR.matches(line) -> { /* separator, skip */ }
                 mFront != null -> openCard(mFront.groupValues[1].trim(), false)
                 mQ != null -> openCard(mQ.groupValues[1].trim(), true)
-                mOption != null ->
-                    options += ParsedOption(mOption.groupValues[1].trim(), mOption.groupValues[2].trim())
+                mOption != null -> options += mOption
                 mA != null && currentFront != null && currentIsQA &&
                     backLines.all { it.isBlank() } -> {
                     // First `A:` after a `Q:`: answer becomes its own paragraph,

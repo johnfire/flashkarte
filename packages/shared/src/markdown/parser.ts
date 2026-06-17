@@ -29,7 +29,21 @@ const QFRONT = /^Q:\s*(.+)/;
 const ABACK = /^A:\s*(.+)/;
 // Branching: an anchor line [label], and option lines "- text -> target".
 const ANCHOR = /^\[([A-Za-z0-9_-]+)\]\s*$/;
-const OPTION = /^-\s+(.+?)\s+->\s+(\S+)\s*$/;
+
+// Option line: "- <text> -> <target>". Parsed with linear string ops rather
+// than one backtracking regex: the old /^-\s+(.+?)\s+->\s+(\S+)\s*$/ backtracked
+// catastrophically (ReDoS) on a long whitespace run, freezing the server's event
+// loop for minutes on a single import. The "->" is anchored at end of line, so a
+// multi-arrow line keeps the original "target = final token" semantics.
+// Keep in sync with python/flashmd/parser/md_parser.py and android MdParser.kt.
+function matchOption(line: string): { text: string; goto: string } | null {
+  if (!/^-\s/.test(line)) return null;
+  const tail = /\s->\s+(\S+)\s*$/.exec(line);
+  if (!tail) return null;
+  const text = line.slice(0, tail.index).replace(/^-\s+/, "").trim();
+  if (!text) return null;
+  return { text, goto: tail[1] };
+}
 
 /**
  * Parse Markdown deck text into a ParsedDeck.
@@ -82,7 +96,7 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
     const mQ = QFRONT.exec(line);
     const mA = ABACK.exec(line);
     const mAnchor = ANCHOR.exec(line);
-    const mOption = currentFront !== null ? OPTION.exec(line) : null;
+    const mOption = currentFront !== null ? matchOption(line) : null;
 
     if (mH1 && !title) {
       title = mH1[1].trim();
@@ -98,7 +112,7 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
     } else if (mQ) {
       openCard(mQ[1].trim(), true);
     } else if (mOption) {
-      options.push({ text: mOption[1].trim(), goto: mOption[2].trim() });
+      options.push({ text: mOption.text, goto: mOption.goto });
     } else if (
       mA &&
       currentFront !== null &&

@@ -194,4 +194,15 @@ You rest here.
       type: "basic", front: "Q", back: "An answer.", label: null, options: [],
     });
   });
+
+  // Regression (SEO-001): the option matcher must be linear. The old regex
+  // /^-\s+(.+?)\s+->\s+(\S+)\s*$/ backtracked catastrophically on a long run of
+  // whitespace, blocking the server's event loop for minutes on a single import.
+  it("parses an adversarial whitespace option line in linear time", () => {
+    const evil = `# T\n\n**1. q**\n- ${" ".repeat(50000)}->\n`;
+    const started = Date.now();
+    const deck = parseDeck(evil);
+    expect(Date.now() - started).toBeLessThan(1000);
+    expect(deck.cards[0].options).toEqual([]); // not a valid option line
+  });
 });
