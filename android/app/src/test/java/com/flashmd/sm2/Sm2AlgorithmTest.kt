@@ -69,6 +69,17 @@ class Sm2AlgorithmTest {
         assertEquals(3, r.repetitions)
     }
 
+    // Regression: easiness must be rounded to 6 decimals to match the TS/Python
+    // canonical, since the server is the sync source of truth. Here the raw
+    // float is 2.2199999999999998; an unrounded port drifts to a value the
+    // server never stores, causing needless sync churn. Delta 0.0 = exact.
+    @Test fun `easiness is rounded to 6dp to match the server`() {
+        val r = calc(2.36, 15, 3, 3)
+        assertEquals(2.22, r.easiness, 0.0)
+        assertEquals(35, r.interval)
+        assertEquals(4, r.repetitions)
+    }
+
     @Test(expected = IllegalArgumentException::class)
     fun `rating 0 throws`() { calc(2.5, 0, 0, 0) }
 

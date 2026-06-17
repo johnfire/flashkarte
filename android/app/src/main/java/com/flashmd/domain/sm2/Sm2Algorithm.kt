@@ -36,11 +36,14 @@ object Sm2Algorithm {
 
         val newEf = maxOf(
             1.3,
-            oldEf + 0.1 - (5 - rating) * (0.08 + (5 - rating) * 0.02)
+            oldEf + (0.1 - (5 - rating) * (0.08 + (5 - rating) * 0.02))
         )
 
         return Sm2Result(
-            easiness = newEf,
+            // Round to 6 decimals exactly as the TS/Python canonical does. The
+            // server is the sync source of truth; an unrounded value drifts
+            // from what it stores and triggers spurious sync churn.
+            easiness = Math.round(newEf * 1_000_000.0) / 1_000_000.0,
             interval = newInterval,
             repetitions = newReps,
         )
