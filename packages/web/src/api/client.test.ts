@@ -75,6 +75,34 @@ describe("api client", () => {
     expect(refreshCalls).toBe(1);
   });
 
+  test("decks.list coerces Postgres string counts to numbers", async () => {
+    // count(*) comes back as a string; i18next pluralization needs a number.
+    const fetchMock = vi.fn().mockResolvedValue(
+      jsonResponse(200, [
+        {
+          id: "d1",
+          title: "T",
+          card_count: "12",
+          due_count: "3",
+          viewed_count: "5",
+          new_count: "7",
+          again_count: "1",
+          hard_count: "2",
+          good_count: "4",
+          easy_count: "6",
+        },
+      ]),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+
+    const [d] = await api.decks.list();
+
+    expect(d.card_count).toBe(12);
+    expect(d.due_count).toBe(3);
+    expect(d.easy_count).toBe(6);
+    expect(typeof d.new_count).toBe("number");
+  });
+
   test("non-ok maps to ApiError with code + message", async () => {
     const fetchMock = vi.fn().mockResolvedValue(
       jsonResponse(422, {

@@ -1,7 +1,9 @@
 import type { ParsedCard } from "@flashkarte/shared";
-import { NotFoundError } from "../../utils/errors";
+import { NotFoundError, ValidationError } from "../../utils/errors";
 import * as repo from "./library.repository";
 import * as decksRepo from "../decks/decks.repository";
+import { validateBranching } from "../decks/branching";
+import { MAX_CARDS_PER_DECK } from "../decks/decks.service";
 
 export interface LibraryDeck {
   id: string;
@@ -75,6 +77,14 @@ export async function clone(userId: string, id: string) {
       category: c.category,
     }),
   );
+  // Apply the same guards as a fresh import so a public deck can never bypass
+  // the card cap or graph validation by being cloned.
+  if (cards.length > MAX_CARDS_PER_DECK) {
+    throw new ValidationError(
+      `A deck can have at most ${MAX_CARDS_PER_DECK} cards`,
+    );
+  }
+  validateBranching(cards);
   const deck = await decksRepo.createDeckWithCards(
     userId,
     source.title,

@@ -30,4 +30,10 @@ async function start() {
   );
 }
 
-start();
+start().catch((err) => {
+  logger.error("startup failed", {
+    message: err instanceof Error ? err.message : String(err),
+    stack: err instanceof Error ? err.stack : undefined,
+  });
+  process.exit(1);
+});

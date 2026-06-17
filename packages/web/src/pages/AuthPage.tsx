@@ -5,6 +5,17 @@ import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../api/client";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
+/**
+ * Resolve a post-auth redirect target from an untrusted `?next=` param. Only
+ * same-origin absolute paths are allowed; protocol-relative (`//`, `/\`) and
+ * scheme URLs are rejected to prevent open redirects. Defaults to "/".
+ */
+export function safeNext(raw: string | null): string {
+  if (!raw || !raw.startsWith("/")) return "/";
+  if (raw.startsWith("//") || raw.startsWith("/\\")) return "/";
+  return raw;
+}
+
 export function AuthPage() {
   const { login, signup } = useAuth();
   const { t } = useTranslation();
@@ -27,7 +38,7 @@ export function AuthPage() {
     try {
       if (mode === "login") await login(email, password, rememberMe);
       else await signup(email, password);
-      navigate("/");
+      navigate(safeNext(params.get("next")));
     } catch (err) {
       setError(err instanceof ApiError ? err.message : t("auth.genericError"));
     } finally {

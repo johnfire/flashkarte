@@ -46,15 +46,15 @@ export interface DeckWithCounts {
   source_filename: string | null;
   created_at: string;
   updated_at: string;
-  card_count: string;
-  due_count: string;
+  card_count: number;
+  due_count: number;
   is_public: boolean;
-  viewed_count: string;
-  new_count: string;
-  again_count: string;
-  hard_count: string;
-  good_count: string;
-  easy_count: string;
+  viewed_count: number;
+  new_count: number;
+  again_count: number;
+  hard_count: number;
+  good_count: number;
+  easy_count: number;
 }
 
 export interface Card {

@@ -108,6 +108,28 @@ export function reportClientError(r: {
   }
 }
 
+// Postgres returns count(*) as a string; coerce the deck-count fields to
+// numbers so i18next pluralization (which checks `typeof count === "number"`)
+// and any arithmetic in the UI behave correctly.
+const DECK_COUNT_KEYS = [
+  "card_count",
+  "due_count",
+  "viewed_count",
+  "new_count",
+  "again_count",
+  "hard_count",
+  "good_count",
+  "easy_count",
+] as const;
+
+function withNumericCounts(deck: DeckWithCounts): DeckWithCounts {
+  const out = { ...deck } as Record<string, unknown>;
+  for (const k of DECK_COUNT_KEYS) {
+    if (typeof out[k] === "string") out[k] = Number(out[k]);
+  }
+  return out as unknown as DeckWithCounts;
+}
+
 export const api = {
   auth: {
     signup: (email: string, password: string) =>
@@ -153,7 +175,8 @@ export const api = {
       }),
   },
   decks: {
-    list: () => request<DeckWithCounts[]>("/decks"),
+    list: () =>
+      request<DeckWithCounts[]>("/decks").then((d) => d.map(withNumericCounts)),
     get: (id: string) => request<DeckDetail>(`/decks/${id}`),
     create: (markdown: string, title?: string) =>
       request<{ id: string; title: string; card_count: number }>("/decks", {
