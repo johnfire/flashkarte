@@ -17,10 +17,11 @@ session).
 ## Live admin account
 
 - URL: https://flashkarte.christopherrehm.de
-- Email: `car2187bus@pm.me` — `account_type=admin`, email pre-verified
-- Password: `kKJz4ayiUF-fk24` (change via Settings/forgot-password when convenient)
-- `ADMIN_EMAILS=car2187bus@pm.me` is set in `/opt/flashkarte/.env`, so this
-  account is re-promoted to admin on every server start (`bootstrapAdmins`).
+- Credentials are NOT stored here. The admin email/password were previously
+  committed in plaintext in this file — that password must be rotated (it is in
+  git history). Keep `ADMIN_EMAILS` in `/opt/flashkarte/.env` only.
+- `ADMIN_EMAILS` (in `/opt/flashkarte/.env`) re-promotes the listed account to
+  admin on every server start (`bootstrapAdmins`).
 
 ## Done this session (all deployed)
 

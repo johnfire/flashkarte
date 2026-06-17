@@ -198,6 +198,14 @@ You rest here.
   // Regression (SEO-001): the option matcher must be linear. The old regex
   // /^-\s+(.+?)\s+->\s+(\S+)\s*$/ backtracked catastrophically on a long run of
   // whitespace, blocking the server's event loop for minutes on a single import.
+  it("treats an option line with no text before -> as plain back text", () => {
+    // "- -> x" has an empty option label; it is not a valid option (matches the
+    // original regex), so the card stays basic and the line is back text.
+    const deck = parseDeck(`# T\n\n**1. q**\n- -> x\n`);
+    expect(deck.cards[0].type).toBe("basic");
+    expect(deck.cards[0].options).toEqual([]);
+  });
+
   it("parses an adversarial whitespace option line in linear time", () => {
     const evil = `# T\n\n**1. q**\n- ${" ".repeat(50000)}->\n`;
     const started = Date.now();

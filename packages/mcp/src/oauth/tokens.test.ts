@@ -31,4 +31,19 @@ describe("mcp access tokens", () => {
     });
     expect(verifyMcpAccessToken(forged)).toBeNull();
   });
+
+  // MCP-005: tokens must be bound to the flashkarte-mcp audience, so a
+  // correctly-signed token minted for another audience (or none) is rejected.
+  test("rejects a correctly-signed token with a missing/wrong audience", () => {
+    const jwt = require("jsonwebtoken");
+    const noAud = jwt.sign({ sub: "mcp-service", sid: "x" }, "test-secret", {
+      algorithm: "HS256",
+    });
+    expect(verifyMcpAccessToken(noAud)).toBeNull();
+    const wrongAud = jwt.sign({ sub: "mcp-service", sid: "x" }, "test-secret", {
+      algorithm: "HS256",
+      audience: "some-other-service",
+    });
+    expect(verifyMcpAccessToken(wrongAud)).toBeNull();
+  });
 });

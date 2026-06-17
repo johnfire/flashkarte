@@ -42,9 +42,13 @@ object MdParser {
     private val OPTION_LEAD = Regex("""^-\s+""")
 
     private fun matchOption(line: String): ParsedOption? {
-        if (line.length < 2 || line[0] != '-' || !line[1].isWhitespace()) return null
+        val lead = OPTION_LEAD.find(line) ?: return null
         val tail = OPTION_TAIL.find(line) ?: return null
-        val text = line.substring(0, tail.range.first).replace(OPTION_LEAD, "").trim()
+        // Text between the "- " prefix and " -> "; empty (e.g. "- -> x") means
+        // not a valid option, matching the original regex.
+        val start = lead.range.last + 1
+        if (start > tail.range.first) return null
+        val text = line.substring(start, tail.range.first).trim()
         if (text.isEmpty()) return null
         return ParsedOption(text, tail.groupValues[1])
     }

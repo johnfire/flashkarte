@@ -44,6 +44,14 @@ class MdParserBranchingTest {
         assertEquals(emptyList<ParsedOption>(), c.options)
     }
 
+    @Test fun optionWithNoTextBeforeArrowIsPlainText() {
+        // "- -> x" has an empty option label -> not a valid option (matches the
+        // original regex); the card stays basic.
+        val deck = MdParser.parse("# T\n\n**1. q**\n- -> x\n")
+        assertEquals("basic", deck.cards.first().type)
+        assertEquals(emptyList<ParsedOption>(), deck.cards.first().options)
+    }
+
     // Regression (SEO-001): the option matcher must be linear. The old regex
     // ^-\s+(.+?)\s+->\s+(\S+)\s*$ backtracked catastrophically on a long
     // whitespace run, which could freeze the app while importing a deck.

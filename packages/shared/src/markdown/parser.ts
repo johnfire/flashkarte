@@ -37,10 +37,14 @@ const ANCHOR = /^\[([A-Za-z0-9_-]+)\]\s*$/;
 // multi-arrow line keeps the original "target = final token" semantics.
 // Keep in sync with python/flashmd/parser/md_parser.py and android MdParser.kt.
 function matchOption(line: string): { text: string; goto: string } | null {
-  if (!/^-\s/.test(line)) return null;
+  const lead = /^-\s+/.exec(line); // "- " prefix (dash + whitespace)
+  if (!lead) return null;
   const tail = /\s->\s+(\S+)\s*$/.exec(line);
   if (!tail) return null;
-  const text = line.slice(0, tail.index).replace(/^-\s+/, "").trim();
+  // Text is what's between the "- " prefix and the " -> " delimiter. When
+  // there's nothing there (e.g. "- -> x"), slice is empty -> not an option,
+  // matching the original regex's behavior.
+  const text = line.slice(lead[0].length, tail.index).trim();
   if (!text) return null;
   return { text, goto: tail[1] };
 }
