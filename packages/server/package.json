@@ -5,6 +5,7 @@
     "build": "rm -rf dist && tsc -p tsconfig.json && cp -r src/db/migrations dist/db/migrations",
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn src/server.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "jest",
     "migrate": "ts-node src/db/migrate.ts"
   },

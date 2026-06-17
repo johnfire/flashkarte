@@ -13,7 +13,6 @@ const STORE = path.join(
 function freshStore() {
   jest.resetModules();
   process.env.MCP_STORE_PATH = STORE;
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   return require("./store") as typeof import("./store");
 }
 

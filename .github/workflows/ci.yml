@@ -25,6 +25,12 @@ jobs:
         run: npm audit --omit=dev --audit-level=high
       - name: Build shared (server/web import its dist for types)
         run: npm run build --workspace=packages/shared
+      - name: Lint
+        run: npm run lint
+      - name: Check formatting
+        run: npm run format:check
+      - name: Typecheck all workspaces
+        run: npm run typecheck
       - name: Test all workspaces
         run: npm test
       - name: Build server

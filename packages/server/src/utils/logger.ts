@@ -23,6 +23,7 @@ function write(level: Level, msg: string, meta?: Record<string, unknown>) {
     msg,
     ...(meta ?? {}),
   });
+  // eslint-disable-next-line no-console -- this is the sanctioned log sink
   (level === "error" ? console.error : console.log)(line);
   fileStream?.write(line + "\n");
 }

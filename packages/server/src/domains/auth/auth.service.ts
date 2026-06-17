@@ -20,7 +20,10 @@ const BCRYPT_ROUNDS = 12;
 let cachedDummyHash: string | null = null;
 function dummyPasswordHash(): string {
   if (!cachedDummyHash) {
-    cachedDummyHash = bcrypt.hashSync("flashkarte-no-such-account", BCRYPT_ROUNDS);
+    cachedDummyHash = bcrypt.hashSync(
+      "flashkarte-no-such-account",
+      BCRYPT_ROUNDS,
+    );
   }
   return cachedDummyHash;
 }

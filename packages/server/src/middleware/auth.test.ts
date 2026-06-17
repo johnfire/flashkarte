@@ -21,7 +21,10 @@ beforeEach(() => jest.clearAllMocks());
 
 describe("requireAuth", () => {
   test("resolves a full-scope fk_ API key to its user", async () => {
-    mockKeys.resolveKey.mockResolvedValue({ userId: "user-123", scope: "full" });
+    mockKeys.resolveKey.mockResolvedValue({
+      userId: "user-123",
+      scope: "full",
+    });
     const { req, err } = await run("Bearer fk_secretkey");
     expect(err).toBeUndefined();
     expect(req.userId).toBe("user-123");
@@ -30,7 +33,10 @@ describe("requireAuth", () => {
   });
 
   test("carries the deck scope through from a deck-scoped key", async () => {
-    mockKeys.resolveKey.mockResolvedValue({ userId: "user-123", scope: "deck" });
+    mockKeys.resolveKey.mockResolvedValue({
+      userId: "user-123",
+      scope: "deck",
+    });
     const { req, err } = await run("Bearer fk_deckkey");
     expect(err).toBeUndefined();
     expect(req.keyScope).toBe("deck");

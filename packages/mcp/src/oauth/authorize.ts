@@ -193,7 +193,9 @@ export function createAuthorizeRouter(
       res
         .status(400)
         .type("html")
-        .send(renderLoginForm(v.params, "Your session expired. Please try again."));
+        .send(
+          renderLoginForm(v.params, "Your session expired. Please try again."),
+        );
       return;
     }
     const { email, password } = body;

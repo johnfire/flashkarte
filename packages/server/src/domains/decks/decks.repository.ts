@@ -30,7 +30,14 @@ async function insertCardsBatch(
   const values: unknown[] = [];
   const rows = cards.map((c, idx) => {
     const b = idx * 6;
-    values.push(userId, deckId, c.type, cardContent(c), c.category, startPos + idx);
+    values.push(
+      userId,
+      deckId,
+      c.type,
+      cardContent(c),
+      c.category,
+      startPos + idx,
+    );
     return `($${b + 1}, $${b + 2}, $${b + 3}, $${b + 4}, $${b + 5}, $${b + 6})`;
   });
   await client.query(

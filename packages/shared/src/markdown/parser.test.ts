@@ -172,7 +172,10 @@ You rest here.
       { text: "Go left toward the cave", goto: "cave" },
       { text: "Go right", goto: "meadow" },
     ]);
-    expect(byLabel["cave"].options[1]).toEqual({ text: "Retreat", goto: "start" });
+    expect(byLabel["cave"].options[1]).toEqual({
+      text: "Retreat",
+      goto: "start",
+    });
   });
 
   it("treats a card with no options as a basic leaf", () => {
@@ -191,7 +194,11 @@ You rest here.
   it("is backward compatible with non-branching decks", () => {
     const deck = parseDeck(`# Plain\n\n**1. Q**\nAn answer.\n`);
     expect(deck.cards[0]).toMatchObject({
-      type: "basic", front: "Q", back: "An answer.", label: null, options: [],
+      type: "basic",
+      front: "Q",
+      back: "An answer.",
+      label: null,
+      options: [],
     });
   });
 

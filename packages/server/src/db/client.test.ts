@@ -14,7 +14,6 @@ afterEach(() => {
 
 function loadClient() {
   jest.resetModules();
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   return require("./client") as typeof import("./client");
 }
 

@@ -91,6 +91,7 @@ function loadStore(): void {
     pruneExpired(refreshTokens);
     pruneExpired(consumedTokens);
   } catch (e) {
+    // eslint-disable-next-line no-console -- MCP server logs directly to stderr
     console.error("oauth store load failed, starting empty:", e);
   }
 }
@@ -121,6 +122,7 @@ function persistNow(): void {
     );
     fs.renameSync(tmp, STORE_PATH);
   } catch (e) {
+    // eslint-disable-next-line no-console -- MCP server logs directly to stderr
     console.error("oauth store persist failed:", e);
   }
 }

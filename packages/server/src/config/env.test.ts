@@ -23,7 +23,6 @@ function load(over: Record<string, string | undefined>) {
     if (v === undefined) delete process.env[k];
     else process.env[k] = v;
   }
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   return require("./env") as typeof import("./env");
 }
 

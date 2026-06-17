@@ -49,13 +49,11 @@ beforeEach(() => {
 
 describe("bug-reports route", () => {
   test("POST /api/bug-reports -> 201 and files the report with reporter email", async () => {
-    const res = await request(app)
-      .post("/api/bug-reports")
-      .send({
-        title: "Crash on study",
-        description: "It blew up",
-        appVersion: "1.2.3",
-      });
+    const res = await request(app).post("/api/bug-reports").send({
+      title: "Crash on study",
+      description: "It blew up",
+      appVersion: "1.2.3",
+    });
 
     expect(res.status).toBe(201);
     expect(res.body).toEqual({
