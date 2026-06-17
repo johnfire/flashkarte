@@ -1,8 +1,10 @@
 package com.flashmd.data.remote
 
+import com.flashmd.BuildConfig
 import com.flashmd.data.local.SessionStore
 import kotlinx.coroutines.runBlocking
 import okhttp3.Authenticator
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.Route
@@ -24,7 +26,11 @@ class TokenAuthenticator @Inject constructor(
     private val sessionStore: SessionStore,
 ) : Authenticator {
 
+    private val apiHost = BuildConfig.API_BASE_URL.toHttpUrlOrNull()?.host
+
     override fun authenticate(route: Route?, response: Response): Request? {
+        // Only refresh+reattach the token for the flashkarte API host (AND-001).
+        if (response.request.url.host != apiHost) return null
         val path = response.request.url.encodedPath
         // Don't try to refresh the refresh/login/signup calls themselves.
         if (path.endsWith("/api/auth/refresh") ||
