@@ -61,6 +61,7 @@ type Validation =
 
 function validate(
   clientId: string,
+  allowedRedirectUris: string[],
   q: Record<string, string | undefined>,
 ): Validation {
   const {
@@ -79,13 +80,16 @@ function validate(
     };
   if (client_id !== clientId)
     return { ok: false, status: 400, body: { error: "invalid_client" } };
-  if (!redirect_uri || !redirect_uri.startsWith("https://"))
+  // Exact-match allowlist. An open redirect_uri lets an attacker initiate the
+  // flow with their own callback + PKCE and steal the victim's auth code, so a
+  // mere "is HTTPS" check is not enough — the URI must be pre-registered.
+  if (!redirect_uri || !allowedRedirectUris.includes(redirect_uri))
     return {
       ok: false,
       status: 400,
       body: {
         error: "invalid_request",
-        error_description: "redirect_uri must be HTTPS",
+        error_description: "redirect_uri is not registered",
       },
     };
   if (code_challenge_method !== "S256" || !code_challenge)
@@ -109,12 +113,16 @@ function validate(
   };
 }
 
-export function createAuthorizeRouter(clientId: string): Router {
+export function createAuthorizeRouter(
+  clientId: string,
+  allowedRedirectUris: string[],
+): Router {
   const router = Router();
 
   router.get("/oauth/authorize", (req, res) => {
     const v = validate(
       clientId,
+      allowedRedirectUris,
       req.query as Record<string, string | undefined>,
     );
     if (!v.ok) {
@@ -126,7 +134,7 @@ export function createAuthorizeRouter(clientId: string): Router {
 
   router.post("/oauth/authorize", async (req, res) => {
     const body = req.body as Record<string, string | undefined>;
-    const v = validate(clientId, body);
+    const v = validate(clientId, allowedRedirectUris, body);
     if (!v.ok) {
       res.status(v.status).json(v.body);
       return;

@@ -3,8 +3,14 @@ import crypto from "crypto";
 import express from "express";
 import request from "supertest";
 import { createTokenRouter } from "./token";
-import { createAuthCode } from "./store";
+import { createAuthCode, resolveAccessSession } from "./store";
 import { verifyMcpAccessToken } from "./tokens";
+
+/** The access token carries an opaque sid; resolve it to the backing fk_ key. */
+function fkKeyFor(accessToken: string): string | undefined {
+  const sid = verifyMcpAccessToken(accessToken)?.sid;
+  return sid ? (resolveAccessSession(sid)?.fk_key ?? undefined) : undefined;
+}
 
 function makeApp() {
   return express()
@@ -44,7 +50,9 @@ describe("token endpoint", () => {
     expect(res.status).toBe(200);
     expect(res.body.token_type).toBe("Bearer");
     expect(res.body.refresh_token).toBeTruthy();
-    expect(verifyMcpAccessToken(res.body.access_token)?.fk_key).toBe("fk_user");
+    expect(fkKeyFor(res.body.access_token)).toBe("fk_user");
+    // The fk_ key must not be embedded in the (readable) JWT payload.
+    expect(res.body.access_token).not.toContain("fk_user");
   });
 
   test("rejects a bad PKCE verifier", async () => {
@@ -81,7 +89,7 @@ describe("token endpoint", () => {
       .type("form")
       .send({ grant_type: "refresh_token", refresh_token: refresh });
     expect(res.status).toBe(200);
-    expect(verifyMcpAccessToken(res.body.access_token)?.fk_key).toBe("fk_user");
+    expect(fkKeyFor(res.body.access_token)).toBe("fk_user");
     expect(res.body.refresh_token).not.toBe(refresh); // rotated
   });
 

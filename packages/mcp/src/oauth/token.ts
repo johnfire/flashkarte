@@ -4,6 +4,7 @@ import {
   consumeAuthCode,
   createRefreshToken,
   consumeRefreshToken,
+  createAccessSession,
 } from "./store";
 import { signMcpAccessToken, ACCESS_TOKEN_TTL_SEC } from "./tokens";
 
@@ -61,7 +62,9 @@ export function createTokenRouter(): Router {
         return;
       }
 
-      const access_token = signMcpAccessToken(authCode.fk_key);
+      const access_token = signMcpAccessToken(
+        createAccessSession(authCode.fk_key),
+      );
       const new_refresh_token = createRefreshToken(authCode.fk_key);
 
       res.json({
@@ -88,7 +91,9 @@ export function createTokenRouter(): Router {
         return;
       }
 
-      const access_token = signMcpAccessToken(stored.fk_key);
+      const access_token = signMcpAccessToken(
+        createAccessSession(stored.fk_key),
+      );
       const rotated_refresh_token = createRefreshToken(stored.fk_key);
 
       res.json({

@@ -20,6 +20,18 @@ const MCP_OAUTH_CLIENT_ID = requireEnv("MCP_OAUTH_CLIENT_ID");
 // Validated at startup so a misconfigured deploy fails fast.
 requireEnv("MCP_JWT_SECRET");
 
+// Exact-match allowlist of OAuth redirect URIs. Defaults to the known claude.ai
+// connector callbacks; override with MCP_ALLOWED_REDIRECT_URIS (comma-separated)
+// if the connector uses a different callback. NEVER widen this to a prefix/HTTPS
+// check — that reintroduces the auth-code-theft open redirect.
+const MCP_ALLOWED_REDIRECT_URIS = (
+  process.env.MCP_ALLOWED_REDIRECT_URIS ??
+  "https://claude.ai/api/mcp/auth_callback,https://claude.com/api/mcp/auth_callback"
+)
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
 function buildServer(): McpServer {
   const server = new McpServer({ name: "flashkarte", version: "0.1.0" });
   registerDeckTools(server);
@@ -37,7 +49,7 @@ app.get("/health", (_req, res) => {
 
 // OAuth 2.1 endpoints — public, no auth required.
 app.use(createDiscoveryRouter(MCP_BASE_URL));
-app.use(createAuthorizeRouter(MCP_OAUTH_CLIENT_ID));
+app.use(createAuthorizeRouter(MCP_OAUTH_CLIENT_ID, MCP_ALLOWED_REDIRECT_URIS));
 app.use(createTokenRouter());
 
 // Everything below requires a valid fk_ key or OAuth JWT.

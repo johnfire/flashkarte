@@ -11,10 +11,11 @@ jest.mock("../api", () => ({
 const mockApi = apiModule as jest.Mocked<typeof apiModule>;
 
 const CLIENT = "test-client";
+const ALLOWED_REDIRECTS = ["https://claude.ai/cb"];
 function makeApp() {
   return express()
     .use(express.urlencoded({ extended: false }))
-    .use(createAuthorizeRouter(CLIENT));
+    .use(createAuthorizeRouter(CLIENT, ALLOWED_REDIRECTS));
 }
 
 const goodQuery = {
@@ -48,6 +49,13 @@ describe("authorize GET", () => {
     const res = await request(makeApp())
       .get("/oauth/authorize")
       .query({ ...goodQuery, redirect_uri: "http://evil.test/cb" });
+    expect(res.status).toBe(400);
+  });
+
+  test("rejects an HTTPS redirect_uri that is not in the allowlist", async () => {
+    const res = await request(makeApp())
+      .get("/oauth/authorize")
+      .query({ ...goodQuery, redirect_uri: "https://evil.test/cb" });
     expect(res.status).toBe(400);
   });
 

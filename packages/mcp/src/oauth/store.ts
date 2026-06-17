@@ -16,9 +16,15 @@ interface RefreshTokenEntry {
 
 const AUTH_CODE_TTL_MS = 10 * 60 * 1000;
 const REFRESH_TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+// Keep in sync with ACCESS_TOKEN_TTL_SEC in tokens.ts (1h). Access sessions are
+// deliberately in-memory only: a restart invalidates access tokens (clients
+// silently re-mint via their persisted refresh token), and the fk_ key for an
+// access token never touches disk.
+const ACCESS_SESSION_TTL_MS = 60 * 60 * 1000;
 
 const authCodes = new Map<string, AuthCodeEntry>();
 const refreshTokens = new Map<string, RefreshTokenEntry>();
+const accessSessions = new Map<string, RefreshTokenEntry>();
 // Tombstones of already-rotated refresh tokens, kept until they would have
 // expired. A token's lineage is its fk_key (one OAuth connection mints one
 // fk_key and keeps it across rotations). Presenting a tombstoned token is a
@@ -31,10 +37,55 @@ const consumedTokens = new Map<string, RefreshTokenEntry>();
 // authCodes are 10-minute ephemera and deliberately not persisted.
 const STORE_PATH = process.env.MCP_STORE_PATH || "";
 
+// At-rest encryption for the persisted store (it holds long-lived fk_ keys).
+// Keyed off MCP_JWT_SECRET so a leaked volume/backup snapshot without the env
+// is useless. If the secret is unset (local dev / tests), fall back to plaintext.
+const STORE_ENC_PREFIX = "enc:v1:";
+
+interface PersistedStore {
+  refreshTokens?: [string, RefreshTokenEntry][];
+  consumedTokens?: [string, RefreshTokenEntry][];
+}
+
+function storeKey(): Buffer | null {
+  const secret = process.env.MCP_JWT_SECRET;
+  return secret ? crypto.createHash("sha256").update(secret).digest() : null;
+}
+
+function serializeStore(payload: PersistedStore): string {
+  const plain = JSON.stringify(payload);
+  const key = storeKey();
+  if (!key) return plain;
+  const iv = crypto.randomBytes(12);
+  const cipher = crypto.createCipheriv("aes-256-gcm", key, iv);
+  const ct = Buffer.concat([cipher.update(plain, "utf8"), cipher.final()]);
+  const tag = cipher.getAuthTag();
+  return STORE_ENC_PREFIX + Buffer.concat([iv, tag, ct]).toString("base64");
+}
+
+function deserializeStore(raw: string): PersistedStore {
+  if (raw.startsWith(STORE_ENC_PREFIX)) {
+    const key = storeKey();
+    if (!key) throw new Error("store is encrypted but MCP_JWT_SECRET is unset");
+    const buf = Buffer.from(raw.slice(STORE_ENC_PREFIX.length), "base64");
+    const iv = buf.subarray(0, 12);
+    const tag = buf.subarray(12, 28);
+    const ct = buf.subarray(28);
+    const decipher = crypto.createDecipheriv("aes-256-gcm", key, iv);
+    decipher.setAuthTag(tag);
+    const plain = Buffer.concat([
+      decipher.update(ct),
+      decipher.final(),
+    ]).toString("utf8");
+    return JSON.parse(plain) as PersistedStore;
+  }
+  return JSON.parse(raw) as PersistedStore; // legacy plaintext
+}
+
 function loadStore(): void {
   if (!STORE_PATH || !fs.existsSync(STORE_PATH)) return;
   try {
-    const raw = JSON.parse(fs.readFileSync(STORE_PATH, "utf8"));
+    const raw = deserializeStore(fs.readFileSync(STORE_PATH, "utf8"));
     for (const [k, v] of raw.refreshTokens ?? []) refreshTokens.set(k, v);
     for (const [k, v] of raw.consumedTokens ?? []) consumedTokens.set(k, v);
     pruneExpired(refreshTokens);
@@ -60,7 +111,7 @@ function persistNow(): void {
     const tmp = STORE_PATH + ".tmp";
     fs.writeFileSync(
       tmp,
-      JSON.stringify({
+      serializeStore({
         refreshTokens: [...refreshTokens],
         consumedTokens: [...consumedTokens],
       }),
@@ -101,6 +152,30 @@ export function consumeAuthCode(code: string): AuthCodeEntry | null {
   authCodes.delete(code);
   if (!entry || entry.expires_at < Date.now()) return null;
   return entry;
+}
+
+/**
+ * Bind a short-lived access session to an fk_ key and return its opaque id.
+ * The id (not the key) is what goes into the access-token JWT.
+ */
+export function createAccessSession(fk_key: string): string {
+  pruneExpired(accessSessions);
+  const sid = crypto.randomBytes(32).toString("hex");
+  accessSessions.set(sid, {
+    fk_key,
+    expires_at: Date.now() + ACCESS_SESSION_TTL_MS,
+  });
+  return sid;
+}
+
+export function resolveAccessSession(sid: string): { fk_key: string } | null {
+  const entry = accessSessions.get(sid);
+  if (!entry) return null;
+  if (entry.expires_at < Date.now()) {
+    accessSessions.delete(sid);
+    return null;
+  }
+  return { fk_key: entry.fk_key };
 }
 
 export function createRefreshToken(fk_key: string): string {

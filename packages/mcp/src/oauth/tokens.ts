@@ -5,7 +5,9 @@ const JWT_ALGORITHM = "HS256" as const;
 
 interface McpTokenPayload {
   sub: "mcp-service";
-  fk_key: string;
+  // Opaque access-session id. The long-lived fk_ key is held server-side and
+  // resolved from this id — it must never travel inside the (readable) JWT.
+  sid: string;
 }
 
 function getMcpJwtSecret(): string {
@@ -15,9 +17,9 @@ function getMcpJwtSecret(): string {
   return secret;
 }
 
-export function signMcpAccessToken(fkKey: string): string {
+export function signMcpAccessToken(sid: string): string {
   return jwt.sign(
-    { sub: "mcp-service", fk_key: fkKey } satisfies McpTokenPayload,
+    { sub: "mcp-service", sid } satisfies McpTokenPayload,
     getMcpJwtSecret(),
     { expiresIn: ACCESS_TOKEN_TTL_SEC, algorithm: JWT_ALGORITHM },
   );

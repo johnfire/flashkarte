@@ -2,11 +2,22 @@ process.env.MCP_JWT_SECRET = "test-secret";
 import { signMcpAccessToken, verifyMcpAccessToken } from "./tokens";
 
 describe("mcp access tokens", () => {
-  test("signs and verifies, carrying the fk_key", () => {
-    const token = signMcpAccessToken("fk_secret");
+  test("signs and verifies, carrying an opaque session id (not the fk_key)", () => {
+    const token = signMcpAccessToken("sess_abc");
     const payload = verifyMcpAccessToken(token);
-    expect(payload?.fk_key).toBe("fk_secret");
+    expect(payload?.sid).toBe("sess_abc");
     expect(payload?.sub).toBe("mcp-service");
+  });
+
+  test("does not leak the fk_ key into the token payload", () => {
+    // A signed JWT's payload is base64-readable; the long-lived fk_ key must
+    // never travel inside it.
+    const token = signMcpAccessToken("sess_abc");
+    const claims = JSON.parse(
+      Buffer.from(token.split(".")[1], "base64url").toString("utf8"),
+    );
+    expect(JSON.stringify(claims)).not.toContain("fk_");
+    expect(claims.fk_key).toBeUndefined();
   });
 
   test("rejects a garbage token", () => {
@@ -15,7 +26,7 @@ describe("mcp access tokens", () => {
 
   test("rejects a token signed with a different secret", () => {
     const jwt = require("jsonwebtoken");
-    const forged = jwt.sign({ sub: "mcp-service", fk_key: "x" }, "wrong", {
+    const forged = jwt.sign({ sub: "mcp-service", sid: "x" }, "wrong", {
       algorithm: "HS256",
     });
     expect(verifyMcpAccessToken(forged)).toBeNull();

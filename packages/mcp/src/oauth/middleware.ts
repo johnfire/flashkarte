@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import { requestKeyStore } from "../api";
 import { verifyMcpAccessToken } from "./tokens";
+import { resolveAccessSession } from "./store";
 
 export function createMcpAuthMiddleware(): RequestHandler {
   return (req, res, next) => {
@@ -19,10 +20,12 @@ export function createMcpAuthMiddleware(): RequestHandler {
       return;
     }
 
-    // OAuth JWT access token.
+    // OAuth JWT access token: verify signature, then resolve the opaque session
+    // id to the fk_ key held server-side.
     const payload = verifyMcpAccessToken(raw);
-    if (payload) {
-      requestKeyStore.run(payload.fk_key, next);
+    const session = payload ? resolveAccessSession(payload.sid) : null;
+    if (session) {
+      requestKeyStore.run(session.fk_key, next);
       return;
     }
 
