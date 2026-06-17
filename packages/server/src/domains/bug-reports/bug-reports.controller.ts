@@ -1,19 +1,13 @@
 import { Request, Response } from "express";
 import { AuthError, ValidationError } from "../../utils/errors";
 import { wrapAsync } from "../../utils/wrapAsync";
+import { clampString as clamp } from "../../utils/clampString";
 import { getCurrentUser } from "../auth/auth.service";
 import * as service from "./bug-reports.service";
 
 const TITLE_MAX = 140;
 const DESC_MAX = 8_000;
 const SHORT_MAX = 80;
-
-function clamp(value: unknown, max: number): string | undefined {
-  if (typeof value !== "string") return undefined;
-  const trimmed = value.trim();
-  if (!trimmed) return undefined;
-  return trimmed.slice(0, max);
-}
 
 export const submitBugReport = wrapAsync(
   async (req: Request, res: Response) => {

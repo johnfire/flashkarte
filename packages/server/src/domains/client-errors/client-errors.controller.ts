@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ValidationError } from "../../utils/errors";
 import { wrapAsync } from "../../utils/wrapAsync";
+import { clampString as clamp } from "../../utils/clampString";
 import * as service from "./client-errors.service";
 
 const MSG_MAX = 2_000;
@@ -8,13 +9,6 @@ const STACK_MAX = 8_000;
 const CONTEXT_MAX = 500;
 const UA_MAX = 500;
 const SHORT_MAX = 50;
-
-function clamp(value: unknown, max: number): string | undefined {
-  if (typeof value !== "string") return undefined;
-  const trimmed = value.trim();
-  if (!trimmed) return undefined;
-  return trimmed.slice(0, max);
-}
 
 export const reportClientError = wrapAsync(
   async (req: Request, res: Response) => {
