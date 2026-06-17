@@ -71,4 +71,17 @@ describe("sync", () => {
   test("rejects non-array events", async () => {
     await expect(sync("u1", { nope: true } as never)).rejects.toThrow();
   });
+
+  // DATA-001: an unbounded events array amplifies one request into hundreds of
+  // thousands of serial DB round-trips. Cap it before processing.
+  test("rejects an oversized events array", async () => {
+    const huge = Array.from({ length: 1001 }, (_, i) => ({
+      event_id: `e${i}`,
+      card_id: "c1",
+      rating: 4,
+      reviewed_at: "2026-06-05T09:00:00.000Z",
+    }));
+    await expect(sync("u1", huge)).rejects.toThrow(/too many|max/i);
+    expect(mockRepo.cardBelongsToUser).not.toHaveBeenCalled();
+  });
 });

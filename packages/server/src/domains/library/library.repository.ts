@@ -10,17 +10,24 @@ export interface LibraryDeckRow {
 
 const AUTHOR = "COALESCE(NULLIF(trim(u.display_name), ''), 'Anonymous')";
 
+// Escape LIKE/ILIKE metacharacters so a search term is matched literally;
+// otherwise `q=%` (or `_`) matches every public deck. Paired with ESCAPE '\'.
+export function escapeLike(term: string): string {
+  return term.replace(/[\\%_]/g, "\\$&");
+}
+
 export function listPublic(q: string | null) {
+  const term = q === null ? null : escapeLike(q);
   return query<LibraryDeckRow>(
     `SELECT d.id, d.title, ${AUTHOR} AS author,
        (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
        d.published_at
      FROM decks d JOIN users u ON u.id = d.user_id
      WHERE d.is_public
-       AND ($1::text IS NULL OR d.title ILIKE '%' || $1 || '%')
+       AND ($1::text IS NULL OR d.title ILIKE '%' || $1 || '%' ESCAPE '\\')
      ORDER BY d.published_at DESC NULLS LAST
      LIMIT 100`,
-    [q],
+    [term],
   );
 }
 

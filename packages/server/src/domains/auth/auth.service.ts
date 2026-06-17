@@ -14,6 +14,16 @@ import * as repo from "./auth.repository";
 import type { UserRow } from "./auth.repository";
 
 const BCRYPT_ROUNDS = 12;
+
+// A real bcrypt hash (same cost) to compare against when an account doesn't
+// exist, equalizing login timing. Computed lazily so it isn't paid at startup.
+let cachedDummyHash: string | null = null;
+function dummyPasswordHash(): string {
+  if (!cachedDummyHash) {
+    cachedDummyHash = bcrypt.hashSync("flashkarte-no-such-account", BCRYPT_ROUNDS);
+  }
+  return cachedDummyHash;
+}
 export const ACCESS_TOKEN_TTL_SEC = 15 * 60;
 const REFRESH_TOKEN_TTL_DAYS = 30;
 const VERIFICATION_TOKEN_TTL_HOURS = 24;
@@ -171,7 +181,15 @@ export async function login(
   const [email, password] = validateCredentials(emailIn, passwordIn);
   const persistent = rememberMeIn === true;
   const row = await repo.findByEmailWithHash(email);
-  if (!row || !(await bcrypt.compare(password, row.password_hash))) {
+  // Always run a bcrypt comparison — against a real dummy hash when the account
+  // doesn't exist — so login takes ~equal time whether or not the email is
+  // registered. Short-circuiting on `!row` leaks account existence via response
+  // timing (AUTH-004).
+  const passwordOk = await bcrypt.compare(
+    password,
+    row?.password_hash ?? dummyPasswordHash(),
+  );
+  if (!row || !passwordOk) {
     throw new AuthError("Invalid email or password");
   }
   const {

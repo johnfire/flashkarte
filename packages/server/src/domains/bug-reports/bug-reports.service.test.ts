@@ -2,7 +2,7 @@ import { buildIssueBody } from "./bug-reports.service";
 import { createIssue } from "../../github/issues";
 
 describe("buildIssueBody", () => {
-  test("includes reporter email and quotes the description", () => {
+  test("includes reporter email and renders the description as inert fenced text", () => {
     const body = buildIssueBody({
       title: "t",
       description: "line one\nline two",
@@ -14,8 +14,21 @@ describe("buildIssueBody", () => {
     });
     expect(body).toContain("a@b.c");
     expect(body).toContain("1.0.0");
-    expect(body).toContain("> line one");
-    expect(body).toContain("> line two");
+    expect(body).toContain("```\nline one\nline two\n```");
+  });
+
+  // DATA-002: a blockquote does not neutralize fenced blocks or image markup.
+  test("fence outlasts inner backticks so markdown/image injection stays literal", () => {
+    const description = "![pwn](http://attacker.test/x)\n```\nbreak\n```";
+    const body = buildIssueBody({
+      title: "t",
+      description,
+      userId: "u1",
+      email: "a@b.c",
+    });
+    // content's longest backtick run is 3, so the wrapper fence is 4 ticks and
+    // the inner ``` cannot close it early.
+    expect(body).toContain("````\n" + description + "\n````");
   });
 });
 

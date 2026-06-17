@@ -1,6 +1,7 @@
 jest.mock("./auth.repository");
+import bcrypt from "bcryptjs";
 import * as repo from "./auth.repository";
-import { updateProfile } from "./auth.service";
+import { updateProfile, login } from "./auth.service";
 import { ValidationError } from "../../utils/errors";
 import type { UserRow } from "./auth.repository";
 
@@ -49,5 +50,18 @@ describe("updateProfile language", () => {
       undefined,
     );
     expect(user.language).toBeNull();
+  });
+});
+
+describe("login account-enumeration resistance (AUTH-004)", () => {
+  test("still runs a bcrypt comparison when the email is unknown", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(null as never);
+    const spy = jest.spyOn(bcrypt, "compare");
+    await expect(
+      login("nobody@example.com", "Sup3rSecretPassword123", false),
+    ).rejects.toThrow();
+    // a dummy compare ran despite no account -> no fast-reject timing oracle
+    expect(spy).toHaveBeenCalledTimes(1);
+    spy.mockRestore();
   });
 });

@@ -2,6 +2,17 @@ import { Pool, PoolClient, QueryResultRow } from "pg";
 
 let pool: Pool | null = null;
 
+function dbPassword(): string | undefined {
+  const pw = process.env.POSTGRES_PASSWORD;
+  if (pw) return pw;
+  // Never silently connect with a well-known default password in production —
+  // fail closed. (server.ts also requires POSTGRES_PASSWORD via validateEnv.)
+  if ((process.env.NODE_ENV ?? "development") === "production") {
+    throw new Error("POSTGRES_PASSWORD must be set in production");
+  }
+  return "flashkarte"; // local dev default only
+}
+
 export function getPool(): Pool {
   if (!pool) {
     pool = new Pool({
@@ -9,7 +20,7 @@ export function getPool(): Pool {
       port: parseInt(process.env.POSTGRES_PORT ?? "5432", 10),
       database: process.env.POSTGRES_DB ?? "flashkarte",
       user: process.env.POSTGRES_USER ?? "flashkarte",
-      password: process.env.POSTGRES_PASSWORD ?? "flashkarte",
+      password: dbPassword(),
     });
   }
   return pool;

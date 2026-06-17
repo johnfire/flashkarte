@@ -11,8 +11,11 @@ export interface BugReportInput {
 }
 
 /**
- * Builds the GitHub issue body. The reporter's description goes inside a
- * blockquote so it can't inject headings/markup into the metadata section.
+ * Builds the GitHub issue body. The reporter's description is wrapped in a code
+ * fence so it renders as literal text — a blockquote does NOT neutralize fenced
+ * code blocks or `![img](url)` references (which would fetch a remote image and
+ * log a maintainer's IP on view). The fence length is chosen to exceed any
+ * backtick run in the input so the description can't close the fence early.
  */
 export function buildIssueBody(input: BugReportInput): string {
   const meta = [
@@ -22,10 +25,12 @@ export function buildIssueBody(input: BugReportInput): string {
     `**Device:** ${input.device ?? "unknown"}`,
   ].join("\n");
 
-  const quoted = input.description
-    .split("\n")
-    .map((line) => `> ${line}`)
-    .join("\n");
+  const longestTicks = (input.description.match(/`+/g) ?? []).reduce(
+    (max, run) => Math.max(max, run.length),
+    0,
+  );
+  const fence = "`".repeat(Math.max(3, longestTicks + 1));
+  const quoted = `${fence}\n${input.description}\n${fence}`;
 
   return `${meta}\n\n---\n\n${quoted}\n\n_Filed from the flashkarte app._`;
 }

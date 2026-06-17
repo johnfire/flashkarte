@@ -59,9 +59,17 @@ function parseEvent(e: unknown): SyncEvent | null {
   return result.success ? result.data : null;
 }
 
+// One sync call applies events serially with several DB round-trips each, so an
+// unbounded array is a request-amplification DoS. Clients drain their outbox in
+// reasonable chunks; cap well above that.
+const MAX_SYNC_EVENTS = 1000;
+
 export async function sync(userId: string, events: unknown) {
   if (!Array.isArray(events)) {
     throw new ValidationError("events must be an array");
+  }
+  if (events.length > MAX_SYNC_EVENTS) {
+    throw new ValidationError(`too many events (max ${MAX_SYNC_EVENTS})`);
   }
 
   const acked: string[] = [];
