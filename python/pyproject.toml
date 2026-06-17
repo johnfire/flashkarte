@@ -13,5 +13,10 @@ flashmd = "flashmd.main:main"
 requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
+# The python/ dir has flashmd/, assets/ and tests/ side by side; without this
+# setuptools' flat-layout auto-discovery errors on multiple top-level packages.
+[tool.setuptools.packages.find]
+include = ["flashmd*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
