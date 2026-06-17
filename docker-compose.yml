@@ -22,6 +22,10 @@ services:
       db:
         condition: service_healthy
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
   mcp:
     build:
@@ -39,6 +43,10 @@ services:
     depends_on:
       - app
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
   db:
     image: postgres:16-alpine

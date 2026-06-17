@@ -35,6 +35,9 @@ COPY --from=build /app/packages/shared/package.json ./node_modules/@flashkarte/s
 COPY --from=build /app/packages/server/dist ./packages/server/dist
 COPY --from=build /app/packages/web/dist ./packages/server/public
 WORKDIR /app/packages/server
+# Drop root: the node:* images ship an unprivileged `node` user (uid 1000).
+# File logging (LOG_DIR=/logs, a bind mount) degrades gracefully if not writable.
+USER node
 EXPOSE 3001
 CMD ["node", "dist/server.js"]
 
@@ -52,5 +55,10 @@ ENV NODE_ENV=production
 COPY --from=mcpdeps /app/node_modules ./node_modules
 COPY --from=build /app/packages/mcp/dist ./packages/mcp/dist
 WORKDIR /app/packages/mcp
+# Drop root. /data holds the persisted OAuth store (a named volume in
+# docker-compose.yml); pre-create it owned by `node` so the fresh volume
+# inherits writable ownership.
+RUN mkdir -p /data && chown node:node /data
+USER node
 EXPOSE 3002
 CMD ["node", "dist/index.js"]

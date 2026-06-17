@@ -36,6 +36,10 @@ services:
       db:
         condition: service_healthy
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
   mcp:
     image: ghcr.io/johnfire/flashkarte-mcp:${IMAGE_TAG:-latest}
@@ -51,6 +55,10 @@ services:
     depends_on:
       - app
     restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
   db:
     image: postgres:16-alpine
