@@ -1,6 +1,6 @@
-# flashmd-android
+# flashkarte-android
 
-Android flashcard app that parses Markdown files into decks and studies them using SM-2 spaced repetition. Fully local, no backend.
+Android flashcard app for [flashkarte](https://flashkarte.christopherrehm.de). Parses Markdown files into decks and studies them using SM-2 spaced repetition. Signs in to the hosted flashkarte API (decks, library, study sync) and points at the deployed API via `BuildConfig.API_BASE_URL`. Study works offline against a local SQLDelight cache; review events queue in an outbox and sync back when connectivity returns.
 
 ## Requirements
 
@@ -86,7 +86,8 @@ Second paragraph if needed.
 |-------|--------|
 | Language | Kotlin |
 | UI | Jetpack Compose + Material3 |
-| Database | Room (SQLite) |
+| Local cache | SQLDelight (SQLite) |
+| Networking | Retrofit + OkHttp (hosted flashkarte API) |
 | DI | Hilt |
 | Navigation | Compose Navigation |
 | Architecture | MVVM + Repository |

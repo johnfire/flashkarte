@@ -1,18 +1,17 @@
 # flashkarte — Session Handoff
 
-_Last updated: 2026-06-05_
+_Last updated: 2026-06-20_
 
 ## TL;DR
 
 Everything below is **shipped, pushed, and live** at
 https://flashkarte.christopherrehm.de (web + server) and published to Play
-internal (Android). `main` is clean and in sync with `origin/main`. **#1
-Offline-first (Android)** AND **Android full-functionality (decks/library/
-settings)** both shipped this session — see below. Next candidates:
-**#2 Multiple-choice study mode**, **#3 card series**, **#24 bug-report screen**.
-On-device smoke tests of the offline flow + the new Android screens still
-pending (no emulator in the build
-session).
+internal (Android). `main` is clean and in sync with `origin/main`. Offline-first
+(Android), Android full-functionality, **multiple-choice study (#2)**, **card
+series / ordered + branching decks (#3)**, **in-app bug reporting (#24)**, **web
+i18n**, **SEO**, **MCP Claude.ai OAuth**, and the **user-guide page** have all
+shipped — see below. On-device smoke tests of the offline flow + the newer
+Android screens are the main remaining manual-QA gap.
 
 ## Live admin account
 
@@ -45,10 +44,14 @@ Vitest · Android `compileDebugKotlin` + **64 unit tests** (parser, sm2,
 api-contract ×4, db/outbox, local-store, and library/deck/settings/create/
 study-choice/study-ordered/mc-options/report-bug ViewModel tests).
 
-Built since (committed on `main`, unpushed — batched for one Play build):
-#2 multiple-choice study mode, #3 ordered decks (`is_ordered`), #24 bug
-reporting (Android screen → `POST /api/bug-reports` → GitHub issue via
-`GITHUB_TOKEN`; no-op-logs when token unset).
+Shipped since (all on `main`, pushed and deployed):
+**#2 multiple-choice study mode**; **#3 ordered decks (`is_ordered`) + branching
+decks** (anchors `[label]` + `-> target`); **#24 bug reporting** (Android screen
+→ `POST /api/bug-reports` → GitHub issue via `GITHUB_TOKEN`; no-op-logs when
+token unset); **web i18n** (`packages/web/src/i18n`, full-locale parity enforced);
+**SEO** (`packages/server/src/seo` — server-rendered meta/OG + sitemap/robots);
+**MCP Claude.ai OAuth** (`packages/mcp/src/oauth` — authorize/token/discovery);
+and the **user-guide page** (`packages/web/src/pages/GuidePage.tsx`).
 
 ## #1 Offline-first — shipped 2026-06-05
 
@@ -107,9 +110,13 @@ existed; this was UI + API-client wiring. Published to Play internal.
 
 ## Open issues
 
-- **#2 Multiple-choice study mode**
-- **#3 Card series / branching follow-up questions**
-- **#24 bug reporting screen** (pre-existing, unstarted)
+- **#2 Multiple-choice study mode** — **SHIPPED**
+- **#3 Card series / branching follow-up questions** — **SHIPPED** (ordered decks
+  + branching anchors/options)
+- **#24 bug reporting screen** — **SHIPPED**
+
+No tracked issues are currently open. Main remaining gap is on-device manual QA
+of the Android offline + newer screens.
 
 ## Architecture quick reference
 
@@ -125,8 +132,8 @@ existed; this was UI + API-client wiring. Published to Play internal.
   + `-> target` options) is TS + Kotlin only; the Python reference parser does
   not implement it.** Change the ports together for any common-subset behaviour.
 - **Migrations** auto-run on server start (`src/db/migrate.ts`, numbered `.sql`,
-  tracked in `_migrations`). Latest is `008_review_events.sql`; add the next as
-  `009_*.sql`.
+  tracked in `_migrations`). Latest is `012_api_key_scope.sql`; add the next as
+  `013_*.sql`.
 - **Auth:** `ValidationError → 422`. `/api/auth` rate-limited. User payload:
   `{ id, email, role, accountType, emailVerifiedAt, displayName }`.
   `account_type` ∈ `free|paid|admin-gifted|admin`; admin access = `account_type='admin'`.
