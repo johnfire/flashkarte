@@ -3,15 +3,29 @@ import path from "path";
 
 const LOG_DIR = process.env.LOG_DIR;
 let fileStream: fs.WriteStream | null = null;
+
+// Open the log file, but never let a file/permission failure crash the process.
+// createWriteStream opens the fd lazily on the libuv thread pool, so an EACCES/
+// ENOENT surfaces as an async 'error' event (not a sync throw) — and an unhandled
+// stream 'error' becomes an uncaughtException. mkdirSync, by contrast, can throw
+// synchronously. Both paths fall back to console-only logging and keep serving.
+function dropFileStream(reason: string, err: unknown): void {
+  // eslint-disable-next-line no-console -- sanctioned: warn before degrading
+  console.error(`logger: ${reason}; falling back to console logging`, err);
+  fileStream = null;
+}
+
 if (LOG_DIR) {
+  const logFile = path.join(LOG_DIR, "flashkarte.log");
   try {
     fs.mkdirSync(LOG_DIR, { recursive: true });
-    fileStream = fs.createWriteStream(path.join(LOG_DIR, "flashkarte.log"), {
-      flags: "a",
-    });
+    const stream = fs.createWriteStream(logFile, { flags: "a" });
+    // Catch the deferred open() EACCES/ENOENT and any later write error (ENOSPC,
+    // etc.) so they degrade gracefully instead of escalating to uncaughtException.
+    stream.on("error", (err) => dropFileStream("log file write failed", err));
+    fileStream = stream;
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("logger: failed to open log file", err);
+    dropFileStream("failed to open log file", err);
   }
 }
 
