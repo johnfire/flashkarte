@@ -1,0 +1,7 @@
+-- Migration v1 -> v2 (Spec 01: diagnostic answers).
+-- Adds diagnostic-card data to the card cache and the picked option to the
+-- outbox. All columns nullable so existing cached rows and, crucially, any
+-- un-synced outbox rows survive the upgrade untouched.
+ALTER TABLE cardEntity ADD COLUMN label TEXT;
+ALTER TABLE cardEntity ADD COLUMN options TEXT;
+ALTER TABLE outboxEntity ADD COLUMN option_index INTEGER;

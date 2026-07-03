@@ -9,7 +9,10 @@ import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
 import com.flashmd.data.repository.StudyRepository
+import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.DueCard
+import com.flashmd.domain.study.DiagnosticStudy
+import com.flashmd.domain.study.StudyOption
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,9 +33,12 @@ data class StudyUiState(
     val isLoading: Boolean = true,
     val error: String? = null,
     val mode: StudyMode = StudyMode.FLIP,
-    val options: List<String> = emptyList(),
-    val selectedOption: String? = null,
-    val correctAnswer: String? = null,
+    val options: List<StudyOption> = emptyList(),
+    // Index into [options] the learner tapped (null until they answer).
+    val selectedIndex: Int? = null,
+    // Spec 01: the remediation card shown as an interlude after a wrong routed
+    // pick. Non-null while the interlude is on screen; it carries no rating.
+    val remediation: Card? = null,
 )
 
 @HiltViewModel
@@ -52,12 +58,14 @@ class StudyViewModel @Inject constructor(
     private var pool: List<String> = emptyList()
     private var ordered = false
     private val random = kotlin.random.Random.Default
+    // Rating to apply once the learner dismisses a remediation interlude.
+    private var pendingRating: Int? = null
 
     private val _uiState = MutableStateFlow(StudyUiState())
     val uiState: StateFlow<StudyUiState> = _uiState
 
-    private fun optionsFor(card: DueCard): List<String> =
-        McOptions.build(card.card.back, pool, 4, random)
+    private fun optionsFor(card: DueCard): List<StudyOption> =
+        DiagnosticStudy.selectOptions(card.card, pool, 4, random)
 
     init {
         viewModelScope.launch {
@@ -78,14 +86,13 @@ class StudyViewModel @Inject constructor(
                         mode = savedMode,
                     )
                 } else {
-                    val first = queue.peek()
+                    val first = queue.first()
                     _uiState.value = _uiState.value.copy(
                         deckTitle = deck?.title ?: "",
                         currentCard = first,
                         remaining = queue.size,
                         isLoading = false,
                         mode = savedMode,
-                        correctAnswer = first.card.back,
                         options = if (savedMode == StudyMode.CHOICE) optionsFor(first) else emptyList(),
                     )
                 }
@@ -130,24 +137,27 @@ class StudyViewModel @Inject constructor(
         val card = _uiState.value.currentCard
         _uiState.value = _uiState.value.copy(
             mode = mode,
-            selectedOption = null,
+            selectedIndex = null,
             options = if (mode == StudyMode.CHOICE && card != null) optionsFor(card) else emptyList(),
-            correctAnswer = card?.card?.back,
         )
     }
 
-    fun chooseAnswer(option: String) {
-        if (_uiState.value.selectedOption != null) return
-        _uiState.value = _uiState.value.copy(selectedOption = option)
+    fun chooseAnswer(index: Int) {
+        if (_uiState.value.selectedIndex != null) return
+        if (index !in _uiState.value.options.indices) return
+        _uiState.value = _uiState.value.copy(selectedIndex = index)
     }
 
+    /** Confirm the picked option: record the rating (+ option index for a
+     *  diagnostic card), then either show a remediation interlude or advance. */
     fun next() {
         val card = _uiState.value.currentCard ?: return
-        val selected = _uiState.value.selectedOption ?: return
-        val rating = if (selected == card.card.back) 4 else 1
+        val index = _uiState.value.selectedIndex ?: return
+        val picked = _uiState.value.options.getOrNull(index) ?: return
+        val rating = if (picked.correct) 4 else 1
         viewModelScope.launch {
             try {
-                studyRepo.applyRating(card.card.id, rating)
+                studyRepo.applyRating(card.card.id, rating, picked.optionIndex)
             } catch (e: ApiException) {
                 _uiState.value = _uiState.value.copy(error = e.message)
                 return@launch
@@ -156,8 +166,32 @@ class StudyViewModel @Inject constructor(
                 _uiState.value = _uiState.value.copy(error = "Couldn't save that answer.")
                 return@launch
             }
-            applyAndAdvance(card, rating)
+
+            val remediationLabel = picked.remediationLabel
+            val remediationCard =
+                if (remediationLabel != null) {
+                    studyRepo.remediationCard(deckId, remediationLabel)
+                } else {
+                    null
+                }
+            if (remediationCard != null) {
+                // Show the remediation interlude; defer advancing until dismissed.
+                // The interlude carries NO rating and generates NO review event.
+                pendingRating = rating
+                _uiState.value = _uiState.value.copy(remediation = remediationCard)
+            } else {
+                applyAndAdvance(card, rating)
+            }
         }
+    }
+
+    /** Dismiss the remediation interlude and advance to the next card. */
+    fun continueFromRemediation() {
+        val card = _uiState.value.currentCard ?: return
+        val rating = pendingRating ?: return
+        pendingRating = null
+        _uiState.value = _uiState.value.copy(remediation = null)
+        applyAndAdvance(card, rating)
     }
 
     private fun applyAndAdvance(card: DueCard, rating: Int) {
@@ -178,7 +212,8 @@ class StudyViewModel @Inject constructor(
                 isDone = true,
                 reviewed = reviewed,
                 ratingCounts = ratingCounts.toMap(),
-                selectedOption = null,
+                selectedIndex = null,
+                remediation = null,
             )
         } else {
             val next = queue.first()
@@ -188,8 +223,8 @@ class StudyViewModel @Inject constructor(
                 remaining = queue.size,
                 reviewed = reviewed,
                 ratingCounts = ratingCounts.toMap(),
-                selectedOption = null,
-                correctAnswer = next.card.back,
+                selectedIndex = null,
+                remediation = null,
                 options = if (_uiState.value.mode == StudyMode.CHOICE) optionsFor(next) else emptyList(),
             )
         }

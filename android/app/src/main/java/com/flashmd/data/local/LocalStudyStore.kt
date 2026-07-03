@@ -1,15 +1,33 @@
 package com.flashmd.data.local
 
 import com.flashmd.db.FlashkarteDb
+import com.flashmd.domain.model.BranchOption
 import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.CardProgress
 import com.flashmd.domain.model.Deck
 import com.flashmd.domain.model.DueCard
 import com.flashmd.domain.sm2.Sm2Algorithm
 import com.flashmd.domain.sm2.Sm2Progress
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.time.Instant
 import javax.inject.Inject
 import javax.inject.Singleton
+
+// Diagnostic-card options are cached as a JSON array of {text, goto}.
+private val optionsJson = Json { ignoreUnknownKeys = true }
+
+private fun encodeOptions(options: List<BranchOption>): String? =
+    if (options.isEmpty()) null else optionsJson.encodeToString(options)
+
+private fun decodeOptions(raw: String?): List<BranchOption> =
+    if (raw.isNullOrBlank()) {
+        emptyList()
+    } else {
+        runCatching { optionsJson.decodeFromString<List<BranchOption>>(raw) }
+            .getOrDefault(emptyList())
+    }
 
 /**
  * SQLDelight-backed local mirror of decks/cards/progress. Enables offline study:
@@ -40,13 +58,27 @@ class LocalStudyStore @Inject constructor(
             )
         }
 
-    /** Replace the cached cards for a deck (used after an online fetch of the due batch). */
+    /**
+     * Replace the cached cards for a deck. Callers pass the whole deck when
+     * online so diagnostic MC options and remediation targets (Spec 01) resolve
+     * offline; the due batch alone is used as a fallback.
+     */
     fun cacheDeckCards(deckId: String, cards: List<Card>) = db.transaction {
         db.cardsQueries.deleteCardsForDeck(deckId)
         cards.forEachIndexed { i, c ->
-            db.cardsQueries.upsertCard(c.id, deckId, c.front, c.back, null, i.toLong())
+            db.cardsQueries.upsertCard(
+                c.id, deckId, c.front, c.back, null, i.toLong(),
+                c.label, encodeOptions(c.options),
+            )
         }
     }
+
+    /** Look up a card by its anchor label within a deck (diagnostic remediation
+     *  targets, Spec 01). Reads from the whole-deck cache — works offline. */
+    fun cardByLabel(deckId: String, label: String): Card? =
+        db.cardsQueries.selectCardByLabel(deckId, label).executeAsOneOrNull()?.let {
+            Card(it.id, it.deck_id, it.front, it.back, it.label, decodeOptions(it.options))
+        }
 
     fun cacheProgress(p: CardProgress) {
         db.cardProgressQueries.upsertProgress(
@@ -65,7 +97,7 @@ class LocalStudyStore @Inject constructor(
         return db.cardProgressQueries.selectDueCards(deckId, nowIso).executeAsList().map { c ->
             val p = db.cardProgressQueries.selectProgress(c.id).executeAsOneOrNull()
             DueCard(
-                card = Card(c.id, c.deck_id, c.front, c.back),
+                card = Card(c.id, c.deck_id, c.front, c.back, c.label, decodeOptions(c.options)),
                 progress = CardProgress(
                     id = c.id,
                     cardId = c.id,

@@ -18,13 +18,15 @@ class OutboxQueriesTest {
     @Test
     fun enqueueCountAndDeleteByIds() {
         val q = db.outboxQueries
-        q.enqueue("e1", "c1", 4, "2026-06-05T09:00:00Z", "2026-06-05T09:00:00Z")
-        q.enqueue("e2", "c2", 5, "2026-06-05T09:01:00Z", "2026-06-05T09:01:00Z")
-        q.enqueue("e1", "c1", 4, "2026-06-05T09:00:00Z", "2026-06-05T09:00:00Z") // dup ignored
+        q.enqueue("e1", "c1", 4, "2026-06-05T09:00:00Z", "2026-06-05T09:00:00Z", null)
+        q.enqueue("e2", "c2", 5, "2026-06-05T09:01:00Z", "2026-06-05T09:01:00Z", 2)
+        q.enqueue("e1", "c1", 4, "2026-06-05T09:00:00Z", "2026-06-05T09:00:00Z", null) // dup ignored
         assertEquals(2L, q.countAll().executeAsOne())
 
         q.deleteByIds(listOf("e1"))
         assertEquals(1L, q.countAll().executeAsOne())
-        assertEquals("e2", q.selectAll().executeAsList().single().event_id)
+        val remaining = q.selectAll().executeAsList().single()
+        assertEquals("e2", remaining.event_id)
+        assertEquals(2L, remaining.option_index) // Spec 01: option_index round-trips
     }
 }

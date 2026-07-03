@@ -87,13 +87,14 @@ export function rowToParsedCard(row: {
       options: (content.options as ParsedOption[]) ?? [],
     };
   }
+  // A basic card carries `options` only when it is a diagnostic card (Spec 01).
   return {
     type: "basic",
     front: (content.front as string) ?? "",
     back: (content.back as string) ?? "",
     category: row.category,
     label: (content.label as string | null) ?? null,
-    options: [],
+    options: (content.options as ParsedOption[]) ?? [],
   };
 }
 
@@ -105,11 +106,12 @@ function cardContent(c: ParsedCard): string {
       options: c.options,
     });
   }
-  return JSON.stringify(
-    c.label
-      ? { front: c.front, back: c.back, label: c.label }
-      : { front: c.front, back: c.back },
-  );
+  // Basic card. Persist `options` only for diagnostic cards (empty otherwise) so
+  // ordinary cards keep their exact historical content shape.
+  const content: Record<string, unknown> = { front: c.front, back: c.back };
+  if (c.label) content.label = c.label;
+  if (c.options.length > 0) content.options = c.options;
+  return JSON.stringify(content);
 }
 
 /**

@@ -1,4 +1,4 @@
-import { parseDeck } from "./parser";
+import { parseDeck, isDiagnostic } from "./parser";
 
 const SAMPLE = `# Test Deck
 *A subtitle line*
@@ -219,5 +219,88 @@ You rest here.
     const deck = parseDeck(evil);
     expect(Date.now() - started).toBeLessThan(1000);
     expect(deck.cards[0].options).toEqual([]); // not a valid option line
+  });
+});
+
+// Spec 01. These parity cases are mirrored in android MdParserTest.kt ("diagnostic
+// cards"); the Python port is frozen and does not classify diagnostic cards.
+describe("diagnostic cards (Spec 01)", () => {
+  const md = `# Biology
+
+[meiosis-vs-mitosis]
+**14. A cell divides producing four haploid cells. This is:**
+- Meiosis -> correct
+- Mitosis -> confusion-mitosis
+- Binary fission -> end
+Meiosis: gametes, variety, halved chromosomes.
+
+[confusion-mitosis]
+**15. You mixed these up. Mitosis produces:**
+Two genetically identical diploid cells.
+`;
+
+  it("classifies a card with a `-> correct` option as basic + keeps back text", () => {
+    const deck = parseDeck(md);
+    const card = deck.cards.find((c) => c.label === "meiosis-vs-mitosis")!;
+    // Diagnostic card: stays `basic` (has SR state) yet carries options.
+    expect(card.type).toBe("basic");
+    expect(card.front).toBe(
+      "A cell divides producing four haploid cells. This is:",
+    );
+    expect(card.back).toBe("Meiosis: gametes, variety, halved chromosomes.");
+    expect(card.options).toEqual([
+      { text: "Meiosis", goto: "correct" },
+      { text: "Mitosis", goto: "confusion-mitosis" },
+      { text: "Binary fission", goto: "end" },
+    ]);
+    expect(isDiagnostic(card)).toBe(true);
+  });
+
+  it("keeps a remediation target as an ordinary basic card", () => {
+    const deck = parseDeck(md);
+    const remediation = deck.cards.find(
+      (c) => c.label === "confusion-mitosis",
+    )!;
+    expect(remediation.type).toBe("basic");
+    expect(remediation.back).toBe("Two genetically identical diploid cells.");
+    expect(remediation.options).toEqual([]);
+    expect(isDiagnostic(remediation)).toBe(false);
+  });
+
+  it("a card with options but NO `-> correct` stays a branch card", () => {
+    const deck = parseDeck(
+      `# T\n\n[q]\n**1. Fork?**\n- Left -> a\n- Right -> b\n`,
+    );
+    const card = deck.cards[0];
+    expect(card.type).toBe("branch");
+    expect(card.back).toBe("");
+    expect(isDiagnostic(card)).toBe(false);
+  });
+
+  it("mixes SR, diagnostic and remediation cards in one deck", () => {
+    const mixed = `# Mixed
+
+**1. Plain front**
+Plain back.
+
+[dx]
+**2. Pick one:**
+- Right -> correct
+- Wrong -> fix
+Explanation back.
+
+[fix]
+**3. Remediation**
+The fix.
+`;
+    const deck = parseDeck(mixed);
+    expect(deck.cards.map((c) => c.type)).toEqual(["basic", "basic", "basic"]);
+    expect(deck.cards.map((c) => isDiagnostic(c))).toEqual([
+      false,
+      true,
+      false,
+    ]);
+    expect(deck.cards[0].back).toBe("Plain back.");
+    expect(deck.cards[1].back).toBe("Explanation back.");
   });
 });

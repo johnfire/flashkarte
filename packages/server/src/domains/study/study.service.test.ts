@@ -84,4 +84,37 @@ describe("sync", () => {
     await expect(sync("u1", huge)).rejects.toThrow(/too many|max/i);
     expect(mockRepo.cardBelongsToUser).not.toHaveBeenCalled();
   });
+
+  // Spec 01 — option_index on the ledger.
+  test("records a diagnostic pick's option_index in the review event", async () => {
+    await sync("u1", [
+      {
+        event_id: "e1",
+        card_id: "c1",
+        rating: 1,
+        reviewed_at: "2026-06-05T09:00:00.000Z",
+        option_index: 2,
+      },
+    ]);
+    expect(mockRepo.insertReviewEvent).toHaveBeenCalledWith(
+      "u1",
+      expect.objectContaining({ event_id: "e1", option_index: 2 }),
+    );
+  });
+
+  test("accepts the old sync shape without option_index (old clients)", async () => {
+    const res = await sync("u1", [
+      {
+        event_id: "e1",
+        card_id: "c1",
+        rating: 4,
+        reviewed_at: "2026-06-05T09:00:00.000Z",
+      },
+    ]);
+    expect(res.acked_event_ids).toEqual(["e1"]);
+    expect(mockRepo.insertReviewEvent).toHaveBeenCalledTimes(1);
+    // The event applied normally; option_index simply absent.
+    const [, ev] = mockRepo.insertReviewEvent.mock.calls[0];
+    expect((ev as { option_index?: number }).option_index).toBeUndefined();
+  });
 });

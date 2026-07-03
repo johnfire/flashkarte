@@ -9,6 +9,9 @@ data class SyncEventDto(
     val card_id: String,
     val rating: Int,
     val reviewed_at: String,
+    // Spec 01: index of the picked diagnostic option; null for flip/ordinary
+    // reviews. The server accepts the field absent or null (old clients).
+    val option_index: Int? = null,
 )
 
 @Serializable

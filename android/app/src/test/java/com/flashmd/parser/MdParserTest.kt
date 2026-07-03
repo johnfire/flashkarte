@@ -1,6 +1,8 @@
 package com.flashmd.parser
 
 import com.flashmd.data.parser.MdParser
+import com.flashmd.data.parser.ParsedOption
+import com.flashmd.data.parser.isDiagnostic
 import org.junit.Assert.*
 import org.junit.Test
 
@@ -108,6 +110,46 @@ class MdParserTest {
     @Test fun `A colon line in bold format is preserved as back text`() {
         val deck = MdParser.parse("# D\n\n**1. FOO**\nA: this is just back text.\n")
         assertEquals("A: this is just back text.", deck.cards[0].back)
+    }
+
+    // Spec 01 — parity with packages/shared parser.test.ts ("diagnostic cards").
+    @Test fun `card with a correct option is basic and keeps back text`() {
+        val md = "# Biology\n\n[dx]\n" +
+            "**14. A cell divides producing four haploid cells. This is:**\n" +
+            "- Meiosis -> correct\n- Mitosis -> confusion-mitosis\n- Binary fission -> end\n" +
+            "Meiosis: gametes, variety, halved chromosomes.\n"
+        val card = MdParser.parse(md).cards.first { it.label == "dx" }
+        assertEquals("basic", card.type)
+        assertEquals("A cell divides producing four haploid cells. This is:", card.front)
+        assertEquals("Meiosis: gametes, variety, halved chromosomes.", card.back)
+        assertEquals(
+            listOf(
+                ParsedOption("Meiosis", "correct"),
+                ParsedOption("Mitosis", "confusion-mitosis"),
+                ParsedOption("Binary fission", "end"),
+            ),
+            card.options,
+        )
+        assertTrue(isDiagnostic(card))
+    }
+
+    @Test fun `card with options but no correct target stays a branch card`() {
+        val deck = MdParser.parse("# T\n\n[q]\n**1. Fork?**\n- Left -> a\n- Right -> b\n")
+        val card = deck.cards[0]
+        assertEquals("branch", card.type)
+        assertEquals("", card.back)
+        assertFalse(isDiagnostic(card))
+    }
+
+    @Test fun `deck mixes SR, diagnostic and remediation cards`() {
+        val md = "# Mixed\n\n**1. Plain front**\nPlain back.\n\n" +
+            "[dx]\n**2. Pick one:**\n- Right -> correct\n- Wrong -> fix\nExplanation back.\n\n" +
+            "[fix]\n**3. Remediation**\nThe fix.\n"
+        val deck = MdParser.parse(md)
+        assertEquals(listOf("basic", "basic", "basic"), deck.cards.map { it.type })
+        assertEquals(listOf(false, true, false), deck.cards.map { isDiagnostic(it) })
+        assertEquals("Plain back.", deck.cards[0].back)
+        assertEquals("Explanation back.", deck.cards[1].back)
     }
 }
 

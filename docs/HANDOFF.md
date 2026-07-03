@@ -13,6 +13,21 @@ i18n**, **SEO**, **MCP Claude.ai OAuth**, and the **user-guide page** have all
 shipped — see below. On-device smoke tests of the offline flow + the newer
 Android screens are the main remaining manual-QA gap.
 
+## In review — NOT deployed (branch `feat/learning-engine-spec-01`)
+
+**Spec 01 — diagnostic answers** (the learning-engine flagship; see
+`docs/specs/01-diagnostic-answers.md`). A wrong multiple-choice option on an
+ordinary SR card can route to a remediation card shown as an interlude. Built on
+a branch and held for review — **do not merge without Chris's OK** (merge = prod,
+no staging). Included: reserved `-> correct` parser target + diagnostic-card
+classification (TS + Kotlin; Python frozen); shared `study/` module
+(`selectOptions`/`resolveChoice` + Kotlin mirror); server validation, options
+persistence, migration **013** (`review_events.option_index`, nullable); Android
+MC uses authored options, records `option_index`, shows the remediation interlude
+(SQLDelight schema **v2** migration `1.sqm` — adds `cardEntity.label/options` +
+`outboxEntity.option_index`; **first on-device DB upgrade — smoke-test before
+release**). Web stays flip-only (Spec 08). All TS + Android unit suites green.
+
 ## Live admin account
 
 - URL: https://flashkarte.christopherrehm.de

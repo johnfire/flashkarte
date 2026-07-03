@@ -6,6 +6,10 @@ data class ParsedOption(
 )
 
 data class ParsedCard(
+    // "basic" cards have front/back and SR state. "branch" cards are play-only.
+    // A "basic" card may also carry options when it is a *diagnostic* card
+    // (Spec 01): one option targets MdParser.CORRECT_TARGET, the rest route to
+    // remediation labels. Detect with isDiagnostic(); the type stays "basic".
     val type: String,           // "basic" | "branch"
     val front: String,
     val back: String,
@@ -20,7 +24,15 @@ data class ParsedDeck(
     val cards: List<ParsedCard>,
 )
 
+/** Mirror of the TS `isDiagnostic()` (packages/shared) — keep in sync. */
+fun isDiagnostic(card: ParsedCard): Boolean =
+    card.type == "basic" && card.options.any { it.goto == MdParser.CORRECT_TARGET }
+
 object MdParser {
+    // Reserved option target marking the right answer on a diagnostic card.
+    // Mirror of TS CORRECT_TARGET (packages/shared/src/markdown/parser.ts).
+    const val CORRECT_TARGET = "correct"
+
     private val H1 = Regex("""^# (.+)""")
     private val H2 = Regex("""^## (.+)""")
     private val FRONT = Regex("""^\*\*\d+\.\s(.+?)\*\*""")
@@ -67,10 +79,15 @@ object MdParser {
 
         fun flushCard() {
             val front = currentFront ?: return
+            // A card with options is a `branch` card UNLESS one option targets
+            // CORRECT_TARGET — then it is a diagnostic card, which keeps its
+            // `basic` type, front/back and SR state, carrying options alongside.
+            val diagnostic = options.any { it.goto == CORRECT_TARGET }
+            val isBranch = options.isNotEmpty() && !diagnostic
             cards += ParsedCard(
-                type = if (options.isNotEmpty()) "branch" else "basic",
+                type = if (isBranch) "branch" else "basic",
                 front = front,
-                back = if (options.isNotEmpty()) "" else cleanBack(backLines.toList()),
+                back = if (isBranch) "" else cleanBack(backLines.toList()),
                 category = currentCategory,
                 label = currentLabel,
                 options = options.toList(),

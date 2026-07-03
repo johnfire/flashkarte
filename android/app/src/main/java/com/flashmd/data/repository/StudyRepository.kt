@@ -3,6 +3,8 @@ package com.flashmd.data.repository
 import com.flashmd.data.local.LocalStudyStore
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
+import com.flashmd.data.remote.dto.DeckCardDto
+import com.flashmd.domain.model.BranchOption
 import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.CardProgress
 import com.flashmd.domain.model.DueCard
@@ -27,7 +29,14 @@ class StudyRepository @Inject constructor(
         return try {
             val due = apiCall { api.studyBatch(deckId) }.map { dto ->
                 DueCard(
-                    card = Card(dto.id, deckId, dto.content.front, dto.content.back),
+                    card = Card(
+                        id = dto.id,
+                        deckId = deckId,
+                        front = dto.content.front,
+                        back = dto.content.back,
+                        label = dto.content.label,
+                        options = dto.content.options.map { BranchOption(it.text, it.goto) },
+                    ),
                     progress = CardProgress(
                         id = dto.id,
                         cardId = dto.id,
@@ -40,8 +49,13 @@ class StudyRepository @Inject constructor(
                     ),
                 )
             }
-            // Cache the fetched cards so this batch can be studied offline.
-            local.cacheDeckCards(deckId, due.map { it.card })
+            // Cache the WHOLE deck (with options + labels) so diagnostic MC and
+            // remediation interludes resolve offline; fall back to just the due
+            // batch if the whole-deck fetch fails.
+            val wholeDeck = runCatching {
+                apiCall { api.getDeck(deckId) }.cards.map { it.toCard(deckId) }
+            }.getOrNull()
+            local.cacheDeckCards(deckId, wholeDeck ?: due.map { it.card })
             // Opportunistically drain any pending offline reviews.
             scheduler.requestSync()
             due
@@ -51,12 +65,20 @@ class StudyRepository @Inject constructor(
         }
     }
 
-    /** Offline-first: apply SM-2 locally, enqueue a sync event, and request a drain. */
-    suspend fun applyRating(cardId: String, rating: Int) {
-        val ev = outbox.enqueue(cardId, rating)
+    /**
+     * Offline-first: apply SM-2 locally, enqueue a sync event, and request a
+     * drain. [optionIndex] records which diagnostic option was picked (Spec 01).
+     */
+    suspend fun applyRating(cardId: String, rating: Int, optionIndex: Int? = null) {
+        val ev = outbox.enqueue(cardId, rating, optionIndex)
         local.applyRatingLocally(cardId, rating, ev.reviewedAt)
         scheduler.requestSync()
     }
+
+    /** The remediation card a diagnostic option routes to, resolved by label
+     *  from the local whole-deck cache (works offline). Null if not found. */
+    fun remediationCard(deckId: String, label: String): Card? =
+        local.cardByLabel(deckId, label)
 
     suspend fun getStats(deckId: String): DeckStudyStats {
         val s = apiCall { api.stats(deckId) }
@@ -73,6 +95,17 @@ class StudyRepository @Inject constructor(
         )
     }
 }
+
+/** Whole-deck card (from GET /api/decks/:id) to a domain Card. Branch cards use
+ *  their prompt as the front; diagnostic/basic cards keep front + options. */
+private fun DeckCardDto.toCard(deckId: String): Card = Card(
+    id = id,
+    deckId = deckId,
+    front = if (type == "branch") content.prompt else content.front,
+    back = content.back,
+    label = content.label,
+    options = content.options.map { BranchOption(it.text, it.goto) },
+)
 
 data class DeckStudyStats(
     val total: Int,

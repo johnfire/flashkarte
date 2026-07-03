@@ -2,7 +2,15 @@ import { query, queryOne } from "../../db/client";
 
 export interface CardForStudy {
   id: string;
-  content: { front: string; back: string };
+  // Diagnostic cards (Spec 01) also carry `label` and authored `options`; the
+  // full content JSONB is returned verbatim so clients can render MC options and
+  // resolve remediation targets.
+  content: {
+    front: string;
+    back: string;
+    label?: string | null;
+    options?: { text: string; goto: string }[];
+  };
   category: string | null;
 }
 
@@ -88,14 +96,22 @@ export async function insertReviewEvent(
     card_id: string;
     rating: number;
     reviewed_at: string;
+    option_index?: number | null;
   },
 ): Promise<boolean> {
   const rows = await query<{ event_id: string }>(
-    `INSERT INTO review_events (event_id, user_id, card_id, rating, reviewed_at)
-     VALUES ($1, $2, $3, $4, $5)
+    `INSERT INTO review_events (event_id, user_id, card_id, rating, reviewed_at, option_index)
+     VALUES ($1, $2, $3, $4, $5, $6)
      ON CONFLICT (event_id) DO NOTHING
      RETURNING event_id`,
-    [ev.event_id, userId, ev.card_id, ev.rating, ev.reviewed_at],
+    [
+      ev.event_id,
+      userId,
+      ev.card_id,
+      ev.rating,
+      ev.reviewed_at,
+      ev.option_index ?? null,
+    ],
   );
   return rows.length > 0;
 }

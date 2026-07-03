@@ -96,6 +96,10 @@ data class BranchOptionDto(
 data class CardContentDto(
     val front: String = "",
     val back: String = "",
+    // Spec 01: diagnostic cards also carry their anchor label and authored MC
+    // options; absent for ordinary cards.
+    val label: String? = null,
+    val options: List<BranchOptionDto> = emptyList(),
 )
 
 @Serializable

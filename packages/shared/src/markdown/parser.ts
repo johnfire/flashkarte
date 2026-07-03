@@ -4,12 +4,35 @@ export interface ParsedOption {
 }
 
 export interface ParsedCard {
+  // "basic" cards have front/back and SR state. "branch" cards are play-only
+  // (no SR state). A "basic" card MAY additionally carry options when it is a
+  // *diagnostic* card (Spec 01): one option targets the reserved CORRECT_TARGET,
+  // the rest route to remediation labels. Detect that case with `isDiagnostic()`
+  // — the `type` stays "basic" so SR scheduling is unchanged.
   type: "basic" | "branch";
   front: string;
   back: string;
   category: string | null;
   label: string | null;
   options: ParsedOption[];
+}
+
+// Reserved option target marking the right answer on a diagnostic card. Shared
+// by the parser (classification), server validation, and the study module.
+export const CORRECT_TARGET = "correct";
+
+/**
+ * A diagnostic card is a `basic` card (front/back + SR state) that also carries
+ * multiple-choice options, one of which targets CORRECT_TARGET. Options with no
+ * `-> correct` target make the card a `branch` card instead. ("Exactly one
+ * correct" is enforced by server validation, which can then reject a two-correct
+ * card with a clear message rather than mis-classifying it as a branch card.)
+ */
+export function isDiagnostic(card: ParsedCard): boolean {
+  return (
+    card.type === "basic" &&
+    card.options.some((option) => option.goto === CORRECT_TARGET)
+  );
 }
 
 export interface ParsedDeck {
@@ -51,8 +74,12 @@ function matchOption(line: string): { text: string; goto: string } | null {
 
 /**
  * Parse Markdown deck text into a ParsedDeck.
- * Ported verbatim from python/flashmd/parser/md_parser.py and mirrored in
- * Kotlin (android .../data/parser/MdParser.kt) — keep all three in sync.
+ * Mirrored in Kotlin (android .../data/parser/MdParser.kt) — keep the two in
+ * sync. The Python port (python/flashmd/parser/md_parser.py) is FROZEN and
+ * implements only the common subset: it has no branching and no diagnostic-card
+ * (`-> correct`) classification. Common-subset behavior stays identical across
+ * all three (corpus `fixtures/parser-cases.json`); branching/diagnostic parity
+ * is TS + Kotlin only.
  * A deck with zero cards is returned as-is; the caller rejects it.
  */
 export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
@@ -70,10 +97,15 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
 
   const flush = () => {
     if (currentFront !== null) {
+      // A card with options is a `branch` card UNLESS one option targets
+      // CORRECT_TARGET — then it is a diagnostic card, which keeps its `basic`
+      // type, front/back and SR state, carrying the options alongside.
+      const diagnostic = options.some((o) => o.goto === CORRECT_TARGET);
+      const isBranch = options.length > 0 && !diagnostic;
       cards.push({
-        type: options.length > 0 ? "branch" : "basic",
+        type: isBranch ? "branch" : "basic",
         front: currentFront,
-        back: options.length > 0 ? "" : cleanBack(backLines),
+        back: isBranch ? "" : cleanBack(backLines),
         category: currentCategory,
         label: currentLabel,
         options,

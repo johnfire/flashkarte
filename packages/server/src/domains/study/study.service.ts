@@ -17,6 +17,9 @@ const syncEventSchema = z.object({
   reviewed_at: z
     .string()
     .refine((s) => !Number.isNaN(Date.parse(s)), "Invalid reviewed_at date"),
+  // Diagnostic-card MC pick (Spec 01): index into the card's authored options.
+  // Optional and nullable — old clients omit it and must keep working.
+  option_index: z.number().int().min(0).nullable().optional(),
 });
 
 export function getStudyBatch(userId: string, deckId: string, limit = 20) {

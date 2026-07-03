@@ -3,12 +3,15 @@ CREATE TABLE outboxEntity (
   card_id TEXT NOT NULL,
   rating INTEGER NOT NULL,
   reviewed_at TEXT NOT NULL,
-  created_at TEXT NOT NULL
+  created_at TEXT NOT NULL,
+  -- Spec 01: which authored option was picked on a diagnostic card. NULL for
+  -- flip-mode reviews and ordinary MC picks; synced to review_events.option_index.
+  option_index INTEGER
 );
 
 enqueue:
-INSERT OR IGNORE INTO outboxEntity(event_id, card_id, rating, reviewed_at, created_at)
-VALUES (?, ?, ?, ?, ?);
+INSERT OR IGNORE INTO outboxEntity(event_id, card_id, rating, reviewed_at, created_at, option_index)
+VALUES (?, ?, ?, ?, ?, ?);
 
 selectAll:
 SELECT * FROM outboxEntity ORDER BY created_at;

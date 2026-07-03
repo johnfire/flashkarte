@@ -33,7 +33,15 @@ class SyncWorker @AssistedInject constructor(
         return try {
             val res = api.syncReviews(
                 SyncRequest(
-                    pending.map { SyncEventDto(it.eventId, it.cardId, it.rating, it.reviewedAt) },
+                    pending.map {
+                        SyncEventDto(
+                            it.eventId,
+                            it.cardId,
+                            it.rating,
+                            it.reviewedAt,
+                            it.optionIndex,
+                        )
+                    },
                 ),
             )
             res.progress.forEach { p ->
