@@ -17,6 +17,7 @@ data class AuthUiState(
     val isSignup: Boolean = false,
     val isSubmitting: Boolean = false,
     val error: String? = null,
+    val info: String? = null,
 )
 
 @HiltViewModel
@@ -29,18 +30,51 @@ class AuthViewModel @Inject constructor(
     val uiState: StateFlow<AuthUiState> = _uiState
 
     fun onEmailChange(value: String) {
-        _uiState.value = _uiState.value.copy(email = value, error = null)
+        _uiState.value = _uiState.value.copy(email = value, error = null, info = null)
     }
 
     fun onPasswordChange(value: String) {
-        _uiState.value = _uiState.value.copy(password = value, error = null)
+        _uiState.value = _uiState.value.copy(password = value, error = null, info = null)
     }
 
     fun toggleMode() {
         _uiState.value = _uiState.value.copy(
             isSignup = !_uiState.value.isSignup,
             error = null,
+            info = null,
         )
+    }
+
+    /**
+     * Send a password-reset email — for when the user can't remember their
+     * password and so can't sign in. Uses the email already typed above.
+     */
+    fun forgotPassword() {
+        val state = _uiState.value
+        if (state.isSubmitting) return
+        val email = state.email.trim()
+        if (email.isEmpty() || !email.contains("@")) {
+            _uiState.value = state.copy(
+                error = "Enter your email above, then tap “Forgot password?”.",
+                info = null,
+            )
+            return
+        }
+        _uiState.value = state.copy(isSubmitting = true, error = null, info = null)
+        viewModelScope.launch {
+            try {
+                authRepo.forgotPassword(email)
+            } catch (_: Exception) {
+                // Deliberately ignore failures: the server responds the same way
+                // whether or not the email exists (no account enumeration), so
+                // we show the same reassuring message regardless.
+            } finally {
+                _uiState.value = _uiState.value.copy(
+                    isSubmitting = false,
+                    info = "If that email has an account, a reset link is on its way.",
+                )
+            }
+        }
     }
 
     fun submit() {
@@ -57,7 +91,7 @@ class AuthViewModel @Inject constructor(
             return
         }
 
-        _uiState.value = state.copy(isSubmitting = true, error = null)
+        _uiState.value = state.copy(isSubmitting = true, error = null, info = null)
         viewModelScope.launch {
             try {
                 if (state.isSignup) {

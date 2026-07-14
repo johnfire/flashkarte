@@ -8,9 +8,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.input.ImeAction
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.data.local.ThemeMode
+import com.flashmd.ui.components.PasswordField
 import com.flashmd.ui.theme.ThemeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -67,8 +69,45 @@ fun SettingsScreen(
             }
 
             HorizontalDivider()
-            Text("Security", style = MaterialTheme.typography.titleMedium)
-            OutlinedButton(onClick = { viewModel.changePassword() }) { Text("Change password (email link)") }
+            Text("Change password", style = MaterialTheme.typography.titleMedium)
+            PasswordField(
+                value = state.currentPassword,
+                onValueChange = viewModel::onCurrentPasswordChange,
+                label = "Current password",
+                imeAction = ImeAction.Next,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            PasswordField(
+                value = state.newPassword,
+                onValueChange = viewModel::onNewPasswordChange,
+                label = "New password (min 8 chars)",
+                imeAction = ImeAction.Next,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            PasswordField(
+                value = state.confirmPassword,
+                onValueChange = viewModel::onConfirmPasswordChange,
+                label = "Confirm new password",
+                imeAction = ImeAction.Done,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Button(
+                onClick = { viewModel.submitPasswordChange() },
+                enabled = !state.isChangingPassword &&
+                    state.currentPassword.isNotEmpty() &&
+                    state.newPassword.isNotEmpty() &&
+                    state.confirmPassword.isNotEmpty(),
+            ) {
+                Text(if (state.isChangingPassword) "Updating…" else "Update password")
+            }
+            Text(
+                "Can't remember your current password?",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            OutlinedButton(onClick = { viewModel.sendResetEmail() }) {
+                Text("Email me a reset link")
+            }
 
             HorizontalDivider()
             Text("Feedback", style = MaterialTheme.typography.titleMedium)

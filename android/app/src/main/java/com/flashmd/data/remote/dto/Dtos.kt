@@ -187,6 +187,12 @@ data class UpdateProfileRequest(val displayName: String)
 data class ForgotPasswordRequest(val email: String)
 
 @Serializable
+data class ChangePasswordRequest(
+    val currentPassword: String,
+    val newPassword: String,
+)
+
+@Serializable
 data class BugReportRequest(
     val title: String,
     val description: String,

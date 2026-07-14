@@ -155,6 +155,39 @@ describe("auth routes", () => {
     expect(res.status).toBe(422);
   });
 
+  test("POST /api/auth/change-password without auth -> 401", async () => {
+    const res = await request(app)
+      .post("/api/auth/change-password")
+      .send({ currentPassword: "old", newPassword: "BrandNewPassw0rd" });
+    expect(res.status).toBe(401);
+    expect(mock.changePassword).not.toHaveBeenCalled();
+  });
+
+  test("POST /api/auth/change-password -> 200, re-issues session cookie", async () => {
+    mock.verifyAccessToken.mockReturnValue({
+      sub: "u1",
+      email: "a@b.com",
+    } as never);
+    mock.changePassword.mockResolvedValue({
+      user: { id: "u1", email: "a@b.com", role: "user" },
+      accessToken: "newtok",
+      rawRefresh: "newraw",
+      persistent: true,
+    } as never);
+    const res = await request(app)
+      .post("/api/auth/change-password")
+      .set("Authorization", "Bearer access-token")
+      .send({ currentPassword: "OldPassw0rd", newPassword: "BrandNewPassw0rd" });
+    expect(res.status).toBe(200);
+    expect(res.body.accessToken).toBe("newtok");
+    expect(res.headers["set-cookie"][0]).toMatch(/fk_refresh=/);
+    expect(mock.changePassword).toHaveBeenCalledWith(
+      "u1",
+      "OldPassw0rd",
+      "BrandNewPassw0rd",
+    );
+  });
+
   test("POST /api/auth/verify-email -> 200 verified", async () => {
     mock.verifyEmail.mockResolvedValue(undefined as never);
     const res = await request(app)

@@ -10,11 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flashmd.ui.components.PasswordField
 
 @Composable
 fun AuthScreen(
@@ -54,23 +54,28 @@ fun AuthScreen(
                 ),
             )
 
-            OutlinedTextField(
+            PasswordField(
                 value = state.password,
                 onValueChange = viewModel::onPasswordChange,
-                label = { Text("Password") },
-                singleLine = true,
-                visualTransformation = PasswordVisualTransformation(),
+                label = "Password",
+                imeAction = ImeAction.Done,
                 modifier = Modifier.fillMaxWidth(),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Done,
-                ),
             )
 
             if (state.error != null) {
                 Text(
                     state.error!!,
                     color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+
+            if (state.info != null) {
+                Text(
+                    state.info!!,
+                    color = MaterialTheme.colorScheme.primary,
                     style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(),
@@ -98,6 +103,15 @@ fun AuthScreen(
                     if (state.isSignup) "Already have an account? Log in"
                     else "No account yet? Sign up",
                 )
+            }
+
+            if (!state.isSignup) {
+                TextButton(
+                    onClick = viewModel::forgotPassword,
+                    enabled = !state.isSubmitting,
+                ) {
+                    Text("Forgot password?")
+                }
             }
         }
     }

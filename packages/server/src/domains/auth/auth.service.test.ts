@@ -1,7 +1,7 @@
 jest.mock("./auth.repository");
 import bcrypt from "bcryptjs";
 import * as repo from "./auth.repository";
-import { updateProfile, login } from "./auth.service";
+import { updateProfile, login, changePassword } from "./auth.service";
 import { ValidationError } from "../../utils/errors";
 import type { UserRow } from "./auth.repository";
 
@@ -50,6 +50,52 @@ describe("updateProfile language", () => {
       undefined,
     );
     expect(user.language).toBeNull();
+  });
+});
+
+describe("changePassword", () => {
+  const CURRENT = "CurrentPassw0rd";
+  function withHash() {
+    return { ...row(), password_hash: bcrypt.hashSync(CURRENT, 4) };
+  }
+
+  beforeEach(() => {
+    mockRepo.findByIdWithHash.mockResolvedValue(withHash() as never);
+    mockRepo.updatePasswordHash.mockResolvedValue(undefined as never);
+    mockRepo.deleteRefreshTokensForUser.mockResolvedValue(undefined as never);
+    mockRepo.storeRefreshToken.mockResolvedValue(undefined as never);
+  });
+
+  test("updates the hash and re-issues a session when the current password matches", async () => {
+    const result = await changePassword("u1", CURRENT, "BrandNewPassw0rd");
+    expect(mockRepo.updatePasswordHash).toHaveBeenCalledTimes(1);
+    // other sessions killed, then a fresh one issued for this device
+    expect(mockRepo.deleteRefreshTokensForUser).toHaveBeenCalledWith("u1");
+    expect(mockRepo.storeRefreshToken).toHaveBeenCalledTimes(1);
+    expect(result.accessToken).toBeTruthy();
+    expect(result.rawRefresh).toBeTruthy();
+  });
+
+  test("rejects a wrong current password without touching the hash", async () => {
+    await expect(
+      changePassword("u1", "WrongPassword", "BrandNewPassw0rd"),
+    ).rejects.toBeInstanceOf(ValidationError);
+    expect(mockRepo.updatePasswordHash).not.toHaveBeenCalled();
+    expect(mockRepo.deleteRefreshTokensForUser).not.toHaveBeenCalled();
+  });
+
+  test("rejects a too-short new password", async () => {
+    await expect(
+      changePassword("u1", CURRENT, "short"),
+    ).rejects.toBeInstanceOf(ValidationError);
+    expect(mockRepo.updatePasswordHash).not.toHaveBeenCalled();
+  });
+
+  test("rejects reusing the current password as the new one", async () => {
+    await expect(
+      changePassword("u1", CURRENT, CURRENT),
+    ).rejects.toBeInstanceOf(ValidationError);
+    expect(mockRepo.updatePasswordHash).not.toHaveBeenCalled();
   });
 });
 

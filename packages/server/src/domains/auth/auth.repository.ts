@@ -30,6 +30,13 @@ export function findById(id: string) {
   ]);
 }
 
+export function findByIdWithHash(id: string) {
+  return queryOne<UserWithHash>(
+    `SELECT ${USER_COLS}, password_hash FROM users WHERE id = $1`,
+    [id],
+  );
+}
+
 export function createUser(email: string, passwordHash: string) {
   return queryOne<UserRow>(
     `INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING ${USER_COLS}`,

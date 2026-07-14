@@ -6,6 +6,7 @@ import { ApiKey, CreatedApiKey, AccountType } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 import { useTheme } from "../theme/useTheme";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { PasswordInput } from "../components/PasswordInput";
 
 const MCP_URL =
   import.meta.env.VITE_MCP_URL ??
@@ -30,6 +31,43 @@ export function SettingsPage() {
   const [displayName, setDisplayName] = useState(user?.displayName ?? "");
   const [savingName, setSavingName] = useState(false);
   const [nameSaved, setNameSaved] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [passwordChanged, setPasswordChanged] = useState(false);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+
+  async function changePassword() {
+    setPasswordChanged(false);
+    setPasswordError(null);
+    if (newPassword.length < 8) {
+      setPasswordError(t("settings.passwordTooShort"));
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      setPasswordError(t("settings.passwordMismatch"));
+      return;
+    }
+    setChangingPassword(true);
+    try {
+      const { user } = await api.auth.changePassword(
+        currentPassword,
+        newPassword,
+      );
+      updateUser(user);
+      setPasswordChanged(true);
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (err) {
+      setPasswordError(
+        err instanceof ApiError ? err.message : t("settings.changePasswordError"),
+      );
+    } finally {
+      setChangingPassword(false);
+    }
+  }
 
   async function saveDisplayName() {
     setSavingName(true);
@@ -144,6 +182,91 @@ export function SettingsPage() {
           {nameSaved && (
             <p className="mt-1 text-sm text-green-600">{t("common.saved")}</p>
           )}
+        </section>
+      )}
+
+      {user && (
+        <section className="mb-8 rounded-lg border p-4">
+          <h2 className="mb-1 text-xl font-semibold">
+            {t("settings.changePassword")}
+          </h2>
+          <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
+            {t("settings.changePasswordHint")}
+          </p>
+          <div className="flex flex-col gap-3">
+            <div>
+              <label
+                htmlFor="current-password"
+                className="mb-1 block text-sm font-medium"
+              >
+                {t("settings.currentPassword")}
+              </label>
+              <PasswordInput
+                id="current-password"
+                value={currentPassword}
+                onChange={setCurrentPassword}
+                autoComplete="current-password"
+                ariaLabel={t("settings.currentPassword")}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="new-password"
+                className="mb-1 block text-sm font-medium"
+              >
+                {t("settings.newPassword")}
+              </label>
+              <PasswordInput
+                id="new-password"
+                value={newPassword}
+                onChange={setNewPassword}
+                autoComplete="new-password"
+                minLength={8}
+                ariaLabel={t("settings.newPassword")}
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="confirm-password"
+                className="mb-1 block text-sm font-medium"
+              >
+                {t("settings.confirmPassword")}
+              </label>
+              <PasswordInput
+                id="confirm-password"
+                value={confirmPassword}
+                onChange={setConfirmPassword}
+                autoComplete="new-password"
+                minLength={8}
+                ariaLabel={t("settings.confirmPassword")}
+              />
+            </div>
+            <button
+              onClick={changePassword}
+              disabled={
+                changingPassword ||
+                !currentPassword ||
+                !newPassword ||
+                !confirmPassword
+              }
+              className="self-start rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
+            >
+              {changingPassword ? "…" : t("settings.changePasswordButton")}
+            </button>
+          </div>
+          {passwordChanged && (
+            <p className="mt-2 text-sm text-green-600">
+              {t("settings.passwordChanged")}
+            </p>
+          )}
+          {passwordError && (
+            <p className="mt-2 text-sm text-red-600">{passwordError}</p>
+          )}
+          <p className="mt-3 text-sm text-gray-500 dark:text-gray-400">
+            <Link to="/forgot-password" className="text-indigo-600">
+              {t("settings.forgotPasswordLink")}
+            </Link>
+          </p>
         </section>
       )}
 

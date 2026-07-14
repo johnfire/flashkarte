@@ -76,6 +76,18 @@ export const updateMe = wrapAsync(async (req: Request, res: Response) => {
   res.json({ user });
 });
 
+export const changePassword = wrapAsync(async (req: Request, res: Response) => {
+  const { user, accessToken, rawRefresh, persistent } =
+    await service.changePassword(
+      req.userId!,
+      req.body.currentPassword,
+      req.body.newPassword,
+    );
+  // Re-issued session for the acting device (all others were invalidated).
+  res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
+  res.json({ user, accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
+});
+
 export const forgotPassword = wrapAsync(async (req: Request, res: Response) => {
   await service.forgotPassword(req.body.email);
   // Always the same response — never reveal whether the email exists.

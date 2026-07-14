@@ -39,11 +39,41 @@ class SettingsViewModelTest {
         coVerify { auth.updateProfile("Bob") }
     }
 
-    @Test fun changePasswordUsesEmail() = runTest {
+    @Test fun sendResetEmailUsesAccountEmail() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         val vm = SettingsViewModel(auth)
         advanceUntilIdle()
-        vm.changePassword(); advanceUntilIdle()
+        vm.sendResetEmail(); advanceUntilIdle()
         coVerify { auth.forgotPassword("a@b.c") }
+    }
+
+    @Test fun changePasswordSubmitsCurrentAndNew() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.onCurrentPasswordChange("OldPassw0rd")
+        vm.onNewPasswordChange("BrandNewPassw0rd")
+        vm.onConfirmPasswordChange("BrandNewPassw0rd")
+        vm.submitPasswordChange(); advanceUntilIdle()
+
+        coVerify { auth.changePassword("OldPassw0rd", "BrandNewPassw0rd") }
+        // Fields cleared and a confirmation shown on success.
+        assertEquals("", vm.state.value.newPassword)
+        assertEquals(true, vm.state.value.message?.startsWith("Password updated"))
+    }
+
+    @Test fun changePasswordRejectsMismatch() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.onCurrentPasswordChange("OldPassw0rd")
+        vm.onNewPasswordChange("BrandNewPassw0rd")
+        vm.onConfirmPasswordChange("Different0ne")
+        vm.submitPasswordChange(); advanceUntilIdle()
+
+        coVerify(exactly = 0) { auth.changePassword(any(), any()) }
+        assertEquals("The new passwords don't match.", vm.state.value.error)
     }
 }

@@ -265,6 +265,47 @@ export async function updateProfile(
 }
 
 /**
+ * Change the password of a logged-in user. Verifies the current password,
+ * sets the new one, and terminates every other session while re-issuing a
+ * fresh session for the acting device (so the caller stays signed in here but
+ * anyone holding a stolen session elsewhere is kicked out).
+ */
+export async function changePassword(
+  userId: string,
+  currentPasswordIn: unknown,
+  newPasswordIn: unknown,
+) {
+  const row = await repo.findByIdWithHash(userId);
+  if (!row) throw new AuthError("Not found");
+
+  if (typeof currentPasswordIn !== "string") {
+    throw new ValidationError("Current password is required");
+  }
+  const currentOk = await bcrypt.compare(currentPasswordIn, row.password_hash);
+  if (!currentOk) {
+    throw new ValidationError("Current password is incorrect");
+  }
+
+  const newPassword = parse(passwordSchema, newPasswordIn);
+  if (newPassword === currentPasswordIn) {
+    throw new ValidationError(
+      "New password must be different from the current one",
+    );
+  }
+
+  const hash = await bcrypt.hash(newPassword, BCRYPT_ROUNDS);
+  await repo.updatePasswordHash(userId, hash);
+  // Invalidate every existing session, then mint a fresh one for this device.
+  await repo.deleteRefreshTokensForUser(userId);
+  const { accessToken, rawRefresh, persistent } = await issueTokens(
+    row.id,
+    row.email,
+    true,
+  );
+  return { user: toUser(row), accessToken, rawRefresh, persistent };
+}
+
+/**
  * Start a password reset. Always resolves the same way whether or not the
  * email belongs to an account (no account enumeration).
  */

@@ -173,6 +173,19 @@ export const api = {
         method: "POST",
         body: JSON.stringify({ token, password }),
       }),
+    changePassword: async (currentPassword: string, newPassword: string) => {
+      const res = await request<{ user: User; accessToken: string }>(
+        "/auth/change-password",
+        {
+          method: "POST",
+          body: JSON.stringify({ currentPassword, newPassword }),
+        },
+      );
+      // The server rotates all sessions; adopt the fresh access token so this
+      // tab keeps working without waiting for a 401/refresh round-trip.
+      setAccessToken(res.accessToken);
+      return res;
+    },
   },
   decks: {
     list: () =>

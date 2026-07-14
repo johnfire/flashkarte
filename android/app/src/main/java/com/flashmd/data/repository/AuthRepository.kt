@@ -4,6 +4,7 @@ import com.flashmd.data.local.AuthCookieJar
 import com.flashmd.data.local.SessionStore
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
+import com.flashmd.data.remote.dto.ChangePasswordRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.ForgotPasswordRequest
 import com.flashmd.data.remote.dto.UpdateProfileRequest
@@ -48,5 +49,16 @@ class AuthRepository @Inject constructor(
 
     suspend fun forgotPassword(email: String) {
         apiCall { api.forgotPassword(ForgotPasswordRequest(email.trim())) }
+    }
+
+    /**
+     * Change the password of the signed-in user. The server rotates the
+     * session, so persist the fresh access token to keep this device logged in.
+     */
+    suspend fun changePassword(currentPassword: String, newPassword: String) {
+        val res = apiCall {
+            api.changePassword(ChangePasswordRequest(currentPassword, newPassword))
+        }
+        sessionStore.saveSession(res.accessToken, res.user)
     }
 }

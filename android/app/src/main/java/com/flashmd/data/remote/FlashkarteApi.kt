@@ -5,6 +5,7 @@ import com.flashmd.data.remote.dto.AddCardsResponse
 import com.flashmd.data.remote.dto.AuthResponse
 import com.flashmd.data.remote.dto.BugReportRequest
 import com.flashmd.data.remote.dto.BugReportResponse
+import com.flashmd.data.remote.dto.ChangePasswordRequest
 import com.flashmd.data.remote.dto.ClientErrorRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.DeckCreatedDto
@@ -100,6 +101,9 @@ interface FlashkarteApi {
 
     @POST("api/auth/forgot-password")
     suspend fun forgotPassword(@Body body: ForgotPasswordRequest): Response<Unit>
+
+    @POST("api/auth/change-password")
+    suspend fun changePassword(@Body body: ChangePasswordRequest): AuthResponse
 
     @POST("api/client-errors")
     suspend fun reportClientError(@Body body: ClientErrorRequest): Response<Unit>

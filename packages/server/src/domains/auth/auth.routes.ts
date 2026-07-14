@@ -11,5 +11,6 @@ authRouter.get("/me", requireAuth, ctrl.me);
 authRouter.patch("/me", requireAuth, ctrl.updateMe);
 authRouter.post("/verify-email", ctrl.verifyEmail);
 authRouter.post("/resend-verification", requireAuth, ctrl.resendVerification);
+authRouter.post("/change-password", requireAuth, ctrl.changePassword);
 authRouter.post("/forgot-password", ctrl.forgotPassword);
 authRouter.post("/reset-password", ctrl.resetPassword);
