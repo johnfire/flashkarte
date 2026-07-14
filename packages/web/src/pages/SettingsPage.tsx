@@ -62,7 +62,9 @@ export function SettingsPage() {
       setConfirmPassword("");
     } catch (err) {
       setPasswordError(
-        err instanceof ApiError ? err.message : t("settings.changePasswordError"),
+        err instanceof ApiError
+          ? err.message
+          : t("settings.changePasswordError"),
       );
     } finally {
       setChangingPassword(false);

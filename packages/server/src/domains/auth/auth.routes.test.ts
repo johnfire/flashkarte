@@ -177,7 +177,10 @@ describe("auth routes", () => {
     const res = await request(app)
       .post("/api/auth/change-password")
       .set("Authorization", "Bearer access-token")
-      .send({ currentPassword: "OldPassw0rd", newPassword: "BrandNewPassw0rd" });
+      .send({
+        currentPassword: "OldPassw0rd",
+        newPassword: "BrandNewPassw0rd",
+      });
     expect(res.status).toBe(200);
     expect(res.body.accessToken).toBe("newtok");
     expect(res.headers["set-cookie"][0]).toMatch(/fk_refresh=/);

@@ -85,16 +85,16 @@ describe("changePassword", () => {
   });
 
   test("rejects a too-short new password", async () => {
-    await expect(
-      changePassword("u1", CURRENT, "short"),
-    ).rejects.toBeInstanceOf(ValidationError);
+    await expect(changePassword("u1", CURRENT, "short")).rejects.toBeInstanceOf(
+      ValidationError,
+    );
     expect(mockRepo.updatePasswordHash).not.toHaveBeenCalled();
   });
 
   test("rejects reusing the current password as the new one", async () => {
-    await expect(
-      changePassword("u1", CURRENT, CURRENT),
-    ).rejects.toBeInstanceOf(ValidationError);
+    await expect(changePassword("u1", CURRENT, CURRENT)).rejects.toBeInstanceOf(
+      ValidationError,
+    );
     expect(mockRepo.updatePasswordHash).not.toHaveBeenCalled();
   });
 });
