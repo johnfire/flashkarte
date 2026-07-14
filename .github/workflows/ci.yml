@@ -12,6 +12,18 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  security:
+    name: Gitleaks — secret scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks — detect secrets in commits
+        uses: gitleaks/gitleaks-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   test:
     runs-on: ubuntu-latest
     steps:
@@ -71,7 +83,7 @@ jobs:
   # Build the app + mcp images and push to GHCR. Only on push to main, after tests.
   build-push:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: test
+    needs: [test, security]
     runs-on: ubuntu-latest
     permissions:
       contents: read

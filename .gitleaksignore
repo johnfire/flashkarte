@@ -1,0 +1,7 @@
+# Known historical finding, baselined by exact fingerprint (not a broad
+# allowlist rule, so it can't mask a future real leak in the same file).
+#
+# A real admin password was briefly committed to docs/HANDOFF.md and removed
+# in a later commit. The credential should be rotated regardless — this file
+# only stops gitleaks from re-flagging the already-known historical commit.
+8b7b6023f0fd079205962b03fd8ff0e508072856:docs/HANDOFF.md:generic-api-key:17
