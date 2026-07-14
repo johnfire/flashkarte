@@ -126,12 +126,28 @@ class ApiContractTest {
                 "accessToken":"jwt.token.here","expiresIn":900}""",
         )
 
-        val res = apiCall { api.login(CredentialsRequest("a@b.com", "password123")) }
+        val res = apiCall { api.login(CredentialsRequest("a@b.com", "password123", true)) }
 
         assertEquals("u1", res.user.id)
         assertEquals("a@b.com", res.user.email)
         assertEquals("jwt.token.here", res.accessToken)
         assertEquals(900, res.expiresIn)
+    }
+
+    @Test
+    fun `login always sends rememberMe true (mobile has no session-cookie prompt)`() = runBlocking {
+        enqueue(
+            200,
+            """{"user":{"id":"u1","email":"a@b.com","role":"user"},"accessToken":"t","expiresIn":900}""",
+        )
+
+        apiCall { api.login(CredentialsRequest("a@b.com", "password123", true)) }
+
+        val recorded = server.takeRequest()
+        val body = recorded.body.readUtf8()
+        // Guards against kotlinx's encodeDefaults=false silently dropping a
+        // defaulted-true field — rememberMe must actually be on the wire.
+        assertTrue("body should include rememberMe:true: $body", body.contains("\"rememberMe\":true"))
     }
 
     @Test
@@ -194,7 +210,7 @@ class ApiContractTest {
             """{"user":{"id":"u1","email":"a@b.com","role":"user"},"accessToken":"t","expiresIn":900}""",
         )
 
-        apiCall { api.signup(CredentialsRequest("a@b.com", "password123")) }
+        apiCall { api.signup(CredentialsRequest("a@b.com", "password123", true)) }
 
         val recorded = server.takeRequest()
         assertEquals("/api/auth/signup", recorded.path)

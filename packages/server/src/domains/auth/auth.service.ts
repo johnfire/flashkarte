@@ -28,7 +28,10 @@ function dummyPasswordHash(): string {
   return cachedDummyHash;
 }
 export const ACCESS_TOKEN_TTL_SEC = 15 * 60;
-const REFRESH_TOKEN_TTL_DAYS = 30;
+// Sliding window: every refresh (issueTokens) re-issues a token expiring this
+// many days out from *now*, so an actively-used session never dies — only
+// REFRESH_TOKEN_TTL_DAYS of total inactivity logs the user out.
+export const REFRESH_TOKEN_TTL_DAYS = 90;
 const VERIFICATION_TOKEN_TTL_HOURS = 24;
 const PASSWORD_RESET_TOKEN_TTL_HOURS = 1;
 

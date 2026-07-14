@@ -10,7 +10,11 @@ function cookieOpts(persistent: boolean) {
     secure: process.env.NODE_ENV === "production",
     sameSite: "strict" as const,
     // Persistent sessions survive browser restarts; session cookies don't.
-    ...(persistent ? { maxAge: 30 * 86400_000 } : {}),
+    // Matches the server-side refresh token TTL so the cookie doesn't die
+    // client-side before the token it carries would.
+    ...(persistent
+      ? { maxAge: service.REFRESH_TOKEN_TTL_DAYS * 86400_000 }
+      : {}),
     path: "/api/auth",
   };
 }

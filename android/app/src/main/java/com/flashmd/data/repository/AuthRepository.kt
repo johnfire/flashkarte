@@ -22,13 +22,20 @@ class AuthRepository @Inject constructor(
     val isLoggedIn: Flow<Boolean> = sessionStore.isLoggedIn
     val userEmail: Flow<String?> = sessionStore.userEmail
 
+    // Mobile apps don't prompt "remember me" the way a browser tab does —
+    // signing in here always starts a persistent, sliding-window session
+    // (see REFRESH_TOKEN_TTL_DAYS server-side).
     suspend fun login(email: String, password: String) {
-        val res = apiCall { api.login(CredentialsRequest(email.trim(), password)) }
+        val res = apiCall {
+            api.login(CredentialsRequest(email.trim(), password, rememberMe = true))
+        }
         sessionStore.saveSession(res.accessToken, res.user)
     }
 
     suspend fun signup(email: String, password: String) {
-        val res = apiCall { api.signup(CredentialsRequest(email.trim(), password)) }
+        val res = apiCall {
+            api.signup(CredentialsRequest(email.trim(), password, rememberMe = true))
+        }
         sessionStore.saveSession(res.accessToken, res.user)
     }
 

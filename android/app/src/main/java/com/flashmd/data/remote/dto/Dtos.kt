@@ -3,10 +3,14 @@ package com.flashmd.data.remote.dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+// rememberMe has no default: the shared Json config has encodeDefaults=false,
+// so a defaulted-true value would silently be dropped from the request body
+// (and the server would then treat the session as non-persistent).
 @Serializable
 data class CredentialsRequest(
     val email: String,
     val password: String,
+    val rememberMe: Boolean,
 )
 
 @Serializable

@@ -69,6 +69,27 @@ describe("auth routes", () => {
     expect(res.headers["set-cookie"][0]).not.toMatch(/Max-Age=/i);
   });
 
+  test("POST /api/auth/login with rememberMe -> persistent cookie Max-Age matches REFRESH_TOKEN_TTL_DAYS", async () => {
+    mock.login.mockResolvedValue({
+      user: { id: "u1", email: "a@b.com", role: "user" },
+      accessToken: "tok",
+      rawRefresh: "raw",
+      persistent: true,
+    } as never);
+
+    const res = await request(app)
+      .post("/api/auth/login")
+      .send({ email: "a@b.com", password: "password123", rememberMe: true });
+
+    // Guards against the cookie's Max-Age drifting out of sync with the
+    // server-side refresh token TTL (a stale hardcoded constant would let
+    // the cookie die client-side before the token it carries expires).
+    const expectedSeconds = service.REFRESH_TOKEN_TTL_DAYS * 86400;
+    expect(res.headers["set-cookie"][0]).toMatch(
+      new RegExp(`Max-Age=${expectedSeconds}\\b`),
+    );
+  });
+
   test("POST /api/auth/refresh -> 200 rotates refresh cookie, inherits persistence", async () => {
     mock.refresh.mockResolvedValue({
       accessToken: "new-tok",
