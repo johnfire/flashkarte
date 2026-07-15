@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { wrapAsync } from "../../utils/wrapAsync";
+import { record, userActor } from "../audit/audit.service";
 import * as service from "./auth.service";
 
 const REFRESH_COOKIE = "fk_refresh";
@@ -24,6 +25,13 @@ export const signup = wrapAsync(async (req: Request, res: Response) => {
     req.body.email,
     req.body.password,
   );
+  await record({
+    actor: userActor(user.id),
+    action: "account.created",
+    targetType: "user",
+    targetId: user.id,
+    afterState: { email: user.email },
+  });
   res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
   res
     .status(201)
@@ -55,7 +63,13 @@ export const logout = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const verifyEmail = wrapAsync(async (req: Request, res: Response) => {
-  await service.verifyEmail(req.body.token);
+  const userId = await service.verifyEmail(req.body.token);
+  await record({
+    actor: userActor(userId),
+    action: "email.verified",
+    targetType: "user",
+    targetId: userId,
+  });
   res.json({ status: "verified" });
 });
 
@@ -87,6 +101,12 @@ export const changePassword = wrapAsync(async (req: Request, res: Response) => {
       req.body.currentPassword,
       req.body.newPassword,
     );
+  await record({
+    actor: userActor(req.userId!),
+    action: "password.changed",
+    targetType: "user",
+    targetId: req.userId!,
+  });
   // Re-issued session for the acting device (all others were invalidated).
   res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
   res.json({ user, accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
@@ -102,6 +122,20 @@ export const forgotPassword = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const resetPassword = wrapAsync(async (req: Request, res: Response) => {
-  await service.resetPassword(req.body.token, req.body.password);
+  const userId = await service.resetPassword(req.body.token, req.body.password);
+  await record({
+    actor: userActor(userId),
+    action: "password.reset",
+    targetType: "user",
+    targetId: userId,
+  });
   res.json({ status: "reset" });
 });
+
+export const deleteAccount = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.deleteAccount(req.userId!, req.body.currentPassword);
+    res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
+    res.status(204).end();
+  },
+);

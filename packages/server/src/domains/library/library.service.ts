@@ -93,5 +93,8 @@ export async function clone(userId: string, id: string) {
   );
   if (!deck) throw new Error("Failed to create deck");
 
-  return { id: deck.id, title: deck.title, card_count: cards.length };
+  return {
+    deck: { id: deck.id, title: deck.title, card_count: cards.length },
+    sourceId: id,
+  };
 }

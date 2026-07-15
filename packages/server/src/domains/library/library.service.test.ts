@@ -35,7 +35,10 @@ describe("library.clone validation (matches importDeck)", () => {
       { type: "basic", content: { front: "AI", back: "def" }, category: null },
     ] as never);
     const res = await clone("u1", "src");
-    expect(res).toEqual({ id: "new1", title: "Source", card_count: 1 });
+    expect(res).toEqual({
+      deck: { id: "new1", title: "Source", card_count: 1 },
+      sourceId: "src",
+    });
     expect(mockDecks.createDeckWithCards).toHaveBeenCalledTimes(1);
   });
 

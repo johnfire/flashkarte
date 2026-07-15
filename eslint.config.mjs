@@ -32,6 +32,22 @@ export default tseslint.config(
       ],
     },
   },
+  // Size limits from coding-standards.md — components ≤ 200 LOC, modules ≤
+  // 1000 LOC. Counts exclude blank lines and comments.
+  {
+    files: ["packages/web/src/**/*.tsx"],
+    ignores: ["**/*.test.tsx", "**/*.spec.tsx"],
+    rules: {
+      "max-lines": ["error", { max: 200, skipBlankLines: true, skipComments: true }],
+    },
+  },
+  {
+    files: ["packages/**/*.ts"],
+    ignores: ["**/*.test.ts", "**/*.spec.ts"],
+    rules: {
+      "max-lines": ["error", { max: 1000, skipBlankLines: true, skipComments: true }],
+    },
+  },
   // Tests legitimately use require() for module-reset / dynamic-import patterns.
   {
     files: ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}"],
@@ -40,6 +56,7 @@ export default tseslint.config(
     },
     rules: {
       "@typescript-eslint/no-require-imports": "off",
+      "max-lines": "off",
     },
   },
   // Browser globals + the two React-hooks correctness rules for the web SPA.

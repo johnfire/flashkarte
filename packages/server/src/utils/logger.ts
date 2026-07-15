@@ -1,8 +1,10 @@
 import fs from "fs";
 import path from "path";
+import { AsyncLocalStorage } from "async_hooks";
 
 const LOG_DIR = process.env.LOG_DIR;
 let fileStream: fs.WriteStream | null = null;
+const asyncLocalStorage = new AsyncLocalStorage<string>();
 
 // Open the log file, but never let a file/permission failure crash the process.
 // createWriteStream opens the fd lazily on the libuv thread pool, so an EACCES/
@@ -30,10 +32,18 @@ if (LOG_DIR) {
 }
 
 type Level = "info" | "warn" | "error";
-function write(level: Level, msg: string, meta?: Record<string, unknown>) {
+
+function write(
+  level: Level,
+  source: string,
+  msg: string,
+  meta?: Record<string, unknown>,
+): void {
   const line = JSON.stringify({
     ts: new Date().toISOString(),
     level,
+    source,
+    correlationId: asyncLocalStorage.getStore(),
     msg,
     ...(meta ?? {}),
   });
@@ -43,7 +53,23 @@ function write(level: Level, msg: string, meta?: Record<string, unknown>) {
 }
 
 export const logger = {
-  info: (m: string, meta?: Record<string, unknown>) => write("info", m, meta),
-  warn: (m: string, meta?: Record<string, unknown>) => write("warn", m, meta),
-  error: (m: string, meta?: Record<string, unknown>) => write("error", m, meta),
+  info: (source: string, m: string, meta?: Record<string, unknown>) =>
+    write("info", source, m, meta),
+  warn: (source: string, m: string, meta?: Record<string, unknown>) =>
+    write("warn", source, m, meta),
+  error: (source: string, m: string, meta?: Record<string, unknown>) =>
+    write("error", source, m, meta),
+
+  /**
+   * Run `fn` with the given correlation ID bound to this async context.
+   * Used by the request-ID middleware so every log line during a request is
+   * tagged with the same ID, enabling end-to-end dataflow tracing.
+   */
+  withCorrelationId: <T>(correlationId: string, fn: () => T): T =>
+    asyncLocalStorage.run(correlationId, fn),
 };
+
+/** Read the correlation ID bound to the current async context (if any). */
+export function getCorrelationId(): string | undefined {
+  return asyncLocalStorage.getStore();
+}

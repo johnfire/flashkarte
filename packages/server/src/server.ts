@@ -17,13 +17,16 @@ function isLoggingFsError(err: Error): boolean {
 }
 
 process.on("uncaughtException", (err) => {
-  logger.error("uncaughtException", { message: err.message, stack: err.stack });
+  logger.error("server", "uncaughtException", {
+    message: err.message,
+    stack: err.stack,
+  });
   if (isLoggingFsError(err)) return;
   process.exit(1);
 });
 process.on("unhandledRejection", (reason) => {
   const err = reason instanceof Error ? reason : undefined;
-  logger.error("unhandledRejection", {
+  logger.error("server", "unhandledRejection", {
     message: err?.message ?? String(reason),
     stack: err?.stack,
   });
@@ -35,12 +38,12 @@ async function start() {
   await runMigrations(pool);
   await bootstrapAdmins(pool);
   createApp().listen(env.PORT, () =>
-    logger.info(`flashkarte server on ${env.PORT} (${env.NODE_ENV})`),
+    logger.info("server", `flashkarte server on ${env.PORT} (${env.NODE_ENV})`),
   );
 }
 
 start().catch((err) => {
-  logger.error("startup failed", {
+  logger.error("server", "startup failed", {
     message: err instanceof Error ? err.message : String(err),
     stack: err instanceof Error ? err.stack : undefined,
   });

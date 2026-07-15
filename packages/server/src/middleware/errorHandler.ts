@@ -22,7 +22,7 @@ export function errorHandler(
     });
     return;
   }
-  logger.error("Unhandled error", {
+  logger.error("middleware.errorHandler", "Unhandled error", {
     method: req.method,
     path: req.originalUrl,
     userId: req.userId,

@@ -81,7 +81,16 @@
     "created": "created",
     "revoke": "Revoke",
     "revokeConfirm": "Revoke this key? Any AI using it will lose access.",
-    "revokeError": "Couldn't revoke the key. Try again."
+    "revokeError": "Couldn't revoke the key. Try again.",
+    "dangerZone": "Danger zone",
+    "deleteAccountHint": "Permanently delete your account and all your decks, cards, and study progress. This cannot be undone.",
+    "deleteAccountButton": "Delete account",
+    "deleteAccountModalTitle": "Delete your account?",
+    "deleteAccountModalBody": "This permanently removes your account, all decks, cards, study progress, and API keys. Enter your password and type DELETE to confirm.",
+    "deleteConfirmLabel": "Type DELETE to confirm",
+    "deleteConfirmMismatch": "Type DELETE in the confirmation field to proceed.",
+    "deleteConfirmButton": "Delete my account",
+    "deleteError": "Couldn't delete the account. Check your password and try again."
   },
   "theme": {
     "toLight": "Switch to light mode",

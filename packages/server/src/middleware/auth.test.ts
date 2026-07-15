@@ -24,11 +24,13 @@ describe("requireAuth", () => {
     mockKeys.resolveKey.mockResolvedValue({
       userId: "user-123",
       scope: "full",
+      keyPrefix: "fk_secretkey",
     });
     const { req, err } = await run("Bearer fk_secretkey");
     expect(err).toBeUndefined();
     expect(req.userId).toBe("user-123");
     expect(req.keyScope).toBe("full");
+    expect(req.keyPrefix).toBe("fk_secretkey");
     expect(mockKeys.resolveKey).toHaveBeenCalledWith("fk_secretkey");
   });
 
@@ -36,10 +38,12 @@ describe("requireAuth", () => {
     mockKeys.resolveKey.mockResolvedValue({
       userId: "user-123",
       scope: "deck",
+      keyPrefix: "fk_deckkey",
     });
     const { req, err } = await run("Bearer fk_deckkey");
     expect(err).toBeUndefined();
     expect(req.keyScope).toBe("deck");
+    expect(req.keyPrefix).toBe("fk_deckkey");
   });
 
   test("rejects an unknown fk_ key", async () => {

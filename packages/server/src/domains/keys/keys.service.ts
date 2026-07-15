@@ -55,11 +55,19 @@ export async function revokeKey(userId: string, keyPrefix: unknown) {
   if (!deleted) throw new NotFoundError("API key not found");
 }
 
-/** Resolves an fk_ key to its owning user id and scope, or null. */
-export async function resolveKey(
-  rawKey: string,
-): Promise<{ userId: string; scope: KeyScope } | null> {
+export interface ResolvedKey {
+  userId: string;
+  scope: KeyScope;
+  keyPrefix: string;
+}
+
+/** Resolves an fk_ key to its owning user id, scope, and display prefix, or null. */
+export async function resolveKey(rawKey: string): Promise<ResolvedKey | null> {
   const row = await repo.findUserByKeyHash(hashKey(rawKey));
   if (!row) return null;
-  return { userId: row.user_id, scope: row.scope === "deck" ? "deck" : "full" };
+  return {
+    userId: row.user_id,
+    scope: row.scope === "deck" ? "deck" : "full",
+    keyPrefix: row.key_prefix,
+  };
 }

@@ -26,6 +26,7 @@ export function requireAuth(
         if (!result) return next(new AuthError("Invalid API key"));
         req.userId = result.userId;
         req.keyScope = result.scope;
+        req.keyPrefix = result.keyPrefix;
         next();
       })
       .catch(next);

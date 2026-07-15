@@ -17,6 +17,8 @@ import { publicLibraryRouter } from "./domains/library/public.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
 import { requireAuth, requireAdmin, requireFullScope } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
+import { requestId } from "./middleware/requestId";
+import { accessLog } from "./middleware/accessLog";
 import { mountSeo } from "./seo/mount";
 import { loadTemplate } from "./seo/template";
 import { getSiteOrigin } from "./seo/siteOrigin";
@@ -67,8 +69,17 @@ export function createApp() {
   app.use(express.json({ limit: "5mb" }));
   app.use(cookieParser());
 
-  if (process.env.NODE_ENV !== "test") {
+  // Trace every request. Must be before any code that reads / logs the ID.
+  app.use(requestId);
+
+  if (process.env.NODE_ENV === "production") {
+    // Structured access logs in production; dev keeps human-readable morgan.
+    app.use(accessLog);
+  } else if (process.env.NODE_ENV !== "test") {
     app.use(morgan("dev"));
+  }
+
+  if (process.env.NODE_ENV !== "test") {
     app.use(
       "/api",
       rateLimit({

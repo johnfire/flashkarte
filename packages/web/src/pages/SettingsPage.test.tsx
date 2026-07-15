@@ -1,5 +1,5 @@
 import { describe, test, expect, vi, beforeEach } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router-dom";
 import "../i18n";
@@ -9,7 +9,11 @@ import { api } from "../api/client";
 vi.mock("../api/client", () => ({
   api: {
     keys: { list: vi.fn(), create: vi.fn(), revoke: vi.fn() },
-    auth: { changePassword: vi.fn(), updateProfile: vi.fn() },
+    auth: {
+      changePassword: vi.fn(),
+      updateProfile: vi.fn(),
+      deleteAccount: vi.fn(),
+    },
   },
   ApiError: class ApiError extends Error {},
 }));
@@ -17,8 +21,9 @@ vi.mock("../api/client", () => ({
 // Mutable so individual tests can render logged-out or logged-in.
 let mockUser: { displayName: string | null; accountType: string } | null = null;
 const updateUser = vi.fn();
+const mockLogout = vi.fn();
 vi.mock("../auth/AuthContext", () => ({
-  useAuth: () => ({ user: mockUser, updateUser }),
+  useAuth: () => ({ user: mockUser, updateUser, logout: mockLogout }),
 }));
 
 const mockApi = api as unknown as {
@@ -30,6 +35,7 @@ const mockApi = api as unknown as {
   auth: {
     changePassword: ReturnType<typeof vi.fn>;
     updateProfile: ReturnType<typeof vi.fn>;
+    deleteAccount: ReturnType<typeof vi.fn>;
   };
 };
 
@@ -141,5 +147,73 @@ describe("SettingsPage", () => {
       await screen.findByText("The new passwords don't match."),
     ).toBeInTheDocument();
     expect(mockApi.auth.changePassword).not.toHaveBeenCalled();
+  });
+
+  describe("DangerZoneSection", () => {
+    test("shows the delete button", async () => {
+      mockUser = { displayName: null, accountType: "free" };
+      mockApi.keys.list.mockResolvedValue([]);
+
+      renderPage();
+      expect(
+        await screen.findByRole("button", { name: /Delete account/ }),
+      ).toBeInTheDocument();
+    });
+
+    test("opens modal on click and requires DELETE confirmation", async () => {
+      mockUser = { displayName: null, accountType: "free" };
+      mockApi.keys.list.mockResolvedValue([]);
+
+      renderPage();
+      await userEvent.click(
+        await screen.findByRole("button", { name: /Delete account/ }),
+      );
+
+      expect(
+        screen.getByText(/Type DELETE to confirm/),
+      ).toBeInTheDocument();
+
+      // Submit without typing DELETE should show error
+      await userEvent.click(
+        screen.getByRole("button", { name: /Delete my account/ }),
+      );
+      expect(
+        await screen.findByText(/Type DELETE in the confirmation field/),
+      ).toBeInTheDocument();
+    });
+
+    test("deletes account on valid password + DELETE confirmation", async () => {
+      mockUser = { displayName: null, accountType: "free" };
+      mockApi.keys.list.mockResolvedValue([]);
+      mockApi.auth.deleteAccount.mockResolvedValue(undefined);
+
+      renderPage();
+      await userEvent.click(
+        await screen.findByRole("button", { name: /Delete account/ }),
+      );
+
+      const modal = screen
+        .getByText("Delete your account?")
+        .closest(".fixed")!;
+
+      await userEvent.type(
+        within(modal as HTMLElement).getByLabelText("Current password"),
+        "password123",
+      );
+      await userEvent.type(
+        within(modal as HTMLElement).getByLabelText("Type DELETE to confirm"),
+        "DELETE",
+      );
+      await userEvent.click(
+        within(modal as HTMLElement).getByRole("button", {
+          name: /Delete my account/,
+        }),
+      );
+
+      await waitFor(() =>
+        expect(mockApi.auth.deleteAccount).toHaveBeenCalledWith("password123"),
+      );
+      expect(mockLogout).toHaveBeenCalled();
+    });
   });
 });

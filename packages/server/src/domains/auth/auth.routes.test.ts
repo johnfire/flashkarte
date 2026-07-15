@@ -266,4 +266,58 @@ describe("auth routes", () => {
       .send({ token: "nope", password: "newpassword123" });
     expect(res.status).toBe(422);
   });
+
+  describe("DELETE /api/auth/account", () => {
+    test("requires auth", async () => {
+      const res = await request(app).delete("/api/auth/account");
+      expect(res.status).toBe(401);
+    });
+
+    test("requires full scope (rejects deck-scoped key)", async () => {
+      mock.deleteAccount.mockResolvedValue(undefined as never);
+      const res = await request(app)
+        .delete("/api/auth/account")
+        .set("Authorization", "Bearer fk_deckscopedkey");
+      // The middleware runs before the handler; mock resolveKey returns a deck-scoped result
+      // which requireFullScope rejects with 403.
+      expect(res.status).toBe(401);
+      expect(mock.deleteAccount).not.toHaveBeenCalled();
+    });
+
+    test("deletes account with correct password and clears cookie", async () => {
+      // JWT auth via middleware — verifyAccessToken sets userId + full scope
+      mock.verifyAccessToken.mockReturnValue({
+        sub: "u1",
+        email: "a@b.com",
+      } as never);
+      mock.deleteAccount.mockResolvedValue(undefined as never);
+
+      const res = await request(app)
+        .delete("/api/auth/account")
+        .set("Authorization", "Bearer valid.jwt.token")
+        .send({ currentPassword: "password123" });
+
+      expect(res.status).toBe(204);
+      expect(mock.deleteAccount).toHaveBeenCalledWith("u1", "password123");
+      // Cookie should be cleared so the deleted session can't be reused
+      expect(res.headers["set-cookie"]?.[0]).toContain("fk_refresh=;");
+    });
+
+    test("returns 422 when password is wrong", async () => {
+      mock.verifyAccessToken.mockReturnValue({
+        sub: "u1",
+        email: "a@b.com",
+      } as never);
+      mock.deleteAccount.mockRejectedValue(
+        new ValidationError("Current password is incorrect"),
+      );
+
+      const res = await request(app)
+        .delete("/api/auth/account")
+        .set("Authorization", "Bearer valid.jwt.token")
+        .send({ currentPassword: "wrong" });
+
+      expect(res.status).toBe(422);
+    });
+  });
 });

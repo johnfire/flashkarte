@@ -186,6 +186,11 @@ export const api = {
       setAccessToken(res.accessToken);
       return res;
     },
+    deleteAccount: (currentPassword: string) =>
+      request<void>("/auth/account", {
+        method: "DELETE",
+        body: JSON.stringify({ currentPassword }),
+      }),
   },
   decks: {
     list: () =>

@@ -38,8 +38,8 @@ export function deleteApiKey(userId: string, keyPrefix: string) {
 }
 
 export function findUserByKeyHash(keyHash: string) {
-  return queryOne<{ user_id: string; scope: string }>(
-    "SELECT user_id, scope FROM user_api_keys WHERE key_hash = $1",
+  return queryOne<{ user_id: string; scope: string; key_prefix: string }>(
+    "SELECT user_id, scope, key_prefix FROM user_api_keys WHERE key_hash = $1",
     [keyHash],
   );
 }

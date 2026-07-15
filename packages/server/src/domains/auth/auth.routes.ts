@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { requireAuth } from "../../middleware/auth";
+import { requireAuth, requireFullScope } from "../../middleware/auth";
 import * as ctrl from "./auth.controller";
 
 export const authRouter = Router();
@@ -14,3 +14,9 @@ authRouter.post("/resend-verification", requireAuth, ctrl.resendVerification);
 authRouter.post("/change-password", requireAuth, ctrl.changePassword);
 authRouter.post("/forgot-password", ctrl.forgotPassword);
 authRouter.post("/reset-password", ctrl.resetPassword);
+authRouter.delete(
+  "/account",
+  requireAuth,
+  requireFullScope,
+  ctrl.deleteAccount,
+);

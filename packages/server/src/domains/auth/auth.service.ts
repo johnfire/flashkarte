@@ -10,6 +10,8 @@ import {
   sendVerificationEmail,
   sendPasswordResetEmail,
 } from "../../email/mailer";
+import { withTransaction } from "../../db/client";
+import { record, userActor } from "../audit/audit.service";
 import * as repo from "./auth.repository";
 import type { UserRow } from "./auth.repository";
 
@@ -159,7 +161,7 @@ export async function signup(emailIn: unknown, passwordIn: unknown) {
 }
 
 /** Confirm an email address from a verification-link token. */
-export async function verifyEmail(rawToken: unknown): Promise<void> {
+export async function verifyEmail(rawToken: unknown): Promise<string> {
   if (typeof rawToken !== "string" || !rawToken) {
     throw new ValidationError("Verification token is required");
   }
@@ -169,6 +171,7 @@ export async function verifyEmail(rawToken: unknown): Promise<void> {
   }
   await repo.markEmailVerified(found.user_id);
   await repo.deleteVerificationTokensForUser(found.user_id);
+  return found.user_id;
 }
 
 /** Re-send a verification email to the logged-in user (no-op if verified). */
@@ -309,6 +312,45 @@ export async function changePassword(
 }
 
 /**
+ * Delete the calling user's account. Re-authenticates with the current
+ * password, writes an audit entry inside the same transaction, then deletes
+ * the user row (FK cascades clean up all owned data except review_events,
+ * which has no FK). The audit row survives — it's append-only — so a record
+ * of who/when remains without PII (before_state is null).
+ */
+export async function deleteAccount(
+  userId: string,
+  currentPasswordIn: unknown,
+): Promise<void> {
+  const row = await repo.findByIdWithHash(userId);
+  if (!row) throw new AuthError("Not found");
+
+  if (typeof currentPasswordIn !== "string") {
+    throw new ValidationError("Current password is required");
+  }
+  const currentOk = await bcrypt.compare(
+    currentPasswordIn,
+    row.password_hash,
+  );
+  if (!currentOk) {
+    throw new ValidationError("Current password is incorrect");
+  }
+
+  await withTransaction(async (client) => {
+    await record(
+      {
+        actor: userActor(userId),
+        action: "account.deleted",
+        targetType: "user",
+        targetId: userId,
+      },
+      client,
+    );
+    await repo.deleteUserAccount(userId, client);
+  });
+}
+
+/**
  * Start a password reset. Always resolves the same way whether or not the
  * email belongs to an account (no account enumeration).
  */
@@ -341,7 +383,7 @@ export async function forgotPassword(emailIn: unknown): Promise<void> {
 export async function resetPassword(
   rawToken: unknown,
   passwordIn: unknown,
-): Promise<void> {
+): Promise<string> {
   if (typeof rawToken !== "string" || !rawToken) {
     throw new ValidationError("Reset token is required");
   }
@@ -354,4 +396,5 @@ export async function resetPassword(
   await repo.updatePasswordHash(found.user_id, hash);
   await repo.deletePasswordResetTokensForUser(found.user_id); // single-use
   await repo.deleteRefreshTokensForUser(found.user_id); // invalidate sessions
+  return found.user_id;
 }

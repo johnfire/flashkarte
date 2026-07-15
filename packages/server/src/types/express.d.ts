@@ -4,5 +4,7 @@ declare module "express-serve-static-core" {
   interface Request {
     userId?: string;
     keyScope?: "full" | "deck";
+    keyPrefix?: string;
+    correlationId?: string;
   }
 }

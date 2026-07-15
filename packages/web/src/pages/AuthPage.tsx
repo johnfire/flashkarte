@@ -62,12 +62,14 @@ export function AuthPage() {
             : t("auth.createAccount")}
         </p>
 
+        <label htmlFor="email" className="sr-only">
+          {t("auth.email")}
+        </label>
         <input
           id="email"
           type="email"
           required
           autoComplete="email"
-          aria-label={t("auth.email")}
           placeholder={t("auth.email")}
           value={email}
           onChange={(e) => setEmail(e.target.value)}

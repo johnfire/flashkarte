@@ -20,7 +20,7 @@ export async function bootstrapAdmins(pool: Pool): Promise<void> {
       [email],
     );
     if (res.rowCount && res.rowCount > 0) {
-      logger.info(`Bootstrapped admin: ${email}`);
+      logger.info("db.bootstrap", `Bootstrapped admin: ${email}`);
     }
   }
 }

@@ -28,11 +28,15 @@ export async function createIssue(
   const repo = getRepo();
 
   if (!token) {
-    logger.warn("github-issue: no GITHUB_TOKEN — logging instead of filing", {
-      repo,
-      title: issue.title,
-      labels: issue.labels,
-    });
+    logger.warn(
+      "github.createIssue",
+      "github-issue: no GITHUB_TOKEN — logging instead of filing",
+      {
+        repo,
+        title: issue.title,
+        labels: issue.labels,
+      },
+    );
     return { url: null };
   }
 
@@ -55,7 +59,7 @@ export async function createIssue(
 
     if (!res.ok) {
       const text = await res.text().catch(() => "");
-      logger.error("github-issue: API rejected request", {
+      logger.error("github.createIssue", "github-issue: API rejected request", {
         repo,
         status: res.status,
         body: text.slice(0, 500),
@@ -66,7 +70,7 @@ export async function createIssue(
     const data = (await res.json()) as { html_url?: string };
     return { url: data.html_url ?? null };
   } catch (err) {
-    logger.error("github-issue: request failed", {
+    logger.error("github.createIssue", "github-issue: request failed", {
       repo,
       error: err instanceof Error ? err.message : String(err),
     });

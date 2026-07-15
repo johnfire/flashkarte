@@ -81,7 +81,16 @@
     "created": "créée le",
     "revoke": "Révoquer",
     "revokeConfirm": "Révoquer cette clé ? Toute IA qui l'utilise perdra l'accès.",
-    "revokeError": "Impossible de révoquer la clé. Réessaie."
+    "revokeError": "Impossible de révoquer la clé. Réessaie.",
+    "dangerZone": "Zone dangereuse",
+    "deleteAccountHint": "Supprime définitivement ton compte et tous tes decks, cartes et progression d'étude. Cette action est irréversible.",
+    "deleteAccountButton": "Supprimer le compte",
+    "deleteAccountModalTitle": "Supprimer ton compte ?",
+    "deleteAccountModalBody": "Cela supprime définitivement ton compte, tous les decks, cartes, progression d'étude et clés API. Saisis ton mot de passe et tape DELETE pour confirmer.",
+    "deleteConfirmLabel": "Tape DELETE pour confirmer",
+    "deleteConfirmMismatch": "Tape DELETE dans le champ de confirmation pour continuer.",
+    "deleteConfirmButton": "Supprimer mon compte",
+    "deleteError": "Impossible de supprimer le compte. Vérifie ton mot de passe et réessaie."
   },
   "theme": {
     "toLight": "Passer au mode clair",

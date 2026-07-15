@@ -75,9 +75,12 @@ describe("library routes", () => {
 
   test("POST /api/library/:id/clone -> 201", async () => {
     mock.clone.mockResolvedValue({
-      id: "new1",
-      title: "AI Terms",
-      card_count: 50,
+      deck: {
+        id: "new1",
+        title: "AI Terms",
+        card_count: 50,
+      },
+      sourceId: "d1",
     });
     const res = await request(app).post("/api/library/d1/clone");
     expect(res.status).toBe(201);

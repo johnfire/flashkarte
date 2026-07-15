@@ -81,7 +81,16 @@
     "created": "creada el",
     "revoke": "Revocar",
     "revokeConfirm": "¿Revocar esta clave? Cualquier IA que la use perderá el acceso.",
-    "revokeError": "No se pudo revocar la clave. Inténtalo de nuevo."
+    "revokeError": "No se pudo revocar la clave. Inténtalo de nuevo.",
+    "dangerZone": "Zona peligrosa",
+    "deleteAccountHint": "Elimina permanentemente tu cuenta y todos tus mazos, tarjetas y progreso de estudio. Esta acción no se puede deshacer.",
+    "deleteAccountButton": "Eliminar cuenta",
+    "deleteAccountModalTitle": "¿Eliminar tu cuenta?",
+    "deleteAccountModalBody": "Esto elimina permanentemente tu cuenta, todos los mazos, tarjetas, progreso de estudio y claves API. Introduce tu contraseña y escribe DELETE para confirmar.",
+    "deleteConfirmLabel": "Escribe DELETE para confirmar",
+    "deleteConfirmMismatch": "Escribe DELETE en el campo de confirmación para continuar.",
+    "deleteConfirmButton": "Eliminar mi cuenta",
+    "deleteError": "No se pudo eliminar la cuenta. Verifica tu contraseña e inténtalo de nuevo."
   },
   "theme": {
     "toLight": "Cambiar al modo claro",

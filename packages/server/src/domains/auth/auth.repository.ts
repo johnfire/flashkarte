@@ -1,3 +1,4 @@
+import type { PoolClient } from "pg";
 import { query, queryOne } from "../../db/client";
 
 export interface UserRow {
@@ -158,4 +159,18 @@ export function deletePasswordResetTokensForUser(userId: string) {
   return query("DELETE FROM password_reset_tokens WHERE user_id = $1", [
     userId,
   ]);
+}
+
+export function deleteUserAccount(
+  userId: string,
+  client?: PoolClient,
+): Promise<unknown[]> {
+  const sql = `
+    DELETE FROM review_events WHERE user_id = $1;
+    DELETE FROM users WHERE id = $1;
+  `;
+  if (client) {
+    return client.query(sql, [userId]).then((res) => res.rows);
+  }
+  return query(sql, [userId]);
 }

@@ -17,7 +17,7 @@ export interface ClientErrorReport {
  * visible and fixable server-side. Logging only (no DB table) for now.
  */
 export function recordClientError(report: ClientErrorReport): void {
-  logger.error("client-error", {
+  logger.error("clientErrors.service", "client-error", {
     app: report.app,
     appVersion: report.appVersion,
     platform: report.platform,

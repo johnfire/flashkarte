@@ -81,7 +81,16 @@
     "created": "erstellt",
     "revoke": "Widerrufen",
     "revokeConfirm": "Diesen Schlüssel widerrufen? Jede KI, die ihn nutzt, verliert den Zugriff.",
-    "revokeError": "Der Schlüssel konnte nicht widerrufen werden. Versuche es erneut."
+    "revokeError": "Der Schlüssel konnte nicht widerrufen werden. Versuche es erneut.",
+    "dangerZone": "Gefahrenzone",
+    "deleteAccountHint": "Lösche dein Konto dauerhaft mit all deinen Stapeln, Karten und deinem Lernfortschritt. Dies kann nicht rückgängig gemacht werden.",
+    "deleteAccountButton": "Konto löschen",
+    "deleteAccountModalTitle": "Dein Konto löschen?",
+    "deleteAccountModalBody": "Dies entfernt dauerhaft dein Konto, alle Stapel, Karten, Lernfortschritte und API-Schlüssel. Gib dein Passwort ein und tippe DELETE zur Bestätigung.",
+    "deleteConfirmLabel": "Tippe DELETE zur Bestätigung",
+    "deleteConfirmMismatch": "Tippe DELETE in das Bestätigungsfeld, um fortzufahren.",
+    "deleteConfirmButton": "Mein Konto löschen",
+    "deleteError": "Konto konnte nicht gelöscht werden. Überprüfe dein Passwort und versuche es erneut."
   },
   "theme": {
     "toLight": "Zum hellen Modus wechseln",
