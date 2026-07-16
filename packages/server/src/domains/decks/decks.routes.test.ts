@@ -61,6 +61,36 @@ describe("decks routes", () => {
     );
   });
 
+  test("POST /api/decks (file upload) -> 201 reads the uploaded buffer", async () => {
+    mock.importDeck.mockResolvedValue({
+      id: "d2",
+      title: "Uploaded Deck",
+      source_filename: "deck.md",
+      created_at: "x",
+      updated_at: "x",
+      card_count: 1,
+    } as never);
+
+    const markdown = "# Uploaded Deck\n\n**1. Q**\nA\n";
+    const res = await request(app)
+      .post("/api/decks")
+      .attach("file", Buffer.from(markdown, "utf8"), "deck.md");
+
+    expect(res.status).toBe(201);
+    // The multipart body reached the controller intact and kept its filename.
+    expect(mock.importDeck).toHaveBeenCalledWith("u1", markdown, "deck.md");
+  });
+
+  test("POST /api/decks rejects an upload over the 5MB limit", async () => {
+    const tooBig = Buffer.alloc(6 * 1024 * 1024, "x");
+    const res = await request(app)
+      .post("/api/decks")
+      .attach("file", tooBig, "huge.md");
+
+    expect(res.status).toBeGreaterThanOrEqual(400);
+    expect(mock.importDeck).not.toHaveBeenCalled();
+  });
+
   test("POST /api/decks with zero cards -> 422", async () => {
     mock.importDeck.mockRejectedValue(
       new ValidationError("Deck has no cards — check the Markdown format"),
