@@ -67,8 +67,8 @@ export async function createIssue(
       return { url: null };
     }
 
-    const data = (await res.json()) as { html_url?: string };
-    return { url: data.html_url ?? null };
+    const created = (await res.json()) as { html_url?: string };
+    return { url: created.html_url ?? null };
   } catch (err) {
     logger.error("github.createIssue", "github-issue: request failed", {
       repo,

@@ -11,6 +11,7 @@ import {
   sendPasswordResetEmail,
 } from "../../email/mailer";
 import { withTransaction } from "../../db/client";
+import { logger } from "../../utils/logger";
 import { record, userActor } from "../audit/audit.service";
 import * as twoFactor from "../account/twoFactor.service";
 import * as repo from "./auth.repository";
@@ -157,8 +158,9 @@ export async function signup(emailIn: unknown, passwordIn: unknown) {
   try {
     await createAndSendVerification(user.id, user.email);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("Failed to send verification email on signup:", err);
+    logger.error("auth.signup", "Failed to send verification email", {
+      error: err instanceof Error ? err.message : String(err),
+    });
   }
   return { user: toUser(user), accessToken, rawRefresh, persistent };
 }
@@ -463,8 +465,9 @@ export async function forgotPassword(emailIn: unknown): Promise<void> {
     const link = `${getAppUrl()}/reset-password?token=${rawToken}`;
     await sendPasswordResetEmail(user.email, link);
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error("Failed to send password reset email:", err);
+    logger.error("auth.forgotPassword", "Failed to send password reset email", {
+      error: err instanceof Error ? err.message : String(err),
+    });
   }
 }
 

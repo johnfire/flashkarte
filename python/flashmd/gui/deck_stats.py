@@ -4,19 +4,24 @@ from tkinter import ttk
 from flashmd.db import deck_repo, progress_repo
 from flashmd.gui import theme
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from flashmd.gui.app import App
+
 
 RATING_LABELS = {1: "Again", 2: "Hard", 3: "Good", 4: "Easy", 5: "Perfect"}
 
 
 class DeckStatsScreen(ttk.Frame):
-    def __init__(self, master, app, deck_id: str):
+    def __init__(self, master: tk.Misc, app: "App", deck_id: str) -> None:
         super().__init__(master)
         self._app = app
         self._deck_id = deck_id
         self._conn = app.conn
         self._build()
 
-    def _build(self):
+    def _build(self) -> None:
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
 
@@ -92,7 +97,7 @@ class DeckStatsScreen(ttk.Frame):
                     font=theme.FONT_NORMAL, fg=theme.SUBTEXT, bg=theme.SURFACE, width=5, anchor="e",
                 ).grid(row=row_idx, column=2, padx=(8, 16), pady=4, sticky="e")
 
-    def _stat_block(self, parent, label: str, value: str, col: int):
+    def _stat_block(self, parent: tk.Misc, label: str, value: str, col: int) -> None:
         f = tk.Frame(parent, bg=theme.SURFACE)
         f.grid(row=0, column=col, padx=12, pady=12, sticky="ew")
         tk.Label(f, text=value, font=theme.FONT_LARGE, fg=theme.ACCENT, bg=theme.SURFACE).pack()

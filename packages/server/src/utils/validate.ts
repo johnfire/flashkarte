@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { ValidationError } from "./errors";
 
-export function parse<T>(schema: z.ZodType<T>, data: unknown): T {
-  const result = schema.safeParse(data);
+export function parse<T>(schema: z.ZodType<T>, input: unknown): T {
+  const result = schema.safeParse(input);
   if (!result.success) {
     throw new ValidationError(result.error.issues[0].message);
   }

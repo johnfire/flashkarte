@@ -58,8 +58,8 @@ export async function review(userId: string, cardId: unknown, rating: unknown) {
 type SyncEvent = z.infer<typeof syncEventSchema>;
 
 function parseEvent(e: unknown): SyncEvent | null {
-  const result = syncEventSchema.safeParse(e);
-  return result.success ? result.data : null;
+  const parsed = syncEventSchema.safeParse(e);
+  return parsed.success ? parsed.data : null;
 }
 
 // One sync call applies events serially with several DB round-trips each, so an

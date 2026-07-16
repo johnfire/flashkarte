@@ -3,19 +3,24 @@ from tkinter import ttk
 
 from flashmd.gui import theme
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from flashmd.gui.app import App
+
 
 RATING_LABELS = {1: "Again", 2: "Hard", 3: "Good", 4: "Easy", 5: "Perfect"}
 
 
 class SessionSummaryScreen(ttk.Frame):
-    def __init__(self, master, app, deck_id: str, results: dict):
+    def __init__(self, master: tk.Misc, app: "App", deck_id: str, results: dict[int, int]) -> None:
         super().__init__(master)
         self._app = app
         self._deck_id = deck_id
         self._results = results
         self._build()
 
-    def _build(self):
+    def _build(self) -> None:
         self.columnconfigure(0, weight=1)
         self.rowconfigure(0, weight=1)
 

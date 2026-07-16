@@ -85,8 +85,9 @@ describe("deck MCP tools", () => {
         descriptions[args[0] as string] = args[1] as string;
       },
     };
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    registerDeckTools(server as any);
+    registerDeckTools(
+      server as unknown as Parameters<typeof registerDeckTools>[0],
+    );
     expect(descriptions["create_deck"]).toContain("**1.");
     expect(descriptions["create_deck"]).toContain("# ");
   });

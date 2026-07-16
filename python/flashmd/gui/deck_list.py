@@ -7,15 +7,20 @@ from flashmd.db.import_service import import_deck
 from flashmd.parser.md_parser import parse
 from flashmd.gui import theme
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from flashmd.gui.app import App
+
 
 class DeckListScreen(ttk.Frame):
-    def __init__(self, master, app):
+    def __init__(self, master: tk.Misc, app: "App") -> None:
         super().__init__(master)
         self._app = app
         self._build()
         self._load()
 
-    def _build(self):
+    def _build(self) -> None:
         self.columnconfigure(0, weight=1)
         self.rowconfigure(1, weight=1)
 
@@ -62,7 +67,7 @@ class DeckListScreen(ttk.Frame):
             style="Sub.TLabel",
         )
 
-    def _load(self):
+    def _load(self) -> None:
         for w in self._list_frame.winfo_children():
             w.destroy()
 
@@ -82,7 +87,7 @@ class DeckListScreen(ttk.Frame):
             stats = progress_repo.get_stats(conn, deck["id"])
             self._deck_card(deck, stats, idx)
 
-    def _deck_card(self, deck, stats, row):
+    def _deck_card(self, deck: dict, stats: dict, row: int) -> None:
         card = ttk.Frame(self._list_frame, style="Surface.TFrame")
         card.grid(row=row, column=0, sticky="ew", padx=12, pady=4)
         card.columnconfigure(0, weight=1)
@@ -112,7 +117,7 @@ class DeckListScreen(ttk.Frame):
             command=lambda d=deck_id: self._app.show_deck_stats(d),
         ).pack(side="left")
 
-    def _import(self):
+    def _import(self) -> None:
         path = filedialog.askopenfilename(
             title="Import Markdown Deck",
             filetypes=[("Markdown files", "*.md"), ("All files", "*.*")],

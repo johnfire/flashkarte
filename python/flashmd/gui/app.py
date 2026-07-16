@@ -10,7 +10,7 @@ from flashmd.gui.deck_stats import DeckStatsScreen
 
 
 class App(tk.Tk):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.title("FlashMD")
         self.update_idletasks()
@@ -44,7 +44,7 @@ class App(tk.Tk):
     def show_study_session(self, deck_id: str) -> None:
         self._swap(StudySessionScreen(self, self, deck_id))
 
-    def show_session_summary(self, deck_id: str, results: dict) -> None:
+    def show_session_summary(self, deck_id: str, results: dict[int, int]) -> None:
         self._swap(SessionSummaryScreen(self, self, deck_id, results))
 
     def show_deck_stats(self, deck_id: str) -> None:

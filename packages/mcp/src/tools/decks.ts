@@ -10,9 +10,11 @@ const MARKDOWN_HELP =
   '# French Basics\n## Greetings\n**1. How do you say "hello"?**\nBonjour\n' +
   '**2. How do you say "thank you"?**\nMerci';
 
-function asText(data: unknown) {
+function asText(payload: unknown) {
   return {
-    content: [{ type: "text" as const, text: JSON.stringify(data, null, 2) }],
+    content: [
+      { type: "text" as const, text: JSON.stringify(payload, null, 2) },
+    ],
   };
 }
 

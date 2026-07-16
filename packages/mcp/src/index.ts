@@ -9,9 +9,9 @@ import { createTokenRouter } from "./oauth/token";
 import { createMcpAuthMiddleware } from "./oauth/middleware";
 
 function requireEnv(name: string): string {
-  const val = process.env[name];
-  if (!val) throw new Error(`${name} environment variable is not set`);
-  return val;
+  const value = process.env[name];
+  if (!value) throw new Error(`${name} environment variable is not set`);
+  return value;
 }
 
 const PORT = parseInt(process.env.MCP_PORT ?? "3002", 10);

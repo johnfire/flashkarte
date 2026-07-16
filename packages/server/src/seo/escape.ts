@@ -10,8 +10,8 @@ export function escapeHtml(s: string): string {
 
 // JSON for a <script type="application/ld+json"> block: escape the three
 // characters that could break out of the script element.
-export function escapeJsonLd(obj: unknown): string {
-  return JSON.stringify(obj)
+export function escapeJsonLd(value: unknown): string {
+  return JSON.stringify(value)
     .replace(/</g, "\\u003c")
     .replace(/>/g, "\\u003e")
     .replace(/&/g, "\\u0026");

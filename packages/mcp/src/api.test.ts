@@ -1,8 +1,7 @@
 import { backendLogin, backendCreateKey } from "./api";
 
 const mockFetch = jest.fn();
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-(global as any).fetch = mockFetch;
+global.fetch = mockFetch as unknown as typeof fetch;
 
 function jsonResponse(ok: boolean, status: number, body: unknown) {
   return {

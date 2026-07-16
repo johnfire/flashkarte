@@ -5,9 +5,14 @@ from collections import deque
 from flashmd.db import progress_repo, deck_repo
 from flashmd.gui import theme
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from flashmd.gui.app import App
+
 
 class StudySessionScreen(ttk.Frame):
-    def __init__(self, master, app, deck_id: str):
+    def __init__(self, master: tk.Misc, app: "App", deck_id: str) -> None:
         super().__init__(master)
         self._app = app
         self._deck_id = deck_id
@@ -22,7 +27,7 @@ class StudySessionScreen(ttk.Frame):
         self._build()
         self.after(0, self._load_queue)
 
-    def _build(self):
+    def _build(self) -> None:
         self.columnconfigure(0, weight=1)
         self.rowconfigure(2, weight=1)
 
@@ -125,7 +130,7 @@ class StudySessionScreen(ttk.Frame):
         for i in range(1, 6):
             self.bind_all(str(i), lambda e, r=i: self._rate(r) if self._flipped else None)
 
-    def _load_queue(self):
+    def _load_queue(self) -> None:
         deck = deck_repo.get_by_id(self._conn, self._deck_id)
         if deck:
             self._deck_label.config(text=deck["title"])
@@ -145,7 +150,7 @@ class StudySessionScreen(ttk.Frame):
 
         self._show_next()
 
-    def _show_next(self):
+    def _show_next(self) -> None:
         self._flipped = False
         self._hide_ratings()
         self._hint_label.grid()
@@ -157,7 +162,7 @@ class StudySessionScreen(ttk.Frame):
         self._back_label.config(text=card["back"])
         self._update_progress()
 
-    def _flip(self):
+    def _flip(self) -> None:
         if self._flipped or not self._queue:
             return
         self._flipped = True
@@ -166,7 +171,7 @@ class StudySessionScreen(ttk.Frame):
         self._back_label.grid(row=2, column=0, padx=30, pady=(4, 30), sticky="ew")
         self._show_ratings()
 
-    def _rate(self, rating: int):
+    def _rate(self, rating: int) -> None:
         if not self._flipped or not self._queue:
             return
 
@@ -189,7 +194,7 @@ class StudySessionScreen(ttk.Frame):
         else:
             self._show_next()
 
-    def _finish(self):
+    def _finish(self) -> None:
         self.unbind_all("<space>")
         for i in range(1, 6):
             self.unbind_all(str(i))
@@ -202,13 +207,13 @@ class StudySessionScreen(ttk.Frame):
             },
         )
 
-    def _back(self):
+    def _back(self) -> None:
         self.unbind_all("<space>")
         for i in range(1, 6):
             self.unbind_all(str(i))
         self._app.show_deck_list()
 
-    def _update_progress(self):
+    def _update_progress(self) -> None:
         remaining = sum(1 for _ in self._queue if True)
         total_in_queue = len(self._queue)
         done = self._reviewed
@@ -220,10 +225,10 @@ class StudySessionScreen(ttk.Frame):
             self._progress_bar["value"] = pct
             self._progress_bar["maximum"] = 100
 
-    def _show_ratings(self):
+    def _show_ratings(self) -> None:
         for btn in self._rating_buttons.values():
             btn.grid()
 
-    def _hide_ratings(self):
+    def _hide_ratings(self) -> None:
         for btn in self._rating_buttons.values():
             btn.grid_remove()
