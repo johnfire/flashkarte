@@ -197,6 +197,9 @@ data class ChangePasswordRequest(
 )
 
 @Serializable
+data class DeleteAccountRequest(val currentPassword: String)
+
+@Serializable
 data class BugReportRequest(
     val title: String,
     val description: String,

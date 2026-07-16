@@ -21,3 +21,6 @@ SELECT count(*) FROM outboxEntity;
 
 deleteByIds:
 DELETE FROM outboxEntity WHERE event_id IN ?;
+
+deleteAllOutbox:
+DELETE FROM outboxEntity;

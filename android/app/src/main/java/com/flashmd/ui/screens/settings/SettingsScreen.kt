@@ -120,8 +120,87 @@ fun SettingsScreen(
                 modifier = Modifier.fillMaxWidth(),
             ) { Text("Log out") }
 
+            HorizontalDivider()
+            Text(
+                "Danger zone",
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.error,
+            )
+            Text(
+                "Deleting your account removes all your decks, cards, and study history. This cannot be undone.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            OutlinedButton(
+                onClick = { viewModel.openDeleteDialog() },
+                colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.error),
+            ) { Text("Delete account") }
+
             if (state.message != null) Text(state.message!!, color = MaterialTheme.colorScheme.primary)
             if (state.error != null) Text(state.error!!, color = MaterialTheme.colorScheme.error)
         }
+
+        if (state.showDeleteDialog) {
+            DeleteAccountDialog(
+                deletePassword = state.deletePassword,
+                deleteConfirmText = state.deleteConfirmText,
+                isDeleting = state.isDeletingAccount,
+                error = state.deleteError,
+                onPasswordChange = viewModel::onDeletePasswordChange,
+                onConfirmTextChange = viewModel::onDeleteConfirmTextChange,
+                onConfirm = { viewModel.deleteAccount() },
+                onDismiss = { viewModel.closeDeleteDialog() },
+            )
+        }
     }
+}
+
+@Composable
+private fun DeleteAccountDialog(
+    deletePassword: String,
+    deleteConfirmText: String,
+    isDeleting: Boolean,
+    error: String?,
+    onPasswordChange: (String) -> Unit,
+    onConfirmTextChange: (String) -> Unit,
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text("Delete account?", color = MaterialTheme.colorScheme.error) },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                Text(
+                    "All your decks, cards, and study history will be permanently " +
+                        "deleted — on this device and on the server. This cannot be undone.",
+                )
+                PasswordField(
+                    value = deletePassword,
+                    onValueChange = onPasswordChange,
+                    label = "Current password",
+                    imeAction = ImeAction.Next,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                OutlinedTextField(
+                    value = deleteConfirmText,
+                    onValueChange = onConfirmTextChange,
+                    label = { Text("Type DELETE to confirm") },
+                    singleLine = true,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+                if (error != null) Text(error, color = MaterialTheme.colorScheme.error)
+            }
+        },
+        confirmButton = {
+            Button(
+                onClick = onConfirm,
+                enabled = !isDeleting && deletePassword.isNotEmpty() && deleteConfirmText.isNotEmpty(),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
+            ) { Text(if (isDeleting) "Deleting…" else "Delete forever") }
+        },
+        dismissButton = {
+            TextButton(onClick = onDismiss, enabled = !isDeleting) { Text("Cancel") }
+        },
+    )
 }

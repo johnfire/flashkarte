@@ -23,6 +23,11 @@ data class SettingsUiState(
     val newPassword: String = "",
     val confirmPassword: String = "",
     val isChangingPassword: Boolean = false,
+    val showDeleteDialog: Boolean = false,
+    val deletePassword: String = "",
+    val deleteConfirmText: String = "",
+    val isDeletingAccount: Boolean = false,
+    val deleteError: String? = null,
 )
 
 @HiltViewModel
@@ -113,6 +118,60 @@ class SettingsViewModel @Inject constructor(
                 )
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isChangingPassword = false, error = e.message)
+            }
+        }
+    }
+
+    fun openDeleteDialog() {
+        _state.value = _state.value.copy(
+            showDeleteDialog = true,
+            deletePassword = "",
+            deleteConfirmText = "",
+            deleteError = null,
+        )
+    }
+
+    fun closeDeleteDialog() {
+        if (_state.value.isDeletingAccount) return
+        _state.value = _state.value.copy(
+            showDeleteDialog = false,
+            deletePassword = "",
+            deleteConfirmText = "",
+            deleteError = null,
+        )
+    }
+
+    fun onDeletePasswordChange(v: String) {
+        _state.value = _state.value.copy(deletePassword = v, deleteError = null)
+    }
+
+    fun onDeleteConfirmTextChange(v: String) {
+        _state.value = _state.value.copy(deleteConfirmText = v, deleteError = null)
+    }
+
+    /**
+     * Permanently delete the account. Two-step confirmation: the user must
+     * type DELETE and re-enter their password (verified server-side). On
+     * success the repository wipes all local data and clears the session,
+     * which navigates back to the auth screen on its own.
+     */
+    fun deleteAccount() {
+        val s = _state.value
+        if (s.isDeletingAccount) return
+        if (s.deleteConfirmText != "DELETE") {
+            _state.value = s.copy(deleteError = "Type DELETE to confirm.")
+            return
+        }
+        _state.value = s.copy(isDeletingAccount = true, deleteError = null)
+        viewModelScope.launch {
+            try {
+                auth.deleteAccount(s.deletePassword)
+                // No state update needed: the cleared session unmounts settings.
+            } catch (e: ApiException) {
+                _state.value = _state.value.copy(
+                    isDeletingAccount = false,
+                    deleteError = e.message,
+                )
             }
         }
     }

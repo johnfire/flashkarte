@@ -15,6 +15,9 @@ VALUES (?, ?, ?, ?, ?, ?, ?);
 selectProgress:
 SELECT * FROM progressEntity WHERE card_id = ?;
 
+deleteAllProgress:
+DELETE FROM progressEntity;
+
 -- Due + new cards for a deck, mirroring the server ordering:
 -- progressed-and-due first (by due date), then new cards, then by position.
 selectDueCards:

@@ -9,6 +9,7 @@ import com.flashmd.data.remote.dto.ChangePasswordRequest
 import com.flashmd.data.remote.dto.ClientErrorRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.DeckCreatedDto
+import com.flashmd.data.remote.dto.DeleteAccountRequest
 import com.flashmd.data.remote.dto.DeckDetailDto
 import com.flashmd.data.remote.dto.DeckListItemDto
 import com.flashmd.data.remote.dto.ForgotPasswordRequest
@@ -29,6 +30,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
@@ -104,6 +106,13 @@ interface FlashkarteApi {
 
     @POST("api/auth/change-password")
     suspend fun changePassword(@Body body: ChangePasswordRequest): AuthResponse
+
+    // Retrofit's @DELETE forbids a request body; the server re-authenticates
+    // the deletion with the current password, so use @HTTP with hasBody.
+    // Returns Unit (not Response<Unit>) so a 422 wrong-password surfaces as an
+    // HttpException that apiCall converts into a user-visible ApiException.
+    @HTTP(method = "DELETE", path = "api/auth/account", hasBody = true)
+    suspend fun deleteAccount(@Body body: DeleteAccountRequest)
 
     @POST("api/client-errors")
     suspend fun reportClientError(@Body body: ClientErrorRequest): Response<Unit>

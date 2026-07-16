@@ -6,9 +6,11 @@ import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.ChangePasswordRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
+import com.flashmd.data.remote.dto.DeleteAccountRequest
 import com.flashmd.data.remote.dto.ForgotPasswordRequest
 import com.flashmd.data.remote.dto.UpdateProfileRequest
 import com.flashmd.data.remote.dto.UserDto
+import com.flashmd.db.FlashkarteDb
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -18,6 +20,7 @@ class AuthRepository @Inject constructor(
     private val api: FlashkarteApi,
     private val sessionStore: SessionStore,
     private val cookieJar: AuthCookieJar,
+    private val db: FlashkarteDb,
 ) {
     val isLoggedIn: Flow<Boolean> = sessionStore.isLoggedIn
     val userEmail: Flow<String?> = sessionStore.userEmail
@@ -67,5 +70,24 @@ class AuthRepository @Inject constructor(
             api.changePassword(ChangePasswordRequest(currentPassword, newPassword))
         }
         sessionStore.saveSession(res.accessToken, res.user)
+    }
+
+    /**
+     * Permanently delete the account server-side, then wipe everything this
+     * device knows about the user: cached decks/cards/progress, the unsynced
+     * review outbox, the session, and the refresh cookie. A re-created account
+     * must never see stale local data. Clearing the session flips [isLoggedIn],
+     * which sends the UI back to the auth screen.
+     */
+    suspend fun deleteAccount(currentPassword: String) {
+        apiCall { api.deleteAccount(DeleteAccountRequest(currentPassword)) }
+        db.transaction {
+            db.outboxQueries.deleteAllOutbox()
+            db.cardProgressQueries.deleteAllProgress()
+            db.cardsQueries.deleteAllCards()
+            db.decksQueries.deleteAllDecks()
+        }
+        sessionStore.clear()
+        cookieJar.clear()
     }
 }

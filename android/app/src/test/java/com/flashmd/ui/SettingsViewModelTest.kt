@@ -1,5 +1,6 @@
 package com.flashmd.ui
 
+import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.dto.UserDto
 import com.flashmd.data.repository.AuthRepository
 import com.flashmd.ui.screens.settings.SettingsViewModel
@@ -75,5 +76,52 @@ class SettingsViewModelTest {
 
         coVerify(exactly = 0) { auth.changePassword(any(), any()) }
         assertEquals("The new passwords don't match.", vm.state.value.error)
+    }
+
+    @Test fun deleteAccountRequiresTypedConfirmation() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.openDeleteDialog()
+        vm.onDeletePasswordChange("MyPassw0rd")
+        vm.onDeleteConfirmTextChange("delete") // wrong case — must not pass
+        vm.deleteAccount(); advanceUntilIdle()
+
+        coVerify(exactly = 0) { auth.deleteAccount(any()) }
+        assertEquals("Type DELETE to confirm.", vm.state.value.deleteError)
+    }
+
+    @Test fun deleteAccountCallsRepositoryWithPassword() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        coEvery { auth.deleteAccount(any()) } returns Unit
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.openDeleteDialog()
+        vm.onDeletePasswordChange("MyPassw0rd")
+        vm.onDeleteConfirmTextChange("DELETE")
+        vm.deleteAccount(); advanceUntilIdle()
+
+        coVerify { auth.deleteAccount("MyPassw0rd") }
+        assertEquals(null, vm.state.value.deleteError)
+    }
+
+    @Test fun deleteAccountSurfacesWrongPasswordError() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        coEvery { auth.deleteAccount(any()) } throws
+            ApiException(status = 422, code = "VALIDATION", message = "Current password is incorrect")
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.openDeleteDialog()
+        vm.onDeletePasswordChange("WrongPassw0rd")
+        vm.onDeleteConfirmTextChange("DELETE")
+        vm.deleteAccount(); advanceUntilIdle()
+
+        assertEquals("Current password is incorrect", vm.state.value.deleteError)
+        assertEquals(false, vm.state.value.isDeletingAccount)
+        // Dialog stays open so the user can retry.
+        assertEquals(true, vm.state.value.showDeleteDialog)
     }
 }

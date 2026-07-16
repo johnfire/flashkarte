@@ -16,3 +16,6 @@ SELECT * FROM deckEntity ORDER BY title;
 
 selectDeck:
 SELECT * FROM deckEntity WHERE id = ?;
+
+deleteAllDecks:
+DELETE FROM deckEntity;
