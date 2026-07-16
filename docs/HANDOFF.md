@@ -51,7 +51,7 @@ Found while triaging the 2026-07-16 dependabot batch — independent of the
 Kotlin chain above, each blocking its own set of updates:
 
 - **AGP 8.5.2** — `lifecycleRuntimeKtx 2.11.0` pulls `androidx.compose
-  1.11.0`, which refuses to build on AGP < 8.6. Same pin that stops KSP.
+1.11.0`, which refuses to build on AGP < 8.6. Same pin that stops KSP.
 - **compileSdk 35** — `okhttp 5.x` requires compiling against API 36.
 
 Merged from that batch (verified building): `hiltWork 1.3.0`,
