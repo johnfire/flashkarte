@@ -1,6 +1,19 @@
 # flashkarte — Session Handoff
 
-_Last updated: 2026-06-20_
+_Last updated: 2026-07-16_
+
+## ⚠️ Before the next deploy (2026-07-16)
+
+The standards remediation (all 7 phases — see
+`docs/standards-remediation-handoff.md`) is complete on local `main` but
+**not yet pushed**. Production now **requires `TWO_FACTOR_SECRET_KEY`** in
+`/opt/flashkarte/.env` (encrypts TOTP seeds at rest; `openssl rand -base64
+32`; docker-compose.prod.yml passes it through). **Set it on the VPS before
+pushing `main`** — startup fails closed without it. New since the last
+deploy: delete-account (web+Android), data export (web+Android), opt-in
+TOTP 2FA (web+Android), audit log, correlation IDs, Playwright E2E + axe
+a11y CI gate, migrations **014** (audit_log) and **015** (two_factor).
+Details: `docs/two-factor.md`, `docs/audit-retention-policy.md`.
 
 ## TL;DR
 

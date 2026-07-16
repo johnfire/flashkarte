@@ -3,7 +3,8 @@
 **Date:** 2026-07-15
 **Goal:** Bring flashkarte into compliance with `coding-standards-full.md` v1.2.
 **Plan doc:** `docs/superpowers/plans/2026-07-15-standards-remediation-plan.md`
-**Status:** Phases 1–4 complete. Phases 5–7 pending.
+**Status:** COMPLETE (2026-07-16). All phases 1–7 done, minor findings closed.
+**Deploy note:** production now requires `TWO_FACTOR_SECRET_KEY` in the VPS `.env` — see docs/two-factor.md — set it BEFORE the next deploy or startup fails.
 
 ## What was completed
 
@@ -73,42 +74,64 @@
 - Tests: `auth.service.test.ts` (service unit), `auth.routes.test.ts` (route integration: 401, 403, 200, 422), `SettingsPage.test.tsx` (3 DangerZoneSection tests).
 - Android: not yet implemented (deferred — see Outstanding below).
 
-## Outstanding work (resume here)
+## Completion record (2026-07-16 session)
 
-### Phase 5 — Data export (§13.3)
+### Fixes to earlier phases (found during verification)
 
-- Add `GET /api/account/export` (rate-limited) returning JSON with profile, decks+cards, card progress, review events, key metadata (no secrets).
-- Audit `account.data_exported`.
-- Web/Android UI: "Download my data" button triggering download.
-- Tests: service unit, route integration.
+- `014_audit_log.sql` used `CREATE TRIGGER IF NOT EXISTS` — invalid on
+  PostgreSQL; the whole migration rolled back and a deploy would have
+  crash-looped prod. Fixed with `CREATE OR REPLACE TRIGGER`, verified on
+  postgres:16-alpine.
+- `deleteUserAccount` sent two DELETEs in one parameterized query — pg
+  prepared statements allow exactly one command, so every real
+  delete-account call would have 500'd. Split into two statements,
+  verified against real Postgres.
+- `audit.service.record()` now rethrows when a transaction client is
+  passed (atomic callers roll back cleanly); the pool path stays
+  best-effort.
+- Prettier formatting fixed repo-wide (the Phases 1–4 commit had failed
+  CI's format check, which is the only reason the broken migration never
+  reached prod).
+- CI test job now runs the compiled migration runner against a real
+  Postgres 16 service — broken migration SQL can no longer reach deploy.
+
+### Phase 4 Android half — delete account
+
+`DELETE /api/auth/account` from a two-step dialog (password + typed
+DELETE); on success one SQLDelight transaction wipes decks/cards/progress/
+outbox, the session store and refresh cookie are cleared, and the flipped
+session flow returns to the auth screen. ViewModel tests cover gating,
+happy path, wrong password.
+
+### Phase 5 — data export (§13.3)
+
+`GET /api/account/export` (full scope, 5/hour) → JSON with profile, decks+
+cards, progress, review events, API-key metadata (no secrets — tested).
+Audited as `account.data_exported`. Web download button + Android SAF
+export. New `domains/account/` (repository/service/controller/routes).
 
 ### Phase 6 — 2FA / TOTP (§13.1)
 
-- Dependencies: `otplib`, `qrcode`.
-- Migration adding encrypted TOTP secret, enabled flag, backup codes to `users`.
-- Endpoints: setup, verify (enable), disable, login-2fa challenge/verify.
-- Rate-limit 2FA verify endpoint.
-- Web/Android UI for enabling, QR display, backup-code one-time reveal, 2FA login step.
-- Audit every 2FA transition.
+See docs/two-factor.md. otplib v13 + qrcode; migration 015; AES-256-GCM
+seed encryption keyed by `TWO_FACTOR_SECRET_KEY` (required in prod);
+90s purpose-bound login challenge; backup codes hashed + single-use;
+rate-limited verify; every transition audited; web + Android flows;
+13 service tests + 7 login-flow tests + E2E coverage.
 
-### Phase 7 — E2E + a11y CI (§9.0, §16)
+### Phase 7 — E2E + a11y (§9.0, §16)
 
-- Add Playwright workspace dev dependency.
-- CI job spinning full Docker stack against real DB.
-- Core flow: signup → verify → create deck → study → change password → enable 2FA → login with 2FA → delete account.
-- `@axe-core/playwright` a11y assertions per page.
+`e2e/` Playwright suite runs the real server (production mode, built SPA)
+against real Postgres: signup → email verification (MAIL_FILE_SINK) →
+deck creation → study → password change → 2FA enrollment + login →
+data export → account deletion → dead credentials. axe WCAG 2.0/2.1 A+AA
+on eight core pages, zero violations enforced (three real violations found
+and fixed: language-switcher contrast, auth footer contrast, privacy-page
+link underlines). CI `e2e` job gates deploy alongside test + security.
 
-### Minor cleanups (low priority, safe to defer)
+### Minor findings
 
-- `packages/mcp/src/index.ts:12` — rename `val`.
-- `packages/mcp/src/tools/decks.ts:13` — rename `data`.
-- `packages/server/src/seo/escape.ts:13` — rename `obj`.
-- `packages/server/src/utils/validate.ts:4` — rename `data`.
-- `packages/server/src/github/issues.ts:66` — rename `data`.
-- `packages/server/src/domains/study/study.service.ts:62` — rename `result`.
-- `packages/server/src/domains/auth/auth.service.ts:156,336` — use `logger.error` instead of `console.error`.
-- Python tkinter GUI type hints.
-- `any` in MCP tests.
+All closed: generic variable renames, auth.service `console.error` →
+logger, MCP test `any`s removed, Python tkinter GUI fully type-hinted.
 
 ## Key design decisions to preserve
 
