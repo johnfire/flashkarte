@@ -41,7 +41,7 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - uses: android-actions/setup-android@v3
+      - uses: android-actions/setup-android@v4
         if: steps.guard.outputs.skip != 'true'
 
       - name: Decode upload keystore + Play credentials from secrets
