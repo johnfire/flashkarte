@@ -25,17 +25,20 @@ updates is stuck behind it. Mapped 2026-07-16 by building each step locally
 2. **KSP ↔ AGP**: KSP new enough for Kotlin 2.4 (`2.3.10`) calls
    `AndroidComponentsExtension.addKspConfigurations`, which doesn't exist in
    our pinned **AGP 8.5.2**. This is where the grouped attempt stops now.
-3. **AGP → Gradle**: bumping AGP will in turn want a newer Gradle wrapper
-   than the current **8.7**. The wrapper is not a dependabot ecosystem, so
-   it must be bumped by hand.
+3. **AGP → Gradle**: dependabot's AGP target is **9.3.0**, which refuses to
+   load on our wrapper: _"Minimum supported Gradle version is 9.5.0.
+   Current version is 8.7."_ The wrapper is not a dependabot ecosystem, so
+   this step is manual — and it has to come **first**, since nothing else
+   applies until Gradle is new enough.
 
 Only then do the libraries blocked behind Kotlin become mergeable:
 `coroutines 1.11` and `kotlinx-serialization 1.11` (both pull
 `kotlin-stdlib 2.2.20`, unreadable by the 2.0.20 compiler) and
 `sqldelight 2.3.2` (forces a newer Kotlin Gradle Plugin).
 
-So: one branch, in the order above — AGP + Gradle wrapper first, then the
-`kotlin-toolchain` group, then drop the ignores for the three libraries.
+So: one branch, in this order — **Gradle wrapper 8.7 → 9.5.0**, then
+**AGP 8.5.2 → 9.3.0**, then the `kotlin-toolchain` group (kotlin 2.4.10 +
+ksp 2.3.10 + composeBom), then drop the ignores for the blocked libraries.
 **SQLDelight owns the on-device schema (v2 / `1.sqm`)** — when it moves,
 smoke-test the DB upgrade path on a real device, not just the unit suite.
 
