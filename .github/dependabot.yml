@@ -31,3 +31,24 @@ updates:
     directory: "/android"
     schedule:
       interval: weekly
+    groups:
+      # The Kotlin toolchain moves as one unit or not at all: ksp is pinned to
+      # the exact Kotlin version (e.g. 2.0.20-1.0.25) and the Compose compiler
+      # plugin ships with Kotlin. Bumped singly they always fail, which is how
+      # #53/#48/#51/#55 sat red for a month. Grouped, the upgrade at least
+      # arrives as one coherent (if still hand-finished) PR.
+      kotlin-toolchain:
+        patterns:
+          - "org.jetbrains.kotlin*"
+          - "com.google.devtools.ksp*"
+          - "androidx.compose*"
+    ignore:
+      # These transitively require a kotlin-stdlib newer than the pinned Kotlin
+      # compiler can read, so they cannot land until the Kotlin upgrade does.
+      # Verified 2026-07-16: coroutines 1.11 / serialization 1.11 pull
+      # kotlin-stdlib 2.2.20 (unreadable by Kotlin 2.0.20); sqldelight 2.3.2
+      # forces a newer Kotlin Gradle Plugin that rejects the jvmTarget DSL.
+      # Drop these ignores as part of the Kotlin migration.
+      - dependency-name: "org.jetbrains.kotlinx:kotlinx-coroutines*"
+      - dependency-name: "org.jetbrains.kotlinx:kotlinx-serialization*"
+      - dependency-name: "app.cash.sqldelight*"

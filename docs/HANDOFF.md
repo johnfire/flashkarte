@@ -2,18 +2,37 @@
 
 _Last updated: 2026-07-16_
 
-## ⚠️ Before the next deploy (2026-07-16)
+## Standards remediation — shipped 2026-07-16
 
-The standards remediation (all 7 phases — see
-`docs/standards-remediation-handoff.md`) is complete on local `main` but
-**not yet pushed**. Production now **requires `TWO_FACTOR_SECRET_KEY`** in
-`/opt/flashkarte/.env` (encrypts TOTP seeds at rest; `openssl rand -base64
-32`; docker-compose.prod.yml passes it through). **Set it on the VPS before
-pushing `main`** — startup fails closed without it. New since the last
-deploy: delete-account (web+Android), data export (web+Android), opt-in
-TOTP 2FA (web+Android), audit log, correlation IDs, Playwright E2E + axe
-a11y CI gate, migrations **014** (audit_log) and **015** (two_factor).
-Details: `docs/two-factor.md`, `docs/audit-retention-policy.md`.
+All 7 phases deployed and verified live (see
+`docs/standards-remediation-handoff.md`): delete-account (web+Android),
+data export (web+Android), opt-in TOTP 2FA (web+Android), audit log,
+correlation IDs, Playwright E2E + axe a11y CI gate, migrations **014**
+(audit_log) and **015** (two_factor). `TWO_FACTOR_SECRET_KEY` is set in
+`/opt/flashkarte/.env` — **required**; the server fails closed without it,
+and losing/rotating it orphans every enrolled TOTP seed. Details:
+`docs/two-factor.md`, `docs/audit-retention-policy.md`.
+
+## Known debt — Kotlin toolchain upgrade (Android)
+
+The Android build is pinned to **Kotlin 2.0.20** and everything downstream
+is stuck behind it. Verified 2026-07-16 by building each bump locally:
+
+- `kotlin 2.4.0` fails — `app/build.gradle.kts:72` uses `jvmTarget: String`,
+  which newer Kotlin rejects outright (needs the `compilerOptions` DSL), and
+  `ksp` is pinned to the exact Kotlin version (`2.0.20-1.0.25`).
+- `coroutines 1.11` / `kotlinx-serialization 1.11` fail — they pull
+  `kotlin-stdlib 2.2.20`, which the 2.0.20 compiler can't read.
+- `sqldelight 2.3.2` fails — it forces a newer Kotlin Gradle Plugin onto the
+  buildscript classpath, hitting the same `jvmTarget` error.
+
+So this is one coordinated migration: kotlin + ksp + Compose BOM + the
+build-script DSL, together, on its own branch. **SQLDelight owns the
+on-device schema (v2 / `1.sqm`)** — when it moves, smoke-test the DB upgrade
+path on a real device, not just the unit suite. Dependabot PRs #53/#48/#51/
+#55 were closed with this evidence; `.github/dependabot.yml` now groups the
+Kotlin toolchain and ignores the three blocked libraries so they stop
+generating red PRs. Drop those ignores as part of the migration.
 
 ## TL;DR
 
