@@ -68,9 +68,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = "11"
-    }
 
     buildFeatures {
         compose = true
@@ -168,4 +165,13 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+// Kotlin 2.x removed the `kotlinOptions { jvmTarget = "11" }` DSL (it is a hard
+// error, not a warning). The compilerOptions DSL is its replacement; the value
+// must stay in step with compileOptions.sourceCompatibility above.
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
 }
