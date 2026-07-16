@@ -108,9 +108,14 @@ release**). Web stays flip-only (Spec 08). All TS + Android unit suites green.
 ## Live admin account
 
 - URL: https://flashkarte.christopherrehm.de
-- Credentials are NOT stored here. The admin email/password were previously
-  committed in plaintext in this file — that password must be rotated (it is in
-  git history). Keep `ADMIN_EMAILS` in `/opt/flashkarte/.env` only.
+- Credentials are NOT stored here. Keep `ADMIN_EMAILS` in
+  `/opt/flashkarte/.env` only.
+- **Rotated 2026-07-16.** An earlier admin password was committed in plaintext
+  in this file and later removed — but removal doesn't erase it, it is still
+  readable in git history (commit `8b7b6023`, baselined in `.gitleaksignore`).
+  The live password is now a different one. The old value must never be reused
+  anywhere, and the history entry is why that fingerprint stays baselined
+  rather than the file being "cleaned".
 - `ADMIN_EMAILS` (in `/opt/flashkarte/.env`) re-promotes the listed account to
   admin on every server start (`bootstrapAdmins`).
 
