@@ -5,3 +5,16 @@
 # in a later commit. The credential should be rotated regardless — this file
 # only stops gitleaks from re-flagging the already-known historical commit.
 8b7b6023f0fd079205962b03fd8ff0e508072856:docs/HANDOFF.md:generic-api-key:17
+
+# False positives from the 2026-07 standards remediation, baselined by exact
+# fingerprint (same rationale as above — no broad allowlist):
+#
+# 1) A SQL *comment* describing the two_factor_secret_enc column tripped the
+#    key:value heuristic. No secret — documentation text.
+c0a76a1650bb4c8fdb4c216b42a7249be072339b:packages/server/src/db/migrations/015_two_factor.sql:generic-api-key:2
+#
+# 2+3) Deliberate dummy secrets for the E2E server (test-only, never valid
+#    anywhere). Reworded to low-entropy values in a follow-up commit so they
+#    can't trip the scanner again; these cover the introducing commit.
+e39bc72452cc7492bd22ea92b82323f0b73d50ce:e2e/playwright.config.ts:generic-api-key:49
+e39bc72452cc7492bd22ea92b82323f0b73d50ce:e2e/playwright.config.ts:generic-api-key:50

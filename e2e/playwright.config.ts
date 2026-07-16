@@ -46,8 +46,10 @@ export default defineConfig({
       POSTGRES_DB: process.env.POSTGRES_DB ?? "flashkarte",
       POSTGRES_USER: process.env.POSTGRES_USER ?? "flashkarte",
       POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD ?? "flashkarte",
-      JWT_SECRET: "e2e-test-jwt-secret-0123456789abcdef0123456789",
-      TWO_FACTOR_SECRET_KEY: "e2e-test-2fa-key-0123456789abcdef0123456789",
+      // Dummy values (>=32 chars required); low-entropy on purpose so
+      // secret scanners don't mistake them for real credentials.
+      JWT_SECRET: "insecure-e2e-jwt-" + "x".repeat(24),
+      TWO_FACTOR_SECRET_KEY: "insecure-e2e-2fa-" + "x".repeat(24),
       CORS_ORIGIN: `http://localhost:${PORT}`,
       APP_URL: `http://localhost:${PORT}`,
       MAIL_FILE_SINK: MAIL_SINK,
