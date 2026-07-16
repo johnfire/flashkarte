@@ -80,12 +80,18 @@ export function createApp() {
     app.use(morgan("dev"));
   }
 
+  // Limits are env-tunable so the E2E suite (which drives dozens of real
+  // logins from one IP) can raise them without disabling the middleware.
+  // Production keeps the defaults.
+  const limitOverride = (name: string, fallback: number): number =>
+    parseInt(process.env[name] ?? "", 10) || fallback;
+
   if (process.env.NODE_ENV !== "test") {
     app.use(
       "/api",
       rateLimit({
         windowMs: 60_000,
-        limit: 200,
+        limit: limitOverride("RATE_LIMIT_API", 200),
         standardHeaders: "draft-7",
         legacyHeaders: false,
       }),
@@ -96,7 +102,7 @@ export function createApp() {
       "/api/auth/2fa/verify",
       rateLimit({
         windowMs: 15 * 60_000,
-        limit: 5,
+        limit: limitOverride("RATE_LIMIT_2FA", 5),
         standardHeaders: "draft-7",
         legacyHeaders: false,
         message: {
@@ -111,7 +117,7 @@ export function createApp() {
       "/api/auth",
       rateLimit({
         windowMs: 15 * 60_000,
-        limit: 20,
+        limit: limitOverride("RATE_LIMIT_AUTH", 20),
         standardHeaders: "draft-7",
         legacyHeaders: false,
         message: {

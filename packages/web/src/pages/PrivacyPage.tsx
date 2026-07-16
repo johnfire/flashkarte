@@ -28,7 +28,7 @@ export function PrivacyPage() {
               components={[
                 <a
                   key="0"
-                  className="text-indigo-600"
+                  className="text-indigo-600 underline"
                   href="mailto:car2187bus@pm.me"
                 />,
               ]}
@@ -104,7 +104,7 @@ export function PrivacyPage() {
                 components={[
                   <a
                     key="0"
-                    className="text-indigo-600"
+                    className="text-indigo-600 underline"
                     href="mailto:car2187bus@pm.me"
                   />,
                 ]}

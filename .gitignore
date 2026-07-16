@@ -7,3 +7,5 @@ coverage/
 # DB backups / dumps must never be committed (scoped to the backup dir so it
 # never shadows tracked migration .sql files)
 backups/
+packages/server/public/
+e2e/.artifacts/

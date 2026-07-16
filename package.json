@@ -10,13 +10,16 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "eslint \"packages/**/*.{ts,tsx}\"",
     "format": "prettier --write \"packages/**/src/**/*.{ts,tsx}\"",
-    "format:check": "prettier --check \"packages/**/src/**/*.{ts,tsx}\""
+    "format:check": "prettier --check \"packages/**/src/**/*.{ts,tsx}\"",
+    "test:e2e": "playwright test --config e2e/playwright.config.ts"
   },
   "overrides": {
     "hono": "^4.12.25"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
     "@eslint/js": "^9.39.4",
+    "@playwright/test": "^1.61.1",
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",

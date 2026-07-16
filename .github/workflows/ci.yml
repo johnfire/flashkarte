@@ -74,6 +74,50 @@ jobs:
       - name: Build web
         run: npm run build --workspace=packages/web
 
+  # Real browser against the real server + real Postgres: the account
+  # lifecycle (signup → verify → deck → study → 2FA → export → delete) and
+  # axe WCAG A/AA checks on the core pages (§9.0, §16).
+  e2e:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: flashkarte
+          POSTGRES_PASSWORD: flashkarte
+          POSTGRES_DB: flashkarte
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Build server + web
+        run: |
+          npm run build --workspace=packages/shared
+          npm run build --workspace=packages/server
+          npm run build --workspace=packages/web
+          cp -r packages/web/dist packages/server/public
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run E2E + a11y suite
+        run: npm run test:e2e
+      - name: Upload traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces
+          path: e2e/.artifacts/test-results
+          retention-days: 7
+
   android:
     runs-on: ubuntu-latest
     steps:
@@ -107,7 +151,7 @@ jobs:
   # Build the app + mcp images and push to GHCR. Only on push to main, after tests.
   build-push:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [test, security]
+    needs: [test, security, e2e]
     runs-on: ubuntu-latest
     permissions:
       contents: read

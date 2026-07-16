@@ -38,6 +38,14 @@ interface Mail {
 export async function sendMail(mail: Mail): Promise<void> {
   const from =
     process.env.MAIL_FROM ?? "flashkarte <contact@christopherrehm.de>";
+  // Test sink: append outbound mail as JSON lines so E2E tests can read
+  // verification/reset links without a real SMTP server. Never set in prod.
+  const sinkPath = process.env.MAIL_FILE_SINK;
+  if (sinkPath) {
+    const fs = await import("fs");
+    fs.appendFileSync(sinkPath, JSON.stringify(mail) + "\n");
+    return;
+  }
   const tx = getTransporter();
   if (!tx) {
     // eslint-disable-next-line no-console

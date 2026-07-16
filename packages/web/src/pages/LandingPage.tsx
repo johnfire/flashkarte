@@ -140,7 +140,7 @@ export function LandingPage() {
       {/* Content */}
       <div className="relative mx-auto max-w-5xl px-6 py-20 sm:py-28">
         <div className="mb-4 flex justify-end">
-          <LanguageSwitcher compact />
+          <LanguageSwitcher compact onDark />
         </div>
         <LandingHero />
         <LandingFeatures />
