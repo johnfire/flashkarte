@@ -15,24 +15,35 @@ and losing/rotating it orphans every enrolled TOTP seed. Details:
 
 ## Known debt — Kotlin toolchain upgrade (Android)
 
-The Android build is pinned to **Kotlin 2.0.20** and everything downstream
-is stuck behind it. Verified 2026-07-16 by building each bump locally:
+The Android build is pinned to **Kotlin 2.0.20** and a queue of dependency
+updates is stuck behind it. Mapped 2026-07-16 by building each step locally
+— the chain, in the order you hit it:
 
-- `kotlin 2.4.0` fails — `app/build.gradle.kts:72` uses `jvmTarget: String`,
-  which newer Kotlin rejects outright (needs the `compilerOptions` DSL), and
-  `ksp` is pinned to the exact Kotlin version (`2.0.20-1.0.25`).
-- `coroutines 1.11` / `kotlinx-serialization 1.11` fail — they pull
-  `kotlin-stdlib 2.2.20`, which the 2.0.20 compiler can't read.
-- `sqldelight 2.3.2` fails — it forces a newer Kotlin Gradle Plugin onto the
-  buildscript classpath, hitting the same `jvmTarget` error.
+1. ~~`kotlinOptions { jvmTarget = "11" }` is a hard error on Kotlin 2.x~~ —
+   **done** (f9e39f7) — migrated to the `compilerOptions` DSL, which works
+   on 2.0.20 today. One domino already cleared.
+2. **KSP ↔ AGP**: KSP new enough for Kotlin 2.4 (`2.3.10`) calls
+   `AndroidComponentsExtension.addKspConfigurations`, which doesn't exist in
+   our pinned **AGP 8.5.2**. This is where the grouped attempt stops now.
+3. **AGP → Gradle**: bumping AGP will in turn want a newer Gradle wrapper
+   than the current **8.7**. The wrapper is not a dependabot ecosystem, so
+   it must be bumped by hand.
 
-So this is one coordinated migration: kotlin + ksp + Compose BOM + the
-build-script DSL, together, on its own branch. **SQLDelight owns the
-on-device schema (v2 / `1.sqm`)** — when it moves, smoke-test the DB upgrade
-path on a real device, not just the unit suite. Dependabot PRs #53/#48/#51/
-#55 were closed with this evidence; `.github/dependabot.yml` now groups the
-Kotlin toolchain and ignores the three blocked libraries so they stop
-generating red PRs. Drop those ignores as part of the migration.
+Only then do the libraries blocked behind Kotlin become mergeable:
+`coroutines 1.11` and `kotlinx-serialization 1.11` (both pull
+`kotlin-stdlib 2.2.20`, unreadable by the 2.0.20 compiler) and
+`sqldelight 2.3.2` (forces a newer Kotlin Gradle Plugin).
+
+So: one branch, in the order above — AGP + Gradle wrapper first, then the
+`kotlin-toolchain` group, then drop the ignores for the three libraries.
+**SQLDelight owns the on-device schema (v2 / `1.sqm`)** — when it moves,
+smoke-test the DB upgrade path on a real device, not just the unit suite.
+
+Nothing here is urgent or insecure — the app builds and ships fine on
+2.0.20. `.github/dependabot.yml` groups the toolchain (kotlin + ksp +
+compose + AGP) and ignores the three blocked libraries so they stop
+generating permanently-red PRs. Dependabot PRs #53/#48/#51/#55/#73 were
+closed with this evidence.
 
 ## TL;DR
 

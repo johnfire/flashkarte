@@ -42,6 +42,14 @@ updates:
           - "org.jetbrains.kotlin*"
           - "com.google.devtools.ksp*"
           - "androidx.compose*"
+          # AGP belongs here too: KSP calls AGP internals, so a KSP new enough
+          # for current Kotlin needs an AGP newer than our pinned 8.5.2
+          # (verified — it fails on AndroidComponentsExtension
+          # .addKspConfigurations). Note the Gradle wrapper is not a dependabot
+          # ecosystem, so it still has to be bumped by hand alongside AGP.
+          - "com.android.tools.build*"
+          - "com.android.application*"
+          - "com.android.library*"
     ignore:
       # These transitively require a kotlin-stdlib newer than the pinned Kotlin
       # compiler can read, so they cannot land until the Kotlin upgrade does.
