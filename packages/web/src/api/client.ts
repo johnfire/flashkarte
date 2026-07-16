@@ -191,6 +191,7 @@ export const api = {
         method: "DELETE",
         body: JSON.stringify({ currentPassword }),
       }),
+    exportData: () => request<unknown>("/account/export"),
   },
   decks: {
     list: () =>

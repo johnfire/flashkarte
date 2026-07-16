@@ -114,6 +114,11 @@ interface FlashkarteApi {
     @HTTP(method = "DELETE", path = "api/auth/account", hasBody = true)
     suspend fun deleteAccount(@Body body: DeleteAccountRequest)
 
+    // Raw body: the export is saved to a user-chosen file verbatim, so there's
+    // no point deserializing and re-serializing it.
+    @GET("api/account/export")
+    suspend fun exportAccountData(): okhttp3.ResponseBody
+
     @POST("api/client-errors")
     suspend fun reportClientError(@Body body: ClientErrorRequest): Response<Unit>
 

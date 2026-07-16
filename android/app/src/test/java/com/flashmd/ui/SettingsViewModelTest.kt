@@ -78,6 +78,33 @@ class SettingsViewModelTest {
         assertEquals("The new passwords don't match.", vm.state.value.error)
     }
 
+    @Test fun exportHandsJsonToWriterAndConfirms() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        coEvery { auth.exportAccountData() } returns """{"profile":{}}"""
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        var written: String? = null
+        vm.exportAccountData { written = it }; advanceUntilIdle()
+
+        assertEquals("""{"profile":{}}""", written)
+        assertEquals("Data exported", vm.state.value.message)
+        assertEquals(false, vm.state.value.isExporting)
+    }
+
+    @Test fun exportSurfacesWriteFailure() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        coEvery { auth.exportAccountData() } returns "{}"
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.exportAccountData { throw java.io.IOException("disk full") }
+        advanceUntilIdle()
+
+        assertEquals("Couldn't save the export file.", vm.state.value.error)
+        assertEquals(false, vm.state.value.isExporting)
+    }
+
     @Test fun deleteAccountRequiresTypedConfirmation() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         val vm = SettingsViewModel(auth)

@@ -1,11 +1,14 @@
 package com.flashmd.ui.screens.settings
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.input.ImeAction
@@ -14,6 +17,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.data.local.ThemeMode
 import com.flashmd.ui.components.PasswordField
 import com.flashmd.ui.theme.ThemeViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.IOException
+import java.time.LocalDate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -108,6 +115,34 @@ fun SettingsScreen(
             OutlinedButton(onClick = { viewModel.sendResetEmail() }) {
                 Text("Email me a reset link")
             }
+
+            HorizontalDivider()
+            Text("Your data", style = MaterialTheme.typography.titleMedium)
+            Text(
+                "Download a copy of everything in your account — profile, decks, cards, and study history — as a JSON file.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            val context = LocalContext.current
+            val exportLauncher = rememberLauncherForActivityResult(
+                ActivityResultContracts.CreateDocument("application/json"),
+            ) { uri ->
+                if (uri != null) {
+                    viewModel.exportAccountData { json ->
+                        withContext(Dispatchers.IO) {
+                            context.contentResolver.openOutputStream(uri)
+                                ?.use { it.write(json.toByteArray()) }
+                                ?: throw IOException("Couldn't open the chosen file")
+                        }
+                    }
+                }
+            }
+            OutlinedButton(
+                onClick = {
+                    exportLauncher.launch("flashkarte-export-${LocalDate.now()}.json")
+                },
+                enabled = !state.isExporting,
+            ) { Text(if (state.isExporting) "Exporting…" else "Download my data") }
 
             HorizontalDivider()
             Text("Feedback", style = MaterialTheme.typography.titleMedium)

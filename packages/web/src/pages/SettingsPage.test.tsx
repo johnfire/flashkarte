@@ -13,6 +13,7 @@ vi.mock("../api/client", () => ({
       changePassword: vi.fn(),
       updateProfile: vi.fn(),
       deleteAccount: vi.fn(),
+      exportData: vi.fn(),
     },
   },
   ApiError: class ApiError extends Error {},
@@ -36,6 +37,7 @@ const mockApi = api as unknown as {
     changePassword: ReturnType<typeof vi.fn>;
     updateProfile: ReturnType<typeof vi.fn>;
     deleteAccount: ReturnType<typeof vi.fn>;
+    exportData: ReturnType<typeof vi.fn>;
   };
 };
 
@@ -147,6 +149,34 @@ describe("SettingsPage", () => {
       await screen.findByText("The new passwords don't match."),
     ).toBeInTheDocument();
     expect(mockApi.auth.changePassword).not.toHaveBeenCalled();
+  });
+
+  describe("DataExportSection", () => {
+    test("downloads the export as a JSON file", async () => {
+      mockUser = { displayName: null, accountType: "free" };
+      mockApi.keys.list.mockResolvedValue([]);
+      mockApi.auth.exportData.mockResolvedValue({ profile: {} });
+
+      // jsdom has no createObjectURL; stub the blob-download plumbing.
+      const objectUrl = vi.fn(() => "blob:mock");
+      const revoke = vi.fn();
+      globalThis.URL.createObjectURL = objectUrl;
+      globalThis.URL.revokeObjectURL = revoke;
+      const click = vi
+        .spyOn(HTMLAnchorElement.prototype, "click")
+        .mockImplementation(() => {});
+
+      renderPage();
+      await userEvent.click(
+        await screen.findByRole("button", { name: /Download my data/ }),
+      );
+
+      await waitFor(() => expect(mockApi.auth.exportData).toHaveBeenCalled());
+      expect(objectUrl).toHaveBeenCalled();
+      expect(click).toHaveBeenCalled();
+      expect(revoke).toHaveBeenCalledWith("blob:mock");
+      click.mockRestore();
+    });
   });
 
   describe("DangerZoneSection", () => {

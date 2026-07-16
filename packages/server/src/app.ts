@@ -15,6 +15,7 @@ import { adminRouter } from "./domains/admin/admin.routes";
 import { libraryRouter } from "./domains/library/library.routes";
 import { publicLibraryRouter } from "./domains/library/public.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
+import { accountRouter } from "./domains/account/account.routes";
 import { requireAuth, requireAdmin, requireFullScope } from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
 import { requestId } from "./middleware/requestId";
@@ -161,6 +162,24 @@ export function createApp() {
   // key). Deck-scoped MCP keys are rejected here, so a leaked MCP key can't mint
   // more keys, spam bug reports, or reach admin. New account routes belong here.
   app.use("/api", requireFullScope);
+  // Full data export is cheap for one user but shouldn't be poll-able.
+  const exportLimiter = rateLimit({
+    windowMs: 60 * 60_000,
+    limit: 5,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+    keyGenerator: (req) =>
+      req.userId ?? normalizeIp(req.ip ?? req.socket.remoteAddress ?? "anon"),
+    skip: isTest,
+    message: {
+      error: {
+        code: "RATE_LIMIT_EXCEEDED",
+        message: "Too many export requests — please try again later",
+      },
+    },
+  });
+  app.use("/api/account/export", exportLimiter);
+  app.use("/api/account", accountRouter);
   app.use("/api/keys", keysRouter);
   app.use("/api/bug-reports", bugReportLimiter, bugReportsRouter);
   app.use("/api/admin", requireAdmin, adminRouter);

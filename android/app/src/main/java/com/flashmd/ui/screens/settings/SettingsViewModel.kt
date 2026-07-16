@@ -23,6 +23,7 @@ data class SettingsUiState(
     val newPassword: String = "",
     val confirmPassword: String = "",
     val isChangingPassword: Boolean = false,
+    val isExporting: Boolean = false,
     val showDeleteDialog: Boolean = false,
     val deletePassword: String = "",
     val deleteConfirmText: String = "",
@@ -118,6 +119,30 @@ class SettingsViewModel @Inject constructor(
                 )
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isChangingPassword = false, error = e.message)
+            }
+        }
+    }
+
+    /**
+     * Fetch the account export and hand it to [write] (the screen supplies a
+     * lambda that streams into the user-chosen SAF document). Keeping the file
+     * IO out of the ViewModel keeps this fully unit-testable.
+     */
+    fun exportAccountData(write: suspend (String) -> Unit) {
+        if (_state.value.isExporting) return
+        _state.value = _state.value.copy(isExporting = true, error = null, message = null)
+        viewModelScope.launch {
+            try {
+                val json = auth.exportAccountData()
+                write(json)
+                _state.value = _state.value.copy(isExporting = false, message = "Data exported")
+            } catch (e: ApiException) {
+                _state.value = _state.value.copy(isExporting = false, error = e.message)
+            } catch (e: Exception) {
+                _state.value = _state.value.copy(
+                    isExporting = false,
+                    error = "Couldn't save the export file.",
+                )
             }
         }
     }

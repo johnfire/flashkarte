@@ -72,6 +72,10 @@ class AuthRepository @Inject constructor(
         sessionStore.saveSession(res.accessToken, res.user)
     }
 
+    /** Fetch the full account export (§13.3 data portability) as raw JSON. */
+    suspend fun exportAccountData(): String =
+        apiCall { api.exportAccountData() }.string()
+
     /**
      * Permanently delete the account server-side, then wipe everything this
      * device knows about the user: cached decks/cards/progress, the unsynced
