@@ -15,8 +15,8 @@ updates:
           - minor
           - patch
     ignore:
-      # Types must track the runtime we actually run (Node 20 in CI + prod).
-      # Bump manually together with a Node upgrade.
+      # Types must track the runtime we actually run (Node 24 LTS in CI + the
+      # Docker images). Bump manually together with a Node upgrade.
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
   - package-ecosystem: docker
