@@ -12,6 +12,7 @@ import {
 } from "../../email/mailer";
 import { withTransaction } from "../../db/client";
 import { record, userActor } from "../audit/audit.service";
+import * as twoFactor from "../account/twoFactor.service";
 import * as repo from "./auth.repository";
 import type { UserRow } from "./auth.repository";
 
@@ -50,6 +51,7 @@ export interface PublicUser {
   emailVerifiedAt: string | null;
   displayName: string | null;
   language: string | null;
+  twoFactorEnabled: boolean;
 }
 
 function toUser(row: UserRow): PublicUser {
@@ -63,6 +65,7 @@ function toUser(row: UserRow): PublicUser {
       : null,
     displayName: row.display_name ?? null,
     language: row.language ?? null,
+    twoFactorEnabled: row.two_factor_enabled ?? false,
   };
 }
 
@@ -182,11 +185,60 @@ export async function resendVerification(userId: string): Promise<void> {
   await createAndSendVerification(user.id, user.email);
 }
 
+// Short-lived signed challenge binding the password step of a 2FA login to
+// the code step. 90s is enough to type a code, short enough to be useless
+// if it leaks.
+const TWO_FACTOR_CHALLENGE_TTL_SEC = 90;
+const TWO_FACTOR_CHALLENGE_PURPOSE = "2fa-challenge";
+
+interface TwoFactorChallengePayload {
+  sub: string;
+  purpose: string;
+}
+
+function signTwoFactorChallenge(userId: string): string {
+  return jwt.sign(
+    {
+      sub: userId,
+      purpose: TWO_FACTOR_CHALLENGE_PURPOSE,
+    } satisfies TwoFactorChallengePayload,
+    getJwtSecret(),
+    { algorithm: "HS256", expiresIn: TWO_FACTOR_CHALLENGE_TTL_SEC },
+  );
+}
+
+function verifyTwoFactorChallenge(challenge: string): string {
+  try {
+    const payload = jwt.verify(challenge, getJwtSecret(), {
+      algorithms: ["HS256"],
+    }) as TwoFactorChallengePayload;
+    if (payload.purpose !== TWO_FACTOR_CHALLENGE_PURPOSE) {
+      throw new Error("wrong purpose");
+    }
+    return payload.sub;
+  } catch {
+    throw new AuthError("Invalid or expired two-factor challenge");
+  }
+}
+
+export type LoginResult =
+  | {
+      requiresTwoFactor: true;
+      challenge: string;
+    }
+  | {
+      requiresTwoFactor?: false;
+      user: PublicUser;
+      accessToken: string;
+      rawRefresh: string;
+      persistent: boolean;
+    };
+
 export async function login(
   emailIn: unknown,
   passwordIn: unknown,
   rememberMeIn: unknown,
-) {
+): Promise<LoginResult> {
   const [email, password] = validateCredentials(emailIn, passwordIn);
   const persistent = rememberMeIn === true;
   const row = await repo.findByEmailWithHash(email);
@@ -201,12 +253,52 @@ export async function login(
   if (!row || !passwordOk) {
     throw new AuthError("Invalid email or password");
   }
+  if (row.two_factor_enabled) {
+    // Don't issue tokens yet — the password step only earns a short-lived
+    // challenge; tokens come from completeTwoFactorLogin.
+    return {
+      requiresTwoFactor: true,
+      challenge: signTwoFactorChallenge(row.id),
+    };
+  }
   const {
     accessToken,
     rawRefresh,
     persistent: p,
   } = await issueTokens(row.id, row.email, persistent);
   return { user: toUser(row), accessToken, rawRefresh, persistent: p };
+}
+
+/**
+ * Second step of a 2FA login: exchange the challenge + a TOTP or one-time
+ * backup code for real tokens.
+ */
+export async function completeTwoFactorLogin(
+  challengeIn: unknown,
+  codeIn: unknown,
+  rememberMeIn: unknown,
+) {
+  if (typeof challengeIn !== "string" || !challengeIn) {
+    throw new AuthError("Invalid or expired two-factor challenge");
+  }
+  const userId = verifyTwoFactorChallenge(challengeIn);
+  const kind = await twoFactor.verifyCode(userId, codeIn);
+  if (!kind) throw new AuthError("Invalid two-factor code");
+  const row = await repo.findById(userId);
+  if (!row) throw new AuthError("Invalid or expired two-factor challenge");
+  const persistent = rememberMeIn === true;
+  const { accessToken, rawRefresh } = await issueTokens(
+    row.id,
+    row.email,
+    persistent,
+  );
+  return {
+    user: toUser(row),
+    accessToken,
+    rawRefresh,
+    persistent,
+    usedBackupCode: kind === "backup",
+  };
 }
 
 export async function refresh(oldRawRefresh: string | undefined) {

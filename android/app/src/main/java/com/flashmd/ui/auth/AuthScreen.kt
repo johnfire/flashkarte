@@ -22,6 +22,11 @@ fun AuthScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
+    if (state.twoFactorChallenge != null) {
+        TwoFactorStep(state, viewModel)
+        return
+    }
+
     Surface(Modifier.fillMaxSize()) {
         Column(
             Modifier
@@ -112,6 +117,70 @@ fun AuthScreen(
                 ) {
                     Text("Forgot password?")
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun TwoFactorStep(state: AuthUiState, viewModel: AuthViewModel) {
+    Surface(Modifier.fillMaxSize()) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .padding(horizontal = 28.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
+        ) {
+            Text(
+                "Two-factor code",
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+            )
+            Text(
+                "Enter the 6-digit code from your authenticator app, or one of your backup codes.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center,
+            )
+            OutlinedTextField(
+                value = state.twoFactorCode,
+                onValueChange = viewModel::onTwoFactorCodeChange,
+                label = { Text("Verification code") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                // Plain text keyboard: backup codes contain letters and a dash.
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Ascii,
+                    imeAction = ImeAction.Done,
+                ),
+            )
+            if (state.error != null) {
+                Text(
+                    state.error!!,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.bodySmall,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+            Button(
+                onClick = viewModel::submitTwoFactor,
+                enabled = !state.isSubmitting && state.twoFactorCode.isNotBlank(),
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+                if (state.isSubmitting) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(20.dp),
+                        strokeWidth = 2.dp,
+                        color = MaterialTheme.colorScheme.onPrimary,
+                    )
+                } else {
+                    Text("Verify")
+                }
+            }
+            TextButton(onClick = viewModel::cancelTwoFactor, enabled = !state.isSubmitting) {
+                Text("Cancel")
             }
         }
     }

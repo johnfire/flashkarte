@@ -39,11 +39,37 @@ export const signup = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const login = wrapAsync(async (req: Request, res: Response) => {
-  const { user, accessToken, rawRefresh, persistent } = await service.login(
+  const result = await service.login(
     req.body.email,
     req.body.password,
     req.body.rememberMe,
   );
+  if (result.requiresTwoFactor) {
+    // Password verified but no session yet — the client must present a
+    // TOTP/backup code with this challenge at /auth/2fa/verify.
+    res.json({ requiresTwoFactor: true, challenge: result.challenge });
+    return;
+  }
+  const { user, accessToken, rawRefresh, persistent } = result;
+  res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
+  res.json({ user, accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
+});
+
+export const twoFactorLogin = wrapAsync(async (req: Request, res: Response) => {
+  const { user, accessToken, rawRefresh, persistent, usedBackupCode } =
+    await service.completeTwoFactorLogin(
+      req.body.challenge,
+      req.body.code,
+      req.body.rememberMe,
+    );
+  if (usedBackupCode) {
+    await record({
+      actor: userActor(user.id),
+      action: "2fa.backup_code_used",
+      targetType: "user",
+      targetId: user.id,
+    });
+  }
   res.cookie(REFRESH_COOKIE, rawRefresh, cookieOpts(persistent));
   res.json({ user, accessToken, expiresIn: service.ACCESS_TOKEN_TTL_SEC });
 });

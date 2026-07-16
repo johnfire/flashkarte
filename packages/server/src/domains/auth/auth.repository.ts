@@ -9,6 +9,7 @@ export interface UserRow {
   email_verified_at: Date | null;
   display_name: string | null;
   language: string | null;
+  two_factor_enabled: boolean;
 }
 
 interface UserWithHash extends UserRow {
@@ -16,7 +17,7 @@ interface UserWithHash extends UserRow {
 }
 
 const USER_COLS =
-  "id, email, role, account_type, email_verified_at, display_name, language";
+  "id, email, role, account_type, email_verified_at, display_name, language, two_factor_enabled";
 
 export function findByEmailWithHash(email: string) {
   return queryOne<UserWithHash>(

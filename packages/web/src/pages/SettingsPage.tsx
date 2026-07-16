@@ -5,6 +5,7 @@ import { PasswordSection } from "./settings/PasswordSection";
 import { AppearanceSection } from "./settings/AppearanceSection";
 import { LanguageSection } from "./settings/LanguageSection";
 import { ApiKeysSection } from "./settings/ApiKeysSection";
+import { TwoFactorSection } from "./settings/TwoFactorSection";
 import { DataExportSection } from "./settings/DataExportSection";
 import { DangerZoneSection } from "./settings/DangerZoneSection";
 
@@ -22,6 +23,7 @@ export function SettingsPage() {
 
       <AccountSection />
       <PasswordSection />
+      <TwoFactorSection />
       <AppearanceSection />
       <LanguageSection />
       <ApiKeysSection />

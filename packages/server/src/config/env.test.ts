@@ -3,6 +3,7 @@ import { describe, test, expect, afterEach } from "@jest/globals";
 const KEYS = [
   "NODE_ENV",
   "JWT_SECRET",
+  "TWO_FACTOR_SECRET_KEY",
   "CORS_ORIGIN",
   "POSTGRES_PASSWORD",
 ] as const;
@@ -72,8 +73,19 @@ describe("validateEnv JWT_SECRET strength (AUTH-002)", () => {
     const { validateEnv } = load({
       NODE_ENV: "production",
       JWT_SECRET: STRONG,
+      TWO_FACTOR_SECRET_KEY: STRONG,
       ...base,
     });
     expect(() => validateEnv()).not.toThrow();
+  });
+
+  test("requires TWO_FACTOR_SECRET_KEY in production", () => {
+    const { validateEnv } = load({
+      NODE_ENV: "production",
+      JWT_SECRET: STRONG,
+      TWO_FACTOR_SECRET_KEY: undefined,
+      ...base,
+    });
+    expect(() => validateEnv()).toThrow(/TWO_FACTOR_SECRET_KEY/);
   });
 });

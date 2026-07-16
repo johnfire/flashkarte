@@ -26,6 +26,10 @@ export function validateEnv() {
   const NODE_ENV = process.env.NODE_ENV ?? "development";
   if (NODE_ENV === "production") {
     assertStrongSecret("JWT_SECRET", required("JWT_SECRET"));
+    assertStrongSecret(
+      "TWO_FACTOR_SECRET_KEY",
+      required("TWO_FACTOR_SECRET_KEY"),
+    );
     required("CORS_ORIGIN");
     required("POSTGRES_PASSWORD");
   }
@@ -33,6 +37,20 @@ export function validateEnv() {
     NODE_ENV,
     PORT: parseInt(process.env.PORT ?? "3001", 10),
   };
+}
+
+/**
+ * Key material for encrypting TOTP seeds at rest. Production requires
+ * TWO_FACTOR_SECRET_KEY (validated above); development derives a stable key
+ * from the JWT secret so restarts don't orphan dev 2FA enrollments.
+ */
+export function getTwoFactorKey(): Buffer {
+  const raw = process.env.TWO_FACTOR_SECRET_KEY;
+  if (raw) return crypto.createHash("sha256").update(raw).digest();
+  if ((process.env.NODE_ENV ?? "development") === "production") {
+    throw new Error("TWO_FACTOR_SECRET_KEY must be set in production");
+  }
+  return crypto.createHash("sha256").update(getJwtSecret()).digest();
 }
 
 // Per-process random dev fallback — never a shared, attacker-known constant, so

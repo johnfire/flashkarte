@@ -138,13 +138,18 @@ export const api = {
         { method: "POST", body: JSON.stringify({ email, password }) },
       ),
     login: (email: string, password: string, rememberMe: boolean) =>
-      request<{ user: User; accessToken: string; expiresIn: number }>(
-        "/auth/login",
-        {
-          method: "POST",
-          body: JSON.stringify({ email, password, rememberMe }),
-        },
-      ),
+      request<
+        | { requiresTwoFactor: true; challenge: string }
+        | {
+            requiresTwoFactor?: false;
+            user: User;
+            accessToken: string;
+            expiresIn: number;
+          }
+      >("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({ email, password, rememberMe }),
+      }),
     refresh: () =>
       request<{ accessToken: string }>("/auth/refresh", { method: "POST" }),
     me: () => request<{ user: User }>("/auth/me"),
@@ -192,6 +197,28 @@ export const api = {
         body: JSON.stringify({ currentPassword }),
       }),
     exportData: () => request<unknown>("/account/export"),
+    twoFactorLogin: (challenge: string, code: string, rememberMe: boolean) =>
+      request<{ user: User; accessToken: string; expiresIn: number }>(
+        "/auth/2fa/verify",
+        {
+          method: "POST",
+          body: JSON.stringify({ challenge, code, rememberMe }),
+        },
+      ),
+    twoFactorSetup: () =>
+      request<{ otpauthUri: string; qrDataUrl: string }>("/account/2fa/setup", {
+        method: "POST",
+      }),
+    twoFactorEnable: (code: string) =>
+      request<{ backupCodes: string[] }>("/account/2fa/verify", {
+        method: "POST",
+        body: JSON.stringify({ code }),
+      }),
+    twoFactorDisable: (code: string) =>
+      request<void>("/account/2fa/disable", {
+        method: "POST",
+        body: JSON.stringify({ code }),
+      }),
   },
   decks: {
     list: () =>

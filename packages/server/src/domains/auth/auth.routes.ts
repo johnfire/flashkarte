@@ -5,6 +5,7 @@ import * as ctrl from "./auth.controller";
 export const authRouter = Router();
 authRouter.post("/signup", ctrl.signup);
 authRouter.post("/login", ctrl.login);
+authRouter.post("/2fa/verify", ctrl.twoFactorLogin);
 authRouter.post("/refresh", ctrl.refresh);
 authRouter.post("/logout", ctrl.logout);
 authRouter.get("/me", requireAuth, ctrl.me);

@@ -14,9 +14,15 @@ interface AuthValue {
   user: User | null;
   authed: boolean;
   loading: boolean;
+  /** Resolves with a challenge when the account has 2FA enabled. */
   login: (
     email: string,
     password: string,
+    rememberMe: boolean,
+  ) => Promise<{ requiresTwoFactor: true; challenge: string } | undefined>;
+  completeTwoFactorLogin: (
+    challenge: string,
+    code: string,
     rememberMe: boolean,
   ) => Promise<void>;
   signup: (email: string, password: string) => Promise<void>;
@@ -69,6 +75,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     rememberMe: boolean,
   ) => {
     const r = await api.auth.login(email, password, rememberMe);
+    if (r.requiresTwoFactor) {
+      // Password OK but no session yet — the caller must collect a code.
+      return { requiresTwoFactor: true as const, challenge: r.challenge };
+    }
+    setAccessToken(r.accessToken);
+    setUser(r.user);
+    applyUserLanguage(r.user);
+    setAuthed(true);
+    return undefined;
+  };
+
+  const completeTwoFactorLogin = async (
+    challenge: string,
+    code: string,
+    rememberMe: boolean,
+  ) => {
+    const r = await api.auth.twoFactorLogin(challenge, code, rememberMe);
     setAccessToken(r.accessToken);
     setUser(r.user);
     applyUserLanguage(r.user);
@@ -97,6 +120,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         authed,
         loading,
         login,
+        completeTwoFactorLogin,
         signup,
         logout,
         updateUser: setUser,

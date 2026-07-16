@@ -14,9 +14,20 @@ vi.mock("../api/client", () => ({
       updateProfile: vi.fn(),
       deleteAccount: vi.fn(),
       exportData: vi.fn(),
+      twoFactorSetup: vi.fn(),
+      twoFactorEnable: vi.fn(),
+      twoFactorDisable: vi.fn(),
     },
   },
-  ApiError: class ApiError extends Error {},
+  ApiError: class ApiError extends Error {
+    constructor(
+      public status: number,
+      public code: string,
+      message: string,
+    ) {
+      super(message);
+    }
+  },
 }));
 
 // Mutable so individual tests can render logged-out or logged-in.
@@ -38,6 +49,9 @@ const mockApi = api as unknown as {
     updateProfile: ReturnType<typeof vi.fn>;
     deleteAccount: ReturnType<typeof vi.fn>;
     exportData: ReturnType<typeof vi.fn>;
+    twoFactorSetup: ReturnType<typeof vi.fn>;
+    twoFactorEnable: ReturnType<typeof vi.fn>;
+    twoFactorDisable: ReturnType<typeof vi.fn>;
   };
 };
 
@@ -149,6 +163,70 @@ describe("SettingsPage", () => {
       await screen.findByText("The new passwords don't match."),
     ).toBeInTheDocument();
     expect(mockApi.auth.changePassword).not.toHaveBeenCalled();
+  });
+
+  describe("TwoFactorSection", () => {
+    test("enable flow: QR shown, code verified, backup codes displayed once", async () => {
+      mockUser = { displayName: null, accountType: "free" };
+      mockApi.keys.list.mockResolvedValue([]);
+      mockApi.auth.twoFactorSetup.mockResolvedValue({
+        otpauthUri: "otpauth://totp/Flashkarte:a%40b.c?secret=X",
+        qrDataUrl: "data:image/png;base64,QR",
+      });
+      mockApi.auth.twoFactorEnable.mockResolvedValue({
+        backupCodes: ["aaaaa-11111", "bbbbb-22222"],
+      });
+
+      renderPage();
+      await userEvent.click(
+        await screen.findByRole("button", { name: /Enable 2FA/ }),
+      );
+
+      // QR pairing step
+      const qr = await screen.findByAltText(/QR code/);
+      expect(qr).toHaveAttribute("src", "data:image/png;base64,QR");
+
+      await userEvent.type(screen.getByLabelText("6-digit code"), "123456");
+      await userEvent.click(
+        screen.getByRole("button", { name: /Verify & enable/ }),
+      );
+
+      await waitFor(() =>
+        expect(mockApi.auth.twoFactorEnable).toHaveBeenCalledWith("123456"),
+      );
+      // one-time backup codes visible
+      expect(await screen.findByText("aaaaa-11111")).toBeInTheDocument();
+      expect(screen.getByText(/will not be shown again/)).toBeInTheDocument();
+    });
+
+    test("wrong code shows the server error and does not enable", async () => {
+      mockUser = { displayName: null, accountType: "free" };
+      mockApi.keys.list.mockResolvedValue([]);
+      mockApi.auth.twoFactorSetup.mockResolvedValue({
+        otpauthUri: "otpauth://x",
+        qrDataUrl: "data:image/png;base64,QR",
+      });
+      const { ApiError } = await import("../api/client");
+      mockApi.auth.twoFactorEnable.mockRejectedValue(
+        new ApiError(422, "VALIDATION", "Invalid verification code"),
+      );
+
+      renderPage();
+      await userEvent.click(
+        await screen.findByRole("button", { name: /Enable 2FA/ }),
+      );
+      await userEvent.type(
+        await screen.findByLabelText("6-digit code"),
+        "000000",
+      );
+      await userEvent.click(
+        screen.getByRole("button", { name: /Verify & enable/ }),
+      );
+
+      expect(
+        await screen.findByText("Invalid verification code"),
+      ).toBeInTheDocument();
+    });
   });
 
   describe("DataExportSection", () => {

@@ -105,6 +105,63 @@ class SettingsViewModelTest {
         assertEquals(false, vm.state.value.isExporting)
     }
 
+    @Test fun twoFactorEnableFlowShowsBackupCodesAndFlipsStatus() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        coEvery { auth.twoFactorSetup() } returns
+            com.flashmd.data.remote.dto.TwoFactorSetupResponse(
+                otpauthUri = "otpauth://totp/x",
+                qrDataUrl = "data:image/png;base64,QR",
+            )
+        coEvery { auth.twoFactorEnable("123456") } returns listOf("aaaaa-11111", "bbbbb-22222")
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.startTwoFactorSetup(); advanceUntilIdle()
+        assertEquals("data:image/png;base64,QR", vm.state.value.twoFactorQrDataUrl)
+
+        vm.onTwoFactorCodeChange("123456")
+        vm.confirmTwoFactorEnable(); advanceUntilIdle()
+
+        assertEquals(listOf("aaaaa-11111", "bbbbb-22222"), vm.state.value.backupCodes)
+        assertEquals(true, vm.state.value.user?.twoFactorEnabled)
+        assertEquals(null, vm.state.value.twoFactorQrDataUrl)
+    }
+
+    @Test fun twoFactorEnableSurfacesWrongCodeError() = runTest {
+        coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
+        coEvery { auth.twoFactorSetup() } returns
+            com.flashmd.data.remote.dto.TwoFactorSetupResponse("otpauth://x", "data:image/png;base64,QR")
+        coEvery { auth.twoFactorEnable(any()) } throws
+            ApiException(status = 422, code = "VALIDATION", message = "Invalid verification code")
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.startTwoFactorSetup(); advanceUntilIdle()
+        vm.onTwoFactorCodeChange("000000")
+        vm.confirmTwoFactorEnable(); advanceUntilIdle()
+
+        assertEquals("Invalid verification code", vm.state.value.twoFactorError)
+        assertEquals(null, vm.state.value.backupCodes)
+        // still in the pairing step so the user can retry
+        assertEquals("data:image/png;base64,QR", vm.state.value.twoFactorQrDataUrl)
+    }
+
+    @Test fun twoFactorDisableFlipsStatusOff() = runTest {
+        coEvery { auth.getMe() } returns
+            UserDto("u1", "a@b.c", "user", "free", null, null, twoFactorEnabled = true)
+        coEvery { auth.twoFactorDisable("654321") } returns Unit
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        vm.openTwoFactorDisable()
+        vm.onTwoFactorCodeChange("654321")
+        vm.confirmTwoFactorDisable(); advanceUntilIdle()
+
+        coVerify { auth.twoFactorDisable("654321") }
+        assertEquals(false, vm.state.value.user?.twoFactorEnabled)
+        assertEquals(false, vm.state.value.showTwoFactorDisable)
+    }
+
     @Test fun deleteAccountRequiresTypedConfirmation() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         val vm = SettingsViewModel(auth)

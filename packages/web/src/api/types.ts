@@ -8,6 +8,7 @@ export interface User {
   emailVerifiedAt: string | null;
   displayName: string | null;
   language: string | null;
+  twoFactorEnabled: boolean;
 }
 
 export interface LibraryDeck {

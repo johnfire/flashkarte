@@ -21,6 +21,7 @@ data class UserDto(
     val accountType: String? = null,
     val emailVerifiedAt: String? = null,
     val displayName: String? = null,
+    val twoFactorEnabled: Boolean = false,
 )
 
 @Serializable
@@ -29,6 +30,37 @@ data class AuthResponse(
     val accessToken: String,
     val expiresIn: Int = 0,
 )
+
+// Login is two-shaped: either a full session, or (when the account has 2FA
+// enabled) just a short-lived challenge for the code step. All fields are
+// optional so one DTO can carry both shapes.
+@Serializable
+data class LoginResponse(
+    val user: UserDto? = null,
+    val accessToken: String? = null,
+    val expiresIn: Int = 0,
+    val requiresTwoFactor: Boolean = false,
+    val challenge: String? = null,
+)
+
+@Serializable
+data class TwoFactorLoginRequest(
+    val challenge: String,
+    val code: String,
+    val rememberMe: Boolean,
+)
+
+@Serializable
+data class TwoFactorSetupResponse(
+    val otpauthUri: String,
+    val qrDataUrl: String,
+)
+
+@Serializable
+data class TwoFactorCodeRequest(val code: String)
+
+@Serializable
+data class TwoFactorBackupCodesResponse(val backupCodes: List<String>)
 
 @Serializable
 data class RefreshResponse(

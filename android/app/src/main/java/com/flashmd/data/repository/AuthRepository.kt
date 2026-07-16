@@ -2,12 +2,16 @@ package com.flashmd.data.repository
 
 import com.flashmd.data.local.AuthCookieJar
 import com.flashmd.data.local.SessionStore
+import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.ChangePasswordRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.DeleteAccountRequest
 import com.flashmd.data.remote.dto.ForgotPasswordRequest
+import com.flashmd.data.remote.dto.TwoFactorCodeRequest
+import com.flashmd.data.remote.dto.TwoFactorLoginRequest
+import com.flashmd.data.remote.dto.TwoFactorSetupResponse
 import com.flashmd.data.remote.dto.UpdateProfileRequest
 import com.flashmd.data.remote.dto.UserDto
 import com.flashmd.db.FlashkarteDb
@@ -25,14 +29,48 @@ class AuthRepository @Inject constructor(
     val isLoggedIn: Flow<Boolean> = sessionStore.isLoggedIn
     val userEmail: Flow<String?> = sessionStore.userEmail
 
+    /** Result of the password step: either signed in, or 2FA code needed. */
+    sealed interface LoginOutcome {
+        data object Success : LoginOutcome
+        data class NeedsTwoFactor(val challenge: String) : LoginOutcome
+    }
+
     // Mobile apps don't prompt "remember me" the way a browser tab does —
     // signing in here always starts a persistent, sliding-window session
     // (see REFRESH_TOKEN_TTL_DAYS server-side).
-    suspend fun login(email: String, password: String) {
+    suspend fun login(email: String, password: String): LoginOutcome {
         val res = apiCall {
             api.login(CredentialsRequest(email.trim(), password, rememberMe = true))
         }
+        if (res.requiresTwoFactor && res.challenge != null) {
+            return LoginOutcome.NeedsTwoFactor(res.challenge)
+        }
+        val user = res.user
+        val token = res.accessToken
+        if (user == null || token == null) {
+            throw ApiException(status = 0, code = "BAD_RESPONSE", message = "Malformed login response")
+        }
+        sessionStore.saveSession(token, user)
+        return LoginOutcome.Success
+    }
+
+    /** Second step of a 2FA login: exchange challenge + code for the session. */
+    suspend fun completeTwoFactorLogin(challenge: String, code: String) {
+        val res = apiCall {
+            api.twoFactorLogin(TwoFactorLoginRequest(challenge, code.trim(), rememberMe = true))
+        }
         sessionStore.saveSession(res.accessToken, res.user)
+    }
+
+    suspend fun twoFactorSetup(): TwoFactorSetupResponse =
+        apiCall { api.twoFactorSetup() }
+
+    /** Verify the pairing code; returns the one-time backup codes. */
+    suspend fun twoFactorEnable(code: String): List<String> =
+        apiCall { api.twoFactorEnable(TwoFactorCodeRequest(code.trim())) }.backupCodes
+
+    suspend fun twoFactorDisable(code: String) {
+        apiCall { api.twoFactorDisable(TwoFactorCodeRequest(code.trim())) }
     }
 
     suspend fun signup(email: String, password: String) {

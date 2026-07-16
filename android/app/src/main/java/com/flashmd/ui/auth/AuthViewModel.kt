@@ -18,6 +18,9 @@ data class AuthUiState(
     val isSubmitting: Boolean = false,
     val error: String? = null,
     val info: String? = null,
+    // Non-null while the server waits for the second factor of a 2FA login.
+    val twoFactorChallenge: String? = null,
+    val twoFactorCode: String = "",
 )
 
 @HiltViewModel
@@ -97,13 +100,55 @@ class AuthViewModel @Inject constructor(
                 if (state.isSignup) {
                     authRepo.signup(email, state.password)
                 } else {
-                    authRepo.login(email, state.password)
+                    val outcome = authRepo.login(email, state.password)
+                    if (outcome is AuthRepository.LoginOutcome.NeedsTwoFactor) {
+                        _uiState.value = _uiState.value.copy(
+                            isSubmitting = false,
+                            twoFactorChallenge = outcome.challenge,
+                            twoFactorCode = "",
+                        )
+                        return@launch
+                    }
                 }
                 // On success the session flow flips and the gate swaps screens.
             } catch (e: ApiException) {
                 _uiState.value = _uiState.value.copy(isSubmitting = false, error = e.message)
             } catch (e: Exception) {
                 errorReporter.report(e.message ?: "auth failed", "Auth.submit", e)
+                _uiState.value = _uiState.value.copy(
+                    isSubmitting = false,
+                    error = "Something went wrong. Please try again.",
+                )
+            }
+        }
+    }
+
+    fun onTwoFactorCodeChange(value: String) {
+        _uiState.value = _uiState.value.copy(twoFactorCode = value, error = null)
+    }
+
+    fun cancelTwoFactor() {
+        _uiState.value = _uiState.value.copy(
+            twoFactorChallenge = null,
+            twoFactorCode = "",
+            error = null,
+        )
+    }
+
+    /** Submit the TOTP/backup code for the pending 2FA login challenge. */
+    fun submitTwoFactor() {
+        val state = _uiState.value
+        val challenge = state.twoFactorChallenge ?: return
+        if (state.isSubmitting || state.twoFactorCode.isBlank()) return
+        _uiState.value = state.copy(isSubmitting = true, error = null)
+        viewModelScope.launch {
+            try {
+                authRepo.completeTwoFactorLogin(challenge, state.twoFactorCode)
+                // Session flow flips; the gate swaps screens.
+            } catch (e: ApiException) {
+                _uiState.value = _uiState.value.copy(isSubmitting = false, error = e.message)
+            } catch (e: Exception) {
+                errorReporter.report(e.message ?: "2fa failed", "Auth.submitTwoFactor", e)
                 _uiState.value = _uiState.value.copy(
                     isSubmitting = false,
                     error = "Something went wrong. Please try again.",

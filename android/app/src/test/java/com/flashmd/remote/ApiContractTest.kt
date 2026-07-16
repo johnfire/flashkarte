@@ -128,10 +128,23 @@ class ApiContractTest {
 
         val res = apiCall { api.login(CredentialsRequest("a@b.com", "password123", true)) }
 
-        assertEquals("u1", res.user.id)
-        assertEquals("a@b.com", res.user.email)
+        assertEquals("u1", res.user!!.id)
+        assertEquals("a@b.com", res.user!!.email)
         assertEquals("jwt.token.here", res.accessToken)
         assertEquals(900, res.expiresIn)
+        assertEquals(false, res.requiresTwoFactor)
+    }
+
+    @Test
+    fun `login parses the two-factor challenge shape`() = runBlocking {
+        enqueue(200, """{"requiresTwoFactor":true,"challenge":"challenge.jwt"}""")
+
+        val res = apiCall { api.login(CredentialsRequest("a@b.com", "password123", true)) }
+
+        assertEquals(true, res.requiresTwoFactor)
+        assertEquals("challenge.jwt", res.challenge)
+        assertEquals(null, res.user)
+        assertEquals(null, res.accessToken)
     }
 
     @Test

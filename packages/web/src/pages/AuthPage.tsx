@@ -5,6 +5,7 @@ import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../api/client";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { PasswordInput } from "../components/PasswordInput";
+import { TwoFactorLoginForm } from "./auth/TwoFactorLoginForm";
 
 /**
  * Resolve a post-auth redirect target from an untrusted `?next=` param. Only
@@ -30,20 +31,42 @@ export function AuthPage() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // Non-null while the server is waiting for the second factor.
+  const [twoFactorChallenge, setTwoFactorChallenge] = useState<string | null>(
+    null,
+  );
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
     setBusy(true);
     try {
-      if (mode === "login") await login(email, password, rememberMe);
-      else await signup(email, password);
+      if (mode === "login") {
+        const result = await login(email, password, rememberMe);
+        if (result?.requiresTwoFactor) {
+          setTwoFactorChallenge(result.challenge);
+          return;
+        }
+      } else {
+        await signup(email, password);
+      }
       navigate(safeNext(params.get("next")));
     } catch (err) {
       setError(err instanceof ApiError ? err.message : t("auth.genericError"));
     } finally {
       setBusy(false);
     }
+  }
+
+  if (twoFactorChallenge) {
+    return (
+      <TwoFactorLoginForm
+        challenge={twoFactorChallenge}
+        rememberMe={rememberMe}
+        onSuccess={() => navigate(safeNext(params.get("next")))}
+        onCancel={() => setTwoFactorChallenge(null)}
+      />
+    );
   }
 
   return (

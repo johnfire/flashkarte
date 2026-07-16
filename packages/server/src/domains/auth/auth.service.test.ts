@@ -1,13 +1,17 @@
 jest.mock("../../db/client");
 jest.mock("../audit/audit.service");
 jest.mock("./auth.repository");
+jest.mock("../account/twoFactor.service");
 jest.mock("bcryptjs");
 
 import bcrypt from "bcryptjs";
 import { withTransaction } from "../../db/client";
 import { record, userActor } from "../audit/audit.service";
+import * as twoFactor from "../account/twoFactor.service";
 import * as repo from "./auth.repository";
-import { deleteAccount } from "./auth.service";
+import { deleteAccount, login, completeTwoFactorLogin } from "./auth.service";
+
+const mockTwoFactor = twoFactor as jest.Mocked<typeof twoFactor>;
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
 const mockAudit = { record, userActor } as {
@@ -31,6 +35,7 @@ function setupRepoRow(
     email_verified_at: null,
     display_name: null,
     language: null,
+    two_factor_enabled: false,
     password_hash: overrides.password_hash ?? "$2a$12$hashhashhash",
   };
   mockRepo.findByIdWithHash.mockResolvedValue(row);
@@ -42,7 +47,7 @@ beforeEach(() => {
   mockAudit.userActor.mockReturnValue({ type: "user", id: "u1" });
   mockBcrypt.compare.mockResolvedValue(true as never);
   mockAudit.record.mockResolvedValue(undefined);
-  mockRepo.deleteUserAccount.mockResolvedValue([]);
+  mockRepo.deleteUserAccount.mockResolvedValue(undefined);
   // withTransaction calls the callback with a mock client
   const mockClient = { query: jest.fn() } as unknown as import("pg").PoolClient;
   (withTransaction as jest.Mock).mockImplementation(
@@ -108,5 +113,103 @@ describe("deleteAccount", () => {
     const params = mockAudit.record.mock.calls[0][0];
     expect(params.beforeState).toBeUndefined();
     expect(params.afterState).toBeUndefined();
+  });
+});
+
+describe("login with 2FA enabled", () => {
+  function userRow(twoFactorEnabled: boolean) {
+    return {
+      id: "u1",
+      email: "a@b.com",
+      role: "user",
+      account_type: "free",
+      email_verified_at: null,
+      display_name: null,
+      language: null,
+      two_factor_enabled: twoFactorEnabled,
+      password_hash: "$2a$12$hashhashhash",
+    };
+  }
+
+  it("returns a challenge instead of tokens", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(true));
+    const result = await login("a@b.com", "password123", false);
+    expect(result.requiresTwoFactor).toBe(true);
+    if (!result.requiresTwoFactor) throw new Error("unreachable");
+    expect(typeof result.challenge).toBe("string");
+    // No session material until the code step succeeds.
+    expect(mockRepo.storeRefreshToken).not.toHaveBeenCalled();
+  });
+
+  it("issues tokens directly when 2FA is off", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(false));
+    const result = await login("a@b.com", "password123", false);
+    expect(result.requiresTwoFactor).toBeFalsy();
+    expect(mockRepo.storeRefreshToken).toHaveBeenCalled();
+  });
+
+  it("completes the login with a valid code", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(true));
+    const first = await login("a@b.com", "password123", false);
+    if (!first.requiresTwoFactor) throw new Error("expected challenge");
+
+    mockTwoFactor.verifyCode.mockResolvedValue("totp");
+    mockRepo.findById.mockResolvedValue(userRow(true));
+    const done = await completeTwoFactorLogin(first.challenge, "123456", true);
+    expect(done.user.id).toBe("u1");
+    expect(done.usedBackupCode).toBe(false);
+    expect(mockRepo.storeRefreshToken).toHaveBeenCalled();
+  });
+
+  it("flags backup-code use so the controller can audit it", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(true));
+    const first = await login("a@b.com", "password123", false);
+    if (!first.requiresTwoFactor) throw new Error("expected challenge");
+
+    mockTwoFactor.verifyCode.mockResolvedValue("backup");
+    mockRepo.findById.mockResolvedValue(userRow(true));
+    const done = await completeTwoFactorLogin(
+      first.challenge,
+      "a3f2c-9b01d",
+      false,
+    );
+    expect(done.usedBackupCode).toBe(true);
+  });
+
+  it("rejects an invalid code", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(true));
+    const first = await login("a@b.com", "password123", false);
+    if (!first.requiresTwoFactor) throw new Error("expected challenge");
+
+    mockTwoFactor.verifyCode.mockResolvedValue(null);
+    await expect(
+      completeTwoFactorLogin(first.challenge, "000000", false),
+    ).rejects.toThrow("Invalid two-factor code");
+    expect(mockRepo.storeRefreshToken).not.toHaveBeenCalled();
+  });
+
+  it("rejects a garbage challenge", async () => {
+    await expect(
+      completeTwoFactorLogin("not-a-jwt", "123456", false),
+    ).rejects.toThrow(/challenge/i);
+  });
+
+  it("rejects an access token used as a challenge (purpose binding)", async () => {
+    // A regular access token is a valid JWT signed with the same secret —
+    // it must NOT be accepted as a 2FA challenge.
+    const jwt = jest.requireActual("jsonwebtoken");
+    const { getJwtSecret } = jest.requireActual("../../config/env");
+    const accessLike = jwt.sign(
+      { sub: "u1", email: "a@b.com" },
+      getJwtSecret(),
+      {
+        algorithm: "HS256",
+        expiresIn: 60,
+      },
+    );
+    mockTwoFactor.verifyCode.mockResolvedValue("totp");
+    await expect(
+      completeTwoFactorLogin(accessLike, "123456", false),
+    ).rejects.toThrow(/challenge/i);
   });
 });

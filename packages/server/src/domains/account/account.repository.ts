@@ -109,3 +109,65 @@ export function findApiKeyMeta(userId: string): Promise<ApiKeyMetaRow[]> {
     [userId],
   );
 }
+
+// --- Two-factor auth (§13.1) ---
+
+export interface TwoFactorRow {
+  email: string;
+  two_factor_secret_enc: string | null;
+  two_factor_enabled: boolean;
+  two_factor_backup: string[];
+}
+
+export function findTwoFactor(userId: string): Promise<TwoFactorRow | null> {
+  return queryOne<TwoFactorRow>(
+    `SELECT email, two_factor_secret_enc, two_factor_enabled, two_factor_backup
+       FROM users WHERE id = $1`,
+    [userId],
+  );
+}
+
+/** Store a (not yet verified) encrypted TOTP seed during setup. */
+export function setTwoFactorSecret(
+  userId: string,
+  encryptedSecret: string,
+): Promise<unknown[]> {
+  return query(
+    `UPDATE users SET two_factor_secret_enc = $2, updated_at = now()
+      WHERE id = $1 AND two_factor_enabled = false`,
+    [userId, encryptedSecret],
+  );
+}
+
+export function enableTwoFactor(
+  userId: string,
+  backupHashes: string[],
+): Promise<unknown[]> {
+  return query(
+    `UPDATE users SET two_factor_enabled = true, two_factor_backup = $2,
+            updated_at = now()
+      WHERE id = $1`,
+    [userId, backupHashes],
+  );
+}
+
+export function disableTwoFactor(userId: string): Promise<unknown[]> {
+  return query(
+    `UPDATE users SET two_factor_enabled = false, two_factor_secret_enc = NULL,
+            two_factor_backup = '{}', updated_at = now()
+      WHERE id = $1`,
+    [userId],
+  );
+}
+
+/** Replace the backup-code hashes (used to consume a spent code). */
+export function updateTwoFactorBackup(
+  userId: string,
+  backupHashes: string[],
+): Promise<unknown[]> {
+  return query(
+    `UPDATE users SET two_factor_backup = $2, updated_at = now()
+      WHERE id = $1`,
+    [userId, backupHashes],
+  );
+}

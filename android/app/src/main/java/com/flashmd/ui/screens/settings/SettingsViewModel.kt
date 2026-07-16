@@ -29,6 +29,16 @@ data class SettingsUiState(
     val deleteConfirmText: String = "",
     val isDeletingAccount: Boolean = false,
     val deleteError: String? = null,
+    // 2FA enrollment/disable flow. qrDataUrl non-null → pairing step is open;
+    // backupCodes non-null → one-time reveal; showTwoFactorDisable → code
+    // prompt for turning it off.
+    val twoFactorQrDataUrl: String? = null,
+    val twoFactorUri: String? = null,
+    val twoFactorCode: String = "",
+    val twoFactorBusy: Boolean = false,
+    val twoFactorError: String? = null,
+    val backupCodes: List<String>? = null,
+    val showTwoFactorDisable: Boolean = false,
 )
 
 @HiltViewModel
@@ -145,6 +155,94 @@ class SettingsViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun onTwoFactorCodeChange(v: String) {
+        _state.value = _state.value.copy(twoFactorCode = v, twoFactorError = null)
+    }
+
+    fun cancelTwoFactorFlow() {
+        if (_state.value.twoFactorBusy) return
+        _state.value = _state.value.copy(
+            twoFactorQrDataUrl = null,
+            twoFactorUri = null,
+            twoFactorCode = "",
+            twoFactorError = null,
+            backupCodes = null,
+            showTwoFactorDisable = false,
+        )
+    }
+
+    /** Begin enrollment: fetch the QR/URI pairing material. */
+    fun startTwoFactorSetup() {
+        if (_state.value.twoFactorBusy) return
+        _state.value = _state.value.copy(twoFactorBusy = true, twoFactorError = null)
+        viewModelScope.launch {
+            try {
+                val setup = auth.twoFactorSetup()
+                _state.value = _state.value.copy(
+                    twoFactorBusy = false,
+                    twoFactorQrDataUrl = setup.qrDataUrl,
+                    twoFactorUri = setup.otpauthUri,
+                    twoFactorCode = "",
+                )
+            } catch (e: ApiException) {
+                _state.value = _state.value.copy(twoFactorBusy = false, twoFactorError = e.message)
+            }
+        }
+    }
+
+    /** Verify the pairing code; on success show the one-time backup codes. */
+    fun confirmTwoFactorEnable() {
+        val s = _state.value
+        if (s.twoFactorBusy || s.twoFactorCode.isBlank()) return
+        _state.value = s.copy(twoFactorBusy = true, twoFactorError = null)
+        viewModelScope.launch {
+            try {
+                val codes = auth.twoFactorEnable(s.twoFactorCode)
+                _state.value = _state.value.copy(
+                    twoFactorBusy = false,
+                    twoFactorQrDataUrl = null,
+                    twoFactorUri = null,
+                    twoFactorCode = "",
+                    backupCodes = codes,
+                    user = _state.value.user?.copy(twoFactorEnabled = true),
+                )
+            } catch (e: ApiException) {
+                _state.value = _state.value.copy(twoFactorBusy = false, twoFactorError = e.message)
+            }
+        }
+    }
+
+    fun openTwoFactorDisable() {
+        _state.value = _state.value.copy(
+            showTwoFactorDisable = true,
+            twoFactorCode = "",
+            twoFactorError = null,
+        )
+    }
+
+    fun confirmTwoFactorDisable() {
+        val s = _state.value
+        if (s.twoFactorBusy || s.twoFactorCode.isBlank()) return
+        _state.value = s.copy(twoFactorBusy = true, twoFactorError = null)
+        viewModelScope.launch {
+            try {
+                auth.twoFactorDisable(s.twoFactorCode)
+                _state.value = _state.value.copy(
+                    twoFactorBusy = false,
+                    showTwoFactorDisable = false,
+                    twoFactorCode = "",
+                    user = _state.value.user?.copy(twoFactorEnabled = false),
+                )
+            } catch (e: ApiException) {
+                _state.value = _state.value.copy(twoFactorBusy = false, twoFactorError = e.message)
+            }
+        }
+    }
+
+    fun dismissBackupCodes() {
+        _state.value = _state.value.copy(backupCodes = null)
     }
 
     fun openDeleteDialog() {

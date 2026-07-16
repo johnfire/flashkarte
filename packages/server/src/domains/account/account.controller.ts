@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { wrapAsync } from "../../utils/wrapAsync";
 import { auditFromRequest } from "../audit/audit.service";
 import * as service from "./account.service";
+import * as twoFactor from "./twoFactor.service";
 
 export const exportData = wrapAsync(async (req: Request, res: Response) => {
   const data = await service.exportData(req.userId!);
@@ -15,3 +16,25 @@ export const exportData = wrapAsync(async (req: Request, res: Response) => {
   );
   res.json(data);
 });
+
+export const twoFactorSetup = wrapAsync(async (req: Request, res: Response) => {
+  const result = await twoFactor.setup(req.userId!);
+  await auditFromRequest(req, "2fa.setup_started", "user", req.userId!);
+  res.json(result);
+});
+
+export const twoFactorEnable = wrapAsync(
+  async (req: Request, res: Response) => {
+    const { backupCodes } = await twoFactor.enable(req.userId!, req.body.code);
+    await auditFromRequest(req, "2fa.enabled", "user", req.userId!);
+    res.json({ backupCodes });
+  },
+);
+
+export const twoFactorDisable = wrapAsync(
+  async (req: Request, res: Response) => {
+    await twoFactor.disable(req.userId!, req.body.code);
+    await auditFromRequest(req, "2fa.disabled", "user", req.userId!);
+    res.status(204).end();
+  },
+);

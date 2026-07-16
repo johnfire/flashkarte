@@ -90,6 +90,23 @@ export function createApp() {
         legacyHeaders: false,
       }),
     );
+    // Tighter than the general auth limiter: 6 digits brute-force fast, and a
+    // stolen challenge JWT is only useful within its 90s life (§13.4).
+    app.use(
+      "/api/auth/2fa/verify",
+      rateLimit({
+        windowMs: 15 * 60_000,
+        limit: 5,
+        standardHeaders: "draft-7",
+        legacyHeaders: false,
+        message: {
+          error: {
+            code: "RATE_LIMIT_EXCEEDED",
+            message: "Too many code attempts, please try again later",
+          },
+        },
+      }),
+    );
     app.use(
       "/api/auth",
       rateLimit({

@@ -16,6 +16,7 @@ import com.flashmd.data.remote.dto.ForgotPasswordRequest
 import com.flashmd.data.remote.dto.ImportRequest
 import com.flashmd.data.remote.dto.LibraryDeckDetailDto
 import com.flashmd.data.remote.dto.LibraryListResponse
+import com.flashmd.data.remote.dto.LoginResponse
 import com.flashmd.data.remote.dto.MeResponse
 import com.flashmd.data.remote.dto.RefreshResponse
 import com.flashmd.data.remote.dto.ReviewRequest
@@ -24,6 +25,10 @@ import com.flashmd.data.remote.dto.StatsDto
 import com.flashmd.data.remote.dto.StudyCardDto
 import com.flashmd.data.remote.dto.SyncRequest
 import com.flashmd.data.remote.dto.SyncResponse
+import com.flashmd.data.remote.dto.TwoFactorBackupCodesResponse
+import com.flashmd.data.remote.dto.TwoFactorCodeRequest
+import com.flashmd.data.remote.dto.TwoFactorLoginRequest
+import com.flashmd.data.remote.dto.TwoFactorSetupResponse
 import com.flashmd.data.remote.dto.UpdateDeckRequest
 import com.flashmd.data.remote.dto.UpdateProfileRequest
 import retrofit2.Response
@@ -42,7 +47,10 @@ interface FlashkarteApi {
     suspend fun signup(@Body body: CredentialsRequest): AuthResponse
 
     @POST("api/auth/login")
-    suspend fun login(@Body body: CredentialsRequest): AuthResponse
+    suspend fun login(@Body body: CredentialsRequest): LoginResponse
+
+    @POST("api/auth/2fa/verify")
+    suspend fun twoFactorLogin(@Body body: TwoFactorLoginRequest): AuthResponse
 
     @POST("api/auth/refresh")
     suspend fun refresh(): RefreshResponse
@@ -118,6 +126,17 @@ interface FlashkarteApi {
     // no point deserializing and re-serializing it.
     @GET("api/account/export")
     suspend fun exportAccountData(): okhttp3.ResponseBody
+
+    // Two-factor auth. Unit returns (not Response<Unit>) so non-2xx becomes
+    // an ApiException with the server's message.
+    @POST("api/account/2fa/setup")
+    suspend fun twoFactorSetup(): TwoFactorSetupResponse
+
+    @POST("api/account/2fa/verify")
+    suspend fun twoFactorEnable(@Body body: TwoFactorCodeRequest): TwoFactorBackupCodesResponse
+
+    @POST("api/account/2fa/disable")
+    suspend fun twoFactorDisable(@Body body: TwoFactorCodeRequest)
 
     @POST("api/client-errors")
     suspend fun reportClientError(@Body body: ClientErrorRequest): Response<Unit>

@@ -1,13 +1,17 @@
 package com.flashmd.ui.screens.settings
 
+import android.graphics.BitmapFactory
+import android.util.Base64
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -117,6 +121,9 @@ fun SettingsScreen(
             }
 
             HorizontalDivider()
+            TwoFactorSection(state, viewModel)
+
+            HorizontalDivider()
             Text("Your data", style = MaterialTheme.typography.titleMedium)
             Text(
                 "Download a copy of everything in your account — profile, decks, cards, and study history — as a JSON file.",
@@ -187,6 +194,125 @@ fun SettingsScreen(
                 onDismiss = { viewModel.closeDeleteDialog() },
             )
         }
+    }
+}
+
+@Composable
+private fun TwoFactorSection(state: SettingsUiState, viewModel: SettingsViewModel) {
+    val enabled = state.user?.twoFactorEnabled == true
+    Text("Two-factor authentication", style = MaterialTheme.typography.titleMedium)
+    Text(
+        if (enabled) {
+            "Enabled. You'll be asked for a code from your authenticator app when signing in."
+        } else {
+            "Protect your account with one-time codes from an authenticator app."
+        },
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+
+    when {
+        // One-time backup-code reveal after successful enrollment.
+        state.backupCodes != null -> {
+            Text(
+                "Save these backup codes now — each works once if you lose your authenticator. They will not be shown again.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.tertiary,
+            )
+            state.backupCodes.forEach { code ->
+                Text(code, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+            }
+            Button(onClick = { viewModel.dismissBackupCodes() }) { Text("I've saved them") }
+        }
+
+        // Pairing step: QR + code entry.
+        state.twoFactorQrDataUrl != null -> {
+            Text(
+                "Scan this QR code with your authenticator app, then enter the 6-digit code it shows.",
+                style = MaterialTheme.typography.bodySmall,
+            )
+            val qrBitmap = remember(state.twoFactorQrDataUrl) {
+                runCatching {
+                    val b64 = state.twoFactorQrDataUrl.substringAfter("base64,")
+                    val bytes = Base64.decode(b64, Base64.DEFAULT)
+                    BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                }.getOrNull()
+            }
+            if (qrBitmap != null) {
+                Image(
+                    bitmap = qrBitmap.asImageBitmap(),
+                    contentDescription = "QR code for authenticator app pairing",
+                    modifier = Modifier.size(180.dp),
+                )
+            } else if (state.twoFactorUri != null) {
+                // QR decode failed — fall back to the raw pairing URI.
+                Text(state.twoFactorUri, style = MaterialTheme.typography.bodySmall)
+            }
+            OutlinedTextField(
+                value = state.twoFactorCode,
+                onValueChange = viewModel::onTwoFactorCodeChange,
+                label = { Text("6-digit code") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(
+                    onClick = { viewModel.confirmTwoFactorEnable() },
+                    enabled = !state.twoFactorBusy && state.twoFactorCode.isNotBlank(),
+                ) { Text(if (state.twoFactorBusy) "Verifying…" else "Verify & enable") }
+                OutlinedButton(
+                    onClick = { viewModel.cancelTwoFactorFlow() },
+                    enabled = !state.twoFactorBusy,
+                ) { Text("Cancel") }
+            }
+        }
+
+        // Disable step: code entry.
+        state.showTwoFactorDisable -> {
+            Text(
+                "Enter a current code from your authenticator app (or a backup code) to turn 2FA off.",
+                style = MaterialTheme.typography.bodySmall,
+            )
+            OutlinedTextField(
+                value = state.twoFactorCode,
+                onValueChange = viewModel::onTwoFactorCodeChange,
+                label = { Text("Verification code") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+            )
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                Button(
+                    onClick = { viewModel.confirmTwoFactorDisable() },
+                    enabled = !state.twoFactorBusy && state.twoFactorCode.isNotBlank(),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
+                ) { Text(if (state.twoFactorBusy) "Disabling…" else "Disable") }
+                OutlinedButton(
+                    onClick = { viewModel.cancelTwoFactorFlow() },
+                    enabled = !state.twoFactorBusy,
+                ) { Text("Cancel") }
+            }
+        }
+
+        enabled -> {
+            OutlinedButton(onClick = { viewModel.openTwoFactorDisable() }) {
+                Text("Disable 2FA")
+            }
+        }
+
+        else -> {
+            Button(
+                onClick = { viewModel.startTwoFactorSetup() },
+                enabled = !state.twoFactorBusy,
+            ) { Text(if (state.twoFactorBusy) "Preparing…" else "Enable 2FA") }
+        }
+    }
+
+    if (state.twoFactorError != null) {
+        Text(
+            state.twoFactorError,
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall,
+        )
     }
 }
 
