@@ -161,16 +161,17 @@ export function deletePasswordResetTokensForUser(userId: string) {
   ]);
 }
 
-export function deleteUserAccount(
+// Two separate statements: pg runs parameterized queries as prepared
+// statements, which allow exactly one command each — a multi-statement
+// string with $1 throws at runtime. review_events has no FK to users
+// (see 008), so it must be cleaned up explicitly before the user row.
+export async function deleteUserAccount(
   userId: string,
   client?: PoolClient,
-): Promise<unknown[]> {
-  const sql = `
-    DELETE FROM review_events WHERE user_id = $1;
-    DELETE FROM users WHERE id = $1;
-  `;
-  if (client) {
-    return client.query(sql, [userId]).then((res) => res.rows);
-  }
-  return query(sql, [userId]);
+): Promise<void> {
+  const run = client
+    ? (sql: string) => client.query(sql, [userId])
+    : (sql: string) => query(sql, [userId]);
+  await run("DELETE FROM review_events WHERE user_id = $1");
+  await run("DELETE FROM users WHERE id = $1");
 }
