@@ -6,8 +6,19 @@ updates:
       interval: weekly
     open-pull-requests-limit: 5
     groups:
+      # Only bundle low-risk bumps. Majors arrive as individual PRs so each
+      # migration (TS, Tailwind, Jest, Vite, …) can be taken — or declined —
+      # deliberately, instead of six breaking changes sharing one red PR.
       dev-dependencies:
         dependency-type: development
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # Types must track the runtime we actually run (Node 20 in CI + prod).
+      # Bump manually together with a Node upgrade.
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
   - package-ecosystem: docker
     directory: "/"
     schedule:
