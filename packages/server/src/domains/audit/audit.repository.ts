@@ -47,9 +47,7 @@ export function insertAuditLog(
     record.afterState ? JSON.stringify(record.afterState) : null,
   ];
   if (client) {
-    return client
-      .query<AuditLogRow>(sql, params)
-      .then((res) => res.rows);
+    return client.query<AuditLogRow>(sql, params).then((res) => res.rows);
   }
   return query<AuditLogRow>(sql, params);
 }

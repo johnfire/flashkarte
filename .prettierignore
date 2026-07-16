@@ -1,0 +1,7 @@
+node_modules
+dist
+coverage
+android/**/build
+python/.pytest_cache
+backups
+logs

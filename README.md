@@ -43,13 +43,13 @@ Docker Compose stack (app + MCP + Postgres + daily backups), served at
 
 ## Docs
 
-| Path                                                       | What it covers                                                    |
-| ---------------------------------------------------------- | ---------------------------------------------------------------- |
-| [`docs/deployment.md`](docs/deployment.md)                 | Docker Compose prod stack, VPS deploy, env, backups              |
-| [`docs/android-release.md`](docs/android-release.md)       | Building and publishing the Android app to Play                  |
-| [`docs/HANDOFF.md`](docs/HANDOFF.md)                       | Current architecture, project state, and conventions            |
-| [`docs/store-assets/`](docs/store-assets/)                 | Play Store listing assets (icon, feature graphic, screenshots)   |
-| [`docs/superpowers/`](docs/superpowers/)                   | Historical plan/spec archive (dated, point-in-time; not current) |
+| Path                                                 | What it covers                                                   |
+| ---------------------------------------------------- | ---------------------------------------------------------------- |
+| [`docs/deployment.md`](docs/deployment.md)           | Docker Compose prod stack, VPS deploy, env, backups              |
+| [`docs/android-release.md`](docs/android-release.md) | Building and publishing the Android app to Play                  |
+| [`docs/HANDOFF.md`](docs/HANDOFF.md)                 | Current architecture, project state, and conventions             |
+| [`docs/store-assets/`](docs/store-assets/)           | Play Store listing assets (icon, feature graphic, screenshots)   |
+| [`docs/superpowers/`](docs/superpowers/)             | Historical plan/spec archive (dated, point-in-time; not current) |
 
 ## History
 

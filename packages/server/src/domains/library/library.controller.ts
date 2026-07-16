@@ -20,9 +20,17 @@ export const preview = wrapAsync(async (req: Request, res: Response) => {
 
 export const clone = wrapAsync(async (req: Request, res: Response) => {
   const { deck, sourceId } = await service.clone(req.userId!, req.params.id);
-  await auditFromRequest(req, "deck.cloned", "deck", deck.id, "success", undefined, {
-    originalDeckId: sourceId,
-    title: deck.title,
-  });
+  await auditFromRequest(
+    req,
+    "deck.cloned",
+    "deck",
+    deck.id,
+    "success",
+    undefined,
+    {
+      originalDeckId: sourceId,
+      title: deck.title,
+    },
+  );
   res.status(201).json(deck);
 });

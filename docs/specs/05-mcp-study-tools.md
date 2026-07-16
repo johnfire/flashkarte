@@ -15,6 +15,7 @@ API keys have scopes (migration `012_api_key_scope.sql`). `review_events` +
 Spec 02 for `confidence` (tools must degrade gracefully when those columns are NULL).
 
 ## New endpoints (server, API-key auth, respect key scope — add a `study` scope if the
+
 scope model requires enumeration)
 
 1. `GET /api/study/summary?deckId=` → per-deck: stats (existing `getStats` shape) +

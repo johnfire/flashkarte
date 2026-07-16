@@ -26,6 +26,22 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    services:
+      # Real Postgres for the migration smoke test — unit tests mock the DB, so
+      # without this a syntactically broken migration only surfaces in prod.
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: flashkarte
+          POSTGRES_PASSWORD: flashkarte
+          POSTGRES_DB: flashkarte
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -47,6 +63,14 @@ jobs:
         run: npm test
       - name: Build server
         run: npm run build --workspace=packages/server
+      - name: Migration smoke test (all migrations against real Postgres)
+        run: node packages/server/dist/db/migrate.js
+        env:
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: "5432"
+          POSTGRES_DB: flashkarte
+          POSTGRES_USER: flashkarte
+          POSTGRES_PASSWORD: flashkarte
       - name: Build web
         run: npm run build --workspace=packages/web
 

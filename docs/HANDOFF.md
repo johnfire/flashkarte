@@ -127,7 +127,7 @@ existed; this was UI + API-client wiring. Published to Play internal.
 
 - **#2 Multiple-choice study mode** — **SHIPPED**
 - **#3 Card series / branching follow-up questions** — **SHIPPED** (ordered decks
-  + branching anchors/options)
+  - branching anchors/options)
 - **#24 bug reporting screen** — **SHIPPED**
 
 No tracked issues are currently open. Main remaining gap is on-device manual QA
@@ -143,9 +143,9 @@ of the Android offline + newer screens.
   handling, title fallback) is identical across all three and locked by a shared
   corpus — `fixtures/parser-cases.json`, exercised by TS
   (`packages/shared/src/markdown/parser.corpus.test.ts`) and Python
-  (`python/tests/unit/test_md_parser_corpus.py`). **Branching (anchors `[label]`
-  + `-> target` options) is TS + Kotlin only; the Python reference parser does
-  not implement it.** Change the ports together for any common-subset behaviour.
+  (`python/tests/unit/test_md_parser_corpus.py`). \*\*Branching (anchors `[label]`
+  - `-> target` options) is TS + Kotlin only; the Python reference parser does
+    not implement it.\*\* Change the ports together for any common-subset behaviour.
 - **Migrations** auto-run on server start (`src/db/migrate.ts`, numbered `.sql`,
   tracked in `_migrations`). Latest is `012_api_key_scope.sql`; add the next as
   `013_*.sql`.

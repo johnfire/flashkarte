@@ -132,10 +132,8 @@ export const resetPassword = wrapAsync(async (req: Request, res: Response) => {
   res.json({ status: "reset" });
 });
 
-export const deleteAccount = wrapAsync(
-  async (req: Request, res: Response) => {
-    await service.deleteAccount(req.userId!, req.body.currentPassword);
-    res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
-    res.status(204).end();
-  },
-);
+export const deleteAccount = wrapAsync(async (req: Request, res: Response) => {
+  await service.deleteAccount(req.userId!, req.body.currentPassword);
+  res.clearCookie(REFRESH_COOKIE, { path: "/api/auth" });
+  res.status(204).end();
+});

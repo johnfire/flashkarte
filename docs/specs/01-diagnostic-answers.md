@@ -16,17 +16,18 @@ that untangles that specific confusion. A wrong answer becomes diagnostic inform
 - Android MC mode (`ui/screens/study/`, `McOptions.kt`) builds distractors randomly from
   other cards' backs; correct → rating 4, wrong → rating 1.
 - `review_events`: `event_id, user_id, card_id, rating, reviewed_at` — no record of
-  *which* option was chosen.
+  _which_ option was chosen.
 
 ## Markdown contract (parser change — TS + Kotlin + corpus, per guardrails)
 
 ```markdown
 [meiosis-vs-mitosis]
 **14. A cell divides producing four genetically distinct haploid cells. This is:**
+
 - Meiosis -> correct
 - Mitosis -> confusion-mitosis
 - Binary fission -> end
-The answer text (back) follows as usual.
+  The answer text (back) follows as usual.
 
 [confusion-mitosis]
 **15. You mixed these up. Mitosis produces:**

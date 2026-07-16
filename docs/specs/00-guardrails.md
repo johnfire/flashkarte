@@ -16,7 +16,7 @@ Kotlin (`android/.../data/parser/MdParser.kt`), Python (`python/`, reference).
   new syntax. Do not touch it; note the divergence in the corpus file comments if needed.
 - Same discipline for SM-2/scheduling: `packages/shared/src/sm2/` and Kotlin
   `domain/sm2/Sm2Algorithm.kt` change together. History lesson: Android once drifted from
-  the server on easiness *rounding* alone (fixed by rounding to 6dp) — numerical parity
+  the server on easiness _rounding_ alone (fixed by rounding to 6dp) — numerical parity
   is part of the contract, write cross-checks.
 
 ## Shared-logic rule (anti-drift)

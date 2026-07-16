@@ -10,6 +10,7 @@ deploys to prod on merge).
 ## Audit findings (summary)
 
 ### CRITICAL
+
 1. **Delete-account flow absent** (§13.1) — no button, endpoint, or migration.
 2. **Data export / portability absent** (§13.3).
 3. **2FA / TOTP absent** (§13.1) — opt-in 2FA mandatory on every web app.
@@ -19,12 +20,14 @@ deploys to prod on merge).
    cannot be traced across function/service boundaries.
 
 ### HIGH
+
 6. **React component size limit exceeded** (§3) — `SettingsPage.tsx` 390 LOC, `LandingPage.tsx`
    223 LOC (limit 200).
 7. **E2E test tier missing** (§9.0) — only unit + mock-based integration exist.
 8. **No automated a11y check in CI** (§16).
 
 ### MEDIUM / LOW
+
 9. Logger missing `source` field (§7.1).
 10. Generic variable names: `val`, `data`, `obj`, `result` in a few non-test files (§2.1).
 11. Python tkinter GUI lacks type hints (§12.1).
@@ -35,6 +38,7 @@ deploys to prod on merge).
 16. `morgan("dev")` runs in production (§7.2).
 
 ### Verified compliant
+
 - Anti-fragility / error handling (§6): `wrapAsync`, structured `errorHandler`, graceful
   logger degradation, login timing-equalized, atomic refresh rotation.
 - Dependency scanning (§10.4): Dependabot + `npm audit` in CI + gitleaks.
@@ -86,15 +90,15 @@ deploys to prod on merge).
 
 ## Phase ordering (dependency-driven)
 
-| Phase | What | Unblocks | Risk |
-|---|---|---|---|
-| 1 | Correlation-ID middleware + logger `source`/`correlationId` | 2,3,4,5 | low |
-| 2 | Audit log table + service + wire existing state-changing actions | 3,4,5 | low-med |
-| 3 | Split SettingsPage; LandingPage; enable `max-lines` lint rule | 4,5,6 (UI room) | low |
-| 4 | Delete-account flow | — | med |
-| 5 | Data export | — | low |
-| 6 | 2FA / TOTP | — | med-high |
-| 7 | E2E tier (Playwright) + a11y axe in CI | validates 4,5,6 | low-med |
+| Phase | What                                                             | Unblocks        | Risk     |
+| ----- | ---------------------------------------------------------------- | --------------- | -------- |
+| 1     | Correlation-ID middleware + logger `source`/`correlationId`      | 2,3,4,5         | low      |
+| 2     | Audit log table + service + wire existing state-changing actions | 3,4,5           | low-med  |
+| 3     | Split SettingsPage; LandingPage; enable `max-lines` lint rule    | 4,5,6 (UI room) | low      |
+| 4     | Delete-account flow                                              | —               | med      |
+| 5     | Data export                                                      | —               | low      |
+| 6     | 2FA / TOTP                                                       | —               | med-high |
+| 7     | E2E tier (Playwright) + a11y axe in CI                           | validates 4,5,6 | low-med  |
 
 ---
 
@@ -104,6 +108,7 @@ deploys to prod on merge).
 is grep-traceable end to end.
 
 **Server (`packages/server`)**
+
 - `middleware/requestId.ts` — new. Generate `crypto.randomUUID()` if no `x-request-id`
   header; attach to `req.correlationId`; set `x-request-id` response header. Mount first
   in `app.ts`, before routers.
@@ -134,6 +139,7 @@ request through server logs.
 append-only, with actor, action, target, outcome, correlation ID.
 
 ### 2a. Schema — migration `014_audit_log.sql`
+
 ```sql
 CREATE TABLE audit_log (
   id              uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -162,11 +168,13 @@ CREATE TRIGGER audit_log_no_delete BEFORE DELETE ON audit_log
 CREATE INDEX audit_log_actor_idx ON audit_log(actor_type, actor_id, created_at DESC);
 CREATE INDEX audit_log_action_idx ON audit_log(action, created_at DESC);
 ```
+
 - **Retention:** document a policy (e.g. 12 months) in `docs/audit-retention-policy.md`;
   a separate archival/prune job is out of scope here — leave a tracked TODO. (§7.6 permits
   a separate scoped job; we just don't build it now.)
 
 ### 2b. Service — `domains/audit/audit.service.ts`
+
 - `record(params, client?)` — inserts one row. If a `client` is passed, use it (joins the
   caller's transaction); else use the pool. **On insert failure:**
   `logger.error("audit write failed", { correlationId, action })` and **continue** — the
@@ -177,12 +185,14 @@ CREATE INDEX audit_log_action_idx ON audit_log(action, created_at DESC);
   there).
 - Actor attribution helper: `actorFromRequest(req)` →
   `{ type: req.keyScope === 'deck' ? 'ai-agent' : 'user', id: req.keyScope === 'deck' ?
-  'ai-agent:' + req.keyPrefix : req.userId }`. Needs the API key prefix on the request —
+'ai-agent:' + req.keyPrefix : req.userId }`. Needs the API key prefix on the request —
   extend `middleware/auth.ts` to set `req.keyPrefix` when resolving an API key (from
   `keys.service.ts::resolveKey`). Confirm `resolveKey` returns the prefix; if not, add it.
 
 ### 2c. Wire existing actions
+
 Add an `audit.record(...)` call (in-transaction where one exists) to:
+
 - **Decks** (`decks.service.ts`): `importDeck`→`deck.created`, `appendCards`→
   `deck.cards_added`, `update`→`deck.updated`, `remove`→`deck.deleted` (with before-state
   snapshot).
@@ -195,6 +205,7 @@ Add an `audit.record(...)` call (in-transaction where one exists) to:
   state-changing — skip per §7.6 "state-changing", though they're worth INFO logs.)
 
 ### 2d. Tests
+
 - Unit: `audit.service.test.ts` (inserts, failure-isolated, actor attribution both types).
 - Integration: extend the existing `*.routes.test.ts` to assert an `audit_log` row exists
   after each mutating call (they already use `supertest` + mock the service — add a
@@ -228,21 +239,22 @@ exceeds it.
 ## Phase 4 — Delete account (§13.1)
 
 **Server**
+
 - `auth.service.ts::deleteAccount(userId, currentPassword)`:
   1. Load user with hash; `bcrypt.compare` current password (re-auth — the "second step"
      beyond clicking delete). Re-auth is stronger than typing "DELETE".
   2. `withTransaction(async (client) => {`
-       - Insert `audit_log` row: `action='account.deleted'`, `actor_type='user'`,
-         `actor_id=userId`, `outcome='success'`, **before_state = null** (no PII — §13.1:
-         the deletion audit entry retains who/when, not the user's email/content). This
-         row is committed in the same txn so a failure rolls back the delete.
-       - `DELETE FROM review_events WHERE user_id = $1` — **explicit** (no FK, confirmed
-         in `008_review_events.sql`).
-       - `DELETE FROM users WHERE id = $1` — cascades the rest (`decks`→`cards`→
-         `card_progress`, `refresh_tokens`, `user_api_keys`, verification/reset tokens if
-         they cascade — **verify** `003`/`004` have `ON DELETE CASCADE`; if not, add to
-         this txn).
-     `})`.
+     - Insert `audit_log` row: `action='account.deleted'`, `actor_type='user'`,
+       `actor_id=userId`, `outcome='success'`, **before_state = null** (no PII — §13.1:
+       the deletion audit entry retains who/when, not the user's email/content). This
+       row is committed in the same txn so a failure rolls back the delete.
+     - `DELETE FROM review_events WHERE user_id = $1` — **explicit** (no FK, confirmed
+       in `008_review_events.sql`).
+     - `DELETE FROM users WHERE id = $1` — cascades the rest (`decks`→`cards`→
+       `card_progress`, `refresh_tokens`, `user_api_keys`, verification/reset tokens if
+       they cascade — **verify** `003`/`004` have `ON DELETE CASCADE`; if not, add to
+       this txn).
+       `})`.
   3. Clear the caller's refresh cookie.
 - Endpoint: `DELETE /api/account` in a new `domains/account/account.routes.ts` (or
   extend `auth.routes.ts`), `requireAuth` + `requireFullScope` (deck-scoped MCP keys must
@@ -274,9 +286,10 @@ row survives with no PII; sessions invalidated; local Android state wiped.
 
 **Server** — `GET /api/account/export` (`requireAuth` + `requireFullScope`),
 `account.service.ts::exportData(userId)`:
+
 - Assemble JSON: `{ profile: {email, displayName, accountType, createdAt}, decks: [...with
-  cards], cardProgress: [...], reviewEvents: [...], apiKeys: [{name, keyPrefix,
-  createdAt}] }` (no key secrets — they're not personal data and must not be re-exposed).
+cards], cardProgress: [...], reviewEvents: [...], apiKeys: [{name, keyPrefix,
+createdAt}] }` (no key secrets — they're not personal data and must not be re-exposed).
 - Synchronous JSON response (personal flashcard datasets are small). If payload ever
   exceeds ~5MB, switch to a background job + notify (§13.3) — note as a TODO.
 - Audit: `account.data_exported` (a read, but security-relevant; log it).
@@ -299,18 +312,21 @@ self-service and audited.
 ## Phase 6 — 2FA / TOTP (§13.1)
 
 **Dependency decision (§10.3):**
+
 - **`otplib`** (TOTP gen/verify, RFC 6238) — ~3k stars, actively maintained, MIT.
   **Import** — cryptography, do not roll your own.
 - **`qrcode`** (QR PNG data URL for pairing) — standard, MIT. **Import**.
 - Both added to `packages/server` deps; present in the PR description per §10.3.
 
 **Schema — migration `015_two_factor.sql`** (or `016` if delete needed `015`):
+
 ```sql
 ALTER TABLE users
   ADD COLUMN two_factor_secret_enc text,      -- AES-256-GCM encrypted TOTP seed
   ADD COLUMN two_factor_enabled    boolean NOT NULL DEFAULT false,
   ADD COLUMN two_factor_backup     text[] NOT NULL DEFAULT '{}'; -- bcrypt-hashed backup codes
 ```
+
 - Encrypt the TOTP secret at rest with a key from `TWO_FACTOR_SECRET_KEY` env (32-byte,
   base64). Add to `config/env.ts` validation (required in prod if 2FA is used — or
   generate-and-warn). Use `crypto.createCipheriv('aes-256-gcm', ...)` with a per-user IV
@@ -318,6 +334,7 @@ ALTER TABLE users
   decryptable, so encryption (not hashing) is correct.
 
 **Server flows**
+
 - `POST /api/account/2fa/setup` (auth, full scope): generate secret, **encrypt + store**
   (not yet enabled), return `{ otpauthUri, qrDataUrl }`. Audit `2fa.setup_started`.
 - `POST /api/account/2fa/verify` `{ code }`: verify against stored secret; on success
@@ -400,6 +417,7 @@ can follow.
 ## Minor findings (fold into nearest phase or batch)
 
 These don't warrant dedicated phases; fix opportunistically or as a small cleanup PR:
+
 - Rename generic vars (`val` in `mcp/src/index.ts:12`, `data`/`obj`/`result` in a few
   server files) — §2.1.
 - `auth.service.ts:156,336` — use `logger` instead of `console.error` — §7.4 (fold into

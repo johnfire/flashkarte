@@ -38,14 +38,20 @@ export default tseslint.config(
     files: ["packages/web/src/**/*.tsx"],
     ignores: ["**/*.test.tsx", "**/*.spec.tsx"],
     rules: {
-      "max-lines": ["error", { max: 200, skipBlankLines: true, skipComments: true }],
+      "max-lines": [
+        "error",
+        { max: 200, skipBlankLines: true, skipComments: true },
+      ],
     },
   },
   {
     files: ["packages/**/*.ts"],
     ignores: ["**/*.test.ts", "**/*.spec.ts"],
     rules: {
-      "max-lines": ["error", { max: 1000, skipBlankLines: true, skipComments: true }],
+      "max-lines": [
+        "error",
+        { max: 1000, skipBlankLines: true, skipComments: true },
+      ],
     },
   },
   // Tests legitimately use require() for module-reset / dynamic-import patterns.

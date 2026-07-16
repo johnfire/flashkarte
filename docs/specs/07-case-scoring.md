@@ -21,6 +21,7 @@ Optional quality marker at the end of an option line:
 ```markdown
 [chest-pain]
 **3. 55-year-old, crushing chest pain, diaphoresis. First action?**
+
 - ECG within 10 minutes -> ecg-result [best]
 - Full history first -> history-path [ok]
 - Discharge with antacids -> ending-bad [harm]
@@ -73,7 +74,7 @@ Scoring + result + revisit-interval functions in `packages/shared` (TS + Kotlin 
 - **Spec 01 synergy (do it):** a `[harm]` option may ALSO carry a route to a remediation
   label — syntax `- text -> target [harm]` already routes; when the target's card exists
   in a companion SR deck this is out of scope (same-deck only, and branch decks contain
-  no SR cards) — so v1: harmful choices show the *option's own node* as normal; the recap
+  no SR cards) — so v1: harmful choices show the _option's own node_ as normal; the recap
   screen lists harmful choices with their node text as the teaching moment.
 
 ## Constraints / non-goals

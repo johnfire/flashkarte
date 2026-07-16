@@ -410,11 +410,9 @@ export function errorHandler(
   _next: NextFunction,
 ): void {
   if (err instanceof AppError) {
-    res
-      .status(err.httpStatus)
-      .json({
-        error: { code: err.code, message: err.message, context: err.context },
-      });
+    res.status(err.httpStatus).json({
+      error: { code: err.code, message: err.message, context: err.context },
+    });
     return;
   }
   logger.error("Unhandled error", {
@@ -424,14 +422,12 @@ export function errorHandler(
     message: err.message,
     stack: err.stack,
   });
-  res
-    .status(500)
-    .json({
-      error: {
-        code: "INTERNAL_ERROR",
-        message: "An unexpected error occurred",
-      },
-    });
+  res.status(500).json({
+    error: {
+      code: "INTERNAL_ERROR",
+      message: "An unexpected error occurred",
+    },
+  });
 }
 ```
 

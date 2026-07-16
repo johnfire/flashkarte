@@ -3,11 +3,7 @@ jest.mock("../../utils/logger");
 
 import type { Request } from "express";
 import { insertAuditLog } from "./audit.repository";
-import {
-  record,
-  actorFromRequest,
-  userActor,
-} from "./audit.service";
+import { record, actorFromRequest, userActor } from "./audit.service";
 
 const mockInsert = insertAuditLog as jest.MockedFunction<typeof insertAuditLog>;
 
@@ -34,9 +30,7 @@ describe("audit.service", () => {
 
     it("throws for fully unauthenticated requests", () => {
       const req = {} as Request;
-      expect(() => actorFromRequest(req)).toThrow(
-        /Cannot derive audit actor/,
-      );
+      expect(() => actorFromRequest(req)).toThrow(/Cannot derive audit actor/);
     });
   });
 
@@ -85,6 +79,21 @@ describe("audit.service", () => {
         client,
       );
       expect(mockInsert).toHaveBeenCalledWith(expect.any(Object), client);
+    });
+
+    it("swallows insert failures on the best-effort pool path", async () => {
+      mockInsert.mockRejectedValue(new Error("db down"));
+      await expect(
+        record({ actor: userActor("u1"), action: "deck.created" }),
+      ).resolves.toBeUndefined();
+    });
+
+    it("rethrows insert failures when a transaction client is passed", async () => {
+      mockInsert.mockRejectedValue(new Error("db down"));
+      const client = { query: jest.fn() } as unknown as import("pg").PoolClient;
+      await expect(
+        record({ actor: userActor("u1"), action: "account.deleted" }, client),
+      ).rejects.toThrow("db down");
     });
   });
 });

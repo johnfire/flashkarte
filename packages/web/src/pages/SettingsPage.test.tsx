@@ -169,9 +169,7 @@ describe("SettingsPage", () => {
         await screen.findByRole("button", { name: /Delete account/ }),
       );
 
-      expect(
-        screen.getByText(/Type DELETE to confirm/),
-      ).toBeInTheDocument();
+      expect(screen.getByText(/Type DELETE to confirm/)).toBeInTheDocument();
 
       // Submit without typing DELETE should show error
       await userEvent.click(
@@ -192,9 +190,7 @@ describe("SettingsPage", () => {
         await screen.findByRole("button", { name: /Delete account/ }),
       );
 
-      const modal = screen
-        .getByText("Delete your account?")
-        .closest(".fixed")!;
+      const modal = screen.getByText("Delete your account?").closest(".fixed")!;
 
       await userEvent.type(
         within(modal as HTMLElement).getByLabelText("Current password"),

@@ -21,11 +21,11 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER IF NOT EXISTS audit_log_no_update
+CREATE OR REPLACE TRIGGER audit_log_no_update
   BEFORE UPDATE ON audit_log
   FOR EACH ROW EXECUTE FUNCTION audit_log_immutable();
 
-CREATE TRIGGER IF NOT EXISTS audit_log_no_delete
+CREATE OR REPLACE TRIGGER audit_log_no_delete
   BEFORE DELETE ON audit_log
   FOR EACH ROW EXECUTE FUNCTION audit_log_immutable();
 

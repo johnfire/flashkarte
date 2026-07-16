@@ -42,10 +42,11 @@ export function auditFromRequest(
 }
 
 /**
- * Append an audit log entry. Best-effort: a failure here is logged and swallowed
- * so an audit-write problem never breaks the primary operation. Destructive
- * operations that need atomicity (e.g. account deletion) should pass a
- * transaction `client` so the audit row is committed with the mutation.
+ * Append an audit log entry. Best-effort by default: a failure is logged and
+ * swallowed so an audit-write problem never breaks the primary operation.
+ * When a transaction `client` is passed the caller wants atomicity (e.g.
+ * account deletion) — the failure is rethrown so the transaction rolls back
+ * instead of leaving it in Postgres's aborted state with a misleading error.
  */
 export async function record(
   params: AuditRecordParams,
@@ -74,15 +75,12 @@ export async function record(
       client,
     );
   } catch (err) {
-    logger.error(
-      "audit.service",
-      "audit write failed",
-      {
-        action: params.action,
-        targetId: params.targetId,
-        correlationId,
-        error: err instanceof Error ? err.message : String(err),
-      },
-    );
+    logger.error("audit.service", "audit write failed", {
+      action: params.action,
+      targetId: params.targetId,
+      correlationId,
+      error: err instanceof Error ? err.message : String(err),
+    });
+    if (client) throw err;
   }
 }

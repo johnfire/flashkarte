@@ -17,6 +17,7 @@ bash install-linux.sh
 Installs a virtual environment, the app, and a desktop launcher (shows up in your app menu).
 
 > **Requires tkinter.** If the installer reports it missing:
+>
 > - Debian/Ubuntu: `sudo apt install python3-tk`
 > - Fedora: `sudo dnf install python3-tkinter`
 

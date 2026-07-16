@@ -328,10 +328,7 @@ export async function deleteAccount(
   if (typeof currentPasswordIn !== "string") {
     throw new ValidationError("Current password is required");
   }
-  const currentOk = await bcrypt.compare(
-    currentPasswordIn,
-    row.password_hash,
-  );
+  const currentOk = await bcrypt.compare(currentPasswordIn, row.password_hash);
   if (!currentOk) {
     throw new ValidationError("Current password is incorrect");
   }

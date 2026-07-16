@@ -9,10 +9,18 @@ export const create = wrapAsync(async (req: Request, res: Response) => {
     : req.body.markdown;
   const filename = req.file ? req.file.originalname : (req.body.title ?? null);
   const deck = await service.importDeck(req.userId!, markdown, filename);
-  await auditFromRequest(req, "deck.created", "deck", deck.id, "success", undefined, {
-    title: deck.title,
-    cardCount: deck.card_count,
-  });
+  await auditFromRequest(
+    req,
+    "deck.created",
+    "deck",
+    deck.id,
+    "success",
+    undefined,
+    {
+      title: deck.title,
+      cardCount: deck.card_count,
+    },
+  );
   res.status(201).json(deck);
 });
 
@@ -22,9 +30,17 @@ export const addCards = wrapAsync(async (req: Request, res: Response) => {
     req.params.id,
     req.body.markdown,
   );
-  await auditFromRequest(req, "deck.cards_added", "deck", result.deck_id, "success", undefined, {
-    added: result.added,
-  });
+  await auditFromRequest(
+    req,
+    "deck.cards_added",
+    "deck",
+    result.deck_id,
+    "success",
+    undefined,
+    {
+      added: result.added,
+    },
+  );
   res.status(201).json(result);
 });
 
@@ -60,12 +76,6 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
 
 export const remove = wrapAsync(async (req: Request, res: Response) => {
   await service.remove(req.userId!, req.params.id);
-  await auditFromRequest(
-    req,
-    "deck.deleted",
-    "deck",
-    req.params.id,
-    "success",
-  );
+  await auditFromRequest(req, "deck.deleted", "deck", req.params.id, "success");
   res.status(204).end();
 });

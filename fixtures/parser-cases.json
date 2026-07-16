@@ -7,7 +7,9 @@
       "source": "test.md",
       "expected": {
         "title": "Deck",
-        "cards": [{ "front": "FOO — Bar", "back": "Definition.", "category": null }]
+        "cards": [
+          { "front": "FOO — Bar", "back": "Definition.", "category": null }
+        ]
       }
     },
     {
@@ -28,7 +30,9 @@
       "source": "test.md",
       "expected": {
         "title": "D",
-        "cards": [{ "front": "X", "back": "line one. line two.", "category": null }]
+        "cards": [
+          { "front": "X", "back": "line one. line two.", "category": null }
+        ]
       }
     },
     {
@@ -37,7 +41,9 @@
       "source": "test.md",
       "expected": {
         "title": "D",
-        "cards": [{ "front": "X", "back": "para one.\n\npara two.", "category": null }]
+        "cards": [
+          { "front": "X", "back": "para one.\n\npara two.", "category": null }
+        ]
       }
     },
     {
@@ -71,7 +77,11 @@
       "expected": {
         "title": "D",
         "cards": [
-          { "front": "FOO", "back": "A: this is just back text.", "category": null }
+          {
+            "front": "FOO",
+            "back": "A: this is just back text.",
+            "category": null
+          }
         ]
       }
     },
@@ -98,7 +108,9 @@
       "source": "x.md",
       "expected": {
         "title": "D",
-        "cards": [{ "front": "FOO — Bar", "back": "Definition.", "category": null }]
+        "cards": [
+          { "front": "FOO — Bar", "back": "Definition.", "category": null }
+        ]
       }
     }
   ]

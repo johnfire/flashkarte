@@ -82,16 +82,16 @@ Second paragraph if needed.
 
 ## Tech Stack
 
-| Layer | Choice |
-|-------|--------|
-| Language | Kotlin |
-| UI | Jetpack Compose + Material3 |
-| Local cache | SQLDelight (SQLite) |
-| Networking | Retrofit + OkHttp (hosted flashkarte API) |
-| DI | Hilt |
-| Navigation | Compose Navigation |
-| Architecture | MVVM + Repository |
-| Min SDK | 26 (Android 8) |
+| Layer        | Choice                                    |
+| ------------ | ----------------------------------------- |
+| Language     | Kotlin                                    |
+| UI           | Jetpack Compose + Material3               |
+| Local cache  | SQLDelight (SQLite)                       |
+| Networking   | Retrofit + OkHttp (hosted flashkarte API) |
+| DI           | Hilt                                      |
+| Navigation   | Compose Navigation                        |
+| Architecture | MVVM + Repository                         |
+| Min SDK      | 26 (Android 8)                            |
 
 ## License
 

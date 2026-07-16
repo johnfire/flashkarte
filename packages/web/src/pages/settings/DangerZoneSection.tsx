@@ -35,9 +35,7 @@ export function DangerZoneSection() {
       navigate("/");
     } catch (err) {
       setError(
-        err instanceof ApiError
-          ? err.message
-          : t("settings.deleteError"),
+        err instanceof ApiError ? err.message : t("settings.deleteError"),
       );
     } finally {
       setDeleting(false);
@@ -104,9 +102,7 @@ export function DangerZoneSection() {
               className="w-full rounded-lg border px-3 py-2"
             />
 
-            {error && (
-              <p className="mt-3 text-sm text-red-600">{error}</p>
-            )}
+            {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
 
             <div className="mt-4 flex justify-end gap-3">
               <button
