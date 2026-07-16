@@ -18,8 +18,7 @@ window.addEventListener("error", (event) => {
 
 window.addEventListener("unhandledrejection", (event) => {
   const reason = event.reason as
-    | { message?: string; stack?: string }
-    | undefined;
+    { message?: string; stack?: string } | undefined;
   reportClientError({
     message: reason?.message ?? String(event.reason),
     stack: reason?.stack,
