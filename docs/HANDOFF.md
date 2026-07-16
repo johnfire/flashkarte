@@ -45,6 +45,37 @@ compose + AGP) and ignores the three blocked libraries so they stop
 generating permanently-red PRs. Dependabot PRs #53/#48/#51/#55/#73 were
 closed with this evidence.
 
+### Two more pins worth knowing about (same neighbourhood)
+
+Found while triaging the 2026-07-16 dependabot batch — independent of the
+Kotlin chain above, each blocking its own set of updates:
+
+- **AGP 8.5.2** — `lifecycleRuntimeKtx 2.11.0` pulls `androidx.compose
+  1.11.0`, which refuses to build on AGP < 8.6. Same pin that stops KSP.
+- **compileSdk 35** — `okhttp 5.x` requires compiling against API 36.
+
+Merged from that batch (verified building): `hiltWork 1.3.0`,
+`espresso 3.7.0`, `datastore 1.2.1`. Closed as blocked: #74 (lifecycle,
+AGP), #76 (okhttp, compileSdk), #77 (mockk, Kotlin).
+
+## Known debt — Express 5 migration (server)
+
+`express` is pinned to **4.22.2** (current and supported; npm audit clean —
+no urgency). Express 5 was attempted 2026-07-16 and is a real migration:
+
+- **`app.get("*")` in `configureProductionWeb` throws** under path-to-regexp
+  v8 (`Missing parameter name at index 1: *`) — bare wildcards are gone, it
+  needs `/*splat`. That route serves the whole SPA, so merging the bump
+  blind would have been a production outage. The SEO/production-web tests
+  caught it.
+- 27 TypeScript errors, including the `req.userId` Request augmentation.
+- Coupled: `express-rate-limit` 8 and `@types/express` 5 target Express 5
+  and only make sense alongside it.
+
+Order when done deliberately: wildcard route → `@types/express` 5 + Request
+augmentation → `express-rate-limit` 8 → re-verify with the E2E suite.
+Dependabot #79/#80 closed with this evidence.
+
 ## TL;DR
 
 Everything below is **shipped, pushed, and live** at
