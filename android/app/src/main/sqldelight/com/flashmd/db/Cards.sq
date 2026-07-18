@@ -22,6 +22,9 @@ DELETE FROM cardEntity WHERE deck_id = ?;
 selectCardsForDeck:
 SELECT * FROM cardEntity WHERE deck_id = ? ORDER BY position;
 
+selectAllCards:
+SELECT * FROM cardEntity ORDER BY id;
+
 selectCardByLabel:
 SELECT * FROM cardEntity WHERE deck_id = ? AND label = ? LIMIT 1;
 
