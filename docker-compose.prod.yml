@@ -65,6 +65,9 @@ services:
       - MCP_BASE_URL=https://mcp.flashkarte.christopherrehm.de
       - MCP_OAUTH_CLIENT_ID=${MCP_OAUTH_CLIENT_ID}
       - MCP_JWT_SECRET=${MCP_JWT_SECRET}
+      - MCP_STORE_PATH=/data/oauth-store.json
+    volumes:
+      - mcp_oauth_store:/data
     ports:
       - "127.0.0.1:${MCP_PORT:-8091}:3002"
     depends_on:
@@ -125,3 +128,4 @@ services:
 
 volumes:
   flashkarte_pgdata:
+  mcp_oauth_store:
