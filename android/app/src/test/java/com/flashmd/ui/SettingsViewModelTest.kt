@@ -40,6 +40,16 @@ class SettingsViewModelTest {
         coVerify { auth.updateProfile("Bob") }
     }
 
+    @Test fun unexpectedProfileFailureShowsErrorAndStopsLoading() = runTest {
+        coEvery { auth.getMe() } throws IllegalStateException("bad payload")
+
+        val vm = SettingsViewModel(auth)
+        advanceUntilIdle()
+
+        assertEquals("Couldn't load account settings.", vm.state.value.error)
+        assertEquals(false, vm.state.value.isLoading)
+    }
+
     @Test fun sendResetEmailUsesAccountEmail() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         val vm = SettingsViewModel(auth)

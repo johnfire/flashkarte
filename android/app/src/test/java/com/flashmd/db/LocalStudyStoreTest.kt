@@ -10,6 +10,7 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import java.time.Instant
 
 class LocalStudyStoreTest {
     private lateinit var db: FlashkarteDb
@@ -66,5 +67,29 @@ class LocalStudyStoreTest {
         val plain = store.dueCards("d2").first().card
         assertNull(plain.label)
         assertTrue(plain.options.isEmpty())
+    }
+
+    @Test
+    fun derivesStatsFromCachedCardsAndProgress() {
+        val cards = (1..5).map { number ->
+            Card("c$number", "d1", "front-$number", "back-$number")
+        }
+        store.cacheDeckCards("d1", cards)
+        store.applyRatingLocally("c1", 1, "2026-06-05T09:00:00Z")
+        store.applyRatingLocally("c2", 2, "2026-06-05T09:00:00Z")
+        store.applyRatingLocally("c3", 3, "2026-06-05T09:00:00Z")
+        store.applyRatingLocally("c4", 4, "2026-06-05T09:00:00Z")
+
+        val stats = store.cachedStudyStats("d1", Instant.parse("2026-06-05T10:00:00Z"))
+
+        assertEquals(5, stats.total)
+        assertEquals(1, stats.new)
+        assertEquals(1, stats.due)
+        assertEquals(2, stats.learned)
+        assertEquals(4, stats.viewed)
+        assertEquals(1, stats.again)
+        assertEquals(1, stats.hard)
+        assertEquals(1, stats.good)
+        assertEquals(1, stats.easy)
     }
 }

@@ -41,6 +41,11 @@ class LibraryViewModel @Inject constructor(
                 _state.value = _state.value.copy(decks = repo.list(q), isLoading = false)
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isLoading = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isLoading = false,
+                    error = "Couldn't load the library.",
+                )
             }
         }
     }

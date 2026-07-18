@@ -82,6 +82,17 @@ class StudyChoiceViewModelTest {
         coVerify { studyRepo.applyRating("c1", 1, null) }
     }
 
+    @Test fun studyModePersistenceFailureShowsError() = runTest {
+        coEvery { modeStore.setMode(StudyMode.FLIP) } throws IllegalStateException("disk full")
+        val vm = vm()
+        advanceUntilIdle()
+
+        vm.setMode(StudyMode.FLIP)
+        advanceUntilIdle()
+
+        assertEquals("Couldn't save the study mode.", vm.uiState.value.error)
+    }
+
     // Spec 01 — diagnostic answers.
     @Test fun diagnosticCorrectPickGradesGoodWithOptionIndexAndNoInterlude() = runTest {
         coEvery { studyRepo.getDueCards("d1") } returns listOf(diagnosticDue("c1"))

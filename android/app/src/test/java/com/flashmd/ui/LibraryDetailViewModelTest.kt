@@ -33,4 +33,15 @@ class LibraryDetailViewModelTest {
         vm.clone("d1"); advanceUntilIdle()
         assertEquals("new1", vm.state.value.clonedDeckId)
     }
+
+    @Test fun unexpectedCloneFailureShowsErrorAndStopsCloning() = runTest {
+        coEvery { repo.clone("d1") } throws IllegalStateException("bad payload")
+        val vm = LibraryDetailViewModel(repo)
+
+        vm.clone("d1")
+        advanceUntilIdle()
+
+        assertEquals("Couldn't clone this deck.", vm.state.value.error)
+        assertEquals(false, vm.state.value.isCloning)
+    }
 }

@@ -49,4 +49,16 @@ class CreateDeckViewModelTest {
         assertTrue(vm.state.value.done)
         coVerify { repo.importMarkdown(any(), any()) }
     }
+
+    @Test fun unexpectedImportFailureShowsErrorAndStopsSaving() = runTest {
+        coEvery { repo.importMarkdown(any(), any()) } throws IllegalStateException("bad payload")
+        val vm = CreateDeckViewModel(repo)
+        vm.onMarkdownChange("Q: a\nA: b")
+
+        vm.create()
+        advanceUntilIdle()
+
+        assertEquals("Couldn't create this deck. Please try again.", vm.state.value.error)
+        assertEquals(false, vm.state.value.isSaving)
+    }
 }

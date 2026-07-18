@@ -133,7 +133,18 @@ class StudyViewModel @Inject constructor(
     }
 
     fun setMode(mode: StudyMode) {
-        viewModelScope.launch { studyModeStore.setMode(mode) }
+        viewModelScope.launch {
+            try {
+                studyModeStore.setMode(mode)
+            } catch (exception: Exception) {
+                errorReporter.report(
+                    exception.message ?: "study mode save failed",
+                    "Study.setMode",
+                    exception,
+                )
+                _uiState.value = _uiState.value.copy(error = "Couldn't save the study mode.")
+            }
+        }
         val card = _uiState.value.currentCard
         _uiState.value = _uiState.value.copy(
             mode = mode,

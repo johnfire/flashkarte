@@ -51,6 +51,11 @@ class CreateDeckViewModel @Inject constructor(
                 _state.value = _state.value.copy(isSaving = false, done = true)
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isSaving = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isSaving = false,
+                    error = "Couldn't create this deck. Please try again.",
+                )
             }
         }
     }

@@ -61,6 +61,11 @@ class SettingsViewModel @Inject constructor(
                 )
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isLoading = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isLoading = false,
+                    error = "Couldn't load account settings.",
+                )
             }
         }
     }
@@ -77,6 +82,11 @@ class SettingsViewModel @Inject constructor(
                 _state.value = _state.value.copy(user = user, isSaving = false, message = "Saved")
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isSaving = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isSaving = false,
+                    error = "Couldn't save your profile.",
+                )
             }
         }
     }
@@ -88,6 +98,8 @@ class SettingsViewModel @Inject constructor(
                 _state.value = _state.value.copy(message = "Verification email sent")
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(error = "Couldn't send a verification email.")
             }
         }
     }
@@ -129,6 +141,11 @@ class SettingsViewModel @Inject constructor(
                 )
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isChangingPassword = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isChangingPassword = false,
+                    error = "Couldn't update your password.",
+                )
             }
         }
     }
@@ -188,6 +205,11 @@ class SettingsViewModel @Inject constructor(
                 )
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(twoFactorBusy = false, twoFactorError = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    twoFactorBusy = false,
+                    twoFactorError = "Couldn't start two-factor setup.",
+                )
             }
         }
     }
@@ -210,6 +232,11 @@ class SettingsViewModel @Inject constructor(
                 )
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(twoFactorBusy = false, twoFactorError = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    twoFactorBusy = false,
+                    twoFactorError = "Couldn't enable two-factor authentication.",
+                )
             }
         }
     }
@@ -237,6 +264,11 @@ class SettingsViewModel @Inject constructor(
                 )
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(twoFactorBusy = false, twoFactorError = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    twoFactorBusy = false,
+                    twoFactorError = "Couldn't disable two-factor authentication.",
+                )
             }
         }
     }
@@ -295,6 +327,11 @@ class SettingsViewModel @Inject constructor(
                     isDeletingAccount = false,
                     deleteError = e.message,
                 )
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isDeletingAccount = false,
+                    deleteError = "Couldn't delete your account.",
+                )
             }
         }
     }
@@ -308,6 +345,8 @@ class SettingsViewModel @Inject constructor(
                 _state.value = _state.value.copy(message = "Password reset email sent")
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(error = "Couldn't send a password reset email.")
             }
         }
     }

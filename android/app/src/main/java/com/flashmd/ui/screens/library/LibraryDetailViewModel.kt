@@ -35,6 +35,11 @@ class LibraryDetailViewModel @Inject constructor(
                 _state.value = _state.value.copy(deck = repo.get(id), isLoading = false)
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isLoading = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isLoading = false,
+                    error = "Couldn't load this library deck.",
+                )
             }
         }
     }
@@ -47,6 +52,11 @@ class LibraryDetailViewModel @Inject constructor(
                 _state.value = _state.value.copy(isCloning = false, clonedDeckId = newId)
             } catch (e: ApiException) {
                 _state.value = _state.value.copy(isCloning = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isCloning = false,
+                    error = "Couldn't clone this deck.",
+                )
             }
         }
     }

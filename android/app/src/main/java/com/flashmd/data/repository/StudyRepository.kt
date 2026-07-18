@@ -1,6 +1,8 @@
 package com.flashmd.data.repository
 
+import com.flashmd.data.local.CachedStudyStats
 import com.flashmd.data.local.LocalStudyStore
+import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.DeckCardDto
@@ -81,20 +83,37 @@ class StudyRepository @Inject constructor(
         local.cardByLabel(deckId, label)
 
     suspend fun getStats(deckId: String): DeckStudyStats {
-        val s = apiCall { api.stats(deckId) }
-        return DeckStudyStats(
-            total = s.total,
-            new = s.newCount,
-            due = s.due,
-            learned = s.learned,
-            viewed = s.viewed,
-            again = s.again,
-            hard = s.hard,
-            good = s.good,
-            easy = s.easy,
-        )
+        return try {
+            val stats = apiCall { api.stats(deckId) }
+            DeckStudyStats(
+                total = stats.total,
+                new = stats.newCount,
+                due = stats.due,
+                learned = stats.learned,
+                viewed = stats.viewed,
+                again = stats.again,
+                hard = stats.hard,
+                good = stats.good,
+                easy = stats.easy,
+            )
+        } catch (exception: ApiException) {
+            if (exception.status != 0) throw exception
+            local.cachedStudyStats(deckId).toDeckStudyStats()
+        }
     }
 }
+
+private fun CachedStudyStats.toDeckStudyStats(): DeckStudyStats = DeckStudyStats(
+    total = total,
+    new = new,
+    due = due,
+    learned = learned,
+    viewed = viewed,
+    again = again,
+    hard = hard,
+    good = good,
+    easy = easy,
+)
 
 /** Whole-deck card (from GET /api/decks/:id) to a domain Card. Branch cards use
  *  their prompt as the front; diagnostic/basic cards keep front + options. */

@@ -36,6 +36,7 @@ fun SettingsScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val themeMode by themeViewModel.mode.collectAsStateWithLifecycle()
+    val themeError by themeViewModel.error.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = { TopAppBar(title = { Text("Settings", fontWeight = FontWeight.Bold) }) },
@@ -180,6 +181,7 @@ fun SettingsScreen(
 
             if (state.message != null) Text(state.message!!, color = MaterialTheme.colorScheme.primary)
             if (state.error != null) Text(state.error!!, color = MaterialTheme.colorScheme.error)
+            if (themeError != null) Text(themeError!!, color = MaterialTheme.colorScheme.error)
         }
 
         if (state.showDeleteDialog) {

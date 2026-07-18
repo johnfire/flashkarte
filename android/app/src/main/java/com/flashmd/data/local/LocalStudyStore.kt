@@ -29,6 +29,18 @@ private fun decodeOptions(raw: String?): List<BranchOption> =
             .getOrDefault(emptyList())
     }
 
+data class CachedStudyStats(
+    val total: Int,
+    val new: Int,
+    val due: Int,
+    val learned: Int,
+    val viewed: Int,
+    val again: Int,
+    val hard: Int,
+    val good: Int,
+    val easy: Int,
+)
+
 /**
  * SQLDelight-backed local mirror of decks/cards/progress. Enables offline study:
  * the due batch is cached on a successful online fetch, ratings are applied
@@ -110,6 +122,29 @@ class LocalStudyStore @Inject constructor(
                 ),
             )
         }
+    }
+
+    fun cachedStudyStats(deckId: String, now: Instant = Instant.now()): CachedStudyStats {
+        val cards = db.cardsQueries.selectCardsForDeck(deckId).executeAsList()
+        val progressByCardId = cards.mapNotNull { card ->
+            db.cardProgressQueries.selectProgress(card.id).executeAsOneOrNull()
+        }.associateBy { progress -> progress.card_id }
+        val nowIso = now.toString()
+
+        return CachedStudyStats(
+            total = cards.size,
+            new = cards.count { card -> card.id !in progressByCardId },
+            due = cards.count { card ->
+                val progress = progressByCardId[card.id]
+                progress == null || progress.due_at == null || progress.due_at <= nowIso
+            },
+            learned = progressByCardId.values.count { progress -> progress.repetitions > 0 },
+            viewed = progressByCardId.size,
+            again = progressByCardId.values.count { progress -> progress.last_rating == 1L },
+            hard = progressByCardId.values.count { progress -> progress.last_rating == 2L },
+            good = progressByCardId.values.count { progress -> progress.last_rating == 3L },
+            easy = progressByCardId.values.count { progress -> progress.last_rating == 4L },
+        )
     }
 
     /** Apply a rating locally via SM-2 and persist the new progress. Returns the new due ISO date. */

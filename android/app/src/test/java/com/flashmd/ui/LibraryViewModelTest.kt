@@ -36,4 +36,14 @@ class LibraryViewModelTest {
         assertEquals("bio", vm.state.value.query)
         assertEquals(1, vm.state.value.decks.size)
     }
+
+    @Test fun unexpectedLoadFailureShowsErrorAndStopsLoading() = runTest {
+        coEvery { repo.list(any()) } throws IllegalStateException("bad payload")
+
+        val vm = LibraryViewModel(repo)
+        advanceUntilIdle()
+
+        assertEquals("Couldn't load the library.", vm.state.value.error)
+        assertEquals(false, vm.state.value.isLoading)
+    }
 }
