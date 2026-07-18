@@ -1,4 +1,5 @@
 import { z } from "zod";
+import type { PoolClient } from "pg";
 import { calculate } from "@flashkarte/shared";
 import { ValidationError, NotFoundError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
@@ -32,33 +33,25 @@ export async function review(userId: string, cardId: unknown, rating: unknown) {
     cardId,
   );
   const validRating = parse(ratingSchema, rating);
-  const owns = await repo.cardBelongsToUser(userId, validCardId);
-  if (!owns) throw new NotFoundError("Card not found");
-
-  const row = await repo.getProgressRow(userId, validCardId);
-  const prev = row
-    ? {
-        easiness: row.ease_factor,
-        interval: row.interval_days,
-        repetitions: row.repetitions,
-      }
-    : { easiness: 2.5, interval: 0, repetitions: 0 };
-  const next = calculate(prev, validRating);
-  const dueAt = new Date(Date.now() + next.interval * 86400_000);
-  await repo.upsertProgress(userId, validCardId, {
-    repetitions: next.repetitions,
-    easeFactor: next.easiness,
-    intervalDays: next.interval,
-    dueAt,
-    lastRating: validRating,
+  return repo.withCardProgressLock(userId, validCardId, async (client) => {
+    const ownedCard = await repo.cardBelongsToUser(userId, validCardId, client);
+    if (!ownedCard) throw new NotFoundError("Card not found");
+    const progressRow = await repo.getProgressRow(userId, validCardId, client);
+    const previous = progressFromRow(progressRow);
+    const update = calculateProgress(previous, validRating, new Date());
+    await repo.upsertProgress(userId, validCardId, update.write, client);
+    return {
+      card_id: validCardId,
+      ...update.next,
+      due_at: update.write.dueAt.toISOString(),
+    };
   });
-  return { card_id: validCardId, ...next, due_at: dueAt.toISOString() };
 }
 
 type SyncEvent = z.infer<typeof syncEventSchema>;
 
-function parseEvent(e: unknown): SyncEvent | null {
-  const parsed = syncEventSchema.safeParse(e);
+function parseEvent(candidate: unknown): SyncEvent | null {
+  const parsed = syncEventSchema.safeParse(candidate);
   return parsed.success ? parsed.data : null;
 }
 
@@ -67,7 +60,54 @@ function parseEvent(e: unknown): SyncEvent | null {
 // reasonable chunks; cap well above that.
 const MAX_SYNC_EVENTS = 1000;
 
-export async function sync(userId: string, events: unknown) {
+interface ProgressState {
+  easiness: number;
+  interval: number;
+  repetitions: number;
+}
+
+interface ProgressWrite {
+  repetitions: number;
+  easeFactor: number;
+  intervalDays: number;
+  dueAt: Date;
+  lastRating: number;
+}
+
+function progressFromRow(
+  row: Awaited<ReturnType<typeof repo.getProgressRow>>,
+): ProgressState {
+  if (!row) return { easiness: 2.5, interval: 0, repetitions: 0 };
+  return {
+    easiness: row.ease_factor,
+    interval: row.interval_days,
+    repetitions: row.repetitions,
+  };
+}
+
+function calculateProgress(
+  previous: ProgressState,
+  rating: number,
+  reviewedAt: Date,
+): { next: ProgressState; write: ProgressWrite } {
+  const next = calculate(previous, rating);
+  const dueAt = new Date(reviewedAt.getTime() + next.interval * 86400_000);
+  return {
+    next,
+    write: {
+      repetitions: next.repetitions,
+      easeFactor: next.easiness,
+      intervalDays: next.interval,
+      dueAt,
+      lastRating: rating,
+    },
+  };
+}
+
+function validateSyncEvents(events: unknown): {
+  ackedEventIds: string[];
+  validEvents: SyncEvent[];
+} {
   if (!Array.isArray(events)) {
     throw new ValidationError("events must be an array");
   }
@@ -75,105 +115,152 @@ export async function sync(userId: string, events: unknown) {
     throw new ValidationError(`too many events (max ${MAX_SYNC_EVENTS})`);
   }
 
-  const acked: string[] = [];
-  const valid: SyncEvent[] = [];
-  for (const raw of events) {
-    const ev = parseEvent(raw);
-    if (ev) {
-      valid.push(ev);
+  const ackedEventIds: string[] = [];
+  const validEvents: SyncEvent[] = [];
+  for (const rawEvent of events) {
+    const event = parseEvent(rawEvent);
+    if (event) {
+      validEvents.push(event);
     } else if (
-      raw &&
-      typeof (raw as { event_id?: unknown }).event_id === "string"
+      rawEvent &&
+      typeof (rawEvent as { event_id?: unknown }).event_id === "string"
     ) {
-      // permanently invalid — ack so the client drops it from its outbox
-      acked.push((raw as { event_id: string }).event_id);
+      ackedEventIds.push((rawEvent as { event_id: string }).event_id);
     }
   }
+  return { ackedEventIds, validEvents };
+}
 
-  // Apply per card, in reviewed_at order. Stable sort by (card_id, reviewed_at).
-  valid.sort((a, b) =>
-    a.card_id === b.card_id
-      ? a.reviewed_at.localeCompare(b.reviewed_at)
-      : a.card_id.localeCompare(b.card_id),
+function sortSyncEvents(events: SyncEvent[]): SyncEvent[] {
+  return [...events].sort((left, right) =>
+    left.card_id === right.card_id
+      ? left.reviewed_at.localeCompare(right.reviewed_at)
+      : left.card_id.localeCompare(right.card_id),
   );
+}
 
-  const progressByCard = new Map<
-    string,
-    {
-      card_id: string;
-      easiness: number;
-      interval: number;
-      repetitions: number;
-      due_at: string;
-      last_rating: number;
-    }
-  >();
-  const prevByCard = new Map<
-    string,
-    { easiness: number; interval: number; repetitions: number }
-  >();
-
-  for (const ev of valid) {
-    const owns = await repo.cardBelongsToUser(userId, ev.card_id);
-    if (!owns) {
-      acked.push(ev.event_id); // not ours / gone — drop it
+function groupOwnedEvents(
+  events: SyncEvent[],
+  ownedCardIds: Set<string>,
+): { byCard: Map<string, SyncEvent[]>; unownedEventIds: string[] } {
+  const byCard = new Map<string, SyncEvent[]>();
+  const unownedEventIds: string[] = [];
+  for (const event of sortSyncEvents(events)) {
+    if (!ownedCardIds.has(event.card_id)) {
+      unownedEventIds.push(event.event_id);
       continue;
     }
-    const inserted = await repo.insertReviewEvent(userId, ev);
-    acked.push(ev.event_id);
-    if (!inserted) continue; // duplicate — already applied in a previous sync
+    const cardEvents = byCard.get(event.card_id) ?? [];
+    cardEvents.push(event);
+    byCard.set(event.card_id, cardEvents);
+  }
+  return { byCard, unownedEventIds };
+}
 
-    let prev = prevByCard.get(ev.card_id);
-    if (!prev) {
-      const row = await repo.getProgressRow(userId, ev.card_id);
-      prev = row
-        ? {
-            easiness: row.ease_factor,
-            interval: row.interval_days,
-            repetitions: row.repetitions,
-          }
-        : { easiness: 2.5, interval: 0, repetitions: 0 };
-    }
-    const next = calculate(prev, ev.rating);
-    const dueAt = new Date(
-      new Date(ev.reviewed_at).getTime() + next.interval * 86400_000,
+interface CardSyncProgress extends ProgressState {
+  card_id: string;
+  due_at: string;
+  last_rating: number;
+}
+
+interface LatestAppliedEvent {
+  event: SyncEvent;
+  next: ProgressState;
+  write: ProgressWrite;
+}
+
+async function applyNewCardEvents(
+  userId: string,
+  events: SyncEvent[],
+  initialProgress: ProgressState,
+  client: PoolClient,
+): Promise<{ ackedEventIds: string[]; latest: LatestAppliedEvent | null }> {
+  const ackedEventIds: string[] = [];
+  let previous = initialProgress;
+  let latest: LatestAppliedEvent | null = null;
+  for (const event of events) {
+    const inserted = await repo.insertReviewEvent(userId, event, client);
+    ackedEventIds.push(event.event_id);
+    if (!inserted) continue;
+    const update = calculateProgress(
+      previous,
+      event.rating,
+      new Date(event.reviewed_at),
     );
-    await repo.upsertProgressAt(userId, ev.card_id, {
-      repetitions: next.repetitions,
-      easeFactor: next.easiness,
-      intervalDays: next.interval,
-      dueAt,
-      lastRating: ev.rating,
-      lastReviewedAt: new Date(ev.reviewed_at),
-    });
-    prevByCard.set(ev.card_id, next);
-    progressByCard.set(ev.card_id, {
-      card_id: ev.card_id,
-      easiness: next.easiness,
-      interval: next.interval,
-      repetitions: next.repetitions,
-      due_at: dueAt.toISOString(),
-      last_rating: ev.rating,
-    });
+    previous = update.next;
+    latest = { event, ...update };
+  }
+  return { ackedEventIds, latest };
+}
+
+async function applyCardEvents(
+  userId: string,
+  cardId: string,
+  events: SyncEvent[],
+): Promise<{ ackedEventIds: string[]; progress: CardSyncProgress | null }> {
+  return repo.withCardProgressLock(userId, cardId, async (client) => {
+    const row = await repo.getProgressRow(userId, cardId, client);
+    const applied = await applyNewCardEvents(
+      userId,
+      events,
+      progressFromRow(row),
+      client,
+    );
+    if (!applied.latest) {
+      return { ackedEventIds: applied.ackedEventIds, progress: null };
+    }
+    const latest = applied.latest;
+    await repo.upsertProgressAt(
+      userId,
+      cardId,
+      { ...latest.write, lastReviewedAt: new Date(latest.event.reviewed_at) },
+      client,
+    );
+    return {
+      ackedEventIds: applied.ackedEventIds,
+      progress: {
+        card_id: cardId,
+        ...latest.next,
+        due_at: latest.write.dueAt.toISOString(),
+        last_rating: latest.event.rating,
+      },
+    };
+  });
+}
+
+export async function sync(userId: string, events: unknown) {
+  const parsed = validateSyncEvents(events);
+  const distinctCardIds = [
+    ...new Set(parsed.validEvents.map((event) => event.card_id)),
+  ];
+  const ownedCardIds = await repo.getOwnedCardIds(userId, distinctCardIds);
+  const grouped = groupOwnedEvents(parsed.validEvents, ownedCardIds);
+  const ackedEventIds = [...parsed.ackedEventIds, ...grouped.unownedEventIds];
+  const progress: CardSyncProgress[] = [];
+
+  for (const [cardId, cardEvents] of grouped.byCard) {
+    const applied = await applyCardEvents(userId, cardId, cardEvents);
+    ackedEventIds.push(...applied.ackedEventIds);
+    if (applied.progress) progress.push(applied.progress);
   }
 
   return {
-    acked_event_ids: acked,
-    progress: Array.from(progressByCard.values()),
+    acked_event_ids: ackedEventIds,
+    progress,
   };
 }
 
 export async function stats(userId: string, deckId: string) {
-  const r = await repo.getStats(userId, deckId);
+  const statsRow = await repo.getStats(userId, deckId);
   return {
-    total: parseInt(r?.total ?? "0", 10),
-    new: parseInt(r?.new ?? "0", 10),
-    due: parseInt(r?.due ?? "0", 10),
-    learned: parseInt(r?.learned ?? "0", 10),
-    viewed: parseInt(r?.viewed ?? "0", 10),
-    again: parseInt(r?.again ?? "0", 10),
-    hard: parseInt(r?.hard ?? "0", 10),
-    good: parseInt(r?.good ?? "0", 10),
-    easy: parseInt(r?.easy ?? "0", 10),
+    total: parseInt(statsRow?.total ?? "0", 10),
+    new: parseInt(statsRow?.new ?? "0", 10),
+    due: parseInt(statsRow?.due ?? "0", 10),
+    learned: parseInt(statsRow?.learned ?? "0", 10),
+    viewed: parseInt(statsRow?.viewed ?? "0", 10),
+    again: parseInt(statsRow?.again ?? "0", 10),
+    hard: parseInt(statsRow?.hard ?? "0", 10),
+    good: parseInt(statsRow?.good ?? "0", 10),
+    easy: parseInt(statsRow?.easy ?? "0", 10),
   };
 }

@@ -4,6 +4,7 @@ module.exports = {
   testEnvironment: "node",
   roots: ["<rootDir>/src"],
   testMatch: ["**/*.test.ts"],
+  testPathIgnorePatterns: ["\\.integration\\.test\\.ts$"],
   moduleNameMapper: {
     // otplib v13's default entry is ESM-only, which Jest's CJS runtime can't
     // parse; point at the CJS build it also ships.

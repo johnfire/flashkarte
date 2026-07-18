@@ -1,4 +1,25 @@
-import { query, queryOne } from "../../db/client";
+import type { PoolClient, QueryResultRow } from "pg";
+import { query, queryOne, withTransaction } from "../../db/client";
+
+async function queryRows<T extends QueryResultRow>(
+  sql: string,
+  params: unknown[],
+  client?: PoolClient,
+): Promise<T[]> {
+  if (!client) return query<T>(sql, params);
+  const queryResult = await client.query<T>(sql, params);
+  return queryResult.rows;
+}
+
+async function queryFirst<T extends QueryResultRow>(
+  sql: string,
+  params: unknown[],
+  client?: PoolClient,
+): Promise<T | null> {
+  if (!client) return queryOne<T>(sql, params);
+  const rows = await queryRows<T>(sql, params, client);
+  return rows[0] ?? null;
+}
 
 export interface CardForStudy {
   id: string;
@@ -38,8 +59,12 @@ export function getDueAndNewCards(
   );
 }
 
-export function getProgressRow(userId: string, cardId: string) {
-  return queryOne<{
+export function getProgressRow(
+  userId: string,
+  cardId: string,
+  client?: PoolClient,
+) {
+  return queryFirst<{
     repetitions: number;
     ease_factor: number;
     interval_days: number;
@@ -47,28 +72,63 @@ export function getProgressRow(userId: string, cardId: string) {
     `SELECT repetitions, ease_factor, interval_days
      FROM card_progress WHERE user_id = $1 AND card_id = $2`,
     [userId, cardId],
+    client,
   );
 }
 
-export function cardBelongsToUser(userId: string, cardId: string) {
-  return queryOne<{ id: string }>(
+export function cardBelongsToUser(
+  userId: string,
+  cardId: string,
+  client?: PoolClient,
+) {
+  return queryFirst<{ id: string }>(
     "SELECT id FROM cards WHERE id = $1 AND user_id = $2",
     [cardId, userId],
+    client,
   );
+}
+
+export async function getOwnedCardIds(
+  userId: string,
+  cardIds: string[],
+): Promise<Set<string>> {
+  if (cardIds.length === 0) return new Set();
+  const ownedCards = await query<{ id: string }>(
+    `SELECT id FROM cards
+     WHERE user_id = $1 AND id = ANY($2::uuid[])`,
+    [userId, cardIds],
+  );
+  return new Set(ownedCards.map((card) => card.id));
+}
+
+export function withCardProgressLock<T>(
+  userId: string,
+  cardId: string,
+  action: (client: PoolClient) => Promise<T>,
+): Promise<T> {
+  return withTransaction(async (client) => {
+    const lockKey = `${userId}:${cardId}`;
+    await client.query(
+      "SELECT pg_advisory_xact_lock(hashtextextended($1, 0))",
+      [lockKey],
+    );
+    return action(client);
+  });
 }
 
 export function upsertProgress(
   userId: string,
   cardId: string,
-  s: {
+  progress: {
     repetitions: number;
     easeFactor: number;
     intervalDays: number;
     dueAt: Date;
     lastRating: number;
   },
+  client?: PoolClient,
 ) {
-  return query(
+  return queryRows(
     `INSERT INTO card_progress
        (user_id, card_id, repetitions, ease_factor, interval_days, due_at, last_rating, last_reviewed_at)
      VALUES ($1, $2, $3, $4, $5, $6, $7, now())
@@ -80,38 +140,41 @@ export function upsertProgress(
     [
       userId,
       cardId,
-      s.repetitions,
-      s.easeFactor,
-      s.intervalDays,
-      s.dueAt,
-      s.lastRating,
+      progress.repetitions,
+      progress.easeFactor,
+      progress.intervalDays,
+      progress.dueAt,
+      progress.lastRating,
     ],
+    client,
   );
 }
 
 export async function insertReviewEvent(
   userId: string,
-  ev: {
+  reviewEvent: {
     event_id: string;
     card_id: string;
     rating: number;
     reviewed_at: string;
     option_index?: number | null;
   },
+  client?: PoolClient,
 ): Promise<boolean> {
-  const rows = await query<{ event_id: string }>(
+  const rows = await queryRows<{ event_id: string }>(
     `INSERT INTO review_events (event_id, user_id, card_id, rating, reviewed_at, option_index)
      VALUES ($1, $2, $3, $4, $5, $6)
      ON CONFLICT (event_id) DO NOTHING
      RETURNING event_id`,
     [
-      ev.event_id,
+      reviewEvent.event_id,
       userId,
-      ev.card_id,
-      ev.rating,
-      ev.reviewed_at,
-      ev.option_index ?? null,
+      reviewEvent.card_id,
+      reviewEvent.rating,
+      reviewEvent.reviewed_at,
+      reviewEvent.option_index ?? null,
     ],
+    client,
   );
   return rows.length > 0;
 }
@@ -119,7 +182,7 @@ export async function insertReviewEvent(
 export function upsertProgressAt(
   userId: string,
   cardId: string,
-  s: {
+  progress: {
     repetitions: number;
     easeFactor: number;
     intervalDays: number;
@@ -127,8 +190,9 @@ export function upsertProgressAt(
     lastRating: number;
     lastReviewedAt: Date;
   },
+  client?: PoolClient,
 ) {
-  return query(
+  return queryRows(
     `INSERT INTO card_progress
        (user_id, card_id, repetitions, ease_factor, interval_days, due_at, last_rating, last_reviewed_at)
      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
@@ -140,13 +204,14 @@ export function upsertProgressAt(
     [
       userId,
       cardId,
-      s.repetitions,
-      s.easeFactor,
-      s.intervalDays,
-      s.dueAt,
-      s.lastRating,
-      s.lastReviewedAt,
+      progress.repetitions,
+      progress.easeFactor,
+      progress.intervalDays,
+      progress.dueAt,
+      progress.lastRating,
+      progress.lastReviewedAt,
     ],
+    client,
   );
 }
 

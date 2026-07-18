@@ -3,12 +3,17 @@ import * as repo from "./study.repository";
 import { sync } from "./study.service";
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
+const mockClient = {} as import("pg").PoolClient;
 beforeEach(() => {
   jest.clearAllMocks();
   mockRepo.cardBelongsToUser.mockResolvedValue({ id: "c1" } as never);
+  mockRepo.getOwnedCardIds.mockResolvedValue(new Set(["c1"]));
   mockRepo.getProgressRow.mockResolvedValue(null as never);
   mockRepo.insertReviewEvent.mockResolvedValue(true);
   mockRepo.upsertProgressAt.mockResolvedValue(undefined as never);
+  mockRepo.withCardProgressLock.mockImplementation(
+    async (_userId, _cardId, action) => action(mockClient),
+  );
 });
 
 describe("sync", () => {
@@ -32,6 +37,7 @@ describe("sync", () => {
     expect(p!.interval).toBe(6);
     expect(p!.repetitions).toBe(2);
     expect(res.acked_event_ids).toEqual(expect.arrayContaining(["e1", "e2"]));
+    expect(mockRepo.upsertProgressAt).toHaveBeenCalledTimes(1);
   });
 
   test("duplicate event_id is acked but not re-applied", async () => {
@@ -99,6 +105,7 @@ describe("sync", () => {
     expect(mockRepo.insertReviewEvent).toHaveBeenCalledWith(
       "u1",
       expect.objectContaining({ event_id: "e1", option_index: 2 }),
+      mockClient,
     );
   });
 
@@ -116,5 +123,27 @@ describe("sync", () => {
     // The event applied normally; option_index simply absent.
     const [, ev] = mockRepo.insertReviewEvent.mock.calls[0];
     expect((ev as { option_index?: number }).option_index).toBeUndefined();
+  });
+
+  test("checks ownership once for all distinct cards", async () => {
+    mockRepo.getOwnedCardIds.mockResolvedValue(new Set(["c1", "c2"]));
+    await sync("u1", [
+      {
+        event_id: "e1",
+        card_id: "c1",
+        rating: 4,
+        reviewed_at: "2026-06-05T09:00:00.000Z",
+      },
+      {
+        event_id: "e2",
+        card_id: "c2",
+        rating: 4,
+        reviewed_at: "2026-06-05T09:00:00.000Z",
+      },
+    ]);
+
+    expect(mockRepo.getOwnedCardIds).toHaveBeenCalledTimes(1);
+    expect(mockRepo.getOwnedCardIds).toHaveBeenCalledWith("u1", ["c1", "c2"]);
+    expect(mockRepo.cardBelongsToUser).not.toHaveBeenCalled();
   });
 });

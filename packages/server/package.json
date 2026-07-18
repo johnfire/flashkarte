@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --respawn src/server.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "jest",
+    "test:integration": "jest --config jest.integration.config.js --runInBand",
     "migrate": "ts-node src/db/migrate.ts"
   },
   "dependencies": {
