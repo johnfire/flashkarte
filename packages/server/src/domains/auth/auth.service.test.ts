@@ -15,7 +15,11 @@ import {
   deleteAccount,
   login,
   completeTwoFactorLogin,
+  changePassword,
   forgotPassword,
+  resetPassword,
+  updateProfile,
+  verifyEmail,
 } from "./auth.service";
 
 const mockTwoFactor = twoFactor as jest.Mocked<typeof twoFactor>;
@@ -100,6 +104,78 @@ describe("forgotPassword", () => {
 
     expect(mockRepo.insertPasswordResetToken).not.toHaveBeenCalled();
     expect(mockSendPasswordResetEmail).not.toHaveBeenCalled();
+  });
+
+  it("silently ignores a non-string email", async () => {
+    await expect(forgotPassword(42)).resolves.toBeUndefined();
+    expect(mockRepo.findByEmailWithHash).not.toHaveBeenCalled();
+  });
+});
+
+describe("auth command validation", () => {
+  it.each([undefined, 42, ""])(
+    "rejects missing verification token %p before querying",
+    async (token) => {
+      await expect(verifyEmail(token)).rejects.toThrow(
+        "Verification token is required",
+      );
+      expect(mockRepo.findVerificationToken).not.toHaveBeenCalled();
+    },
+  );
+
+  it("normalizes a valid profile update", async () => {
+    const user = setupRepoRow();
+    mockRepo.updateProfileFields.mockResolvedValue(user);
+
+    await updateProfile("u1", "  Ada  ", "de");
+
+    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith(
+      "u1",
+      "Ada",
+      "de",
+    );
+  });
+
+  it.each([
+    [42, undefined, "Display name must be text"],
+    ["a".repeat(61), undefined, "Display name must be 60 characters or fewer"],
+    ["Ada", "it", "Unsupported language"],
+  ])(
+    "rejects invalid profile fields",
+    async (displayName, language, message) => {
+      await expect(updateProfile("u1", displayName, language)).rejects.toThrow(
+        message,
+      );
+      expect(mockRepo.updateProfileFields).not.toHaveBeenCalled();
+    },
+  );
+
+  it("rejects a missing current password before comparing", async () => {
+    setupRepoRow();
+
+    await expect(
+      changePassword("u1", undefined, "new-password"),
+    ).rejects.toThrow("Current password is required");
+    expect(mockBcrypt.compare).not.toHaveBeenCalled();
+  });
+
+  it.each([undefined, 42, ""])(
+    "rejects missing reset token %p before querying",
+    async (token) => {
+      await expect(resetPassword(token, "new-password")).rejects.toThrow(
+        "Reset token is required",
+      );
+      expect(mockRepo.findPasswordResetToken).not.toHaveBeenCalled();
+    },
+  );
+
+  it("keeps malformed two-factor challenges as authentication errors", async () => {
+    await expect(
+      completeTwoFactorLogin(42, "123456", false),
+    ).rejects.toMatchObject({
+      code: "UNAUTHENTICATED",
+      httpStatus: 401,
+    });
   });
 });
 

@@ -38,6 +38,23 @@ export const ACCESS_TOKEN_TTL_SEC = 15 * 60;
 export const REFRESH_TOKEN_TTL_DAYS = 90;
 const VERIFICATION_TOKEN_TTL_HOURS = 24;
 const PASSWORD_RESET_TOKEN_TTL_HOURS = 1;
+const verificationTokenSchema = z
+  .string({ error: "Verification token is required" })
+  .min(1, "Verification token is required");
+const resetTokenSchema = z
+  .string({ error: "Reset token is required" })
+  .min(1, "Reset token is required");
+const twoFactorChallengeSchema = z
+  .string({ error: "Invalid or expired two-factor challenge" })
+  .min(1, "Invalid or expired two-factor challenge");
+const currentPasswordSchema = z.string({
+  error: "Current password is required",
+});
+const forgotPasswordEmailSchema = z.preprocess(
+  (emailInput) =>
+    typeof emailInput === "string" ? emailInput.toLowerCase() : null,
+  z.string().nullable(),
+);
 
 export interface JwtPayload {
   sub: string;
@@ -71,6 +88,16 @@ function toUser(row: UserRow): PublicUser {
 }
 
 const SUPPORTED_LANGUAGES = ["en", "de", "fr", "es"] as const;
+const profileUpdateSchema = z.object({
+  displayName: z
+    .string({ error: "Display name must be text" })
+    .trim()
+    .max(60, "Display name must be 60 characters or fewer")
+    .optional(),
+  language: z
+    .enum(SUPPORTED_LANGUAGES, { error: "Unsupported language" })
+    .optional(),
+});
 
 // Create a fresh verification token (replacing any prior ones) and email the
 // link. Best-effort at call sites: a mail failure must not break signup.
@@ -133,11 +160,11 @@ function validateCredentials(
   email: unknown,
   password: unknown,
 ): [string, string] {
-  const { email: e, password: p } = parse(credentialsSchema, {
+  const validatedCredentials = parse(credentialsSchema, {
     email,
     password,
   });
-  return [e, p];
+  return [validatedCredentials.email, validatedCredentials.password];
 }
 
 export async function signup(emailIn: unknown, passwordIn: unknown) {
@@ -167,10 +194,8 @@ export async function signup(emailIn: unknown, passwordIn: unknown) {
 
 /** Confirm an email address from a verification-link token. */
 export async function verifyEmail(rawToken: unknown): Promise<string> {
-  if (typeof rawToken !== "string" || !rawToken) {
-    throw new ValidationError("Verification token is required");
-  }
-  const found = await repo.findVerificationToken(hashToken(rawToken));
+  const token = parse(verificationTokenSchema, rawToken);
+  const found = await repo.findVerificationToken(hashToken(token));
   if (!found || found.expires_at < new Date()) {
     throw new ValidationError("This verification link is invalid or expired");
   }
@@ -280,10 +305,13 @@ export async function completeTwoFactorLogin(
   codeIn: unknown,
   rememberMeIn: unknown,
 ) {
-  if (typeof challengeIn !== "string" || !challengeIn) {
+  let challenge: string;
+  try {
+    challenge = parse(twoFactorChallengeSchema, challengeIn);
+  } catch {
     throw new AuthError("Invalid or expired two-factor challenge");
   }
-  const userId = verifyTwoFactorChallenge(challengeIn);
+  const userId = verifyTwoFactorChallenge(challenge);
   const kind = await twoFactor.verifyCode(userId, codeIn);
   if (!kind) throw new AuthError("Invalid two-factor code");
   const row = await repo.findById(userId);
@@ -339,26 +367,14 @@ export async function updateProfile(
   displayNameIn: unknown,
   languageIn?: unknown,
 ): Promise<PublicUser> {
-  if (displayNameIn !== undefined && typeof displayNameIn !== "string") {
-    throw new ValidationError("Display name must be text");
-  }
-  const trimmed = typeof displayNameIn === "string" ? displayNameIn.trim() : "";
-  if (trimmed.length > 60) {
-    throw new ValidationError("Display name must be 60 characters or fewer");
-  }
-  if (
-    languageIn !== undefined &&
-    (typeof languageIn !== "string" ||
-      !SUPPORTED_LANGUAGES.includes(
-        languageIn as (typeof SUPPORTED_LANGUAGES)[number],
-      ))
-  ) {
-    throw new ValidationError("Unsupported language");
-  }
+  const profile = parse(profileUpdateSchema, {
+    displayName: displayNameIn,
+    language: languageIn,
+  });
   const user = await repo.updateProfileFields(
     userId,
-    trimmed || null,
-    languageIn as string | undefined,
+    profile.displayName || null,
+    profile.language,
   );
   if (!user) throw new AuthError("Not found");
   return toUser(user);
@@ -378,16 +394,14 @@ export async function changePassword(
   const row = await repo.findByIdWithHash(userId);
   if (!row) throw new AuthError("Not found");
 
-  if (typeof currentPasswordIn !== "string") {
-    throw new ValidationError("Current password is required");
-  }
-  const currentOk = await bcrypt.compare(currentPasswordIn, row.password_hash);
+  const currentPassword = parse(currentPasswordSchema, currentPasswordIn);
+  const currentOk = await bcrypt.compare(currentPassword, row.password_hash);
   if (!currentOk) {
     throw new ValidationError("Current password is incorrect");
   }
 
   const newPassword = parse(passwordSchema, newPasswordIn);
-  if (newPassword === currentPasswordIn) {
+  if (newPassword === currentPassword) {
     throw new ValidationError(
       "New password must be different from the current one",
     );
@@ -419,10 +433,8 @@ export async function deleteAccount(
   const row = await repo.findByIdWithHash(userId);
   if (!row) throw new AuthError("Not found");
 
-  if (typeof currentPasswordIn !== "string") {
-    throw new ValidationError("Current password is required");
-  }
-  const currentOk = await bcrypt.compare(currentPasswordIn, row.password_hash);
+  const currentPassword = parse(currentPasswordSchema, currentPasswordIn);
+  const currentOk = await bcrypt.compare(currentPassword, row.password_hash);
   if (!currentOk) {
     throw new ValidationError("Current password is incorrect");
   }
@@ -462,8 +474,8 @@ export async function forgotPassword(emailIn: unknown): Promise<void> {
     Date.now() + PASSWORD_RESET_TOKEN_TTL_HOURS * 3600_000,
   );
 
-  if (typeof emailIn !== "string") return;
-  const email = emailIn.toLowerCase();
+  const email = parse(forgotPasswordEmailSchema, emailIn);
+  if (email === null) return;
   const user = await repo.findByEmailWithHash(email);
   if (!user) return; // unknown email — succeed silently
 
@@ -484,11 +496,9 @@ export async function resetPassword(
   rawToken: unknown,
   passwordIn: unknown,
 ): Promise<string> {
-  if (typeof rawToken !== "string" || !rawToken) {
-    throw new ValidationError("Reset token is required");
-  }
+  const token = parse(resetTokenSchema, rawToken);
   const password = parse(passwordSchema, passwordIn);
-  const found = await repo.findPasswordResetToken(hashToken(rawToken));
+  const found = await repo.findPasswordResetToken(hashToken(token));
   if (!found || found.expires_at < new Date()) {
     throw new ValidationError("This reset link is invalid or expired");
   }
