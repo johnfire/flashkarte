@@ -22,6 +22,18 @@ function twoFactorRow(
 
 beforeEach(() => jest.clearAllMocks());
 
+describe("twoFactor input validation", () => {
+  it.each([undefined, 42, "   "])(
+    "rejects missing verification code %p before reading account state",
+    async (code) => {
+      await expect(enable("u1", code)).rejects.toThrow(
+        "A verification code is required",
+      );
+      expect(mock.findTwoFactor).not.toHaveBeenCalled();
+    },
+  );
+});
+
 describe("secretBox round-trip", () => {
   it("encrypts and decrypts a TOTP seed", () => {
     const enc = encryptSecret("JBSWY3DPEHPK3PXP");

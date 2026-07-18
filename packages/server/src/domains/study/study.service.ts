@@ -1,7 +1,7 @@
 import { z } from "zod";
 import type { PoolClient } from "pg";
 import { calculate } from "@flashkarte/shared";
-import { ValidationError, NotFoundError } from "../../utils/errors";
+import { NotFoundError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
 import * as repo from "./study.repository";
 
@@ -10,6 +10,10 @@ const ratingSchema = z
   .int("rating must be an integer 1-5")
   .min(1, "rating must be an integer 1-5")
   .max(5, "rating must be an integer 1-5");
+const MAX_SYNC_EVENTS = 1000;
+const syncEventsSchema = z
+  .array(z.unknown(), { error: "events must be an array" })
+  .max(MAX_SYNC_EVENTS, `too many events (max ${MAX_SYNC_EVENTS})`);
 
 const syncEventSchema = z.object({
   event_id: z.string(),
@@ -58,8 +62,6 @@ function parseEvent(candidate: unknown): SyncEvent | null {
 // One sync call applies events serially with several DB round-trips each, so an
 // unbounded array is a request-amplification DoS. Clients drain their outbox in
 // reasonable chunks; cap well above that.
-const MAX_SYNC_EVENTS = 1000;
-
 interface ProgressState {
   easiness: number;
   interval: number;
@@ -108,16 +110,11 @@ function validateSyncEvents(events: unknown): {
   ackedEventIds: string[];
   validEvents: SyncEvent[];
 } {
-  if (!Array.isArray(events)) {
-    throw new ValidationError("events must be an array");
-  }
-  if (events.length > MAX_SYNC_EVENTS) {
-    throw new ValidationError(`too many events (max ${MAX_SYNC_EVENTS})`);
-  }
+  const eventCandidates = parse(syncEventsSchema, events);
 
   const ackedEventIds: string[] = [];
   const validEvents: SyncEvent[] = [];
-  for (const rawEvent of events) {
+  for (const rawEvent of eventCandidates) {
     const event = parseEvent(rawEvent);
     if (event) {
       validEvents.push(event);

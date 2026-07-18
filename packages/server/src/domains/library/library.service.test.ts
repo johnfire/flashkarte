@@ -8,7 +8,7 @@ jest.mock("../decks/decks.repository", () => {
 
 import * as repo from "./library.repository";
 import * as decksRepo from "../decks/decks.repository";
-import { clone } from "./library.service";
+import { clone, list } from "./library.service";
 import { MAX_CARDS_PER_DECK } from "../decks/decks.service";
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
@@ -27,6 +27,20 @@ beforeEach(() => {
     id: "new1",
     title: "Source",
   } as never);
+});
+
+describe("library.list input normalization", () => {
+  test.each([
+    ["  biology  ", "biology"],
+    ["   ", null],
+    [42, null],
+  ])("normalizes list search %p", async (searchInput, expectedSearch) => {
+    mockRepo.listPublic.mockResolvedValue([]);
+
+    await list(searchInput);
+
+    expect(mockRepo.listPublic).toHaveBeenCalledWith(expectedSearch);
+  });
 });
 
 describe("library.clone validation (matches importDeck)", () => {

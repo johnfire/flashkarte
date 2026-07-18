@@ -1,5 +1,7 @@
 import crypto from "crypto";
-import { ValidationError, NotFoundError } from "../../utils/errors";
+import { z } from "zod";
+import { NotFoundError } from "../../utils/errors";
+import { parse } from "../../utils/validate";
 import * as repo from "./keys.repository";
 
 // 'full' keys authenticate anywhere a JWT does. 'deck' keys (minted by the
@@ -7,6 +9,20 @@ import * as repo from "./keys.repository";
 export type KeyScope = "full" | "deck";
 
 const API_KEY_PATTERN = /^fk_[0-9a-f]{64}$/;
+const keyScopeSchema = z.enum(["full", "deck"], {
+  error: "invalid key scope",
+});
+const keyNameSchema = z
+  .string()
+  .trim()
+  .min(1)
+  .transform((name) => name.slice(0, 50))
+  .catch("MCP");
+const keyPrefixSchema = z
+  .string({ error: "key prefix is required" })
+  .refine((keyPrefix) => keyPrefix.trim().length > 0, {
+    message: "key prefix is required",
+  });
 
 export function hashKey(rawKey: string): string {
   return crypto.createHash("sha256").update(rawKey).digest("hex");
@@ -23,13 +39,10 @@ export function hasValidApiKeyFormat(rawKey: string): boolean {
 export async function createKey(
   userId: string,
   name: unknown,
-  scope: unknown = "full",
+  scopeInput: unknown = "full",
 ) {
-  if (scope !== "full" && scope !== "deck") {
-    throw new ValidationError("invalid key scope");
-  }
-  const keyName =
-    typeof name === "string" && name.trim() ? name.trim().slice(0, 50) : "MCP";
+  const scope = parse(keyScopeSchema, scopeInput);
+  const keyName = parse(keyNameSchema, name);
   const rawKey = "fk_" + crypto.randomBytes(32).toString("hex");
   const keyPrefix = rawKey.slice(0, 12);
   const row = await repo.insertApiKey(
@@ -54,10 +67,8 @@ export function listKeys(userId: string) {
 }
 
 export async function revokeKey(userId: string, keyPrefix: unknown) {
-  if (typeof keyPrefix !== "string" || !keyPrefix.trim()) {
-    throw new ValidationError("key prefix is required");
-  }
-  const deleted = await repo.deleteApiKey(userId, keyPrefix);
+  const validKeyPrefix = parse(keyPrefixSchema, keyPrefix);
+  const deleted = await repo.deleteApiKey(userId, validKeyPrefix);
   if (!deleted) throw new NotFoundError("API key not found");
 }
 

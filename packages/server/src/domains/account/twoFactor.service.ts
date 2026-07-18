@@ -2,8 +2,10 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { generateSecret, generateURI, verify as verifyTotp } from "otplib";
 import { toDataURL } from "qrcode";
+import { z } from "zod";
 import { ValidationError, NotFoundError } from "../../utils/errors";
 import { encryptSecret, decryptSecret } from "../../utils/secretBox";
+import { parse } from "../../utils/validate";
 import * as repo from "./account.repository";
 
 const ISSUER = "Flashkarte";
@@ -14,6 +16,10 @@ const BACKUP_BCRYPT_ROUNDS = 10;
 // Accept the adjacent 30s window so slight clock drift between the server
 // and the user's phone doesn't reject valid codes.
 const EPOCH_TOLERANCE_SEC = 30;
+const verificationCodeSchema = z
+  .string({ error: "A verification code is required" })
+  .trim()
+  .min(1, "A verification code is required");
 
 async function totpMatches(token: string, secret: string): Promise<boolean> {
   try {
@@ -37,10 +43,7 @@ function generateBackupCode(): string {
 }
 
 function requireCode(codeIn: unknown): string {
-  if (typeof codeIn !== "string" || !codeIn.trim()) {
-    throw new ValidationError("A verification code is required");
-  }
-  return codeIn.trim();
+  return parse(verificationCodeSchema, codeIn);
 }
 
 /**

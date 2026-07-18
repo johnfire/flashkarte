@@ -75,7 +75,9 @@ describe("sync", () => {
   });
 
   test("rejects non-array events", async () => {
-    await expect(sync("u1", { nope: true } as never)).rejects.toThrow();
+    await expect(sync("u1", { nope: true } as never)).rejects.toThrow(
+      "events must be an array",
+    );
   });
 
   // DATA-001: an unbounded events array amplifies one request into hundreds of
@@ -87,7 +89,9 @@ describe("sync", () => {
       rating: 4,
       reviewed_at: "2026-06-05T09:00:00.000Z",
     }));
-    await expect(sync("u1", huge)).rejects.toThrow(/too many|max/i);
+    await expect(sync("u1", huge)).rejects.toThrow(
+      "too many events (max 1000)",
+    );
     expect(mockRepo.cardBelongsToUser).not.toHaveBeenCalled();
   });
 

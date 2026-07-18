@@ -1,5 +1,10 @@
 import * as repository from "./keys.repository";
-import { hasValidApiKeyFormat, resolveKey } from "./keys.service";
+import {
+  createKey,
+  hasValidApiKeyFormat,
+  resolveKey,
+  revokeKey,
+} from "./keys.service";
 
 jest.mock("./keys.repository");
 
@@ -42,5 +47,41 @@ describe("resolveKey", () => {
       keyPrefix: "fk_aaaaaaaaa",
     });
     expect(mockedRepository.findUserByKeyHash).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("key command validation", () => {
+  test("rejects an invalid scope before inserting", async () => {
+    await expect(createKey("user-1", "MCP", "invalid")).rejects.toThrow(
+      "invalid key scope",
+    );
+    expect(mockedRepository.insertApiKey).not.toHaveBeenCalled();
+  });
+
+  test("defaults a blank name and truncates long names", async () => {
+    mockedRepository.insertApiKey.mockResolvedValue({
+      name: "MCP",
+      key_prefix: "fk_aaaaaaaaa",
+      created_at: "2026-01-01",
+    });
+
+    await createKey("user-1", "   ");
+    expect(mockedRepository.insertApiKey).toHaveBeenLastCalledWith(
+      expect.any(String),
+      "user-1",
+      "MCP",
+      expect.any(String),
+      "full",
+    );
+
+    await createKey("user-1", "a".repeat(80));
+    expect(mockedRepository.insertApiKey.mock.calls[1][2]).toHaveLength(50);
+  });
+
+  test("rejects a blank prefix before deleting", async () => {
+    await expect(revokeKey("user-1", "   ")).rejects.toThrow(
+      "key prefix is required",
+    );
+    expect(mockedRepository.deleteApiKey).not.toHaveBeenCalled();
   });
 });

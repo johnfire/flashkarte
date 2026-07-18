@@ -1,5 +1,7 @@
 import type { ParsedCard } from "@flashkarte/shared";
+import { z } from "zod";
 import { NotFoundError, ValidationError } from "../../utils/errors";
+import { parse } from "../../utils/validate";
 import * as repo from "./library.repository";
 import * as decksRepo from "../decks/decks.repository";
 import { validateBranching } from "../decks/branching";
@@ -12,6 +14,14 @@ export interface LibraryDeck {
   cardCount: number;
   publishedAt: string | null;
 }
+
+const librarySearchSchema = z.preprocess(
+  (searchInput) =>
+    typeof searchInput === "string" && searchInput.trim()
+      ? searchInput.trim()
+      : null,
+  z.string().nullable(),
+);
 
 function toLibraryDeck(row: repo.LibraryDeckRow): LibraryDeck {
   return {
@@ -26,7 +36,7 @@ function toLibraryDeck(row: repo.LibraryDeckRow): LibraryDeck {
 }
 
 export async function list(q: unknown): Promise<LibraryDeck[]> {
-  const search = typeof q === "string" && q.trim() ? q.trim() : null;
+  const search = parse(librarySearchSchema, q);
   const rows = await repo.listPublic(search);
   return rows.map(toLibraryDeck);
 }

@@ -1,5 +1,7 @@
 import { parseDeck } from "@flashkarte/shared";
+import { z } from "zod";
 import { ValidationError, NotFoundError } from "../../utils/errors";
+import { parse } from "../../utils/validate";
 import * as repo from "./decks.repository";
 import { validateBranching } from "./branching";
 
@@ -7,16 +9,28 @@ import { validateBranching } from "./branching";
 // 65535-parameter limit at 6 params/card) and prevents a huge upload from
 // becoming a soft DoS.
 export const MAX_CARDS_PER_DECK = 5000;
+const markdownSchema = z
+  .string({ error: "Markdown content is required" })
+  .refine((markdown) => markdown.trim().length > 0, {
+    message: "Markdown content is required",
+  });
+const deckUpdateSchema = z.object({
+  title: z
+    .string({ error: "Title is required" })
+    .trim()
+    .min(1, "Title is required")
+    .optional(),
+  isPublic: z.boolean({ error: "isPublic must be a boolean" }).optional(),
+  isOrdered: z.boolean({ error: "isOrdered must be a boolean" }).optional(),
+});
 
 export async function importDeck(
   userId: string,
   markdown: unknown,
   filename: string | null = null,
 ) {
-  if (typeof markdown !== "string" || !markdown.trim()) {
-    throw new ValidationError("Markdown content is required");
-  }
-  const parsed = parseDeck(markdown, filename ?? "");
+  const validMarkdown = parse(markdownSchema, markdown);
+  const parsed = parseDeck(validMarkdown, filename ?? "");
   if (parsed.cards.length === 0) {
     throw new ValidationError("Deck has no cards — check the Markdown format");
   }
@@ -41,12 +55,10 @@ export async function appendCards(
   deckId: string,
   markdown: unknown,
 ) {
-  if (typeof markdown !== "string" || !markdown.trim()) {
-    throw new ValidationError("Markdown content is required");
-  }
+  const validMarkdown = parse(markdownSchema, markdown);
   const deck = await repo.getDeck(userId, deckId);
   if (!deck) throw new NotFoundError("Deck not found");
-  const parsed = parseDeck(markdown, "");
+  const parsed = parseDeck(validMarkdown, "");
   if (parsed.cards.length === 0) {
     throw new ValidationError("No cards found — check the Markdown format");
   }
@@ -74,27 +86,19 @@ export async function get(userId: string, id: string) {
 export async function update(
   userId: string,
   id: string,
-  patch: { title?: unknown; isPublic?: unknown; isOrdered?: unknown },
+  patchInput: { title?: unknown; isPublic?: unknown; isOrdered?: unknown },
 ) {
   let deck = await repo.getDeck(userId, id);
   if (!deck) throw new NotFoundError("Deck not found");
+  const patch = parse(deckUpdateSchema, patchInput);
 
   if (patch.title !== undefined) {
-    if (typeof patch.title !== "string" || !patch.title.trim()) {
-      throw new ValidationError("Title is required");
-    }
-    deck = (await repo.renameDeck(userId, id, patch.title.trim())) ?? deck;
+    deck = (await repo.renameDeck(userId, id, patch.title)) ?? deck;
   }
   if (patch.isPublic !== undefined) {
-    if (typeof patch.isPublic !== "boolean") {
-      throw new ValidationError("isPublic must be a boolean");
-    }
     deck = (await repo.setDeckPublic(userId, id, patch.isPublic)) ?? deck;
   }
   if (patch.isOrdered !== undefined) {
-    if (typeof patch.isOrdered !== "boolean") {
-      throw new ValidationError("isOrdered must be a boolean");
-    }
     deck = (await repo.setDeckOrdered(userId, id, patch.isOrdered)) ?? deck;
   }
   return deck;
