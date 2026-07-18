@@ -38,6 +38,11 @@ jest.mock("../../middleware/auth", () => ({
     if (header === "Bearer deck-key") req.keyScope = "deck";
     next();
   },
+  requireVerified: (
+    _req: import("express").Request,
+    _res: import("express").Response,
+    next: import("express").NextFunction,
+  ) => next(),
   requireAdmin: (
     _req: import("express").Request,
     _res: import("express").Response,

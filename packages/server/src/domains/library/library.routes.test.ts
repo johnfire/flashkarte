@@ -21,6 +21,11 @@ jest.mock("../../middleware/auth", () => ({
     req.userId = "u1";
     next();
   },
+  requireVerified: (
+    _req: import("express").Request,
+    _res: import("express").Response,
+    next: import("express").NextFunction,
+  ) => next(),
   requireAdmin: (
     _req: import("express").Request,
     _res: import("express").Response,

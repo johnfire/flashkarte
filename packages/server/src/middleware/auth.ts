@@ -4,7 +4,11 @@ import {
   getCurrentUser,
 } from "../domains/auth/auth.service";
 import { resolveKey } from "../domains/keys/keys.service";
-import { AuthError, ForbiddenError } from "../utils/errors";
+import {
+  AuthError,
+  EmailVerificationRequiredError,
+  ForbiddenError,
+} from "../utils/errors";
 
 export function requireAuth(
   req: Request,
@@ -56,6 +60,29 @@ export function requireFullScope(
     return;
   }
   next();
+}
+
+// New accounts can authenticate so they can resend verification, manage their
+// profile, recover access, or delete the account. Product features stay locked
+// until ownership of the email address has been demonstrated.
+export function requireVerified(
+  req: Request,
+  _res: Response,
+  next: NextFunction,
+): void {
+  if (!req.userId) {
+    next(new AuthError());
+    return;
+  }
+  getCurrentUser(req.userId)
+    .then((user) => {
+      if (!user.emailVerifiedAt) {
+        next(new EmailVerificationRequiredError());
+        return;
+      }
+      next();
+    })
+    .catch(next);
 }
 
 // Gate admin-only routes. Runs after requireAuth: looks up the authenticated

@@ -123,7 +123,7 @@
     "dark": "Dunkler Modus"
   },
   "verify": {
-    "message": "Bitte bestätige deine E-Mail-Adresse ({{email}}), um dein Konto zu sichern.",
+    "message": "Bitte bestätige deine E-Mail-Adresse ({{email}}), um flashkarte zu verwenden.",
     "sent": "Bestätigungs-E-Mail gesendet.",
     "resend": "E-Mail erneut senden",
     "sending": "Wird gesendet…"

@@ -24,7 +24,7 @@ const ADMIN = {
   email: "admin@b.com",
   role: "user",
   accountType: "admin",
-  emailVerifiedAt: null,
+  emailVerifiedAt: "2026-01-01T00:00:00.000Z",
 };
 const REGULAR = { ...ADMIN, id: "u2", accountType: "free" };
 

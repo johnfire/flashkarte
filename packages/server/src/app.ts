@@ -16,7 +16,12 @@ import { libraryRouter } from "./domains/library/library.routes";
 import { publicLibraryRouter } from "./domains/library/public.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
 import { accountRouter } from "./domains/account/account.routes";
-import { requireAuth, requireAdmin, requireFullScope } from "./middleware/auth";
+import {
+  requireAuth,
+  requireAdmin,
+  requireFullScope,
+  requireVerified,
+} from "./middleware/auth";
 import { errorHandler } from "./middleware/errorHandler";
 import { requestId } from "./middleware/requestId";
 import { accessLog } from "./middleware/accessLog";
@@ -177,6 +182,9 @@ export function createApp() {
 
   // Everything below requires a valid JWT or API key
   app.use("/api", requireAuth);
+  // Auth/profile/recovery routes above remain available so an unverified user
+  // can complete verification or delete the account. Product routes do not.
+  app.use("/api", requireVerified);
   // Deck data routes — reachable by deck-scoped MCP keys as well as full creds.
   app.use("/api/decks", decksRouter);
   app.use("/api/study", studyRouter);

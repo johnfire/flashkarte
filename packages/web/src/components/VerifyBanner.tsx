@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { api } from "../api/client";
 import { useAuth } from "../auth/AuthContext";
 
-// Soft email-verification nudge: shown in the app when the current user's
-// email isn't verified yet. Lets them resend the verification link.
+// Verification gate shown when the current user's email is not verified yet.
+// Account and recovery actions remain available while product APIs are locked.
 export function VerifyBanner() {
   const { t } = useTranslation();
   const { user } = useAuth();

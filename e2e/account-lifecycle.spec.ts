@@ -42,7 +42,7 @@ async function login(
   }
 }
 
-test("signup creates an account and lands on the deck list", async ({
+test("signup gates product access until the email is verified", async ({
   page,
 }) => {
   await page.goto("/login?mode=signup");
@@ -52,6 +52,9 @@ test("signup creates an account and lands on the deck list", async ({
     .fill(password);
   await page.getByRole("button", { name: "Sign up", exact: true }).click();
   await expect(page.getByRole("heading", { name: "My Decks" })).toBeVisible();
+  await expect(
+    page.getByText("Verify your email before using this feature"),
+  ).toBeVisible();
 });
 
 test("the emailed verification link verifies the address", async ({ page }) => {

@@ -28,6 +28,16 @@ export class ForbiddenError extends AppError {
   }
 }
 
+export class EmailVerificationRequiredError extends AppError {
+  constructor() {
+    super(
+      "Verify your email before using this feature",
+      "EMAIL_VERIFICATION_REQUIRED",
+      403,
+    );
+  }
+}
+
 export class NotFoundError extends AppError {
   constructor(message = "Not found") {
     super(message, "NOT_FOUND", 404);

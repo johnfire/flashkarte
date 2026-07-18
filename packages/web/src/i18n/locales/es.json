@@ -123,7 +123,7 @@
     "dark": "Modo oscuro"
   },
   "verify": {
-    "message": "Verifica tu correo electrónico ({{email}}) para proteger tu cuenta.",
+    "message": "Verifica tu correo electrónico ({{email}}) para usar flashkarte.",
     "sent": "Correo de verificación enviado.",
     "resend": "Reenviar correo",
     "sending": "Enviando…"

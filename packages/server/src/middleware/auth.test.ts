@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { requireAuth, requireFullScope } from "./auth";
+import { requireAuth, requireFullScope, requireVerified } from "./auth";
 import * as keysService from "../domains/keys/keys.service";
 import * as authService from "../domains/auth/auth.service";
 
@@ -87,5 +87,46 @@ describe("requireFullScope", () => {
 
   test("allows JWT requests (no keyScope set to deck)", async () => {
     expect(await scope(undefined)).toBeUndefined();
+  });
+});
+
+describe("requireVerified", () => {
+  function verify(userId?: string) {
+    const req = { userId } as Request;
+    return new Promise<unknown>((resolve) => {
+      requireVerified(req, {} as Response, (err?: unknown) => resolve(err));
+    });
+  }
+
+  test("allows a verified account", async () => {
+    mockAuth.getCurrentUser.mockResolvedValue({
+      emailVerifiedAt: "2026-07-18T12:00:00.000Z",
+    } as never);
+
+    expect(await verify("user-123")).toBeUndefined();
+  });
+
+  test("blocks an unverified account with a specific error", async () => {
+    mockAuth.getCurrentUser.mockResolvedValue({
+      emailVerifiedAt: null,
+    } as never);
+
+    const error = await verify("user-123");
+    expect(error).toMatchObject({
+      code: "EMAIL_VERIFICATION_REQUIRED",
+      httpStatus: 403,
+    });
+  });
+
+  test("rejects a request without an authenticated user", async () => {
+    expect(await verify()).toMatchObject({ code: "UNAUTHENTICATED" });
+    expect(mockAuth.getCurrentUser).not.toHaveBeenCalled();
+  });
+
+  test("forwards account lookup failures", async () => {
+    const lookupError = new Error("database unavailable");
+    mockAuth.getCurrentUser.mockRejectedValue(lookupError);
+
+    expect(await verify("user-123")).toBe(lookupError);
   });
 });
