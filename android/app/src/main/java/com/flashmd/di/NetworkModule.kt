@@ -11,6 +11,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.json.Json
+import okhttp3.CertificatePinner
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -30,10 +31,15 @@ object NetworkModule {
 
     @Provides
     @Singleton
+    fun provideCertificatePinner(): CertificatePinner = createApiCertificatePinner()
+
+    @Provides
+    @Singleton
     fun provideOkHttp(
         authInterceptor: AuthInterceptor,
         authenticator: TokenAuthenticator,
         cookieJar: AuthCookieJar,
+        certificatePinner: CertificatePinner,
     ): OkHttpClient {
         val logging = HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
@@ -43,6 +49,7 @@ object NetworkModule {
             }
         }
         return OkHttpClient.Builder()
+            .certificatePinner(certificatePinner)
             .cookieJar(cookieJar)
             .addInterceptor(authInterceptor)
             .addInterceptor(logging)
