@@ -77,6 +77,14 @@ export default tseslint.config(
     rules: {
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "JSXAttribute[name.name='dangerouslySetInnerHTML']",
+          message:
+            "Render React content normally; dangerouslySetInnerHTML can make translated strings unsafe.",
+        },
+      ],
     },
   },
 );

@@ -6,8 +6,14 @@ import * as repo from "./keys.repository";
 // MCP/OAuth flow) are restricted to deck data routes — see requireFullScope.
 export type KeyScope = "full" | "deck";
 
+const API_KEY_PATTERN = /^fk_[0-9a-f]{64}$/;
+
 export function hashKey(rawKey: string): string {
   return crypto.createHash("sha256").update(rawKey).digest("hex");
+}
+
+export function hasValidApiKeyFormat(rawKey: string): boolean {
+  return API_KEY_PATTERN.test(rawKey);
 }
 
 /**
@@ -63,6 +69,7 @@ export interface ResolvedKey {
 
 /** Resolves an fk_ key to its owning user id, scope, and display prefix, or null. */
 export async function resolveKey(rawKey: string): Promise<ResolvedKey | null> {
+  if (!hasValidApiKeyFormat(rawKey)) return null;
   const row = await repo.findUserByKeyHash(hashKey(rawKey));
   if (!row) return null;
   return {
