@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { ValidationError } from "../../utils/errors";
+import { z } from "zod";
 import { wrapAsync } from "../../utils/wrapAsync";
+import { parse } from "../../utils/validate";
 import { clampString as clamp } from "../../utils/clampString";
 import * as service from "./client-errors.service";
 
@@ -9,11 +10,14 @@ const STACK_MAX = 8_000;
 const CONTEXT_MAX = 500;
 const UA_MAX = 500;
 const SHORT_MAX = 50;
+const clientErrorMessageSchema = z.string({ error: "message is required" });
 
 export const reportClientError = wrapAsync(
   async (req: Request, res: Response) => {
-    const message = clamp(req.body.message, MSG_MAX);
-    if (!message) throw new ValidationError("message is required");
+    const message = parse(
+      clientErrorMessageSchema,
+      clamp(req.body.message, MSG_MAX),
+    );
 
     service.recordClientError({
       app: clamp(req.body.app, SHORT_MAX) ?? "unknown",

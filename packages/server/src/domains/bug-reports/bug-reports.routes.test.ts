@@ -74,6 +74,17 @@ describe("bug-reports route", () => {
       .post("/api/bug-reports")
       .send({ description: "no title here" });
     expect(res.status).toBe(422);
+    expect(res.body.error.message).toBe("title is required");
+    expect(mockService.submitBugReport).not.toHaveBeenCalled();
+  });
+
+  test("422 when description is blank", async () => {
+    const res = await request(app)
+      .post("/api/bug-reports")
+      .send({ title: "Missing details", description: "   " });
+
+    expect(res.status).toBe(422);
+    expect(res.body.error.message).toBe("description is required");
     expect(mockService.submitBugReport).not.toHaveBeenCalled();
   });
 });

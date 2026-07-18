@@ -58,5 +58,17 @@ describe("client-errors route (public)", () => {
 
     const bad = await request(app).post("/api/client-errors").send({});
     expect(bad.status).toBe(422);
+    expect(bad.body.error.message).toBe("message is required");
+  });
+
+  test("rejects blank and non-string messages consistently", async () => {
+    for (const message of ["   ", 42]) {
+      const response = await request(app)
+        .post("/api/client-errors")
+        .send({ message });
+      expect(response.status).toBe(422);
+      expect(response.body.error.message).toBe("message is required");
+    }
+    expect(mock.recordClientError).not.toHaveBeenCalled();
   });
 });

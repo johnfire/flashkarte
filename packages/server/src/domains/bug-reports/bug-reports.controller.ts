@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
-import { AuthError, ValidationError } from "../../utils/errors";
+import { z } from "zod";
+import { AuthError } from "../../utils/errors";
 import { wrapAsync } from "../../utils/wrapAsync";
+import { parse } from "../../utils/validate";
 import { clampString as clamp } from "../../utils/clampString";
 import { getCurrentUser } from "../auth/auth.service";
 import * as service from "./bug-reports.service";
@@ -8,16 +10,20 @@ import * as service from "./bug-reports.service";
 const TITLE_MAX = 140;
 const DESC_MAX = 8_000;
 const SHORT_MAX = 80;
+const bugReportTitleSchema = z.string({ error: "title is required" });
+const bugReportDescriptionSchema = z.string({
+  error: "description is required",
+});
 
 export const submitBugReport = wrapAsync(
   async (req: Request, res: Response) => {
     if (!req.userId) throw new AuthError();
 
-    const title = clamp(req.body.title, TITLE_MAX);
-    if (!title) throw new ValidationError("title is required");
-
-    const description = clamp(req.body.description, DESC_MAX);
-    if (!description) throw new ValidationError("description is required");
+    const title = parse(bugReportTitleSchema, clamp(req.body.title, TITLE_MAX));
+    const description = parse(
+      bugReportDescriptionSchema,
+      clamp(req.body.description, DESC_MAX),
+    );
 
     const user = await getCurrentUser(req.userId);
 

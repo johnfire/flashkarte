@@ -1,6 +1,11 @@
 import { z } from "zod";
 import { ValidationError } from "./errors";
 
+/**
+ * Endpoint validation pattern: define a named Zod schema near the domain
+ * boundary, then call parse(schema, untrustedInput). Keep state-dependent
+ * business rules in the service after parsing.
+ */
 export function parse<T>(schema: z.ZodType<T>, input: unknown): T {
   const result = schema.safeParse(input);
   if (!result.success) {
