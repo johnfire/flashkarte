@@ -1,10 +1,11 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { deckPath } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";
 import { LibraryDeck } from "../api/types";
 import { useDocumentHead } from "../seo/useDocumentHead";
+import { useAsync } from "../hooks/use-async";
 
 export function ExplorePage() {
   const { t } = useTranslation();
@@ -13,35 +14,28 @@ export function ExplorePage() {
     description:
       "Browse free, community-shared flashcard decks on flashkarte and clone any of them into your account to start studying.",
   });
-  const [decks, setDecks] = useState<LibraryDeck[] | null>(null);
   const [q, setQ] = useState("");
-  const [error, setError] = useState<string | null>(null);
 
-  const load = useCallback(
-    async (search: string) => {
-      setError(null);
-      try {
-        const { decks } = await api.publicLibrary.list(
-          search.trim() || undefined,
-        );
-        setDecks(decks);
-      } catch (err) {
-        setError(
-          err instanceof ApiError ? err.message : t("explore.loadError"),
-        );
-      }
-    },
-    [t],
-  );
-
-  useEffect(() => {
-    load("");
-  }, [load]);
+  const loadDecks = useCallback(async (search: string) => {
+    const response = await api.publicLibrary.list(search.trim() || undefined);
+    return response.decks;
+  }, []);
+  const {
+    data: decks,
+    error: loadError,
+    loading,
+    reload,
+  } = useAsync<LibraryDeck[], [string]>(loadDecks, [""]);
+  const error =
+    loadError instanceof ApiError
+      ? loadError.message
+      : loadError
+        ? t("explore.loadError")
+        : null;
 
   function onSearch(e: React.FormEvent) {
     e.preventDefault();
-    setDecks(null);
-    load(q);
+    void reload(q);
   }
 
   return (
@@ -65,7 +59,7 @@ export function ExplorePage() {
         </button>
       </form>
       {error && <p className="mb-3 text-red-600">{error}</p>}
-      {decks === null && !error && (
+      {loading && !error && (
         <p className="text-gray-500 dark:text-gray-400">
           {t("common.loading")}
         </p>

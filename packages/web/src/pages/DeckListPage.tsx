@@ -1,33 +1,38 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { api, ApiError, reportClientError } from "../api/client";
 import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
+import { useAsync } from "../hooks/use-async";
 
 export function DeckListPage() {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
-  const [decks, setDecks] = useState<DeckWithCounts[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  const load = useCallback(async () => {
-    setError(null);
+  const loadDecks = useCallback(async () => {
     try {
-      setDecks(await api.decks.list());
+      return await api.decks.list();
     } catch (err) {
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
         context: "DeckListPage.load",
       });
-      setError(err instanceof ApiError ? err.message : t("decks.loadError"));
+      throw err;
     }
-  }, [t]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
+  }, []);
+  const {
+    data: decks,
+    error: loadError,
+    loading,
+    setData: setDecks,
+  } = useAsync<DeckWithCounts[], []>(loadDecks, []);
+  const error =
+    loadError instanceof ApiError
+      ? loadError.message
+      : loadError
+        ? t("decks.loadError")
+        : null;
 
   async function onDelete(id: string, title: string) {
     if (!window.confirm(t("decks.deleteConfirm", { title }))) return;
@@ -105,7 +110,7 @@ export function DeckListPage() {
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
 
-      {decks === null && !error && (
+      {loading && !error && (
         <p className="text-gray-500 dark:text-gray-400">
           {t("common.loading")}
         </p>

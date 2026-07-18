@@ -1,9 +1,10 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import { AdminUser, AccountType } from "../api/types";
 import { PasswordInput } from "../components/PasswordInput";
+import { useAsync } from "../hooks/use-async";
 
 const ACCOUNT_TYPES: AccountType[] = ["free", "paid", "admin-gifted", "admin"];
 
@@ -16,35 +17,37 @@ const TYPE_LABEL_KEY: Record<AccountType, string> = {
 
 export function AdminPage() {
   const { t } = useTranslation();
-  const [users, setUsers] = useState<AdminUser[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
-
   // create-user form
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [accountType, setAccountType] = useState<AccountType>("free");
   const [creating, setCreating] = useState(false);
   const [createMsg, setCreateMsg] = useState<string | null>(null);
+  const [mutationError, setMutationError] = useState<string | null>(null);
 
-  const load = useCallback(async () => {
-    setError(null);
-    try {
-      const { users } = await api.admin.listUsers();
-      setUsers(users);
-    } catch (err) {
-      setError(err instanceof ApiError ? err.message : t("admin.loadError"));
-    }
-  }, [t]);
-
-  useEffect(() => {
-    load();
-  }, [load]);
+  const loadUsers = useCallback(async () => {
+    const response = await api.admin.listUsers();
+    return response.users;
+  }, []);
+  const {
+    data: users,
+    error: loadError,
+    loading,
+    setData: setUsers,
+  } = useAsync<AdminUser[], []>(loadUsers, []);
+  const error =
+    mutationError ??
+    (loadError instanceof ApiError
+      ? loadError.message
+      : loadError
+        ? t("admin.loadError")
+        : null);
 
   async function createUser(e: React.FormEvent) {
     e.preventDefault();
     setCreating(true);
     setCreateMsg(null);
-    setError(null);
+    setMutationError(null);
     try {
       const { user } = await api.admin.createUser(
         email.trim(),
@@ -57,7 +60,9 @@ export function AdminPage() {
       setPassword("");
       setAccountType("free");
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : t("admin.createError"));
+      setMutationError(
+        err instanceof ApiError ? err.message : t("admin.createError"),
+      );
     } finally {
       setCreating(false);
     }
@@ -72,7 +77,7 @@ export function AdminPage() {
       await api.admin.setAccountType(id, type);
     } catch (err) {
       setUsers(prev ?? null); // revert
-      setError(
+      setMutationError(
         err instanceof ApiError ? err.message : t("admin.updateTypeError"),
       );
     }
@@ -149,7 +154,7 @@ export function AdminPage() {
         <h2 className="mb-3 text-xl font-semibold">
           {users ? t("admin.users", { count: users.length }) : t("admin.users")}
         </h2>
-        {users === null && !error && (
+        {loading && !error && (
           <p className="text-gray-500 dark:text-gray-400">
             {t("admin.loading")}
           </p>

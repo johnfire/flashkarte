@@ -1,50 +1,51 @@
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import { LibraryDeck } from "../api/types";
+import { useAsync } from "../hooks/use-async";
 
 export function LibraryPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [decks, setDecks] = useState<LibraryDeck[] | null>(null);
   const [q, setQ] = useState("");
-  const [error, setError] = useState<string | null>(null);
   const [cloning, setCloning] = useState<string | null>(null);
+  const [mutationError, setMutationError] = useState<string | null>(null);
 
-  const load = useCallback(
-    async (search: string) => {
-      setError(null);
-      try {
-        const { decks } = await api.library.list(search.trim() || undefined);
-        setDecks(decks);
-      } catch (err) {
-        setError(
-          err instanceof ApiError ? err.message : t("library.loadError"),
-        );
-      }
-    },
-    [t],
-  );
-
-  useEffect(() => {
-    load("");
-  }, [load]);
+  const loadDecks = useCallback(async (search: string) => {
+    const response = await api.library.list(search.trim() || undefined);
+    return response.decks;
+  }, []);
+  const {
+    data: decks,
+    error: loadError,
+    loading,
+    reload,
+  } = useAsync<LibraryDeck[], [string]>(loadDecks, [""]);
+  const error =
+    mutationError ??
+    (loadError instanceof ApiError
+      ? loadError.message
+      : loadError
+        ? t("library.loadError")
+        : null);
 
   function onSearch(e: React.FormEvent) {
     e.preventDefault();
-    setDecks(null);
-    load(q);
+    setMutationError(null);
+    void reload(q);
   }
 
   async function clone(id: string) {
     setCloning(id);
-    setError(null);
+    setMutationError(null);
     try {
       const deck = await api.library.clone(id);
       navigate(`/decks/${deck.id}/study`);
     } catch (err) {
-      setError(err instanceof ApiError ? err.message : t("library.cloneError"));
+      setMutationError(
+        err instanceof ApiError ? err.message : t("library.cloneError"),
+      );
       setCloning(null);
     }
   }
@@ -79,7 +80,7 @@ export function LibraryPage() {
       </form>
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
-      {decks === null && !error && (
+      {loading && !error && (
         <p className="text-gray-500 dark:text-gray-400">
           {t("library.loading")}
         </p>
