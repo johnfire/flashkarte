@@ -91,7 +91,7 @@ services:
       start_period: 10s
 
   db:
-    image: postgres:16-alpine
+    image: postgres:16-alpine@sha256:57c72fd2a128e416c7fcc499958864df5301e940bca0a56f58fddf30ffc07777
     environment:
       - POSTGRES_DB=flashkarte
       - POSTGRES_USER=flashkarte
@@ -106,7 +106,7 @@ services:
     restart: unless-stopped
 
   db-backup:
-    image: prodrigestivill/postgres-backup-local:16-alpine
+    image: prodrigestivill/postgres-backup-local:16-alpine@sha256:08e7b70879af45a89305b91f4600cfbc88da2419a65948df870cddb082b8cf83
     environment:
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432

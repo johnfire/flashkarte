@@ -1,5 +1,5 @@
 # ---- build (all workspaces) ----
-FROM node:24-bookworm-slim AS build
+FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS build
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY packages/shared/package.json packages/shared/
@@ -18,7 +18,7 @@ RUN npm run build --workspace=packages/shared \
  && npm run build --workspace=packages/mcp
 
 # ---- app production deps ----
-FROM node:24-bookworm-slim AS proddeps
+FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS proddeps
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY packages/shared/package.json packages/shared/
@@ -26,7 +26,7 @@ COPY packages/server/package.json packages/server/
 RUN npm ci --omit=dev --workspace=packages/server
 
 # ---- app runtime (serves SPA + /api) ----
-FROM node:24-bookworm-slim AS production
+FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS production
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=proddeps /app/node_modules ./node_modules
@@ -42,14 +42,14 @@ EXPOSE 3001
 CMD ["node", "dist/server.js"]
 
 # ---- mcp production deps ----
-FROM node:24-bookworm-slim AS mcpdeps
+FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS mcpdeps
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY packages/mcp/package.json packages/mcp/
 RUN npm ci --omit=dev --workspace=packages/mcp
 
 # ---- mcp runtime (hosted MCP server) ----
-FROM node:24-bookworm-slim AS mcp
+FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS mcp
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=mcpdeps /app/node_modules ./node_modules
