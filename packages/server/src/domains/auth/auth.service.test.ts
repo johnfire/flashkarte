@@ -3,13 +3,20 @@ jest.mock("../audit/audit.service");
 jest.mock("./auth.repository");
 jest.mock("../account/twoFactor.service");
 jest.mock("bcryptjs");
+jest.mock("../../email/mailer");
 
 import bcrypt from "bcryptjs";
 import { withTransaction } from "../../db/client";
+import { getAppUrl, sendPasswordResetEmail } from "../../email/mailer";
 import { record, userActor } from "../audit/audit.service";
 import * as twoFactor from "../account/twoFactor.service";
 import * as repo from "./auth.repository";
-import { deleteAccount, login, completeTwoFactorLogin } from "./auth.service";
+import {
+  deleteAccount,
+  login,
+  completeTwoFactorLogin,
+  forgotPassword,
+} from "./auth.service";
 
 const mockTwoFactor = twoFactor as jest.Mocked<typeof twoFactor>;
 
@@ -19,6 +26,9 @@ const mockAudit = { record, userActor } as {
   userActor: jest.MockedFunction<typeof userActor>;
 };
 const mockBcrypt = bcrypt as jest.Mocked<typeof bcrypt>;
+const mockGetAppUrl = getAppUrl as jest.MockedFunction<typeof getAppUrl>;
+const mockSendPasswordResetEmail =
+  sendPasswordResetEmail as jest.MockedFunction<typeof sendPasswordResetEmail>;
 
 function setupRepoRow(
   overrides: Partial<{
@@ -47,12 +57,50 @@ beforeEach(() => {
   mockAudit.userActor.mockReturnValue({ type: "user", id: "u1" });
   mockBcrypt.compare.mockResolvedValue(true as never);
   mockAudit.record.mockResolvedValue(undefined);
+  mockGetAppUrl.mockReturnValue("https://flashkarte.example");
   mockRepo.deleteUserAccount.mockResolvedValue(undefined);
   // withTransaction calls the callback with a mock client
   const mockClient = { query: jest.fn() } as unknown as import("pg").PoolClient;
   (withTransaction as jest.Mock).mockImplementation(
     async (fn: (client: unknown) => Promise<void>) => fn(mockClient),
   );
+});
+
+describe("forgotPassword", () => {
+  it("returns without waiting for SMTP delivery", async () => {
+    const user = setupRepoRow();
+    mockRepo.findByEmailWithHash.mockResolvedValue(user);
+    mockRepo.deletePasswordResetTokensForUser.mockResolvedValue([]);
+    mockRepo.insertPasswordResetToken.mockResolvedValue([]);
+
+    let finishSending: (() => void) | undefined;
+    const pendingDelivery = new Promise<void>((resolve) => {
+      finishSending = resolve;
+    });
+    mockSendPasswordResetEmail.mockReturnValue(pendingDelivery);
+
+    await expect(forgotPassword("A@B.COM")).resolves.toBeUndefined();
+    expect(mockSendPasswordResetEmail).toHaveBeenCalledWith(
+      "a@b.com",
+      expect.stringMatching(
+        /^https:\/\/flashkarte\.example\/reset-password\?token=/,
+      ),
+    );
+
+    finishSending?.();
+    await pendingDelivery;
+  });
+
+  it("does not create a reset token for an unknown email", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(null);
+
+    await expect(
+      forgotPassword("missing@example.com"),
+    ).resolves.toBeUndefined();
+
+    expect(mockRepo.insertPasswordResetToken).not.toHaveBeenCalled();
+    expect(mockSendPasswordResetEmail).not.toHaveBeenCalled();
+  });
 });
 
 describe("deleteAccount", () => {

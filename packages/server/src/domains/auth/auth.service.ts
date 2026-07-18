@@ -441,6 +441,14 @@ export async function deleteAccount(
   });
 }
 
+function sendPasswordResetInBackground(email: string, link: string): void {
+  void sendPasswordResetEmail(email, link).catch((error) => {
+    logger.error("auth.forgotPassword", "Failed to send password reset email", {
+      error: error instanceof Error ? error.message : String(error),
+    });
+  });
+}
+
 /**
  * Start a password reset. Always resolves the same way whether or not the
  * email belongs to an account (no account enumeration).
@@ -463,10 +471,10 @@ export async function forgotPassword(emailIn: unknown): Promise<void> {
     await repo.deletePasswordResetTokensForUser(user.id);
     await repo.insertPasswordResetToken(user.id, tokenHash, expiresAt);
     const link = `${getAppUrl()}/reset-password?token=${rawToken}`;
-    await sendPasswordResetEmail(user.email, link);
-  } catch (err) {
-    logger.error("auth.forgotPassword", "Failed to send password reset email", {
-      error: err instanceof Error ? err.message : String(err),
+    sendPasswordResetInBackground(user.email, link);
+  } catch (error) {
+    logger.error("auth.forgotPassword", "Failed to prepare password reset", {
+      error: error instanceof Error ? error.message : String(error),
     });
   }
 }
