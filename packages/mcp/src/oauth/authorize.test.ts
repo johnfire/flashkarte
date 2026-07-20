@@ -1,8 +1,11 @@
+import crypto from "crypto";
 import express from "express";
 import request from "supertest";
 import { createAuthorizeRouter } from "./authorize";
 import * as apiModule from "../api";
 import * as store from "./store";
+
+process.env.MCP_JWT_SECRET = "test-secret-that-is-long-enough-32chars";
 
 jest.mock("../api", () => ({
   backendLogin: jest.fn(),
@@ -27,17 +30,19 @@ const goodQuery = {
   state: "xyz",
 };
 
-// GET the form, lift its CSRF token, then POST — mirrors a real browser so the
-// stateless login-CSRF token validates.
+// GET the form, lift its CSRF token, then POST with the cookie — mirrors a
+// real browser so the double-submit cookie CSRF token validates.
 async function postAuthorize(
   app: ReturnType<typeof makeApp>,
   fields: Record<string, string> = {},
 ) {
   const form = await request(app).get("/oauth/authorize").query(goodQuery);
-  const ts = /name="csrf_ts" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
-  const sig = /name="csrf_sig" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+  const ts = /name="csrf_ts" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+  const sig = /name="csrf_sig" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+  const cookies = form.headers["set-cookie"];
   return request(app)
     .post("/oauth/authorize")
+    .set("Cookie", Array.isArray(cookies) ? cookies : [cookies].filter(Boolean))
     .type("form")
     .send({ ...goodQuery, csrf_ts: ts, csrf_sig: sig, ...fields });
 }
@@ -160,5 +165,68 @@ describe("authorize POST", () => {
       last = res.status;
     }
     expect(last).toBe(429); // tripped the per-IP limit
+  });
+
+  // M1: a valid signature without the session cookie must fail (attacker can
+  // mint signatures but cannot read the SameSite=Strict nonce cookie).
+  test("rejects a signed POST that presents no CSRF cookie", async () => {
+    const app = makeApp();
+    const form = await request(app).get("/oauth/authorize").query(goodQuery);
+    const ts = /name="csrf_ts" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+    const sig = /name="csrf_sig" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+    const res = await request(app)
+      .post("/oauth/authorize")
+      .type("form")
+      .send({ ...goodQuery, csrf_ts: ts, csrf_sig: sig, email: "a@b.com", password: "pw" });
+    expect(res.status).toBe(400);
+    expect(mockApi.backendLogin).not.toHaveBeenCalled();
+  });
+
+  test("rejects a signature bound to a different nonce (cookie mismatch)", async () => {
+    const app = makeApp();
+    const form1 = await request(app).get("/oauth/authorize").query(goodQuery);
+    const sig1 = /name="csrf_sig" value="([^\"]+)"/.exec(form1.text)?.[1] ?? "";
+    const ts1 = /name="csrf_ts" value="([^\"]+)"/.exec(form1.text)?.[1] ?? "";
+    const form2 = await request(app).get("/oauth/authorize").query(goodQuery); // new nonce
+    const cookies2 = form2.headers["set-cookie"];
+    const res = await request(app)
+      .post("/oauth/authorize")
+      .set("Cookie", Array.isArray(cookies2) ? cookies2 : [cookies2].filter(Boolean))
+      .type("form")
+      .send({ ...goodQuery, csrf_ts: ts1, csrf_sig: sig1, email: "a@b.com", password: "pw" });
+    expect(res.status).toBe(400);
+  });
+
+  test("rejects a token with a future timestamp", async () => {
+    // Mint a token exactly like the server does, but with a future ts.
+    const futureTs = String(Date.now() + 60 * 60 * 1000);
+    const nonce = "testnonce123";
+    const sig = crypto
+      .createHmac("sha256", process.env.MCP_JWT_SECRET!)
+      .update(
+        [futureTs, nonce, goodQuery.client_id, goodQuery.redirect_uri, goodQuery.code_challenge, goodQuery.state].join("\n"),
+      )
+      .digest("base64url");
+    const res = await request(makeApp())
+      .post("/oauth/authorize")
+      .set("Cookie", `mcp_csrf=${nonce}`)
+      .type("form")
+      .send({ ...goodQuery, csrf_ts: futureTs, csrf_sig: sig, email: "a@b.com", password: "pw" });
+    expect(res.status).toBe(400);
+  });
+
+  test("rejects a signature minted for a different state", async () => {
+    const app = makeApp();
+    const form = await request(app).get("/oauth/authorize").query(goodQuery);
+    const cookies = form.headers["set-cookie"];
+    // Sig was minted over state "xyz"; submit the form with a different state.
+    const ts = /name="csrf_ts" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+    const sig = /name="csrf_sig" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+    const res = await request(app)
+      .post("/oauth/authorize")
+      .set("Cookie", Array.isArray(cookies) ? cookies : [cookies].filter(Boolean))
+      .type("form")
+      .send({ ...goodQuery, state: "forged", csrf_ts: ts, csrf_sig: sig, email: "a@b.com", password: "pw" });
+    expect(res.status).toBe(400);
   });
 });

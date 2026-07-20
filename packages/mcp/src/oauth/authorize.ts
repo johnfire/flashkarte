@@ -1,4 +1,4 @@
-import { Router } from "express";
+import express, { Router } from "express";
 import crypto from "crypto";
 import { createAuthCode } from "./store";
 import { backendLogin, backendCreateKey } from "../api";
@@ -11,10 +11,14 @@ interface OAuthParams {
   state?: string;
 }
 
-// --- Login CSRF: a stateless signed token binding the form to its OAuth params.
-// Without it, an attacker can cross-site-submit their own credentials to log a
-// victim's connector into the attacker's account (login CSRF). 10-min validity.
+// --- Login CSRF: double-submit cookie. GET sets a SameSite=Strict HttpOnly
+// nonce cookie and signs [ts, nonce, OAuth params, state] into the form; POST
+// must present a signature bound to the cookie's nonce. A cross-site submit
+// fails (browser withholds the cookie; the nonce is unreadable to the attacker).
 const CSRF_TTL_MS = 10 * 60 * 1000;
+const CSRF_COOKIE = "mcp_csrf";
+// Allow 60s of client clock skew when rejecting future timestamps.
+const CLOCK_SKEW_MS = 60 * 1000;
 
 let devCsrfSecret: string | null = null;
 function csrfSecret(): string {
@@ -29,21 +33,49 @@ function csrfSecret(): string {
   return devCsrfSecret;
 }
 
-function signCsrf(p: OAuthParams, ts: string): string {
+function signCsrf(p: OAuthParams, ts: string, nonce: string): string {
   return crypto
     .createHmac("sha256", csrfSecret())
-    .update([ts, p.client_id, p.redirect_uri, p.code_challenge].join("\n"))
+    .update(
+      [ts, nonce, p.client_id, p.redirect_uri, p.code_challenge, p.state ?? ""].join("\n"),
+    )
     .digest("base64url");
 }
 
-function csrfValid(p: OAuthParams, ts?: string, sig?: string): boolean {
-  if (!ts || !sig) return false;
+function csrfValid(
+  p: OAuthParams,
+  ts?: string,
+  sig?: string,
+  nonce?: string,
+): boolean {
+  if (!ts || !sig || !nonce) return false;
   const tsNum = Number(ts);
-  if (!Number.isFinite(tsNum) || Date.now() - tsNum > CSRF_TTL_MS) return false;
-  const expected = signCsrf(p, ts);
+  if (!Number.isFinite(tsNum)) return false;
+  if (tsNum > Date.now() + CLOCK_SKEW_MS) return false; // future ts
+  if (Date.now() - tsNum > CSRF_TTL_MS) return false; // expired
+  const expected = signCsrf(p, ts, nonce);
   const a = Buffer.from(sig);
   const b = Buffer.from(expected);
   return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
+// Minimal cookie reader — avoids a cookie-parser dependency for one value.
+function readCookie(req: express.Request, name: string): string | undefined {
+  const header = req.headers.cookie;
+  if (!header) return undefined;
+  for (const part of header.split(";")) {
+    const [k, ...rest] = part.trim().split("=");
+    if (k === name) return rest.join("=");
+  }
+  return undefined;
+}
+
+function setCsrfCookie(res: express.Response, nonce: string): void {
+  const secure = (process.env.NODE_ENV ?? "development") === "production";
+  res.setHeader(
+    "Set-Cookie",
+    `${CSRF_COOKIE}=${nonce}; HttpOnly; SameSite=Strict; Path=/oauth; Max-Age=${CSRF_TTL_MS / 1000}${secure ? "; Secure" : ""}`,
+  );
 }
 
 // --- Per-IP login rate limit (the authorize POST is an unauthenticated
@@ -63,13 +95,13 @@ function escapeHtml(s: string): string {
   return s.replace(/[&<>"']/g, (c) => HTML_ESCAPES[c]);
 }
 
-function renderLoginForm(p: OAuthParams, error?: string): string {
+function renderLoginForm(p: OAuthParams, nonce: string, error?: string): string {
   const hidden = (name: string, val?: string) =>
     val
       ? `<input type="hidden" name="${name}" value="${escapeHtml(val)}">`
       : "";
   const csrfTs = String(Date.now());
-  const csrfSig = signCsrf(p, csrfTs);
+  const csrfSig = signCsrf(p, csrfTs, nonce);
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -98,6 +130,17 @@ ${hidden("csrf_sig", csrfSig)}
 <button type="submit">Log in &amp; connect</button>
 </form>
 </body></html>`;
+}
+
+function sendLoginForm(
+  res: express.Response,
+  p: OAuthParams,
+  status: number,
+  error?: string,
+): void {
+  const nonce = crypto.randomBytes(16).toString("base64url");
+  setCsrfCookie(res, nonce);
+  res.status(status).type("html").send(renderLoginForm(p, nonce, error));
 }
 
 type Validation =
@@ -201,7 +244,7 @@ export function createAuthorizeRouter(
       res.status(v.status).json(v.body);
       return;
     }
-    res.type("html").send(renderLoginForm(v.params));
+    sendLoginForm(res, v.params, 200);
   });
 
   router.post("/oauth/authorize", async (req, res) => {
@@ -211,42 +254,23 @@ export function createAuthorizeRouter(
       res.status(v.status).json(v.body);
       return;
     }
-    if (!csrfValid(v.params, body.csrf_ts, body.csrf_sig)) {
-      res
-        .status(400)
-        .type("html")
-        .send(
-          renderLoginForm(v.params, "Your session expired. Please try again."),
-        );
+    if (!csrfValid(v.params, body.csrf_ts, body.csrf_sig, readCookie(req, CSRF_COOKIE))) {
+      sendLoginForm(res, v.params, 400, "Your session expired. Please try again.");
       return;
     }
     const { email, password } = body;
     if (!email || !password) {
-      res
-        .status(400)
-        .type("html")
-        .send(renderLoginForm(v.params, "Email and password are required."));
+      sendLoginForm(res, v.params, 400, "Email and password are required.");
       return;
     }
     if (rateLimited(req.ip)) {
-      res
-        .status(429)
-        .type("html")
-        .send(
-          renderLoginForm(
-            v.params,
-            "Too many attempts. Please wait a few minutes and try again.",
-          ),
-        );
+      sendLoginForm(res, v.params, 429, "Too many attempts. Please wait a few minutes and try again.");
       return;
     }
 
     const login = await backendLogin(email, password);
     if (!login) {
-      res
-        .status(401)
-        .type("html")
-        .send(renderLoginForm(v.params, "Invalid email or password."));
+      sendLoginForm(res, v.params, 401, "Invalid email or password.");
       return;
     }
 
@@ -255,15 +279,7 @@ export function createAuthorizeRouter(
       const key = await backendCreateKey(login.accessToken, "claude.ai");
       fkKey = key.key;
     } catch {
-      res
-        .status(500)
-        .type("html")
-        .send(
-          renderLoginForm(
-            v.params,
-            "Could not create an API key. Please try again.",
-          ),
-        );
+      sendLoginForm(res, v.params, 500, "Could not create an API key. Please try again.");
       return;
     }
 
