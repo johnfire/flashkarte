@@ -5,11 +5,20 @@ const BASE_URL = process.env.FLASHKARTE_API_URL ?? "http://localhost:3001";
 // Per-request API key threaded from the incoming MCP HTTP request, so each
 // tool call acts as the user who owns that key.
 export const requestKeyStore = new AsyncLocalStorage<string>();
+export const requestCorrelationStore = new AsyncLocalStorage<string>();
 
 function authHeaders(extra?: Record<string, string>): Record<string, string> {
   const headers: Record<string, string> = { ...extra };
-  const key = requestKeyStore.getStore() ?? process.env.FLASHKARTE_API_KEY;
+  // Production must never fall back to an ambient shared key — fail closed
+  // (backend 401) if the request context was lost.
+  const key =
+    requestKeyStore.getStore() ??
+    (process.env.NODE_ENV === "production"
+      ? undefined
+      : process.env.FLASHKARTE_API_KEY);
   if (key) headers["Authorization"] = `Bearer ${key}`;
+  const correlationId = requestCorrelationStore.getStore();
+  if (correlationId) headers["X-Request-ID"] = correlationId;
   return headers;
 }
 
