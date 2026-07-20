@@ -37,7 +37,14 @@ function signCsrf(p: OAuthParams, ts: string, nonce: string): string {
   return crypto
     .createHmac("sha256", csrfSecret())
     .update(
-      [ts, nonce, p.client_id, p.redirect_uri, p.code_challenge, p.state ?? ""].join("\n"),
+      [
+        ts,
+        nonce,
+        p.client_id,
+        p.redirect_uri,
+        p.code_challenge,
+        p.state ?? "",
+      ].join("\n"),
     )
     .digest("base64url");
 }
@@ -95,7 +102,11 @@ function escapeHtml(s: string): string {
   return s.replace(/[&<>"']/g, (c) => HTML_ESCAPES[c]);
 }
 
-function renderLoginForm(p: OAuthParams, nonce: string, error?: string): string {
+function renderLoginForm(
+  p: OAuthParams,
+  nonce: string,
+  error?: string,
+): string {
   const hidden = (name: string, val?: string) =>
     val
       ? `<input type="hidden" name="${name}" value="${escapeHtml(val)}">`
@@ -140,7 +151,10 @@ function sendLoginForm(
 ): void {
   const nonce = crypto.randomBytes(16).toString("base64url");
   setCsrfCookie(res, nonce);
-  res.status(status).type("html").send(renderLoginForm(p, nonce, error));
+  res
+    .status(status)
+    .type("html")
+    .send(renderLoginForm(p, nonce, error));
 }
 
 type Validation =
@@ -254,8 +268,20 @@ export function createAuthorizeRouter(
       res.status(v.status).json(v.body);
       return;
     }
-    if (!csrfValid(v.params, body.csrf_ts, body.csrf_sig, readCookie(req, CSRF_COOKIE))) {
-      sendLoginForm(res, v.params, 400, "Your session expired. Please try again.");
+    if (
+      !csrfValid(
+        v.params,
+        body.csrf_ts,
+        body.csrf_sig,
+        readCookie(req, CSRF_COOKIE),
+      )
+    ) {
+      sendLoginForm(
+        res,
+        v.params,
+        400,
+        "Your session expired. Please try again.",
+      );
       return;
     }
     const { email, password } = body;
@@ -264,7 +290,12 @@ export function createAuthorizeRouter(
       return;
     }
     if (rateLimited(req.ip)) {
-      sendLoginForm(res, v.params, 429, "Too many attempts. Please wait a few minutes and try again.");
+      sendLoginForm(
+        res,
+        v.params,
+        429,
+        "Too many attempts. Please wait a few minutes and try again.",
+      );
       return;
     }
 
@@ -279,7 +310,12 @@ export function createAuthorizeRouter(
       const key = await backendCreateKey(login.accessToken, "claude.ai");
       fkKey = key.key;
     } catch {
-      sendLoginForm(res, v.params, 500, "Could not create an API key. Please try again.");
+      sendLoginForm(
+        res,
+        v.params,
+        500,
+        "Could not create an API key. Please try again.",
+      );
       return;
     }
 

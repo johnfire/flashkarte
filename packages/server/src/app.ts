@@ -152,7 +152,11 @@ export function createApp() {
     const suppliedToken = req.headers.authorization?.replace(/^Bearer\s+/i, "");
     const a = Buffer.from(suppliedToken ?? "");
     const b = Buffer.from(expectedToken ?? "");
-    if (!expectedToken || a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+    if (
+      !expectedToken ||
+      a.length !== b.length ||
+      !crypto.timingSafeEqual(a, b)
+    ) {
       res.status(404).end();
       return;
     }

@@ -37,8 +37,8 @@ async function postAuthorize(
   fields: Record<string, string> = {},
 ) {
   const form = await request(app).get("/oauth/authorize").query(goodQuery);
-  const ts = /name="csrf_ts" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
-  const sig = /name="csrf_sig" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+  const ts = /name="csrf_ts" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+  const sig = /name="csrf_sig" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
   const cookies = form.headers["set-cookie"];
   return request(app)
     .post("/oauth/authorize")
@@ -172,12 +172,18 @@ describe("authorize POST", () => {
   test("rejects a signed POST that presents no CSRF cookie", async () => {
     const app = makeApp();
     const form = await request(app).get("/oauth/authorize").query(goodQuery);
-    const ts = /name="csrf_ts" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
-    const sig = /name="csrf_sig" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+    const ts = /name="csrf_ts" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+    const sig = /name="csrf_sig" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
     const res = await request(app)
       .post("/oauth/authorize")
       .type("form")
-      .send({ ...goodQuery, csrf_ts: ts, csrf_sig: sig, email: "a@b.com", password: "pw" });
+      .send({
+        ...goodQuery,
+        csrf_ts: ts,
+        csrf_sig: sig,
+        email: "a@b.com",
+        password: "pw",
+      });
     expect(res.status).toBe(400);
     expect(mockApi.backendLogin).not.toHaveBeenCalled();
   });
@@ -185,15 +191,24 @@ describe("authorize POST", () => {
   test("rejects a signature bound to a different nonce (cookie mismatch)", async () => {
     const app = makeApp();
     const form1 = await request(app).get("/oauth/authorize").query(goodQuery);
-    const sig1 = /name="csrf_sig" value="([^\"]+)"/.exec(form1.text)?.[1] ?? "";
-    const ts1 = /name="csrf_ts" value="([^\"]+)"/.exec(form1.text)?.[1] ?? "";
+    const sig1 = /name="csrf_sig" value="([^"]+)"/.exec(form1.text)?.[1] ?? "";
+    const ts1 = /name="csrf_ts" value="([^"]+)"/.exec(form1.text)?.[1] ?? "";
     const form2 = await request(app).get("/oauth/authorize").query(goodQuery); // new nonce
     const cookies2 = form2.headers["set-cookie"];
     const res = await request(app)
       .post("/oauth/authorize")
-      .set("Cookie", Array.isArray(cookies2) ? cookies2 : [cookies2].filter(Boolean))
+      .set(
+        "Cookie",
+        Array.isArray(cookies2) ? cookies2 : [cookies2].filter(Boolean),
+      )
       .type("form")
-      .send({ ...goodQuery, csrf_ts: ts1, csrf_sig: sig1, email: "a@b.com", password: "pw" });
+      .send({
+        ...goodQuery,
+        csrf_ts: ts1,
+        csrf_sig: sig1,
+        email: "a@b.com",
+        password: "pw",
+      });
     expect(res.status).toBe(400);
   });
 
@@ -204,14 +219,27 @@ describe("authorize POST", () => {
     const sig = crypto
       .createHmac("sha256", process.env.MCP_JWT_SECRET!)
       .update(
-        [futureTs, nonce, goodQuery.client_id, goodQuery.redirect_uri, goodQuery.code_challenge, goodQuery.state].join("\n"),
+        [
+          futureTs,
+          nonce,
+          goodQuery.client_id,
+          goodQuery.redirect_uri,
+          goodQuery.code_challenge,
+          goodQuery.state,
+        ].join("\n"),
       )
       .digest("base64url");
     const res = await request(makeApp())
       .post("/oauth/authorize")
       .set("Cookie", `mcp_csrf=${nonce}`)
       .type("form")
-      .send({ ...goodQuery, csrf_ts: futureTs, csrf_sig: sig, email: "a@b.com", password: "pw" });
+      .send({
+        ...goodQuery,
+        csrf_ts: futureTs,
+        csrf_sig: sig,
+        email: "a@b.com",
+        password: "pw",
+      });
     expect(res.status).toBe(400);
   });
 
@@ -220,13 +248,23 @@ describe("authorize POST", () => {
     const form = await request(app).get("/oauth/authorize").query(goodQuery);
     const cookies = form.headers["set-cookie"];
     // Sig was minted over state "xyz"; submit the form with a different state.
-    const ts = /name="csrf_ts" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
-    const sig = /name="csrf_sig" value="([^\"]+)"/.exec(form.text)?.[1] ?? "";
+    const ts = /name="csrf_ts" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+    const sig = /name="csrf_sig" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
     const res = await request(app)
       .post("/oauth/authorize")
-      .set("Cookie", Array.isArray(cookies) ? cookies : [cookies].filter(Boolean))
+      .set(
+        "Cookie",
+        Array.isArray(cookies) ? cookies : [cookies].filter(Boolean),
+      )
       .type("form")
-      .send({ ...goodQuery, state: "forged", csrf_ts: ts, csrf_sig: sig, email: "a@b.com", password: "pw" });
+      .send({
+        ...goodQuery,
+        state: "forged",
+        csrf_ts: ts,
+        csrf_sig: sig,
+        email: "a@b.com",
+        password: "pw",
+      });
     expect(res.status).toBe(400);
   });
 });
