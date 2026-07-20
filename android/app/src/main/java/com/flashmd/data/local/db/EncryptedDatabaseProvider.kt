@@ -27,7 +27,13 @@ internal object EncryptedDatabaseProvider {
         encryptedFile: File,
     ) {
         val legacyFile = context.getDatabasePath(LEGACY_NAME)
-        if (encryptedFile.exists() || !legacyFile.exists()) return
+        if (!legacyFile.exists()) return
+        if (encryptedFile.exists()) {
+            // Migration previously completed but was interrupted before cleanup —
+            // never let the plaintext copy linger.
+            deleteDatabaseFiles(context, LEGACY_NAME)
+            return
+        }
 
         deleteDatabaseFiles(context, MIGRATION_NAME)
         val sourceDriver = AndroidSqliteDriver(FlashkarteDb.Schema, context, LEGACY_NAME)
