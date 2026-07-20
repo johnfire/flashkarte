@@ -16,8 +16,17 @@ interface OAuthParams {
 // victim's connector into the attacker's account (login CSRF). 10-min validity.
 const CSRF_TTL_MS = 10 * 60 * 1000;
 
+let devCsrfSecret: string | null = null;
 function csrfSecret(): string {
-  return process.env.MCP_JWT_SECRET ?? "mcp-dev-csrf-secret";
+  const secret = process.env.MCP_JWT_SECRET;
+  if (secret) return secret;
+  if ((process.env.NODE_ENV ?? "development") === "production") {
+    throw new Error("MCP_JWT_SECRET must be set in production");
+  }
+  // Per-process random dev fallback — tokens don't survive restarts, and no
+  // attacker-known constant ever signs anything.
+  if (!devCsrfSecret) devCsrfSecret = crypto.randomBytes(32).toString("hex");
+  return devCsrfSecret;
 }
 
 function signCsrf(p: OAuthParams, ts: string): string {
