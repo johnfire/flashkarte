@@ -166,9 +166,22 @@ export function createAuthorizeRouter(
 
   // Per-instance so each app gets a fresh limiter (one instance in prod).
   const attempts = new Map<string, { count: number; resetAt: number }>();
+  const MAX_TRACKED_IPS = 10_000;
+
+  function sweepAttempts(): void {
+    const now = Date.now();
+    for (const [key, entry] of attempts) {
+      if (entry.resetAt < now) attempts.delete(key);
+    }
+  }
+
+  // Unref'd so the timer never keeps the process alive (tests, CLI runs).
+  setInterval(sweepAttempts, ATTEMPT_WINDOW_MS).unref();
+
   function rateLimited(ip: string | undefined): boolean {
     const key = ip ?? "unknown";
     const now = Date.now();
+    if (attempts.size >= MAX_TRACKED_IPS) sweepAttempts();
     const e = attempts.get(key);
     if (!e || e.resetAt < now) {
       attempts.set(key, { count: 1, resetAt: now + ATTEMPT_WINDOW_MS });
