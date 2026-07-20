@@ -97,7 +97,10 @@ export function reportClientError(r: {
         app: "web",
         appVersion: APP_VERSION,
         platform: "web",
-        url: typeof location !== "undefined" ? location.href : undefined,
+        url:
+          typeof location !== "undefined"
+            ? location.origin + location.pathname
+            : undefined,
         userAgent:
           typeof navigator !== "undefined" ? navigator.userAgent : undefined,
         ...r,
