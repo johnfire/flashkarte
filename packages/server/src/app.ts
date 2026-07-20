@@ -1,5 +1,6 @@
 import path from "path";
 import net from "net";
+import crypto from "crypto";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -31,6 +32,8 @@ import { getSiteOrigin } from "./seo/siteOrigin";
 import { SitemapUrl } from "./seo/sitemap";
 import * as libraryService from "./domains/library/library.service";
 import { deckPath } from "@flashkarte/shared";
+import { getPool } from "./db/client";
+import { renderHttpMetrics } from "./observability/httpMetrics";
 
 // For IPv6, bucket by the /64 prefix so a client can't trivially bypass rate
 // limits by rotating through addresses within their allocated /64 block.
@@ -136,6 +139,25 @@ export function createApp() {
   }
 
   app.get("/health", (_req, res) => res.json({ status: "ok" }));
+  app.get("/ready", async (_req, res) => {
+    try {
+      await getPool().query("SELECT 1");
+      res.json({ status: "ready" });
+    } catch {
+      res.status(503).json({ status: "not_ready" });
+    }
+  });
+  app.get("/metrics", (req, res) => {
+    const expectedToken = process.env.METRICS_TOKEN;
+    const suppliedToken = req.headers.authorization?.replace(/^Bearer\s+/i, "");
+    const a = Buffer.from(suppliedToken ?? "");
+    const b = Buffer.from(expectedToken ?? "");
+    if (!expectedToken || a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+      res.status(404).end();
+      return;
+    }
+    res.type("text/plain").send(renderHttpMetrics());
+  });
 
   // No-store on API responses (stale 304s break refresh after mutations)
   app.use("/api", (_req, res, next) => {
