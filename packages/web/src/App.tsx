@@ -17,11 +17,13 @@ import { HomeRoute } from "./components/HomeRoute";
 import { LibraryPage } from "./pages/LibraryPage";
 import { ExplorePage } from "./pages/ExplorePage";
 import { PublicDeckPage } from "./pages/PublicDeckPage";
+import { AnalyticsConsentBanner } from "./components/AnalyticsConsentBanner";
 
 export default function App() {
   return (
     <>
       <ThemeToggle />
+      <AnalyticsConsentBanner />
       <Routes>
         <Route path="/" element={<HomeRoute />} />
         <Route path="/welcome" element={<Navigate to="/" replace />} />

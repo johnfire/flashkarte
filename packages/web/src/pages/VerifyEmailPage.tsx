@@ -9,6 +9,7 @@ export function VerifyEmailPage() {
   const { t } = useTranslation();
   const [params] = useSearchParams();
   const token = params.get("token");
+  const changeToken = params.get("changeToken");
   const [status, setStatus] = useState<Status>("verifying");
   const [message, setMessage] = useState("");
   const ran = useRef(false);
@@ -16,13 +17,15 @@ export function VerifyEmailPage() {
   useEffect(() => {
     if (ran.current) return; // guard React 18 StrictMode double-invoke
     ran.current = true;
-    if (!token) {
+    if (!token && !changeToken) {
       setStatus("error");
       setMessage(t("verifyEmail.missingToken"));
       return;
     }
-    api.auth
-      .verifyEmail(token)
+    const verification = changeToken
+      ? api.auth.confirmEmailChange(changeToken)
+      : api.auth.verifyEmail(token!);
+    verification
       .then(() => setStatus("success"))
       .catch((err) => {
         setStatus("error");
@@ -30,7 +33,7 @@ export function VerifyEmailPage() {
           err instanceof ApiError ? err.message : t("verifyEmail.genericError"),
         );
       });
-  }, [token]);
+  }, [changeToken, t, token]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">
@@ -43,7 +46,13 @@ export function VerifyEmailPage() {
         )}
         {status === "success" && (
           <>
-            <p className="text-green-600">{t("verifyEmail.success")}</p>
+            <p className="text-green-600">
+              {t(
+                changeToken
+                  ? "verifyEmail.emailChanged"
+                  : "verifyEmail.success",
+              )}
+            </p>
             <Link
               to="/"
               className="inline-block rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"

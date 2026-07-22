@@ -1,8 +1,13 @@
 jest.mock("./study.repository");
+jest.mock("../audit/audit.service", () => ({ recordRequired: jest.fn() }));
 import * as repo from "./study.repository";
+import { recordRequired } from "../audit/audit.service";
 import { sync } from "./study.service";
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
+const mockRecordRequired = recordRequired as jest.MockedFunction<
+  typeof recordRequired
+>;
 const mockClient = {} as import("pg").PoolClient;
 beforeEach(() => {
   jest.clearAllMocks();
@@ -14,6 +19,7 @@ beforeEach(() => {
   mockRepo.withCardProgressLock.mockImplementation(
     async (_userId, _cardId, action) => action(mockClient),
   );
+  mockRecordRequired.mockResolvedValue();
 });
 
 describe("sync", () => {
@@ -38,6 +44,10 @@ describe("sync", () => {
     expect(p!.repetitions).toBe(2);
     expect(res.acked_event_ids).toEqual(expect.arrayContaining(["e1", "e2"]));
     expect(mockRepo.upsertProgressAt).toHaveBeenCalledTimes(1);
+    expect(mockRecordRequired).toHaveBeenCalledWith(
+      expect.objectContaining({ action: "study.synced", targetId: "c1" }),
+      mockClient,
+    );
   });
 
   test("duplicate event_id is acked but not re-applied", async () => {

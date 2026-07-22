@@ -139,6 +139,17 @@ from web/Android) land here:
 tail -f ~/logs/flashkarte/flashkarte.log
 ```
 
+The log contains structured request IDs. MCP tool logs forward the same
+`x-request-id` to the backend, so investigate an AI action by searching that
+ID in both service logs. `/metrics` requires an `Authorization: Bearer`
+header matching `METRICS_TOKEN`; keep it behind the trusted reverse proxy.
+Configure host `logrotate`
+for the JSON-lines file before it reaches operationally significant size.
+
+The self-hosted Postfix delivery and error logs use a dedicated daily logrotate
+policy with a 90-day maximum retention. This is separate from the application
+JSON log, which requires its own retention policy.
+
 ## Backups
 
 The `db-backup` sidecar dumps the database daily to `./backups` (7 daily / 4

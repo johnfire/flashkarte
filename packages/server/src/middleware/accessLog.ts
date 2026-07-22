@@ -1,5 +1,6 @@
 import type { Request, Response, NextFunction } from "express";
 import { logger } from "../utils/logger";
+import { recordHttpMetric } from "../observability/httpMetrics";
 
 /**
  * Structured HTTP access log. Emits a single JSON line on response finish,
@@ -16,10 +17,11 @@ export function accessLog(
   const correlationId = req.correlationId ?? "unknown";
   res.on("finish", () => {
     const duration = Date.now() - start;
+    recordHttpMetric(req.method, res.statusCode, duration);
     logger.withCorrelationId(correlationId, () => {
       logger.info("http.access", "request", {
         method: req.method,
-        path: req.originalUrl,
+        path: req.path,
         statusCode: res.statusCode,
         durationMs: duration,
         userId: req.userId,

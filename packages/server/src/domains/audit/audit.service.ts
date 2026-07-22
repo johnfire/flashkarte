@@ -84,3 +84,24 @@ export async function record(
     if (client) throw err;
   }
 }
+
+/** Write audit history within a state-change transaction. */
+export async function recordRequired(
+  params: AuditRecordParams,
+  client: PoolClient,
+): Promise<void> {
+  await insertAuditLog(
+    {
+      actorType: params.actor.type,
+      actorId: params.actor.id,
+      action: params.action,
+      targetType: params.targetType,
+      targetId: params.targetId,
+      correlationId: getCorrelationId(),
+      outcome: params.outcome ?? "success",
+      beforeState: params.beforeState,
+      afterState: params.afterState,
+    },
+    client,
+  );
+}

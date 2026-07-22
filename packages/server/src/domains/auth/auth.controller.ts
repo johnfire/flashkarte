@@ -102,7 +102,43 @@ export const verifyEmail = wrapAsync(async (req: Request, res: Response) => {
 export const resendVerification = wrapAsync(
   async (req: Request, res: Response) => {
     await service.resendVerification(req.userId!);
+    await record({
+      actor: userActor(req.userId!),
+      action: "email.verification_resent",
+      targetType: "user",
+      targetId: req.userId!,
+    });
     res.status(202).json({ status: "sent" });
+  },
+);
+
+export const requestEmailChange = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.requestEmailChange(
+      req.userId!,
+      req.body.currentPassword,
+      req.body.newEmail,
+    );
+    await record({
+      actor: userActor(req.userId!),
+      action: "email.change_requested",
+      targetType: "user",
+      targetId: req.userId!,
+    });
+    res.status(202).json({ status: "sent" });
+  },
+);
+
+export const confirmEmailChange = wrapAsync(
+  async (req: Request, res: Response) => {
+    const userId = await service.confirmEmailChange(req.body.token);
+    await record({
+      actor: userActor(userId),
+      action: "email.changed",
+      targetType: "user",
+      targetId: userId,
+    });
+    res.json({ status: "changed" });
   },
 );
 
@@ -117,6 +153,13 @@ export const updateMe = wrapAsync(async (req: Request, res: Response) => {
     req.body.displayName,
     req.body.language,
   );
+  await record({
+    actor: userActor(req.userId!),
+    action: "profile.updated",
+    targetType: "user",
+    targetId: req.userId!,
+    afterState: { displayName: user.displayName, language: user.language },
+  });
   res.json({ user });
 });
 

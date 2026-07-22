@@ -7,7 +7,11 @@ jest.mock("../../email/mailer");
 
 import bcrypt from "bcryptjs";
 import { withTransaction } from "../../db/client";
-import { getAppUrl, sendPasswordResetEmail } from "../../email/mailer";
+import {
+  getAppUrl,
+  sendEmailChangeVerification,
+  sendPasswordResetEmail,
+} from "../../email/mailer";
 import { record, userActor } from "../audit/audit.service";
 import * as twoFactor from "../account/twoFactor.service";
 import * as repo from "./auth.repository";
@@ -18,6 +22,8 @@ import {
   changePassword,
   forgotPassword,
   resetPassword,
+  requestEmailChange,
+  confirmEmailChange,
   updateProfile,
   verifyEmail,
 } from "./auth.service";
@@ -33,6 +39,10 @@ const mockBcrypt = bcrypt as jest.Mocked<typeof bcrypt>;
 const mockGetAppUrl = getAppUrl as jest.MockedFunction<typeof getAppUrl>;
 const mockSendPasswordResetEmail =
   sendPasswordResetEmail as jest.MockedFunction<typeof sendPasswordResetEmail>;
+const mockSendEmailChangeVerification =
+  sendEmailChangeVerification as jest.MockedFunction<
+    typeof sendEmailChangeVerification
+  >;
 
 function setupRepoRow(
   overrides: Partial<{
@@ -176,6 +186,73 @@ describe("auth command validation", () => {
       code: "UNAUTHENTICATED",
       httpStatus: 401,
     });
+  });
+});
+
+describe("verified email changes", () => {
+  it("requires the current password before sending a change link", async () => {
+    setupRepoRow();
+    mockBcrypt.compare.mockResolvedValue(false as never);
+
+    await expect(
+      requestEmailChange("u1", "wrong", "new@example.com"),
+    ).rejects.toThrow("Current password is incorrect");
+    expect(mockRepo.insertEmailChangeToken).not.toHaveBeenCalled();
+  });
+
+  it("stores only a hashed token and emails the new address", async () => {
+    setupRepoRow();
+    mockRepo.findByEmailWithHash.mockResolvedValue(null);
+    mockRepo.deleteEmailChangeTokensForUser.mockResolvedValue([]);
+    mockRepo.insertEmailChangeToken.mockResolvedValue([]);
+    mockSendEmailChangeVerification.mockResolvedValue(undefined);
+
+    await requestEmailChange("u1", "password", "NEW@example.com");
+
+    expect(mockRepo.insertEmailChangeToken).toHaveBeenCalledWith(
+      "u1",
+      "new@example.com",
+      expect.stringMatching(/^[0-9a-f]{64}$/),
+      expect.any(Date),
+    );
+    expect(mockSendEmailChangeVerification).toHaveBeenCalledWith(
+      "new@example.com",
+      expect.stringMatching(
+        /^https:\/\/flashkarte\.example\/verify-email\?changeToken=/,
+      ),
+    );
+  });
+
+  it("changes the email once, then invalidates every session", async () => {
+    mockRepo.findEmailChangeToken.mockResolvedValue({
+      user_id: "u1",
+      new_email: "new@example.com",
+      expires_at: new Date(Date.now() + 60_000),
+    });
+    mockRepo.updateEmail.mockResolvedValue(
+      setupRepoRow({
+        email: "new@example.com",
+      }),
+    );
+    mockRepo.deleteEmailChangeTokensForUser.mockResolvedValue([]);
+    mockRepo.deleteRefreshTokensForUser.mockResolvedValue([]);
+
+    await expect(confirmEmailChange("link-token")).resolves.toBe("u1");
+    expect(mockRepo.updateEmail).toHaveBeenCalledWith("u1", "new@example.com");
+    expect(mockRepo.deleteRefreshTokensForUser).toHaveBeenCalledWith("u1");
+  });
+
+  it("rejects an expired email-change link", async () => {
+    mockRepo.findEmailChangeToken.mockResolvedValue({
+      user_id: "u1",
+      new_email: "new@example.com",
+      expires_at: new Date(Date.now() - 60_000),
+    });
+
+    await expect(confirmEmailChange("expired-token")).rejects.toThrow(
+      "This email-change link is invalid or expired",
+    );
+    expect(mockRepo.updateEmail).not.toHaveBeenCalled();
   });
 });
 

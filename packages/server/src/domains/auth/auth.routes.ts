@@ -11,8 +11,10 @@ authRouter.post("/logout", ctrl.logout);
 authRouter.get("/me", requireAuth, ctrl.me);
 authRouter.patch("/me", requireAuth, ctrl.updateMe);
 authRouter.post("/verify-email", ctrl.verifyEmail);
+authRouter.post("/confirm-email-change", ctrl.confirmEmailChange);
 authRouter.post("/resend-verification", requireAuth, ctrl.resendVerification);
 authRouter.post("/change-password", requireAuth, ctrl.changePassword);
+authRouter.post("/change-email", requireAuth, ctrl.requestEmailChange);
 authRouter.post("/forgot-password", ctrl.forgotPassword);
 authRouter.post("/reset-password", ctrl.resetPassword);
 authRouter.delete(

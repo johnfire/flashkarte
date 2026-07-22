@@ -32,7 +32,7 @@ export function StudyPage() {
       });
       setError(err instanceof ApiError ? err.message : t("study.loadError"));
     }
-  }, [id]);
+  }, [id, t]);
 
   useEffect(() => {
     load();

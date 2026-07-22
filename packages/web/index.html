@@ -8,13 +8,6 @@
     <!-- External (not inline) so it's allowed by the production CSP
          `script-src 'self'`; restores the saved theme before paint. -->
     <script src="/theme-init.js"></script>
-    <!-- Privacy-friendly analytics (Umami). The production CSP (helmet config
-         in server app.ts) allowlists this origin in script-src + connect-src. -->
-    <script
-      defer
-      src="https://stats.christopherrehm.de/script.js"
-      data-website-id="cb5832ad-8bb6-4c86-b554-9b5b63b90bd2"
-    ></script>
   </head>
   <body>
     <div id="root"></div>

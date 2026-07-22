@@ -232,6 +232,26 @@ describe("auth routes", () => {
     expect(res.status).toBe(422);
   });
 
+  test("POST /api/auth/change-email requires authentication", async () => {
+    const res = await request(app)
+      .post("/api/auth/change-email")
+      .send({ currentPassword: "password", newEmail: "new@example.com" });
+
+    expect(res.status).toBe(401);
+    expect(mock.requestEmailChange).not.toHaveBeenCalled();
+  });
+
+  test("POST /api/auth/confirm-email-change confirms the supplied token", async () => {
+    mock.confirmEmailChange.mockResolvedValue("u1");
+    const res = await request(app)
+      .post("/api/auth/confirm-email-change")
+      .send({ token: "change-token" });
+
+    expect(res.status).toBe(200);
+    expect(res.body.status).toBe("changed");
+    expect(mock.confirmEmailChange).toHaveBeenCalledWith("change-token");
+  });
+
   test("POST /api/auth/resend-verification without auth -> 401", async () => {
     const res = await request(app).post("/api/auth/resend-verification");
     expect(res.status).toBe(401);

@@ -1,4 +1,9 @@
-import { backendLogin, backendCreateKey } from "./api";
+import {
+  api,
+  backendLogin,
+  backendCreateKey,
+  requestCorrelationStore,
+} from "./api";
 
 const mockFetch = jest.fn();
 global.fetch = mockFetch as unknown as typeof fetch;
@@ -47,5 +52,12 @@ describe("backend helpers", () => {
   test("backendCreateKey throws on failure", async () => {
     mockFetch.mockResolvedValue(jsonResponse(false, 500, {}));
     await expect(backendCreateKey("jwt", "n")).rejects.toThrow();
+  });
+
+  test("forwards the current correlation ID to the backend", async () => {
+    mockFetch.mockResolvedValue(jsonResponse(true, 200, { ok: true }));
+    await requestCorrelationStore.run("trace-42", () => api("GET", "/health"));
+    const [, options] = mockFetch.mock.calls[0];
+    expect(options.headers["X-Request-ID"]).toBe("trace-42");
   });
 });

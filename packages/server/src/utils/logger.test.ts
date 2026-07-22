@@ -45,4 +45,14 @@ describe("logger", () => {
     expect(entry.level).toBe("error");
     expect(entry.msg).toBe("oops");
   });
+
+  it("redacts tokens from structured log metadata", () => {
+    logger.info("test.source", "request", {
+      authorization: "Bearer secret-value",
+      error: "request failed with fk_secret-value",
+    });
+    const entry = JSON.parse(consoleLogSpy.mock.calls[0][0] as string);
+    expect(entry.authorization).toBe("[REDACTED]");
+    expect(entry.error).not.toContain("secret-value");
+  });
 });

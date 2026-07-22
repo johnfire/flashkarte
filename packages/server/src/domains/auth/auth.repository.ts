@@ -96,6 +96,42 @@ export function markEmailVerified(userId: string) {
   );
 }
 
+// --- Verified email changes ---
+
+export function insertEmailChangeToken(
+  userId: string,
+  newEmail: string,
+  tokenHash: string,
+  expiresAt: Date,
+) {
+  return query(
+    `INSERT INTO email_change_tokens (user_id, new_email, token_hash, expires_at)
+     VALUES ($1, $2, $3, $4)`,
+    [userId, newEmail, tokenHash, expiresAt],
+  );
+}
+
+export function findEmailChangeToken(tokenHash: string) {
+  return queryOne<{ user_id: string; new_email: string; expires_at: Date }>(
+    "SELECT user_id, new_email, expires_at FROM email_change_tokens WHERE token_hash = $1",
+    [tokenHash],
+  );
+}
+
+export function deleteEmailChangeTokensForUser(userId: string) {
+  return query("DELETE FROM email_change_tokens WHERE user_id = $1", [userId]);
+}
+
+export function updateEmail(userId: string, email: string) {
+  return queryOne<UserRow>(
+    `UPDATE users
+     SET email = $2, email_verified_at = now(), updated_at = now()
+     WHERE id = $1
+     RETURNING ${USER_COLS}`,
+    [userId, email],
+  );
+}
+
 export function storeRefreshToken(
   userId: string,
   tokenHash: string,

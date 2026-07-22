@@ -1,4 +1,5 @@
 import nodemailer, { Transporter } from "nodemailer";
+import { logger } from "../utils/logger";
 
 // Email sending. SMTP is configured via env (MAIL_HOST/PORT/USER/PASS/FROM).
 // When MAIL_HOST is unset (local dev, tests, CI) we don't send — we log the
@@ -48,10 +49,9 @@ export async function sendMail(mail: Mail): Promise<void> {
   }
   const tx = getTransporter();
   if (!tx) {
-    // eslint-disable-next-line no-console
-    console.log(
-      `[mailer] no SMTP configured — skipping send to ${mail.to} (${mail.subject})`,
-    );
+    logger.info("email.mailer", "smtp not configured; message skipped", {
+      subject: mail.subject,
+    });
     return;
   }
   await tx.sendMail({ from, ...mail });
@@ -83,6 +83,23 @@ export async function sendVerificationEmail(
       "Confirm your email",
       "Welcome to flashkarte! Please confirm your email address. This link expires in 24 hours.",
       "Verify email",
+      link,
+    ),
+  });
+}
+
+export async function sendEmailChangeVerification(
+  to: string,
+  link: string,
+): Promise<void> {
+  await sendMail({
+    to,
+    subject: "Confirm your new flashkarte email",
+    text: `Confirm this email address for your flashkarte account by opening this link:\n${link}\n\nThis link expires in 24 hours. If you did not request this change, you can ignore this email.`,
+    html: layout(
+      "Confirm your new email",
+      "Confirm this email address for your flashkarte account. This link expires in 24 hours. If you did not request it, you can safely ignore this email.",
+      "Confirm email",
       link,
     ),
   });

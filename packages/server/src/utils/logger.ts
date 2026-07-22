@@ -33,6 +33,26 @@ if (LOG_DIR) {
 
 type Level = "info" | "warn" | "error";
 
+const SENSITIVE_FIELD = /authorization|cookie|password|secret|token|api.?key/i;
+const SENSITIVE_TEXT =
+  /(bearer\s+)[^\s,]+|(fk_[A-Za-z0-9_-]+)|([?&](?:token|code|key)=[^&\s]+)/gi;
+const MAX_LOG_TEXT_LENGTH = 2_000;
+
+function redactText(value: string): string {
+  const redacted = value.replace(SENSITIVE_TEXT, "$1[REDACTED]");
+  return redacted.slice(0, MAX_LOG_TEXT_LENGTH);
+}
+
+function sanitizeMeta(meta: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(
+    Object.entries(meta).map(([key, value]) => {
+      if (SENSITIVE_FIELD.test(key)) return [key, "[REDACTED]"];
+      if (typeof value === "string") return [key, redactText(value)];
+      return [key, value];
+    }),
+  );
+}
+
 function write(
   level: Level,
   source: string,
@@ -45,7 +65,7 @@ function write(
     source,
     correlationId: asyncLocalStorage.getStore(),
     msg,
-    ...(meta ?? {}),
+    ...(meta ? sanitizeMeta(meta) : {}),
   });
   // eslint-disable-next-line no-console -- this is the sanctioned log sink
   (level === "error" ? console.error : console.log)(line);

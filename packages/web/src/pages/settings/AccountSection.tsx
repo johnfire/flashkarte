@@ -17,6 +17,10 @@ export function AccountSection() {
   const [savingName, setSavingName] = useState(false);
   const [nameSaved, setNameSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [newEmail, setNewEmail] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [savingEmail, setSavingEmail] = useState(false);
+  const [emailMessage, setEmailMessage] = useState<string | null>(null);
 
   if (!user) return null;
 
@@ -38,6 +42,22 @@ export function AccountSection() {
       );
     } finally {
       setSavingName(false);
+    }
+  }
+
+  async function requestEmailChange() {
+    setSavingEmail(true);
+    setEmailMessage(null);
+    try {
+      await api.auth.requestEmailChange(currentPassword, newEmail.trim());
+      setCurrentPassword("");
+      setEmailMessage(t("settings.emailChangeSent"));
+    } catch (err) {
+      setEmailMessage(
+        err instanceof ApiError ? err.message : t("settings.changeEmailError"),
+      );
+    } finally {
+      setSavingEmail(false);
     }
   }
 
@@ -82,6 +102,44 @@ export function AccountSection() {
         <p className="mt-1 text-sm text-green-600">{t("common.saved")}</p>
       )}
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
+
+      <div className="mt-6 border-t pt-4">
+        <h3 className="font-medium">{t("settings.changeEmail")}</h3>
+        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+          {t("settings.changeEmailHint")}
+        </p>
+        <div className="mt-3 space-y-2">
+          <input
+            type="email"
+            autoComplete="email"
+            value={newEmail}
+            onChange={(event) => setNewEmail(event.target.value)}
+            placeholder={t("settings.newEmail")}
+            className="w-full rounded-lg border px-3 py-2"
+          />
+          <input
+            type="password"
+            autoComplete="current-password"
+            value={currentPassword}
+            onChange={(event) => setCurrentPassword(event.target.value)}
+            placeholder={t("settings.currentPassword")}
+            className="w-full rounded-lg border px-3 py-2"
+          />
+          <button
+            type="button"
+            onClick={requestEmailChange}
+            disabled={savingEmail || !newEmail || !currentPassword}
+            className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
+          >
+            {savingEmail ? "…" : t("settings.changeEmailButton")}
+          </button>
+        </div>
+        {emailMessage && (
+          <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
+            {emailMessage}
+          </p>
+        )}
+      </div>
     </section>
   );
 }

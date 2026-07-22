@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
+jest.mock("../domains/audit/audit.service", () => ({
+  auditFromRequest: jest.fn(),
+}));
+
 import { errorHandler } from "./errorHandler";
 import { NotFoundError } from "../utils/errors";
+import { auditFromRequest } from "../domains/audit/audit.service";
 
 function run(err: Error) {
   const json = jest.fn();
@@ -38,5 +43,30 @@ describe("errorHandler", () => {
     const { status, json } = run(new Error("boom"));
     expect(status).toHaveBeenCalledWith(500);
     expect(json.mock.calls[0][0].error.code).toBe("INTERNAL_ERROR");
+  });
+
+  test("records a failed AI deck mutation", async () => {
+    const json = jest.fn();
+    const status = jest.fn().mockReturnValue({ json });
+    errorHandler(
+      new NotFoundError("Deck not found"),
+      {
+        method: "DELETE",
+        path: "/api/decks/invalid-id",
+        keyScope: "deck",
+        keyPrefix: "fk_test",
+        userId: "u1",
+      } as unknown as Request,
+      { status } as unknown as Response,
+      jest.fn(),
+    );
+    await Promise.resolve();
+    expect(auditFromRequest).toHaveBeenCalledWith(
+      expect.anything(),
+      "deck.deleted",
+      "deck",
+      undefined,
+      "failure",
+    );
   });
 });

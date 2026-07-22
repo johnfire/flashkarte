@@ -194,6 +194,16 @@ export const api = {
       setAccessToken(res.accessToken);
       return res;
     },
+    requestEmailChange: (currentPassword: string, newEmail: string) =>
+      request<{ status: string }>("/auth/change-email", {
+        method: "POST",
+        body: JSON.stringify({ currentPassword, newEmail }),
+      }),
+    confirmEmailChange: (token: string) =>
+      request<{ status: string }>("/auth/confirm-email-change", {
+        method: "POST",
+        body: JSON.stringify({ token }),
+      }),
     deleteAccount: (currentPassword: string) =>
       request<void>("/auth/account", {
         method: "DELETE",

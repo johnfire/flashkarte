@@ -19,6 +19,8 @@ services:
       - TWO_FACTOR_SECRET_KEY=${TWO_FACTOR_SECRET_KEY}
       - CORS_ORIGIN=https://${NGINX_HOST}
       - LOG_DIR=/logs
+      # Optional bearer token for the internal Prometheus-compatible /metrics endpoint.
+      - METRICS_TOKEN=${METRICS_TOKEN:-}
       # Email (verification + password reset). No-ops if MAIL_HOST is unset.
       - MAIL_HOST=${MAIL_HOST:-}
       - MAIL_PORT=${MAIL_PORT:-587}

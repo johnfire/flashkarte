@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { wrapAsync } from "../../utils/wrapAsync";
+import { actorFromRequest } from "../audit/audit.service";
 import * as service from "./study.service";
 
 export const studyBatch = wrapAsync(async (req: Request, res: Response) => {
@@ -16,10 +17,17 @@ export const stats = wrapAsync(async (req: Request, res: Response) => {
 
 export const review = wrapAsync(async (req: Request, res: Response) => {
   res.json(
-    await service.review(req.userId!, req.body.card_id, req.body.rating),
+    await service.review(
+      req.userId!,
+      req.body.card_id,
+      req.body.rating,
+      actorFromRequest(req),
+    ),
   );
 });
 
 export const sync = wrapAsync(async (req: Request, res: Response) => {
-  res.json(await service.sync(req.userId!, req.body.events));
+  res.json(
+    await service.sync(req.userId!, req.body.events, actorFromRequest(req)),
+  );
 });

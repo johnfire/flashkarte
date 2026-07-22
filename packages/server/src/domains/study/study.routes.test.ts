@@ -58,7 +58,10 @@ describe("study routes", () => {
 
     expect(res.status).toBe(200);
     expect(res.body.interval).toBe(1);
-    expect(mock.review).toHaveBeenCalledWith("u1", "c1", 4);
+    expect(mock.review).toHaveBeenCalledWith("u1", "c1", 4, {
+      type: "user",
+      id: "u1",
+    });
   });
 
   test("POST /api/study/review with rating 6 -> 422", async () => {
@@ -121,13 +124,17 @@ describe("study routes", () => {
 
     expect(res.status).toBe(200);
     expect(res.body.acked_event_ids).toEqual(["e1"]);
-    expect(mock.sync).toHaveBeenCalledWith("u1", [
-      {
-        event_id: "e1",
-        card_id: "c1",
-        rating: 4,
-        reviewed_at: "2026-06-05T09:00:00.000Z",
-      },
-    ]);
+    expect(mock.sync).toHaveBeenCalledWith(
+      "u1",
+      [
+        {
+          event_id: "e1",
+          card_id: "c1",
+          rating: 4,
+          reviewed_at: "2026-06-05T09:00:00.000Z",
+        },
+      ],
+      { type: "user", id: "u1" },
+    );
   });
 });

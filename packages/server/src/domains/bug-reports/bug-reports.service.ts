@@ -5,9 +5,7 @@ export interface BugReportInput {
   description: string;
   appVersion?: string;
   platform?: string;
-  device?: string;
   userId: string;
-  email: string;
 }
 
 /**
@@ -19,10 +17,9 @@ export interface BugReportInput {
  */
 export function buildIssueBody(input: BugReportInput): string {
   const meta = [
-    `**Reporter:** ${input.email} (\`${input.userId}\`)`,
+    `**Reporter account ID:** \`${input.userId}\``,
     `**App version:** ${input.appVersion ?? "unknown"}`,
     `**Platform:** ${input.platform ?? "unknown"}`,
-    `**Device:** ${input.device ?? "unknown"}`,
   ].join("\n");
 
   const longestTicks = (input.description.match(/`+/g) ?? []).reduce(

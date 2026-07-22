@@ -3,7 +3,12 @@ jest.mock("../../utils/logger");
 
 import type { Request } from "express";
 import { insertAuditLog } from "./audit.repository";
-import { record, actorFromRequest, userActor } from "./audit.service";
+import {
+  record,
+  recordRequired,
+  actorFromRequest,
+  userActor,
+} from "./audit.service";
 
 const mockInsert = insertAuditLog as jest.MockedFunction<typeof insertAuditLog>;
 
@@ -94,6 +99,19 @@ describe("audit.service", () => {
       await expect(
         record({ actor: userActor("u1"), action: "account.deleted" }, client),
       ).rejects.toThrow("db down");
+    });
+  });
+
+  describe("recordRequired", () => {
+    it("uses the caller transaction and propagates an audit write failure", async () => {
+      const client = { query: jest.fn() } as unknown as import("pg").PoolClient;
+      mockInsert.mockRejectedValue(new Error("audit unavailable"));
+      await expect(
+        recordRequired(
+          { actor: userActor("u1"), action: "study.reviewed" },
+          client,
+        ),
+      ).rejects.toThrow("audit unavailable");
     });
   });
 });

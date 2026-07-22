@@ -22,10 +22,10 @@ export function recordClientError(report: ClientErrorReport): void {
     appVersion: report.appVersion,
     platform: report.platform,
     context: report.context,
-    url: report.url,
-    userAgent: report.userAgent,
     userId: report.userId,
-    clientMessage: report.message,
-    stack: report.stack,
+    messageLength: report.message.length,
+    hasStack: Boolean(report.stack),
+    hasUrl: Boolean(report.url),
+    hasUserAgent: Boolean(report.userAgent),
   });
 }

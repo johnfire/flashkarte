@@ -3,6 +3,8 @@ import type { PoolClient } from "pg";
 import { calculate } from "@flashkarte/shared";
 import { NotFoundError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
+import { recordRequired } from "../audit/audit.service";
+import type { AuditActor } from "../audit/audit.types";
 import * as repo from "./study.repository";
 
 const ratingSchema = z
@@ -31,7 +33,12 @@ export function getStudyBatch(userId: string, deckId: string, limit = 20) {
   return repo.getDueAndNewCards(userId, deckId, limit);
 }
 
-export async function review(userId: string, cardId: unknown, rating: unknown) {
+export async function review(
+  userId: string,
+  cardId: unknown,
+  rating: unknown,
+  actor: AuditActor = { type: "user", id: userId },
+) {
   const validCardId = parse(
     z.string({ error: "card_id is required" }).min(1, "card_id is required"),
     cardId,
@@ -44,6 +51,16 @@ export async function review(userId: string, cardId: unknown, rating: unknown) {
     const previous = progressFromRow(progressRow);
     const update = calculateProgress(previous, validRating, new Date());
     await repo.upsertProgress(userId, validCardId, update.write, client);
+    await recordRequired(
+      {
+        actor,
+        action: "study.reviewed",
+        targetType: "card",
+        targetId: validCardId,
+        afterState: { rating: validRating },
+      },
+      client,
+    );
     return {
       card_id: validCardId,
       ...update.next,
@@ -194,6 +211,7 @@ async function applyCardEvents(
   userId: string,
   cardId: string,
   events: SyncEvent[],
+  actor: AuditActor,
 ): Promise<{ ackedEventIds: string[]; progress: CardSyncProgress | null }> {
   return repo.withCardProgressLock(userId, cardId, async (client) => {
     const row = await repo.getProgressRow(userId, cardId, client);
@@ -213,6 +231,16 @@ async function applyCardEvents(
       { ...latest.write, lastReviewedAt: new Date(latest.event.reviewed_at) },
       client,
     );
+    await recordRequired(
+      {
+        actor,
+        action: "study.synced",
+        targetType: "card",
+        targetId: cardId,
+        afterState: { rating: latest.event.rating, eventCount: events.length },
+      },
+      client,
+    );
     return {
       ackedEventIds: applied.ackedEventIds,
       progress: {
@@ -225,7 +253,11 @@ async function applyCardEvents(
   });
 }
 
-export async function sync(userId: string, events: unknown) {
+export async function sync(
+  userId: string,
+  events: unknown,
+  actor: AuditActor = { type: "user", id: userId },
+) {
   const parsed = validateSyncEvents(events);
   const distinctCardIds = [
     ...new Set(parsed.validEvents.map((event) => event.card_id)),
@@ -236,7 +268,7 @@ export async function sync(userId: string, events: unknown) {
   const progress: CardSyncProgress[] = [];
 
   for (const [cardId, cardEvents] of grouped.byCard) {
-    const applied = await applyCardEvents(userId, cardId, cardEvents);
+    const applied = await applyCardEvents(userId, cardId, cardEvents, actor);
     ackedEventIds.push(...applied.ackedEventIds);
     if (applied.progress) progress.push(applied.progress);
   }

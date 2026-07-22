@@ -4,7 +4,7 @@ import { AuthError } from "../../utils/errors";
 import { wrapAsync } from "../../utils/wrapAsync";
 import { parse } from "../../utils/validate";
 import { clampString as clamp } from "../../utils/clampString";
-import { getCurrentUser } from "../auth/auth.service";
+import { auditFromRequest } from "../audit/audit.service";
 import * as service from "./bug-reports.service";
 
 const TITLE_MAX = 140;
@@ -25,17 +25,25 @@ export const submitBugReport = wrapAsync(
       clamp(req.body.description, DESC_MAX),
     );
 
-    const user = await getCurrentUser(req.userId);
-
     const result = await service.submitBugReport({
       title,
       description,
       appVersion: clamp(req.body.appVersion, SHORT_MAX),
       platform: clamp(req.body.platform, SHORT_MAX),
-      device: clamp(req.body.device, SHORT_MAX),
       userId: req.userId,
-      email: user.email,
     });
+    await auditFromRequest(
+      req,
+      "bug_report.submitted",
+      "bug-report",
+      undefined,
+      "success",
+      undefined,
+      {
+        platform: clamp(req.body.platform, SHORT_MAX),
+        filed: Boolean(result.issueUrl),
+      },
+    );
 
     res.status(201).json(result);
   },

@@ -2,17 +2,16 @@ import { buildIssueBody } from "./bug-reports.service";
 import { createIssue } from "../../github/issues";
 
 describe("buildIssueBody", () => {
-  test("includes reporter email and renders the description as inert fenced text", () => {
+  test("includes a pseudonymous reporter ID and renders the description as inert fenced text", () => {
     const body = buildIssueBody({
       title: "t",
       description: "line one\nline two",
       appVersion: "1.0.0",
       platform: "android",
-      device: "Pixel 7",
       userId: "u1",
-      email: "a@b.c",
     });
-    expect(body).toContain("a@b.c");
+    expect(body).toContain("Reporter account ID:** `u1`");
+    expect(body).not.toContain("Device:");
     expect(body).toContain("1.0.0");
     expect(body).toContain("```\nline one\nline two\n```");
   });
@@ -24,7 +23,6 @@ describe("buildIssueBody", () => {
       title: "t",
       description,
       userId: "u1",
-      email: "a@b.c",
     });
     // content's longest backtick run is 3, so the wrapper fence is 4 ticks and
     // the inner ``` cannot close it early.

@@ -6,10 +6,13 @@
 ## What is recorded
 
 Every state-changing action by a user or an AI agent (deck-scoped MCP key):
-decks, API keys, admin actions, account lifecycle (created / deleted / data
-exported), password events, email verification, and every 2FA transition.
+decks, study reviews and syncs, API keys, admin actions, account lifecycle
+(created / deleted / data exported), profile updates, password events, email
+verification, bug-report submission, and every 2FA transition. Study audit
+records are committed in the same database transaction as the progress write.
 Each row carries actor type + id, action, target, outcome, correlation ID,
-and optional before/after state. The account-deletion entry deliberately
+and optional before/after state. Failed AI deck mutations are also recorded
+with a failure outcome. The account-deletion entry deliberately
 contains **no PII** — who (user id) and when only.
 
 ## Immutability
@@ -21,14 +24,9 @@ even if its role is over-permissioned.
 ## Retention
 
 - **Policy: 12 months.** Entries older than 12 months may be pruned.
-- Pruning is done by a **separate, tightly-scoped job** (per §7.6 the
-  triggers stay; the job runs as a role with trigger-bypass, or the trigger
-  is temporarily disabled inside the job's transaction). This job is **not
-  yet built** — until it exists, the log simply grows, which at current
-  volume is fine.
-- TODO (tracked here): implement the prune job once the table approaches a
-  size that matters (revisit at ~1M rows or 12 months after launch,
-  whichever comes first).
+- Pruning is done daily by the host-only `flashkarte-audit-retention` job. It
+  temporarily bypasses only the delete trigger inside one transaction, deletes
+  entries older than 12 months, and restores the trigger before commit.
 
 ## Access
 

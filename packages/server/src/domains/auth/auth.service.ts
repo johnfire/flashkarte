@@ -7,6 +7,7 @@ import { ValidationError, AuthError } from "../../utils/errors";
 import { parse, emailSchema, passwordSchema } from "../../utils/validate";
 import {
   getAppUrl,
+  sendEmailChangeVerification,
   sendVerificationEmail,
   sendPasswordResetEmail,
 } from "../../email/mailer";
@@ -38,6 +39,7 @@ export const ACCESS_TOKEN_TTL_SEC = 15 * 60;
 export const REFRESH_TOKEN_TTL_DAYS = 90;
 const VERIFICATION_TOKEN_TTL_HOURS = 24;
 const PASSWORD_RESET_TOKEN_TTL_HOURS = 1;
+const EMAIL_CHANGE_TOKEN_TTL_HOURS = 24;
 const verificationTokenSchema = z
   .string({ error: "Verification token is required" })
   .min(1, "Verification token is required");
@@ -210,6 +212,56 @@ export async function resendVerification(userId: string): Promise<void> {
   if (!user) throw new AuthError("Not found");
   if (user.email_verified_at) return; // already verified
   await createAndSendVerification(user.id, user.email);
+}
+
+export async function requestEmailChange(
+  userId: string,
+  currentPasswordIn: unknown,
+  newEmailIn: unknown,
+): Promise<void> {
+  const user = await repo.findByIdWithHash(userId);
+  if (!user) throw new AuthError("Not found");
+  const currentPassword = parse(currentPasswordSchema, currentPasswordIn);
+  if (!(await bcrypt.compare(currentPassword, user.password_hash))) {
+    throw new ValidationError("Current password is incorrect");
+  }
+  const newEmail = parse(emailSchema, newEmailIn);
+  if (newEmail === user.email) {
+    throw new ValidationError(
+      "New email must be different from the current email",
+    );
+  }
+  if (await repo.findByEmailWithHash(newEmail)) {
+    throw new ValidationError("An account with this email already exists");
+  }
+  const rawToken = crypto.randomBytes(32).toString("hex");
+  const expiresAt = new Date(
+    Date.now() + EMAIL_CHANGE_TOKEN_TTL_HOURS * 3600_000,
+  );
+  await repo.deleteEmailChangeTokensForUser(userId);
+  await repo.insertEmailChangeToken(
+    userId,
+    newEmail,
+    hashToken(rawToken),
+    expiresAt,
+  );
+  await sendEmailChangeVerification(
+    newEmail,
+    `${getAppUrl()}/verify-email?changeToken=${rawToken}`,
+  );
+}
+
+export async function confirmEmailChange(rawToken: unknown): Promise<string> {
+  const token = parse(verificationTokenSchema, rawToken);
+  const found = await repo.findEmailChangeToken(hashToken(token));
+  if (!found || found.expires_at < new Date()) {
+    throw new ValidationError("This email-change link is invalid or expired");
+  }
+  const user = await repo.updateEmail(found.user_id, found.new_email);
+  if (!user) throw new AuthError("Not found");
+  await repo.deleteEmailChangeTokensForUser(found.user_id);
+  await repo.deleteRefreshTokensForUser(found.user_id);
+  return found.user_id;
 }
 
 // Short-lived signed challenge binding the password step of a 2FA login to

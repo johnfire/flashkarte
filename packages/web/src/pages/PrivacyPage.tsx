@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Trans, useTranslation } from "react-i18next";
+import { resetAnalyticsConsent } from "../components/AnalyticsConsentBanner";
 import { useDocumentHead } from "../seo/useDocumentHead";
 
 export function PrivacyPage() {
@@ -18,7 +19,7 @@ export function PrivacyPage() {
 
         <h1 className="mt-4 text-2xl font-bold">{t("privacy.title")}</h1>
         <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          {t("privacy.lastUpdated", { date: "5 June 2026" })}
+          {t("privacy.lastUpdated", { date: "22 July 2026" })}
         </p>
 
         <div className="prose prose-sm mt-6 max-w-none space-y-6 text-gray-700 dark:text-gray-300">
@@ -80,11 +81,31 @@ export function PrivacyPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              {t("privacy.analyticsHeading")}
+            </h2>
+            <p className="mt-2">{t("privacy.analyticsBody")}</p>
+            <button
+              className="mt-3 rounded border border-indigo-600 px-3 py-2 text-sm font-medium text-indigo-700 dark:text-indigo-300"
+              onClick={resetAnalyticsConsent}
+            >
+              {t("privacy.analyticsChange")}
+            </button>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
               {t("privacy.aiHeading")}
             </h2>
             <p className="mt-2">
               <Trans i18nKey="privacy.aiBody" components={[<em key="0" />]} />
             </p>
+          </section>
+
+          <section>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+              {t("privacy.recipientsHeading")}
+            </h2>
+            <p className="mt-2">{t("privacy.recipientsBody")}</p>
           </section>
 
           <section>
