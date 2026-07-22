@@ -54,19 +54,19 @@ export function AnalyticsConsentBanner() {
 
   return (
     <aside
-      className="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl rounded-lg bg-gray-900 p-4 text-sm text-white shadow-lg"
+      className="pointer-events-none fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl rounded-lg bg-gray-900 p-4 text-sm text-white shadow-lg"
       aria-label={t("analyticsConsent.label")}
     >
       <p>{t("analyticsConsent.body")}</p>
       <div className="mt-3 flex gap-3">
         <button
-          className="rounded bg-indigo-500 px-3 py-2 font-medium"
+          className="pointer-events-auto rounded bg-indigo-600 px-3 py-2 font-medium"
           onClick={() => choose("accepted")}
         >
           {t("analyticsConsent.accept")}
         </button>
         <button
-          className="rounded border border-gray-400 px-3 py-2 font-medium"
+          className="pointer-events-auto rounded border border-gray-400 px-3 py-2 font-medium"
           onClick={() => choose("rejected")}
         >
           {t("analyticsConsent.reject")}
