@@ -17,12 +17,12 @@ val playCredentials = System.getenv("PLAY_SERVICE_ACCOUNT_FILE")?.let { file(it)
 
 android {
     namespace = "com.flashmd"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "de.christopherrehm.flashkarte"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         // Play requires a monotonically increasing versionCode; CI passes the
         // workflow run number. Defaults to 1 for local builds.
         versionCode = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
