@@ -135,7 +135,7 @@ shared key — fail closed (backend 401) if the request context was lost.`
 **Files:** `packages/mcp/src/oauth/authorize.ts` (lines 19–21), `packages/mcp/src/index.ts` (line 24)
 
 **Problem:** `csrfSecret()` falls back to the published constant
-`"mcp-dev-csrf-secret"`. The shipped server guards this with
+`"<development-only value>"`. The shipped server guards this with
 `requireEnv("MCP_JWT_SECRET")` in `index.ts`, but the exported router doesn't
 defend itself, and a short/weak secret is also accepted. Additionally, nothing
 enforces that `MCP_JWT_SECRET` is strong — one weak secret makes both JWTs
@@ -148,7 +148,7 @@ the main server's `getJwtSecret()` (never a shared constant):
 // replace csrfSecret():
 let devCsrfSecret: string | null = null;
 function csrfSecret(): string {
-  const secret = process.env.MCP_JWT_SECRET;
+  const secret = process.env.MCP_JWT_SECRET; // set a unique production secret
   if (secret) return secret;
   if ((process.env.NODE_ENV ?? "development") === "production") {
     throw new Error("MCP_JWT_SECRET must be set in production");
@@ -359,7 +359,7 @@ At the top of the file (after the imports), set a known secret so tests can mint
 signatures themselves:
 
 ```ts
-process.env.MCP_JWT_SECRET = "test-secret-that-is-long-enough-32chars";
+process.env.MCP_JWT_SECRET = "<32-character test value>";
 ```
 
 Update the `postAuthorize` helper to forward the cookie from GET to POST:
