@@ -8,7 +8,7 @@
     "back": "Atrás",
     "privacy": "Privacidad",
     "impressum": "Aviso legal",
-    "guide": "Guía"
+    "help": "Ayuda"
   },
   "auth": {
     "signInToAccount": "Inicia sesión en tu cuenta",
@@ -79,6 +79,7 @@
     "mcpUrlLabel": "URL del servidor MCP:",
     "claudeAiHint": "En claude.ai, añade un conector personalizado con esta URL y luego inicia sesión con tu cuenta de flashkarte. Después pide, p. ej.:",
     "claudeAiExample": "«Convierte esto en un mazo de flashkarte: …»",
+    "aiLearnMore": "¿Quieres más detalles? <0>Consulta la guía de IA</0>.",
     "keyNamePlaceholder": "Nombre de la clave (p. ej. Mi IA)",
     "generateKey": "Generar clave",
     "copyKeyWarning": "Copia esta clave ahora: no se volverá a mostrar.",
@@ -168,6 +169,8 @@
     "signOut": "Cerrar sesión",
     "loadError": "No se pudieron cargar tus mazos",
     "empty": "Aún no hay mazos. Crea uno para empezar a estudiar.",
+    "emptyHint": "¿Eres nuevo aquí? <0>Lee la guía de primeros pasos</0>.",
+    "legendHint": "¿No sabes qué significan Vistas / Nuevas / Repetir / Difíciles / Bien / Fáciles? <0>Descubre cómo funciona el estudio</0>.",
     "public": "Público",
     "cardCount_one": "{{count}} tarjeta",
     "cardCount_other": "{{count}} tarjetas",
@@ -214,6 +217,7 @@
     "hard": "Difícil",
     "good": "Bien",
     "easy": "Fácil",
+    "ratingHint": "¿No sabes qué hace cada botón? <0>Descubre cómo funciona la repetición espaciada</0>.",
     "complete": "Sesión completada",
     "nothingDue": "Nada pendiente ahora mismo: ¡bien hecho por estar al día!",
     "reviewed_one": "Repasaste {{count}} tarjeta.",
@@ -332,49 +336,127 @@
     "disputeHeading": "Streitschlichtung",
     "disputeBody": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <0>https://ec.europa.eu/consumers/odr/</0>. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
   },
-  "guide": {
-    "back": "Volver",
-    "metaTitle": "Guía — flashkarte",
-    "metaDescription": "Cómo usar flashkarte: crea mazos de tarjetas en Markdown, estudia con repetición espaciada, comparte mazos y deja que tu IA cree mazos por ti.",
-    "title": "Cómo usar flashkarte",
-    "intro": "flashkarte convierte Markdown sencillo en tarjetas de memoria con repetición espaciada que puedes estudiar en la web y en Android, siempre sincronizadas. Esta guía muestra cómo crear y diseñar mazos, estudiarlos, compartirlos y conectar un asistente de IA.",
-    "tocHeading": "En esta página",
-    "tocStart": "Primeros pasos",
-    "tocCreate": "Crear un mazo",
-    "tocFormat": "Formato del mazo",
-    "tocBranching": "Mazos ramificados",
-    "tocSettings": "Ajustes del mazo",
-    "tocStudy": "Estudiar",
-    "tocAI": "Conectar un asistente de IA",
-    "startHeading": "Primeros pasos",
-    "startBody": "Regístrate con un correo electrónico y una contraseña, y luego confirma el correo de verificación. Tus mazos y tu progreso de estudio están vinculados a tu cuenta y se sincronizan en todos los dispositivos en los que inicies sesión.",
-    "createHeading": "Crear un mazo",
-    "createIntro": "Hay tres formas de crear un mazo:",
-    "createWeb": "En la web, abre el editor de mazos, pega o escribe Markdown con el formato de abajo y guarda. Una vista previa en vivo muestra las tarjetas detectadas antes de guardar.",
-    "createAndroid": "En la app de Android, crea o importa un mazo de la misma manera usando el mismo formato Markdown.",
-    "createAI": "Deja que un asistente de IA cree un mazo por ti — consulta «Conectar un asistente de IA» más abajo.",
-    "formatHeading": "Formato del mazo",
-    "formatIntro": "Un mazo es Markdown sencillo. El primer encabezado es el título; una línea opcional en cursiva debajo es decorativa y se ignora. Usa encabezados de segundo nivel para agrupar las tarjetas en categorías, y una línea de guiones como separador visual.",
-    "formatCardsIntro": "Escribe las tarjetas en cualquiera de estos dos formatos — puedes mezclar ambos en un mismo mazo:",
-    "formatBold": "Anverso en negrita numerado: una línea en negrita como \"**1. front**\" inicia una tarjeta; las líneas debajo son la respuesta.",
-    "formatQA": "Formato Q:/A:: una línea \"Q:\" es el anverso; la primera línea \"A:\" es la respuesta, y cualquier línea posterior se convierte en un segundo párrafo.",
-    "formatParagraphs": "Dentro de una respuesta, las líneas consecutivas se unen en un solo párrafo; deja una línea en blanco para empezar un nuevo párrafo.",
-    "formatExampleCaption": "Mazo de ejemplo:",
-    "branchingHeading": "Mazos ramificados",
-    "branchingBody": "Convierte un mazo en una secuencia de tipo «elige tu camino». Coloca un ancla como \"[label]\" en su propia línea antes de una tarjeta, y luego indica cada opción como una línea \"- choice text -> target\", donde target es otra etiqueta de ancla (o \"end\" para terminar). Una tarjeta sin opciones es una tarjeta normal.",
-    "branchingExampleCaption": "Ejemplo de mazo ramificado:",
-    "settingsHeading": "Ajustes del mazo",
-    "settingsOrdered": "Estudiar en orden: cuando está activado, las tarjetas se muestran en el orden en que las creaste y debes responder correctamente la tarjeta actual antes de avanzar — útil para secuencias que se construyen unas sobre otras.",
-    "settingsPublic": "Mazos públicos: haz público un mazo para obtener una página que puedas compartir y que aparezca en la página Explorar, donde cualquiera puede verlo en vista previa y clonarlo en su propia cuenta.",
-    "studyHeading": "Estudiar",
-    "studySrs": "flashkarte programa las repasos con el algoritmo de repetición espaciada SM-2, de modo que las tarjetas que te resultan difíciles vuelven antes y las fáciles más tarde.",
-    "studyRatings": "En el modo de volteo predeterminado, revelas la respuesta y valoras tu recuerdo — Otra vez, Difícil, Bien o Fácil —, lo que determina cuándo vence la tarjeta la próxima vez.",
-    "studyChoice": "La app de Android también ofrece un modo de opción múltiple que genera las opciones de respuesta automáticamente a partir de tus otras tarjetas y te califica al tocar.",
-    "aiHeading": "Conectar un asistente de IA",
-    "aiBody": "Un asistente de IA puede crear mazos por ti y enviarlos directamente a tu cuenta, usando tu propia cuenta de IA.",
-    "aiStep1": "En Ajustes, genera una clave API y copia la URL del servidor MCP.",
-    "aiStep2": "Añade la URL como conector personalizado en tu cliente de IA (por ejemplo claude.ai o Claude Desktop) e inicia sesión con tu cuenta de flashkarte.",
-    "aiStep3": "Pídele que cree un mazo, p. ej. \"Turn this into a flashkarte deck: …\", y el nuevo mazo aparecerá en tu cuenta."
+  "help": {
+    "backToIndex": "← Ayuda",
+    "backToHome": "← Inicio",
+    "next": "Siguiente: {{title}} →",
+    "index": {
+      "metaTitle": "Ayuda — flashkarte",
+      "metaDescription": "Todo lo que necesitas para usar flashkarte: escribir mazos en Markdown, mazos ramificados, estudiar con repetición espaciada, compartir mazos y conectar tu propia IA.",
+      "title": "Ayuda",
+      "intro": "flashkarte convierte Markdown sencillo en tarjetas de memoria con repetición espaciada que puedes estudiar en la web y en Android, siempre sincronizadas. Elige un tema a continuación.",
+      "topics": {
+        "gettingStarted": {
+          "title": "Primeros pasos",
+          "description": "Regístrate, entiende el ciclo de crear y estudiar, y encuentra tu camino."
+        },
+        "writingDecks": {
+          "title": "Escribir mazos",
+          "description": "El formato Markdown para las tarjetas y las tres formas de crear un mazo."
+        },
+        "branchingDecks": {
+          "title": "Mazos ramificados",
+          "description": "Convierte un mazo en una historia o escenario de «elige tu camino»."
+        },
+        "studying": {
+          "title": "Estudiar y repetición espaciada",
+          "description": "Cómo funciona la programación SM-2, qué hacen los botones de valoración y qué significan los contadores del mazo."
+        },
+        "ai": {
+          "title": "Crear mazos con IA",
+          "description": "Conecta tu propio asistente de IA para que cree mazos por ti."
+        },
+        "sharing": {
+          "title": "Compartir y explorar",
+          "description": "Haz público un mazo, busca en la biblioteca y clona mazos que otros han compartido."
+        }
+      }
+    },
+    "gettingStarted": {
+      "metaTitle": "Primeros pasos — Ayuda de flashkarte",
+      "metaDescription": "Cómo registrarte y empezar a estudiar con flashkarte.",
+      "title": "Primeros pasos",
+      "signupHeading": "Regístrate",
+      "signupBody": "Crea una cuenta con un correo electrónico y una contraseña, y luego confirma el correo de verificación que te envía flashkarte. Tus mazos y tu progreso de estudio están vinculados a esa cuenta y se sincronizan en todos los dispositivos en los que inicies sesión — web y Android.",
+      "loopHeading": "El ciclo",
+      "loopBody": "flashkarte tiene un ciclo central: escribir un mazo y luego estudiarlo. Las tarjetas nuevas aparecen como «Nuevas»; una vez que has repasado una tarjeta, la repetición espaciada decide cuándo «vence» de nuevo. Estudiar con regularidad, aunque sea poco, es lo que hace que el sistema funcione.",
+      "mapHeading": "Dónde está todo",
+      "mapDecks": "Mis mazos — tus mazos, con contadores de vencidas y accesos rápidos para estudiar, compartir o eliminar.",
+      "mapLibrary": "Biblioteca — busca mazos públicos compartidos por otros usuarios y clona uno en tu cuenta.",
+      "mapExplore": "Explorar — navega por mazos públicos sin iniciar sesión.",
+      "mapSettings": "Ajustes — cuenta, apariencia, idioma, conexión con IA y datos."
+    },
+    "writingDecks": {
+      "metaTitle": "Escribir mazos — Ayuda de flashkarte",
+      "metaDescription": "El formato Markdown que usa flashkarte para las tarjetas y las tres formas de crear un mazo.",
+      "title": "Escribir mazos",
+      "waysHeading": "Tres formas de crear un mazo",
+      "waysWeb": "En la web, abre el editor de mazos, pega o escribe Markdown con el formato de abajo y guarda. Una vista previa en vivo muestra las tarjetas detectadas antes de guardar.",
+      "waysAndroid": "En la app de Android, crea o importa un mazo de la misma manera usando el mismo formato Markdown.",
+      "waysAI": "Deja que un asistente de IA cree un mazo por ti — consulta «Crear mazos con IA».",
+      "formatHeading": "El formato",
+      "formatIntro": "Un mazo es Markdown sencillo. El primer encabezado es el título; una línea opcional en cursiva debajo es decorativa y se ignora. Usa encabezados de segundo nivel para agrupar las tarjetas en categorías.",
+      "formatCardsIntro": "Escribe las tarjetas en uno de estos dos estilos — puedes mezclar ambos en un mismo mazo:",
+      "formatBold": "Anverso en negrita numerado: una línea en negrita como \"**1. front**\" inicia una tarjeta; las líneas debajo son la respuesta.",
+      "formatQA": "Formato Q:/A:: una línea \"Q:\" es el anverso; la primera línea \"A:\" es la respuesta, y cualquier línea posterior se convierte en un segundo párrafo.",
+      "formatParagraphs": "Dentro de una respuesta, las líneas consecutivas se unen en un solo párrafo; deja una línea en blanco para empezar un nuevo párrafo.",
+      "formatExampleCaption": "Mazo de ejemplo:",
+      "settingsHeading": "Ajustes del mazo",
+      "settingsOrdered": "Estudiar en orden: las tarjetas se muestran en el orden en que las creaste y debes responder correctamente la tarjeta actual antes de avanzar — útil para secuencias que se construyen unas sobre otras."
+    },
+    "branchingDecks": {
+      "metaTitle": "Mazos ramificados — Ayuda de flashkarte",
+      "metaDescription": "Cómo escribir un mazo ramificado de «elige tu camino» en flashkarte.",
+      "title": "Mazos ramificados",
+      "body": "Convierte un mazo en una secuencia de «elige tu camino» en lugar de un repaso normal. Coloca un ancla como \"[label]\" en su propia línea antes de una tarjeta, y luego indica cada opción como una línea \"- choice text -> target\", donde target es otra etiqueta de ancla (o \"end\" para terminar). Una tarjeta sin opciones es una tarjeta normal sin continuación. Cualquier mazo con al menos una tarjeta de opciones se convierte automáticamente en un mazo ramificado, que se juega en lugar de repasarse.",
+      "exampleCaption": "Ejemplo de mazo ramificado:"
+    },
+    "studying": {
+      "metaTitle": "Estudiar y repetición espaciada — Ayuda de flashkarte",
+      "metaDescription": "Cómo funciona la programación SM-2 de repetición espaciada, qué hacen los botones de valoración y qué significan los contadores del mazo.",
+      "title": "Estudiar y repetición espaciada",
+      "srsHeading": "Repetición espaciada (SM-2)",
+      "srsBody": "flashkarte programa los repasos con el algoritmo SM-2. Cada tarjeta tiene una fecha de vencimiento. Las tarjetas que valoras bien avanzan más hacia el futuro; las que te cuestan vuelven antes — a menudo al día siguiente. El objetivo es ver cada tarjeta justo antes de que la olvidarías, para que las sesiones de estudio se mantengan cortas.",
+      "ratingsHeading": "Los botones de valoración",
+      "ratingsIntro": "Después de revelar la respuesta de una tarjeta, valora qué tan bien la recordaste. Esto es lo que programa el siguiente repaso — sé honesto, no optimista.",
+      "ratingAgain": "Repetir — no la recordaste. La tarjeta se reinicia: vuelve mañana, y su siguiente intervalo empieza de nuevo desde el principio.",
+      "ratingHard": "Difícil — la recordaste, pero te costó. El siguiente intervalo crece, pero menos que con Bien.",
+      "ratingGood": "Bien — la recordaste correctamente con un esfuerzo razonable. El intervalo crece al ritmo normal.",
+      "ratingEasy": "Fácil — recordarla te resultó fácil. El intervalo crece más, y los intervalos futuros de esta tarjeta también crecerán más rápido.",
+      "countersHeading": "Qué significan los números de un mazo",
+      "countersIntro": "Cada mazo enumera sus tarjetas por estado:",
+      "counterDue": "Vencidas — tarjetas listas para estudiar ahora mismo (tarjetas nuevas, más tarjetas repasadas cuya fecha programada ya llegó).",
+      "counterNew": "Nuevas — tarjetas que aún no has estudiado.",
+      "counterViewed": "Vistas — tarjetas que has estudiado al menos una vez.",
+      "counterAgain": "Repetir — tarjetas cuyo repaso más reciente se valoró como Repetir.",
+      "counterHard": "Difíciles — tarjetas cuyo repaso más reciente se valoró como Difícil.",
+      "counterGood": "Bien — tarjetas cuyo repaso más reciente se valoró como Bien.",
+      "counterEasy": "Fáciles — tarjetas cuyo repaso más reciente se valoró como Fácil.",
+      "counterNote": "Repetir/Difíciles/Bien/Fáciles reflejan solo el repaso más reciente de cada tarjeta, no un total acumulado — juntos siempre suman el valor de Vistas.",
+      "choiceHeading": "Modo de opción múltiple",
+      "choiceBody": "La app de Android también ofrece un modo de opción múltiple que genera las opciones de respuesta automáticamente a partir de tus otras tarjetas y te califica en cuanto tocas una."
+    },
+    "ai": {
+      "metaTitle": "Crear mazos con IA — Ayuda de flashkarte",
+      "metaDescription": "Cómo conectar tu propio asistente de IA a flashkarte mediante MCP para que cree mazos por ti.",
+      "title": "Crear mazos con IA",
+      "body": "Un asistente de IA puede crear mazos por ti y enviarlos directamente a tu cuenta, usando tu propia cuenta de IA — el servidor de flashkarte nunca ejecuta la IA.",
+      "step1": "En Ajustes, genera una clave API y copia la URL del servidor MCP.",
+      "step2": "Añade la URL como conector personalizado en tu cliente de IA (por ejemplo claude.ai o Claude Desktop) e inicia sesión con tu cuenta de flashkarte.",
+      "step3": "Pídele que cree un mazo, p. ej. \"Turn this into a flashkarte deck: …\", y el nuevo mazo aparecerá en tu cuenta, listo para estudiar.",
+      "settingsLink": "Abrir Ajustes →"
+    },
+    "sharing": {
+      "metaTitle": "Compartir y explorar — Ayuda de flashkarte",
+      "metaDescription": "Cómo hacer público un mazo, explorar la página Explorar y clonar mazos desde la Biblioteca.",
+      "title": "Compartir y explorar",
+      "publicHeading": "Hacer público un mazo",
+      "publicBody": "Haz público uno de tus mazos desde la página Mis mazos para obtener una página que puedas compartir y que otros puedan encontrar. Puedes quitarlo de público en cualquier momento. Las respuestas permanecen ocultas para los visitantes hasta que se registran para estudiar el mazo.",
+      "exploreHeading": "Explorar",
+      "exploreBody": "Explorar permite que cualquiera — con sesión iniciada o no — navegue y vea en vista previa los mazos públicos compartidos por otros usuarios de flashkarte.",
+      "libraryHeading": "Biblioteca",
+      "libraryBody": "Biblioteca es la versión para usuarios con sesión iniciada: busca mazos públicos y clona cualquiera de ellos directamente en tu propia cuenta para empezar a estudiar de inmediato."
+    }
   },
   "explore": {
     "title": "Explorar mazos",

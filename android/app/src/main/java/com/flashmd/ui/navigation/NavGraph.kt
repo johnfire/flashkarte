@@ -23,6 +23,7 @@ import androidx.navigation.navArgument
 import com.flashmd.ui.screens.createdeck.CreateDeckScreen
 import com.flashmd.ui.screens.decklist.DeckListScreen
 import com.flashmd.ui.screens.help.BranchingHelpScreen
+import com.flashmd.ui.screens.help.HelpScreen
 import com.flashmd.ui.screens.library.LibraryDetailScreen
 import com.flashmd.ui.screens.library.LibraryScreen
 import com.flashmd.ui.screens.play.BranchPlayScreen
@@ -82,6 +83,7 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                     onPlayDeck = { deckId -> navController.navigate("play/$deckId") },
                     onStatsDeck = { deckId -> navController.navigate("stats/$deckId") },
                     onCreateDeck = { navController.navigate("decks/new") },
+                    onHelp = { navController.navigate("help") },
                 )
             }
 
@@ -94,6 +96,13 @@ fun NavGraph(onLogout: () -> Unit = {}) {
 
             composable("branching-help") {
                 BranchingHelpScreen(onBack = { navController.popBackStack() })
+            }
+
+            composable("help") {
+                HelpScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenBranchingHelp = { navController.navigate("branching-help") },
+                )
             }
 
             composable(
@@ -124,6 +133,7 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                 SettingsScreen(
                     onLogout = onLogout,
                     onReportBug = { navController.navigate("report-bug") },
+                    onHelp = { navController.navigate("help") },
                 )
             }
 

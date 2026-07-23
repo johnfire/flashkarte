@@ -10,10 +10,13 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flashmd.R
 import com.flashmd.ui.components.SyncStatusChip
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,6 +26,7 @@ fun DeckListScreen(
     onPlayDeck: (String) -> Unit,
     onStatsDeck: (String) -> Unit,
     onCreateDeck: () -> Unit,
+    onHelp: () -> Unit,
     viewModel: DeckListViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -35,6 +39,9 @@ fun DeckListScreen(
                 actions = {
                     if (pending > 0) {
                         SyncStatusChip(pending, onRetry = { viewModel.onRetrySync() })
+                    }
+                    TextButton(onClick = onHelp) {
+                        Text(stringResource(R.string.help_title))
                     }
                 },
             )
@@ -63,12 +70,20 @@ fun DeckListScreen(
                 Button(onClick = { viewModel.refresh() }) { Text("Retry") }
             }
         } else if (state.decks.isEmpty()) {
-            Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+            Column(
+                Modifier.fillMaxSize().padding(padding).padding(24.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+            ) {
                 Text(
                     "No decks yet.\nTap + to create or import one.",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Center,
                 )
+                TextButton(onClick = onHelp) {
+                    Text(stringResource(R.string.decks_empty_hint))
+                }
             }
         } else {
             LazyColumn(

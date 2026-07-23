@@ -16,7 +16,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.flashmd.R
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.data.local.ThemeMode
 import com.flashmd.ui.components.PasswordField
@@ -31,6 +33,7 @@ import java.time.LocalDate
 fun SettingsScreen(
     onLogout: () -> Unit,
     onReportBug: () -> Unit = {},
+    onHelp: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
 ) {
@@ -154,6 +157,7 @@ fun SettingsScreen(
 
             HorizontalDivider()
             Text("Feedback", style = MaterialTheme.typography.titleMedium)
+            OutlinedButton(onClick = onHelp) { Text(stringResource(R.string.settings_help)) }
             OutlinedButton(onClick = onReportBug) { Text("Report a bug") }
 
             HorizontalDivider()

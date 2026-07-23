@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Help screen -->
+    <string name="help_title">Help</string>
+    <string name="help_back">Back</string>
+
+    <string name="help_getting_started_title">Getting started</string>
+    <string name="help_getting_started_signup_heading">Sign up</string>
+    <string name="help_getting_started_signup_body">Create an account with an email and password, then confirm the verification email flashkarte sends you. Your decks and study progress are tied to that account and sync across every device you sign in on — this app and the web.</string>
+    <string name="help_getting_started_loop_heading">The loop</string>
+    <string name="help_getting_started_loop_body">flashkarte has one core loop: write a deck, then study it. New cards are marked New; once a card has been studied, spaced repetition decides when it is due again. Studying regularly, even briefly, is what makes the schedule work.</string>
+    <string name="help_getting_started_map_heading">Where things are</string>
+    <string name="help_getting_started_map_decks">Decks — your decks, with due counts and quick actions to study, share, or delete.</string>
+    <string name="help_getting_started_map_library">Library — search public decks shared by other users and clone one into your account.</string>
+    <string name="help_getting_started_map_settings">Settings — account, appearance, AI connection, and data.</string>
+
+    <string name="help_writing_decks_title">Writing decks</string>
+    <string name="help_writing_ways_heading">Three ways to create a deck</string>
+    <string name="help_writing_ways_app">Tap the + button on Decks to create or import a deck using the format below.</string>
+    <string name="help_writing_ways_web">On the web, use the deck editor with the same Markdown format.</string>
+    <string name="help_writing_ways_ai">Let an AI assistant build a deck for you — see Creating decks with AI below.</string>
+    <string name="help_writing_format_heading">The format</string>
+    <string name="help_writing_format_intro">A deck is plain Markdown. The first heading is the title. Use second-level headings to group cards into categories.</string>
+    <string name="help_writing_format_bold">Numbered bold front: a bold line like **1. front** starts a card; the lines below it are the answer.</string>
+    <string name="help_writing_format_qa">Q:/A: format: a Q: line is the front; the first A: line is the answer, and any lines after it become a second paragraph.</string>
+    <string name="help_writing_format_paragraphs">Within an answer, consecutive lines join into one paragraph; leave a blank line to start a new paragraph.</string>
+    <string name="help_writing_format_example_caption">Example deck:</string>
+    <string name="help_writing_format_example">"# Spanish Basics\n*A starter deck*\n\n## Greetings\n\n**1. hola**\nhello\n\n**2. buenos días**\ngood morning\nUsed until about noon.\n\n## Numbers\n\nQ: uno\nA: one\n\nQ: dos\nA: two"</string>
+
+    <string name="help_branching_title">Branching decks</string>
+    <string name="help_branching_body">Turn a deck into a choose-your-path sequence instead of a plain review. Give a card a name with a line like [cave] just above its question, then add options below it as a line starting with a dash, ending in an arrow to another card\'s name, for example: Sneak past -&gt; treasure. A card with no options is a normal, dead-end card.</string>
+    <string name="help_branching_link">Open the branching deck guide →</string>
+
+    <string name="help_studying_title">Studying &amp; spaced repetition</string>
+    <string name="help_studying_srs_heading">Spaced repetition (SM-2)</string>
+    <string name="help_studying_srs_body">flashkarte schedules reviews with the SM-2 algorithm. Every card has a due date. Cards rated highly move further into the future; cards you struggle with come back sooner — often the next day. The goal is to see each card right before you would otherwise forget it, so review sessions stay short.</string>
+    <string name="help_studying_ratings_heading">The rating buttons</string>
+    <string name="help_studying_ratings_intro">After flipping a card, rate how well you recalled it. This is what schedules the next review — be honest, not optimistic.</string>
+    <string name="help_studying_rating_again">Again — you did not recall it. The card resets and comes back tomorrow.</string>
+    <string name="help_studying_rating_hard">Hard — you recalled it, but it was a struggle. The next interval grows by less than Good.</string>
+    <string name="help_studying_rating_good">Good — you recalled it correctly with reasonable effort. The interval grows at the normal pace.</string>
+    <string name="help_studying_rating_easy">Easy — recalling it felt effortless. The interval grows more than Good.</string>
+    <string name="help_studying_rating_perfect">Perfect — instant, effortless recall. The interval grows the most.</string>
+    <string name="help_studying_choice_heading">Multiple-choice mode</string>
+    <string name="help_studying_choice_body">Switch to Choice mode during a session to get answer options built automatically from your other cards — you are graded the moment you tap one.</string>
+
+    <string name="help_ai_title">Creating decks with AI</string>
+    <string name="help_ai_body">An AI assistant can build decks for you and push them straight into your account, using your own AI account — flashkarte\'s server never runs the AI itself.</string>
+    <string name="help_ai_step1">In Settings, generate an API key and copy the MCP server URL.</string>
+    <string name="help_ai_step2">Add the URL as a custom connector in your AI client (for example claude.ai or Claude Desktop) and sign in with your flashkarte account.</string>
+    <string name="help_ai_step3">Ask it to build a deck, for example: Turn this into a flashkarte deck: … — the new deck appears in your account, ready to study.</string>
+
+    <string name="help_sharing_title">Sharing &amp; exploring</string>
+    <string name="help_sharing_public_heading">Making a deck public</string>
+    <string name="help_sharing_public_body">Publish one of your decks from its menu to get a shareable link and have it listed in the Library for others to find. You can unpublish it again at any time.</string>
+    <string name="help_sharing_library_heading">Library</string>
+    <string name="help_sharing_library_body">Search public decks shared by other flashkarte users and clone any of them straight into your account to start studying immediately.</string>
+
+    <!-- Inline hints -->
+    <string name="decks_empty_hint">New here? Open Help to learn the basics.</string>
+    <string name="study_rating_hint">Not sure what these do? See how spaced repetition works in Help.</string>
+    <string name="settings_help">Help</string>
+</resources>

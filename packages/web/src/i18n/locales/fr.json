@@ -8,7 +8,7 @@
     "back": "Retour",
     "privacy": "Confidentialité",
     "impressum": "Mentions légales",
-    "guide": "Guide"
+    "help": "Aide"
   },
   "auth": {
     "signInToAccount": "Connecte-toi à ton compte",
@@ -79,6 +79,7 @@
     "mcpUrlLabel": "URL du serveur MCP :",
     "claudeAiHint": "Dans claude.ai, ajoute un connecteur personnalisé avec cette URL, puis connecte-toi avec ton compte flashkarte. Demande ensuite, p. ex. :",
     "claudeAiExample": "« Transforme ceci en paquet flashkarte : … »",
+    "aiLearnMore": "Besoin de plus de détails ? <0>Consulte le guide de l'IA</0>.",
     "keyNamePlaceholder": "Nom de la clé (p. ex. Mon IA)",
     "generateKey": "Générer une clé",
     "copyKeyWarning": "Copie cette clé maintenant — elle ne sera plus affichée.",
@@ -168,6 +169,8 @@
     "signOut": "Se déconnecter",
     "loadError": "Impossible de charger tes paquets",
     "empty": "Aucun paquet pour l'instant. Crées-en un pour commencer à apprendre.",
+    "emptyHint": "Nouveau ici ? <0>Lis le guide de démarrage</0>.",
+    "legendHint": "Tu ne sais pas ce que signifient Vues / Nouvelles / À refaire / Difficiles / Correctes / Faciles ? <0>Découvre comment fonctionne la révision</0>.",
     "public": "Public",
     "cardCount_one": "{{count}} carte",
     "cardCount_other": "{{count}} cartes",
@@ -214,6 +217,7 @@
     "hard": "Difficile",
     "good": "Correct",
     "easy": "Facile",
+    "ratingHint": "Tu ne sais pas à quoi servent ces boutons ? <0>Découvre comment fonctionne la répétition espacée</0>.",
     "complete": "Session terminée",
     "nothingDue": "Rien à réviser pour l'instant — bravo de rester à jour !",
     "reviewed_one": "Tu as révisé {{count}} carte.",
@@ -332,49 +336,127 @@
     "disputeHeading": "Streitschlichtung",
     "disputeBody": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <0>https://ec.europa.eu/consumers/odr/</0>. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
   },
-  "guide": {
-    "back": "Retour",
-    "metaTitle": "Guide — flashkarte",
-    "metaDescription": "Comment utiliser flashkarte : créez des paquets de cartes en Markdown, révisez avec la répétition espacée, partagez des paquets et laissez votre IA créer des paquets pour vous.",
-    "title": "Comment utiliser flashkarte",
-    "intro": "flashkarte transforme du simple Markdown en cartes mémoire à répétition espacée que tu peux réviser sur le web et sur Android, toujours synchronisées. Ce guide montre comment créer et concevoir des paquets, les réviser, les partager et connecter un assistant IA.",
-    "tocHeading": "Sur cette page",
-    "tocStart": "Premiers pas",
-    "tocCreate": "Créer un paquet",
-    "tocFormat": "Format du paquet",
-    "tocBranching": "Paquets à embranchements",
-    "tocSettings": "Réglages du paquet",
-    "tocStudy": "Réviser",
-    "tocAI": "Connecter un assistant IA",
-    "startHeading": "Premiers pas",
-    "startBody": "Inscris-toi avec une adresse e-mail et un mot de passe, puis confirme l'e-mail de vérification. Tes paquets et ta progression de révision sont liés à ton compte et se synchronisent sur tous les appareils où tu te connectes.",
-    "createHeading": "Créer un paquet",
-    "createIntro": "Il existe trois façons de créer un paquet :",
-    "createWeb": "Sur le web, ouvre l'éditeur de paquets, colle ou saisis du Markdown au format ci-dessous, puis enregistre. Un aperçu en direct affiche les cartes détectées avant l'enregistrement.",
-    "createAndroid": "Dans l'application Android, crée ou importe un paquet de la même manière en utilisant le même format Markdown.",
-    "createAI": "Laisse un assistant IA créer un paquet pour toi — voir « Connecter un assistant IA » ci-dessous.",
-    "formatHeading": "Format du paquet",
-    "formatIntro": "Un paquet est du simple Markdown. Le premier titre est le nom du paquet ; une ligne en italique facultative en dessous est décorative et ignorée. Utilise des titres de deuxième niveau pour regrouper les cartes en catégories, et une ligne de tirets comme séparateur visuel.",
-    "formatCardsIntro": "Rédige les cartes dans l'un de ces deux formats — tu peux mélanger les deux dans un même paquet :",
-    "formatBold": "Recto en gras numéroté : une ligne en gras comme \"**1. front**\" commence une carte ; les lignes en dessous sont la réponse.",
-    "formatQA": "Format Q:/A: : une ligne \"Q:\" est le recto ; la première ligne \"A:\" est la réponse, et toutes les lignes qui suivent deviennent un second paragraphe.",
-    "formatParagraphs": "Au sein d'une réponse, les lignes consécutives sont réunies en un seul paragraphe ; laisse une ligne vide pour commencer un nouveau paragraphe.",
-    "formatExampleCaption": "Exemple de paquet :",
-    "branchingHeading": "Paquets à embranchements",
-    "branchingBody": "Transforme un paquet en une séquence à choix multiples « choisis ton chemin ». Place une ancre comme \"[label]\" sur sa propre ligne avant une carte, puis indique chaque option sous la forme d'une ligne \"- choice text -> target\", où target est une autre étiquette d'ancre (ou \"end\" pour terminer). Une carte sans options est une carte normale.",
-    "branchingExampleCaption": "Exemple de paquet à embranchements :",
-    "settingsHeading": "Réglages du paquet",
-    "settingsOrdered": "Réviser dans l'ordre : lorsque cette option est activée, les cartes sont affichées dans l'ordre où tu les as créées et tu dois répondre correctement à la carte en cours avant de continuer — utile pour les séquences qui s'enchaînent.",
-    "settingsPublic": "Paquets publics : rends un paquet public pour obtenir une page partageable et le faire figurer sur la page Explorer, où chacun peut le prévisualiser et le cloner dans son propre compte.",
-    "studyHeading": "Réviser",
-    "studySrs": "flashkarte planifie les révisions avec l'algorithme de répétition espacée SM-2, de sorte que les cartes que tu trouves difficiles reviennent plus tôt et les faciles plus tard.",
-    "studyRatings": "Dans le mode retournement par défaut, tu révèles la réponse et évalues ta mémorisation — Encore, Difficile, Bien ou Facile —, ce qui détermine la prochaine échéance de la carte.",
-    "studyChoice": "L'application Android propose aussi un mode à choix multiples qui génère automatiquement les options de réponse à partir de tes autres cartes et te note dès que tu touches l'écran.",
-    "aiHeading": "Connecter un assistant IA",
-    "aiBody": "Un assistant IA peut créer des paquets pour toi et les envoyer directement dans ton compte, en utilisant ton propre compte IA.",
-    "aiStep1": "Dans les Réglages, génère une clé API et copie l'URL du serveur MCP.",
-    "aiStep2": "Ajoute l'URL comme connecteur personnalisé dans ton client IA (par exemple claude.ai ou Claude Desktop) et connecte-toi avec ton compte flashkarte.",
-    "aiStep3": "Demande-lui de créer un paquet, p. ex. \"Turn this into a flashkarte deck: …\", et le nouveau paquet apparaît dans ton compte."
+  "help": {
+    "backToIndex": "← Aide",
+    "backToHome": "← Accueil",
+    "next": "Suivant : {{title}} →",
+    "index": {
+      "metaTitle": "Aide — flashkarte",
+      "metaDescription": "Tout ce qu'il faut savoir pour utiliser flashkarte : écrire des paquets en Markdown, les paquets à embranchements, réviser avec la répétition espacée, partager des paquets et connecter ta propre IA.",
+      "title": "Aide",
+      "intro": "flashkarte transforme du simple Markdown en cartes mémoire à répétition espacée que tu peux réviser sur le web et sur Android, toujours synchronisées. Choisis un thème ci-dessous.",
+      "topics": {
+        "gettingStarted": {
+          "title": "Premiers pas",
+          "description": "Inscris-toi, comprends le cycle créer → réviser, et repère-toi dans l'application."
+        },
+        "writingDecks": {
+          "title": "Écrire des paquets",
+          "description": "Le format Markdown des cartes et les trois façons de créer un paquet."
+        },
+        "branchingDecks": {
+          "title": "Paquets à embranchements",
+          "description": "Transforme un paquet en histoire ou en scénario « choisis ton chemin »."
+        },
+        "studying": {
+          "title": "Réviser & répétition espacée",
+          "description": "Comment fonctionne la planification SM-2, ce que font les boutons de notation et ce que signifient les compteurs du paquet."
+        },
+        "ai": {
+          "title": "Créer des paquets avec l'IA",
+          "description": "Connecte ton propre assistant IA pour qu'il crée des paquets pour toi."
+        },
+        "sharing": {
+          "title": "Partager & explorer",
+          "description": "Rends un paquet public, parcours la bibliothèque et clone des paquets partagés par d'autres."
+        }
+      }
+    },
+    "gettingStarted": {
+      "metaTitle": "Premiers pas — Aide flashkarte",
+      "metaDescription": "Comment t'inscrire et commencer à réviser avec flashkarte.",
+      "title": "Premiers pas",
+      "signupHeading": "Inscription",
+      "signupBody": "Crée un compte avec une adresse e-mail et un mot de passe, puis confirme l'e-mail de vérification que flashkarte t'envoie. Tes paquets et ta progression de révision sont liés à ce compte et se synchronisent sur chaque appareil où tu te connectes — web et Android.",
+      "loopHeading": "Le cycle",
+      "loopBody": "flashkarte repose sur un cycle central : écrire un paquet, puis le réviser. Les nouvelles cartes apparaissent comme « Nouvelles » ; une fois qu'une carte a été révisée, la répétition espacée détermine sa prochaine échéance. Réviser régulièrement, même brièvement, est ce qui fait fonctionner le système.",
+      "mapHeading": "Où trouver quoi",
+      "mapDecks": "Mes paquets — tes paquets, avec les compteurs d'échéances et des actions rapides pour réviser, partager ou supprimer.",
+      "mapLibrary": "Bibliothèque — recherche des paquets publics partagés par d'autres utilisateurs et clones-en un dans ton compte.",
+      "mapExplore": "Explorer — parcours les paquets publics sans te connecter.",
+      "mapSettings": "Réglages — compte, apparence, langue, connexion IA et données."
+    },
+    "writingDecks": {
+      "metaTitle": "Écrire des paquets — Aide flashkarte",
+      "metaDescription": "Le format Markdown utilisé par flashkarte pour les cartes et les trois façons de créer un paquet.",
+      "title": "Écrire des paquets",
+      "waysHeading": "Trois façons de créer un paquet",
+      "waysWeb": "Sur le web, ouvre l'éditeur de paquets, colle ou saisis du Markdown au format ci-dessous, puis enregistre. Un aperçu en direct affiche les cartes détectées avant l'enregistrement.",
+      "waysAndroid": "Dans l'application Android, crée ou importe un paquet de la même manière en utilisant le même format Markdown.",
+      "waysAI": "Laisse un assistant IA créer un paquet pour toi — voir « Créer des paquets avec l'IA ».",
+      "formatHeading": "Le format",
+      "formatIntro": "Un paquet est du simple Markdown. Le premier titre est le nom du paquet ; une ligne en italique facultative en dessous est décorative et ignorée. Utilise des titres de deuxième niveau pour regrouper les cartes en catégories.",
+      "formatCardsIntro": "Rédige les cartes dans l'un de ces deux styles — tu peux mélanger les deux dans un même paquet :",
+      "formatBold": "Recto en gras numéroté : une ligne en gras comme \"**1. front**\" commence une carte ; les lignes en dessous sont la réponse.",
+      "formatQA": "Format Q:/A: : une ligne \"Q:\" est le recto ; la première ligne \"A:\" est la réponse, et toutes les lignes qui suivent deviennent un second paragraphe.",
+      "formatParagraphs": "Au sein d'une réponse, les lignes consécutives sont réunies en un seul paragraphe ; laisse une ligne vide pour commencer un nouveau paragraphe.",
+      "formatExampleCaption": "Exemple de paquet :",
+      "settingsHeading": "Réglages du paquet",
+      "settingsOrdered": "Réviser dans l'ordre : les cartes sont affichées dans l'ordre où tu les as créées et tu dois répondre correctement à la carte en cours avant de continuer — utile pour les séquences qui s'enchaînent."
+    },
+    "branchingDecks": {
+      "metaTitle": "Paquets à embranchements — Aide flashkarte",
+      "metaDescription": "Comment écrire un paquet à embranchements « choisis ton chemin » dans flashkarte.",
+      "title": "Paquets à embranchements",
+      "body": "Transforme un paquet en une séquence « choisis ton chemin » plutôt qu'une simple révision. Place une ancre comme \"[label]\" sur sa propre ligne avant une carte, puis indique chaque option sous la forme d'une ligne \"- choice text -> target\", où target est une autre étiquette d'ancre (ou \"end\" pour terminer). Une carte sans options est une carte normale, sans suite. Tout paquet contenant au moins une carte à options devient automatiquement un paquet à embranchements, qui se joue plutôt qu'il ne se révise.",
+      "exampleCaption": "Exemple de paquet à embranchements :"
+    },
+    "studying": {
+      "metaTitle": "Réviser & répétition espacée — Aide flashkarte",
+      "metaDescription": "Comment fonctionne la planification SM-2 de répétition espacée, ce que font les boutons de notation et ce que signifient les compteurs du paquet.",
+      "title": "Réviser & répétition espacée",
+      "srsHeading": "Répétition espacée (SM-2)",
+      "srsBody": "flashkarte planifie les révisions avec l'algorithme SM-2. Chaque carte a une échéance. Les cartes que tu notes bien avancent plus loin dans le futur ; celles qui te posent problème reviennent plus tôt — souvent dès le lendemain. L'objectif est de revoir chaque carte juste avant que tu ne l'oublies, pour que les sessions de révision restent courtes.",
+      "ratingsHeading": "Les boutons de notation",
+      "ratingsIntro": "Après avoir révélé la réponse d'une carte, évalue ta mémorisation. C'est ce qui planifie la prochaine révision — sois honnête, pas optimiste.",
+      "ratingAgain": "À refaire — tu ne t'en es pas souvenu. La carte est réinitialisée : elle revient dès demain, et son prochain intervalle recommence depuis le début.",
+      "ratingHard": "Difficile — tu t'en es souvenu, mais c'était difficile. Le prochain intervalle augmente, mais moins qu'avec Correct.",
+      "ratingGood": "Correct — tu t'en es souvenu correctement avec un effort raisonnable. L'intervalle augmente au rythme normal.",
+      "ratingEasy": "Facile — t'en souvenir n'a demandé aucun effort. L'intervalle augmente le plus, et les intervalles futurs de cette carte augmenteront aussi plus vite.",
+      "countersHeading": "Ce que signifient les nombres sur un paquet",
+      "countersIntro": "Chaque paquet liste ses cartes par statut :",
+      "counterDue": "Échéance — cartes prêtes à être révisées maintenant (nouvelles cartes, plus cartes déjà révisées dont la date prévue est arrivée).",
+      "counterNew": "Nouvelles — cartes que tu n'as pas encore révisées.",
+      "counterViewed": "Vues — cartes que tu as révisées au moins une fois.",
+      "counterAgain": "À refaire — cartes dont la révision la plus récente a été notée À refaire.",
+      "counterHard": "Difficiles — cartes dont la révision la plus récente a été notée Difficile.",
+      "counterGood": "Correctes — cartes dont la révision la plus récente a été notée Correct.",
+      "counterEasy": "Faciles — cartes dont la révision la plus récente a été notée Facile.",
+      "counterNote": "À refaire/Difficiles/Correctes/Faciles ne reflètent que la révision la plus récente de chaque carte, pas un total cumulé — ensemble, elles correspondent toujours au nombre de cartes Vues.",
+      "choiceHeading": "Mode à choix multiples",
+      "choiceBody": "L'application Android propose aussi un mode à choix multiples qui génère automatiquement les options de réponse à partir de tes autres cartes et te note dès que tu en touches une."
+    },
+    "ai": {
+      "metaTitle": "Créer des paquets avec l'IA — Aide flashkarte",
+      "metaDescription": "Comment connecter ton propre assistant IA à flashkarte via MCP pour qu'il crée des paquets pour toi.",
+      "title": "Créer des paquets avec l'IA",
+      "body": "Un assistant IA peut créer des paquets pour toi et les envoyer directement dans ton compte, en utilisant ton propre compte IA — le serveur de flashkarte ne fait jamais tourner l'IA lui-même.",
+      "step1": "Dans les Réglages, génère une clé API et copie l'URL du serveur MCP.",
+      "step2": "Ajoute l'URL comme connecteur personnalisé dans ton client IA (par exemple claude.ai ou Claude Desktop) et connecte-toi avec ton compte flashkarte.",
+      "step3": "Demande-lui de créer un paquet, p. ex. \"Turn this into a flashkarte deck: …\", et le nouveau paquet apparaît dans ton compte, prêt à être révisé.",
+      "settingsLink": "Ouvrir les Réglages →"
+    },
+    "sharing": {
+      "metaTitle": "Partager & explorer — Aide flashkarte",
+      "metaDescription": "Comment rendre un paquet public, parcourir la page Explorer et cloner des paquets depuis la Bibliothèque.",
+      "title": "Partager & explorer",
+      "publicHeading": "Rendre un paquet public",
+      "publicBody": "Rends l'un de tes paquets public depuis la page Mes paquets pour obtenir un lien partageable et le faire figurer pour que d'autres le trouvent. Tu peux annuler le partage à tout moment. Les réponses restent cachées aux visiteurs tant qu'ils ne se sont pas inscrits pour réviser le paquet.",
+      "exploreHeading": "Explorer",
+      "exploreBody": "Explorer permet à n'importe qui — connecté ou non — de parcourir et de prévisualiser les paquets publics partagés par d'autres utilisateurs de flashkarte.",
+      "libraryHeading": "Bibliothèque",
+      "libraryBody": "Bibliothèque est la version pour les utilisateurs connectés : recherche des paquets publics et clones-en n'importe lequel directement dans ton propre compte pour commencer à réviser immédiatement."
+    }
   },
   "explore": {
     "title": "Explorer les paquets",

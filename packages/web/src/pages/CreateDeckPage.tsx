@@ -47,8 +47,8 @@ export function CreateDeckPage() {
     <div className="mx-auto max-w-2xl p-4">
       <h1 className="mb-2 text-3xl font-bold">{t("createDeck.title")}</h1>
       <p className="mb-4 text-sm">
-        <Link to="/guide#format" className="text-indigo-600">
-          {t("common.guide")}
+        <Link to="/help/writing-decks#format" className="text-indigo-600">
+          {t("common.help")}
         </Link>
       </p>
       <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">

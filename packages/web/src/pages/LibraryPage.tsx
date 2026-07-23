@@ -55,8 +55,8 @@ export function LibraryPage() {
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("library.title")}</h1>
         <div className="flex gap-4 text-sm">
-          <Link to="/guide" className="text-indigo-600">
-            {t("common.guide")}
+          <Link to="/help" className="text-indigo-600">
+            {t("common.help")}
           </Link>
           <Link to="/" className="text-indigo-600">
             {t("library.myDecks")}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Help screen -->
+    <string name="help_title">Hilfe</string>
+    <string name="help_back">Zurück</string>
+
+    <string name="help_getting_started_title">Erste Schritte</string>
+    <string name="help_getting_started_signup_heading">Registrieren</string>
+    <string name="help_getting_started_signup_body">Erstelle ein Konto mit E-Mail-Adresse und Passwort und bestätige dann die Verifizierungs-E-Mail, die dir flashkarte sendet. Deine Stapel und dein Lernfortschritt sind mit diesem Konto verknüpft und synchronisieren sich auf jedem Gerät, auf dem du dich anmeldest — in dieser App und im Web.</string>
+    <string name="help_getting_started_loop_heading">Der Kreislauf</string>
+    <string name="help_getting_started_loop_body">flashkarte hat einen zentralen Kreislauf: einen Stapel schreiben, dann lernen. Neue Karten sind als Neu markiert; sobald eine Karte gelernt wurde, entscheidet die verteilte Wiederholung, wann sie wieder fällig ist. Regelmäßiges Lernen, auch kurz, ist das, was den Zeitplan funktionieren lässt.</string>
+    <string name="help_getting_started_map_heading">Wo du was findest</string>
+    <string name="help_getting_started_map_decks">Stapel — deine Stapel mit Fälligkeitszählern und schnellen Aktionen zum Lernen, Teilen oder Löschen.</string>
+    <string name="help_getting_started_map_library">Bibliothek — durchsuche öffentliche Stapel anderer Nutzer und kopiere einen in dein Konto.</string>
+    <string name="help_getting_started_map_settings">Einstellungen — Konto, Darstellung, KI-Verbindung und Daten.</string>
+
+    <string name="help_writing_decks_title">Stapel schreiben</string>
+    <string name="help_writing_ways_heading">Drei Wege, einen Stapel zu erstellen</string>
+    <string name="help_writing_ways_app">Tippe bei Stapel auf das +, um einen Stapel im untenstehenden Format zu erstellen oder zu importieren.</string>
+    <string name="help_writing_ways_web">Nutze im Web den Stapel-Editor mit demselben Markdown-Format.</string>
+    <string name="help_writing_ways_ai">Lass einen KI-Assistenten einen Stapel für dich erstellen — siehe unten „Stapel mit KI erstellen“.</string>
+    <string name="help_writing_format_heading">Das Format</string>
+    <string name="help_writing_format_intro">Ein Stapel ist einfaches Markdown. Die erste Überschrift ist der Titel. Verwende Überschriften der zweiten Ebene, um Karten in Kategorien zu gruppieren.</string>
+    <string name="help_writing_format_bold">Nummerierte fette Vorderseite: eine fette Zeile wie **1. front** beginnt eine Karte; die Zeilen darunter sind die Antwort.</string>
+    <string name="help_writing_format_qa">Q:/A:-Format: eine Q:-Zeile ist die Vorderseite; die erste A:-Zeile ist die Antwort, und alle Zeilen danach werden zu einem zweiten Absatz.</string>
+    <string name="help_writing_format_paragraphs">Innerhalb einer Antwort werden aufeinanderfolgende Zeilen zu einem Absatz zusammengefügt; lass eine Leerzeile, um einen neuen Absatz zu beginnen.</string>
+    <string name="help_writing_format_example_caption">Beispielstapel:</string>
+    <string name="help_writing_format_example">"# Spanish Basics\n*A starter deck*\n\n## Greetings\n\n**1. hola**\nhello\n\n**2. buenos días**\ngood morning\nUsed until about noon.\n\n## Numbers\n\nQ: uno\nA: one\n\nQ: dos\nA: two"</string>
+
+    <string name="help_branching_title">Verzweigte Stapel</string>
+    <string name="help_branching_body">Verwandle einen Stapel in eine Abfolge nach dem Prinzip „Wähle deinen Weg“ statt einer normalen Wiederholung. Gib einer Karte einen Namen mit einer Zeile wie [cave] direkt über der Frage und füge darunter Optionen als Zeile mit einem Gedankenstrich hinzu, die mit einem Pfeil zum Namen einer anderen Karte enden, zum Beispiel: Sneak past -&gt; treasure. Eine Karte ohne Optionen ist eine normale Karte ohne Fortsetzung.</string>
+    <string name="help_branching_link">Ausführliche Anleitung für verzweigte Stapel öffnen →</string>
+
+    <string name="help_studying_title">Lernen &amp; verteilte Wiederholung</string>
+    <string name="help_studying_srs_heading">Verteilte Wiederholung (SM-2)</string>
+    <string name="help_studying_srs_body">flashkarte plant Wiederholungen mit dem SM-2-Algorithmus. Jede Karte hat ein Fälligkeitsdatum. Gut bewertete Karten rücken weiter in die Zukunft; Karten, bei denen du dich schwertust, kommen früher wieder — oft schon am nächsten Tag. Ziel ist es, jede Karte genau dann zu sehen, bevor du sie sonst vergessen würdest, damit die Lerneinheiten kurz bleiben.</string>
+    <string name="help_studying_ratings_heading">Die Bewertungs-Buttons</string>
+    <string name="help_studying_ratings_intro">Nachdem du eine Karte umgedreht hast, bewertest du, wie gut du dich erinnert hast. Das legt fest, wann die Karte als Nächstes fällig ist — sei ehrlich, nicht optimistisch.</string>
+    <string name="help_studying_rating_again">Nochmal — du konntest dich nicht erinnern. Die Karte wird zurückgesetzt und kommt morgen wieder.</string>
+    <string name="help_studying_rating_hard">Schwer — du konntest dich erinnern, aber es war mühsam. Das nächste Intervall wächst weniger stark als bei Gut.</string>
+    <string name="help_studying_rating_good">Gut — du konntest dich mit angemessenem Aufwand richtig erinnern. Das Intervall wächst im normalen Tempo.</string>
+    <string name="help_studying_rating_easy">Einfach — die Erinnerung fiel dir mühelos. Das Intervall wächst stärker als bei Gut.</string>
+    <string name="help_studying_rating_perfect">Perfekt — sofortige, mühelose Erinnerung. Das Intervall wächst am stärksten.</string>
+    <string name="help_studying_choice_heading">Multiple-Choice-Modus</string>
+    <string name="help_studying_choice_body">Wechsle während einer Sitzung in den Auswahl-Modus, um Antwortoptionen zu erhalten, die automatisch aus deinen anderen Karten erstellt werden — du wirst bewertet, sobald du eine antippst.</string>
+
+    <string name="help_ai_title">Stapel mit KI erstellen</string>
+    <string name="help_ai_body">Ein KI-Assistent kann Stapel für dich erstellen und sie direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt — die KI läuft nicht auf dem Server von flashkarte.</string>
+    <string name="help_ai_step1">Erzeuge in den Einstellungen einen API-Schlüssel und kopiere die MCP-Server-URL.</string>
+    <string name="help_ai_step2">Füge die URL als benutzerdefinierten Connector in deinem KI-Client hinzu (zum Beispiel claude.ai oder Claude Desktop) und melde dich mit deinem flashkarte-Konto an.</string>
+    <string name="help_ai_step3">Bitte ihn, einen Stapel zu erstellen, zum Beispiel: Turn this into a flashkarte deck: … — der neue Stapel erscheint in deinem Konto, bereit zum Lernen.</string>
+
+    <string name="help_sharing_title">Teilen &amp; entdecken</string>
+    <string name="help_sharing_public_heading">Einen Stapel öffentlich machen</string>
+    <string name="help_sharing_public_body">Veröffentliche einen deiner Stapel über sein Menü, um einen teilbaren Link zu erhalten und ihn in der Bibliothek auffindbar zu machen. Du kannst die Veröffentlichung jederzeit wieder aufheben.</string>
+    <string name="help_sharing_library_heading">Bibliothek</string>
+    <string name="help_sharing_library_body">Durchsuche öffentliche Stapel anderer flashkarte-Nutzer und kopiere jeden davon direkt in dein Konto, um sofort mit dem Lernen zu beginnen.</string>
+
+    <!-- Inline hints -->
+    <string name="decks_empty_hint">Neu hier? Öffne die Hilfe, um die Grundlagen zu lernen.</string>
+    <string name="study_rating_hint">Nicht sicher, was das bewirkt? Sieh dir in der Hilfe an, wie verteilte Wiederholung funktioniert.</string>
+    <string name="settings_help">Hilfe</string>
+</resources>

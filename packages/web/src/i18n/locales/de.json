@@ -8,7 +8,7 @@
     "back": "Zurück",
     "privacy": "Datenschutz",
     "impressum": "Impressum",
-    "guide": "Anleitung"
+    "help": "Hilfe"
   },
   "auth": {
     "signInToAccount": "Melde dich bei deinem Konto an",
@@ -79,6 +79,7 @@
     "mcpUrlLabel": "MCP-Server-URL:",
     "claudeAiHint": "Füge in claude.ai einen benutzerdefinierten Connector mit dieser URL hinzu und melde dich dann mit deinem flashkarte-Konto an. Frage dann z. B.:",
     "claudeAiExample": "„Mach daraus einen flashkarte-Stapel: …“",
+    "aiLearnMore": "Mehr Details gefällig? <0>Zur KI-Anleitung</0>.",
     "keyNamePlaceholder": "Schlüsselname (z. B. Meine KI)",
     "generateKey": "Schlüssel erstellen",
     "copyKeyWarning": "Kopiere diesen Schlüssel jetzt – er wird nicht erneut angezeigt.",
@@ -168,6 +169,8 @@
     "signOut": "Abmelden",
     "loadError": "Deine Stapel konnten nicht geladen werden",
     "empty": "Noch keine Stapel. Erstelle einen, um mit dem Lernen zu beginnen.",
+    "emptyHint": "Neu hier? <0>Lies die Erste-Schritte-Anleitung</0>.",
+    "legendHint": "Nicht sicher, was Angesehen / Neu / Nochmal / Schwer / Gut / Einfach bedeuten? <0>So funktioniert das Lernen</0>.",
     "public": "Öffentlich",
     "cardCount_one": "{{count}} Karte",
     "cardCount_other": "{{count}} Karten",
@@ -214,6 +217,7 @@
     "hard": "Schwer",
     "good": "Gut",
     "easy": "Einfach",
+    "ratingHint": "Nicht sicher, was das bewirkt? <0>So funktioniert verteilte Wiederholung</0>.",
     "complete": "Sitzung abgeschlossen",
     "nothingDue": "Gerade ist nichts fällig – super, dass du am Ball bleibst!",
     "reviewed_one": "Du hast {{count}} Karte wiederholt.",
@@ -332,49 +336,127 @@
     "disputeHeading": "Streitschlichtung",
     "disputeBody": "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <0>https://ec.europa.eu/consumers/odr/</0>. Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen."
   },
-  "guide": {
-    "back": "Zurück",
-    "metaTitle": "Anleitung — flashkarte",
-    "metaDescription": "So nutzt du flashkarte: Markdown-Lernkartendecks schreiben, mit verteilter Wiederholung lernen, Decks teilen und deine KI Decks erstellen lassen.",
-    "title": "So nutzt du flashkarte",
-    "intro": "flashkarte verwandelt einfaches Markdown in Lernkarten mit verteilter Wiederholung, die du im Web und unter Android lernen kannst — immer synchron. Diese Anleitung zeigt, wie du Stapel erstellst und gestaltest, sie lernst, teilst und einen KI-Assistenten verbindest.",
-    "tocHeading": "Auf dieser Seite",
-    "tocStart": "Erste Schritte",
-    "tocCreate": "Einen Stapel erstellen",
-    "tocFormat": "Stapelformat",
-    "tocBranching": "Verzweigte Stapel",
-    "tocSettings": "Stapeleinstellungen",
-    "tocStudy": "Lernen",
-    "tocAI": "Einen KI-Assistenten verbinden",
-    "startHeading": "Erste Schritte",
-    "startBody": "Melde dich mit E-Mail und Passwort an und bestätige dann die Verifizierungs-E-Mail. Deine Stapel und dein Lernfortschritt sind mit deinem Konto verknüpft und werden auf allen Geräten synchronisiert, auf denen du dich anmeldest.",
-    "createHeading": "Einen Stapel erstellen",
-    "createIntro": "Es gibt drei Möglichkeiten, einen Stapel zu erstellen:",
-    "createWeb": "Öffne im Web den Stapel-Editor, füge Markdown im untenstehenden Format ein oder tippe es, und speichere. Eine Live-Vorschau zeigt die erkannten Karten, bevor du speicherst.",
-    "createAndroid": "Erstelle oder importiere in der Android-App einen Stapel auf dieselbe Weise mit demselben Markdown-Format.",
-    "createAI": "Lass einen KI-Assistenten einen Stapel für dich erstellen — siehe weiter unten „Einen KI-Assistenten verbinden“.",
-    "formatHeading": "Stapelformat",
-    "formatIntro": "Ein Stapel ist einfaches Markdown. Die erste Überschrift ist der Titel; eine optionale kursive Zeile darunter ist dekorativ und wird ignoriert. Verwende Überschriften der zweiten Ebene, um Karten in Kategorien zu gruppieren, und eine Zeile aus Bindestrichen als optischen Trenner.",
-    "formatCardsIntro": "Schreibe Karten in einem von zwei Formaten — du kannst beide in einem Stapel mischen:",
-    "formatBold": "Nummerierte fette Vorderseite: eine fette Zeile wie \"**1. front**\" beginnt eine Karte; die Zeilen darunter sind die Antwort.",
-    "formatQA": "Q:/A:-Format: eine \"Q:\"-Zeile ist die Vorderseite; die erste \"A:\"-Zeile ist die Antwort, und alle Zeilen danach werden zu einem zweiten Absatz.",
-    "formatParagraphs": "Innerhalb einer Antwort werden aufeinanderfolgende Zeilen zu einem Absatz zusammengefügt; lass eine Leerzeile, um einen neuen Absatz zu beginnen.",
-    "formatExampleCaption": "Beispielstapel:",
-    "branchingHeading": "Verzweigte Stapel",
-    "branchingBody": "Verwandle einen Stapel in eine Abfolge nach dem Prinzip „Wähle deinen Weg“. Setze einen Anker wie \"[label]\" in eine eigene Zeile vor eine Karte und gib dann jede Option als Zeile \"- choice text -> target\" an, wobei target ein anderer Anker-Label ist (oder \"end\", um abzuschließen). Eine Karte ohne Optionen ist eine normale Karte.",
-    "branchingExampleCaption": "Beispiel für einen verzweigten Stapel:",
-    "settingsHeading": "Stapeleinstellungen",
-    "settingsOrdered": "In Reihenfolge lernen: wenn aktiviert, werden die Karten in der von dir festgelegten Reihenfolge angezeigt, und du musst die aktuelle Karte richtig beantworten, bevor du weitergehst — nützlich für Abfolgen, die aufeinander aufbauen.",
-    "settingsPublic": "Öffentliche Stapel: mache einen Stapel öffentlich, um eine teilbare Seite zu erhalten und ihn auf der Entdecken-Seite zu listen, wo jeder ihn in der Vorschau ansehen und in sein eigenes Konto klonen kann.",
-    "studyHeading": "Lernen",
-    "studySrs": "flashkarte plant Wiederholungen mit dem SM-2-Algorithmus für verteilte Wiederholung, sodass Karten, die dir schwerfallen, früher wiederkommen und leichte später.",
-    "studyRatings": "Im Standard-Umdrehmodus deckst du die Antwort auf und bewertest deine Erinnerung — Nochmal, Schwer, Gut oder Leicht —, was festlegt, wann die Karte als Nächstes fällig ist.",
-    "studyChoice": "Die Android-App bietet außerdem einen Multiple-Choice-Modus, der Antwortoptionen automatisch aus deinen anderen Karten erstellt und dich beim Antippen bewertet.",
-    "aiHeading": "Einen KI-Assistenten verbinden",
-    "aiBody": "Ein KI-Assistent kann Stapel für dich erstellen und sie direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt.",
-    "aiStep1": "Erzeuge in den Einstellungen einen API-Schlüssel und kopiere die MCP-Server-URL.",
-    "aiStep2": "Füge die URL als benutzerdefinierten Connector in deinem KI-Client hinzu (zum Beispiel claude.ai oder Claude Desktop) und melde dich mit deinem flashkarte-Konto an.",
-    "aiStep3": "Bitte ihn, einen Stapel zu erstellen, z. B. \"Turn this into a flashkarte deck: …\", und der neue Stapel erscheint in deinem Konto."
+  "help": {
+    "backToIndex": "← Hilfe",
+    "backToHome": "← Start",
+    "next": "Weiter: {{title}} →",
+    "index": {
+      "metaTitle": "Hilfe — flashkarte",
+      "metaDescription": "Alles, was du für flashkarte brauchst: Markdown-Stapel schreiben, verzweigte Stapel, Lernen mit verteilter Wiederholung, Stapel teilen und deine eigene KI verbinden.",
+      "title": "Hilfe",
+      "intro": "flashkarte verwandelt einfaches Markdown in Lernkarten mit verteilter Wiederholung, die du im Web und unter Android lernen kannst — immer synchron. Wähle unten ein Thema.",
+      "topics": {
+        "gettingStarted": {
+          "title": "Erste Schritte",
+          "description": "Registrieren, den Kreislauf aus Erstellen und Lernen verstehen und dich zurechtfinden."
+        },
+        "writingDecks": {
+          "title": "Stapel schreiben",
+          "description": "Das Markdown-Format für Karten und die drei Wege, einen Stapel zu erstellen."
+        },
+        "branchingDecks": {
+          "title": "Verzweigte Stapel",
+          "description": "Verwandle einen Stapel in eine Geschichte oder ein Szenario nach dem Prinzip „Wähle deinen Weg“."
+        },
+        "studying": {
+          "title": "Lernen & verteilte Wiederholung",
+          "description": "Wie die SM-2-Planung funktioniert, was die Bewertungs-Buttons bewirken und was die Zähler an einem Stapel bedeuten."
+        },
+        "ai": {
+          "title": "Stapel mit KI erstellen",
+          "description": "Verbinde deinen eigenen KI-Assistenten, damit er Stapel für dich erstellt."
+        },
+        "sharing": {
+          "title": "Teilen & entdecken",
+          "description": "Mache einen Stapel öffentlich, durchsuche die Bibliothek und kopiere Stapel, die andere geteilt haben."
+        }
+      }
+    },
+    "gettingStarted": {
+      "metaTitle": "Erste Schritte — flashkarte-Hilfe",
+      "metaDescription": "So registrierst du dich und beginnst mit flashkarte zu lernen.",
+      "title": "Erste Schritte",
+      "signupHeading": "Registrieren",
+      "signupBody": "Erstelle ein Konto mit E-Mail-Adresse und Passwort und bestätige dann die Verifizierungs-E-Mail, die dir flashkarte sendet. Deine Stapel und dein Lernfortschritt sind mit diesem Konto verknüpft und synchronisieren sich auf jedem Gerät, auf dem du dich anmeldest — Web und Android.",
+      "loopHeading": "Der Kreislauf",
+      "loopBody": "flashkarte hat einen zentralen Kreislauf: einen Stapel schreiben, dann lernen. Neue Karten erscheinen als „Neu“; sobald du eine Karte wiederholt hast, entscheidet die verteilte Wiederholung, wann sie als Nächstes „fällig“ ist. Regelmäßiges Lernen, auch kurz, ist das, was den Zeitplan funktionieren lässt.",
+      "mapHeading": "Wo du was findest",
+      "mapDecks": "Meine Stapel — deine Stapel mit Fälligkeitszählern und schnellen Aktionen zum Lernen, Teilen oder Löschen.",
+      "mapLibrary": "Bibliothek — durchsuche öffentliche Stapel anderer Nutzer und kopiere einen in dein Konto.",
+      "mapExplore": "Entdecken — durchstöbere öffentliche Stapel, ohne dich anzumelden.",
+      "mapSettings": "Einstellungen — Konto, Darstellung, Sprache, KI-Verbindung und Daten."
+    },
+    "writingDecks": {
+      "metaTitle": "Stapel schreiben — flashkarte-Hilfe",
+      "metaDescription": "Das Markdown-Format, das flashkarte für Karten verwendet, und die drei Wege, einen Stapel zu erstellen.",
+      "title": "Stapel schreiben",
+      "waysHeading": "Drei Wege, einen Stapel zu erstellen",
+      "waysWeb": "Öffne im Web den Stapel-Editor, füge Markdown im untenstehenden Format ein oder tippe es, und speichere. Eine Live-Vorschau zeigt die erkannten Karten, bevor du speicherst.",
+      "waysAndroid": "Erstelle oder importiere in der Android-App einen Stapel auf dieselbe Weise mit demselben Markdown-Format.",
+      "waysAI": "Lass einen KI-Assistenten einen Stapel für dich erstellen — siehe „Stapel mit KI erstellen“.",
+      "formatHeading": "Das Format",
+      "formatIntro": "Ein Stapel ist einfaches Markdown. Die erste Überschrift ist der Titel; eine optionale kursive Zeile darunter ist dekorativ und wird ignoriert. Verwende Überschriften der zweiten Ebene, um Karten in Kategorien zu gruppieren.",
+      "formatCardsIntro": "Schreibe Karten in einem von zwei Stilen — du kannst beide in einem Stapel mischen:",
+      "formatBold": "Nummerierte fette Vorderseite: eine fette Zeile wie \"**1. front**\" beginnt eine Karte; die Zeilen darunter sind die Antwort.",
+      "formatQA": "Q:/A:-Format: eine \"Q:\"-Zeile ist die Vorderseite; die erste \"A:\"-Zeile ist die Antwort, und alle Zeilen danach werden zu einem zweiten Absatz.",
+      "formatParagraphs": "Innerhalb einer Antwort werden aufeinanderfolgende Zeilen zu einem Absatz zusammengefügt; lass eine Leerzeile, um einen neuen Absatz zu beginnen.",
+      "formatExampleCaption": "Beispielstapel:",
+      "settingsHeading": "Stapeleinstellungen",
+      "settingsOrdered": "In Reihenfolge lernen: Karten werden in der von dir festgelegten Reihenfolge angezeigt, und du musst die aktuelle Karte richtig beantworten, bevor du weitergehst — nützlich für Abfolgen, die aufeinander aufbauen."
+    },
+    "branchingDecks": {
+      "metaTitle": "Verzweigte Stapel — flashkarte-Hilfe",
+      "metaDescription": "So schreibst du einen verzweigten Stapel nach dem Prinzip „Wähle deinen Weg“ in flashkarte.",
+      "title": "Verzweigte Stapel",
+      "body": "Verwandle einen Stapel in eine Abfolge nach dem Prinzip „Wähle deinen Weg“ statt einer normalen Wiederholung. Setze einen Anker wie \"[label]\" in eine eigene Zeile vor eine Karte und gib dann jede Option als Zeile \"- choice text -> target\" an, wobei target ein anderer Anker-Label ist (oder \"end\", um abzuschließen). Eine Karte ohne Optionen ist eine normale Karte ohne Fortsetzung. Jeder Stapel mit mindestens einer Options-Karte wird automatisch zu einem verzweigten Stapel, der gespielt statt wiederholt wird.",
+      "exampleCaption": "Beispiel für einen verzweigten Stapel:"
+    },
+    "studying": {
+      "metaTitle": "Lernen & verteilte Wiederholung — flashkarte-Hilfe",
+      "metaDescription": "Wie die SM-2-Planung für verteilte Wiederholung funktioniert, was die Bewertungs-Buttons bewirken und was die Zähler an einem Stapel bedeuten.",
+      "title": "Lernen & verteilte Wiederholung",
+      "srsHeading": "Verteilte Wiederholung (SM-2)",
+      "srsBody": "flashkarte plant Wiederholungen mit dem SM-2-Algorithmus. Jede Karte hat ein Fälligkeitsdatum. Karten, die du gut bewertest, rücken weiter in die Zukunft; Karten, bei denen du dich schwertust, kommen früher wieder — oft schon am nächsten Tag. Ziel ist es, jede Karte genau dann zu sehen, bevor du sie sonst vergessen würdest, damit die Lerneinheiten kurz bleiben.",
+      "ratingsHeading": "Die Bewertungs-Buttons",
+      "ratingsIntro": "Nachdem du die Antwort einer Karte aufgedeckt hast, bewertest du, wie gut du dich erinnert hast. Das legt fest, wann die Karte als Nächstes fällig ist — sei ehrlich, nicht optimistisch.",
+      "ratingAgain": "Nochmal — du konntest dich nicht erinnern. Die Karte wird zurückgesetzt: Sie kommt morgen wieder, und ihr nächstes Intervall beginnt von vorn.",
+      "ratingHard": "Schwer — du konntest dich erinnern, aber es war mühsam. Das nächste Intervall wächst, aber weniger stark als bei Gut.",
+      "ratingGood": "Gut — du konntest dich mit angemessenem Aufwand richtig erinnern. Das Intervall wächst im normalen Tempo.",
+      "ratingEasy": "Einfach — die Erinnerung fiel dir mühelos. Das Intervall wächst am stärksten, und auch künftige Intervalle dieser Karte wachsen schneller.",
+      "countersHeading": "Was die Zahlen an einem Stapel bedeuten",
+      "countersIntro": "Jeder Stapel listet seine Karten nach Status auf:",
+      "counterDue": "Fällig — Karten, die jetzt zum Lernen bereitstehen (neue Karten sowie wiederholte Karten, deren geplantes Datum erreicht ist).",
+      "counterNew": "Neu — Karten, die du noch nicht gelernt hast.",
+      "counterViewed": "Angesehen — Karten, die du mindestens einmal gelernt hast.",
+      "counterAgain": "Nochmal — Karten, deren letzte Wiederholung mit Nochmal bewertet wurde.",
+      "counterHard": "Schwer — Karten, deren letzte Wiederholung mit Schwer bewertet wurde.",
+      "counterGood": "Gut — Karten, deren letzte Wiederholung mit Gut bewertet wurde.",
+      "counterEasy": "Einfach — Karten, deren letzte Wiederholung mit Einfach bewertet wurde.",
+      "counterNote": "Nochmal/Schwer/Gut/Einfach spiegeln nur die letzte Wiederholung jeder Karte wider, nicht eine laufende Summe — zusammen ergeben sie also immer den Wert von Angesehen.",
+      "choiceHeading": "Multiple-Choice-Modus",
+      "choiceBody": "Die Android-App bietet außerdem einen Multiple-Choice-Modus, der Antwortoptionen automatisch aus deinen anderen Karten erstellt und dich bewertet, sobald du eine antippst."
+    },
+    "ai": {
+      "metaTitle": "Stapel mit KI erstellen — flashkarte-Hilfe",
+      "metaDescription": "So verbindest du deinen eigenen KI-Assistenten über MCP mit flashkarte, damit er Stapel für dich erstellt.",
+      "title": "Stapel mit KI erstellen",
+      "body": "Ein KI-Assistent kann Stapel für dich erstellen und sie direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt — die KI läuft nicht auf dem Server von flashkarte.",
+      "step1": "Erzeuge in den Einstellungen einen API-Schlüssel und kopiere die MCP-Server-URL.",
+      "step2": "Füge die URL als benutzerdefinierten Connector in deinem KI-Client hinzu (zum Beispiel claude.ai oder Claude Desktop) und melde dich mit deinem flashkarte-Konto an.",
+      "step3": "Bitte ihn, einen Stapel zu erstellen, z. B. \"Turn this into a flashkarte deck: …\", und der neue Stapel erscheint in deinem Konto, bereit zum Lernen.",
+      "settingsLink": "Einstellungen öffnen →"
+    },
+    "sharing": {
+      "metaTitle": "Teilen & entdecken — flashkarte-Hilfe",
+      "metaDescription": "So machst du einen Stapel öffentlich, durchstöberst die Entdecken-Seite und kopierst Stapel aus der Bibliothek.",
+      "title": "Teilen & entdecken",
+      "publicHeading": "Einen Stapel öffentlich machen",
+      "publicBody": "Mache einen deiner Stapel auf der Seite Meine Stapel öffentlich, um eine teilbare Seite zu erhalten und ihn für andere auffindbar zu machen. Du kannst die Freigabe jederzeit wieder aufheben. Die Antworten bleiben für Besucher verborgen, bis sie sich registrieren, um den Stapel zu lernen.",
+      "exploreHeading": "Entdecken",
+      "exploreBody": "Auf der Entdecken-Seite kann jeder — angemeldet oder nicht — öffentliche Stapel anderer flashkarte-Nutzer durchstöbern und in der Vorschau ansehen.",
+      "libraryHeading": "Bibliothek",
+      "libraryBody": "Die Bibliothek ist die Variante für angemeldete Nutzer: durchsuche öffentliche Stapel und kopiere jeden davon direkt in dein eigenes Konto, um sofort mit dem Lernen zu beginnen."
+    }
   },
   "explore": {
     "title": "Stapel entdecken",

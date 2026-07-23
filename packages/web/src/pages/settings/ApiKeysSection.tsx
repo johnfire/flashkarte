@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { Trans, useTranslation } from "react-i18next";
 import { api, ApiError } from "../../api/client";
 import type { ApiKey, CreatedApiKey } from "../../api/types";
 
@@ -69,8 +70,16 @@ export function ApiKeysSection() {
           {MCP_URL}
         </code>
       </p>
-      <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">
+      <p className="mb-2 text-sm text-gray-600 dark:text-gray-300">
         {t("settings.claudeAiHint")} <em>{t("settings.claudeAiExample")}</em>
+      </p>
+      <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+        <Trans
+          i18nKey="settings.aiLearnMore"
+          components={[
+            <Link key="0" to="/help/ai" className="text-indigo-600" />,
+          ]}
+        />
       </p>
 
       <div className="flex gap-2">

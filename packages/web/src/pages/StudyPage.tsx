@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { api, ApiError, reportClientError } from "../api/client";
 import { StudyCard } from "../api/types";
 
@@ -143,6 +143,17 @@ export function StudyPage() {
           </div>
         )}
       </div>
+
+      {revealed && (
+        <p className="mt-3 text-center text-xs text-gray-500 dark:text-gray-400">
+          <Trans
+            i18nKey="study.ratingHint"
+            components={[
+              <Link key="0" to="/help/studying#ratings" className="text-indigo-600" />,
+            ]}
+          />
+        </p>
+      )}
     </div>
   );
 }

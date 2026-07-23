@@ -14,11 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.flashmd.R
 import com.flashmd.data.local.StudyMode
 import com.flashmd.domain.study.StudyOption
 import com.flashmd.ui.theme.RatingColor
@@ -152,6 +154,13 @@ fun StudyScreen(
                     // Rating buttons — only shown after flip
                     if (state.isFlipped) {
                         RatingRow(onRate = { viewModel.rate(it) })
+                        Text(
+                            stringResource(R.string.study_rating_hint),
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(bottom = 12.dp),
+                        )
                     } else {
                         Text(
                             "Tap card to reveal answer",

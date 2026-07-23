@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Help screen -->
+    <string name="help_title">Ayuda</string>
+    <string name="help_back">Volver</string>
+
+    <string name="help_getting_started_title">Primeros pasos</string>
+    <string name="help_getting_started_signup_heading">Regístrate</string>
+    <string name="help_getting_started_signup_body">Crea una cuenta con un correo electrónico y una contraseña, y luego confirma el correo de verificación que te envía flashkarte. Tus mazos y tu progreso de estudio están vinculados a esa cuenta y se sincronizan en todos los dispositivos en los que inicies sesión — en esta app y en la web.</string>
+    <string name="help_getting_started_loop_heading">El ciclo</string>
+    <string name="help_getting_started_loop_body">flashkarte tiene un ciclo central: escribir un mazo y luego estudiarlo. Las tarjetas nuevas se marcan como Nuevas; una vez que se ha estudiado una tarjeta, la repetición espaciada decide cuándo vence de nuevo. Estudiar con regularidad, aunque sea poco, es lo que hace que el sistema funcione.</string>
+    <string name="help_getting_started_map_heading">Dónde está todo</string>
+    <string name="help_getting_started_map_decks">Mazos — tus mazos, con contadores de vencidas y accesos rápidos para estudiar, compartir o eliminar.</string>
+    <string name="help_getting_started_map_library">Biblioteca — busca mazos públicos compartidos por otros usuarios y clona uno en tu cuenta.</string>
+    <string name="help_getting_started_map_settings">Ajustes — cuenta, apariencia, conexión con IA y datos.</string>
+
+    <string name="help_writing_decks_title">Escribir mazos</string>
+    <string name="help_writing_ways_heading">Tres formas de crear un mazo</string>
+    <string name="help_writing_ways_app">Toca el + en Mazos para crear o importar un mazo con el formato de abajo.</string>
+    <string name="help_writing_ways_web">En la web, usa el editor de mazos con el mismo formato Markdown.</string>
+    <string name="help_writing_ways_ai">Deja que un asistente de IA cree un mazo por ti — consulta «Crear mazos con IA» más abajo.</string>
+    <string name="help_writing_format_heading">El formato</string>
+    <string name="help_writing_format_intro">Un mazo es Markdown sencillo. El primer encabezado es el título. Usa encabezados de segundo nivel para agrupar las tarjetas en categorías.</string>
+    <string name="help_writing_format_bold">Anverso en negrita numerado: una línea en negrita como **1. front** inicia una tarjeta; las líneas debajo son la respuesta.</string>
+    <string name="help_writing_format_qa">Formato Q:/A:: una línea Q: es el anverso; la primera línea A: es la respuesta, y cualquier línea posterior se convierte en un segundo párrafo.</string>
+    <string name="help_writing_format_paragraphs">Dentro de una respuesta, las líneas consecutivas se unen en un solo párrafo; deja una línea en blanco para empezar un nuevo párrafo.</string>
+    <string name="help_writing_format_example_caption">Mazo de ejemplo:</string>
+    <string name="help_writing_format_example">"# Spanish Basics\n*A starter deck*\n\n## Greetings\n\n**1. hola**\nhello\n\n**2. buenos días**\ngood morning\nUsed until about noon.\n\n## Numbers\n\nQ: uno\nA: one\n\nQ: dos\nA: two"</string>
+
+    <string name="help_branching_title">Mazos ramificados</string>
+    <string name="help_branching_body">Convierte un mazo en una secuencia de «elige tu camino» en lugar de un repaso normal. Dale un nombre a una tarjeta con una línea como [cave] justo encima de su pregunta, y añade opciones debajo como una línea con un guion que termine en una flecha hacia el nombre de otra tarjeta, por ejemplo: Sneak past -&gt; treasure. Una tarjeta sin opciones es una tarjeta normal sin continuación.</string>
+    <string name="help_branching_link">Abrir la guía detallada de mazos ramificados →</string>
+
+    <string name="help_studying_title">Estudiar &amp; repetición espaciada</string>
+    <string name="help_studying_srs_heading">Repetición espaciada (SM-2)</string>
+    <string name="help_studying_srs_body">flashkarte programa los repasos con el algoritmo SM-2. Cada tarjeta tiene una fecha de vencimiento. Las tarjetas bien valoradas avanzan más hacia el futuro; las que te cuestan vuelven antes — a menudo al día siguiente. El objetivo es ver cada tarjeta justo antes de que la olvidarías, para que las sesiones de estudio se mantengan cortas.</string>
+    <string name="help_studying_ratings_heading">Los botones de valoración</string>
+    <string name="help_studying_ratings_intro">Después de voltear una tarjeta, valora qué tan bien la recordaste. Esto es lo que programa el siguiente repaso — sé honesto, no optimista.</string>
+    <string name="help_studying_rating_again">Repetir — no la recordaste. La tarjeta se reinicia y vuelve mañana.</string>
+    <string name="help_studying_rating_hard">Difícil — la recordaste, pero te costó. El siguiente intervalo crece menos que con Bien.</string>
+    <string name="help_studying_rating_good">Bien — la recordaste correctamente con un esfuerzo razonable. El intervalo crece al ritmo normal.</string>
+    <string name="help_studying_rating_easy">Fácil — recordarla te resultó fácil. El intervalo crece más que con Bien.</string>
+    <string name="help_studying_rating_perfect">Perfecto — recuerdo instantáneo y sin esfuerzo. El intervalo crece al máximo.</string>
+    <string name="help_studying_choice_heading">Modo de opción múltiple</string>
+    <string name="help_studying_choice_body">Cambia al modo Opción durante una sesión para obtener opciones de respuesta generadas automáticamente a partir de tus otras tarjetas — se te califica en cuanto tocas una.</string>
+
+    <string name="help_ai_title">Crear mazos con IA</string>
+    <string name="help_ai_body">Un asistente de IA puede crear mazos por ti y enviarlos directamente a tu cuenta, usando tu propia cuenta de IA — el servidor de flashkarte nunca ejecuta la IA.</string>
+    <string name="help_ai_step1">En Ajustes, genera una clave API y copia la URL del servidor MCP.</string>
+    <string name="help_ai_step2">Añade la URL como conector personalizado en tu cliente de IA (por ejemplo claude.ai o Claude Desktop) e inicia sesión con tu cuenta de flashkarte.</string>
+    <string name="help_ai_step3">Pídele que cree un mazo, por ejemplo: Turn this into a flashkarte deck: … — el nuevo mazo aparecerá en tu cuenta, listo para estudiar.</string>
+
+    <string name="help_sharing_title">Compartir &amp; explorar</string>
+    <string name="help_sharing_public_heading">Hacer público un mazo</string>
+    <string name="help_sharing_public_body">Publica uno de tus mazos desde su menú para obtener un enlace que puedas compartir y que aparezca en la Biblioteca para que otros lo encuentren. Puedes despublicarlo en cualquier momento.</string>
+    <string name="help_sharing_library_heading">Biblioteca</string>
+    <string name="help_sharing_library_body">Busca mazos públicos compartidos por otros usuarios de flashkarte y clona cualquiera de ellos directamente en tu cuenta para empezar a estudiar de inmediato.</string>
+
+    <!-- Inline hints -->
+    <string name="decks_empty_hint">¿Eres nuevo aquí? Abre la Ayuda para aprender lo básico.</string>
+    <string name="study_rating_hint">¿No sabes qué hace cada botón? Descubre cómo funciona la repetición espaciada en la Ayuda.</string>
+    <string name="settings_help">Ayuda</string>
+</resources>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Help screen -->
+    <string name="help_title">Aide</string>
+    <string name="help_back">Retour</string>
+
+    <string name="help_getting_started_title">Premiers pas</string>
+    <string name="help_getting_started_signup_heading">Inscription</string>
+    <string name="help_getting_started_signup_body">Crée un compte avec une adresse e-mail et un mot de passe, puis confirme l\'e-mail de vérification que flashkarte t\'envoie. Tes paquets et ta progression de révision sont liés à ce compte et se synchronisent sur chaque appareil où tu te connectes — dans cette application et sur le web.</string>
+    <string name="help_getting_started_loop_heading">Le cycle</string>
+    <string name="help_getting_started_loop_body">flashkarte repose sur un cycle central : écrire un paquet, puis le réviser. Les nouvelles cartes sont marquées Nouvelles ; une fois qu\'une carte a été révisée, la répétition espacée détermine sa prochaine échéance. Réviser régulièrement, même brièvement, est ce qui fait fonctionner le système.</string>
+    <string name="help_getting_started_map_heading">Où trouver quoi</string>
+    <string name="help_getting_started_map_decks">Paquets — tes paquets, avec les compteurs d\'échéances et des actions rapides pour réviser, partager ou supprimer.</string>
+    <string name="help_getting_started_map_library">Bibliothèque — recherche des paquets publics partagés par d\'autres utilisateurs et clones-en un dans ton compte.</string>
+    <string name="help_getting_started_map_settings">Réglages — compte, apparence, connexion IA et données.</string>
+
+    <string name="help_writing_decks_title">Écrire des paquets</string>
+    <string name="help_writing_ways_heading">Trois façons de créer un paquet</string>
+    <string name="help_writing_ways_app">Touche le + sur Paquets pour créer ou importer un paquet au format ci-dessous.</string>
+    <string name="help_writing_ways_web">Sur le web, utilise l\'éditeur de paquets avec le même format Markdown.</string>
+    <string name="help_writing_ways_ai">Laisse un assistant IA créer un paquet pour toi — voir « Créer des paquets avec l\'IA » ci-dessous.</string>
+    <string name="help_writing_format_heading">Le format</string>
+    <string name="help_writing_format_intro">Un paquet est du simple Markdown. Le premier titre est le nom du paquet. Utilise des titres de deuxième niveau pour regrouper les cartes en catégories.</string>
+    <string name="help_writing_format_bold">Recto en gras numéroté : une ligne en gras comme **1. front** commence une carte ; les lignes en dessous sont la réponse.</string>
+    <string name="help_writing_format_qa">Format Q:/A: : une ligne Q: est le recto ; la première ligne A: est la réponse, et toutes les lignes qui suivent deviennent un second paragraphe.</string>
+    <string name="help_writing_format_paragraphs">Au sein d\'une réponse, les lignes consécutives sont réunies en un seul paragraphe ; laisse une ligne vide pour commencer un nouveau paragraphe.</string>
+    <string name="help_writing_format_example_caption">Exemple de paquet :</string>
+    <string name="help_writing_format_example">"# Spanish Basics\n*A starter deck*\n\n## Greetings\n\n**1. hola**\nhello\n\n**2. buenos días**\ngood morning\nUsed until about noon.\n\n## Numbers\n\nQ: uno\nA: one\n\nQ: dos\nA: two"</string>
+
+    <string name="help_branching_title">Paquets à embranchements</string>
+    <string name="help_branching_body">Transforme un paquet en une séquence « choisis ton chemin » plutôt qu\'une simple révision. Donne un nom à une carte avec une ligne comme [cave] juste au-dessus de sa question, puis ajoute des options en dessous sous forme de ligne commençant par un tiret et se terminant par une flèche vers le nom d\'une autre carte, par exemple : Sneak past -&gt; treasure. Une carte sans options est une carte normale, sans suite.</string>
+    <string name="help_branching_link">Ouvrir le guide détaillé des paquets à embranchements →</string>
+
+    <string name="help_studying_title">Réviser &amp; répétition espacée</string>
+    <string name="help_studying_srs_heading">Répétition espacée (SM-2)</string>
+    <string name="help_studying_srs_body">flashkarte planifie les révisions avec l\'algorithme SM-2. Chaque carte a une échéance. Les cartes bien notées avancent plus loin dans le futur ; celles qui te posent problème reviennent plus tôt — souvent dès le lendemain. L\'objectif est de revoir chaque carte juste avant que tu ne l\'oublies, pour que les sessions de révision restent courtes.</string>
+    <string name="help_studying_ratings_heading">Les boutons de notation</string>
+    <string name="help_studying_ratings_intro">Après avoir retourné une carte, évalue ta mémorisation. C\'est ce qui planifie la prochaine révision — sois honnête, pas optimiste.</string>
+    <string name="help_studying_rating_again">À refaire — tu ne t\'en es pas souvenu. La carte est réinitialisée et revient dès demain.</string>
+    <string name="help_studying_rating_hard">Difficile — tu t\'en es souvenu, mais c\'était difficile. Le prochain intervalle augmente moins qu\'avec Correct.</string>
+    <string name="help_studying_rating_good">Correct — tu t\'en es souvenu correctement avec un effort raisonnable. L\'intervalle augmente au rythme normal.</string>
+    <string name="help_studying_rating_easy">Facile — t\'en souvenir n\'a demandé aucun effort. L\'intervalle augmente plus qu\'avec Correct.</string>
+    <string name="help_studying_rating_perfect">Parfait — mémorisation instantanée et sans effort. L\'intervalle augmente le plus.</string>
+    <string name="help_studying_choice_heading">Mode à choix multiples</string>
+    <string name="help_studying_choice_body">Passe en mode Choix pendant une session pour obtenir des options de réponse générées automatiquement à partir de tes autres cartes — tu es noté dès que tu en touches une.</string>
+
+    <string name="help_ai_title">Créer des paquets avec l\'IA</string>
+    <string name="help_ai_body">Un assistant IA peut créer des paquets pour toi et les envoyer directement dans ton compte, en utilisant ton propre compte IA — le serveur de flashkarte ne fait jamais tourner l\'IA lui-même.</string>
+    <string name="help_ai_step1">Dans les Réglages, génère une clé API et copie l\'URL du serveur MCP.</string>
+    <string name="help_ai_step2">Ajoute l\'URL comme connecteur personnalisé dans ton client IA (par exemple claude.ai ou Claude Desktop) et connecte-toi avec ton compte flashkarte.</string>
+    <string name="help_ai_step3">Demande-lui de créer un paquet, par exemple : Turn this into a flashkarte deck: … — le nouveau paquet apparaît dans ton compte, prêt à être révisé.</string>
+
+    <string name="help_sharing_title">Partager &amp; explorer</string>
+    <string name="help_sharing_public_heading">Rendre un paquet public</string>
+    <string name="help_sharing_public_body">Publie l\'un de tes paquets depuis son menu pour obtenir un lien partageable et le faire figurer dans la Bibliothèque pour que d\'autres le trouvent. Tu peux annuler la publication à tout moment.</string>
+    <string name="help_sharing_library_heading">Bibliothèque</string>
+    <string name="help_sharing_library_body">Recherche des paquets publics partagés par d\'autres utilisateurs de flashkarte et clones-en n\'importe lequel directement dans ton compte pour commencer à réviser immédiatement.</string>
+
+    <!-- Inline hints -->
+    <string name="decks_empty_hint">Nouveau ici ? Ouvre l\'Aide pour apprendre les bases.</string>
+    <string name="study_rating_hint">Tu ne sais pas à quoi servent ces boutons ? Découvre comment fonctionne la répétition espacée dans l\'Aide.</string>
+    <string name="settings_help">Aide</string>
+</resources>
