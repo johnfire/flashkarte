@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 
 export function Code({ children }: { children: string }) {
@@ -10,8 +10,7 @@ export function Code({ children }: { children: string }) {
   );
 }
 
-export const helpH2 =
-  "text-lg font-semibold text-gray-900 dark:text-gray-100";
+export const helpH2 = "text-lg font-semibold text-gray-900 dark:text-gray-100";
 
 interface HelpTopicShellProps {
   title: string;

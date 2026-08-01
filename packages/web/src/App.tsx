@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminRoute } from "./components/AdminRoute";
 import { AdminPage } from "./pages/AdminPage";
@@ -38,15 +38,9 @@ export default function App() {
         <Route path="/impressum" element={<ImpressumPage />} />
         <Route path="/guide" element={<Navigate to="/help" replace />} />
         <Route path="/help" element={<HelpIndexPage />} />
-        <Route
-          path="/help/getting-started"
-          element={<GettingStartedPage />}
-        />
+        <Route path="/help/getting-started" element={<GettingStartedPage />} />
         <Route path="/help/writing-decks" element={<WritingDecksPage />} />
-        <Route
-          path="/help/branching-decks"
-          element={<BranchingDecksPage />}
-        />
+        <Route path="/help/branching-decks" element={<BranchingDecksPage />} />
         <Route path="/help/studying" element={<StudyingPage />} />
         <Route path="/help/ai" element={<AiPage />} />
         <Route path="/help/sharing" element={<SharingPage />} />

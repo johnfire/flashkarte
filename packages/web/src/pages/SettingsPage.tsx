@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { AccountSection } from "./settings/AccountSection";
 import { PasswordSection } from "./settings/PasswordSection";
 import { AppearanceSection } from "./settings/AppearanceSection";

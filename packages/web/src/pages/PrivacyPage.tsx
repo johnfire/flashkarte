@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { resetAnalyticsConsent } from "../components/AnalyticsConsentBanner";
 import { useDocumentHead } from "../seo/useDocumentHead";

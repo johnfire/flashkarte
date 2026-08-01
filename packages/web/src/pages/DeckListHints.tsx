@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 
 export function DeckListEmptyHint() {
@@ -10,7 +10,11 @@ export function DeckListEmptyHint() {
         <Trans
           i18nKey="decks.emptyHint"
           components={[
-            <Link key="0" to="/help/getting-started" className="text-indigo-600" />,
+            <Link
+              key="0"
+              to="/help/getting-started"
+              className="text-indigo-600"
+            />,
           ]}
         />
       </p>
@@ -24,7 +28,11 @@ export function DeckListLegendHint() {
       <Trans
         i18nKey="decks.legendHint"
         components={[
-          <Link key="0" to="/help/studying#counters" className="text-indigo-600" />,
+          <Link
+            key="0"
+            to="/help/studying#counters"
+            className="text-indigo-600"
+          />,
         ]}
       />
     </p>

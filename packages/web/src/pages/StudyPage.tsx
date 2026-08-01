@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { api, ApiError, reportClientError } from "../api/client";
 import { StudyCard } from "../api/types";
@@ -149,7 +149,11 @@ export function StudyPage() {
           <Trans
             i18nKey="study.ratingHint"
             components={[
-              <Link key="0" to="/help/studying#ratings" className="text-indigo-600" />,
+              <Link
+                key="0"
+                to="/help/studying#ratings"
+                className="text-indigo-600"
+              />,
             ]}
           />
         </p>

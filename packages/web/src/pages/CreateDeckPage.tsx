@@ -1,5 +1,5 @@
 import { useState, useMemo, FormEvent } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { parseDeck } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";

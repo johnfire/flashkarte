@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError, reportClientError } from "../api/client";
 import { DeckWithCounts } from "../api/types";
