@@ -77,7 +77,11 @@ export function ApiKeysSection() {
         <Trans
           i18nKey="settings.aiLearnMore"
           components={[
-            <Link key="0" to="/help/ai" className="text-indigo-600" />,
+            <Link
+              key="0"
+              to="/help/ai"
+              className="text-indigo-600 underline"
+            />,
           ]}
         />
       </p>

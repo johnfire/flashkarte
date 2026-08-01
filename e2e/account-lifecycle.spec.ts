@@ -78,7 +78,9 @@ test("a markdown deck can be created and studied", async ({ page }) => {
   await expect(page.getByText("E2E Deck", { exact: true })).toBeVisible();
 
   // Study one card: reveal, grade it, and see the next card or the summary.
-  await page.getByRole("link", { name: /study/i }).first().click();
+  // Exact match: the deck-list legend hint links to "See how studying works",
+  // which a loose /study/i also matches — and it renders before the deck rows.
+  await page.getByRole("link", { name: "Study", exact: true }).first().click();
   await page.getByRole("button", { name: "Show answer" }).click();
   await page.getByRole("button", { name: /^Good/ }).click();
   await expect(page.getByText(/2 \/ 2|complete/i).first()).toBeVisible();

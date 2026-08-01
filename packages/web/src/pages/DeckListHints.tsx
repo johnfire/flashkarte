@@ -13,7 +13,7 @@ export function DeckListEmptyHint() {
             <Link
               key="0"
               to="/help/getting-started"
-              className="text-indigo-600"
+              className="text-indigo-600 underline"
             />,
           ]}
         />
@@ -31,7 +31,7 @@ export function DeckListLegendHint() {
           <Link
             key="0"
             to="/help/studying#counters"
-            className="text-indigo-600"
+            className="text-indigo-600 underline"
           />,
         ]}
       />
