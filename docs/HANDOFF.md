@@ -1,6 +1,6 @@
 # flashkarte — Session Handoff
 
-_Last updated: 2026-07-16_
+_Last updated: 2026-08-01_
 
 ## Standards remediation — shipped 2026-07-16
 
@@ -55,7 +55,10 @@ Kotlin chain above, each blocking its own set of updates:
 
 - **AGP 8.5.2** — `lifecycleRuntimeKtx 2.11.0` pulls `androidx.compose
 1.11.0`, which refuses to build on AGP < 8.6. Same pin that stops KSP.
-- **compileSdk 35** — `okhttp 5.x` requires compiling against API 36.
+- ~~**compileSdk 35** — `okhttp 5.x` requires compiling against API 36.~~
+  **Cleared** — `f6fef68` moved `compileSdk`/`targetSdk` to **36**. The okhttp 5
+  bump (#76) is therefore unblocked on paper; it has **not** been re-attempted or
+  verified building, so re-open it deliberately rather than assuming it's green.
 
 Merged from that batch (verified building): `hiltWork 1.3.0`,
 `espresso 3.7.0`, `datastore 1.2.1`. Closed as blocked: #74 (lifecycle,
@@ -90,13 +93,41 @@ i18n**, **SEO**, **MCP Claude.ai OAuth**, and the **user-guide page** have all
 shipped — see below. On-device smoke tests of the offline flow + the newer
 Android screens are the main remaining manual-QA gap.
 
-## In review — NOT deployed (branch `feat/learning-engine-spec-01`)
+## Learning-engine spec pack — status
 
-**Spec 01 — diagnostic answers** (the learning-engine flagship; see
-`docs/specs/01-diagnostic-answers.md`). A wrong multiple-choice option on an
-ordinary SR card can route to a remediation card shown as an interlude. Built on
-a branch and held for review — **do not merge without Chris's OK** (merge = prod,
-no staging). Included: reserved `-> correct` parser target + diagnostic-card
+Spec pack lives in `docs/specs/` (read `00-guardrails.md` first). Status as of
+2026-08-01:
+
+| Spec                  | Status                              |
+| --------------------- | ----------------------------------- |
+| 01 Diagnostic answers | **SHIPPED** — `946f8e7`, 2026-07-03 |
+| 02 Confidence rating  | not started                         |
+| 03 Image support      | not started                         |
+| 04 FSRS scheduler     | not started                         |
+| 05 MCP study tools    | not started                         |
+| 06 Depth ladders      | not started                         |
+| 07 Case scoring       | not started                         |
+| 08 Web parity         | not started                         |
+
+Nothing from 02–08 exists in the tree: no confidence column, no `@concept` /
+`@depth`, no FSRS, no `path_events`, no MCP study tools. **Web still has no
+diagnostic MC path** — `packages/web/src/pages/StudyPage.tsx` does not consume
+`selectOptions`/`resolveChoice`, so the Android-vs-web drift called out in
+`docs/specs/00-guardrails.md` has not narrowed.
+
+A course-mode design building on this pack is in
+`docs/plans/2026-08-01-course-mode-design.md`; it makes specs **06 and 08 hard
+prerequisites** rather than optional shelf items.
+
+The `feat/learning-engine-spec-01` branch is **fully merged** into `main`
+(`git log main..feat/learning-engine-spec-01` is empty) and can be deleted.
+
+## Spec 01 — diagnostic answers — shipped 2026-07-03
+
+The learning-engine flagship; see `docs/specs/01-diagnostic-answers.md`. A wrong
+multiple-choice option on an ordinary SR card can route to a remediation card
+shown as an interlude. Merged and deployed in `946f8e7`. Included: reserved
+`-> correct` parser target + diagnostic-card
 classification (TS + Kotlin; Python frozen); shared `study/` module
 (`selectOptions`/`resolveChoice` + Kotlin mirror); server validation, options
 persistence, migration **013** (`review_events.option_index`, nullable); Android
@@ -148,7 +179,19 @@ decks** (anchors `[label]` + `-> target`); **#24 bug reporting** (Android screen
 token unset); **web i18n** (`packages/web/src/i18n`, full-locale parity enforced);
 **SEO** (`packages/server/src/seo` — server-rendered meta/OG + sitemap/robots);
 **MCP Claude.ai OAuth** (`packages/mcp/src/oauth` — authorize/token/discovery);
-and the **user-guide page** (`packages/web/src/pages/GuidePage.tsx`).
+and the **user-guide page** (since replaced — see below).
+
+Shipped after 2026-07-16 (all on `main`, deployed):
+
+- **Spec 01 diagnostic answers** — `946f8e7` (migration 013).
+- **Verified-email enforcement** — `286f4ac` (migration 016).
+- **GDPR retention controls + privacy flows** — `46705d8` (migration 017);
+  reports in `docs/gdpr/`.
+- **Help center** — `a37aec1`. A multi-page `/help` (`packages/web/src/pages/help/`)
+  **replaced** the single `GuidePage.tsx`, mirrored on Android.
+- **Android targets API 36** — `f6fef68` (`compileSdk`/`targetSdk` now 36).
+- **Security hardening batch** — MCP CSRF/rate-limit/API-key fixes, Android DB
+  encryption + cert pinning, timing-safe `/metrics` compare, async reset email.
 
 ## #1 Offline-first — shipped 2026-06-05
 
@@ -229,8 +272,10 @@ of the Android offline + newer screens.
   - `-> target` options) is TS + Kotlin only; the Python reference parser does
     not implement it.\*\* Change the ports together for any common-subset behaviour.
 - **Migrations** auto-run on server start (`src/db/migrate.ts`, numbered `.sql`,
-  tracked in `_migrations`). Latest is `012_api_key_scope.sql`; add the next as
-  `013_*.sql`.
+  tracked in `_migrations`). Latest is `017_email_change.sql`; add the next as
+  `018_*.sql`. Since 012: **013** `review_events.option_index` (spec 01), **014**
+  `audit_log`, **015** `two_factor`, **016** `enforce_email_verification`, **017**
+  `email_change`.
 - **Auth:** `ValidationError → 422`. `/api/auth` rate-limited. User payload:
   `{ id, email, role, accountType, emailVerifiedAt, displayName }`.
   `account_type` ∈ `free|paid|admin-gifted|admin`; admin access = `account_type='admin'`.
