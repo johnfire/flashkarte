@@ -1,6 +1,18 @@
-# flashkarte — Session Handoff
+# flashkarte — Session Handoff (ARCHIVED)
 
-_Last updated: 2026-08-01_
+> **Archived 2026-08-01. Point-in-time snapshot — do not treat as current.**
+>
+> This was a session-handoff document from when work was passed between
+> sessions. It is kept for the history it records (the Kotlin/AGP/Gradle
+> upgrade chain, the Express 5 migration analysis, and the offline-first and
+> Android parity write-ups), not as a description of the project today.
+>
+> Current sources of truth: [`README.md`](../../README.md) for architecture,
+> [`docs/specs/`](../specs/README.md) for the learning-engine work, and
+> [`docs/deployment.md`](../deployment.md) for the production stack. Anything
+> below may be stale — it does not cover changes shipped after 2026-08-01.
+
+_Last updated while live: 2026-08-01_
 
 ## Standards remediation — shipped 2026-07-16
 

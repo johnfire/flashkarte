@@ -1,8 +1,11 @@
 # 00 — Guardrails (READ FIRST, applies to every spec in this directory)
 
-Implementing agents MUST read this file, `docs/HANDOFF.md`, and (for anything touching
-branching) `docs/superpowers/specs/2026-06-06-branching-decks-design.md` before coding.
-These constraints override anything a spec forgets to repeat.
+Implementing agents MUST read this file, the `README.md` architecture section, and (for
+anything touching branching) `docs/superpowers/specs/2026-06-06-branching-decks-design.md`
+before coding. These constraints override anything a spec forgets to repeat.
+
+(The old `docs/HANDOFF.md` was retired to `docs/older-docs/` on 2026-08-01 — it is a
+point-in-time snapshot and must not be relied on as current.)
 
 ## Parser parity — the cardinal rule
 
@@ -67,4 +70,4 @@ puts semantics in a ViewModel or React page is being implemented wrong.
 2. All workspaces' tests + lint green; Android compiles and unit tests pass.
 3. Parser/scheduler changes: corpus updated, TS+Kotlin parity cases added.
 4. Old-client compatibility stated in the PR (Android APKs in the field, MCP clients).
-5. `docs/HANDOFF.md` gets a one-line entry for the shipped change.
+5. The commit message records what shipped — there is no separate status doc to update.
