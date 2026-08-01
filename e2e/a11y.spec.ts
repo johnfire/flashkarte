@@ -20,11 +20,21 @@ function report(violations: Awaited<ReturnType<typeof scan>>["violations"]) {
     .join("\n");
 }
 
+// The old single "/guide" page was replaced by the /help centre; scanning
+// "/guide" only exercised its redirect, so the help content went unchecked.
+// Each topic page is listed explicitly — they carry inline links in prose,
+// which is exactly the shape that trips link-in-text-block.
 for (const [name, path] of [
   ["landing", "/"],
   ["auth", "/login"],
   ["signup", "/login?mode=signup"],
-  ["guide", "/guide"],
+  ["help index", "/help"],
+  ["help: getting started", "/help/getting-started"],
+  ["help: writing decks", "/help/writing-decks"],
+  ["help: branching decks", "/help/branching-decks"],
+  ["help: studying", "/help/studying"],
+  ["help: ai", "/help/ai"],
+  ["help: sharing", "/help/sharing"],
   ["explore", "/explore"],
   ["privacy", "/privacy"],
 ] as const) {
