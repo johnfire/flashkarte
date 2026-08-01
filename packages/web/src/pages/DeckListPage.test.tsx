@@ -2,28 +2,33 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { api, ApiError } from "../api/client";
+import { api, ApiError, reportClientError } from "../api/client";
 import type { DeckWithCounts } from "../api/types";
 import "../i18n";
 import { DeckListPage } from "./DeckListPage";
 
-vi.mock("../api/client", () => ({
+// Keep the real ApiError and isVerificationRequired: a stub ApiError that drops
+// `code` cannot express the difference between a genuine failure and the
+// deliberate verification refusal, which is exactly what this page branches on.
+vi.mock("../api/client", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("../api/client")>()),
   api: {
     decks: { list: vi.fn(), remove: vi.fn(), setPublic: vi.fn() },
-  },
-  ApiError: class ApiError extends Error {
-    constructor(_status: number, _code: string, message: string) {
-      super(message);
-    }
   },
   reportClientError: vi.fn(),
 }));
 
+// Mutable so a test can flip the account to unverified; reset in beforeEach.
+const auth = vi.hoisted(() => ({
+  user: {
+    accountType: "free",
+    email: "learner@example.com",
+    emailVerifiedAt: "2026-01-01T00:00:00Z" as string | null,
+  },
+}));
+
 vi.mock("../auth/AuthContext", () => ({
-  useAuth: () => ({
-    user: { accountType: "free" },
-    logout: vi.fn(),
-  }),
+  useAuth: () => ({ user: auth.user, logout: vi.fn() }),
 }));
 
 const mockedDecksApi = api.decks as unknown as {
@@ -58,7 +63,10 @@ function renderPage() {
 }
 
 describe("DeckListPage", () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    auth.user = { ...auth.user, emailVerifiedAt: "2026-01-01T00:00:00Z" };
+  });
 
   test("renders loading and loaded states", async () => {
     mockedDecksApi.list.mockResolvedValue([deck]);
@@ -77,6 +85,50 @@ describe("DeckListPage", () => {
     expect(
       await screen.findByText("Deck service unavailable"),
     ).toBeInTheDocument();
+    expect(reportClientError).toHaveBeenCalled();
+  });
+
+  test("an unverified account gets the verify panel, not an error", async () => {
+    auth.user = { ...auth.user, emailVerifiedAt: null };
+    renderPage();
+
+    expect(
+      await screen.findByText("Verify your email to get started"),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/learner@example\.com/)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "read the getting started guide" }),
+    ).toBeInTheDocument();
+    // The generic empty hint is for verified accounts with no decks yet.
+    expect(
+      screen.queryByText("No decks yet. Create one to start studying."),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Couldn't load your decks"),
+    ).not.toBeInTheDocument();
+    // A request that could only ever 403 is not worth making, and a deliberate
+    // refusal is not a client error.
+    expect(mockedDecksApi.list).not.toHaveBeenCalled();
+    expect(reportClientError).not.toHaveBeenCalled();
+  });
+
+  test("a stale verified flag still does not log the gate as an error", async () => {
+    mockedDecksApi.list.mockRejectedValue(
+      new ApiError(
+        403,
+        "EMAIL_VERIFICATION_REQUIRED",
+        "Verify your email before using this feature",
+      ),
+    );
+    renderPage();
+
+    expect(
+      await screen.findByText("No decks yet. Create one to start studying."),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByText("Verify your email before using this feature"),
+    ).not.toBeInTheDocument();
+    expect(reportClientError).not.toHaveBeenCalled();
   });
 
   test("deletes a deck and toggles sharing optimistically", async () => {

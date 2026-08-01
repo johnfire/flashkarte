@@ -32,6 +32,19 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * True when the server deliberately refused because the account's email is not
+ * verified yet (403 from `requireVerified`). This is an expected state for a
+ * new account, not a failure: `VerifyBanner` already tells the user what to do,
+ * so callers should render their normal gated UI and must NOT push it through
+ * `reportClientError` — doing so files routine signups as server-side errors.
+ */
+export function isVerificationRequired(error: unknown): boolean {
+  return (
+    error instanceof ApiError && error.code === "EMAIL_VERIFICATION_REQUIRED"
+  );
+}
+
 async function raw(path: string, opts: RequestInit = {}): Promise<Response> {
   const headers = new Headers(opts.headers);
   if (!(opts.body instanceof FormData)) {

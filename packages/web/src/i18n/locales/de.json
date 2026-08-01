@@ -189,7 +189,9 @@
     "deleteConfirm": "„{{title}}“ löschen? Das kann nicht rückgängig gemacht werden.",
     "deleteError": "Der Stapel konnte nicht gelöscht werden. Versuche es erneut.",
     "delete": "Löschen",
-    "togglePublicError": "Die Freigabe konnte nicht aktualisiert werden. Versuche es erneut."
+    "togglePublicError": "Die Freigabe konnte nicht aktualisiert werden. Versuche es erneut.",
+    "verifyTitle": "Bestätige deine E-Mail-Adresse, um loszulegen",
+    "verifyBody": "Wir haben einen Link an {{email}} geschickt. Bestätige ihn, dann erscheinen deine Stapel hier — in der Zwischenzeit <0>lies die Erste-Schritte-Anleitung</0>."
   },
   "createDeck": {
     "title": "Neuer Stapel",

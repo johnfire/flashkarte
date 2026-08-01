@@ -1,7 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
-import { api, ApiError, reportClientError } from "../api/client";
+import {
+  api,
+  ApiError,
+  isVerificationRequired,
+  reportClientError,
+} from "../api/client";
 import { StudyCard } from "../api/types";
 
 const RATINGS = [
@@ -26,10 +31,16 @@ export function StudyPage() {
     try {
       setCards(await api.study.batch(id));
     } catch (err) {
-      reportClientError({
-        message: err instanceof Error ? err.message : String(err),
-        context: "StudyPage.load",
-      });
+      // The verification gate is an expected refusal, not a failure — surface
+      // it to the user but keep it out of the client-error log. Unlike the deck
+      // list this keeps the error state: an empty card list would render the
+      // "study complete" screen, which would be a lie.
+      if (!isVerificationRequired(err)) {
+        reportClientError({
+          message: err instanceof Error ? err.message : String(err),
+          context: "StudyPage.load",
+        });
+      }
       setError(err instanceof ApiError ? err.message : t("study.loadError"));
     }
   }, [id, t]);

@@ -189,7 +189,9 @@
     "deleteConfirm": "Supprimer « {{title}} » ? Cette action est irréversible.",
     "deleteError": "Impossible de supprimer le paquet. Réessaie.",
     "delete": "Supprimer",
-    "togglePublicError": "Impossible de mettre à jour le partage. Réessaie."
+    "togglePublicError": "Impossible de mettre à jour le partage. Réessaie.",
+    "verifyTitle": "Vérifiez votre e-mail pour commencer",
+    "verifyBody": "Nous avons envoyé un lien à {{email}}. Confirmez-le et vos paquets apparaîtront ici — en attendant, <0>lisez le guide de démarrage</0>."
   },
   "createDeck": {
     "title": "Nouveau paquet",

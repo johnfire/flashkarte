@@ -189,7 +189,9 @@
     "deleteConfirm": "Delete \"{{title}}\"? This cannot be undone.",
     "deleteError": "Couldn't delete the deck. Try again.",
     "delete": "Delete",
-    "togglePublicError": "Couldn't update sharing. Try again."
+    "togglePublicError": "Couldn't update sharing. Try again.",
+    "verifyTitle": "Verify your email to get started",
+    "verifyBody": "We sent a link to {{email}}. Confirm it and your decks appear here — meanwhile, <0>read the getting started guide</0>."
   },
   "createDeck": {
     "title": "New Deck",

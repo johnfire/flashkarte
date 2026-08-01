@@ -52,9 +52,18 @@ test("signup gates product access until the email is verified", async ({
     .fill(password);
   await page.getByRole("button", { name: "Sign up", exact: true }).click();
   await expect(page.getByRole("heading", { name: "My Decks" })).toBeVisible();
+  // Assert the designed gated state, not the raw server error string: the deck
+  // list shows a purpose-built panel and the banner offers to resend, rather
+  // than leaking "Verify your email before using this feature" as a failure.
+  await expect(
+    page.getByRole("heading", { name: "Verify your email to get started" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Resend email" }),
+  ).toBeVisible();
   await expect(
     page.getByText("Verify your email before using this feature"),
-  ).toBeVisible();
+  ).toHaveCount(0);
 });
 
 test("the emailed verification link verifies the address", async ({ page }) => {

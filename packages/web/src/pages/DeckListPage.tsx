@@ -1,28 +1,46 @@
 import { useCallback } from "react";
 import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
-import { api, ApiError, reportClientError } from "../api/client";
+import {
+  api,
+  ApiError,
+  isVerificationRequired,
+  reportClientError,
+} from "../api/client";
 import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 import { useAsync } from "../hooks/use-async";
 import { DeckListItem } from "./DeckListItem";
-import { DeckListEmptyHint, DeckListLegendHint } from "./DeckListHints";
+import {
+  DeckListEmptyHint,
+  DeckListLegendHint,
+  DeckListVerifyPanel,
+} from "./DeckListHints";
 
 export function DeckListPage() {
   const { t } = useTranslation();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  // Product APIs are gated behind a verified email, and verification can only
+  // be outstanding on a brand-new account (changing an email keeps the old
+  // address verified until the new one is confirmed) — so an unverified user
+  // provably owns no decks. Skip the request that would only ever 403.
+  const verified = Boolean(user?.emailVerifiedAt);
   const loadDecks = useCallback(async () => {
+    if (!verified) return [];
     try {
       return await api.decks.list();
     } catch (err) {
+      // Defence in depth: if the cached user is stale the request still goes
+      // out, and a deliberate refusal must not be filed as a client error.
+      if (isVerificationRequired(err)) return [];
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
         context: "DeckListPage.load",
       });
       throw err;
     }
-  }, []);
+  }, [verified]);
   const {
     data: decks,
     error: loadError,
@@ -124,8 +142,15 @@ export function DeckListPage() {
         </p>
       )}
 
-      {decks && decks.length === 0 && !error && <DeckListEmptyHint />}
-      {decks && decks.length > 0 && !error && <DeckListLegendHint />}
+      {!verified && !error && user && (
+        <DeckListVerifyPanel email={user.email} />
+      )}
+      {verified && decks && decks.length === 0 && !error && (
+        <DeckListEmptyHint />
+      )}
+      {verified && decks && decks.length > 0 && !error && (
+        <DeckListLegendHint />
+      )}
 
       <ul className="space-y-3">
         {decks?.map((d) => (

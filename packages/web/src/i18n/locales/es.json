@@ -189,7 +189,9 @@
     "deleteConfirm": "¿Eliminar «{{title}}»? Esta acción no se puede deshacer.",
     "deleteError": "No se pudo eliminar el mazo. Inténtalo de nuevo.",
     "delete": "Eliminar",
-    "togglePublicError": "No se pudo actualizar el uso compartido. Inténtalo de nuevo."
+    "togglePublicError": "No se pudo actualizar el uso compartido. Inténtalo de nuevo.",
+    "verifyTitle": "Verifica tu correo para empezar",
+    "verifyBody": "Enviamos un enlace a {{email}}. Confírmalo y tus mazos aparecerán aquí — mientras tanto, <0>lee la guía de introducción</0>."
   },
   "createDeck": {
     "title": "Nuevo mazo",
