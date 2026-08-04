@@ -1,0 +1,166 @@
+name: Android Security
+
+# Report-only Android security checks: static manifest/build-config analysis
+# against Gradle's merged manifest, including exported-component detection
+# (scripts/security/android-static-checks.mjs) plus a real emulator boot doing
+# a launch/crash smoke test (scripts/security/android-dynamic-checks.sh —
+# flashkarte declares no custom URI scheme/App Link, so there's no deep-link
+# surface to fuzz yet; extend that script if one is ever added). Adapted from
+# notes-world's identical pipeline; unlike that repo, flashkarte is a native
+# Kotlin app (no React Native/Expo layer, Kotlin DSL build.gradle.kts) and has
+# no deployed VPS to push a status file to, so results land in the GitHub
+# Actions job summary + a downloadable artifact instead. Runs on fresh
+# ubuntu-latest runners — no signing secrets needed, debug build only.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "android/**"
+      - "scripts/security/**"
+      - ".github/workflows/android-security.yml"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - uses: android-actions/setup-android@v4
+
+      - name: Build debug APK
+        working-directory: android
+        run: ./gradlew :app:assembleDebug --no-daemon --stacktrace
+
+      - name: Stage artifacts at flat paths
+        run: |
+          mkdir -p /tmp/artifacts
+          cp android/app/build/outputs/apk/debug/app-debug.apk /tmp/artifacts/app-debug.apk
+          cp android/app/build/intermediates/packaged_manifests/debug/processDebugManifestForPackage/AndroidManifest.xml \
+            /tmp/artifacts/merged-manifest.xml
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: /tmp/artifacts/app-debug.apk
+          retention-days: 7
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: merged-manifest
+          path: /tmp/artifacts/merged-manifest.xml
+          retention-days: 7
+
+  static:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: merged-manifest
+          path: /tmp/artifacts
+
+      - name: Static checks
+        env:
+          MERGED_MANIFEST_PATH: /tmp/artifacts/merged-manifest.xml
+          SECURITY_FINDINGS_OUT: /tmp/artifacts/android-static-findings.json
+        run: node scripts/security/android-static-checks.mjs
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: static-findings
+          path: /tmp/artifacts/android-static-findings.json
+          retention-days: 30
+
+  dynamic:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: android-actions/setup-android@v4
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: app-debug-apk
+          path: /tmp/artifacts
+
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Boot emulator and run dynamic checks
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            adb install /tmp/artifacts/app-debug.apk
+            SECURITY_FINDINGS_OUT=/tmp/artifacts/android-dynamic-findings.json bash scripts/security/android-dynamic-checks.sh
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: dynamic-findings
+          path: /tmp/artifacts/android-dynamic-findings.json
+          retention-days: 30
+
+  report:
+    needs: [static, dynamic]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: static-findings
+          path: /tmp/artifacts
+        continue-on-error: true
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dynamic-findings
+          path: /tmp/artifacts
+        continue-on-error: true
+
+      - name: Build combined report
+        env:
+          STATIC_FINDINGS_PATH: /tmp/artifacts/android-static-findings.json
+          DYNAMIC_FINDINGS_PATH: /tmp/artifacts/android-dynamic-findings.json
+          GITHUB_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/security/build-security-report.mjs
+
+      - name: Write to job summary
+        run: cat android-security-report.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: combined-report
+          path: |
+            android-security-report.json
+            android-security-report.md
+          retention-days: 90

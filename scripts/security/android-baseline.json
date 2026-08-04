@@ -1,0 +1,19 @@
+{
+  "_comment": "Known-accepted Android attack surface for flashkarte, seeded 2026-08-04 as part of adapting notes-world's automated security pipeline. android-static-checks.mjs diffs the current app's DEBUG merged manifest against this file — anything NEW gets flagged as a finding. Update this file deliberately (with a reason in the commit message) when you intentionally add an exported component or permission; do not update it just to silence a finding you haven't looked at. Component names are the fully-qualified android:name as it appears in Gradle's merged manifest (app components resolved with the package prefix, library components already fully-qualified). Note: the pipeline builds/checks the debug variant, but a couple of entries below are debug-only tooling that never ships in release — see each one's reason.",
+  "exportedComponents": [
+    { "name": "com.flashmd.MainActivity", "type": "activity", "reason": "launcher activity, required. No custom URI scheme or App Link declared." },
+    { "name": "androidx.work.impl.background.systemjob.SystemJobService", "type": "service", "reason": "standard unmodified androidx.work (WorkManager) library component. exported=true but gated by android:permission=\"android.permission.BIND_JOB_SERVICE\" (signature-level, held only by the system JobScheduler service) — not reachable by arbitrary third-party apps. Verified in the release merged manifest 2026-08-04." },
+    { "name": "androidx.work.impl.diagnostics.DiagnosticsReceiver", "type": "receiver", "reason": "standard unmodified androidx.work (WorkManager) library component. exported=true but gated by android:permission=\"android.permission.DUMP\" (system-level, not grantable to regular third-party apps) — not reachable by arbitrary third-party apps. Verified in the release merged manifest 2026-08-04." },
+    { "name": "androidx.profileinstaller.ProfileInstallReceiver", "type": "receiver", "reason": "standard AndroidX profileinstaller library component, not custom app code (same as notes-world/engcrm-mobile)." },
+    { "name": "androidx.activity.ComponentActivity", "type": "activity", "reason": "from androidx.compose.ui:ui-test-manifest (Compose UI testing tooling), a debugImplementation-only dependency. Confirmed ABSENT from the release merged manifest 2026-08-04 — never ships to real users, only exists in the debug build this pipeline tests." },
+    { "name": "androidx.compose.ui.tooling.PreviewActivity", "type": "activity", "reason": "from androidx.compose.ui:ui-tooling (Compose @Preview design-time tooling), a debugImplementation-only dependency. Confirmed ABSENT from the release merged manifest 2026-08-04 — never ships to real users, only exists in the debug build this pipeline tests." }
+  ],
+  "permissions": [
+    "android.permission.INTERNET",
+    "android.permission.WAKE_LOCK",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.RECEIVE_BOOT_COMPLETED",
+    "android.permission.FOREGROUND_SERVICE",
+    "de.christopherrehm.flashkarte.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ]
+}
