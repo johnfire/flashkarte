@@ -45,13 +45,13 @@ jobs:
           cp android/app/build/intermediates/packaged_manifests/debug/processDebugManifestForPackage/AndroidManifest.xml \
             /tmp/artifacts/merged-manifest.xml
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: app-debug-apk
           path: /tmp/artifacts/app-debug.apk
           retention-days: 7
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: merged-manifest
           path: /tmp/artifacts/merged-manifest.xml
@@ -78,7 +78,7 @@ jobs:
           SECURITY_FINDINGS_OUT: /tmp/artifacts/android-static-findings.json
         run: node scripts/security/android-static-checks.mjs
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: static-findings
           path: /tmp/artifacts/android-static-findings.json
@@ -117,7 +117,7 @@ jobs:
             adb install /tmp/artifacts/app-debug.apk
             SECURITY_FINDINGS_OUT=/tmp/artifacts/android-dynamic-findings.json bash scripts/security/android-dynamic-checks.sh
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: dynamic-findings
@@ -157,7 +157,7 @@ jobs:
       - name: Write to job summary
         run: cat android-security-report.md >> "$GITHUB_STEP_SUMMARY"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: combined-report
           path: |
