@@ -52,6 +52,11 @@ const deck: DeckWithCounts = {
   hard_count: 0,
   good_count: 1,
   easy_count: 0,
+  speech_enabled: null,
+  speech_front_lang: null,
+  speech_back_lang: null,
+  speech_autoplay: null,
+  speech_rate: null,
 };
 
 function renderPage() {

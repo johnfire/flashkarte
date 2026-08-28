@@ -56,6 +56,27 @@ fun StudyScreen(
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
                     }
                 },
+                actions = {
+                    // Offered only when this deck actually has a voice, so the
+                    // bar stays clean for everyone not using speech. The replay
+                    // button works even while muted — mute is about autoplay.
+                    val canSpeak = state.speech.frontLang != null ||
+                        state.speech.backLang != null
+                    if (canSpeak) {
+                        TextButton(
+                            onClick = {
+                                viewModel.speakSide(if (state.isFlipped) "back" else "front")
+                            },
+                        ) { Text(stringResource(R.string.study_speak)) }
+                        TextButton(onClick = { viewModel.toggleMute() }) {
+                            Text(
+                                stringResource(
+                                    if (state.muted) R.string.study_unmute else R.string.study_mute,
+                                ),
+                            )
+                        }
+                    }
+                },
             )
         },
     ) { padding ->

@@ -29,9 +29,9 @@ export function AccountSection() {
     setNameSaved(false);
     setError(null);
     try {
-      const { user: updated } = await api.auth.updateProfile(
-        displayName.trim(),
-      );
+      const { user: updated } = await api.auth.updateProfile({
+        displayName: displayName.trim(),
+      });
       updateUser(updated);
       setNameSaved(true);
     } catch (err) {

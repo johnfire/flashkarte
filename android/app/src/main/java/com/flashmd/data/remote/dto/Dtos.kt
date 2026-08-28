@@ -22,6 +22,13 @@ data class UserDto(
     val emailVerifiedAt: String? = null,
     val displayName: String? = null,
     val twoFactorEnabled: Boolean = false,
+    val language: String? = null,
+    // Global speech defaults (Spec 09). Defaulted so an older server that does
+    // not send them still deserialises.
+    val speechEnabled: Boolean = false,
+    val speechLang: String? = null,
+    val speechAutoplay: String = "back",
+    val speechRate: Double = 1.0,
 )
 
 @Serializable
@@ -83,6 +90,25 @@ data class DeckListItemDto(
     @SerialName("is_public") val isPublic: Boolean = false,
     @SerialName("is_ordered") val isOrdered: Boolean = false,
     @SerialName("is_branching") val isBranching: Boolean = false,
+    @SerialName("speech_enabled") val speechEnabled: Boolean? = null,
+    @SerialName("speech_front_lang") val speechFrontLang: String? = null,
+    @SerialName("speech_back_lang") val speechBackLang: String? = null,
+    @SerialName("speech_autoplay") val speechAutoplay: String? = null,
+    @SerialName("speech_rate") val speechRate: Double? = null,
+)
+
+/** GET /api/decks/{id}/settings — the deck row without its cards. */
+@Serializable
+data class DeckSettingsDto(
+    val id: String,
+    val title: String,
+    @SerialName("is_public") val isPublic: Boolean = false,
+    @SerialName("is_ordered") val isOrdered: Boolean = false,
+    @SerialName("speech_enabled") val speechEnabled: Boolean? = null,
+    @SerialName("speech_front_lang") val speechFrontLang: String? = null,
+    @SerialName("speech_back_lang") val speechBackLang: String? = null,
+    @SerialName("speech_autoplay") val speechAutoplay: String? = null,
+    @SerialName("speech_rate") val speechRate: Double? = null,
 )
 
 /** Response from POST /api/decks — here `card_count` is a real number. */
@@ -101,6 +127,11 @@ data class DeckDetailDto(
     @SerialName("created_at") val createdAt: String,
     @SerialName("updated_at") val updatedAt: String,
     @SerialName("is_ordered") val isOrdered: Boolean = false,
+    @SerialName("speech_enabled") val speechEnabled: Boolean? = null,
+    @SerialName("speech_front_lang") val speechFrontLang: String? = null,
+    @SerialName("speech_back_lang") val speechBackLang: String? = null,
+    @SerialName("speech_autoplay") val speechAutoplay: String? = null,
+    @SerialName("speech_rate") val speechRate: Double? = null,
     val cards: List<DeckCardDto> = emptyList(),
 )
 
@@ -217,7 +248,13 @@ data class AddCardsResponse(
 data class MeResponse(val user: UserDto)
 
 @Serializable
-data class UpdateProfileRequest(val displayName: String)
+data class UpdateProfileRequest(
+    val displayName: String? = null,
+    val speechEnabled: Boolean? = null,
+    val speechLang: String? = null,
+    val speechAutoplay: String? = null,
+    val speechRate: Double? = null,
+)
 
 @Serializable
 data class ForgotPasswordRequest(val email: String)

@@ -102,6 +102,10 @@ fun DeckListScreen(
                         onTogglePublic = { viewModel.setPublic(row.deck.id, !row.deck.isPublic) },
                         onToggleOrdered = { viewModel.setOrdered(row.deck.id, !row.deck.isOrdered) },
                         onDelete = { viewModel.delete(row.deck.id) },
+                        voiceLanguages = viewModel::voiceLanguages,
+                        onSetSpeech = { enabled, front, back, autoplay, rate ->
+                            viewModel.setSpeech(row.deck.id, enabled, front, back, autoplay, rate)
+                        },
                     )
                 }
             }
@@ -120,11 +124,14 @@ private fun DeckCard(
     onTogglePublic: () -> Unit,
     onToggleOrdered: () -> Unit,
     onDelete: () -> Unit,
+    voiceLanguages: () -> List<String>,
+    onSetSpeech: (Boolean?, String?, String?, String?, Double?) -> Unit,
 ) {
     var menuOpen by remember { mutableStateOf(false) }
     var renaming by remember { mutableStateOf(false) }
     var addingCards by remember { mutableStateOf(false) }
     var confirmingDelete by remember { mutableStateOf(false) }
+    var editingSpeech by remember { mutableStateOf(false) }
 
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -163,6 +170,10 @@ private fun DeckCard(
                         text = { Text(if (row.deck.isOrdered) "Unordered study" else "Study in order") },
                         onClick = { menuOpen = false; onToggleOrdered() },
                     )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(R.string.deck_speech)) },
+                        onClick = { menuOpen = false; editingSpeech = true },
+                    )
                     DropdownMenuItem(text = { Text("Delete") }, onClick = { menuOpen = false; confirmingDelete = true })
                 }
             }
@@ -180,6 +191,17 @@ private fun DeckCard(
             addingCards = false
             if (md != null && md.isNotBlank()) onAddCards(md)
         }
+    }
+    if (editingSpeech) {
+        DeckSpeechDialog(
+            deck = row.deck,
+            availableLanguages = voiceLanguages(),
+            onDismiss = { editingSpeech = false },
+            onSave = { enabled, front, back, autoplay, rate ->
+                editingSpeech = false
+                onSetSpeech(enabled, front, back, autoplay, rate)
+            },
+        )
     }
     if (confirmingDelete) {
         AlertDialog(

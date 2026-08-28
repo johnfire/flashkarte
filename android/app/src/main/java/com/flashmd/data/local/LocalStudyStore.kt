@@ -54,6 +54,8 @@ class LocalStudyStore @Inject constructor(
         decks.forEach { d ->
             db.decksQueries.upsertDeck(
                 d.id, d.title, d.sourceFile, d.createdAt, d.lastStudied, d.totalCards.toLong(),
+                d.speechEnabled, d.speechFrontLang, d.speechBackLang,
+                d.speechAutoplay, d.speechRate,
             )
         }
     }
@@ -67,6 +69,11 @@ class LocalStudyStore @Inject constructor(
                 createdAt = it.created_at ?: "",
                 lastStudied = it.last_studied,
                 totalCards = it.total_cards.toInt(),
+                speechEnabled = it.speech_enabled,
+                speechFrontLang = it.speech_front_lang,
+                speechBackLang = it.speech_back_lang,
+                speechAutoplay = it.speech_autoplay,
+                speechRate = it.speech_rate,
             )
         }
 

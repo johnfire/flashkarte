@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.dto.UserDto
 import com.flashmd.data.repository.AuthRepository
+import com.flashmd.data.speech.SpeechPlayer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,6 +18,7 @@ data class SettingsUiState(
     val displayNameDraft: String = "",
     val isLoading: Boolean = true,
     val isSaving: Boolean = false,
+    val isSavingSpeech: Boolean = false,
     val message: String? = null,
     val error: String? = null,
     val currentPassword: String = "",
@@ -44,7 +46,11 @@ data class SettingsUiState(
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val auth: AuthRepository,
+    private val speechPlayer: SpeechPlayer,
 ) : ViewModel() {
+
+    /** Voices installed on this device; empty until the TTS engine is ready. */
+    fun voiceLanguages(): List<String> = speechPlayer.availableLanguages()
 
     private val _state = MutableStateFlow(SettingsUiState())
     val state: StateFlow<SettingsUiState> = _state.asStateFlow()
@@ -86,6 +92,40 @@ class SettingsViewModel @Inject constructor(
                 _state.value = _state.value.copy(
                     isSaving = false,
                     error = "Couldn't save your profile.",
+                )
+            }
+        }
+    }
+
+    /**
+     * Write one global speech default.
+     *
+     * Each control saves on change rather than behind a Save button — these are
+     * single-value toggles the user wants to hear the effect of immediately.
+     * Only the named field is sent, so the others are left untouched.
+     */
+    fun updateSpeech(
+        enabled: Boolean? = null,
+        lang: String? = null,
+        autoplay: String? = null,
+        rate: Double? = null,
+    ) {
+        viewModelScope.launch {
+            _state.value = _state.value.copy(isSavingSpeech = true, error = null)
+            try {
+                val user = auth.updateSpeechDefaults(
+                    enabled = enabled,
+                    lang = lang,
+                    autoplay = autoplay,
+                    rate = rate,
+                )
+                _state.value = _state.value.copy(user = user, isSavingSpeech = false)
+            } catch (e: ApiException) {
+                _state.value = _state.value.copy(isSavingSpeech = false, error = e.message)
+            } catch (_: Exception) {
+                _state.value = _state.value.copy(
+                    isSavingSpeech = false,
+                    error = "Couldn't save your speech settings.",
                 )
             }
         }

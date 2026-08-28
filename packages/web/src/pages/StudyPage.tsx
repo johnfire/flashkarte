@@ -8,6 +8,8 @@ import {
   reportClientError,
 } from "../api/client";
 import { StudyCard } from "../api/types";
+import { useCardSpeech } from "../speech/useCardSpeech";
+import { SpeakButton } from "../speech/SpeakButton";
 
 const RATINGS = [
   { value: 1, labelKey: "again", className: "bg-red-600" },
@@ -49,9 +51,14 @@ export function StudyPage() {
     load();
   }, [load]);
 
+  const current = cards && idx < cards.length ? cards[idx] : null;
+  const { speech, speakSide, muted, setMuted, cancel, canSpeak } =
+    useCardSpeech(id, current?.content ?? null, revealed, idx);
+
   async function grade(rating: number) {
     if (!cards) return;
     const card = cards[idx];
+    cancel();
     try {
       await api.study.review(card.id, rating);
     } catch (err) {
@@ -113,9 +120,24 @@ export function StudyPage() {
         <Link to="/" className="text-indigo-600">
           {t("study.decks")}
         </Link>
-        <span>
-          {t("study.progress", { current: idx + 1, total: cards.length })}
-        </span>
+        <div className="flex items-center gap-3">
+          {canSpeak && (
+            <button
+              type="button"
+              onClick={() => {
+                if (!muted) cancel();
+                setMuted(!muted);
+              }}
+              aria-pressed={muted}
+              className="text-indigo-600"
+            >
+              {muted ? t("study.speech.unmute") : t("study.speech.mute")}
+            </button>
+          )}
+          <span>
+            {t("study.progress", { current: idx + 1, total: cards.length })}
+          </span>
+        </div>
       </div>
 
       <div className="rounded-xl border p-8 shadow-sm">
@@ -124,11 +146,27 @@ export function StudyPage() {
             {card.category}
           </p>
         )}
-        <p className="text-lg font-medium">{card.content.front}</p>
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-lg font-medium">{card.content.front}</p>
+          {speech.frontLang && (
+            <SpeakButton
+              lang={speech.frontLang}
+              onSpeak={() => speakSide("front")}
+            />
+          )}
+        </div>
         {revealed && (
-          <p className="mt-6 whitespace-pre-wrap border-t pt-6 text-gray-700 dark:text-gray-300">
-            {card.content.back}
-          </p>
+          <div className="mt-6 flex items-start justify-between gap-2 border-t pt-6">
+            <p className="whitespace-pre-wrap text-gray-700 dark:text-gray-300">
+              {card.content.back}
+            </p>
+            {speech.backLang && (
+              <SpeakButton
+                lang={speech.backLang}
+                onSpeak={() => speakSide("back")}
+              />
+            )}
+          </div>
         )}
       </div>
 

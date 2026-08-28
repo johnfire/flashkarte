@@ -15,8 +15,9 @@ ship TS + Kotlin together with corpus cases — no exceptions.
 | 06  | [Depth ladders](06-depth-ladders.md)           | ~1 wk   | —                         | @concept/@depth, stability-gated unlock                |
 | 07  | [Case scoring](07-case-scoring.md)             | ~1–2 wk | —                         | path_events ledger + revisit scheduling                |
 | 08  | [Web parity](08-web-parity.md)                 | ~1 wk   | 01, 02, 07                | ends the flip-only web era                             |
+| 09  | [Spoken cards (TTS)](09-speech.md)             | ~4–5 d  | —                         | on-device TTS; two constituencies, one mechanism       |
 
-01–03 are independent (parallelizable). 04 should run alone (touches the scheduling
+01–03 and 09 are independent (parallelizable). 04 should run alone (touches the scheduling
 core). 08 goes last.
 
 Explicitly rejected (see ideas doc §3): narrative-game machinery, visual branch editor,

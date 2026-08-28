@@ -3,6 +3,7 @@ package com.flashmd.ui
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.dto.UserDto
 import com.flashmd.data.repository.AuthRepository
+import com.flashmd.data.speech.SpeechPlayer
 import com.flashmd.ui.screens.settings.SettingsViewModel
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -22,6 +23,7 @@ import org.junit.Test
 @OptIn(ExperimentalCoroutinesApi::class)
 class SettingsViewModelTest {
     private val auth = mockk<AuthRepository>(relaxed = true)
+    private val speechPlayer = mockk<SpeechPlayer>(relaxed = true)
 
     @Before fun setUp() = Dispatchers.setMain(StandardTestDispatcher())
     @After fun tearDown() = Dispatchers.resetMain()
@@ -29,7 +31,7 @@ class SettingsViewModelTest {
     @Test fun loadsProfileAndSaves() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, "Ada")
         coEvery { auth.updateProfile(any()) } returns UserDto("u1", "a@b.c", "user", "free", null, "Bob")
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
         assertEquals("Ada", vm.state.value.displayNameDraft)
 
@@ -43,7 +45,7 @@ class SettingsViewModelTest {
     @Test fun unexpectedProfileFailureShowsErrorAndStopsLoading() = runTest {
         coEvery { auth.getMe() } throws IllegalStateException("bad payload")
 
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         assertEquals("Couldn't load account settings.", vm.state.value.error)
@@ -52,7 +54,7 @@ class SettingsViewModelTest {
 
     @Test fun sendResetEmailUsesAccountEmail() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
         vm.sendResetEmail(); advanceUntilIdle()
         coVerify { auth.forgotPassword("a@b.c") }
@@ -60,7 +62,7 @@ class SettingsViewModelTest {
 
     @Test fun changePasswordSubmitsCurrentAndNew() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.onCurrentPasswordChange("OldPassw0rd")
@@ -76,7 +78,7 @@ class SettingsViewModelTest {
 
     @Test fun changePasswordRejectsMismatch() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.onCurrentPasswordChange("OldPassw0rd")
@@ -91,7 +93,7 @@ class SettingsViewModelTest {
     @Test fun exportHandsJsonToWriterAndConfirms() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         coEvery { auth.exportAccountData() } returns """{"profile":{}}"""
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         var written: String? = null
@@ -105,7 +107,7 @@ class SettingsViewModelTest {
     @Test fun exportSurfacesWriteFailure() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         coEvery { auth.exportAccountData() } returns "{}"
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.exportAccountData { throw java.io.IOException("disk full") }
@@ -123,7 +125,7 @@ class SettingsViewModelTest {
                 qrDataUrl = "data:image/png;base64,QR",
             )
         coEvery { auth.twoFactorEnable("123456") } returns listOf("aaaaa-11111", "bbbbb-22222")
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.startTwoFactorSetup(); advanceUntilIdle()
@@ -143,7 +145,7 @@ class SettingsViewModelTest {
             com.flashmd.data.remote.dto.TwoFactorSetupResponse("otpauth://x", "data:image/png;base64,QR")
         coEvery { auth.twoFactorEnable(any()) } throws
             ApiException(status = 422, code = "VALIDATION", message = "Invalid verification code")
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.startTwoFactorSetup(); advanceUntilIdle()
@@ -160,7 +162,7 @@ class SettingsViewModelTest {
         coEvery { auth.getMe() } returns
             UserDto("u1", "a@b.c", "user", "free", null, null, twoFactorEnabled = true)
         coEvery { auth.twoFactorDisable("654321") } returns Unit
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.openTwoFactorDisable()
@@ -174,7 +176,7 @@ class SettingsViewModelTest {
 
     @Test fun deleteAccountRequiresTypedConfirmation() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.openDeleteDialog()
@@ -189,7 +191,7 @@ class SettingsViewModelTest {
     @Test fun deleteAccountCallsRepositoryWithPassword() = runTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         coEvery { auth.deleteAccount(any()) } returns Unit
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.openDeleteDialog()
@@ -205,7 +207,7 @@ class SettingsViewModelTest {
         coEvery { auth.getMe() } returns UserDto("u1", "a@b.c", "user", "free", null, null)
         coEvery { auth.deleteAccount(any()) } throws
             ApiException(status = 422, code = "VALIDATION", message = "Current password is incorrect")
-        val vm = SettingsViewModel(auth)
+        val vm = SettingsViewModel(auth, speechPlayer)
         advanceUntilIdle()
 
         vm.openDeleteDialog()

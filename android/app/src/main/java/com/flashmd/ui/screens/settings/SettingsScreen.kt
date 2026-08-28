@@ -20,8 +20,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.flashmd.R
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import com.flashmd.data.local.ThemeMode
+import com.flashmd.domain.speech.SpeechResolver
 import com.flashmd.ui.components.PasswordField
+import com.flashmd.ui.components.VoiceLanguagePicker
 import com.flashmd.ui.theme.ThemeViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -82,6 +86,20 @@ fun SettingsScreen(
                     )
                 }
             }
+
+            HorizontalDivider()
+            SpeechSettingsSection(
+                enabled = state.user?.speechEnabled ?: false,
+                lang = state.user?.speechLang,
+                availableLanguages = viewModel.voiceLanguages(),
+                autoplay = state.user?.speechAutoplay ?: SpeechResolver.DEFAULT_AUTOPLAY,
+                rate = state.user?.speechRate ?: SpeechResolver.DEFAULT_RATE,
+                busy = state.isSavingSpeech,
+                onEnabledChange = { viewModel.updateSpeech(enabled = it) },
+                onLangChange = { viewModel.updateSpeech(lang = it) },
+                onAutoplayChange = { viewModel.updateSpeech(autoplay = it) },
+                onRateChange = { viewModel.updateSpeech(rate = it) },
+            )
 
             HorizontalDivider()
             Text("Change password", style = MaterialTheme.typography.titleMedium)
@@ -371,3 +389,78 @@ private fun DeleteAccountDialog(
         },
     )
 }
+
+/**
+ * Global speech defaults.
+ *
+ * The language is a free-text BCP-47 field rather than a picker: which voices
+ * exist is a property of the device, and the engine's own list is not reliably
+ * enumerable before it has initialised. An unavailable tag simply stays silent.
+ */
+@Composable
+private fun SpeechSettingsSection(
+    enabled: Boolean,
+    lang: String?,
+    availableLanguages: List<String>,
+    autoplay: String,
+    rate: Double,
+    busy: Boolean,
+    onEnabledChange: (Boolean) -> Unit,
+    onLangChange: (String?) -> Unit,
+    onAutoplayChange: (String) -> Unit,
+    onRateChange: (Double) -> Unit,
+) {
+    Text(stringResource(R.string.speech_title), style = MaterialTheme.typography.titleMedium)
+    Text(
+        stringResource(R.string.speech_hint),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Switch(checked = enabled, onCheckedChange = onEnabledChange, enabled = !busy)
+        Text(stringResource(R.string.speech_enable))
+    }
+    VoiceLanguagePicker(
+        label = stringResource(R.string.speech_voice),
+        value = lang,
+        available = availableLanguages,
+        emptyLabel = stringResource(R.string.speech_voice_default),
+        onChange = onLangChange,
+    )
+
+    Text(stringResource(R.string.speech_autoplay), style = MaterialTheme.typography.labelLarge)
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        SpeechResolver.AUTOPLAY_MODES.forEach { mode ->
+            FilterChip(
+                selected = autoplay == mode,
+                onClick = { onAutoplayChange(mode) },
+                enabled = !busy,
+                label = { Text(autoplayLabel(mode)) },
+            )
+        }
+    }
+
+    Text(
+        "${stringResource(R.string.speech_rate)}: ${"%.2f".format(rate)}×",
+        style = MaterialTheme.typography.labelLarge,
+    )
+    Slider(
+        value = rate.toFloat(),
+        onValueChange = { onRateChange(it.toDouble()) },
+        valueRange = SpeechResolver.MIN_RATE.toFloat()..SpeechResolver.MAX_RATE.toFloat(),
+        enabled = !busy,
+    )
+}
+
+@Composable
+private fun autoplayLabel(mode: String): String = stringResource(
+    when (mode) {
+        "off" -> R.string.speech_autoplay_off
+        "front" -> R.string.speech_autoplay_front
+        "back" -> R.string.speech_autoplay_back
+        else -> R.string.speech_autoplay_both
+    },
+)

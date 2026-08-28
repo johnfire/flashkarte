@@ -10,10 +10,17 @@ export interface DeckRow {
   updated_at: string;
   is_public: boolean;
   is_ordered: boolean;
+  speech_enabled: boolean | null;
+  speech_front_lang: string | null;
+  speech_back_lang: string | null;
+  speech_autoplay: string | null;
+  speech_rate: number | null;
 }
 
-const DECK_COLS =
-  "id, title, source_filename, created_at, updated_at, is_public, is_ordered";
+const SPEECH_COLS =
+  "speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate";
+
+const DECK_COLS = `id, title, source_filename, created_at, updated_at, is_public, is_ordered, ${SPEECH_COLS}`;
 
 /**
  * Insert many cards in a single multi-row statement on the given transaction
@@ -155,6 +162,7 @@ export interface DeckListRow extends DeckRow {
 export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
     `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_ordered,
+       d.speech_enabled, d.speech_front_lang, d.speech_back_lang, d.speech_autoplay, d.speech_rate,
        s.total AS card_count,
        s.due AS due_count,
        s.viewed AS viewed_count,
@@ -224,6 +232,46 @@ export function setDeckPublic(userId: string, id: string, isPublic: boolean) {
      WHERE id = $2 AND user_id = $3
      RETURNING ${DECK_COLS}`,
     [isPublic, id, userId],
+  );
+}
+
+/** The deck-level speech overrides a caller may set. Null means "inherit". */
+export interface DeckSpeechPatch {
+  speech_enabled?: boolean | null;
+  speech_front_lang?: string | null;
+  speech_back_lang?: string | null;
+  speech_autoplay?: string | null;
+  speech_rate?: number | null;
+}
+
+const SPEECH_PATCH_COLS = [
+  "speech_enabled",
+  "speech_front_lang",
+  "speech_back_lang",
+  "speech_autoplay",
+  "speech_rate",
+] as const;
+
+/**
+ * Apply only the speech columns the caller actually sent.
+ *
+ * Absent and null are different here: absent leaves the stored value alone,
+ * while an explicit null resets that field to "inherit the user default". The
+ * SET list is built from a fixed whitelist, never from caller-supplied keys.
+ */
+export function setDeckSpeech(
+  userId: string,
+  id: string,
+  patch: DeckSpeechPatch,
+) {
+  const columns = SPEECH_PATCH_COLS.filter((col) => patch[col] !== undefined);
+  if (columns.length === 0) return getDeck(userId, id);
+  const assignments = columns.map((col, idx) => `${col} = $${idx + 3}`);
+  return queryOne<DeckRow>(
+    `UPDATE decks SET ${assignments.join(", ")}, updated_at = now()
+     WHERE id = $1 AND user_id = $2
+     RETURNING ${DECK_COLS}`,
+    [id, userId, ...columns.map((col) => patch[col] ?? null)],
   );
 }
 

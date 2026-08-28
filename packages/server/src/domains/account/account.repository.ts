@@ -6,6 +6,10 @@ export interface ProfileRow {
   role: string;
   account_type: string;
   language: string | null;
+  speech_enabled: boolean;
+  speech_lang: string | null;
+  speech_autoplay: string;
+  speech_rate: number;
   email_verified_at: string | null;
   created_at: string;
 }
@@ -16,6 +20,11 @@ export interface DeckRow {
   source_filename: string | null;
   is_public: boolean;
   is_ordered: boolean;
+  speech_enabled: boolean | null;
+  speech_front_lang: string | null;
+  speech_back_lang: string | null;
+  speech_autoplay: string | null;
+  speech_rate: number | null;
   created_at: string;
   updated_at: string;
 }
@@ -60,6 +69,7 @@ export interface ApiKeyMetaRow {
 export function findProfile(userId: string): Promise<ProfileRow | null> {
   return queryOne<ProfileRow>(
     `SELECT email, display_name, role, account_type, language,
+            speech_enabled, speech_lang, speech_autoplay, speech_rate,
             email_verified_at, created_at
        FROM users WHERE id = $1`,
     [userId],
@@ -69,6 +79,7 @@ export function findProfile(userId: string): Promise<ProfileRow | null> {
 export function findDecks(userId: string): Promise<DeckRow[]> {
   return query<DeckRow>(
     `SELECT id, title, source_filename, is_public, is_ordered,
+            speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate,
             created_at, updated_at
        FROM decks WHERE user_id = $1 ORDER BY created_at`,
     [userId],

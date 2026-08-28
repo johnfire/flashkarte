@@ -7,6 +7,7 @@ import com.flashmd.data.parser.MdParser
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
+import com.flashmd.data.speech.SpeechPlayer
 import com.flashmd.data.repository.OutboxRepository
 import com.flashmd.domain.model.Deck
 import com.flashmd.sync.SyncScheduler
@@ -39,6 +40,7 @@ class DeckListViewModel @Inject constructor(
     private val errorReporter: ErrorReporter,
     private val outbox: OutboxRepository,
     private val scheduler: SyncScheduler,
+    private val speechPlayer: SpeechPlayer,
 ) : ViewModel() {
 
     private val _isLoading = MutableStateFlow(true)
@@ -98,6 +100,35 @@ class DeckListViewModel @Inject constructor(
         try { deckRepo.setOrdered(id, isOrdered) }
         catch (e: Exception) { _listError.value = "Couldn't update study order." }
     }
+
+    /**
+     * Save this deck's speech overrides.
+     *
+     * Every field is nullable and every one is sent: null means "inherit the
+     * user's global default", which is a distinct state from any value, so the
+     * dialog has to be able to say it explicitly.
+     */
+    fun setSpeech(
+        id: String,
+        enabled: Boolean?,
+        frontLang: String?,
+        backLang: String?,
+        autoplay: String?,
+        rate: Double?,
+    ) = viewModelScope.launch {
+        try {
+            deckRepo.setSpeech(id, enabled, frontLang, backLang, autoplay, rate)
+        } catch (e: Exception) {
+            _listError.value = "Couldn't save this deck's speech settings."
+        }
+    }
+
+    /**
+     * Voices installed on this device, read when a dialog opens rather than at
+     * construction: the TTS engine initialises asynchronously, so asking early
+     * would usually return nothing.
+     */
+    fun voiceLanguages(): List<String> = speechPlayer.availableLanguages()
 
     fun refresh() {
         viewModelScope.launch {

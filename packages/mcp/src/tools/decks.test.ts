@@ -4,6 +4,7 @@ import * as apiModule from "../api";
 jest.mock("../api", () => ({
   get: jest.fn(),
   post: jest.fn(),
+  patch: jest.fn(),
   del: jest.fn(),
 }));
 
@@ -29,7 +30,7 @@ function captureTools(): {
 describe("deck MCP tools", () => {
   beforeEach(() => jest.clearAllMocks());
 
-  test("registers the five v1 tools", () => {
+  test("registers the deck tools", () => {
     const { handlers, server } = captureTools();
     registerDeckTools(server as never);
     expect(Object.keys(handlers).sort()).toEqual([
@@ -38,6 +39,7 @@ describe("deck MCP tools", () => {
       "delete_deck",
       "get_deck",
       "list_decks",
+      "set_deck_speech",
     ]);
   });
 
@@ -49,6 +51,67 @@ describe("deck MCP tools", () => {
     expect(mockApi.post).toHaveBeenCalledWith("/api/decks", {
       markdown: "# D\n**1. Q**\nA",
       title: "D",
+    });
+  });
+
+  test("create_deck applies speech settings as a follow-up patch", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.post.mockResolvedValue({ id: "d1" });
+    mockApi.patch.mockResolvedValue({ id: "d1", speech_front_lang: "de-DE" });
+
+    await handlers.create_deck({
+      markdown: "# D\n**1. Q**\nA",
+      speech_enabled: true,
+      speech_front_lang: "de-DE",
+      speech_back_lang: "en-GB",
+    });
+
+    expect(mockApi.patch).toHaveBeenCalledWith("/api/decks/d1", {
+      speechEnabled: true,
+      speechFrontLang: "de-DE",
+      speechBackLang: "en-GB",
+    });
+  });
+
+  test("create_deck without speech args never patches", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.post.mockResolvedValue({ id: "d1" });
+
+    await handlers.create_deck({ markdown: "# D\n**1. Q**\nA" });
+
+    expect(mockApi.patch).not.toHaveBeenCalled();
+  });
+
+  test("a failed speech patch still reports the created deck", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.post.mockResolvedValue({ id: "d1" });
+    mockApi.patch.mockRejectedValue(new Error("422 bad tag"));
+
+    const result = (await handlers.create_deck({
+      markdown: "# D\n**1. Q**\nA",
+      speech_front_lang: "de-DE",
+    })) as { content: { text: string }[] };
+
+    const payload = JSON.parse(result.content[0].text);
+    expect(payload.id).toBe("d1");
+    expect(payload.speech_warning).toMatch(/422 bad tag/);
+  });
+
+  test("set_deck_speech PATCHes only the fields given", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.patch.mockResolvedValue({ id: "d1" });
+
+    await handlers.set_deck_speech({
+      deck_id: "d1",
+      speech_enabled: false,
+    });
+
+    expect(mockApi.patch).toHaveBeenCalledWith("/api/decks/d1", {
+      speechEnabled: false,
     });
   });
 

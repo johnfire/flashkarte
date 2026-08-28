@@ -4,12 +4,23 @@ CREATE TABLE deckEntity (
   source_file TEXT,
   created_at TEXT,
   last_studied TEXT,
-  total_cards INTEGER NOT NULL DEFAULT 0
+  total_cards INTEGER NOT NULL DEFAULT 0,
+  -- Speech overrides (Spec 09). Nullable throughout: null means "inherit the
+  -- user's global default", and speech_enabled is tri-state, so a missing value
+  -- and an explicit false are deliberately different rows.
+  speech_enabled INTEGER AS kotlin.Boolean,
+  speech_front_lang TEXT,
+  speech_back_lang TEXT,
+  speech_autoplay TEXT,
+  speech_rate REAL
 );
 
 upsertDeck:
-INSERT OR REPLACE INTO deckEntity(id, title, source_file, created_at, last_studied, total_cards)
-VALUES (?, ?, ?, ?, ?, ?);
+INSERT OR REPLACE INTO deckEntity(
+  id, title, source_file, created_at, last_studied, total_cards,
+  speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate
+)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 selectAllDecks:
 SELECT * FROM deckEntity ORDER BY title;

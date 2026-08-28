@@ -60,4 +60,34 @@
     <string name="decks_empty_hint">Neu hier? Öffne die Hilfe, um die Grundlagen zu lernen.</string>
     <string name="study_rating_hint">Nicht sicher, was das bewirkt? Sieh dir in der Hilfe an, wie verteilte Wiederholung funktioniert.</string>
     <string name="settings_help">Hilfe</string>
+
+    <!-- Spoken cards (Spec 09) -->
+    <string name="study_speak">Vorlesen</string>
+    <string name="study_mute">Stumm</string>
+    <string name="study_unmute">Ton an</string>
+    <string name="speech_title">Karten vorlesen</string>
+    <string name="speech_hint">Karten mit den Stimmen dieses Geräts vorlesen lassen. Es wird nichts an einen Server gesendet. Einzelne Stapel können diese Einstellungen überschreiben.</string>
+    <string name="speech_enable">Meine Karten vorlesen</string>
+    <string name="speech_voice">Stimme</string>
+    <string name="speech_voice_default">Leer lassen, um der App-Sprache zu folgen</string>
+    <string name="speech_autoplay">Automatisch vorlesen</string>
+    <string name="speech_autoplay_off">Nie — nur per Knopf</string>
+    <string name="speech_autoplay_front">Die Frage</string>
+    <string name="speech_autoplay_back">Die Antwort</string>
+    <string name="speech_autoplay_both">Beide Seiten</string>
+    <string name="speech_rate">Geschwindigkeit</string>
+    <string name="speech_save_error">Spracheinstellungen konnten nicht gespeichert werden.</string>
+    <string name="speech_no_voice">Für diese Sprache ist auf diesem Gerät keine Stimme installiert; sie bleibt hier stumm.</string>
+    <string name="deck_speech">Sprache</string>
+    <string name="deck_speech_title">Vorlese-Einstellungen</string>
+    <string name="deck_speech_hint">Gib jeder Seite ihre eigene Stimme. Ein Deutsch-Englisch-Stapel sollte die Frage auf Deutsch und die Antwort auf Englisch sprechen.</string>
+    <string name="deck_speech_enabled">Diesen Stapel vorlesen</string>
+    <string name="deck_speech_inherit">Globale Einstellung verwenden</string>
+    <string name="deck_speech_on">Immer</string>
+    <string name="deck_speech_off">Nie (Stapel stummschalten)</string>
+    <string name="deck_speech_front">Stimme der Frage</string>
+    <string name="deck_speech_back">Stimme der Antwort</string>
+    <string name="deck_speech_save_error">Spracheinstellungen des Stapels konnten nicht gespeichert werden.</string>
+    <string name="deck_speech_rate_inherit">Globale Geschwindigkeit verwenden</string>
+    <string name="speech_no_voice_list">Dieses Gerät hat seine Stimmen noch nicht gemeldet — gib ein BCP-47-Kürzel wie de-DE ein.</string>
 </resources>

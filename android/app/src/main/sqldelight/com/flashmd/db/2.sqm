@@ -1,0 +1,10 @@
+-- Migration v2 -> v3 (Spec 09: spoken cards).
+-- Caches each deck's speech overrides so a session started offline still uses
+-- the deck's own voices — a commute is the case this feature exists for.
+-- All columns nullable so existing cached rows survive and simply inherit the
+-- user's global defaults until the next successful refresh.
+ALTER TABLE deckEntity ADD COLUMN speech_enabled INTEGER;
+ALTER TABLE deckEntity ADD COLUMN speech_front_lang TEXT;
+ALTER TABLE deckEntity ADD COLUMN speech_back_lang TEXT;
+ALTER TABLE deckEntity ADD COLUMN speech_autoplay TEXT;
+ALTER TABLE deckEntity ADD COLUMN speech_rate REAL;

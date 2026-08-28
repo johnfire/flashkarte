@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { DeckWithCounts } from "../api/types";
+import { DeckSpeechDialog } from "./DeckSpeechDialog";
 
 interface DeckListItemProps {
   deck: DeckWithCounts;
@@ -14,6 +16,7 @@ export function DeckListItem({
   onDelete,
 }: DeckListItemProps) {
   const { t } = useTranslation();
+  const [speechOpen, setSpeechOpen] = useState(false);
   return (
     <li className="flex items-center justify-between rounded-lg border p-4">
       <div>
@@ -65,12 +68,26 @@ export function DeckListItem({
           {d.is_public ? t("decks.unshare") : t("decks.share")}
         </button>
         <button
+          onClick={() => setSpeechOpen(true)}
+          className="text-sm text-indigo-600"
+          title={t("decks.speech.openTitle")}
+        >
+          {t("decks.speech.open")}
+        </button>
+        <button
           onClick={() => onDelete(d.id, d.title)}
           className="text-sm text-red-600"
         >
           {t("decks.delete")}
         </button>
       </div>
+      {speechOpen && (
+        <DeckSpeechDialog
+          deckId={d.id}
+          deckTitle={d.title}
+          onClose={() => setSpeechOpen(false)}
+        />
+      )}
     </li>
   );
 }

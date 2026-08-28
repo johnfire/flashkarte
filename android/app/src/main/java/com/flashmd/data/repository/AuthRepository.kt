@@ -2,6 +2,7 @@ package com.flashmd.data.repository
 
 import com.flashmd.data.local.AuthCookieJar
 import com.flashmd.data.local.SessionStore
+import com.flashmd.data.local.SpeechSettingsStore
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
@@ -25,6 +26,7 @@ class AuthRepository @Inject constructor(
     private val sessionStore: SessionStore,
     private val cookieJar: AuthCookieJar,
     private val db: FlashkarteDb,
+    private val speechStore: SpeechSettingsStore,
 ) {
     val isLoggedIn: Flow<Boolean> = sessionStore.isLoggedIn
     val userEmail: Flow<String?> = sessionStore.userEmail
@@ -51,6 +53,7 @@ class AuthRepository @Inject constructor(
             throw ApiException(status = 0, code = "BAD_RESPONSE", message = "Malformed login response")
         }
         sessionStore.saveSession(token, user)
+        speechStore.mirror(user)
         return LoginOutcome.Success
     }
 
@@ -60,6 +63,7 @@ class AuthRepository @Inject constructor(
             api.twoFactorLogin(TwoFactorLoginRequest(challenge, code.trim(), rememberMe = true))
         }
         sessionStore.saveSession(res.accessToken, res.user)
+        speechStore.mirror(res.user)
     }
 
     suspend fun twoFactorSetup(): TwoFactorSetupResponse =
@@ -78,6 +82,7 @@ class AuthRepository @Inject constructor(
             api.signup(CredentialsRequest(email.trim(), password, rememberMe = true))
         }
         sessionStore.saveSession(res.accessToken, res.user)
+        speechStore.mirror(res.user)
     }
 
     suspend fun logout() {
@@ -86,10 +91,33 @@ class AuthRepository @Inject constructor(
         cookieJar.clear()
     }
 
-    suspend fun getMe(): UserDto = apiCall { api.getMe() }.user
+    suspend fun getMe(): UserDto =
+        apiCall { api.getMe() }.user.also { speechStore.mirror(it) }
 
     suspend fun updateProfile(displayName: String): UserDto =
-        apiCall { api.updateMe(UpdateProfileRequest(displayName.trim())) }.user
+        apiCall { api.updateMe(UpdateProfileRequest(displayName = displayName.trim())) }.user
+
+    /**
+     * Write the global speech defaults.
+     *
+     * Sends only the speech fields: the server patches what it receives, so the
+     * display name is left untouched.
+     */
+    suspend fun updateSpeechDefaults(
+        enabled: Boolean? = null,
+        lang: String? = null,
+        autoplay: String? = null,
+        rate: Double? = null,
+    ): UserDto = apiCall {
+        api.updateMe(
+            UpdateProfileRequest(
+                speechEnabled = enabled,
+                speechLang = lang,
+                speechAutoplay = autoplay,
+                speechRate = rate,
+            ),
+        )
+    }.user.also { speechStore.mirror(it) }
 
     suspend fun resendVerification() {
         apiCall { api.resendVerification() }
@@ -108,6 +136,7 @@ class AuthRepository @Inject constructor(
             api.changePassword(ChangePasswordRequest(currentPassword, newPassword))
         }
         sessionStore.saveSession(res.accessToken, res.user)
+        speechStore.mirror(res.user)
     }
 
     /** Fetch the full account export (§13.3 data portability) as raw JSON. */

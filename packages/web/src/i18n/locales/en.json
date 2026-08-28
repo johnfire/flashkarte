@@ -121,7 +121,26 @@
     "deleteConfirmLabel": "Type DELETE to confirm",
     "deleteConfirmMismatch": "Type DELETE in the confirmation field to proceed.",
     "deleteConfirmButton": "Delete my account",
-    "deleteError": "Couldn't delete the account. Check your password and try again."
+    "deleteError": "Couldn't delete the account. Check your password and try again.",
+    "speech": {
+      "title": "Spoken cards",
+      "hint": "Read cards aloud with your device's own voices. Nothing is sent to a server. Individual decks can override these settings — useful for language decks, where each side needs its own voice.",
+      "enable": "Read my cards aloud",
+      "voice": "Voice",
+      "voiceDefault": "Match my app language",
+      "autoplay": "Speak automatically",
+      "autoplayMode": {
+        "off": "Never — button only",
+        "front": "The question",
+        "back": "The answer",
+        "both": "Both sides"
+      },
+      "rate": "Speed ({{rate}}×)",
+      "missingVoice": "This device has no {{lang}} voice installed, so that side stays silent here.",
+      "noVoices": "This device reports no speech voices.",
+      "unsupported": "This browser has no speech engine.",
+      "saveError": "Could not save your speech settings."
+    }
   },
   "theme": {
     "toLight": "Switch to light mode",
@@ -191,7 +210,25 @@
     "delete": "Delete",
     "togglePublicError": "Couldn't update sharing. Try again.",
     "verifyTitle": "Verify your email to get started",
-    "verifyBody": "We sent a link to {{email}}. Confirm it and your decks appear here — meanwhile, <0>read the getting started guide</0>."
+    "verifyBody": "We sent a link to {{email}}. Confirm it and your decks appear here — meanwhile, <0>read the getting started guide</0>.",
+    "speech": {
+      "open": "Speech",
+      "openTitle": "Spoken-card settings for this deck",
+      "title": "Speech — {{title}}",
+      "hint": "Give each side its own voice. A German-to-English deck should speak the question in German and the answer in English.",
+      "enabled": "Read this deck aloud",
+      "enabledInherit": "Use my global setting",
+      "enabledOn": "Always",
+      "enabledOff": "Never (mute this deck)",
+      "inherit": "Use my global setting",
+      "frontLang": "Question voice",
+      "backLang": "Answer voice",
+      "rateInherit": "Use my global speed",
+      "loading": "Loading…",
+      "saving": "Saving…",
+      "loadError": "Could not load this deck's speech settings.",
+      "saveError": "Could not save this deck's speech settings."
+    }
   },
   "createDeck": {
     "title": "New Deck",
@@ -223,7 +260,12 @@
     "complete": "Session complete",
     "nothingDue": "Nothing due right now — great job staying on top of it!",
     "reviewed_one": "You reviewed {{count}} card.",
-    "reviewed_other": "You reviewed {{count}} cards."
+    "reviewed_other": "You reviewed {{count}} cards.",
+    "speech": {
+      "speak": "Speak this side ({{lang}})",
+      "mute": "Mute",
+      "unmute": "Unmute"
+    }
   },
   "library": {
     "title": "Library",

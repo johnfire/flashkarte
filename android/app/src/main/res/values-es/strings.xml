@@ -60,4 +60,34 @@
     <string name="decks_empty_hint">¿Eres nuevo aquí? Abre la Ayuda para aprender lo básico.</string>
     <string name="study_rating_hint">¿No sabes qué hace cada botón? Descubre cómo funciona la repetición espaciada en la Ayuda.</string>
     <string name="settings_help">Ayuda</string>
+
+    <!-- Spoken cards (Spec 09) -->
+    <string name="study_speak">Leer</string>
+    <string name="study_mute">Silenciar</string>
+    <string name="study_unmute">Activar sonido</string>
+    <string name="speech_title">Tarjetas habladas</string>
+    <string name="speech_hint">Lee las tarjetas en voz alta con las voces de este dispositivo. No se envía nada a ningún servidor. Cada mazo puede anular estos ajustes.</string>
+    <string name="speech_enable">Leer mis tarjetas en voz alta</string>
+    <string name="speech_voice">Voz</string>
+    <string name="speech_voice_default">Déjalo vacío para seguir el idioma de la aplicación</string>
+    <string name="speech_autoplay">Leer automáticamente</string>
+    <string name="speech_autoplay_off">Nunca — solo con el botón</string>
+    <string name="speech_autoplay_front">La pregunta</string>
+    <string name="speech_autoplay_back">La respuesta</string>
+    <string name="speech_autoplay_both">Ambos lados</string>
+    <string name="speech_rate">Velocidad</string>
+    <string name="speech_save_error">No se han podido guardar tus ajustes de voz.</string>
+    <string name="speech_no_voice">En este dispositivo no hay ninguna voz instalada para este idioma, así que quedará en silencio aquí.</string>
+    <string name="deck_speech">Voz</string>
+    <string name="deck_speech_title">Ajustes de lectura</string>
+    <string name="deck_speech_hint">Da a cada lado su propia voz. Un mazo alemán-inglés debe leer la pregunta en alemán y la respuesta en inglés.</string>
+    <string name="deck_speech_enabled">Leer este mazo en voz alta</string>
+    <string name="deck_speech_inherit">Usar mi ajuste global</string>
+    <string name="deck_speech_on">Siempre</string>
+    <string name="deck_speech_off">Nunca (silenciar este mazo)</string>
+    <string name="deck_speech_front">Voz de la pregunta</string>
+    <string name="deck_speech_back">Voz de la respuesta</string>
+    <string name="deck_speech_save_error">No se han podido guardar los ajustes de lectura del mazo.</string>
+    <string name="deck_speech_rate_inherit">Usar mi velocidad global</string>
+    <string name="speech_no_voice_list">Este dispositivo aún no ha informado de sus voces: escribe una etiqueta BCP-47 como de-DE.</string>
 </resources>

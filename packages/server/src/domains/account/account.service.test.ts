@@ -12,6 +12,10 @@ const profileRow: repo.ProfileRow = {
   role: "user",
   account_type: "free",
   language: "en",
+  speech_enabled: true,
+  speech_lang: "en-GB",
+  speech_autoplay: "back",
+  speech_rate: 0.9,
   email_verified_at: "2026-01-02T00:00:00Z",
   created_at: "2026-01-01T00:00:00Z",
 };
@@ -32,6 +36,41 @@ describe("account.service exportData", () => {
     await expect(exportData("ghost")).rejects.toThrow(NotFoundError);
   });
 
+  it("exports the speech settings of the profile and each deck", async () => {
+    mock.findDecks.mockResolvedValue([
+      {
+        id: "d1",
+        title: "Spanish",
+        source_filename: "es.md",
+        is_public: false,
+        is_ordered: false,
+        speech_enabled: true,
+        speech_front_lang: "es-ES",
+        speech_back_lang: "en-GB",
+        speech_autoplay: "both",
+        speech_rate: 0.8,
+        created_at: "c",
+        updated_at: "u",
+      },
+    ]);
+
+    const result = await exportData("u1");
+
+    expect(result.profile.speech).toEqual({
+      enabled: true,
+      lang: "en-GB",
+      autoplay: "back",
+      rate: 0.9,
+    });
+    expect(result.decks[0].speech).toEqual({
+      enabled: true,
+      frontLang: "es-ES",
+      backLang: "en-GB",
+      autoplay: "both",
+      rate: 0.8,
+    });
+  });
+
   it("assembles profile, decks with nested cards, progress, and events", async () => {
     mock.findDecks.mockResolvedValue([
       {
@@ -40,6 +79,11 @@ describe("account.service exportData", () => {
         source_filename: "es.md",
         is_public: false,
         is_ordered: false,
+        speech_enabled: true,
+        speech_front_lang: "es-ES",
+        speech_back_lang: "en-GB",
+        speech_autoplay: "both",
+        speech_rate: 0.8,
         created_at: "c",
         updated_at: "u",
       },

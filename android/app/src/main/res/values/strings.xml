@@ -60,4 +60,34 @@
     <string name="decks_empty_hint">New here? Open Help to learn the basics.</string>
     <string name="study_rating_hint">Not sure what these do? See how spaced repetition works in Help.</string>
     <string name="settings_help">Help</string>
+
+    <!-- Spoken cards (Spec 09) -->
+    <string name="study_speak">Speak</string>
+    <string name="study_mute">Mute</string>
+    <string name="study_unmute">Unmute</string>
+    <string name="speech_title">Spoken cards</string>
+    <string name="speech_hint">Read cards aloud with this device\'s own voices. Nothing is sent to a server. Individual decks can override these settings.</string>
+    <string name="speech_enable">Read my cards aloud</string>
+    <string name="speech_voice">Voice</string>
+    <string name="speech_voice_default">Leave empty to match your app language</string>
+    <string name="speech_autoplay">Speak automatically</string>
+    <string name="speech_autoplay_off">Never — button only</string>
+    <string name="speech_autoplay_front">The question</string>
+    <string name="speech_autoplay_back">The answer</string>
+    <string name="speech_autoplay_both">Both sides</string>
+    <string name="speech_rate">Speed</string>
+    <string name="speech_save_error">Couldn\'t save your speech settings.</string>
+    <string name="speech_no_voice">No voice for this language is installed on this device, so it will stay silent here.</string>
+    <string name="deck_speech">Speech</string>
+    <string name="deck_speech_title">Speech settings</string>
+    <string name="deck_speech_hint">Give each side its own voice. A German-to-English deck should speak the question in German and the answer in English.</string>
+    <string name="deck_speech_enabled">Read this deck aloud</string>
+    <string name="deck_speech_inherit">Use my global setting</string>
+    <string name="deck_speech_on">Always</string>
+    <string name="deck_speech_off">Never (mute this deck)</string>
+    <string name="deck_speech_front">Question voice</string>
+    <string name="deck_speech_back">Answer voice</string>
+    <string name="deck_speech_save_error">Couldn\'t save this deck\'s speech settings.</string>
+    <string name="deck_speech_rate_inherit">Use my global speed</string>
+    <string name="speech_no_voice_list">This device hasn\'t reported its voices yet — type a BCP-47 tag such as de-DE.</string>
 </resources>

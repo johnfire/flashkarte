@@ -121,7 +121,26 @@
     "deleteConfirmLabel": "Tippe DELETE zur Bestätigung",
     "deleteConfirmMismatch": "Tippe DELETE in das Bestätigungsfeld, um fortzufahren.",
     "deleteConfirmButton": "Mein Konto löschen",
-    "deleteError": "Konto konnte nicht gelöscht werden. Überprüfe dein Passwort und versuche es erneut."
+    "deleteError": "Konto konnte nicht gelöscht werden. Überprüfe dein Passwort und versuche es erneut.",
+    "speech": {
+      "title": "Karten vorlesen",
+      "hint": "Karten mit den Stimmen deines Geräts vorlesen lassen. Es wird nichts an einen Server gesendet. Einzelne Stapel können diese Einstellungen überschreiben — praktisch für Sprachstapel, bei denen jede Seite ihre eigene Stimme braucht.",
+      "enable": "Meine Karten vorlesen",
+      "voice": "Stimme",
+      "voiceDefault": "Passend zur App-Sprache",
+      "autoplay": "Automatisch vorlesen",
+      "autoplayMode": {
+        "off": "Nie — nur per Knopf",
+        "front": "Die Frage",
+        "back": "Die Antwort",
+        "both": "Beide Seiten"
+      },
+      "rate": "Geschwindigkeit ({{rate}}×)",
+      "missingVoice": "Auf diesem Gerät ist keine {{lang}}-Stimme installiert; diese Seite bleibt hier stumm.",
+      "noVoices": "Dieses Gerät meldet keine Sprachstimmen.",
+      "unsupported": "Dieser Browser hat keine Sprachausgabe.",
+      "saveError": "Spracheinstellungen konnten nicht gespeichert werden."
+    }
   },
   "theme": {
     "toLight": "Zum hellen Modus wechseln",
@@ -191,7 +210,25 @@
     "delete": "Löschen",
     "togglePublicError": "Die Freigabe konnte nicht aktualisiert werden. Versuche es erneut.",
     "verifyTitle": "Bestätige deine E-Mail-Adresse, um loszulegen",
-    "verifyBody": "Wir haben einen Link an {{email}} geschickt. Bestätige ihn, dann erscheinen deine Stapel hier — in der Zwischenzeit <0>lies die Erste-Schritte-Anleitung</0>."
+    "verifyBody": "Wir haben einen Link an {{email}} geschickt. Bestätige ihn, dann erscheinen deine Stapel hier — in der Zwischenzeit <0>lies die Erste-Schritte-Anleitung</0>.",
+    "speech": {
+      "open": "Sprache",
+      "openTitle": "Vorlese-Einstellungen für diesen Stapel",
+      "title": "Vorlesen — {{title}}",
+      "hint": "Gib jeder Seite ihre eigene Stimme. Ein Deutsch-Englisch-Stapel sollte die Frage auf Deutsch und die Antwort auf Englisch sprechen.",
+      "enabled": "Diesen Stapel vorlesen",
+      "enabledInherit": "Globale Einstellung verwenden",
+      "enabledOn": "Immer",
+      "enabledOff": "Nie (Stapel stummschalten)",
+      "inherit": "Globale Einstellung verwenden",
+      "frontLang": "Stimme der Frage",
+      "backLang": "Stimme der Antwort",
+      "rateInherit": "Globale Geschwindigkeit verwenden",
+      "loading": "Wird geladen…",
+      "saving": "Wird gespeichert…",
+      "loadError": "Spracheinstellungen des Stapels konnten nicht geladen werden.",
+      "saveError": "Spracheinstellungen des Stapels konnten nicht gespeichert werden."
+    }
   },
   "createDeck": {
     "title": "Neuer Stapel",
@@ -223,7 +260,12 @@
     "complete": "Sitzung abgeschlossen",
     "nothingDue": "Gerade ist nichts fällig – super, dass du am Ball bleibst!",
     "reviewed_one": "Du hast {{count}} Karte wiederholt.",
-    "reviewed_other": "Du hast {{count}} Karten wiederholt."
+    "reviewed_other": "Du hast {{count}} Karten wiederholt.",
+    "speech": {
+      "speak": "Diese Seite vorlesen ({{lang}})",
+      "mute": "Stumm",
+      "unmute": "Ton an"
+    }
   },
   "library": {
     "title": "Bibliothek",

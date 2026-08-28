@@ -10,6 +10,10 @@ export interface UserRow {
   display_name: string | null;
   language: string | null;
   two_factor_enabled: boolean;
+  speech_enabled: boolean;
+  speech_lang: string | null;
+  speech_autoplay: string;
+  speech_rate: number;
 }
 
 interface UserWithHash extends UserRow {
@@ -17,7 +21,8 @@ interface UserWithHash extends UserRow {
 }
 
 const USER_COLS =
-  "id, email, role, account_type, email_verified_at, display_name, language, two_factor_enabled";
+  "id, email, role, account_type, email_verified_at, display_name, language, two_factor_enabled, " +
+  "speech_enabled, speech_lang, speech_autoplay, speech_rate";
 
 export function findByEmailWithHash(email: string) {
   return queryOne<UserWithHash>(
@@ -46,20 +51,41 @@ export function createUser(email: string, passwordHash: string) {
   );
 }
 
-export function updateProfileFields(
-  userId: string,
-  displayName: string | null,
-  language: string | null | undefined,
-) {
-  if (language !== undefined) {
-    return queryOne<UserRow>(
-      `UPDATE users SET display_name = $2, language = $3, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
-      [userId, displayName, language],
-    );
-  }
+/** Editable profile columns. Absent keys are left untouched by the UPDATE. */
+export interface ProfilePatch {
+  display_name?: string | null;
+  language?: string | null;
+  speech_enabled?: boolean;
+  speech_lang?: string | null;
+  speech_autoplay?: string;
+  speech_rate?: number;
+}
+
+const PROFILE_PATCH_COLS = [
+  "display_name",
+  "language",
+  "speech_enabled",
+  "speech_lang",
+  "speech_autoplay",
+  "speech_rate",
+] as const;
+
+/**
+ * Update only the profile columns the caller actually sent.
+ *
+ * Whitelist-driven rather than a fixed column list: the previous fixed form
+ * always wrote `display_name`, so a language-only PATCH (which is what the UI
+ * language switcher sends) silently cleared the user's display name. Absent
+ * now means "leave alone"; only an explicit null clears a field.
+ */
+export function updateProfileFields(userId: string, patch: ProfilePatch) {
+  const columns = PROFILE_PATCH_COLS.filter((col) => patch[col] !== undefined);
+  if (columns.length === 0) return findById(userId);
+  const assignments = columns.map((col, idx) => `${col} = $${idx + 2}`);
   return queryOne<UserRow>(
-    `UPDATE users SET display_name = $2, updated_at = now() WHERE id = $1 RETURNING ${USER_COLS}`,
-    [userId, displayName],
+    `UPDATE users SET ${assignments.join(", ")}, updated_at = now()
+     WHERE id = $1 RETURNING ${USER_COLS}`,
+    [userId, ...columns.map((col) => patch[col] ?? null)],
   );
 }
 

@@ -4,7 +4,19 @@ import { z } from "zod";
 import jwt from "jsonwebtoken";
 import { getJwtSecret } from "../../config/env";
 import { ValidationError, AuthError } from "../../utils/errors";
-import { parse, emailSchema, passwordSchema } from "../../utils/validate";
+import {
+  parse,
+  emailSchema,
+  passwordSchema,
+  speechAutoplaySchema,
+  speechLangSchema,
+  speechRateSchema,
+} from "../../utils/validate";
+import {
+  clampSpeechRate,
+  DEFAULT_SPEECH_AUTOPLAY,
+  type SpeechAutoplay,
+} from "@flashkarte/shared";
 import {
   getAppUrl,
   sendEmailChangeVerification,
@@ -72,6 +84,10 @@ export interface PublicUser {
   displayName: string | null;
   language: string | null;
   twoFactorEnabled: boolean;
+  speechEnabled: boolean;
+  speechLang: string | null;
+  speechAutoplay: SpeechAutoplay;
+  speechRate: number;
 }
 
 function toUser(row: UserRow): PublicUser {
@@ -86,6 +102,11 @@ function toUser(row: UserRow): PublicUser {
     displayName: row.display_name ?? null,
     language: row.language ?? null,
     twoFactorEnabled: row.two_factor_enabled ?? false,
+    speechEnabled: row.speech_enabled ?? false,
+    speechLang: row.speech_lang ?? null,
+    speechAutoplay: (row.speech_autoplay ??
+      DEFAULT_SPEECH_AUTOPLAY) as SpeechAutoplay,
+    speechRate: clampSpeechRate(row.speech_rate),
   };
 }
 
@@ -99,6 +120,14 @@ const profileUpdateSchema = z.object({
   language: z
     .enum(SUPPORTED_LANGUAGES, { error: "Unsupported language" })
     .optional(),
+  // Global speech defaults (Spec 09). `speechLang` is nullable so a user can
+  // clear it and fall back to their UI language again.
+  speechEnabled: z
+    .boolean({ error: "speechEnabled must be a boolean" })
+    .optional(),
+  speechLang: speechLangSchema.optional(),
+  speechAutoplay: speechAutoplaySchema.optional(),
+  speechRate: speechRateSchema.optional(),
 });
 
 // Create a fresh verification token (replacing any prior ones) and email the
@@ -413,21 +442,36 @@ export async function getCurrentUser(userId: string): Promise<PublicUser> {
   return toUser(user);
 }
 
-/** Update the caller's editable profile fields (currently display name). */
+/**
+ * Update the caller's editable profile fields.
+ *
+ * Only the fields present in `input` are written — a language-only PATCH from
+ * the UI language switcher must not touch the display name.
+ */
 export async function updateProfile(
   userId: string,
-  displayNameIn: unknown,
-  languageIn?: unknown,
+  input: {
+    displayName?: unknown;
+    language?: unknown;
+    speechEnabled?: unknown;
+    speechLang?: unknown;
+    speechAutoplay?: unknown;
+    speechRate?: unknown;
+  },
 ): Promise<PublicUser> {
-  const profile = parse(profileUpdateSchema, {
-    displayName: displayNameIn,
-    language: languageIn,
-  });
-  const user = await repo.updateProfileFields(
-    userId,
-    profile.displayName || null,
-    profile.language,
-  );
+  const profile = parse(profileUpdateSchema, input);
+  const patch: repo.ProfilePatch = {};
+  if (profile.displayName !== undefined)
+    patch.display_name = profile.displayName || null;
+  if (profile.language !== undefined) patch.language = profile.language;
+  if (profile.speechEnabled !== undefined)
+    patch.speech_enabled = profile.speechEnabled;
+  if (profile.speechLang !== undefined) patch.speech_lang = profile.speechLang;
+  if (profile.speechAutoplay !== undefined)
+    patch.speech_autoplay = profile.speechAutoplay;
+  if (profile.speechRate !== undefined) patch.speech_rate = profile.speechRate;
+
+  const user = await repo.updateProfileFields(userId, patch);
   if (!user) throw new AuthError("Not found");
   return toUser(user);
 }

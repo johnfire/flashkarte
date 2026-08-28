@@ -52,11 +52,20 @@ export const get = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.get(req.userId!, req.params.id));
 });
 
+export const getSettings = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.getSettings(req.userId!, req.params.id));
+});
+
 export const update = wrapAsync(async (req: Request, res: Response) => {
   const updated = await service.update(req.userId!, req.params.id, {
     title: req.body.title,
     isPublic: req.body.isPublic,
     isOrdered: req.body.isOrdered,
+    speechEnabled: req.body.speechEnabled,
+    speechFrontLang: req.body.speechFrontLang,
+    speechBackLang: req.body.speechBackLang,
+    speechAutoplay: req.body.speechAutoplay,
+    speechRate: req.body.speechRate,
   });
   await auditFromRequest(
     req,
@@ -69,6 +78,11 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
       title: updated.title,
       isPublic: updated.is_public,
       isOrdered: updated.is_ordered,
+      speechEnabled: updated.speech_enabled,
+      speechFrontLang: updated.speech_front_lang,
+      speechBackLang: updated.speech_back_lang,
+      speechAutoplay: updated.speech_autoplay,
+      speechRate: updated.speech_rate,
     },
   );
   res.json(updated);

@@ -12,6 +12,7 @@ import com.flashmd.data.remote.dto.DeckCreatedDto
 import com.flashmd.data.remote.dto.DeleteAccountRequest
 import com.flashmd.data.remote.dto.DeckDetailDto
 import com.flashmd.data.remote.dto.DeckListItemDto
+import com.flashmd.data.remote.dto.DeckSettingsDto
 import com.flashmd.data.remote.dto.ForgotPasswordRequest
 import com.flashmd.data.remote.dto.ImportRequest
 import com.flashmd.data.remote.dto.LibraryDeckDetailDto
@@ -40,6 +41,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import kotlinx.serialization.json.JsonObject
 
 interface FlashkarteApi {
 
@@ -73,6 +75,9 @@ interface FlashkarteApi {
     @GET("api/decks/{id}/study")
     suspend fun studyBatch(@Path("id") id: String): List<StudyCardDto>
 
+    @GET("api/decks/{id}/settings")
+    suspend fun getDeckSettings(@Path("id") id: String): DeckSettingsDto
+
     @GET("api/decks/{id}/stats")
     suspend fun stats(@Path("id") id: String): StatsDto
 
@@ -85,6 +90,15 @@ interface FlashkarteApi {
     // Deck mutations
     @PATCH("api/decks/{id}")
     suspend fun updateDeck(@Path("id") id: String, @Body body: UpdateDeckRequest): DeckDetailDto
+
+    // Speech overrides are sent as a raw JsonObject rather than a data class:
+    // the app's Json has explicitNulls = false, which would silently drop the
+    // explicit nulls that mean "reset this field to inherit".
+    @PATCH("api/decks/{id}")
+    suspend fun updateDeckSpeech(
+        @Path("id") id: String,
+        @Body body: JsonObject,
+    ): DeckSettingsDto
 
     @POST("api/decks/{id}/cards")
     suspend fun addCards(@Path("id") id: String, @Body body: AddCardsRequest): AddCardsResponse

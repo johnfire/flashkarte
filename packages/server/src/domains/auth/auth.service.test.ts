@@ -60,6 +60,10 @@ function setupRepoRow(
     display_name: null,
     language: null,
     two_factor_enabled: false,
+    speech_enabled: false,
+    speech_lang: null,
+    speech_autoplay: "back",
+    speech_rate: 1.0,
     password_hash: overrides.password_hash ?? "$2a$12$hashhashhash",
   };
   mockRepo.findByIdWithHash.mockResolvedValue(row);
@@ -137,28 +141,76 @@ describe("auth command validation", () => {
     const user = setupRepoRow();
     mockRepo.updateProfileFields.mockResolvedValue(user);
 
-    await updateProfile("u1", "  Ada  ", "de");
+    await updateProfile("u1", { displayName: "  Ada  ", language: "de" });
 
-    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith(
-      "u1",
-      "Ada",
-      "de",
-    );
+    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith("u1", {
+      display_name: "Ada",
+      language: "de",
+    });
+  });
+
+  it("patches only the fields sent, so a language switch keeps the name", async () => {
+    const user = setupRepoRow();
+    mockRepo.updateProfileFields.mockResolvedValue(user);
+
+    await updateProfile("u1", { language: "es" });
+
+    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith("u1", {
+      language: "es",
+    });
+  });
+
+  it("accepts the global speech defaults", async () => {
+    const user = setupRepoRow();
+    mockRepo.updateProfileFields.mockResolvedValue(user);
+
+    await updateProfile("u1", {
+      speechEnabled: true,
+      speechLang: "de-DE",
+      speechAutoplay: "both",
+      speechRate: 0.8,
+    });
+
+    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith("u1", {
+      speech_enabled: true,
+      speech_lang: "de-DE",
+      speech_autoplay: "both",
+      speech_rate: 0.8,
+    });
+  });
+
+  it("clears the speech language when sent blank", async () => {
+    const user = setupRepoRow();
+    mockRepo.updateProfileFields.mockResolvedValue(user);
+
+    await updateProfile("u1", { speechLang: "   " });
+
+    expect(mockRepo.updateProfileFields).toHaveBeenCalledWith("u1", {
+      speech_lang: null,
+    });
   });
 
   it.each([
-    [42, undefined, "Display name must be text"],
-    ["a".repeat(61), undefined, "Display name must be 60 characters or fewer"],
-    ["Ada", "it", "Unsupported language"],
-  ])(
-    "rejects invalid profile fields",
-    async (displayName, language, message) => {
-      await expect(updateProfile("u1", displayName, language)).rejects.toThrow(
-        message,
-      );
-      expect(mockRepo.updateProfileFields).not.toHaveBeenCalled();
-    },
-  );
+    [{ displayName: 42 }, "Display name must be text"],
+    [
+      { displayName: "a".repeat(61) },
+      "Display name must be 60 characters or fewer",
+    ],
+    [{ displayName: "Ada", language: "it" }, "Unsupported language"],
+    [
+      { speechLang: "not a tag" },
+      "Language must be a BCP-47 tag such as de-DE",
+    ],
+    [
+      { speechAutoplay: "sideways" },
+      "Autoplay must be off, front, back or both",
+    ],
+    [{ speechRate: 5 }, "Speech rate must be between 0.5 and 2"],
+    [{ speechEnabled: "yes" }, "speechEnabled must be a boolean"],
+  ])("rejects invalid profile fields", async (input, message) => {
+    await expect(updateProfile("u1", input)).rejects.toThrow(message);
+    expect(mockRepo.updateProfileFields).not.toHaveBeenCalled();
+  });
 
   it("rejects a missing current password before comparing", async () => {
     setupRepoRow();
@@ -328,6 +380,10 @@ describe("login with 2FA enabled", () => {
       display_name: null,
       language: null,
       two_factor_enabled: twoFactorEnabled,
+      speech_enabled: false,
+      speech_lang: null,
+      speech_autoplay: "back",
+      speech_rate: 1.0,
       password_hash: "$2a$12$hashhashhash",
     };
   }

@@ -9,6 +9,12 @@ export interface AccountExport {
     role: string;
     accountType: string;
     language: string | null;
+    speech: {
+      enabled: boolean;
+      lang: string | null;
+      autoplay: string;
+      rate: number;
+    };
     emailVerifiedAt: string | null;
     createdAt: string;
   };
@@ -18,6 +24,13 @@ export interface AccountExport {
     sourceFilename: string | null;
     isPublic: boolean;
     isOrdered: boolean;
+    speech: {
+      enabled: boolean | null;
+      frontLang: string | null;
+      backLang: string | null;
+      autoplay: string | null;
+      rate: number | null;
+    };
     createdAt: string;
     updatedAt: string;
     cards: Array<{
@@ -89,6 +102,12 @@ export async function exportData(userId: string): Promise<AccountExport> {
       role: profile.role,
       accountType: profile.account_type,
       language: profile.language,
+      speech: {
+        enabled: profile.speech_enabled,
+        lang: profile.speech_lang,
+        autoplay: profile.speech_autoplay,
+        rate: profile.speech_rate,
+      },
       emailVerifiedAt: profile.email_verified_at,
       createdAt: profile.created_at,
     },
@@ -98,6 +117,13 @@ export async function exportData(userId: string): Promise<AccountExport> {
       sourceFilename: deck.source_filename,
       isPublic: deck.is_public,
       isOrdered: deck.is_ordered,
+      speech: {
+        enabled: deck.speech_enabled,
+        frontLang: deck.speech_front_lang,
+        backLang: deck.speech_back_lang,
+        autoplay: deck.speech_autoplay,
+        rate: deck.speech_rate,
+      },
       createdAt: deck.created_at,
       updatedAt: deck.updated_at,
       cards: (cardsByDeck.get(deck.id) ?? []).map((card) => ({

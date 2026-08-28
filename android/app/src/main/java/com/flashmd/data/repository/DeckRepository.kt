@@ -4,6 +4,7 @@ import com.flashmd.data.local.LocalStudyStore
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.DeckListItemDto
+import com.flashmd.data.remote.dto.DeckSettingsDto
 import com.flashmd.data.remote.dto.ImportRequest
 import com.flashmd.domain.model.BranchOption
 import com.flashmd.domain.model.Deck
@@ -11,6 +12,9 @@ import com.flashmd.domain.model.DeckNode
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.serialization.json.JsonNull
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -53,6 +57,11 @@ class DeckRepository @Inject constructor(
                         createdAt = it.createdAt,
                         lastStudied = it.updatedAt,
                         isOrdered = it.isOrdered,
+                        speechEnabled = it.speechEnabled,
+                        speechFrontLang = it.speechFrontLang,
+                        speechBackLang = it.speechBackLang,
+                        speechAutoplay = it.speechAutoplay,
+                        speechRate = it.speechRate,
                         isBranching = it.cards.any { c -> c.type == "branch" },
                     )
                 }
@@ -108,6 +117,35 @@ class DeckRepository @Inject constructor(
         refresh()
     }
 
+    suspend fun getSpeechSettings(id: String): DeckSettingsDto =
+        apiCall { api.getDeckSettings(id) }
+
+    /**
+     * Write this deck's speech overrides.
+     *
+     * Every field is sent on every save, with null encoded explicitly so the
+     * server resets it to "inherit the global default" — the tri-state on/off
+     * control depends on being able to say null out loud.
+     */
+    suspend fun setSpeech(
+        id: String,
+        enabled: Boolean?,
+        frontLang: String?,
+        backLang: String?,
+        autoplay: String?,
+        rate: Double?,
+    ) {
+        val body = buildJsonObject {
+            put("speechEnabled", enabled?.let { JsonPrimitive(it) } ?: JsonNull)
+            put("speechFrontLang", frontLang?.let { JsonPrimitive(it) } ?: JsonNull)
+            put("speechBackLang", backLang?.let { JsonPrimitive(it) } ?: JsonNull)
+            put("speechAutoplay", autoplay?.let { JsonPrimitive(it) } ?: JsonNull)
+            put("speechRate", rate?.let { JsonPrimitive(it) } ?: JsonNull)
+        }
+        apiCall { api.updateDeckSpeech(id, body) }
+        refresh()
+    }
+
     private fun DeckListItemDto.toDomain() = Deck(
         id = id,
         title = title,
@@ -118,6 +156,11 @@ class DeckRepository @Inject constructor(
         dueCount = dueCount.toIntOrNull() ?: 0,
         isPublic = isPublic,
         isOrdered = isOrdered,
+        speechEnabled = speechEnabled,
+        speechFrontLang = speechFrontLang,
+        speechBackLang = speechBackLang,
+        speechAutoplay = speechAutoplay,
+        speechRate = speechRate,
         isBranching = isBranching,
     )
 }

@@ -30,7 +30,7 @@ describe("setLanguage", () => {
 
   it("PATCHes /me with language when authed", async () => {
     await setLanguage("es", { authed: true });
-    expect(updateProfile).toHaveBeenCalledWith(undefined, "es");
+    expect(updateProfile).toHaveBeenCalledWith({ language: "es" });
   });
 
   it("resolves unsupported tags to en before applying", async () => {

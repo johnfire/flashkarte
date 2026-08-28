@@ -8,7 +8,10 @@ import com.flashmd.data.local.StudyModeStore
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.DeckRepository
+import com.flashmd.data.local.SpeechSettingsStore
 import com.flashmd.data.repository.StudyRepository
+import com.flashmd.data.speech.SpeechPlayer
+import com.flashmd.domain.speech.SpeechResolver
 import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.DueCard
 import com.flashmd.domain.study.DiagnosticStudy
@@ -39,6 +42,18 @@ data class StudyUiState(
     // Spec 01: the remediation card shown as an interlude after a wrong routed
     // pick. Non-null while the interlude is on screen; it carries no rating.
     val remediation: Card? = null,
+    // Spec 09. `speech` is the resolved result, so the screen only has to ask
+    // "is there a language for this side?" — never how it was derived.
+    val speech: SpeechResolver.Resolved = SILENT,
+    val muted: Boolean = false,
+)
+
+/** Speech off: both sides null, so no button is offered and nothing plays. */
+private val SILENT = SpeechResolver.Resolved(
+    frontLang = null,
+    backLang = null,
+    autoplay = "off",
+    rate = SpeechResolver.DEFAULT_RATE,
 )
 
 @HiltViewModel
@@ -48,6 +63,8 @@ class StudyViewModel @Inject constructor(
     private val errorReporter: ErrorReporter,
     savedStateHandle: SavedStateHandle,
     private val studyModeStore: StudyModeStore,
+    private val speechPlayer: SpeechPlayer,
+    private val speechSettings: SpeechSettingsStore,
 ) : ViewModel() {
 
     private val deckId: String = checkNotNull(savedStateHandle["deckId"])
@@ -76,6 +93,7 @@ class StudyViewModel @Inject constructor(
                 pool = due.map { it.card.back }
                 ordered = deck?.isOrdered == true
                 val savedMode = studyModeStore.mode.first()
+                val speech = resolveSpeechFor(deck)
 
                 if (queue.isEmpty()) {
                     _uiState.value = _uiState.value.copy(
@@ -84,6 +102,7 @@ class StudyViewModel @Inject constructor(
                         isDone = true,
                         isLoading = false,
                         mode = savedMode,
+                        speech = speech,
                     )
                 } else {
                     val first = queue.first()
@@ -93,8 +112,10 @@ class StudyViewModel @Inject constructor(
                         remaining = queue.size,
                         isLoading = false,
                         mode = savedMode,
+                        speech = speech,
                         options = if (savedMode == StudyMode.CHOICE) optionsFor(first) else emptyList(),
                     )
+                    autoplay("front", first)
                 }
             } catch (e: ApiException) {
                 _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
@@ -111,6 +132,66 @@ class StudyViewModel @Inject constructor(
     fun flip() {
         if (_uiState.value.isFlipped) return
         _uiState.value = _uiState.value.copy(isFlipped = true)
+        autoplay("back", _uiState.value.currentCard)
+    }
+
+    /**
+     * Resolve global defaults against this deck's overrides.
+     *
+     * The defaults come from the local mirror rather than the network so a
+     * session started offline still speaks — the commute is the case this
+     * feature exists for. A deck loaded from the offline cache carries no
+     * overrides, so it falls back to the global settings.
+     */
+    private suspend fun resolveSpeechFor(deck: com.flashmd.domain.model.Deck?):
+        SpeechResolver.Resolved {
+        val defaults = runCatching { speechSettings.defaults.first() }
+            .getOrDefault(SpeechResolver.UserDefaults())
+        return SpeechResolver.resolve(
+            defaults,
+            SpeechResolver.DeckOverrides(
+                enabled = deck?.speechEnabled,
+                frontLang = deck?.speechFrontLang,
+                backLang = deck?.speechBackLang,
+                autoplay = deck?.speechAutoplay,
+                rate = deck?.speechRate,
+            ),
+            java.util.Locale.getDefault().toLanguageTag(),
+        )
+    }
+
+    /** Speak one side on request — always available when the side has a voice. */
+    fun speakSide(side: String) {
+        val card = _uiState.value.currentCard ?: return
+        val state = _uiState.value
+        val lang = if (side == "front") state.speech.frontLang else state.speech.backLang
+        if (lang == null) return
+        val text = if (side == "front") card.card.front else card.card.back
+        speechPlayer.speak(text, lang, state.speech.rate)
+    }
+
+    private fun autoplay(side: String, card: DueCard?) {
+        if (card == null) return
+        val state = _uiState.value
+        if (state.muted) return
+        if (!SpeechResolver.shouldAutoplay(state.speech, side)) return
+        speakSide(side)
+    }
+
+    /**
+     * Session mute — transient by design. It suppresses autoplay for this
+     * sitting without touching the settings the learner actually chose.
+     */
+    fun toggleMute() {
+        val muted = !_uiState.value.muted
+        if (muted) speechPlayer.stop()
+        _uiState.value = _uiState.value.copy(muted = muted)
+    }
+
+    override fun onCleared() {
+        // Leaving the screen mid-utterance must not keep talking.
+        speechPlayer.stop()
+        super.onCleared()
     }
 
     fun rate(rating: Int) {
@@ -206,6 +287,9 @@ class StudyViewModel @Inject constructor(
     }
 
     private fun applyAndAdvance(card: DueCard, rating: Int) {
+        // Stop before advancing: the previous card's answer must not talk over
+        // the next card's question.
+        speechPlayer.stop()
         queue.poll()
         ratingCounts[rating] = (ratingCounts[rating] ?: 0) + 1
 
@@ -238,6 +322,7 @@ class StudyViewModel @Inject constructor(
                 remediation = null,
                 options = if (_uiState.value.mode == StudyMode.CHOICE) optionsFor(next) else emptyList(),
             )
+            autoplay("front", next)
         }
     }
 }

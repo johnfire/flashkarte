@@ -158,7 +158,10 @@ describe("auth routes", () => {
       .send({ language: "de" });
     expect(res.status).toBe(200);
     expect(res.body.user.language).toBe("de");
-    expect(mock.updateProfile).toHaveBeenCalledWith("u1", undefined, "de");
+    expect(mock.updateProfile).toHaveBeenCalledWith(
+      "u1",
+      expect.objectContaining({ language: "de", displayName: undefined }),
+    );
   });
 
   test("PATCH /api/auth/me with unsupported language -> 422", async () => {

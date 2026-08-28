@@ -15,7 +15,7 @@ export async function setLanguage(
   }
   if (opts.authed) {
     try {
-      await api.auth.updateProfile(undefined, loc);
+      await api.auth.updateProfile({ language: loc });
     } catch {
       // non-fatal: local choice still applied
     }

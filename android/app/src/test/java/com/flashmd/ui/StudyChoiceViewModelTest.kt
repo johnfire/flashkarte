@@ -3,7 +3,10 @@ package com.flashmd.ui
 import androidx.lifecycle.SavedStateHandle
 import com.flashmd.data.local.StudyMode
 import com.flashmd.data.local.StudyModeStore
+import com.flashmd.data.local.SpeechSettingsStore
 import com.flashmd.data.remote.ErrorReporter
+import com.flashmd.data.speech.SpeechPlayer
+import com.flashmd.domain.speech.SpeechResolver
 import com.flashmd.data.repository.DeckRepository
 import com.flashmd.data.repository.StudyRepository
 import com.flashmd.domain.model.BranchOption
@@ -38,6 +41,8 @@ class StudyChoiceViewModelTest {
     private val studyRepo = mockk<StudyRepository>(relaxed = true)
     private val reporter = mockk<ErrorReporter>(relaxed = true)
     private val modeStore = mockk<StudyModeStore>(relaxed = true)
+    private val speechPlayer = mockk<SpeechPlayer>(relaxed = true)
+    private val speechSettings = mockk<SpeechSettingsStore>(relaxed = true)
 
     private fun due(id: String, back: String) = DueCard(
         Card(id, "d1", "front-$id", back),
@@ -63,6 +68,7 @@ class StudyChoiceViewModelTest {
 
     private fun vm() = StudyViewModel(
         deckRepo, studyRepo, reporter, SavedStateHandle(mapOf("deckId" to "d1")), modeStore,
+        speechPlayer, speechSettings,
     )
 
     // Index of the presented option whose text matches, regardless of shuffle.

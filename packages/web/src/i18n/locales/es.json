@@ -121,7 +121,26 @@
     "deleteConfirmLabel": "Escribe DELETE para confirmar",
     "deleteConfirmMismatch": "Escribe DELETE en el campo de confirmación para continuar.",
     "deleteConfirmButton": "Eliminar mi cuenta",
-    "deleteError": "No se pudo eliminar la cuenta. Verifica tu contraseña e inténtalo de nuevo."
+    "deleteError": "No se pudo eliminar la cuenta. Verifica tu contraseña e inténtalo de nuevo.",
+    "speech": {
+      "title": "Tarjetas habladas",
+      "hint": "Lee las tarjetas en voz alta con las voces de tu dispositivo. No se envía nada a ningún servidor. Cada mazo puede anular estos ajustes — útil para mazos de idiomas, donde cada lado necesita su propia voz.",
+      "enable": "Leer mis tarjetas en voz alta",
+      "voice": "Voz",
+      "voiceDefault": "Igual que el idioma de la aplicación",
+      "autoplay": "Leer automáticamente",
+      "autoplayMode": {
+        "off": "Nunca — solo con el botón",
+        "front": "La pregunta",
+        "back": "La respuesta",
+        "both": "Ambos lados"
+      },
+      "rate": "Velocidad ({{rate}}×)",
+      "missingVoice": "Este dispositivo no tiene instalada una voz de {{lang}}; ese lado quedará en silencio aquí.",
+      "noVoices": "Este dispositivo no informa de ninguna voz.",
+      "unsupported": "Este navegador no tiene motor de voz.",
+      "saveError": "No se han podido guardar tus ajustes de voz."
+    }
   },
   "theme": {
     "toLight": "Cambiar al modo claro",
@@ -191,7 +210,25 @@
     "delete": "Eliminar",
     "togglePublicError": "No se pudo actualizar el uso compartido. Inténtalo de nuevo.",
     "verifyTitle": "Verifica tu correo para empezar",
-    "verifyBody": "Enviamos un enlace a {{email}}. Confírmalo y tus mazos aparecerán aquí — mientras tanto, <0>lee la guía de introducción</0>."
+    "verifyBody": "Enviamos un enlace a {{email}}. Confírmalo y tus mazos aparecerán aquí — mientras tanto, <0>lee la guía de introducción</0>.",
+    "speech": {
+      "open": "Voz",
+      "openTitle": "Ajustes de lectura de este mazo",
+      "title": "Lectura — {{title}}",
+      "hint": "Da a cada lado su propia voz. Un mazo alemán-inglés debe leer la pregunta en alemán y la respuesta en inglés.",
+      "enabled": "Leer este mazo en voz alta",
+      "enabledInherit": "Usar mi ajuste global",
+      "enabledOn": "Siempre",
+      "enabledOff": "Nunca (silenciar este mazo)",
+      "inherit": "Usar mi ajuste global",
+      "frontLang": "Voz de la pregunta",
+      "backLang": "Voz de la respuesta",
+      "rateInherit": "Usar mi velocidad global",
+      "loading": "Cargando…",
+      "saving": "Guardando…",
+      "loadError": "No se han podido cargar los ajustes de lectura del mazo.",
+      "saveError": "No se han podido guardar los ajustes de lectura del mazo."
+    }
   },
   "createDeck": {
     "title": "Nuevo mazo",
@@ -223,7 +260,12 @@
     "complete": "Sesión completada",
     "nothingDue": "Nada pendiente ahora mismo: ¡bien hecho por estar al día!",
     "reviewed_one": "Repasaste {{count}} tarjeta.",
-    "reviewed_other": "Repasaste {{count}} tarjetas."
+    "reviewed_other": "Repasaste {{count}} tarjetas.",
+    "speech": {
+      "speak": "Leer este lado ({{lang}})",
+      "mute": "Silenciar",
+      "unmute": "Activar sonido"
+    }
   },
   "library": {
     "title": "Biblioteca",

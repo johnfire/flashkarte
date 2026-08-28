@@ -184,4 +184,64 @@ describe("decks routes", () => {
       expect.objectContaining({ isOrdered: true }),
     );
   });
+
+  test("PATCH /api/decks/:id forwards the speech overrides", async () => {
+    mock.update.mockResolvedValue({
+      id: "d1",
+      title: "Deck",
+      source_filename: null,
+      created_at: "x",
+      updated_at: "x",
+      is_public: false,
+      is_ordered: false,
+      speech_enabled: true,
+      speech_front_lang: "de-DE",
+      speech_back_lang: "en-GB",
+      speech_autoplay: "both",
+      speech_rate: 0.8,
+    } as never);
+    const res = await request(app).patch("/api/decks/d1").send({
+      speechEnabled: true,
+      speechFrontLang: "de-DE",
+      speechBackLang: "en-GB",
+      speechAutoplay: "both",
+      speechRate: 0.8,
+    });
+    expect(res.status).toBe(200);
+    expect(res.body.speech_front_lang).toBe("de-DE");
+    expect(res.body.speech_back_lang).toBe("en-GB");
+    expect(mock.update).toHaveBeenCalledWith(
+      "u1",
+      "d1",
+      expect.objectContaining({
+        speechEnabled: true,
+        speechFrontLang: "de-DE",
+        speechBackLang: "en-GB",
+        speechAutoplay: "both",
+        speechRate: 0.8,
+      }),
+    );
+  });
+
+  // Old-client contract: Android APKs in the field send the pre-Spec-09 shape
+  // and must be unaffected by the new columns.
+  test("PATCH /api/decks/:id with no speech fields sends them as undefined", async () => {
+    mock.update.mockResolvedValue({
+      id: "d1",
+      title: "Renamed",
+      source_filename: null,
+      created_at: "x",
+      updated_at: "x",
+      is_public: false,
+      is_ordered: false,
+    } as never);
+    const res = await request(app)
+      .patch("/api/decks/d1")
+      .send({ title: "Renamed" });
+    expect(res.status).toBe(200);
+    const patch = mock.update.mock.calls[0][2] as Record<string, unknown>;
+    expect(patch.speechEnabled).toBeUndefined();
+    expect(patch.speechFrontLang).toBeUndefined();
+    expect(patch.speechRate).toBeUndefined();
+  });
 });

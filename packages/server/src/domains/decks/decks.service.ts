@@ -1,7 +1,12 @@
 import { parseDeck } from "@flashkarte/shared";
 import { z } from "zod";
 import { ValidationError, NotFoundError } from "../../utils/errors";
-import { parse } from "../../utils/validate";
+import {
+  parse,
+  speechAutoplaySchema,
+  speechLangSchema,
+  speechRateSchema,
+} from "../../utils/validate";
 import * as repo from "./decks.repository";
 import { validateBranching } from "./branching";
 
@@ -22,6 +27,18 @@ const deckUpdateSchema = z.object({
     .optional(),
   isPublic: z.boolean({ error: "isPublic must be a boolean" }).optional(),
   isOrdered: z.boolean({ error: "isOrdered must be a boolean" }).optional(),
+  // Speech overrides (Spec 09). Every one is nullable-optional on purpose:
+  // absent leaves the stored value alone, explicit null resets it to "inherit
+  // the user's global default". speechEnabled is tri-state for the same reason
+  // — a boolean could not express "global on, mute this one deck".
+  speechEnabled: z
+    .boolean({ error: "speechEnabled must be a boolean" })
+    .nullable()
+    .optional(),
+  speechFrontLang: speechLangSchema.optional(),
+  speechBackLang: speechLangSchema.optional(),
+  speechAutoplay: speechAutoplaySchema.nullable().optional(),
+  speechRate: speechRateSchema.nullable().optional(),
 });
 
 export async function importDeck(
@@ -83,10 +100,33 @@ export async function get(userId: string, id: string) {
   return { ...deck, cards };
 }
 
+/**
+ * The deck row without its cards.
+ *
+ * The study screen needs a deck's speech settings before it can speak, and
+ * `get()` would ship up to MAX_CARDS_PER_DECK cards to answer that. Kept
+ * separate from the study batch response, which stays a bare array so the
+ * Android clients already in the field are unaffected.
+ */
+export async function getSettings(userId: string, id: string) {
+  const deck = await repo.getDeck(userId, id);
+  if (!deck) throw new NotFoundError("Deck not found");
+  return deck;
+}
+
 export async function update(
   userId: string,
   id: string,
-  patchInput: { title?: unknown; isPublic?: unknown; isOrdered?: unknown },
+  patchInput: {
+    title?: unknown;
+    isPublic?: unknown;
+    isOrdered?: unknown;
+    speechEnabled?: unknown;
+    speechFrontLang?: unknown;
+    speechBackLang?: unknown;
+    speechAutoplay?: unknown;
+    speechRate?: unknown;
+  },
 ) {
   let deck = await repo.getDeck(userId, id);
   if (!deck) throw new NotFoundError("Deck not found");
@@ -100,6 +140,20 @@ export async function update(
   }
   if (patch.isOrdered !== undefined) {
     deck = (await repo.setDeckOrdered(userId, id, patch.isOrdered)) ?? deck;
+  }
+
+  const speech: repo.DeckSpeechPatch = {};
+  if (patch.speechEnabled !== undefined)
+    speech.speech_enabled = patch.speechEnabled;
+  if (patch.speechFrontLang !== undefined)
+    speech.speech_front_lang = patch.speechFrontLang;
+  if (patch.speechBackLang !== undefined)
+    speech.speech_back_lang = patch.speechBackLang;
+  if (patch.speechAutoplay !== undefined)
+    speech.speech_autoplay = patch.speechAutoplay;
+  if (patch.speechRate !== undefined) speech.speech_rate = patch.speechRate;
+  if (Object.keys(speech).length > 0) {
+    deck = (await repo.setDeckSpeech(userId, id, speech)) ?? deck;
   }
   return deck;
 }

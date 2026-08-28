@@ -12,6 +12,7 @@ export const decksRouter = Router();
 decksRouter.get("/", ctrl.list);
 decksRouter.post("/", upload.single("file"), ctrl.create);
 decksRouter.get("/:id", ctrl.get);
+decksRouter.get("/:id/settings", ctrl.getSettings);
 decksRouter.patch("/:id", ctrl.update);
 decksRouter.delete("/:id", ctrl.remove);
 decksRouter.post("/:id/cards", ctrl.addCards);

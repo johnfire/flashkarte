@@ -148,17 +148,27 @@ export const me = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const updateMe = wrapAsync(async (req: Request, res: Response) => {
-  const user = await service.updateProfile(
-    req.userId!,
-    req.body.displayName,
-    req.body.language,
-  );
+  const user = await service.updateProfile(req.userId!, {
+    displayName: req.body.displayName,
+    language: req.body.language,
+    speechEnabled: req.body.speechEnabled,
+    speechLang: req.body.speechLang,
+    speechAutoplay: req.body.speechAutoplay,
+    speechRate: req.body.speechRate,
+  });
   await record({
     actor: userActor(req.userId!),
     action: "profile.updated",
     targetType: "user",
     targetId: req.userId!,
-    afterState: { displayName: user.displayName, language: user.language },
+    afterState: {
+      displayName: user.displayName,
+      language: user.language,
+      speechEnabled: user.speechEnabled,
+      speechLang: user.speechLang,
+      speechAutoplay: user.speechAutoplay,
+      speechRate: user.speechRate,
+    },
   });
   res.json({ user });
 });

@@ -12,7 +12,28 @@ import {
   LibraryDeck,
   LibraryDeckDetail,
   PublicDeckPreview,
+  DeckSettings,
 } from "./types";
+import type { SpeechAutoplay } from "@flashkarte/shared";
+
+/** Profile fields a client may patch; absent keys are left untouched. */
+export interface ProfilePatch {
+  displayName?: string;
+  language?: string;
+  speechEnabled?: boolean;
+  speechLang?: string | null;
+  speechAutoplay?: SpeechAutoplay;
+  speechRate?: number;
+}
+
+/** Deck speech overrides; null resets a field to "inherit". */
+export interface DeckSpeechPatch {
+  speechEnabled?: boolean | null;
+  speechFrontLang?: string | null;
+  speechBackLang?: string | null;
+  speechAutoplay?: SpeechAutoplay | null;
+  speechRate?: number | null;
+}
 
 const APP_VERSION = "0.1.0";
 
@@ -169,10 +190,12 @@ export const api = {
     refresh: () =>
       request<{ accessToken: string }>("/auth/refresh", { method: "POST" }),
     me: () => request<{ user: User }>("/auth/me"),
-    updateProfile: (displayName?: string, language?: string) =>
+    // Only the keys present are sent: the server patches exactly what it
+    // receives, so a language-only update must not carry displayName: null.
+    updateProfile: (patch: ProfilePatch) =>
       request<{ user: User }>("/auth/me", {
         method: "PATCH",
-        body: JSON.stringify({ displayName, language }),
+        body: JSON.stringify(patch),
       }),
     logout: () => request<void>("/auth/logout", { method: "POST" }),
     verifyEmail: (token: string) =>
@@ -272,6 +295,12 @@ export const api = {
       request<DeckWithCounts>(`/decks/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ isPublic }),
+      }),
+    settings: (id: string) => request<DeckSettings>(`/decks/${id}/settings`),
+    setSpeech: (id: string, patch: DeckSpeechPatch) =>
+      request<DeckWithCounts>(`/decks/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify(patch),
       }),
     remove: (id: string) => request<void>(`/decks/${id}`, { method: "DELETE" }),
   },

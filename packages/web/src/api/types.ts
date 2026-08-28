@@ -1,4 +1,15 @@
+import type { SpeechAutoplay } from "@flashkarte/shared";
+
 export type AccountType = "free" | "paid" | "admin-gifted" | "admin";
+
+/** A deck's speech overrides. Null means "inherit the global default". */
+export interface DeckSpeech {
+  speech_enabled: boolean | null;
+  speech_front_lang: string | null;
+  speech_back_lang: string | null;
+  speech_autoplay: SpeechAutoplay | null;
+  speech_rate: number | null;
+}
 
 export interface User {
   id: string;
@@ -9,6 +20,10 @@ export interface User {
   displayName: string | null;
   language: string | null;
   twoFactorEnabled: boolean;
+  speechEnabled: boolean;
+  speechLang: string | null;
+  speechAutoplay: SpeechAutoplay;
+  speechRate: number;
 }
 
 export interface LibraryDeck {
@@ -41,7 +56,7 @@ export interface AdminUser {
   createdAt: string;
 }
 
-export interface DeckWithCounts {
+export interface DeckWithCounts extends DeckSpeech {
   id: string;
   title: string;
   source_filename: string | null;
@@ -64,6 +79,16 @@ export interface Card {
   content: { front: string; back: string };
   category: string | null;
   position: number;
+}
+
+export interface DeckSettings extends DeckSpeech {
+  id: string;
+  title: string;
+  source_filename: string | null;
+  created_at: string;
+  updated_at: string;
+  is_public: boolean;
+  is_ordered: boolean;
 }
 
 export interface DeckDetail {

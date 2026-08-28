@@ -121,7 +121,26 @@
     "deleteConfirmLabel": "Tape DELETE pour confirmer",
     "deleteConfirmMismatch": "Tape DELETE dans le champ de confirmation pour continuer.",
     "deleteConfirmButton": "Supprimer mon compte",
-    "deleteError": "Impossible de supprimer le compte. Vérifie ton mot de passe et réessaie."
+    "deleteError": "Impossible de supprimer le compte. Vérifie ton mot de passe et réessaie.",
+    "speech": {
+      "title": "Cartes lues à voix haute",
+      "hint": "Faites lire vos cartes avec les voix de votre appareil. Rien n'est envoyé à un serveur. Chaque paquet peut remplacer ces réglages — utile pour les paquets de langues, où chaque côté a besoin de sa propre voix.",
+      "enable": "Lire mes cartes à voix haute",
+      "voice": "Voix",
+      "voiceDefault": "Suivre la langue de l'application",
+      "autoplay": "Lecture automatique",
+      "autoplayMode": {
+        "off": "Jamais — bouton uniquement",
+        "front": "La question",
+        "back": "La réponse",
+        "both": "Les deux côtés"
+      },
+      "rate": "Vitesse ({{rate}}×)",
+      "missingVoice": "Aucune voix {{lang}} n'est installée sur cet appareil ; ce côté restera muet ici.",
+      "noVoices": "Cet appareil ne signale aucune voix de synthèse.",
+      "unsupported": "Ce navigateur n'a pas de moteur de synthèse vocale.",
+      "saveError": "Impossible d'enregistrer vos réglages de lecture."
+    }
   },
   "theme": {
     "toLight": "Passer au mode clair",
@@ -191,7 +210,25 @@
     "delete": "Supprimer",
     "togglePublicError": "Impossible de mettre à jour le partage. Réessaie.",
     "verifyTitle": "Vérifiez votre e-mail pour commencer",
-    "verifyBody": "Nous avons envoyé un lien à {{email}}. Confirmez-le et vos paquets apparaîtront ici — en attendant, <0>lisez le guide de démarrage</0>."
+    "verifyBody": "Nous avons envoyé un lien à {{email}}. Confirmez-le et vos paquets apparaîtront ici — en attendant, <0>lisez le guide de démarrage</0>.",
+    "speech": {
+      "open": "Voix",
+      "openTitle": "Réglages de lecture de ce paquet",
+      "title": "Lecture — {{title}}",
+      "hint": "Donnez à chaque côté sa propre voix. Un paquet allemand-anglais doit lire la question en allemand et la réponse en anglais.",
+      "enabled": "Lire ce paquet à voix haute",
+      "enabledInherit": "Utiliser mon réglage global",
+      "enabledOn": "Toujours",
+      "enabledOff": "Jamais (couper ce paquet)",
+      "inherit": "Utiliser mon réglage global",
+      "frontLang": "Voix de la question",
+      "backLang": "Voix de la réponse",
+      "rateInherit": "Utiliser ma vitesse globale",
+      "loading": "Chargement…",
+      "saving": "Enregistrement…",
+      "loadError": "Impossible de charger les réglages de lecture de ce paquet.",
+      "saveError": "Impossible d'enregistrer les réglages de lecture de ce paquet."
+    }
   },
   "createDeck": {
     "title": "Nouveau paquet",
@@ -223,7 +260,12 @@
     "complete": "Session terminée",
     "nothingDue": "Rien à réviser pour l'instant — bravo de rester à jour !",
     "reviewed_one": "Tu as révisé {{count}} carte.",
-    "reviewed_other": "Tu as révisé {{count}} cartes."
+    "reviewed_other": "Tu as révisé {{count}} cartes.",
+    "speech": {
+      "speak": "Lire ce côté ({{lang}})",
+      "mute": "Couper le son",
+      "unmute": "Activer le son"
+    }
   },
   "library": {
     "title": "Bibliothèque",

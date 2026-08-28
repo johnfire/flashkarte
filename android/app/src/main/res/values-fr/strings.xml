@@ -60,4 +60,34 @@
     <string name="decks_empty_hint">Nouveau ici ? Ouvre l\'Aide pour apprendre les bases.</string>
     <string name="study_rating_hint">Tu ne sais pas à quoi servent ces boutons ? Découvre comment fonctionne la répétition espacée dans l\'Aide.</string>
     <string name="settings_help">Aide</string>
+
+    <!-- Spoken cards (Spec 09) -->
+    <string name="study_speak">Lire</string>
+    <string name="study_mute">Couper</string>
+    <string name="study_unmute">Activer</string>
+    <string name="speech_title">Cartes lues à voix haute</string>
+    <string name="speech_hint">Faites lire vos cartes avec les voix de cet appareil. Rien n\'est envoyé à un serveur. Chaque paquet peut remplacer ces réglages.</string>
+    <string name="speech_enable">Lire mes cartes à voix haute</string>
+    <string name="speech_voice">Voix</string>
+    <string name="speech_voice_default">Laisser vide pour suivre la langue de l\'application</string>
+    <string name="speech_autoplay">Lecture automatique</string>
+    <string name="speech_autoplay_off">Jamais — bouton uniquement</string>
+    <string name="speech_autoplay_front">La question</string>
+    <string name="speech_autoplay_back">La réponse</string>
+    <string name="speech_autoplay_both">Les deux côtés</string>
+    <string name="speech_rate">Vitesse</string>
+    <string name="speech_save_error">Impossible d\'enregistrer vos réglages de lecture.</string>
+    <string name="speech_no_voice">Aucune voix pour cette langue n\'est installée sur cet appareil ; elle restera muette ici.</string>
+    <string name="deck_speech">Voix</string>
+    <string name="deck_speech_title">Réglages de lecture</string>
+    <string name="deck_speech_hint">Donnez à chaque côté sa propre voix. Un paquet allemand-anglais doit lire la question en allemand et la réponse en anglais.</string>
+    <string name="deck_speech_enabled">Lire ce paquet à voix haute</string>
+    <string name="deck_speech_inherit">Utiliser mon réglage global</string>
+    <string name="deck_speech_on">Toujours</string>
+    <string name="deck_speech_off">Jamais (couper ce paquet)</string>
+    <string name="deck_speech_front">Voix de la question</string>
+    <string name="deck_speech_back">Voix de la réponse</string>
+    <string name="deck_speech_save_error">Impossible d\'enregistrer les réglages de lecture de ce paquet.</string>
+    <string name="deck_speech_rate_inherit">Utiliser ma vitesse globale</string>
+    <string name="speech_no_voice_list">Cet appareil n\'a pas encore signalé ses voix — saisis un code BCP-47 comme de-DE.</string>
 </resources>
