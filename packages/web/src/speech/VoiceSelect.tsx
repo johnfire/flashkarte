@@ -48,12 +48,12 @@ export function VoiceSelect({
         ))}
       </select>
       {missing && (
-        <span className="mt-1 block text-xs text-amber-600 dark:text-amber-400">
+        <span className="mt-1 block text-xs text-amber-700 dark:text-amber-400">
           {t("settings.speech.missingVoice", { lang: value })}
         </span>
       )}
       {loaded && supported && languages.length === 0 && (
-        <span className="mt-1 block text-xs text-amber-600 dark:text-amber-400">
+        <span className="mt-1 block text-xs text-amber-700 dark:text-amber-400">
           {t("settings.speech.noVoices")}
         </span>
       )}
