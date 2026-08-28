@@ -1,7 +1,9 @@
 package com.flashmd.ui.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
@@ -14,12 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.flashmd.R
 import com.flashmd.ui.screens.createdeck.CreateDeckScreen
 import com.flashmd.ui.screens.decklist.DeckListScreen
 import com.flashmd.ui.screens.help.BranchingHelpScreen
@@ -33,39 +37,53 @@ import com.flashmd.ui.screens.stats.StatsScreen
 import com.flashmd.ui.screens.study.StudyScreen
 import com.flashmd.ui.screens.summary.SessionSummaryScreen
 
-private data class Tab(val route: String, val label: String, val icon: ImageVector)
-
-private val tabs = listOf(
-    Tab("decks", "Decks", Icons.Filled.Home),
-    Tab("library", "Library", Icons.Filled.Search),
-    Tab("settings", "Settings", Icons.Filled.Settings),
+// `isTab` false marks a one-off action rather than a destination: it pushes a
+// screen on top of the current tab instead of switching tabs, and never shows
+// as selected.
+private data class BarItem(
+    val route: String,
+    @StringRes val label: Int,
+    val icon: ImageVector,
+    val isTab: Boolean = true,
 )
+
+private val barItems = listOf(
+    BarItem("decks", R.string.nav_decks, Icons.Filled.Home),
+    BarItem("decks/new", R.string.nav_new, Icons.Filled.Add, isTab = false),
+    BarItem("library", R.string.nav_library, Icons.Filled.Search),
+    BarItem("settings", R.string.nav_settings, Icons.Filled.Settings),
+)
+
+private val tabRoutes = barItems.filter { it.isTab }.map { it.route }
 
 @Composable
 fun NavGraph(onLogout: () -> Unit = {}) {
     val navController = rememberNavController()
     val backStack by navController.currentBackStackEntryAsState()
     val currentRoute = backStack?.destination?.route
-    val showBar = currentRoute in tabs.map { it.route }
+    val showBar = currentRoute in tabRoutes
 
     Scaffold(
         bottomBar = {
             if (showBar) {
                 NavigationBar {
-                    tabs.forEach { tab ->
+                    barItems.forEach { item ->
+                        val label = stringResource(item.label)
                         NavigationBarItem(
-                            selected = currentRoute == tab.route,
+                            selected = item.isTab && currentRoute == item.route,
                             onClick = {
-                                if (currentRoute != tab.route) {
-                                    navController.navigate(tab.route) {
+                                if (!item.isTab) {
+                                    navController.navigate(item.route)
+                                } else if (currentRoute != item.route) {
+                                    navController.navigate(item.route) {
                                         popUpTo("decks") { saveState = true }
                                         launchSingleTop = true
                                         restoreState = true
                                     }
                                 }
                             },
-                            icon = { Icon(tab.icon, contentDescription = tab.label) },
-                            label = { Text(tab.label) },
+                            icon = { Icon(item.icon, contentDescription = label) },
+                            label = { Text(label) },
                         )
                     }
                 }
@@ -82,7 +100,6 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                     onStudyDeck = { deckId -> navController.navigate("study/$deckId") },
                     onPlayDeck = { deckId -> navController.navigate("play/$deckId") },
                     onStatsDeck = { deckId -> navController.navigate("stats/$deckId") },
-                    onCreateDeck = { navController.navigate("decks/new") },
                     onHelp = { navController.navigate("help") },
                 )
             }

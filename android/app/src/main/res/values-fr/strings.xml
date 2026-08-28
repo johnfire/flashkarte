@@ -16,7 +16,7 @@
 
     <string name="help_writing_decks_title">Écrire des paquets</string>
     <string name="help_writing_ways_heading">Trois façons de créer un paquet</string>
-    <string name="help_writing_ways_app">Touche le + sur Paquets pour créer ou importer un paquet au format ci-dessous.</string>
+    <string name="help_writing_ways_app">Touche Nouveau dans la barre du bas pour créer ou importer un paquet au format ci-dessous.</string>
     <string name="help_writing_ways_web">Sur le web, utilise l\'éditeur de paquets avec le même format Markdown.</string>
     <string name="help_writing_ways_ai">Laisse un assistant IA créer un paquet pour toi — voir « Créer des paquets avec l\'IA » ci-dessous.</string>
     <string name="help_writing_format_heading">Le format</string>
@@ -55,6 +55,12 @@
     <string name="help_sharing_public_body">Publie l\'un de tes paquets depuis son menu pour obtenir un lien partageable et le faire figurer dans la Bibliothèque pour que d\'autres le trouvent. Tu peux annuler la publication à tout moment.</string>
     <string name="help_sharing_library_heading">Bibliothèque</string>
     <string name="help_sharing_library_body">Recherche des paquets publics partagés par d\'autres utilisateurs de flashkarte et clones-en n\'importe lequel directement dans ton compte pour commencer à réviser immédiatement.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_decks">Paquets</string>
+    <string name="nav_new">Nouveau</string>
+    <string name="nav_library">Bibliothèque</string>
+    <string name="nav_settings">Réglages</string>
 
     <!-- Inline hints -->
     <string name="decks_empty_hint">Nouveau ici ? Ouvre l\'Aide pour apprendre les bases.</string>

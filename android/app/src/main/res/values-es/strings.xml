@@ -16,7 +16,7 @@
 
     <string name="help_writing_decks_title">Escribir mazos</string>
     <string name="help_writing_ways_heading">Tres formas de crear un mazo</string>
-    <string name="help_writing_ways_app">Toca el + en Mazos para crear o importar un mazo con el formato de abajo.</string>
+    <string name="help_writing_ways_app">Toca Nuevo en la barra inferior para crear o importar un mazo con el formato de abajo.</string>
     <string name="help_writing_ways_web">En la web, usa el editor de mazos con el mismo formato Markdown.</string>
     <string name="help_writing_ways_ai">Deja que un asistente de IA cree un mazo por ti — consulta «Crear mazos con IA» más abajo.</string>
     <string name="help_writing_format_heading">El formato</string>
@@ -55,6 +55,12 @@
     <string name="help_sharing_public_body">Publica uno de tus mazos desde su menú para obtener un enlace que puedas compartir y que aparezca en la Biblioteca para que otros lo encuentren. Puedes despublicarlo en cualquier momento.</string>
     <string name="help_sharing_library_heading">Biblioteca</string>
     <string name="help_sharing_library_body">Busca mazos públicos compartidos por otros usuarios de flashkarte y clona cualquiera de ellos directamente en tu cuenta para empezar a estudiar de inmediato.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_decks">Mazos</string>
+    <string name="nav_new">Nuevo</string>
+    <string name="nav_library">Biblioteca</string>
+    <string name="nav_settings">Ajustes</string>
 
     <!-- Inline hints -->
     <string name="decks_empty_hint">¿Eres nuevo aquí? Abre la Ayuda para aprender lo básico.</string>

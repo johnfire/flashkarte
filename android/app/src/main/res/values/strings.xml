@@ -16,7 +16,7 @@
 
     <string name="help_writing_decks_title">Writing decks</string>
     <string name="help_writing_ways_heading">Three ways to create a deck</string>
-    <string name="help_writing_ways_app">Tap the + button on Decks to create or import a deck using the format below.</string>
+    <string name="help_writing_ways_app">Tap New in the bottom bar to create or import a deck using the format below.</string>
     <string name="help_writing_ways_web">On the web, use the deck editor with the same Markdown format.</string>
     <string name="help_writing_ways_ai">Let an AI assistant build a deck for you — see Creating decks with AI below.</string>
     <string name="help_writing_format_heading">The format</string>
@@ -55,6 +55,12 @@
     <string name="help_sharing_public_body">Publish one of your decks from its menu to get a shareable link and have it listed in the Library for others to find. You can unpublish it again at any time.</string>
     <string name="help_sharing_library_heading">Library</string>
     <string name="help_sharing_library_body">Search public decks shared by other flashkarte users and clone any of them straight into your account to start studying immediately.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_decks">Decks</string>
+    <string name="nav_new">New</string>
+    <string name="nav_library">Library</string>
+    <string name="nav_settings">Settings</string>
 
     <!-- Inline hints -->
     <string name="decks_empty_hint">New here? Open Help to learn the basics.</string>

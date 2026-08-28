@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -25,7 +24,6 @@ fun DeckListScreen(
     onStudyDeck: (String) -> Unit,
     onPlayDeck: (String) -> Unit,
     onStatsDeck: (String) -> Unit,
-    onCreateDeck: () -> Unit,
     onHelp: () -> Unit,
     viewModel: DeckListViewModel = hiltViewModel(),
 ) {
@@ -45,11 +43,6 @@ fun DeckListScreen(
                     }
                 },
             )
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = onCreateDeck) {
-                Icon(Icons.Default.Add, contentDescription = "New deck")
-            }
         },
     ) { padding ->
         if (state.decks.isEmpty() && state.isLoading) {
@@ -76,7 +69,7 @@ fun DeckListScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
             ) {
                 Text(
-                    "No decks yet.\nTap + to create or import one.",
+                    "No decks yet.\nTap New below to create or import one.",
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center,

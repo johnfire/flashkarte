@@ -16,7 +16,7 @@
 
     <string name="help_writing_decks_title">Stapel schreiben</string>
     <string name="help_writing_ways_heading">Drei Wege, einen Stapel zu erstellen</string>
-    <string name="help_writing_ways_app">Tippe bei Stapel auf das +, um einen Stapel im untenstehenden Format zu erstellen oder zu importieren.</string>
+    <string name="help_writing_ways_app">Tippe unten in der Navigationsleiste auf Neu, um einen Stapel im untenstehenden Format zu erstellen oder zu importieren.</string>
     <string name="help_writing_ways_web">Nutze im Web den Stapel-Editor mit demselben Markdown-Format.</string>
     <string name="help_writing_ways_ai">Lass einen KI-Assistenten einen Stapel für dich erstellen — siehe unten „Stapel mit KI erstellen“.</string>
     <string name="help_writing_format_heading">Das Format</string>
@@ -55,6 +55,12 @@
     <string name="help_sharing_public_body">Veröffentliche einen deiner Stapel über sein Menü, um einen teilbaren Link zu erhalten und ihn in der Bibliothek auffindbar zu machen. Du kannst die Veröffentlichung jederzeit wieder aufheben.</string>
     <string name="help_sharing_library_heading">Bibliothek</string>
     <string name="help_sharing_library_body">Durchsuche öffentliche Stapel anderer flashkarte-Nutzer und kopiere jeden davon direkt in dein Konto, um sofort mit dem Lernen zu beginnen.</string>
+
+    <!-- Bottom navigation -->
+    <string name="nav_decks">Stapel</string>
+    <string name="nav_new">Neu</string>
+    <string name="nav_library">Bibliothek</string>
+    <string name="nav_settings">Einstellungen</string>
 
     <!-- Inline hints -->
     <string name="decks_empty_hint">Neu hier? Öffne die Hilfe, um die Grundlagen zu lernen.</string>
