@@ -22,7 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "multer": "^2.2.0",
-    "nodemailer": "^9.0.1",
+    "nodemailer": "^9.0.5",
     "otplib": "^13.4.1",
     "pg": "^8.11.5",
     "qrcode": "^1.5.4",
