@@ -228,7 +228,9 @@
       "saving": "Guardando…",
       "loadError": "No se han podido cargar los ajustes de lectura del mazo.",
       "saveError": "No se han podido guardar los ajustes de lectura del mazo."
-    }
+    },
+    "branching": "Ramificado",
+    "branchingHint": "Es un mazo de árbol de decisiones. Juégalo en la aplicación de Android: la versión web solo estudia tarjetas de anverso y reverso."
   },
   "createDeck": {
     "title": "Nuevo mazo",
@@ -265,7 +267,9 @@
       "speak": "Leer este lado ({{lang}})",
       "mute": "Silenciar",
       "unmute": "Activar sonido"
-    }
+    },
+    "branchingTitle": "No se puede estudiar en la web",
+    "branchingBody": "Este es un mazo ramificado: sus tarjetas son pasos de un árbol de decisiones, no pares de pregunta y respuesta. Juégalo en la aplicación de Android."
   },
   "library": {
     "title": "Biblioteca",

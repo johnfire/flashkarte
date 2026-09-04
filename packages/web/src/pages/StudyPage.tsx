@@ -10,6 +10,21 @@ import {
 import { StudyCard } from "../api/types";
 import { useCardSpeech } from "../speech/useCardSpeech";
 import { SpeakButton } from "../speech/SpeakButton";
+import { StudyNotice } from "./StudyNotice";
+
+/**
+ * Web studies cards by flipping front → back. A branch card (a decision-tree
+ * node) has neither: its content is `{ label, prompt, options }`. The study
+ * queue returns raw content with no `type` field, so guard on the shape.
+ *
+ * Filtering here is what makes `StudyCard["content"]`'s front/back true for
+ * every card this page renders — without it a branch deck reached by direct URL
+ * shows blank cards whose rating buttons write real SM-2 events.
+ */
+function isFlippable(card: StudyCard): boolean {
+  const front = (card.content as { front?: unknown }).front;
+  return typeof front === "string" && front.trim() !== "";
+}
 
 const RATINGS = [
   { value: 1, labelKey: "again", className: "bg-red-600" },
@@ -26,12 +41,19 @@ export function StudyPage() {
   const [revealed, setRevealed] = useState(false);
   const [reviewed, setReviewed] = useState(0);
   const [error, setError] = useState<string | null>(null);
+  const [unstudiable, setUnstudiable] = useState(false);
 
   const load = useCallback(async () => {
     if (!id) return;
     setError(null);
     try {
-      setCards(await api.study.batch(id));
+      const batch = await api.study.batch(id);
+      const flippable = batch.filter(isFlippable);
+      // A queue that held cards but nothing flippable is a branching deck. Say
+      // so — falling through to the "study complete" screen would be a lie, the
+      // same reasoning as the verification gate below.
+      setUnstudiable(batch.length > 0 && flippable.length === 0);
+      setCards(flippable);
     } catch (err) {
       // The verification gate is an expected refusal, not a failure — surface
       // it to the user but keep it out of the client-error log. Unlike the deck
@@ -75,14 +97,7 @@ export function StudyPage() {
   }
 
   if (error) {
-    return (
-      <div className="mx-auto max-w-xl p-8 text-center">
-        <p className="mb-4 text-red-600">{error}</p>
-        <Link to="/" className="text-indigo-600">
-          {t("study.backToDecks")}
-        </Link>
-      </div>
-    );
+    return <StudyNotice body={error} tone="error" />;
   }
 
   if (cards === null) {
@@ -93,23 +108,26 @@ export function StudyPage() {
     );
   }
 
+  if (unstudiable) {
+    return (
+      <StudyNotice
+        title={t("study.branchingTitle")}
+        body={t("study.branchingBody")}
+      />
+    );
+  }
+
   const done = idx >= cards.length;
   if (done) {
     return (
-      <div className="mx-auto max-w-xl p-8 text-center">
-        <h1 className="mb-2 text-2xl font-bold">{t("study.complete")}</h1>
-        <p className="mb-6 text-gray-600 dark:text-gray-300">
-          {reviewed === 0
+      <StudyNotice
+        title={t("study.complete")}
+        body={
+          reviewed === 0
             ? t("study.nothingDue")
-            : t("study.reviewed", { count: reviewed })}
-        </p>
-        <Link
-          to="/"
-          className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"
-        >
-          {t("study.backToDecks")}
-        </Link>
-      </div>
+            : t("study.reviewed", { count: reviewed })
+        }
+      />
     );
   }
 

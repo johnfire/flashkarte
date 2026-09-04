@@ -228,7 +228,9 @@
       "saving": "Wird gespeichert…",
       "loadError": "Spracheinstellungen des Stapels konnten nicht geladen werden.",
       "saveError": "Spracheinstellungen des Stapels konnten nicht gespeichert werden."
-    }
+    },
+    "branching": "Verzweigt",
+    "branchingHint": "Dies ist ein Entscheidungsbaum-Stapel. Spiele ihn in der Android-App — die Web-Version lernt nur Karteikarten."
   },
   "createDeck": {
     "title": "Neuer Stapel",
@@ -265,7 +267,9 @@
       "speak": "Diese Seite vorlesen ({{lang}})",
       "mute": "Stumm",
       "unmute": "Ton an"
-    }
+    },
+    "branchingTitle": "Im Web nicht lernbar",
+    "branchingBody": "Dies ist ein verzweigter Stapel: Seine Karten sind Schritte in einem Entscheidungsbaum, keine Frage-Antwort-Paare. Spiele ihn in der Android-App."
   },
   "library": {
     "title": "Bibliothek",

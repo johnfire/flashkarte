@@ -228,7 +228,9 @@
       "saving": "Enregistrement…",
       "loadError": "Impossible de charger les réglages de lecture de ce paquet.",
       "saveError": "Impossible d'enregistrer les réglages de lecture de ce paquet."
-    }
+    },
+    "branching": "Ramifié",
+    "branchingHint": "Ce paquet est un arbre de décision. Jouez-le dans l'application Android : la version web n'étudie que les cartes recto-verso."
   },
   "createDeck": {
     "title": "Nouveau paquet",
@@ -265,7 +267,9 @@
       "speak": "Lire ce côté ({{lang}})",
       "mute": "Couper le son",
       "unmute": "Activer le son"
-    }
+    },
+    "branchingTitle": "Non étudiable sur le web",
+    "branchingBody": "Ce paquet est ramifié : ses cartes sont des étapes d'un arbre de décision, pas des paires question-réponse. Jouez-le dans l'application Android."
   },
   "library": {
     "title": "Bibliothèque",

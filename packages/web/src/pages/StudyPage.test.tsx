@@ -116,6 +116,36 @@ describe("StudyPage", () => {
     );
   });
 
+  // Reached by direct URL: the deck list hides Study for branching decks, but a
+  // bookmark or a pasted link still lands here. Branch cards carry
+  // { label, prompt, options } and no front, and the study queue has no type
+  // field to filter on, so the page guards on shape.
+  test("a branching deck says so instead of rendering blank cards", async () => {
+    mockApi.study.batch.mockResolvedValue([
+      {
+        id: "b1",
+        content: {
+          label: "start",
+          prompt: "You reach a fork. Which way?",
+          options: [{ text: "Go left", goto: "cave" }],
+        },
+        category: null,
+      },
+    ]);
+
+    renderStudy();
+
+    expect(
+      await screen.findByText(/Not studiable on the web/),
+    ).toBeInTheDocument();
+    // Never the "complete" screen, which would claim the deck was reviewed.
+    expect(screen.queryByText(/Session complete/)).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Good" }),
+    ).not.toBeInTheDocument();
+    expect(mockApi.study.review).not.toHaveBeenCalled();
+  });
+
   test("empty batch shows an encouraging summary", async () => {
     mockApi.study.batch.mockResolvedValue([]);
     renderStudy();

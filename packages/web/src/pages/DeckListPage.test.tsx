@@ -57,6 +57,7 @@ const deck: DeckWithCounts = {
   speech_back_lang: null,
   speech_autoplay: null,
   speech_rate: null,
+  is_branching: false,
 };
 
 function renderPage() {
@@ -79,6 +80,23 @@ describe("DeckListPage", () => {
 
     expect(screen.getByText("Loading…")).toBeInTheDocument();
     expect(await screen.findByText("German nouns")).toBeInTheDocument();
+  });
+
+  // A branch card has { label, prompt, options } and no front/back, so a Study
+  // link here would open blank cards whose ratings write real SM-2 events.
+  test("offers Study for a flip deck but not for a branching deck", async () => {
+    mockedDecksApi.list.mockResolvedValue([
+      deck,
+      { ...deck, id: "deck-2", title: "Forest Path", is_branching: true },
+    ]);
+    renderPage();
+
+    expect(await screen.findByText("Forest Path")).toBeInTheDocument();
+
+    const studyLinks = screen.getAllByRole("link", { name: "Study" });
+    expect(studyLinks).toHaveLength(1);
+    expect(studyLinks[0]).toHaveAttribute("href", "/decks/deck-1/study");
+    expect(screen.getByText("Branching")).toBeInTheDocument();
   });
 
   test("renders API load failures", async () => {

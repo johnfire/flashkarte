@@ -54,12 +54,25 @@ export function DeckListItem({
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <Link
-          to={`/decks/${d.id}/study`}
-          className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-medium text-white"
-        >
-          {t("decks.study")}
-        </Link>
+        {d.is_branching ? (
+          // Branching decks are played as a decision tree, which only the
+          // Android app implements. Their branch cards have no front/back, so
+          // offering Study here would render blank cards and write SM-2 review
+          // events against scenario nodes.
+          <span
+            className="rounded-lg bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300"
+            title={t("decks.branchingHint")}
+          >
+            {t("decks.branching")}
+          </span>
+        ) : (
+          <Link
+            to={`/decks/${d.id}/study`}
+            className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-medium text-white"
+          >
+            {t("decks.study")}
+          </Link>
+        )}
         <button
           onClick={() => onTogglePublic(d.id, !d.is_public)}
           className="text-sm text-indigo-600"

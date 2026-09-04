@@ -228,7 +228,9 @@
       "saving": "Saving…",
       "loadError": "Could not load this deck's speech settings.",
       "saveError": "Could not save this deck's speech settings."
-    }
+    },
+    "branching": "Branching",
+    "branchingHint": "This is a decision-tree deck. Play it in the Android app — the web version studies flip cards only."
   },
   "createDeck": {
     "title": "New Deck",
@@ -265,7 +267,9 @@
       "speak": "Speak this side ({{lang}})",
       "mute": "Mute",
       "unmute": "Unmute"
-    }
+    },
+    "branchingTitle": "Not studiable on the web",
+    "branchingBody": "This is a branching deck: its cards are decision-tree steps rather than question-and-answer pairs. Play it in the Android app."
   },
   "library": {
     "title": "Library",

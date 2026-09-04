@@ -71,6 +71,11 @@ export interface DeckWithCounts extends DeckSpeech {
   hard_count: number;
   good_count: number;
   easy_count: number;
+  // True when the deck contains at least one `branch` card, i.e. it is a
+  // decision-tree deck rather than a spaced-repetition deck. Branch cards carry
+  // `{ label, prompt, options }` instead of `{ front, back }`, so web — which is
+  // flip-only — cannot study them and must not offer to.
+  is_branching: boolean;
 }
 
 export interface Card {
