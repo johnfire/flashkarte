@@ -110,6 +110,9 @@ describe("study persistence", () => {
       [USER_ID, FIRST_CARD_ID],
     );
 
-    expect(progress.rows[0]).toEqual({ repetitions: 2, interval_days: 6 });
+    // `repetitions: 2` is what proves both reviews applied — under fixed cadences
+    // Good is always 2 days, so the interval alone can no longer tell one applied
+    // review from two.
+    expect(progress.rows[0]).toEqual({ repetitions: 2, interval_days: 2 });
   });
 });
