@@ -147,10 +147,17 @@ class LocalStudyStore @Inject constructor(
             },
             learned = progressByCardId.values.count { progress -> progress.repetitions > 0 },
             viewed = progressByCardId.size,
-            again = progressByCardId.values.count { progress -> progress.last_rating == 1L },
-            hard = progressByCardId.values.count { progress -> progress.last_rating == 2L },
-            good = progressByCardId.values.count { progress -> progress.last_rating == 3L },
-            easy = progressByCardId.values.count { progress -> progress.last_rating == 4L },
+            // The rating scale is 1-2 Again, 3 Hard, 4 Good, 5 Easy - not one
+            // bucket per index. These must stay in step with the server's
+            // deckStats query, or the counters visibly shift the moment a sync
+            // replaces these local numbers with the server's.
+            again = progressByCardId.values.count { progress ->
+                val rating = progress.last_rating
+                rating != null && rating <= 2L
+            },
+            hard = progressByCardId.values.count { progress -> progress.last_rating == 3L },
+            good = progressByCardId.values.count { progress -> progress.last_rating == 4L },
+            easy = progressByCardId.values.count { progress -> progress.last_rating == 5L },
         )
     }
 

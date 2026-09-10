@@ -40,6 +40,42 @@ class LocalStudyStoreTest {
         assertTrue(p.due_at!! > "2026-06-05T09:00:00Z")
     }
 
+    // Regression: the counters used to be one bucket per index (1/2/3/4), which
+    // silently shifted every card down a level — Hard counted as Again, Easy not
+    // counted at all — until a sync replaced them with the server's numbers.
+    // The scale is 1-2 Again, 3 Hard, 4 Good, 5 Easy.
+    @Test
+    fun cachedStatsBucketEachRatingLikeTheServer() {
+        store.cacheDeckCards(
+            "d1",
+            listOf(
+                Card("again1", "d1", "f", "b"),
+                Card("again2", "d1", "f", "b"),
+                Card("hard", "d1", "f", "b"),
+                Card("good", "d1", "f", "b"),
+                Card("easy", "d1", "f", "b"),
+            ),
+        )
+
+        val reviewedAt = "2026-06-05T09:00:00Z"
+        store.applyRatingLocally("again1", 1, reviewedAt)
+        store.applyRatingLocally("again2", 2, reviewedAt)
+        store.applyRatingLocally("hard", 3, reviewedAt)
+        store.applyRatingLocally("good", 4, reviewedAt)
+        store.applyRatingLocally("easy", 5, reviewedAt)
+
+        val stats = store.cachedStudyStats("d1")
+        assertEquals(2, stats.again)
+        assertEquals(1, stats.hard)
+        assertEquals(1, stats.good)
+        assertEquals(1, stats.easy)
+
+        // The help page promises the four buckets add up to Viewed; that only
+        // holds while every rating lands in exactly one of them.
+        assertEquals(5, stats.viewed)
+        assertEquals(stats.viewed, stats.again + stats.hard + stats.good + stats.easy)
+    }
+
     // Spec 01 — diagnostic options + label survive the local cache round-trip,
     // and remediation targets resolve by label (offline).
     @Test
@@ -88,9 +124,12 @@ class LocalStudyStoreTest {
         assertEquals(1, stats.due)
         assertEquals(2, stats.learned)
         assertEquals(4, stats.viewed)
-        assertEquals(1, stats.again)
+        // Ratings 1 and 2 are both Again, and nothing here was rated 5, so no
+        // card is Easy. This test previously expected one card per bucket,
+        // which is what kept the off-by-one in the counters alive.
+        assertEquals(2, stats.again)
         assertEquals(1, stats.hard)
         assertEquals(1, stats.good)
-        assertEquals(1, stats.easy)
+        assertEquals(0, stats.easy)
     }
 }
