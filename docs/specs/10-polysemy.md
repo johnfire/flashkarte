@@ -151,11 +151,16 @@ queue parity. Web: chain renders hint prompt, split renders context.
 
 ## Knock-on (do not skip)
 
-- **Spec 06** gates depth tiers on `interval_days >= 7` — unreachable under the current
-  scheduler, so tiers would never unlock. Its gating rule and acceptance criterion 3 must be
-  rewritten to `STABLE_REPS`. Whichever spec ships first defines the constant.
-- **Spec 04 (FSRS)** conflicts with shipped code: adopting it would undo the fixed cadences.
-  Amend or retire it — decision pending, not addressed here.
+Both were **resolved on 2026-09-10**; each carries an amendment note.
+
+- **Spec 06** gated depth tiers on `interval_days >= 7`, unreachable under the current
+  scheduler, so tiers would never have unlocked. Now gates on `STABLE_REPS`, which this
+  spec shipped in `packages/shared/src/study/senses.ts`.
+- **Spec 04 (FSRS)** turned out to be less broken than first thought: it is **opt-in**, so
+  the abstraction wraps whatever ships today and adopting FSRS does not undo the fixed
+  cadences. It was reframed rather than retired. Two decisions were left open there — the
+  `'sm2'` scheduler identifier is now a misnomer, and FSRS would give opted-in users the
+  growth curves the fixed cadences deliberately removed.
 
 ## Non-goals
 

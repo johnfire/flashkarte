@@ -18,9 +18,10 @@ ship TS + Kotlin together with corpus cases — no exceptions.
 | 09  | [Spoken cards (TTS)](09-speech.md)             | ~4–5 d  | —                         | on-device TTS; two constituencies, one mechanism       |
 | 10  | [Polysemy](10-polysemy.md)                     | ~1 wk   | —                         | one headword, many senses; defines STABLE_REPS         |
 
-**Spec 04 conflicts with shipped code** (it would undo the fixed-cadence scheduler,
-`7833a91`) and **spec 06's `interval_days >= 7` gate is unreachable** under it — both
-await review; see `10-polysemy.md` §Knock-on.
+Specs 04 and 06 were **amended on 2026-09-10** for the fixed-cadence scheduler
+(`7833a91`): 06 now gates on `STABLE_REPS` (its day threshold had become unreachable), and
+04 is reframed as an opt-in alternative rather than a replacement for SM-2, which no longer
+ships. Each carries an amendment note explaining what changed and what is left to decide.
 
 01–03 and 09 are independent (parallelizable). 04 should run alone (touches the scheduling
 core). 08 goes last.

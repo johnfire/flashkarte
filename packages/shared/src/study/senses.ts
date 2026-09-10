@@ -9,7 +9,7 @@ import { CardSense } from "../markdown/parser";
  * threshold. `repetitions` resets on a lapse and is otherwise independent of both
  * the rating and the scheduler, so it survives future scheduling changes.
  *
- * Spec 06 (depth ladders) must gate on this too rather than its own STABLE_DAYS.
+ * Spec 06 (depth ladders) gates its tier unlocks on this same constant.
  */
 export const STABLE_REPS = 3;
 
