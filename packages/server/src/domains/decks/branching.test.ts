@@ -153,28 +153,3 @@ describe("validateBranching", () => {
     ).not.toThrow();
   });
 });
-
-describe("sense lines (Spec 10)", () => {
-  test("a card mixing sense lines with routed options is rejected by name", () => {
-    const conflicted: ParsedCard = {
-      ...basic("der Zug"),
-      senseConflict: true,
-      options: [{ text: "Right", goto: "correct" }],
-    };
-    expect(() => validateBranching([conflicted])).toThrow(/der Zug/);
-  });
-
-  test("ordinary sense cards pass validation untouched", () => {
-    const senseCard: ParsedCard = {
-      ...basic("der Zug"),
-      sense: {
-        context: "Der Zug fährt um 8 Uhr ab.",
-        hint: "Eisenbahn",
-        word: "der-zug",
-        index: 0,
-        count: 2,
-      },
-    };
-    expect(() => validateBranching([senseCard])).not.toThrow();
-  });
-});

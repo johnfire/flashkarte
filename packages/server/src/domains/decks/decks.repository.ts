@@ -77,6 +77,18 @@ export function createDeckWithCards(
   });
 }
 
+/** The `sense.word` keys already stored in a deck — see validateSenses. */
+export async function getSenseWords(userId: string, deckId: string) {
+  const rows = await query<{ word: string }>(
+    `SELECT DISTINCT c.content->'sense'->>'word' AS word
+     FROM cards c
+     WHERE c.deck_id = $1 AND c.user_id = $2
+       AND c.content->'sense'->>'word' IS NOT NULL`,
+    [deckId, userId],
+  );
+  return new Set(rows.map((r) => r.word));
+}
+
 /** Reconstruct a ParsedCard from a stored card row (inverse of cardContent). */
 export function rowToParsedCard(row: {
   type: string;
