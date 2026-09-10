@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, Link } from "react-router";
-import { Trans, useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import {
   api,
   ApiError,
@@ -11,6 +11,7 @@ import { StudyCard } from "../api/types";
 import { useCardSpeech } from "../speech/useCardSpeech";
 import { SpeakButton } from "../speech/SpeakButton";
 import { StudyNotice } from "./StudyNotice";
+import { StudyControls } from "./StudyControls";
 
 /**
  * Web studies cards by flipping front → back. A branch card (a decision-tree
@@ -26,12 +27,8 @@ function isFlippable(card: StudyCard): boolean {
   return typeof front === "string" && front.trim() !== "";
 }
 
-const RATINGS = [
-  { value: 1, labelKey: "again", className: "bg-red-600" },
-  { value: 3, labelKey: "hard", className: "bg-amber-600" },
-  { value: 4, labelKey: "good", className: "bg-green-600" },
-  { value: 5, labelKey: "easy", className: "bg-emerald-600" },
-];
+/** Ratings below this are lapses: the card comes back before the session ends. */
+const LAPSE_CEILING = 3;
 
 export function StudyPage() {
   const { t } = useTranslation();
@@ -39,7 +36,9 @@ export function StudyPage() {
   const [cards, setCards] = useState<StudyCard[] | null>(null);
   const [idx, setIdx] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [reviewed, setReviewed] = useState(0);
+  // Distinct cards, not reviews: a lapsed card is re-queued and rated again in
+  // the same session, and "reviewed 12 cards" must not count it twice.
+  const [reviewedIds, setReviewedIds] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [unstudiable, setUnstudiable] = useState(false);
 
@@ -91,8 +90,13 @@ export function StudyPage() {
       window.alert(t("study.saveReviewError"));
       return;
     }
-    setReviewed((n) => n + 1);
+    setReviewedIds((seen) => new Set(seen).add(card.id));
     setRevealed(false);
+    // A lapse goes to the back of the queue so it is drilled again now; the
+    // server has already scheduled it for tomorrow either way.
+    if (rating < LAPSE_CEILING) {
+      setCards((queue) => (queue ? [...queue, card] : queue));
+    }
     setIdx((i) => i + 1);
   }
 
@@ -123,9 +127,9 @@ export function StudyPage() {
       <StudyNotice
         title={t("study.complete")}
         body={
-          reviewed === 0
+          reviewedIds.size === 0
             ? t("study.nothingDue")
-            : t("study.reviewed", { count: reviewed })
+            : t("study.reviewed", { count: reviewedIds.size })
         }
       />
     );
@@ -188,43 +192,11 @@ export function StudyPage() {
         )}
       </div>
 
-      <div className="mt-6">
-        {!revealed ? (
-          <button
-            onClick={() => setRevealed(true)}
-            className="w-full rounded-lg bg-indigo-600 py-3 font-medium text-white"
-          >
-            {t("study.showAnswer")}
-          </button>
-        ) : (
-          <div className="grid grid-cols-4 gap-2">
-            {RATINGS.map((r) => (
-              <button
-                key={r.value}
-                onClick={() => grade(r.value)}
-                className={`rounded-lg ${r.className} py-3 text-sm font-medium text-white`}
-              >
-                {t(`study.${r.labelKey}`)}
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {revealed && (
-        <p className="mt-3 text-center text-xs text-gray-500 dark:text-gray-400">
-          <Trans
-            i18nKey="study.ratingHint"
-            components={[
-              <Link
-                key="0"
-                to="/help/studying#ratings"
-                className="text-indigo-600"
-              />,
-            ]}
-          />
-        </p>
-      )}
+      <StudyControls
+        revealed={revealed}
+        onReveal={() => setRevealed(true)}
+        onGrade={grade}
+      />
     </div>
   );
 }

@@ -66,7 +66,7 @@ def get_progress(conn: sqlite3.Connection, card_id: str) -> sqlite3.Row | None:
 
 
 def apply_rating(conn: sqlite3.Connection, card_id: str, rating: int) -> None:
-    """Run SM-2, persist result, update due_date."""
+    """Run the scheduler, persist result, update due_date."""
     row = get_progress(conn, card_id)
     if row is None:
         raise ValueError(f"No CardProgress for card {card_id}")
@@ -75,6 +75,9 @@ def apply_rating(conn: sqlite3.Connection, card_id: str, rating: int) -> None:
         easiness=row["easiness"],
         interval=row["interval"],
         repetitions=row["repetitions"],
+        # Without this the scheduler can never see an Easy streak, so an Easy
+        # card would reset to the entry interval on every review.
+        last_rating=row["last_rating"],
     )
     result = calculate(progress, rating)
 

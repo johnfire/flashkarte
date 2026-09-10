@@ -68,8 +68,11 @@ export function getProgressRow(
     repetitions: number;
     ease_factor: number;
     interval_days: number;
+    last_rating: number | null;
   }>(
-    `SELECT repetitions, ease_factor, interval_days
+    // last_rating is what tells the scheduler a card is staying on Easy; drop
+    // it and every Easy review restarts at the entry interval.
+    `SELECT repetitions, ease_factor, interval_days, last_rating
      FROM card_progress WHERE user_id = $1 AND card_id = $2`,
     [userId, cardId],
     client,

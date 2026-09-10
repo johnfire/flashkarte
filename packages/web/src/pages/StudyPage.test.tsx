@@ -116,6 +116,57 @@ describe("StudyPage", () => {
     );
   });
 
+  test("a lapsed card comes back later in the same session", async () => {
+    mockApi.study.batch.mockResolvedValue([
+      { id: "c1", content: { front: "Front?", back: "Back!" }, category: null },
+      { id: "c2", content: { front: "Second?", back: "Two!" }, category: null },
+    ]);
+    mockApi.study.review.mockResolvedValue({});
+
+    renderStudy();
+
+    // Fail the first card: it should be re-queued behind the second one.
+    await userEvent.click(
+      await screen.findByRole("button", { name: /Show answer/ }),
+    );
+    await userEvent.click(screen.getByRole("button", { name: "Again" }));
+    expect(mockApi.study.review).toHaveBeenCalledWith("c1", 1);
+
+    expect(await screen.findByText("Second?")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
+    await userEvent.click(screen.getByRole("button", { name: "Good" }));
+
+    // The failed card is drilled again before the session can end.
+    expect(await screen.findByText("Front?")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
+    await userEvent.click(screen.getByRole("button", { name: "Good" }));
+
+    await waitFor(() =>
+      expect(screen.getByText(/Session complete/)).toBeInTheDocument(),
+    );
+    // Two distinct cards, three reviews - the summary counts cards.
+    expect(screen.getByText(/2 cards/)).toBeInTheDocument();
+  });
+
+  test("Hard and Good do not re-queue the card", async () => {
+    mockApi.study.batch.mockResolvedValue([
+      { id: "c1", content: { front: "Front?", back: "Back!" }, category: null },
+    ]);
+    mockApi.study.review.mockResolvedValue({});
+
+    renderStudy();
+
+    await userEvent.click(
+      await screen.findByRole("button", { name: /Show answer/ }),
+    );
+    await userEvent.click(screen.getByRole("button", { name: "Hard" }));
+    expect(mockApi.study.review).toHaveBeenCalledWith("c1", 3);
+
+    await waitFor(() =>
+      expect(screen.getByText(/Session complete/)).toBeInTheDocument(),
+    );
+  });
+
   // Reached by direct URL: the deck list hides Study for branching decks, but a
   // bookmark or a pasted link still lands here. Branch cards carry
   // { label, prompt, options } and no front, and the study queue has no type

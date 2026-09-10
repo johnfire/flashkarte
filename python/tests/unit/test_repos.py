@@ -119,7 +119,7 @@ def test_apply_rating_updates_progress(conn, parsed_deck):
     conn.commit()
     prog = progress_repo.get_progress(conn, card_id)
     assert prog["repetitions"] == 1
-    assert prog["interval"] == 1
+    assert prog["interval"] == 2  # Good is always two days
     assert prog["last_rating"] == 4
 
 

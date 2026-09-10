@@ -30,10 +30,11 @@ class LocalStudyStoreTest {
         // new card is due
         assertEquals(1, store.dueCards("d1").size)
 
-        // rating 4 on a new card -> interval 1, reps 1; due date moves out, so no longer due "now"
+        // rating 4 (Good) on a new card -> interval 2, reps 1; due date moves out,
+        // so the card is no longer due "now"
         store.applyRatingLocally("c1", 4, "2026-06-05T09:00:00Z")
         val p = db.cardProgressQueries.selectProgress("c1").executeAsOne()
-        assertEquals(1L, p.interval_days)
+        assertEquals(2L, p.interval_days)
         assertEquals(1L, p.repetitions)
         assertEquals(4L, p.last_rating)
         assertTrue(p.due_at!! > "2026-06-05T09:00:00Z")

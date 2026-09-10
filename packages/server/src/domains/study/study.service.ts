@@ -83,6 +83,7 @@ interface ProgressState {
   easiness: number;
   interval: number;
   repetitions: number;
+  lastRating: number | null;
 }
 
 interface ProgressWrite {
@@ -96,11 +97,13 @@ interface ProgressWrite {
 function progressFromRow(
   row: Awaited<ReturnType<typeof repo.getProgressRow>>,
 ): ProgressState {
-  if (!row) return { easiness: 2.5, interval: 0, repetitions: 0 };
+  if (!row)
+    return { easiness: 2.5, interval: 0, repetitions: 0, lastRating: null };
   return {
     easiness: row.ease_factor,
     interval: row.interval_days,
     repetitions: row.repetitions,
+    lastRating: row.last_rating,
   };
 }
 

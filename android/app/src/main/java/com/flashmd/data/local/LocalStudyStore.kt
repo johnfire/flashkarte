@@ -161,6 +161,9 @@ class LocalStudyStore @Inject constructor(
             easiness = prev?.easiness ?: 2.5,
             interval = (prev?.interval_days ?: 0L).toInt(),
             repetitions = (prev?.repetitions ?: 0L).toInt(),
+            // Without this the scheduler can never see an Easy streak, so an
+            // Easy card would reset to the entry interval on every review.
+            lastRating = prev?.last_rating?.toInt(),
         )
         val next = Sm2Algorithm.calculate(current, rating)
         val dueIso = Instant.parse(reviewedAtIso)
