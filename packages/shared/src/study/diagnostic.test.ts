@@ -23,6 +23,8 @@ const plain: ParsedCard = {
   category: null,
   label: null,
   options: [],
+  sense: null,
+  senseConflict: false,
 };
 
 describe("resolveChoice (deterministic — TS/Kotlin parity)", () => {

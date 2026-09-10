@@ -2,7 +2,7 @@ jest.mock("./study.repository");
 jest.mock("../audit/audit.service", () => ({ recordRequired: jest.fn() }));
 import * as repo from "./study.repository";
 import { recordRequired } from "../audit/audit.service";
-import { sync } from "./study.service";
+import { sync, getStudyBatch } from "./study.service";
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
 const mockRecordRequired = recordRequired as jest.MockedFunction<
@@ -163,5 +163,114 @@ describe("sync", () => {
     expect(mockRepo.getOwnedCardIds).toHaveBeenCalledTimes(1);
     expect(mockRepo.getOwnedCardIds).toHaveBeenCalledWith("u1", ["c1", "c2"]);
     expect(mockRepo.cardBelongsToUser).not.toHaveBeenCalled();
+  });
+});
+
+describe("getStudyBatch — chained senses (Spec 10)", () => {
+  const senseCard = (
+    id: string,
+    index: number,
+    repetitions: number,
+    word = "der-zug",
+    count = 3,
+  ) => ({
+    id,
+    content: {
+      front: "der Zug",
+      back: `gloss-${index}`,
+      sense: { context: null, hint: null, word, index, count },
+    },
+    category: null,
+    position: index,
+    repetitions,
+  });
+
+  const plain = (id: string) => ({
+    id,
+    content: { front: id, back: "b" },
+    category: null,
+  });
+
+  test("a chained word brings all its senses, ordered by senseIndex", async () => {
+    // Only sense 1 is due, but the word has not graduated, so all three come.
+    mockRepo.getDueAndNewCards.mockResolvedValue([
+      senseCard("s1", 1, 0) as never,
+    ]);
+    mockRepo.getSenseCardsForWords.mockResolvedValue([
+      senseCard("s2", 2, 0),
+      senseCard("s0", 0, 1),
+      senseCard("s1", 1, 0),
+    ] as never);
+
+    const batch = await getStudyBatch("u1", "d1");
+    expect(batch.map((c) => c.id)).toEqual(["s0", "s1", "s2"]);
+  });
+
+  test("a graduated word brings only the sense that is actually due", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([
+      senseCard("s1", 1, 5) as never,
+    ]);
+    mockRepo.getSenseCardsForWords.mockResolvedValue([
+      senseCard("s0", 0, 4),
+      senseCard("s1", 1, 5),
+      senseCard("s2", 2, 3),
+    ] as never);
+
+    const batch = await getStudyBatch("u1", "d1");
+    expect(batch.map((c) => c.id)).toEqual(["s1"]);
+  });
+
+  test("a lapse on one sense re-chains the whole word", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([
+      senseCard("s0", 0, 0) as never,
+    ]);
+    mockRepo.getSenseCardsForWords.mockResolvedValue([
+      senseCard("s0", 0, 0), // just failed
+      senseCard("s1", 1, 9),
+      senseCard("s2", 2, 9),
+    ] as never);
+
+    const batch = await getStudyBatch("u1", "d1");
+    expect(batch.map((c) => c.id)).toEqual(["s0", "s1", "s2"]);
+  });
+
+  test("a word is expanded once even when several of its senses are due", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([
+      senseCard("s0", 0, 0) as never,
+      senseCard("s1", 1, 0) as never,
+    ]);
+    mockRepo.getSenseCardsForWords.mockResolvedValue([
+      senseCard("s0", 0, 0),
+      senseCard("s1", 1, 0),
+    ] as never);
+
+    const batch = await getStudyBatch("u1", "d1");
+    expect(batch.map((c) => c.id)).toEqual(["s0", "s1"]);
+  });
+
+  test("decks without sense cards never hit the second query", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([
+      plain("c1") as never,
+      plain("c2") as never,
+    ]);
+
+    const batch = await getStudyBatch("u1", "d1");
+    expect(batch.map((c) => c.id)).toEqual(["c1", "c2"]);
+    expect(mockRepo.getSenseCardsForWords).not.toHaveBeenCalled();
+  });
+
+  test("ordinary cards keep their place around an expanded word", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([
+      plain("before") as never,
+      senseCard("s1", 1, 0) as never,
+      plain("after") as never,
+    ]);
+    mockRepo.getSenseCardsForWords.mockResolvedValue([
+      senseCard("s0", 0, 0),
+      senseCard("s1", 1, 0),
+    ] as never);
+
+    const batch = await getStudyBatch("u1", "d1");
+    expect(batch.map((c) => c.id)).toEqual(["before", "s0", "s1", "after"]);
   });
 });

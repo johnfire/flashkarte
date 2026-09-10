@@ -167,6 +167,60 @@ describe("StudyPage", () => {
     );
   });
 
+  describe("sense cards (Spec 10)", () => {
+    const sense = (over = {}) => ({
+      context: "Der Zug fährt um 8 Uhr ab.",
+      hint: "Eisenbahn",
+      word: "der-zug",
+      index: 0,
+      count: 3,
+      ...over,
+    });
+
+    test("a chained sense is prompted by its hint, not the bare headword", async () => {
+      mockApi.study.batch.mockResolvedValue([
+        {
+          id: "s1",
+          content: { front: "der Zug", back: "train", sense: sense() },
+          phase: "chain",
+          category: null,
+        },
+      ]);
+      renderStudy();
+      expect(
+        await screen.findByText("der Zug — Eisenbahn?"),
+      ).toBeInTheDocument();
+      expect(screen.queryByText("der Zug")).not.toBeInTheDocument();
+    });
+
+    test("a graduated sense is prompted by its context sentence", async () => {
+      mockApi.study.batch.mockResolvedValue([
+        {
+          id: "s1",
+          content: { front: "der Zug", back: "train", sense: sense() },
+          phase: "split",
+          category: null,
+        },
+      ]);
+      renderStudy();
+      expect(
+        await screen.findByText("Der Zug fährt um 8 Uhr ab."),
+      ).toBeInTheDocument();
+    });
+
+    test("a card with no sense renders its front exactly as before", async () => {
+      mockApi.study.batch.mockResolvedValue([
+        {
+          id: "c1",
+          content: { front: "Front?", back: "Back!" },
+          category: null,
+        },
+      ]);
+      renderStudy();
+      expect(await screen.findByText("Front?")).toBeInTheDocument();
+    });
+  });
+
   // Reached by direct URL: the deck list hides Study for branching decks, but a
   // bookmark or a pasted link still lands here. Branch cards carry
   // { label, prompt, options } and no front, and the study queue has no type

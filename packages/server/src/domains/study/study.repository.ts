@@ -1,5 +1,6 @@
 import type { PoolClient, QueryResultRow } from "pg";
 import { query, queryOne, withTransaction } from "../../db/client";
+import type { CardSense } from "@flashkarte/shared";
 
 async function queryRows<T extends QueryResultRow>(
   sql: string,
@@ -31,6 +32,8 @@ export interface CardForStudy {
     back: string;
     label?: string | null;
     options?: { text: string; goto: string }[];
+    // Spec 10: present only on cards that are one meaning of a word block.
+    sense?: CardSense | null;
   };
   category: string | null;
 }
@@ -76,6 +79,28 @@ export function getProgressRow(
      FROM card_progress WHERE user_id = $1 AND card_id = $2`,
     [userId, cardId],
     client,
+  );
+}
+
+/**
+ * Every sense card of the given words in a deck, with the `repetitions` the phase gate
+ * needs. Kept as a second query rather than folded into getDueAndNewCards: that query's
+ * ordered-deck ordering is covered by scripts/verify-ordered-study-order.sql and is not
+ * worth destabilising to add a join.
+ */
+export function getSenseCardsForWords(
+  userId: string,
+  deckId: string,
+  words: string[],
+) {
+  return query<CardForStudy & { position: number; repetitions: number | null }>(
+    `SELECT c.id, c.content, c.category, c.position, p.repetitions
+     FROM cards c
+     LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
+     WHERE c.deck_id = $2 AND c.user_id = $1
+       AND c.content->'sense'->>'word' = ANY($3::text[])
+     ORDER BY c.position ASC`,
+    [userId, deckId, words],
   );
 }
 

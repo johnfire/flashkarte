@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { PoolClient } from "pg";
-import { calculate } from "@flashkarte/shared";
+import { calculate, wordPhase } from "@flashkarte/shared";
+import type { WordPhase } from "@flashkarte/shared";
 import { NotFoundError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
 import { recordRequired } from "../audit/audit.service";
@@ -29,8 +30,83 @@ const syncEventSchema = z.object({
   option_index: z.number().int().min(0).nullable().optional(),
 });
 
-export function getStudyBatch(userId: string, deckId: string, limit = 20) {
-  return repo.getDueAndNewCards(userId, deckId, limit);
+/**
+ * Spec 10: while a word is in its chain phase, seeing any one of its senses means
+ * seeing them all — the point of that phase is to map the word's range in one pass.
+ * Senses that are not otherwise due are pulled in early and ordered by senseIndex.
+ * Once every sense is stable the word has graduated, and its senses are ordinary
+ * independent cards that only appear when actually due.
+ */
+async function withChainedSenses(
+  userId: string,
+  deckId: string,
+  due: repo.CardForStudy[],
+): Promise<StudyBatchCard[]> {
+  const dueWords = new Set(
+    due.map((c) => c.content.sense?.word).filter((w): w is string => !!w),
+  );
+  if (dueWords.size === 0) return due;
+
+  const siblings = await repo.getSenseCardsForWords(userId, deckId, [
+    ...dueWords,
+  ]);
+  const byWord = new Map<string, typeof siblings>();
+  for (const row of siblings) {
+    const word = row.content.sense?.word;
+    if (!word) continue;
+    byWord.set(word, [...(byWord.get(word) ?? []), row]);
+  }
+
+  const chained = new Set<string>();
+  for (const [word, rows] of byWord) {
+    const phase = wordPhase(
+      rows.map((r) => ({ repetitions: r.repetitions ?? 0 })),
+    );
+    if (phase === "chain") chained.add(word);
+  }
+
+  // The phase travels with the card: only the server sees every sense's
+  // repetitions, so a client cannot work it out for itself.
+  const tag = (card: repo.CardForStudy): StudyBatchCard => {
+    const word = card.content.sense?.word;
+    if (!word) return card;
+    return { ...card, phase: chained.has(word) ? "chain" : "split" };
+  };
+
+  // Keep the queue's own ordering, but replace the first sense of each chained
+  // word with that word's full set so the senses arrive together and in order.
+  const emitted = new Set<string>();
+  const out: StudyBatchCard[] = [];
+  for (const card of due) {
+    const word = card.content.sense?.word;
+    if (!word || !chained.has(word)) {
+      out.push(tag(card));
+      continue;
+    }
+    if (emitted.has(word)) continue;
+    emitted.add(word);
+    const rows = [...(byWord.get(word) ?? [])].sort(
+      (a, b) => (a.content.sense?.index ?? 0) - (b.content.sense?.index ?? 0),
+    );
+    for (const row of rows) {
+      out.push(
+        tag({ id: row.id, content: row.content, category: row.category }),
+      );
+    }
+  }
+  return out;
+}
+
+/** A study card plus, for sense cards, the phase the client renders it in. */
+export type StudyBatchCard = repo.CardForStudy & { phase?: WordPhase };
+
+export async function getStudyBatch(
+  userId: string,
+  deckId: string,
+  limit = 20,
+): Promise<StudyBatchCard[]> {
+  const due = await repo.getDueAndNewCards(userId, deckId, limit);
+  return withChainedSenses(userId, deckId, due);
 }
 
 export async function review(

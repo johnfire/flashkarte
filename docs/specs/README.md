@@ -16,6 +16,11 @@ ship TS + Kotlin together with corpus cases — no exceptions.
 | 07  | [Case scoring](07-case-scoring.md)             | ~1–2 wk | —                         | path_events ledger + revisit scheduling                |
 | 08  | [Web parity](08-web-parity.md)                 | ~1 wk   | 01, 02, 07                | ends the flip-only web era                             |
 | 09  | [Spoken cards (TTS)](09-speech.md)             | ~4–5 d  | —                         | on-device TTS; two constituencies, one mechanism       |
+| 10  | [Polysemy](10-polysemy.md)                     | ~1 wk   | —                         | one headword, many senses; defines STABLE_REPS         |
+
+**Spec 04 conflicts with shipped code** (it would undo the fixed-cadence scheduler,
+`7833a91`) and **spec 06's `interval_days >= 7` gate is unreachable** under it — both
+await review; see `10-polysemy.md` §Knock-on.
 
 01–03 and 09 are independent (parallelizable). 04 should run alone (touches the scheduling
 core). 08 goes last.

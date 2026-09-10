@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useParams, Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import {
@@ -8,6 +8,7 @@ import {
   reportClientError,
 } from "../api/client";
 import { StudyCard } from "../api/types";
+import { promptFor } from "@flashkarte/shared";
 import { useCardSpeech } from "../speech/useCardSpeech";
 import { SpeakButton } from "../speech/SpeakButton";
 import { StudyNotice } from "./StudyNotice";
@@ -25,6 +26,18 @@ import { StudyControls } from "./StudyControls";
 function isFlippable(card: StudyCard): boolean {
   const front = (card.content as { front?: unknown }).front;
   return typeof front === "string" && front.trim() !== "";
+}
+
+/**
+ * What a card asks. A sense card (Spec 10) is prompted by its hint while its word is
+ * still chained and by its context sentence once the word has graduated; the phase is
+ * decided server-side, since only the server sees every sense's progress.
+ */
+function cardPrompt(card: StudyCard): string {
+  return promptFor(
+    { front: card.content.front, sense: card.content.sense ?? null },
+    card.phase ?? "split",
+  );
 }
 
 /** Ratings below this are lapses: the card comes back before the session ends. */
@@ -73,8 +86,18 @@ export function StudyPage() {
   }, [load]);
 
   const current = cards && idx < cards.length ? cards[idx] : null;
+  // Speech reads the prompt, not the raw headword, so a graduated sense is spoken
+  // as its whole context sentence. Memoised because the hook's autoplay effects
+  // depend on this object's identity — a fresh one each render would re-speak.
+  const spoken = useMemo(
+    () =>
+      current
+        ? { front: cardPrompt(current), back: current.content.back }
+        : null,
+    [current],
+  );
   const { speech, speakSide, muted, setMuted, cancel, canSpeak } =
-    useCardSpeech(id, current?.content ?? null, revealed, idx);
+    useCardSpeech(id, spoken, revealed, idx);
 
   async function grade(rating: number) {
     if (!cards) return;
@@ -169,7 +192,7 @@ export function StudyPage() {
           </p>
         )}
         <div className="flex items-start justify-between gap-2">
-          <p className="text-lg font-medium">{card.content.front}</p>
+          <p className="text-lg font-medium">{cardPrompt(card)}</p>
           {speech.frontLang && (
             <SpeakButton
               lang={speech.frontLang}

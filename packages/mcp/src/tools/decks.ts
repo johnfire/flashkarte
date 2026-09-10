@@ -11,6 +11,21 @@ const MARKDOWN_HELP =
   '# French Basics\n## Greetings\n**1. How do you say "hello"?**\nBonjour\n' +
   '**2. How do you say "thank you"?**\nMerci';
 
+const SENSES_HELP =
+  "Words with several distinct meanings: instead of one card listing them all, " +
+  "write the headword once and give each meaning its own line as " +
+  "`- gloss | context sentence | hint`. Each becomes its own card with its own " +
+  "scheduling. While the word is being learned it is prompted by the hint " +
+  "(`der Zug — Eisenbahn?`); once every meaning is known the hint drops away and " +
+  "the context sentence becomes the prompt. Both extra fields are optional, but " +
+  "a real context sentence is what makes the second phase work — write one per " +
+  "meaning. Use this only for genuinely distinct senses (train / chess move / " +
+  "draught of air), not for near-synonyms. Example:\n\n" +
+  "**1. der Zug**\n" +
+  "- train | Der Zug fährt um 8 Uhr ab. | Eisenbahn\n" +
+  "- move (in chess) | Das war ein guter Zug! | Schach\n" +
+  "- draught | Es zieht, mach das Fenster zu. | Luft";
+
 const SPEECH_HELP =
   "Spoken cards: flashkarte can read a deck aloud using the device's own " +
   "text-to-speech voices. A language deck needs TWO languages — the front and " +
@@ -115,6 +130,8 @@ export function registerDeckTools(server: McpServer) {
     "Create a new flashcard deck from Markdown in the user's flashkarte account. " +
       MARKDOWN_HELP +
       "\n\n" +
+      SENSES_HELP +
+      "\n\n" +
       SPEECH_HELP,
     {
       markdown: z
@@ -159,7 +176,9 @@ export function registerDeckTools(server: McpServer) {
   server.tool(
     "add_cards",
     "Append more cards (in the Markdown card format) to an existing deck. " +
-      MARKDOWN_HELP,
+      MARKDOWN_HELP +
+      "\n\n" +
+      SENSES_HELP,
     {
       deck_id: z.string().uuid().describe("The deck's UUID."),
       markdown: z

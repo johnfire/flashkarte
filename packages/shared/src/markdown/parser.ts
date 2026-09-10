@@ -1,6 +1,20 @@
+import { slugify } from "../slug";
+
 export interface ParsedOption {
   text: string;
   goto: string;
+}
+
+/**
+ * A single meaning of a polysemous headword. `context` is the prompt once the word has
+ * graduated to independent cards; `hint` is the scaffold shown while it is still chained.
+ */
+export interface CardSense {
+  context: string | null;
+  hint: string | null;
+  word: string;
+  index: number;
+  count: number;
 }
 
 export interface ParsedCard {
@@ -15,6 +29,12 @@ export interface ParsedCard {
   category: string | null;
   label: string | null;
   options: ParsedOption[];
+  // Set when this card is one meaning of a word block; null for ordinary cards.
+  sense: CardSense | null;
+  // True when a card carries BOTH sense lines and routed options, which is not a
+  // meaningful card. The parser keeps today's behaviour (options win, back stays
+  // prose) and the server rejects it at upload — see decks validation.
+  senseConflict: boolean;
 }
 
 // Reserved option target marking the right answer on a diagnostic card. Shared
@@ -73,6 +93,49 @@ function matchOption(line: string): { text: string; goto: string } | null {
 }
 
 /**
+ * Sense line: "- <gloss> | <context> | <hint>", where only the gloss is required. Split
+ * into at most three fields, so any further "|" belongs to the hint.
+ *
+ * A "- " line that ends in " -> target" is an option, not a sense line; matchOption is
+ * tried first, so the two syntaxes cannot be confused.
+ */
+function matchSenseLine(line: string): RawSense | null {
+  const lead = /^-\s+/.exec(line);
+  if (!lead) return null;
+  const rest = line.slice(lead[0].length);
+  if (!rest.includes("|")) return null;
+  const parts = rest.split("|");
+  const gloss = parts[0].trim();
+  if (!gloss) return null; // "- | x" is not a sense line, mirroring matchOption
+  const context = (parts[1] ?? "").trim();
+  const hint = parts.slice(2).join("|").trim();
+  return { gloss, context: context || null, hint: hint || null };
+}
+
+interface RawSense {
+  gloss: string;
+  context: string | null;
+  hint: string | null;
+}
+
+/**
+ * A back is a word block only when EVERY non-blank line is a sense line and there are at
+ * least two of them. The strictness is deliberate: a back that merely happens to contain a
+ * "- a | b" line keeps parsing exactly as it does today, so existing decks are unaffected.
+ * A single sense line is not a block either — a one-meaning word needs none of this.
+ */
+function detectSenses(lines: string[]): RawSense[] | null {
+  const senses: RawSense[] = [];
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const sense = matchSenseLine(line);
+    if (!sense) return null;
+    senses.push(sense);
+  }
+  return senses.length >= 2 ? senses : null;
+}
+
+/**
  * Parse Markdown deck text into a ParsedDeck.
  * Mirrored in Kotlin (android .../data/parser/MdParser.kt) — keep the two in
  * sync. The Python port (python/flashmd/parser/md_parser.py) is FROZEN and
@@ -102,14 +165,42 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
       // type, front/back and SR state, carrying the options alongside.
       const diagnostic = options.some((o) => o.goto === CORRECT_TARGET);
       const isBranch = options.length > 0 && !diagnostic;
-      cards.push({
-        type: isBranch ? "branch" : "basic",
-        front: currentFront,
-        back: isBranch ? "" : cleanBack(backLines),
-        category: currentCategory,
-        label: currentLabel,
-        options,
-      });
+      const senses = detectSenses(backLines);
+
+      if (senses && options.length === 0) {
+        // A word block: one card per meaning, sharing the headword as front and
+        // laid down contiguously so their positions stay together in the deck.
+        const word = slugify(currentFront);
+        senses.forEach((sense, index) => {
+          cards.push({
+            type: "basic",
+            front: currentFront as string,
+            back: sense.gloss,
+            category: currentCategory,
+            label: index === 0 ? currentLabel : null,
+            options: [],
+            sense: {
+              context: sense.context,
+              hint: sense.hint,
+              word,
+              index,
+              count: senses.length,
+            },
+            senseConflict: false,
+          });
+        });
+      } else {
+        cards.push({
+          type: isBranch ? "branch" : "basic",
+          front: currentFront,
+          back: isBranch ? "" : cleanBack(backLines),
+          category: currentCategory,
+          label: currentLabel,
+          options,
+          sense: null,
+          senseConflict: senses !== null,
+        });
+      }
     }
     currentFront = null;
     currentLabel = null;

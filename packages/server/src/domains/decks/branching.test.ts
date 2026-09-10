@@ -8,6 +8,8 @@ const basic = (front: string): ParsedCard => ({
   category: null,
   label: null,
   options: [],
+  sense: null,
+  senseConflict: false,
 });
 const branch = (label: string, opts: [string, string][]): ParsedCard => ({
   type: "branch",
@@ -16,6 +18,8 @@ const branch = (label: string, opts: [string, string][]): ParsedCard => ({
   category: null,
   label,
   options: opts.map(([text, goto]) => ({ text, goto })),
+  sense: null,
+  senseConflict: false,
 });
 // A diagnostic card is a basic card carrying options, one of which is `correct`.
 const diagnostic = (front: string, opts: [string, string][]): ParsedCard => ({
@@ -25,6 +29,8 @@ const diagnostic = (front: string, opts: [string, string][]): ParsedCard => ({
   category: null,
   label: null,
   options: opts.map(([text, goto]) => ({ text, goto })),
+  sense: null,
+  senseConflict: false,
 });
 const labelled = (label: string): ParsedCard => ({
   ...basic(label),
@@ -145,5 +151,30 @@ describe("validateBranching", () => {
         ]),
       ]),
     ).not.toThrow();
+  });
+});
+
+describe("sense lines (Spec 10)", () => {
+  test("a card mixing sense lines with routed options is rejected by name", () => {
+    const conflicted: ParsedCard = {
+      ...basic("der Zug"),
+      senseConflict: true,
+      options: [{ text: "Right", goto: "correct" }],
+    };
+    expect(() => validateBranching([conflicted])).toThrow(/der Zug/);
+  });
+
+  test("ordinary sense cards pass validation untouched", () => {
+    const senseCard: ParsedCard = {
+      ...basic("der Zug"),
+      sense: {
+        context: "Der Zug fährt um 8 Uhr ab.",
+        hint: "Eisenbahn",
+        word: "der-zug",
+        index: 0,
+        count: 2,
+      },
+    };
+    expect(() => validateBranching([senseCard])).not.toThrow();
   });
 });

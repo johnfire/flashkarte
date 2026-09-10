@@ -1,4 +1,4 @@
-import type { SpeechAutoplay } from "@flashkarte/shared";
+import type { SpeechAutoplay, CardSense, WordPhase } from "@flashkarte/shared";
 
 export type AccountType = "free" | "paid" | "admin-gifted" | "admin";
 
@@ -107,7 +107,12 @@ export interface DeckDetail {
 
 export interface StudyCard {
   id: string;
-  content: { front: string; back: string };
+  // `sense` is present only on cards that are one meaning of a word block (Spec 10);
+  // every other card renders exactly as before.
+  content: { front: string; back: string; sense?: CardSense | null };
+  // Which phase to render a sense card in. Only the server sees every sense's
+  // progress, so it decides; absent for ordinary cards.
+  phase?: WordPhase;
   category: string | null;
 }
 

@@ -5,6 +5,19 @@ data class ParsedOption(
     val goto: String,
 )
 
+/**
+ * A single meaning of a polysemous headword (Spec 10). `context` is the prompt once the
+ * word has graduated to independent cards; `hint` is the scaffold shown while chained.
+ * Mirror of the TS `CardSense` — keep in sync.
+ */
+data class CardSense(
+    val context: String?,
+    val hint: String?,
+    val word: String,
+    val index: Int,
+    val count: Int,
+)
+
 data class ParsedCard(
     // "basic" cards have front/back and SR state. "branch" cards are play-only.
     // A "basic" card may also carry options when it is a *diagnostic* card
@@ -16,6 +29,12 @@ data class ParsedCard(
     val category: String?,
     val label: String?,
     val options: List<ParsedOption>,
+    // Set when this card is one meaning of a word block; null for ordinary cards.
+    val sense: CardSense? = null,
+    // True when a card carries BOTH sense lines and routed options, which is not a
+    // meaningful card. The parser keeps today's behaviour (options win, back stays
+    // prose) and the server rejects it at upload.
+    val senseConflict: Boolean = false,
 )
 
 data class ParsedDeck(
@@ -65,6 +84,43 @@ object MdParser {
         return ParsedOption(text, tail.groupValues[1])
     }
 
+    private val SENSE_LEAD = Regex("""^-\s+""")
+
+    private data class RawSense(val gloss: String, val context: String?, val hint: String?)
+
+    /**
+     * Sense line: "- <gloss> | <context> | <hint>", only the gloss required. Split into at
+     * most three fields, so any further "|" belongs to the hint. matchOption is tried
+     * first, so a line ending in " -> target" is an option and never a sense line.
+     * Mirror of the TS matchSenseLine — keep in sync.
+     */
+    private fun matchSenseLine(line: String): RawSense? {
+        val lead = SENSE_LEAD.find(line) ?: return null
+        val rest = line.substring(lead.range.last + 1)
+        if (!rest.contains("|")) return null
+        val parts = rest.split("|")
+        val gloss = parts[0].trim()
+        if (gloss.isEmpty()) return null
+        val context = parts.getOrElse(1) { "" }.trim()
+        val hint = parts.drop(2).joinToString("|").trim()
+        return RawSense(gloss, context.ifEmpty { null }, hint.ifEmpty { null })
+    }
+
+    /**
+     * A back is a word block only when EVERY non-blank line is a sense line and there are
+     * at least two. The strictness keeps existing decks parsing byte-identically.
+     * Mirror of the TS detectSenses — keep in sync.
+     */
+    private fun detectSenses(lines: List<String>): List<RawSense>? {
+        val senses = mutableListOf<RawSense>()
+        for (line in lines) {
+            if (line.isBlank()) continue
+            val sense = matchSenseLine(line) ?: return null
+            senses += sense
+        }
+        return if (senses.size >= 2) senses else null
+    }
+
     fun parse(text: String, sourceFile: String = ""): ParsedDeck {
         val lines = text.lines()
         var title = ""
@@ -84,14 +140,40 @@ object MdParser {
             // `basic` type, front/back and SR state, carrying options alongside.
             val diagnostic = options.any { it.goto == CORRECT_TARGET }
             val isBranch = options.isNotEmpty() && !diagnostic
-            cards += ParsedCard(
-                type = if (isBranch) "branch" else "basic",
-                front = front,
-                back = if (isBranch) "" else cleanBack(backLines.toList()),
-                category = currentCategory,
-                label = currentLabel,
-                options = options.toList(),
-            )
+            val senses = detectSenses(backLines.toList())
+
+            if (senses != null && options.isEmpty()) {
+                // A word block: one card per meaning, sharing the headword as front and
+                // laid down contiguously so their positions stay together in the deck.
+                val word = slugify(front)
+                senses.forEachIndexed { index, sense ->
+                    cards += ParsedCard(
+                        type = "basic",
+                        front = front,
+                        back = sense.gloss,
+                        category = currentCategory,
+                        label = if (index == 0) currentLabel else null,
+                        options = emptyList(),
+                        sense = CardSense(
+                            context = sense.context,
+                            hint = sense.hint,
+                            word = word,
+                            index = index,
+                            count = senses.size,
+                        ),
+                    )
+                }
+            } else {
+                cards += ParsedCard(
+                    type = if (isBranch) "branch" else "basic",
+                    front = front,
+                    back = if (isBranch) "" else cleanBack(backLines.toList()),
+                    category = currentCategory,
+                    label = currentLabel,
+                    options = options.toList(),
+                    senseConflict = senses != null,
+                )
+            }
             currentFront = null
             currentLabel = null
             backLines.clear()

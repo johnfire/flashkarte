@@ -304,3 +304,112 @@ The fix.
     expect(deck.cards[1].back).toBe("Explanation back.");
   });
 });
+
+describe("word blocks (polysemy)", () => {
+  const ZUG = [
+    "# D",
+    "",
+    "## Nouns",
+    "",
+    "**1. der Zug**",
+    "- train | Der Zug fährt um 8 Uhr ab. | Eisenbahn",
+    "- move | Das war ein guter Zug! | Schach",
+    "- draught | Es zieht. | Luft",
+    "",
+  ].join("\n");
+
+  test("one block becomes one card per sense, contiguous and sharing the headword", () => {
+    const cards = parseDeck(ZUG, "t.md").cards;
+    expect(cards).toHaveLength(3);
+    expect(cards.map((c) => c.front)).toEqual([
+      "der Zug",
+      "der Zug",
+      "der Zug",
+    ]);
+    expect(cards.map((c) => c.back)).toEqual(["train", "move", "draught"]);
+    expect(cards.map((c) => c.category)).toEqual(["Nouns", "Nouns", "Nouns"]);
+    expect(cards.map((c) => c.sense?.index)).toEqual([0, 1, 2]);
+    expect(cards.every((c) => c.sense?.count === 3)).toBe(true);
+    expect(cards.every((c) => c.sense?.word === "der-zug")).toBe(true);
+    expect(cards[0].sense).toMatchObject({
+      context: "Der Zug fährt um 8 Uhr ab.",
+      hint: "Eisenbahn",
+    });
+  });
+
+  test("context and hint are optional, but the pipe is what marks a sense line", () => {
+    // A bare "- a" is an ordinary bullet, not a gloss-only sense — otherwise every
+    // deck with a bulleted back would silently become a word block. A sense with no
+    // context or hint is therefore written with a trailing pipe.
+    const bullets = parseDeck(
+      "# D\n\n**1. W**\n- a\n- b | ctx\n",
+      "t.md",
+    ).cards;
+    expect(bullets).toHaveLength(1);
+    expect(bullets[0].sense).toBeNull();
+
+    const ok = parseDeck("# D\n\n**1. W**\n- a |\n- b | ctx\n", "t.md").cards;
+    expect(ok).toHaveLength(2);
+    expect(ok[0].sense).toMatchObject({ context: null, hint: null });
+    expect(ok[1].sense).toMatchObject({ context: "ctx", hint: null });
+  });
+
+  test("only the first two pipes split; the rest belong to the hint", () => {
+    const cards = parseDeck(
+      "# D\n\n**1. W**\n- g | c | h | extra\n- g2 | c2\n",
+      "t.md",
+    ).cards;
+    expect(cards[0].sense).toMatchObject({ context: "c", hint: "h | extra" });
+  });
+
+  test("a single sense line stays an ordinary card", () => {
+    const cards = parseDeck(
+      "# D\n\n**1. W**\n- only | ctx | hint\n",
+      "t.md",
+    ).cards;
+    expect(cards).toHaveLength(1);
+    expect(cards[0].sense).toBeNull();
+    expect(cards[0].back).toBe("- only | ctx | hint");
+  });
+
+  test("a back that is not entirely sense lines is left alone", () => {
+    // Strictness is what keeps existing decks parsing byte-identically.
+    const md = "# D\n\n**1. W**\nIntro prose.\n- a | b\n- c | d\n";
+    const cards = parseDeck(md, "t.md").cards;
+    expect(cards).toHaveLength(1);
+    expect(cards[0].sense).toBeNull();
+    expect(cards[0].back).toBe("Intro prose. - a | b - c | d");
+  });
+
+  test("an empty gloss disqualifies the line, mirroring option parsing", () => {
+    const cards = parseDeck(
+      "# D\n\n**1. W**\n- | ctx\n- b | ctx\n",
+      "t.md",
+    ).cards;
+    expect(cards).toHaveLength(1);
+    expect(cards[0].sense).toBeNull();
+  });
+
+  test("options win over sense lines and the conflict is flagged for the server", () => {
+    const md = [
+      "# D",
+      "",
+      "**1. W**",
+      "- train | ctx | hint",
+      "- move | ctx2 | hint2",
+      "- Right -> correct",
+      "",
+    ].join("\n");
+    const cards = parseDeck(md, "t.md").cards;
+    expect(cards).toHaveLength(1);
+    expect(cards[0].sense).toBeNull();
+    expect(cards[0].senseConflict).toBe(true);
+    expect(cards[0].options).toHaveLength(1);
+  });
+
+  test("ordinary cards carry no sense and no conflict", () => {
+    const cards = parseDeck("# D\n\n**1. X**\nplain.\n", "t.md").cards;
+    expect(cards[0].sense).toBeNull();
+    expect(cards[0].senseConflict).toBe(false);
+  });
+});

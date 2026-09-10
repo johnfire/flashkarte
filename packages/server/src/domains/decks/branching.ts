@@ -19,6 +19,15 @@ const END_TARGET = "end";
  * without exactly one `-> correct` option are rejected.
  */
 export function validateBranching(cards: ParsedCard[]): void {
+  // Spec 10: sense lines and routed options on one card is not a meaningful card.
+  // The parser keeps today's behaviour and flags it; this is where it is refused.
+  const conflicted = cards.find((c) => c.senseConflict);
+  if (conflicted) {
+    throw new ValidationError(
+      `Card "${conflicted.front}" mixes sense lines with routed options — use one or the other`,
+    );
+  }
+
   const branchCards = cards.filter((c) => c.type === "branch");
   const diagnosticCards = cards.filter((c) => isDiagnostic(c));
 

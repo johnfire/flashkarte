@@ -1,5 +1,5 @@
 import { query, queryOne, withTransaction } from "../../db/client";
-import { ParsedCard, ParsedOption } from "@flashkarte/shared";
+import { ParsedCard, ParsedOption, CardSense } from "@flashkarte/shared";
 import type { PoolClient } from "pg";
 
 export interface DeckRow {
@@ -92,9 +92,12 @@ export function rowToParsedCard(row: {
       category: row.category,
       label: (content.label as string | null) ?? null,
       options: (content.options as ParsedOption[]) ?? [],
+      sense: null,
+      senseConflict: false,
     };
   }
-  // A basic card carries `options` only when it is a diagnostic card (Spec 01).
+  // A basic card carries `options` only when it is a diagnostic card (Spec 01)
+  // and `sense` only when it is one meaning of a word block (Spec 10).
   return {
     type: "basic",
     front: (content.front as string) ?? "",
@@ -102,6 +105,8 @@ export function rowToParsedCard(row: {
     category: row.category,
     label: (content.label as string | null) ?? null,
     options: (content.options as ParsedOption[]) ?? [],
+    sense: (content.sense as CardSense | null) ?? null,
+    senseConflict: false,
   };
 }
 
@@ -118,6 +123,7 @@ function cardContent(c: ParsedCard): string {
   const content: Record<string, unknown> = { front: c.front, back: c.back };
   if (c.label) content.label = c.label;
   if (c.options.length > 0) content.options = c.options;
+  if (c.sense) content.sense = c.sense;
   return JSON.stringify(content);
 }
 
