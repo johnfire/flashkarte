@@ -81,12 +81,30 @@ export async function unpublishDeck(id: string): Promise<void> {
   if (!deck) throw new NotFoundError("Deck not found");
 }
 
+const collectionTitleSchema = z
+  .string({ error: "collectionTitle must be text" })
+  .trim()
+  .min(1, "collectionTitle must not be blank")
+  .max(200, "collectionTitle is too long");
+
 /**
  * Publish a deck (and its cards) as app-wide official content, owned by the
- * system account instead of whoever created it.
+ * system account instead of whoever created it. `collectionTitleIn` is
+ * find-or-create-by-title: omit it to leave collection membership
+ * untouched (idempotent re-promotion), pass null to detach from any
+ * collection, or a title to attach it (creating the collection if new).
  */
-export async function promoteOfficialDeck(id: string): Promise<void> {
-  const deck = await decksRepo.promoteToOfficial(id);
+export async function promoteOfficialDeck(
+  id: string,
+  collectionTitleIn?: unknown,
+): Promise<void> {
+  const collectionTitle =
+    collectionTitleIn === undefined
+      ? undefined
+      : collectionTitleIn === null
+        ? null
+        : parse(collectionTitleSchema, collectionTitleIn);
+  const deck = await decksRepo.promoteToOfficial(id, collectionTitle);
   if (!deck) throw new NotFoundError("Deck not found");
 }
 

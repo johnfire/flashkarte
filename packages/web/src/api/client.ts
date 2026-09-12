@@ -14,6 +14,8 @@ import {
   PublicDeckPreview,
   DeckSettings,
   OfficialDeck,
+  DeckCollection,
+  DeckCollectionDetail,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 
@@ -168,6 +170,23 @@ function withNumericCounts(deck: DeckWithCounts): DeckWithCounts {
   return out as unknown as DeckWithCounts;
 }
 
+/** Search + pagination for the App Decks browse endpoints. */
+export interface BrowseParams {
+  q?: string;
+  limit?: number;
+  offset?: number;
+}
+
+function browseQuery(params?: BrowseParams): string {
+  if (!params) return "";
+  const search = new URLSearchParams();
+  if (params.q) search.set("q", params.q);
+  if (params.limit !== undefined) search.set("limit", String(params.limit));
+  if (params.offset !== undefined) search.set("offset", String(params.offset));
+  const qs = search.toString();
+  return qs ? `?${qs}` : "";
+}
+
 export const api = {
   auth: {
     signup: (email: string, password: string) =>
@@ -304,7 +323,21 @@ export const api = {
         body: JSON.stringify(patch),
       }),
     remove: (id: string) => request<void>(`/decks/${id}`, { method: "DELETE" }),
-    listOfficial: () => request<OfficialDeck[]>("/decks/official"),
+    listOfficial: (params?: BrowseParams) =>
+      request<OfficialDeck[]>(`/decks/official${browseQuery(params)}`),
+    listCollections: (params?: BrowseParams) =>
+      request<DeckCollection[]>(
+        `/decks/official/collections${browseQuery(params)}`,
+      ),
+    getCollection: (id: string, params?: BrowseParams) =>
+      request<DeckCollectionDetail>(
+        `/decks/official/collections/${id}${browseQuery(params)}`,
+      ),
+    subscribeAllInCollection: (id: string) =>
+      request<{ subscribed: number }>(
+        `/decks/official/collections/${id}/subscribe-all`,
+        { method: "POST" },
+      ),
     subscribe: (id: string) =>
       request<void>(`/decks/${id}/subscribe`, { method: "POST" }),
     unsubscribe: (id: string) =>

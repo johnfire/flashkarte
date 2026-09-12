@@ -8,6 +8,7 @@ const OWNER_ID = "10000000-0000-4000-8000-0000000000a1";
 const SUBSCRIBER_ID = "10000000-0000-4000-8000-0000000000b1";
 const OUTSIDER_ID = "10000000-0000-4000-8000-0000000000c1";
 const DECK_ID = "20000000-0000-4000-8000-0000000000d1";
+const DECK_ID_2 = "20000000-0000-4000-8000-0000000000d2";
 const CARD_ID = "30000000-0000-4000-8000-0000000000e1";
 
 function assertSafeIntegrationDatabase(): void {
@@ -38,8 +39,9 @@ async function resetFixtures(): Promise<void> {
     [OWNER_ID, SUBSCRIBER_ID, OUTSIDER_ID],
   );
   await pool.query(
-    "INSERT INTO decks (id, user_id, title) VALUES ($1, $2, 'Original Deck')",
-    [DECK_ID, OWNER_ID],
+    `INSERT INTO decks (id, user_id, title) VALUES
+       ($1, $3, 'Original Deck'), ($2, $3, 'Second Deck')`,
+    [DECK_ID, DECK_ID_2, OWNER_ID],
   );
   await pool.query(
     `INSERT INTO cards (id, user_id, deck_id, content, position)
@@ -126,5 +128,76 @@ describe("official decks", () => {
   test("subscribing to a deck that isn't official fails", async () => {
     const result = await decksRepo.subscribeOfficial(SUBSCRIBER_ID, DECK_ID);
     expect(result).toBe(false);
+  });
+});
+
+describe("deck collections", () => {
+  test("promote-with-title creates/reuses a collection, orders members, and supports bulk subscribe", async () => {
+    const first = await decksRepo.promoteToOfficial(DECK_ID, "CEFR Series");
+    const second = await decksRepo.promoteToOfficial(DECK_ID_2, "CEFR Series");
+    expect(first?.is_official).toBe(true);
+    expect(second?.is_official).toBe(true);
+
+    const collections = await decksRepo.listOfficialCollections(null, 50, 0);
+    expect(collections).toHaveLength(1);
+    expect(collections[0].title).toBe("CEFR Series");
+    expect(Number(collections[0].deck_count)).toBe(2);
+    const collectionId = collections[0].id;
+
+    // Case-insensitive title search finds it (citext).
+    const searched = await decksRepo.listOfficialCollections("cefr", 50, 0);
+    expect(searched).toHaveLength(1);
+
+    const members = await decksRepo.listCollectionDecks(
+      OUTSIDER_ID,
+      collectionId,
+      null,
+      50,
+      0,
+    );
+    expect(members.map((m) => m.title)).toEqual([
+      "Original Deck",
+      "Second Deck",
+    ]);
+    expect(members.every((m) => m.subscribed === false)).toBe(true);
+
+    // Standalone browsing excludes decks that now belong to a collection.
+    const standalone = await decksRepo.listStandaloneOfficial(
+      OUTSIDER_ID,
+      null,
+      50,
+      0,
+    );
+    expect(standalone.find((d) => d.id === DECK_ID)).toBeUndefined();
+
+    const count = await decksRepo.subscribeAllInCollection(
+      SUBSCRIBER_ID,
+      collectionId,
+    );
+    expect(count).toBe(2);
+    const afterBulk = await decksRepo.listCollectionDecks(
+      SUBSCRIBER_ID,
+      collectionId,
+      null,
+      50,
+      0,
+    );
+    expect(afterBulk.every((m) => m.subscribed === true)).toBe(true);
+
+    // Re-promoting without a collectionTitle leaves membership untouched.
+    await decksRepo.promoteToOfficial(DECK_ID);
+    const stillMember = await decksRepo.getDeck(SUBSCRIBER_ID, DECK_ID);
+    expect(stillMember).not.toBeNull();
+
+    // Demoting clears collection membership.
+    await decksRepo.demoteFromOfficial(DECK_ID, OWNER_ID);
+    const afterDemote = await decksRepo.listCollectionDecks(
+      OUTSIDER_ID,
+      collectionId,
+      null,
+      50,
+      0,
+    );
+    expect(afterDemote.map((m) => m.id)).toEqual([DECK_ID_2]);
   });
 });

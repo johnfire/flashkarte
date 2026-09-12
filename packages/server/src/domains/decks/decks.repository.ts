@@ -1,6 +1,7 @@
 import { query, queryOne, withTransaction } from "../../db/client";
 import { ParsedCard, ParsedOption, CardSense } from "@flashkarte/shared";
 import type { PoolClient } from "pg";
+import { escapeLike } from "../library/library.repository";
 
 export interface DeckRow {
   id: string;
@@ -338,23 +339,113 @@ export interface OfficialDeckRow {
   title: string;
   created_at: string;
   card_count: string;
+  subscribed: boolean;
 }
 
-/** Official decks the caller hasn't subscribed to yet — the "browse" list. */
-export function listAvailableOfficial(userId: string) {
+/**
+ * Standalone official decks (no collection), searchable and paginated for
+ * the App Decks page. Includes decks the caller already subscribed to
+ * (flagged, not hidden) so a page of results doesn't shift under them as
+ * they add decks.
+ */
+export function listStandaloneOfficial(
+  userId: string,
+  q: string | null,
+  limit: number,
+  offset: number,
+) {
+  const term = q === null ? null : escapeLike(q);
   return query<OfficialDeckRow>(
-    `SELECT d.id, d.title, d.created_at, count(c.*) AS card_count
-     FROM decks d
-     LEFT JOIN cards c ON c.deck_id = d.id
-     WHERE d.is_official
-       AND NOT EXISTS (
+    `SELECT d.id, d.title, d.created_at, count(c.*) AS card_count,
+       EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1
-       )
+       ) AS subscribed
+     FROM decks d
+     LEFT JOIN cards c ON c.deck_id = d.id
+     WHERE d.is_official AND d.collection_id IS NULL
+       AND ($2::text IS NULL OR d.title ILIKE '%' || $2 || '%' ESCAPE '\\')
      GROUP BY d.id
-     ORDER BY d.title ASC`,
-    [userId],
+     ORDER BY d.title ASC
+     LIMIT $3 OFFSET $4`,
+    [userId, term, limit, offset],
   );
+}
+
+export interface CollectionRow {
+  id: string;
+  title: string;
+  description: string | null;
+  created_at: string;
+  deck_count: string;
+}
+
+/** Official-deck collections, searchable and paginated — the primary browse view. */
+export function listOfficialCollections(
+  q: string | null,
+  limit: number,
+  offset: number,
+) {
+  const term = q === null ? null : escapeLike(q);
+  return query<CollectionRow>(
+    `SELECT dc.id, dc.title, dc.description, dc.created_at,
+       count(d.*) AS deck_count
+     FROM deck_collections dc
+     LEFT JOIN decks d ON d.collection_id = dc.id AND d.is_official
+     WHERE $1::text IS NULL OR dc.title ILIKE '%' || $1 || '%' ESCAPE '\\'
+     GROUP BY dc.id
+     ORDER BY dc.title ASC
+     LIMIT $2 OFFSET $3`,
+    [term, limit, offset],
+  );
+}
+
+export function getCollection(id: string) {
+  return queryOne<{ id: string; title: string; description: string | null }>(
+    "SELECT id, title, description FROM deck_collections WHERE id = $1",
+    [id],
+  );
+}
+
+/** A collection's member decks, searchable and paginated, each flagging the caller's subscription. */
+export function listCollectionDecks(
+  userId: string,
+  collectionId: string,
+  q: string | null,
+  limit: number,
+  offset: number,
+) {
+  const term = q === null ? null : escapeLike(q);
+  return query<OfficialDeckRow>(
+    `SELECT d.id, d.title, d.created_at, count(c.*) AS card_count,
+       EXISTS (
+         SELECT 1 FROM deck_subscriptions sub
+         WHERE sub.deck_id = d.id AND sub.user_id = $1
+       ) AS subscribed
+     FROM decks d
+     LEFT JOIN cards c ON c.deck_id = d.id
+     WHERE d.collection_id = $2 AND d.is_official
+       AND ($3::text IS NULL OR d.title ILIKE '%' || $3 || '%' ESCAPE '\\')
+     GROUP BY d.id
+     ORDER BY d.collection_position ASC NULLS LAST, d.title ASC
+     LIMIT $4 OFFSET $5`,
+    [userId, collectionId, term, limit, offset],
+  );
+}
+
+/** Bulk-subscribe to every deck currently in a collection. Idempotent per-deck. */
+export async function subscribeAllInCollection(
+  userId: string,
+  collectionId: string,
+): Promise<number> {
+  const rows = await query<{ deck_id: string }>(
+    `INSERT INTO deck_subscriptions (user_id, deck_id)
+     SELECT $1, id FROM decks WHERE collection_id = $2 AND is_official
+     ON CONFLICT (user_id, deck_id) DO NOTHING
+     RETURNING deck_id`,
+    [userId, collectionId],
+  );
+  return rows.length;
 }
 
 /** Add an official deck to the caller's own deck list. Idempotent. */
@@ -391,16 +482,63 @@ export async function unsubscribeOfficial(
 }
 
 /**
+ * Find a collection by exact (case-insensitive) title, creating it if it
+ * doesn't exist yet, inside the caller's transaction.
+ */
+async function findOrCreateCollection(
+  client: PoolClient,
+  title: string,
+): Promise<string> {
+  const existing = await client.query<{ id: string }>(
+    "SELECT id FROM deck_collections WHERE title = $1",
+    [title],
+  );
+  if (existing.rowCount && existing.rowCount > 0) return existing.rows[0].id;
+  const created = await client.query<{ id: string }>(
+    "INSERT INTO deck_collections (title) VALUES ($1) RETURNING id",
+    [title],
+  );
+  return created.rows[0].id;
+}
+
+/**
  * Reassign a deck and its cards to the system account and mark it official.
  * Reassigning the cards too matters: otherwise they'd still count as the
  * original owner's for account deletion/data export.
+ *
+ * `collectionTitle` is find-or-create-by-title: `undefined` leaves the
+ * deck's current collection membership untouched (so re-running promote is
+ * idempotent), `null` explicitly detaches it from any collection, and a
+ * string attaches it (creating the collection if it's new), appending the
+ * deck at the end of that collection's ordering.
  */
-export function promoteToOfficial(deckId: string) {
+export function promoteToOfficial(
+  deckId: string,
+  collectionTitle?: string | null,
+) {
   return withTransaction(async (client) => {
+    let collectionAssignment = "";
+    const values: unknown[] = [deckId, SYSTEM_ACCOUNT_ID];
+    if (collectionTitle === null) {
+      collectionAssignment =
+        ", collection_id = NULL, collection_position = NULL";
+    } else if (collectionTitle !== undefined) {
+      const collectionId = await findOrCreateCollection(
+        client,
+        collectionTitle,
+      );
+      const maxPos = await client.query<{ max: number | null }>(
+        "SELECT max(collection_position) AS max FROM decks WHERE collection_id = $1",
+        [collectionId],
+      );
+      const nextPos = (maxPos.rows[0]?.max ?? -1) + 1;
+      values.push(collectionId, nextPos);
+      collectionAssignment = `, collection_id = $${values.length - 1}, collection_position = $${values.length}`;
+    }
     const deck = await client.query<DeckRow>(
-      `UPDATE decks SET user_id = $2, is_official = true, updated_at = now()
+      `UPDATE decks SET user_id = $2, is_official = true, updated_at = now()${collectionAssignment}
        WHERE id = $1 RETURNING ${DECK_COLS}`,
-      [deckId, SYSTEM_ACCOUNT_ID],
+      values,
     );
     if (deck.rowCount === 0) return null;
     await client.query("UPDATE cards SET user_id = $2 WHERE deck_id = $1", [
@@ -415,7 +553,9 @@ export function promoteToOfficial(deckId: string) {
 export function demoteFromOfficial(deckId: string, ownerId: string) {
   return withTransaction(async (client) => {
     const deck = await client.query<DeckRow>(
-      `UPDATE decks SET user_id = $2, is_official = false, updated_at = now()
+      `UPDATE decks
+         SET user_id = $2, is_official = false, collection_id = NULL,
+             collection_position = NULL, updated_at = now()
        WHERE id = $1 RETURNING ${DECK_COLS}`,
       [deckId, ownerId],
     );

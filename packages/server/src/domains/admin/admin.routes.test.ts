@@ -168,7 +168,21 @@ describe("admin routes", () => {
       .post("/api/admin/decks/d1/promote-official")
       .set("Authorization", AUTH);
     expect(res.status).toBe(204);
-    expect(mock.promoteOfficialDeck).toHaveBeenCalledWith("d1");
+    expect(mock.promoteOfficialDeck).toHaveBeenCalledWith("d1", undefined);
+  });
+
+  test("POST /api/admin/decks/:id/promote-official forwards collectionTitle", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    mock.promoteOfficialDeck.mockResolvedValue(undefined);
+    const res = await request(app)
+      .post("/api/admin/decks/d1/promote-official")
+      .set("Authorization", AUTH)
+      .send({ collectionTitle: "German for Arabic Speakers" });
+    expect(res.status).toBe(204);
+    expect(mock.promoteOfficialDeck).toHaveBeenCalledWith(
+      "d1",
+      "German for Arabic Speakers",
+    );
   });
 
   test("POST /api/admin/decks/:id/promote-official as non-admin -> 403", async () => {

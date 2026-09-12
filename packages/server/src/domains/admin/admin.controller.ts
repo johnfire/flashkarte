@@ -61,13 +61,15 @@ export const unpublishDeck = wrapAsync(async (req: Request, res: Response) => {
 
 export const promoteOfficialDeck = wrapAsync(
   async (req: Request, res: Response) => {
-    await service.promoteOfficialDeck(req.params.id);
+    await service.promoteOfficialDeck(req.params.id, req.body?.collectionTitle);
     await auditFromRequest(
       req,
       "admin.deck_promoted_official",
       "deck",
       req.params.id,
       "success",
+      undefined,
+      { collectionTitle: req.body?.collectionTitle ?? null },
     );
     res.status(204).end();
   },

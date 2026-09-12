@@ -21,6 +21,8 @@ import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { HomeRoute } from "./components/HomeRoute";
 import { LibraryPage } from "./pages/LibraryPage";
+import { AppDecksPage } from "./pages/AppDecksPage";
+import { AppDecksCollectionPage } from "./pages/AppDecksCollectionPage";
 import { ExplorePage } from "./pages/ExplorePage";
 import { PublicDeckPage } from "./pages/PublicDeckPage";
 import { AnalyticsConsentBanner } from "./components/AnalyticsConsentBanner";
@@ -53,6 +55,8 @@ export default function App() {
           <Route path="/decks/new" element={<CreateDeckPage />} />
           <Route path="/decks/:id/study" element={<StudyPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/app-decks" element={<AppDecksPage />} />
+          <Route path="/app-decks/:id" element={<AppDecksCollectionPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
         <Route element={<AdminRoute />}>

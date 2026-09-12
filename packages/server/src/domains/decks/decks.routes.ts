@@ -10,7 +10,10 @@ const upload = multer({
 
 export const decksRouter = Router();
 decksRouter.get("/", ctrl.list);
-// Must come before "/:id" or "official" would be parsed as a deck id.
+// Must come before "/:id" or "official"/"collections" would be parsed as a deck id.
+decksRouter.get("/official/collections", ctrl.listCollections);
+decksRouter.get("/official/collections/:id", ctrl.getCollection);
+decksRouter.post("/official/collections/:id/subscribe-all", ctrl.subscribeAll);
 decksRouter.get("/official", ctrl.listOfficial);
 decksRouter.post("/", upload.single("file"), ctrl.create);
 decksRouter.get("/:id", ctrl.get);

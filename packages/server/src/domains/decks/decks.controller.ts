@@ -49,7 +49,33 @@ export const list = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const listOfficial = wrapAsync(async (req: Request, res: Response) => {
-  res.json(await service.listOfficial(req.userId!));
+  res.json(await service.listStandaloneOfficial(req.userId!, req.query));
+});
+
+export const listCollections = wrapAsync(
+  async (req: Request, res: Response) => {
+    res.json(await service.listCollections(req.query));
+  },
+);
+
+export const getCollection = wrapAsync(async (req: Request, res: Response) => {
+  res.json(
+    await service.getCollectionDecks(req.userId!, req.params.id, req.query),
+  );
+});
+
+export const subscribeAll = wrapAsync(async (req: Request, res: Response) => {
+  const count = await service.subscribeAll(req.userId!, req.params.id);
+  await auditFromRequest(
+    req,
+    "deck.collection_subscribed_all",
+    "deck_collection",
+    req.params.id,
+    "success",
+    undefined,
+    { count },
+  );
+  res.json({ subscribed: count });
 });
 
 export const subscribe = wrapAsync(async (req: Request, res: Response) => {

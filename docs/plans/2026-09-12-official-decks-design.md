@@ -66,12 +66,11 @@ with fully independent SM-2-successor scheduling — no per-user copies.
 
 ## UI
 
-`DeckListPage` renders the caller's own list as today, then an "Official
-decks" section below it listing anything from `/decks/official` with an Add
-button. Subscribing moves it into the main list on the next load. A
-subscribed official deck shows a "Remove" action instead of
-rename/delete/share/speech controls (those would silently no-op against a
-system-owned deck since the ownership check would just fail).
+`DeckListPage` renders the caller's own list as today; a subscribed official
+deck shows a "Remove" action instead of rename/delete/share/speech controls
+(those would silently no-op against a system-owned deck since the ownership
+check would just fail). Browsing/adding official decks moved to a dedicated
+page — see the addendum below.
 
 ## Rollout of the six existing CEFR decks
 
@@ -90,3 +89,80 @@ deck goes through, and it's reversible via demote if anything looks wrong.
   defaults at promote time; individual users can't override yet).
 - Any admin *UI* button for promote/demote — the endpoint is there; a web
   admin-page control can follow if this gets used often enough to want one.
+
+---
+
+## Addendum (same day): collections, for scale
+
+Chris expects "hundreds, probably thousands" of official decks eventually. A
+flat "Official Decks" list (the original inline section on `DeckListPage`)
+doesn't hold up at that volume, so it was replaced with a dedicated **App
+Decks** area before any real volume existed.
+
+### Data model
+
+- `deck_collections (id, title citext unique, description, created_at,
+  updated_at)` — `citext` for forgiving, case-insensitive title matching
+  (same type `users.email` already uses).
+- `decks.collection_id` (nullable FK, `ON DELETE SET NULL`) — a deck belongs
+  to at most one collection; null means standalone.
+- `decks.collection_position` (nullable int) — append-only ordering within
+  a collection, assigned at promote time. No manual reorder UI.
+- "Subscribe to a whole collection" needed no new state: it's a bulk insert
+  into the existing `deck_subscriptions` table for whatever's in the
+  collection *right now* — not a standing "auto-add future members" rule.
+
+### API
+
+- `GET /decks/official/collections?q=&limit=&offset=` — paginated,
+  searchable collections list: `{id, title, description, deck_count}`.
+- `GET /decks/official/collections/:id?q=&limit=&offset=` — one
+  collection's member decks, paginated/searchable, each flagging whether
+  the caller is subscribed.
+- `GET /decks/official?q=&limit=&offset=` — standalone official decks (no
+  collection), now paginated/searchable instead of returning everything.
+- `POST /decks/official/collections/:id/subscribe-all` — bulk-subscribes
+  every deck currently in the collection.
+- `promote-official` gained an optional `collectionTitle`: `undefined`
+  leaves collection membership untouched (idempotent re-promotion), `null`
+  detaches, a string finds-or-creates the collection and appends the deck
+  at the end of its ordering.
+- Pagination is plain `limit`/`offset`, not cursor-based — at "thousands,"
+  offset pagination on an indexed, searched query is fine in Postgres, and
+  it's simpler than keyset pagination. Worth revisiting only past
+  six-figure row counts.
+- A key change from the original design: `/decks/official` and the
+  collection-detail endpoint no longer hide decks the caller already
+  subscribed to — they flag `subscribed: true` instead. Hiding them made
+  sense for a small unpaginated list; at scale it means items silently
+  disappear out from under a paginated scroll, which is worse than just
+  showing "Added."
+
+### UI
+
+- `/app-decks` — search box, a paginated **Collections** section (each row
+  links into the collection and has a bulk "Add all"), and a paginated
+  **Other Official Decks** section for standalone decks. Search filters
+  both sections by title; it does not reach inside collections to find a
+  buried deck by name — that requires opening the collection first, since
+  no endpoint searches across every deck regardless of collection.
+  Deliberately out of scope for now; add a cross-collection search
+  endpoint later if browsing turns out too shallow.
+- `/app-decks/:id` — one collection's title/description, its own "Add all"
+  and search box, and its paginated deck list.
+- `DeckListPage` lost its inline "Official Decks" section entirely — the
+  header link that was "Library" now has an "App Decks" link next to it.
+  "My Decks" itself (subscribed decks, badge, Remove) is unchanged.
+- New shared pieces: `usePaginatedList` (search + "load more" pagination,
+  used by all three browse lists), `OfficialDeckRow` (a deck row with an
+  Add/Added button), `CollectionRow` (a collection row with its own bulk
+  Add all).
+
+### Rollout
+
+The six CEFR decks were promoted without a `collectionTitle` in the first
+pass (before this addendum), so they're currently standalone. Once this
+ships, re-run `promote-official` on all six with
+`collectionTitle: "German for Arabic Speakers"` — idempotent, and it moves
+them into a proper collection without touching ownership/`is_official`
+(both already set).

@@ -10,14 +10,12 @@ import {
 import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 import { useAsync } from "../hooks/use-async";
-import { useOfficialDecks } from "../hooks/use-official-decks";
 import { DeckListItem } from "./DeckListItem";
 import {
   DeckListEmptyHint,
   DeckListLegendHint,
   DeckListVerifyPanel,
 } from "./DeckListHints";
-import { OfficialDecksSection } from "./OfficialDecksSection";
 
 export function DeckListPage() {
   const { t } = useTranslation();
@@ -47,7 +45,6 @@ export function DeckListPage() {
     data: decks,
     error: loadError,
     loading,
-    reload: reloadDecks,
     setData: setDecks,
   } = useAsync<DeckWithCounts[], []>(loadDecks, []);
   const error =
@@ -56,14 +53,6 @@ export function DeckListPage() {
       : loadError
         ? t("decks.loadError")
         : null;
-
-  const {
-    officialDecks,
-    officialLoadError,
-    reloadOfficial,
-    subscribing,
-    onSubscribe,
-  } = useOfficialDecks(verified, reloadDecks);
 
   async function onDelete(id: string, title: string) {
     if (!window.confirm(t("decks.deleteConfirm", { title }))) return;
@@ -84,7 +73,6 @@ export function DeckListPage() {
     try {
       await api.decks.unsubscribe(id);
       setDecks((d) => (d ? d.filter((x) => x.id !== id) : d));
-      await reloadOfficial();
     } catch (err) {
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
@@ -121,6 +109,12 @@ export function DeckListPage() {
             className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"
           >
             {t("decks.newDeck")}
+          </Link>
+          <Link
+            to="/app-decks"
+            className="self-center text-sm text-gray-500 dark:text-gray-400"
+          >
+            {t("decks.appDecks")}
           </Link>
           <Link
             to="/library"
@@ -189,15 +183,6 @@ export function DeckListPage() {
           />
         ))}
       </ul>
-
-      {verified && officialDecks && (
-        <OfficialDecksSection
-          decks={officialDecks}
-          loadError={officialLoadError}
-          subscribingId={subscribing}
-          onSubscribe={onSubscribe}
-        />
-      )}
     </div>
   );
 }

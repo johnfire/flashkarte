@@ -61,6 +61,21 @@ export interface OfficialDeck {
   title: string;
   created_at: string;
   card_count: number;
+  subscribed: boolean;
+}
+
+export interface DeckCollection {
+  id: string;
+  title: string;
+  description: string | null;
+  deck_count: number;
+}
+
+export interface DeckCollectionDetail {
+  id: string;
+  title: string;
+  description: string | null;
+  decks: OfficialDeck[];
 }
 
 export interface DeckWithCounts extends DeckSpeech {

@@ -98,14 +98,83 @@ export function list(userId: string) {
   return repo.listDecksWithCounts(userId);
 }
 
-export async function listOfficial(userId: string) {
-  const rows = await repo.listAvailableOfficial(userId);
-  return rows.map((row) => ({
+// Shared by every App Decks browse endpoint: an optional title search plus
+// limit/offset, clamped to sane bounds so a caller can't force an unbounded
+// scan of what may eventually be thousands of rows.
+const paginationSchema = z.object({
+  q: z.preprocess(
+    (v) => (typeof v === "string" && v.trim() ? v.trim() : null),
+    z.string().nullable(),
+  ),
+  limit: z.coerce
+    .number({ error: "limit must be a number" })
+    .int()
+    .min(1)
+    .max(200)
+    .optional()
+    .default(50),
+  offset: z.coerce
+    .number({ error: "offset must be a number" })
+    .int()
+    .min(0)
+    .optional()
+    .default(0),
+});
+
+function parsePagination(query: unknown) {
+  return parse(paginationSchema, query ?? {});
+}
+
+function toOfficialDeck(row: repo.OfficialDeckRow) {
+  return {
     id: row.id,
     title: row.title,
     created_at: row.created_at,
     card_count: Number(row.card_count),
+    subscribed: row.subscribed,
+  };
+}
+
+/** Standalone official decks (no collection) — the "browse" list. */
+export async function listStandaloneOfficial(userId: string, query: unknown) {
+  const { q, limit, offset } = parsePagination(query);
+  const rows = await repo.listStandaloneOfficial(userId, q, limit, offset);
+  return rows.map(toOfficialDeck);
+}
+
+export async function listCollections(query: unknown) {
+  const { q, limit, offset } = parsePagination(query);
+  const rows = await repo.listOfficialCollections(q, limit, offset);
+  return rows.map((row) => ({
+    id: row.id,
+    title: row.title,
+    description: row.description,
+    deck_count: Number(row.deck_count),
   }));
+}
+
+export async function getCollectionDecks(
+  userId: string,
+  collectionId: string,
+  query: unknown,
+) {
+  const collection = await repo.getCollection(collectionId);
+  if (!collection) throw new NotFoundError("Collection not found");
+  const { q, limit, offset } = parsePagination(query);
+  const rows = await repo.listCollectionDecks(
+    userId,
+    collectionId,
+    q,
+    limit,
+    offset,
+  );
+  return { ...collection, decks: rows.map(toOfficialDeck) };
+}
+
+export async function subscribeAll(userId: string, collectionId: string) {
+  const collection = await repo.getCollection(collectionId);
+  if (!collection) throw new NotFoundError("Collection not found");
+  return repo.subscribeAllInCollection(userId, collectionId);
 }
 
 export async function subscribe(userId: string, deckId: string) {

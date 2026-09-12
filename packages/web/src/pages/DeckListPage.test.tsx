@@ -184,40 +184,6 @@ describe("DeckListPage", () => {
     expect(mockedDecksApi.remove).toHaveBeenCalledWith("deck-1");
   });
 
-  test("lists browsable official decks and adds one to My Decks", async () => {
-    mockedDecksApi.list.mockResolvedValueOnce([]).mockResolvedValueOnce([
-      {
-        ...deck,
-        id: "official-1",
-        title: "Official Deck",
-        is_official: true,
-      },
-    ]);
-    mockedDecksApi.listOfficial.mockResolvedValueOnce([
-      {
-        id: "official-1",
-        title: "Official Deck",
-        created_at: "x",
-        card_count: 500,
-      },
-    ]);
-    mockedDecksApi.subscribe.mockResolvedValue(undefined);
-    renderPage();
-
-    await screen.findByText("Official Decks");
-    expect(screen.getByText("Official Deck")).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole("button", { name: "Add" }));
-
-    expect(mockedDecksApi.subscribe).toHaveBeenCalledWith("official-1");
-    await waitFor(() =>
-      expect(
-        screen.queryByRole("button", { name: "Add" }),
-      ).not.toBeInTheDocument(),
-    );
-    expect(screen.getByText("Official")).toBeInTheDocument();
-  });
-
   test("removes a subscribed official deck from My Decks", async () => {
     mockedDecksApi.list.mockResolvedValue([
       { ...deck, id: "official-1", title: "Official Deck", is_official: true },

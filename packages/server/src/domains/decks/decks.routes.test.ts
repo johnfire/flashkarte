@@ -246,13 +246,72 @@ describe("decks routes", () => {
   });
 
   test("GET /api/decks/official -> 200 list", async () => {
-    mock.listOfficial.mockResolvedValue([
-      { id: "od1", title: "Official Deck", created_at: "x", card_count: 500 },
+    mock.listStandaloneOfficial.mockResolvedValue([
+      {
+        id: "od1",
+        title: "Official Deck",
+        created_at: "x",
+        card_count: 500,
+        subscribed: false,
+      },
     ] as never);
-    const res = await request(app).get("/api/decks/official");
+    const res = await request(app).get("/api/decks/official?q=foo");
     expect(res.status).toBe(200);
     expect(res.body).toHaveLength(1);
-    expect(mock.listOfficial).toHaveBeenCalledWith("u1");
+    expect(mock.listStandaloneOfficial).toHaveBeenCalledWith(
+      "u1",
+      expect.objectContaining({ q: "foo" }),
+    );
+  });
+
+  test("GET /api/decks/official/collections -> 200 list", async () => {
+    mock.listCollections.mockResolvedValue([
+      {
+        id: "c1",
+        title: "German for Arabic Speakers",
+        description: null,
+        deck_count: 6,
+      },
+    ] as never);
+    const res = await request(app).get("/api/decks/official/collections");
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(1);
+    expect(mock.listCollections).toHaveBeenCalled();
+  });
+
+  test("GET /api/decks/official/collections/:id -> 200 with decks", async () => {
+    mock.getCollectionDecks.mockResolvedValue({
+      id: "c1",
+      title: "German for Arabic Speakers",
+      description: null,
+      decks: [],
+    } as never);
+    const res = await request(app).get("/api/decks/official/collections/c1");
+    expect(res.status).toBe(200);
+    expect(res.body.title).toBe("German for Arabic Speakers");
+    expect(mock.getCollectionDecks).toHaveBeenCalledWith(
+      "u1",
+      "c1",
+      expect.anything(),
+    );
+  });
+
+  test("GET /api/decks/official/collections/:id missing -> 404", async () => {
+    mock.getCollectionDecks.mockRejectedValue(
+      new NotFoundError("Collection not found"),
+    );
+    const res = await request(app).get("/api/decks/official/collections/nope");
+    expect(res.status).toBe(404);
+  });
+
+  test("POST /api/decks/official/collections/:id/subscribe-all -> 200", async () => {
+    mock.subscribeAll.mockResolvedValue(6);
+    const res = await request(app).post(
+      "/api/decks/official/collections/c1/subscribe-all",
+    );
+    expect(res.status).toBe(200);
+    expect(res.body.subscribed).toBe(6);
+    expect(mock.subscribeAll).toHaveBeenCalledWith("u1", "c1");
   });
 
   test("POST /api/decks/:id/subscribe -> 204", async () => {
