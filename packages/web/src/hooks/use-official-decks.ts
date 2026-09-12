@@ -1,10 +1,6 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  api,
-  isVerificationRequired,
-  reportClientError,
-} from "../api/client";
+import { api, isVerificationRequired, reportClientError } from "../api/client";
 import { OfficialDeck } from "../api/types";
 import { useAsync } from "./use-async";
 
@@ -57,5 +53,11 @@ export function useOfficialDecks(
     }
   }
 
-  return { officialDecks, officialLoadError, reloadOfficial, subscribing, onSubscribe };
+  return {
+    officialDecks,
+    officialLoadError,
+    reloadOfficial,
+    subscribing,
+    onSubscribe,
+  };
 }

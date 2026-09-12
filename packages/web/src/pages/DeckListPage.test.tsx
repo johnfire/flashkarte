@@ -186,10 +186,20 @@ describe("DeckListPage", () => {
 
   test("lists browsable official decks and adds one to My Decks", async () => {
     mockedDecksApi.list.mockResolvedValueOnce([]).mockResolvedValueOnce([
-      { ...deck, id: "official-1", title: "Official Deck", is_official: true },
+      {
+        ...deck,
+        id: "official-1",
+        title: "Official Deck",
+        is_official: true,
+      },
     ]);
     mockedDecksApi.listOfficial.mockResolvedValueOnce([
-      { id: "official-1", title: "Official Deck", created_at: "x", card_count: 500 },
+      {
+        id: "official-1",
+        title: "Official Deck",
+        created_at: "x",
+        card_count: 500,
+      },
     ]);
     mockedDecksApi.subscribe.mockResolvedValue(undefined);
     renderPage();

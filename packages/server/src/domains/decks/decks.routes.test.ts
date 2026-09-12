@@ -263,7 +263,9 @@ describe("decks routes", () => {
   });
 
   test("POST /api/decks/:id/subscribe on a non-official deck -> 404", async () => {
-    mock.subscribe.mockRejectedValue(new NotFoundError("Official deck not found"));
+    mock.subscribe.mockRejectedValue(
+      new NotFoundError("Official deck not found"),
+    );
     const res = await request(app).post("/api/decks/d1/subscribe");
     expect(res.status).toBe(404);
   });
