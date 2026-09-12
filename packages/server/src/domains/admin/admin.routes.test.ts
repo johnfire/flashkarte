@@ -160,4 +160,34 @@ describe("admin routes", () => {
     expect(res.status).toBe(403);
     expect(mock.unpublishDeck).not.toHaveBeenCalled();
   });
+
+  test("POST /api/admin/decks/:id/promote-official as admin -> 204", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    mock.promoteOfficialDeck.mockResolvedValue(undefined);
+    const res = await request(app)
+      .post("/api/admin/decks/d1/promote-official")
+      .set("Authorization", AUTH);
+    expect(res.status).toBe(204);
+    expect(mock.promoteOfficialDeck).toHaveBeenCalledWith("d1");
+  });
+
+  test("POST /api/admin/decks/:id/promote-official as non-admin -> 403", async () => {
+    authMock.getCurrentUser.mockResolvedValue(REGULAR as never);
+    const res = await request(app)
+      .post("/api/admin/decks/d1/promote-official")
+      .set("Authorization", AUTH);
+    expect(res.status).toBe(403);
+    expect(mock.promoteOfficialDeck).not.toHaveBeenCalled();
+  });
+
+  test("POST /api/admin/decks/:id/demote-official as admin -> 204", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    mock.demoteOfficialDeck.mockResolvedValue(undefined);
+    const res = await request(app)
+      .post("/api/admin/decks/d1/demote-official")
+      .set("Authorization", AUTH)
+      .send({ ownerId: "u2" });
+    expect(res.status).toBe(204);
+    expect(mock.demoteOfficialDeck).toHaveBeenCalledWith("d1", "u2");
+  });
 });

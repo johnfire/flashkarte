@@ -48,6 +48,34 @@ export const list = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.list(req.userId!));
 });
 
+export const listOfficial = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.listOfficial(req.userId!));
+});
+
+export const subscribe = wrapAsync(async (req: Request, res: Response) => {
+  await service.subscribe(req.userId!, req.params.id);
+  await auditFromRequest(
+    req,
+    "deck.subscribed",
+    "deck",
+    req.params.id,
+    "success",
+  );
+  res.status(204).end();
+});
+
+export const unsubscribe = wrapAsync(async (req: Request, res: Response) => {
+  await service.unsubscribe(req.userId!, req.params.id);
+  await auditFromRequest(
+    req,
+    "deck.unsubscribed",
+    "deck",
+    req.params.id,
+    "success",
+  );
+  res.status(204).end();
+});
+
 export const get = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.get(req.userId!, req.params.id));
 });

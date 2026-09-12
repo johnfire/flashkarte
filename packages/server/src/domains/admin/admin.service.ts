@@ -80,3 +80,24 @@ export async function unpublishDeck(id: string): Promise<void> {
   const deck = await decksRepo.adminUnpublish(id);
   if (!deck) throw new NotFoundError("Deck not found");
 }
+
+/**
+ * Publish a deck (and its cards) as app-wide official content, owned by the
+ * system account instead of whoever created it.
+ */
+export async function promoteOfficialDeck(id: string): Promise<void> {
+  const deck = await decksRepo.promoteToOfficial(id);
+  if (!deck) throw new NotFoundError("Deck not found");
+}
+
+const ownerIdSchema = z.string({ error: "ownerId is required" }).min(1);
+
+/** Reverse of promoteOfficialDeck: hand the deck back to a real account. */
+export async function demoteOfficialDeck(
+  id: string,
+  ownerIdIn: unknown,
+): Promise<void> {
+  const ownerId = parse(ownerIdSchema, ownerIdIn);
+  const deck = await decksRepo.demoteFromOfficial(id, ownerId);
+  if (!deck) throw new NotFoundError("Deck not found");
+}

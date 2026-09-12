@@ -244,4 +244,34 @@ describe("decks routes", () => {
     expect(patch.speechFrontLang).toBeUndefined();
     expect(patch.speechRate).toBeUndefined();
   });
+
+  test("GET /api/decks/official -> 200 list", async () => {
+    mock.listOfficial.mockResolvedValue([
+      { id: "od1", title: "Official Deck", created_at: "x", card_count: 500 },
+    ] as never);
+    const res = await request(app).get("/api/decks/official");
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(1);
+    expect(mock.listOfficial).toHaveBeenCalledWith("u1");
+  });
+
+  test("POST /api/decks/:id/subscribe -> 204", async () => {
+    mock.subscribe.mockResolvedValue(undefined);
+    const res = await request(app).post("/api/decks/od1/subscribe");
+    expect(res.status).toBe(204);
+    expect(mock.subscribe).toHaveBeenCalledWith("u1", "od1");
+  });
+
+  test("POST /api/decks/:id/subscribe on a non-official deck -> 404", async () => {
+    mock.subscribe.mockRejectedValue(new NotFoundError("Official deck not found"));
+    const res = await request(app).post("/api/decks/d1/subscribe");
+    expect(res.status).toBe(404);
+  });
+
+  test("DELETE /api/decks/:id/subscribe -> 204", async () => {
+    mock.unsubscribe.mockResolvedValue(undefined);
+    const res = await request(app).delete("/api/decks/od1/subscribe");
+    expect(res.status).toBe(204);
+    expect(mock.unsubscribe).toHaveBeenCalledWith("u1", "od1");
+  });
 });

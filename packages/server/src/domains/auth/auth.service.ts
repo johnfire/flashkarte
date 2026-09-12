@@ -358,7 +358,9 @@ export async function login(
     password,
     row?.password_hash ?? dummyPasswordHash(),
   );
-  if (!row || !passwordOk) {
+  // role='system' marks the account that owns official decks (#33) — it must
+  // never be a real session, only an ownership anchor for the FK.
+  if (!row || !passwordOk || row.role === "system") {
     throw new AuthError("Invalid email or password");
   }
   if (row.two_factor_enabled) {

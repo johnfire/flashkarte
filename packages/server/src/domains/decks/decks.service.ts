@@ -98,6 +98,25 @@ export function list(userId: string) {
   return repo.listDecksWithCounts(userId);
 }
 
+export async function listOfficial(userId: string) {
+  const rows = await repo.listAvailableOfficial(userId);
+  return rows.map((row) => ({
+    id: row.id,
+    title: row.title,
+    created_at: row.created_at,
+    card_count: Number(row.card_count),
+  }));
+}
+
+export async function subscribe(userId: string, deckId: string) {
+  const ok = await repo.subscribeOfficial(userId, deckId);
+  if (!ok) throw new NotFoundError("Official deck not found");
+}
+
+export async function unsubscribe(userId: string, deckId: string) {
+  await repo.unsubscribeOfficial(userId, deckId);
+}
+
 export async function get(userId: string, id: string) {
   const deck = await repo.getDeck(userId, id);
   if (!deck) throw new NotFoundError("Deck not found");

@@ -10,12 +10,14 @@ import {
 import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
 import { useAsync } from "../hooks/use-async";
+import { useOfficialDecks } from "../hooks/use-official-decks";
 import { DeckListItem } from "./DeckListItem";
 import {
   DeckListEmptyHint,
   DeckListLegendHint,
   DeckListVerifyPanel,
 } from "./DeckListHints";
+import { OfficialDecksSection } from "./OfficialDecksSection";
 
 export function DeckListPage() {
   const { t } = useTranslation();
@@ -45,6 +47,7 @@ export function DeckListPage() {
     data: decks,
     error: loadError,
     loading,
+    reload: reloadDecks,
     setData: setDecks,
   } = useAsync<DeckWithCounts[], []>(loadDecks, []);
   const error =
@@ -53,6 +56,14 @@ export function DeckListPage() {
       : loadError
         ? t("decks.loadError")
         : null;
+
+  const {
+    officialDecks,
+    officialLoadError,
+    reloadOfficial,
+    subscribing,
+    onSubscribe,
+  } = useOfficialDecks(verified, reloadDecks);
 
   async function onDelete(id: string, title: string) {
     if (!window.confirm(t("decks.deleteConfirm", { title }))) return;
@@ -65,6 +76,21 @@ export function DeckListPage() {
         context: "DeckListPage.onDelete",
       });
       window.alert(t("decks.deleteError"));
+    }
+  }
+
+  async function onUnsubscribe(id: string, title: string) {
+    if (!window.confirm(t("decks.removeConfirm", { title }))) return;
+    try {
+      await api.decks.unsubscribe(id);
+      setDecks((d) => (d ? d.filter((x) => x.id !== id) : d));
+      await reloadOfficial();
+    } catch (err) {
+      reportClientError({
+        message: err instanceof Error ? err.message : String(err),
+        context: "DeckListPage.onUnsubscribe",
+      });
+      window.alert(t("decks.removeError"));
     }
   }
 
@@ -159,9 +185,19 @@ export function DeckListPage() {
             deck={d}
             onTogglePublic={onTogglePublic}
             onDelete={onDelete}
+            onUnsubscribe={onUnsubscribe}
           />
         ))}
       </ul>
+
+      {verified && officialDecks && (
+        <OfficialDecksSection
+          decks={officialDecks}
+          loadError={officialLoadError}
+          subscribingId={subscribing}
+          onSubscribe={onSubscribe}
+        />
+      )}
     </div>
   );
 }

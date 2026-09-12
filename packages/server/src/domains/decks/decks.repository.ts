@@ -9,6 +9,7 @@ export interface DeckRow {
   created_at: string;
   updated_at: string;
   is_public: boolean;
+  is_official: boolean;
   is_ordered: boolean;
   speech_enabled: boolean | null;
   speech_front_lang: string | null;
@@ -17,10 +18,27 @@ export interface DeckRow {
   speech_rate: number | null;
 }
 
+// Fixed id of the system account that owns official (app-wide) decks. Login
+// rejects this account outright (auth.service.ts) — it exists only so
+// official decks and cards have a real owner row to satisfy the FK, never as
+// a session anyone can start.
+export const SYSTEM_ACCOUNT_ID = "00000000-0000-4000-8000-000000000000";
+
 const SPEECH_COLS =
   "speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate";
 
-const DECK_COLS = `id, title, source_filename, created_at, updated_at, is_public, is_ordered, ${SPEECH_COLS}`;
+const DECK_COLS = `id, title, source_filename, created_at, updated_at, is_public, is_official, is_ordered, ${SPEECH_COLS}`;
+
+// A caller may read a deck/card they don't own when it's official and they've
+// opted in. Shared by every read-path query below; `$N` is the caller's
+// user_id parameter position in that query.
+function subscribedOrOwned(deckAlias: string, userIdParam: number): string {
+  return `(${deckAlias}.user_id = $${userIdParam}
+     OR (${deckAlias}.is_official AND EXISTS (
+       SELECT 1 FROM deck_subscriptions sub
+       WHERE sub.deck_id = ${deckAlias}.id AND sub.user_id = $${userIdParam}
+     )))`;
+}
 
 /**
  * Insert many cards in a single multi-row statement on the given transaction
@@ -179,7 +197,7 @@ export interface DeckListRow extends DeckRow {
 
 export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
-    `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_ordered,
+    `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered,
        d.speech_enabled, d.speech_front_lang, d.speech_back_lang, d.speech_autoplay, d.speech_rate,
        s.total AS card_count,
        s.due AS due_count,
@@ -206,14 +224,15 @@ export function listDecksWithCounts(userId: string) {
        LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
        WHERE c.deck_id = d.id
      ) s ON true
-     WHERE d.user_id = $1 ORDER BY d.updated_at DESC`,
+     WHERE ${subscribedOrOwned("d", 1)}
+     ORDER BY d.is_official ASC, d.updated_at DESC`,
     [userId],
   );
 }
 
 export function getDeck(userId: string, id: string) {
   return queryOne<DeckRow>(
-    `SELECT ${DECK_COLS} FROM decks WHERE id = $1 AND user_id = $2`,
+    `SELECT ${DECK_COLS} FROM decks d WHERE d.id = $1 AND ${subscribedOrOwned("d", 2)}`,
     [id, userId],
   );
 }
@@ -226,8 +245,11 @@ export function getCards(userId: string, deckId: string) {
     category: string | null;
     position: number;
   }>(
-    `SELECT id, type, content, category, position FROM cards
-     WHERE deck_id = $1 AND user_id = $2 ORDER BY position ASC`,
+    `SELECT c.id, c.type, c.content, c.category, c.position
+     FROM cards c
+     JOIN decks d ON d.id = c.deck_id
+     WHERE c.deck_id = $1 AND ${subscribedOrOwned("d", 2)}
+     ORDER BY c.position ASC`,
     [deckId, userId],
   );
 }
@@ -309,6 +331,106 @@ export function adminUnpublish(id: string) {
      WHERE id = $1 RETURNING id`,
     [id],
   );
+}
+
+export interface OfficialDeckRow {
+  id: string;
+  title: string;
+  created_at: string;
+  card_count: string;
+}
+
+/** Official decks the caller hasn't subscribed to yet — the "browse" list. */
+export function listAvailableOfficial(userId: string) {
+  return query<OfficialDeckRow>(
+    `SELECT d.id, d.title, d.created_at, count(c.*) AS card_count
+     FROM decks d
+     LEFT JOIN cards c ON c.deck_id = d.id
+     WHERE d.is_official
+       AND NOT EXISTS (
+         SELECT 1 FROM deck_subscriptions sub
+         WHERE sub.deck_id = d.id AND sub.user_id = $1
+       )
+     GROUP BY d.id
+     ORDER BY d.title ASC`,
+    [userId],
+  );
+}
+
+/** Add an official deck to the caller's own deck list. Idempotent. */
+export async function subscribeOfficial(
+  userId: string,
+  deckId: string,
+): Promise<boolean> {
+  const rows = await query<{ deck_id: string }>(
+    `INSERT INTO deck_subscriptions (user_id, deck_id)
+     SELECT $1, id FROM decks WHERE id = $2 AND is_official
+     ON CONFLICT (user_id, deck_id) DO NOTHING
+     RETURNING deck_id`,
+    [userId, deckId],
+  );
+  if (rows.length > 0) return true;
+  // Already subscribed (ON CONFLICT swallowed the insert) vs. not an
+  // official deck at all — tell those apart for a proper 404 either way.
+  const already = await queryOne<{ deck_id: string }>(
+    "SELECT deck_id FROM deck_subscriptions WHERE user_id = $1 AND deck_id = $2",
+    [userId, deckId],
+  );
+  return already !== null;
+}
+
+/** Remove an official deck from the caller's own deck list. Idempotent. */
+export async function unsubscribeOfficial(
+  userId: string,
+  deckId: string,
+): Promise<void> {
+  await query(
+    "DELETE FROM deck_subscriptions WHERE user_id = $1 AND deck_id = $2",
+    [userId, deckId],
+  );
+}
+
+/**
+ * Reassign a deck and its cards to the system account and mark it official.
+ * Reassigning the cards too matters: otherwise they'd still count as the
+ * original owner's for account deletion/data export.
+ */
+export function promoteToOfficial(deckId: string) {
+  return withTransaction(async (client) => {
+    const deck = await client.query<DeckRow>(
+      `UPDATE decks SET user_id = $2, is_official = true, updated_at = now()
+       WHERE id = $1 RETURNING ${DECK_COLS}`,
+      [deckId, SYSTEM_ACCOUNT_ID],
+    );
+    if (deck.rowCount === 0) return null;
+    await client.query("UPDATE cards SET user_id = $2 WHERE deck_id = $1", [
+      deckId,
+      SYSTEM_ACCOUNT_ID,
+    ]);
+    return deck.rows[0];
+  });
+}
+
+/** Reverse of promoteToOfficial: hand the deck back to a real owner. */
+export function demoteFromOfficial(deckId: string, ownerId: string) {
+  return withTransaction(async (client) => {
+    const deck = await client.query<DeckRow>(
+      `UPDATE decks SET user_id = $2, is_official = false, updated_at = now()
+       WHERE id = $1 RETURNING ${DECK_COLS}`,
+      [deckId, ownerId],
+    );
+    if (deck.rowCount === 0) return null;
+    await client.query("UPDATE cards SET user_id = $2 WHERE deck_id = $1", [
+      deckId,
+      ownerId,
+    ]);
+    // Subscriptions are meaningless once the deck isn't official; drop the
+    // dead rows rather than leaving them to confuse a future promote.
+    await client.query("DELETE FROM deck_subscriptions WHERE deck_id = $1", [
+      deckId,
+    ]);
+    return deck.rows[0];
+  });
 }
 
 export function deleteDeck(userId: string, id: string) {

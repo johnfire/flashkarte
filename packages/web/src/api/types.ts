@@ -56,6 +56,13 @@ export interface AdminUser {
   createdAt: string;
 }
 
+export interface OfficialDeck {
+  id: string;
+  title: string;
+  created_at: string;
+  card_count: number;
+}
+
 export interface DeckWithCounts extends DeckSpeech {
   id: string;
   title: string;
@@ -65,6 +72,10 @@ export interface DeckWithCounts extends DeckSpeech {
   card_count: number;
   due_count: number;
   is_public: boolean;
+  // True for an official (app-owned) deck the caller has subscribed to.
+  // Owner-only actions (rename/delete/share/speech) are hidden for these in
+  // the UI since the mutation would silently no-op against the system owner.
+  is_official: boolean;
   viewed_count: number;
   new_count: number;
   again_count: number;

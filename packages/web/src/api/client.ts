@@ -13,6 +13,7 @@ import {
   LibraryDeckDetail,
   PublicDeckPreview,
   DeckSettings,
+  OfficialDeck,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 
@@ -303,6 +304,11 @@ export const api = {
         body: JSON.stringify(patch),
       }),
     remove: (id: string) => request<void>(`/decks/${id}`, { method: "DELETE" }),
+    listOfficial: () => request<OfficialDeck[]>("/decks/official"),
+    subscribe: (id: string) =>
+      request<void>(`/decks/${id}/subscribe`, { method: "POST" }),
+    unsubscribe: (id: string) =>
+      request<void>(`/decks/${id}/subscribe`, { method: "DELETE" }),
   },
   library: {
     list: (q?: string) =>

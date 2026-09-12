@@ -58,3 +58,33 @@ export const unpublishDeck = wrapAsync(async (req: Request, res: Response) => {
   );
   res.status(204).end();
 });
+
+export const promoteOfficialDeck = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.promoteOfficialDeck(req.params.id);
+    await auditFromRequest(
+      req,
+      "admin.deck_promoted_official",
+      "deck",
+      req.params.id,
+      "success",
+    );
+    res.status(204).end();
+  },
+);
+
+export const demoteOfficialDeck = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.demoteOfficialDeck(req.params.id, req.body.ownerId);
+    await auditFromRequest(
+      req,
+      "admin.deck_demoted_official",
+      "deck",
+      req.params.id,
+      "success",
+      undefined,
+      { newOwnerId: req.body.ownerId },
+    );
+    res.status(204).end();
+  },
+);

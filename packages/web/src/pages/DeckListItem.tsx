@@ -8,12 +8,14 @@ interface DeckListItemProps {
   deck: DeckWithCounts;
   onTogglePublic: (id: string, makePublic: boolean) => void;
   onDelete: (id: string, title: string) => void;
+  onUnsubscribe: (id: string, title: string) => void;
 }
 
 export function DeckListItem({
   deck: d,
   onTogglePublic,
   onDelete,
+  onUnsubscribe,
 }: DeckListItemProps) {
   const { t } = useTranslation();
   const [speechOpen, setSpeechOpen] = useState(false);
@@ -22,6 +24,11 @@ export function DeckListItem({
       <div>
         <p className="font-medium">
           {d.title}
+          {d.is_official && (
+            <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">
+              {t("decks.official")}
+            </span>
+          )}
           {d.is_public && (
             <span className="ml-2 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
               {t("decks.public")}
@@ -73,26 +80,39 @@ export function DeckListItem({
             {t("decks.study")}
           </Link>
         )}
-        <button
-          onClick={() => onTogglePublic(d.id, !d.is_public)}
-          className="text-sm text-indigo-600"
-          title={d.is_public ? t("decks.unshareTitle") : t("decks.shareTitle")}
-        >
-          {d.is_public ? t("decks.unshare") : t("decks.share")}
-        </button>
-        <button
-          onClick={() => setSpeechOpen(true)}
-          className="text-sm text-indigo-600"
-          title={t("decks.speech.openTitle")}
-        >
-          {t("decks.speech.open")}
-        </button>
-        <button
-          onClick={() => onDelete(d.id, d.title)}
-          className="text-sm text-red-600"
-        >
-          {t("decks.delete")}
-        </button>
+        {d.is_official ? (
+          <button
+            onClick={() => onUnsubscribe(d.id, d.title)}
+            className="text-sm text-red-600"
+          >
+            {t("decks.remove")}
+          </button>
+        ) : (
+          <>
+            <button
+              onClick={() => onTogglePublic(d.id, !d.is_public)}
+              className="text-sm text-indigo-600"
+              title={
+                d.is_public ? t("decks.unshareTitle") : t("decks.shareTitle")
+              }
+            >
+              {d.is_public ? t("decks.unshare") : t("decks.share")}
+            </button>
+            <button
+              onClick={() => setSpeechOpen(true)}
+              className="text-sm text-indigo-600"
+              title={t("decks.speech.openTitle")}
+            >
+              {t("decks.speech.open")}
+            </button>
+            <button
+              onClick={() => onDelete(d.id, d.title)}
+              className="text-sm text-red-600"
+            >
+              {t("decks.delete")}
+            </button>
+          </>
+        )}
       </div>
       {speechOpen && (
         <DeckSpeechDialog

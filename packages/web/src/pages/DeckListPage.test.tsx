@@ -13,7 +13,14 @@ import { DeckListPage } from "./DeckListPage";
 vi.mock("../api/client", async (importOriginal) => ({
   ...(await importOriginal<typeof import("../api/client")>()),
   api: {
-    decks: { list: vi.fn(), remove: vi.fn(), setPublic: vi.fn() },
+    decks: {
+      list: vi.fn(),
+      remove: vi.fn(),
+      setPublic: vi.fn(),
+      listOfficial: vi.fn().mockResolvedValue([]),
+      subscribe: vi.fn(),
+      unsubscribe: vi.fn(),
+    },
   },
   reportClientError: vi.fn(),
 }));
@@ -35,6 +42,9 @@ const mockedDecksApi = api.decks as unknown as {
   list: ReturnType<typeof vi.fn>;
   remove: ReturnType<typeof vi.fn>;
   setPublic: ReturnType<typeof vi.fn>;
+  listOfficial: ReturnType<typeof vi.fn>;
+  subscribe: ReturnType<typeof vi.fn>;
+  unsubscribe: ReturnType<typeof vi.fn>;
 };
 
 const deck: DeckWithCounts = {
@@ -46,6 +56,7 @@ const deck: DeckWithCounts = {
   card_count: 3,
   due_count: 2,
   is_public: false,
+  is_official: false,
   viewed_count: 1,
   new_count: 1,
   again_count: 0,
@@ -171,5 +182,50 @@ describe("DeckListPage", () => {
       expect(screen.queryByText("German nouns")).not.toBeInTheDocument(),
     );
     expect(mockedDecksApi.remove).toHaveBeenCalledWith("deck-1");
+  });
+
+  test("lists browsable official decks and adds one to My Decks", async () => {
+    mockedDecksApi.list.mockResolvedValueOnce([]).mockResolvedValueOnce([
+      { ...deck, id: "official-1", title: "Official Deck", is_official: true },
+    ]);
+    mockedDecksApi.listOfficial.mockResolvedValueOnce([
+      { id: "official-1", title: "Official Deck", created_at: "x", card_count: 500 },
+    ]);
+    mockedDecksApi.subscribe.mockResolvedValue(undefined);
+    renderPage();
+
+    await screen.findByText("Official Decks");
+    expect(screen.getByText("Official Deck")).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "Add" }));
+
+    expect(mockedDecksApi.subscribe).toHaveBeenCalledWith("official-1");
+    await waitFor(() =>
+      expect(
+        screen.queryByRole("button", { name: "Add" }),
+      ).not.toBeInTheDocument(),
+    );
+    expect(screen.getByText("Official")).toBeInTheDocument();
+  });
+
+  test("removes a subscribed official deck from My Decks", async () => {
+    mockedDecksApi.list.mockResolvedValue([
+      { ...deck, id: "official-1", title: "Official Deck", is_official: true },
+    ]);
+    mockedDecksApi.unsubscribe.mockResolvedValue(undefined);
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+    renderPage();
+    await screen.findByText("Official Deck");
+
+    expect(
+      screen.queryByRole("button", { name: "Share" }),
+    ).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "Remove" }));
+
+    expect(mockedDecksApi.unsubscribe).toHaveBeenCalledWith("official-1");
+    await waitFor(() =>
+      expect(screen.queryByText("Official Deck")).not.toBeInTheDocument(),
+    );
   });
 });

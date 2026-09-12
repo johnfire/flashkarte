@@ -38,6 +38,22 @@ export interface CardForStudy {
   category: string | null;
 }
 
+// A caller may study/rate a card they don't own when its deck is official
+// and they've opted in via deck_subscriptions. `$N` is the caller's user_id
+// parameter position in that query; `cardAlias`/`deckAlias` must already be
+// joined (cards.deck_id = decks.id) in the surrounding query.
+function officialOrOwned(
+  cardAlias: string,
+  deckAlias: string,
+  userIdParam: number,
+): string {
+  return `(${cardAlias}.user_id = $${userIdParam}
+     OR (${deckAlias}.is_official AND EXISTS (
+       SELECT 1 FROM deck_subscriptions sub
+       WHERE sub.deck_id = ${deckAlias}.id AND sub.user_id = $${userIdParam}
+     )))`;
+}
+
 export function getDueAndNewCards(
   userId: string,
   deckId: string,
@@ -52,7 +68,7 @@ export function getDueAndNewCards(
      FROM cards c
      JOIN decks d ON d.id = c.deck_id
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
-     WHERE c.deck_id = $2 AND c.user_id = $1
+     WHERE c.deck_id = $2 AND ${officialOrOwned("c", "d", 1)}
        AND (p.id IS NULL OR p.due_at <= now())
      ORDER BY
        CASE WHEN d.is_ordered THEN c.position END ASC NULLS LAST,
@@ -96,8 +112,9 @@ export function getSenseCardsForWords(
   return query<CardForStudy & { position: number; repetitions: number | null }>(
     `SELECT c.id, c.content, c.category, c.position, p.repetitions
      FROM cards c
+     JOIN decks d ON d.id = c.deck_id
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
-     WHERE c.deck_id = $2 AND c.user_id = $1
+     WHERE c.deck_id = $2 AND ${officialOrOwned("c", "d", 1)}
        AND c.content->'sense'->>'word' = ANY($3::text[])
      ORDER BY c.position ASC`,
     [userId, deckId, words],
@@ -110,7 +127,9 @@ export function cardBelongsToUser(
   client?: PoolClient,
 ) {
   return queryFirst<{ id: string }>(
-    "SELECT id FROM cards WHERE id = $1 AND user_id = $2",
+    `SELECT c.id FROM cards c
+     JOIN decks d ON d.id = c.deck_id
+     WHERE c.id = $1 AND ${officialOrOwned("c", "d", 2)}`,
     [cardId, userId],
     client,
   );
@@ -122,8 +141,9 @@ export async function getOwnedCardIds(
 ): Promise<Set<string>> {
   if (cardIds.length === 0) return new Set();
   const ownedCards = await query<{ id: string }>(
-    `SELECT id FROM cards
-     WHERE user_id = $1 AND id = ANY($2::uuid[])`,
+    `SELECT c.id FROM cards c
+     JOIN decks d ON d.id = c.deck_id
+     WHERE ${officialOrOwned("c", "d", 1)} AND c.id = ANY($2::uuid[])`,
     [userId, cardIds],
   );
   return new Set(ownedCards.map((card) => card.id));
