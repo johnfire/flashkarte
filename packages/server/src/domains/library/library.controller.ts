@@ -5,7 +5,7 @@ import { auditFromRequest } from "../audit/audit.service";
 import * as service from "./library.service";
 
 export const list = wrapAsync(async (req: Request, res: Response) => {
-  res.json({ decks: await service.list(req.query.q) });
+  res.json({ decks: await service.list(req.query) });
 });
 
 export const get = wrapAsync(async (req: Request, res: Response) => {

@@ -304,7 +304,6 @@
     "search": "Suchen",
     "loadError": "Die Bibliothek konnte nicht geladen werden",
     "cloneError": "Der Stapel konnte nicht kopiert werden",
-    "loading": "Wird geladen…",
     "empty": "Keine öffentlichen Stapel gefunden.",
     "cardsByAuthor_one": "{{count}} Karte · von {{author}}",
     "cardsByAuthor_other": "{{count}} Karten · von {{author}}",
@@ -360,7 +359,10 @@
       "assignDecksHeading": "Einzelne Stapel",
       "assignCollectionsHeading": "Sammlungen",
       "assignEmpty": "Keine Treffer",
-      "optionSubLabel": "{{parent}} › {{title}}"
+      "optionSubLabel": "{{parent}} › {{title}}",
+      "officialLabel": "App-Decks",
+      "libraryLabel": "Bibliothek",
+      "assignLibraryHeading": "Bibliotheks-Decks"
     }
   },
   "forgotPassword": {

@@ -1,7 +1,7 @@
 import { query, queryOne, withTransaction } from "../../db/client";
 import { ParsedCard, ParsedOption, CardSense } from "@flashkarte/shared";
 import type { PoolClient } from "pg";
-import { escapeLike } from "../library/library.repository";
+import { escapeLike, categoryFilterSql } from "../library/library.repository";
 
 export interface DeckRow {
   id: string;
@@ -344,25 +344,6 @@ export interface OfficialDeckRow {
 }
 
 /**
- * Appends a category-filter SQL fragment and its parameter (if any) to
- * `values`, returning the fragment to AND into a query's WHERE clause.
- * `undefined` = no filter (the flat, cross-category search box),
- * `null` = the uncategorized bucket, a string = one specific
- * category/subcategory id — this is how the App Decks page scopes each
- * collapsible category section to its own contents.
- */
-function categoryFilterSql(
-  column: string,
-  categoryId: string | null | undefined,
-  values: unknown[],
-): string {
-  if (categoryId === undefined) return "TRUE";
-  if (categoryId === null) return `${column} IS NULL`;
-  values.push(categoryId);
-  return `${column} = $${values.length}`;
-}
-
-/**
  * Standalone official decks (no collection), searchable and paginated for
  * the App Decks page. Includes decks the caller already subscribed to
  * (flagged, not hidden) so a page of results doesn't shift under them as
@@ -571,7 +552,9 @@ export function promoteToOfficial(
       collectionAssignment = `, collection_id = $${values.length - 1}, collection_position = $${values.length}`;
     }
     const deck = await client.query<DeckRow>(
-      `UPDATE decks SET user_id = $2, is_official = true, updated_at = now()${collectionAssignment}
+      `UPDATE decks
+         SET user_id = $2, is_official = true, is_public = false,
+             published_at = NULL, updated_at = now()${collectionAssignment}
        WHERE id = $1 RETURNING ${DECK_COLS}`,
       values,
     );
@@ -615,11 +598,16 @@ export function deleteDeck(userId: string, id: string) {
   );
 }
 
-/** Assign/clear an official deck's category. `categoryId: null` clears it. */
+/**
+ * Assign/clear a deck's category. `categoryId: null` clears it. Scoped to
+ * official decks (App Decks) and public decks (Library) — the only two
+ * places a category is ever browsable; an ordinary private deck has no use
+ * for one.
+ */
 export function setDeckCategory(deckId: string, categoryId: string | null) {
   return queryOne<{ id: string }>(
     `UPDATE decks SET category_id = $2, updated_at = now()
-     WHERE id = $1 AND is_official RETURNING id`,
+     WHERE id = $1 AND (is_official OR is_public) RETURNING id`,
     [deckId, categoryId],
   );
 }

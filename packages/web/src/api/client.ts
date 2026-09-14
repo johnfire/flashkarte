@@ -353,9 +353,9 @@ export const api = {
     tree: () => request<{ categories: DeckCategory[] }>("/categories"),
   },
   library: {
-    list: (q?: string) =>
-      request<{ decks: LibraryDeck[] }>(
-        `/library${q ? `?q=${encodeURIComponent(q)}` : ""}`,
+    list: (params?: BrowseParams) =>
+      request<{ decks: LibraryDeck[] }>(`/library${browseQuery(params)}`).then(
+        (r) => r.decks,
       ),
     get: (id: string) => request<LibraryDeckDetail>(`/library/${id}`),
     clone: (id: string) =>

@@ -90,6 +90,7 @@ describe("production deck SEO wiring", () => {
         author: "Chris",
         cardCount: 1,
         publishedAt: null,
+        categoryId: null,
       },
     ]);
     const res = await request(app()).get("/sitemap.xml");

@@ -86,7 +86,8 @@ export function CategoryRow({ category, onChanged }: CategoryRowProps) {
       <span>
         {category.title}{" "}
         <span className="text-sm text-gray-500 dark:text-gray-400">
-          ({category.itemCount})
+          ({category.officialCount} {t("admin.categories.officialLabel")} ·{" "}
+          {category.publicCount} {t("admin.categories.libraryLabel")})
         </span>
       </span>
       <span className="flex shrink-0 items-center gap-3 text-sm">

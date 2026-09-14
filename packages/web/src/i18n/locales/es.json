@@ -304,7 +304,6 @@
     "search": "Buscar",
     "loadError": "No se pudo cargar la biblioteca",
     "cloneError": "No se pudo copiar el mazo",
-    "loading": "Cargando…",
     "empty": "No se encontraron mazos públicos.",
     "cardsByAuthor_one": "{{count}} tarjeta · por {{author}}",
     "cardsByAuthor_other": "{{count}} tarjetas · por {{author}}",
@@ -360,7 +359,10 @@
       "assignDecksHeading": "Mazos individuales",
       "assignCollectionsHeading": "Colecciones",
       "assignEmpty": "Sin resultados",
-      "optionSubLabel": "{{parent}} › {{title}}"
+      "optionSubLabel": "{{parent}} › {{title}}",
+      "officialLabel": "Mazos de la app",
+      "libraryLabel": "Biblioteca",
+      "assignLibraryHeading": "Mazos de la biblioteca"
     }
   },
   "forgotPassword": {

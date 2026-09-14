@@ -12,7 +12,12 @@ export interface CategoryNode {
   id: string;
   title: string;
   parentId: string | null;
-  itemCount: number;
+  // Counted separately, not combined, so each browse page's badge reflects
+  // only what it actually displays: App Decks shows officialCount
+  // (collections + standalone official decks), Library shows publicCount
+  // (public, non-official decks).
+  officialCount: number;
+  publicCount: number;
   subcategories: CategoryNode[];
 }
 
@@ -126,18 +131,25 @@ function byTitle(a: { title: string }, b: { title: string }): number {
 const UNCATEGORIZED_ID = null;
 
 /** Full two-level tree with item counts, alphabetical at every level, for both the admin picker and the browse page. */
+interface Counts {
+  officialCount: number;
+  publicCount: number;
+}
+
+const ZERO_COUNTS: Counts = { officialCount: 0, publicCount: 0 };
+
 export async function getTree(): Promise<CategoryNode[]> {
   const [rows, counts] = await Promise.all([
     repo.listAll(),
     repo.countItemsPerCategory(),
   ]);
 
-  const countByCategory = new Map<string | null, number>();
+  const countByCategory = new Map<string | null, Counts>();
   for (const row of counts) {
-    countByCategory.set(
-      row.category_id,
-      Number(row.collection_count) + Number(row.deck_count),
-    );
+    countByCategory.set(row.category_id, {
+      officialCount: Number(row.collection_count) + Number(row.deck_count),
+      publicCount: Number(row.public_deck_count),
+    });
   }
 
   const subcategoriesByParent = new Map<string, CategoryNode[]>();
@@ -147,7 +159,7 @@ export async function getTree(): Promise<CategoryNode[]> {
       id: row.id,
       title: row.title,
       parentId: row.parent_id,
-      itemCount: countByCategory.get(row.id) ?? 0,
+      ...(countByCategory.get(row.id) ?? ZERO_COUNTS),
       subcategories: [],
     };
     const siblings = subcategoriesByParent.get(row.parent_id) ?? [];
@@ -161,7 +173,7 @@ export async function getTree(): Promise<CategoryNode[]> {
       id: row.id,
       title: row.title,
       parentId: null,
-      itemCount: countByCategory.get(row.id) ?? 0,
+      ...(countByCategory.get(row.id) ?? ZERO_COUNTS),
       subcategories: subcategoriesByParent.get(row.id) ?? [],
     }));
 
@@ -169,7 +181,7 @@ export async function getTree(): Promise<CategoryNode[]> {
     id: "uncategorized",
     title: "Uncategorized",
     parentId: UNCATEGORIZED_ID,
-    itemCount: countByCategory.get(null) ?? 0,
+    ...(countByCategory.get(null) ?? ZERO_COUNTS),
     subcategories: [],
   };
 

@@ -151,12 +151,27 @@ describe("remove", () => {
 });
 
 describe("getTree", () => {
-  test("nests subcategories, attaches counts, and appends an alphabetically-sorted Uncategorized entry", async () => {
+  test("nests subcategories, attaches per-page counts, and appends an alphabetically-sorted Uncategorized entry", async () => {
     mockedRepo.listAll.mockResolvedValue([TOP_LEVEL, SUB] as never);
     mockedRepo.countItemsPerCategory.mockResolvedValue([
-      { category_id: "cat-1", collection_count: "2", deck_count: "1" },
-      { category_id: "cat-2", collection_count: "0", deck_count: "3" },
-      { category_id: null, collection_count: "1", deck_count: "0" },
+      {
+        category_id: "cat-1",
+        collection_count: "2",
+        deck_count: "1",
+        public_deck_count: "4",
+      },
+      {
+        category_id: "cat-2",
+        collection_count: "0",
+        deck_count: "3",
+        public_deck_count: "0",
+      },
+      {
+        category_id: null,
+        collection_count: "1",
+        deck_count: "0",
+        public_deck_count: "2",
+      },
     ] as never);
 
     const tree = await getTree();
@@ -166,14 +181,20 @@ describe("getTree", () => {
       "Uncategorized",
     ]);
     const languageLearning = tree[0];
-    expect(languageLearning.itemCount).toBe(3);
+    expect(languageLearning.officialCount).toBe(3);
+    expect(languageLearning.publicCount).toBe(4);
     expect(languageLearning.subcategories).toHaveLength(1);
     expect(languageLearning.subcategories[0]).toMatchObject({
       id: "cat-2",
       title: "German",
-      itemCount: 3,
+      officialCount: 3,
+      publicCount: 0,
     });
-    expect(tree[1]).toMatchObject({ id: "uncategorized", itemCount: 1 });
+    expect(tree[1]).toMatchObject({
+      id: "uncategorized",
+      officialCount: 1,
+      publicCount: 2,
+    });
   });
 });
 

@@ -85,24 +85,32 @@ export interface CategoryCountRow {
   category_id: string | null;
   collection_count: string;
   deck_count: string;
+  public_deck_count: string;
 }
 
 /**
- * Items placed directly on each category/subcategory (collections, plus
- * standalone official decks — decks inside a collection are reached through
- * it, not counted separately). `category_id: null` is the uncategorized
+ * Items placed directly on each category/subcategory, broken out by which
+ * browse page shows them: App Decks (collections + standalone official
+ * decks — decks inside a collection are reached through it, not counted
+ * separately) vs. the public Library (public, non-official decks). Kept
+ * separate rather than one combined total so each page's badge reflects
+ * only what it actually displays. `category_id: null` is the uncategorized
  * bucket, grouped the same way any other value is.
  */
 export function countItemsPerCategory() {
   return query<CategoryCountRow>(
     `SELECT category_id,
        count(*) FILTER (WHERE kind = 'collection') AS collection_count,
-       count(*) FILTER (WHERE kind = 'deck') AS deck_count
+       count(*) FILTER (WHERE kind = 'deck') AS deck_count,
+       count(*) FILTER (WHERE kind = 'public_deck') AS public_deck_count
      FROM (
        SELECT category_id, 'collection' AS kind FROM deck_collections
        UNION ALL
        SELECT category_id, 'deck' AS kind FROM decks
        WHERE is_official AND collection_id IS NULL
+       UNION ALL
+       SELECT category_id, 'public_deck' AS kind FROM decks
+       WHERE is_public AND NOT is_official
      ) items
      GROUP BY category_id`,
   );

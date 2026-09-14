@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../../api/client";
-import { DeckCategory, DeckCollection, OfficialDeck } from "../../api/types";
+import {
+  DeckCategory,
+  DeckCollection,
+  LibraryDeck,
+  OfficialDeck,
+} from "../../api/types";
 import { flattenCategoryOptions } from "./categoryOptions";
 import { AssignableItemRow } from "./AssignableItemRow";
 
@@ -10,16 +15,18 @@ interface CategoryAssignPanelProps {
 }
 
 /**
- * Search official decks and collections, then assign each a category via a
- * flat "Category" / "Category › Subcategory" dropdown. Lets Chris file
- * existing official content into categories without needing a promote/demote
- * UI — that flow stays API-only, out of scope here.
+ * Search official decks/collections (App Decks) and public decks (Library),
+ * then assign each a category via a flat "Category" / "Category ›
+ * Subcategory" dropdown. Lets Chris file existing content into categories
+ * without needing a promote/demote or publish UI — those flows stay
+ * API-only, out of scope here.
  */
 export function CategoryAssignPanel({ categories }: CategoryAssignPanelProps) {
   const { t } = useTranslation();
   const [q, setQ] = useState("");
   const [decks, setDecks] = useState<OfficialDeck[] | null>(null);
   const [collections, setCollections] = useState<DeckCollection[] | null>(null);
+  const [libraryDecks, setLibraryDecks] = useState<LibraryDeck[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const options = flattenCategoryOptions(categories);
@@ -29,12 +36,15 @@ export function CategoryAssignPanel({ categories }: CategoryAssignPanelProps) {
     setLoading(true);
     setError(null);
     try {
-      const [deckResults, collectionResults] = await Promise.all([
-        api.decks.listOfficial({ q, limit: 50 }),
-        api.decks.listCollections({ q, limit: 50 }),
-      ]);
+      const [deckResults, collectionResults, libraryResults] =
+        await Promise.all([
+          api.decks.listOfficial({ q, limit: 50 }),
+          api.decks.listCollections({ q, limit: 50 }),
+          api.library.list({ q, limit: 50 }),
+        ]);
       setDecks(deckResults);
       setCollections(collectionResults);
+      setLibraryDecks(libraryResults);
     } catch (err) {
       setError(
         err instanceof ApiError
@@ -49,8 +59,10 @@ export function CategoryAssignPanel({ categories }: CategoryAssignPanelProps) {
   const isEmpty =
     decks !== null &&
     collections !== null &&
+    libraryDecks !== null &&
     decks.length === 0 &&
-    collections.length === 0;
+    collections.length === 0 &&
+    libraryDecks.length === 0;
 
   return (
     <div>
@@ -102,7 +114,7 @@ export function CategoryAssignPanel({ categories }: CategoryAssignPanelProps) {
       )}
 
       {decks !== null && decks.length > 0 && (
-        <div>
+        <div className="mb-4">
           <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
             {t("admin.categories.assignDecksHeading")}
           </h4>
@@ -112,6 +124,27 @@ export function CategoryAssignPanel({ categories }: CategoryAssignPanelProps) {
                 key={d.id}
                 title={d.title}
                 categoryId={d.category_id}
+                options={options}
+                onAssign={(categoryId) =>
+                  api.admin.setDeckCategory(d.id, categoryId)
+                }
+              />
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {libraryDecks !== null && libraryDecks.length > 0 && (
+        <div>
+          <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+            {t("admin.categories.assignLibraryHeading")}
+          </h4>
+          <ul className="space-y-2">
+            {libraryDecks.map((d) => (
+              <AssignableItemRow
+                key={d.id}
+                title={d.title}
+                categoryId={d.categoryId}
                 options={options}
                 onAssign={(categoryId) =>
                   api.admin.setDeckCategory(d.id, categoryId)

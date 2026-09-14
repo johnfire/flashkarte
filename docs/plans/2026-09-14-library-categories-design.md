@@ -125,3 +125,64 @@ out of scope for this change.
 - Retroactively re-sorting/relocating the six existing CEFR decks/their
   collection into a category — left uncategorized until Chris assigns one
   via the new admin UI.
+
+---
+
+## Addendum (same day): extended to the public Library page
+
+Chris asked for the same organization on `/library` — the public library of
+user-published decks (`decks.is_public`, migration 006), distinct from
+App Decks' admin-curated content — plus a real fix: promoting a deck to
+official didn't clear `is_public`/`published_at`, so a deck that was public
+before promotion (the six original CEFR decks) kept leaking into Library as
+a duplicate of what App Decks already showed.
+
+### Decisions
+
+- Library reuses the **same** `deck_categories` tree as App Decks — one
+  category system app-wide, not a parallel one.
+- Only Chris assigns a category to a Library deck (via the admin panel),
+  matching App Decks — a deck's owner never picks one at publish time.
+- Official decks are excluded from Library outright: `listPublic` now
+  filters `is_public AND NOT is_official`, and `promoteToOfficial` clears
+  `is_public = false, published_at = NULL` at promotion time so the data
+  stays honest going forward, not just filtered at query time.
+
+### Data model
+
+No new tables — `decks.category_id` (added in the base migration) is
+already usable for public decks with zero schema work, since public and
+official decks live in the same `decks` table.
+
+### API
+
+- `listPublic`/`GET /library` and `GET /public/library` (the same query,
+  shared by both routes) gain the same `categoryId` filter and real
+  `limit`/`offset` pagination as the App Decks endpoints, replacing the old
+  flat `LIMIT 100`. Sort switched from `published_at DESC` to
+  `title COLLATE de_phonebook ASC`, matching App Decks.
+- `GET /categories` is unchanged and reused as-is by Library.
+- Item counts are no longer a single combined number: `CategoryNode` now
+  carries `officialCount` (collections + standalone official decks) and
+  `publicCount` (Library decks) separately, so each page's badge reflects
+  only what it actually displays instead of a misleading combined total.
+- `setDeckCategory` broadened from official-only to
+  `WHERE is_official OR is_public`, so it also works on Library decks.
+- The shared `categoryFilterSql` SQL-fragment helper moved from
+  `decks.repository.ts` into `library.repository.ts` (alongside the
+  existing `escapeLike`) since it's now used by both domains — one home for
+  generic browse-query helpers, matching the existing pattern.
+
+### UI
+
+- `CategorySection` (the collapsible tree-node shell) was generalized to
+  accept `getItemCount`/`renderContents` props instead of hardcoding the
+  App-Decks-specific contents component, so both pages share the
+  expand/collapse/alphabetical-tree logic with no duplication.
+- `/library` gets the same shape as `/app-decks`: a category tree by
+  default, lazy-loaded per section (`LibraryCategoryContents`), and a flat
+  cross-category search fallback (`LibrarySearchResults`) — both reusing a
+  new `LibraryDeckRow` for the actual deck+Clone-button row.
+- Admin's "Assign categories" panel gained a third results section
+  (Library decks, searched via the same box) alongside the existing
+  Collections/Standalone-decks sections.

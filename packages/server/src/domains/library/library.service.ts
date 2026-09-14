@@ -13,15 +13,37 @@ export interface LibraryDeck {
   author: string;
   cardCount: number;
   publishedAt: string | null;
+  categoryId: string | null;
 }
 
-const librarySearchSchema = z.preprocess(
-  (searchInput) =>
-    typeof searchInput === "string" && searchInput.trim()
-      ? searchInput.trim()
-      : null,
-  z.string().nullable(),
-);
+// Shared by list(): an optional title search plus limit/offset/categoryId,
+// matching the App Decks browse endpoints' shape (decks.service.ts) so both
+// pages page and filter the same way. Default limit of 100 preserves the
+// previous unpaginated cap for the unauthenticated Explore page, which
+// doesn't page through results.
+const paginationSchema = z.object({
+  q: z.preprocess(
+    (v) => (typeof v === "string" && v.trim() ? v.trim() : null),
+    z.string().nullable(),
+  ),
+  limit: z.coerce
+    .number({ error: "limit must be a number" })
+    .int()
+    .min(1)
+    .max(200)
+    .optional()
+    .default(100),
+  offset: z.coerce
+    .number({ error: "offset must be a number" })
+    .int()
+    .min(0)
+    .optional()
+    .default(0),
+  categoryId: z.preprocess(
+    (v) => (typeof v === "string" && v.trim() ? v.trim() : undefined),
+    z.string().optional(),
+  ),
+});
 
 function toLibraryDeck(row: repo.LibraryDeckRow): LibraryDeck {
   return {
@@ -32,12 +54,19 @@ function toLibraryDeck(row: repo.LibraryDeckRow): LibraryDeck {
     publishedAt: row.published_at
       ? new Date(row.published_at).toISOString()
       : null,
+    categoryId: row.category_id,
   };
 }
 
-export async function list(q: unknown): Promise<LibraryDeck[]> {
-  const search = parse(librarySearchSchema, q);
-  const rows = await repo.listPublic(search);
+export async function list(query: unknown): Promise<LibraryDeck[]> {
+  const { q, limit, offset, categoryId } = parse(paginationSchema, query ?? {});
+  const categoryFilter: string | null | undefined =
+    categoryId === undefined
+      ? undefined
+      : categoryId === "uncategorized"
+        ? null
+        : categoryId;
+  const rows = await repo.listPublic(q, limit, offset, categoryFilter);
   return rows.map(toLibraryDeck);
 }
 

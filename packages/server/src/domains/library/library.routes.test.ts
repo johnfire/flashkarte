@@ -50,12 +50,15 @@ describe("library routes", () => {
         author: "Chris",
         cardCount: 50,
         publishedAt: "2026-06-05T00:00:00.000Z",
+        categoryId: null,
       },
     ]);
     const res = await request(app).get("/api/library?q=ai");
     expect(res.status).toBe(200);
     expect(res.body.decks[0].title).toBe("AI Terms");
-    expect(mock.list).toHaveBeenCalledWith("ai");
+    expect(mock.list).toHaveBeenCalledWith(
+      expect.objectContaining({ q: "ai" }),
+    );
   });
 
   test("GET /api/library/:id -> 200 with cards", async () => {

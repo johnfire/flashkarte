@@ -49,13 +49,15 @@ const TREE = [
     id: "cat-1",
     title: "Language Learning",
     parentId: null,
-    itemCount: 3,
+    officialCount: 3,
+    publicCount: 0,
     subcategories: [
       {
         id: "cat-2",
         title: "German",
         parentId: "cat-1",
-        itemCount: 3,
+        officialCount: 3,
+        publicCount: 0,
         subcategories: [],
       },
     ],
@@ -64,7 +66,8 @@ const TREE = [
     id: "uncategorized",
     title: "Uncategorized",
     parentId: null,
-    itemCount: 1,
+    officialCount: 1,
+    publicCount: 0,
     subcategories: [],
   },
 ];

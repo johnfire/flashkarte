@@ -5,7 +5,13 @@ import { api, ApiError } from "../api/client";
 import { DeckCategory } from "../api/types";
 import { useAsync } from "../hooks/use-async";
 import { CategorySection } from "./CategorySection";
+import { CategoryContents } from "./CategoryContents";
 import { AppDecksSearchResults } from "./AppDecksSearchResults";
+
+const getOfficialCount = (category: DeckCategory) => category.officialCount;
+const renderOfficialContents = (categoryId: string) => (
+  <CategoryContents categoryId={categoryId} />
+);
 
 export function AppDecksPage() {
   const { t } = useTranslation();
@@ -74,7 +80,12 @@ export function AppDecksPage() {
           {treeResponse && (
             <ul className="space-y-3">
               {treeResponse.categories.map((category: DeckCategory) => (
-                <CategorySection key={category.id} category={category} />
+                <CategorySection
+                  key={category.id}
+                  category={category}
+                  getItemCount={getOfficialCount}
+                  renderContents={renderOfficialContents}
+                />
               ))}
             </ul>
           )}

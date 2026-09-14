@@ -304,7 +304,6 @@
     "search": "Rechercher",
     "loadError": "Impossible de charger la bibliothèque",
     "cloneError": "Impossible de copier le paquet",
-    "loading": "Chargement…",
     "empty": "Aucun paquet public trouvé.",
     "cardsByAuthor_one": "{{count}} carte · par {{author}}",
     "cardsByAuthor_other": "{{count}} cartes · par {{author}}",
@@ -360,7 +359,10 @@
       "assignDecksHeading": "Paquets autonomes",
       "assignCollectionsHeading": "Collections",
       "assignEmpty": "Aucun résultat",
-      "optionSubLabel": "{{parent}} › {{title}}"
+      "optionSubLabel": "{{parent}} › {{title}}",
+      "officialLabel": "Decks de l'appli",
+      "libraryLabel": "Bibliothèque",
+      "assignLibraryHeading": "Paquets de la bibliothèque"
     }
   },
   "forgotPassword": {

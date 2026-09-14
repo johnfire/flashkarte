@@ -32,6 +32,7 @@ export interface LibraryDeck {
   author: string;
   cardCount: number;
   publishedAt: string | null;
+  categoryId: string | null;
 }
 
 export interface LibraryDeckDetail extends LibraryDeck {
@@ -81,16 +82,20 @@ export interface DeckCollectionDetail {
 }
 
 /**
- * A node in the two-level category tree for the App Decks page.
- * `id: "uncategorized"` is a synthetic entry (not a real category row) for
- * items with no category assigned; render its title from local i18n rather
- * than the server's placeholder text.
+ * A node in the two-level category tree, shared by the App Decks and
+ * Library browse pages. `id: "uncategorized"` is a synthetic entry (not a
+ * real category row) for items with no category assigned; render its title
+ * from local i18n rather than the server's placeholder text. `officialCount`
+ * and `publicCount` are kept separate (not summed) so each page's badge
+ * reflects only what it actually displays — App Decks shows officialCount,
+ * Library shows publicCount.
  */
 export interface DeckCategory {
   id: string;
   title: string;
   parentId: string | null;
-  itemCount: number;
+  officialCount: number;
+  publicCount: number;
   subcategories: DeckCategory[];
 }
 

@@ -17,7 +17,14 @@ const app = createApp();
 describe("public library API", () => {
   it("GET /api/public/library lists decks (no auth)", async () => {
     mock.list.mockResolvedValue([
-      { id: "d1", title: "T", author: "A", cardCount: 2, publishedAt: null },
+      {
+        id: "d1",
+        title: "T",
+        author: "A",
+        cardCount: 2,
+        publishedAt: null,
+        categoryId: null,
+      },
     ]);
     const res = await request(app).get("/api/public/library");
     expect(res.status).toBe(200);

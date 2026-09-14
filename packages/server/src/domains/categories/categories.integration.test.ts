@@ -3,6 +3,7 @@ import { runMigrations } from "../../db/migrate";
 import * as categoriesRepo from "./categories.repository";
 import * as categoriesService from "./categories.service";
 import * as decksRepo from "../decks/decks.repository";
+import * as libraryRepo from "../library/library.repository";
 import { ConflictError } from "../../utils/errors";
 
 const OWNER_ID = "10000000-0000-4000-8000-0000000000a1";
@@ -131,6 +132,13 @@ describe("browse filtering and counts", () => {
       [decksRepo.SYSTEM_ACCOUNT_ID],
     );
 
+    // A public (non-official) Library deck, also filed under "German".
+    const publicDeck = await getPool().query<{ id: string }>(
+      `INSERT INTO decks (user_id, title, is_public, category_id)
+       VALUES ($1, 'Deutsch für Anfänger', true, $2) RETURNING id`,
+      [OWNER_ID, german.id],
+    );
+
     const inGerman = await decksRepo.listOfficialCollections(
       null,
       50,
@@ -168,10 +176,21 @@ describe("browse filtering and counts", () => {
 
     const tree = await categoriesService.getTree();
     const topLevel = tree.find((c) => c.id === languageLearning.id)!;
-    expect(topLevel.itemCount).toBe(1); // the standalone deck placed directly on it
-    expect(topLevel.subcategories[0].itemCount).toBe(1); // the collection under "German"
+    expect(topLevel.officialCount).toBe(1); // the standalone deck placed directly on it
+    expect(topLevel.publicCount).toBe(0);
+    const germanNode = topLevel.subcategories[0];
+    expect(germanNode.officialCount).toBe(1); // the collection under "German"
+    expect(germanNode.publicCount).toBe(1); // the public Library deck under "German"
     const uncategorized = tree.find((c) => c.id === "uncategorized")!;
-    expect(uncategorized.itemCount).toBe(1);
+    expect(uncategorized.officialCount).toBe(1);
+
+    const libraryInGerman = await libraryRepo.listPublic(
+      null,
+      50,
+      0,
+      german.id,
+    );
+    expect(libraryInGerman.map((d) => d.id)).toEqual([publicDeck.rows[0].id]);
   });
 
   test("category deletion clears the category_id on decks and collections it held (ON DELETE SET NULL)", async () => {

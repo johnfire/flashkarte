@@ -129,6 +129,25 @@ describe("official decks", () => {
     const result = await decksRepo.subscribeOfficial(SUBSCRIBER_ID, DECK_ID);
     expect(result).toBe(false);
   });
+
+  test("promoting a previously-public deck unpublishes it — no duplicate showing on both App Decks and Library", async () => {
+    await decksRepo.setDeckPublic(OWNER_ID, DECK_ID, true);
+    const beforePromote = await getPool().query(
+      "SELECT is_public FROM decks WHERE id = $1",
+      [DECK_ID],
+    );
+    expect(beforePromote.rows[0].is_public).toBe(true);
+
+    const promoted = await decksRepo.promoteToOfficial(DECK_ID);
+    expect(promoted?.is_official).toBe(true);
+
+    const afterPromote = await getPool().query(
+      "SELECT is_public, published_at FROM decks WHERE id = $1",
+      [DECK_ID],
+    );
+    expect(afterPromote.rows[0].is_public).toBe(false);
+    expect(afterPromote.rows[0].published_at).toBeNull();
+  });
 });
 
 describe("deck collections", () => {

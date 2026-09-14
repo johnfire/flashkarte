@@ -2,53 +2,67 @@ import { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
-import { LibraryDeck } from "../api/types";
+import { DeckCategory } from "../api/types";
 import { useAsync } from "../hooks/use-async";
+import { CategorySection } from "./CategorySection";
+import { LibraryCategoryContents } from "./LibraryCategoryContents";
+import { LibrarySearchResults } from "./LibrarySearchResults";
+
+const getPublicCount = (category: DeckCategory) => category.publicCount;
 
 export function LibraryPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [q, setQ] = useState("");
-  const [cloning, setCloning] = useState<string | null>(null);
-  const [mutationError, setMutationError] = useState<string | null>(null);
+  const [activeQuery, setActiveQuery] = useState<string | null>(null);
+  const [cloningId, setCloningId] = useState<string | null>(null);
+  const [cloneError, setCloneError] = useState<string | null>(null);
 
-  const loadDecks = useCallback(async (search: string) => {
-    const response = await api.library.list(search.trim() || undefined);
-    return response.decks;
-  }, []);
+  const loadTree = useCallback(() => api.categories.tree(), []);
   const {
-    data: decks,
-    error: loadError,
-    loading,
-    reload,
-  } = useAsync<LibraryDeck[], [string]>(loadDecks, [""]);
-  const error =
-    mutationError ??
-    (loadError instanceof ApiError
-      ? loadError.message
-      : loadError
-        ? t("library.loadError")
-        : null);
+    data: treeResponse,
+    error: treeError,
+    loading: treeLoading,
+  } = useAsync(loadTree, []);
 
-  function onSearch(e: React.FormEvent) {
+  function onSearchSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setMutationError(null);
-    void reload(q);
+    const query = q.trim();
+    setActiveQuery(query || null);
   }
 
-  async function clone(id: string) {
-    setCloning(id);
-    setMutationError(null);
+  async function onClone(id: string) {
+    setCloningId(id);
+    setCloneError(null);
     try {
       const deck = await api.library.clone(id);
       navigate(`/decks/${deck.id}/study`);
     } catch (err) {
-      setMutationError(
+      setCloneError(
         err instanceof ApiError ? err.message : t("library.cloneError"),
       );
-      setCloning(null);
+      setCloningId(null);
     }
   }
+
+  const renderPublicContents = useCallback(
+    (categoryId: string) => (
+      <LibraryCategoryContents
+        categoryId={categoryId}
+        cloningId={cloningId}
+        onClone={onClone}
+      />
+    ),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [cloningId],
+  );
+
+  const treeErrorMessage =
+    treeError instanceof ApiError
+      ? treeError.message
+      : treeError
+        ? t("decks.categoriesLoadError")
+        : null;
 
   return (
     <div className="mx-auto max-w-2xl p-4">
@@ -64,7 +78,7 @@ export function LibraryPage() {
         </div>
       </header>
 
-      <form onSubmit={onSearch} className="mb-6 flex gap-2">
+      <form onSubmit={onSearchSubmit} className="mb-6 flex gap-2">
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
@@ -79,41 +93,38 @@ export function LibraryPage() {
         </button>
       </form>
 
-      {error && <p className="mb-4 text-red-600">{error}</p>}
-      {loading && !error && (
-        <p className="text-gray-500 dark:text-gray-400">
-          {t("library.loading")}
-        </p>
-      )}
-      {decks && decks.length === 0 && !error && (
-        <p className="text-gray-500 dark:text-gray-400">{t("library.empty")}</p>
-      )}
+      {cloneError && <p className="mb-4 text-red-600">{cloneError}</p>}
 
-      <ul className="space-y-2">
-        {decks?.map((d) => (
-          <li
-            key={d.id}
-            className="flex items-center justify-between gap-3 rounded-lg border p-3"
-          >
-            <div className="min-w-0">
-              <p className="truncate font-medium">{d.title}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {t("library.cardsByAuthor", {
-                  count: d.cardCount,
-                  author: d.author,
-                })}
-              </p>
-            </div>
-            <button
-              onClick={() => clone(d.id)}
-              disabled={cloning === d.id}
-              className="shrink-0 rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white disabled:opacity-50"
-            >
-              {cloning === d.id ? t("library.cloning") : t("library.clone")}
-            </button>
-          </li>
-        ))}
-      </ul>
+      {activeQuery !== null ? (
+        <LibrarySearchResults
+          q={activeQuery}
+          cloningId={cloningId}
+          onClone={onClone}
+        />
+      ) : (
+        <>
+          {treeLoading && (
+            <p className="text-gray-500 dark:text-gray-400">
+              {t("common.loading")}
+            </p>
+          )}
+          {treeErrorMessage && (
+            <p className="mb-4 text-red-600">{treeErrorMessage}</p>
+          )}
+          {treeResponse && (
+            <ul className="space-y-3">
+              {treeResponse.categories.map((category: DeckCategory) => (
+                <CategorySection
+                  key={category.id}
+                  category={category}
+                  getItemCount={getPublicCount}
+                  renderContents={renderPublicContents}
+                />
+              ))}
+            </ul>
+          )}
+        </>
+      )}
     </div>
   );
 }

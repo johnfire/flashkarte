@@ -19,6 +19,9 @@ vi.mock("../../api/client", () => ({
       listOfficial: vi.fn(),
       listCollections: vi.fn(),
     },
+    library: {
+      list: vi.fn(),
+    },
   },
   ApiError: class ApiError extends Error {
     constructor(_status: number, _code: string, message: string) {
@@ -39,6 +42,9 @@ const mockedDecks = api.decks as unknown as {
   listOfficial: ReturnType<typeof vi.fn>;
   listCollections: ReturnType<typeof vi.fn>;
 };
+const mockedLibrary = api.library as unknown as {
+  list: ReturnType<typeof vi.fn>;
+};
 
 const TREE = {
   categories: [
@@ -46,13 +52,15 @@ const TREE = {
       id: "cat-1",
       title: "Language Learning",
       parentId: null,
-      itemCount: 0,
+      officialCount: 0,
+      publicCount: 0,
       subcategories: [
         {
           id: "cat-2",
           title: "German",
           parentId: "cat-1",
-          itemCount: 0,
+          officialCount: 0,
+          publicCount: 0,
           subcategories: [],
         },
       ],
@@ -61,7 +69,8 @@ const TREE = {
       id: "uncategorized",
       title: "Uncategorized",
       parentId: null,
-      itemCount: 1,
+      officialCount: 1,
+      publicCount: 0,
       subcategories: [],
     },
   ],
@@ -72,6 +81,7 @@ beforeEach(() => {
   mockedAdmin.categoryTree.mockResolvedValue(TREE);
   mockedDecks.listOfficial.mockResolvedValue([]);
   mockedDecks.listCollections.mockResolvedValue([]);
+  mockedLibrary.list.mockResolvedValue([]);
 });
 
 describe("CategoriesSection", () => {
@@ -170,6 +180,37 @@ describe("CategoriesSection", () => {
       expect(mockedAdmin.setDeckCategory).toHaveBeenCalledWith(
         "deck-1",
         "cat-2",
+      ),
+    );
+  });
+
+  test("assigning a category to a found Library deck also calls setDeckCategory", async () => {
+    mockedLibrary.list.mockResolvedValue([
+      {
+        id: "pub-1",
+        title: "Kanji Basics",
+        author: "Chris",
+        cardCount: 20,
+        publishedAt: "2026-01-01T00:00:00.000Z",
+        categoryId: null,
+      },
+    ]);
+    mockedAdmin.setDeckCategory.mockResolvedValue(undefined);
+    render(<CategoriesSection />);
+    await screen.findByText("Language Learning");
+
+    await userEvent.type(
+      screen.getByPlaceholderText("Search official decks and collections…"),
+      "Kanji",
+    );
+    await userEvent.click(screen.getByRole("button", { name: "Search" }));
+    await screen.findByText("Kanji Basics");
+
+    await userEvent.selectOptions(screen.getByRole("combobox"), "cat-1");
+    await waitFor(() =>
+      expect(mockedAdmin.setDeckCategory).toHaveBeenCalledWith(
+        "pub-1",
+        "cat-1",
       ),
     );
   });
