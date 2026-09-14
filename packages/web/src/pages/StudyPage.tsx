@@ -13,6 +13,7 @@ import { useCardSpeech } from "../speech/useCardSpeech";
 import { SpeakButton } from "../speech/SpeakButton";
 import { StudyNotice } from "./StudyNotice";
 import { StudyControls } from "./StudyControls";
+import { CardText } from "../components/CardText";
 
 /**
  * Web studies cards by flipping front → back. A branch card (a decision-tree
@@ -192,7 +193,9 @@ export function StudyPage() {
           </p>
         )}
         <div className="flex items-start justify-between gap-2">
-          <p className="text-lg font-medium">{cardPrompt(card)}</p>
+          <p className="text-lg font-medium">
+            <CardText text={cardPrompt(card)} />
+          </p>
           {speech.frontLang && (
             <SpeakButton
               lang={speech.frontLang}
@@ -203,7 +206,7 @@ export function StudyPage() {
         {revealed && (
           <div className="mt-6 flex items-start justify-between gap-2 border-t pt-6">
             <p className="whitespace-pre-wrap text-gray-700 dark:text-gray-300">
-              {card.content.back}
+              <CardText text={card.content.back} />
             </p>
             {speech.backLang && (
               <SpeakButton

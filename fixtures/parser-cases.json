@@ -112,6 +112,36 @@
           { "front": "FOO — Bar", "back": "Definition.", "category": null }
         ]
       }
+    },
+    {
+      "name": "image markdown alone on a line survives cleanBack verbatim",
+      "input": "# D\n\n**1. Voltage divider**\n![schematic](/schematics/ch1-voltage-divider.svg)\n",
+      "source": "images.md",
+      "expected": {
+        "title": "D",
+        "cards": [
+          {
+            "front": "Voltage divider",
+            "back": "![schematic](/schematics/ch1-voltage-divider.svg)",
+            "category": null
+          }
+        ]
+      }
+    },
+    {
+      "name": "image markdown inline with text survives paragraph joining",
+      "input": "# D\n\n**1. RC lowpass**\nSee below: ![schematic](https://example.com/x.svg)\nAn RC lowpass filter.\n",
+      "source": "images.md",
+      "expected": {
+        "title": "D",
+        "cards": [
+          {
+            "front": "RC lowpass",
+            "back": "See below: ![schematic](https://example.com/x.svg) An RC lowpass filter.",
+            "category": null
+          }
+        ]
+      }
     }
   ]
 }

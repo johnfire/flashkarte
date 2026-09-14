@@ -5,6 +5,7 @@ import { extractDeckId } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";
 import { PublicDeckPreview } from "../api/types";
 import { useDocumentHead } from "../seo/useDocumentHead";
+import { CardText } from "../components/CardText";
 
 export function PublicDeckPage() {
   const { t } = useTranslation();
@@ -71,7 +72,7 @@ export function PublicDeckPage() {
       <ul className="mt-6 space-y-2">
         {deck.cards.map((c, i) => (
           <li key={i} className="rounded-lg border p-3">
-            {c.front}
+            <CardText text={c.front} />
           </li>
         ))}
       </ul>

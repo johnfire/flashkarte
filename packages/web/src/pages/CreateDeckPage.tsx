@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { parseDeck } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";
+import { CardText } from "../components/CardText";
 
 export function CreateDeckPage() {
   const { t } = useTranslation();
@@ -96,7 +97,9 @@ export function CreateDeckPage() {
                 </p>
                 <ul className="mt-1 list-disc pl-5 text-gray-600 dark:text-gray-300">
                   {preview.cards.slice(0, 3).map((c, i) => (
-                    <li key={i}>{c.front}</li>
+                    <li key={i}>
+                      <CardText text={c.front} />
+                    </li>
                   ))}
                 </ul>
               </>

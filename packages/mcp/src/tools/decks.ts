@@ -11,6 +11,15 @@ const MARKDOWN_HELP =
   '# French Basics\n## Greetings\n**1. How do you say "hello"?**\nBonjour\n' +
   '**2. How do you say "thank you"?**\nMerci';
 
+const IMAGES_HELP =
+  "Images: `![alt](url)` in a front or back renders as an image, where url is " +
+  "either an `https://` link or a root-relative path served by the app itself " +
+  "(e.g. a bundled diagram at `/schematics/foo.svg`). Any other URL scheme " +
+  "(data:, javascript:, etc.) is shown as literal text, not rendered. Use this " +
+  "sparingly — only when a picture genuinely clarifies something text can't, " +
+  "such as a multi-component circuit topology, e.g. `![RC lowpass filter]" +
+  "(/schematics/ch1-rc-lowpass.svg)`.";
+
 const SENSES_HELP =
   "Words with several distinct meanings: instead of one card listing them all, " +
   "write the headword once and give each meaning its own line as " +
@@ -130,6 +139,8 @@ export function registerDeckTools(server: McpServer) {
     "Create a new flashcard deck from Markdown in the user's flashkarte account. " +
       MARKDOWN_HELP +
       "\n\n" +
+      IMAGES_HELP +
+      "\n\n" +
       SENSES_HELP +
       "\n\n" +
       SPEECH_HELP,
@@ -177,6 +188,8 @@ export function registerDeckTools(server: McpServer) {
     "add_cards",
     "Append more cards (in the Markdown card format) to an existing deck. " +
       MARKDOWN_HELP +
+      "\n\n" +
+      IMAGES_HELP +
       "\n\n" +
       SENSES_HELP,
     {
