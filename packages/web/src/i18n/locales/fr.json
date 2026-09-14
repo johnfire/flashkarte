@@ -362,7 +362,12 @@
       "optionSubLabel": "{{parent}} › {{title}}",
       "officialLabel": "Decks de l'appli",
       "libraryLabel": "Bibliothèque",
-      "assignLibraryHeading": "Paquets de la bibliothèque"
+      "assignLibraryHeading": "Paquets de la bibliothèque",
+      "quickTitle": "Catégoriser rapidement",
+      "quickTargetLabel": "Catégoriser dans",
+      "quickTargetPlaceholder": "Choisir une catégorie…",
+      "quickHint": "Choisissez une catégorie ci-dessus, puis cliquez sur un élément ci-dessous pour le classer instantanément.",
+      "quickEmpty": "Tout est à jour — rien à catégoriser ici."
     }
   },
   "forgotPassword": {

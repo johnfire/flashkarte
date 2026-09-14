@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../../api/client";
 import { useAsync } from "../../hooks/use-async";
 import { CategoriesPanel } from "./CategoriesPanel";
+import { CategorizeTriagePanel } from "./CategorizeTriagePanel";
 import { CategoryAssignPanel } from "./CategoryAssignPanel";
 
 /** Category management + assignment, as one admin-page section. Owns the shared tree fetch both panels need. */
@@ -32,6 +33,7 @@ export function CategoriesSection() {
             categories={data.categories}
             onChanged={() => void reload()}
           />
+          <CategorizeTriagePanel categories={data.categories} />
           <CategoryAssignPanel categories={data.categories} />
         </div>
       )}

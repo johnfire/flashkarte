@@ -362,7 +362,12 @@
       "optionSubLabel": "{{parent}} › {{title}}",
       "officialLabel": "Mazos de la app",
       "libraryLabel": "Biblioteca",
-      "assignLibraryHeading": "Mazos de la biblioteca"
+      "assignLibraryHeading": "Mazos de la biblioteca",
+      "quickTitle": "Categorizar rápido",
+      "quickTargetLabel": "Categorizar en",
+      "quickTargetPlaceholder": "Elige una categoría…",
+      "quickHint": "Elige una categoría arriba y luego haz clic en cualquier elemento de abajo para archivarlo allí al instante.",
+      "quickEmpty": "Todo al día — no hay nada sin categorizar aquí."
     }
   },
   "forgotPassword": {

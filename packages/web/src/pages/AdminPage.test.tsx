@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, test, vi } from "vitest";
@@ -18,6 +18,9 @@ vi.mock("../api/client", () => ({
     decks: {
       listOfficial: vi.fn(),
       listCollections: vi.fn(),
+    },
+    library: {
+      list: vi.fn(),
     },
   },
   ApiError: class ApiError extends Error {
@@ -97,7 +100,10 @@ describe("AdminPage", () => {
       "free",
     );
 
-    const accountTypeSelect = screen.getAllByRole("combobox")[1];
+    const userRow = screen
+      .getByText("new@example.com")
+      .closest("li") as HTMLElement;
+    const accountTypeSelect = within(userRow).getByRole("combobox");
     await userEvent.selectOptions(accountTypeSelect, "paid");
     expect(mockedAdminApi.setAccountType).toHaveBeenCalledWith(
       "user-1",

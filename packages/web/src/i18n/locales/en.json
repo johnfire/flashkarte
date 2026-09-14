@@ -362,7 +362,12 @@
       "optionSubLabel": "{{parent}} › {{title}}",
       "officialLabel": "App Decks",
       "libraryLabel": "Library",
-      "assignLibraryHeading": "Library decks"
+      "assignLibraryHeading": "Library decks",
+      "quickTitle": "Quick categorize",
+      "quickTargetLabel": "Categorize into",
+      "quickTargetPlaceholder": "Choose a category…",
+      "quickHint": "Choose a category above, then click any item below to file it there instantly.",
+      "quickEmpty": "All caught up — nothing uncategorized here."
     }
   },
   "forgotPassword": {
