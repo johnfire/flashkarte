@@ -16,7 +16,11 @@ describe("splitCardText", () => {
     );
     expect(segments).toEqual([
       { type: "text", value: "See below: " },
-      { type: "image", alt: "schematic", src: "/schematics/ch1-rc-lowpass.svg" },
+      {
+        type: "image",
+        alt: "schematic",
+        src: "/schematics/ch1-rc-lowpass.svg",
+      },
       { type: "text", value: " — an RC lowpass." },
     ]);
   });
@@ -39,7 +43,9 @@ describe("CardText", () => {
     );
     const img = container.querySelector("img");
     expect(img).toBeTruthy();
-    expect(img?.getAttribute("src")).toBe("/schematics/ch1-voltage-divider.svg");
+    expect(img?.getAttribute("src")).toBe(
+      "/schematics/ch1-voltage-divider.svg",
+    );
     expect(img?.getAttribute("alt")).toBe("voltage divider");
     expect(container.querySelectorAll("img").length).toBe(1);
   });

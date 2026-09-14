@@ -11,8 +11,7 @@
 const IMAGE_PATTERN = /!\[([^\]]*)\]\(((?:https:\/\/|\/)[^\s)]+)\)/g;
 
 type CardTextSegment =
-  | { type: "text"; value: string }
-  | { type: "image"; alt: string; src: string };
+  { type: "text"; value: string } | { type: "image"; alt: string; src: string };
 
 export function splitCardText(text: string): CardTextSegment[] {
   const segments: CardTextSegment[] = [];
