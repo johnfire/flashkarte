@@ -256,7 +256,8 @@
     "categoriesLoadError": "Kategorien konnten nicht geladen werden",
     "uncategorized": "Unkategorisiert",
     "itemCount_one": "{{count}} Eintrag",
-    "itemCount_other": "{{count}} Einträge"
+    "itemCount_other": "{{count}} Einträge",
+    "manage": "Verwalten"
   },
   "createDeck": {
     "title": "Neuer Stapel",
@@ -580,5 +581,51 @@
     "explore": "← Entdecken",
     "cta": "Melde dich kostenlos an, um die Antworten zu sehen und diesen Stapel mit Spaced Repetition zu lernen.",
     "ctaButton": "Anmelden zum Lernen"
+  },
+  "manageCards": {
+    "back": "← Stapel",
+    "title": "Karten in \"{{deck}}\"",
+    "cardCount_one": "{{count}} Karte",
+    "cardCount_other": "{{count}} Karten",
+    "empty": "Dieser Stapel hat noch keine Karten.",
+    "loadError": "Die Karten dieses Stapels konnten nicht geladen werden.",
+    "type": {
+      "branch": "Verzweigung",
+      "diagnostic": "Diagnostisch",
+      "sense": "Wort"
+    }
+  },
+  "editCard": {
+    "back": "← Karten",
+    "title": "Karte bearbeiten",
+    "front": "Vorderseite",
+    "prompt": "Frage",
+    "backLabel": "Rückseite",
+    "preview": "Vorschau",
+    "category": "Kategorie",
+    "categoryPlaceholder": "Keine Kategorie",
+    "options": "Optionen",
+    "optionText": "Optionstext",
+    "optionTarget": "Führt zu",
+    "addOption": "Option hinzufügen",
+    "removeOption": "Entfernen",
+    "senseChainInfo": "Bedeutung {{index}} von {{count}}",
+    "senseContext": "Beispielsatz",
+    "senseHint": "Hinweis",
+    "reorderSenses": "Bedeutungen dieses Worts neu anordnen",
+    "save": "Speichern",
+    "loadError": "Diese Karte konnte nicht geladen werden.",
+    "saveError": "Konnte nicht gespeichert werden — bitte Felder prüfen und erneut versuchen."
+  },
+  "reorderSenses": {
+    "back": "← Karte",
+    "title": "Bedeutungen von \"{{word}}\" neu anordnen",
+    "hint": "Bedeutung 1 wird zuerst angezeigt, solange das Wort noch gelernt wird.",
+    "moveUp": "Nach oben",
+    "moveDown": "Nach unten",
+    "save": "Reihenfolge speichern",
+    "saved": "Reihenfolge gespeichert.",
+    "loadError": "Die Bedeutungen dieses Worts konnten nicht geladen werden.",
+    "saveError": "Die neue Reihenfolge konnte nicht gespeichert werden — bitte erneut versuchen."
   }
 }

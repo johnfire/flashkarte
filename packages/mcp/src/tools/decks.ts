@@ -209,6 +209,94 @@ export function registerDeckTools(server: McpServer) {
   );
 
   server.tool(
+    "update_card",
+    "Edit one existing card in place (front/back/category/options/sense), " +
+      "instead of deleting and recreating it — this preserves the card's " +
+      "study progress. Only the fields you pass are changed. The whole deck " +
+      "is re-validated on save, so an edit that breaks a branch route or a " +
+      "sense chain is rejected with an explanation rather than silently " +
+      "corrupting the deck.",
+    {
+      deck_id: z.string().uuid().describe("The deck's UUID."),
+      card_id: z.string().uuid().describe("The card's UUID."),
+      front: z
+        .string()
+        .optional()
+        .describe("New front text (or prompt text, for a branch card)."),
+      back: z
+        .string()
+        .optional()
+        .describe("New back text. Not applicable to branch cards."),
+      category: z
+        .string()
+        .nullable()
+        .optional()
+        .describe("New category, or null to clear it."),
+      options: z
+        .array(
+          z.object({
+            text: z.string().describe("The option's displayed text."),
+            goto: z
+              .string()
+              .describe(
+                "Target label to jump to, or the reserved targets " +
+                  '"end" or "correct".',
+              ),
+          }),
+        )
+        .optional()
+        .describe("Replaces all of a branch/diagnostic card's routed options."),
+      sense: z
+        .object({
+          word: z.string().optional(),
+          context: z.string().nullable().optional(),
+          hint: z.string().nullable().optional(),
+        })
+        .optional()
+        .describe(
+          "Edits a sense card's word/context/hint. Changing `word` moves " +
+            "the card to a different meaning chain; index/count within a " +
+            "chain are set only by reorder_senses, not here.",
+        ),
+    },
+    async ({ deck_id, card_id, ...patchBody }) =>
+      runTool("update_card", async () =>
+        asText(
+          await patch(
+            `/api/decks/${encodeURIComponent(deck_id)}/cards/${encodeURIComponent(card_id)}`,
+            patchBody,
+          ),
+        ),
+      ),
+  );
+
+  server.tool(
+    "reorder_senses",
+    "Set the display order of a word's meanings for a sense-card chain " +
+      "(created via the sense-list Markdown format). Meaning 1 is shown " +
+      "first while the word is still being learned. Pass every sibling " +
+      "card's ID sharing this word, in the desired order — the whole set " +
+      "must match exactly, or the reorder is rejected.",
+    {
+      deck_id: z.string().uuid().describe("The deck's UUID."),
+      word: z.string().describe('The shared headword, e.g. "der Zug".'),
+      order: z
+        .array(z.string().uuid())
+        .min(1)
+        .describe("Every sibling card's UUID, in the new order."),
+    },
+    async ({ deck_id, word, order }) =>
+      runTool("reorder_senses", async () =>
+        asText(
+          await patch(
+            `/api/decks/${encodeURIComponent(deck_id)}/senses/${encodeURIComponent(word)}/reorder`,
+            { order },
+          ),
+        ),
+      ),
+  );
+
+  server.tool(
     "list_decks",
     "List the user's decks with card and due counts.",
     {},

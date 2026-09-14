@@ -256,7 +256,8 @@
     "categoriesLoadError": "Couldn't load categories",
     "uncategorized": "Uncategorized",
     "itemCount_one": "{{count}} item",
-    "itemCount_other": "{{count}} items"
+    "itemCount_other": "{{count}} items",
+    "manage": "Manage"
   },
   "createDeck": {
     "title": "New Deck",
@@ -580,5 +581,51 @@
     "explore": "← Explore",
     "cta": "Sign up free to reveal the answers and study this deck with spaced repetition.",
     "ctaButton": "Sign up to study"
+  },
+  "manageCards": {
+    "back": "← Decks",
+    "title": "Cards in \"{{deck}}\"",
+    "cardCount_one": "{{count}} card",
+    "cardCount_other": "{{count}} cards",
+    "empty": "This deck has no cards yet.",
+    "loadError": "Couldn't load this deck's cards.",
+    "type": {
+      "branch": "Branch",
+      "diagnostic": "Diagnostic",
+      "sense": "Word"
+    }
+  },
+  "editCard": {
+    "back": "← Cards",
+    "title": "Edit card",
+    "front": "Front",
+    "prompt": "Prompt",
+    "backLabel": "Back",
+    "preview": "Preview",
+    "category": "Category",
+    "categoryPlaceholder": "No category",
+    "options": "Options",
+    "optionText": "Option text",
+    "optionTarget": "Goes to",
+    "addOption": "Add option",
+    "removeOption": "Remove",
+    "senseChainInfo": "Meaning {{index}} of {{count}}",
+    "senseContext": "Context sentence",
+    "senseHint": "Hint",
+    "reorderSenses": "Reorder this word's meanings",
+    "save": "Save",
+    "loadError": "Couldn't load this card.",
+    "saveError": "Couldn't save — check the fields and try again."
+  },
+  "reorderSenses": {
+    "back": "← Card",
+    "title": "Reorder meanings of \"{{word}}\"",
+    "hint": "Meaning 1 is shown first while the word is still being learned.",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "save": "Save order",
+    "saved": "Order saved.",
+    "loadError": "Couldn't load this word's meanings.",
+    "saveError": "Couldn't save the new order — try again."
   }
 }

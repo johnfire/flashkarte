@@ -21,6 +21,8 @@ decksRouter.get("/:id/settings", ctrl.getSettings);
 decksRouter.patch("/:id", ctrl.update);
 decksRouter.delete("/:id", ctrl.remove);
 decksRouter.post("/:id/cards", ctrl.addCards);
+decksRouter.patch("/:id/cards/:cardId", ctrl.updateCard);
+decksRouter.patch("/:id/senses/:word/reorder", ctrl.reorderSenses);
 decksRouter.post("/:id/subscribe", ctrl.subscribe);
 decksRouter.delete("/:id/subscribe", ctrl.unsubscribe);
 

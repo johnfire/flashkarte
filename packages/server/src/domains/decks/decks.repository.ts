@@ -184,6 +184,67 @@ export async function appendCards(
   });
 }
 
+/** Overwrite one card's type/content/category in place. Owner-only. */
+// Returns the row in the same shape getCards() does (raw stored content —
+// branch cards keyed by `prompt`, not `front`) so callers get one consistent
+// card shape everywhere, whether they just listed the deck or just edited
+// one card in it.
+export function updateCardRow(
+  userId: string,
+  deckId: string,
+  cardId: string,
+  card: ParsedCard,
+) {
+  return queryOne<{
+    id: string;
+    type: string;
+    content: Record<string, unknown>;
+    category: string | null;
+  }>(
+    `UPDATE cards SET type = $1, content = $2::jsonb, category = $3, updated_at = now()
+     WHERE id = $4 AND deck_id = $5 AND user_id = $6
+     RETURNING id, type, content, category`,
+    [card.type, cardContent(card), card.category, cardId, deckId, userId],
+  );
+}
+
+/** Every card sharing a sense word, for reorder validation + rewriting. */
+export function getSenseCards(userId: string, deckId: string, word: string) {
+  return query<{ id: string }>(
+    `SELECT id FROM cards
+     WHERE deck_id = $1 AND user_id = $2 AND content->'sense'->>'word' = $3`,
+    [deckId, userId, word],
+  );
+}
+
+/**
+ * Atomically rewrite `sense.index`/`sense.count` for a full set of sibling
+ * cards, in the given order. Caller has already checked `orderedIds` is
+ * exactly the existing sibling set (see reorderSenses in the service) — this
+ * just writes the new order.
+ */
+export async function reorderSenseCards(
+  userId: string,
+  deckId: string,
+  orderedIds: string[],
+) {
+  await withTransaction(async (client) => {
+    const count = orderedIds.length;
+    for (const [index, cardId] of orderedIds.entries()) {
+      await client.query(
+        `UPDATE cards
+         SET content = jsonb_set(
+               jsonb_set(content, '{sense,index}', $1::jsonb, true),
+               '{sense,count}', $2::jsonb, true
+             ),
+             updated_at = now()
+         WHERE id = $3 AND deck_id = $4 AND user_id = $5`,
+        [String(index), String(count), cardId, deckId, userId],
+      );
+    }
+  });
+}
+
 export interface DeckListRow extends DeckRow {
   card_count: string;
   due_count: string;

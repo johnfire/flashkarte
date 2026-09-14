@@ -80,6 +80,9 @@ export function DeckListItem({
             {t("decks.study")}
           </Link>
         )}
+        <Link to={`/decks/${d.id}/cards`} className="text-sm text-indigo-600">
+          {t("decks.manage")}
+        </Link>
         {d.is_official ? (
           <button
             onClick={() => onUnsubscribe(d.id, d.title)}

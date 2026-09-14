@@ -256,7 +256,8 @@
     "categoriesLoadError": "No se pudieron cargar las categorías",
     "uncategorized": "Sin categoría",
     "itemCount_one": "{{count}} elemento",
-    "itemCount_other": "{{count}} elementos"
+    "itemCount_other": "{{count}} elementos",
+    "manage": "Administrar"
   },
   "createDeck": {
     "title": "Nuevo mazo",
@@ -580,5 +581,51 @@
     "explore": "← Explorar",
     "cta": "Regístrate gratis para ver las respuestas y estudiar este mazo con repetición espaciada.",
     "ctaButton": "Regístrate para estudiar"
+  },
+  "manageCards": {
+    "back": "← Mazos",
+    "title": "Tarjetas en \"{{deck}}\"",
+    "cardCount_one": "{{count}} tarjeta",
+    "cardCount_other": "{{count}} tarjetas",
+    "empty": "Este mazo todavía no tiene tarjetas.",
+    "loadError": "No se pudieron cargar las tarjetas de este mazo.",
+    "type": {
+      "branch": "Ramificación",
+      "diagnostic": "Diagnóstico",
+      "sense": "Palabra"
+    }
+  },
+  "editCard": {
+    "back": "← Tarjetas",
+    "title": "Editar tarjeta",
+    "front": "Anverso",
+    "prompt": "Pregunta",
+    "backLabel": "Reverso",
+    "preview": "Vista previa",
+    "category": "Categoría",
+    "categoryPlaceholder": "Sin categoría",
+    "options": "Opciones",
+    "optionText": "Texto de la opción",
+    "optionTarget": "Lleva a",
+    "addOption": "Añadir opción",
+    "removeOption": "Eliminar",
+    "senseChainInfo": "Significado {{index}} de {{count}}",
+    "senseContext": "Frase de contexto",
+    "senseHint": "Pista",
+    "reorderSenses": "Reordenar los significados de esta palabra",
+    "save": "Guardar",
+    "loadError": "No se pudo cargar esta tarjeta.",
+    "saveError": "No se pudo guardar — revisa los campos e inténtalo de nuevo."
+  },
+  "reorderSenses": {
+    "back": "← Tarjeta",
+    "title": "Reordenar los significados de \"{{word}}\"",
+    "hint": "El significado 1 se muestra primero mientras la palabra todavía se está aprendiendo.",
+    "moveUp": "Subir",
+    "moveDown": "Bajar",
+    "save": "Guardar orden",
+    "saved": "Orden guardado.",
+    "loadError": "No se pudieron cargar los significados de esta palabra.",
+    "saveError": "No se pudo guardar el nuevo orden — inténtalo de nuevo."
   }
 }

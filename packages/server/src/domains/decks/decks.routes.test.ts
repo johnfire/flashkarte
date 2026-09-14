@@ -143,6 +143,71 @@ describe("decks routes", () => {
     expect(res.status).toBe(404);
   });
 
+  test("PATCH /api/decks/:id/cards/:cardId edits a card -> 200", async () => {
+    mock.updateCard.mockResolvedValue({
+      id: "c1",
+      type: "basic",
+      content: { front: "Q", back: "A2" },
+      category: null,
+    } as never);
+    const res = await request(app)
+      .patch("/api/decks/d1/cards/c1")
+      .send({ back: "A2" });
+    expect(res.status).toBe(200);
+    expect(res.body.content.back).toBe("A2");
+    expect(mock.updateCard).toHaveBeenCalledWith("u1", "d1", "c1", {
+      back: "A2",
+    });
+  });
+
+  test("PATCH /api/decks/:id/cards/:cardId with a dangling branch target -> 422", async () => {
+    mock.updateCard.mockRejectedValue(
+      new ValidationError('Branch card "Q" has an option pointing nowhere'),
+    );
+    const res = await request(app)
+      .patch("/api/decks/d1/cards/c1")
+      .send({ options: [{ text: "Go", goto: "nowhere" }] });
+    expect(res.status).toBe(422);
+    expect(res.body.error.code).toBe("VALIDATION_ERROR");
+  });
+
+  test("PATCH /api/decks/:id/cards/:cardId on missing card -> 404", async () => {
+    mock.updateCard.mockRejectedValue(new NotFoundError("Card not found"));
+    const res = await request(app)
+      .patch("/api/decks/d1/cards/nope")
+      .send({ front: "Q" });
+    expect(res.status).toBe(404);
+  });
+
+  test("PATCH /api/decks/:id/senses/:word/reorder -> 200", async () => {
+    mock.reorderSenses.mockResolvedValue({
+      deck_id: "d1",
+      word: "der Zug",
+      order: ["c2", "c1"],
+    } as never);
+    const res = await request(app)
+      .patch("/api/decks/d1/senses/der%20Zug/reorder")
+      .send({ order: ["c2", "c1"] });
+    expect(res.status).toBe(200);
+    expect(res.body.order).toEqual(["c2", "c1"]);
+    expect(mock.reorderSenses).toHaveBeenCalledWith("u1", "d1", "der Zug", [
+      "c2",
+      "c1",
+    ]);
+  });
+
+  test("PATCH /api/decks/:id/senses/:word/reorder with a mismatched set -> 422", async () => {
+    mock.reorderSenses.mockRejectedValue(
+      new ValidationError(
+        'The reorder list must contain exactly "der Zug"\'s existing cards, no more and no fewer',
+      ),
+    );
+    const res = await request(app)
+      .patch("/api/decks/d1/senses/der%20Zug/reorder")
+      .send({ order: ["c1"] });
+    expect(res.status).toBe(422);
+  });
+
   test("PATCH /api/decks/:id toggles isPublic -> 200", async () => {
     mock.update.mockResolvedValue({
       id: "d1",

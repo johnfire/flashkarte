@@ -256,7 +256,8 @@
     "categoriesLoadError": "Impossible de charger les catégories",
     "uncategorized": "Sans catégorie",
     "itemCount_one": "{{count}} élément",
-    "itemCount_other": "{{count}} éléments"
+    "itemCount_other": "{{count}} éléments",
+    "manage": "Gérer"
   },
   "createDeck": {
     "title": "Nouveau paquet",
@@ -580,5 +581,51 @@
     "explore": "← Explorer",
     "cta": "Inscrivez-vous gratuitement pour révéler les réponses et étudier ce paquet avec la répétition espacée.",
     "ctaButton": "S’inscrire pour étudier"
+  },
+  "manageCards": {
+    "back": "← Paquets",
+    "title": "Cartes dans \"{{deck}}\"",
+    "cardCount_one": "{{count}} carte",
+    "cardCount_other": "{{count}} cartes",
+    "empty": "Ce paquet n'a pas encore de cartes.",
+    "loadError": "Impossible de charger les cartes de ce paquet.",
+    "type": {
+      "branch": "Embranchement",
+      "diagnostic": "Diagnostic",
+      "sense": "Mot"
+    }
+  },
+  "editCard": {
+    "back": "← Cartes",
+    "title": "Modifier la carte",
+    "front": "Recto",
+    "prompt": "Question",
+    "backLabel": "Verso",
+    "preview": "Aperçu",
+    "category": "Catégorie",
+    "categoryPlaceholder": "Aucune catégorie",
+    "options": "Options",
+    "optionText": "Texte de l'option",
+    "optionTarget": "Mène à",
+    "addOption": "Ajouter une option",
+    "removeOption": "Supprimer",
+    "senseChainInfo": "Sens {{index}} sur {{count}}",
+    "senseContext": "Phrase de contexte",
+    "senseHint": "Indice",
+    "reorderSenses": "Réorganiser les sens de ce mot",
+    "save": "Enregistrer",
+    "loadError": "Impossible de charger cette carte.",
+    "saveError": "Impossible d'enregistrer — vérifiez les champs et réessayez."
+  },
+  "reorderSenses": {
+    "back": "← Carte",
+    "title": "Réorganiser les sens de \"{{word}}\"",
+    "hint": "Le sens 1 est affiché en premier tant que le mot est encore en apprentissage.",
+    "moveUp": "Monter",
+    "moveDown": "Descendre",
+    "save": "Enregistrer l'ordre",
+    "saved": "Ordre enregistré.",
+    "loadError": "Impossible de charger les sens de ce mot.",
+    "saveError": "Impossible d'enregistrer le nouvel ordre — réessayez."
   }
 }

@@ -1,4 +1,9 @@
-import type { SpeechAutoplay, CardSense, WordPhase } from "@flashkarte/shared";
+import type {
+  SpeechAutoplay,
+  CardSense,
+  WordPhase,
+  ParsedOption,
+} from "@flashkarte/shared";
 
 export type AccountType = "free" | "paid" | "admin-gifted" | "admin";
 
@@ -125,12 +130,32 @@ export interface DeckWithCounts extends DeckSpeech {
   is_branching: boolean;
 }
 
+// Raw stored content, as `GET /decks/:id` and `PATCH .../cards/:cardId` both
+// return it: a branch card's display text is keyed `prompt`, not `front`.
+export interface CardContent {
+  front?: string;
+  prompt?: string;
+  back?: string;
+  label?: string | null;
+  options?: ParsedOption[];
+  sense?: CardSense | null;
+}
+
 export interface Card {
   id: string;
   type: string;
-  content: { front: string; back: string };
+  content: CardContent;
   category: string | null;
   position: number;
+}
+
+/** Fields a single-card edit may change — see decks.service.ts's cardPatchSchema. */
+export interface CardEditPatch {
+  front?: string;
+  back?: string;
+  category?: string | null;
+  options?: ParsedOption[];
+  sense?: { word?: string; context?: string | null; hint?: string | null };
 }
 
 export interface DeckSettings extends DeckSpeech {

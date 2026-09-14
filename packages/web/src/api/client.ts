@@ -17,6 +17,8 @@ import {
   DeckCollection,
   DeckCollectionDetail,
   DeckCategory,
+  Card,
+  CardEditPatch,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 
@@ -329,6 +331,16 @@ export const api = {
         body: JSON.stringify(patch),
       }),
     remove: (id: string) => request<void>(`/decks/${id}`, { method: "DELETE" }),
+    updateCard: (deckId: string, cardId: string, patch: CardEditPatch) =>
+      request<Card>(`/decks/${deckId}/cards/${cardId}`, {
+        method: "PATCH",
+        body: JSON.stringify(patch),
+      }),
+    reorderSenses: (deckId: string, word: string, order: string[]) =>
+      request<{ deck_id: string; word: string; order: string[] }>(
+        `/decks/${deckId}/senses/${encodeURIComponent(word)}/reorder`,
+        { method: "PATCH", body: JSON.stringify({ order }) },
+      ),
     listOfficial: (params?: BrowseParams) =>
       request<OfficialDeck[]>(`/decks/official${browseQuery(params)}`),
     listCollections: (params?: BrowseParams) =>

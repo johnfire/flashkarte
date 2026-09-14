@@ -39,7 +39,9 @@ describe("deck MCP tools", () => {
       "delete_deck",
       "get_deck",
       "list_decks",
+      "reorder_senses",
       "set_deck_speech",
+      "update_card",
     ]);
   });
 
@@ -123,6 +125,45 @@ describe("deck MCP tools", () => {
     expect(mockApi.post).toHaveBeenCalledWith("/api/decks/d1/cards", {
       markdown: "**1. Q**\nA",
     });
+  });
+
+  test("update_card PATCHes only the fields given", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.patch.mockResolvedValue({ id: "c1" });
+
+    await handlers.update_card({
+      deck_id: "d1",
+      card_id: "c1",
+      front: "New front",
+      options: [{ text: "Go", goto: "end" }],
+    });
+
+    expect(mockApi.patch).toHaveBeenCalledWith("/api/decks/d1/cards/c1", {
+      front: "New front",
+      options: [{ text: "Go", goto: "end" }],
+    });
+  });
+
+  test("reorder_senses PATCHes the sibling order", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.patch.mockResolvedValue({
+      deck_id: "d1",
+      word: "der Zug",
+      order: ["c2", "c1"],
+    });
+
+    await handlers.reorder_senses({
+      deck_id: "d1",
+      word: "der Zug",
+      order: ["c2", "c1"],
+    });
+
+    expect(mockApi.patch).toHaveBeenCalledWith(
+      "/api/decks/d1/senses/der%20Zug/reorder",
+      { order: ["c2", "c1"] },
+    );
   });
 
   test("list_decks GETs /api/decks", async () => {

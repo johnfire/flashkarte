@@ -44,6 +44,44 @@ export const addCards = wrapAsync(async (req: Request, res: Response) => {
   res.status(201).json(result);
 });
 
+export const updateCard = wrapAsync(async (req: Request, res: Response) => {
+  const updated = await service.updateCard(
+    req.userId!,
+    req.params.id,
+    req.params.cardId,
+    req.body,
+  );
+  await auditFromRequest(
+    req,
+    "card.updated",
+    "deck",
+    req.params.id,
+    "success",
+    undefined,
+    { cardId: req.params.cardId },
+  );
+  res.json(updated);
+});
+
+export const reorderSenses = wrapAsync(async (req: Request, res: Response) => {
+  const result = await service.reorderSenses(
+    req.userId!,
+    req.params.id,
+    req.params.word,
+    req.body.order,
+  );
+  await auditFromRequest(
+    req,
+    "deck.senses_reordered",
+    "deck",
+    req.params.id,
+    "success",
+    undefined,
+    { word: req.params.word, order: result.order },
+  );
+  res.json(result);
+});
+
 export const list = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.list(req.userId!));
 });
