@@ -62,6 +62,7 @@ export interface OfficialDeck {
   created_at: string;
   card_count: number;
   subscribed: boolean;
+  category_id: string | null;
 }
 
 export interface DeckCollection {
@@ -69,6 +70,7 @@ export interface DeckCollection {
   title: string;
   description: string | null;
   deck_count: number;
+  category_id: string | null;
 }
 
 export interface DeckCollectionDetail {
@@ -76,6 +78,20 @@ export interface DeckCollectionDetail {
   title: string;
   description: string | null;
   decks: OfficialDeck[];
+}
+
+/**
+ * A node in the two-level category tree for the App Decks page.
+ * `id: "uncategorized"` is a synthetic entry (not a real category row) for
+ * items with no category assigned; render its title from local i18n rather
+ * than the server's placeholder text.
+ */
+export interface DeckCategory {
+  id: string;
+  title: string;
+  parentId: string | null;
+  itemCount: number;
+  subcategories: DeckCategory[];
 }
 
 export interface DeckWithCounts extends DeckSpeech {

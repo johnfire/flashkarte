@@ -16,6 +16,7 @@ interface PageRequest {
 export function usePaginatedList<T>(
   loadPage: (params: PageRequest) => Promise<T[]>,
   pageSize = 30,
+  initialQuery = "",
 ) {
   const [q, setQ] = useState("");
   const [items, setItems] = useState<T[] | null>(null);
@@ -65,8 +66,8 @@ export function usePaginatedList<T>(
   }, [items, loadingMore, loadPage, pageSize, q]);
 
   useEffect(() => {
-    void search("");
-    // Only ever run on mount; `search("")` re-runs explicitly on user action.
+    void search(initialQuery);
+    // Only ever run on mount; `search()` re-runs explicitly on user action.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -340,6 +340,26 @@ export interface OfficialDeckRow {
   created_at: string;
   card_count: string;
   subscribed: boolean;
+  category_id: string | null;
+}
+
+/**
+ * Appends a category-filter SQL fragment and its parameter (if any) to
+ * `values`, returning the fragment to AND into a query's WHERE clause.
+ * `undefined` = no filter (the flat, cross-category search box),
+ * `null` = the uncategorized bucket, a string = one specific
+ * category/subcategory id — this is how the App Decks page scopes each
+ * collapsible category section to its own contents.
+ */
+function categoryFilterSql(
+  column: string,
+  categoryId: string | null | undefined,
+  values: unknown[],
+): string {
+  if (categoryId === undefined) return "TRUE";
+  if (categoryId === null) return `${column} IS NULL`;
+  values.push(categoryId);
+  return `${column} = $${values.length}`;
 }
 
 /**
@@ -353,10 +373,14 @@ export function listStandaloneOfficial(
   q: string | null,
   limit: number,
   offset: number,
+  categoryId?: string | null,
 ) {
   const term = q === null ? null : escapeLike(q);
+  const values: unknown[] = [userId, term];
+  const categoryClause = categoryFilterSql("d.category_id", categoryId, values);
+  values.push(limit, offset);
   return query<OfficialDeckRow>(
-    `SELECT d.id, d.title, d.created_at, count(c.*) AS card_count,
+    `SELECT d.id, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
        EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1
@@ -365,10 +389,11 @@ export function listStandaloneOfficial(
      LEFT JOIN cards c ON c.deck_id = d.id
      WHERE d.is_official AND d.collection_id IS NULL
        AND ($2::text IS NULL OR d.title ILIKE '%' || $2 || '%' ESCAPE '\\')
+       AND (${categoryClause})
      GROUP BY d.id
-     ORDER BY d.title ASC
-     LIMIT $3 OFFSET $4`,
-    [userId, term, limit, offset],
+     ORDER BY d.title COLLATE de_phonebook ASC
+     LIMIT $${values.length - 1} OFFSET $${values.length}`,
+    values,
   );
 }
 
@@ -378,6 +403,7 @@ export interface CollectionRow {
   description: string | null;
   created_at: string;
   deck_count: string;
+  category_id: string | null;
 }
 
 /** Official-deck collections, searchable and paginated — the primary browse view. */
@@ -385,18 +411,27 @@ export function listOfficialCollections(
   q: string | null,
   limit: number,
   offset: number,
+  categoryId?: string | null,
 ) {
   const term = q === null ? null : escapeLike(q);
+  const values: unknown[] = [term];
+  const categoryClause = categoryFilterSql(
+    "dc.category_id",
+    categoryId,
+    values,
+  );
+  values.push(limit, offset);
   return query<CollectionRow>(
-    `SELECT dc.id, dc.title, dc.description, dc.created_at,
+    `SELECT dc.id, dc.title, dc.description, dc.created_at, dc.category_id,
        count(d.*) AS deck_count
      FROM deck_collections dc
      LEFT JOIN decks d ON d.collection_id = dc.id AND d.is_official
-     WHERE $1::text IS NULL OR dc.title ILIKE '%' || $1 || '%' ESCAPE '\\'
+     WHERE ($1::text IS NULL OR dc.title ILIKE '%' || $1 || '%' ESCAPE '\\')
+       AND (${categoryClause})
      GROUP BY dc.id
-     ORDER BY dc.title ASC
-     LIMIT $2 OFFSET $3`,
-    [term, limit, offset],
+     ORDER BY dc.title COLLATE de_phonebook ASC
+     LIMIT $${values.length - 1} OFFSET $${values.length}`,
+    values,
   );
 }
 
@@ -417,7 +452,7 @@ export function listCollectionDecks(
 ) {
   const term = q === null ? null : escapeLike(q);
   return query<OfficialDeckRow>(
-    `SELECT d.id, d.title, d.created_at, count(c.*) AS card_count,
+    `SELECT d.id, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
        EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1
@@ -427,7 +462,7 @@ export function listCollectionDecks(
      WHERE d.collection_id = $2 AND d.is_official
        AND ($3::text IS NULL OR d.title ILIKE '%' || $3 || '%' ESCAPE '\\')
      GROUP BY d.id
-     ORDER BY d.collection_position ASC NULLS LAST, d.title ASC
+     ORDER BY d.collection_position ASC NULLS LAST, d.title COLLATE de_phonebook ASC
      LIMIT $4 OFFSET $5`,
     [userId, collectionId, term, limit, offset],
   );
@@ -577,5 +612,26 @@ export function deleteDeck(userId: string, id: string) {
   return queryOne<{ id: string }>(
     "DELETE FROM decks WHERE id = $1 AND user_id = $2 RETURNING id",
     [id, userId],
+  );
+}
+
+/** Assign/clear an official deck's category. `categoryId: null` clears it. */
+export function setDeckCategory(deckId: string, categoryId: string | null) {
+  return queryOne<{ id: string }>(
+    `UPDATE decks SET category_id = $2, updated_at = now()
+     WHERE id = $1 AND is_official RETURNING id`,
+    [deckId, categoryId],
+  );
+}
+
+/** Assign/clear a collection's category. `categoryId: null` clears it. */
+export function setCollectionCategory(
+  collectionId: string,
+  categoryId: string | null,
+) {
+  return queryOne<{ id: string }>(
+    `UPDATE deck_collections SET category_id = $2, updated_at = now()
+     WHERE id = $1 RETURNING id`,
+    [collectionId, categoryId],
   );
 }

@@ -8,6 +8,9 @@ import { AppDecksPage } from "./AppDecksPage";
 
 vi.mock("../api/client", () => ({
   api: {
+    categories: {
+      tree: vi.fn(),
+    },
     decks: {
       listCollections: vi.fn(),
       listOfficial: vi.fn(),
@@ -23,11 +26,38 @@ vi.mock("../api/client", () => ({
   reportClientError: vi.fn(),
 }));
 
+const mockedCategories = api.categories as unknown as {
+  tree: ReturnType<typeof vi.fn>;
+};
 const mockedApi = api.decks as unknown as {
   listCollections: ReturnType<typeof vi.fn>;
   listOfficial: ReturnType<typeof vi.fn>;
   subscribe: ReturnType<typeof vi.fn>;
   subscribeAllInCollection: ReturnType<typeof vi.fn>;
+};
+
+const LANGUAGE_LEARNING = {
+  id: "cat-1",
+  title: "Language Learning",
+  parentId: null,
+  itemCount: 0,
+  subcategories: [
+    {
+      id: "cat-2",
+      title: "German",
+      parentId: "cat-1",
+      itemCount: 1,
+      subcategories: [],
+    },
+  ],
+};
+
+const UNCATEGORIZED = {
+  id: "uncategorized",
+  title: "Uncategorized",
+  parentId: null,
+  itemCount: 1,
+  subcategories: [],
 };
 
 function renderPage() {
@@ -45,49 +75,76 @@ function renderPage() {
 describe("AppDecksPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockedCategories.tree.mockResolvedValue({
+      categories: [LANGUAGE_LEARNING, UNCATEGORIZED],
+    });
     mockedApi.listCollections.mockResolvedValue([]);
     mockedApi.listOfficial.mockResolvedValue([]);
   });
 
-  test("renders collections and standalone decks", async () => {
-    mockedApi.listCollections.mockResolvedValue([
-      {
-        id: "col-1",
-        title: "German for Arabic Speakers",
-        description: null,
-        deck_count: 6,
-      },
-    ]);
-    mockedApi.listOfficial.mockResolvedValue([
-      {
-        id: "deck-1",
-        title: "AI Terms",
-        created_at: "x",
-        card_count: 50,
-        subscribed: false,
-      },
-    ]);
+  test("renders the category tree, alphabetically as returned by the server", async () => {
     renderPage();
+    expect(await screen.findByText("Language Learning")).toBeInTheDocument();
+    expect(screen.getByText("Uncategorized")).toBeInTheDocument();
+  });
+
+  test("expanding a subcategory lazily loads its collections and decks", async () => {
+    mockedApi.listCollections.mockImplementation((params) =>
+      Promise.resolve(
+        params?.categoryId === "cat-2"
+          ? [
+              {
+                id: "col-1",
+                title: "German for Arabic Speakers",
+                description: null,
+                deck_count: 6,
+              },
+            ]
+          : [],
+      ),
+    );
+    renderPage();
+    await userEvent.click(
+      await screen.findByRole("button", { name: /Language Learning/ }),
+    );
+    // Expanding the parent loads its own direct contents, but not the
+    // still-collapsed subcategory's.
+    expect(mockedApi.listCollections).not.toHaveBeenCalledWith(
+      expect.objectContaining({ categoryId: "cat-2" }),
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: /German/ }));
 
     expect(
       await screen.findByText("German for Arabic Speakers"),
     ).toBeInTheDocument();
-    expect(screen.getByText("6 decks")).toBeInTheDocument();
-    expect(screen.getByText("AI Terms")).toBeInTheDocument();
+    expect(mockedApi.listCollections).toHaveBeenLastCalledWith(
+      expect.objectContaining({ categoryId: "cat-2" }),
+    );
   });
 
-  test("adding a standalone deck marks it Added", async () => {
-    mockedApi.listOfficial.mockResolvedValue([
-      {
-        id: "deck-1",
-        title: "AI Terms",
-        created_at: "x",
-        card_count: 50,
-        subscribed: false,
-      },
-    ]);
+  test("adding a standalone deck in an expanded category marks it Added", async () => {
+    mockedApi.listOfficial.mockImplementation((params) =>
+      Promise.resolve(
+        params?.categoryId === "cat-2"
+          ? [
+              {
+                id: "deck-1",
+                title: "AI Terms",
+                created_at: "x",
+                card_count: 50,
+                subscribed: false,
+              },
+            ]
+          : [],
+      ),
+    );
     mockedApi.subscribe.mockResolvedValue(undefined);
     renderPage();
+    await userEvent.click(
+      await screen.findByRole("button", { name: /Language Learning/ }),
+    );
+    await userEvent.click(screen.getByRole("button", { name: /German/ }));
     await screen.findByText("AI Terms");
 
     await userEvent.click(screen.getByRole("button", { name: "Add" }));
@@ -98,16 +155,26 @@ describe("AppDecksPage", () => {
   });
 
   test("Add all on a collection marks it Added all", async () => {
-    mockedApi.listCollections.mockResolvedValue([
-      {
-        id: "col-1",
-        title: "German for Arabic Speakers",
-        description: null,
-        deck_count: 6,
-      },
-    ]);
+    mockedApi.listCollections.mockImplementation((params) =>
+      Promise.resolve(
+        params?.categoryId === "cat-2"
+          ? [
+              {
+                id: "col-1",
+                title: "German for Arabic Speakers",
+                description: null,
+                deck_count: 6,
+              },
+            ]
+          : [],
+      ),
+    );
     mockedApi.subscribeAllInCollection.mockResolvedValue({ subscribed: 6 });
     renderPage();
+    await userEvent.click(
+      await screen.findByRole("button", { name: /Language Learning/ }),
+    );
+    await userEvent.click(screen.getByRole("button", { name: /German/ }));
     await screen.findByText("German for Arabic Speakers");
 
     await userEvent.click(screen.getByRole("button", { name: "Add all" }));
@@ -117,23 +184,26 @@ describe("AppDecksPage", () => {
     );
   });
 
-  test("search filters both sections", async () => {
+  test("search shows flat, cross-category results instead of the tree", async () => {
     renderPage();
-    await screen.findByText("No collections match your search.");
+    await screen.findByText("Language Learning");
 
     await userEvent.type(screen.getByRole("textbox"), "cefr");
     await userEvent.click(screen.getByRole("button", { name: "Search" }));
 
-    expect(mockedApi.listCollections).toHaveBeenLastCalledWith(
-      expect.objectContaining({ q: "cefr" }),
+    await waitFor(() =>
+      expect(mockedApi.listCollections).toHaveBeenLastCalledWith(
+        expect.objectContaining({ q: "cefr" }),
+      ),
     );
     expect(mockedApi.listOfficial).toHaveBeenLastCalledWith(
       expect.objectContaining({ q: "cefr" }),
     );
+    expect(screen.queryByText("Language Learning")).not.toBeInTheDocument();
   });
 
-  test("renders load failures", async () => {
-    mockedApi.listCollections.mockRejectedValue(
+  test("renders a category-tree load failure", async () => {
+    mockedCategories.tree.mockRejectedValue(
       new ApiError(500, "FAILED", "App decks unavailable"),
     );
     renderPage();

@@ -252,7 +252,11 @@
       "saveError": "Impossible d'enregistrer les réglages de lecture de ce paquet."
     },
     "branching": "Ramifié",
-    "branchingHint": "Ce paquet est un arbre de décision. Jouez-le dans l'application Android : la version web n'étudie que les cartes recto-verso."
+    "branchingHint": "Ce paquet est un arbre de décision. Jouez-le dans l'application Android : la version web n'étudie que les cartes recto-verso.",
+    "categoriesLoadError": "Impossible de charger les catégories",
+    "uncategorized": "Sans catégorie",
+    "itemCount_one": "{{count}} élément",
+    "itemCount_other": "{{count}} éléments"
   },
   "createDeck": {
     "title": "Nouveau paquet",
@@ -330,7 +334,34 @@
     "verified": "vérifié",
     "unverified": "non vérifié",
     "joined": "inscrit le {{date}}",
-    "updateTypeError": "Impossible de mettre à jour le type de compte"
+    "updateTypeError": "Impossible de mettre à jour le type de compte",
+    "categories": {
+      "title": "Catégories",
+      "loadError": "Impossible de charger les catégories",
+      "newCategoryPlaceholder": "Nom de la nouvelle catégorie",
+      "newSubcategoryPlaceholder": "Nom de la nouvelle sous-catégorie",
+      "addCategory": "Ajouter une catégorie",
+      "addSubcategory": "Ajouter une sous-catégorie",
+      "adding": "Ajout…",
+      "rename": "Renommer",
+      "renamePlaceholder": "Nouveau titre",
+      "save": "Enregistrer",
+      "delete": "Supprimer",
+      "deleteConfirm": "Supprimer « {{title}} » ?",
+      "deleteError": "Impossible de supprimer cette catégorie",
+      "deleteBlocked": "Déplacez ou supprimez d'abord ses sous-catégories",
+      "createError": "Impossible de créer la catégorie",
+      "renameError": "Impossible de renommer la catégorie",
+      "empty": "Aucune catégorie pour l'instant",
+      "assignTitle": "Attribuer des catégories",
+      "assignSearchPlaceholder": "Rechercher des paquets officiels et des collections…",
+      "assignNone": "Aucune",
+      "assignError": "Impossible de mettre à jour la catégorie",
+      "assignDecksHeading": "Paquets autonomes",
+      "assignCollectionsHeading": "Collections",
+      "assignEmpty": "Aucun résultat",
+      "optionSubLabel": "{{parent}} › {{title}}"
+    }
   },
   "forgotPassword": {
     "title": "Réinitialiser le mot de passe",

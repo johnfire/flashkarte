@@ -252,7 +252,11 @@
       "saveError": "Spracheinstellungen des Stapels konnten nicht gespeichert werden."
     },
     "branching": "Verzweigt",
-    "branchingHint": "Dies ist ein Entscheidungsbaum-Stapel. Spiele ihn in der Android-App — die Web-Version lernt nur Karteikarten."
+    "branchingHint": "Dies ist ein Entscheidungsbaum-Stapel. Spiele ihn in der Android-App — die Web-Version lernt nur Karteikarten.",
+    "categoriesLoadError": "Kategorien konnten nicht geladen werden",
+    "uncategorized": "Unkategorisiert",
+    "itemCount_one": "{{count}} Eintrag",
+    "itemCount_other": "{{count}} Einträge"
   },
   "createDeck": {
     "title": "Neuer Stapel",
@@ -330,7 +334,34 @@
     "verified": "verifiziert",
     "unverified": "nicht verifiziert",
     "joined": "beigetreten {{date}}",
-    "updateTypeError": "Der Kontotyp konnte nicht aktualisiert werden"
+    "updateTypeError": "Der Kontotyp konnte nicht aktualisiert werden",
+    "categories": {
+      "title": "Kategorien",
+      "loadError": "Kategorien konnten nicht geladen werden",
+      "newCategoryPlaceholder": "Name der neuen Kategorie",
+      "newSubcategoryPlaceholder": "Name der neuen Unterkategorie",
+      "addCategory": "Kategorie hinzufügen",
+      "addSubcategory": "Unterkategorie hinzufügen",
+      "adding": "Wird hinzugefügt…",
+      "rename": "Umbenennen",
+      "renamePlaceholder": "Neuer Titel",
+      "save": "Speichern",
+      "delete": "Löschen",
+      "deleteConfirm": "„{{title}}“ löschen?",
+      "deleteError": "Diese Kategorie konnte nicht gelöscht werden",
+      "deleteBlocked": "Verschiebe oder lösche zuerst ihre Unterkategorien",
+      "createError": "Die Kategorie konnte nicht erstellt werden",
+      "renameError": "Die Kategorie konnte nicht umbenannt werden",
+      "empty": "Noch keine Kategorien",
+      "assignTitle": "Kategorien zuweisen",
+      "assignSearchPlaceholder": "Offizielle Stapel und Sammlungen durchsuchen…",
+      "assignNone": "Keine",
+      "assignError": "Die Kategorie konnte nicht aktualisiert werden",
+      "assignDecksHeading": "Einzelne Stapel",
+      "assignCollectionsHeading": "Sammlungen",
+      "assignEmpty": "Keine Treffer",
+      "optionSubLabel": "{{parent}} › {{title}}"
+    }
   },
   "forgotPassword": {
     "title": "Passwort zurücksetzen",

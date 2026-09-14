@@ -252,7 +252,11 @@
       "saveError": "Could not save this deck's speech settings."
     },
     "branching": "Branching",
-    "branchingHint": "This is a decision-tree deck. Play it in the Android app — the web version studies flip cards only."
+    "branchingHint": "This is a decision-tree deck. Play it in the Android app — the web version studies flip cards only.",
+    "categoriesLoadError": "Couldn't load categories",
+    "uncategorized": "Uncategorized",
+    "itemCount_one": "{{count}} item",
+    "itemCount_other": "{{count}} items"
   },
   "createDeck": {
     "title": "New Deck",
@@ -330,7 +334,34 @@
     "verified": "verified",
     "unverified": "unverified",
     "joined": "joined {{date}}",
-    "updateTypeError": "Couldn't update account type"
+    "updateTypeError": "Couldn't update account type",
+    "categories": {
+      "title": "Categories",
+      "loadError": "Couldn't load categories",
+      "newCategoryPlaceholder": "New category name",
+      "newSubcategoryPlaceholder": "New subcategory name",
+      "addCategory": "Add category",
+      "addSubcategory": "Add subcategory",
+      "adding": "Adding…",
+      "rename": "Rename",
+      "renamePlaceholder": "New title",
+      "save": "Save",
+      "delete": "Delete",
+      "deleteConfirm": "Delete \"{{title}}\"?",
+      "deleteError": "Couldn't delete this category",
+      "deleteBlocked": "Move or delete its subcategories before deleting this category",
+      "createError": "Couldn't create the category",
+      "renameError": "Couldn't rename the category",
+      "empty": "No categories yet",
+      "assignTitle": "Assign categories",
+      "assignSearchPlaceholder": "Search official decks and collections…",
+      "assignNone": "None",
+      "assignError": "Couldn't update the category",
+      "assignDecksHeading": "Standalone decks",
+      "assignCollectionsHeading": "Collections",
+      "assignEmpty": "No matches",
+      "optionSubLabel": "{{parent}} › {{title}}"
+    }
   },
   "forgotPassword": {
     "title": "Reset password",

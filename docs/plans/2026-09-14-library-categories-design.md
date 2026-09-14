@@ -74,9 +74,12 @@ out of scope for this change.
 
 ### Browse
 
-- `GET /library/categories` — the full tree with counts, unpaginated (small
-  at any realistic category count). Drives the top-level section list on
-  `/app-decks`.
+- `GET /categories` — the full tree with counts, unpaginated (small at any
+  realistic category count). Drives the top-level section list on
+  `/app-decks`. (Mounted as its own domain rather than under `/library` —
+  that prefix already names the unrelated public-library-of-shared-decks
+  feature from migration 006, so reusing it here would have been
+  confusing.)
 - `GET /decks/official/collections` and `GET /decks/official` gain an
   optional `categoryId` filter (a literal `uncategorized` value selects the
   `IS NULL` bucket). Existing `q`/`limit`/`offset` pagination is unchanged —
@@ -87,7 +90,7 @@ out of scope for this change.
 
 ### `/app-decks`
 
-- On load, fetch `/library/categories` once (cheap, unpaginated) and render
+- On load, fetch `/categories` once (cheap, unpaginated) and render
   each top-level category as a collapsible section, sorted alphabetically
   (server-side, ICU collation). A category with subcategories nests them,
   also alphabetical, one level in and independently collapsible.

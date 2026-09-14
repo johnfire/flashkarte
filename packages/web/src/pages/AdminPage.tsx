@@ -5,6 +5,7 @@ import { api, ApiError } from "../api/client";
 import { AdminUser, AccountType } from "../api/types";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAsync } from "../hooks/use-async";
+import { CategoriesSection } from "./admin/CategoriesSection";
 
 const ACCOUNT_TYPES: AccountType[] = ["free", "paid", "admin-gifted", "admin"];
 
@@ -149,6 +150,8 @@ export function AdminPage() {
           {t("admin.verifiedHint")}
         </p>
       </section>
+
+      <CategoriesSection />
 
       <section>
         <h2 className="mb-3 text-xl font-semibold">

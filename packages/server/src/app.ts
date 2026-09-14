@@ -14,6 +14,7 @@ import { keysRouter } from "./domains/keys/keys.routes";
 import { clientErrorsRouter } from "./domains/client-errors/client-errors.routes";
 import { adminRouter } from "./domains/admin/admin.routes";
 import { libraryRouter } from "./domains/library/library.routes";
+import { categoriesRouter } from "./domains/categories/categories.routes";
 import { publicLibraryRouter } from "./domains/library/public.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
 import { accountRouter } from "./domains/account/account.routes";
@@ -215,6 +216,7 @@ export function createApp() {
   app.use("/api/decks", decksRouter);
   app.use("/api/study", studyRouter);
   app.use("/api/library", libraryRouter);
+  app.use("/api/categories", categoriesRouter);
   // Account-level routes below require a full-scope credential (JWT or personal
   // key). Deck-scoped MCP keys are rejected here, so a leaked MCP key can't mint
   // more keys, spam bug reports, or reach admin. New account routes belong here.

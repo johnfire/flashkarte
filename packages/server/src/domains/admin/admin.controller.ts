@@ -90,3 +90,35 @@ export const demoteOfficialDeck = wrapAsync(
     res.status(204).end();
   },
 );
+
+export const setDeckCategory = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.setDeckCategory(req.params.id, req.body?.categoryId);
+    await auditFromRequest(
+      req,
+      "admin.deck_category_changed",
+      "deck",
+      req.params.id,
+      "success",
+      undefined,
+      { categoryId: req.body?.categoryId ?? null },
+    );
+    res.status(204).end();
+  },
+);
+
+export const setCollectionCategory = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.setCollectionCategory(req.params.id, req.body?.categoryId);
+    await auditFromRequest(
+      req,
+      "admin.collection_category_changed",
+      "deck_collection",
+      req.params.id,
+      "success",
+      undefined,
+      { categoryId: req.body?.categoryId ?? null },
+    );
+    res.status(204).end();
+  },
+);

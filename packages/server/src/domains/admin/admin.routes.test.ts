@@ -204,4 +204,36 @@ describe("admin routes", () => {
     expect(res.status).toBe(204);
     expect(mock.demoteOfficialDeck).toHaveBeenCalledWith("d1", "u2");
   });
+
+  test("PATCH /api/admin/decks/:id/category as admin -> 204", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    mock.setDeckCategory.mockResolvedValue(undefined);
+    const res = await request(app)
+      .patch("/api/admin/decks/d1/category")
+      .set("Authorization", AUTH)
+      .send({ categoryId: "cat-1" });
+    expect(res.status).toBe(204);
+    expect(mock.setDeckCategory).toHaveBeenCalledWith("d1", "cat-1");
+  });
+
+  test("PATCH /api/admin/decks/:id/category as non-admin -> 403", async () => {
+    authMock.getCurrentUser.mockResolvedValue(REGULAR as never);
+    const res = await request(app)
+      .patch("/api/admin/decks/d1/category")
+      .set("Authorization", AUTH)
+      .send({ categoryId: "cat-1" });
+    expect(res.status).toBe(403);
+    expect(mock.setDeckCategory).not.toHaveBeenCalled();
+  });
+
+  test("PATCH /api/admin/collections/:id/category as admin -> 204", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    mock.setCollectionCategory.mockResolvedValue(undefined);
+    const res = await request(app)
+      .patch("/api/admin/collections/c1/category")
+      .set("Authorization", AUTH)
+      .send({ categoryId: null });
+    expect(res.status).toBe(204);
+    expect(mock.setCollectionCategory).toHaveBeenCalledWith("c1", null);
+  });
 });

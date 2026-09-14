@@ -119,10 +119,24 @@ const paginationSchema = z.object({
     .min(0)
     .optional()
     .default(0),
+  // Scopes a browse query to one category/subcategory: omitted = no filter
+  // (the flat, cross-category search box), "uncategorized" = the
+  // uncategorized bucket, anything else = that category/subcategory id.
+  categoryId: z.preprocess(
+    (v) => (typeof v === "string" && v.trim() ? v.trim() : undefined),
+    z.string().optional(),
+  ),
 });
 
 function parsePagination(query: unknown) {
-  return parse(paginationSchema, query ?? {});
+  const { categoryId, ...rest } = parse(paginationSchema, query ?? {});
+  const categoryFilter: string | null | undefined =
+    categoryId === undefined
+      ? undefined
+      : categoryId === "uncategorized"
+        ? null
+        : categoryId;
+  return { ...rest, categoryFilter };
 }
 
 function toOfficialDeck(row: repo.OfficialDeckRow) {
@@ -132,24 +146,37 @@ function toOfficialDeck(row: repo.OfficialDeckRow) {
     created_at: row.created_at,
     card_count: Number(row.card_count),
     subscribed: row.subscribed,
+    category_id: row.category_id,
   };
 }
 
 /** Standalone official decks (no collection) — the "browse" list. */
 export async function listStandaloneOfficial(userId: string, query: unknown) {
-  const { q, limit, offset } = parsePagination(query);
-  const rows = await repo.listStandaloneOfficial(userId, q, limit, offset);
+  const { q, limit, offset, categoryFilter } = parsePagination(query);
+  const rows = await repo.listStandaloneOfficial(
+    userId,
+    q,
+    limit,
+    offset,
+    categoryFilter,
+  );
   return rows.map(toOfficialDeck);
 }
 
 export async function listCollections(query: unknown) {
-  const { q, limit, offset } = parsePagination(query);
-  const rows = await repo.listOfficialCollections(q, limit, offset);
+  const { q, limit, offset, categoryFilter } = parsePagination(query);
+  const rows = await repo.listOfficialCollections(
+    q,
+    limit,
+    offset,
+    categoryFilter,
+  );
   return rows.map((row) => ({
     id: row.id,
     title: row.title,
     description: row.description,
     deck_count: Number(row.deck_count),
+    category_id: row.category_id,
   }));
 }
 

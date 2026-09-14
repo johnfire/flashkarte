@@ -16,6 +16,7 @@ import {
   OfficialDeck,
   DeckCollection,
   DeckCollectionDetail,
+  DeckCategory,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 
@@ -175,6 +176,9 @@ export interface BrowseParams {
   q?: string;
   limit?: number;
   offset?: number;
+  // Scopes results to one category/subcategory ("uncategorized" for the
+  // no-category bucket). Omitted = no filter, used by the flat search box.
+  categoryId?: string;
 }
 
 function browseQuery(params?: BrowseParams): string {
@@ -183,6 +187,8 @@ function browseQuery(params?: BrowseParams): string {
   if (params.q) search.set("q", params.q);
   if (params.limit !== undefined) search.set("limit", String(params.limit));
   if (params.offset !== undefined) search.set("offset", String(params.offset));
+  if (params.categoryId !== undefined)
+    search.set("categoryId", params.categoryId);
   const qs = search.toString();
   return qs ? `?${qs}` : "";
 }
@@ -343,6 +349,9 @@ export const api = {
     unsubscribe: (id: string) =>
       request<void>(`/decks/${id}/subscribe`, { method: "DELETE" }),
   },
+  categories: {
+    tree: () => request<{ categories: DeckCategory[] }>("/categories"),
+  },
   library: {
     list: (q?: string) =>
       request<{ decks: LibraryDeck[] }>(
@@ -393,6 +402,30 @@ export const api = {
       request<{ user: AdminUser }>(`/admin/users/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ accountType }),
+      }),
+    categoryTree: () =>
+      request<{ categories: DeckCategory[] }>("/admin/categories"),
+    createCategory: (title: string, parentId?: string) =>
+      request<{ category: DeckCategory }>("/admin/categories", {
+        method: "POST",
+        body: JSON.stringify({ title, parentId }),
+      }),
+    renameCategory: (id: string, title: string) =>
+      request<{ category: DeckCategory }>(`/admin/categories/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ title }),
+      }),
+    deleteCategory: (id: string) =>
+      request<void>(`/admin/categories/${id}`, { method: "DELETE" }),
+    setDeckCategory: (id: string, categoryId: string | null) =>
+      request<void>(`/admin/decks/${id}/category`, {
+        method: "PATCH",
+        body: JSON.stringify({ categoryId }),
+      }),
+    setCollectionCategory: (id: string, categoryId: string | null) =>
+      request<void>(`/admin/collections/${id}/category`, {
+        method: "PATCH",
+        body: JSON.stringify({ categoryId }),
       }),
   },
 };

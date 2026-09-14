@@ -13,6 +13,11 @@ vi.mock("../api/client", () => ({
       listUsers: vi.fn(),
       createUser: vi.fn(),
       setAccountType: vi.fn(),
+      categoryTree: vi.fn(),
+    },
+    decks: {
+      listOfficial: vi.fn(),
+      listCollections: vi.fn(),
     },
   },
   ApiError: class ApiError extends Error {
@@ -26,6 +31,7 @@ const mockedAdminApi = api.admin as unknown as {
   listUsers: ReturnType<typeof vi.fn>;
   createUser: ReturnType<typeof vi.fn>;
   setAccountType: ReturnType<typeof vi.fn>;
+  categoryTree: ReturnType<typeof vi.fn>;
 };
 
 const adminUser: AdminUser = {
@@ -46,13 +52,16 @@ function renderPage() {
 }
 
 describe("AdminPage", () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedAdminApi.categoryTree.mockResolvedValue({ categories: [] });
+  });
 
   test("renders loading and loaded states", async () => {
     mockedAdminApi.listUsers.mockResolvedValue({ users: [adminUser] });
     renderPage();
 
-    expect(screen.getByText("Loading…")).toBeInTheDocument();
+    expect(screen.getAllByText("Loading…").length).toBeGreaterThan(0);
     expect(await screen.findByText("new@example.com")).toBeInTheDocument();
   });
 

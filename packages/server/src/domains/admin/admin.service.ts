@@ -5,6 +5,7 @@ import { parse, emailSchema, passwordSchema } from "../../utils/validate";
 import * as repo from "./admin.repository";
 import type { AdminUserRow } from "./admin.repository";
 import * as decksRepo from "../decks/decks.repository";
+import * as categoriesRepo from "../categories/categories.repository";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -118,4 +119,39 @@ export async function demoteOfficialDeck(
   const ownerId = parse(ownerIdSchema, ownerIdIn);
   const deck = await decksRepo.demoteFromOfficial(id, ownerId);
   if (!deck) throw new NotFoundError("Deck not found");
+}
+
+const categoryIdSchema = z
+  .string({ error: "categoryId must be text" })
+  .min(1)
+  .nullable();
+
+async function validateCategoryId(
+  categoryIdIn: unknown,
+): Promise<string | null> {
+  const categoryId = parse(categoryIdSchema, categoryIdIn);
+  if (categoryId !== null && !(await categoriesRepo.getById(categoryId))) {
+    throw new NotFoundError("Category not found");
+  }
+  return categoryId;
+}
+
+/** Assign/clear an official deck's category, separate from promote/demote. */
+export async function setDeckCategory(
+  id: string,
+  categoryIdIn: unknown,
+): Promise<void> {
+  const categoryId = await validateCategoryId(categoryIdIn);
+  const deck = await decksRepo.setDeckCategory(id, categoryId);
+  if (!deck) throw new NotFoundError("Official deck not found");
+}
+
+/** Assign/clear a collection's category. */
+export async function setCollectionCategory(
+  id: string,
+  categoryIdIn: unknown,
+): Promise<void> {
+  const categoryId = await validateCategoryId(categoryIdIn);
+  const collection = await decksRepo.setCollectionCategory(id, categoryId);
+  if (!collection) throw new NotFoundError("Collection not found");
 }

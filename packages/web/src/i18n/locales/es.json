@@ -252,7 +252,11 @@
       "saveError": "No se han podido guardar los ajustes de lectura del mazo."
     },
     "branching": "Ramificado",
-    "branchingHint": "Es un mazo de árbol de decisiones. Juégalo en la aplicación de Android: la versión web solo estudia tarjetas de anverso y reverso."
+    "branchingHint": "Es un mazo de árbol de decisiones. Juégalo en la aplicación de Android: la versión web solo estudia tarjetas de anverso y reverso.",
+    "categoriesLoadError": "No se pudieron cargar las categorías",
+    "uncategorized": "Sin categoría",
+    "itemCount_one": "{{count}} elemento",
+    "itemCount_other": "{{count}} elementos"
   },
   "createDeck": {
     "title": "Nuevo mazo",
@@ -330,7 +334,34 @@
     "verified": "verificado",
     "unverified": "sin verificar",
     "joined": "se unió el {{date}}",
-    "updateTypeError": "No se pudo actualizar el tipo de cuenta"
+    "updateTypeError": "No se pudo actualizar el tipo de cuenta",
+    "categories": {
+      "title": "Categorías",
+      "loadError": "No se pudieron cargar las categorías",
+      "newCategoryPlaceholder": "Nombre de la nueva categoría",
+      "newSubcategoryPlaceholder": "Nombre de la nueva subcategoría",
+      "addCategory": "Añadir categoría",
+      "addSubcategory": "Añadir subcategoría",
+      "adding": "Añadiendo…",
+      "rename": "Renombrar",
+      "renamePlaceholder": "Nuevo título",
+      "save": "Guardar",
+      "delete": "Eliminar",
+      "deleteConfirm": "¿Eliminar «{{title}}»?",
+      "deleteError": "No se pudo eliminar esta categoría",
+      "deleteBlocked": "Mueve o elimina primero sus subcategorías",
+      "createError": "No se pudo crear la categoría",
+      "renameError": "No se pudo renombrar la categoría",
+      "empty": "Todavía no hay categorías",
+      "assignTitle": "Asignar categorías",
+      "assignSearchPlaceholder": "Buscar mazos oficiales y colecciones…",
+      "assignNone": "Ninguna",
+      "assignError": "No se pudo actualizar la categoría",
+      "assignDecksHeading": "Mazos individuales",
+      "assignCollectionsHeading": "Colecciones",
+      "assignEmpty": "Sin resultados",
+      "optionSubLabel": "{{parent}} › {{title}}"
+    }
   },
   "forgotPassword": {
     "title": "Restablecer contraseña",

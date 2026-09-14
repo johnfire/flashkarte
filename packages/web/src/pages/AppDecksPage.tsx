@@ -1,61 +1,35 @@
 import { useCallback, useState } from "react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import { api, ApiError, reportClientError, BrowseParams } from "../api/client";
-import { DeckCollection, OfficialDeck } from "../api/types";
-import { usePaginatedList } from "../hooks/use-paginated-list";
-import { OfficialDeckRow } from "./OfficialDeckRow";
-import { CollectionRow } from "./CollectionRow";
+import { api, ApiError } from "../api/client";
+import { DeckCategory } from "../api/types";
+import { useAsync } from "../hooks/use-async";
+import { CategorySection } from "./CategorySection";
+import { AppDecksSearchResults } from "./AppDecksSearchResults";
 
 export function AppDecksPage() {
   const { t } = useTranslation();
   const [q, setQ] = useState("");
-  const [subscribingId, setSubscribingId] = useState<string | null>(null);
+  const [activeQuery, setActiveQuery] = useState<string | null>(null);
 
-  const loadCollections = useCallback(
-    (params: BrowseParams) => api.decks.listCollections(params),
-    [],
-  );
-  const collections = usePaginatedList<DeckCollection>(loadCollections);
-
-  const loadStandalone = useCallback(
-    (params: BrowseParams) => api.decks.listOfficial(params),
-    [],
-  );
-  const standalone = usePaginatedList<OfficialDeck>(loadStandalone);
+  const loadTree = useCallback(() => api.categories.tree(), []);
+  const {
+    data: treeResponse,
+    error: treeError,
+    loading: treeLoading,
+  } = useAsync(loadTree, []);
 
   function onSearchSubmit(e: React.FormEvent) {
     e.preventDefault();
-    void collections.search(q);
-    void standalone.search(q);
+    const query = q.trim();
+    setActiveQuery(query || null);
   }
 
-  async function onAdd(id: string) {
-    setSubscribingId(id);
-    try {
-      await api.decks.subscribe(id);
-      standalone.setItems(
-        (list) =>
-          list?.map((d) => (d.id === id ? { ...d, subscribed: true } : d)) ??
-          list,
-      );
-    } catch (err) {
-      reportClientError({
-        message: err instanceof Error ? err.message : String(err),
-        context: "AppDecksPage.onAdd",
-      });
-      window.alert(t("decks.subscribeError"));
-    } finally {
-      setSubscribingId(null);
-    }
-  }
-
-  const error = [collections.error, standalone.error].find(Boolean);
-  const errorMessage =
-    error instanceof ApiError
-      ? error.message
-      : error
-        ? t("decks.loadError")
+  const treeErrorMessage =
+    treeError instanceof ApiError
+      ? treeError.message
+      : treeError
+        ? t("decks.categoriesLoadError")
         : null;
 
   return (
@@ -85,76 +59,27 @@ export function AppDecksPage() {
         </button>
       </form>
 
-      {errorMessage && <p className="mb-4 text-red-600">{errorMessage}</p>}
-
-      <section className="mb-8">
-        <h2 className="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300">
-          {t("decks.collectionsSectionTitle")}
-        </h2>
-        {collections.loading && (
-          <p className="text-gray-500 dark:text-gray-400">
-            {t("common.loading")}
-          </p>
-        )}
-        {collections.items && collections.items.length === 0 && (
-          <p className="text-gray-500 dark:text-gray-400">
-            {t("decks.collectionsEmpty")}
-          </p>
-        )}
-        <ul className="space-y-3">
-          {collections.items?.map((c) => (
-            <CollectionRow key={c.id} collection={c} />
-          ))}
-        </ul>
-        {collections.hasMore && collections.items && (
-          <button
-            onClick={() => void collections.loadMore()}
-            disabled={collections.loadingMore}
-            className="mt-3 text-sm text-indigo-600 disabled:opacity-50"
-          >
-            {collections.loadingMore
-              ? t("decks.loadingMore")
-              : t("decks.loadMore")}
-          </button>
-        )}
-      </section>
-
-      <section>
-        <h2 className="mb-3 text-lg font-semibold text-gray-700 dark:text-gray-300">
-          {t("decks.standaloneSectionTitle")}
-        </h2>
-        {standalone.loading && (
-          <p className="text-gray-500 dark:text-gray-400">
-            {t("common.loading")}
-          </p>
-        )}
-        {standalone.items && standalone.items.length === 0 && (
-          <p className="text-gray-500 dark:text-gray-400">
-            {t("decks.standaloneEmpty")}
-          </p>
-        )}
-        <ul className="space-y-3">
-          {standalone.items?.map((d) => (
-            <OfficialDeckRow
-              key={d.id}
-              deck={d}
-              busy={subscribingId === d.id}
-              onAdd={onAdd}
-            />
-          ))}
-        </ul>
-        {standalone.hasMore && standalone.items && (
-          <button
-            onClick={() => void standalone.loadMore()}
-            disabled={standalone.loadingMore}
-            className="mt-3 text-sm text-indigo-600 disabled:opacity-50"
-          >
-            {standalone.loadingMore
-              ? t("decks.loadingMore")
-              : t("decks.loadMore")}
-          </button>
-        )}
-      </section>
+      {activeQuery !== null ? (
+        <AppDecksSearchResults q={activeQuery} />
+      ) : (
+        <>
+          {treeLoading && (
+            <p className="text-gray-500 dark:text-gray-400">
+              {t("common.loading")}
+            </p>
+          )}
+          {treeErrorMessage && (
+            <p className="mb-4 text-red-600">{treeErrorMessage}</p>
+          )}
+          {treeResponse && (
+            <ul className="space-y-3">
+              {treeResponse.categories.map((category: DeckCategory) => (
+                <CategorySection key={category.id} category={category} />
+              ))}
+            </ul>
+          )}
+        </>
+      )}
     </div>
   );
 }
