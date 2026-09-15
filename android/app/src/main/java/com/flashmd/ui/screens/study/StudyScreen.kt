@@ -23,6 +23,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.R
 import com.flashmd.data.local.StudyMode
 import com.flashmd.domain.study.StudyOption
+import com.flashmd.ui.components.CardText
 import com.flashmd.ui.theme.RatingColor
 
 private val RATING_LABELS = mapOf(1 to "Again", 2 to "Hard", 3 to "Good", 4 to "Easy", 5 to "Perfect")
@@ -115,8 +116,13 @@ fun StudyScreen(
                 modifier = Modifier.fillMaxWidth(),
             )
 
+            val cardNumber = state.currentCard?.card?.position?.plus(1)
             Text(
-                "${state.reviewed} done  •  ${state.remaining} remaining",
+                if (cardNumber != null) {
+                    "Card #$cardNumber  •  ${state.reviewed} done  •  ${state.remaining} remaining"
+                } else {
+                    "${state.reviewed} done  •  ${state.remaining} remaining"
+                },
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 4.dp, bottom = 8.dp),
@@ -223,7 +229,7 @@ private fun ChoicePanel(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Spacer(Modifier.height(16.dp))
-                Text(
+                CardText(
                     front,
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center,
@@ -284,14 +290,14 @@ private fun RemediationInterlude(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 Spacer(Modifier.height(16.dp))
-                Text(
+                CardText(
                     front,
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center,
                     fontWeight = FontWeight.Bold,
                 )
                 Spacer(Modifier.height(16.dp))
-                Text(
+                CardText(
                     back,
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
@@ -357,7 +363,7 @@ private fun CardFace(text: String, label: String) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(bottom = 16.dp),
             )
-            Text(
+            CardText(
                 text,
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center,

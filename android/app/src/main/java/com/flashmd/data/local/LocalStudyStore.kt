@@ -84,9 +84,9 @@ class LocalStudyStore @Inject constructor(
      */
     fun cacheDeckCards(deckId: String, cards: List<Card>) = db.transaction {
         db.cardsQueries.deleteCardsForDeck(deckId)
-        cards.forEachIndexed { i, c ->
+        cards.forEach { c ->
             db.cardsQueries.upsertCard(
-                c.id, deckId, c.front, c.back, null, i.toLong(),
+                c.id, deckId, c.front, c.back, null, c.position.toLong(),
                 c.label, encodeOptions(c.options),
             )
         }
@@ -96,7 +96,10 @@ class LocalStudyStore @Inject constructor(
      *  targets, Spec 01). Reads from the whole-deck cache — works offline. */
     fun cardByLabel(deckId: String, label: String): Card? =
         db.cardsQueries.selectCardByLabel(deckId, label).executeAsOneOrNull()?.let {
-            Card(it.id, it.deck_id, it.front, it.back, it.label, decodeOptions(it.options))
+            Card(
+                it.id, it.deck_id, it.front, it.back, it.label,
+                decodeOptions(it.options), it.position.toInt(),
+            )
         }
 
     fun cacheProgress(p: CardProgress) {
@@ -116,7 +119,10 @@ class LocalStudyStore @Inject constructor(
         return db.cardProgressQueries.selectDueCards(deckId, nowIso).executeAsList().map { c ->
             val p = db.cardProgressQueries.selectProgress(c.id).executeAsOneOrNull()
             DueCard(
-                card = Card(c.id, c.deck_id, c.front, c.back, c.label, decodeOptions(c.options)),
+                card = Card(
+                    c.id, c.deck_id, c.front, c.back, c.label,
+                    decodeOptions(c.options), c.position.toInt(),
+                ),
                 progress = CardProgress(
                     id = c.id,
                     cardId = c.id,

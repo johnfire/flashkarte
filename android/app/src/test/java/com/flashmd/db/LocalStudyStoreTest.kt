@@ -132,4 +132,26 @@ class LocalStudyStoreTest {
         assertEquals(1, stats.good)
         assertEquals(0, stats.easy)
     }
+
+    // Regression: cacheDeckCards used to write each card's list *index* as its
+    // position, not its real server position. That happened to look right only
+    // when the list was already gapless and in order — it silently drifted the
+    // moment a card was deleted (leaving a gap) or the cache was filled from
+    // the study-batch order instead of deck order. Position must survive the
+    // round trip unchanged, out of order and with gaps.
+    @Test
+    fun cachesEachCardsRealPositionNotItsListIndex() {
+        store.cacheDeckCards(
+            "d1",
+            listOf(
+                Card("c1", "d1", "f1", "b1", position = 5),
+                Card("c2", "d1", "f2", "b2", label = "anchor", position = 0),
+            ),
+        )
+
+        val byId = store.dueCards("d1").associate { it.card.id to it.card.position }
+        assertEquals(5, byId["c1"])
+        assertEquals(0, byId["c2"])
+        assertEquals(0, store.cardByLabel("d1", "anchor")?.position)
+    }
 }

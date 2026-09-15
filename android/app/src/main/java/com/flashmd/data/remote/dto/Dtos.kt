@@ -174,6 +174,10 @@ data class StudyCardDto(
     val id: String,
     val content: CardContentDto,
     val category: String? = null,
+    // The card's fixed place in the deck, independent of study order (the
+    // scheduler studies cards out of sequence). Defaulted so an older server
+    // that doesn't send it still deserialises.
+    val position: Int = 0,
 )
 
 @Serializable

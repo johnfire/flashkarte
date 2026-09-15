@@ -38,6 +38,7 @@ class StudyRepository @Inject constructor(
                         back = dto.content.back,
                         label = dto.content.label,
                         options = dto.content.options.map { BranchOption(it.text, it.goto) },
+                        position = dto.position,
                     ),
                     progress = CardProgress(
                         id = dto.id,
@@ -124,6 +125,7 @@ private fun DeckCardDto.toCard(deckId: String): Card = Card(
     back = content.back,
     label = content.label,
     options = content.options.map { BranchOption(it.text, it.goto) },
+    position = position,
 )
 
 data class DeckStudyStats(

@@ -119,6 +119,27 @@ class ApiContractTest {
     }
 
     @Test
+    fun `study batch parses each card's deck position`() = runBlocking {
+        enqueue(
+            200,
+            """[{"id":"c1","content":{"front":"Q1","back":"A1"},"position":4}]""",
+        )
+
+        val cards = apiCall { api.studyBatch("d1") }
+
+        assertEquals(4, cards[0].position)
+    }
+
+    @Test
+    fun `study batch defaults position to 0 when the server omits it`() = runBlocking {
+        enqueue(200, """[{"id":"c1","content":{"front":"Q1","back":"A1"}}]""")
+
+        val cards = apiCall { api.studyBatch("d1") }
+
+        assertEquals(0, cards[0].position)
+    }
+
+    @Test
     fun `login parses user and access token`() = runBlocking {
         enqueue(
             200,

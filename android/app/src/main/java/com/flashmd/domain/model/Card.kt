@@ -11,4 +11,8 @@ data class Card(
     // it as another card's remediation target.
     val label: String? = null,
     val options: List<BranchOption> = emptyList(),
+    // Fixed place in the deck (0-based), independent of study order — shown
+    // to the learner as "Card #N" so it survives the scheduler reordering
+    // due/new cards.
+    val position: Int = 0,
 )
