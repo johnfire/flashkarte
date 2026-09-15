@@ -99,7 +99,39 @@ describe("deck MCP tools", () => {
 
     const payload = JSON.parse(result.content[0].text);
     expect(payload.id).toBe("d1");
-    expect(payload.speech_warning).toMatch(/422 bad tag/);
+    expect(payload.warnings[0]).toMatch(/422 bad tag/);
+  });
+
+  test("create_deck with course_id attaches the new deck to that course", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.post.mockResolvedValueOnce({ id: "d1" });
+    mockApi.post.mockResolvedValueOnce({ course_id: "c1", deck_id: "d1" });
+
+    await handlers.create_deck({
+      markdown: "# D\n**1. Q**\nA",
+      course_id: "c1",
+    });
+
+    expect(mockApi.post).toHaveBeenCalledWith("/api/courses/c1/decks", {
+      deck_id: "d1",
+    });
+  });
+
+  test("a failed course attachment still reports the created deck", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.post.mockResolvedValueOnce({ id: "d1" });
+    mockApi.post.mockRejectedValueOnce(new Error("404 course not found"));
+
+    const result = (await handlers.create_deck({
+      markdown: "# D\n**1. Q**\nA",
+      course_id: "c1",
+    })) as { content: { text: string }[] };
+
+    const payload = JSON.parse(result.content[0].text);
+    expect(payload.id).toBe("d1");
+    expect(payload.warnings[0]).toMatch(/could not be attached/);
   });
 
   test("set_deck_speech PATCHes only the fields given", async () => {

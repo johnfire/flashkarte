@@ -143,7 +143,10 @@ export function registerDeckTools(server: McpServer) {
       "\n\n" +
       SENSES_HELP +
       "\n\n" +
-      SPEECH_HELP,
+      SPEECH_HELP +
+      "\n\nPass course_id to create this deck as the next unit of an " +
+      "existing course (see create_course) in one call, instead of " +
+      "create-then-add_deck_to_course.",
     {
       markdown: z
         .string()
@@ -154,33 +157,60 @@ export function registerDeckTools(server: McpServer) {
         .describe(
           "Optional title; otherwise taken from the Markdown # heading.",
         ),
+      course_id: z
+        .string()
+        .uuid()
+        .optional()
+        .describe(
+          "Optional: attach this deck to an existing course as its next unit.",
+        ),
       ...speechShape,
     },
-    async ({ markdown, title, ...speech }) =>
+    async ({ markdown, title, course_id, ...speech }) =>
       runTool("create_deck", async () => {
         const deck = await post<{ id: string }>("/api/decks", {
           markdown,
           title,
         });
-        // Creation takes Markdown only, so the speech settings are applied as
-        // a follow-up patch. A failure there must not lose the deck: report it
-        // alongside the created deck rather than throwing.
+        const warnings: string[] = [];
+
+        // Creation takes Markdown only, so the speech settings and the
+        // course attachment are applied as follow-up calls. A failure in
+        // either must not lose the deck: report it alongside the created
+        // deck rather than throwing.
         const patchBody = speechPatch(speech);
-        if (Object.keys(patchBody).length === 0) return asText(deck);
-        try {
-          const updated = await patch(
-            `/api/decks/${encodeURIComponent(deck.id)}`,
-            patchBody,
-          );
-          return asText(updated);
-        } catch (error) {
-          return asText({
-            ...deck,
-            speech_warning: `Deck created, but its speech settings could not be applied: ${
-              error instanceof Error ? error.message : String(error)
-            }`,
-          });
+        let result: Record<string, unknown> = deck;
+        if (Object.keys(patchBody).length > 0) {
+          try {
+            result = await patch(
+              `/api/decks/${encodeURIComponent(deck.id)}`,
+              patchBody,
+            );
+          } catch (error) {
+            warnings.push(
+              `Deck created, but its speech settings could not be applied: ${
+                error instanceof Error ? error.message : String(error)
+              }`,
+            );
+          }
         }
+
+        if (course_id) {
+          try {
+            await post(`/api/courses/${encodeURIComponent(course_id)}/decks`, {
+              deck_id: deck.id,
+            });
+          } catch (error) {
+            warnings.push(
+              `Deck created, but could not be attached to course ${course_id}: ${
+                error instanceof Error ? error.message : String(error)
+              }`,
+            );
+          }
+        }
+
+        if (warnings.length === 0) return asText(result);
+        return asText({ ...result, warnings });
       }),
   );
 

@@ -4,6 +4,8 @@ import express from "express";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { registerDeckTools } from "./tools/decks";
+import { registerCourseTools } from "./tools/courses";
+import { registerCoursePrompts } from "./prompts/build-a-course";
 import { createDiscoveryRouter } from "./oauth/discovery";
 import { createAuthorizeRouter } from "./oauth/authorize";
 import { createTokenRouter } from "./oauth/token";
@@ -40,6 +42,8 @@ const MCP_ALLOWED_REDIRECT_URIS = (
 function buildServer(): McpServer {
   const server = new McpServer({ name: "flashkarte", version: "0.1.0" });
   registerDeckTools(server);
+  registerCourseTools(server);
+  registerCoursePrompts(server);
   return server;
 }
 
