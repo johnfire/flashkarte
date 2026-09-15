@@ -297,7 +297,15 @@
       "unmute": "Unmute"
     },
     "branchingTitle": "Not studiable on the web",
-    "branchingBody": "This is a branching deck: its cards are decision-tree steps rather than question-and-answer pairs. Play it in the Android app."
+    "branchingBody": "This is a branching deck: its cards are decision-tree steps rather than question-and-answer pairs. Play it in the Android app.",
+    "mode": {
+      "flip": "Flip",
+      "choice": "Choice"
+    },
+    "continue": "Continue",
+    "remediation": {
+      "title": "Let's clear that up"
+    }
   },
   "library": {
     "title": "Library",

@@ -180,8 +180,16 @@ export interface DeckDetail {
 export interface StudyCard {
   id: string;
   // `sense` is present only on cards that are one meaning of a word block (Spec 10);
-  // every other card renders exactly as before.
-  content: { front: string; back: string; sense?: CardSense | null };
+  // `label`/`options` only on a diagnostic card (Spec 01) -- one option targets
+  // the reserved CORRECT_TARGET, the rest route to remediation labels or "end".
+  // Every other card renders exactly as before.
+  content: {
+    front: string;
+    back: string;
+    label?: string | null;
+    options?: ParsedOption[];
+    sense?: CardSense | null;
+  };
   // Which phase to render a sense card in. Only the server sees every sense's
   // progress, so it decides; absent for ordinary cards.
   phase?: WordPhase;

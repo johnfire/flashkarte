@@ -297,7 +297,15 @@
       "unmute": "Activer le son"
     },
     "branchingTitle": "Non étudiable sur le web",
-    "branchingBody": "Ce paquet est ramifié : ses cartes sont des étapes d'un arbre de décision, pas des paires question-réponse. Jouez-le dans l'application Android."
+    "branchingBody": "Ce paquet est ramifié : ses cartes sont des étapes d'un arbre de décision, pas des paires question-réponse. Jouez-le dans l'application Android.",
+    "mode": {
+      "flip": "Retourner",
+      "choice": "Choix"
+    },
+    "continue": "Continuer",
+    "remediation": {
+      "title": "Éclaircissons ça"
+    }
   },
   "library": {
     "title": "Bibliothèque",

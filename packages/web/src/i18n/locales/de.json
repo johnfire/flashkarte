@@ -297,7 +297,15 @@
       "unmute": "Ton an"
     },
     "branchingTitle": "Im Web nicht lernbar",
-    "branchingBody": "Dies ist ein verzweigter Stapel: Seine Karten sind Schritte in einem Entscheidungsbaum, keine Frage-Antwort-Paare. Spiele ihn in der Android-App."
+    "branchingBody": "Dies ist ein verzweigter Stapel: Seine Karten sind Schritte in einem Entscheidungsbaum, keine Frage-Antwort-Paare. Spiele ihn in der Android-App.",
+    "mode": {
+      "flip": "Umdrehen",
+      "choice": "Auswahl"
+    },
+    "continue": "Weiter",
+    "remediation": {
+      "title": "Das klären wir noch"
+    }
   },
   "library": {
     "title": "Bibliothek",

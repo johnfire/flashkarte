@@ -387,10 +387,17 @@ export const api = {
   study: {
     batch: (deckId: string) => request<StudyCard[]>(`/decks/${deckId}/study`),
     stats: (deckId: string) => request<DeckStats>(`/decks/${deckId}/stats`),
-    review: (cardId: string, rating: number) =>
+    // optionIndex identifies which authored option a diagnostic-card (Spec 01)
+    // pick chose, for the review_events ledger; omitted for ordinary cards and
+    // for a Flip-mode grade.
+    review: (cardId: string, rating: number, optionIndex?: number) =>
       request<ReviewResult>("/study/review", {
         method: "POST",
-        body: JSON.stringify({ card_id: cardId, rating }),
+        body: JSON.stringify({
+          card_id: cardId,
+          rating,
+          option_index: optionIndex,
+        }),
       }),
   },
   keys: {

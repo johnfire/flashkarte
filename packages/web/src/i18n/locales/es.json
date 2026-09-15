@@ -297,7 +297,15 @@
       "unmute": "Activar sonido"
     },
     "branchingTitle": "No se puede estudiar en la web",
-    "branchingBody": "Este es un mazo ramificado: sus tarjetas son pasos de un árbol de decisiones, no pares de pregunta y respuesta. Juégalo en la aplicación de Android."
+    "branchingBody": "Este es un mazo ramificado: sus tarjetas son pasos de un árbol de decisiones, no pares de pregunta y respuesta. Juégalo en la aplicación de Android.",
+    "mode": {
+      "flip": "Voltear",
+      "choice": "Opción múltiple"
+    },
+    "continue": "Continuar",
+    "remediation": {
+      "title": "Aclaremos eso"
+    }
   },
   "library": {
     "title": "Biblioteca",
