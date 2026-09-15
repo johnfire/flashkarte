@@ -1,7 +1,10 @@
 jest.mock("./courses.repository");
+jest.mock("../decks/decks.repository");
+jest.mock("../decks/branching", () => ({ validateBranching: jest.fn() }));
 jest.mock("../audit/audit.service", () => ({ recordRequired: jest.fn() }));
 import * as repo from "./courses.repository";
 import type { CourseDeckRow } from "./courses.repository";
+import * as decksRepo from "../decks/decks.repository";
 import {
   computeGating,
   createCourse,
@@ -12,9 +15,13 @@ import {
   addDeckToCourse,
   removeDeckFromCourse,
   reorderCourseDecks,
+  listPublicCourses,
+  getPublicCoursePreview,
+  cloneCourse,
 } from "./courses.service";
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
+const mockDecksRepo = decksRepo as jest.Mocked<typeof decksRepo>;
 
 const courseRow = {
   id: "c1",
@@ -222,5 +229,122 @@ describe("reorderCourseDecks", () => {
     const result = await reorderCourseDecks("u1", "c1", [b, a]);
     expect(mockRepo.reorderCourseDecks).toHaveBeenCalledWith("c1", [b, a]);
     expect(result.order).toEqual([b, a]);
+  });
+});
+
+const publicCourseRow = { ...courseRow, is_public: true };
+
+describe("listPublicCourses", () => {
+  test("defaults to limit 50, offset 0", async () => {
+    mockRepo.listPublicCourses.mockResolvedValue([]);
+    await listPublicCourses({});
+    expect(mockRepo.listPublicCourses).toHaveBeenCalledWith(50, 0);
+  });
+});
+
+describe("getPublicCoursePreview", () => {
+  test("404s when the course doesn't exist", async () => {
+    mockRepo.getCourse.mockResolvedValue(null);
+    await expect(getPublicCoursePreview("u1", "c1")).rejects.toThrow(
+      "Course not found",
+    );
+  });
+
+  test("404s when the course exists but isn't public", async () => {
+    mockRepo.getCourse.mockResolvedValue(courseRow as never);
+    await expect(getPublicCoursePreview("u1", "c1")).rejects.toThrow(
+      "Course not found",
+    );
+  });
+
+  test("returns the course with its ordered decks", async () => {
+    mockRepo.getCourse.mockResolvedValue(publicCourseRow as never);
+    mockRepo.getPublicCourseDecks.mockResolvedValue([
+      { deck_id: "d1", position: 0, title: "Deck 1", card_count: 5 },
+    ]);
+    const result = await getPublicCoursePreview("u1", "c1");
+    expect(result.decks).toHaveLength(1);
+  });
+});
+
+describe("cloneCourse", () => {
+  beforeEach(() => {
+    mockDecksRepo.rowToParsedCard.mockImplementation(
+      (row) =>
+        ({
+          type: "basic",
+          front: "f",
+          back: "b",
+          category: row.category,
+          label: null,
+          options: [],
+          sense: null,
+          senseConflict: false,
+        }) as never,
+    );
+  });
+
+  test("404s on a course that isn't public", async () => {
+    mockRepo.getCourse.mockResolvedValue(courseRow as never);
+    await expect(cloneCourse("u2", "c1")).rejects.toThrow("Course not found");
+  });
+
+  test("rejects cloning a course with no decks", async () => {
+    mockRepo.getCourse.mockResolvedValue(publicCourseRow as never);
+    mockRepo.getPublicCourseDecks.mockResolvedValue([]);
+    await expect(cloneCourse("u2", "c1")).rejects.toThrow("no decks");
+  });
+
+  test("clones every member deck into the caller's account, in order", async () => {
+    mockRepo.getCourse.mockResolvedValue(publicCourseRow as never);
+    mockRepo.getPublicCourseDecks.mockResolvedValue([
+      { deck_id: "d1", position: 0, title: "Unit 1", card_count: 2 },
+      { deck_id: "d2", position: 1, title: "Unit 2", card_count: 1 },
+    ]);
+    mockRepo.getCardsForDeck.mockResolvedValue([
+      { type: "basic", content: {}, category: null, position: 0 },
+    ]);
+    mockRepo.createCourse.mockResolvedValue({
+      ...publicCourseRow,
+      id: "new-c1",
+      user_id: "u2",
+    } as never);
+    mockDecksRepo.createDeckWithCards
+      .mockResolvedValueOnce({ id: "new-d1" } as never)
+      .mockResolvedValueOnce({ id: "new-d2" } as never);
+
+    const result = await cloneCourse("u2", "c1");
+
+    expect(mockRepo.createCourse).toHaveBeenCalledWith(
+      "u2",
+      publicCourseRow.title,
+      publicCourseRow.description,
+    );
+    expect(mockDecksRepo.createDeckWithCards).toHaveBeenNthCalledWith(
+      1,
+      "u2",
+      "Unit 1",
+      null,
+      expect.any(Array),
+    );
+    expect(mockDecksRepo.createDeckWithCards).toHaveBeenNthCalledWith(
+      2,
+      "u2",
+      "Unit 2",
+      null,
+      expect.any(Array),
+    );
+    expect(mockRepo.addDeckToCourse).toHaveBeenNthCalledWith(
+      1,
+      "new-c1",
+      "new-d1",
+    );
+    expect(mockRepo.addDeckToCourse).toHaveBeenNthCalledWith(
+      2,
+      "new-c1",
+      "new-d2",
+    );
+    expect(result.decks_cloned).toBe(2);
+    expect(result.course.id).toBe("new-c1");
   });
 });

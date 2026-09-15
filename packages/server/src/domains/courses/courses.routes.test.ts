@@ -157,3 +157,54 @@ describe("courses routes", () => {
     expect(res.status).toBe(422);
   });
 });
+
+describe("public course browsing + clone (mounted under /api/library)", () => {
+  test("GET /api/library/courses -> 200 with public courses", async () => {
+    mock.listPublicCourses.mockResolvedValue([
+      { ...course, is_public: true, decks_total: 3 },
+    ] as never);
+    const res = await request(app).get("/api/library/courses");
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveLength(1);
+  });
+
+  test("GET /api/library/courses/:id -> 200 with the ordered deck preview", async () => {
+    mock.getPublicCoursePreview.mockResolvedValue({
+      ...course,
+      is_public: true,
+      decks: [{ deck_id: "d1", position: 0, title: "Unit 1", card_count: 5 }],
+    } as never);
+    const res = await request(app).get("/api/library/courses/c1");
+    expect(res.status).toBe(200);
+    expect(res.body.decks).toHaveLength(1);
+  });
+
+  test("GET /api/library/courses/:id -> 404 when private", async () => {
+    mock.getPublicCoursePreview.mockRejectedValue(
+      new NotFoundError("Course not found"),
+    );
+    const res = await request(app).get("/api/library/courses/c1");
+    expect(res.status).toBe(404);
+  });
+
+  test("POST /api/library/courses/:id/clone -> 201 with the new course", async () => {
+    mock.cloneCourse.mockResolvedValue({
+      course: { ...course, id: "new-c1" },
+      decks_cloned: 2,
+      source_id: "c1",
+    } as never);
+    const res = await request(app).post("/api/library/courses/c1/clone");
+    expect(res.status).toBe(201);
+    expect(res.body.decks_cloned).toBe(2);
+    expect(mock.cloneCourse).toHaveBeenCalledWith("u1", "c1");
+  });
+
+  test("does not route /api/library/courses to the deck-by-id handler", async () => {
+    // Regression guard for the ordering fix: /courses must be registered
+    // before /:id or "courses" gets parsed as a deck id.
+    mock.listPublicCourses.mockResolvedValue([]);
+    const res = await request(app).get("/api/library/courses");
+    expect(res.status).toBe(200);
+    expect(mock.listPublicCourses).toHaveBeenCalled();
+  });
+});

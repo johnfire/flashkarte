@@ -1,9 +1,13 @@
 import { z } from "zod";
+import type { ParsedCard } from "@flashkarte/shared";
 import { STABLE_REPS } from "@flashkarte/shared";
 import { NotFoundError, ValidationError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
 import * as repo from "./courses.repository";
 import type { CourseDeckRow } from "./courses.repository";
+import * as decksRepo from "../decks/decks.repository";
+import { validateBranching } from "../decks/branching";
+import { MAX_CARDS_PER_DECK } from "../decks/decks.service";
 
 const titleSchema = z
   .string({ error: "Title is required" })
@@ -12,6 +16,10 @@ const titleSchema = z
   .max(200, "Title is too long");
 const descriptionSchema = z.string().trim().max(2000).nullable();
 const isPublicSchema = z.boolean();
+const publicListSchema = z.object({
+  limit: z.coerce.number().int().min(1).max(100).optional().default(50),
+  offset: z.coerce.number().int().min(0).optional().default(0),
+});
 
 export interface CourseDeckView extends CourseDeckRow {
   mastered: boolean;
@@ -167,4 +175,68 @@ export async function reorderCourseDecks(
 
   await repo.reorderCourseDecks(courseId, orderedDeckIds);
   return { course_id: courseId, order: orderedDeckIds };
+}
+
+export async function listPublicCourses(queryInput: unknown) {
+  const { limit, offset } = parse(publicListSchema, queryInput);
+  return repo.listPublicCourses(limit, offset);
+}
+
+export async function getPublicCoursePreview(userId: string, id: string) {
+  const course = await repo.getCourse(userId, id);
+  if (!course || !course.is_public) throw new NotFoundError("Course not found");
+  const decks = await repo.getPublicCourseDecks(id);
+  return { ...course, decks };
+}
+
+/**
+ * Clone every member deck of a public course (reusing the same
+ * card-copy/validate/create path decks.service's clone uses for a single
+ * deck) into the caller's account, then recreate the course structure
+ * pointing at the new decks in the same order. The clone's gating starts
+ * fresh at deck 0 -- progress is per-user and is never copied.
+ */
+export async function cloneCourse(userId: string, id: string) {
+  const course = await repo.getCourse(userId, id);
+  if (!course || !course.is_public) throw new NotFoundError("Course not found");
+  const members = await repo.getPublicCourseDecks(id);
+  if (members.length === 0) {
+    throw new ValidationError("This course has no decks to clone");
+  }
+
+  const newCourse = await repo.createCourse(
+    userId,
+    course.title,
+    course.description,
+  );
+  if (!newCourse) throw new Error("Failed to create course");
+
+  for (const member of members) {
+    const cardRows = await repo.getCardsForDeck(member.deck_id);
+    const cards: ParsedCard[] = cardRows.map((c) =>
+      decksRepo.rowToParsedCard({
+        type: c.type,
+        content: c.content,
+        category: c.category,
+      }),
+    );
+    // Same guards as a fresh import/deck-clone, so a public course can never
+    // bypass the card cap or graph validation by being cloned.
+    if (cards.length > MAX_CARDS_PER_DECK) {
+      throw new ValidationError(
+        `A deck can have at most ${MAX_CARDS_PER_DECK} cards`,
+      );
+    }
+    validateBranching(cards);
+    const clonedDeck = await decksRepo.createDeckWithCards(
+      userId,
+      member.title,
+      null,
+      cards,
+    );
+    if (!clonedDeck) throw new Error("Failed to clone a course deck");
+    await repo.addDeckToCourse(newCourse.id, clonedDeck.id);
+  }
+
+  return { course: newCourse, decks_cloned: members.length, source_id: id };
 }

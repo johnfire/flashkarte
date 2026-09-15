@@ -112,3 +112,27 @@ export const reorderDecks = wrapAsync(async (req: Request, res: Response) => {
   );
   res.json(result);
 });
+
+export const listPublic = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.listPublicCourses(req.query));
+});
+
+export const getPublicPreview = wrapAsync(
+  async (req: Request, res: Response) => {
+    res.json(await service.getPublicCoursePreview(req.userId!, req.params.id));
+  },
+);
+
+export const clone = wrapAsync(async (req: Request, res: Response) => {
+  const result = await service.cloneCourse(req.userId!, req.params.id);
+  await auditFromRequest(
+    req,
+    "course.cloned",
+    "course",
+    result.course.id,
+    "success",
+    undefined,
+    { sourceId: result.source_id, decksCloned: result.decks_cloned },
+  );
+  res.status(201).json(result);
+});

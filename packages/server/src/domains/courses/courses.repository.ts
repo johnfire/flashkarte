@@ -103,6 +103,62 @@ export function getCourseDecks(
   );
 }
 
+export interface PublicCourseRow extends CourseRow {
+  decks_total: number;
+}
+
+export function listPublicCourses(limit: number, offset: number) {
+  return query<PublicCourseRow>(
+    `SELECT c.*,
+            (SELECT count(*) FROM course_decks cd WHERE cd.course_id = c.id)::int AS decks_total
+     FROM courses c
+     WHERE c.is_public
+     ORDER BY c.created_at DESC
+     LIMIT $1 OFFSET $2`,
+    [limit, offset],
+  );
+}
+
+export interface PublicCourseDeckRow {
+  deck_id: string;
+  position: number;
+  title: string;
+  card_count: number;
+}
+
+/** Ordered member decks of a course, with no progress/gating -- for
+ *  browsing before a clone, where the caller doesn't own any of it yet. */
+export function getPublicCourseDecks(courseId: string) {
+  return query<PublicCourseDeckRow>(
+    `SELECT cd.deck_id, cd.position, d.title,
+            (SELECT count(*) FROM cards c WHERE c.deck_id = d.id)::int AS card_count
+     FROM course_decks cd
+     JOIN decks d ON d.id = cd.deck_id
+     JOIN courses co ON co.id = cd.course_id
+     WHERE cd.course_id = $1 AND co.is_public
+     ORDER BY cd.position ASC`,
+    [courseId],
+  );
+}
+
+/**
+ * Every card of a deck, with no ownership/public filter -- safe ONLY because
+ * the sole caller (courses.service's cloneCourse) has already verified the
+ * owning course is public before reading any deck's cards this way.
+ */
+export function getCardsForDeck(deckId: string) {
+  return query<{
+    type: string;
+    content: Record<string, unknown>;
+    category: string | null;
+    position: number;
+  }>(
+    `SELECT c.type, c.content, c.category, c.position
+     FROM cards c WHERE c.deck_id = $1 ORDER BY c.position ASC`,
+    [deckId],
+  );
+}
+
 export function deckBelongsToUser(userId: string, deckId: string) {
   return queryOne<{ id: string }>(
     `SELECT id FROM decks WHERE id = $1 AND user_id = $2`,
