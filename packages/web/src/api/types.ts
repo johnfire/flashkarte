@@ -223,3 +223,58 @@ export interface ApiKey {
 export interface CreatedApiKey extends ApiKey {
   key: string;
 }
+
+export interface Course {
+  id: string;
+  user_id: string;
+  title: string;
+  description: string | null;
+  is_public: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+/** A course as listed on "My Courses" -- a summary, not its full deck list. */
+export interface CourseSummary extends Course {
+  decks_total: number;
+  decks_mastered: number;
+}
+
+/** One member deck of a course, with the gating state Study needs to render
+ *  it as locked/unlocked. */
+export interface CourseDeckView {
+  deck_id: string;
+  position: number;
+  title: string;
+  card_count: number;
+  mastered_count: number;
+  mastered: boolean;
+  locked: boolean;
+}
+
+export interface CourseDetail extends Course {
+  decks: CourseDeckView[];
+}
+
+export interface PublicCourseSummary extends Course {
+  decks_total: number;
+}
+
+/** A public course's member deck, before the caller owns any of it --
+ *  no lock/progress state, just what's in it. */
+export interface PublicCourseDeck {
+  deck_id: string;
+  position: number;
+  title: string;
+  card_count: number;
+}
+
+export interface PublicCourseDetail extends Course {
+  decks: PublicCourseDeck[];
+}
+
+export interface ClonedCourse {
+  course: Course;
+  decks_cloned: number;
+  source_id: string;
+}

@@ -117,6 +117,12 @@ export function DeckListPage() {
             {t("decks.appDecks")}
           </Link>
           <Link
+            to="/courses"
+            className="self-center text-sm text-gray-500 dark:text-gray-400"
+          >
+            {t("decks.courses")}
+          </Link>
+          <Link
             to="/library"
             className="self-center text-sm text-gray-500 dark:text-gray-400"
           >

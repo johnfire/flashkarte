@@ -27,6 +27,9 @@ import { AppDecksCollectionPage } from "./pages/AppDecksCollectionPage";
 import { ExplorePage } from "./pages/ExplorePage";
 import { PublicDeckPage } from "./pages/PublicDeckPage";
 import { ManageDeckCardsPage } from "./pages/ManageDeckCardsPage";
+import { CoursesPage } from "./pages/CoursesPage";
+import { CourseDetailPage } from "./pages/CourseDetailPage";
+import { PublicCoursesPage } from "./pages/PublicCoursesPage";
 import { EditCardPage } from "./pages/EditCardPage";
 import { SenseReorderPage } from "./pages/SenseReorderPage";
 import { AnalyticsConsentBanner } from "./components/AnalyticsConsentBanner";
@@ -66,6 +69,9 @@ export default function App() {
             element={<SenseReorderPage />}
           />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/courses" element={<CoursesPage />} />
+          <Route path="/courses/:id" element={<CourseDetailPage />} />
+          <Route path="/library/courses" element={<PublicCoursesPage />} />
           <Route path="/app-decks" element={<AppDecksPage />} />
           <Route path="/app-decks/:id" element={<AppDecksCollectionPage />} />
           <Route path="/settings" element={<SettingsPage />} />

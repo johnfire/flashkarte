@@ -19,6 +19,11 @@ import {
   DeckCategory,
   Card,
   CardEditPatch,
+  CourseSummary,
+  CourseDetail,
+  PublicCourseSummary,
+  PublicCourseDetail,
+  ClonedCourse,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 
@@ -375,6 +380,47 @@ export const api = {
         `/library/${id}/clone`,
         { method: "POST" },
       ),
+  },
+  courses: {
+    list: () => request<CourseSummary[]>("/courses"),
+    get: (id: string) => request<CourseDetail>(`/courses/${id}`),
+    create: (title: string, description?: string) =>
+      request<CourseSummary>("/courses", {
+        method: "POST",
+        body: JSON.stringify({ title, description }),
+      }),
+    rename: (id: string, title: string) =>
+      request<CourseSummary>(`/courses/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ title }),
+      }),
+    setPublic: (id: string, isPublic: boolean) =>
+      request<CourseSummary>(`/courses/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ isPublic }),
+      }),
+    remove: (id: string) =>
+      request<void>(`/courses/${id}`, { method: "DELETE" }),
+    addDeck: (id: string, deckId: string) =>
+      request<{ course_id: string; deck_id: string }>(`/courses/${id}/decks`, {
+        method: "POST",
+        body: JSON.stringify({ deck_id: deckId }),
+      }),
+    removeDeck: (id: string, deckId: string) =>
+      request<void>(`/courses/${id}/decks/${deckId}`, { method: "DELETE" }),
+    reorderDecks: (id: string, deckIds: string[]) =>
+      request<{ course_id: string; order: string[] }>(
+        `/courses/${id}/decks/reorder`,
+        { method: "PATCH", body: JSON.stringify({ order: deckIds }) },
+      ),
+  },
+  publicCourses: {
+    list: () => request<PublicCourseSummary[]>("/library/courses"),
+    get: (id: string) => request<PublicCourseDetail>(`/library/courses/${id}`),
+    clone: (id: string) =>
+      request<ClonedCourse>(`/library/courses/${id}/clone`, {
+        method: "POST",
+      }),
   },
   publicLibrary: {
     list: (q?: string) =>
