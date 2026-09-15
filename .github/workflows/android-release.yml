@@ -41,8 +41,13 @@ jobs:
           java-version: 17
           cache: gradle
 
+      # Google has dropped the legacy `tools` package from the SDK repository
+      # index (setup-android's default `packages` input) — only
+      # platform-tools (adb) is actually needed here.
       - uses: android-actions/setup-android@v4
         if: steps.guard.outputs.skip != 'true'
+        with:
+          packages: platform-tools
 
       - name: Decode upload keystore + Play credentials from secrets
         if: steps.guard.outputs.skip != 'true'

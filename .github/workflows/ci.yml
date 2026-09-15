@@ -135,7 +135,13 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
+      # Google has dropped the legacy `tools` package from the SDK repository
+      # index (setup-android's default `packages` input) — only platform-tools
+      # (adb) is actually needed here; Gradle/AGP fetch their own SDK
+      # components via the license acceptance this action also does.
       - uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools
       - name: Build debug APK + run unit tests
         working-directory: android
         run: ./gradlew :app:assembleDebug :app:testDebugUnitTest --no-daemon --stacktrace

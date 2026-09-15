@@ -32,7 +32,12 @@ jobs:
           java-version: 17
           cache: gradle
 
+      # Google has dropped the legacy `tools` package from the SDK repository
+      # index (setup-android's default `packages` input) — only
+      # platform-tools (adb) is actually needed here.
       - uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools
 
       - name: Build debug APK
         working-directory: android
@@ -90,7 +95,12 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # Google has dropped the legacy `tools` package from the SDK repository
+      # index (setup-android's default `packages` input) — only
+      # platform-tools (adb) is actually needed here.
       - uses: android-actions/setup-android@v4
+        with:
+          packages: platform-tools
 
       - uses: actions/download-artifact@v7
         with:
