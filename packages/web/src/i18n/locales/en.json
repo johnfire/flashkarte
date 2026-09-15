@@ -165,7 +165,7 @@
   },
   "landing": {
     "heroTitle": "Learn anything, faster.",
-    "heroBody": "flashkarte is a spaced-repetition flashcard app. Write your cards in plain Markdown — or let your own AI build them — and it schedules each review for the moment right before you'd forget. Study on the web or on Android, always in sync.",
+    "heroBody": "flashkarte is a spaced-repetition flashcard app. Write your cards in plain Markdown, or hand it to your own AI — it already knows how flashkarte works, and can turn a textbook chapter into a graduated course while you watch. Study on the web or on Android, always in sync.",
     "signupCta": "Sign up — it's free",
     "signin": "Sign in",
     "startStudying": "Start studying →",
@@ -176,8 +176,16 @@
     "feature2Body": "A proven SM-2 schedule shows you each card right before you'd forget it, so reviews stay short.",
     "feature3Title": "Study anywhere",
     "feature3Body": "Web and Android, in sync. Pick up your reviews on the bus and finish them at your desk.",
-    "feature4Title": "Bring your own AI",
-    "feature4Body": "Connect your own AI assistant over MCP to turn notes into decks — no extra subscription."
+    "feature4Title": "AI-built courses",
+    "feature4Body": "Tell your AI what you want to learn. It reads the real material, builds a course that gets harder step by step, and can even walk you through the app itself.",
+    "aiSectionTitle": "Your AI already knows how to use this app.",
+    "aiSectionBody": "Most apps hand an AI an API and hope for the best. flashkarte ships its own instructions — a connected AI reads what the app is for, what it can do, and how to do it well, before it touches a single card.",
+    "aiPoint1Title": "It builds real courses, not a pile of cards",
+    "aiPoint1Body": "Say \"teach me the basics of circuit analysis\" and it comes back with an ordered course — each deck unlocks the next only once you've actually mastered the one before it, not all 200 cards dumped on you at once.",
+    "aiPoint2Title": "It grounds every card in something real",
+    "aiPoint2Body": "Hand it a textbook chapter, your lecture notes, or a PDF, and it studies that material before writing a single card. No made-up facts to pad out a deck.",
+    "aiPoint3Title": "It can teach you the app, not just build for it",
+    "aiPoint3Body": "New here? Ask your AI how flashkarte works. It already knows how studying, sharing, and course-building fit together."
   },
   "decks": {
     "title": "My Decks",

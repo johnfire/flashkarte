@@ -165,7 +165,7 @@
   },
   "landing": {
     "heroTitle": "Aprende lo que sea, más rápido.",
-    "heroBody": "flashkarte es una aplicación de tarjetas de memoria con repetición espaciada. Escribe tus tarjetas en Markdown sencillo — o deja que tu propia IA las cree — y programa cada repaso para el momento justo antes de que lo olvides. Estudia en la web o en Android, siempre sincronizado.",
+    "heroBody": "flashkarte es una aplicación de tarjetas de memoria con repetición espaciada. Escribe tus tarjetas en Markdown sencillo, o entrégaselas a tu propia IA — ya sabe cómo funciona flashkarte, y puede convertir un capítulo de un libro de texto en un curso progresivo mientras lo ves. Estudia en la web o en Android, siempre sincronizado.",
     "signupCta": "Regístrate gratis",
     "signin": "Iniciar sesión",
     "startStudying": "Empezar a estudiar →",
@@ -176,8 +176,16 @@
     "feature2Body": "Un comprobado sistema SM-2 te muestra cada tarjeta justo antes de que la olvides, así los repasos son breves.",
     "feature3Title": "Estudia en cualquier lugar",
     "feature3Body": "Web y Android, sincronizados. Empieza tus repasos en el autobús y termínalos en tu escritorio.",
-    "feature4Title": "Usa tu propia IA",
-    "feature4Body": "Conecta tu propio asistente de IA mediante MCP para convertir notas en mazos — sin suscripción adicional."
+    "feature4Title": "Cursos creados por IA",
+    "feature4Body": "Dile a tu IA qué quieres aprender. Lee el material real, construye un curso que se vuelve más difícil paso a paso, e incluso puede guiarte por la propia app.",
+    "aiSectionTitle": "Tu IA ya sabe usar esta app.",
+    "aiSectionBody": "La mayoría de las apps le dan a una IA una API y esperan lo mejor. flashkarte incluye sus propias instrucciones — una IA conectada lee para qué sirve la app, qué puede hacer y cómo hacerlo bien, antes de tocar una sola tarjeta.",
+    "aiPoint1Title": "Crea cursos de verdad, no un montón de tarjetas",
+    "aiPoint1Body": "Dile \"enséñame lo básico del análisis de circuitos\" y te devuelve un curso ordenado — cada mazo desbloquea el siguiente solo cuando de verdad has dominado el anterior, en vez de soltarte 200 tarjetas de golpe.",
+    "aiPoint2Title": "Fundamenta cada tarjeta en algo real",
+    "aiPoint2Body": "Dale un capítulo de un libro, tus apuntes de clase o un PDF, y estudiará ese material antes de escribir una sola tarjeta. Sin datos inventados para rellenar un mazo.",
+    "aiPoint3Title": "Puede enseñarte la app, no solo crear para ella",
+    "aiPoint3Body": "¿Eres nuevo? Pregúntale a tu IA cómo funciona flashkarte. Ya sabe cómo encajan el estudio, el uso compartido y la creación de cursos."
   },
   "decks": {
     "title": "Mis mazos",

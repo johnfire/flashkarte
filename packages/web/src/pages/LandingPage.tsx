@@ -2,6 +2,7 @@ import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useDocumentHead } from "../seo/useDocumentHead";
 import { LandingHero } from "./landing/LandingHero";
 import { LandingFeatures } from "./landing/LandingFeatures";
+import { LandingAI } from "./landing/LandingAI";
 import { LandingFooter } from "./landing/LandingFooter";
 
 // Decorative cards that drift behind the hero — "learning is happening here".
@@ -96,7 +97,7 @@ export function LandingPage() {
   useDocumentHead({
     title: "flashkarte — Learn anything with spaced-repetition flashcards",
     description:
-      "flashkarte is a free spaced-repetition flashcard app. Write decks in plain Markdown or let your own AI build them, and study on web and Android — always in sync.",
+      "flashkarte is a free spaced-repetition flashcard app. Write decks in plain Markdown, or hand it to your own AI — it already knows how the app works, and can build a graduated course from a textbook chapter or your notes. Study on web and Android, always in sync.",
   });
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">
@@ -144,6 +145,7 @@ export function LandingPage() {
         </div>
         <LandingHero />
         <LandingFeatures />
+        <LandingAI />
         <LandingFooter />
       </div>
     </div>

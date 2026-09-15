@@ -165,7 +165,7 @@
   },
   "landing": {
     "heroTitle": "Apprends tout, plus vite.",
-    "heroBody": "flashkarte est une application de cartes mémoire à répétition espacée. Rédige tes cartes en simple Markdown — ou laisse ta propre IA les créer — et l'application planifie chaque révision juste avant que tu n'oublies. Étudie sur le web ou sur Android, toujours synchronisé.",
+    "heroBody": "flashkarte est une application de cartes mémoire à répétition espacée. Rédige tes cartes en simple Markdown, ou confie-les à ta propre IA — elle sait déjà comment flashkarte fonctionne, et peut transformer un chapitre de manuel en un cours progressif sous tes yeux. Étudie sur le web ou sur Android, toujours synchronisé.",
     "signupCta": "Inscription gratuite",
     "signin": "Se connecter",
     "startStudying": "Commencer à apprendre →",
@@ -176,8 +176,16 @@
     "feature2Body": "Un algorithme SM-2 éprouvé te montre chaque carte juste avant que tu ne l'oublies, pour des révisions courtes.",
     "feature3Title": "Étudie partout",
     "feature3Body": "Web et Android, synchronisés. Commence tes révisions dans le bus et termine-les à ton bureau.",
-    "feature4Title": "Utilise ta propre IA",
-    "feature4Body": "Connecte ton propre assistant IA via MCP pour transformer tes notes en paquets — sans abonnement supplémentaire."
+    "feature4Title": "Cours créés par IA",
+    "feature4Body": "Dis à ton IA ce que tu veux apprendre. Elle lit le contenu réel, construit un cours qui se corse étape par étape, et peut même te faire visiter l'appli elle-même.",
+    "aiSectionTitle": "Ton IA sait déjà utiliser cette appli.",
+    "aiSectionBody": "La plupart des applis donnent une API à une IA et espèrent que ça marche. flashkarte fournit son propre mode d'emploi — une IA connectée lit à quoi sert l'appli, ce qu'elle peut faire et comment bien le faire, avant même de toucher une seule carte.",
+    "aiPoint1Title": "Elle construit de vrais cours, pas un tas de cartes",
+    "aiPoint1Body": "Dis-lui « apprends-moi les bases de l'analyse de circuits » et elle te renvoie un cours ordonné — chaque paquet ne débloque le suivant qu'une fois le précédent vraiment maîtrisé, plutôt que 200 cartes déversées d'un coup.",
+    "aiPoint2Title": "Elle ancre chaque carte dans quelque chose de réel",
+    "aiPoint2Body": "Donne-lui un chapitre de manuel, tes notes de cours ou un PDF, et elle étudie ce contenu avant d'écrire la moindre carte. Aucun fait inventé pour remplir un paquet.",
+    "aiPoint3Title": "Elle peut t'expliquer l'appli, pas seulement construire pour elle",
+    "aiPoint3Body": "Nouveau ici ? Demande à ton IA comment fonctionne flashkarte. Elle sait déjà comment s'articulent l'étude, le partage et la création de cours."
   },
   "decks": {
     "title": "Mes paquets",

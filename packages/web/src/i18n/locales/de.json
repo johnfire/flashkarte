@@ -165,7 +165,7 @@
   },
   "landing": {
     "heroTitle": "Lerne alles – schneller.",
-    "heroBody": "flashkarte ist eine App für Karteikarten mit verteilter Wiederholung. Schreibe deine Karten in einfachem Markdown – oder lass sie von deiner eigenen KI erstellen – und die App plant jede Wiederholung genau für den Moment, bevor du es vergisst. Lerne im Web oder auf Android, immer synchron.",
+    "heroBody": "flashkarte ist eine App für Karteikarten mit verteilter Wiederholung. Schreibe deine Karten in einfachem Markdown, oder überlass sie deiner eigenen KI — sie weiß bereits, wie flashkarte funktioniert, und verwandelt ein Buchkapitel direkt vor deinen Augen in einen abgestuften Kurs. Lerne im Web oder auf Android, immer synchron.",
     "signupCta": "Kostenlos registrieren",
     "signin": "Anmelden",
     "startStudying": "Jetzt lernen →",
@@ -176,8 +176,16 @@
     "feature2Body": "Ein bewährter SM-2-Plan zeigt dir jede Karte genau dann, bevor du sie vergisst – so bleiben die Wiederholungen kurz.",
     "feature3Title": "Überall lernen",
     "feature3Body": "Web und Android, synchron. Beginne deine Wiederholungen im Bus und beende sie am Schreibtisch.",
-    "feature4Title": "Nutze deine eigene KI",
-    "feature4Body": "Verbinde deinen eigenen KI-Assistenten über MCP, um Notizen in Stapel zu verwandeln – kein zusätzliches Abo."
+    "feature4Title": "KI-erstellte Kurse",
+    "feature4Body": "Sag deiner KI, was du lernen willst. Sie liest das eigentliche Material, baut einen Kurs, der Schritt für Schritt schwerer wird, und kann dir sogar die App selbst erklären.",
+    "aiSectionTitle": "Deine KI weiß bereits, wie diese App funktioniert.",
+    "aiSectionBody": "Die meisten Apps geben einer KI nur eine API und hoffen auf das Beste. flashkarte liefert seine eigene Anleitung mit — eine verbundene KI liest, wofür die App da ist, was sie kann und wie man es richtig macht, bevor sie auch nur eine einzige Karte anfasst.",
+    "aiPoint1Title": "Sie baut echte Kurse, keinen Kartenhaufen",
+    "aiPoint1Body": "Sag \"bring mir die Grundlagen der Schaltungsanalyse bei\" und du bekommst einen geordneten Kurs zurück — jeder Stapel schaltet den nächsten erst frei, wenn du den vorherigen wirklich gemeistert hast, statt dir 200 Karten auf einmal vor die Füße zu werfen.",
+    "aiPoint2Title": "Sie verankert jede Karte in etwas Echtem",
+    "aiPoint2Body": "Gib ihr ein Buchkapitel, deine Vorlesungsnotizen oder ein PDF, und sie arbeitet das Material durch, bevor sie auch nur eine Karte schreibt. Keine erfundenen Fakten, um einen Stapel aufzufüllen.",
+    "aiPoint3Title": "Sie kann dir die App erklären, nicht nur dafür bauen",
+    "aiPoint3Body": "Neu hier? Frag deine KI, wie flashkarte funktioniert. Sie weiß bereits, wie Lernen, Teilen und Kurserstellung zusammenspielen."
   },
   "decks": {
     "title": "Meine Stapel",
