@@ -113,7 +113,12 @@ export async function getStudyBatch(
   limit = 20,
 ): Promise<StudyBatchCard[]> {
   const due = await repo.getDueAndNewCards(userId, deckId, limit);
-  return withChainedSenses(userId, deckId, due);
+  // Nothing due and nothing new: offer a random practice round instead of a
+  // dead end. Ratings on these cards apply normally (same review path as any
+  // other card) — studying early just advances their next due date sooner.
+  const batch =
+    due.length > 0 ? due : await repo.getRandomCards(userId, deckId, limit);
+  return withChainedSenses(userId, deckId, batch);
 }
 
 export async function review(

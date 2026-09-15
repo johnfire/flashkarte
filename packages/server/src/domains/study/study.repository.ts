@@ -82,6 +82,24 @@ export function getDueAndNewCards(
   );
 }
 
+/**
+ * Fallback when nothing is due: a random practice round so finishing a deck
+ * doesn't dead-end into "nothing due" until the schedule catches up. Only
+ * `basic` cards (ordinary + diagnostic) qualify — branch cards have no SR
+ * state and would show up as blank/unstudiable if pulled in here.
+ */
+export function getRandomCards(userId: string, deckId: string, limit: number) {
+  return query<CardForStudy>(
+    `SELECT c.id, c.content, c.category, c.position
+     FROM cards c
+     JOIN decks d ON d.id = c.deck_id
+     WHERE c.deck_id = $2 AND c.type = 'basic' AND ${officialOrOwned("c", "d", 1)}
+     ORDER BY random()
+     LIMIT $3`,
+    [userId, deckId, limit],
+  );
+}
+
 export function getProgressRow(
   userId: string,
   cardId: string,

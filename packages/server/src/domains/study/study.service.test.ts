@@ -196,6 +196,46 @@ describe("review", () => {
   });
 });
 
+describe("getStudyBatch — random practice fallback", () => {
+  const plain = (id: string) => ({
+    id,
+    content: { front: id, back: "b" },
+    category: null,
+    position: 0,
+  });
+
+  test("falls back to a random round when nothing is due", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([]);
+    mockRepo.getRandomCards.mockResolvedValue([
+      plain("r1"),
+      plain("r2"),
+    ] as never);
+
+    const batch = await getStudyBatch("u1", "d1");
+
+    expect(mockRepo.getRandomCards).toHaveBeenCalledWith("u1", "d1", 20);
+    expect(batch.map((c) => c.id)).toEqual(["r1", "r2"]);
+  });
+
+  test("does not query for random cards when something is actually due", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([plain("c1") as never]);
+
+    const batch = await getStudyBatch("u1", "d1");
+
+    expect(mockRepo.getRandomCards).not.toHaveBeenCalled();
+    expect(batch.map((c) => c.id)).toEqual(["c1"]);
+  });
+
+  test("an empty deck (no cards at all) stays empty, not an error", async () => {
+    mockRepo.getDueAndNewCards.mockResolvedValue([]);
+    mockRepo.getRandomCards.mockResolvedValue([]);
+
+    const batch = await getStudyBatch("u1", "d1");
+
+    expect(batch).toEqual([]);
+  });
+});
+
 describe("getStudyBatch — chained senses (Spec 10)", () => {
   const senseCard = (
     id: string,
