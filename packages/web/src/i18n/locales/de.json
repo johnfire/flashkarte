@@ -472,6 +472,10 @@
           "title": "Stapel schreiben",
           "description": "Das Markdown-Format für Karten und die drei Wege, einen Stapel zu erstellen."
         },
+        "advancedCards": {
+          "title": "Multiple-Choice, Verwechslungen & mehrdeutige Wörter",
+          "description": "Diagnostische Karten erstellen, die bei einer falschen Antwort zu einer Vertiefung führen, sowie Wörter mit mehreren Bedeutungen."
+        },
         "branchingDecks": {
           "title": "Verzweigte Stapel",
           "description": "Verwandle einen Stapel in eine Geschichte oder ein Szenario nach dem Prinzip „Wähle deinen Weg“."
@@ -522,6 +526,23 @@
       "settingsHeading": "Stapeleinstellungen",
       "settingsOrdered": "In Reihenfolge lernen: Karten werden in der von dir festgelegten Reihenfolge angezeigt, und du musst die aktuelle Karte richtig beantworten, bevor du weitergehst — nützlich für Abfolgen, die aufeinander aufbauen."
     },
+    "advancedCards": {
+      "metaTitle": "Erweiterte Kartentypen — flashkarte-Hilfe",
+      "metaDescription": "Wie man diagnostische Multiple-Choice-Karten mit Vertiefungskarten schreibt, und Karten für Wörter mit mehreren Bedeutungen.",
+      "title": "Erweiterte Kartentypen",
+      "diagnosticHeading": "Diagnostische (Multiple-Choice-)Karten",
+      "diagnosticIntro": "Eine normale Karte kann Multiple-Choice-Optionen enthalten, wobei eine Option als richtig markiert ist und die anderen zu einer Vertiefungskarte führen. Im Auswahlmodus zeigt eine falsche Antwort diese Vertiefung — eine kurze, gezielte Erklärung genau dieses Fehlers — bevor es weitergeht. Die Karte selbst wird weiterhin ganz normal nach dem Wiederholungsplan geplant, wie jede andere Karte.",
+      "diagnosticCorrect": "Genau eine Option muss auf \"correct\" zeigen — das ist die richtige Antwort.",
+      "diagnosticRemediation": "Eine falsche Option kann auf die Marke einer anderen Karte zeigen (siehe Verzweigte Stapel für die Funktionsweise von Marken); diese wird als unbewertete Vertiefung angezeigt, bevor es weitergeht.",
+      "diagnosticEnd": "Eine falsche Option kann auch auf \"end\" zeigen — einfach falsch, ohne Vertiefung.",
+      "diagnosticStudy": "Die Vertiefungskarte ist eine ganz normale Karte im Stapel — sie wird bei ihrem eigenen Termin ganz normal eingeplant, und ihre Anzeige als Vertiefung zählt nicht als eigene Wiederholung.",
+      "diagnosticExampleCaption": "Beispiel einer diagnostischen Karte mit Vertiefung:",
+      "sensesHeading": "Wörter mit mehreren Bedeutungen",
+      "sensesIntro": "Ein Stichwort mit mehreren unabhängigen Bedeutungen (wie \"der Zug\" — Eisenbahn, Schachzug oder Luftzug) lässt sich einmal, als ein Block, schreiben und wird als eine eigenständige Karte pro Bedeutung gelernt. Gib jeder Bedeutung eine eigene Zeile: \"- Bedeutung | Beispielsatz | kurzer Hinweis\".",
+      "sensesPhases": "Solange ein Wort neu ist, werden alle Bedeutungen zusammen angezeigt, mit dem kurzen Hinweis als Frage, damit du die ganze Bandbreite des Wortes auf einmal lernst. Sobald jede Bedeutung gut sitzt, entfällt der Hinweis, und jede Bedeutung wird zu einer eigenen normalen Karte, diesmal mit dem Beispielsatz als Frage.",
+      "sensesExampleCaption": "Beispielwort mit drei Bedeutungen:",
+      "sensesNote": "Hinweis und Beispielsatz sind beide optional, aber erst ein echter Beispielsatz macht die zweite Phase wirklich brauchbar — schreib also für jede Bedeutung einen."
+    },
     "branchingDecks": {
       "metaTitle": "Verzweigte Stapel — flashkarte-Hilfe",
       "metaDescription": "So schreibst du einen verzweigten Stapel nach dem Prinzip „Wähle deinen Weg“ in flashkarte.",
@@ -535,6 +556,8 @@
       "title": "Lernen & verteilte Wiederholung",
       "srsHeading": "Wie Wiederholungen geplant werden",
       "srsBody": "Jede Karte hat ein Fälligkeitsdatum, das sich aus deiner letzten Bewertung ergibt. Schwer bringt eine Karte morgen zurück, Gut in zwei Tagen — unabhängig davon, wie lange sie vorher pausiert hatte. Nur Einfach schiebt eine Karte weiter nach hinten, und jedes weitere Einfach in Folge noch weiter. So verlässt eine Karte, die du sicher beherrschst, den täglichen Umlauf.",
+      "practiceHeading": "Wenn nichts fällig ist",
+      "practiceBody": "Wenn du einen Stapel öffnest und alles erledigt ist — nichts fällig, nichts neu —, bietet dir flashkarte stattdessen 20 zufällige Karten aus dem Stapel als Übungsrunde an, statt dich vor dem Nichts stehen zu lassen. Das Bewerten funktioniert dabei ganz normal und aktualisiert den Zeitplan wie gewohnt.",
       "ratingsHeading": "Die Bewertungs-Buttons",
       "ratingsIntro": "Nachdem du die Antwort einer Karte aufgedeckt hast, bewertest du, wie gut du dich erinnert hast. Das legt fest, wann die Karte als Nächstes fällig ist — sei ehrlich, nicht optimistisch.",
       "ratingAgain": "Nochmal — du konntest dich nicht erinnern. Die Karte kommt noch in dieser Sitzung wieder und außerdem morgen erneut.",
@@ -552,7 +575,7 @@
       "counterEasy": "Einfach — Karten, deren letzte Wiederholung mit Einfach bewertet wurde.",
       "counterNote": "Nochmal/Schwer/Gut/Einfach spiegeln nur die letzte Wiederholung jeder Karte wider, nicht eine laufende Summe — zusammen ergeben sie also immer den Wert von Angesehen.",
       "choiceHeading": "Multiple-Choice-Modus",
-      "choiceBody": "Die Android-App bietet außerdem einen Multiple-Choice-Modus, der Antwortoptionen automatisch aus deinen anderen Karten erstellt und dich bewertet, sobald du eine antippst."
+      "choiceBody": "Sowohl die Web-App als auch die Android-App bieten einen Multiple-Choice-Modus. Bei einer normalen Karte werden die Antwortoptionen automatisch aus deinen anderen fälligen Karten gebildet; bei einer diagnostischen Karte (siehe Erweiterte Kartentypen) werden die von dir geschriebenen Optionen verwendet, und eine falsche Antwort kann vor dem Weitergehen eine Vertiefungskarte anzeigen."
     },
     "ai": {
       "metaTitle": "Stapel mit KI erstellen — flashkarte-Hilfe",

@@ -32,8 +32,8 @@ export function WritingDecksPage() {
   return (
     <HelpTopicShell
       title={t("help.writingDecks.title")}
-      nextTo="/help/branching-decks"
-      nextTitle={t("help.index.topics.branchingDecks.title")}
+      nextTo="/help/advanced-cards"
+      nextTitle={t("help.index.topics.advancedCards.title")}
     >
       <section id="ways" className="scroll-mt-6">
         <h2 className={helpH2}>{t("help.writingDecks.waysHeading")}</h2>

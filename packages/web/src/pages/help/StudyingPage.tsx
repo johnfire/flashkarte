@@ -20,6 +20,11 @@ export function StudyingPage() {
         <p className="mt-2">{t("help.studying.srsBody")}</p>
       </section>
 
+      <section id="practice" className="scroll-mt-6">
+        <h2 className={helpH2}>{t("help.studying.practiceHeading")}</h2>
+        <p className="mt-2">{t("help.studying.practiceBody")}</p>
+      </section>
+
       <section id="ratings" className="scroll-mt-6">
         <h2 className={helpH2}>{t("help.studying.ratingsHeading")}</h2>
         <p className="mt-2">{t("help.studying.ratingsIntro")}</p>

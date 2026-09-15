@@ -472,6 +472,10 @@
           "title": "Writing decks",
           "description": "The Markdown format for cards, and the three ways to create a deck."
         },
+        "advancedCards": {
+          "title": "Multiple choice, mix-ups & multi-sense words",
+          "description": "Author diagnostic cards that route a wrong answer to a follow-up, and words with more than one meaning."
+        },
         "branchingDecks": {
           "title": "Branching decks",
           "description": "Turn a deck into a choose-your-path story or scenario."
@@ -522,6 +526,23 @@
       "settingsHeading": "Deck settings",
       "settingsOrdered": "Study in order: cards are shown in their authored order, and you must answer the current card correctly before advancing — useful for sequences that build on each other."
     },
+    "advancedCards": {
+      "metaTitle": "Advanced card types — flashkarte Help",
+      "metaDescription": "How to write diagnostic multiple-choice cards with follow-up remediation, and cards for words with more than one meaning.",
+      "title": "Advanced card types",
+      "diagnosticHeading": "Diagnostic (multiple-choice) cards",
+      "diagnosticIntro": "An ordinary card can carry multiple-choice options, with one option marked as correct and the others routed to a follow-up card. Studied in Choice mode, a wrong pick shows that follow-up — a quick, targeted explanation of exactly that mistake — before moving on. The card itself still has normal spaced-repetition scheduling, just like any other card.",
+      "diagnosticCorrect": "Exactly one option must target \"correct\" — that's the right answer.",
+      "diagnosticRemediation": "A wrong option can target another card's label (see Branching decks for how labels work), shown as a no-grade follow-up before you continue.",
+      "diagnosticEnd": "A wrong option can also target \"end\" — plain wrong, no follow-up.",
+      "diagnosticStudy": "The follow-up card is an ordinary card in the deck — it's scheduled normally on its own turn, and showing it as a follow-up doesn't count as a separate review.",
+      "diagnosticExampleCaption": "Example diagnostic card with a follow-up:",
+      "sensesHeading": "Words with more than one meaning",
+      "sensesIntro": "A headword with several unrelated meanings (like German \"der Zug\" — train, chess move, or draught) can be written once, as one block, and studied as one independent card per meaning. Give each meaning its own line: \"- meaning | example sentence | short hint\".",
+      "sensesPhases": "While a word is new, every meaning is shown together, prompted by its short hint, so you learn the word's range in one pass. Once every meaning is well known, the hint drops away and each meaning becomes its own ordinary card, prompted by its example sentence instead.",
+      "sensesExampleCaption": "Example word with three senses:",
+      "sensesNote": "The hint and example sentence are both optional, but a real example sentence is what makes the second phase work well — write one per meaning."
+    },
     "branchingDecks": {
       "metaTitle": "Branching decks — flashkarte Help",
       "metaDescription": "How to write a choose-your-path branching deck in flashkarte.",
@@ -535,6 +556,8 @@
       "title": "Studying & spaced repetition",
       "srsHeading": "How reviews are scheduled",
       "srsBody": "Every card has a due date, set by how you rated it last time. Hard brings a card back tomorrow and Good brings it back in two days, however long it had been waiting before. Only Easy pushes a card further out, and each Easy in a row pushes it further still — that is how a card you know well leaves the daily rotation.",
+      "practiceHeading": "When nothing is due",
+      "practiceBody": "If you open a deck and everything is caught up — nothing due, nothing new — flashkarte offers 20 random cards from the deck as a practice round instead of leaving you with nothing to do. Rating them works exactly as usual and updates their schedule normally.",
       "ratingsHeading": "The rating buttons",
       "ratingsIntro": "After you reveal a card's answer, rate how well you recalled it. This is what schedules the next review — be honest, not optimistic.",
       "ratingAgain": "Again — you didn't recall it. The card returns later in this same session, and again tomorrow.",
@@ -552,7 +575,7 @@
       "counterEasy": "Easy — cards whose most recent review was rated Easy.",
       "counterNote": "Again/Hard/Good/Easy reflect only the latest review of each card, not a running total — so together they always add up to the Viewed count.",
       "choiceHeading": "Multiple-choice mode",
-      "choiceBody": "The Android app also offers a multiple-choice mode, which builds answer options automatically from your other cards and grades you the moment you tap one."
+      "choiceBody": "Both the web app and the Android app offer a multiple-choice mode. For an ordinary card it builds answer options automatically from your other due cards; for a diagnostic card (see Advanced card types) it uses the options you wrote, and a wrong pick can show a follow-up card before you continue."
     },
     "ai": {
       "metaTitle": "Creating decks with AI — flashkarte Help",

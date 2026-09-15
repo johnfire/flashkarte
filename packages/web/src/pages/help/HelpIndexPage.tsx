@@ -5,6 +5,7 @@ import { useDocumentHead } from "../../seo/useDocumentHead";
 const TOPICS = [
   { path: "getting-started", key: "gettingStarted" },
   { path: "writing-decks", key: "writingDecks" },
+  { path: "advanced-cards", key: "advancedCards" },
   { path: "branching-decks", key: "branchingDecks" },
   { path: "studying", key: "studying" },
   { path: "ai", key: "ai" },

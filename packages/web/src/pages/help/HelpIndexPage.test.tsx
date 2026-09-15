@@ -25,6 +25,7 @@ describe("HelpIndexPage", () => {
     for (const [path, name] of [
       ["/help/getting-started", "Getting started"],
       ["/help/writing-decks", "Writing decks"],
+      ["/help/advanced-cards", "Multiple choice, mix-ups"],
       ["/help/branching-decks", "Branching decks"],
       ["/help/studying", "Studying & spaced repetition"],
       ["/help/ai", "Creating decks with AI"],

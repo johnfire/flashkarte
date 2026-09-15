@@ -4,6 +4,7 @@ import { describe, it, expect } from "vitest";
 import "../../i18n";
 import { GettingStartedPage } from "./GettingStartedPage";
 import { WritingDecksPage } from "./WritingDecksPage";
+import { AdvancedCardsPage } from "./AdvancedCardsPage";
 import { BranchingDecksPage } from "./BranchingDecksPage";
 import { StudyingPage } from "./StudyingPage";
 import { AiPage } from "./AiPage";
@@ -24,12 +25,27 @@ describe("help topic pages", () => {
     ).toHaveAttribute("href", "/help/writing-decks");
   });
 
-  it("WritingDecksPage shows the Markdown format example", () => {
+  it("WritingDecksPage shows the Markdown format example and links onward", () => {
     renderPage(<WritingDecksPage />);
     expect(
       screen.getByRole("heading", { level: 1, name: "Writing decks" }),
     ).toBeInTheDocument();
     expect(screen.getByText(/# Spanish Basics/)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /Next: Multiple choice, mix-ups/ }),
+    ).toHaveAttribute("href", "/help/advanced-cards");
+  });
+
+  it("AdvancedCardsPage explains diagnostic cards and multi-sense words", () => {
+    renderPage(<AdvancedCardsPage />);
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Advanced card types" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/-> confusion-mitosis/)).toBeInTheDocument();
+    expect(screen.getByText(/Eisenbahn/)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /Next: Branching decks/ }),
+    ).toHaveAttribute("href", "/help/branching-decks");
   });
 
   it("BranchingDecksPage shows the branching example", () => {

@@ -472,6 +472,10 @@
           "title": "Écrire des paquets",
           "description": "Le format Markdown des cartes et les trois façons de créer un paquet."
         },
+        "advancedCards": {
+          "title": "QCM, pièges et mots à plusieurs sens",
+          "description": "Créez des cartes de diagnostic qui redirigent une mauvaise réponse vers une carte de suivi, et des mots ayant plusieurs sens."
+        },
         "branchingDecks": {
           "title": "Paquets à embranchements",
           "description": "Transforme un paquet en histoire ou en scénario « choisis ton chemin »."
@@ -522,6 +526,23 @@
       "settingsHeading": "Réglages du paquet",
       "settingsOrdered": "Réviser dans l'ordre : les cartes sont affichées dans l'ordre où tu les as créées et tu dois répondre correctement à la carte en cours avant de continuer — utile pour les séquences qui s'enchaînent."
     },
+    "advancedCards": {
+      "metaTitle": "Types de cartes avancés — Aide flashkarte",
+      "metaDescription": "Comment écrire des cartes de diagnostic à choix multiples avec une carte de suivi, et des cartes pour des mots ayant plusieurs sens.",
+      "title": "Types de cartes avancés",
+      "diagnosticHeading": "Cartes de diagnostic (choix multiples)",
+      "diagnosticIntro": "Une carte ordinaire peut comporter des options à choix multiples, l'une étant marquée comme correcte et les autres redirigées vers une carte de suivi. En mode Choix, une mauvaise réponse affiche ce suivi — une explication brève et ciblée de cette erreur précise — avant de continuer. La carte elle-même reste programmée normalement par répétition espacée, comme toute autre carte.",
+      "diagnosticCorrect": "Exactement une option doit cibler \"correct\" — c'est la bonne réponse.",
+      "diagnosticRemediation": "Une mauvaise option peut cibler l'étiquette d'une autre carte (voir Paquets à embranchements pour le fonctionnement des étiquettes), affichée comme un suivi non noté avant de continuer.",
+      "diagnosticEnd": "Une mauvaise option peut aussi cibler \"end\" — simplement fausse, sans suivi.",
+      "diagnosticStudy": "La carte de suivi est une carte ordinaire du paquet — elle est programmée normalement à son propre tour, et son affichage en tant que suivi ne compte pas comme une révision distincte.",
+      "diagnosticExampleCaption": "Exemple de carte de diagnostic avec suivi :",
+      "sensesHeading": "Mots ayant plusieurs sens",
+      "sensesIntro": "Un mot-vedette ayant plusieurs sens distincts (comme l'allemand « der Zug » — train, coup d'échecs ou courant d'air) peut être écrit une seule fois, en un bloc, et étudié comme une carte indépendante par sens. Donnez à chaque sens sa propre ligne : « - sens | phrase d'exemple | indice court ».",
+      "sensesPhases": "Tant que le mot est nouveau, tous les sens sont présentés ensemble, avec l'indice court comme question, pour apprendre d'un coup toute l'étendue du mot. Une fois chaque sens bien maîtrisé, l'indice disparaît et chaque sens devient sa propre carte ordinaire, avec la phrase d'exemple comme question.",
+      "sensesExampleCaption": "Exemple de mot à trois sens :",
+      "sensesNote": "L'indice et la phrase d'exemple sont tous deux facultatifs, mais une vraie phrase d'exemple est ce qui rend la seconde phase vraiment utile — écrivez-en une par sens."
+    },
     "branchingDecks": {
       "metaTitle": "Paquets à embranchements — Aide flashkarte",
       "metaDescription": "Comment écrire un paquet à embranchements « choisis ton chemin » dans flashkarte.",
@@ -535,6 +556,8 @@
       "title": "Réviser & répétition espacée",
       "srsHeading": "Comment les révisions sont planifiées",
       "srsBody": "Chaque carte a une date de révision, fixée par ton évaluation précédente. Difficile la ramène demain et Correct la ramène dans deux jours, quel qu'ait été son délai auparavant. Seul Facile l'éloigne dans le temps, et chaque Facile consécutif l'éloigne davantage : c'est ainsi qu'une carte bien maîtrisée quitte la rotation quotidienne.",
+      "practiceHeading": "Quand rien n'est dû",
+      "practiceBody": "Si tu ouvres un paquet et que tout est à jour — rien de dû, rien de nouveau —, flashkarte te propose 20 cartes aléatoires du paquet comme session d'entraînement plutôt que de te laisser sans rien à faire. Les noter fonctionne exactement comme d'habitude et met à jour leur programmation normalement.",
       "ratingsHeading": "Les boutons de notation",
       "ratingsIntro": "Après avoir révélé la réponse d'une carte, évalue ta mémorisation. C'est ce qui planifie la prochaine révision — sois honnête, pas optimiste.",
       "ratingAgain": "À refaire — tu ne t'en es pas souvenu. La carte revient plus tard dans cette même session, puis de nouveau demain.",
@@ -552,7 +575,7 @@
       "counterEasy": "Faciles — cartes dont la révision la plus récente a été notée Facile.",
       "counterNote": "À refaire/Difficiles/Correctes/Faciles ne reflètent que la révision la plus récente de chaque carte, pas un total cumulé — ensemble, elles correspondent toujours au nombre de cartes Vues.",
       "choiceHeading": "Mode à choix multiples",
-      "choiceBody": "L'application Android propose aussi un mode à choix multiples qui génère automatiquement les options de réponse à partir de tes autres cartes et te note dès que tu en touches une."
+      "choiceBody": "L'application web et l'application Android proposent toutes deux un mode à choix multiples. Pour une carte ordinaire, les options de réponse sont générées automatiquement à partir de tes autres cartes dues ; pour une carte de diagnostic (voir Types de cartes avancés), ce sont les options que tu as écrites qui sont utilisées, et une mauvaise réponse peut afficher une carte de suivi avant de continuer."
     },
     "ai": {
       "metaTitle": "Créer des paquets avec l'IA — Aide flashkarte",

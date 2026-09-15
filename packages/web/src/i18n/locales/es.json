@@ -472,6 +472,10 @@
           "title": "Escribir mazos",
           "description": "El formato Markdown para las tarjetas y las tres formas de crear un mazo."
         },
+        "advancedCards": {
+          "title": "Opción múltiple, confusiones y palabras con varios sentidos",
+          "description": "Crea tarjetas de diagnóstico que dirigen una respuesta incorrecta a una tarjeta de refuerzo, y palabras con más de un significado."
+        },
         "branchingDecks": {
           "title": "Mazos ramificados",
           "description": "Convierte un mazo en una historia o escenario de «elige tu camino»."
@@ -522,6 +526,23 @@
       "settingsHeading": "Ajustes del mazo",
       "settingsOrdered": "Estudiar en orden: las tarjetas se muestran en el orden en que las creaste y debes responder correctamente la tarjeta actual antes de avanzar — útil para secuencias que se construyen unas sobre otras."
     },
+    "advancedCards": {
+      "metaTitle": "Tipos de tarjeta avanzados — Ayuda de flashkarte",
+      "metaDescription": "Cómo escribir tarjetas de diagnóstico de opción múltiple con una tarjeta de refuerzo, y tarjetas para palabras con más de un significado.",
+      "title": "Tipos de tarjeta avanzados",
+      "diagnosticHeading": "Tarjetas de diagnóstico (opción múltiple)",
+      "diagnosticIntro": "Una tarjeta normal puede llevar opciones de opción múltiple, con una marcada como correcta y las demás dirigidas a una tarjeta de refuerzo. Estudiada en modo Opción múltiple, elegir mal muestra ese refuerzo — una explicación breve y precisa de ese error exacto — antes de continuar. La tarjeta en sí sigue programándose con repetición espaciada normal, como cualquier otra.",
+      "diagnosticCorrect": "Exactamente una opción debe apuntar a \"correct\" — esa es la respuesta correcta.",
+      "diagnosticRemediation": "Una opción incorrecta puede apuntar a la etiqueta de otra tarjeta (ver Mazos ramificados para saber cómo funcionan las etiquetas), que se muestra como un refuerzo sin calificar antes de continuar.",
+      "diagnosticEnd": "Una opción incorrecta también puede apuntar a \"end\" — simplemente incorrecta, sin refuerzo.",
+      "diagnosticStudy": "La tarjeta de refuerzo es una tarjeta normal del mazo — se programa con normalidad en su propio turno, y mostrarla como refuerzo no cuenta como una repetición aparte.",
+      "diagnosticExampleCaption": "Ejemplo de tarjeta de diagnóstico con refuerzo:",
+      "sensesHeading": "Palabras con más de un significado",
+      "sensesIntro": "Una palabra con varios significados no relacionados (como el alemán \"der Zug\" — tren, jugada de ajedrez o corriente de aire) puede escribirse una sola vez, como un bloque, y estudiarse como una tarjeta independiente por significado. Dale a cada significado su propia línea: \"- significado | frase de ejemplo | pista breve\".",
+      "sensesPhases": "Mientras la palabra es nueva, todos los significados se muestran juntos, con la pista breve como pregunta, para que aprendas de una vez todo el alcance de la palabra. Una vez que domines cada significado, la pista desaparece y cada significado pasa a ser su propia tarjeta normal, con la frase de ejemplo como pregunta.",
+      "sensesExampleCaption": "Ejemplo de palabra con tres significados:",
+      "sensesNote": "La pista y la frase de ejemplo son opcionales, pero una frase de ejemplo real es lo que hace que la segunda fase funcione bien — escribe una para cada significado."
+    },
     "branchingDecks": {
       "metaTitle": "Mazos ramificados — Ayuda de flashkarte",
       "metaDescription": "Cómo escribir un mazo ramificado de «elige tu camino» en flashkarte.",
@@ -535,6 +556,8 @@
       "title": "Estudiar y repetición espaciada",
       "srsHeading": "Cómo se programan los repasos",
       "srsBody": "Cada tarjeta tiene una fecha de repaso, fijada por cómo la valoraste la última vez. Difícil la devuelve mañana y Bien la devuelve en dos días, por mucho que hubiera esperado antes. Solo Fácil la aleja en el tiempo, y cada Fácil seguido la aleja todavía más: así una tarjeta que ya dominas sale de la rotación diaria.",
+      "practiceHeading": "Cuando no hay nada pendiente",
+      "practiceBody": "Si abres un mazo y todo está al día — nada pendiente, nada nuevo —, flashkarte te ofrece 20 tarjetas aleatorias del mazo como ronda de práctica en lugar de dejarte sin nada que hacer. Calificarlas funciona exactamente igual que siempre y actualiza su programación con normalidad.",
       "ratingsHeading": "Los botones de valoración",
       "ratingsIntro": "Después de revelar la respuesta de una tarjeta, valora qué tan bien la recordaste. Esto es lo que programa el siguiente repaso — sé honesto, no optimista.",
       "ratingAgain": "Repetir — no la recordaste. La tarjeta vuelve más adelante en esta misma sesión, y otra vez mañana.",
@@ -552,7 +575,7 @@
       "counterEasy": "Fáciles — tarjetas cuyo repaso más reciente se valoró como Fácil.",
       "counterNote": "Repetir/Difíciles/Bien/Fáciles reflejan solo el repaso más reciente de cada tarjeta, no un total acumulado — juntos siempre suman el valor de Vistas.",
       "choiceHeading": "Modo de opción múltiple",
-      "choiceBody": "La app de Android también ofrece un modo de opción múltiple que genera las opciones de respuesta automáticamente a partir de tus otras tarjetas y te califica en cuanto tocas una."
+      "choiceBody": "Tanto la app web como la de Android ofrecen un modo de opción múltiple. Para una tarjeta normal, genera opciones automáticamente a partir de tus otras tarjetas pendientes; para una tarjeta de diagnóstico (ver Tipos de tarjeta avanzados) usa las opciones que escribiste, y elegir mal puede mostrar una tarjeta de refuerzo antes de continuar."
     },
     "ai": {
       "metaTitle": "Crear mazos con IA — Ayuda de flashkarte",
