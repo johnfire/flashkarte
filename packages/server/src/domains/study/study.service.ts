@@ -1,4 +1,5 @@
 import { z } from "zod";
+import crypto from "crypto";
 import type { PoolClient } from "pg";
 import { calculate, wordPhase } from "@flashkarte/shared";
 import type { WordPhase } from "@flashkarte/shared";
@@ -13,6 +14,9 @@ const ratingSchema = z
   .int("rating must be an integer 1-5")
   .min(1, "rating must be an integer 1-5")
   .max(5, "rating must be an integer 1-5");
+// Diagnostic-card MC pick (Spec 01): index into the card's authored options.
+// Optional and nullable — old callers omit it and must keep working.
+const optionIndexSchema = z.number().int().min(0).nullable().optional();
 const MAX_SYNC_EVENTS = 1000;
 const syncEventsSchema = z
   .array(z.unknown(), { error: "events must be an array" })
@@ -25,9 +29,7 @@ const syncEventSchema = z.object({
   reviewed_at: z
     .string()
     .refine((s) => !Number.isNaN(Date.parse(s)), "Invalid reviewed_at date"),
-  // Diagnostic-card MC pick (Spec 01): index into the card's authored options.
-  // Optional and nullable — old clients omit it and must keep working.
-  option_index: z.number().int().min(0).nullable().optional(),
+  option_index: optionIndexSchema,
 });
 
 /**
@@ -119,12 +121,14 @@ export async function review(
   cardId: unknown,
   rating: unknown,
   actor: AuditActor = { type: "user", id: userId },
+  optionIndex: unknown = null,
 ) {
   const validCardId = parse(
     z.string({ error: "card_id is required" }).min(1, "card_id is required"),
     cardId,
   );
   const validRating = parse(ratingSchema, rating);
+  const validOptionIndex = parse(optionIndexSchema, optionIndex) ?? null;
   return repo.withCardProgressLock(userId, validCardId, async (client) => {
     const ownedCard = await repo.cardBelongsToUser(userId, validCardId, client);
     if (!ownedCard) throw new NotFoundError("Card not found");
@@ -132,6 +136,21 @@ export async function review(
     const previous = progressFromRow(progressRow);
     const update = calculateProgress(previous, validRating, new Date());
     await repo.upsertProgress(userId, validCardId, update.write, client);
+    // review_events is the append-only ledger the sync path has always written
+    // to; the live single-review path (used by web) never wrote to it, leaving
+    // it Android-only. Writing here closes that gap and gives diagnostic picks
+    // (Spec 01) somewhere to record option_index regardless of client.
+    await repo.insertReviewEvent(
+      userId,
+      {
+        event_id: crypto.randomUUID(),
+        card_id: validCardId,
+        rating: validRating,
+        reviewed_at: new Date().toISOString(),
+        option_index: validOptionIndex,
+      },
+      client,
+    );
     await recordRequired(
       {
         actor,

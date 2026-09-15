@@ -22,6 +22,7 @@ export const review = wrapAsync(async (req: Request, res: Response) => {
       req.body.card_id,
       req.body.rating,
       actorFromRequest(req),
+      req.body.option_index,
     ),
   );
 });

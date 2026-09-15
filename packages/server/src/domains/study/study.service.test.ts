@@ -2,7 +2,7 @@ jest.mock("./study.repository");
 jest.mock("../audit/audit.service", () => ({ recordRequired: jest.fn() }));
 import * as repo from "./study.repository";
 import { recordRequired } from "../audit/audit.service";
-import { sync, getStudyBatch } from "./study.service";
+import { sync, getStudyBatch, review } from "./study.service";
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
 const mockRecordRequired = recordRequired as jest.MockedFunction<
@@ -163,6 +163,36 @@ describe("sync", () => {
     expect(mockRepo.getOwnedCardIds).toHaveBeenCalledTimes(1);
     expect(mockRepo.getOwnedCardIds).toHaveBeenCalledWith("u1", ["c1", "c2"]);
     expect(mockRepo.cardBelongsToUser).not.toHaveBeenCalled();
+  });
+});
+
+// Spec 08 — the live review path (used by web) now writes to review_events too,
+// closing the gap where it never had anywhere to record a diagnostic option_index.
+describe("review", () => {
+  test("writes a review_events row with the given option_index", async () => {
+    await review("u1", "c1", 1, { type: "user", id: "u1" }, 2);
+    expect(mockRepo.insertReviewEvent).toHaveBeenCalledWith(
+      "u1",
+      expect.objectContaining({ card_id: "c1", rating: 1, option_index: 2 }),
+      mockClient,
+    );
+  });
+
+  // Old callers (no option_index arg) must keep working exactly as before,
+  // just with a ledger row added — option_index simply null.
+  test("writes a review_events row with a null option_index when omitted", async () => {
+    const res = await review("u1", "c1", 4);
+    expect(mockRepo.insertReviewEvent).toHaveBeenCalledWith(
+      "u1",
+      expect.objectContaining({ card_id: "c1", rating: 4, option_index: null }),
+      mockClient,
+    );
+    expect(res.card_id).toBe("c1");
+  });
+
+  test("rejects an unknown card", async () => {
+    mockRepo.cardBelongsToUser.mockResolvedValue(null as never);
+    await expect(review("u1", "nope", 4)).rejects.toThrow("Card not found");
   });
 });
 

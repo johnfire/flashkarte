@@ -58,10 +58,37 @@ describe("study routes", () => {
 
     expect(res.status).toBe(200);
     expect(res.body.interval).toBe(1);
-    expect(mock.review).toHaveBeenCalledWith("u1", "c1", 4, {
-      type: "user",
-      id: "u1",
-    });
+    expect(mock.review).toHaveBeenCalledWith(
+      "u1",
+      "c1",
+      4,
+      { type: "user", id: "u1" },
+      undefined,
+    );
+  });
+
+  // Spec 01/08 — a diagnostic MC pick's option_index reaches the service.
+  test("POST /api/study/review with option_index -> passed through", async () => {
+    mock.review.mockResolvedValue({
+      card_id: "c1",
+      easiness: 2.5,
+      interval: 1,
+      repetitions: 1,
+      due_at: "2026-06-05T00:00:00.000Z",
+    } as never);
+
+    const res = await request(app)
+      .post("/api/study/review")
+      .send({ card_id: "c1", rating: 1, option_index: 2 });
+
+    expect(res.status).toBe(200);
+    expect(mock.review).toHaveBeenCalledWith(
+      "u1",
+      "c1",
+      1,
+      { type: "user", id: "u1" },
+      2,
+    );
   });
 
   test("POST /api/study/review with rating 6 -> 422", async () => {
