@@ -280,6 +280,7 @@
     "backToDecks": "Back to decks",
     "decks": "← Decks",
     "progress": "{{current}} / {{total}}",
+    "cardNumber": "Card #{{number}}",
     "showAnswer": "Show answer",
     "again": "Again",
     "hard": "Hard",
@@ -597,7 +598,7 @@
   },
   "editCard": {
     "back": "← Cards",
-    "title": "Edit card",
+    "title": "Edit card #{{number}}",
     "front": "Front",
     "prompt": "Prompt",
     "backLabel": "Back",

@@ -48,7 +48,7 @@ describe("EditCardPage", () => {
 
     renderPage("c1");
 
-    await screen.findByText("Edit card");
+    await screen.findByText("Edit card #1");
     const frontField = screen.getByDisplayValue("Old front");
     fireEvent.change(frontField, { target: { value: "New front" } });
     const backField = screen.getByDisplayValue("Old back");
@@ -90,7 +90,7 @@ describe("EditCardPage", () => {
 
     renderPage("c1");
 
-    await screen.findByText("Edit card");
+    await screen.findByText("Edit card #1");
     expect(screen.getByDisplayValue("Pick a path")).toBeTruthy();
     expect(screen.queryByText("Back")).toBeNull();
     expect(screen.queryByText("Category")).toBeNull();
@@ -135,7 +135,7 @@ describe("EditCardPage", () => {
 
     renderPage("c1");
 
-    await screen.findByText("Edit card");
+    await screen.findByText("Edit card #1");
     expect(screen.getByText("Meaning 1 of 2")).toBeTruthy();
     expect(screen.getByText("Reorder this word's meanings")).toBeTruthy();
     // Sense cards don't get a freeform category field.

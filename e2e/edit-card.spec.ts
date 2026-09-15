@@ -31,14 +31,18 @@ test("editing a card's front, back, and category persists the change", async ({
   await page.getByRole("button", { name: "Sign up", exact: true }).click();
   await expect(page.getByRole("heading", { name: "My Decks" })).toBeVisible();
 
-  const link = lastMailTo(email).text.match(/https?:\/\/\S+verify-email\S+/)?.[0];
+  const link = lastMailTo(email).text.match(
+    /https?:\/\/\S+verify-email\S+/,
+  )?.[0];
   expect(link, "verification link present in the captured mail").toBeTruthy();
   await page.goto(link!);
   await expect(page.getByText(/verified/i).first()).toBeVisible();
 
   await page.goto("/login");
   await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password (min 8 chars)", { exact: true }).fill(password);
+  await page
+    .getByLabel("Password (min 8 chars)", { exact: true })
+    .fill(password);
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
   await expect(page.getByRole("heading", { name: "My Decks" })).toBeVisible();
 
@@ -52,9 +56,12 @@ test("editing a card's front, back, and category persists the change", async ({
 
   await page.getByRole("link", { name: "Manage", exact: true }).click();
   await expect(page.getByText("What is 2+2?")).toBeVisible();
+  await expect(page.getByText("1.", { exact: true })).toBeVisible();
   await page.getByText("What is 2+2?").click();
 
-  await expect(page.getByRole("heading", { name: "Edit card" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Edit card #1" }),
+  ).toBeVisible();
   const fields = page.getByRole("textbox");
   await fields.nth(0).fill("What is two plus two?");
   await fields.nth(1).fill("Four.");
@@ -63,16 +70,16 @@ test("editing a card's front, back, and category persists the change", async ({
 
   // Save navigates back to the card list — the edited front and its new
   // category are visible there without a reload.
-  await expect(
-    page.getByRole("heading", { name: /Cards in/ }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Cards in/ })).toBeVisible();
   await expect(page.getByText("What is two plus two?")).toBeVisible();
   await expect(page.getByText("Math", { exact: true })).toBeVisible();
 
   // Re-opening the card confirms the back text and category were persisted
   // server-side, not just held in local component state.
   await page.getByText("What is two plus two?").click();
-  await expect(page.getByRole("heading", { name: "Edit card" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Edit card #1" }),
+  ).toBeVisible();
   const reopenedFields = page.getByRole("textbox");
   await expect(reopenedFields.nth(0)).toHaveValue("What is two plus two?");
   await expect(reopenedFields.nth(1)).toHaveValue("Four.");

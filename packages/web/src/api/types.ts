@@ -186,6 +186,9 @@ export interface StudyCard {
   // progress, so it decides; absent for ordinary cards.
   phase?: WordPhase;
   category: string | null;
+  // The card's fixed place in the deck, independent of study order (the
+  // scheduler studies cards out of sequence).
+  position: number;
 }
 
 export interface ReviewResult {

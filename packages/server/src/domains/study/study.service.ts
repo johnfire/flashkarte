@@ -90,7 +90,12 @@ async function withChainedSenses(
     );
     for (const row of rows) {
       out.push(
-        tag({ id: row.id, content: row.content, category: row.category }),
+        tag({
+          id: row.id,
+          content: row.content,
+          category: row.category,
+          position: row.position,
+        }),
       );
     }
   }

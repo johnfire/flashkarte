@@ -36,6 +36,10 @@ export interface CardForStudy {
     sense?: CardSense | null;
   };
   category: string | null;
+  // The card's fixed place in the deck (0-based), independent of study
+  // order, so a client can show "card 5 of 20" for reference/support even
+  // while the scheduler studies cards out of sequence.
+  position: number;
 }
 
 // A caller may study/rate a card they don't own when its deck is official
@@ -64,7 +68,7 @@ export function getDueAndNewCards(
     // unordered decks keep reviewed/due-first grouping (the CASE is NULL for
     // every row, so the remaining keys stay in control). Regression fixture:
     // scripts/verify-ordered-study-order.sql — update both together.
-    `SELECT c.id, c.content, c.category
+    `SELECT c.id, c.content, c.category, c.position
      FROM cards c
      JOIN decks d ON d.id = c.deck_id
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
@@ -109,7 +113,7 @@ export function getSenseCardsForWords(
   deckId: string,
   words: string[],
 ) {
-  return query<CardForStudy & { position: number; repetitions: number | null }>(
+  return query<CardForStudy & { repetitions: number | null }>(
     `SELECT c.id, c.content, c.category, c.position, p.repetitions
      FROM cards c
      JOIN decks d ON d.id = c.deck_id

@@ -104,7 +104,9 @@ export function EditCardPage() {
 
       {card && (
         <div className="space-y-4">
-          <h1 className="text-2xl font-bold">{t("editCard.title")}</h1>
+          <h1 className="text-2xl font-bold">
+            {t("editCard.title", { number: card.position + 1 })}
+          </h1>
 
           <div>
             <label className="mb-1 block text-sm font-medium">

@@ -76,6 +76,9 @@ export function ManageDeckCardsPage() {
                     to={`/decks/${id}/cards/${card.id}`}
                     className="flex items-center justify-between gap-3 rounded-lg border p-3 hover:bg-gray-50 dark:hover:bg-gray-800"
                   >
+                    <span className="w-8 shrink-0 tabular-nums text-sm text-gray-400 dark:text-gray-500">
+                      {card.position + 1}.
+                    </span>
                     <span className="min-w-0 flex-1 truncate">
                       <CardText text={cardFrontText(card.content)} />
                     </span>

@@ -187,11 +187,10 @@ export function StudyPage() {
       </div>
 
       <div className="rounded-xl border p-8 shadow-sm">
-        {card.category && (
-          <p className="mb-2 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
-            {card.category}
-          </p>
-        )}
+        <p className="mb-2 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
+          {t("study.cardNumber", { number: card.position + 1 })}
+          {card.category && ` · ${card.category}`}
+        </p>
         <div className="flex items-start justify-between gap-2">
           <p className="text-lg font-medium">
             <CardText text={cardPrompt(card)} />

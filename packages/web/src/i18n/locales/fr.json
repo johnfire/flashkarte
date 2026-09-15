@@ -280,6 +280,7 @@
     "backToDecks": "Retour aux paquets",
     "decks": "← Paquets",
     "progress": "{{current}} / {{total}}",
+    "cardNumber": "Carte n° {{number}}",
     "showAnswer": "Afficher la réponse",
     "again": "À refaire",
     "hard": "Difficile",
@@ -597,7 +598,7 @@
   },
   "editCard": {
     "back": "← Cartes",
-    "title": "Modifier la carte",
+    "title": "Modifier la carte n° {{number}}",
     "front": "Recto",
     "prompt": "Question",
     "backLabel": "Verso",

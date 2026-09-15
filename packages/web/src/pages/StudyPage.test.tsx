@@ -96,7 +96,12 @@ describe("StudyPage", () => {
 
   test("reveals the answer then grades via the API", async () => {
     mockApi.study.batch.mockResolvedValue([
-      { id: "c1", content: { front: "Front?", back: "Back!" }, category: null },
+      {
+        id: "c1",
+        content: { front: "Front?", back: "Back!" },
+        category: null,
+        position: 0,
+      },
     ]);
     mockApi.study.review.mockResolvedValue({});
 
@@ -104,6 +109,7 @@ describe("StudyPage", () => {
 
     expect(await screen.findByText("Front?")).toBeInTheDocument();
     expect(screen.queryByText("Back!")).not.toBeInTheDocument();
+    expect(screen.getByText("Card #1")).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
     expect(screen.getByText("Back!")).toBeInTheDocument();
@@ -118,8 +124,18 @@ describe("StudyPage", () => {
 
   test("a lapsed card comes back later in the same session", async () => {
     mockApi.study.batch.mockResolvedValue([
-      { id: "c1", content: { front: "Front?", back: "Back!" }, category: null },
-      { id: "c2", content: { front: "Second?", back: "Two!" }, category: null },
+      {
+        id: "c1",
+        content: { front: "Front?", back: "Back!" },
+        category: null,
+        position: 0,
+      },
+      {
+        id: "c2",
+        content: { front: "Second?", back: "Two!" },
+        category: null,
+        position: 1,
+      },
     ]);
     mockApi.study.review.mockResolvedValue({});
 
@@ -133,11 +149,14 @@ describe("StudyPage", () => {
     expect(mockApi.study.review).toHaveBeenCalledWith("c1", 1);
 
     expect(await screen.findByText("Second?")).toBeInTheDocument();
+    expect(screen.getByText("Card #2")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
     await userEvent.click(screen.getByRole("button", { name: "Good" }));
 
-    // The failed card is drilled again before the session can end.
+    // The failed card is drilled again before the session can end. It still
+    // shows its own deck position (#1), not the session's running slot (3rd).
     expect(await screen.findByText("Front?")).toBeInTheDocument();
+    expect(screen.getByText("Card #1")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
     await userEvent.click(screen.getByRole("button", { name: "Good" }));
 
@@ -150,7 +169,12 @@ describe("StudyPage", () => {
 
   test("Hard and Good do not re-queue the card", async () => {
     mockApi.study.batch.mockResolvedValue([
-      { id: "c1", content: { front: "Front?", back: "Back!" }, category: null },
+      {
+        id: "c1",
+        content: { front: "Front?", back: "Back!" },
+        category: null,
+        position: 0,
+      },
     ]);
     mockApi.study.review.mockResolvedValue({});
 
@@ -184,6 +208,7 @@ describe("StudyPage", () => {
           content: { front: "der Zug", back: "train", sense: sense() },
           phase: "chain",
           category: null,
+          position: 0,
         },
       ]);
       renderStudy();
@@ -200,6 +225,7 @@ describe("StudyPage", () => {
           content: { front: "der Zug", back: "train", sense: sense() },
           phase: "split",
           category: null,
+          position: 0,
         },
       ]);
       renderStudy();
@@ -214,6 +240,7 @@ describe("StudyPage", () => {
           id: "c1",
           content: { front: "Front?", back: "Back!" },
           category: null,
+          position: 0,
         },
       ]);
       renderStudy();
@@ -235,6 +262,7 @@ describe("StudyPage", () => {
           options: [{ text: "Go left", goto: "cave" }],
         },
         category: null,
+        position: 0,
       },
     ]);
 
@@ -261,7 +289,12 @@ describe("StudyPage", () => {
   test("a failure loading deck settings leaves the session silent, not broken", async () => {
     mockApi.decks.settings.mockRejectedValue(new Error("nope"));
     mockApi.study.batch.mockResolvedValue([
-      { id: "c1", content: { front: "Front?", back: "Back!" }, category: null },
+      {
+        id: "c1",
+        content: { front: "Front?", back: "Back!" },
+        category: null,
+        position: 0,
+      },
     ]);
 
     renderStudy();
@@ -292,6 +325,7 @@ describe("StudyPage", () => {
           id: "c1",
           content: { front: "der Hund", back: "the dog" },
           category: null,
+          position: 0,
         },
       ]);
       mockApi.study.review.mockResolvedValue({});

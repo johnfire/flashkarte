@@ -280,6 +280,7 @@
     "backToDecks": "Volver a los mazos",
     "decks": "← Mazos",
     "progress": "{{current}} / {{total}}",
+    "cardNumber": "Tarjeta n.º {{number}}",
     "showAnswer": "Mostrar respuesta",
     "again": "Repetir",
     "hard": "Difícil",
@@ -597,7 +598,7 @@
   },
   "editCard": {
     "back": "← Tarjetas",
-    "title": "Editar tarjeta",
+    "title": "Editar tarjeta n.º {{number}}",
     "front": "Anverso",
     "prompt": "Pregunta",
     "backLabel": "Reverso",

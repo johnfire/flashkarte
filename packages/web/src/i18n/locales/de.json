@@ -280,6 +280,7 @@
     "backToDecks": "Zurück zu den Stapeln",
     "decks": "← Stapel",
     "progress": "{{current}} / {{total}}",
+    "cardNumber": "Karte Nr. {{number}}",
     "showAnswer": "Antwort anzeigen",
     "again": "Nochmal",
     "hard": "Schwer",
@@ -597,7 +598,7 @@
   },
   "editCard": {
     "back": "← Karten",
-    "title": "Karte bearbeiten",
+    "title": "Karte Nr. {{number}} bearbeiten",
     "front": "Vorderseite",
     "prompt": "Frage",
     "backLabel": "Rückseite",

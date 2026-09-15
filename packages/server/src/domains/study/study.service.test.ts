@@ -204,6 +204,9 @@ describe("getStudyBatch — chained senses (Spec 10)", () => {
 
     const batch = await getStudyBatch("u1", "d1");
     expect(batch.map((c) => c.id)).toEqual(["s0", "s1", "s2"]);
+    // Expanding a chained word rebuilds each card from the sibling row —
+    // its deck position must survive that rebuild, not just its content.
+    expect(batch.map((c) => c.position)).toEqual([0, 1, 2]);
   });
 
   test("a graduated word brings only the sense that is actually due", async () => {

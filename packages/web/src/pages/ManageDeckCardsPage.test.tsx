@@ -57,6 +57,9 @@ describe("ManageDeckCardsPage", () => {
     // Branch card's display text comes from `prompt`, not `front`.
     expect(screen.getByText("Branch node")).toBeTruthy();
     expect(screen.getByText("Branch")).toBeTruthy();
+    // Card numbers are the card's 1-based deck position, not an arbitrary index.
+    expect(screen.getByText("1.")).toBeTruthy();
+    expect(screen.getByText("2.")).toBeTruthy();
   });
 
   test("shows an empty-state message for a deck with no cards", async () => {
