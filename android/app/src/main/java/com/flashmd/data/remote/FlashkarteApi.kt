@@ -7,6 +7,11 @@ import com.flashmd.data.remote.dto.BugReportRequest
 import com.flashmd.data.remote.dto.BugReportResponse
 import com.flashmd.data.remote.dto.ChangePasswordRequest
 import com.flashmd.data.remote.dto.ClientErrorRequest
+import com.flashmd.data.remote.dto.CloneCourseResponse
+import com.flashmd.data.remote.dto.AddDeckToCourseRequest
+import com.flashmd.data.remote.dto.CourseDetailDto
+import com.flashmd.data.remote.dto.CourseSummaryDto
+import com.flashmd.data.remote.dto.CreateCourseRequest
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.DeckCreatedDto
 import com.flashmd.data.remote.dto.DeleteAccountRequest
@@ -19,7 +24,10 @@ import com.flashmd.data.remote.dto.LibraryDeckDetailDto
 import com.flashmd.data.remote.dto.LibraryListResponse
 import com.flashmd.data.remote.dto.LoginResponse
 import com.flashmd.data.remote.dto.MeResponse
+import com.flashmd.data.remote.dto.PublicCourseDetailDto
+import com.flashmd.data.remote.dto.PublicCourseSummaryDto
 import com.flashmd.data.remote.dto.RefreshResponse
+import com.flashmd.data.remote.dto.ReorderCourseDecksRequest
 import com.flashmd.data.remote.dto.ReviewRequest
 import com.flashmd.data.remote.dto.ReviewResponseDto
 import com.flashmd.data.remote.dto.StatsDto
@@ -30,6 +38,7 @@ import com.flashmd.data.remote.dto.TwoFactorBackupCodesResponse
 import com.flashmd.data.remote.dto.TwoFactorCodeRequest
 import com.flashmd.data.remote.dto.TwoFactorLoginRequest
 import com.flashmd.data.remote.dto.TwoFactorSetupResponse
+import com.flashmd.data.remote.dto.UpdateCourseRequest
 import com.flashmd.data.remote.dto.UpdateDeckRequest
 import com.flashmd.data.remote.dto.UpdateProfileRequest
 import retrofit2.Response
@@ -112,6 +121,52 @@ interface FlashkarteApi {
 
     @POST("api/library/{id}/clone")
     suspend fun cloneLibraryDeck(@Path("id") id: String): DeckCreatedDto
+
+    // Courses
+    @GET("api/courses")
+    suspend fun listCourses(): List<CourseSummaryDto>
+
+    @POST("api/courses")
+    suspend fun createCourse(@Body body: CreateCourseRequest): CourseSummaryDto
+
+    @GET("api/courses/{id}")
+    suspend fun getCourse(@Path("id") id: String): CourseDetailDto
+
+    @PATCH("api/courses/{id}")
+    suspend fun updateCourse(
+        @Path("id") id: String,
+        @Body body: UpdateCourseRequest,
+    ): CourseSummaryDto
+
+    @DELETE("api/courses/{id}")
+    suspend fun deleteCourse(@Path("id") id: String): Response<Unit>
+
+    @POST("api/courses/{id}/decks")
+    suspend fun addDeckToCourse(
+        @Path("id") id: String,
+        @Body body: AddDeckToCourseRequest,
+    ): Response<Unit>
+
+    @DELETE("api/courses/{id}/decks/{deckId}")
+    suspend fun removeDeckFromCourse(
+        @Path("id") id: String,
+        @Path("deckId") deckId: String,
+    ): Response<Unit>
+
+    @PATCH("api/courses/{id}/decks/reorder")
+    suspend fun reorderCourseDecks(
+        @Path("id") id: String,
+        @Body body: ReorderCourseDecksRequest,
+    ): Response<Unit>
+
+    @GET("api/library/courses")
+    suspend fun listPublicCourses(): List<PublicCourseSummaryDto>
+
+    @GET("api/library/courses/{id}")
+    suspend fun getPublicCourse(@Path("id") id: String): PublicCourseDetailDto
+
+    @POST("api/library/courses/{id}/clone")
+    suspend fun cloneCourse(@Path("id") id: String): CloneCourseResponse
 
     // Account
     @GET("api/auth/me")

@@ -3,6 +3,7 @@ package com.flashmd.ui.navigation
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
@@ -24,6 +25,9 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.flashmd.R
+import com.flashmd.ui.screens.courses.CourseDetailScreen
+import com.flashmd.ui.screens.courses.CoursesScreen
+import com.flashmd.ui.screens.courses.PublicCoursesScreen
 import com.flashmd.ui.screens.createdeck.CreateDeckScreen
 import com.flashmd.ui.screens.decklist.DeckListScreen
 import com.flashmd.ui.screens.help.BranchingHelpScreen
@@ -50,6 +54,7 @@ private data class BarItem(
 private val barItems = listOf(
     BarItem("decks", R.string.nav_decks, Icons.Filled.Home),
     BarItem("decks/new", R.string.nav_new, Icons.Filled.Add, isTab = false),
+    BarItem("courses", R.string.nav_courses, Icons.AutoMirrored.Filled.List),
     BarItem("library", R.string.nav_library, Icons.Filled.Search),
     BarItem("settings", R.string.nav_settings, Icons.Filled.Settings),
 )
@@ -142,6 +147,33 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                     onBack = { navController.popBackStack() },
                     onCloned = { newId ->
                         navController.navigate("study/$newId") { popUpTo("decks") }
+                    },
+                )
+            }
+
+            composable("courses") {
+                CoursesScreen(
+                    onOpenCourse = { id -> navController.navigate("courses/$id") },
+                    onBrowsePublic = { navController.navigate("public-courses") },
+                )
+            }
+
+            composable(
+                route = "courses/{courseId}",
+                arguments = listOf(navArgument("courseId") { type = NavType.StringType }),
+            ) { entry ->
+                CourseDetailScreen(
+                    courseId = entry.arguments!!.getString("courseId")!!,
+                    onBack = { navController.popBackStack() },
+                    onStudyDeck = { deckId -> navController.navigate("study/$deckId") },
+                )
+            }
+
+            composable("public-courses") {
+                PublicCoursesScreen(
+                    onBack = { navController.popBackStack() },
+                    onCloned = { newCourseId ->
+                        navController.navigate("courses/$newCourseId") { popUpTo("courses") }
                     },
                 )
             }

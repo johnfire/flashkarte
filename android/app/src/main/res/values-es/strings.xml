@@ -59,6 +59,7 @@
     <!-- Bottom navigation -->
     <string name="nav_decks">Mazos</string>
     <string name="nav_new">Nuevo</string>
+    <string name="nav_courses">Cursos</string>
     <string name="nav_library">Biblioteca</string>
     <string name="nav_settings">Ajustes</string>
 

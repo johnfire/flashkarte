@@ -59,6 +59,7 @@
     <!-- Bottom navigation -->
     <string name="nav_decks">Stapel</string>
     <string name="nav_new">Neu</string>
+    <string name="nav_courses">Kurse</string>
     <string name="nav_library">Bibliothek</string>
     <string name="nav_settings">Einstellungen</string>
 

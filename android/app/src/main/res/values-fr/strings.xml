@@ -59,6 +59,7 @@
     <!-- Bottom navigation -->
     <string name="nav_decks">Paquets</string>
     <string name="nav_new">Nouveau</string>
+    <string name="nav_courses">Cours</string>
     <string name="nav_library">Bibliothèque</string>
     <string name="nav_settings">Réglages</string>
 
