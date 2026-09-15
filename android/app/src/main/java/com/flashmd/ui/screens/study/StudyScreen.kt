@@ -5,7 +5,9 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
@@ -219,7 +221,7 @@ private fun ChoicePanel(
             tonalElevation = 4.dp,
         ) {
             Column(
-                Modifier.fillMaxSize().padding(24.dp),
+                Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
@@ -280,7 +282,7 @@ private fun RemediationInterlude(
             tonalElevation = 4.dp,
         ) {
             Column(
-                Modifier.fillMaxSize().padding(24.dp),
+                Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
             ) {
@@ -353,7 +355,7 @@ private fun CardFace(text: String, label: String) {
         tonalElevation = 4.dp,
     ) {
         Column(
-            Modifier.fillMaxSize().padding(24.dp),
+            Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {

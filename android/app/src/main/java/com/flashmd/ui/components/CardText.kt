@@ -2,6 +2,7 @@ package com.flashmd.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.LocalTextStyle
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -85,7 +87,8 @@ fun CardText(
                 is CardTextSegment.Image -> AsyncImage(
                     model = resolveImageUrl(segment.src),
                     contentDescription = segment.alt,
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp),
+                    contentScale = ContentScale.Fit,
+                    modifier = Modifier.fillMaxWidth().heightIn(max = 240.dp).padding(vertical = 8.dp),
                 )
             }
         }
