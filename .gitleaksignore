@@ -19,3 +19,10 @@ c0a76a1650bb4c8fdb4c216b42a7249be072339b:packages/server/src/db/migrations/015_t
 #    can't trip the scanner again; these cover the introducing commit.
 e39bc72452cc7492bd22ea92b82323f0b73d50ce:e2e/playwright.config.ts:generic-api-key:49
 e39bc72452cc7492bd22ea92b82323f0b73d50ce:e2e/playwright.config.ts:generic-api-key:50
+
+# 4) The landing page's AI-section i18n key list trips the key:value
+#    heuristic on lines like `bodyKey: "landing.aiPoint1Body"` — these are
+#    translation-key names, not secrets.
+9fec9af13b5cd6d65882751e2a5f2d5b92572275:packages/web/src/pages/landing/LandingAI.tsx:generic-api-key:4
+9fec9af13b5cd6d65882751e2a5f2d5b92572275:packages/web/src/pages/landing/LandingAI.tsx:generic-api-key:5
+9fec9af13b5cd6d65882751e2a5f2d5b92572275:packages/web/src/pages/landing/LandingAI.tsx:generic-api-key:6
