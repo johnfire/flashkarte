@@ -1,4 +1,5 @@
 import type { Block, Span } from "@flashkarte/shared";
+import { LessonImage } from "./LessonImage";
 
 /**
  * Draws a screen's blocks natively (no markdown): paragraphs and lists of spans, code, callouts,
@@ -79,18 +80,7 @@ function BlockView({ block }: { block: Block }) {
         </aside>
       );
     case "image":
-      return (
-        <figure className="rounded-lg border p-4 text-sm text-gray-700 dark:text-gray-300">
-          <span role="img" aria-label={block.alt}>
-            {block.alt}
-          </span>
-          {block.caption && (
-            <figcaption className="mt-1 text-gray-600 dark:text-gray-400">
-              {block.caption}
-            </figcaption>
-          )}
-        </figure>
-      );
+      return <LessonImage block={block} />;
     case "formula":
       return (
         <p

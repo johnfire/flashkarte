@@ -779,6 +779,12 @@
     "reviewTitle": "Wiederholung",
     "nothingDue": "Gerade ist nichts zur Wiederholung fällig.",
     "reviewDone": "Fertig. Die Frage kommt später wieder.",
-    "nextReview": "Weiter"
+    "nextReview": "Weiter",
+    "showDiagram": "Diagramm anzeigen",
+    "closeDiagram": "Schließen",
+    "zoomIn": "Vergrößern",
+    "zoomOut": "Verkleinern",
+    "zoomFit": "An Bildschirm anpassen",
+    "imageUnavailable": "Dieses Bild konnte nicht geladen werden."
   }
 }

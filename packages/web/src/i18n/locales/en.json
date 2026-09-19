@@ -779,6 +779,12 @@
     "reviewTitle": "Review",
     "nothingDue": "Nothing is due for review right now.",
     "reviewDone": "Done. It will come back later.",
-    "nextReview": "Next"
+    "nextReview": "Next",
+    "showDiagram": "Show diagram",
+    "closeDiagram": "Close",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "zoomFit": "Fit to screen",
+    "imageUnavailable": "This image could not be loaded."
   }
 }

@@ -27,7 +27,17 @@ const question = (n: number, teaches: string) => ({
     },
   ],
 });
-const tokensLesson = {
+const DIAGRAM = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+  <title>A resistor and a capacitor in series</title>
+  <rect x="10" y="30" width="60" height="40" fill="#fff" stroke="#111" stroke-width="3"/>
+  <text x="40" y="56" text-anchor="middle" font-size="16" fill="#111">R</text>
+  <line x1="70" y1="50" x2="130" y2="50" stroke="#111" stroke-width="3"/>
+  <line x1="130" y1="25" x2="130" y2="75" stroke="#111" stroke-width="3"/>
+  <line x1="145" y1="25" x2="145" y2="75" stroke="#111" stroke-width="3"/>
+  <script>alert("this is removed")</script>
+</svg>`;
+
+const tokensLesson = (diagram: string) => ({
   module: "Input side",
   lesson: {
     slug: "tokens",
@@ -35,12 +45,41 @@ const tokensLesson = {
     summary: "What a token is.",
     covers: ["token"],
   },
-  screens: [1, 2, 3, 4].map((n) => ({
-    ref: `s${n}`,
-    blocks: para(`Teaching text of screen ${n}`),
-  })),
+  screens: [
+    {
+      ref: "s1",
+      blocks: [
+        ...para("Teaching text of screen 1"),
+        {
+          type: "image",
+          src: diagram,
+          alt: "A resistor and a capacitor in series",
+          display: "inline",
+          caption: "Figure 1: the circuit",
+        },
+      ],
+    },
+    {
+      ref: "s2",
+      blocks: [
+        ...para("Teaching text of screen 2"),
+        {
+          type: "image",
+          src: diagram,
+          alt: "The same circuit, large",
+          display: "expandable",
+          caption: "Open the full circuit",
+        },
+      ],
+    },
+    ...[3, 4].map((n) => ({
+      ref: `s${n}`,
+      blocks: para(`Teaching text of screen ${n}`),
+    })),
+  ],
   questions: [question(1, "s1"), question(2, "s2"), question(3, "s3")],
-};
+});
+
 const embeddingsLesson = {
   module: "Input side",
   lesson: {
@@ -96,10 +135,15 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
       kind: "idea",
     });
   }
+  const diagram = await api.send("POST", `/subjects/${subject.id}/assets`, {
+    svg: DIAGRAM,
+    description: "RC circuit",
+  });
+  expect(diagram.removed).toEqual(["<script>"]);
   await api.send(
     "POST",
     `/subjects/${subject.id}/lessons/import`,
-    tokensLesson,
+    tokensLesson(diagram.src),
   );
   await api.send(
     "POST",
@@ -139,11 +183,53 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
   await expect(page.getByText("Screen 1 of 4")).toBeVisible();
   await expect(page.getByText("Teaching text of screen 1")).toBeVisible();
   await expect(page.getByRole("button", { name: "Back" })).toBeDisabled();
+  // The stored diagram is fetched with the sign-in and drawn (not a broken image).
+  const inline = page.getByRole("img", {
+    name: "A resistor and a capacitor in series",
+  });
+  await expect(inline).toBeVisible();
+  await expect
+    .poll(() => inline.evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBeGreaterThan(0);
+  await expect(page.getByText("Figure 1: the circuit")).toBeVisible();
   await page.screenshot({ path: path.join(artifacts, "learn-screen.png") });
-  await expectNoAxeViolations(page, "a lesson screen");
+  await expectNoAxeViolations(page, "a lesson screen with a diagram");
+  // On a dark page the diagram keeps its light surface, so its dark lines stay readable.
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await page.screenshot({
+    path: path.join(artifacts, "learn-screen-dark.png"),
+  });
+  await expectNoAxeViolations(
+    page,
+    "a lesson screen with a diagram in dark mode",
+  );
+  await page.getByRole("button", { name: "Switch to light mode" }).click();
 
   await page.getByRole("button", { name: "Next" }).click();
   await expect(page.getByText("Teaching text of screen 2")).toBeVisible();
+
+  // An expandable diagram opens full-screen, zooms, and closes back to the same screen.
+  await page.getByRole("button", { name: "Show diagram" }).click();
+  const big = page.getByRole("dialog", { name: "The same circuit, large" });
+  await expect(big).toBeVisible();
+  const bigImage = big.getByRole("img");
+  await expect
+    .poll(() => bigImage.evaluate((img: HTMLImageElement) => img.naturalWidth))
+    .toBeGreaterThan(0);
+  await page.screenshot({
+    path: path.join(artifacts, "learn-diagram-open.png"),
+  });
+  await expectNoAxeViolations(page, "the open diagram");
+  const before = (await bigImage.boundingBox())!.width;
+  await page.getByRole("button", { name: "Zoom in" }).click();
+  expect((await bigImage.boundingBox())!.width).toBeGreaterThan(before);
+  await page.keyboard.press("Escape");
+  await expect(big).toBeHidden();
+  await expect(page.getByText("Teaching text of screen 2")).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Show diagram" }),
+  ).toBeFocused();
+
   await page.getByRole("button", { name: "Back" }).click();
   await expect(page.getByText("Teaching text of screen 1")).toBeVisible();
 

@@ -779,6 +779,12 @@
     "reviewTitle": "Révision",
     "nothingDue": "Rien à réviser pour le moment.",
     "reviewDone": "Terminé. Elle reviendra plus tard.",
-    "nextReview": "Suivant"
+    "nextReview": "Suivant",
+    "showDiagram": "Afficher le schéma",
+    "closeDiagram": "Fermer",
+    "zoomIn": "Agrandir",
+    "zoomOut": "Réduire",
+    "zoomFit": "Ajuster à l'écran",
+    "imageUnavailable": "Cette image n'a pas pu être chargée."
   }
 }

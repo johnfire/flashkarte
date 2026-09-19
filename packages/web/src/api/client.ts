@@ -119,6 +119,39 @@ function refreshAccessToken(): Promise<boolean> {
   return refreshPromise;
 }
 
+/**
+ * A stored diagram as a data URL an <img> can show. The route needs the sign-in, so an <img src>
+ * cannot fetch it. A data URL (rather than a blob URL) is what the page's content security policy
+ * already allows for images.
+ */
+const assetUrls = new Map<string, Promise<string>>();
+
+async function fetchAssetUrl(
+  subjectId: string,
+  assetId: string,
+): Promise<string> {
+  const path = `/subjects/${subjectId}/assets/${assetId}`;
+  let res = await raw(path);
+  if (res.status === 401 && (await refreshAccessToken())) res = await raw(path);
+  if (!res.ok) throw new ApiError(res.status, "ERROR", `HTTP ${res.status}`);
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(await res.text())}`;
+}
+
+/** Fetched once per image for the life of the page: an asset's contents never change. */
+export function assetDataUrl(
+  subjectId: string,
+  assetId: string,
+): Promise<string> {
+  const key = `${subjectId}/${assetId}`;
+  let pending = assetUrls.get(key);
+  if (!pending) {
+    pending = fetchAssetUrl(subjectId, assetId);
+    assetUrls.set(key, pending);
+    pending.catch(() => assetUrls.delete(key));
+  }
+  return pending;
+}
+
 function lessonAction<T>(
   subjectId: string,
   slug: string,

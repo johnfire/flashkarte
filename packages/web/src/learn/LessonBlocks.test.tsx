@@ -25,7 +25,7 @@ const blocks: Block[] = [
   { type: "callout", tone: "warning", spans: [{ text: "Careful here" }] },
   {
     type: "image",
-    src: "x",
+    src: "https://example.com/tokenizer.svg",
     alt: "A diagram of a tokenizer",
     display: "inline",
     caption: "Figure 1",

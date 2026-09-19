@@ -80,6 +80,7 @@ export type {
   BlockIssue,
   BlockType,
   CalloutTone,
+  ImageBlock,
   ImageDisplay,
   Span,
 } from "./lessons/lesson-blocks";

@@ -779,6 +779,12 @@
     "reviewTitle": "Repaso",
     "nothingDue": "Ahora mismo no hay nada que repasar.",
     "reviewDone": "Hecho. Volverá más adelante.",
-    "nextReview": "Siguiente"
+    "nextReview": "Siguiente",
+    "showDiagram": "Mostrar diagrama",
+    "closeDiagram": "Cerrar",
+    "zoomIn": "Acercar",
+    "zoomOut": "Alejar",
+    "zoomFit": "Ajustar a la pantalla",
+    "imageUnavailable": "No se pudo cargar esta imagen."
   }
 }
