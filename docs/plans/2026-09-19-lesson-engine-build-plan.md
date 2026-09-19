@@ -57,7 +57,9 @@ unlocks early.
 ## Slice 3: web learner UI (M)
 
 Outline, screen reader (number shown, Back/Next, position remembered), questions and the loop,
-lesson-passed state, review of due questions. Text, lists, code and callouts only at this stage.
+lesson-passed state, review of due questions, and an owner-only "comment on this screen" (a note
+kept against the screen number) so the testing stage is usable: Chris will review by learning the
+subject himself. Text, lists, code and callouts only at this stage.
 
 - **Verified by:** component tests, and a Playwright spec that authors a small lesson, learns it
   in a browser, fails a question on purpose and is sent back to the right screen, passes, and sees
@@ -65,7 +67,8 @@ lesson-passed state, review of due questions. Text, lists, code and callouts onl
 
 ## Content pilot (starts once slice 3 works; runs alongside)
 
-Author **one module of Transformers** (about 6 to 8 lessons, so roughly 40 to 60 screens) with AI
+Author **one module of Transformers, "Input side: text to vectors"** (about 10 concepts, so roughly
+4 lessons and 20 to 40 screens) with AI
 drafting and Chris reviewing every screen and question. This is the first real test of the design:
 whether 4 to 10 screens per lesson is right, whether the questions test what was taught, and
 whether the lesson-level graph derived from the concept graph is sensible. Findings feed back

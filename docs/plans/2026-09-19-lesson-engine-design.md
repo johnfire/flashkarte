@@ -19,20 +19,24 @@ of other people's lessons; question types beyond multiple choice (later slices).
 
 ## 2. What is decided
 
-| Topic            | Decision                                                                                                                                            |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Unit of learning | A **lesson**: 4 to 10 numbered screens (one idea each, read not flipped), then 3 to 5 questions                                                     |
-| Size             | Not a constraint. A complex subject is 400+ screens. Modules group lessons                                                                          |
-| Graph node       | The **lesson**, a bundle of a few of the old concepts. The old concepts stay as the lesson's **coverage checklist**                                 |
-| Pass rule        | A wrong answer shows the screen that teaches it, then re-asks. Passed only when every question is right. First-try score is recorded                |
-| Retention        | After passing, each question gets its own spaced-review schedule. A miss sends the learner back to its screen                                       |
-| Storage          | Structured data through the API/MCP. **No new markdown syntax, no new parser**                                                                      |
-| Screen content   | Structured **blocks**: paragraph, list, code, image, callout, formula. Paragraphs allow only bold, italic, inline code                              |
-| Numbering        | Every screen has a **permanent decimal number** that is also its sort key: 213, then 213.010, 213.020, later 213.025. Never renumbered or reused    |
-| Stages           | **Testing**: edit, delete, reorder freely. **Finished**: additive only. You may insert screens but not delete, reorder or change the meaning of one |
-| Maths            | Typeset maths, rendered once on the server to SVG (see 7)                                                                                           |
-| Learner help     | A learner can ask for more on a screen. The **owner's** requests become real screens; anyone else's become **private notes**                        |
-| Outline          | A course-outline screen up front (see 4)                                                                                                            |
+| Topic            | Decision                                                                                                                                                                                                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Unit of learning | A **lesson**: 4 to 10 numbered screens (one idea each, read not flipped), then 3 to 5 questions                                                                                                                                                                                                                          |
+| Size             | Not a constraint. A complex subject is 400+ screens. Modules group lessons                                                                                                                                                                                                                                               |
+| Graph node       | The **lesson**, a bundle of a few of the old concepts. The old concepts stay as the lesson's **coverage checklist**                                                                                                                                                                                                      |
+| Pass rule        | A wrong answer shows the screen that teaches it, then re-asks. Passed only when every question is right. First-try score is recorded                                                                                                                                                                                     |
+| Retention        | After passing, each question gets its own spaced-review schedule. A miss sends the learner back to its screen                                                                                                                                                                                                            |
+| Storage          | Structured data through the API/MCP. **No new markdown syntax, no new parser**                                                                                                                                                                                                                                           |
+| Screen content   | Structured **blocks**: paragraph, list, code, image, callout, formula. Paragraphs allow only bold, italic, inline code                                                                                                                                                                                                   |
+| Numbering        | Every screen has a **permanent decimal number** that is also its sort key: 213, then 213.010, 213.020, later 213.025. Never renumbered or reused. Unique across the **whole subject**, and numbers are allowed to get large (Chris, 2026-09-19)                                                                          |
+| Stages           | Applied **per lesson**, so module 1 can be finished and safe for learners while module 5 is still being written; a subject-level "finish all" is only a convenience. **Testing**: edit, delete, reorder freely. **Finished**: additive only. You may insert screens but not delete, reorder or change the meaning of one |
+| Maths            | Typeset maths, rendered once on the server to SVG (see 7)                                                                                                                                                                                                                                                                |
+| Learner help     | A learner can ask for more on a screen. The **owner's** requests become real screens; anyone else's become **private notes**                                                                                                                                                                                             |
+| Outline          | A course-outline screen up front (see 4)                                                                                                                                                                                                                                                                                 |
+
+| Owner comments | In the testing stage the owner can leave a note on any screen number from the reader. Included from the start, because Chris will review by learning the subject himself. It is the seed of the later help requests |
+| Pilot | The Transformers module **"Input side: text to vectors"** first (about 10 concepts, so roughly 4 lessons), chosen by me at Chris's request |
+| App section | Called **Learn** (default) |
 
 ## 3. The model
 
@@ -92,7 +96,7 @@ a stage), the same way the subject graph is. The server **lints** before saving:
 - warnings, not errors: a lesson with fewer than 4 or more than 10 screens, or fewer than 3 or more
   than 5 questions.
 
-In the **testing** stage anything can change and no promise is made to learners. **Finished**
+Stages are set **per lesson**. In the **testing** stage anything can change and no promise is made to learners. **Finished**
 freezes numbers: inserts are allowed (safe, because numbers never change), deletes, reorders and
 meaning-changing edits are not, and need a new version of the subject.
 
