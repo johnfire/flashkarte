@@ -23,7 +23,10 @@ export interface ParsedCard {
   // *diagnostic* card (Spec 01): one option targets the reserved CORRECT_TARGET,
   // the rest route to remediation labels. Detect that case with `isDiagnostic()`
   // — the `type` stays "basic" so SR scheduling is unchanged.
-  type: "basic" | "branch";
+  // "read" cards are lessons: a title (front) and a body (back) that is read and
+  // acknowledged, never rated. They carry no SR state and are exposure, not
+  // evidence of mastery. Authored with an `@read` tag line above the front.
+  type: "basic" | "branch" | "read";
   front: string;
   back: string;
   category: string | null;
@@ -55,6 +58,10 @@ export function isDiagnostic(card: ParsedCard): boolean {
   );
 }
 
+export function isReading(card: ParsedCard): boolean {
+  return card.type === "read";
+}
+
 export interface ParsedDeck {
   title: string;
   sourceFilename: string;
@@ -70,6 +77,10 @@ const HR = /^---+$/;
 // additional paragraphs.
 const QFRONT = /^Q:\s*(.+)/;
 const ABACK = /^A:\s*(.+)/;
+// Reading card: an `@read` tag line, on its own, above the card's front. The body
+// that follows is kept as written (lists, code, blank lines) — unlike a basic
+// card's back, which has its single newlines collapsed into spaces.
+const READ_TAG = /^@read\s*$/;
 // Branching: an anchor line [label], and option lines "- text -> target".
 const ANCHOR = /^\[([A-Za-z0-9_-]+)\]\s*$/;
 
@@ -152,6 +163,8 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
   let currentCategory: string | null = null;
   let currentFront: string | null = null;
   let currentIsQA = false;
+  let currentIsRead = false;
+  let pendingRead = false;
   let currentLabel: string | null = null;
   let pendingLabel: string | null = null;
   let backLines: string[] = [];
@@ -159,7 +172,18 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
   const cards: ParsedCard[] = [];
 
   const flush = () => {
-    if (currentFront !== null) {
+    if (currentFront !== null && currentIsRead) {
+      cards.push({
+        type: "read",
+        front: currentFront,
+        back: cleanReadBody(backLines),
+        category: currentCategory,
+        label: currentLabel,
+        options: [],
+        sense: null,
+        senseConflict: false,
+      });
+    } else if (currentFront !== null) {
       // A card with options is a `branch` card UNLESS one option targets
       // CORRECT_TARGET — then it is a diagnostic card, which keeps its `basic`
       // type, front/back and SR state, carrying the options alongside.
@@ -203,6 +227,7 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
       }
     }
     currentFront = null;
+    currentIsRead = false;
     currentLabel = null;
     backLines = [];
     options = [];
@@ -212,6 +237,8 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
     flush();
     currentFront = front;
     currentIsQA = isQA;
+    currentIsRead = pendingRead;
+    pendingRead = false;
     currentLabel = pendingLabel;
     pendingLabel = null;
   };
@@ -223,12 +250,16 @@ export function parseDeck(text: string, sourceFilename = ""): ParsedDeck {
     const mQ = QFRONT.exec(line);
     const mA = ABACK.exec(line);
     const mAnchor = ANCHOR.exec(line);
-    const mOption = currentFront !== null ? matchOption(line) : null;
+    // A reading body is prose: "- a -> b" inside it is text, not a branch option.
+    const mOption =
+      currentFront !== null && !currentIsRead ? matchOption(line) : null;
 
     if (mH1 && !title) {
       title = mH1[1].trim();
     } else if (mAnchor) {
       pendingLabel = mAnchor[1];
+    } else if (READ_TAG.test(line)) {
+      pendingRead = true;
     } else if (mH2) {
       flush();
       currentCategory = mH2[1].trim();
@@ -280,4 +311,16 @@ function cleanBack(lines: string[]): string {
   if (current.length) paragraphs.push(current.join(" "));
 
   return paragraphs.join("\n\n");
+}
+
+/**
+ * A reading body keeps its structure: only leading/trailing blank lines and
+ * trailing whitespace are removed. Deliberately not cleanBack, which would
+ * flatten lists and code into one paragraph.
+ */
+function cleanReadBody(lines: string[]): string {
+  const buf = lines.map((line) => line.replace(/\s+$/, ""));
+  while (buf.length && !buf[0].trim()) buf.shift();
+  while (buf.length && !buf[buf.length - 1].trim()) buf.pop();
+  return buf.join("\n");
 }

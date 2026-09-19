@@ -1,4 +1,4 @@
-import { parseDeck, isDiagnostic } from "./parser";
+import { parseDeck, isDiagnostic, isReading } from "./parser";
 
 const SAMPLE = `# Test Deck
 *A subtitle line*
@@ -411,5 +411,111 @@ describe("word blocks (polysemy)", () => {
     const cards = parseDeck("# D\n\n**1. X**\nplain.\n", "t.md").cards;
     expect(cards[0].sense).toBeNull();
     expect(cards[0].senseConflict).toBe(false);
+  });
+});
+
+describe("reading cards (@read)", () => {
+  const lesson = [
+    "# D",
+    "",
+    "## Basics",
+    "",
+    "@read",
+    "**1. How a dot product measures similarity**",
+    "A dot product multiplies matching entries and adds them up.",
+    "",
+    "- large and positive: the vectors point the same way",
+    "- near zero: unrelated",
+    "",
+    "    indented code line",
+    "",
+  ].join("\n");
+
+  test("@read turns the next card into a reading card", () => {
+    const [card] = parseDeck(lesson, "t.md").cards;
+    expect(card.type).toBe("read");
+    expect(card.front).toBe("How a dot product measures similarity");
+    expect(card.category).toBe("Basics");
+    expect(card.options).toEqual([]);
+    expect(card.sense).toBeNull();
+    expect(isReading(card)).toBe(true);
+    expect(isDiagnostic(card)).toBe(false);
+  });
+
+  test("the body keeps its lists, blank lines and indentation", () => {
+    const [card] = parseDeck(lesson, "t.md").cards;
+    expect(card.back).toBe(
+      [
+        "A dot product multiplies matching entries and adds them up.",
+        "",
+        "- large and positive: the vectors point the same way",
+        "- near zero: unrelated",
+        "",
+        "    indented code line",
+      ].join("\n"),
+    );
+  });
+
+  test("trailing whitespace and surrounding blank lines are dropped", () => {
+    const text = "@read\n**1. T**\n\n\nbody   \n\n\n";
+    expect(parseDeck(text).cards[0].back).toBe("body");
+  });
+
+  test("the tag applies to one card only; neighbours stay basic and unchanged", () => {
+    const text = [
+      "**1. First**",
+      "front side answer",
+      "more of it",
+      "",
+      "@read",
+      "**2. Lesson**",
+      "Read me.",
+      "**3. Last**",
+      "another answer",
+      "",
+    ].join("\n");
+    const cards = parseDeck(text).cards;
+    expect(cards.map((c) => c.type)).toEqual(["basic", "read", "basic"]);
+    expect(cards[0].back).toBe("front side answer more of it");
+    expect(cards[2].back).toBe("another answer");
+  });
+
+  test("option-like and sense-like lines in a body are plain text", () => {
+    const text = [
+      "@read",
+      "**1. Not a branch**",
+      "- go left -> somewhere",
+      "- a | b",
+      "- c | d",
+      "",
+    ].join("\n");
+    const [card] = parseDeck(text).cards;
+    expect(card.type).toBe("read");
+    expect(card.options).toEqual([]);
+    expect(card.sense).toBeNull();
+    expect(card.senseConflict).toBe(false);
+    expect(card.back).toBe("- go left -> somewhere\n- a | b\n- c | d");
+  });
+
+  test("works with the Q: front and keeps a label", () => {
+    const text = "[intro]\n@read\nQ: Why read first?\nBecause context helps.\n";
+    const [card] = parseDeck(text).cards;
+    expect(card.type).toBe("read");
+    expect(card.label).toBe("intro");
+    expect(card.front).toBe("Why read first?");
+    expect(card.back).toBe("Because context helps.");
+  });
+
+  test("a ## heading still starts a new category and ends the body", () => {
+    const text = "@read\n**1. T**\nbody\n## Next\n**2. Q**\nans\n";
+    const cards = parseDeck(text).cards;
+    expect(cards[0].back).toBe("body");
+    expect(cards[1].category).toBe("Next");
+    expect(cards[1].type).toBe("basic");
+  });
+
+  test("a lone @read with no card after it changes nothing", () => {
+    const text = "**1. A**\nans\n@read\n";
+    expect(parseDeck(text).cards.map((c) => c.type)).toEqual(["basic"]);
   });
 });

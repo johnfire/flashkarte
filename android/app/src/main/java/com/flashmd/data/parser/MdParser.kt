@@ -23,7 +23,9 @@ data class ParsedCard(
     // A "basic" card may also carry options when it is a *diagnostic* card
     // (Spec 01): one option targets MdParser.CORRECT_TARGET, the rest route to
     // remediation labels. Detect with isDiagnostic(); the type stays "basic".
-    val type: String,           // "basic" | "branch"
+    // "read" cards are lessons (title + body): read and acknowledged, never rated,
+    // no SR state, and never evidence of mastery. Authored with an `@read` tag line.
+    val type: String,           // "basic" | "branch" | "read"
     val front: String,
     val back: String,
     val category: String?,
@@ -47,6 +49,9 @@ data class ParsedDeck(
 fun isDiagnostic(card: ParsedCard): Boolean =
     card.type == "basic" && card.options.any { it.goto == MdParser.CORRECT_TARGET }
 
+/** Mirror of the TS `isReading()` (packages/shared) — keep in sync. */
+fun isReading(card: ParsedCard): Boolean = card.type == "read"
+
 object MdParser {
     // Reserved option target marking the right answer on a diagnostic card.
     // Mirror of TS CORRECT_TARGET (packages/shared/src/markdown/parser.ts).
@@ -61,6 +66,9 @@ object MdParser {
     // as additional paragraphs.
     private val QFRONT = Regex("""^Q:\s*(.+)""")
     private val ABACK = Regex("""^A:\s*(.+)""")
+    // Reading card: an `@read` tag line, on its own, above the card's front. The body is
+    // kept as written (lists, code, blank lines), unlike a basic card's back.
+    private val READ_TAG = Regex("""^@read\s*$""")
     // Branching: an anchor line [label], and option lines "- text -> target".
     private val ANCHOR = Regex("""^\[([A-Za-z0-9_-]+)\]\s*$""")
 
@@ -127,6 +135,8 @@ object MdParser {
         var currentCategory: String? = null
         var currentFront: String? = null
         var currentIsQA = false
+        var currentIsRead = false
+        var pendingRead = false
         var currentLabel: String? = null
         var pendingLabel: String? = null
         val backLines = mutableListOf<String>()
@@ -135,6 +145,22 @@ object MdParser {
 
         fun flushCard() {
             val front = currentFront ?: return
+            if (currentIsRead) {
+                cards += ParsedCard(
+                    type = "read",
+                    front = front,
+                    back = cleanReadBody(backLines.toList()),
+                    category = currentCategory,
+                    label = currentLabel,
+                    options = emptyList(),
+                )
+                currentFront = null
+                currentIsRead = false
+                currentLabel = null
+                backLines.clear()
+                options = mutableListOf()
+                return
+            }
             // A card with options is a `branch` card UNLESS one option targets
             // CORRECT_TARGET — then it is a diagnostic card, which keeps its
             // `basic` type, front/back and SR state, carrying options alongside.
@@ -184,6 +210,8 @@ object MdParser {
             flushCard()
             currentFront = front
             currentIsQA = isQA
+            currentIsRead = pendingRead
+            pendingRead = false
             currentLabel = pendingLabel
             pendingLabel = null
         }
@@ -195,11 +223,13 @@ object MdParser {
             val mQ = QFRONT.find(line)
             val mA = ABACK.find(line)
             val mAnchor = ANCHOR.find(line)
-            val mOption = if (currentFront != null) matchOption(line) else null
+            // A reading body is prose: "- a -> b" inside it is text, not a branch option.
+            val mOption = if (currentFront != null && !currentIsRead) matchOption(line) else null
 
             when {
                 mH1 != null && title.isEmpty() -> title = mH1.groupValues[1].trim()
                 mAnchor != null -> pendingLabel = mAnchor.groupValues[1]
+                READ_TAG.matches(line) -> pendingRead = true
                 mH2 != null -> {
                     flushCard()
                     currentCategory = mH2.groupValues[1].trim()
@@ -226,6 +256,17 @@ object MdParser {
             cards = cards,
         )
     }
+
+    /**
+     * A reading body keeps its structure: only leading/trailing blank lines and trailing
+     * whitespace are removed. Deliberately not cleanBack, which would flatten lists and code.
+     * Mirror of the TS cleanReadBody — keep in sync.
+     */
+    private fun cleanReadBody(lines: List<String>): String =
+        lines.map { it.trimEnd() }
+            .dropWhile { it.isBlank() }
+            .dropLastWhile { it.isBlank() }
+            .joinToString("\n")
 
     private fun cleanBack(lines: List<String>): String {
         val trimmed = lines.dropWhile { it.isBlank() }.dropLastWhile { it.isBlank() }
