@@ -72,7 +72,9 @@ The first thing a learner sees in a subject: **what you are going to learn, in o
 as headings; under each, the lessons in prerequisite order, each with its one-line summary and the
 concepts it covers, and its state (locked, available, in progress, passed, due for review). A
 lesson is unlocked when its prerequisite lessons are passed. Tapping a lesson opens it. The
-outline is derived from the graph, not authored separately, so it can never disagree with it.
+outline is derived from the graph, not authored separately, so it can never disagree with it. Lessons that are available at the same time are listed in authoring order, which is the recommended
+path; the learner can still open any available lesson. Locked lessons stay visible, with what unlocks
+them ("unlocks after: Tokenizer, Embeddings"), so the learner can see the whole road.
 
 ## 5. Learner flow
 
