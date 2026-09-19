@@ -4,10 +4,7 @@
     "slug": "sequence-shapes",
     "title": "Sequence length and reading shapes",
     "summary": "How many tokens are in a text, what the context window limits, and how to read the shape n × d_model and the course's symbols.",
-    "covers": [
-      "sequence-length",
-      "shape-notation"
-    ],
+    "covers": ["sequence-length", "shape-notation"],
     "prerequisites": [
       {
         "lesson": "tokens",
@@ -519,12 +516,8 @@
           ]
         }
       ],
-      "teaches": [
-        "n"
-      ],
-      "covers": [
-        "sequence-length"
-      ],
+      "teaches": ["n"],
+      "covers": ["sequence-length"],
       "variants": [
         {
           "prompt": [
@@ -739,12 +732,8 @@
           ]
         }
       ],
-      "teaches": [
-        "window"
-      ],
-      "covers": [
-        "sequence-length"
-      ],
+      "teaches": ["window"],
+      "covers": ["sequence-length"],
       "variants": [
         {
           "prompt": [
@@ -959,14 +948,8 @@
           ]
         }
       ],
-      "teaches": [
-        "table",
-        "shape",
-        "example"
-      ],
-      "covers": [
-        "shape-notation"
-      ],
+      "teaches": ["table", "shape", "example"],
+      "covers": ["shape-notation"],
       "variants": [
         {
           "prompt": [
@@ -1181,12 +1164,8 @@
           ]
         }
       ],
-      "teaches": [
-        "symbols"
-      ],
-      "covers": [
-        "shape-notation"
-      ],
+      "teaches": ["symbols"],
+      "covers": ["shape-notation"],
       "variants": [
         {
           "prompt": [

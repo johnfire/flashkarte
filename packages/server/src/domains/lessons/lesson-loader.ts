@@ -1,5 +1,6 @@
 import type { LessonInput, QuestionInput } from "@flashkarte/shared";
 import type { Queryable } from "../../db/queryable";
+import * as assetsRepo from "../assets/assets.repository";
 import * as lessonsRepo from "./lessons.repository";
 import * as questionsRepo from "./questions.repository";
 import * as screensRepo from "./screens.repository";
@@ -18,6 +19,7 @@ export async function loadLessonForLint(
   const questions = await questionsRepo.listQuestions(db, lesson.id);
   const links = await questionsRepo.loadQuestionLinks(db, lesson.id);
   const covered = await lessonsRepo.listLessonConcepts(db, lesson.subject_id);
+  const assetIds = await assetsRepo.listAssetIds(db, lesson.subject_id);
   const top = questions.filter((question) => question.parent_id === null);
   const toQuestion = (question: questionsRepo.QuestionRow): QuestionInput => ({
     id: question.id,
@@ -36,6 +38,7 @@ export async function loadLessonForLint(
       })),
   });
   return {
+    assetIds,
     summary: lesson.summary,
     covers: covered
       .filter((row) => row.lesson_id === lesson.id)

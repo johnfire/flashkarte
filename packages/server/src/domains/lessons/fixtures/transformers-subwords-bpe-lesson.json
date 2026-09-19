@@ -4,10 +4,7 @@
     "slug": "subwords-bpe",
     "title": "Splitting text: subwords and byte-pair encoding",
     "summary": "Why models split text into subwords, how byte-pair encoding builds a vocabulary by merging frequent pairs, what byte-level guarantees, and what tokens-not-characters costs.",
-    "covers": [
-      "subword-tokenization",
-      "bpe"
-    ],
+    "covers": ["subword-tokenization", "bpe"],
     "prerequisites": [
       {
         "lesson": "tokens",
@@ -515,13 +512,8 @@
           ]
         }
       ],
-      "teaches": [
-        "two-ways",
-        "subwords"
-      ],
-      "covers": [
-        "subword-tokenization"
-      ],
+      "teaches": ["two-ways", "subwords"],
+      "covers": ["subword-tokenization"],
       "variants": [
         {
           "prompt": [
@@ -736,12 +728,8 @@
           ]
         }
       ],
-      "teaches": [
-        "long"
-      ],
-      "covers": [
-        "subword-tokenization"
-      ],
+      "teaches": ["long"],
+      "covers": ["subword-tokenization"],
       "variants": [
         {
           "prompt": [
@@ -956,13 +944,8 @@
           ]
         }
       ],
-      "teaches": [
-        "bpe",
-        "worked"
-      ],
-      "covers": [
-        "bpe"
-      ],
+      "teaches": ["bpe", "worked"],
+      "covers": ["bpe"],
       "variants": [
         {
           "prompt": [
@@ -1177,13 +1160,8 @@
           ]
         }
       ],
-      "teaches": [
-        "bytes",
-        "merges"
-      ],
-      "covers": [
-        "bpe"
-      ],
+      "teaches": ["bytes", "merges"],
+      "covers": ["bpe"],
       "variants": [
         {
           "prompt": [
@@ -1398,12 +1376,8 @@
           ]
         }
       ],
-      "teaches": [
-        "costs"
-      ],
-      "covers": [
-        "subword-tokenization"
-      ],
+      "teaches": ["costs"],
+      "covers": ["subword-tokenization"],
       "variants": [
         {
           "prompt": [

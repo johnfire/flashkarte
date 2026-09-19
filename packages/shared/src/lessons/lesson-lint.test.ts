@@ -238,6 +238,50 @@ describe("completeness rules only block finishing", () => {
   });
 });
 
+describe("images that point at stored diagrams", () => {
+  const ASSET = "0a1b2c3d-0000-4000-8000-000000000001";
+  // The good lesson with its first screen swapped for one holding the image.
+  const withImage = (src: string, assetIds?: string[]) => {
+    const base = goodLesson();
+    return goodLesson({
+      assetIds,
+      screens: [
+        {
+          number: base.screens[0].number,
+          blocks: [{ type: "image", src, alt: "A circuit", display: "inline" }],
+        },
+        ...base.screens.slice(1),
+      ],
+    });
+  };
+
+  it("reports an image whose diagram the subject does not have, but only blocks finishing", () => {
+    const lesson = withImage(`asset:${ASSET}`, []);
+    const issues = lintLesson(lesson);
+    expect(codes(lesson, "completeness")).toContain("IMAGE_ASSET_MISSING");
+    expect(canSave(issues)).toBe(true);
+    expect(canFinish(issues)).toBe(false);
+  });
+
+  it("accepts a diagram the subject holds, whatever the letter case of its id", () => {
+    expect(
+      codes(withImage(`asset:${ASSET}`, [ASSET.toUpperCase()])),
+    ).not.toContain("IMAGE_ASSET_MISSING");
+  });
+
+  it("does not check images when it was not told which diagrams exist, and never checks web links", () => {
+    expect(codes(withImage(`asset:${ASSET}`))).not.toContain(
+      "IMAGE_ASSET_MISSING",
+    );
+    expect(codes(withImage("https://example.com/x.svg", []))).not.toContain(
+      "IMAGE_ASSET_MISSING",
+    );
+    expect(codes(withImage("/schematics/rc.svg", []))).not.toContain(
+      "IMAGE_ASSET_MISSING",
+    );
+  });
+});
+
 describe("warnings never block", () => {
   it("advises on counts and a missing variant", () => {
     const lesson = goodLesson({

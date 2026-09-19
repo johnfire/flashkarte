@@ -40,9 +40,36 @@ beforeEach(() => {
   mock.findQuestionAttempts.mockResolvedValue([]);
   mock.findQuestionReviews.mockResolvedValue([]);
   mock.findScreenComments.mockResolvedValue([]);
+  mock.findAssets.mockResolvedValue([]);
 });
 
 describe("account.service exportData", () => {
+  it("exports the subject's stored images with their SVG", async () => {
+    mock.findAssets.mockResolvedValue([
+      {
+        id: "a1",
+        subject_id: "s1",
+        kind: "diagram",
+        description: "A box",
+        author_kind: "ai",
+        content: "<svg/>",
+        created_at: "t",
+      },
+    ]);
+    const { lessonContent } = await exportData("u1");
+    expect(lessonContent.assets).toEqual([
+      {
+        id: "a1",
+        subjectId: "s1",
+        kind: "diagram",
+        description: "A box",
+        authorKind: "ai",
+        svg: "<svg/>",
+        createdAt: "t",
+      },
+    ]);
+  });
+
   it("exports what the learner did: progress, every answer, and the review schedule", async () => {
     mock.findLessonProgress.mockResolvedValue([
       {

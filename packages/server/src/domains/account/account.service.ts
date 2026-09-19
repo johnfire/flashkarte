@@ -89,6 +89,15 @@ export interface AccountExport {
       retired: boolean;
       revisions: Array<{ change: string; changedAt: string; blocks: unknown }>;
     }>;
+    assets: Array<{
+      id: string;
+      subjectId: string;
+      kind: string;
+      description: string | null;
+      authorKind: string;
+      svg: string;
+      createdAt: string;
+    }>;
     questions: Array<{
       subjectId: string;
       lesson: string;
@@ -198,6 +207,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
     questionAttempts,
     questionReviews,
     screenComments,
+    assets,
   ] = await Promise.all([
     repo.findDecks(userId),
     repo.findCards(userId),
@@ -216,6 +226,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
     repo.findQuestionAttempts(userId),
     repo.findQuestionReviews(userId),
     repo.findScreenComments(userId),
+    repo.findAssets(userId),
   ]);
 
   const cardsByDeck = new Map<string, repo.CardRow[]>();
@@ -319,6 +330,15 @@ export async function exportData(userId: string): Promise<AccountExport> {
           changedAt: r.changed_at,
           blocks: r.blocks,
         })),
+      })),
+      assets: assets.map((a) => ({
+        id: a.id,
+        subjectId: a.subject_id,
+        kind: a.kind,
+        description: a.description,
+        authorKind: a.author_kind,
+        svg: a.content,
+        createdAt: a.created_at,
       })),
       questions: lessonQuestions.map((q) => ({
         subjectId: q.subject_id,

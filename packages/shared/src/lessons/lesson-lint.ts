@@ -63,6 +63,11 @@ export interface ScreenInput {
   retired?: boolean;
 }
 export interface LessonInput {
+  /**
+   * The ids of the images the subject holds. When given, an image block that points at an asset
+   * not in this list is reported; when left out, images are not checked.
+   */
+  assetIds?: string[];
   summary: string;
   /** The lesson's coverage checklist: concept slugs. */
   covers: string[];
@@ -321,8 +326,28 @@ export function lintLesson(lesson: LessonInput): LessonIssue[] {
       `A formula has no spoken text for screen readers: ${formula.latex.slice(0, 40)}`,
     );
   }
+  checkImages(lesson, blocks, add);
   checkAdvice(lesson, screens, questions, add);
   return issues;
+}
+
+const ASSET_SOURCE = /^asset:([0-9a-f-]{36})$/i;
+
+/** An image that points at a stored diagram the subject does not have would show nothing. */
+function checkImages(lesson: LessonInput, blocks: Block[], add: Add): void {
+  if (!lesson.assetIds) return;
+  const known = new Set(lesson.assetIds.map((id) => id.toLowerCase()));
+  for (const block of blocks) {
+    if (block.type !== "image") continue;
+    const match = ASSET_SOURCE.exec(block.src);
+    if (match && !known.has(match[1].toLowerCase())) {
+      add(
+        "completeness",
+        "IMAGE_ASSET_MISSING",
+        `An image points at a diagram this subject does not have: ${block.src} (${block.alt.slice(0, 40)})`,
+      );
+    }
+  }
 }
 
 /** A lesson may be saved as long as nothing structural is wrong. */

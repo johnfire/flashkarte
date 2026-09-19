@@ -34,7 +34,9 @@ describe("lesson MCP tools", () => {
       "add_question",
       "add_question_variant",
       "add_screen",
+      "create_image",
       "create_module",
+      "delete_image",
       "delete_screen",
       "finish_lesson",
       "get_lesson",
@@ -42,6 +44,7 @@ describe("lesson MCP tools", () => {
       "get_question_insights",
       "import_lesson",
       "lint_lesson",
+      "list_images",
       "list_screen_comments",
       "resolve_screen_comment",
       "retire_screen",
@@ -82,6 +85,28 @@ describe("lesson MCP tools", () => {
     expect(mockApi.post).toHaveBeenLastCalledWith(
       `/api/subjects/${S}/comments/c1/resolve`,
       {},
+    );
+  });
+
+  it("stores, lists and deletes images under the subject", async () => {
+    mockApi.post.mockResolvedValue({});
+    mockApi.get.mockResolvedValue([]);
+    mockApi.del.mockResolvedValue(undefined);
+    const { handlers } = setup();
+    await handlers.create_image({
+      subject_id: S,
+      svg: "<svg/>",
+      description: "A box",
+    });
+    expect(mockApi.post).toHaveBeenLastCalledWith(`/api/subjects/${S}/assets`, {
+      svg: "<svg/>",
+      description: "A box",
+    });
+    await handlers.list_images({ subject_id: S });
+    expect(mockApi.get).toHaveBeenLastCalledWith(`/api/subjects/${S}/assets`);
+    await handlers.delete_image({ subject_id: S, image_id: "a1" });
+    expect(mockApi.del).toHaveBeenLastCalledWith(
+      `/api/subjects/${S}/assets/a1`,
     );
   });
 

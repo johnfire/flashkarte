@@ -209,6 +209,59 @@ export function registerLessonTools(server: McpServer) {
   );
 
   server.tool(
+    "create_image",
+    "Store a diagram for the subject and get back the `src` to put in an image block (`asset:<id>`). Pass the " +
+      'SVG source as text: a root <svg> with xmlns="http://www.w3.org/2000/svg" and a viewBox, using only ' +
+      "drawing elements (paths, shapes, text, gradients). The server cleans it: scripts, event handlers, " +
+      "external links, embedded HTML, <style> and <image> are removed, and the reply lists what was removed so " +
+      "you can fix the source. Input that is not well-formed SVG is refused. Then use it in a screen as " +
+      "{type:'image', src:'asset:<id>', alt:'...', display:'inline'|'expandable', caption?}; write alt text a " +
+      "screen reader can use. Use 'expandable' for a large diagram, which the learner opens full-screen.",
+    {
+      subject_id: subjectId,
+      svg: z.string().describe("The SVG source as text (at most 200 KB)."),
+      description: z
+        .string()
+        .optional()
+        .describe(
+          "A short note for the owner about what the diagram is (not shown to learners).",
+        ),
+    },
+    async ({ subject_id, svg, description }) =>
+      runTool("create_image", async () =>
+        asText(await post(`${path(subject_id)}/assets`, { svg, description })),
+      ),
+  );
+
+  server.tool(
+    "list_images",
+    "The diagrams a subject holds: id, the `src` to use, description, who made it and its size. Read-only.",
+    { subject_id: subjectId },
+    async ({ subject_id }) =>
+      runTool("list_images", async () =>
+        asText(await get(`${path(subject_id)}/assets`)),
+      ),
+  );
+
+  server.tool(
+    "delete_image",
+    "Delete a diagram nothing uses. One that a screen or question points at (even in its edit history) cannot " +
+      "be deleted: point the screen at another image first.",
+    {
+      subject_id: subjectId,
+      image_id: z.string().describe("The image's UUID from list_images."),
+    },
+    async ({ subject_id, image_id }) =>
+      runTool("delete_image", async () =>
+        asText(
+          await del(
+            `${path(subject_id)}/assets/${encodeURIComponent(image_id)}`,
+          ),
+        ),
+      ),
+  );
+
+  server.tool(
     "get_outline",
     "The course outline for a subject: modules, and the lessons in prerequisite order with what each " +
       "covers and what unlocks it. Derived from the lesson graph.",

@@ -4,10 +4,7 @@
     "slug": "embeddings",
     "title": "Embeddings and the embedding table",
     "summary": "How a token ID becomes a vector: what an embedding and d_model are, the table E and the lookup, and the matrix X₀ the transformer starts from.",
-    "covers": [
-      "embedding",
-      "embedding-table"
-    ],
+    "covers": ["embedding", "embedding-table"],
     "prerequisites": [
       {
         "lesson": "tokens",
@@ -475,12 +472,8 @@
           ]
         }
       ],
-      "teaches": [
-        "vector"
-      ],
-      "covers": [
-        "embedding"
-      ],
+      "teaches": ["vector"],
+      "covers": ["embedding"],
       "variants": [
         {
           "prompt": [
@@ -695,12 +688,8 @@
           ]
         }
       ],
-      "teaches": [
-        "width"
-      ],
-      "covers": [
-        "embedding"
-      ],
+      "teaches": ["width"],
+      "covers": ["embedding"],
       "variants": [
         {
           "prompt": [
@@ -915,13 +904,8 @@
           ]
         }
       ],
-      "teaches": [
-        "table-e",
-        "size"
-      ],
-      "covers": [
-        "embedding-table"
-      ],
+      "teaches": ["table-e", "size"],
+      "covers": ["embedding-table"],
       "variants": [
         {
           "prompt": [
@@ -1136,12 +1120,8 @@
           ]
         }
       ],
-      "teaches": [
-        "lookup"
-      ],
-      "covers": [
-        "embedding-table"
-      ],
+      "teaches": ["lookup"],
+      "covers": ["embedding-table"],
       "variants": [
         {
           "prompt": [
@@ -1356,12 +1336,8 @@
           ]
         }
       ],
-      "teaches": [
-        "x0"
-      ],
-      "covers": [
-        "embedding-table"
-      ],
+      "teaches": ["x0"],
+      "covers": ["embedding-table"],
       "variants": [
         {
           "prompt": [

@@ -26,6 +26,7 @@
     "otplib": "^13.4.1",
     "pg": "^8.11.5",
     "qrcode": "^1.5.4",
+    "saxes": "^6.0.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
