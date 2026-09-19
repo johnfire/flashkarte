@@ -5,6 +5,7 @@ import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.dto.LessonAnswerResponseDto
 import com.flashmd.data.remote.dto.LessonScreensDto
 import com.flashmd.data.remote.dto.LessonStepResponseDto
+import com.flashmd.data.remote.dto.HelpSentDto
 import com.flashmd.data.remote.dto.PassedStepDto
 import com.flashmd.data.remote.dto.PausedStepDto
 import com.flashmd.data.remote.dto.QuestionStepDto
@@ -161,6 +162,49 @@ class LessonViewModelTest {
         vm.comment("1", "hello")
         assertEquals(CommentState.Failed("Can't reach the server."), vm.state.value.comment)
         assertTrue(vm.state.value.step is ScreenStepDto)
+    }
+
+    @Test
+    fun `asking for more on a screen sends the trimmed note against its number, and says it was sent`() {
+        coEvery { repo.start(any(), any()) } returns start
+        coEvery { repo.askForMoreOnScreen("s1", "1", "why a piece?") } returns HelpSentDto("h1", "1")
+        val vm = viewModel()
+        vm.askForMore(HelpTarget.Screen("1"), "  why a piece?  ")
+        assertEquals(HelpState.Sent, vm.state.value.help)
+        coVerify(exactly = 1) { repo.askForMoreOnScreen("s1", "1", "why a piece?") }
+    }
+
+    @Test
+    fun `an empty note is sent as no note, and a question is asked about by its id`() {
+        coEvery { repo.start(any(), any()) } returns question
+        coEvery { repo.askForMoreOnScreen(any(), any(), any()) } returns HelpSentDto("h1", "1")
+        coEvery { repo.askForMoreOnQuestion("s1", "q1", null) } returns HelpSentDto("h2", "1", "q1")
+        val vm = viewModel()
+        vm.askForMore(HelpTarget.Question("q1"), "   ")
+        coVerify(exactly = 1) { repo.askForMoreOnQuestion("s1", "q1", null) }
+        assertEquals(HelpState.Sent, vm.state.value.help)
+    }
+
+    @Test
+    fun `a request that cannot be sent says why and leaves the lesson usable, and moving on clears it`() {
+        coEvery { repo.start(any(), any()) } returns start
+        coEvery { repo.next(any(), any()) } returns read<LessonStepResponseDto>("next-screen")
+        coEvery { repo.askForMoreOnScreen(any(), any(), any()) } throws
+            ApiException(422, "VALIDATION", "You already have 50 requests waiting")
+        val vm = viewModel()
+        vm.askForMore(HelpTarget.Screen("1"), "hi")
+        assertEquals(HelpState.Failed("You already have 50 requests waiting"), vm.state.value.help)
+        assertTrue(vm.state.value.step is ScreenStepDto)
+        vm.next()
+        assertEquals(HelpState.Idle, vm.state.value.help)
+    }
+
+    @Test
+    fun `the state knows its subject and lesson, for the message to the learner's AI`() {
+        coEvery { repo.start(any(), any()) } returns start
+        val state = viewModel().state.value
+        assertEquals("s1", state.subjectId)
+        assertEquals("tokens", state.slug)
     }
 
     @Test

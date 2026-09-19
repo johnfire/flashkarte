@@ -106,61 +106,61 @@ None demonstrated in this technical audit.
 
 ## Recipients & transfers table
 
-| Recipient | Data sent | Country | Adequacy/mechanism | DPA status |
-|---|---|---|---|---|
-| IONOS VPS / self-hosted services | Account, content, study, logs, backups, analytics | Germany | EU processing; confirm hosting terms | Needs legal confirmation |
-| GitHub private Issues | Pseudonymous account ID, bug-report text, app version/platform | Confirm with GitHub | Confirm transfer mechanism | Needs legal confirmation |
-| User-selected AI provider | Deck/card content and tool input selected by user | Provider-dependent | Provider-dependent; may be Chapter V | User/provider terms do not replace confirmation |
-| Self-hosted Postfix/Dovecot | Account email and delivery metadata | Germany | EU processing | Self-operated; confirm infrastructure terms |
+| Recipient                        | Data sent                                                      | Country             | Adequacy/mechanism                   | DPA status                                      |
+| -------------------------------- | -------------------------------------------------------------- | ------------------- | ------------------------------------ | ----------------------------------------------- |
+| IONOS VPS / self-hosted services | Account, content, study, logs, backups, analytics              | Germany             | EU processing; confirm hosting terms | Needs legal confirmation                        |
+| GitHub private Issues            | Pseudonymous account ID, bug-report text, app version/platform | Confirm with GitHub | Confirm transfer mechanism           | Needs legal confirmation                        |
+| User-selected AI provider        | Deck/card content and tool input selected by user              | Provider-dependent  | Provider-dependent; may be Chapter V | User/provider terms do not replace confirmation |
+| Self-hosted Postfix/Dovecot      | Account email and delivery metadata                            | Germany             | EU processing                        | Self-operated; confirm infrastructure terms     |
 
 ## Checklist appendix
 
-| Item | Status | Note |
-|---|---|---|
-| 1.1 Schema sweep | OK | Live schema inventory covers users, authentication tokens, decks/cards, review history, API keys and audit data. |
-| 1.2 Special categories | N/A | No dedicated Art. 9 fields; deck/card free text can contain user-provided sensitive material. |
-| 1.3 Uploads & media | N/A | Reviewed application exposes Markdown/deck import, not media/document storage. |
-| 1.4 Derived/imported data | N/A | No enrichment, OCR or scraping flow found. |
-| 1.5 Identifiers in URLs | OK | Analytics refuses query-string routes; verification/reset tokens are not sent to analytics. |
-| 2.1 Access/export | OK | Authenticated JSON export in `account.service.ts:65-136`. |
-| 2.2 Erasure | OK | Password-confirmed account deletion is transactional; documented backup/audit exceptions expire. |
-| 2.3 Rectification | OK | Settings profile update and verified email-change flow exist. |
-| 2.4 Restriction/objection | N/A | No automated marketing/profiling; DSAR runbook covers requests. |
-| 2.5 Automated decisions | N/A | Spaced-repetition scheduling has no legal/significant decision effect. |
-| 2.6 Identity + deadline plumbing | OK | `docs/dsar-runbook.md` specifies identity verification and request tracking; legal deadline remains operational. |
-| 3.1 Outbound inventory | FINDING → F-03 | IONOS, GitHub, self-hosted Umami/Postfix and user-selected AI identified. |
-| 3.2 LLM/AI APIs | FINDING → F-03 | Provider/country safeguards are not provable from repository. |
-| 3.3 Frontend loads | OK | Only same-origin theme script plus consent-gated self-hosted analytics script found. |
-| 3.4 Analytics & tracking | OK / FINDING → F-01 | Umami loads after consent and purges at 90 days; evidence record is local-only. |
-| 3.5 Email/SMS providers | OK | Self-hosted Postfix/Dovecot on VPS; 90-day mail-log retention. |
-| 3.6 Payment providers | N/A | No payment flow found. |
-| 3.7 Error reporting / APM | OK | Diagnostics stay in application/server logs; no external APM found. |
-| 4.1 Storage-access inventory | OK | Necessary theme/language/session state plus optional analytics-consent localStorage identified. |
-| 4.2 Consent gating | OK | Umami script appended only after accepted decision. |
-| 4.3 Consent quality | FINDING → F-01 | Equal accept/reject, expiry and withdrawal exist; controller-held proof absent. |
-| 4.4 Dark patterns | OK | Equal-size accept/reject controls; E2E axe checks pass. |
-| 5.1 PII in logs | OK | Structured app access log records path, pseudonymous IDs and timing, not email/body/token. |
-| 5.2 Web-server logs | OK | Live dedicated Apache/application/mail log rotation is daily with 90-day maximum. |
-| 5.3 Retention mechanism exists | OK | Live daily jobs purge Umami (90d), audit (12m), GitHub bug reports (90d); OAuth store uses shorter TTLs. |
-| 5.4 Backups | FINDING → F-04 | Three-month retention is configured; encryption/restore handling needs confirmation. |
-| 5.5 Data minimization | OK | Bug reports are pseudonymous and omit reporter email/device data. |
-| 6.1 | OK | bcrypt password hashing. |
-| 6.2 | OK | TLS reverse proxy and HTTPS-only public URLs; live health verified behind proxy. |
-| 6.3 | OK | Authenticated routes and ownership checks are exercised by CI; spot-check only. |
-| 6.4 | OK | Append-only audit log records user actions with correlation IDs. |
-| 6.5 | OK / judgment | TOTP secret is encrypted; proportionality of volume/backup encryption is F-04. |
-| 6.6 | OK | Structured logs, audit trail, health checks and `docs/incident-response-runbook.md` exist. |
-| 7.1 | OK | Live schema matches migrations reviewed. |
-| 7.2 | OK | Live queries found zero orphan refresh and email-verification tokens. |
-| 7.3 | OK | Live query found zero audit rows older than 12 months. |
-| 7.4 | OK | Test/CI credentials are fixture values; no production-data fixture found. |
-| 8.1 | OK | Live deployment is IONOS Frankfurt, Germany per deployment evidence. |
-| 8.2 | FINDING → F-04 | Backups are VPS-local and retained three months; encryption confirmation missing. |
-| 8.3 | OK | Database/MCP stores are Docker volumes; no application media volume found. |
-| 8.4 | OK | Production secrets are environment-injected; CI secret scan passed. |
-| 8.5 | OK | CI uses synthetic Postgres and redacted security artifacts. |
-| 9.1 §26 BDSG | N/A | No employee/HR data processing feature found. |
-| 9.2 Art. 8 | FINDING → F-05 | Audience/age decision required. |
-| 9.3 Impressum | OK | Public Impressum route exists. |
-| 9.4 Privacy policy | OK / FINDING → F-06 | Public policy names identified recipients/retention; legal accuracy needs approval. |
-| 9.5 App-store obligations | FINDING → F-02 | Store listing/declaration cannot be verified in repository. |
+| Item                             | Status              | Note                                                                                                             |
+| -------------------------------- | ------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| 1.1 Schema sweep                 | OK                  | Live schema inventory covers users, authentication tokens, decks/cards, review history, API keys and audit data. |
+| 1.2 Special categories           | N/A                 | No dedicated Art. 9 fields; deck/card free text can contain user-provided sensitive material.                    |
+| 1.3 Uploads & media              | N/A                 | Reviewed application exposes Markdown/deck import, not media/document storage.                                   |
+| 1.4 Derived/imported data        | N/A                 | No enrichment, OCR or scraping flow found.                                                                       |
+| 1.5 Identifiers in URLs          | OK                  | Analytics refuses query-string routes; verification/reset tokens are not sent to analytics.                      |
+| 2.1 Access/export                | OK                  | Authenticated JSON export in `account.service.ts:65-136`.                                                        |
+| 2.2 Erasure                      | OK                  | Password-confirmed account deletion is transactional; documented backup/audit exceptions expire.                 |
+| 2.3 Rectification                | OK                  | Settings profile update and verified email-change flow exist.                                                    |
+| 2.4 Restriction/objection        | N/A                 | No automated marketing/profiling; DSAR runbook covers requests.                                                  |
+| 2.5 Automated decisions          | N/A                 | Spaced-repetition scheduling has no legal/significant decision effect.                                           |
+| 2.6 Identity + deadline plumbing | OK                  | `docs/dsar-runbook.md` specifies identity verification and request tracking; legal deadline remains operational. |
+| 3.1 Outbound inventory           | FINDING → F-03      | IONOS, GitHub, self-hosted Umami/Postfix and user-selected AI identified.                                        |
+| 3.2 LLM/AI APIs                  | FINDING → F-03      | Provider/country safeguards are not provable from repository.                                                    |
+| 3.3 Frontend loads               | OK                  | Only same-origin theme script plus consent-gated self-hosted analytics script found.                             |
+| 3.4 Analytics & tracking         | OK / FINDING → F-01 | Umami loads after consent and purges at 90 days; evidence record is local-only.                                  |
+| 3.5 Email/SMS providers          | OK                  | Self-hosted Postfix/Dovecot on VPS; 90-day mail-log retention.                                                   |
+| 3.6 Payment providers            | N/A                 | No payment flow found.                                                                                           |
+| 3.7 Error reporting / APM        | OK                  | Diagnostics stay in application/server logs; no external APM found.                                              |
+| 4.1 Storage-access inventory     | OK                  | Necessary theme/language/session state plus optional analytics-consent localStorage identified.                  |
+| 4.2 Consent gating               | OK                  | Umami script appended only after accepted decision.                                                              |
+| 4.3 Consent quality              | FINDING → F-01      | Equal accept/reject, expiry and withdrawal exist; controller-held proof absent.                                  |
+| 4.4 Dark patterns                | OK                  | Equal-size accept/reject controls; E2E axe checks pass.                                                          |
+| 5.1 PII in logs                  | OK                  | Structured app access log records path, pseudonymous IDs and timing, not email/body/token.                       |
+| 5.2 Web-server logs              | OK                  | Live dedicated Apache/application/mail log rotation is daily with 90-day maximum.                                |
+| 5.3 Retention mechanism exists   | OK                  | Live daily jobs purge Umami (90d), audit (12m), GitHub bug reports (90d); OAuth store uses shorter TTLs.         |
+| 5.4 Backups                      | FINDING → F-04      | Three-month retention is configured; encryption/restore handling needs confirmation.                             |
+| 5.5 Data minimization            | OK                  | Bug reports are pseudonymous and omit reporter email/device data.                                                |
+| 6.1                              | OK                  | bcrypt password hashing.                                                                                         |
+| 6.2                              | OK                  | TLS reverse proxy and HTTPS-only public URLs; live health verified behind proxy.                                 |
+| 6.3                              | OK                  | Authenticated routes and ownership checks are exercised by CI; spot-check only.                                  |
+| 6.4                              | OK                  | Append-only audit log records user actions with correlation IDs.                                                 |
+| 6.5                              | OK / judgment       | TOTP secret is encrypted; proportionality of volume/backup encryption is F-04.                                   |
+| 6.6                              | OK                  | Structured logs, audit trail, health checks and `docs/incident-response-runbook.md` exist.                       |
+| 7.1                              | OK                  | Live schema matches migrations reviewed.                                                                         |
+| 7.2                              | OK                  | Live queries found zero orphan refresh and email-verification tokens.                                            |
+| 7.3                              | OK                  | Live query found zero audit rows older than 12 months.                                                           |
+| 7.4                              | OK                  | Test/CI credentials are fixture values; no production-data fixture found.                                        |
+| 8.1                              | OK                  | Live deployment is IONOS Frankfurt, Germany per deployment evidence.                                             |
+| 8.2                              | FINDING → F-04      | Backups are VPS-local and retained three months; encryption confirmation missing.                                |
+| 8.3                              | OK                  | Database/MCP stores are Docker volumes; no application media volume found.                                       |
+| 8.4                              | OK                  | Production secrets are environment-injected; CI secret scan passed.                                              |
+| 8.5                              | OK                  | CI uses synthetic Postgres and redacted security artifacts.                                                      |
+| 9.1 §26 BDSG                     | N/A                 | No employee/HR data processing feature found.                                                                    |
+| 9.2 Art. 8                       | FINDING → F-05      | Audience/age decision required.                                                                                  |
+| 9.3 Impressum                    | OK                  | Public Impressum route exists.                                                                                   |
+| 9.4 Privacy policy               | OK / FINDING → F-06 | Public policy names identified recipients/retention; legal accuracy needs approval.                              |
+| 9.5 App-store obligations        | FINDING → F-02      | Store listing/declaration cannot be verified in repository.                                                      |

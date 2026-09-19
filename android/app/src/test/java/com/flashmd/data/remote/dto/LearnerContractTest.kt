@@ -163,6 +163,30 @@ class LearnerContractTest {
     }
 
     @Test
+    fun `a help request, its waiting and answered states, and the answer screen decode`() {
+        val sent = read<HelpSentDto>("help-request")
+        assertEquals("5", sent.number)
+        assertNull(sent.questionId)
+
+        val waiting = read<LessonStepResponseDto>("help-waiting").step as ScreenStepDto
+        assertEquals("open", waiting.help.single().status)
+        assertTrue(waiting.help.single().answers.isEmpty())
+        assertNull(waiting.addedInAnswer)
+        assertNull(waiting.sources)
+
+        val answered = read<LessonStepResponseDto>("help-answered").step as ScreenStepDto
+        assertEquals("answered", answered.help.single().status)
+        assertEquals(listOf("5.010"), answered.help.single().answers)
+
+        val answer = read<LessonStepResponseDto>("help-answer-screen").step as ScreenStepDto
+        assertEquals("5.010", answer.number)
+        assertEquals("ai", answer.addedInAnswer)
+        assertEquals("Transformers in LLMs (flashkarte deck, card 6)", answer.sources?.single()?.title)
+        assertEquals("https://example.com/card6", answer.sources?.single()?.url)
+        assertTrue(answer.help.isEmpty())
+    }
+
+    @Test
     fun `a block or step kind from a newer server is skipped, not a crash`() {
         val blocks = json.decodeFromString<List<BlockDto>>(
             """[{"type":"paragraph","spans":[{"text":"hi"}]},{"type":"hologram","depth":3}]""",

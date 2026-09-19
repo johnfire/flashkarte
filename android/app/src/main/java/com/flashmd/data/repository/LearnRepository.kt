@@ -5,6 +5,8 @@ import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.AnswerRequest
 import com.flashmd.data.remote.dto.CommentRequest
 import com.flashmd.data.remote.dto.DueReviewsDto
+import com.flashmd.data.remote.dto.HelpRequest
+import com.flashmd.data.remote.dto.HelpSentDto
 import com.flashmd.data.remote.dto.LearnSubjectDto
 import com.flashmd.data.remote.dto.LearnerOutlineDto
 import com.flashmd.data.remote.dto.LessonAnswerResponseDto
@@ -50,6 +52,12 @@ class LearnRepository @Inject constructor(private val api: FlashkarteApi) {
 
     suspend fun comment(subjectId: String, number: String, body: String): ScreenCommentDto =
         apiCall { api.commentOnScreen(subjectId, number, CommentRequest(body)) }
+
+    suspend fun askForMoreOnScreen(subjectId: String, number: String, note: String?): HelpSentDto =
+        apiCall { api.askForMoreOnScreen(subjectId, number, HelpRequest(note = note)) }
+
+    suspend fun askForMoreOnQuestion(subjectId: String, questionId: String, note: String?): HelpSentDto =
+        apiCall { api.askForMoreOnQuestion(subjectId, questionId, HelpRequest(note = note)) }
 
     suspend fun dueReviews(subjectId: String): DueReviewsDto = apiCall { api.dueReviews(subjectId) }
 

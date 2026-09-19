@@ -29,7 +29,7 @@ same functions from inside instead of via MCP," not a rewrite.
   chain/split phase. Course gating reuses this constant rather than inventing
   a new threshold.
 - Depth ladders (`docs/specs/06-depth-ladders.md`, `@concept`/`@depth`
-  within-deck gating) is fully speced but unbuilt. Courses give cross-*deck*
+  within-deck gating) is fully speced but unbuilt. Courses give cross-_deck_
   gating without needing it; depth ladders can layer on within a deck later
   without changing anything here.
 - The flashkarte MCP server already has deck-authoring tools
@@ -79,7 +79,7 @@ apart. The service layer folds over the ordered rows once:
 - `POST /api/courses` — create `{title, description?}`
 - `GET /api/courses` — list the caller's courses + progress summary
 - `GET /api/courses/:id` — ordered decks, each with `{card_count,
-  mastered_count, locked}`
+mastered_count, locked}`
 - `PATCH /api/courses/:id` — rename / set public
 - `DELETE /api/courses/:id` — removes the course + `course_decks` rows; member
   decks are untouched
@@ -165,6 +165,7 @@ No parser/corpus work anywhere in this feature — courses are structured via
 API/MCP calls, not authored Markdown.
 
 ## Rollout — four sequenced phases, each its own commit(s), pushed and
+
 CI-green before the next starts
 
 1. **Migration + server domain + gating** — usable immediately via direct

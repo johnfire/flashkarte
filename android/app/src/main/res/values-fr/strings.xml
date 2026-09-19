@@ -182,4 +182,20 @@
     <string name="learn_zoom_out">Réduire</string>
     <string name="learn_zoom_fit">Ajuster à l\'écran</string>
     <string name="learn_image_unavailable">Cette image n\'a pas pu être chargée.</string>
+    <string name="learn_help_open">J\'ai besoin de plus sur ce point</string>
+    <string name="learn_help_label">Qu\'est-ce qui aiderait ? (facultatif)</string>
+    <string name="learn_help_passage">À propos de :</string>
+    <string name="learn_help_how">Votre IA le lit à sa prochaine exécution, fait des recherches et ajoute de courts écrans à côté de celui-ci, avec leurs sources. Vous n\'avez pas à attendre : vous pouvez aussi copier un message à lui donner tout de suite.</string>
+    <string name="learn_help_send">Demander à mon IA</string>
+    <string name="learn_help_error">Impossible d\'envoyer la demande.</string>
+    <string name="learn_help_waiting">Vous avez demandé plus sur ce point. Cela attend votre IA, qui ajoutera des écrans à côté de celui-ci.</string>
+    <string name="learn_help_copy_prompt">Copier un message pour mon IA</string>
+    <string name="learn_help_copied">Copié. Collez-le dans votre IA.</string>
+    <string name="learn_help_answered">Répondu : voir %1$s (les écrans suivants).</string>
+    <string name="learn_added_by_ai">Ajouté par votre IA en réponse à votre question</string>
+    <string name="learn_added_in_answer">Ajouté en réponse à votre question</string>
+    <plurals name="learn_sources">
+        <item quantity="one">%1$d source</item>
+        <item quantity="other">%1$d sources</item>
+    </plurals>
 </resources>

@@ -33,7 +33,7 @@ unbuilt — Android's branch play has zero persistence today). Those are phases 
 - `packages/web/src/pages/StudyPage.tsx` is flip-only: one `grade(rating)` path driven by
   four fixed rating buttons.
 - All 8 of the user's current decks are `is_branching: false` with every card `type:
-  "basic"` and no `options` — none use diagnostic/branch cards yet (verified via the
+"basic"` and no `options` — none use diagnostic/branch cards yet (verified via the
   `flashkarte` MCP `list_decks`/`get_deck` tools).
 
 ## Commit 1 — server: review endpoint writes the ledger
@@ -55,8 +55,9 @@ default `"flip"`) — matches the existing pattern in `theme/useTheme.ts`. Per-d
 server sync, consistent with Android's per-device `StudyModeStore`.
 
 **`StudyPage` additions:**
+
 - `mode: "flip" | "choice"`, `options: StudyOption[]`, `selectedOption`, `remediation: Card
-  | null`, `deckCards: Card[] | null` (lazily fetched via `api.decks.get`, only if the
+| null`, `deckCards: Card[] | null` (lazily fetched via `api.decks.get`, only if the
   batch contains a diagnostic card), `sessionPool` (batch card backs, for ordinary-card
   distractors).
 - `submitRating(rating, optionIndex?)` factored out of today's `grade()` as the shared tail

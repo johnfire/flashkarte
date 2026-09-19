@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-10 · **Status:** design agreed, not implemented · **Would become:** spec 10
 
-A word like *der Zug* has several unrelated meanings (train / move in chess / draught of
+A word like _der Zug_ has several unrelated meanings (train / move in chess / draught of
 air). Today a deck can only express that badly: one card listing all senses on the back
 (all-or-nothing grading), or several cards sharing a front (you cannot tell which sense is
 being asked, and each carries independent scheduling state). This design makes the **word**
@@ -14,10 +14,10 @@ the authoring unit and the **sense** the study unit.
 
 A word is learned in two phases, and the difference between them is a **fading scaffold**.
 
-| Phase     | Prompt                     | Purpose                                 |
-| --------- | -------------------------- | --------------------------------------- |
-| **Chain** | `der Zug — Eisenbahn?`     | map the word's range; sense is handed to you |
-| **Split** | `Der Zug fährt um 8 Uhr ab.` | retrieval practice; nothing given away  |
+| Phase     | Prompt                       | Purpose                                      |
+| --------- | ---------------------------- | -------------------------------------------- |
+| **Chain** | `der Zug — Eisenbahn?`       | map the word's range; sense is handed to you |
+| **Split** | `Der Zug fährt um 8 Uhr ab.` | retrieval practice; nothing given away       |
 
 In chain phase all senses of a word are studied in one pass, prompted one at a time with a
 short hint. Once the word graduates, its senses become ordinary independent cards prompted
@@ -33,7 +33,7 @@ reviews.
 
 The obvious rule — spec 06's `interval_days >= 7` — is no longer usable. Since the
 fixed-cadence scheduler landed (commit `7833a91`), Hard is 1 day and Good is 2 days
-*forever*; the only route past 7 days is Easy. So `interval_days` no longer measures
+_forever_; the only route past 7 days is Easy. So `interval_days` no longer measures
 stability at all — it is a restatement of which button was last pressed, and a learner who
 honestly presses Good would never graduate a word.
 
@@ -61,6 +61,7 @@ at least one `|`.
 ## Nouns
 
 **1. der Zug**
+
 - train | Der Zug fährt um 8 Uhr ab. | Eisenbahn
 - move | Das war ein guter Zug! | Schach
 - draught | Es zieht, mach das Fenster zu. | Luft
@@ -68,11 +69,11 @@ at least one `|`.
 
 Fields split on the **first two** `|`:
 
-| Field       | Required | Role                                    |
-| ----------- | -------- | --------------------------------------- |
-| **gloss**   | yes      | the answer                              |
-| **context** | no       | the split-phase prompt                  |
-| **hint**    | no       | the chain-phase scaffold                |
+| Field       | Required | Role                     |
+| ----------- | -------- | ------------------------ |
+| **gloss**   | yes      | the answer               |
+| **context** | no       | the split-phase prompt   |
+| **hint**    | no       | the chain-phase scaffold |
 
 Later `|` characters stay in the context, so sentences may contain them.
 
@@ -130,7 +131,7 @@ Clients render the result where `content.front` goes today. `StudyCard.content` 
 - **Speech:** `useCardSpeech` speaks the prompt, so after graduation it speaks a full sentence
   instead of a bare noun — sentence-level listening practice, which is what spec 09 wanted.
 - **MCP:** deck tool descriptions gain the sense-line syntax and one example, making "add the
-  other senses of *Zug*, with context sentences and hints" a normal request. Hand-authoring
+  other senses of _Zug_, with context sentences and hints" a normal request. Hand-authoring
   three fields per sense is real work; AI authoring is the intended path (§2.5 of the ideas doc).
 
 ## 6. Testing
@@ -154,7 +155,7 @@ Good-presser under the current scheduler, so depth tiers would never unlock. Its
 and acceptance criterion 3 need rewriting to `STABLE_REPS`.
 
 **Spec 04 (FSRS)** is in direct conflict with shipped code, not merely stale. Its premise is
-replacing SM-2 with an algorithm that models stability to *compute* intervals — adopting it
+replacing SM-2 with an algorithm that models stability to _compute_ intervals — adopting it
 would undo the fixed cadences chosen on 2026-09-10. Someone picking it up cold would build
 the wrong thing. **Needs amending or retiring; not touched here pending review.**
 

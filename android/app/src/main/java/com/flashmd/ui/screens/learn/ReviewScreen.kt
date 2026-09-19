@@ -77,6 +77,7 @@ fun ReviewScreen(
                                     style = MaterialTheme.typography.labelSmall,
                                 )
                                 LessonBlocks(step.blocks)
+                                ScreenOrigin(step.addedInAnswer, step.sources)
                             }
                         }
                         Button(onClick = viewModel::carryOn, enabled = !state.busy, modifier = Modifier.fillMaxWidth()) {

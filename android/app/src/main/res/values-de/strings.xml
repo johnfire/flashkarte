@@ -182,4 +182,20 @@
     <string name="learn_zoom_out">Verkleinern</string>
     <string name="learn_zoom_fit">An Bildschirm anpassen</string>
     <string name="learn_image_unavailable">Dieses Bild konnte nicht geladen werden.</string>
+    <string name="learn_help_open">Dazu brauche ich mehr</string>
+    <string name="learn_help_label">Was würde helfen? (optional)</string>
+    <string name="learn_help_passage">Zu:</string>
+    <string name="learn_help_how">Deine KI liest das beim nächsten Mal, recherchiert es und fügt neben dieser Seite kurze Seiten mit Quellen hinzu. Du musst nicht warten: Du kannst auch eine Nachricht kopieren und ihr sofort geben.</string>
+    <string name="learn_help_send">Meine KI fragen</string>
+    <string name="learn_help_error">Die Anfrage konnte nicht gesendet werden.</string>
+    <string name="learn_help_waiting">Du hast um mehr dazu gebeten. Es wartet auf deine KI, die Seiten neben dieser hinzufügt.</string>
+    <string name="learn_help_copy_prompt">Nachricht für meine KI kopieren</string>
+    <string name="learn_help_copied">Kopiert. Gib sie deiner KI.</string>
+    <string name="learn_help_answered">Beantwortet: siehe %1$s (die nächsten Seiten).</string>
+    <string name="learn_added_by_ai">Von deiner KI als Antwort auf deine Frage hinzugefügt</string>
+    <string name="learn_added_in_answer">Als Antwort auf deine Frage hinzugefügt</string>
+    <plurals name="learn_sources">
+        <item quantity="one">%1$d Quelle</item>
+        <item quantity="other">%1$d Quellen</item>
+    </plurals>
 </resources>

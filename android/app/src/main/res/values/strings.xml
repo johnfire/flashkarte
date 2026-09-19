@@ -182,4 +182,20 @@
     <string name="learn_zoom_out">Zoom out</string>
     <string name="learn_zoom_fit">Fit to screen</string>
     <string name="learn_image_unavailable">This image could not be loaded.</string>
+    <string name="learn_help_open">I need more on this</string>
+    <string name="learn_help_label">What would help? (optional)</string>
+    <string name="learn_help_passage">About:</string>
+    <string name="learn_help_how">Your AI reads this the next time it runs, researches it, and adds short screens next to this one, with their sources. You do not have to wait: you can also copy a message to give it now.</string>
+    <string name="learn_help_send">Ask my AI</string>
+    <string name="learn_help_error">Couldn\'t send the request.</string>
+    <string name="learn_help_waiting">You asked for more on this. It is waiting for your AI, which will add screens next to this one.</string>
+    <string name="learn_help_copy_prompt">Copy a message for my AI</string>
+    <string name="learn_help_copied">Copied. Paste it to your AI.</string>
+    <string name="learn_help_answered">Answered: see %1$s (the next screens).</string>
+    <string name="learn_added_by_ai">Added by your AI in answer to your question</string>
+    <string name="learn_added_in_answer">Added in answer to your question</string>
+    <plurals name="learn_sources">
+        <item quantity="one">%1$d source</item>
+        <item quantity="other">%1$d sources</item>
+    </plurals>
 </resources>

@@ -68,6 +68,19 @@ data class LearnerOutlineDto(
 @Serializable
 data class QuestionOptionDto(val blocks: List<BlockDto>)
 
+/** A learner's "I need more on this" request as the server reports it back. */
+@Serializable
+data class HelpNoticeDto(
+    val id: String,
+    /** "open" (waiting for the AI) or "answered". */
+    val status: String,
+    /** The screens added in answer, in order. */
+    val answers: List<String> = emptyList(),
+)
+
+@Serializable
+data class ScreenSourceDto(val title: String, val url: String? = null)
+
 @Serializable(with = StepSerializer::class)
 sealed interface StepDto
 
@@ -78,6 +91,10 @@ data class ScreenStepDto(
     val total: Int,
     @SerialName("can_go_back") val canGoBack: Boolean = false,
     val blocks: List<BlockDto> = emptyList(),
+    val sources: List<ScreenSourceDto>? = null,
+    /** "ai" or "human" when the screen was added in answer to a request. */
+    @SerialName("added_in_answer") val addedInAnswer: String? = null,
+    val help: List<HelpNoticeDto> = emptyList(),
 ) : StepDto
 
 @Serializable
@@ -91,6 +108,7 @@ data class QuestionStepDto(
     val total: Int = 0,
     val misses: Int = 0,
     @SerialName("help_offered") val helpOffered: Boolean = false,
+    val help: List<HelpNoticeDto> = emptyList(),
 ) : StepDto
 
 @Serializable
@@ -101,6 +119,9 @@ data class RemediationStepDto(
     val of: Int,
     @SerialName("help_offered") val helpOffered: Boolean = false,
     val blocks: List<BlockDto> = emptyList(),
+    val sources: List<ScreenSourceDto>? = null,
+    @SerialName("added_in_answer") val addedInAnswer: String? = null,
+    val help: List<HelpNoticeDto> = emptyList(),
 ) : StepDto
 
 @Serializable
@@ -195,7 +216,22 @@ data class LessonAnswerResponseDto(
 data class AnswerRequest(val choice: Int)
 
 @Serializable
-data class LessonScreenDto(val number: String, val blocks: List<BlockDto> = emptyList())
+data class LessonScreenDto(
+    val number: String,
+    val blocks: List<BlockDto> = emptyList(),
+    val sources: List<ScreenSourceDto>? = null,
+    @SerialName("added_in_answer") val addedInAnswer: String? = null,
+)
+
+@Serializable
+data class HelpRequest(val selection: String? = null, val note: String? = null)
+
+@Serializable
+data class HelpSentDto(
+    val id: String,
+    val number: String,
+    @SerialName("question_id") val questionId: String? = null,
+)
 
 @Serializable
 data class LessonScreensDto(val lesson: LessonSummaryDto, val screens: List<LessonScreenDto> = emptyList())

@@ -19,7 +19,7 @@ web and Android; there's no asset upload/hosting.
 2. **URL rule:** widen spec 03's "https:// only" rule to also accept root-relative paths
    (`/schematics/foo.svg`). Bundled assets don't need a hardcoded domain, and this keeps local
    dev, staging, and prod all working identically. Absolute `https://` URLs remain supported too
-   (for anyone who *does* want to link an external image).
+   (for anyone who _does_ want to link an external image).
 3. **Platform scope:** web only for this pass. Android (Coil or link-fallback, per spec) is a
    deliberate fast-follow, not done here.
 4. **Existing decks:** Ch.2 and Ch.3 have zero study history — safe to delete and recreate.
@@ -57,7 +57,7 @@ parallel-line capacitor, coil inductor, triangle+bar diode, standard BJT/FET sym
 symbol, circled voltage source. Consistent `viewBox`, stroke width, and label font across the
 set so it reads as one family.
 
-One diagram per *topology*, not per card — e.g. `rc-lowpass.svg` is referenced from every Ch.1
+One diagram per _topology_, not per card — e.g. `rc-lowpass.svg` is referenced from every Ch.1
 card discussing RC lowpass behavior. Roughly 36 SVGs total (~13 for Ch.1, ~13 for Ch.2, ~10 for
 Ch.3), covering the topology cards; pure definition/formula cards stay text-only.
 

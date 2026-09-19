@@ -97,6 +97,7 @@ fun OpenBook(state: LessonUiState, actions: LessonActions) {
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
                             LessonBlocks(screen.blocks)
+                        ScreenOrigin(screen.addedInAnswer, screen.sources)
                         }
                     }
                 }

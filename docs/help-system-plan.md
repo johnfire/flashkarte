@@ -30,13 +30,13 @@ parity-tested); Android is currently English-only.
 
 ## Decisions locked
 
-| # | Decision | Choice |
-|---|----------|--------|
-| 1 | Platforms | Web **and** Android |
-| 2 | In-context help mechanism | Inline + empty-state hints (no hover tooltips, no first-run tour) |
-| 3 | Written help shape | Multi-page help center (not one long page) |
-| 4 | Android help depth | **Single** scrollable Help screen (not a multi-screen mirror) |
-| 5 | Android help localization | **All 4 languages** — introduces Android's first localized strings |
+| #   | Decision                  | Choice                                                             |
+| --- | ------------------------- | ------------------------------------------------------------------ |
+| 1   | Platforms                 | Web **and** Android                                                |
+| 2   | In-context help mechanism | Inline + empty-state hints (no hover tooltips, no first-run tour)  |
+| 3   | Written help shape        | Multi-page help center (not one long page)                         |
+| 4   | Android help depth        | **Single** scrollable Help screen (not a multi-screen mirror)      |
+| 5   | Android help localization | **All 4 languages** — introduces Android's first localized strings |
 
 ### Consequence of #5 (flagged, accepted)
 
@@ -51,18 +51,19 @@ the Android app as part of this work.
 Six focused topics. Most content already exists in the web guide's i18n keys and
 just needs re-homing — keeps new-translation cost down.
 
-| Topic | Covers | Seed source |
-|-------|--------|-------------|
-| Getting started | sign up, the create→study loop, where things live | new + `guide.start`/`guide.create` |
-| Writing decks | Markdown format, `**1.**` fronts and `Q:/A:` | `guide.format` |
-| Branching decks | `[name]` anchors, `-> target`, `end` | `guide.branching` (web) + Android `BranchingHelpScreen` |
-| Studying & spaced repetition | SM-2, Again/Hard/Good/Easy, "due", the 6-chip legend | **expand** — weakest area today |
-| Creating decks with AI | MCP server + API-key setup, step by step | `guide.ai` |
-| Sharing & exploring | public decks, Library, Explore, import | new |
+| Topic                        | Covers                                               | Seed source                                             |
+| ---------------------------- | ---------------------------------------------------- | ------------------------------------------------------- |
+| Getting started              | sign up, the create→study loop, where things live    | new + `guide.start`/`guide.create`                      |
+| Writing decks                | Markdown format, `**1.**` fronts and `Q:/A:`         | `guide.format`                                          |
+| Branching decks              | `[name]` anchors, `-> target`, `end`                 | `guide.branching` (web) + Android `BranchingHelpScreen` |
+| Studying & spaced repetition | SM-2, Again/Hard/Good/Easy, "due", the 6-chip legend | **expand** — weakest area today                         |
+| Creating decks with AI       | MCP server + API-key setup, step by step             | `guide.ai`                                              |
+| Sharing & exploring          | public decks, Library, Explore, import               | new                                                     |
 
 ## Web implementation
 
 ### Help center
+
 - New `/help` index page linking the six topics (each its own route, e.g.
   `/help/studying`, or anchored sections — decide at build time; routes preferred
   for "a few pages").
@@ -70,6 +71,7 @@ just needs re-homing — keeps new-translation cost down.
 - All new strings added to en/de/es/fr; parity test must pass.
 
 ### Inline & empty-state hints (highest value per effort)
+
 - **DeckListPage** ([DeckListPage.tsx](../packages/web/src/pages/DeckListPage.tsx)):
   add a "Help" link to the header (currently absent); turn the bare `decks.empty`
   message into a first-run hint ("Create your first deck →" + help link).

@@ -10,4 +10,3 @@ result only through the authenticated session. For erasure, use the account
 deletion flow, run the GitHub `Purge expired app bug reports` workflow with the
 linked issue number, and record that backup copies expire within three months.
 Audit history is retained for twelve months with no unnecessary PII.
-

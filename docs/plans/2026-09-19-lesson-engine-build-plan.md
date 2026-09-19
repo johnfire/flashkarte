@@ -94,7 +94,7 @@ Server-side rendering on save, stored SVG plus LaTeX plus spoken text; display f
 inline symbols. Verified in light and dark on both platforms, and by an accessibility check that
 every formula has spoken text (required to finish a lesson, a warning while testing).
 
-## Slice 7: "I need more on this" (M)
+## Slice 7: "I need more on this" (M) — **DONE 2026-09-19** (see "What slice 7 decided and found" below)
 
 Help requests, an MCP tool for the user's AI to read and answer them, real screens for the owner and
 private notes for everyone else, AI labelling and sources, export, deletion and the GDPR record.
@@ -391,3 +391,42 @@ finding, now real), and reserve their space while loading.
 **Not in slice 6:** matrices and multi-line derivations (not tested); an inline symbol wrapping at a line end (it is
 a picture, so it cannot break); TalkBack and screen-reader reading of the spoken text on a phone (labels are set,
 not listened to); text selection or copying from a formula; a way to remove unused formula pictures.
+
+## What slice 7 decided and found
+
+Built and verified locally: real-Postgres tests of the whole request-and-answer cycle, an HTTP test with the AI
+key, MCP tool tests, web component tests, the Playwright lesson spec (axe), Android unit tests (278) and 18
+on-device tests with screenshots. Nothing pushed.
+
+**What exists:** on any screen, and on a question the learner keeps missing, **I need more on this** takes an
+optional note (and, on the web, the passage they had selected) and puts a request in a queue. Because MCP is
+pull-only, the screen says plainly that it waits for your AI, and offers **a ready-made message to copy** for
+your AI if you do not want to wait. Your AI reads the queue with `list_help_requests` and answers with
+`answer_help_request`: **one to three short screens, each with at least one source**, inserted right after the
+screen you asked about (for example 2.010, 2.020), recorded as written by the AI, in one step that also marks the
+request answered. You see "Answered: see 2.010" on the screen you asked from, and each new screen says **"Added by
+your AI in answer to your question"** and lists its sources (only https links are followable). It works on a
+finished lesson, because inserts are safe there. Exported, erased with the account, audited (the AI's answer is
+recorded as `ai-agent`), in the GDPR record.
+
+**Decisions taken while building** (flag any you disagree with):
+
+1. **Help requests share the queue with the screen comments from slice 3** (one table, one queue for your AI, a
+   `kind` to tell them apart), rather than a second near-identical mechanism. `answer_help_request` works on a
+   comment too.
+2. **An answer must cite sources** (a title, and a link where there is one): the tool refuses a screen without
+   one. This is the design's "with sources", enforced.
+3. **At most three screens per answer,** so an answer stays short. More is a new lesson, not an answer.
+4. **At most 50 open requests per subject,** so a runaway loop is caught.
+5. **A question's request is about the screen that teaches it** (the first one), and remembers the question.
+6. **The label is only for screens made to answer a request.** A whole lesson your AI drafted is not labelled on
+   every screen, though every AI-drafted screen still records who wrote it and lists any sources under "N sources".
+7. **Private notes for someone who does not own the subject are not built:** today a learner is always the owner, so
+   an answer always becomes real screens. That comes with cloning and other learners.
+
+**A real bug found by the new tests:** a screen number that is not a number ("abc", "1..2") reached the database as
+one it could not read and came back as a server error, in the comment feature from slice 3 as well as the new one.
+It is now a "not found" (with a test).
+
+**Not in slice 7:** the learner cannot see a list of everything they have asked (each request shows on its own screen);
+answering a request asked from a review (the button is on lessons only); a way to withdraw a request.

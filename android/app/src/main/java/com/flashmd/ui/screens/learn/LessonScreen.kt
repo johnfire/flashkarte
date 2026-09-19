@@ -83,6 +83,8 @@ fun LessonScreen(
                 comment = viewModel::comment,
                 dismissComment = viewModel::dismissComment,
                 toggleOpenBook = viewModel::toggleOpenBook,
+                askForMore = viewModel::askForMore,
+                dismissHelp = viewModel::dismissHelp,
                 toOutline = onBack,
                 openLesson = onOpenLesson,
             ),
@@ -103,6 +105,8 @@ class LessonActions(
     val comment: (String, String) -> Unit,
     val dismissComment: () -> Unit,
     val toggleOpenBook: () -> Unit,
+    val askForMore: (HelpTarget, String) -> Unit,
+    val dismissHelp: () -> Unit,
     val toOutline: () -> Unit,
     val openLesson: (String) -> Unit,
 )
@@ -136,7 +140,9 @@ fun LessonBody(state: LessonUiState, actions: LessonActions, modifier: Modifier 
                     onAnswer = actions.answer,
                     onContinue = actions.afterFeedback,
                     extra = {
-                        if (feedback.response.answer.helpOffered && !feedback.response.passed) StuckNote(actions.pause)
+                        if (feedback.response.answer.helpOffered && !feedback.response.passed) {
+                            StuckNote(actions.pause) { QuestionHelp(feedback.question, state, actions) }
+                        }
                     },
                 )
                 step != null -> StepPanel(step, state, actions)
@@ -160,6 +166,9 @@ private fun StepPanel(step: StepDto, state: LessonUiState, actions: LessonAction
             label = stringResource(R.string.learn_screen_of, step.index + 1, step.total),
             number = step.number,
             blocks = step.blocks,
+            sources = step.sources,
+            addedInAnswer = step.addedInAnswer,
+            notices = step.help,
             state = state,
             actions = actions,
             canGoBack = step.canGoBack,
@@ -173,6 +182,9 @@ private fun StepPanel(step: StepDto, state: LessonUiState, actions: LessonAction
             label = stringResource(R.string.learn_reread, step.position + 1, step.of),
             number = step.number,
             blocks = step.blocks,
+            sources = step.sources,
+            addedInAnswer = step.addedInAnswer,
+            notices = step.help,
             state = state,
             actions = actions,
             canGoBack = false,
@@ -188,7 +200,7 @@ private fun StepPanel(step: StepDto, state: LessonUiState, actions: LessonAction
             onAnswer = actions.answer,
             onContinue = actions.afterFeedback,
             extra = {
-                if (step.helpOffered) StuckNote(actions.pause)
+                if (step.helpOffered) StuckNote(actions.pause) { QuestionHelp(step, state, actions) }
                 OpenBook(state, actions)
             },
         )
@@ -203,6 +215,9 @@ private fun ScreenPanel(
     label: String,
     number: String,
     blocks: List<com.flashmd.data.remote.dto.BlockDto>,
+    sources: List<com.flashmd.data.remote.dto.ScreenSourceDto>?,
+    addedInAnswer: String?,
+    notices: List<com.flashmd.data.remote.dto.HelpNoticeDto>,
     state: LessonUiState,
     actions: LessonActions,
     canGoBack: Boolean,
@@ -224,7 +239,15 @@ private fun ScreenPanel(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             LessonBlocks(blocks)
+            ScreenOrigin(addedInAnswer, sources)
             note()
+            NeedMoreOnThis(
+                target = HelpTarget.Screen(number),
+                notices = notices,
+                help = state.help,
+                prompt = helpPrompt(state.subjectId, state.slug, number),
+                actions = actions,
+            )
             CommentOnScreen(number, state.comment, actions)
         }
     }
@@ -240,11 +263,12 @@ private fun ScreenPanel(
 
 /** Shown from the second miss. "I need more on this" arrives with help requests. */
 @Composable
-fun StuckNote(onPause: () -> Unit) {
+fun StuckNote(onPause: () -> Unit, more: @Composable () -> Unit = {}) {
     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.tertiaryContainer)) {
         Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(stringResource(R.string.learn_stuck_note), style = MaterialTheme.typography.bodyMedium)
             TextButton(onClick = onPause) { Text(stringResource(R.string.learn_come_back_later)) }
+            more()
         }
     }
 }
@@ -293,4 +317,16 @@ private fun PausedPanel(actions: LessonActions) {
             }
         }
     }
+}
+
+/** "I need more on this" for a question the learner keeps missing. */
+@Composable
+private fun QuestionHelp(question: QuestionStepDto, state: LessonUiState, actions: LessonActions) {
+    NeedMoreOnThis(
+        target = HelpTarget.Question(question.questionId),
+        notices = question.help,
+        help = state.help,
+        prompt = helpPrompt(state.subjectId, state.slug, null),
+        actions = actions,
+    )
 }

@@ -41,6 +41,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import com.flashmd.data.remote.dto.FormulaBlockDto
+import com.flashmd.data.remote.dto.HelpNoticeDto
+import com.flashmd.data.remote.dto.ScreenSourceDto
 import com.flashmd.data.remote.dto.ImageBlockDto
 import com.flashmd.data.remote.dto.InlineMathDto
 import com.flashmd.data.remote.dto.ParagraphBlockDto
@@ -277,7 +279,7 @@ class LearnerScreensTest {
     private val noActions = LessonActions(
         next = {}, back = {}, carryOn = {}, pause = {}, resume = {}, answer = {},
         afterFeedback = {}, comment = { _, _ -> }, dismissComment = {}, toggleOpenBook = {},
-        toOutline = {}, openLesson = {},
+        askForMore = { _, _ -> }, dismissHelp = {}, toOutline = {}, openLesson = {},
     )
 
     private fun showDiagramScreen(display: String, code: Int = 200, dark: Boolean = false) {
@@ -416,6 +418,68 @@ class LearnerScreensTest {
         show { LessonBody(mathScreen, noActions) }
         compose.onNodeWithText("softmax").assertExists()
         compose.onNodeWithText("d_k", substring = true).assertExists()
+    }
+
+    // --- "I need more on this" ---
+
+    private fun helpScreen(
+        notices: List<HelpNoticeDto> = emptyList(),
+        addedInAnswer: String? = null,
+        sources: List<ScreenSourceDto>? = null,
+    ) = LessonUiState(
+        title = "Embeddings", busy = false, subjectId = "s1", slug = "embeddings",
+        step = ScreenStepDto(
+            number = "5", index = 0, total = 4, canGoBack = false,
+            blocks = listOf(ParagraphBlockDto(listOf(SpanDto("Numbers can be compared.")))),
+            sources = sources, addedInAnswer = addedInAnswer, help = notices,
+        ),
+    )
+
+    @Test
+    fun asking_for_more_sends_the_note_and_the_form_closes() {
+        val asked = mutableListOf<Pair<HelpTarget, String>>()
+        val actions = LessonActions(
+            next = {}, back = {}, carryOn = {}, pause = {}, resume = {}, answer = {}, afterFeedback = {},
+            comment = { _, _ -> }, dismissComment = {}, toggleOpenBook = {},
+            askForMore = { target, note -> asked += target to note }, dismissHelp = {},
+            toOutline = {}, openLesson = {},
+        )
+        show { LessonBody(helpScreen(), actions) }
+        compose.onNodeWithText("I need more on this").performScrollTo().performClick()
+        compose.onNodeWithText("What would help? (optional)").performTextInput("Why numbers?")
+        compose.onNodeWithText("Your AI reads this the next time it runs", substring = true).assertExists()
+        shot("learn-help-form")
+        compose.onNodeWithText("Ask my AI").performScrollTo().performClick()
+        assertEquals(listOf<Pair<HelpTarget, String>>(HelpTarget.Screen("5") to "Why numbers?"), asked)
+        compose.onNodeWithText("Ask my AI").assertDoesNotExist()
+    }
+
+    @Test
+    fun a_request_that_is_waiting_says_so_and_offers_the_message_to_copy() {
+        show { LessonBody(helpScreen(listOf(HelpNoticeDto("h1", "open"))), noActions) }
+        compose.onNodeWithText("You asked for more on this.", substring = true).assertExists()
+        compose.onNodeWithText("I need more on this").assertDoesNotExist()
+        compose.onNodeWithText("Copy a message for my AI").performScrollTo().performClick()
+        compose.onNodeWithText("Copied. Paste it to your AI.").assertExists()
+    }
+
+    @Test
+    fun an_answered_request_says_where_the_answer_is_and_the_learner_may_ask_again() {
+        show { LessonBody(helpScreen(listOf(HelpNoticeDto("h1", "answered", listOf("5.010")))), noActions) }
+        compose.onNodeWithText("Answered: see 5.010 (the next screens).").assertExists()
+        compose.onNodeWithText("I need more on this").assertExists()
+    }
+
+    @Test
+    fun a_screen_added_in_answer_says_who_wrote_it_and_lists_its_sources_on_request() {
+        val sources = listOf(ScreenSourceDto("The deck, card 6", "https://example.com/card6"), ScreenSourceDto("A book"))
+        show { LessonBody(helpScreen(addedInAnswer = "ai", sources = sources), noActions) }
+        compose.onNodeWithText("Added by your AI in answer to your question").assertExists()
+        compose.onNodeWithText("The deck, card 6").assertDoesNotExist()
+        compose.onNodeWithText("2 sources").performScrollTo().performClick()
+        compose.onNodeWithText("The deck, card 6").assertExists()
+        compose.onNodeWithText("• A book").assertExists()
+        shot("learn-help-answer")
     }
 }
 

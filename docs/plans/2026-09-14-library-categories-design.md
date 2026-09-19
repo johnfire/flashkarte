@@ -17,9 +17,9 @@ there's no way to group related material (e.g. "Language Learning > German",
 ## Data model
 
 - `deck_categories (id uuid PK, title citext NOT NULL, parent_id uuid NULL
-  REFERENCES deck_categories(id), created_at, updated_at)`. `parent_id NULL`
+REFERENCES deck_categories(id), created_at, updated_at)`. `parent_id NULL`
   = top-level category; non-null = subcategory. Unique on `(parent_id,
-  title)` so sibling titles can't collide but the same subcategory name can
+title)` so sibling titles can't collide but the same subcategory name can
   exist under different parents.
 - A trigger enforces exactly two levels: inserting/updating a row with
   `parent_id` set is rejected if that parent itself already has a

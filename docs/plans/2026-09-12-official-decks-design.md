@@ -87,7 +87,7 @@ deck goes through, and it's reversible via demote if anything looks wrong.
   them until someone updates the Android UI too).
 - Per-user speech overrides on an official deck (the admin sets sensible
   defaults at promote time; individual users can't override yet).
-- Any admin *UI* button for promote/demote — the endpoint is there; a web
+- Any admin _UI_ button for promote/demote — the endpoint is there; a web
   admin-page control can follow if this gets used often enough to want one.
 
 ---
@@ -102,7 +102,7 @@ Decks** area before any real volume existed.
 ### Data model
 
 - `deck_collections (id, title citext unique, description, created_at,
-  updated_at)` — `citext` for forgiving, case-insensitive title matching
+updated_at)` — `citext` for forgiving, case-insensitive title matching
   (same type `users.email` already uses).
 - `decks.collection_id` (nullable FK, `ON DELETE SET NULL`) — a deck belongs
   to at most one collection; null means standalone.
@@ -110,7 +110,7 @@ Decks** area before any real volume existed.
   a collection, assigned at promote time. No manual reorder UI.
 - "Subscribe to a whole collection" needed no new state: it's a bulk insert
   into the existing `deck_subscriptions` table for whatever's in the
-  collection *right now* — not a standing "auto-add future members" rule.
+  collection _right now_ — not a standing "auto-add future members" rule.
 
 ### API
 

@@ -84,7 +84,11 @@ app.get("/metrics", (req, res) => {
   const suppliedToken = req.headers.authorization?.replace(/^Bearer\s+/i, "");
   const a = Buffer.from(suppliedToken ?? "");
   const b = Buffer.from(expectedToken ?? "");
-  if (!expectedToken || a.length !== b.length || !crypto.timingSafeEqual(a, b)) {
+  if (
+    !expectedToken ||
+    a.length !== b.length ||
+    !crypto.timingSafeEqual(a, b)
+  ) {
     res.status(404).end();
     return;
   }
@@ -263,7 +267,14 @@ function signCsrf(p: OAuthParams, ts: string, nonce: string): string {
   return crypto
     .createHmac("sha256", csrfSecret())
     .update(
-      [ts, nonce, p.client_id, p.redirect_uri, p.code_challenge, p.state ?? ""].join("\n"),
+      [
+        ts,
+        nonce,
+        p.client_id,
+        p.redirect_uri,
+        p.code_challenge,
+        p.state ?? "",
+      ].join("\n"),
     )
     .digest("base64url");
 }
@@ -335,7 +346,10 @@ function sendLoginForm(
 ): void {
   const nonce = crypto.randomBytes(16).toString("base64url");
   setCsrfCookie(res, nonce);
-  res.status(status).type("html").send(renderLoginForm(p, nonce, error));
+  res
+    .status(status)
+    .type("html")
+    .send(renderLoginForm(p, nonce, error));
 }
 ```
 
@@ -394,7 +408,13 @@ test("rejects a signed POST that presents no CSRF cookie", async () => {
   const res = await request(app)
     .post("/oauth/authorize")
     .type("form")
-    .send({ ...goodQuery, csrf_ts: ts, csrf_sig: sig, email: "a@b.com", password: "pw" });
+    .send({
+      ...goodQuery,
+      csrf_ts: ts,
+      csrf_sig: sig,
+      email: "a@b.com",
+      password: "pw",
+    });
   expect(res.status).toBe(400);
   expect(mockApi.backendLogin).not.toHaveBeenCalled();
 });
@@ -408,9 +428,18 @@ test("rejects a signature bound to a different nonce (cookie mismatch)", async (
   const cookies2 = form2.headers["set-cookie"];
   const res = await request(app)
     .post("/oauth/authorize")
-    .set("Cookie", Array.isArray(cookies2) ? cookies2 : [cookies2].filter(Boolean))
+    .set(
+      "Cookie",
+      Array.isArray(cookies2) ? cookies2 : [cookies2].filter(Boolean),
+    )
     .type("form")
-    .send({ ...goodQuery, csrf_ts: ts1, csrf_sig: sig1, email: "a@b.com", password: "pw" });
+    .send({
+      ...goodQuery,
+      csrf_ts: ts1,
+      csrf_sig: sig1,
+      email: "a@b.com",
+      password: "pw",
+    });
   expect(res.status).toBe(400);
 });
 
@@ -421,14 +450,27 @@ test("rejects a token with a future timestamp", async () => {
   const sig = require("crypto")
     .createHmac("sha256", process.env.MCP_JWT_SECRET!)
     .update(
-      [futureTs, nonce, goodQuery.client_id, goodQuery.redirect_uri, goodQuery.code_challenge, goodQuery.state].join("\n"),
+      [
+        futureTs,
+        nonce,
+        goodQuery.client_id,
+        goodQuery.redirect_uri,
+        goodQuery.code_challenge,
+        goodQuery.state,
+      ].join("\n"),
     )
     .digest("base64url");
   const res = await request(makeApp())
     .post("/oauth/authorize")
     .set("Cookie", `mcp_csrf=${nonce}`)
     .type("form")
-    .send({ ...goodQuery, csrf_ts: futureTs, csrf_sig: sig, email: "a@b.com", password: "pw" });
+    .send({
+      ...goodQuery,
+      csrf_ts: futureTs,
+      csrf_sig: sig,
+      email: "a@b.com",
+      password: "pw",
+    });
   expect(res.status).toBe(400);
 });
 
@@ -443,7 +485,14 @@ test("rejects a signature minted for a different state", async () => {
     .post("/oauth/authorize")
     .set("Cookie", Array.isArray(cookies) ? cookies : [cookies].filter(Boolean))
     .type("form")
-    .send({ ...goodQuery, state: "forged", csrf_ts: ts, csrf_sig: sig, email: "a@b.com", password: "pw" });
+    .send({
+      ...goodQuery,
+      state: "forged",
+      csrf_ts: ts,
+      csrf_sig: sig,
+      email: "a@b.com",
+      password: "pw",
+    });
   expect(res.status).toBe(400);
 });
 ```
@@ -492,7 +541,7 @@ if (encryptedFile.exists()) {
 **Severity:** **Medium** (operational availability, not attacker-exploitable) · **Effort:** S
 **File:** `android/app/src/main/java/com/flashmd/di/ApiCertificatePinning.kt`
 
-**Problem:** the pinner pins exactly two Let's Encrypt *intermediates* (YE1,
+**Problem:** the pinner pins exactly two Let's Encrypt _intermediates_ (YE1,
 YE2). If Let's Encrypt rotates issuance to new intermediates (they have done so
 before), every installed app loses all API connectivity until an app update
 clears Play review — a self-inflicted total outage.
@@ -532,15 +581,15 @@ echo | openssl s_client -connect flashkarte.christopherrehm.de:443 \
 These are real but need a design or ops decision first — they're listed so they
 aren't lost. Creating a tracking issue for each is appropriate.
 
-| Item | Why deferred |
-| --- | --- |
-| Server refresh-token reuse detection / family revocation | Requires a schema migration (token tombstones or family IDs) plus a cleanup job. Design first. |
-| MCP token revocation endpoint (RFC 7009) + "disconnect connector" UI | New feature spanning MCP, backend keys UI, and docs. |
-| MCP→backend cleartext HTTP on the docker bridge (`FLASHKARTE_API_URL=http://app:3001`) | Infra trust decision: internal TLS vs documented trust boundary. Passwords and `fk_` keys cross this hop. |
-| Reset/verify tokens in URL query reach the Umami analytics DB | Fragment-carried tokens (`#token=`) are a product-wide change (email templates, both clients). Fix 1 already removes the server-log copy. |
-| Android release minification (R8) | Needs keep-rules for kotlinx.serialization/Hilt and a full release-build test round. |
-| Android: recovery path for Keystore-failure crash loops | UX/product tradeoff (fail-closed vs degraded re-sync mode). |
-| MCP tool input size caps (`.max()` on markdown/title) and `frame-ancestors` on the login page | One-line hardening; fine to batch into any later MCP change. |
+| Item                                                                                          | Why deferred                                                                                                                              |
+| --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Server refresh-token reuse detection / family revocation                                      | Requires a schema migration (token tombstones or family IDs) plus a cleanup job. Design first.                                            |
+| MCP token revocation endpoint (RFC 7009) + "disconnect connector" UI                          | New feature spanning MCP, backend keys UI, and docs.                                                                                      |
+| MCP→backend cleartext HTTP on the docker bridge (`FLASHKARTE_API_URL=http://app:3001`)        | Infra trust decision: internal TLS vs documented trust boundary. Passwords and `fk_` keys cross this hop.                                 |
+| Reset/verify tokens in URL query reach the Umami analytics DB                                 | Fragment-carried tokens (`#token=`) are a product-wide change (email templates, both clients). Fix 1 already removes the server-log copy. |
+| Android release minification (R8)                                                             | Needs keep-rules for kotlinx.serialization/Hilt and a full release-build test round.                                                      |
+| Android: recovery path for Keystore-failure crash loops                                       | UX/product tradeoff (fail-closed vs degraded re-sync mode).                                                                               |
+| MCP tool input size caps (`.max()` on markdown/title) and `frame-ancestors` on the login page | One-line hardening; fine to batch into any later MCP change.                                                                              |
 
 ---
 

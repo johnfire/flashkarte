@@ -28,6 +28,20 @@ sealed interface CommentState {
     data class Failed(val message: String) : CommentState
 }
 
+sealed interface HelpState {
+    data object Idle : HelpState
+    data object Sending : HelpState
+    /** Sent from this screen: the server will report it as waiting from now on. */
+    data object Sent : HelpState
+    data class Failed(val message: String) : HelpState
+}
+
+/** What an "I need more on this" request is about. */
+sealed interface HelpTarget {
+    data class Screen(val number: String) : HelpTarget
+    data class Question(val id: String) : HelpTarget
+}
+
 sealed interface OpenBookState {
     data object Closed : OpenBookState
     data object Loading : OpenBookState
@@ -45,6 +59,10 @@ data class LessonUiState(
     val error: String? = null,
     val comment: CommentState = CommentState.Idle,
     val openBook: OpenBookState = OpenBookState.Closed,
+    val help: HelpState = HelpState.Idle,
+    /** For the ready-made message to the learner's AI. */
+    val subjectId: String = "",
+    val slug: String = "",
 )
 
 /**
@@ -58,8 +76,8 @@ class LessonViewModel @Inject constructor(
     savedState: SavedStateHandle,
 ) : ViewModel() {
     val subjectId: String = checkNotNull(savedState["subjectId"])
-    private val slug: String = checkNotNull(savedState["slug"])
-    private val _state = MutableStateFlow(LessonUiState())
+    val slug: String = checkNotNull(savedState["slug"])
+    private val _state = MutableStateFlow(LessonUiState(subjectId = subjectId, slug = slug))
     val state: StateFlow<LessonUiState> = _state.asStateFlow()
 
     init { perform { repo.start(subjectId, slug) } }
@@ -70,7 +88,7 @@ class LessonViewModel @Inject constructor(
             try {
                 val reply = call()
                 _state.update {
-                    it.copy(title = reply.lesson.title, step = reply.step, feedback = null, busy = false)
+                    it.copy(title = reply.lesson.title, step = reply.step, feedback = null, busy = false, help = HelpState.Idle)
                 }
             } catch (e: Exception) {
                 _state.update { it.copy(busy = false, error = messageOf(e, "Something went wrong.")) }
@@ -132,6 +150,25 @@ class LessonViewModel @Inject constructor(
             }
         }
     }
+
+    /** "I need more on this": the request waits in the queue for the owner's AI to read. */
+    fun askForMore(target: HelpTarget, note: String) {
+        _state.update { it.copy(help = HelpState.Sending) }
+        viewModelScope.launch {
+            try {
+                val text = note.trim().ifEmpty { null }
+                when (target) {
+                    is HelpTarget.Screen -> repo.askForMoreOnScreen(subjectId, target.number, text)
+                    is HelpTarget.Question -> repo.askForMoreOnQuestion(subjectId, target.id, text)
+                }
+                _state.update { it.copy(help = HelpState.Sent) }
+            } catch (e: Exception) {
+                _state.update { it.copy(help = HelpState.Failed(messageOf(e, "Couldn't send the request."))) }
+            }
+        }
+    }
+
+    fun dismissHelp() = _state.update { it.copy(help = HelpState.Idle) }
 
     fun dismissComment() = _state.update { it.copy(comment = CommentState.Idle) }
 

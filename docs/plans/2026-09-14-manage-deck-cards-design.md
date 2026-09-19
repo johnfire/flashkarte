@@ -35,7 +35,7 @@ real study progress.
 2. Fetch the deck's full current card set; splice in the proposed edit for
    the target card, in memory.
 3. Run `validateBranching(fullSet)` and `validateSenses(fullSet)` against the
-   *whole* updated set (not just the edited card) — same rejection messages
+   _whole_ updated set (not just the edited card) — same rejection messages
    the create/add-cards flows already produce (duplicate label, dangling
    option target, split sense word) if the edit breaks deck consistency.
 4. Persist just that card's `content`. Audit log `card.updated` (actor,

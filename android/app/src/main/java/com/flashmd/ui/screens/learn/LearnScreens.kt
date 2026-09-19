@@ -231,6 +231,7 @@ fun ReadLessonScreen(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                         LessonBlocks(screen.blocks)
+                        ScreenOrigin(screen.addedInAnswer, screen.sources)
                     }
                 }
             }

@@ -182,4 +182,20 @@
     <string name="learn_zoom_out">Alejar</string>
     <string name="learn_zoom_fit">Ajustar a la pantalla</string>
     <string name="learn_image_unavailable">No se pudo cargar esta imagen.</string>
+    <string name="learn_help_open">Necesito más sobre esto</string>
+    <string name="learn_help_label">¿Qué ayudaría? (opcional)</string>
+    <string name="learn_help_passage">Sobre:</string>
+    <string name="learn_help_how">Tu IA lo lee la próxima vez que se ejecute, lo investiga y añade pantallas cortas junto a esta, con sus fuentes. No tienes que esperar: también puedes copiar un mensaje para dárselo ahora.</string>
+    <string name="learn_help_send">Preguntar a mi IA</string>
+    <string name="learn_help_error">No se pudo enviar la solicitud.</string>
+    <string name="learn_help_waiting">Pediste más sobre esto. Espera a tu IA, que añadirá pantallas junto a esta.</string>
+    <string name="learn_help_copy_prompt">Copiar un mensaje para mi IA</string>
+    <string name="learn_help_copied">Copiado. Pégalo en tu IA.</string>
+    <string name="learn_help_answered">Respondido: mira %1$s (las siguientes pantallas).</string>
+    <string name="learn_added_by_ai">Añadido por tu IA en respuesta a tu pregunta</string>
+    <string name="learn_added_in_answer">Añadido en respuesta a tu pregunta</string>
+    <plurals name="learn_sources">
+        <item quantity="one">%1$d fuente</item>
+        <item quantity="other">%1$d fuentes</item>
+    </plurals>
 </resources>

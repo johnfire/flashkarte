@@ -6,7 +6,7 @@ server queue + web + Android study
 
 ## Goal
 
-A word with several unrelated meanings (*der Zug* = train / chess move / draught) is authored
+A word with several unrelated meanings (_der Zug_ = train / chess move / draught) is authored
 as **one block** and studied as **one card per sense**. Senses are learned in two phases: a
 **chain** phase that hands you the sense via a short hint, then **split** independent cards
 prompted by a context sentence. The scaffold fades as the word is learned.
@@ -31,21 +31,22 @@ sense lines is a **word block**.
 
 ```markdown
 **1. der Zug**
+
 - train | Der Zug fährt um 8 Uhr ab. | Eisenbahn
 - move | Das war ein guter Zug! | Schach
 - draught | Es zieht, mach das Fenster zu. | Luft
 ```
 
 A line is split into **at most three** fields, so any further `|` belongs to the hint. The
-`|` is also what *marks* the line as a sense line: a bare `- train` is an ordinary bullet, or
+`|` is also what _marks_ the line as a sense line: a bare `- train` is an ordinary bullet, or
 every deck with a bulleted back would silently become a word block. A sense with neither
 context nor hint is therefore written with a trailing pipe — `- train |`.
 
-| Field       | Required | Role                      |
-| ----------- | -------- | ------------------------- |
-| **gloss**   | yes      | the answer (card back)    |
-| **context** | no       | the split-phase prompt    |
-| **hint**    | no       | the chain-phase scaffold  |
+| Field       | Required | Role                     |
+| ----------- | -------- | ------------------------ |
+| **gloss**   | yes      | the answer (card back)   |
+| **context** | no       | the split-phase prompt   |
+| **hint**    | no       | the chain-phase scaffold |
 
 Rules:
 
@@ -127,7 +128,7 @@ table, no new column, no sync change — old Android clients are unaffected.
 - **Speech:** `useCardSpeech` speaks the prompt, so after graduation it speaks a full sentence
   — sentence-level listening practice (spec 09's intent).
 - **MCP:** deck tool descriptions gain the sense-line syntax + one example; "add the other
-  senses of *Zug* with context sentences and hints" becomes a normal request.
+  senses of _Zug_ with context sentences and hints" becomes a normal request.
 
 ## Acceptance criteria
 

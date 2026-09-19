@@ -46,6 +46,8 @@ import com.flashmd.data.remote.dto.UpdateProfileRequest
 import com.flashmd.data.remote.dto.AnswerRequest
 import com.flashmd.data.remote.dto.CommentRequest
 import com.flashmd.data.remote.dto.DueReviewsDto
+import com.flashmd.data.remote.dto.HelpRequest
+import com.flashmd.data.remote.dto.HelpSentDto
 import com.flashmd.data.remote.dto.LearnSubjectDto
 import com.flashmd.data.remote.dto.LearnerOutlineDto
 import com.flashmd.data.remote.dto.LessonAnswerResponseDto
@@ -275,6 +277,20 @@ interface FlashkarteApi {
         @Path("number") number: String,
         @Body body: CommentRequest,
     ): ScreenCommentDto
+
+    @POST("api/subjects/{id}/learn/screens/{number}/help")
+    suspend fun askForMoreOnScreen(
+        @Path("id") subjectId: String,
+        @Path("number") number: String,
+        @Body body: HelpRequest,
+    ): HelpSentDto
+
+    @POST("api/subjects/{id}/learn/questions/{questionId}/help")
+    suspend fun askForMoreOnQuestion(
+        @Path("id") subjectId: String,
+        @Path("questionId") questionId: String,
+        @Body body: HelpRequest,
+    ): HelpSentDto
 
     @GET("api/subjects/{id}/learn/reviews")
     suspend fun dueReviews(@Path("id") subjectId: String): DueReviewsDto
