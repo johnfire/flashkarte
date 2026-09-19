@@ -175,3 +175,21 @@ export async function playToEnd(
   if (step.kind !== "passed") throw new Error("Lesson did not finish");
   return results;
 }
+
+/**
+ * For lessons whose options are not marked in their text (real content): finds the right position
+ * by looking the answer up in the database, the way only a test may.
+ */
+export async function rightPositionFromDatabase(step: {
+  presentation_id: string;
+  options: { blocks: unknown }[];
+}): Promise<number> {
+  const stored = (
+    await getPool().query<{ options: { correct: boolean; blocks: unknown }[] }>(
+      `SELECT options FROM lesson_questions WHERE id = $1`,
+      [step.presentation_id],
+    )
+  ).rows[0].options;
+  const rightText = textOf(stored.find((option) => option.correct)!.blocks);
+  return step.options.findIndex((shown) => textOf(shown.blocks) === rightText);
+}

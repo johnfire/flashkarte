@@ -448,6 +448,35 @@ describe("spaced review", () => {
     expect(row.last_rating).toBe(1);
   });
 
+  it("reviews one question alone even when its lesson has several", async () => {
+    await authorLesson(subjectId, "tokens", { questions: 3 });
+    await learn.startLesson(LEARNER, subjectId, "tokens", random());
+    await playToEnd(subjectId, "tokens", random(), { now: start });
+    const now = new Date(start.getTime() + 30 * DAY);
+    const { due } = await reviews.listDueReviews(LEARNER, subjectId, now);
+    expect(due).toHaveLength(3);
+    const begun = await reviews.startReview(
+      LEARNER,
+      subjectId,
+      due[0].question_id,
+      random(),
+      now,
+    );
+    expect(begun.step).toMatchObject({ kind: "question", total: 1 });
+    const done = await reviews.answerReview(
+      LEARNER,
+      subjectId,
+      due[0].question_id,
+      positionOf(begun.step, true),
+      random(),
+      now,
+    );
+    expect(done.step.kind).toBe("review_done");
+    expect(
+      (await reviews.listDueReviews(LEARNER, subjectId, now)).due,
+    ).toHaveLength(2);
+  });
+
   it("refuses a review that is not due yet or does not exist", async () => {
     await passTokens(start);
     const [{ question_id }] = (

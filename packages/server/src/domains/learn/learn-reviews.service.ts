@@ -17,7 +17,12 @@ import * as subjectsRepo from "../subjects/subjects.repository";
 import { getPool } from "../../db/client";
 import * as lessonsRepo from "../lessons/lessons.repository";
 import * as questionsRepo from "../lessons/questions.repository";
-import { loadLesson, renderStep, revealAnswer } from "./learn-content";
+import {
+  loadLesson,
+  narrowToQuestion,
+  renderStep,
+  revealAnswer,
+} from "./learn-content";
 import { asValidationError, type Random } from "./learn-context";
 import * as repo from "./learn.repository";
 
@@ -93,7 +98,7 @@ async function withReview<T>(
         db,
         review,
         lesson,
-        loaded: await loadLesson(db, lesson),
+        loaded: narrowToQuestion(await loadLesson(db, lesson), questionId),
       });
     } catch (error) {
       return asValidationError(error);

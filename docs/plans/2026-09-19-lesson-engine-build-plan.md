@@ -43,7 +43,7 @@ audit-log and account-export patterns.
   outline matches the lesson graph.
 - **Usable when done:** an AI can author a small lesson through MCP. No learner UI yet.
 
-## Slice 2: the learner engine (M)
+## Slice 2: the learner engine (M) — **DONE 2026-09-19** (see "What slice 2 decided and found" below)
 
 The rules, as **pure shared logic** with exhaustive tests: lesson progress, the question loop (wrong
 answer → teaching screens → re-ask a different variant, or from the back of the set with options
@@ -161,3 +161,61 @@ and appears in the outline. It is **draft content for you to review**, not finis
 **Not in slice 1, by design:** a learner's progress (locked, in progress, passed) on the outline, the asset
 store and image uploads (slice 5), formula rendering to SVG (slice 6), private notes and help requests
 (slice 7), and any screen a learner can see (slice 3).
+
+## What slice 2 decided and found
+
+Built and verified locally (shared unit tests, real-Postgres integration tests, a real-HTTP test, route
+tests, mutation checks on the risky guards, and the full lint, format, typecheck, build and test sweep).
+Nothing pushed.
+
+**What exists:** the rules as pure shared logic (session state machine, lesson unlocking, review
+scheduling); migration 026 (`lesson_progress`, an append-only `question_attempts` ledger,
+`question_reviews`); a server-authoritative learner session; `/api/subjects/:id/learn/...` for the
+outline, each lesson step (start, step, next, back, answer, continue, pause, resume, open-book screens)
+and reviews (list due, start, answer, continue, pause); owner-only question insights
+(`/lessons/:slug/insights`, and an MCP tool `get_question_insights`); audit entries for starts, answers
+and passes; account export of progress, every answer and the review schedule; erasure with the account
+and with a deleted lesson.
+
+**Decisions taken while building** (flag any you disagree with):
+
+1. **A step never contains the answer.** A question step carries the prompt and the options in shown
+   order, with no correctness and no reasons; both are revealed only in the reply to the answer.
+2. **The server holds the session.** A client sends "next", "back" or an answer and renders the step it
+   gets back. The rules exist once, in `packages/shared`, and Android will mirror them with parity tests.
+3. **A lesson opens only when every prerequisite is passed.** A lesson that is paused ("come back
+   later") counts as in progress, so its dependents stay locked. Passing reports exactly which lessons it
+   opened.
+4. **Going back on the first screen stays on the first screen** rather than being an error.
+5. **A review asks one question, alone.** A miss shows that question's teaching screens, then asks
+   again; the first attempt of the review sets the next interval (right 4, wrong 1) on the existing
+   fixed-cadence scheduler.
+6. **Learner routes refuse an AI (deck-scoped) key.** The AI authors lessons and can read where
+   questions fail, but does not take lessons for the person.
+7. **Learners are the subject's owner for now.** Using someone else's public subject comes with cloning.
+8. **Audit against the subject,** with the lesson slug or question id in the detail, because the audit
+   target must be a uuid.
+9. **A learner's saved session is brought in line with edits** to the lesson (a screen added or retired,
+   a question added) each time it is read, so editing a lesson never strands someone mid-lesson.
+
+**Real bugs found and fixed before they shipped:**
+
+- **Reviews pulled in the whole lesson.** The first review of a question in a lesson with several
+  questions did not finish after a right answer, because catching a saved session up to the lesson's
+  content re-added the lesson's other questions. Caught by the whole-subject walk test (a one-question
+  lesson hid it). Fixed by narrowing a review to its one question; a test fails if that is removed.
+- **Audit entries were silently lost.** They were addressed to a lesson slug, but the audit target must be
+  a uuid, and the audit service swallows write failures by design. Caught by a test that reads the audit
+  table back rather than trusting the call.
+- **Concurrent queries on one connection.** Loading a lesson inside a transaction ran queries in
+  parallel on a single connection, which the database driver deprecates. They now run one after the other.
+
+**Proven by the walk test:** a learner passes a six-lesson subject with a diamond and a join in prerequisites,
+under five random orders with wrong answers along the way; nothing opens early, what a pass reports as
+unlocked is exactly what opened, no learner is ever stuck; then 60 days later all 18 questions come back
+for review, and a miss is recorded in the ledger. The real Transformers "Tokens and the vocabulary"
+lesson is also learned end to end through the learner path (with one deliberate miss).
+
+**Not in slice 2, by design:** any screen a learner sees (slice 3); the entry check or test-out (it fits
+right after slice 2, since it reuses the question engine: still your decision on recommend versus block);
+help requests (slice 7).

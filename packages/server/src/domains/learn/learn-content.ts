@@ -82,6 +82,24 @@ export async function loadLesson(
   };
 }
 
+/**
+ * A lesson as a review sees it: the same screens (to teach again after a miss) but only the one
+ * question being reviewed. Without this the session would fill up with the lesson's other questions.
+ */
+export function narrowToQuestion(
+  loaded: LoadedLesson,
+  questionId: string,
+): LoadedLesson {
+  return {
+    ...loaded,
+    questions: loaded.questions.filter((q) => q.id === questionId),
+    content: {
+      ...loaded.content,
+      questions: loaded.content.questions.filter((q) => q.id === questionId),
+    },
+  };
+}
+
 function presentationOf(
   loaded: LoadedLesson,
   questionId: string,

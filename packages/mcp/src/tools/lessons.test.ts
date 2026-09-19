@@ -39,6 +39,7 @@ describe("lesson MCP tools", () => {
       "finish_lesson",
       "get_lesson",
       "get_outline",
+      "get_question_insights",
       "import_lesson",
       "lint_lesson",
       "retire_screen",
@@ -46,6 +47,17 @@ describe("lesson MCP tools", () => {
       "update_question",
       "update_screen",
     ]);
+  });
+
+  it("get_question_insights reads the lesson's insights", async () => {
+    mockApi.get.mockResolvedValue({ questions: [] });
+    await setup().handlers.get_question_insights({
+      subject_id: S,
+      lesson: "tokens",
+    });
+    expect(mockApi.get).toHaveBeenCalledWith(
+      `/api/subjects/${S}/lessons/tokens/insights`,
+    );
   });
 
   it("import_lesson posts the whole lesson under the subject", async () => {

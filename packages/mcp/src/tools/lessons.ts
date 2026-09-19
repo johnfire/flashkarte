@@ -162,6 +162,19 @@ export function registerLessonTools(server: McpServer) {
   );
 
   server.tool(
+    "get_question_insights",
+    "How often each question in a lesson is answered and missed, over all learners, with no learner " +
+      "identities. Use it to find questions worth rewording or screens worth clarifying: a question " +
+      "missed often is as likely a bad question or an unclear screen as a struggling learner. " +
+      "Read-only; changes are still made with add_question_variant, update_question or add_screen.",
+    { subject_id: subjectId, lesson: slug },
+    async ({ subject_id, lesson }) =>
+      runTool("get_question_insights", async () =>
+        asText(await get(`${lessonPath(subject_id, lesson)}/insights`)),
+      ),
+  );
+
+  server.tool(
     "get_outline",
     "The course outline for a subject: modules, and the lessons in prerequisite order with what each " +
       "covers and what unlocks it. Derived from the lesson graph.",
