@@ -1,5 +1,6 @@
 import type { Block, Span } from "@flashkarte/shared";
 import { LessonImage } from "./LessonImage";
+import { DisplayFormula, InlineMath } from "./MathPicture";
 
 /**
  * Draws a screen's blocks natively (no markdown): paragraphs and lists of spans, code, callouts,
@@ -20,6 +21,7 @@ function Spans({ spans }: { spans: Span[] }) {
   return (
     <>
       {spans.map((span, index) => {
+        if (span.math) return <InlineMath key={index} span={span} />;
         let node: React.ReactNode = span.text;
         if (span.code) {
           node = (
@@ -82,14 +84,6 @@ function BlockView({ block }: { block: Block }) {
     case "image":
       return <LessonImage block={block} />;
     case "formula":
-      return (
-        <p
-          className="overflow-x-auto rounded-lg bg-gray-100 p-4 text-center font-mono dark:bg-gray-800"
-          role="math"
-          aria-label={block.spoken ?? block.latex}
-        >
-          {block.latex}
-        </p>
-      );
+      return <DisplayFormula block={block} />;
   }
 }

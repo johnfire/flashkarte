@@ -72,10 +72,29 @@ const tokensLesson = (diagram: string) => ({
         },
       ],
     },
-    ...[3, 4].map((n) => ({
-      ref: `s${n}`,
-      blocks: para(`Teaching text of screen ${n}`),
-    })),
+    {
+      ref: "s3",
+      blocks: [
+        ...para("Teaching text of screen 3"),
+        {
+          type: "formula",
+          latex: "\\mathrm{softmax}(z)_i = \\frac{e^{z_i}}{\\sum_j e^{z_j}}",
+          spoken:
+            "softmax of z sub i equals e to the z sub i over the sum over j of e to the z sub j",
+        },
+        {
+          type: "paragraph",
+          spans: [
+            { text: "Here the key size " },
+            { text: "d_k", math: { spoken: "d sub k" } },
+            { text: " and the query " },
+            { text: "x_i W_Q", math: { spoken: "x sub i times W sub Q" } },
+            { text: " sit on the line of text." },
+          ],
+        },
+      ],
+    },
+    { ref: "s4", blocks: para("Teaching text of screen 4") },
   ],
   questions: [question(1, "s1"), question(2, "s2"), question(3, "s3")],
 });
@@ -251,9 +270,31 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
     }),
   ]);
 
-  for (let screen = 1; screen < 3; screen++) {
-    await page.getByRole("button", { name: "Next" }).click();
+  await page.getByRole("button", { name: "Next" }).click();
+  await page.getByRole("button", { name: "Next" }).click();
+
+  // Typeset maths: a formula on its own line and symbols inside a sentence, drawn by the server.
+  await expect(page.getByText("Teaching text of screen 3")).toBeVisible();
+  const softmax = page.getByRole("img", { name: /^softmax of z sub i equals/ });
+  await expect(softmax).toBeVisible();
+  const symbol = page.getByRole("img", { name: "d sub k", exact: true });
+  await expect(symbol).toBeVisible();
+  for (const picture of [softmax, symbol]) {
+    await expect
+      .poll(() => picture.evaluate((img: HTMLImageElement) => img.naturalWidth))
+      .toBeGreaterThan(0);
   }
+  // The symbol is on the line: its bottom hangs below the text baseline, not floating above it.
+  expect(
+    await symbol.evaluate((img) => getComputedStyle(img).verticalAlign),
+  ).toMatch(/^-/);
+  await page.screenshot({ path: path.join(artifacts, "learn-maths.png") });
+  await expectNoAxeViolations(page, "a screen with maths");
+  await page.getByRole("button", { name: "Switch to dark mode" }).click();
+  await page.screenshot({ path: path.join(artifacts, "learn-maths-dark.png") });
+  await expectNoAxeViolations(page, "a screen with maths in dark mode");
+  await page.getByRole("button", { name: "Switch to light mode" }).click();
+
   await page.getByRole("button", { name: "Next" }).click();
   await expect(
     page.getByRole("button", { name: "Start the questions" }),
