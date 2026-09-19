@@ -25,7 +25,7 @@ export function ReadingCard({
   return (
     <>
       <article className="rounded-xl border p-8 shadow-sm">
-        <p className="mb-2 text-xs uppercase tracking-wide text-gray-400 dark:text-gray-500">
+        <p className="mb-2 text-xs uppercase tracking-wide text-gray-600 dark:text-gray-400">
           {t("study.reading")} · {cardNumberLabel}
           {category && ` · ${category}`}
         </p>
@@ -35,7 +35,7 @@ export function ReadingCard({
         <div className="mt-4 whitespace-pre-wrap text-gray-700 dark:text-gray-300">
           <CardText text={body} />
         </div>
-        <p className="mt-6 text-xs text-gray-400 dark:text-gray-500">
+        <p className="mt-6 text-xs text-gray-600 dark:text-gray-400">
           {t("study.readingHint")}
         </p>
       </article>
