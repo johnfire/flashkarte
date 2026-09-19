@@ -47,9 +47,12 @@ Read from the live deck data on 2026-09-19 (`get_deck`). Observations, not opini
 - The pipeline walk-through (card 18) is really a _capstone_ that asks the learner to
   sequence nine things covered elsewhere, yet it sits in the opening section.
 
-**Common failure:** both decks are correct, dense reference material in _reading_ order.
-Neither says what must be understood first, and neither can tell "knows it" from "has
-seen it."
+**Common failure:** both decks are correct, dense reference material with no stated
+prerequisites, and neither can tell "knows it" from "has seen it." Electronics is in
+textbook order. Transformers turned out to be mostly well ordered once a graph was drawn
+for it (8 forward references, none severe; see
+[the Transformers DAG](2026-09-19-transformers-concept-dag.md)); its gaps are missing
+prerequisites, multi-concept cards, and recall-only items.
 
 ## 3. The model
 
@@ -62,6 +65,29 @@ Five layers. Each is separate data, so any one can be revised without breaking t
 | **Item**    | One question testing one concept at one depth, of one _type_    | cards (`basic`, diagnostic MC)            |
 | **Unit**    | A chunk of concepts studied together, ending in a capstone      | decks                                     |
 | **Path**    | Ordered, gated sequence of units                                | Courses (deck-level gating)               |
+
+**The graph belongs to the subject, not to a deck or a course.** This is the structural
+consequence of putting the DAG first:
+
+- The **subject model** (concepts with stable ids, `requires`/`suggests` edges, each with a
+  reason) is one artifact per subject. It is what everything else is derived from.
+- A **course** is a _cut_ through it: a chosen set of target concepts, an entry floor
+  (concepts assumed known), and a route. Different audiences get different cuts of the
+  same graph (a beginner course, an engineer's course) without rewriting content.
+- **Items attach to concepts**; decks are just how items are grouped for study. Learner
+  progress is keyed to concept ids, not card order, so revising the graph or reshuffling
+  decks does not lose anyone's progress.
+- **Learner state** is mastery per concept. What to study next is the _frontier_: concepts
+  whose `requires` parents are all mastered. Spaced repetition stays as the retention layer
+  inside that; it stops being the whole product.
+- Subjects compose: one course's entry floor is another subject's concepts. Transformers
+  assumes matrix multiplication and the dot product; those are nodes in a maths subject.
+  That is why concepts must be cross-deck.
+- The graph is a **hypothesis, versioned**, never a fixed truth. It is revised by review
+  and, later, by learner data (§6).
+
+(This is close to what adaptive-learning systems call a knowledge space. That is from my
+general knowledge, not something I checked here.)
 
 Two rules that come from the transformers discussion:
 
@@ -90,8 +116,9 @@ Each step has an output that can be checked before the next begins.
    concept with more than ~4 `requires` parents (a sign it is really two concepts); the
    longest chain gives the minimum course depth.
 6. **Derive the order.** Topological sort. Ties are broken by a per-course choice
-   (§8, decision 1): _shape-first_ or _bottom-up_. Group into units of roughly 12–25
-   concepts, so a unit is one sitting-week, not a textbook chapter.
+   (§8, decision 1): _shape-first_ or _bottom-up_. Group into units of roughly 5–10
+   concepts (the Transformers draft gave 2–18; the 17–18 ones need splitting), so a unit is
+   one sitting, not a textbook chapter.
 7. **Write items per concept, at more than one depth**, using the type table (§5).
    Every concept needs ≥1 recognition item and ≥1 _production or application_ item.
    Distractors and remediation are written from the real misconceptions found in step 2,
@@ -174,18 +201,18 @@ first_, chosen by value: **numeric/compute** and **ordering** first (both determ
 both used by the two reference subjects), then multi-select, match/classify, cloze. Label
 the diagram and predict-the-change come after, and explain-in-words stays practice-only.
 
-## 8. Decisions needed before any building
+## 8. Decisions
 
-1. **Learning-order philosophy per course:** _shape-first_ (overview, then open each
-   box) or _bottom-up_. My recommendation for engineers: shape-first, using an ungated
-   "map" unit at the start (the pipeline in Transformers, the four building blocks in
-   Electronics) that is read-and-orient, and re-tested as the capstone at the end.
-2. **Where the graph lives:** in the card markdown (`@concept`, `@requires`), or as its
-   own structure managed via API/MCP like Courses. Markdown keeps a deck a single file;
-   an API structure avoids the round-trip and lets edges carry reasons. I lean API/MCP,
-   with markdown export for backup.
-3. **Concept scope:** cross-deck concepts (needed for the multi-chapter case) or keep
-   Spec 06's one-deck limit and gate only between decks.
+**Decided 2026-09-19 (Chris):**
+
+1. **Shape-first.** An ungated "map" unit first (the pipeline in Transformers, the four
+   building blocks in Electronics), read-and-orient, and re-tested as the capstone.
+2. **The graph lives behind the API/MCP**, like Courses, not in card markdown. Edges carry
+   a reason field. Markdown export is for backup only.
+3. **Concepts are cross-deck.** Spec 06's one-deck limit does not apply.
+
+**Still open:**
+
 4. **First item types** to build (§7 suggests numeric/compute, then ordering).
 5. **Rebuild vs extend.** Everything here maps onto existing pieces (Courses, Spec 06,
    the diagnostic mechanism). I recommend extending, and would want to hear what a
@@ -193,10 +220,12 @@ the diagram and predict-the-change come after, and explain-in-words stays practi
 
 ## 9. Suggested next steps (in order)
 
-1. Agree decisions 1–3 above.
-2. Apply steps 3–5 to **Electronics Ch. 1** as a paper exercise: inventory, edges with
-   reasons, lint. Output is a graph document, no code. Ch. 1 first because it has a
-   clear prerequisite chain (Ohm → series/parallel → divider → loading → Thévenin;
-   capacitor → RC → filters → resonance) that you can judge yourself.
-3. Repeat for Transformers to see whether the method holds up in a different subject.
+1. ~~Agree decisions 1–3.~~ Done.
+2. **Transformers first** (Chris's call), as a paper exercise: inventory, edges with
+   reasons, lint. Draft done:
+   [2026-09-19-transformers-concept-dag.md](2026-09-19-transformers-concept-dag.md).
+   **Awaiting review** of its sections 5–6.
+3. Repeat for Electronics Ch. 1 to see whether the method holds in a calculation-heavy
+   subject (Ohm → series/parallel → divider → loading → Thévenin; capacitor → RC → filters
+   → resonance).
 4. Only then design the data model and the first two item types.
