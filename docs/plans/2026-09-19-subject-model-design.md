@@ -147,7 +147,10 @@ unit and route derivation, cloning a public subject with its card links, learner
 
 1. **Shared graph logic + tests.** No schema, no behaviour change.
 2. **Migration + server domain + integration tests against real Postgres.**
-3. **MCP tools + `import_subject`**, then import the Transformers DAG.
+3. **MCP tools + `import_subject`**, then import the Transformers DAG. _Tools built and
+   tested; the Transformers graph is a committed fixture
+   (`domains/subjects/fixtures/transformers-subject.json`) that a real-Postgres test imports
+   and walks end to end. Importing it into production waits for the deploy._
 4. **`read` card type:** parser TS + Kotlin + corpus, server acceptance and queue
    exclusion, `card_reads`, reading screen on web and Android.
 5. **Web:** subject view (graph by unit, states) and frontier-driven study.
