@@ -243,3 +243,68 @@ test("the owner comments on a screen, their AI reads and resolves it, and the AI
   ]);
   expect(actors.rows[1].actor_type).toBe("ai-agent");
 });
+
+test("the learner asks for more, their AI reads the queue and answers with sourced screens, and the AI cannot ask", async () => {
+  const id = await makeSubject();
+  const S = `/api/subjects/${id}`;
+  const asked = await request(app)
+    .post(`${S}/learn/screens/2/help`)
+    .send({ selection: "a token", note: "why?" });
+  expect(asked.status).toBe(201);
+  expect(
+    (
+      await request(app)
+        .post(`${S}/learn/screens/2/help`)
+        .send({ note: "x".repeat(2000) })
+    ).status,
+  ).toBe(422);
+  expect(
+    (await request(app).post(`${S}/learn/screens/abc/help`).send({})).status,
+  ).toBe(404);
+
+  keyScope = "deck";
+  expect(
+    (await request(app).post(`${S}/learn/screens/2/help`).send({})).status,
+  ).toBe(403);
+  const queue = await request(app).get(`${S}/help?lesson=tokens`);
+  expect(queue.body.requests).toEqual([
+    expect.objectContaining({
+      id: asked.body.id,
+      note: "why?",
+      selection: "a token",
+      lesson: "tokens",
+    }),
+  ]);
+
+  const noSource = await request(app)
+    .post(`${S}/help/${asked.body.id}/answer`)
+    .send({
+      screens: [
+        { blocks: [{ type: "paragraph", spans: [{ text: "More." }] }] },
+      ],
+    });
+  expect(noSource.status).toBe(422);
+  expect(noSource.body.error.message).toMatch(/at least one source/);
+
+  const answered = await request(app)
+    .post(`${S}/help/${asked.body.id}/answer`)
+    .send({
+      screens: [
+        {
+          blocks: [{ type: "paragraph", spans: [{ text: "More." }] }],
+          sources: [{ title: "The deck, card 1" }],
+        },
+      ],
+    });
+  expect(answered.status).toBe(201);
+  expect(answered.body.screens).toEqual(["2.010"]);
+  expect((await request(app).get(`${S}/help`)).body.requests).toEqual([]);
+
+  const audit = await getPool().query(
+    `SELECT action, actor_type FROM audit_log WHERE action LIKE 'help.%' ORDER BY created_at`,
+  );
+  expect(audit.rows.map((r) => `${r.action}:${r.actor_type}`)).toEqual([
+    "help.requested:user",
+    "help.answered:ai-agent",
+  ]);
+});

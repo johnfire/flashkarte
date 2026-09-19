@@ -34,6 +34,7 @@ describe("lesson MCP tools", () => {
       "add_question",
       "add_question_variant",
       "add_screen",
+      "answer_help_request",
       "create_image",
       "create_module",
       "delete_image",
@@ -44,6 +45,7 @@ describe("lesson MCP tools", () => {
       "get_question_insights",
       "import_lesson",
       "lint_lesson",
+      "list_help_requests",
       "list_images",
       "list_screen_comments",
       "resolve_screen_comment",
@@ -107,6 +109,33 @@ describe("lesson MCP tools", () => {
     await handlers.delete_image({ subject_id: S, image_id: "a1" });
     expect(mockApi.del).toHaveBeenLastCalledWith(
       `/api/subjects/${S}/assets/a1`,
+    );
+  });
+
+  it("reads the help queue, and answers a request with sourced screens in one call", async () => {
+    mockApi.get.mockResolvedValue({ requests: [] });
+    mockApi.post.mockResolvedValue({});
+    const { handlers } = setup();
+    await handlers.list_help_requests({ subject_id: S });
+    expect(mockApi.get).toHaveBeenLastCalledWith(`/api/subjects/${S}/help`);
+    await handlers.list_help_requests({ subject_id: S, lesson: "tokens" });
+    expect(mockApi.get).toHaveBeenLastCalledWith(
+      `/api/subjects/${S}/help?lesson=tokens`,
+    );
+    const screens = [
+      {
+        blocks: para,
+        sources: [{ title: "The deck", url: "https://example.com" }],
+      },
+    ];
+    await handlers.answer_help_request({
+      subject_id: S,
+      request_id: "r1",
+      screens,
+    });
+    expect(mockApi.post).toHaveBeenLastCalledWith(
+      `/api/subjects/${S}/help/r1/answer`,
+      { screens },
     );
   });
 

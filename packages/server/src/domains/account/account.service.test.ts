@@ -110,6 +110,8 @@ describe("account.service exportData", () => {
       {
         subject_id: "s1",
         number: "2.010",
+        kind: "comment",
+        selection: null,
         body: "Unclear",
         created_at: "t",
         resolved_at: null,

@@ -620,6 +620,12 @@ describe("comments on a screen", () => {
     await expect(
       comments.addScreenComment(LEARNER, subjectId, "99", { body: "hi" }),
     ).rejects.toBeInstanceOf(NotFoundError);
+    // A number that is not one never reaches the database as a number it cannot read.
+    for (const bad of ["abc", "1..2", "1.2.3", "", "1e3"]) {
+      await expect(
+        comments.addScreenComment(LEARNER, subjectId, bad, { body: "hi" }),
+      ).rejects.toBeInstanceOf(NotFoundError);
+    }
     await expect(
       comments.addScreenComment(STRANGER, subjectId, "1", { body: "hi" }),
     ).rejects.toBeInstanceOf(NotFoundError);

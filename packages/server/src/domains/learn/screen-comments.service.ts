@@ -3,9 +3,9 @@ import { getPool } from "../../db/client";
 import { NotFoundError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
 import { requireLesson } from "../lessons/lesson-context";
-import * as screensRepo from "../lessons/screens.repository";
 import { requireOwnedSubject } from "../subjects/subjects.service";
 import * as repo from "./screen-comments.repository";
+import { findScreenByNumberOrNull } from "./screen-lookup";
 
 const commentSchema = z.object({
   body: z
@@ -24,11 +24,7 @@ export async function addScreenComment(
 ) {
   const { body } = parse(commentSchema, input);
   await requireOwnedSubject(userId, subjectId);
-  const screen = await screensRepo.findScreenByNumber(
-    getPool(),
-    subjectId,
-    number,
-  );
+  const screen = await findScreenByNumberOrNull(getPool(), subjectId, number);
   if (!screen) throw new NotFoundError(`Screen ${number} not found`);
   const id = await repo.insertComment(getPool(), userId, screen.id, body);
   return { id, number: screen.number, body };

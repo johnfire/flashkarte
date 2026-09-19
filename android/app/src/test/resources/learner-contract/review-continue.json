@@ -55,6 +55,7 @@
     "answered": 0,
     "total": 1,
     "misses": 1,
-    "help_offered": false
+    "help_offered": false,
+    "help": []
   }
 }

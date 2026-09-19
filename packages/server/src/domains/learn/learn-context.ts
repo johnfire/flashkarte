@@ -48,7 +48,7 @@ export function withLearnerLesson<T>(
     if (!subject) throw new NotFoundError("Subject not found");
     const lesson = await requireLesson(db, subject.id, slug);
     await repo.lockLearner(db, userId, lesson.id);
-    const loaded = await loadLesson(db, lesson);
+    const loaded = await loadLesson(db, lesson, userId);
     const progress = await repo.findProgress(db, userId, lesson.id);
     try {
       return await action({ db, subject, lesson, loaded, progress });

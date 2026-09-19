@@ -1,0 +1,35 @@
+{
+  "lesson": {
+    "slug": "embeddings",
+    "title": "Embeddings",
+    "stage": "testing"
+  },
+  "step": {
+    "kind": "screen",
+    "number": "5",
+    "index": 0,
+    "total": 5,
+    "can_go_back": false,
+    "blocks": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Embedding 1"
+          }
+        ]
+      }
+    ],
+    "sources": null,
+    "added_in_answer": null,
+    "help": [
+      {
+        "id": "<uuid>",
+        "status": "answered",
+        "answers": [
+          "5.010"
+        ]
+      }
+    ]
+  }
+}

@@ -134,6 +134,9 @@ export interface AccountExport {
     comments: Array<{
       subjectId: string;
       screen: string;
+      /** A comment on a screen, or an "I need more on this" request. */
+      kind: string;
+      selection: string | null;
       body: string;
       createdAt: string;
       resolvedAt: string | null;
@@ -377,6 +380,8 @@ export async function exportData(userId: string): Promise<AccountExport> {
       comments: screenComments.map((c) => ({
         subjectId: c.subject_id,
         screen: c.number,
+        kind: c.kind,
+        selection: c.selection,
         body: c.body,
         createdAt: c.created_at,
         resolvedAt: c.resolved_at,

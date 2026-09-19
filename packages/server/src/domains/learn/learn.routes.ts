@@ -37,3 +37,12 @@ learnRouter.get("/:id/lessons/:slug/insights", ctrl.insights);
 learnRouter.post("/:id/learn/screens/:number/comments", ctrl.addComment);
 learnRouter.get("/:id/lessons/:slug/comments", ctrl.listComments);
 learnRouter.post("/:id/comments/:commentId/resolve", ctrl.resolveComment);
+
+// "I need more on this": the learner asks; the owner's AI reads the queue and answers with sourced screens.
+learnRouter.post("/:id/learn/screens/:number/help", ctrl.askForMore);
+learnRouter.post(
+  "/:id/learn/questions/:questionId/help",
+  ctrl.askForMoreOnQuestion,
+);
+learnRouter.get("/:id/help", ctrl.openHelp);
+learnRouter.post("/:id/help/:requestId/answer", ctrl.answerHelp);

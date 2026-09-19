@@ -111,7 +111,9 @@
           "widthEm": 4.373,
           "heightEm": 1.131
         }
-      ]
+      ],
+      "sources": null,
+      "added_in_answer": null
     },
     {
       "number": "2",
@@ -124,7 +126,9 @@
             }
           ]
         }
-      ]
+      ],
+      "sources": null,
+      "added_in_answer": null
     },
     {
       "number": "3",
@@ -137,7 +141,9 @@
             }
           ]
         }
-      ]
+      ],
+      "sources": null,
+      "added_in_answer": null
     },
     {
       "number": "4",
@@ -150,7 +156,9 @@
             }
           ]
         }
-      ]
+      ],
+      "sources": null,
+      "added_in_answer": null
     }
   ]
 }

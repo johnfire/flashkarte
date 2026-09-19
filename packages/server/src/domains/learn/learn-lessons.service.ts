@@ -252,7 +252,9 @@ export async function lessonScreens(
       lesson: summary(ctx),
       screens: ctx.loaded.content.screens.map((number) => ({
         number,
-        blocks: ctx.loaded.screens.get(number),
+        blocks: ctx.loaded.screens.get(number)?.blocks,
+        sources: ctx.loaded.screens.get(number)?.sources ?? null,
+        added_in_answer: ctx.loaded.screens.get(number)?.addedInAnswer ?? null,
       })),
     };
   });

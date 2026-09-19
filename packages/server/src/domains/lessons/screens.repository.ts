@@ -12,6 +12,8 @@ export interface ScreenRow {
   blocks: unknown;
   author_kind: AuthorKind;
   sources: unknown;
+  /** The help request this screen was added to answer, if any. */
+  answers_request: string | null;
   retired_at: string | null;
 }
 
@@ -20,7 +22,7 @@ interface RawScreenRow extends Omit<ScreenRow, "number"> {
 }
 
 const SCREEN_COLS =
-  "s.id, s.subject_id, s.lesson_id, s.number, s.blocks, s.author_kind, s.sources, s.retired_at";
+  "s.id, s.subject_id, s.lesson_id, s.number, s.blocks, s.author_kind, s.sources, s.answers_request, s.retired_at";
 
 const toScreen = (row: RawScreenRow): ScreenRow => ({
   ...row,
@@ -103,12 +105,13 @@ export async function insertScreen(
     blocks: unknown;
     authorKind: AuthorKind;
     sources: unknown;
+    answersRequest?: string;
   },
 ): Promise<ScreenRow> {
   const result = await db.query<RawScreenRow>(
-    `INSERT INTO screens (subject_id, lesson_id, number, blocks, author_kind, sources)
-     VALUES ($1, $2, $3::numeric, $4::jsonb, $5, $6::jsonb)
-     RETURNING id, subject_id, lesson_id, number, blocks, author_kind, sources, retired_at`,
+    `INSERT INTO screens (subject_id, lesson_id, number, blocks, author_kind, sources, answers_request)
+     VALUES ($1, $2, $3::numeric, $4::jsonb, $5, $6::jsonb, $7)
+     RETURNING id, subject_id, lesson_id, number, blocks, author_kind, sources, answers_request, retired_at`,
     [
       fields.subjectId,
       fields.lessonId,
@@ -118,6 +121,7 @@ export async function insertScreen(
       fields.sources === undefined || fields.sources === null
         ? null
         : JSON.stringify(fields.sources),
+      fields.answersRequest ?? null,
     ],
   );
   return toScreen(result.rows[0]);

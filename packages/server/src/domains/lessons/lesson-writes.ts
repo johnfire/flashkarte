@@ -101,6 +101,8 @@ export async function createScreen(
     place?: Place;
     authorKind: screensRepo.AuthorKind;
     sources?: unknown;
+    /** The help request this screen answers. */
+    answersRequest?: string;
   },
 ): Promise<screensRepo.ScreenRow> {
   assertValidBlocks(fields.blocks);
@@ -118,6 +120,7 @@ export async function createScreen(
     blocks,
     authorKind: fields.authorKind,
     sources: fields.sources ?? null,
+    answersRequest: fields.answersRequest,
   });
 }
 

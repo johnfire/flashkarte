@@ -5,7 +5,9 @@ import type {
   Step,
 } from "@flashkarte/shared";
 import type { Queryable } from "../../db/queryable";
+import { normalizeScreenNumber } from "@flashkarte/shared";
 import type { LessonRow } from "../lessons/lessons.repository";
+import * as helpRepo from "./help-requests.repository";
 import * as questionsRepo from "../lessons/questions.repository";
 import * as screensRepo from "../lessons/screens.repository";
 
@@ -24,9 +26,26 @@ export interface LoadedQuestion {
   screens: string[];
   presentations: LoadedPresentation[];
 }
+/** What a client needs to draw a screen besides its blocks. */
+export interface LoadedScreen {
+  blocks: unknown;
+  sources: unknown;
+  /** Set for a screen added in answer to a "need more" request: who wrote the answer. */
+  addedInAnswer: "ai" | "human" | null;
+}
+/** A learner's request for more, and whether it has been answered. */
+export interface HelpStatus {
+  id: string;
+  status: "open" | "answered";
+  /** The screens added in answer, in order. */
+  answers: string[];
+  questionId: string | null;
+}
 export interface LoadedLesson {
   lesson: LessonRow;
-  screens: Map<string, unknown>;
+  screens: Map<string, LoadedScreen>;
+  /** This learner's requests on the lesson, by the number of the screen they asked about. */
+  help: Map<string, HelpStatus[]>;
   questions: LoadedQuestion[];
   content: SessionContent;
 }
@@ -39,6 +58,7 @@ export interface LoadedLesson {
 export async function loadLesson(
   db: Queryable,
   lesson: LessonRow,
+  userId?: string,
 ): Promise<LoadedLesson> {
   // One after the other: `db` is often a single transaction connection, which runs one query at a time.
   const screens = await screensRepo.listScreens(db, lesson.id);
@@ -65,7 +85,17 @@ export async function loadLesson(
     }));
   return {
     lesson,
-    screens: new Map(active.map((screen) => [screen.number, screen.blocks])),
+    screens: new Map(
+      active.map((screen) => [
+        screen.number,
+        {
+          blocks: screen.blocks,
+          sources: screen.sources,
+          addedInAnswer: screen.answers_request ? screen.author_kind : null,
+        },
+      ]),
+    ),
+    help: userId ? await loadHelp(db, userId, lesson.id) : new Map(),
     questions,
     content: {
       screens: active.map((screen) => screen.number),
@@ -100,6 +130,40 @@ export function narrowToQuestion(
   };
 }
 
+async function loadHelp(
+  db: Queryable,
+  userId: string,
+  lessonId: string,
+): Promise<Map<string, HelpStatus[]>> {
+  const byScreen = new Map<string, HelpStatus[]>();
+  for (const row of await helpRepo.listHelpStatus(db, userId, lessonId)) {
+    const list = byScreen.get(row.number) ?? [];
+    list.push({
+      id: row.id,
+      status: row.resolved_at ? "answered" : "open",
+      answers: row.answer_numbers.map((n) => normalizeScreenNumber(n)),
+      questionId: row.question_id,
+    });
+    byScreen.set(row.number, list);
+  }
+  return byScreen;
+}
+
+/** The public shape of a screen's extras: where it came from, its sources, and this learner's requests on it. */
+function screenExtras(loaded: LoadedLesson, number: string) {
+  const screen = loaded.screens.get(number);
+  return {
+    blocks: screen?.blocks,
+    sources: screen?.sources ?? null,
+    added_in_answer: screen?.addedInAnswer ?? null,
+    help: (loaded.help.get(number) ?? []).map((h) => ({
+      id: h.id,
+      status: h.status,
+      answers: h.answers,
+    })),
+  };
+}
+
 function presentationOf(
   loaded: LoadedLesson,
   questionId: string,
@@ -107,6 +171,12 @@ function presentationOf(
 ): LoadedPresentation {
   const question = loaded.questions.find((q) => q.id === questionId)!;
   return question.presentations.find((p) => p.id === presentationId)!;
+}
+
+export interface HelpPublic {
+  id: string;
+  status: "open" | "answered";
+  answers: string[];
 }
 
 export type RenderedStep =
@@ -117,6 +187,9 @@ export type RenderedStep =
       total: number;
       can_go_back: boolean;
       blocks: unknown;
+      sources: unknown;
+      added_in_answer: "ai" | "human" | null;
+      help: HelpPublic[];
     }
   | {
       kind: "question";
@@ -129,6 +202,8 @@ export type RenderedStep =
       total: number;
       misses: number;
       help_offered: boolean;
+      /** This learner's requests for more on this question. */
+      help: HelpPublic[];
     }
   | {
       kind: "remediation";
@@ -137,6 +212,9 @@ export type RenderedStep =
       of: number;
       help_offered: boolean;
       blocks: unknown;
+      sources: unknown;
+      added_in_answer: "ai" | "human" | null;
+      help: HelpPublic[];
     }
   | {
       kind: "passed";
@@ -156,7 +234,7 @@ export function renderStep(step: Step, loaded: LoadedLesson): RenderedStep {
         index: step.index,
         total: step.total,
         can_go_back: step.canGoBack,
-        blocks: loaded.screens.get(step.number),
+        ...screenExtras(loaded, step.number),
       };
     case "question": {
       const presentation = presentationOf(
@@ -176,6 +254,10 @@ export function renderStep(step: Step, loaded: LoadedLesson): RenderedStep {
         total: step.total,
         misses: step.misses,
         help_offered: step.helpOffered,
+        help: [...loaded.help.values()]
+          .flat()
+          .filter((h) => h.questionId === step.questionId)
+          .map(({ id, status, answers }) => ({ id, status, answers })),
       };
     }
     case "remediation":
@@ -185,7 +267,7 @@ export function renderStep(step: Step, loaded: LoadedLesson): RenderedStep {
         position: step.position,
         of: step.of,
         help_offered: step.helpOffered,
-        blocks: loaded.screens.get(step.number),
+        ...screenExtras(loaded, step.number),
       };
     case "passed":
       return {

@@ -86,7 +86,8 @@
     "answered": 2,
     "total": 3,
     "misses": 0,
-    "help_offered": false
+    "help_offered": false,
+    "help": []
   },
   "passed": false,
   "unlocked": []

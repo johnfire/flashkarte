@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 import { seededRandom } from "@flashkarte/shared";
 import { renderFormula } from "../maths/formula-renderer";
+import { answerRequest, requestHelpOnScreen } from "./help-requests.service";
 import { importLesson } from "../lessons/lesson-import.service";
 import * as concepts from "../subjects/concepts.service";
 import * as subjectsService from "../subjects/subjects.service";
@@ -293,6 +294,50 @@ it("the learner API's responses match the files the Android app decodes", async 
       random,
       later,
     ),
+  );
+
+  // "I need more on this": the request, what the learner sees while it waits, and once it is answered.
+  await learn.startLesson(LEARNER, subjectId, "embeddings", random);
+  const asked = await requestHelpOnScreen(LEARNER, subjectId, "5", {
+    selection: "Embedding 1",
+    note: "Why numbers?",
+  });
+  capture("help-request", asked);
+  capture(
+    "help-waiting",
+    await learn.currentLessonStep(LEARNER, subjectId, "embeddings", random),
+  );
+  await answerRequest(
+    LEARNER,
+    subjectId,
+    asked.id,
+    {
+      screens: [
+        {
+          blocks: [
+            {
+              type: "paragraph",
+              spans: [{ text: "Numbers can be compared." }],
+            },
+          ],
+          sources: [
+            {
+              title: "Transformers in LLMs (flashkarte deck, card 6)",
+              url: "https://example.com/card6",
+            },
+          ],
+        },
+      ],
+    },
+    "ai",
+  );
+  capture(
+    "help-answered",
+    await learn.currentLessonStep(LEARNER, subjectId, "embeddings", random),
+  );
+  capture(
+    "help-answer-screen",
+    await learn.goNext(LEARNER, subjectId, "embeddings", random),
   );
 
   // The pictures the server draws for maths, for the app's on-device tests to show.

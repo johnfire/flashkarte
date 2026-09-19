@@ -1,27 +1,33 @@
 {
   "lesson": {
-    "slug": "tokens",
-    "title": "Tokens",
+    "slug": "embeddings",
+    "title": "Embeddings",
     "stage": "testing"
   },
   "step": {
     "kind": "screen",
-    "number": "2",
-    "index": 1,
+    "number": "5",
+    "index": 0,
     "total": 4,
-    "can_go_back": true,
+    "can_go_back": false,
     "blocks": [
       {
         "type": "paragraph",
         "spans": [
           {
-            "text": "Second screen"
+            "text": "Embedding 1"
           }
         ]
       }
     ],
     "sources": null,
     "added_in_answer": null,
-    "help": []
+    "help": [
+      {
+        "id": "<uuid>",
+        "status": "open",
+        "answers": []
+      }
+    ]
   }
 }

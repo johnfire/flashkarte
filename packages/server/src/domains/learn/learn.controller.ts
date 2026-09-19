@@ -5,6 +5,7 @@ import { wrapAsync } from "../../utils/wrapAsync";
 import { auditFromRequest } from "../audit/audit.service";
 import { questionInsights } from "./learn-insights.service";
 import * as comments from "./screen-comments.service";
+import * as help from "./help-requests.service";
 import * as learn from "./learn-lessons.service";
 import { getLearnerOutline } from "./learn-outline.service";
 import * as reviews from "./learn-reviews.service";
@@ -168,4 +169,59 @@ export const resolveComment = wrapAsync(async (req: Request, res: Response) => {
     comment: req.params.commentId,
   });
   res.json(result);
+});
+
+export const askForMore = wrapAsync(async (req: Request, res: Response) => {
+  const result = await help.requestHelpOnScreen(
+    req.userId!,
+    req.params.id,
+    req.params.number,
+    req.body,
+  );
+  await audit(req, "help.requested", {
+    screen: result.number,
+    request: result.id,
+  });
+  res.status(201).json(result);
+});
+export const askForMoreOnQuestion = wrapAsync(
+  async (req: Request, res: Response) => {
+    const result = await help.requestHelpOnQuestion(
+      req.userId!,
+      req.params.id,
+      req.params.questionId,
+      req.body,
+    );
+    await audit(req, "help.requested", {
+      screen: result.number,
+      question: result.question_id,
+      request: result.id,
+    });
+    res.status(201).json(result);
+  },
+);
+
+/** For the owner's AI: what learners have asked for more on. */
+export const openHelp = wrapAsync(async (req: Request, res: Response) => {
+  res.json(
+    await help.listOpenHelpRequests(
+      req.userId!,
+      req.params.id,
+      typeof req.query.lesson === "string" ? req.query.lesson : undefined,
+    ),
+  );
+});
+export const answerHelp = wrapAsync(async (req: Request, res: Response) => {
+  const result = await help.answerRequest(
+    req.userId!,
+    req.params.id,
+    req.params.requestId,
+    req.body,
+    req.keyScope === "deck" ? "ai" : "human",
+  );
+  await audit(req, "help.answered", {
+    request: result.answered,
+    screens: result.screens,
+  });
+  res.status(201).json(result);
 });

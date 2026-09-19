@@ -1,0 +1,32 @@
+{
+  "lesson": {
+    "slug": "embeddings",
+    "title": "Embeddings",
+    "stage": "testing"
+  },
+  "step": {
+    "kind": "screen",
+    "number": "5.010",
+    "index": 1,
+    "total": 5,
+    "can_go_back": true,
+    "blocks": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Numbers can be compared."
+          }
+        ]
+      }
+    ],
+    "sources": [
+      {
+        "url": "https://example.com/card6",
+        "title": "Transformers in LLMs (flashkarte deck, card 6)"
+      }
+    ],
+    "added_in_answer": "ai",
+    "help": []
+  }
+}
