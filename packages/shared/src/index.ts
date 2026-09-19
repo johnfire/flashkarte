@@ -30,8 +30,14 @@ export type {
   ResolvedSpeech,
 } from "./speech/resolve";
 export * from "./slug";
+export {
+  CONCEPT_KINDS,
+  CONCEPT_TIERS,
+  EDGE_STRENGTHS,
+} from "./graph/concept-graph-types";
 export type {
   ConceptKind,
+  ConceptTier,
   EdgeStrength,
   ConceptNode,
   ConceptEdge,

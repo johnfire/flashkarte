@@ -1,7 +1,18 @@
-export type ConceptKind =
-  "term" | "idea" | "skill" | "map" | "capstone" | "assumption";
+export const CONCEPT_KINDS = [
+  "term",
+  "idea",
+  "skill",
+  "map",
+  "capstone",
+  "assumption",
+] as const;
+export type ConceptKind = (typeof CONCEPT_KINDS)[number];
 
-export type EdgeStrength = "requires" | "suggests";
+export const CONCEPT_TIERS = ["core", "extension"] as const;
+export type ConceptTier = (typeof CONCEPT_TIERS)[number];
+
+export const EDGE_STRENGTHS = ["requires", "suggests"] as const;
+export type EdgeStrength = (typeof EDGE_STRENGTHS)[number];
 
 export interface ConceptNode {
   id: string;
