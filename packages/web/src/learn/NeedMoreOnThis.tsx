@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import type { HelpNotice } from "../api/learn-types";
