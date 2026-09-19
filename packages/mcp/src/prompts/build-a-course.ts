@@ -52,6 +52,10 @@ real confusion exists.
    - Sense blocks (see create_deck's own description for the \
 "- meaning | example | hint" syntax) for a term with multiple genuinely \
 distinct meanings.
+   - Reading cards (see create_deck's own description for the "@read" \
+syntax) for the parts of learning that are just reading: the orientation \
+overview, background a later concept assumes, a worked explanation. Reading \
+is not tested, so pair each lesson with question cards on the same concept.
    - Do NOT use "@concept"/"@depth" tags -- that syntax isn't implemented \
 yet and would corrupt card content.
 

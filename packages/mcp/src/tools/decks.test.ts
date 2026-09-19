@@ -228,3 +228,25 @@ describe("deck MCP tools", () => {
     expect(descriptions["create_deck"]).toContain("# ");
   });
 });
+
+describe("deck tool descriptions", () => {
+  function descriptions(): Record<string, string> {
+    const found: Record<string, string> = {};
+    registerDeckTools({
+      tool: (...args: unknown[]) => {
+        found[args[0] as string] = args[1] as string;
+      },
+    } as never);
+    return found;
+  }
+
+  test.each(["create_deck", "add_cards"])(
+    "%s teaches the @read syntax and that reading is never mastery evidence",
+    (tool) => {
+      const text = descriptions()[tool];
+      expect(text).toMatch(/@read/);
+      expect(text).toMatch(/never counts toward mastery/);
+      expect(text).toMatch(/kept exactly as written/);
+    },
+  );
+});

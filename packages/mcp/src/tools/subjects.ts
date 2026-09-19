@@ -162,8 +162,11 @@ export function registerSubjectTools(server: McpServer) {
 
   server.tool(
     "link_concept_cards",
-    "Replace the set of cards that assess a concept. Mastery of the concept " +
-      "is computed from these cards, so link every card that tests it. " +
+    "Replace the set of cards attached to a concept. Mastery is computed from " +
+      "the ordinary question cards; reading cards (lessons, `@read`) linked " +
+      "here are offered to the learner first but never count toward mastery " +
+      "and never lock anything. Link every card that tests the concept, plus " +
+      "any lesson that teaches it. " +
       CARD_REFERENCE_HELP,
     {
       subject_id: subjectId,
@@ -199,8 +202,10 @@ export function registerSubjectTools(server: McpServer) {
     "Where the learner stands in a subject: every concept in route order " +
       "(prerequisites first) with state mastered / available / locked, " +
       "the frontier (what to study next), and a summary. A concept is " +
-      "mastered when all its assessing cards are stable; is_unassessed " +
-      "means it has no cards yet.",
+      "mastered when all its question cards are stable; is_unassessed " +
+      "means it has no question cards yet. needs_reading means an unread " +
+      "lesson (reading card) is waiting: tell the learner to read it before " +
+      "practising. A concept with only lessons is done once they are read.",
     { subject_id: subjectId },
     async ({ subject_id }) =>
       runTool("get_subject_progress", async () =>

@@ -35,6 +35,7 @@ describe("build_a_course prompt", () => {
     expect(text).toMatch(/create_deck/);
     expect(text).toMatch(/get_course/);
     expect(text).toMatch(/import_subject/);
+    expect(text).toMatch(/@read/);
     expect(text).toMatch(/hypothesis/i);
     // Depth ladders aren't implemented -- the prompt must warn against the
     // tag syntax, not instruct the AI to use it.

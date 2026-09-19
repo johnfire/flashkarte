@@ -35,6 +35,24 @@ const SENSES_HELP =
   "- move (in chess) | Das war ein guter Zug! | Schach\n" +
   "- draught | Es zieht, mach das Fenster zu. | Luft";
 
+const READING_HELP =
+  "Reading cards (lessons): for the parts of learning that are just reading — " +
+  "an orientation overview, background a later card assumes, a worked " +
+  "explanation — put `@read` on its own line above a card. Its front is the " +
+  "lesson title and the text after it is the body, kept exactly as written " +
+  "(paragraphs, `- ` lists, indented code) instead of being joined into one " +
+  'paragraph. The learner reads it and taps "Got it": there is no rating and ' +
+  "no scheduling, and reading never counts toward mastery, so put the " +
+  "questions on separate ordinary cards. Inside a body, avoid `## ` lines and " +
+  "numbered `**N. ...**` lines (they start a new category or card), and don't " +
+  "mix reading cards with branch (`-> label`) cards in one deck. Keep a lesson " +
+  "to a few short paragraphs. Example:\n\n" +
+  "@read\n" +
+  "**5. How a dot product measures similarity**\n" +
+  "A dot product multiplies matching entries and adds them up.\n\n" +
+  "- large and positive: the vectors point the same way\n" +
+  "- near zero: unrelated";
+
 const SPEECH_HELP =
   "Spoken cards: flashkarte can read a deck aloud using the device's own " +
   "text-to-speech voices. A language deck needs TWO languages — the front and " +
@@ -111,6 +129,8 @@ export function registerDeckTools(server: McpServer) {
       IMAGES_HELP +
       "\n\n" +
       SENSES_HELP +
+      "\n\n" +
+      READING_HELP +
       "\n\n" +
       SPEECH_HELP +
       "\n\nPass course_id to create this deck as the next unit of an " +
@@ -190,7 +210,9 @@ export function registerDeckTools(server: McpServer) {
       "\n\n" +
       IMAGES_HELP +
       "\n\n" +
-      SENSES_HELP,
+      SENSES_HELP +
+      "\n\n" +
+      READING_HELP,
     {
       deck_id: z.string().uuid().describe("The deck's UUID."),
       markdown: z
