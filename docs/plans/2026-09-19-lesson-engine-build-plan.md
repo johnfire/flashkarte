@@ -31,7 +31,8 @@ Answer the two questions the design admits it hasn't proven, before anything dep
 
 ## Slice 1: content model and authoring (M)
 
-Migrations for modules, lessons, screens, questions and their links; **shared TypeScript** for
+Migrations for modules, lessons, screens, questions (with their variants and their list of teaching
+screens) and their links; **shared TypeScript** for
 block validation and the lint from section 6 of the spec; testing/finished stage rules enforced
 server-side; MCP tools to author (create module and lesson, add screen, add question, set
 prerequisites, set stage); a derived outline endpoint. Reuses the existing subject, ownership,
@@ -45,7 +46,8 @@ audit-log and account-export patterns.
 ## Slice 2: the learner engine (M)
 
 The rules, as **pure shared logic** with exhaustive tests: lesson progress, the question loop (wrong
-answer → teaching screen → re-ask), pass, unlocking, outline states, and the adapter that feeds
+answer → teaching screens → re-ask a different variant, or from the back of the set with options
+shuffled), pass, unlocking, outline states, and the adapter that feeds
 question reviews into the existing scheduler. Endpoints to read a lesson, record screen reads and
 question answers, and fetch the outline with the learner's states. A "walk" test (like the
 Transformers one) drives a learner through a whole subject to prove nothing deadlocks and nothing

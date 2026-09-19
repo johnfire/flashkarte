@@ -24,7 +24,7 @@ of other people's lessons; question types beyond multiple choice (later slices).
 | Unit of learning | A **lesson**: 4 to 10 numbered screens (one idea each, read not flipped), then 3 to 5 questions                                                                                                                                                                                                                          |
 | Size             | Not a constraint. A complex subject is 400+ screens. Modules group lessons                                                                                                                                                                                                                                               |
 | Graph node       | The **lesson**, a bundle of a few of the old concepts. The old concepts stay as the lesson's **coverage checklist**                                                                                                                                                                                                      |
-| Pass rule        | A wrong answer shows the screen that teaches it, then re-asks. Passed only when every question is right. First-try score is recorded                                                                                                                                                                                     |
+| Pass rule        | A wrong answer shows the screens that teach it, then re-asks (with a different variant of the question when one exists). Passed only when every question is right. First-try score is recorded                                                                                                                           |
 | Retention        | After passing, each question gets its own spaced-review schedule. A miss sends the learner back to its screen                                                                                                                                                                                                            |
 | Storage          | Structured data through the API/MCP. **No new markdown syntax, no new parser**                                                                                                                                                                                                                                           |
 | Screen content   | Structured **blocks**: paragraph, list, code, image, callout, formula. Paragraphs allow only bold, italic, inline code                                                                                                                                                                                                   |
@@ -44,7 +44,7 @@ Subject
   └─ Module            a named group of lessons, for browsing and progress
        └─ Lesson       a node in the prerequisite graph
             ├─ Screen  numbered, ordered by number, made of blocks
-            └─ Question  belongs to a lesson, names the screen that teaches it
+            └─ Question  belongs to a lesson, names the screens that teach it
 ```
 
 - **Lesson:** `title`, `summary` (one or two sentences, "what you will learn"), `module`,
@@ -52,10 +52,14 @@ Subject
   the written reason, derived at first from the reviewed concept edges).
 - **Screen:** `number` (exact decimal, unique within the subject), `lesson`, `blocks`,
   `layer` (`shared` or `private`), `author` (`human` or `ai`, with sources for AI).
-- **Question (v1: multiple choice):** `lesson`, `teaches` (a screen number), `prompt`,
-  `options` (each with `correct` and a short `reason` shown after the pick), `covers`
-  (concept slugs it tests).
-- **Learner progress:** screens read (by number), each question's status, first-try score,
+- **Question (v1: multiple choice):** `lesson`, `teaches` (**a list** of one or more screen
+  numbers; on a miss the learner is shown all of them, in order), `prompt`, `options` (each with
+  `correct` and a short `reason` shown after the pick), `covers` (concept slugs it tests), and
+  optional **`variants`**: equivalent questions worded differently, each with its own options and
+  reasons and the same `teaches` and `covers`. Which variant a learner sees first is chosen at
+  random.
+- **Learner progress:** screens read (by number; a screen counts as read when the learner moves
+  past it with Next, which cannot prove they read it, so the questions are what prove understanding), each question's status, first-try score,
   lesson passed or not. Per-question review state for retention (reusing the existing scheduler).
 
 **Numbering rules.** Stored as an exact decimal, shown with at least three decimals when
@@ -76,8 +80,11 @@ outline is derived from the graph, not authored separately, so it can never disa
 2. **Screens**, one at a time: "Screen 3 of 8" plus the small permanent number, Back and Next.
    Position and scroll are remembered.
 3. **Questions**, 3 to 5, after the last screen. A right answer shows its reason and moves on.
-4. **A wrong answer** shows the reason, then the teaching screen (number shown), then the same
-   question again. Repeats until right.
+4. **A wrong answer** shows the reason, then the teaching screens (numbers shown), then asks
+   again. The re-ask uses a **different variant** when the question has one; if it has none, the
+   question goes to the back of the set with its options shuffled, so the learner is not just
+   repeating an answer they saw seconds ago. Repeats until right. Real retention is tested later by
+   the spaced review.
 5. **Lesson passed** when all are right. The next lessons unlock and its questions join review.
 6. **Review:** a due question is asked on its own; a miss sends the learner to its screen, then
    re-asks (same loop as 4).
@@ -88,12 +95,14 @@ outline is derived from the graph, not authored separately, so it can never disa
 Authored through MCP tools (create lesson, add screens, add questions, set prerequisites, publish
 a stage), the same way the subject graph is. The server **lints** before saving:
 
-- every question names a screen that exists in its lesson;
+- every question names at least one screen, and every screen it names exists in its lesson;
+- every variant covers the same concepts and points at the same screens as its question;
 - every concept a lesson covers is tested by at least one question, and every question covers a
   concept the lesson lists (so nothing is taught untested, nothing tested untaught);
 - a screen has at least one block and no empty text; images resolve; formulas render;
 - warnings, not errors: a lesson with fewer than 4 or more than 10 screens, or fewer than 3 or more
-  than 5 questions.
+  than 5 questions, or a question with no variant (so a miss can only be re-asked from the back of
+  the set).
 
 Stages are set **per lesson**. In the **testing** stage anything can change and no promise is made to learners. **Finished**
 freezes numbers: inserts are allowed (safe, because numbers never change), deletes, reorders and
