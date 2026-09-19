@@ -61,6 +61,19 @@
           {
             "code": true,
             "text": "cat"
+          },
+          {
+            "text": " and the key size "
+          },
+          {
+            "math": {
+              "spoken": "d sub k",
+              "assetId": "<uuid>",
+              "depthEm": 0.179,
+              "widthEm": 1.099,
+              "heightEm": 0.964
+            },
+            "text": "d_k"
           }
         ]
       },

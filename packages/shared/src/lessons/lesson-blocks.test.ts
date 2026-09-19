@@ -1,5 +1,6 @@
 import {
   formulasWithoutSpokenText,
+  inlineMathWithoutSpokenText,
   MAX_BLOCKS_PER_LIST,
   MAX_LIST_ITEMS,
   validateBlocks,
@@ -205,5 +206,82 @@ describe("a rendered formula", () => {
       depthEm: 0.179,
     });
     expect(blocks[1]).toEqual({ type: "formula", latex: "x" });
+  });
+});
+
+describe("maths inside a sentence", () => {
+  const sentence = (spans: unknown[]) =>
+    validateBlocks([{ type: "paragraph", spans }]);
+
+  it("keeps the LaTeX in text and the spoken words in math, in paragraphs, lists and callouts", () => {
+    const math = { text: "d_k", math: { spoken: "d sub k" } };
+    const { blocks, issues } = validateBlocks([
+      { type: "paragraph", spans: [{ text: "The key size " }, math] },
+      { type: "list", ordered: false, items: [[math]] },
+      { type: "callout", tone: "note", spans: [math] },
+    ]);
+    expect(issues).toEqual([]);
+    expect(blocks).toHaveLength(3);
+    expect((blocks[0] as { spans: unknown[] }).spans[1]).toEqual({
+      text: "d_k",
+      math: { spoken: "d sub k" },
+    });
+  });
+
+  it("accepts a bare maths span, and keeps only well-formed rendering fields", () => {
+    const { blocks, issues } = sentence([
+      {
+        text: "x_i",
+        math: { assetId: "a1", widthEm: 1.2, heightEm: 0.8, depthEm: 0.2 },
+      },
+      { text: "y", math: { widthEm: "wide", depthEm: -1 } },
+    ]);
+    expect(issues).toEqual([]);
+    const spans = (blocks[0] as { spans: { math: object }[] }).spans;
+    expect(spans[0].math).toEqual({
+      assetId: "a1",
+      widthEm: 1.2,
+      heightEm: 0.8,
+      depthEm: 0.2,
+    });
+    expect(spans[1].math).toEqual({});
+  });
+
+  it.each([
+    [
+      "a maths flag that is not an object",
+      { text: "x", math: true },
+      /math must be an object/,
+    ],
+    ["empty LaTeX", { text: " ", math: {} }, /needs its LaTeX/],
+    [
+      "a long formula",
+      { text: "x".repeat(301), math: {} },
+      /at most 300 characters/,
+    ],
+    ["bold maths", { text: "x", bold: true, math: {} }, /cannot also be bold/],
+  ])("refuses %s", (_name, span, message) => {
+    const { issues } = sentence([{ text: "see " }, span]);
+    expect(issues.map((i) => `${i.path} ${i.message}`).join("\n")).toMatch(
+      message,
+    );
+  });
+
+  it("finds inline maths a screen reader could not say", () => {
+    const { blocks } = validateBlocks([
+      {
+        type: "paragraph",
+        spans: [
+          { text: "a", math: {} },
+          { text: "b", math: { spoken: "b" } },
+          { text: "plain" },
+        ],
+      },
+      { type: "list", ordered: true, items: [[{ text: "c", math: {} }]] },
+    ]);
+    expect(inlineMathWithoutSpokenText(blocks).map((s) => s.text)).toEqual([
+      "a",
+      "c",
+    ]);
   });
 });

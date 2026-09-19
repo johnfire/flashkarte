@@ -73,6 +73,7 @@ export {
   CALLOUT_TONES,
   IMAGE_DISPLAYS,
   formulasWithoutSpokenText,
+  inlineMathWithoutSpokenText,
   validateBlocks,
 } from "./lessons/lesson-blocks";
 export type {
@@ -83,6 +84,7 @@ export type {
   FormulaBlock,
   ImageBlock,
   ImageDisplay,
+  InlineMath,
   Span,
 } from "./lessons/lesson-blocks";
 export {

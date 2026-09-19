@@ -270,6 +270,145 @@ describe("a formula is drawn when its screen is saved", () => {
   });
 });
 
+describe("maths inside a sentence is drawn inline", () => {
+  it("draws each symbol in its own inline style, in paragraphs, lists and callouts, and reuses repeats", async () => {
+    await screens.addScreen(
+      OWNER,
+      subjectId,
+      "softmax",
+      {
+        blocks: [
+          {
+            type: "paragraph",
+            spans: [
+              { text: "The key size " },
+              { text: "d_k", math: { spoken: "d sub k" } },
+              { text: " and " },
+              { text: "d_k", math: { spoken: "d sub k" } },
+            ],
+          },
+          {
+            type: "list",
+            ordered: false,
+            items: [
+              [
+                {
+                  text: "x_i",
+                  math: { spoken: "x sub i", assetId: "forged", widthEm: 99 },
+                },
+              ],
+            ],
+          },
+          { type: "callout", tone: "note", spans: [{ text: "y", math: {} }] },
+        ],
+      },
+      "ai",
+    );
+    const drawn = await formulaAssets();
+    expect(drawn.map((a) => `${a.latex}:${a.display}`).sort()).toEqual([
+      "d_k:false",
+      "x_i:false",
+      "y:false",
+    ]);
+
+    const blocks = await blocksOf("1");
+    const paragraph = (
+      blocks[0] as unknown as {
+        spans: { text: string; math?: Record<string, unknown> }[];
+      }
+    ).spans;
+    const dk = drawn.find((a) => a.latex === "d_k")!;
+    expect(paragraph[1]).toEqual({
+      text: "d_k",
+      math: {
+        spoken: "d sub k",
+        assetId: dk.id,
+        widthEm: dk.width_em,
+        heightEm: dk.height_em,
+        depthEm: dk.depth_em,
+      },
+    });
+    expect(paragraph[3].math!.assetId).toBe(dk.id);
+    expect(paragraph[0]).toEqual({ text: "The key size " });
+    // Anything the author supplied for the picture is replaced by the server's.
+    const item = (
+      blocks[1] as unknown as { items: { math: Record<string, unknown> }[][] }
+    ).items[0][0];
+    expect(item.math.assetId).not.toBe("forged");
+    expect(item.math.widthEm).not.toBe(99);
+  });
+
+  it("draws the same LaTeX separately for a display block and for a symbol in a sentence", async () => {
+    await screens.addScreen(
+      OWNER,
+      subjectId,
+      "softmax",
+      {
+        blocks: [
+          formula("\\sum_i x_i"),
+          { type: "paragraph", spans: [{ text: "\\sum_i x_i", math: {} }] },
+        ],
+      },
+      "ai",
+    );
+    const drawn = await formulaAssets();
+    expect(drawn.map((a) => a.display).sort()).toEqual([false, true]);
+  });
+
+  it("refuses a symbol MathJax cannot read, naming it", async () => {
+    await expect(
+      screens.addScreen(
+        OWNER,
+        subjectId,
+        "softmax",
+        {
+          blocks: [
+            {
+              type: "paragraph",
+              spans: [{ text: "see " }, { text: "\\href{x}{y}", math: {} }],
+            },
+          ],
+        },
+        "ai",
+      ),
+    ).rejects.toThrow(/could not be read/);
+  });
+
+  it("puts a symbol in a question's prompt on the line too", async () => {
+    await screens.addScreen(
+      OWNER,
+      subjectId,
+      "softmax",
+      { blocks: para("teach") },
+      "ai",
+    );
+    await questions.addQuestion(OWNER, subjectId, "softmax", {
+      prompt: [
+        {
+          type: "paragraph",
+          spans: [
+            { text: "What is " },
+            { text: "d_k", math: { spoken: "d sub k" } },
+            { text: "?" },
+          ],
+        },
+      ],
+      options: [
+        { correct: true, blocks: para("a"), reason: para("b") },
+        { correct: false, blocks: para("c"), reason: para("d") },
+      ],
+      teaches: ["1"],
+      covers: ["softmax"],
+    });
+    const stored = (
+      await getPool().query(
+        `SELECT prompt FROM lesson_questions WHERE parent_id IS NULL`,
+      )
+    ).rows[0];
+    expect(stored.prompt[0].spans[1].math).toHaveProperty("assetId");
+  });
+});
+
 describe("a formula picture belongs to the subject", () => {
   it("is not served from another subject, is exported with its source, and goes with the subject", async () => {
     await screens.addScreen(

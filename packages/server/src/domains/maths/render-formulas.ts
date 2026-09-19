@@ -1,4 +1,9 @@
-import { validateBlocks, type FormulaBlock } from "@flashkarte/shared";
+import {
+  validateBlocks,
+  type Block,
+  type FormulaBlock,
+  type Span,
+} from "@flashkarte/shared";
 import type { Queryable } from "../../db/queryable";
 import * as assets from "../assets/assets.repository";
 import { renderFormula } from "./formula-renderer";
@@ -12,40 +17,120 @@ import { renderFormula } from "./formula-renderer";
  * job, and it is reported there.
  */
 
-/** A formula block is a display formula (on its own line). Inline symbols are drawn in a later step. */
+/** A formula block is a display formula (on its own line); a symbol in a sentence is drawn inline. */
 const DISPLAY = true;
+const INLINE = false;
 
-async function drawn(
+interface Picture {
+  assetId: string;
+  widthEm: number;
+  heightEm: number;
+  depthEm: number;
+}
+
+/** The picture of a formula in one style: the stored one, or drawn now and stored for next time. */
+async function pictureOf(
   db: Queryable,
   subjectId: string,
-  block: FormulaBlock,
+  latex: string,
+  display: boolean,
   authorKind: assets.AssetAuthor,
-): Promise<FormulaBlock> {
-  let asset = await assets.findFormulaAsset(
-    db,
-    subjectId,
-    block.latex,
-    DISPLAY,
-  );
+): Promise<Picture> {
+  let asset = await assets.findFormulaAsset(db, subjectId, latex, display);
   if (!asset) {
-    const picture = renderFormula(block.latex, DISPLAY);
+    const picture = renderFormula(latex, display);
     asset = await assets.insertFormulaAsset(db, {
       subjectId,
-      latex: block.latex,
-      display: DISPLAY,
+      latex,
+      display,
       authorKind,
       ...picture,
     });
   }
   return {
-    type: "formula",
-    latex: block.latex,
-    ...(block.spoken && { spoken: block.spoken }),
     assetId: asset.id,
     widthEm: asset.width_em,
     heightEm: asset.height_em,
     depthEm: asset.depth_em,
   };
+}
+
+async function drawnBlock(
+  db: Queryable,
+  subjectId: string,
+  block: FormulaBlock,
+  authorKind: assets.AssetAuthor,
+): Promise<FormulaBlock> {
+  const picture = await pictureOf(
+    db,
+    subjectId,
+    block.latex,
+    DISPLAY,
+    authorKind,
+  );
+  return {
+    type: "formula",
+    latex: block.latex,
+    ...(block.spoken && { spoken: block.spoken }),
+    ...picture,
+  };
+}
+
+async function drawnSpans(
+  db: Queryable,
+  subjectId: string,
+  spans: Span[],
+  authorKind: assets.AssetAuthor,
+): Promise<Span[]> {
+  const drawn: Span[] = [];
+  for (const span of spans) {
+    if (!span.math) {
+      drawn.push(span);
+      continue;
+    }
+    const picture = await pictureOf(
+      db,
+      subjectId,
+      span.text,
+      INLINE,
+      authorKind,
+    );
+    drawn.push({
+      text: span.text,
+      math: {
+        ...(span.math.spoken && { spoken: span.math.spoken }),
+        ...picture,
+      },
+    });
+  }
+  return drawn;
+}
+
+async function drawnContent(
+  db: Queryable,
+  subjectId: string,
+  block: Block,
+  authorKind: assets.AssetAuthor,
+): Promise<Block> {
+  switch (block.type) {
+    case "formula":
+      return drawnBlock(db, subjectId, block, authorKind);
+    case "paragraph":
+    case "callout":
+      return {
+        ...block,
+        spans: await drawnSpans(db, subjectId, block.spans, authorKind),
+      };
+    case "list": {
+      const items: Span[][] = [];
+      for (const item of block.items) {
+        items.push(await drawnSpans(db, subjectId, item, authorKind));
+      }
+      return { ...block, items };
+    }
+    default:
+      return block;
+  }
 }
 
 export async function renderBlocks(
@@ -56,13 +141,9 @@ export async function renderBlocks(
 ): Promise<unknown> {
   const { blocks, issues } = validateBlocks(input);
   if (issues.length > 0) return input;
-  const rendered = [];
+  const rendered: Block[] = [];
   for (const block of blocks) {
-    rendered.push(
-      block.type === "formula"
-        ? await drawn(db, subjectId, block, authorKind)
-        : block,
-    );
+    rendered.push(await drawnContent(db, subjectId, block, authorKind));
   }
   return rendered;
 }

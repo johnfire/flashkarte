@@ -1,5 +1,6 @@
 import {
   formulasWithoutSpokenText,
+  inlineMathWithoutSpokenText,
   validateBlocks,
   type Block,
 } from "./lesson-blocks";
@@ -324,6 +325,13 @@ export function lintLesson(lesson: LessonInput): LessonIssue[] {
       "completeness",
       "FORMULA_NO_SPOKEN_TEXT",
       `A formula has no spoken text for screen readers: ${formula.latex.slice(0, 40)}`,
+    );
+  }
+  for (const span of inlineMathWithoutSpokenText(blocks)) {
+    add(
+      "completeness",
+      "MATH_NO_SPOKEN_TEXT",
+      `A symbol in a sentence has no spoken text for screen readers: ${span.text.slice(0, 40)}`,
     );
   }
   checkImages(lesson, blocks, add);

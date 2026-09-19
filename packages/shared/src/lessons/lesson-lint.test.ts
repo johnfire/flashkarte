@@ -238,6 +238,30 @@ describe("completeness rules only block finishing", () => {
   });
 });
 
+describe("maths in a sentence", () => {
+  it("wants spoken text to finish, but not to save", () => {
+    const base = goodLesson();
+    const lesson = goodLesson({
+      screens: [
+        {
+          number: base.screens[0].number,
+          blocks: [
+            {
+              type: "paragraph",
+              spans: [{ text: "The size " }, { text: "d_k", math: {} }],
+            },
+          ],
+        },
+        ...base.screens.slice(1),
+      ],
+    });
+    const issues = lintLesson(lesson);
+    expect(codes(lesson, "completeness")).toContain("MATH_NO_SPOKEN_TEXT");
+    expect(canSave(issues)).toBe(true);
+    expect(canFinish(issues)).toBe(false);
+  });
+});
+
 describe("images that point at stored diagrams", () => {
   const ASSET = "0a1b2c3d-0000-4000-8000-000000000001";
   // The good lesson with its first screen swapped for one holding the image.

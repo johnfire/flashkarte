@@ -29,13 +29,32 @@ export const MAX_SPANS = 60;
 export const MAX_TEXT_LENGTH = 2000;
 export const MAX_CODE_LENGTH = 4000;
 export const MAX_LATEX_LENGTH = 2000;
+/** A symbol in a sentence is short; a long formula belongs in its own formula block. */
+export const MAX_INLINE_LATEX_LENGTH = 300;
 export const MAX_ALT_LENGTH = 300;
 
+/**
+ * A symbol or short formula inside a sentence. The span's `text` holds its LaTeX (so an app that
+ * does not know about maths still shows something readable); the server draws it when the screen is
+ * saved and fills in the picture and its size.
+ */
+export interface InlineMath {
+  /** How a screen reader says it. Required to finish a lesson, not to save one. */
+  spoken?: string;
+  /** The rendered SVG asset. The server sets these; an author cannot. */
+  assetId?: string;
+  widthEm?: number;
+  heightEm?: number;
+  /** How far the picture hangs below the text baseline, so it can sit on the line. */
+  depthEm?: number;
+}
 export interface Span {
   text: string;
   bold?: boolean;
   italic?: boolean;
   code?: boolean;
+  /** When present, `text` is LaTeX drawn as a picture in the sentence. */
+  math?: InlineMath;
 }
 export interface ParagraphBlock {
   type: "paragraph";
@@ -98,6 +117,55 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+const size = (value: unknown): number | undefined =>
+  typeof value === "number" && Number.isFinite(value) && value >= 0
+    ? value
+    : undefined;
+
+/** The rendering fields of a maths span or block, normalised: only well-formed values survive. */
+function renderedFields(raw: Record<string, unknown>) {
+  const assetId = typeof raw.assetId === "string" ? raw.assetId : undefined;
+  const [widthEm, heightEm, depthEm] = [
+    raw.widthEm,
+    raw.heightEm,
+    raw.depthEm,
+  ].map(size);
+  return {
+    ...(assetId && { assetId }),
+    ...(widthEm !== undefined && { widthEm }),
+    ...(heightEm !== undefined && { heightEm }),
+    ...(depthEm !== undefined && { depthEm }),
+  };
+}
+
+function validateInlineMath(
+  raw: Record<string, unknown>,
+  at: string,
+  report: Reporter,
+): InlineMath | undefined {
+  const math = raw.math;
+  if (!isRecord(math)) {
+    report(`${at}.math`, "must be an object (it can be empty)");
+    return undefined;
+  }
+  if ((raw.text as string).trim() === "")
+    report(at, "a maths span needs its LaTeX in text");
+  if ((raw.text as string).length > MAX_INLINE_LATEX_LENGTH) {
+    report(
+      at,
+      `a symbol in a sentence is at most ${MAX_INLINE_LATEX_LENGTH} characters: put a long formula in its own formula block`,
+    );
+  }
+  if (raw.bold === true || raw.italic === true || raw.code === true) {
+    report(at, "a maths span cannot also be bold, italic or code");
+  }
+  const spoken =
+    typeof math.spoken === "string" && math.spoken.trim() !== ""
+      ? math.spoken
+      : undefined;
+  return { ...(spoken && { spoken }), ...renderedFields(math) };
+}
+
 function validateSpans(
   value: unknown,
   path: string,
@@ -129,11 +197,14 @@ function validateSpans(
       }
     }
     if (raw.text.trim() !== "") hasText = true;
+    const math =
+      raw.math === undefined ? undefined : validateInlineMath(raw, at, report);
     spans.push({
       text: raw.text,
       ...(raw.bold === true && { bold: true }),
       ...(raw.italic === true && { italic: true }),
       ...(raw.code === true && { code: true }),
+      ...(math && { math }),
     });
   });
   if (!hasText) report(path, "is empty");
@@ -270,24 +341,11 @@ function validateFormula(
     typeof raw.spoken === "string" && raw.spoken.trim() !== ""
       ? raw.spoken
       : undefined;
-  const assetId = typeof raw.assetId === "string" ? raw.assetId : undefined;
-  const size = (value: unknown): number | undefined =>
-    typeof value === "number" && Number.isFinite(value) && value >= 0
-      ? value
-      : undefined;
-  const [widthEm, heightEm, depthEm] = [
-    raw.widthEm,
-    raw.heightEm,
-    raw.depthEm,
-  ].map(size);
   return {
     type: "formula",
     latex: raw.latex,
     ...(spoken && { spoken }),
-    ...(assetId && { assetId }),
-    ...(widthEm !== undefined && { widthEm }),
-    ...(heightEm !== undefined && { heightEm }),
-    ...(depthEm !== undefined && { depthEm }),
+    ...renderedFields(raw),
   };
 }
 
@@ -321,6 +379,22 @@ export function validateBlocks(
 }
 
 /** Formulas among these blocks that have no spoken text (a completeness rule, not a structural one). */
+/** Every span of a paragraph, list or callout, wherever it is. */
+function allSpans(blocks: Block[]): Span[] {
+  return blocks.flatMap((block) =>
+    block.type === "paragraph" || block.type === "callout"
+      ? block.spans
+      : block.type === "list"
+        ? block.items.flat()
+        : [],
+  );
+}
+
+/** Inline maths a screen reader could not say. */
+export function inlineMathWithoutSpokenText(blocks: Block[]): Span[] {
+  return allSpans(blocks).filter((span) => span.math && !span.math.spoken);
+}
+
 export function formulasWithoutSpokenText(blocks: Block[]): FormulaBlock[] {
   return blocks.filter(
     (block): block is FormulaBlock => block.type === "formula" && !block.spoken,

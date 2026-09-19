@@ -98,6 +98,8 @@ const RICH_SCREEN = [
       { text: "a piece", italic: true },
       { text: " of text, like " },
       { text: "cat", code: true },
+      { text: " and the key size " },
+      { text: "d_k", math: { spoken: "d sub k" } },
     ],
   },
   {
