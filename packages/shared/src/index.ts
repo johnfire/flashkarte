@@ -107,3 +107,46 @@ export type {
   OutlineModuleInput,
   OutlineUnlock,
 } from "./lessons/lesson-outline";
+export {
+  HELP_AFTER_MISSES,
+  SessionError,
+  answerQuestion,
+  comeBackLater,
+  continueRemediation,
+  describeStep,
+  lessonResult,
+  nextScreen,
+  previousScreen,
+  reconcile,
+  resume,
+  startSession,
+} from "./lessons/lesson-session";
+export type {
+  AnswerOutcome,
+  FirstTry,
+  LessonResult,
+  LessonSession,
+  PresentationContent,
+  QuestionContent,
+  QuestionRun,
+  SessionContent,
+  SessionPhase,
+  Step,
+} from "./lessons/lesson-session";
+export { canOpen, computeLessonAccess } from "./lessons/lesson-unlock";
+export type {
+  LessonAccess,
+  LessonAccessInfo,
+  LessonProgressStatus,
+  PrerequisiteEdge,
+} from "./lessons/lesson-unlock";
+export {
+  INITIAL_REVIEW_STATE,
+  RATING_RIGHT,
+  RATING_WRONG,
+  dueQuestionIds,
+  isReviewDue,
+  ratingFor,
+  scheduleReview,
+} from "./lessons/question-review";
+export type { ScheduledReview } from "./lessons/question-review";
