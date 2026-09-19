@@ -1,8 +1,8 @@
-import fs from "fs";
 import path from "path";
 import { test, expect, Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { MAIL_SINK } from "./playwright.config";
+import { signUpVerifyAndSignIn } from "./support";
 
 // End-to-end coverage for reading cards (lessons): a lesson is read and
 // acknowledged with "Got it", never rated, kept out of the review counts, and
@@ -28,55 +28,6 @@ const DECK = [
   "It turns scores into probabilities.",
   "",
 ].join("\n");
-
-function lastMailTo(address: string): { text: string } {
-  const lines = fs
-    .readFileSync(MAIL_SINK, "utf8")
-    .trim()
-    .split("\n")
-    .map((l) => JSON.parse(l) as { to: string; text: string });
-  const mail = lines.filter((m) => m.to === address).pop();
-  if (!mail) throw new Error(`no mail captured for ${address}`);
-  return mail;
-}
-
-/** Decline analytics up front (the privacy-preserving choice) so the consent banner never covers the page. */
-async function declineAnalytics(page: Page) {
-  await page.addInitScript(() => {
-    const ninetyDays = 90 * 24 * 60 * 60 * 1000;
-    localStorage.setItem(
-      "flashkarte.analytics-consent",
-      `rejected:${Date.now() + ninetyDays}`,
-    );
-  });
-}
-
-async function signUpVerifyAndSignIn(page: Page, email: string) {
-  await declineAnalytics(page);
-  const password = "E2ePassword-1";
-  await page.goto("/login?mode=signup");
-  await page.getByLabel("Email").fill(email);
-  await page
-    .getByLabel("Password (min 8 chars)", { exact: true })
-    .fill(password);
-  await page.getByRole("button", { name: "Sign up", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "My Decks" })).toBeVisible();
-
-  const link = lastMailTo(email).text.match(
-    /https?:\/\/\S+verify-email\S+/,
-  )?.[0];
-  expect(link, "verification link present in the captured mail").toBeTruthy();
-  await page.goto(link!);
-  await expect(page.getByText(/verified/i).first()).toBeVisible();
-
-  await page.goto("/login");
-  await page.getByLabel("Email").fill(email);
-  await page
-    .getByLabel("Password (min 8 chars)", { exact: true })
-    .fill(password);
-  await page.getByRole("button", { name: "Sign in", exact: true }).click();
-  await expect(page.getByRole("heading", { name: "My Decks" })).toBeVisible();
-}
 
 test("a lesson is read with Got it, never rated, and is not offered again", async ({
   page,

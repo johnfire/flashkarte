@@ -56,7 +56,7 @@ unlocks early.
 - **Verified by:** unit tests of every transition; real-Postgres integration tests; the walk test.
 - **Decision needed first:** the pass-loop escape hatch (see below).
 
-## Slice 3: web learner UI (M)
+## Slice 3: web learner UI (M) — **DONE 2026-09-19** (see "What slice 3 decided and found" below)
 
 Outline, screen reader (number shown, Back/Next, position remembered), questions and the loop,
 lesson-passed state, review of due questions, and an owner-only "comment on this screen" (a note
@@ -219,3 +219,48 @@ lesson is also learned end to end through the learner path (with one deliberate 
 **Not in slice 2, by design:** any screen a learner sees (slice 3); the entry check or test-out (it fits
 right after slice 2, since it reuses the question engine: still your decision on recommend versus block);
 help requests (slice 7).
+
+## What slice 3 decided and found
+
+Built and verified locally: 21 new component tests, 8 new server tests, a real-browser Playwright spec
+with the axe accessibility check (light and dark), the whole e2e suite (24 pass), and the full lint,
+format, typecheck, build, unit and integration sweep. Nothing pushed.
+
+**What exists:** a **Learn** link on the deck list opens `/learn` (your subjects), then
+`/learn/:subject` (the outline: modules, each lesson with its state in words, what a locked lesson
+waits for, reviews due), then a lesson: numbered screens with Back and Next, the questions, the
+wrong-answer loop, "come back later", open book, the passed screen, and a read-only "Read again" for a
+passed lesson. `/learn/:subject/reviews` asks due questions one at a time. Every string is in English,
+German, Spanish and French. Screens are drawn natively from blocks, never as markdown.
+
+**Owner comments on a screen** (added because the pilot needs them): while learning, "Comment on screen
+2.010" saves a note against that permanent number (migration 027). Your AI reads open comments with the
+MCP tool `list_screen_comments`, answers them (usually with a clarifying screen numbered next to it) and
+marks them done with `resolve_screen_comment`, recorded as the AI. Exported, erased with the account or the
+screen, audited, in the GDPR record. The comment text is described to the AI as data, not instructions.
+
+**Decisions taken while building** (flag any you disagree with):
+
+1. **The verdict comes first, then the next step.** After an answer the reasons are shown and nothing
+   moves until the learner presses Continue (or "Look at the screen again" after a miss), even though the
+   server has already advanced.
+2. **State is said in words** (Locked, Ready, In progress, Passed, "Come back later"), not colour alone;
+   the right and chosen options are labelled "Right answer" and "Your answer".
+3. **From the second miss** the learner sees why it may be the lesson rather than them, and "Come back
+   later". The "I need more on this" button is **not there yet**: it arrives with help requests (slice 7).
+4. **A locked lesson has no link** on the outline, and opening its address shows the server's message.
+5. **Images and formulas are placeholders** for now (alt text; LaTeX with its spoken text) until slices 5 and 6.
+6. **Reviews live at the subject** (`/learn/:subject/reviews`), reached from the outline's "N questions are due".
+
+**Real bugs found before they shipped:**
+
+- **"Re-read 0 of 1".** The server counts the re-taught screens from 0 and the page printed it as is. My
+  component test had invented a 1-based value, so only the real-browser test caught it. Fixed and the test now uses the
+  server's real value.
+- **A test selector matched the reason text too** ("Right." also matched "This is right."); fixed by matching
+  the verdict exactly. (Test-only.)
+
+**Not in slice 3:** remembering scroll position within a screen (the place in the lesson is remembered;
+a new screen starts at the top and moves keyboard focus to its heading); an owner-only view listing all open
+comments in the app (your AI reads them through MCP; say if you want a screen for it); a Learn entry in the
+Android app (slice 4); the entry check.

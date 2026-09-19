@@ -109,7 +109,7 @@ describe("LessonPage", () => {
       step: {
         kind: "remediation",
         number: "1",
-        position: 1,
+        position: 0,
         of: 1,
         help_offered: false,
         blocks: para("Teach it again"),

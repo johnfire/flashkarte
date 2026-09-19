@@ -69,6 +69,7 @@ export type LessonStep =
   | {
       kind: "remediation";
       number: string;
+      /** Which screen of the re-teaching, counting from 0 (like `index` on a screen). */
       position: number;
       of: number;
       help_offered: boolean;

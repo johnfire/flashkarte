@@ -66,7 +66,10 @@ export function LessonStepBody({
         <ScreenView
           subjectId={subjectId}
           number={step.number}
-          label={t("learn.reread", { current: step.position, total: step.of })}
+          label={t("learn.reread", {
+            current: step.position + 1,
+            total: step.of,
+          })}
           blocks={step.blocks}
           canGoBack={false}
           nextLabel={t("learn.continue")}
