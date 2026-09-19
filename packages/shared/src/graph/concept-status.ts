@@ -11,7 +11,10 @@ export type ConceptState = "mastered" | "available" | "locked";
 export interface ConceptStatus {
   id: string;
   state: ConceptState;
-  /** No linked cards, so nothing can be tested yet. Authoring should see this. */
+  /**
+   * No linked cards, so there is nothing to study or test. True for an
+   * assumption too (it is never taught); authoring reports should skip those.
+   */
   isUnassessed: boolean;
 }
 
@@ -74,7 +77,7 @@ export function computeConceptStatuses(
     return {
       id: node.id,
       state,
-      isUnassessed: evidence.cardCount === 0 && node.kind !== "assumption",
+      isUnassessed: evidence.cardCount === 0,
     };
   });
 }

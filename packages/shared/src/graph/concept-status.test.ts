@@ -74,13 +74,13 @@ describe("computeConceptStatuses", () => {
     expect(stateOf(statuses, "real")?.state).toBe("available");
   });
 
-  it("does not flag an assumption as unassessed", () => {
+  it("reports an assumption as having no cards, like any concept without items", () => {
     const statuses = computeConceptStatuses(
       [node("floor", "assumption")],
       [],
       evidence({}),
     );
-    expect(stateOf(statuses, "floor")?.isUnassessed).toBe(false);
+    expect(stateOf(statuses, "floor")?.isUnassessed).toBe(true);
   });
 
   it("lets a suggests edge order but never lock", () => {
@@ -121,6 +121,22 @@ describe("studyFrontier", () => {
       evidence({ a: [1, 1], b: [1, 0], c: [1, 0], d: [0, 0] }),
     );
     expect(studyFrontier(statuses, ["a", "c", "b", "d"])).toEqual(["c", "b"]);
+  });
+
+  it("never offers an assumption, a map without cards, or a card-less concept", () => {
+    const statuses = computeConceptStatuses(
+      [
+        node("floor", "assumption"),
+        node("overview", "map"),
+        node("empty"),
+        node("real"),
+      ],
+      [requires("floor", "real")],
+      evidence({ real: [1, 0] }),
+    );
+    expect(
+      studyFrontier(statuses, ["floor", "overview", "empty", "real"]),
+    ).toEqual(["real"]);
   });
 
   it("is empty when everything is mastered", () => {
