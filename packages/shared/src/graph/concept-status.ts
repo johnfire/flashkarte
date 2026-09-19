@@ -1,9 +1,15 @@
 import type { ConceptEdge, ConceptNode } from "./concept-graph-types";
 
-/** How many of a concept's linked cards the learner has made stable. */
+/**
+ * How many of a concept's linked cards the learner has made stable, and how many
+ * of its lessons (reading cards) they have read. Lessons are exposure, not
+ * evidence: they never count toward mastery and never gate anything.
+ */
 export interface ConceptEvidence {
   cardCount: number;
   masteredCardCount: number;
+  lessonCount?: number;
+  unreadLessonCount?: number;
 }
 
 export type ConceptState = "mastered" | "available" | "locked";
@@ -16,6 +22,8 @@ export interface ConceptStatus {
    * assumption too (it is never taught); authoring reports should skip those.
    */
   isUnassessed: boolean;
+  /** A lesson is waiting and the concept is reachable, so it should be read next. */
+  needsReading: boolean;
 }
 
 const NO_EVIDENCE: ConceptEvidence = { cardCount: 0, masteredCardCount: 0 };
@@ -35,6 +43,19 @@ function isMasteredByCards(evidence: ConceptEvidence): boolean {
 function isSatisfied(node: ConceptNode, evidence: ConceptEvidence): boolean {
   if (node.kind === "map" || node.kind === "assumption") return true;
   return evidence.cardCount === 0 || isMasteredByCards(evidence);
+}
+
+function unreadLessons(evidence: ConceptEvidence): number {
+  return evidence.unreadLessonCount ?? 0;
+}
+
+/** A concept with no cards but lessons is done once all of its lessons are read. */
+function isReadOnlyAndFullyRead(evidence: ConceptEvidence): boolean {
+  return (
+    evidence.cardCount === 0 &&
+    (evidence.lessonCount ?? 0) > 0 &&
+    unreadLessons(evidence) === 0
+  );
 }
 
 function requiredParentsByConcept(edges: ConceptEdge[]): Map<string, string[]> {
@@ -69,22 +90,25 @@ export function computeConceptStatuses(
     const parentsAreSatisfied = (requiredParents.get(node.id) ?? []).every(
       parentIsSatisfied,
     );
-    const state: ConceptState = isMasteredByCards(evidence)
-      ? "mastered"
-      : parentsAreSatisfied
-        ? "available"
-        : "locked";
+    const state: ConceptState =
+      isMasteredByCards(evidence) || isReadOnlyAndFullyRead(evidence)
+        ? "mastered"
+        : parentsAreSatisfied
+          ? "available"
+          : "locked";
     return {
       id: node.id,
       state,
       isUnassessed: evidence.cardCount === 0,
+      needsReading: unreadLessons(evidence) > 0 && state !== "locked",
     };
   });
 }
 
 /**
- * What to study next: available concepts that have cards to study, in the
- * given route order (typically `topologicalOrder`).
+ * What to study next, in the given route order (typically `topologicalOrder`):
+ * available concepts that have cards to study, plus any reachable concept with an
+ * unread lesson (so a reading-only concept such as a map is offered until read).
  */
 export function studyFrontier(
   statuses: ConceptStatus[],
@@ -92,7 +116,11 @@ export function studyFrontier(
 ): string[] {
   const studyable = new Set(
     statuses
-      .filter((status) => status.state === "available" && !status.isUnassessed)
+      .filter(
+        (status) =>
+          status.needsReading ||
+          (status.state === "available" && !status.isUnassessed),
+      )
       .map((status) => status.id),
   );
   return routeOrder.filter((id) => studyable.has(id));
