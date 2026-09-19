@@ -28,9 +28,77 @@ beforeEach(() => {
   mock.findProgress.mockResolvedValue([]);
   mock.findReviewEvents.mockResolvedValue([]);
   mock.findApiKeyMeta.mockResolvedValue([]);
+  mock.findSubjects.mockResolvedValue([]);
+  mock.findConcepts.mockResolvedValue([]);
+  mock.findConceptEdges.mockResolvedValue([]);
 });
 
 describe("account.service exportData", () => {
+  it("exports each subject with its concepts, card links and edges", async () => {
+    mock.findSubjects.mockResolvedValue([
+      {
+        id: "s1",
+        title: "Transformers",
+        description: null,
+        is_public: false,
+        version: 4,
+        created_at: "c",
+        updated_at: "u",
+      },
+    ]);
+    mock.findConcepts.mockResolvedValue([
+      {
+        subject_id: "s1",
+        slug: "kv-cache",
+        name: "KV cache",
+        kind: "idea",
+        tier: "core",
+        position: 0,
+        card_ids: ["card1"],
+      },
+      {
+        subject_id: "other-subject",
+        slug: "unrelated",
+        name: "Unrelated",
+        kind: "idea",
+        tier: "core",
+        position: 0,
+        card_ids: [],
+      },
+    ]);
+    mock.findConceptEdges.mockResolvedValue([
+      {
+        subject_id: "s1",
+        from_slug: "causal-mask",
+        to_slug: "kv-cache",
+        strength: "requires",
+        reason: "cache is valid because of the mask",
+      },
+    ]);
+
+    const result = await exportData("u1");
+
+    expect(result.subjects).toHaveLength(1);
+    expect(result.subjects[0].concepts).toEqual([
+      {
+        slug: "kv-cache",
+        name: "KV cache",
+        kind: "idea",
+        tier: "core",
+        position: 0,
+        cardIds: ["card1"],
+      },
+    ]);
+    expect(result.subjects[0].edges).toEqual([
+      {
+        from: "causal-mask",
+        to: "kv-cache",
+        strength: "requires",
+        reason: "cache is valid because of the mask",
+      },
+    ]);
+  });
+
   it("throws NotFoundError for an unknown user", async () => {
     mock.findProfile.mockResolvedValue(null);
     await expect(exportData("ghost")).rejects.toThrow(NotFoundError);

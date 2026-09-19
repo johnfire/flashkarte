@@ -60,6 +60,29 @@ export interface AccountExport {
     optionIndex: number | null;
     createdAt: string;
   }>;
+  subjects: Array<{
+    id: string;
+    title: string;
+    description: string | null;
+    isPublic: boolean;
+    version: number;
+    createdAt: string;
+    updatedAt: string;
+    concepts: Array<{
+      slug: string;
+      name: string;
+      kind: string;
+      tier: string;
+      position: number;
+      cardIds: string[];
+    }>;
+    edges: Array<{
+      from: string;
+      to: string;
+      strength: string;
+      reason: string | null;
+    }>;
+  }>;
   apiKeys: Array<{
     name: string;
     keyPrefix: string;
@@ -79,12 +102,24 @@ export async function exportData(userId: string): Promise<AccountExport> {
   const profile = await repo.findProfile(userId);
   if (!profile) throw new NotFoundError("User not found");
 
-  const [decks, cards, progress, reviewEvents, apiKeys] = await Promise.all([
+  const [
+    decks,
+    cards,
+    progress,
+    reviewEvents,
+    apiKeys,
+    subjects,
+    concepts,
+    conceptEdges,
+  ] = await Promise.all([
     repo.findDecks(userId),
     repo.findCards(userId),
     repo.findProgress(userId),
     repo.findReviewEvents(userId),
     repo.findApiKeyMeta(userId),
+    repo.findSubjects(userId),
+    repo.findConcepts(userId),
+    repo.findConceptEdges(userId),
   ]);
 
   const cardsByDeck = new Map<string, repo.CardRow[]>();
@@ -152,6 +187,33 @@ export async function exportData(userId: string): Promise<AccountExport> {
       reviewedAt: e.reviewed_at,
       optionIndex: e.option_index,
       createdAt: e.created_at,
+    })),
+    subjects: subjects.map((subject) => ({
+      id: subject.id,
+      title: subject.title,
+      description: subject.description,
+      isPublic: subject.is_public,
+      version: subject.version,
+      createdAt: subject.created_at,
+      updatedAt: subject.updated_at,
+      concepts: concepts
+        .filter((concept) => concept.subject_id === subject.id)
+        .map((concept) => ({
+          slug: concept.slug,
+          name: concept.name,
+          kind: concept.kind,
+          tier: concept.tier,
+          position: concept.position,
+          cardIds: concept.card_ids,
+        })),
+      edges: conceptEdges
+        .filter((edge) => edge.subject_id === subject.id)
+        .map((edge) => ({
+          from: edge.from_slug,
+          to: edge.to_slug,
+          strength: edge.strength,
+          reason: edge.reason,
+        })),
     })),
     apiKeys: apiKeys.map((k) => ({
       name: k.name,

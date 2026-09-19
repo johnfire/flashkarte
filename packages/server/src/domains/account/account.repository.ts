@@ -112,6 +112,71 @@ export function findReviewEvents(userId: string): Promise<ReviewEventRow[]> {
   );
 }
 
+export interface SubjectExportRow {
+  id: string;
+  title: string;
+  description: string | null;
+  is_public: boolean;
+  version: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export function findSubjects(userId: string): Promise<SubjectExportRow[]> {
+  return query<SubjectExportRow>(
+    `SELECT id, title, description, is_public, version, created_at, updated_at
+     FROM subjects WHERE user_id = $1 ORDER BY created_at`,
+    [userId],
+  );
+}
+
+export interface ConceptExportRow {
+  subject_id: string;
+  slug: string;
+  name: string;
+  kind: string;
+  tier: string;
+  position: number;
+  card_ids: string[];
+}
+
+export function findConcepts(userId: string): Promise<ConceptExportRow[]> {
+  return query<ConceptExportRow>(
+    `SELECT c.subject_id, c.slug, c.name, c.kind, c.tier, c.position,
+            COALESCE(array_agg(cc.card_id) FILTER (WHERE cc.card_id IS NOT NULL), '{}') AS card_ids
+     FROM concepts c
+     JOIN subjects s ON s.id = c.subject_id
+     LEFT JOIN card_concepts cc ON cc.concept_id = c.id
+     WHERE s.user_id = $1
+     GROUP BY c.id
+     ORDER BY c.subject_id, c.position`,
+    [userId],
+  );
+}
+
+export interface ConceptEdgeExportRow {
+  subject_id: string;
+  from_slug: string;
+  to_slug: string;
+  strength: string;
+  reason: string | null;
+}
+
+export function findConceptEdges(
+  userId: string,
+): Promise<ConceptEdgeExportRow[]> {
+  return query<ConceptEdgeExportRow>(
+    `SELECT t.subject_id, f.slug AS from_slug, t.slug AS to_slug, e.strength, e.reason
+     FROM concept_edges e
+     JOIN concepts f ON f.id = e.from_concept
+     JOIN concepts t ON t.id = e.to_concept
+     JOIN subjects s ON s.id = t.subject_id
+     WHERE s.user_id = $1
+     ORDER BY t.subject_id, t.position`,
+    [userId],
+  );
+}
+
 /** Key metadata only — the hash is a credential and must never be exported. */
 export function findApiKeyMeta(userId: string): Promise<ApiKeyMetaRow[]> {
   return query<ApiKeyMetaRow>(
