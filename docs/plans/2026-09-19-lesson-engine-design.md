@@ -171,3 +171,42 @@ number suggestion, mirrored in Kotlin where Android needs it.
   edges need review like the concept ones did.
 - **The pass loop can frustrate.** Nothing yet says what happens if a learner cannot pass a lesson
   after many tries (an escape hatch, or a nudge to the "I need more" button). Needs a decision.
+
+## 13. Open idea: entry check and test-out (raised by Chris)
+
+Chris's concern: a learner should be checked, before a course, on what the course assumes, so
+nobody starts Transformers without the maths it leans on, or electronics without the basics. This is
+really two different things.
+
+**Readiness ("do you know what this course assumes?").** The subject graph already lists what a
+course does not teach: the `assumption` concepts (for Transformers: matrix multiplication, the dot
+product, probability, derivatives, exp and log, mean and variance, sin and cos, what an RNN is, matrix
+rank). An **entry check** asks 2 to 3 questions per assumption and reports each as knows it, shaky or
+missing. For a missing one the outline says "before you start, learn X" and points at a primer: a small
+optional **Foundations** module inside the course now, or a separate subject later (assumptions can be
+resolved to another subject's concepts, as the subject model already allows).
+
+**Placement ("you already know this, skip it").** Vocabulary such as tokens, logits and embeddings is
+not assumed knowledge; it is what the first module teaches. A learner who already knows it should not
+have to read it. Each lesson can offer a **test-out**: answer its questions cold, without the
+screens. All right means the lesson counts as passed (its questions join review, and the first-try
+score is recorded). A miss means take the lesson, and the miss names the screen to start from. It
+reuses the questions we already write. Run in order along the graph, it doubles as a course-wide
+pretest: test out of what you know, and stop where you fail. The outline then shows a personal route:
+already known, recommended primer, still to learn.
+
+**Fit with the model.** An entry check is a lesson with questions and no screens. It needs the question
+engine first (slice 2), then it is a small addition.
+
+**Cautions.**
+
+- Multiple choice can be guessed (a quarter of the time with four options), so each checked concept
+  needs 2 to 3 questions and a stated rule for what counts as known.
+- Word results as "likely gap", never as a verdict; a short test cannot certify understanding.
+- The list of what a course assumes is an LLM-drafted hypothesis for Chris to review, like the graph.
+  The pilot module will show whether it is right.
+- The Electronics graph has not been drawn yet, so what that course assumes is not yet known.
+
+**Open decision.** Should a failed readiness check only **recommend** a primer and let the learner
+proceed, or actually **stop** them from starting? Chris said "required", so this needs his call. Recommend
+is safer against wrongly blocking someone; block is a stronger promise.

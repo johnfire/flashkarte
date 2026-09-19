@@ -109,6 +109,9 @@ Depends entirely on the decision in section 9 of the spec. Not planned until Chr
    prerequisites, keeping each written reason) and who reviews the result.
 4. **Question types after multiple choice** and when: ordering and calculation are the next two.
 5. **In-app AI** (spec section 9).
+6. **Entry check and test-out** (spec section 13): whether a failed readiness check recommends a
+   primer or blocks the learner. It fits right after slice 2 as a small addition, since it reuses the
+   question engine.
 
 ## What I am least sure of
 
