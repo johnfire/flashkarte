@@ -11,7 +11,11 @@ import { NotFoundError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
 import * as repo from "./subjects.repository";
 import * as conceptsRepo from "./concepts.repository";
-import { loadConceptEvidence } from "./concept-cards.repository";
+import {
+  loadConceptEvidence,
+  loadConceptLessons,
+  type ConceptLessonRow,
+} from "./concept-cards.repository";
 import { descriptionSchema, titleSchema } from "./subjects.schemas";
 import {
   slugById,
@@ -88,16 +92,31 @@ export async function deleteSubject(userId: string, id: string) {
   await repo.removeSubject(id);
 }
 
-function toEvidenceMap(rows: Awaited<ReturnType<typeof loadConceptEvidence>>) {
-  return new Map<string, ConceptEvidence>(
-    rows.map((row) => [
-      row.concept_id,
-      {
-        cardCount: row.card_count,
-        masteredCardCount: row.mastered_card_count,
-      },
-    ]),
-  );
+type EvidenceRows = Awaited<ReturnType<typeof loadConceptEvidence>>;
+
+function toEvidenceMap(
+  evidenceRows: EvidenceRows,
+  lessonRows: ConceptLessonRow[],
+) {
+  const evidence = new Map<string, ConceptEvidence>();
+  for (const row of evidenceRows) {
+    evidence.set(row.concept_id, {
+      cardCount: row.card_count,
+      masteredCardCount: row.mastered_card_count,
+    });
+  }
+  for (const row of lessonRows) {
+    const existing = evidence.get(row.concept_id) ?? {
+      cardCount: 0,
+      masteredCardCount: 0,
+    };
+    evidence.set(row.concept_id, {
+      ...existing,
+      lessonCount: row.lesson_count,
+      unreadLessonCount: row.unread_lesson_count,
+    });
+  }
+  return evidence;
 }
 
 /**
@@ -108,20 +127,22 @@ function toEvidenceMap(rows: Awaited<ReturnType<typeof loadConceptEvidence>>) {
 export async function getSubjectProgress(userId: string, id: string) {
   const subject = await requireOwnedSubject(userId, id);
   const db = getPool();
-  const [concepts, edges, evidenceRows] = await Promise.all([
+  const [concepts, edges, evidenceRows, lessonRows] = await Promise.all([
     conceptsRepo.listConcepts(db, id),
     conceptsRepo.listEdges(db, id),
     loadConceptEvidence(db, userId, id, STABLE_REPS),
+    loadConceptLessons(db, userId, id),
   ]);
+  const evidence = toEvidenceMap(evidenceRows, lessonRows);
   const graphEdges = toGraphEdges(edges);
   const statuses = computeConceptStatuses(
     toGraphNodes(concepts),
     graphEdges,
-    toEvidenceMap(evidenceRows),
+    evidence,
   );
   const authoringOrder = concepts.map((concept) => concept.id);
   const route = topologicalOrder(authoringOrder, graphEdges) ?? authoringOrder;
-  return buildProgressView(subject, concepts, evidenceRows, statuses, route);
+  return buildProgressView(subject, concepts, evidence, statuses, route);
 }
 
 function describeConceptProgress(
@@ -136,21 +157,23 @@ function describeConceptProgress(
     tier: concept.tier,
     state: status.state,
     is_unassessed: status.isUnassessed,
+    needs_reading: status.needsReading,
     card_count: evidence?.cardCount ?? 0,
     mastered_card_count: evidence?.masteredCardCount ?? 0,
+    lesson_count: evidence?.lessonCount ?? 0,
+    unread_lesson_count: evidence?.unreadLessonCount ?? 0,
   };
 }
 
 function buildProgressView(
   subject: repo.SubjectRow,
   concepts: conceptsRepo.ConceptRow[],
-  evidenceRows: Awaited<ReturnType<typeof loadConceptEvidence>>,
+  evidenceById: Map<string, ConceptEvidence>,
   statuses: ReturnType<typeof computeConceptStatuses>,
   route: string[],
 ) {
   const conceptById = new Map(concepts.map((c) => [c.id, c]));
   const statusById = new Map(statuses.map((s) => [s.id, s]));
-  const evidenceById = toEvidenceMap(evidenceRows);
   const routed = route.map((conceptId) =>
     describeConceptProgress(
       conceptById.get(conceptId)!,

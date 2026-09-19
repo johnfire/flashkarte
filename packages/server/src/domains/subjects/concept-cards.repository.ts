@@ -79,3 +79,34 @@ export async function loadConceptEvidence(
   );
   return result.rows;
 }
+
+export interface ConceptLessonRow {
+  concept_id: string;
+  lesson_count: number;
+  unread_lesson_count: number;
+}
+
+/**
+ * Per-concept lessons (reading cards) for one learner, and how many they have not
+ * read yet. Kept apart from loadConceptEvidence on purpose: lessons are exposure,
+ * never mastery evidence, so they must not be able to leak into that count.
+ */
+export async function loadConceptLessons(
+  db: Queryable,
+  userId: string,
+  subjectId: string,
+): Promise<ConceptLessonRow[]> {
+  const result = await db.query<ConceptLessonRow>(
+    `SELECT cc.concept_id,
+            count(c.id)::int AS lesson_count,
+            count(c.id) FILTER (WHERE r.card_id IS NULL)::int AS unread_lesson_count
+     FROM concepts k
+     JOIN card_concepts cc ON cc.concept_id = k.id
+     JOIN cards c ON c.id = cc.card_id AND c.type = 'read'
+     LEFT JOIN card_reads r ON r.card_id = c.id AND r.user_id = $1
+     WHERE k.subject_id = $2
+     GROUP BY cc.concept_id`,
+    [userId, subjectId],
+  );
+  return result.rows;
+}

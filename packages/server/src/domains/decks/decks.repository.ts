@@ -127,6 +127,18 @@ export function rowToParsedCard(row: {
       senseConflict: false,
     };
   }
+  if (row.type === "read") {
+    return {
+      type: "read",
+      front: (content.front as string) ?? "",
+      back: (content.back as string) ?? "",
+      category: row.category,
+      label: (content.label as string | null) ?? null,
+      options: [],
+      sense: null,
+      senseConflict: false,
+    };
+  }
   // A basic card carries `options` only when it is a diagnostic card (Spec 01)
   // and `sense` only when it is one meaning of a word block (Spec 10).
   return {
@@ -148,6 +160,11 @@ function cardContent(c: ParsedCard): string {
       prompt: c.front,
       options: c.options,
     });
+  }
+  if (c.type === "read") {
+    const lesson: Record<string, unknown> = { front: c.front, back: c.back };
+    if (c.label) lesson.label = c.label;
+    return JSON.stringify(lesson);
   }
   // Basic card. Persist `options` only for diagnostic cards (empty otherwise) so
   // ordinary cards keep their exact historical content shape.
@@ -248,6 +265,8 @@ export async function reorderSenseCards(
 export interface DeckListRow extends DeckRow {
   card_count: string;
   due_count: string;
+  lesson_count: string;
+  unread_lesson_count: string;
   viewed_count: string;
   new_count: string;
   again_count: string;
@@ -269,21 +288,28 @@ export function listDecksWithCounts(userId: string) {
        s.hard AS hard_count,
        s.good AS good_count,
        s.easy AS easy_count,
+       s.lessons AS lesson_count,
+       s.unread_lessons AS unread_lesson_count,
        s.is_branching
      FROM decks d
      LEFT JOIN LATERAL (
        SELECT
-         count(*) AS total,
+         -- Reading cards (lessons) are not reviewed, so they stay out of the
+         -- review numbers and are counted on their own.
+         count(*) FILTER (WHERE c.type <> 'read') AS total,
          COALESCE(bool_or(c.type = 'branch'), false) AS is_branching,
-         count(*) FILTER (WHERE p.id IS NULL OR p.due_at <= now()) AS due,
+         count(*) FILTER (WHERE c.type <> 'read' AND (p.id IS NULL OR p.due_at <= now())) AS due,
          count(*) FILTER (WHERE p.id IS NOT NULL) AS viewed,
-         count(*) FILTER (WHERE p.id IS NULL) AS new_cards,
+         count(*) FILTER (WHERE c.type <> 'read' AND p.id IS NULL) AS new_cards,
+         count(*) FILTER (WHERE c.type = 'read') AS lessons,
+         count(*) FILTER (WHERE c.type = 'read' AND r.card_id IS NULL) AS unread_lessons,
          count(*) FILTER (WHERE p.last_rating <= 2) AS again,
          count(*) FILTER (WHERE p.last_rating = 3) AS hard,
          count(*) FILTER (WHERE p.last_rating = 4) AS good,
          count(*) FILTER (WHERE p.last_rating = 5) AS easy
        FROM cards c
        LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
+       LEFT JOIN card_reads r ON r.card_id = c.id AND r.user_id = $1
        WHERE c.deck_id = d.id
      ) s ON true
      WHERE ${subscribedOrOwned("d", 1)}

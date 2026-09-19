@@ -94,6 +94,7 @@ async function withChainedSenses(
       out.push(
         tag({
           id: row.id,
+          type: row.type,
           content: row.content,
           category: row.category,
           position: row.position,
@@ -111,8 +112,14 @@ export async function getStudyBatch(
   userId: string,
   deckId: string,
   limit = 20,
+  includeLessons = false,
 ): Promise<StudyBatchCard[]> {
-  const due = await repo.getDueAndNewCards(userId, deckId, limit);
+  const due = await repo.getDueAndNewCards(
+    userId,
+    deckId,
+    limit,
+    includeLessons,
+  );
   // Nothing due and nothing new: offer a random practice round instead of a
   // dead end. Ratings on these cards apply normally (same review path as any
   // other card) — studying early just advances their next due date sooner.

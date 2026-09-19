@@ -1,6 +1,12 @@
 import request from "supertest";
 
 jest.mock("./study.service");
+jest.mock("./lesson-reads.service");
+jest.mock("../audit/audit.service", () => ({
+  auditFromRequest: jest.fn().mockResolvedValue(undefined),
+  actorFromRequest: jest.fn(() => ({ type: "user", id: "u1" })),
+  userActor: jest.fn(),
+}));
 jest.mock("../decks/decks.service");
 jest.mock("../../db/client", () => ({
   getPool: jest.fn(),
@@ -35,10 +41,16 @@ jest.mock("../../middleware/auth", () => ({
 }));
 
 import * as service from "./study.service";
+import * as lessonReads from "./lesson-reads.service";
+import { auditFromRequest } from "../audit/audit.service";
 import { createApp } from "../../app";
 import { ValidationError, NotFoundError } from "../../utils/errors";
 
 const mock = service as jest.Mocked<typeof service>;
+const readsMock = lessonReads as jest.Mocked<typeof lessonReads>;
+const auditMock = auditFromRequest as jest.MockedFunction<
+  typeof auditFromRequest
+>;
 const app = createApp();
 beforeEach(() => jest.clearAllMocks());
 
@@ -163,5 +175,55 @@ describe("study routes", () => {
       ],
       { type: "user", id: "u1" },
     );
+  });
+});
+
+describe("lesson (reading card) routes", () => {
+  test("GET /api/decks/:id/study leaves lessons out unless the client asks", async () => {
+    mock.getStudyBatch.mockResolvedValue([]);
+    await request(app).get("/api/decks/d1/study");
+    expect(mock.getStudyBatch).toHaveBeenLastCalledWith("u1", "d1", 20, false);
+    await request(app).get("/api/decks/d1/study?lessons=1");
+    expect(mock.getStudyBatch).toHaveBeenLastCalledWith("u1", "d1", 20, true);
+  });
+
+  test("POST /api/study/reads records the reads and audits one lesson by id", async () => {
+    readsMock.recordLessonReads.mockResolvedValue({
+      acked_card_ids: ["c1"],
+      recorded: 1,
+    });
+    const res = await request(app)
+      .post("/api/study/reads")
+      .send({ reads: [{ card_id: "c1" }] });
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ acked_card_ids: ["c1"], recorded: 1 });
+    expect(readsMock.recordLessonReads).toHaveBeenCalledWith("u1", [
+      { card_id: "c1" },
+    ]);
+    expect(auditMock.mock.calls[0].slice(1, 5)).toEqual([
+      "lesson.read",
+      "card",
+      "c1",
+      "success",
+    ]);
+  });
+
+  test("POST /api/study/reads with nothing recorded is not audited", async () => {
+    readsMock.recordLessonReads.mockResolvedValue({
+      acked_card_ids: ["c1"],
+      recorded: 0,
+    });
+    await request(app)
+      .post("/api/study/reads")
+      .send({ reads: [{ card_id: "c1" }] });
+    expect(auditMock).not.toHaveBeenCalled();
+  });
+
+  test("POST /api/study/reads with a bad batch -> 422", async () => {
+    readsMock.recordLessonReads.mockRejectedValue(
+      new ValidationError("reads must not be empty"),
+    );
+    const res = await request(app).post("/api/study/reads").send({ reads: [] });
+    expect(res.status).toBe(422);
   });
 });

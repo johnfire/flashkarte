@@ -24,6 +24,9 @@ async function queryFirst<T extends QueryResultRow>(
 
 export interface CardForStudy {
   id: string;
+  // "basic" for ordinary and diagnostic cards; "read" for a lesson, which a client
+  // shows for reading and acknowledges instead of rating.
+  type: string;
   // Diagnostic cards (Spec 01) also carry `label` and authored `options`; the
   // full content JSONB is returned verbatim so clients can render MC options and
   // resolve remediation targets.
@@ -58,27 +61,36 @@ function officialOrOwned(
      )))`;
 }
 
+/**
+ * `includeLessons` opts a client in to reading cards. Clients that predate them never
+ * ask, so they never receive a card they would show as a flip card and rate; a lesson
+ * the learner has already read is never offered again.
+ */
 export function getDueAndNewCards(
   userId: string,
   deckId: string,
   limit: number,
+  includeLessons = false,
 ) {
   return query<CardForStudy>(
     // Ordered decks (decks.is_ordered) study in strict global position order;
     // unordered decks keep reviewed/due-first grouping (the CASE is NULL for
     // every row, so the remaining keys stay in control). Regression fixture:
     // scripts/verify-ordered-study-order.sql — update both together.
-    `SELECT c.id, c.content, c.category, c.position
+    `SELECT c.id, c.type, c.content, c.category, c.position
      FROM cards c
      JOIN decks d ON d.id = c.deck_id
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
      WHERE c.deck_id = $2 AND ${officialOrOwned("c", "d", 1)}
        AND (p.id IS NULL OR p.due_at <= now())
+       AND (c.type <> 'read' OR ($4::boolean AND NOT EXISTS (
+         SELECT 1 FROM card_reads r WHERE r.card_id = c.id AND r.user_id = $1
+       )))
      ORDER BY
        CASE WHEN d.is_ordered THEN c.position END ASC NULLS LAST,
        (p.id IS NULL) ASC, p.due_at ASC NULLS LAST, c.position ASC
      LIMIT $3`,
-    [userId, deckId, limit],
+    [userId, deckId, limit, includeLessons],
   );
 }
 
@@ -90,7 +102,7 @@ export function getDueAndNewCards(
  */
 export function getRandomCards(userId: string, deckId: string, limit: number) {
   return query<CardForStudy>(
-    `SELECT c.id, c.content, c.category, c.position
+    `SELECT c.id, c.type, c.content, c.category, c.position
      FROM cards c
      JOIN decks d ON d.id = c.deck_id
      WHERE c.deck_id = $2 AND c.type = 'basic' AND ${officialOrOwned("c", "d", 1)}
@@ -132,7 +144,7 @@ export function getSenseCardsForWords(
   words: string[],
 ) {
   return query<CardForStudy & { repetitions: number | null }>(
-    `SELECT c.id, c.content, c.category, c.position, p.repetitions
+    `SELECT c.id, c.type, c.content, c.category, c.position, p.repetitions
      FROM cards c
      JOIN decks d ON d.id = c.deck_id
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
@@ -309,7 +321,40 @@ export function getStats(userId: string, deckId: string) {
        count(*) FILTER (WHERE p.last_rating = 5) AS easy
      FROM cards c
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
-     WHERE c.deck_id = $2 AND c.user_id = $1`,
+     WHERE c.deck_id = $2 AND c.user_id = $1 AND c.type <> 'read'`,
     [userId, deckId],
+  );
+}
+
+/** Which of these cards are lessons the caller may read (owned, or official and subscribed). */
+export async function getReadableLessonIds(
+  userId: string,
+  cardIds: string[],
+): Promise<Set<string>> {
+  if (cardIds.length === 0) return new Set();
+  const lessons = await query<{ id: string }>(
+    `SELECT c.id FROM cards c
+     JOIN decks d ON d.id = c.deck_id
+     WHERE c.type = 'read' AND ${officialOrOwned("c", "d", 1)} AND c.id = ANY($2::uuid[])`,
+    [userId, cardIds],
+  );
+  return new Set(lessons.map((lesson) => lesson.id));
+}
+
+/**
+ * Records that the learner has read these lessons. The first read wins: a replayed
+ * offline batch does nothing, so a read time can never be moved or duplicated.
+ */
+export async function insertCardReads(
+  userId: string,
+  reads: { cardId: string; readAt: Date }[],
+): Promise<void> {
+  if (reads.length === 0) return;
+  await query(
+    `INSERT INTO card_reads (user_id, card_id, read_at)
+     SELECT $1, r.card_id, r.read_at
+     FROM unnest($2::uuid[], $3::timestamptz[]) AS r(card_id, read_at)
+     ON CONFLICT (user_id, card_id) DO NOTHING`,
+    [userId, reads.map((r) => r.cardId), reads.map((r) => r.readAt)],
   );
 }

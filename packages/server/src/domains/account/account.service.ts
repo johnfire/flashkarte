@@ -60,6 +60,7 @@ export interface AccountExport {
     optionIndex: number | null;
     createdAt: string;
   }>;
+  cardReads: Array<{ cardId: string; readAt: string }>;
   subjects: Array<{
     id: string;
     title: string;
@@ -111,6 +112,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
     subjects,
     concepts,
     conceptEdges,
+    cardReads,
   ] = await Promise.all([
     repo.findDecks(userId),
     repo.findCards(userId),
@@ -120,6 +122,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
     repo.findSubjects(userId),
     repo.findConcepts(userId),
     repo.findConceptEdges(userId),
+    repo.findCardReads(userId),
   ]);
 
   const cardsByDeck = new Map<string, repo.CardRow[]>();
@@ -187,6 +190,10 @@ export async function exportData(userId: string): Promise<AccountExport> {
       reviewedAt: e.reviewed_at,
       optionIndex: e.option_index,
       createdAt: e.created_at,
+    })),
+    cardReads: cardReads.map((read) => ({
+      cardId: read.card_id,
+      readAt: read.read_at,
     })),
     subjects: subjects.map((subject) => ({
       id: subject.id,

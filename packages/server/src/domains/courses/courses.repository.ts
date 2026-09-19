@@ -94,7 +94,9 @@ export function getCourseDecks(
             count(c.id) FILTER (WHERE p.repetitions >= $3)::int AS mastered_count
      FROM course_decks cd
      JOIN decks d ON d.id = cd.deck_id
-     LEFT JOIN cards c ON c.deck_id = d.id
+     -- A reading card has no SR state, so it can never become 'mastered'; counting
+     -- it would lock every later deck in the course forever.
+     LEFT JOIN cards c ON c.deck_id = d.id AND c.type <> 'read'
      LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
      WHERE cd.course_id = $2
      GROUP BY cd.deck_id, cd.position, d.title

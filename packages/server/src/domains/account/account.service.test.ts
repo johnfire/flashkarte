@@ -31,9 +31,20 @@ beforeEach(() => {
   mock.findSubjects.mockResolvedValue([]);
   mock.findConcepts.mockResolvedValue([]);
   mock.findConceptEdges.mockResolvedValue([]);
+  mock.findCardReads.mockResolvedValue([]);
 });
 
 describe("account.service exportData", () => {
+  it("exports which lessons the learner has read", async () => {
+    mock.findCardReads.mockResolvedValue([
+      { card_id: "lesson1", read_at: "2026-09-19T10:00:00Z" },
+    ]);
+    const result = await exportData("u1");
+    expect(result.cardReads).toEqual([
+      { cardId: "lesson1", readAt: "2026-09-19T10:00:00Z" },
+    ]);
+  });
+
   it("exports each subject with its concepts, card links and edges", async () => {
     mock.findSubjects.mockResolvedValue([
       {

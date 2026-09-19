@@ -9,6 +9,7 @@ import {
 } from "../../utils/validate";
 import * as repo from "./decks.repository";
 import { validateBranching } from "./branching";
+import { validateReadingCards } from "./reading-cards";
 import { validateSenses } from "./senses";
 
 // Cap cards per request: bounds the multi-row INSERT (well under Postgres'
@@ -58,6 +59,7 @@ export async function importDeck(
     );
   }
   validateBranching(parsed.cards);
+  validateReadingCards(parsed.cards);
   validateSenses(parsed.cards);
   const deck = await repo.createDeckWithCards(
     userId,
@@ -87,6 +89,7 @@ export async function appendCards(
     );
   }
   validateBranching(parsed.cards);
+  validateReadingCards(parsed.cards);
   // Appending sees only this request's markdown, so the words already in the deck
   // have to be read back or a word could be split across two uploads.
   validateSenses(parsed.cards, await repo.getSenseWords(userId, deckId));
@@ -184,6 +187,7 @@ export async function updateCard(
     r.id === cardId ? updated : repo.rowToParsedCard(r),
   );
   validateBranching(fullSet);
+  validateReadingCards(fullSet);
   validateSenses(fullSet);
 
   const result = await repo.updateCardRow(userId, deckId, cardId, updated);

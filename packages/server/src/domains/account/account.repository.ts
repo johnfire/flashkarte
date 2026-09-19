@@ -177,6 +177,18 @@ export function findConceptEdges(
   );
 }
 
+export interface CardReadRow {
+  card_id: string;
+  read_at: string;
+}
+
+export function findCardReads(userId: string): Promise<CardReadRow[]> {
+  return query<CardReadRow>(
+    `SELECT card_id, read_at FROM card_reads WHERE user_id = $1 ORDER BY read_at`,
+    [userId],
+  );
+}
+
 /** Key metadata only — the hash is a credential and must never be exported. */
 export function findApiKeyMeta(userId: string): Promise<ApiKeyMetaRow[]> {
   return query<ApiKeyMetaRow>(
