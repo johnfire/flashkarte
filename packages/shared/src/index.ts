@@ -30,3 +30,23 @@ export type {
   ResolvedSpeech,
 } from "./speech/resolve";
 export * from "./slug";
+export type {
+  ConceptKind,
+  EdgeStrength,
+  ConceptNode,
+  ConceptEdge,
+} from "./graph/concept-graph-types";
+export {
+  wouldCreateCycle,
+  topologicalOrder,
+  unorderableConcepts,
+  prerequisiteLevels,
+} from "./graph/prerequisites";
+export { lintConceptGraph, MAX_REQUIRES_PARENTS } from "./graph/graph-lint";
+export type { GraphIssue, GraphIssueCode } from "./graph/graph-lint";
+export { computeConceptStatuses, studyFrontier } from "./graph/concept-status";
+export type {
+  ConceptEvidence,
+  ConceptState,
+  ConceptStatus,
+} from "./graph/concept-status";
