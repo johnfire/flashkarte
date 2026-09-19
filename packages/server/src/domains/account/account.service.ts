@@ -101,6 +101,35 @@ export interface AccountExport {
       covers: string[];
     }>;
   };
+  lessonLearning: {
+    progress: Array<{
+      subjectId: string;
+      lesson: string;
+      status: string;
+      session: unknown;
+      startedAt: string;
+      updatedAt: string;
+      passedAt: string | null;
+    }>;
+    answers: Array<{
+      questionId: string;
+      presentationId: string;
+      chosenOption: number;
+      correct: boolean;
+      phase: string;
+      misses: number;
+      answeredAt: string;
+    }>;
+    reviews: Array<{
+      questionId: string;
+      easiness: number;
+      intervalDays: number;
+      repetitions: number;
+      lastRating: number | null;
+      dueAt: string;
+      lastReviewedAt: string | null;
+    }>;
+  };
   subjects: Array<{
     id: string;
     title: string;
@@ -157,6 +186,9 @@ export async function exportData(userId: string): Promise<AccountExport> {
     lessons,
     screens,
     lessonQuestions,
+    lessonProgress,
+    questionAttempts,
+    questionReviews,
   ] = await Promise.all([
     repo.findDecks(userId),
     repo.findCards(userId),
@@ -171,6 +203,9 @@ export async function exportData(userId: string): Promise<AccountExport> {
     repo.findLessons(userId),
     repo.findScreens(userId),
     repo.findLessonQuestions(userId),
+    repo.findLessonProgress(userId),
+    repo.findQuestionAttempts(userId),
+    repo.findQuestionReviews(userId),
   ]);
 
   const cardsByDeck = new Map<string, repo.CardRow[]>();
@@ -285,6 +320,35 @@ export async function exportData(userId: string): Promise<AccountExport> {
         retired: q.retired_at !== null,
         teaches: q.teaches,
         covers: q.covers,
+      })),
+    },
+    lessonLearning: {
+      progress: lessonProgress.map((p) => ({
+        subjectId: p.subject_id,
+        lesson: p.lesson_slug,
+        status: p.status,
+        session: p.session,
+        startedAt: p.started_at,
+        updatedAt: p.updated_at,
+        passedAt: p.passed_at,
+      })),
+      answers: questionAttempts.map((a) => ({
+        questionId: a.question_id,
+        presentationId: a.presentation_id,
+        chosenOption: a.chosen_option,
+        correct: a.correct,
+        phase: a.phase,
+        misses: a.misses,
+        answeredAt: a.attempted_at,
+      })),
+      reviews: questionReviews.map((r) => ({
+        questionId: r.question_id,
+        easiness: r.easiness,
+        intervalDays: r.interval_days,
+        repetitions: r.repetitions,
+        lastRating: r.last_rating,
+        dueAt: r.due_at,
+        lastReviewedAt: r.last_reviewed_at,
       })),
     },
     subjects: subjects.map((subject) => ({

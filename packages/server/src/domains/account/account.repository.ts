@@ -361,3 +361,65 @@ export function updateTwoFactorBackup(
     [userId, backupHashes],
   );
 }
+
+export interface LessonProgressExportRow {
+  subject_id: string;
+  lesson_slug: string;
+  status: string;
+  session: unknown;
+  started_at: string;
+  updated_at: string;
+  passed_at: string | null;
+}
+
+/** The learner's place in each lesson, including the saved session (which screen, misses so far). */
+export function findLessonProgress(
+  userId: string,
+): Promise<LessonProgressExportRow[]> {
+  return query<LessonProgressExportRow>(
+    `SELECT l.subject_id, l.slug AS lesson_slug, p.status, p.session, p.started_at, p.updated_at, p.passed_at
+     FROM lesson_progress p JOIN lessons l ON l.id = p.lesson_id
+     WHERE p.user_id = $1 ORDER BY p.started_at`,
+    [userId],
+  );
+}
+
+export interface QuestionAttemptExportRow {
+  question_id: string;
+  presentation_id: string;
+  chosen_option: number;
+  correct: boolean;
+  phase: string;
+  misses: number;
+  attempted_at: string;
+}
+
+export function findQuestionAttempts(
+  userId: string,
+): Promise<QuestionAttemptExportRow[]> {
+  return query<QuestionAttemptExportRow>(
+    `SELECT question_id, presentation_id, chosen_option, correct, phase, misses, attempted_at
+     FROM question_attempts WHERE user_id = $1 ORDER BY attempted_at`,
+    [userId],
+  );
+}
+
+export interface QuestionReviewExportRow {
+  question_id: string;
+  easiness: number;
+  interval_days: number;
+  repetitions: number;
+  last_rating: number | null;
+  due_at: string;
+  last_reviewed_at: string | null;
+}
+
+export function findQuestionReviews(
+  userId: string,
+): Promise<QuestionReviewExportRow[]> {
+  return query<QuestionReviewExportRow>(
+    `SELECT question_id, easiness, interval_days, repetitions, last_rating, due_at, last_reviewed_at
+     FROM question_reviews WHERE user_id = $1 ORDER BY due_at`,
+    [userId],
+  );
+}

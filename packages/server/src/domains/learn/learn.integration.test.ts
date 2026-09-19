@@ -1,5 +1,6 @@
 import { seededRandom } from "@flashkarte/shared";
 import { getPool } from "../../db/client";
+import { exportData } from "../account/account.service";
 import { NotFoundError, ValidationError } from "../../utils/errors";
 import * as lessons from "../lessons/lessons.service";
 import * as questions from "../lessons/questions.service";
@@ -495,5 +496,48 @@ describe("owner insights", () => {
     await expect(
       questionInsights(STRANGER, subjectId, "tokens"),
     ).rejects.toBeInstanceOf(NotFoundError);
+  });
+});
+
+describe("the learner's data belongs to them", () => {
+  const counts = async () =>
+    (
+      await getPool().query(
+        `SELECT (SELECT count(*) FROM lesson_progress)::int AS progress,
+                (SELECT count(*) FROM question_attempts)::int AS attempts,
+                (SELECT count(*) FROM question_reviews)::int AS reviews`,
+      )
+    ).rows[0];
+
+  async function learnOneLesson() {
+    await authorLesson(subjectId, "tokens", { questions: 2 });
+    await learn.startLesson(LEARNER, subjectId, "tokens", random());
+    await playToEnd(subjectId, "tokens", random(), {
+      missTimes: new Map([[0, 1]]),
+    });
+  }
+
+  it("exports progress, every answer and the review schedule", async () => {
+    await learnOneLesson();
+    const { lessonLearning } = await exportData(LEARNER);
+    expect(lessonLearning.progress).toEqual([
+      expect.objectContaining({ lesson: "tokens", status: "passed" }),
+    ]);
+    expect(lessonLearning.answers).toHaveLength(3);
+    expect(lessonLearning.answers.filter((a) => !a.correct)).toHaveLength(1);
+    expect(lessonLearning.reviews).toHaveLength(2);
+  });
+
+  it("erases all of it with the account", async () => {
+    await learnOneLesson();
+    expect((await counts()).attempts).toBe(3);
+    await getPool().query("DELETE FROM users WHERE id = $1", [LEARNER]);
+    expect(await counts()).toEqual({ progress: 0, attempts: 0, reviews: 0 });
+  });
+
+  it("erases a lesson's learner data when the lesson itself is deleted", async () => {
+    await learnOneLesson();
+    await lessons.deleteLesson(LEARNER, subjectId, "tokens");
+    expect(await counts()).toEqual({ progress: 0, attempts: 0, reviews: 0 });
   });
 });

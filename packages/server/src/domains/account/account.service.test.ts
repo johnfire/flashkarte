@@ -36,9 +36,65 @@ beforeEach(() => {
   mock.findLessons.mockResolvedValue([]);
   mock.findScreens.mockResolvedValue([]);
   mock.findLessonQuestions.mockResolvedValue([]);
+  mock.findLessonProgress.mockResolvedValue([]);
+  mock.findQuestionAttempts.mockResolvedValue([]);
+  mock.findQuestionReviews.mockResolvedValue([]);
 });
 
 describe("account.service exportData", () => {
+  it("exports what the learner did: progress, every answer, and the review schedule", async () => {
+    mock.findLessonProgress.mockResolvedValue([
+      {
+        subject_id: "s1",
+        lesson_slug: "tokens",
+        status: "passed",
+        session: { phase: "passed" },
+        started_at: "a",
+        updated_at: "b",
+        passed_at: "c",
+      },
+    ]);
+    mock.findQuestionAttempts.mockResolvedValue([
+      {
+        question_id: "q1",
+        presentation_id: "q1v",
+        chosen_option: 2,
+        correct: false,
+        phase: "lesson",
+        misses: 1,
+        attempted_at: "t",
+      },
+    ]);
+    mock.findQuestionReviews.mockResolvedValue([
+      {
+        question_id: "q1",
+        easiness: 2.5,
+        interval_days: 2,
+        repetitions: 1,
+        last_rating: 4,
+        due_at: "d",
+        last_reviewed_at: null,
+      },
+    ]);
+    const { lessonLearning } = await exportData("u1");
+    expect(lessonLearning.progress[0]).toMatchObject({
+      lesson: "tokens",
+      status: "passed",
+      passedAt: "c",
+    });
+    expect(lessonLearning.answers[0]).toMatchObject({
+      questionId: "q1",
+      chosenOption: 2,
+      correct: false,
+      answeredAt: "t",
+    });
+    expect(lessonLearning.reviews[0]).toMatchObject({
+      questionId: "q1",
+      intervalDays: 2,
+      lastRating: 4,
+    });
+  });
+
   it("exports lesson content: modules, lessons, screens with their revisions, and questions", async () => {
     mock.findLessonModules.mockResolvedValue([
       { id: "m1", subject_id: "s1", title: "Input side", position: 0 },
