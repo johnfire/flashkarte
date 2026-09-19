@@ -120,6 +120,14 @@ export interface AccountExport {
       misses: number;
       answeredAt: string;
     }>;
+    comments: Array<{
+      subjectId: string;
+      screen: string;
+      body: string;
+      createdAt: string;
+      resolvedAt: string | null;
+      resolvedBy: string | null;
+    }>;
     reviews: Array<{
       questionId: string;
       easiness: number;
@@ -189,6 +197,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
     lessonProgress,
     questionAttempts,
     questionReviews,
+    screenComments,
   ] = await Promise.all([
     repo.findDecks(userId),
     repo.findCards(userId),
@@ -206,6 +215,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
     repo.findLessonProgress(userId),
     repo.findQuestionAttempts(userId),
     repo.findQuestionReviews(userId),
+    repo.findScreenComments(userId),
   ]);
 
   const cardsByDeck = new Map<string, repo.CardRow[]>();
@@ -340,6 +350,14 @@ export async function exportData(userId: string): Promise<AccountExport> {
         phase: a.phase,
         misses: a.misses,
         answeredAt: a.attempted_at,
+      })),
+      comments: screenComments.map((c) => ({
+        subjectId: c.subject_id,
+        screen: c.number,
+        body: c.body,
+        createdAt: c.created_at,
+        resolvedAt: c.resolved_at,
+        resolvedBy: c.resolved_by,
       })),
       reviews: questionReviews.map((r) => ({
         questionId: r.question_id,

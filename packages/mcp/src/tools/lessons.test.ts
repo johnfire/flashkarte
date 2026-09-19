@@ -42,6 +42,8 @@ describe("lesson MCP tools", () => {
       "get_question_insights",
       "import_lesson",
       "lint_lesson",
+      "list_screen_comments",
+      "resolve_screen_comment",
       "retire_screen",
       "set_lesson_prerequisite",
       "update_question",
@@ -57,6 +59,29 @@ describe("lesson MCP tools", () => {
     });
     expect(mockApi.get).toHaveBeenCalledWith(
       `/api/subjects/${S}/lessons/tokens/insights`,
+    );
+  });
+
+  it("lists a lesson's open comments, and resolves one", async () => {
+    mockApi.get.mockResolvedValue({ comments: [] });
+    mockApi.post.mockResolvedValue({});
+    const { handlers } = setup();
+    await handlers.list_screen_comments({ subject_id: S, lesson: "tokens" });
+    expect(mockApi.get).toHaveBeenLastCalledWith(
+      `/api/subjects/${S}/lessons/tokens/comments`,
+    );
+    await handlers.list_screen_comments({
+      subject_id: S,
+      lesson: "tokens",
+      include_resolved: true,
+    });
+    expect(mockApi.get).toHaveBeenLastCalledWith(
+      `/api/subjects/${S}/lessons/tokens/comments?include_resolved=true`,
+    );
+    await handlers.resolve_screen_comment({ subject_id: S, comment_id: "c1" });
+    expect(mockApi.post).toHaveBeenLastCalledWith(
+      `/api/subjects/${S}/comments/c1/resolve`,
+      {},
     );
   });
 

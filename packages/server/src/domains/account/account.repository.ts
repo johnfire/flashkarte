@@ -423,3 +423,23 @@ export function findQuestionReviews(
     [userId],
   );
 }
+
+export interface ScreenCommentExportRow {
+  subject_id: string;
+  number: string;
+  body: string;
+  created_at: string;
+  resolved_at: string | null;
+  resolved_by: string | null;
+}
+
+export function findScreenComments(
+  userId: string,
+): Promise<ScreenCommentExportRow[]> {
+  return query<ScreenCommentExportRow>(
+    `SELECT s.subject_id, s.number::text AS number, c.body, c.created_at, c.resolved_at, c.resolved_by
+     FROM screen_comments c JOIN screens s ON s.id = c.screen_id
+     WHERE c.user_id = $1 ORDER BY c.created_at`,
+    [userId],
+  );
+}

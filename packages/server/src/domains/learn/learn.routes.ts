@@ -32,3 +32,8 @@ learnRouter.post("/:id/learn/reviews/:questionId/pause", ctrl.pauseReview);
 
 // Owner-only insight into which questions fail; the lesson's owner is checked in the service.
 learnRouter.get("/:id/lessons/:slug/insights", ctrl.insights);
+
+// Comments on screens: the owner writes them while learning; the owner's AI reads and resolves them.
+learnRouter.post("/:id/learn/screens/:number/comments", ctrl.addComment);
+learnRouter.get("/:id/lessons/:slug/comments", ctrl.listComments);
+learnRouter.post("/:id/comments/:commentId/resolve", ctrl.resolveComment);

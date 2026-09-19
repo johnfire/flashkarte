@@ -8,6 +8,7 @@ import * as screens from "../lessons/screens.service";
 import { getLearnerOutline } from "./learn-outline.service";
 import * as learn from "./learn-lessons.service";
 import * as reviews from "./learn-reviews.service";
+import * as comments from "./screen-comments.service";
 import { questionInsights } from "./learn-insights.service";
 import {
   LEARNER,
@@ -568,5 +569,78 @@ describe("the learner's data belongs to them", () => {
     await learnOneLesson();
     await lessons.deleteLesson(LEARNER, subjectId, "tokens");
     expect(await counts()).toEqual({ progress: 0, attempts: 0, reviews: 0 });
+  });
+});
+
+describe("comments on a screen", () => {
+  it("records a comment against the screen's number, lists it open, and resolves it once", async () => {
+    await authorLesson(subjectId, "tokens");
+    const made = await comments.addScreenComment(LEARNER, subjectId, "2", {
+      body: "  What is a byte here?  ",
+    });
+    expect(made).toMatchObject({ number: "2", body: "What is a byte here?" });
+
+    const open = await comments.listScreenComments(
+      LEARNER,
+      subjectId,
+      "tokens",
+    );
+    expect(open.comments).toEqual([
+      expect.objectContaining({
+        number: "2",
+        body: "What is a byte here?",
+        resolved_at: null,
+      }),
+    ]);
+
+    await comments.resolveScreenComment(LEARNER, subjectId, made.id, "ai");
+    expect(
+      (await comments.listScreenComments(LEARNER, subjectId, "tokens"))
+        .comments,
+    ).toHaveLength(0);
+    const all = await comments.listScreenComments(
+      LEARNER,
+      subjectId,
+      "tokens",
+      true,
+    );
+    expect(all.comments[0]).toMatchObject({ resolved_by: "ai" });
+    await expect(
+      comments.resolveScreenComment(LEARNER, subjectId, made.id, "ai"),
+    ).rejects.toBeInstanceOf(NotFoundError);
+  });
+
+  it("refuses an empty or too long comment, an unknown screen and a stranger", async () => {
+    await authorLesson(subjectId, "tokens");
+    for (const body of ["", "   ", "x".repeat(2001), undefined]) {
+      await expect(
+        comments.addScreenComment(LEARNER, subjectId, "1", { body }),
+      ).rejects.toBeInstanceOf(ValidationError);
+    }
+    await expect(
+      comments.addScreenComment(LEARNER, subjectId, "99", { body: "hi" }),
+    ).rejects.toBeInstanceOf(NotFoundError);
+    await expect(
+      comments.addScreenComment(STRANGER, subjectId, "1", { body: "hi" }),
+    ).rejects.toBeInstanceOf(NotFoundError);
+    await expect(
+      comments.listScreenComments(STRANGER, subjectId, "tokens"),
+    ).rejects.toBeInstanceOf(NotFoundError);
+  });
+
+  it("is exported, and goes with the screen or the account", async () => {
+    await authorLesson(subjectId, "tokens");
+    await comments.addScreenComment(LEARNER, subjectId, "1", { body: "one" });
+    await comments.addScreenComment(LEARNER, subjectId, "4", { body: "two" });
+    expect((await exportData(LEARNER)).lessonLearning.comments).toHaveLength(2);
+    await screens.deleteScreen(LEARNER, subjectId, "4"); // no question teaches screen 4
+    const left = await getPool().query(
+      "SELECT count(*)::int AS n FROM screen_comments",
+    );
+    expect(left.rows[0].n).toBe(1);
+    await getPool().query("DELETE FROM users WHERE id = $1", [LEARNER]);
+    expect(
+      (await getPool().query("SELECT 1 FROM screen_comments")).rowCount,
+    ).toBe(0);
   });
 });

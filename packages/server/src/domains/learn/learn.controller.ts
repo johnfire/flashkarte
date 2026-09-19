@@ -4,6 +4,7 @@ import { parse } from "../../utils/validate";
 import { wrapAsync } from "../../utils/wrapAsync";
 import { auditFromRequest } from "../audit/audit.service";
 import { questionInsights } from "./learn-insights.service";
+import * as comments from "./screen-comments.service";
 import * as learn from "./learn-lessons.service";
 import { getLearnerOutline } from "./learn-outline.service";
 import * as reviews from "./learn-reviews.service";
@@ -133,4 +134,38 @@ export const answerReview = wrapAsync(async (req: Request, res: Response) => {
 /** For the owner: how often each question in a lesson is missed, over all learners, with no identities. */
 export const insights = wrapAsync(async (req: Request, res: Response) => {
   res.json(await questionInsights(...ids(req)));
+});
+
+export const addComment = wrapAsync(async (req: Request, res: Response) => {
+  const result = await comments.addScreenComment(
+    req.userId!,
+    req.params.id,
+    req.params.number,
+    req.body,
+  );
+  await audit(req, "screen.commented", {
+    screen: result.number,
+    comment: result.id,
+  });
+  res.status(201).json(result);
+});
+export const listComments = wrapAsync(async (req: Request, res: Response) => {
+  res.json(
+    await comments.listScreenComments(
+      ...ids(req),
+      req.query.include_resolved === "true",
+    ),
+  );
+});
+export const resolveComment = wrapAsync(async (req: Request, res: Response) => {
+  const result = await comments.resolveScreenComment(
+    req.userId!,
+    req.params.id,
+    req.params.commentId,
+    req.keyScope === "deck" ? "ai" : "human",
+  );
+  await audit(req, "screen.comment_resolved", {
+    comment: req.params.commentId,
+  });
+  res.json(result);
 });

@@ -39,6 +39,7 @@ beforeEach(() => {
   mock.findLessonProgress.mockResolvedValue([]);
   mock.findQuestionAttempts.mockResolvedValue([]);
   mock.findQuestionReviews.mockResolvedValue([]);
+  mock.findScreenComments.mockResolvedValue([]);
 });
 
 describe("account.service exportData", () => {
@@ -76,7 +77,24 @@ describe("account.service exportData", () => {
         last_reviewed_at: null,
       },
     ]);
+    mock.findScreenComments.mockResolvedValue([
+      {
+        subject_id: "s1",
+        number: "2.010",
+        body: "Unclear",
+        created_at: "t",
+        resolved_at: null,
+        resolved_by: null,
+      },
+    ]);
     const { lessonLearning } = await exportData("u1");
+    expect(lessonLearning.comments).toEqual([
+      expect.objectContaining({
+        screen: "2.010",
+        body: "Unclear",
+        resolvedAt: null,
+      }),
+    ]);
     expect(lessonLearning.progress[0]).toMatchObject({
       lesson: "tokens",
       status: "passed",

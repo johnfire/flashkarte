@@ -203,3 +203,43 @@ test("an AI (deck-scoped) key cannot learn, but can read where questions fail", 
   expect(insights.status).toBe(200);
   expect(insights.body.questions).toHaveLength(3);
 });
+
+test("the owner comments on a screen, their AI reads and resolves it, and the AI cannot comment", async () => {
+  const id = await makeSubject();
+  const S = `/api/subjects/${id}`;
+  const made = await request(app)
+    .post(`${S}/learn/screens/2/comments`)
+    .send({ body: "Why 256 and not 255?" });
+  expect(made.status).toBe(201);
+  expect(
+    (await request(app).post(`${S}/learn/screens/2/comments`).send({})).status,
+  ).toBe(422);
+
+  keyScope = "deck";
+  expect(
+    (
+      await request(app)
+        .post(`${S}/learn/screens/2/comments`)
+        .send({ body: "x" })
+    ).status,
+  ).toBe(403);
+  const listed = await request(app).get(`${S}/lessons/tokens/comments`);
+  expect(listed.body.comments).toEqual([
+    expect.objectContaining({ number: "2", body: "Why 256 and not 255?" }),
+  ]);
+  expect(
+    (await request(app).post(`${S}/comments/${made.body.id}/resolve`)).status,
+  ).toBe(200);
+  expect(
+    (await request(app).get(`${S}/lessons/tokens/comments`)).body.comments,
+  ).toHaveLength(0);
+
+  const actors = await getPool().query(
+    `SELECT action, actor_type FROM audit_log WHERE action LIKE 'screen.%' ORDER BY created_at`,
+  );
+  expect(actors.rows.map((r) => r.action)).toEqual([
+    "screen.commented",
+    "screen.comment_resolved",
+  ]);
+  expect(actors.rows[1].actor_type).toBe("ai-agent");
+});

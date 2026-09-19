@@ -1,1676 +1,1517 @@
 {
- "title": "Transformers in LLMs",
- "description": "Prerequisite graph for the Transformers in LLMs deck (86 cards). Draft v0: edges are an LLM-drafted hypothesis awaiting human review. Card numbers are the deck's 1-based card numbers.",
- "concepts": [
-  {
-   "slug": "ext-matmul",
-   "name": "Matrices, shapes, matrix multiplication",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-dot",
-   "name": "Dot product as a similarity score",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-prob",
-   "name": "A probability distribution (non-negative, sums to 1)",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-deriv",
-   "name": "A derivative as 'how much the output changes per unit input change'",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-exp-log",
-   "name": "Exp and log",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-stats",
-   "name": "Mean and variance",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-rot",
-   "name": "Sin/cos and 2-D rotation",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-rnn",
-   "name": "What a recurrent network (RNN) is",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "ext-rank",
-   "name": "Matrix rank",
-   "kind": "assumption",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "pipeline-map",
-   "name": "The pipeline map (text, IDs, vectors, block stack, logits, token, repeat)",
-   "kind": "map",
-   "tier": "core",
-   "cards": [
-    18
-   ]
-  },
-  {
-   "slug": "transformer-vs-llm",
-   "name": "'Transformer' versus 'LLM'",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    80
-   ]
-  },
-  {
-   "slug": "token",
-   "name": "Token",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    1
-   ]
-  },
-  {
-   "slug": "shape-notation",
-   "name": "Reading n x d_model and the deck's symbols",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    7,
-    8
-   ]
-  },
-  {
-   "slug": "vocabulary",
-   "name": "Vocabulary and V",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    2
-   ]
-  },
-  {
-   "slug": "sequence-length",
-   "name": "Sequence length n and context window",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    5
-   ]
-  },
-  {
-   "slug": "token-id",
-   "name": "Token ID",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    3
-   ]
-  },
-  {
-   "slug": "tokenizer",
-   "name": "Tokenizer",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    4
-   ]
-  },
-  {
-   "slug": "embedding",
-   "name": "Embedding and d_model",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    6
-   ]
-  },
-  {
-   "slug": "subword-tokenization",
-   "name": "Why subwords (and what tokens-not-characters costs)",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    22,
-    26
-   ]
-  },
-  {
-   "slug": "embedding-table",
-   "name": "The embedding table E (V x d_model)",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    29
-   ]
-  },
-  {
-   "slug": "bpe",
-   "name": "Byte-pair encoding (incl. byte-level)",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    23,
-    24
-   ]
-  },
-  {
-   "slug": "softmax",
-   "name": "Softmax",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    14
-   ]
-  },
-  {
-   "slug": "logits",
-   "name": "Logits",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    13
-   ]
-  },
-  {
-   "slug": "next-token-distribution",
-   "name": "One forward pass gives P(next token) at every position",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    19
-   ]
-  },
-  {
-   "slug": "temperature",
-   "name": "Temperature",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    70
-   ]
-  },
-  {
-   "slug": "sampling",
-   "name": "Sampling",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    15
-   ]
-  },
-  {
-   "slug": "autoregressive-generation",
-   "name": "Autoregressive generation (why 200 tokens = 200 passes)",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    16,
-    20
-   ]
-  },
-  {
-   "slug": "decoding-strategies",
-   "name": "Greedy, top-k, top-p",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    71
-   ]
-  },
-  {
-   "slug": "autoregressive-factorization",
-   "name": "Autoregressive factorization of P(sequence)",
-   "kind": "idea",
-   "tier": "extension",
-   "cards": [
-    21
-   ]
-  },
-  {
-   "slug": "parameters",
-   "name": "Parameters (weights)",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    9
-   ]
-  },
-  {
-   "slug": "training-vs-inference",
-   "name": "Training versus inference",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    10
-   ]
-  },
-  {
-   "slug": "loss",
-   "name": "Loss",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    11
-   ]
-  },
-  {
-   "slug": "gradient-backprop",
-   "name": "Gradient and backpropagation",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    11
-   ]
-  },
-  {
-   "slug": "pretraining-loss",
-   "name": "Pretraining loss and perplexity",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    72
-   ]
-  },
-  {
-   "slug": "training-compute",
-   "name": "Training compute is about 6ND",
-   "kind": "skill",
-   "tier": "extension",
-   "cards": [
-    75
-   ]
-  },
-  {
-   "slug": "tokenizer-not-trained",
-   "name": "The tokenizer is fixed, not learned",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    27,
-    28
-   ]
-  },
-  {
-   "slug": "pretrain-vs-posttrain",
-   "name": "Pretraining versus post-training",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    74
-   ]
-  },
-  {
-   "slug": "teacher-forcing",
-   "name": "Teacher forcing (all positions in one pass)",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    73
-   ]
-  },
-  {
-   "slug": "attention-gist",
-   "name": "Attention, at the highest level",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    17
-   ]
-  },
-  {
-   "slug": "qkv-projections",
-   "name": "Q, K, V projections",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    30
-   ]
-  },
-  {
-   "slug": "attention-scores",
-   "name": "Attention scores Q K^T",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    31
-   ]
-  },
-  {
-   "slug": "attention-weights",
-   "name": "Attention weights: row-wise softmax",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    31,
-    34,
-    35
-   ]
-  },
-  {
-   "slug": "score-scaling",
-   "name": "Why divide by sqrt(d_k)",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    32
-   ]
-  },
-  {
-   "slug": "attention-cost",
-   "name": "Attention cost grows with n squared",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    37
-   ]
-  },
-  {
-   "slug": "qk-bilinear-form",
-   "name": "W_Q W_K^T is one bilinear form",
-   "kind": "idea",
-   "tier": "extension",
-   "cards": [
-    51
-   ]
-  },
-  {
-   "slug": "attention-output",
-   "name": "Attention output is a weighted average of values",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    31,
-    33
-   ]
-  },
-  {
-   "slug": "causal-mask",
-   "name": "Causal mask (and why before softmax)",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    41,
-    42,
-    43
-   ]
-  },
-  {
-   "slug": "self-vs-cross-attention",
-   "name": "Self- versus cross-attention",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    36
-   ]
-  },
-  {
-   "slug": "multi-head-attention",
-   "name": "Multi-head attention",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    38,
-    39
-   ]
-  },
-  {
-   "slug": "mask-in-training",
-   "name": "Why the mask matters in training",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    44
-   ]
-  },
-  {
-   "slug": "position-need",
-   "name": "Why position information is needed",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    45
-   ]
-  },
-  {
-   "slug": "mha-parameter-count",
-   "name": "Parameter count of multi-head attention (4 d_model^2)",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    40
-   ]
-  },
-  {
-   "slug": "sinusoidal-position",
-   "name": "Sinusoidal position encoding",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    46
-   ]
-  },
-  {
-   "slug": "learned-absolute-position",
-   "name": "Learned absolute position embeddings",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    47
-   ]
-  },
-  {
-   "slug": "rope",
-   "name": "Rotary position embedding (RoPE)",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    48,
-    49
-   ]
-  },
-  {
-   "slug": "vo-product",
-   "name": "Only W_V W_O matters in a head",
-   "kind": "idea",
-   "tier": "extension",
-   "cards": [
-    52
-   ]
-  },
-  {
-   "slug": "hidden-states-layer",
-   "name": "Layers and hidden states",
-   "kind": "term",
-   "tier": "core",
-   "cards": [
-    12
-   ]
-  },
-  {
-   "slug": "residual-connection",
-   "name": "Residual connection and the residual stream",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    55
-   ]
-  },
-  {
-   "slug": "layernorm",
-   "name": "LayerNorm",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    56
-   ]
-  },
-  {
-   "slug": "ffn",
-   "name": "Feed-forward sublayer",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    58
-   ]
-  },
-  {
-   "slug": "rmsnorm",
-   "name": "RMSNorm",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    57
-   ]
-  },
-  {
-   "slug": "ffn-activations",
-   "name": "FFN activations (ReLU, GELU, SwiGLU)",
-   "kind": "idea",
-   "tier": "extension",
-   "cards": [
-    66
-   ]
-  },
-  {
-   "slug": "ffn-kv-memory",
-   "name": "FFN as key-value memory",
-   "kind": "idea",
-   "tier": "extension",
-   "cards": [
-    67
-   ]
-  },
-  {
-   "slug": "attention-vs-ffn-roles",
-   "name": "Attention mixes positions; FFN mixes features",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    59
-   ]
-  },
-  {
-   "slug": "preln-block",
-   "name": "The pre-LN transformer block",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    60
-   ]
-  },
-  {
-   "slug": "absolute-vs-rope",
-   "name": "Where position enters: absolute versus RoPE",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    50
-   ]
-  },
-  {
-   "slug": "block-stack-shape-contract",
-   "name": "Same shape in and out, so blocks stack",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    61
-   ]
-  },
-  {
-   "slug": "pre-vs-post-ln",
-   "name": "Pre-LN versus post-LN",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    62,
-    63
-   ]
-  },
-  {
-   "slug": "params-per-block",
-   "name": "Parameters per block (about 12 d_model^2)",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    64
-   ]
-  },
-  {
-   "slug": "attention-not-explanation",
-   "name": "Attention weights are not a full explanation",
-   "kind": "idea",
-   "tier": "extension",
-   "cards": [
-    53,
-    54
-   ]
-  },
-  {
-   "slug": "unembedding",
-   "name": "Unembedding (d_model to V) and the final norm",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    68
-   ]
-  },
-  {
-   "slug": "vocab-size-tradeoff",
-   "name": "The trade-off in choosing V",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    25
-   ]
-  },
-  {
-   "slug": "weight-tying",
-   "name": "Weight tying",
-   "kind": "idea",
-   "tier": "extension",
-   "cards": [
-    69
-   ]
-  },
-  {
-   "slug": "prefill-vs-decode",
-   "name": "Prefill versus decode",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    76
-   ]
-  },
-  {
-   "slug": "kv-cache",
-   "name": "The KV cache and why it is valid",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    77
-   ]
-  },
-  {
-   "slug": "kv-cache-size",
-   "name": "KV-cache size",
-   "kind": "skill",
-   "tier": "core",
-   "cards": [
-    78
-   ]
-  },
-  {
-   "slug": "mqa-gqa",
-   "name": "Multi-query and grouped-query attention",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    79
-   ]
-  },
-  {
-   "slug": "transformer-vs-rnn",
-   "name": "Why transformers displaced RNNs",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    82
-   ]
-  },
-  {
-   "slug": "architecture-families",
-   "name": "Encoder-only, decoder-only, encoder-decoder",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    83,
-    84
-   ]
-  },
-  {
-   "slug": "pipeline-order-capstone",
-   "name": "Capstone: put the inference pipeline in order",
-   "kind": "capstone",
-   "tier": "core",
-   "cards": []
-  },
-  {
-   "slug": "learned-vs-fixed-parts",
-   "name": "Capstone: which parts are learned, which fixed",
-   "kind": "capstone",
-   "tier": "core",
-   "cards": [
-    81
-   ]
-  },
-  {
-   "slug": "context-window-limits",
-   "name": "What limits the context window",
-   "kind": "idea",
-   "tier": "core",
-   "cards": [
-    85
-   ]
-  }
- ],
- "edges": [
-  {
-   "from": "ext-matmul",
-   "to": "shape-notation",
-   "strength": "requires",
-   "reason": "Shapes are matrix dimensions."
-  },
-  {
-   "from": "token",
-   "to": "vocabulary",
-   "strength": "requires",
-   "reason": "V counts tokens."
-  },
-  {
-   "from": "token",
-   "to": "sequence-length",
-   "strength": "requires",
-   "reason": "N counts tokens."
-  },
-  {
-   "from": "vocabulary",
-   "to": "token-id",
-   "strength": "requires",
-   "reason": "An ID is a position in the vocabulary list."
-  },
-  {
-   "from": "token-id",
-   "to": "tokenizer",
-   "strength": "requires",
-   "reason": "It maps text to and from ID sequences."
-  },
-  {
-   "from": "token-id",
-   "to": "embedding",
-   "strength": "requires",
-   "reason": "An embedding is what an ID is turned into."
-  },
-  {
-   "from": "tokenizer",
-   "to": "subword-tokenization",
-   "strength": "requires",
-   "reason": "Compares ways a tokenizer can split text."
-  },
-  {
-   "from": "embedding",
-   "to": "embedding-table",
-   "strength": "requires",
-   "reason": "E holds the embeddings."
-  },
-  {
-   "from": "shape-notation",
-   "to": "embedding-table",
-   "strength": "requires",
-   "reason": "The card is about shapes."
-  },
-  {
-   "from": "ext-matmul",
-   "to": "embedding-table",
-   "strength": "requires",
-   "reason": "Lookup equals one-hot times E."
-  },
-  {
-   "from": "subword-tokenization",
-   "to": "bpe",
-   "strength": "requires",
-   "reason": "BPE is one way to build a subword vocabulary."
-  },
-  {
-   "from": "ext-prob",
-   "to": "softmax",
-   "strength": "requires",
-   "reason": "Its output is a distribution."
-  },
-  {
-   "from": "ext-exp-log",
-   "to": "softmax",
-   "strength": "requires",
-   "reason": "It is defined with exp."
-  },
-  {
-   "from": "vocabulary",
-   "to": "logits",
-   "strength": "requires",
-   "reason": "One raw score per vocabulary token."
-  },
-  {
-   "from": "logits",
-   "to": "next-token-distribution",
-   "strength": "requires",
-   "reason": "The raw output."
-  },
-  {
-   "from": "softmax",
-   "to": "next-token-distribution",
-   "strength": "requires",
-   "reason": "Turns logits into probabilities."
-  },
-  {
-   "from": "softmax",
-   "to": "temperature",
-   "strength": "requires",
-   "reason": "It rescales the input to softmax."
-  },
-  {
-   "from": "logits",
-   "to": "temperature",
-   "strength": "requires",
-   "reason": "It divides the logits."
-  },
-  {
-   "from": "next-token-distribution",
-   "to": "sampling",
-   "strength": "requires",
-   "reason": "You pick from that distribution."
-  },
-  {
-   "from": "sampling",
-   "to": "autoregressive-generation",
-   "strength": "requires",
-   "reason": "Each step samples one token."
-  },
-  {
-   "from": "sequence-length",
-   "to": "autoregressive-generation",
-   "strength": "requires",
-   "reason": "N grows by one per step."
-  },
-  {
-   "from": "sampling",
-   "to": "decoding-strategies",
-   "strength": "requires",
-   "reason": "They are ways of choosing the sample."
-  },
-  {
-   "from": "next-token-distribution",
-   "to": "decoding-strategies",
-   "strength": "requires",
-   "reason": "They act on its probabilities."
-  },
-  {
-   "from": "temperature",
-   "to": "decoding-strategies",
-   "strength": "suggests"
-  },
-  {
-   "from": "autoregressive-generation",
-   "to": "autoregressive-factorization",
-   "strength": "requires",
-   "reason": "The formula restates the loop."
-  },
-  {
-   "from": "ext-prob",
-   "to": "autoregressive-factorization",
-   "strength": "requires",
-   "reason": "Chain rule of probability."
-  },
-  {
-   "from": "ext-matmul",
-   "to": "parameters",
-   "strength": "requires",
-   "reason": "Parameters are matrix entries."
-  },
-  {
-   "from": "parameters",
-   "to": "training-vs-inference",
-   "strength": "requires",
-   "reason": "Training changes them, inference freezes them."
-  },
-  {
-   "from": "training-vs-inference",
-   "to": "loss",
-   "strength": "requires",
-   "reason": "Loss is the training signal."
-  },
-  {
-   "from": "loss",
-   "to": "gradient-backprop",
-   "strength": "requires",
-   "reason": "The gradient is of the loss."
-  },
-  {
-   "from": "ext-deriv",
-   "to": "gradient-backprop",
-   "strength": "requires",
-   "reason": "A gradient is a derivative."
-  },
-  {
-   "from": "loss",
-   "to": "pretraining-loss",
-   "strength": "requires",
-   "reason": "It is the loss for this task."
-  },
-  {
-   "from": "next-token-distribution",
-   "to": "pretraining-loss",
-   "strength": "requires",
-   "reason": "Cross-entropy on the true next token."
-  },
-  {
-   "from": "ext-exp-log",
-   "to": "pretraining-loss",
-   "strength": "requires",
-   "reason": "Log and exp."
-  },
-  {
-   "from": "parameters",
-   "to": "training-compute",
-   "strength": "requires",
-   "reason": "N is parameter count."
-  },
-  {
-   "from": "gradient-backprop",
-   "to": "training-compute",
-   "strength": "requires",
-   "reason": "The backward pass costs about 2x forward."
-  },
-  {
-   "from": "tokenizer",
-   "to": "tokenizer-not-trained",
-   "strength": "requires",
-   "reason": "The thing in question."
-  },
-  {
-   "from": "gradient-backprop",
-   "to": "tokenizer-not-trained",
-   "strength": "requires",
-   "reason": "Gradients cannot pass through discrete splits."
-  },
-  {
-   "from": "embedding-table",
-   "to": "tokenizer-not-trained",
-   "strength": "requires",
-   "reason": "Gradients reach only looked-up rows."
-  },
-  {
-   "from": "pretraining-loss",
-   "to": "pretrain-vs-posttrain",
-   "strength": "requires",
-   "reason": "Pretraining minimises it."
-  },
-  {
-   "from": "training-vs-inference",
-   "to": "pretrain-vs-posttrain",
-   "strength": "requires",
-   "reason": "Both are training stages."
-  },
-  {
-   "from": "pretraining-loss",
-   "to": "teacher-forcing",
-   "strength": "requires",
-   "reason": "Targets are the input shifted by one."
-  },
-  {
-   "from": "autoregressive-generation",
-   "to": "teacher-forcing",
-   "strength": "requires",
-   "reason": "Contrast with generation one step at a time."
-  },
-  {
-   "from": "training-vs-inference",
-   "to": "teacher-forcing",
-   "strength": "requires",
-   "reason": "A training-only trick."
-  },
-  {
-   "from": "embedding",
-   "to": "attention-gist",
-   "strength": "requires",
-   "reason": "Attention updates token vectors."
-  },
-  {
-   "from": "sequence-length",
-   "to": "attention-gist",
-   "strength": "requires",
-   "reason": "It looks across the n positions."
-  },
-  {
-   "from": "attention-gist",
-   "to": "qkv-projections",
-   "strength": "requires",
-   "reason": "They are how attention is computed."
-  },
-  {
-   "from": "shape-notation",
-   "to": "qkv-projections",
-   "strength": "requires",
-   "reason": "The card is about shapes."
-  },
-  {
-   "from": "parameters",
-   "to": "qkv-projections",
-   "strength": "requires",
-   "reason": "W_Q, W_K, W_V are learned."
-  },
-  {
-   "from": "ext-matmul",
-   "to": "qkv-projections",
-   "strength": "requires",
-   "reason": "X W_Q."
-  },
-  {
-   "from": "qkv-projections",
-   "to": "attention-scores",
-   "strength": "requires",
-   "reason": "Built from Q and K."
-  },
-  {
-   "from": "ext-dot",
-   "to": "attention-scores",
-   "strength": "requires",
-   "reason": "Each score is a dot product."
-  },
-  {
-   "from": "attention-scores",
-   "to": "attention-weights",
-   "strength": "requires",
-   "reason": "Softmax of the scores."
-  },
-  {
-   "from": "softmax",
-   "to": "attention-weights",
-   "strength": "requires",
-   "reason": "The operation used."
-  },
-  {
-   "from": "attention-scores",
-   "to": "score-scaling",
-   "strength": "requires",
-   "reason": "It rescales them."
-  },
-  {
-   "from": "softmax",
-   "to": "score-scaling",
-   "strength": "requires",
-   "reason": "Large scores saturate softmax."
-  },
-  {
-   "from": "ext-stats",
-   "to": "score-scaling",
-   "strength": "requires",
-   "reason": "Dot-product variance grows with d_k."
-  },
-  {
-   "from": "attention-scores",
-   "to": "attention-cost",
-   "strength": "requires",
-   "reason": "The n x n score matrix."
-  },
-  {
-   "from": "sequence-length",
-   "to": "attention-cost",
-   "strength": "requires",
-   "reason": "N is the variable."
-  },
-  {
-   "from": "attention-scores",
-   "to": "qk-bilinear-form",
-   "strength": "requires",
-   "reason": "The form the scores use."
-  },
-  {
-   "from": "ext-rank",
-   "to": "qk-bilinear-form",
-   "strength": "requires",
-   "reason": "The rank bound."
-  },
-  {
-   "from": "attention-weights",
-   "to": "attention-output",
-   "strength": "requires",
-   "reason": "They are the averaging weights."
-  },
-  {
-   "from": "qkv-projections",
-   "to": "attention-output",
-   "strength": "requires",
-   "reason": "V supplies the values."
-  },
-  {
-   "from": "attention-weights",
-   "to": "causal-mask",
-   "strength": "requires",
-   "reason": "It edits the scores that become weights."
-  },
-  {
-   "from": "softmax",
-   "to": "causal-mask",
-   "strength": "requires",
-   "reason": "Masking works through softmax renormalisation."
-  },
-  {
-   "from": "attention-output",
-   "to": "self-vs-cross-attention",
-   "strength": "requires",
-   "reason": "They differ only in where Q and K,V come from."
-  },
-  {
-   "from": "attention-output",
-   "to": "multi-head-attention",
-   "strength": "requires",
-   "reason": "A head is one such computation."
-  },
-  {
-   "from": "shape-notation",
-   "to": "multi-head-attention",
-   "strength": "requires",
-   "reason": "Heads split d_model."
-  },
-  {
-   "from": "causal-mask",
-   "to": "mask-in-training",
-   "strength": "requires",
-   "reason": "The mechanism."
-  },
-  {
-   "from": "teacher-forcing",
-   "to": "mask-in-training",
-   "strength": "requires",
-   "reason": "The setting where whole sequences are fed at once."
-  },
-  {
-   "from": "attention-output",
-   "to": "position-need",
-   "strength": "requires",
-   "reason": "A weighted average ignores token order."
-  },
-  {
-   "from": "multi-head-attention",
-   "to": "mha-parameter-count",
-   "strength": "requires",
-   "reason": "Counts its matrices."
-  },
-  {
-   "from": "position-need",
-   "to": "sinusoidal-position",
-   "strength": "requires",
-   "reason": "A fix for it."
-  },
-  {
-   "from": "embedding",
-   "to": "sinusoidal-position",
-   "strength": "requires",
-   "reason": "Added to embeddings."
-  },
-  {
-   "from": "ext-rot",
-   "to": "sinusoidal-position",
-   "strength": "requires",
-   "reason": "Sin/cos."
-  },
-  {
-   "from": "position-need",
-   "to": "learned-absolute-position",
-   "strength": "requires",
-   "reason": "A fix for it."
-  },
-  {
-   "from": "embedding-table",
-   "to": "learned-absolute-position",
-   "strength": "requires",
-   "reason": "Same lookup-table idea."
-  },
-  {
-   "from": "position-need",
-   "to": "rope",
-   "strength": "requires",
-   "reason": "A fix for it."
-  },
-  {
-   "from": "attention-scores",
-   "to": "rope",
-   "strength": "requires",
-   "reason": "It rotates q and k before the dot product."
-  },
-  {
-   "from": "ext-rot",
-   "to": "rope",
-   "strength": "requires",
-   "reason": "2-D rotation."
-  },
-  {
-   "from": "multi-head-attention",
-   "to": "vo-product",
-   "strength": "requires",
-   "reason": "W_O belongs to the multi-head layer."
-  },
-  {
-   "from": "ext-rank",
-   "to": "vo-product",
-   "strength": "requires",
-   "reason": "The rank bound."
-  },
-  {
-   "from": "embedding",
-   "to": "hidden-states-layer",
-   "strength": "requires",
-   "reason": "Hidden states are per-token vectors."
-  },
-  {
-   "from": "parameters",
-   "to": "hidden-states-layer",
-   "strength": "requires",
-   "reason": "Each layer has its own."
-  },
-  {
-   "from": "hidden-states-layer",
-   "to": "residual-connection",
-   "strength": "requires",
-   "reason": "It adds a layer's output to its input."
-  },
-  {
-   "from": "gradient-backprop",
-   "to": "residual-connection",
-   "strength": "requires",
-   "reason": "The point is an identity path for gradients."
-  },
-  {
-   "from": "hidden-states-layer",
-   "to": "layernorm",
-   "strength": "requires",
-   "reason": "It normalises a token's hidden vector."
-  },
-  {
-   "from": "ext-stats",
-   "to": "layernorm",
-   "strength": "requires",
-   "reason": "Mean and variance."
-  },
-  {
-   "from": "hidden-states-layer",
-   "to": "ffn",
-   "strength": "requires",
-   "reason": "It transforms each token's vector."
-  },
-  {
-   "from": "shape-notation",
-   "to": "ffn",
-   "strength": "requires",
-   "reason": "D_model x d_ff."
-  },
-  {
-   "from": "ext-matmul",
-   "to": "ffn",
-   "strength": "requires",
-   "reason": "Two matrix multiplies."
-  },
-  {
-   "from": "layernorm",
-   "to": "rmsnorm",
-   "strength": "requires",
-   "reason": "Defined as a change to it."
-  },
-  {
-   "from": "ffn",
-   "to": "ffn-activations",
-   "strength": "requires",
-   "reason": "They are its nonlinearity."
-  },
-  {
-   "from": "ffn",
-   "to": "ffn-kv-memory",
-   "strength": "requires",
-   "reason": "The hypothesis is about it."
-  },
-  {
-   "from": "attention-output",
-   "to": "ffn-kv-memory",
-   "strength": "requires",
-   "reason": "Uses the key/value analogy."
-  },
-  {
-   "from": "ffn",
-   "to": "attention-vs-ffn-roles",
-   "strength": "requires",
-   "reason": "One of the two."
-  },
-  {
-   "from": "multi-head-attention",
-   "to": "attention-vs-ffn-roles",
-   "strength": "requires",
-   "reason": "The other."
-  },
-  {
-   "from": "residual-connection",
-   "to": "preln-block",
-   "strength": "requires",
-   "reason": "Each sublayer sits in a residual branch."
-  },
-  {
-   "from": "layernorm",
-   "to": "preln-block",
-   "strength": "requires",
-   "reason": "Applied to each sublayer's input."
-  },
-  {
-   "from": "ffn",
-   "to": "preln-block",
-   "strength": "requires",
-   "reason": "One sublayer."
-  },
-  {
-   "from": "multi-head-attention",
-   "to": "preln-block",
-   "strength": "requires",
-   "reason": "The other sublayer."
-  },
-  {
-   "from": "rope",
-   "to": "absolute-vs-rope",
-   "strength": "requires",
-   "reason": "One of the two."
-  },
-  {
-   "from": "sinusoidal-position",
-   "to": "absolute-vs-rope",
-   "strength": "requires",
-   "reason": "The other (either absolute scheme works)."
-  },
-  {
-   "from": "residual-connection",
-   "to": "absolute-vs-rope",
-   "strength": "requires",
-   "reason": "Absolute position travels through the residual stream."
-  },
-  {
-   "from": "preln-block",
-   "to": "block-stack-shape-contract",
-   "strength": "requires",
-   "reason": "The shape contract of that block."
-  },
-  {
-   "from": "shape-notation",
-   "to": "block-stack-shape-contract",
-   "strength": "requires",
-   "reason": "It is stated in shapes."
-  },
-  {
-   "from": "preln-block",
-   "to": "pre-vs-post-ln",
-   "strength": "requires",
-   "reason": "One of the two layouts."
-  },
-  {
-   "from": "gradient-backprop",
-   "to": "pre-vs-post-ln",
-   "strength": "requires",
-   "reason": "The difference is gradient behaviour at init."
-  },
-  {
-   "from": "mha-parameter-count",
-   "to": "params-per-block",
-   "strength": "requires",
-   "reason": "The attention share."
-  },
-  {
-   "from": "ffn",
-   "to": "params-per-block",
-   "strength": "requires",
-   "reason": "The FFN share."
-  },
-  {
-   "from": "multi-head-attention",
-   "to": "attention-not-explanation",
-   "strength": "requires",
-   "reason": "Many heads."
-  },
-  {
-   "from": "ffn",
-   "to": "attention-not-explanation",
-   "strength": "requires",
-   "reason": "The other computation the weights ignore."
-  },
-  {
-   "from": "block-stack-shape-contract",
-   "to": "attention-not-explanation",
-   "strength": "requires",
-   "reason": "Many layers."
-  },
-  {
-   "from": "block-stack-shape-contract",
-   "to": "unembedding",
-   "strength": "requires",
-   "reason": "It consumes the stack's output."
-  },
-  {
-   "from": "logits",
-   "to": "unembedding",
-   "strength": "requires",
-   "reason": "It produces them."
-  },
-  {
-   "from": "layernorm",
-   "to": "unembedding",
-   "strength": "requires",
-   "reason": "The final norm."
-  },
-  {
-   "from": "shape-notation",
-   "to": "unembedding",
-   "strength": "requires",
-   "reason": "D_model x V."
-  },
-  {
-   "from": "subword-tokenization",
-   "to": "vocab-size-tradeoff",
-   "strength": "requires",
-   "reason": "V comes from the split scheme."
-  },
-  {
-   "from": "embedding-table",
-   "to": "vocab-size-tradeoff",
-   "strength": "requires",
-   "reason": "Larger V, larger E."
-  },
-  {
-   "from": "unembedding",
-   "to": "vocab-size-tradeoff",
-   "strength": "requires",
-   "reason": "Larger V, wider output layer."
-  },
-  {
-   "from": "unembedding",
-   "to": "weight-tying",
-   "strength": "requires",
-   "reason": "One of the two matrices."
-  },
-  {
-   "from": "embedding-table",
-   "to": "weight-tying",
-   "strength": "requires",
-   "reason": "The other."
-  },
-  {
-   "from": "autoregressive-generation",
-   "to": "prefill-vs-decode",
-   "strength": "requires",
-   "reason": "Decode is the one-token loop."
-  },
-  {
-   "from": "block-stack-shape-contract",
-   "to": "prefill-vs-decode",
-   "strength": "requires",
-   "reason": "A whole pass through the stack."
-  },
-  {
-   "from": "causal-mask",
-   "to": "prefill-vs-decode",
-   "strength": "requires",
-   "reason": "Why the prompt can be processed in parallel."
-  },
-  {
-   "from": "prefill-vs-decode",
-   "to": "kv-cache",
-   "strength": "requires",
-   "reason": "Prefill fills it, decode reuses it."
-  },
-  {
-   "from": "attention-output",
-   "to": "kv-cache",
-   "strength": "requires",
-   "reason": "K and V are what is cached."
-  },
-  {
-   "from": "causal-mask",
-   "to": "kv-cache",
-   "strength": "requires",
-   "reason": "Earlier positions never see later ones, so their K,V never change."
-  },
-  {
-   "from": "kv-cache",
-   "to": "kv-cache-size",
-   "strength": "requires",
-   "reason": "What is being sized."
-  },
-  {
-   "from": "multi-head-attention",
-   "to": "kv-cache-size",
-   "strength": "requires",
-   "reason": "Heads and d_head set the size."
-  },
-  {
-   "from": "kv-cache-size",
-   "to": "mqa-gqa",
-   "strength": "requires",
-   "reason": "They exist to shrink it."
-  },
-  {
-   "from": "multi-head-attention",
-   "to": "mqa-gqa",
-   "strength": "requires",
-   "reason": "They modify how heads share K,V."
-  },
-  {
-   "from": "attention-output",
-   "to": "transformer-vs-rnn",
-   "strength": "requires",
-   "reason": "Direct paths between any two tokens."
-  },
-  {
-   "from": "teacher-forcing",
-   "to": "transformer-vs-rnn",
-   "strength": "requires",
-   "reason": "Parallel training."
-  },
-  {
-   "from": "ext-rnn",
-   "to": "transformer-vs-rnn",
-   "strength": "requires",
-   "reason": "The comparison assumes it."
-  },
-  {
-   "from": "causal-mask",
-   "to": "architecture-families",
-   "strength": "requires",
-   "reason": "The mask is what separates BERT from GPT."
-  },
-  {
-   "from": "pretraining-loss",
-   "to": "architecture-families",
-   "strength": "requires",
-   "reason": "The objectives differ."
-  },
-  {
-   "from": "self-vs-cross-attention",
-   "to": "architecture-families",
-   "strength": "requires",
-   "reason": "Encoder-decoder uses cross-attention."
-  },
-  {
-   "from": "tokenizer",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "Step 1."
-  },
-  {
-   "from": "embedding-table",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "Step 2."
-  },
-  {
-   "from": "sinusoidal-position",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "Position information is added early (any scheme)."
-  },
-  {
-   "from": "block-stack-shape-contract",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "The stack."
-  },
-  {
-   "from": "unembedding",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "Logits."
-  },
-  {
-   "from": "softmax",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "Probabilities."
-  },
-  {
-   "from": "sampling",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "Choose a token."
-  },
-  {
-   "from": "autoregressive-generation",
-   "to": "pipeline-order-capstone",
-   "strength": "requires",
-   "reason": "Loop."
-  },
-  {
-   "from": "tokenizer-not-trained",
-   "to": "learned-vs-fixed-parts",
-   "strength": "requires",
-   "reason": "The fixed part."
-  },
-  {
-   "from": "embedding-table",
-   "to": "learned-vs-fixed-parts",
-   "strength": "requires",
-   "reason": "Learned."
-  },
-  {
-   "from": "qkv-projections",
-   "to": "learned-vs-fixed-parts",
-   "strength": "requires",
-   "reason": "Learned."
-  },
-  {
-   "from": "ffn",
-   "to": "learned-vs-fixed-parts",
-   "strength": "requires",
-   "reason": "Learned."
-  },
-  {
-   "from": "layernorm",
-   "to": "learned-vs-fixed-parts",
-   "strength": "requires",
-   "reason": "Learned gains."
-  },
-  {
-   "from": "unembedding",
-   "to": "learned-vs-fixed-parts",
-   "strength": "requires",
-   "reason": "Learned."
-  },
-  {
-   "from": "sequence-length",
-   "to": "context-window-limits",
-   "strength": "requires",
-   "reason": "The quantity limited."
-  },
-  {
-   "from": "learned-absolute-position",
-   "to": "context-window-limits",
-   "strength": "requires",
-   "reason": "Trained position range."
-  },
-  {
-   "from": "attention-cost",
-   "to": "context-window-limits",
-   "strength": "requires",
-   "reason": "N squared."
-  },
-  {
-   "from": "kv-cache-size",
-   "to": "context-window-limits",
-   "strength": "requires",
-   "reason": "Cache grows with n."
-  }
- ]
+  "title": "Transformers in LLMs",
+  "description": "Prerequisite graph for the Transformers in LLMs deck (86 cards). Draft v0: edges are an LLM-drafted hypothesis awaiting human review. Card numbers are the deck's 1-based card numbers.",
+  "concepts": [
+    {
+      "slug": "ext-matmul",
+      "name": "Matrices, shapes, matrix multiplication",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-dot",
+      "name": "Dot product as a similarity score",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-prob",
+      "name": "A probability distribution (non-negative, sums to 1)",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-deriv",
+      "name": "A derivative as 'how much the output changes per unit input change'",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-exp-log",
+      "name": "Exp and log",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-stats",
+      "name": "Mean and variance",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-rot",
+      "name": "Sin/cos and 2-D rotation",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-rnn",
+      "name": "What a recurrent network (RNN) is",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "ext-rank",
+      "name": "Matrix rank",
+      "kind": "assumption",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "pipeline-map",
+      "name": "The pipeline map (text, IDs, vectors, block stack, logits, token, repeat)",
+      "kind": "map",
+      "tier": "core",
+      "cards": [18]
+    },
+    {
+      "slug": "transformer-vs-llm",
+      "name": "'Transformer' versus 'LLM'",
+      "kind": "term",
+      "tier": "core",
+      "cards": [80]
+    },
+    {
+      "slug": "token",
+      "name": "Token",
+      "kind": "term",
+      "tier": "core",
+      "cards": [1]
+    },
+    {
+      "slug": "shape-notation",
+      "name": "Reading n x d_model and the deck's symbols",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [7, 8]
+    },
+    {
+      "slug": "vocabulary",
+      "name": "Vocabulary and V",
+      "kind": "term",
+      "tier": "core",
+      "cards": [2]
+    },
+    {
+      "slug": "sequence-length",
+      "name": "Sequence length n and context window",
+      "kind": "term",
+      "tier": "core",
+      "cards": [5]
+    },
+    {
+      "slug": "token-id",
+      "name": "Token ID",
+      "kind": "term",
+      "tier": "core",
+      "cards": [3]
+    },
+    {
+      "slug": "tokenizer",
+      "name": "Tokenizer",
+      "kind": "term",
+      "tier": "core",
+      "cards": [4]
+    },
+    {
+      "slug": "embedding",
+      "name": "Embedding and d_model",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [6]
+    },
+    {
+      "slug": "subword-tokenization",
+      "name": "Why subwords (and what tokens-not-characters costs)",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [22, 26]
+    },
+    {
+      "slug": "embedding-table",
+      "name": "The embedding table E (V x d_model)",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [29]
+    },
+    {
+      "slug": "bpe",
+      "name": "Byte-pair encoding (incl. byte-level)",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [23, 24]
+    },
+    {
+      "slug": "softmax",
+      "name": "Softmax",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [14]
+    },
+    {
+      "slug": "logits",
+      "name": "Logits",
+      "kind": "term",
+      "tier": "core",
+      "cards": [13]
+    },
+    {
+      "slug": "next-token-distribution",
+      "name": "One forward pass gives P(next token) at every position",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [19]
+    },
+    {
+      "slug": "temperature",
+      "name": "Temperature",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [70]
+    },
+    {
+      "slug": "sampling",
+      "name": "Sampling",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [15]
+    },
+    {
+      "slug": "autoregressive-generation",
+      "name": "Autoregressive generation (why 200 tokens = 200 passes)",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [16, 20]
+    },
+    {
+      "slug": "decoding-strategies",
+      "name": "Greedy, top-k, top-p",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [71]
+    },
+    {
+      "slug": "autoregressive-factorization",
+      "name": "Autoregressive factorization of P(sequence)",
+      "kind": "idea",
+      "tier": "extension",
+      "cards": [21]
+    },
+    {
+      "slug": "parameters",
+      "name": "Parameters (weights)",
+      "kind": "term",
+      "tier": "core",
+      "cards": [9]
+    },
+    {
+      "slug": "training-vs-inference",
+      "name": "Training versus inference",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [10]
+    },
+    {
+      "slug": "loss",
+      "name": "Loss",
+      "kind": "term",
+      "tier": "core",
+      "cards": [11]
+    },
+    {
+      "slug": "gradient-backprop",
+      "name": "Gradient and backpropagation",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [11]
+    },
+    {
+      "slug": "pretraining-loss",
+      "name": "Pretraining loss and perplexity",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [72]
+    },
+    {
+      "slug": "training-compute",
+      "name": "Training compute is about 6ND",
+      "kind": "skill",
+      "tier": "extension",
+      "cards": [75]
+    },
+    {
+      "slug": "tokenizer-not-trained",
+      "name": "The tokenizer is fixed, not learned",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [27, 28]
+    },
+    {
+      "slug": "pretrain-vs-posttrain",
+      "name": "Pretraining versus post-training",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [74]
+    },
+    {
+      "slug": "teacher-forcing",
+      "name": "Teacher forcing (all positions in one pass)",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [73]
+    },
+    {
+      "slug": "attention-gist",
+      "name": "Attention, at the highest level",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [17]
+    },
+    {
+      "slug": "qkv-projections",
+      "name": "Q, K, V projections",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [30]
+    },
+    {
+      "slug": "attention-scores",
+      "name": "Attention scores Q K^T",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [31]
+    },
+    {
+      "slug": "attention-weights",
+      "name": "Attention weights: row-wise softmax",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [31, 34, 35]
+    },
+    {
+      "slug": "score-scaling",
+      "name": "Why divide by sqrt(d_k)",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [32]
+    },
+    {
+      "slug": "attention-cost",
+      "name": "Attention cost grows with n squared",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [37]
+    },
+    {
+      "slug": "qk-bilinear-form",
+      "name": "W_Q W_K^T is one bilinear form",
+      "kind": "idea",
+      "tier": "extension",
+      "cards": [51]
+    },
+    {
+      "slug": "attention-output",
+      "name": "Attention output is a weighted average of values",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [31, 33]
+    },
+    {
+      "slug": "causal-mask",
+      "name": "Causal mask (and why before softmax)",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [41, 42, 43]
+    },
+    {
+      "slug": "self-vs-cross-attention",
+      "name": "Self- versus cross-attention",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [36]
+    },
+    {
+      "slug": "multi-head-attention",
+      "name": "Multi-head attention",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [38, 39]
+    },
+    {
+      "slug": "mask-in-training",
+      "name": "Why the mask matters in training",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [44]
+    },
+    {
+      "slug": "position-need",
+      "name": "Why position information is needed",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [45]
+    },
+    {
+      "slug": "mha-parameter-count",
+      "name": "Parameter count of multi-head attention (4 d_model^2)",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [40]
+    },
+    {
+      "slug": "sinusoidal-position",
+      "name": "Sinusoidal position encoding",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [46]
+    },
+    {
+      "slug": "learned-absolute-position",
+      "name": "Learned absolute position embeddings",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [47]
+    },
+    {
+      "slug": "rope",
+      "name": "Rotary position embedding (RoPE)",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [48, 49]
+    },
+    {
+      "slug": "vo-product",
+      "name": "Only W_V W_O matters in a head",
+      "kind": "idea",
+      "tier": "extension",
+      "cards": [52]
+    },
+    {
+      "slug": "hidden-states-layer",
+      "name": "Layers and hidden states",
+      "kind": "term",
+      "tier": "core",
+      "cards": [12]
+    },
+    {
+      "slug": "residual-connection",
+      "name": "Residual connection and the residual stream",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [55]
+    },
+    {
+      "slug": "layernorm",
+      "name": "LayerNorm",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [56]
+    },
+    {
+      "slug": "ffn",
+      "name": "Feed-forward sublayer",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [58]
+    },
+    {
+      "slug": "rmsnorm",
+      "name": "RMSNorm",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [57]
+    },
+    {
+      "slug": "ffn-activations",
+      "name": "FFN activations (ReLU, GELU, SwiGLU)",
+      "kind": "idea",
+      "tier": "extension",
+      "cards": [66]
+    },
+    {
+      "slug": "ffn-kv-memory",
+      "name": "FFN as key-value memory",
+      "kind": "idea",
+      "tier": "extension",
+      "cards": [67]
+    },
+    {
+      "slug": "attention-vs-ffn-roles",
+      "name": "Attention mixes positions; FFN mixes features",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [59]
+    },
+    {
+      "slug": "preln-block",
+      "name": "The pre-LN transformer block",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [60]
+    },
+    {
+      "slug": "absolute-vs-rope",
+      "name": "Where position enters: absolute versus RoPE",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [50]
+    },
+    {
+      "slug": "block-stack-shape-contract",
+      "name": "Same shape in and out, so blocks stack",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [61]
+    },
+    {
+      "slug": "pre-vs-post-ln",
+      "name": "Pre-LN versus post-LN",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [62, 63]
+    },
+    {
+      "slug": "params-per-block",
+      "name": "Parameters per block (about 12 d_model^2)",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [64]
+    },
+    {
+      "slug": "attention-not-explanation",
+      "name": "Attention weights are not a full explanation",
+      "kind": "idea",
+      "tier": "extension",
+      "cards": [53, 54]
+    },
+    {
+      "slug": "unembedding",
+      "name": "Unembedding (d_model to V) and the final norm",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [68]
+    },
+    {
+      "slug": "vocab-size-tradeoff",
+      "name": "The trade-off in choosing V",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [25]
+    },
+    {
+      "slug": "weight-tying",
+      "name": "Weight tying",
+      "kind": "idea",
+      "tier": "extension",
+      "cards": [69]
+    },
+    {
+      "slug": "prefill-vs-decode",
+      "name": "Prefill versus decode",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [76]
+    },
+    {
+      "slug": "kv-cache",
+      "name": "The KV cache and why it is valid",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [77]
+    },
+    {
+      "slug": "kv-cache-size",
+      "name": "KV-cache size",
+      "kind": "skill",
+      "tier": "core",
+      "cards": [78]
+    },
+    {
+      "slug": "mqa-gqa",
+      "name": "Multi-query and grouped-query attention",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [79]
+    },
+    {
+      "slug": "transformer-vs-rnn",
+      "name": "Why transformers displaced RNNs",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [82]
+    },
+    {
+      "slug": "architecture-families",
+      "name": "Encoder-only, decoder-only, encoder-decoder",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [83, 84]
+    },
+    {
+      "slug": "pipeline-order-capstone",
+      "name": "Capstone: put the inference pipeline in order",
+      "kind": "capstone",
+      "tier": "core",
+      "cards": []
+    },
+    {
+      "slug": "learned-vs-fixed-parts",
+      "name": "Capstone: which parts are learned, which fixed",
+      "kind": "capstone",
+      "tier": "core",
+      "cards": [81]
+    },
+    {
+      "slug": "context-window-limits",
+      "name": "What limits the context window",
+      "kind": "idea",
+      "tier": "core",
+      "cards": [85]
+    }
+  ],
+  "edges": [
+    {
+      "from": "ext-matmul",
+      "to": "shape-notation",
+      "strength": "requires",
+      "reason": "Shapes are matrix dimensions."
+    },
+    {
+      "from": "token",
+      "to": "vocabulary",
+      "strength": "requires",
+      "reason": "V counts tokens."
+    },
+    {
+      "from": "token",
+      "to": "sequence-length",
+      "strength": "requires",
+      "reason": "N counts tokens."
+    },
+    {
+      "from": "vocabulary",
+      "to": "token-id",
+      "strength": "requires",
+      "reason": "An ID is a position in the vocabulary list."
+    },
+    {
+      "from": "token-id",
+      "to": "tokenizer",
+      "strength": "requires",
+      "reason": "It maps text to and from ID sequences."
+    },
+    {
+      "from": "token-id",
+      "to": "embedding",
+      "strength": "requires",
+      "reason": "An embedding is what an ID is turned into."
+    },
+    {
+      "from": "tokenizer",
+      "to": "subword-tokenization",
+      "strength": "requires",
+      "reason": "Compares ways a tokenizer can split text."
+    },
+    {
+      "from": "embedding",
+      "to": "embedding-table",
+      "strength": "requires",
+      "reason": "E holds the embeddings."
+    },
+    {
+      "from": "shape-notation",
+      "to": "embedding-table",
+      "strength": "requires",
+      "reason": "The card is about shapes."
+    },
+    {
+      "from": "ext-matmul",
+      "to": "embedding-table",
+      "strength": "requires",
+      "reason": "Lookup equals one-hot times E."
+    },
+    {
+      "from": "subword-tokenization",
+      "to": "bpe",
+      "strength": "requires",
+      "reason": "BPE is one way to build a subword vocabulary."
+    },
+    {
+      "from": "ext-prob",
+      "to": "softmax",
+      "strength": "requires",
+      "reason": "Its output is a distribution."
+    },
+    {
+      "from": "ext-exp-log",
+      "to": "softmax",
+      "strength": "requires",
+      "reason": "It is defined with exp."
+    },
+    {
+      "from": "vocabulary",
+      "to": "logits",
+      "strength": "requires",
+      "reason": "One raw score per vocabulary token."
+    },
+    {
+      "from": "logits",
+      "to": "next-token-distribution",
+      "strength": "requires",
+      "reason": "The raw output."
+    },
+    {
+      "from": "softmax",
+      "to": "next-token-distribution",
+      "strength": "requires",
+      "reason": "Turns logits into probabilities."
+    },
+    {
+      "from": "softmax",
+      "to": "temperature",
+      "strength": "requires",
+      "reason": "It rescales the input to softmax."
+    },
+    {
+      "from": "logits",
+      "to": "temperature",
+      "strength": "requires",
+      "reason": "It divides the logits."
+    },
+    {
+      "from": "next-token-distribution",
+      "to": "sampling",
+      "strength": "requires",
+      "reason": "You pick from that distribution."
+    },
+    {
+      "from": "sampling",
+      "to": "autoregressive-generation",
+      "strength": "requires",
+      "reason": "Each step samples one token."
+    },
+    {
+      "from": "sequence-length",
+      "to": "autoregressive-generation",
+      "strength": "requires",
+      "reason": "N grows by one per step."
+    },
+    {
+      "from": "sampling",
+      "to": "decoding-strategies",
+      "strength": "requires",
+      "reason": "They are ways of choosing the sample."
+    },
+    {
+      "from": "next-token-distribution",
+      "to": "decoding-strategies",
+      "strength": "requires",
+      "reason": "They act on its probabilities."
+    },
+    {
+      "from": "temperature",
+      "to": "decoding-strategies",
+      "strength": "suggests"
+    },
+    {
+      "from": "autoregressive-generation",
+      "to": "autoregressive-factorization",
+      "strength": "requires",
+      "reason": "The formula restates the loop."
+    },
+    {
+      "from": "ext-prob",
+      "to": "autoregressive-factorization",
+      "strength": "requires",
+      "reason": "Chain rule of probability."
+    },
+    {
+      "from": "ext-matmul",
+      "to": "parameters",
+      "strength": "requires",
+      "reason": "Parameters are matrix entries."
+    },
+    {
+      "from": "parameters",
+      "to": "training-vs-inference",
+      "strength": "requires",
+      "reason": "Training changes them, inference freezes them."
+    },
+    {
+      "from": "training-vs-inference",
+      "to": "loss",
+      "strength": "requires",
+      "reason": "Loss is the training signal."
+    },
+    {
+      "from": "loss",
+      "to": "gradient-backprop",
+      "strength": "requires",
+      "reason": "The gradient is of the loss."
+    },
+    {
+      "from": "ext-deriv",
+      "to": "gradient-backprop",
+      "strength": "requires",
+      "reason": "A gradient is a derivative."
+    },
+    {
+      "from": "loss",
+      "to": "pretraining-loss",
+      "strength": "requires",
+      "reason": "It is the loss for this task."
+    },
+    {
+      "from": "next-token-distribution",
+      "to": "pretraining-loss",
+      "strength": "requires",
+      "reason": "Cross-entropy on the true next token."
+    },
+    {
+      "from": "ext-exp-log",
+      "to": "pretraining-loss",
+      "strength": "requires",
+      "reason": "Log and exp."
+    },
+    {
+      "from": "parameters",
+      "to": "training-compute",
+      "strength": "requires",
+      "reason": "N is parameter count."
+    },
+    {
+      "from": "gradient-backprop",
+      "to": "training-compute",
+      "strength": "requires",
+      "reason": "The backward pass costs about 2x forward."
+    },
+    {
+      "from": "tokenizer",
+      "to": "tokenizer-not-trained",
+      "strength": "requires",
+      "reason": "The thing in question."
+    },
+    {
+      "from": "gradient-backprop",
+      "to": "tokenizer-not-trained",
+      "strength": "requires",
+      "reason": "Gradients cannot pass through discrete splits."
+    },
+    {
+      "from": "embedding-table",
+      "to": "tokenizer-not-trained",
+      "strength": "requires",
+      "reason": "Gradients reach only looked-up rows."
+    },
+    {
+      "from": "pretraining-loss",
+      "to": "pretrain-vs-posttrain",
+      "strength": "requires",
+      "reason": "Pretraining minimises it."
+    },
+    {
+      "from": "training-vs-inference",
+      "to": "pretrain-vs-posttrain",
+      "strength": "requires",
+      "reason": "Both are training stages."
+    },
+    {
+      "from": "pretraining-loss",
+      "to": "teacher-forcing",
+      "strength": "requires",
+      "reason": "Targets are the input shifted by one."
+    },
+    {
+      "from": "autoregressive-generation",
+      "to": "teacher-forcing",
+      "strength": "requires",
+      "reason": "Contrast with generation one step at a time."
+    },
+    {
+      "from": "training-vs-inference",
+      "to": "teacher-forcing",
+      "strength": "requires",
+      "reason": "A training-only trick."
+    },
+    {
+      "from": "embedding",
+      "to": "attention-gist",
+      "strength": "requires",
+      "reason": "Attention updates token vectors."
+    },
+    {
+      "from": "sequence-length",
+      "to": "attention-gist",
+      "strength": "requires",
+      "reason": "It looks across the n positions."
+    },
+    {
+      "from": "attention-gist",
+      "to": "qkv-projections",
+      "strength": "requires",
+      "reason": "They are how attention is computed."
+    },
+    {
+      "from": "shape-notation",
+      "to": "qkv-projections",
+      "strength": "requires",
+      "reason": "The card is about shapes."
+    },
+    {
+      "from": "parameters",
+      "to": "qkv-projections",
+      "strength": "requires",
+      "reason": "W_Q, W_K, W_V are learned."
+    },
+    {
+      "from": "ext-matmul",
+      "to": "qkv-projections",
+      "strength": "requires",
+      "reason": "X W_Q."
+    },
+    {
+      "from": "qkv-projections",
+      "to": "attention-scores",
+      "strength": "requires",
+      "reason": "Built from Q and K."
+    },
+    {
+      "from": "ext-dot",
+      "to": "attention-scores",
+      "strength": "requires",
+      "reason": "Each score is a dot product."
+    },
+    {
+      "from": "attention-scores",
+      "to": "attention-weights",
+      "strength": "requires",
+      "reason": "Softmax of the scores."
+    },
+    {
+      "from": "softmax",
+      "to": "attention-weights",
+      "strength": "requires",
+      "reason": "The operation used."
+    },
+    {
+      "from": "attention-scores",
+      "to": "score-scaling",
+      "strength": "requires",
+      "reason": "It rescales them."
+    },
+    {
+      "from": "softmax",
+      "to": "score-scaling",
+      "strength": "requires",
+      "reason": "Large scores saturate softmax."
+    },
+    {
+      "from": "ext-stats",
+      "to": "score-scaling",
+      "strength": "requires",
+      "reason": "Dot-product variance grows with d_k."
+    },
+    {
+      "from": "attention-scores",
+      "to": "attention-cost",
+      "strength": "requires",
+      "reason": "The n x n score matrix."
+    },
+    {
+      "from": "sequence-length",
+      "to": "attention-cost",
+      "strength": "requires",
+      "reason": "N is the variable."
+    },
+    {
+      "from": "attention-scores",
+      "to": "qk-bilinear-form",
+      "strength": "requires",
+      "reason": "The form the scores use."
+    },
+    {
+      "from": "ext-rank",
+      "to": "qk-bilinear-form",
+      "strength": "requires",
+      "reason": "The rank bound."
+    },
+    {
+      "from": "attention-weights",
+      "to": "attention-output",
+      "strength": "requires",
+      "reason": "They are the averaging weights."
+    },
+    {
+      "from": "qkv-projections",
+      "to": "attention-output",
+      "strength": "requires",
+      "reason": "V supplies the values."
+    },
+    {
+      "from": "attention-weights",
+      "to": "causal-mask",
+      "strength": "requires",
+      "reason": "It edits the scores that become weights."
+    },
+    {
+      "from": "softmax",
+      "to": "causal-mask",
+      "strength": "requires",
+      "reason": "Masking works through softmax renormalisation."
+    },
+    {
+      "from": "attention-output",
+      "to": "self-vs-cross-attention",
+      "strength": "requires",
+      "reason": "They differ only in where Q and K,V come from."
+    },
+    {
+      "from": "attention-output",
+      "to": "multi-head-attention",
+      "strength": "requires",
+      "reason": "A head is one such computation."
+    },
+    {
+      "from": "shape-notation",
+      "to": "multi-head-attention",
+      "strength": "requires",
+      "reason": "Heads split d_model."
+    },
+    {
+      "from": "causal-mask",
+      "to": "mask-in-training",
+      "strength": "requires",
+      "reason": "The mechanism."
+    },
+    {
+      "from": "teacher-forcing",
+      "to": "mask-in-training",
+      "strength": "requires",
+      "reason": "The setting where whole sequences are fed at once."
+    },
+    {
+      "from": "attention-output",
+      "to": "position-need",
+      "strength": "requires",
+      "reason": "A weighted average ignores token order."
+    },
+    {
+      "from": "multi-head-attention",
+      "to": "mha-parameter-count",
+      "strength": "requires",
+      "reason": "Counts its matrices."
+    },
+    {
+      "from": "position-need",
+      "to": "sinusoidal-position",
+      "strength": "requires",
+      "reason": "A fix for it."
+    },
+    {
+      "from": "embedding",
+      "to": "sinusoidal-position",
+      "strength": "requires",
+      "reason": "Added to embeddings."
+    },
+    {
+      "from": "ext-rot",
+      "to": "sinusoidal-position",
+      "strength": "requires",
+      "reason": "Sin/cos."
+    },
+    {
+      "from": "position-need",
+      "to": "learned-absolute-position",
+      "strength": "requires",
+      "reason": "A fix for it."
+    },
+    {
+      "from": "embedding-table",
+      "to": "learned-absolute-position",
+      "strength": "requires",
+      "reason": "Same lookup-table idea."
+    },
+    {
+      "from": "position-need",
+      "to": "rope",
+      "strength": "requires",
+      "reason": "A fix for it."
+    },
+    {
+      "from": "attention-scores",
+      "to": "rope",
+      "strength": "requires",
+      "reason": "It rotates q and k before the dot product."
+    },
+    {
+      "from": "ext-rot",
+      "to": "rope",
+      "strength": "requires",
+      "reason": "2-D rotation."
+    },
+    {
+      "from": "multi-head-attention",
+      "to": "vo-product",
+      "strength": "requires",
+      "reason": "W_O belongs to the multi-head layer."
+    },
+    {
+      "from": "ext-rank",
+      "to": "vo-product",
+      "strength": "requires",
+      "reason": "The rank bound."
+    },
+    {
+      "from": "embedding",
+      "to": "hidden-states-layer",
+      "strength": "requires",
+      "reason": "Hidden states are per-token vectors."
+    },
+    {
+      "from": "parameters",
+      "to": "hidden-states-layer",
+      "strength": "requires",
+      "reason": "Each layer has its own."
+    },
+    {
+      "from": "hidden-states-layer",
+      "to": "residual-connection",
+      "strength": "requires",
+      "reason": "It adds a layer's output to its input."
+    },
+    {
+      "from": "gradient-backprop",
+      "to": "residual-connection",
+      "strength": "requires",
+      "reason": "The point is an identity path for gradients."
+    },
+    {
+      "from": "hidden-states-layer",
+      "to": "layernorm",
+      "strength": "requires",
+      "reason": "It normalises a token's hidden vector."
+    },
+    {
+      "from": "ext-stats",
+      "to": "layernorm",
+      "strength": "requires",
+      "reason": "Mean and variance."
+    },
+    {
+      "from": "hidden-states-layer",
+      "to": "ffn",
+      "strength": "requires",
+      "reason": "It transforms each token's vector."
+    },
+    {
+      "from": "shape-notation",
+      "to": "ffn",
+      "strength": "requires",
+      "reason": "D_model x d_ff."
+    },
+    {
+      "from": "ext-matmul",
+      "to": "ffn",
+      "strength": "requires",
+      "reason": "Two matrix multiplies."
+    },
+    {
+      "from": "layernorm",
+      "to": "rmsnorm",
+      "strength": "requires",
+      "reason": "Defined as a change to it."
+    },
+    {
+      "from": "ffn",
+      "to": "ffn-activations",
+      "strength": "requires",
+      "reason": "They are its nonlinearity."
+    },
+    {
+      "from": "ffn",
+      "to": "ffn-kv-memory",
+      "strength": "requires",
+      "reason": "The hypothesis is about it."
+    },
+    {
+      "from": "attention-output",
+      "to": "ffn-kv-memory",
+      "strength": "requires",
+      "reason": "Uses the key/value analogy."
+    },
+    {
+      "from": "ffn",
+      "to": "attention-vs-ffn-roles",
+      "strength": "requires",
+      "reason": "One of the two."
+    },
+    {
+      "from": "multi-head-attention",
+      "to": "attention-vs-ffn-roles",
+      "strength": "requires",
+      "reason": "The other."
+    },
+    {
+      "from": "residual-connection",
+      "to": "preln-block",
+      "strength": "requires",
+      "reason": "Each sublayer sits in a residual branch."
+    },
+    {
+      "from": "layernorm",
+      "to": "preln-block",
+      "strength": "requires",
+      "reason": "Applied to each sublayer's input."
+    },
+    {
+      "from": "ffn",
+      "to": "preln-block",
+      "strength": "requires",
+      "reason": "One sublayer."
+    },
+    {
+      "from": "multi-head-attention",
+      "to": "preln-block",
+      "strength": "requires",
+      "reason": "The other sublayer."
+    },
+    {
+      "from": "rope",
+      "to": "absolute-vs-rope",
+      "strength": "requires",
+      "reason": "One of the two."
+    },
+    {
+      "from": "sinusoidal-position",
+      "to": "absolute-vs-rope",
+      "strength": "requires",
+      "reason": "The other (either absolute scheme works)."
+    },
+    {
+      "from": "residual-connection",
+      "to": "absolute-vs-rope",
+      "strength": "requires",
+      "reason": "Absolute position travels through the residual stream."
+    },
+    {
+      "from": "preln-block",
+      "to": "block-stack-shape-contract",
+      "strength": "requires",
+      "reason": "The shape contract of that block."
+    },
+    {
+      "from": "shape-notation",
+      "to": "block-stack-shape-contract",
+      "strength": "requires",
+      "reason": "It is stated in shapes."
+    },
+    {
+      "from": "preln-block",
+      "to": "pre-vs-post-ln",
+      "strength": "requires",
+      "reason": "One of the two layouts."
+    },
+    {
+      "from": "gradient-backprop",
+      "to": "pre-vs-post-ln",
+      "strength": "requires",
+      "reason": "The difference is gradient behaviour at init."
+    },
+    {
+      "from": "mha-parameter-count",
+      "to": "params-per-block",
+      "strength": "requires",
+      "reason": "The attention share."
+    },
+    {
+      "from": "ffn",
+      "to": "params-per-block",
+      "strength": "requires",
+      "reason": "The FFN share."
+    },
+    {
+      "from": "multi-head-attention",
+      "to": "attention-not-explanation",
+      "strength": "requires",
+      "reason": "Many heads."
+    },
+    {
+      "from": "ffn",
+      "to": "attention-not-explanation",
+      "strength": "requires",
+      "reason": "The other computation the weights ignore."
+    },
+    {
+      "from": "block-stack-shape-contract",
+      "to": "attention-not-explanation",
+      "strength": "requires",
+      "reason": "Many layers."
+    },
+    {
+      "from": "block-stack-shape-contract",
+      "to": "unembedding",
+      "strength": "requires",
+      "reason": "It consumes the stack's output."
+    },
+    {
+      "from": "logits",
+      "to": "unembedding",
+      "strength": "requires",
+      "reason": "It produces them."
+    },
+    {
+      "from": "layernorm",
+      "to": "unembedding",
+      "strength": "requires",
+      "reason": "The final norm."
+    },
+    {
+      "from": "shape-notation",
+      "to": "unembedding",
+      "strength": "requires",
+      "reason": "D_model x V."
+    },
+    {
+      "from": "subword-tokenization",
+      "to": "vocab-size-tradeoff",
+      "strength": "requires",
+      "reason": "V comes from the split scheme."
+    },
+    {
+      "from": "embedding-table",
+      "to": "vocab-size-tradeoff",
+      "strength": "requires",
+      "reason": "Larger V, larger E."
+    },
+    {
+      "from": "unembedding",
+      "to": "vocab-size-tradeoff",
+      "strength": "requires",
+      "reason": "Larger V, wider output layer."
+    },
+    {
+      "from": "unembedding",
+      "to": "weight-tying",
+      "strength": "requires",
+      "reason": "One of the two matrices."
+    },
+    {
+      "from": "embedding-table",
+      "to": "weight-tying",
+      "strength": "requires",
+      "reason": "The other."
+    },
+    {
+      "from": "autoregressive-generation",
+      "to": "prefill-vs-decode",
+      "strength": "requires",
+      "reason": "Decode is the one-token loop."
+    },
+    {
+      "from": "block-stack-shape-contract",
+      "to": "prefill-vs-decode",
+      "strength": "requires",
+      "reason": "A whole pass through the stack."
+    },
+    {
+      "from": "causal-mask",
+      "to": "prefill-vs-decode",
+      "strength": "requires",
+      "reason": "Why the prompt can be processed in parallel."
+    },
+    {
+      "from": "prefill-vs-decode",
+      "to": "kv-cache",
+      "strength": "requires",
+      "reason": "Prefill fills it, decode reuses it."
+    },
+    {
+      "from": "attention-output",
+      "to": "kv-cache",
+      "strength": "requires",
+      "reason": "K and V are what is cached."
+    },
+    {
+      "from": "causal-mask",
+      "to": "kv-cache",
+      "strength": "requires",
+      "reason": "Earlier positions never see later ones, so their K,V never change."
+    },
+    {
+      "from": "kv-cache",
+      "to": "kv-cache-size",
+      "strength": "requires",
+      "reason": "What is being sized."
+    },
+    {
+      "from": "multi-head-attention",
+      "to": "kv-cache-size",
+      "strength": "requires",
+      "reason": "Heads and d_head set the size."
+    },
+    {
+      "from": "kv-cache-size",
+      "to": "mqa-gqa",
+      "strength": "requires",
+      "reason": "They exist to shrink it."
+    },
+    {
+      "from": "multi-head-attention",
+      "to": "mqa-gqa",
+      "strength": "requires",
+      "reason": "They modify how heads share K,V."
+    },
+    {
+      "from": "attention-output",
+      "to": "transformer-vs-rnn",
+      "strength": "requires",
+      "reason": "Direct paths between any two tokens."
+    },
+    {
+      "from": "teacher-forcing",
+      "to": "transformer-vs-rnn",
+      "strength": "requires",
+      "reason": "Parallel training."
+    },
+    {
+      "from": "ext-rnn",
+      "to": "transformer-vs-rnn",
+      "strength": "requires",
+      "reason": "The comparison assumes it."
+    },
+    {
+      "from": "causal-mask",
+      "to": "architecture-families",
+      "strength": "requires",
+      "reason": "The mask is what separates BERT from GPT."
+    },
+    {
+      "from": "pretraining-loss",
+      "to": "architecture-families",
+      "strength": "requires",
+      "reason": "The objectives differ."
+    },
+    {
+      "from": "self-vs-cross-attention",
+      "to": "architecture-families",
+      "strength": "requires",
+      "reason": "Encoder-decoder uses cross-attention."
+    },
+    {
+      "from": "tokenizer",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "Step 1."
+    },
+    {
+      "from": "embedding-table",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "Step 2."
+    },
+    {
+      "from": "sinusoidal-position",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "Position information is added early (any scheme)."
+    },
+    {
+      "from": "block-stack-shape-contract",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "The stack."
+    },
+    {
+      "from": "unembedding",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "Logits."
+    },
+    {
+      "from": "softmax",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "Probabilities."
+    },
+    {
+      "from": "sampling",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "Choose a token."
+    },
+    {
+      "from": "autoregressive-generation",
+      "to": "pipeline-order-capstone",
+      "strength": "requires",
+      "reason": "Loop."
+    },
+    {
+      "from": "tokenizer-not-trained",
+      "to": "learned-vs-fixed-parts",
+      "strength": "requires",
+      "reason": "The fixed part."
+    },
+    {
+      "from": "embedding-table",
+      "to": "learned-vs-fixed-parts",
+      "strength": "requires",
+      "reason": "Learned."
+    },
+    {
+      "from": "qkv-projections",
+      "to": "learned-vs-fixed-parts",
+      "strength": "requires",
+      "reason": "Learned."
+    },
+    {
+      "from": "ffn",
+      "to": "learned-vs-fixed-parts",
+      "strength": "requires",
+      "reason": "Learned."
+    },
+    {
+      "from": "layernorm",
+      "to": "learned-vs-fixed-parts",
+      "strength": "requires",
+      "reason": "Learned gains."
+    },
+    {
+      "from": "unembedding",
+      "to": "learned-vs-fixed-parts",
+      "strength": "requires",
+      "reason": "Learned."
+    },
+    {
+      "from": "sequence-length",
+      "to": "context-window-limits",
+      "strength": "requires",
+      "reason": "The quantity limited."
+    },
+    {
+      "from": "learned-absolute-position",
+      "to": "context-window-limits",
+      "strength": "requires",
+      "reason": "Trained position range."
+    },
+    {
+      "from": "attention-cost",
+      "to": "context-window-limits",
+      "strength": "requires",
+      "reason": "N squared."
+    },
+    {
+      "from": "kv-cache-size",
+      "to": "context-window-limits",
+      "strength": "requires",
+      "reason": "Cache grows with n."
+    }
+  ]
 }
