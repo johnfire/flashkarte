@@ -103,10 +103,15 @@ CREATE TABLE IF NOT EXISTS lesson_questions (
 CREATE INDEX IF NOT EXISTS idx_lesson_questions_lesson ON lesson_questions(lesson_id);
 CREATE INDEX IF NOT EXISTS idx_lesson_questions_parent ON lesson_questions(parent_id);
 
--- RESTRICT: a screen a question teaches cannot be deleted from under it.
+-- A screen a question teaches cannot be deleted from under it. The check is DEFERRED to commit, and
+-- deliberately not RESTRICT or NO ACTION: each step of a cascade is checked at the end of its own
+-- internal statement, and deleting a lesson (or a subject, or an account) removes its screens before
+-- its questions, so an immediate check refuses the whole cascade and an account with lessons could
+-- never be erased. Deferred, the check runs once everything has been removed; deleting just the
+-- screen still fails at commit.
 CREATE TABLE IF NOT EXISTS question_screens (
   question_id uuid NOT NULL REFERENCES lesson_questions(id) ON DELETE CASCADE,
-  screen_id   uuid NOT NULL REFERENCES screens(id) ON DELETE RESTRICT,
+  screen_id   uuid NOT NULL REFERENCES screens(id) DEFERRABLE INITIALLY DEFERRED,
   PRIMARY KEY (question_id, screen_id)
 );
 CREATE INDEX IF NOT EXISTS idx_question_screens_screen ON question_screens(screen_id);

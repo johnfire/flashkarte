@@ -5,6 +5,7 @@ import {
   NotFoundError,
   ValidationError,
 } from "../../utils/errors";
+import * as accountRepo from "../account/account.repository";
 import * as concepts from "../subjects/concepts.service";
 import * as subjects from "../subjects/subjects.service";
 import { importLesson } from "./lesson-import.service";
@@ -116,6 +117,19 @@ describe("database constraints (real Postgres)", () => {
         [subjectId, lesson.id],
       ),
     ).rejects.toThrow(/check/);
+  });
+
+  it("refuses to delete just a screen a question teaches, yet lets a whole account be erased", async () => {
+    await makeLesson();
+    await addScreen("tokens", "taught");
+    await questions.addQuestion(OWNER, subjectId, "tokens", goodQuestion());
+    // Directly, the database protects the screen...
+    await expect(getPool().query("DELETE FROM screens")).rejects.toThrow(
+      /question_screens_screen_id_fkey/,
+    );
+    // ...but deleting the account (a cascade that also removes the question) must succeed.
+    await getPool().query("DELETE FROM users WHERE id = $1", [OWNER]);
+    expect((await getPool().query("SELECT 1 FROM screens")).rowCount).toBe(0);
   });
 
   it("treats 213.01 and 213.010 as the same screen number, and sorts numerically", async () => {
@@ -847,5 +861,86 @@ describe("importing a whole lesson", () => {
     await expect(
       importLesson(OWNER, subjectId, lessonImport(), "ai"),
     ).rejects.toBeInstanceOf(ConflictError);
+  });
+});
+
+describe("account data export and deletion (real Postgres)", () => {
+  it("exports every lesson table for its owner only, and account deletion removes them all", async () => {
+    await importLesson(
+      OWNER,
+      subjectId,
+      {
+        module: "Input side",
+        lesson: {
+          slug: "tokens",
+          title: "Tokens",
+          summary: "s",
+          covers: ["token"],
+          prerequisites: [],
+        },
+        screens: [{ ref: "a", blocks: para("one") }, { blocks: para("two") }],
+        questions: [
+          {
+            prompt: para("q"),
+            options: [option(true), option(false)],
+            teaches: ["a"],
+            covers: ["token"],
+            variants: [
+              { prompt: para("v"), options: [option(true), option(false)] },
+            ],
+          },
+        ],
+      },
+      "ai",
+    );
+    await screens.updateScreen(OWNER, subjectId, "1", {
+      blocks: para("one, revised"),
+    });
+
+    const modules = await accountRepo.findLessonModules(OWNER);
+    const exportedLessons = await accountRepo.findLessons(OWNER);
+    const exportedScreens = await accountRepo.findScreens(OWNER);
+    const exportedQuestions = await accountRepo.findLessonQuestions(OWNER);
+    expect(modules.map((m) => m.title)).toEqual(["Input side"]);
+    expect(exportedLessons[0]).toMatchObject({
+      slug: "tokens",
+      covers: ["token"],
+      prerequisites: [],
+    });
+    expect(exportedScreens.map((s) => s.number)).toEqual(["1", "2"]);
+    expect(exportedScreens[0].revisions.map((r) => r.change)).toEqual([
+      "edited",
+    ]);
+    expect(exportedQuestions).toHaveLength(2);
+    expect(exportedQuestions.find((q) => q.parent_id === null)).toMatchObject({
+      teaches: ["1"],
+      covers: ["token"],
+    });
+
+    for (const find of [
+      accountRepo.findLessonModules,
+      accountRepo.findLessons,
+      accountRepo.findScreens,
+      accountRepo.findLessonQuestions,
+    ]) {
+      expect(await find(OUTSIDER)).toEqual([]);
+    }
+
+    await getPool().query("DELETE FROM users WHERE id = $1", [OWNER]);
+    for (const table of [
+      "lesson_modules",
+      "lessons",
+      "lesson_concepts",
+      "screens",
+      "screen_revisions",
+      "lesson_questions",
+      "question_screens",
+      "question_concepts",
+      "lesson_prerequisites",
+    ]) {
+      expect((await getPool().query(`SELECT 1 FROM ${table}`)).rowCount).toBe(
+        0,
+      );
+    }
   });
 });

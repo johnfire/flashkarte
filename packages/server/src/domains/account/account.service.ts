@@ -61,6 +61,46 @@ export interface AccountExport {
     createdAt: string;
   }>;
   cardReads: Array<{ cardId: string; readAt: string }>;
+  lessonContent: {
+    modules: Array<{
+      id: string;
+      subjectId: string;
+      title: string;
+      position: number;
+    }>;
+    lessons: Array<{
+      subjectId: string;
+      moduleId: string | null;
+      slug: string;
+      title: string;
+      summary: string;
+      stage: string;
+      position: number;
+      covers: string[];
+      prerequisites: Array<{ from: string; reason: string }>;
+    }>;
+    screens: Array<{
+      subjectId: string;
+      lesson: string;
+      number: string;
+      blocks: unknown;
+      authorKind: string;
+      sources: unknown;
+      retired: boolean;
+      revisions: Array<{ change: string; changedAt: string; blocks: unknown }>;
+    }>;
+    questions: Array<{
+      subjectId: string;
+      lesson: string;
+      id: string;
+      variantOf: string | null;
+      prompt: unknown;
+      options: unknown;
+      retired: boolean;
+      teaches: string[];
+      covers: string[];
+    }>;
+  };
   subjects: Array<{
     id: string;
     title: string;
@@ -113,6 +153,10 @@ export async function exportData(userId: string): Promise<AccountExport> {
     concepts,
     conceptEdges,
     cardReads,
+    lessonModules,
+    lessons,
+    screens,
+    lessonQuestions,
   ] = await Promise.all([
     repo.findDecks(userId),
     repo.findCards(userId),
@@ -123,6 +167,10 @@ export async function exportData(userId: string): Promise<AccountExport> {
     repo.findConcepts(userId),
     repo.findConceptEdges(userId),
     repo.findCardReads(userId),
+    repo.findLessonModules(userId),
+    repo.findLessons(userId),
+    repo.findScreens(userId),
+    repo.findLessonQuestions(userId),
   ]);
 
   const cardsByDeck = new Map<string, repo.CardRow[]>();
@@ -195,6 +243,50 @@ export async function exportData(userId: string): Promise<AccountExport> {
       cardId: read.card_id,
       readAt: read.read_at,
     })),
+    lessonContent: {
+      modules: lessonModules.map((m) => ({
+        id: m.id,
+        subjectId: m.subject_id,
+        title: m.title,
+        position: m.position,
+      })),
+      lessons: lessons.map((l) => ({
+        subjectId: l.subject_id,
+        moduleId: l.module_id,
+        slug: l.slug,
+        title: l.title,
+        summary: l.summary,
+        stage: l.stage,
+        position: l.position,
+        covers: l.covers,
+        prerequisites: l.prerequisites,
+      })),
+      screens: screens.map((sc) => ({
+        subjectId: sc.subject_id,
+        lesson: sc.lesson_slug,
+        number: sc.number,
+        blocks: sc.blocks,
+        authorKind: sc.author_kind,
+        sources: sc.sources,
+        retired: sc.retired_at !== null,
+        revisions: sc.revisions.map((r) => ({
+          change: r.change,
+          changedAt: r.changed_at,
+          blocks: r.blocks,
+        })),
+      })),
+      questions: lessonQuestions.map((q) => ({
+        subjectId: q.subject_id,
+        lesson: q.lesson_slug,
+        id: q.id,
+        variantOf: q.parent_id,
+        prompt: q.prompt,
+        options: q.options,
+        retired: q.retired_at !== null,
+        teaches: q.teaches,
+        covers: q.covers,
+      })),
+    },
     subjects: subjects.map((subject) => ({
       id: subject.id,
       title: subject.title,

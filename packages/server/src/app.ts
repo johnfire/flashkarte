@@ -16,6 +16,7 @@ import { adminRouter } from "./domains/admin/admin.routes";
 import { libraryRouter } from "./domains/library/library.routes";
 import { coursesRouter } from "./domains/courses/courses.routes";
 import { subjectsRouter } from "./domains/subjects/subjects.routes";
+import { lessonsRouter } from "./domains/lessons/lessons.routes";
 import { categoriesRouter } from "./domains/categories/categories.routes";
 import { publicLibraryRouter } from "./domains/library/public.routes";
 import { bugReportsRouter } from "./domains/bug-reports/bug-reports.routes";
@@ -220,6 +221,7 @@ export function createApp() {
   app.use("/api/library", libraryRouter);
   app.use("/api/courses", coursesRouter);
   app.use("/api/subjects", subjectsRouter);
+  app.use("/api/subjects", lessonsRouter);
   app.use("/api/categories", categoriesRouter);
   // Account-level routes below require a full-scope credential (JWT or personal
   // key). Deck-scoped MCP keys are rejected here, so a leaked MCP key can't mint

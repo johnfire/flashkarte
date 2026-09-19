@@ -189,6 +189,108 @@ export function findCardReads(userId: string): Promise<CardReadRow[]> {
   );
 }
 
+export interface LessonModuleExportRow {
+  id: string;
+  subject_id: string;
+  title: string;
+  position: number;
+}
+
+export function findLessonModules(
+  userId: string,
+): Promise<LessonModuleExportRow[]> {
+  return query<LessonModuleExportRow>(
+    `SELECT m.id, m.subject_id, m.title, m.position
+     FROM lesson_modules m JOIN subjects s ON s.id = m.subject_id
+     WHERE s.user_id = $1 ORDER BY m.subject_id, m.position`,
+    [userId],
+  );
+}
+
+export interface LessonExportRow {
+  subject_id: string;
+  module_id: string | null;
+  slug: string;
+  title: string;
+  summary: string;
+  stage: string;
+  position: number;
+  covers: string[];
+  prerequisites: { from: string; reason: string }[];
+}
+
+export function findLessons(userId: string): Promise<LessonExportRow[]> {
+  return query<LessonExportRow>(
+    `SELECT l.subject_id, l.module_id, l.slug, l.title, l.summary, l.stage, l.position,
+            COALESCE((SELECT array_agg(c.slug ORDER BY c.position)
+                      FROM lesson_concepts lc JOIN concepts c ON c.id = lc.concept_id
+                      WHERE lc.lesson_id = l.id), '{}') AS covers,
+            COALESCE((SELECT jsonb_agg(jsonb_build_object('from', pl.slug, 'reason', p.reason))
+                      FROM lesson_prerequisites p JOIN lessons pl ON pl.id = p.from_lesson
+                      WHERE p.to_lesson = l.id), '[]'::jsonb) AS prerequisites
+     FROM lessons l JOIN subjects s ON s.id = l.subject_id
+     WHERE s.user_id = $1 ORDER BY l.subject_id, l.position`,
+    [userId],
+  );
+}
+
+export interface ScreenExportRow {
+  subject_id: string;
+  lesson_slug: string;
+  number: string;
+  blocks: unknown;
+  author_kind: string;
+  sources: unknown;
+  retired_at: string | null;
+  revisions: { change: string; changed_at: string; blocks: unknown }[];
+}
+
+export function findScreens(userId: string): Promise<ScreenExportRow[]> {
+  return query<ScreenExportRow>(
+    `SELECT sc.subject_id, l.slug AS lesson_slug, sc.number::text AS number, sc.blocks,
+            sc.author_kind, sc.sources, sc.retired_at,
+            COALESCE((SELECT jsonb_agg(jsonb_build_object('change', r.change, 'changed_at', r.changed_at, 'blocks', r.blocks)
+                                       ORDER BY r.changed_at)
+                      FROM screen_revisions r WHERE r.screen_id = sc.id), '[]'::jsonb) AS revisions
+     FROM screens sc
+     JOIN lessons l ON l.id = sc.lesson_id
+     JOIN subjects s ON s.id = sc.subject_id
+     WHERE s.user_id = $1 ORDER BY sc.subject_id, sc.number`,
+    [userId],
+  );
+}
+
+export interface LessonQuestionExportRow {
+  subject_id: string;
+  lesson_slug: string;
+  id: string;
+  parent_id: string | null;
+  prompt: unknown;
+  options: unknown;
+  retired_at: string | null;
+  teaches: string[];
+  covers: string[];
+}
+
+export function findLessonQuestions(
+  userId: string,
+): Promise<LessonQuestionExportRow[]> {
+  return query<LessonQuestionExportRow>(
+    `SELECT l.subject_id, l.slug AS lesson_slug, q.id, q.parent_id, q.prompt, q.options, q.retired_at,
+            COALESCE((SELECT array_agg(sc.number::text ORDER BY sc.number)
+                      FROM question_screens qs JOIN screens sc ON sc.id = qs.screen_id
+                      WHERE qs.question_id = q.id), '{}') AS teaches,
+            COALESCE((SELECT array_agg(c.slug ORDER BY c.position)
+                      FROM question_concepts qc JOIN concepts c ON c.id = qc.concept_id
+                      WHERE qc.question_id = q.id), '{}') AS covers
+     FROM lesson_questions q
+     JOIN lessons l ON l.id = q.lesson_id
+     JOIN subjects s ON s.id = l.subject_id
+     WHERE s.user_id = $1 ORDER BY l.subject_id, l.position, q.position`,
+    [userId],
+  );
+}
+
 /** Key metadata only — the hash is a credential and must never be exported. */
 export function findApiKeyMeta(userId: string): Promise<ApiKeyMetaRow[]> {
   return query<ApiKeyMetaRow>(

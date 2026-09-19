@@ -32,9 +32,80 @@ beforeEach(() => {
   mock.findConcepts.mockResolvedValue([]);
   mock.findConceptEdges.mockResolvedValue([]);
   mock.findCardReads.mockResolvedValue([]);
+  mock.findLessonModules.mockResolvedValue([]);
+  mock.findLessons.mockResolvedValue([]);
+  mock.findScreens.mockResolvedValue([]);
+  mock.findLessonQuestions.mockResolvedValue([]);
 });
 
 describe("account.service exportData", () => {
+  it("exports lesson content: modules, lessons, screens with their revisions, and questions", async () => {
+    mock.findLessonModules.mockResolvedValue([
+      { id: "m1", subject_id: "s1", title: "Input side", position: 0 },
+    ]);
+    mock.findLessons.mockResolvedValue([
+      {
+        subject_id: "s1",
+        module_id: "m1",
+        slug: "tokens",
+        title: "Tokens",
+        summary: "s",
+        stage: "finished",
+        position: 0,
+        covers: ["token"],
+        prerequisites: [{ from: "intro", reason: "r" }],
+      },
+    ]);
+    mock.findScreens.mockResolvedValue([
+      {
+        subject_id: "s1",
+        lesson_slug: "tokens",
+        number: "213.010",
+        blocks: [{ type: "paragraph" }],
+        author_kind: "ai",
+        sources: null,
+        retired_at: "2026-09-19T00:00:00Z",
+        revisions: [{ change: "edited", changed_at: "t", blocks: [] }],
+      },
+    ]);
+    mock.findLessonQuestions.mockResolvedValue([
+      {
+        subject_id: "s1",
+        lesson_slug: "tokens",
+        id: "q1",
+        parent_id: null,
+        prompt: [],
+        options: [],
+        retired_at: null,
+        teaches: ["213.010"],
+        covers: ["token"],
+      },
+    ]);
+    const { lessonContent } = await exportData("u1");
+    expect(lessonContent.modules).toEqual([
+      { id: "m1", subjectId: "s1", title: "Input side", position: 0 },
+    ]);
+    expect(lessonContent.lessons[0]).toMatchObject({
+      slug: "tokens",
+      stage: "finished",
+      covers: ["token"],
+      prerequisites: [{ from: "intro", reason: "r" }],
+    });
+    expect(lessonContent.screens[0]).toMatchObject({
+      number: "213.010",
+      authorKind: "ai",
+      retired: true,
+      revisions: [{ change: "edited", changedAt: "t", blocks: [] }],
+    });
+    expect(lessonContent.questions[0]).toMatchObject({
+      id: "q1",
+      variantOf: null,
+      teaches: ["213.010"],
+      covers: ["token"],
+      retired: false,
+    });
+  });
+
   it("exports which lessons the learner has read", async () => {
     mock.findCardReads.mockResolvedValue([
       { card_id: "lesson1", read_at: "2026-09-19T10:00:00Z" },
