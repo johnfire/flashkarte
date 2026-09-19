@@ -8,6 +8,7 @@ import {
 } from "../../utils/errors";
 import * as concepts from "./concepts.service";
 import * as subjects from "./subjects.service";
+import * as accountRepo from "../account/account.repository";
 import { importSubject } from "./subjects-import.service";
 
 const OWNER_ID = "10000000-0000-4000-8000-0000000000a1";
@@ -460,5 +461,67 @@ describe("import", () => {
       "TOO_MANY_REQUIRES",
     ]);
     expect(await countOf("concepts")).toBe(6);
+  });
+});
+
+describe("account data export (real Postgres)", () => {
+  it("exports subjects, concepts with their card ids, and edges by slug", async () => {
+    const { subject } = await importSubject(OWNER_ID, {
+      title: "Exported",
+      concepts: [
+        { slug: "one", name: "One", kind: "term", cards: [CARD_1, CARD_2] },
+        { slug: "two", name: "Two", kind: "idea" },
+      ],
+      edges: [edge("one", "two", "two builds on one")],
+    });
+
+    const exportedSubjects = await accountRepo.findSubjects(OWNER_ID);
+    const exportedConcepts = await accountRepo.findConcepts(OWNER_ID);
+    const exportedEdges = await accountRepo.findConceptEdges(OWNER_ID);
+
+    expect(exportedSubjects.map((row) => row.id)).toEqual([subject.id]);
+    expect(exportedConcepts.map((row) => row.slug)).toEqual(["one", "two"]);
+    expect([...exportedConcepts[0].card_ids].sort()).toEqual([CARD_1, CARD_2]);
+    expect(exportedConcepts[1].card_ids).toEqual([]);
+    expect(exportedEdges).toEqual([
+      {
+        subject_id: subject.id,
+        from_slug: "one",
+        to_slug: "two",
+        strength: "requires",
+        reason: "two builds on one",
+      },
+    ]);
+  });
+
+  it("never exports another user's subjects", async () => {
+    await seedSubject(["a"]);
+    expect(await accountRepo.findSubjects(OUTSIDER_ID)).toEqual([]);
+    expect(await accountRepo.findConcepts(OUTSIDER_ID)).toEqual([]);
+    expect(await accountRepo.findConceptEdges(OUTSIDER_ID)).toEqual([]);
+  });
+
+  it("deleting the account removes every subject table row", async () => {
+    await seedSubject(["a", "b"]);
+    await getPool().query("DELETE FROM users WHERE id = $1", [OWNER_ID]);
+    for (const table of [
+      "subjects",
+      "concepts",
+      "concept_edges",
+      "card_concepts",
+    ]) {
+      const result = await getPool().query(`SELECT count(*) FROM ${table}`);
+      expect(Number(result.rows[0].count)).toBe(0);
+    }
+  });
+});
+
+describe("malformed ids", () => {
+  it("surfaces a bad subject id as a Postgres 22P02, which the error handler maps to 404", async () => {
+    await expect(
+      subjects.getSubject(OWNER_ID, "not-a-uuid"),
+    ).rejects.toMatchObject({
+      code: "22P02",
+    });
   });
 });
