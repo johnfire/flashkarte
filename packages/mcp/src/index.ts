@@ -6,6 +6,7 @@ import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/
 import { registerDeckTools } from "./tools/decks";
 import { registerCourseTools } from "./tools/courses";
 import { registerSubjectTools } from "./tools/subjects";
+import { registerLessonTools } from "./tools/lessons";
 import { registerCoursePrompts } from "./prompts/build-a-course";
 import { createDiscoveryRouter } from "./oauth/discovery";
 import { createAuthorizeRouter } from "./oauth/authorize";
@@ -45,6 +46,7 @@ function buildServer(): McpServer {
   registerDeckTools(server);
   registerCourseTools(server);
   registerSubjectTools(server);
+  registerLessonTools(server);
   registerCoursePrompts(server);
   return server;
 }

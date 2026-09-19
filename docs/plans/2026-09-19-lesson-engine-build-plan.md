@@ -29,7 +29,7 @@ Answer the two questions the design admits it hasn't proven, before anything dep
    pure "suggest a number between two neighbours" function with property tests (always strictly
    between, never collides, any gap splittable). **Exit:** the function and tests, kept.
 
-## Slice 1: content model and authoring (M)
+## Slice 1: content model and authoring (M) — **DONE 2026-09-19** (see "What slice 1 decided" below)
 
 Migrations for modules, lessons, screens, questions (with their variants and their list of teaching
 screens) and their links; **shared TypeScript** for
@@ -123,3 +123,41 @@ Depends entirely on the decision in section 9 of the spec. Not planned until Chr
 
 The maths pipeline and inline maths on Android (spike first); the size of the content work; and
 whether lessons of 4 to 10 screens are the right grain, which only the pilot can tell us.
+
+## What slice 1 decided and found
+
+Built and verified locally (real-Postgres integration tests, route tests, a real-HTTP test, and the MCP
+tools registered on the real MCP SDK). Nothing pushed.
+
+**Decisions taken while building** (flag any you disagree with):
+
+1. **Paragraph text is a list of spans** (text plus bold, italic or code flags), not markup in a string,
+   so there is no parser to keep in step between web and Android.
+2. **A variant holds only its own wording.** Its teaching screens and tested concepts are its question's, so
+   they cannot disagree; the lint rule "variants match" became unnecessary.
+3. **A lesson can only be taught by its own screens.** A question cannot point at another lesson's screen.
+4. **In a finished lesson:** inserts, edits (with revision history), new questions and variants, retiring a
+   screen, and re-pointing a question are allowed. Deleting, renumbering, changing what the lesson covers,
+   changing its prerequisites, and deleting a question (retire it instead) are not. A lesson cannot go back
+   from finished to testing.
+5. **A screen is retired, not deleted,** and only after no active question teaches it. A screen a question
+   teaches cannot be deleted even in the testing stage.
+6. **A write made with an AI key is recorded as AI-authored,** on the screen and as `ai-agent` in the audit log.
+7. **Numbers continue after the subject's highest** when a new lesson is created, so screen numbers stay
+   unique across the subject without the author choosing any.
+8. **A lesson's module is optional;** lessons without one appear in a trailing group in the outline.
+
+**A real bug found and fixed before it shipped:** the constraint that stops a taught screen being deleted
+made an account with lessons impossible to erase, because deleting a lesson, subject or account removes its
+screens before its questions and an immediate check refuses the cascade. It is now a deferred constraint:
+whole-account deletion works and deleting just a taught screen still fails. This is the reason the account
+deletion check exists.
+
+**Proven with real content:** the first Transformers lesson ("Tokens and the vocabulary": 5 screens, 4
+questions, each with a variant, 4 concepts) imports through the authoring path, lints with no issues, finishes,
+and appears in the outline. It is **draft content for you to review**, not finished teaching; it lives at
+`packages/server/src/domains/lessons/fixtures/transformers-tokens-lesson.json`.
+
+**Not in slice 1, by design:** a learner's progress (locked, in progress, passed) on the outline, the asset
+store and image uploads (slice 5), formula rendering to SVG (slice 6), private notes and help requests
+(slice 7), and any screen a learner can see (slice 3).

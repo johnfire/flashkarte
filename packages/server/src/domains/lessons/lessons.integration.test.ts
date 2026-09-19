@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { closePool, getPool } from "../../db/client";
 import { runMigrations } from "../../db/migrate";
 import {
@@ -8,6 +10,7 @@ import {
 import * as accountRepo from "../account/account.repository";
 import * as concepts from "../subjects/concepts.service";
 import * as subjects from "../subjects/subjects.service";
+import { importSubject } from "../subjects/subjects-import.service";
 import { importLesson } from "./lesson-import.service";
 import * as lessons from "./lessons.service";
 import { getOutline } from "./outline.service";
@@ -942,5 +945,94 @@ describe("account data export and deletion (real Postgres)", () => {
         0,
       );
     }
+  });
+});
+
+describe("a real lesson: Transformers, tokens (draft content for the pilot)", () => {
+  const readFixture = (name: string) =>
+    JSON.parse(fs.readFileSync(path.join(__dirname, "fixtures", name), "utf8"));
+
+  it("imports, lints clean, finishes, and shows in the outline", async () => {
+    // The concepts the lesson covers come from the reviewed Transformers subject.
+    const graph = JSON.parse(
+      fs.readFileSync(
+        path.join(
+          __dirname,
+          "..",
+          "subjects",
+          "fixtures",
+          "transformers-subject.json",
+        ),
+        "utf8",
+      ),
+    );
+    const real = await importSubject(OWNER, {
+      title: graph.title,
+      concepts: graph.concepts.map((c: { cards: unknown[] }) => ({
+        ...c,
+        cards: [],
+      })),
+      edges: graph.edges,
+    });
+    const result = await importLesson(
+      OWNER,
+      real.subject.id,
+      readFixture("transformers-tokens-lesson.json"),
+      "ai",
+    );
+
+    expect(result.screens).toHaveLength(5);
+    expect(result.question_ids).toHaveLength(4);
+    expect(result.issues).toEqual([]); // no completeness issues and no warnings: 5 screens, 4 questions, every question has a variant
+
+    expect(
+      await lessons.finishLesson(OWNER, real.subject.id, "tokens"),
+    ).toMatchObject({ stage: "finished" });
+    const outline = await getOutline(OWNER, real.subject.id);
+    expect(outline.modules[0].title).toBe("Input side: text to vectors");
+    expect(outline.modules[0].lessons[0]).toMatchObject({
+      slug: "tokens",
+      stage: "finished",
+      covers: ["Token", "Vocabulary and V", "Token ID", "Tokenizer"],
+    });
+  });
+
+  it("each question is taught by real screens and every concept is tested", async () => {
+    const graph = JSON.parse(
+      fs.readFileSync(
+        path.join(
+          __dirname,
+          "..",
+          "subjects",
+          "fixtures",
+          "transformers-subject.json",
+        ),
+        "utf8",
+      ),
+    );
+    const real = await importSubject(OWNER, {
+      title: graph.title,
+      concepts: graph.concepts.map((c: { cards: unknown[] }) => ({
+        ...c,
+        cards: [],
+      })),
+      edges: graph.edges,
+    });
+    await importLesson(
+      OWNER,
+      real.subject.id,
+      readFixture("transformers-tokens-lesson.json"),
+      "ai",
+    );
+    const detail = await lessons.getLesson(OWNER, real.subject.id, "tokens");
+    expect(
+      detail.questions.every(
+        (q) => q.screens.length >= 1 && q.variants.length === 1,
+      ),
+    ).toBe(true);
+    expect(new Set(detail.questions.flatMap((q) => q.covers))).toEqual(
+      new Set(["token", "vocabulary", "token-id", "tokenizer"]),
+    );
+    expect(detail.screens.every((s) => s.author_kind === "ai")).toBe(true);
   });
 });
