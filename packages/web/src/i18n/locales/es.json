@@ -589,7 +589,12 @@
       "sensesIntro": "Una palabra con varios significados no relacionados (como el alemán \"der Zug\" — tren, jugada de ajedrez o corriente de aire) puede escribirse una sola vez, como un bloque, y estudiarse como una tarjeta independiente por significado. Dale a cada significado su propia línea: \"- significado | frase de ejemplo | pista breve\".",
       "sensesPhases": "Mientras la palabra es nueva, todos los significados se muestran juntos, con la pista breve como pregunta, para que aprendas de una vez todo el alcance de la palabra. Una vez que domines cada significado, la pista desaparece y cada significado pasa a ser su propia tarjeta normal, con la frase de ejemplo como pregunta.",
       "sensesExampleCaption": "Ejemplo de palabra con tres significados:",
-      "sensesNote": "La pista y la frase de ejemplo son opcionales, pero una frase de ejemplo real es lo que hace que la segunda fase funcione bien — escribe una para cada significado."
+      "sensesNote": "La pista y la frase de ejemplo son opcionales, pero una frase de ejemplo real es lo que hace que la segunda fase funcione bien — escribe una para cada significado.",
+      "readingHeading": "Tarjetas de lectura (lecciones)",
+      "readingIntro": "Parte del aprendizaje es simplemente leer. Escribe @read en su propia línea encima de una tarjeta y se convierte en una lección: un título y un texto que lees y continúas con «Entendido». Una lección no se puntúa ni se programa, así que nunca cuenta como repaso, y leerla no cuenta como dominar el tema. Pon las preguntas en tarjetas normales.",
+      "readingBody": "El texto se muestra exactamente como lo escribes, así que los párrafos y las líneas de lista con «- » siguen siendo legibles. Cada lección se muestra una vez; cuando la has leído, no se vuelve a ofrecer.",
+      "readingExampleCaption": "Ejemplo de tarjeta de lectura:",
+      "readingLimits": "Dentro de una lección evita líneas que empiecen por «## » o por un número en negrita como «**3. …**»: inician una categoría o una tarjeta nueva. Un mazo con lecciones tampoco puede contener tarjetas ramificadas."
     },
     "branchingDecks": {
       "metaTitle": "Mazos ramificados — Ayuda de flashkarte",

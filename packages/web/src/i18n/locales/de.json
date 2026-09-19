@@ -589,7 +589,12 @@
       "sensesIntro": "Ein Stichwort mit mehreren unabhängigen Bedeutungen (wie \"der Zug\" — Eisenbahn, Schachzug oder Luftzug) lässt sich einmal, als ein Block, schreiben und wird als eine eigenständige Karte pro Bedeutung gelernt. Gib jeder Bedeutung eine eigene Zeile: \"- Bedeutung | Beispielsatz | kurzer Hinweis\".",
       "sensesPhases": "Solange ein Wort neu ist, werden alle Bedeutungen zusammen angezeigt, mit dem kurzen Hinweis als Frage, damit du die ganze Bandbreite des Wortes auf einmal lernst. Sobald jede Bedeutung gut sitzt, entfällt der Hinweis, und jede Bedeutung wird zu einer eigenen normalen Karte, diesmal mit dem Beispielsatz als Frage.",
       "sensesExampleCaption": "Beispielwort mit drei Bedeutungen:",
-      "sensesNote": "Hinweis und Beispielsatz sind beide optional, aber erst ein echter Beispielsatz macht die zweite Phase wirklich brauchbar — schreib also für jede Bedeutung einen."
+      "sensesNote": "Hinweis und Beispielsatz sind beide optional, aber erst ein echter Beispielsatz macht die zweite Phase wirklich brauchbar — schreib also für jede Bedeutung einen.",
+      "readingHeading": "Lesekarten (Lektionen)",
+      "readingIntro": "Manches Lernen ist einfach Lesen. Schreib @read in eine eigene Zeile über eine Karte, und sie wird zur Lektion: ein Titel und ein Text, den du liest und dann mit „Verstanden“ abschließt. Eine Lektion wird weder bewertet noch geplant, zählt also nie als Wiederholung, und sie zu lesen heißt nicht, das Thema zu beherrschen. Die Fragen gehören auf normale Karten.",
+      "readingBody": "Der Text wird genau so angezeigt, wie du ihn schreibst, damit Absätze und Listenzeilen mit „- “ lesbar bleiben. Jede Lektion erscheint einmal; wenn du sie gelesen hast, wird sie nicht erneut angeboten.",
+      "readingExampleCaption": "Beispiel für eine Lesekarte:",
+      "readingLimits": "Vermeide in einer Lektion Zeilen, die mit „## “ oder mit einer fetten Nummer wie „**3. …**“ beginnen: Sie starten eine neue Kategorie oder Karte. Ein Deck mit Lektionen darf keine Verzweigungskarten enthalten."
     },
     "branchingDecks": {
       "metaTitle": "Verzweigte Stapel — flashkarte-Hilfe",

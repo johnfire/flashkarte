@@ -18,6 +18,13 @@ const SENSE_EXAMPLE = `**1. der Zug**
 - move (in chess) | Das war ein guter Zug! | Schach
 - draught | Es zieht, mach das Fenster zu. | Luft`;
 
+const READING_EXAMPLE = `@read
+**5. How a dot product measures similarity**
+A dot product multiplies matching entries and adds them up.
+
+- large and positive: the vectors point the same way
+- near zero: unrelated`;
+
 export function AdvancedCardsPage() {
   const { t } = useTranslation();
   useDocumentHead({
@@ -56,6 +63,19 @@ export function AdvancedCardsPage() {
         <Code>{SENSE_EXAMPLE}</Code>
         <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
           {t("help.advancedCards.sensesNote")}
+        </p>
+      </section>
+
+      <section id="reading" className="scroll-mt-6">
+        <h2 className={helpH2}>{t("help.advancedCards.readingHeading")}</h2>
+        <p className="mt-2">{t("help.advancedCards.readingIntro")}</p>
+        <p className="mt-2">{t("help.advancedCards.readingBody")}</p>
+        <p className="mt-3 font-medium">
+          {t("help.advancedCards.readingExampleCaption")}
+        </p>
+        <Code>{READING_EXAMPLE}</Code>
+        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400">
+          {t("help.advancedCards.readingLimits")}
         </p>
       </section>
     </HelpTopicShell>

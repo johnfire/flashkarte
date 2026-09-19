@@ -589,7 +589,12 @@
       "sensesIntro": "Un mot-vedette ayant plusieurs sens distincts (comme l'allemand « der Zug » — train, coup d'échecs ou courant d'air) peut être écrit une seule fois, en un bloc, et étudié comme une carte indépendante par sens. Donnez à chaque sens sa propre ligne : « - sens | phrase d'exemple | indice court ».",
       "sensesPhases": "Tant que le mot est nouveau, tous les sens sont présentés ensemble, avec l'indice court comme question, pour apprendre d'un coup toute l'étendue du mot. Une fois chaque sens bien maîtrisé, l'indice disparaît et chaque sens devient sa propre carte ordinaire, avec la phrase d'exemple comme question.",
       "sensesExampleCaption": "Exemple de mot à trois sens :",
-      "sensesNote": "L'indice et la phrase d'exemple sont tous deux facultatifs, mais une vraie phrase d'exemple est ce qui rend la seconde phase vraiment utile — écrivez-en une par sens."
+      "sensesNote": "L'indice et la phrase d'exemple sont tous deux facultatifs, mais une vraie phrase d'exemple est ce qui rend la seconde phase vraiment utile — écrivez-en une par sens.",
+      "readingHeading": "Cartes de lecture (leçons)",
+      "readingIntro": "Une part de l'apprentissage consiste simplement à lire. Écris @read sur sa propre ligne au-dessus d'une carte et elle devient une leçon : un titre et un texte que tu lis, puis tu continues avec « Compris ». Une leçon n'est ni notée ni planifiée, donc elle ne compte jamais comme une révision, et la lire ne veut pas dire maîtriser le sujet. Mets les questions sur des cartes ordinaires.",
+      "readingBody": "Le texte s'affiche exactement comme tu l'écris, donc les paragraphes et les lignes de liste commençant par « - » restent lisibles. Chaque leçon s'affiche une fois ; une fois lue, elle n'est plus proposée.",
+      "readingExampleCaption": "Exemple de carte de lecture :",
+      "readingLimits": "Dans une leçon, évite les lignes qui commencent par « ## » ou par un numéro en gras comme « **3. …** » : elles démarrent une nouvelle catégorie ou une nouvelle carte. Un paquet avec des leçons ne peut pas non plus contenir de cartes de branchement."
     },
     "branchingDecks": {
       "metaTitle": "Paquets à embranchements — Aide flashkarte",

@@ -589,7 +589,12 @@
       "sensesIntro": "A headword with several unrelated meanings (like German \"der Zug\" — train, chess move, or draught) can be written once, as one block, and studied as one independent card per meaning. Give each meaning its own line: \"- meaning | example sentence | short hint\".",
       "sensesPhases": "While a word is new, every meaning is shown together, prompted by its short hint, so you learn the word's range in one pass. Once every meaning is well known, the hint drops away and each meaning becomes its own ordinary card, prompted by its example sentence instead.",
       "sensesExampleCaption": "Example word with three senses:",
-      "sensesNote": "The hint and example sentence are both optional, but a real example sentence is what makes the second phase work well — write one per meaning."
+      "sensesNote": "The hint and example sentence are both optional, but a real example sentence is what makes the second phase work well — write one per meaning.",
+      "readingHeading": "Reading cards (lessons)",
+      "readingIntro": "Some learning is just reading. Put @read on its own line above a card and it becomes a lesson: a title and a body you read, then continue with \"Got it\". A lesson isn't graded and isn't scheduled, so it never counts as a review, and reading it never counts as knowing the topic. Put the questions on ordinary cards.",
+      "readingBody": "The body is shown exactly as you write it, so paragraphs and \"- \" list lines stay readable. Each lesson is shown once; after you have read it, it isn't offered again.",
+      "readingExampleCaption": "Example reading card:",
+      "readingLimits": "Inside a lesson, avoid lines that start with \"## \" or with a bold number like \"**3. …**\": they start a new category or a new card. A deck with lessons can't also contain branch cards."
     },
     "branchingDecks": {
       "metaTitle": "Branching decks — flashkarte Help",
