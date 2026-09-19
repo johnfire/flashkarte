@@ -104,7 +104,9 @@ them ("unlocks after: Tokenizer, Embeddings"), so the learner can see the whole 
 ## 6. Authoring and stages
 
 Authored through MCP tools (create lesson, add screens, add questions, set prerequisites, publish
-a stage), the same way the subject graph is. The server **lints** before saving:
+a stage), the same way the subject graph is. The server checks the content on two levels.
+**Structural rules** block any save. **Completeness rules** are reported on every save and only block
+moving a lesson to **finished**, so a half-written lesson in the testing stage can always be saved:
 
 - every question names at least one screen, and every screen it names exists in its lesson;
 - every variant covers the same concepts and points at the same screens as its question;
@@ -115,9 +117,17 @@ a stage), the same way the subject graph is. The server **lints** before saving:
   than 5 questions, or a question with no variant (so a miss can only be re-asked from the back of
   the set).
 
+Structural: valid blocks, unique numbers, every question and variant pointing at real screens of its
+lesson. Completeness: every concept tested, every question having a variant, formulas having spoken
+text, the lesson having questions at all.
+
 Stages are set **per lesson**. In the **testing** stage anything can change and no promise is made to learners. **Finished**
-freezes numbers: inserts are allowed (safe, because numbers never change), deletes, reorders and
-meaning-changing edits are not, and need a new version of the subject.
+freezes numbers: inserts are allowed (safe, because numbers never change), deletes and reorders are not. Edits to a finished screen are allowed but
+kept in a visible **revision history** (software cannot tell a typo fix from a rewrite, so the history and
+the owner's judgement carry that). A screen that is simply wrong is **retired**: hidden from new
+learners, kept for anyone whose progress points at it, with a corrected replacement inserted next to it.
+Nothing is deleted, so no progress is lost. **Adding a question or variant** to a finished lesson only
+affects new learners; anyone who already passed stays passed.
 
 ## 7. Rich content
 
