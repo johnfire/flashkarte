@@ -6,6 +6,8 @@ import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.DeckCardDto
+import com.flashmd.data.remote.dto.LessonReadDto
+import com.flashmd.data.remote.dto.LessonReadsRequest
 import com.flashmd.domain.model.BranchOption
 import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.CardProgress
@@ -39,6 +41,7 @@ class StudyRepository @Inject constructor(
                         label = dto.content.label,
                         options = dto.content.options.map { BranchOption(it.text, it.goto) },
                         position = dto.position,
+                        type = dto.type,
                     ),
                     progress = CardProgress(
                         id = dto.id,
@@ -77,6 +80,19 @@ class StudyRepository @Inject constructor(
         local.applyRatingLocally(cardId, rating, ev.reviewedAt)
         scheduler.requestSync()
     }
+
+    /**
+     * Records that the learner read a lesson. Best effort: a lesson has no rating to
+     * lose, and the server keeps the first read, so a failure here just means the
+     * lesson is offered again next time. Returns whether it was recorded.
+     */
+    suspend fun markLessonRead(cardId: String): Boolean =
+        try {
+            apiCall { api.recordLessonReads(LessonReadsRequest(listOf(LessonReadDto(cardId)))) }
+            true
+        } catch (exception: ApiException) {
+            false
+        }
 
     /** The remediation card a diagnostic option routes to, resolved by label
      *  from the local whole-deck cache (works offline). Null if not found. */
@@ -126,6 +142,7 @@ private fun DeckCardDto.toCard(deckId: String): Card = Card(
     label = content.label,
     options = content.options.map { BranchOption(it.text, it.goto) },
     position = position,
+    type = type,
 )
 
 data class DeckStudyStats(

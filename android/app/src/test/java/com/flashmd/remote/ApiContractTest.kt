@@ -5,6 +5,8 @@ import com.flashmd.data.remote.FlashkarteApi
 import com.flashmd.data.remote.apiCall
 import com.flashmd.data.remote.dto.CredentialsRequest
 import com.flashmd.data.remote.dto.ImportRequest
+import com.flashmd.data.remote.dto.LessonReadDto
+import com.flashmd.data.remote.dto.LessonReadsRequest
 import com.flashmd.data.remote.dto.ReviewRequest
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
@@ -137,6 +139,45 @@ class ApiContractTest {
         val cards = apiCall { api.studyBatch("d1") }
 
         assertEquals(0, cards[0].position)
+    }
+
+    @Test
+    fun `study batch asks the server for lessons`() = runBlocking {
+        enqueue(200, "[]")
+
+        apiCall { api.studyBatch("d1") }
+
+        val request = server.takeRequest()
+        assertEquals("/api/decks/d1/study?lessons=1", request.path)
+    }
+
+    @Test
+    fun `study batch parses a lesson's type and defaults to basic for an older server`() = runBlocking {
+        enqueue(
+            200,
+            """[{"id":"l1","type":"read","content":{"front":"A lesson","back":"Body"},"position":0},""" +
+                """{"id":"c1","content":{"front":"Q","back":"A"},"position":1}]""",
+        )
+
+        val cards = apiCall { api.studyBatch("d1") }
+
+        assertEquals("read", cards[0].type)
+        assertEquals("basic", cards[1].type)
+    }
+
+    @Test
+    fun `recording a lesson read posts card_id in a reads list`() = runBlocking {
+        enqueue(200, """{"acked_card_ids":["l1"],"recorded":1}""")
+
+        val response = apiCall {
+            api.recordLessonReads(LessonReadsRequest(listOf(LessonReadDto("l1"))))
+        }
+
+        val request = server.takeRequest()
+        assertEquals("POST", request.method)
+        assertEquals("/api/study/reads", request.path)
+        assertEquals("""{"reads":[{"card_id":"l1"}]}""", request.body.readUtf8())
+        assertEquals(1, response.recorded)
     }
 
     @Test

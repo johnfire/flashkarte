@@ -172,6 +172,9 @@ data class CardContentDto(
 @Serializable
 data class StudyCardDto(
     val id: String,
+    // "read" for a lesson (only sent when the app asks with lessons=1). Defaulted so
+    // an older server that doesn't send it still deserialises.
+    val type: String = "basic",
     val content: CardContentDto,
     val category: String? = null,
     // The card's fixed place in the deck, independent of study order (the
@@ -203,6 +206,22 @@ data class ImportRequest(
 data class ReviewRequest(
     @SerialName("card_id") val cardId: String,
     val rating: Int,
+)
+
+@Serializable
+data class LessonReadDto(
+    @SerialName("card_id") val cardId: String,
+)
+
+/** Marks lessons as read. Idempotent on the server, so a retry is always safe. */
+@Serializable
+data class LessonReadsRequest(
+    val reads: List<LessonReadDto>,
+)
+
+@Serializable
+data class LessonReadsResponseDto(
+    val recorded: Int = 0,
 )
 
 @Serializable

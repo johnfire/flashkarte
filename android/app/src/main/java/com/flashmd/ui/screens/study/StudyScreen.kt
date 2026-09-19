@@ -35,7 +35,7 @@ private val RATING_LABELS = mapOf(1 to "Again", 2 to "Hard", 3 to "Good", 4 to "
 fun StudyScreen(
     deckId: String,
     onBack: () -> Unit,
-    onSessionDone: (reviewed: Int, c1: Int, c2: Int, c3: Int, c4: Int, c5: Int) -> Unit,
+    onSessionDone: (reviewed: Int, c1: Int, c2: Int, c3: Int, c4: Int, c5: Int, lessons: Int) -> Unit,
     viewModel: StudyViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -46,6 +46,7 @@ fun StudyScreen(
             onSessionDone(
                 state.reviewed,
                 c[1] ?: 0, c[2] ?: 0, c[3] ?: 0, c[4] ?: 0, c[5] ?: 0,
+                state.lessonsRead,
             )
         }
     }
@@ -110,8 +111,10 @@ fun StudyScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             // Progress bar
-            val progress = if (state.remaining + state.reviewed > 0)
-                state.reviewed.toFloat() / (state.reviewed + state.remaining)
+            // Lessons read count as progress too, though they are not reviews.
+            val completed = state.reviewed + state.lessonsRead
+            val progress = if (state.remaining + completed > 0)
+                completed.toFloat() / (completed + state.remaining)
             else 0f
             LinearProgressIndicator(
                 progress = { progress },
@@ -119,18 +122,22 @@ fun StudyScreen(
             )
 
             val cardNumber = state.currentCard?.card?.position?.plus(1)
+            val onLesson = state.currentCard?.card?.isLesson == true
+            val readingLabel = stringResource(R.string.study_reading)
             Text(
                 if (cardNumber != null) {
-                    "Card #$cardNumber  •  ${state.reviewed} done  •  ${state.remaining} remaining"
+                    val prefix = if (onLesson) "$readingLabel  •  " else ""
+                    "${prefix}Card #$cardNumber  •  $completed done  •  ${state.remaining} remaining"
                 } else {
-                    "${state.reviewed} done  •  ${state.remaining} remaining"
+                    "$completed done  •  ${state.remaining} remaining"
                 },
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(top = 4.dp, bottom = 8.dp),
             )
 
-            SingleChoiceSegmentedButtonRow(Modifier.padding(bottom = 8.dp)) {
+            // Flip/Choice describe how a question is answered; a lesson has none.
+            if (!onLesson) SingleChoiceSegmentedButtonRow(Modifier.padding(bottom = 8.dp)) {
                 SegmentedButton(
                     selected = state.mode == StudyMode.FLIP,
                     onClick = { viewModel.setMode(StudyMode.FLIP) },
@@ -153,6 +160,15 @@ fun StudyScreen(
                     front = remediation.front,
                     back = remediation.back,
                     onContinue = { viewModel.continueFromRemediation() },
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 20.dp, vertical = 12.dp),
+                )
+            } else if (card != null && card.card.isLesson) {
+                ReadingPanel(
+                    title = card.card.front,
+                    body = card.card.back,
+                    onGotIt = { viewModel.markLessonRead() },
                     modifier = Modifier
                         .weight(1f)
                         .padding(horizontal = 20.dp, vertical = 12.dp),
@@ -261,6 +277,53 @@ private fun ChoicePanel(
         if (selectedIndex != null) {
             Spacer(Modifier.height(8.dp))
             Button(onClick = onContinue, modifier = Modifier.fillMaxWidth()) { Text("Continue") }
+        }
+    }
+}
+
+/**
+ * A lesson (reading card): a title and a body to read, then one "Got it" button. It is
+ * not graded and not scheduled, so there is nothing to reveal and no rating row. The
+ * body is left-aligned and shown as written, so lists and paragraphs stay readable.
+ */
+@Composable
+private fun ReadingPanel(
+    title: String,
+    body: String,
+    onGotIt: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Surface(
+            modifier = Modifier.fillMaxWidth().weight(1f),
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            tonalElevation = 4.dp,
+        ) {
+            Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp)) {
+                CardText(
+                    title,
+                    style = MaterialTheme.typography.titleLarge,
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold,
+                )
+                Spacer(Modifier.height(16.dp))
+                CardText(
+                    body,
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Start,
+                )
+                Spacer(Modifier.height(24.dp))
+                Text(
+                    stringResource(R.string.study_reading_hint),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+        }
+        Spacer(Modifier.height(8.dp))
+        Button(onClick = onGotIt, modifier = Modifier.fillMaxWidth()) {
+            Text(stringResource(R.string.study_got_it))
         }
     }
 }

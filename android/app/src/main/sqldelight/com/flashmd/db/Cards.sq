@@ -9,12 +9,15 @@ CREATE TABLE cardEntity (
   -- multiple-choice options as a JSON array of {text, goto}. Both NULL for
   -- ordinary cards. Cached whole-deck so remediation interludes resolve offline.
   label TEXT,
-  options TEXT
+  options TEXT,
+  -- "basic", "branch" or "read" (a lesson). NULL on rows cached before reading
+  -- cards existed, which are ordinary cards.
+  type TEXT
 );
 
 upsertCard:
-INSERT OR REPLACE INTO cardEntity(id, deck_id, front, back, category, position, label, options)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+INSERT OR REPLACE INTO cardEntity(id, deck_id, front, back, category, position, label, options, type)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 deleteCardsForDeck:
 DELETE FROM cardEntity WHERE deck_id = ?;

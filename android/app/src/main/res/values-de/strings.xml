@@ -97,4 +97,13 @@
     <string name="deck_speech_save_error">Spracheinstellungen des Stapels konnten nicht gespeichert werden.</string>
     <string name="deck_speech_rate_inherit">Globale Geschwindigkeit verwenden</string>
     <string name="speech_no_voice_list">Dieses Gerät hat seine Stimmen noch nicht gemeldet — gib ein BCP-47-Kürzel wie de-DE ein.</string>
+
+    <!-- Reading cards (lessons) -->
+    <string name="study_reading">Lesen</string>
+    <string name="study_reading_hint">Lies das, dann geht\'s weiter. Das wird nicht bewertet.</string>
+    <string name="study_got_it">Verstanden</string>
+    <plurals name="study_lessons_read">
+        <item quantity="one">Du hast %d Lektion gelesen.</item>
+        <item quantity="other">Du hast %d Lektionen gelesen.</item>
+    </plurals>
 </resources>

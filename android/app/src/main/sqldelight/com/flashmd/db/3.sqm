@@ -1,0 +1,5 @@
+-- Migration v3 -> v4 (reading cards / lessons).
+-- Records each cached card's type so the offline queue and stats can leave out
+-- lessons (reading cards), which are read and acknowledged, never rated. Nullable:
+-- existing cached rows have no type and are treated as ordinary "basic" cards.
+ALTER TABLE cardEntity ADD COLUMN type TEXT;

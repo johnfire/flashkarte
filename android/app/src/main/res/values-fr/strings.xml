@@ -97,4 +97,13 @@
     <string name="deck_speech_save_error">Impossible d\'enregistrer les réglages de lecture de ce paquet.</string>
     <string name="deck_speech_rate_inherit">Utiliser ma vitesse globale</string>
     <string name="speech_no_voice_list">Cet appareil n\'a pas encore signalé ses voix — saisis un code BCP-47 comme de-DE.</string>
+
+    <!-- Reading cards (lessons) -->
+    <string name="study_reading">Lecture</string>
+    <string name="study_reading_hint">Lis ceci, puis continue. Ce n\'est pas noté.</string>
+    <string name="study_got_it">Compris</string>
+    <plurals name="study_lessons_read">
+        <item quantity="one">Tu as lu %d leçon.</item>
+        <item quantity="other">Tu as lu %d leçons.</item>
+    </plurals>
 </resources>

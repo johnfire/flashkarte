@@ -15,4 +15,9 @@ data class Card(
     // to the learner as "Card #N" so it survives the scheduler reordering
     // due/new cards.
     val position: Int = 0,
-)
+    // "basic" (ordinary and diagnostic), "branch", or "read": a lesson, which is
+    // read and acknowledged with "Got it" and never rated or scheduled.
+    val type: String = "basic",
+) {
+    val isLesson: Boolean get() = type == "read"
+}

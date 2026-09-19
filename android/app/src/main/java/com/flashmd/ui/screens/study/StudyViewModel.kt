@@ -30,6 +30,8 @@ data class StudyUiState(
     val isFlipped: Boolean = false,
     val remaining: Int = 0,
     val reviewed: Int = 0,
+    // Lessons (reading cards) acknowledged this session. They are not reviews.
+    val lessonsRead: Int = 0,
     val isDone: Boolean = false,
     val nothingDue: Boolean = false,
     val ratingCounts: Map<Int, Int> = emptyMap(),
@@ -71,6 +73,7 @@ class StudyViewModel @Inject constructor(
 
     private val queue = ArrayDeque<DueCard>()
     private var reviewed = 0
+    private var lessonsRead = 0
     private val ratingCounts = mutableMapOf<Int, Int>()
     private var pool: List<String> = emptyList()
     private var ordered = false
@@ -90,7 +93,8 @@ class StudyViewModel @Inject constructor(
                 val deck = deckRepo.getDeckById(deckId)
                 val due = studyRepo.getDueCards(deckId)
                 queue.addAll(due)
-                pool = due.map { it.card.back }
+                // Distractors come from real answers; a lesson body is not one.
+                pool = due.filter { !it.card.isLesson }.map { it.card.back }
                 ordered = deck?.isOrdered == true
                 val savedMode = studyModeStore.mode.first()
                 val speech = resolveSpeechFor(deck)
@@ -113,9 +117,13 @@ class StudyViewModel @Inject constructor(
                         isLoading = false,
                         mode = savedMode,
                         speech = speech,
-                        options = if (savedMode == StudyMode.CHOICE) optionsFor(first) else emptyList(),
+                        options = if (savedMode == StudyMode.CHOICE && !first.card.isLesson) {
+                            optionsFor(first)
+                        } else {
+                            emptyList()
+                        },
                     )
-                    autoplay("front", first)
+                    if (!first.card.isLesson) autoplay("front", first)
                 }
             } catch (e: ApiException) {
                 _uiState.value = _uiState.value.copy(isLoading = false, error = e.message)
@@ -196,7 +204,7 @@ class StudyViewModel @Inject constructor(
 
     fun rate(rating: Int) {
         val card = _uiState.value.currentCard ?: return
-        if (!_uiState.value.isFlipped) return
+        if (card.card.isLesson || !_uiState.value.isFlipped) return
 
         viewModelScope.launch {
             try {
@@ -230,7 +238,11 @@ class StudyViewModel @Inject constructor(
         _uiState.value = _uiState.value.copy(
             mode = mode,
             selectedIndex = null,
-            options = if (mode == StudyMode.CHOICE && card != null) optionsFor(card) else emptyList(),
+            options = if (mode == StudyMode.CHOICE && card != null && !card.card.isLesson) {
+                optionsFor(card)
+            } else {
+                emptyList()
+            },
         )
     }
 
@@ -277,6 +289,23 @@ class StudyViewModel @Inject constructor(
         }
     }
 
+    /**
+     * "Got it" on a lesson. Fails open: recording the read is best effort (the server
+     * keeps the first one and a lesson has no rating to lose), so an offline learner
+     * moves straight on and the lesson is simply offered again next time.
+     */
+    fun markLessonRead() {
+        val card = _uiState.value.currentCard ?: return
+        if (!card.card.isLesson) return
+        viewModelScope.launch {
+            studyRepo.markLessonRead(card.card.id)
+            speechPlayer.stop()
+            queue.poll()
+            lessonsRead++
+            showNextOrFinish()
+        }
+    }
+
     /** Dismiss the remediation interlude and advance to the next card. */
     fun continueFromRemediation() {
         val card = _uiState.value.currentCard ?: return
@@ -301,11 +330,17 @@ class StudyViewModel @Inject constructor(
             reviewed++
         }
 
+        showNextOrFinish()
+    }
+
+    /** Show the next card, or finish the session when the queue is empty. */
+    private fun showNextOrFinish() {
         if (queue.isEmpty()) {
             _uiState.value = _uiState.value.copy(
                 currentCard = null,
                 isDone = true,
                 reviewed = reviewed,
+                lessonsRead = lessonsRead,
                 ratingCounts = ratingCounts.toMap(),
                 selectedIndex = null,
                 remediation = null,
@@ -317,12 +352,17 @@ class StudyViewModel @Inject constructor(
                 isFlipped = false,
                 remaining = queue.size,
                 reviewed = reviewed,
+                lessonsRead = lessonsRead,
                 ratingCounts = ratingCounts.toMap(),
                 selectedIndex = null,
                 remediation = null,
-                options = if (_uiState.value.mode == StudyMode.CHOICE) optionsFor(next) else emptyList(),
+                options = if (_uiState.value.mode == StudyMode.CHOICE && !next.card.isLesson) {
+                    optionsFor(next)
+                } else {
+                    emptyList()
+                },
             )
-            autoplay("front", next)
+            if (!next.card.isLesson) autoplay("front", next)
         }
     }
 }

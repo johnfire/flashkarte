@@ -7,6 +7,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.flashmd.R
 import com.flashmd.ui.theme.RatingColor
 
 private val RATING_LABELS = mapOf(1 to "Again", 2 to "Hard", 3 to "Good", 4 to "Easy", 5 to "Perfect")
@@ -17,10 +18,15 @@ fun SessionSummaryScreen(
     deckId: String,
     reviewed: Int,
     ratingCounts: Map<Int, Int>,
+    lessonsRead: Int = 0,
     onBack: () -> Unit,
     onStats: (String) -> Unit,
 ) {
-    val nothingDue = reviewed == 0 && ratingCounts.values.all { it == 0 }
+    val nothingReviewed = reviewed == 0 && ratingCounts.values.all { it == 0 }
+    val lessonsOnly = nothingReviewed && lessonsRead > 0
+    val nothingDue = nothingReviewed && lessonsRead == 0
+    val context = androidx.compose.ui.platform.LocalContext.current
+    val lessonsText = context.resources.getQuantityString(R.plurals.study_lessons_read, lessonsRead, lessonsRead)
 
     Scaffold(
         topBar = { TopAppBar(title = { Text("Session Complete") }) },
@@ -30,7 +36,9 @@ fun SessionSummaryScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
-            if (nothingDue) {
+            if (lessonsOnly) {
+                Text(lessonsText, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
+            } else if (nothingDue) {
                 Text("Nothing due today!", style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(8.dp))
                 Text("All caught up. Come back later.", color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -40,6 +48,10 @@ fun SessionSummaryScreen(
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                 )
+                if (lessonsRead > 0) {
+                    Spacer(Modifier.height(8.dp))
+                    Text(lessonsText, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
                 Spacer(Modifier.height(24.dp))
 
                 // Ratings breakdown

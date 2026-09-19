@@ -87,7 +87,7 @@ class LocalStudyStore @Inject constructor(
         cards.forEach { c ->
             db.cardsQueries.upsertCard(
                 c.id, deckId, c.front, c.back, null, c.position.toLong(),
-                c.label, encodeOptions(c.options),
+                c.label, encodeOptions(c.options), c.type,
             )
         }
     }
@@ -98,7 +98,7 @@ class LocalStudyStore @Inject constructor(
         db.cardsQueries.selectCardByLabel(deckId, label).executeAsOneOrNull()?.let {
             Card(
                 it.id, it.deck_id, it.front, it.back, it.label,
-                decodeOptions(it.options), it.position.toInt(),
+                decodeOptions(it.options), it.position.toInt(), it.type ?: "basic",
             )
         }
 
@@ -121,7 +121,7 @@ class LocalStudyStore @Inject constructor(
             DueCard(
                 card = Card(
                     c.id, c.deck_id, c.front, c.back, c.label,
-                    decodeOptions(c.options), c.position.toInt(),
+                    decodeOptions(c.options), c.position.toInt(), c.type ?: "basic",
                 ),
                 progress = CardProgress(
                     id = c.id,
@@ -138,7 +138,9 @@ class LocalStudyStore @Inject constructor(
     }
 
     fun cachedStudyStats(deckId: String, now: Instant = Instant.now()): CachedStudyStats {
+        // Lessons are read, not reviewed: they stay out of the review numbers, as on the server.
         val cards = db.cardsQueries.selectCardsForDeck(deckId).executeAsList()
+            .filter { it.type != "read" }
         val progressByCardId = cards.mapNotNull { card ->
             db.cardProgressQueries.selectProgress(card.id).executeAsOneOrNull()
         }.associateBy { progress -> progress.card_id }

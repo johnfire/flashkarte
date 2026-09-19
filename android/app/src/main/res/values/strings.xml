@@ -97,4 +97,13 @@
     <string name="deck_speech_save_error">Couldn\'t save this deck\'s speech settings.</string>
     <string name="deck_speech_rate_inherit">Use my global speed</string>
     <string name="speech_no_voice_list">This device hasn\'t reported its voices yet — type a BCP-47 tag such as de-DE.</string>
+
+    <!-- Reading cards (lessons) -->
+    <string name="study_reading">Reading</string>
+    <string name="study_reading_hint">Read this, then continue. It isn\'t graded.</string>
+    <string name="study_got_it">Got it</string>
+    <plurals name="study_lessons_read">
+        <item quantity="one">You read %d lesson.</item>
+        <item quantity="other">You read %d lessons.</item>
+    </plurals>
 </resources>

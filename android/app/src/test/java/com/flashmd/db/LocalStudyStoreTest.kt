@@ -154,4 +154,45 @@ class LocalStudyStoreTest {
         assertEquals(0, byId["c2"])
         assertEquals(0, store.cardByLabel("d1", "anchor")?.position)
     }
+
+    // Reading cards (lessons) have no spaced-repetition state. If one reached the
+    // offline queue it would be shown as a flashcard and rated.
+    @Test
+    fun lessonsNeverAppearInTheOfflineQueueOrTheStats() {
+        store.cacheDeckCards(
+            "d1",
+            listOf(
+                Card("q1", "d1", "Question?", "Answer.", position = 0),
+                Card("l1", "d1", "A lesson", "Read me.", position = 1, type = "read"),
+            ),
+        )
+
+        assertEquals(listOf("q1"), store.dueCards("d1").map { it.card.id })
+        val stats = store.cachedStudyStats("d1")
+        assertEquals(1, stats.total)
+        assertEquals(1, stats.new)
+        assertEquals(1, stats.due)
+    }
+
+    @Test
+    fun aCardsTypeSurvivesTheCacheRoundTrip() {
+        store.cacheDeckCards(
+            "d1",
+            listOf(Card("l1", "d1", "A lesson", "Read me.", label = "intro", type = "read")),
+        )
+
+        val cached = store.cardByLabel("d1", "intro")!!
+        assertEquals("read", cached.type)
+        assertTrue(cached.isLesson)
+    }
+
+    @Test
+    fun anOrdinaryCardIsNotALesson() {
+        store.cacheDeckCards("d1", listOf(Card("q1", "d1", "Q?", "A.", label = "q")))
+
+        val cached = store.cardByLabel("d1", "q")!!
+        assertEquals("basic", cached.type)
+        assertTrue(!cached.isLesson)
+        assertEquals("basic", store.dueCards("d1").single().card.type)
+    }
 }

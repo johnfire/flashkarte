@@ -20,6 +20,8 @@ import com.flashmd.data.remote.dto.DeckListItemDto
 import com.flashmd.data.remote.dto.DeckSettingsDto
 import com.flashmd.data.remote.dto.ForgotPasswordRequest
 import com.flashmd.data.remote.dto.ImportRequest
+import com.flashmd.data.remote.dto.LessonReadsRequest
+import com.flashmd.data.remote.dto.LessonReadsResponseDto
 import com.flashmd.data.remote.dto.LibraryDeckDetailDto
 import com.flashmd.data.remote.dto.LibraryListResponse
 import com.flashmd.data.remote.dto.LoginResponse
@@ -81,14 +83,21 @@ interface FlashkarteApi {
     @DELETE("api/decks/{id}")
     suspend fun deleteDeck(@Path("id") id: String): Response<Unit>
 
+    // lessons=1 opts in to reading cards; the server never sends them otherwise.
     @GET("api/decks/{id}/study")
-    suspend fun studyBatch(@Path("id") id: String): List<StudyCardDto>
+    suspend fun studyBatch(
+        @Path("id") id: String,
+        @Query("lessons") lessons: Int = 1,
+    ): List<StudyCardDto>
 
     @GET("api/decks/{id}/settings")
     suspend fun getDeckSettings(@Path("id") id: String): DeckSettingsDto
 
     @GET("api/decks/{id}/stats")
     suspend fun stats(@Path("id") id: String): StatsDto
+
+    @POST("api/study/reads")
+    suspend fun recordLessonReads(@Body body: LessonReadsRequest): LessonReadsResponseDto
 
     @POST("api/study/review")
     suspend fun review(@Body body: ReviewRequest): ReviewResponseDto

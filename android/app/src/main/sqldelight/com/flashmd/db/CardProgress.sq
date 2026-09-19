@@ -28,4 +28,6 @@ SELECT c.* FROM cardEntity c
 LEFT JOIN progressEntity p ON p.card_id = c.id
 WHERE c.deck_id = ?
   AND (p.card_id IS NULL OR p.due_at <= ?)
+  -- Lessons have no spaced-repetition state, so they never appear as due offline.
+  AND (c.type IS NULL OR c.type <> 'read')
 ORDER BY (p.card_id IS NULL) ASC, p.due_at ASC, c.position ASC;

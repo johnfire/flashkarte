@@ -97,4 +97,13 @@
     <string name="deck_speech_save_error">No se han podido guardar los ajustes de lectura del mazo.</string>
     <string name="deck_speech_rate_inherit">Usar mi velocidad global</string>
     <string name="speech_no_voice_list">Este dispositivo aún no ha informado de sus voces: escribe una etiqueta BCP-47 como de-DE.</string>
+
+    <!-- Reading cards (lessons) -->
+    <string name="study_reading">Lectura</string>
+    <string name="study_reading_hint">Léelo y continúa. No se puntúa.</string>
+    <string name="study_got_it">Entendido</string>
+    <plurals name="study_lessons_read">
+        <item quantity="one">Leíste %d lección.</item>
+        <item quantity="other">Leíste %d lecciones.</item>
+    </plurals>
 </resources>

@@ -198,8 +198,8 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                 StudyScreen(
                     deckId = deckId,
                     onBack = { navController.popBackStack() },
-                    onSessionDone = { reviewed, c1, c2, c3, c4, c5 ->
-                        navController.navigate("summary/$deckId/$reviewed/$c1/$c2/$c3/$c4/$c5") {
+                    onSessionDone = { reviewed, c1, c2, c3, c4, c5, lessons ->
+                        navController.navigate("summary/$deckId/$reviewed/$c1/$c2/$c3/$c4/$c5?lessons=$lessons") {
                             popUpTo("decks")
                         }
                     },
@@ -207,7 +207,7 @@ fun NavGraph(onLogout: () -> Unit = {}) {
             }
 
             composable(
-                route = "summary/{deckId}/{reviewed}/{c1}/{c2}/{c3}/{c4}/{c5}",
+                route = "summary/{deckId}/{reviewed}/{c1}/{c2}/{c3}/{c4}/{c5}?lessons={lessons}",
                 arguments = listOf(
                     navArgument("deckId") { type = NavType.StringType },
                     navArgument("reviewed") { type = NavType.IntType },
@@ -216,12 +216,17 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                     navArgument("c3") { type = NavType.IntType },
                     navArgument("c4") { type = NavType.IntType },
                     navArgument("c5") { type = NavType.IntType },
+                    navArgument("lessons") {
+                        type = NavType.IntType
+                        defaultValue = 0
+                    },
                 ),
             ) { backStack ->
                 val args = backStack.arguments!!
                 SessionSummaryScreen(
                     deckId = args.getString("deckId")!!,
                     reviewed = args.getInt("reviewed"),
+                    lessonsRead = args.getInt("lessons"),
                     ratingCounts = mapOf(
                         1 to args.getInt("c1"),
                         2 to args.getInt("c2"),

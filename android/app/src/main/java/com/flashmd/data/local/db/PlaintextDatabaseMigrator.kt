@@ -21,7 +21,7 @@ internal object PlaintextDatabaseMigrator {
             cards.forEach { row ->
                 target.cardsQueries.upsertCard(
                     row.id, row.deck_id, row.front, row.back, row.category,
-                    row.position, row.label, row.options,
+                    row.position, row.label, row.options, row.type,
                 )
             }
             progress.forEach { row ->
