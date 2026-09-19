@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import { seededRandom } from "@flashkarte/shared";
+import { renderFormula } from "../maths/formula-renderer";
 import { importLesson } from "../lessons/lesson-import.service";
 import * as concepts from "../subjects/concepts.service";
 import * as subjectsService from "../subjects/subjects.service";
@@ -294,6 +295,18 @@ it("the learner API's responses match the files the Android app decodes", async 
     ),
   );
 
+  // The pictures the server draws for maths, for the app's on-device tests to show.
+  const pictures = new Map([
+    ["math-inline.svg", renderFormula("d_k", false).svg],
+    [
+      "math-display.svg",
+      renderFormula(
+        "\\mathrm{softmax}(z)_i = \\frac{e^{z_i}}{\\sum_j e^{z_j}}",
+        true,
+      ).svg,
+    ],
+  ]);
+
   if (process.env.UPDATE_LEARNER_CONTRACT === "1") {
     fs.mkdirSync(CONTRACT_DIR, { recursive: true });
     for (const [name, response] of captured) {
@@ -302,6 +315,9 @@ it("the learner API's responses match the files the Android app decodes", async 
         JSON.stringify(response, null, 2) + "\n",
       );
     }
+    for (const [name, svg] of pictures) {
+      fs.writeFileSync(path.join(CONTRACT_DIR, name), svg);
+    }
   }
   for (const [name, response] of captured) {
     const file = path.join(CONTRACT_DIR, `${name}.json`);
@@ -309,5 +325,8 @@ it("the learner API's responses match the files the Android app decodes", async 
       name,
       body: response,
     });
+  }
+  for (const [name, svg] of pictures) {
+    expect(fs.readFileSync(path.join(CONTRACT_DIR, name), "utf8")).toBe(svg);
   }
 });

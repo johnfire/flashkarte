@@ -5,7 +5,10 @@ import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import android.content.Context
 import coil.ImageLoader
+import coil.request.CachePolicy
+import coil.request.ImageRequest
 import com.flashmd.BuildConfig
 import com.flashmd.di.LessonImageLoader
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,3 +44,10 @@ fun rememberLessonImages(subjectId: String): LessonImages {
     val loader = hiltViewModel<LessonImagesViewModel>().imageLoader
     return remember(subjectId, loader) { LessonImages(subjectId, loader) }
 }
+
+/**
+ * A request for a stored picture. It belongs to the learner's private course, so it is kept out of
+ * the disk cache (the app keeps its own data encrypted); a web picture is not stored specially.
+ */
+fun storedImageRequest(context: Context, url: String): ImageRequest =
+    ImageRequest.Builder(context).data(url).diskCachePolicy(CachePolicy.DISABLED).build()

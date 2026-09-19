@@ -66,6 +66,7 @@ describe("account.service exportData", () => {
         description: "A box",
         authorKind: "ai",
         svg: "<svg/>",
+        latex: null,
         createdAt: "t",
       },
     ]);

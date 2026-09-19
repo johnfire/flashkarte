@@ -40,7 +40,9 @@ import java.lang.reflect.Proxy
 import androidx.compose.runtime.CompositionLocalProvider
 import coil.ImageLoader
 import coil.decode.SvgDecoder
+import com.flashmd.data.remote.dto.FormulaBlockDto
 import com.flashmd.data.remote.dto.ImageBlockDto
+import com.flashmd.data.remote.dto.InlineMathDto
 import com.flashmd.data.remote.dto.ParagraphBlockDto
 import com.flashmd.data.remote.dto.ScreenStepDto
 import com.flashmd.data.remote.dto.SpanDto
@@ -337,6 +339,83 @@ class LearnerScreensTest {
         compose.waitUntil(5_000) {
             compose.onAllNodesWithText("This image could not be loaded.").fetchSemanticsNodes().isNotEmpty()
         }
+    }
+
+    // --- typeset maths ---
+
+    private fun contractFile(name: String): String =
+        checkNotNull(LearnerScreensTest::class.java.classLoader?.getResourceAsStream("learner-contract/$name")) {
+            "missing $name"
+        }.bufferedReader().use { it.readText() }
+
+    private val inlineId = "0a1b2c3d-0000-4000-8000-000000000011"
+    private val displayId = "0a1b2c3d-0000-4000-8000-000000000012"
+
+    /** A loader that answers with the pictures the server drew for these two formulas. */
+    private fun mathLoader(): ImageLoader {
+        val inline = contractFile("math-inline.svg")
+        val display = contractFile("math-display.svg")
+        val client = OkHttpClient.Builder().addInterceptor { chain ->
+            val svg = if (chain.request().url.toString().endsWith(inlineId)) inline else display
+            Response.Builder().request(chain.request()).protocol(Protocol.HTTP_1_1).code(200).message("OK")
+                .body(svg.toResponseBody("image/svg+xml".toMediaType())).build()
+        }.build()
+        return ImageLoader.Builder(compose.activity).okHttpClient(client)
+            .components { add(SvgDecoder.Factory()) }.build()
+    }
+
+    // The sizes the server measured for these two (see math-inline.svg and math-display.svg).
+    private val mathScreen = LessonUiState(
+        title = "Attention",
+        busy = false,
+        step = ScreenStepDto(
+            number = "1", index = 0, total = 4, canGoBack = false,
+            blocks = listOf(
+                ParagraphBlockDto(
+                    listOf(
+                        SpanDto("The key size "),
+                        SpanDto("d_k", math = InlineMathDto("d sub k", inlineId, 1.099, 0.964, 0.179)),
+                        SpanDto(" sits on the line of text, like the letters around it."),
+                    ),
+                ),
+                FormulaBlockDto(
+                    latex = "softmax", spoken = "softmax of z sub i",
+                    assetId = displayId, widthEm = 9.5, heightEm = 2.5, depthEm = 1.1,
+                ),
+            ),
+        ),
+    )
+
+    @Test
+    fun maths_is_drawn_inline_and_on_its_own_line_from_the_servers_pictures() {
+        val images = LessonImages("s1", mathLoader())
+        show { CompositionLocalProvider(LocalLessonImages provides images) { LessonBody(mathScreen, noActions) } }
+        compose.waitUntil(5_000) {
+            // A symbol inside a sentence is part of the text's own node, so look in the unmerged tree.
+            compose.onAllNodesWithContentDescription("d sub k", useUnmergedTree = true).fetchSemanticsNodes().isNotEmpty() &&
+                compose.onAllNodesWithContentDescription("softmax of z sub i").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.waitForIdle()
+        shot("learn-maths")
+    }
+
+    @Test
+    fun maths_follows_the_dark_theme() {
+        val images = LessonImages("s1", mathLoader())
+        show(dark = true) { CompositionLocalProvider(LocalLessonImages provides images) { LessonBody(mathScreen, noActions) } }
+        compose.waitUntil(5_000) {
+            compose.onAllNodesWithContentDescription("softmax of z sub i").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.waitForIdle()
+        shot("learn-maths-dark")
+    }
+
+    @Test
+    fun maths_that_cannot_be_drawn_shows_its_latex_and_the_sentence_still_reads() {
+        // No subject to fetch from: nothing can be drawn, so the LaTeX shows instead.
+        show { LessonBody(mathScreen, noActions) }
+        compose.onNodeWithText("softmax").assertExists()
+        compose.onNodeWithText("d_k", substring = true).assertExists()
     }
 }
 

@@ -88,7 +88,7 @@ Inline and expandable ("Show diagram", full-screen, pinch-zoom, return to the sa
 on both platforms, and the **asset store**: SVGs stored in the database, cleaned by the server and served
 as plain images (the same store later holds the rendered maths).
 
-## Slice 6: typeset maths (M/L, depends on slice 0)
+## Slice 6: typeset maths (M/L, depends on slice 0) — **DONE 2026-09-19** (see "What slice 6 decided and found" below)
 
 Server-side rendering on save, stored SVG plus LaTeX plus spoken text; display formulas first, then
 inline symbols. Verified in light and dark on both platforms, and by an accessibility check that
@@ -348,3 +348,46 @@ signed-in client.
 **Not in slice 5:** typeset maths (slice 6, which reuses this store); uploading a photo or raster image (SVG
 only, as the design said); scroll position within a screen; an in-app list of your images (your AI reads them
 through MCP).
+
+## What slice 6 decided and found
+
+Built and verified locally: renderer tests including hostile TeX (with a check that the tests fail if the risky
+packages are loaded), real-Postgres tests, shared tests, web tests, the Playwright lesson spec with real maths
+(axe in light and dark), Android unit tests and on-device tests on the emulator with screenshots. Nothing pushed.
+
+**What exists:** an AI (or you) writes a formula as plain LaTeX in a `formula` block for a line of its own, or in a
+span with a `math` object for a symbol inside a sentence (`{"text":"d_k","math":{"spoken":"d sub k"}}`). When the
+screen or question is saved, the server draws it once with MathJax and stores the picture (reused for the same
+formula), and puts the picture's id and measured size on the block. Web and Android only draw a picture: they need
+no maths engine. Display formulas scroll sideways if wide. Inline symbols sit on the text baseline (the spike's
+finding, now real), and reserve their space while loading.
+
+**Decisions taken while building** (flag any you disagree with):
+
+1. **Inline maths is a span with a `math` object, and its LaTeX stays in `text`.** An older app that knows nothing
+   about maths still shows the LaTeX as text, so nothing breaks or goes blank.
+2. **Only the base and AMS LaTeX commands exist.** Commands that could load code, link out or inject markup
+   (`\require`, `\href`, `\unicode`, `\class`, `\style`) are undefined, so they are refused with the reason. A
+   formula that cannot be read is refused on save, naming the formula, so the AI fixes it and retries.
+3. **The server always sets the picture and its size.** Anything an author supplies for them is discarded, so a
+   block can never point at another subject's picture.
+4. **Spoken text is a completeness rule** (needed to finish, not to save), for display formulas and inline
+   symbols alike; `d_k` is read out as its spoken words.
+5. **A symbol in a sentence is at most 300 characters;** a long formula belongs in its own block.
+6. **Maths is tinted or inverted with the theme** (one colour); diagrams keep a light surface (decided in slice 5).
+7. **The old picture stays when a formula is edited:** the store keeps drawn formulas for the subject (they are
+   small); nothing removes unused ones yet.
+8. **New dependency: `mathjax-full`.** `npm audit fix` cleared its transitive advisory (the spike's finding) and the
+   audit is at 0. It adds roughly 50 MB to the server image and runs only when a screen is saved.
+
+**Real findings:**
+
+- **The sanitizer now always declares the `xlink` namespace** on the root, because a standalone SVG that uses an
+  `xlink:` attribute without declaring it is refused by a browser. MathJax's output does not use it with the font
+  cache off, but the sanitizer must not depend on that.
+- **The LaTeX allowlist test would not have caught loading `\href` by adding the package name alone** (MathJax
+  needs the module imported), so I checked the test really fails when the modules are imported.
+
+**Not in slice 6:** matrices and multi-line derivations (not tested); an inline symbol wrapping at a line end (it is
+a picture, so it cannot break); TalkBack and screen-reader reading of the spoken text on a phone (labels are set,
+not listened to); text selection or copying from a formula; a way to remove unused formula pictures.

@@ -14,10 +14,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.foundation.text.appendInlineContent
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -48,15 +50,27 @@ fun LessonBlocks(blocks: List<BlockDto>, modifier: Modifier = Modifier) {
     }
 }
 
-/** Spans as one styled string. Code gets a monospace face and a tinted background. */
-internal fun spansToAnnotated(spans: List<SpanDto>, codeBackground: androidx.compose.ui.graphics.Color): AnnotatedString =
+/**
+ * Spans as one styled string. Code gets a monospace face and a tinted background; a symbol the
+ * server drew as a picture becomes inline content at its position (see MathPicture.kt), and one it
+ * did not draw shows its LaTeX as code.
+ */
+internal fun spansToAnnotated(
+    spans: List<SpanDto>,
+    codeBackground: androidx.compose.ui.graphics.Color,
+    pictured: Set<Int> = emptySet(),
+): AnnotatedString =
     buildAnnotatedString {
-        spans.forEach { span ->
+        spans.forEachIndexed { index, span ->
+            if (index in pictured) {
+                appendInlineContent(inlineMathId(index), span.text)
+                return@forEachIndexed
+            }
             val style = SpanStyle(
                 fontWeight = if (span.bold) FontWeight.Bold else null,
                 fontStyle = if (span.italic) FontStyle.Italic else null,
-                fontFamily = if (span.code) FontFamily.Monospace else null,
-                background = if (span.code) codeBackground else androidx.compose.ui.graphics.Color.Unspecified,
+                fontFamily = if (span.code || span.math != null) FontFamily.Monospace else null,
+                background = if (span.code || span.math != null) codeBackground else androidx.compose.ui.graphics.Color.Unspecified,
             )
             withStyle(style) { append(span.text) }
         }
@@ -64,9 +78,15 @@ internal fun spansToAnnotated(spans: List<SpanDto>, codeBackground: androidx.com
 
 @Composable
 private fun SpanText(spans: List<SpanDto>, modifier: Modifier = Modifier) {
+    val images = LocalLessonImages.current
+    val style = MaterialTheme.typography.bodyLarge
+    val pictured = remember(spans, images) {
+        spans.indices.filter { isDrawnMath(spans[it], images) }.toSet()
+    }
     Text(
-        spansToAnnotated(spans, MaterialTheme.colorScheme.surfaceVariant),
-        style = MaterialTheme.typography.bodyLarge,
+        spansToAnnotated(spans, MaterialTheme.colorScheme.surfaceVariant, pictured),
+        inlineContent = inlineMathContent(spans, style.fontSize, images),
+        style = style,
         modifier = modifier,
     )
 }
@@ -103,16 +123,7 @@ private fun LessonBlock(block: BlockDto) {
                 .padding(12.dp),
         )
         is ImageBlockDto -> LessonImageBlock(block)
-        is FormulaBlockDto -> Text(
-            block.latex,
-            fontFamily = FontFamily.Monospace,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(8.dp))
-                .background(MaterialTheme.colorScheme.surfaceVariant)
-                .padding(12.dp)
-                .semantics { contentDescription = block.spoken ?: block.latex },
-        )
+        is FormulaBlockDto -> DisplayFormula(block)
         is UnknownBlockDto -> Unit
     }
 }

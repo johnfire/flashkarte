@@ -42,7 +42,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import coil.compose.SubcomposeAsyncImage
-import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.flashmd.R
 import com.flashmd.data.remote.dto.ImageBlockDto
@@ -98,11 +97,8 @@ private fun ImageUnavailable(alt: String) {
 private fun Picture(target: ImageTarget, alt: String, images: LessonImages, modifier: Modifier, scale: Modifier = Modifier) {
     val context = LocalContext.current
     val request = remember(target) {
-        ImageRequest.Builder(context)
-            .data(target.url)
-            // A stored diagram belongs to the learner's private course: keep it out of the disk cache.
-            .apply { if (target.stored) diskCachePolicy(CachePolicy.DISABLED) }
-            .build()
+        if (target.stored) storedImageRequest(context, target.url)
+        else ImageRequest.Builder(context).data(target.url).build()
     }
     Box(modifier.clip(RoundedCornerShape(8.dp)).background(PAPER), contentAlignment = Alignment.Center) {
         SubcomposeAsyncImage(

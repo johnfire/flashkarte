@@ -17,12 +17,27 @@ import kotlinx.serialization.json.jsonPrimitive
 @Serializable(with = BlockSerializer::class)
 sealed interface BlockDto
 
+/**
+ * Typeset maths the server drew when the screen was saved: its picture, and its size in em. An
+ * inline symbol also says how far it hangs below the text baseline, so it can sit on the line.
+ */
+@Serializable
+data class InlineMathDto(
+    val spoken: String? = null,
+    val assetId: String? = null,
+    val widthEm: Double? = null,
+    val heightEm: Double? = null,
+    val depthEm: Double? = null,
+)
+
 @Serializable
 data class SpanDto(
     val text: String,
     val bold: Boolean = false,
     val italic: Boolean = false,
     val code: Boolean = false,
+    /** When present, `text` is LaTeX for a symbol in the sentence. */
+    val math: InlineMathDto? = null,
 )
 
 @Serializable
@@ -46,7 +61,14 @@ data class ImageBlockDto(
 data class CalloutBlockDto(val tone: String = "note", val spans: List<SpanDto>) : BlockDto
 
 @Serializable
-data class FormulaBlockDto(val latex: String, val spoken: String? = null) : BlockDto
+data class FormulaBlockDto(
+    val latex: String,
+    val spoken: String? = null,
+    val assetId: String? = null,
+    val widthEm: Double? = null,
+    val heightEm: Double? = null,
+    val depthEm: Double? = null,
+) : BlockDto
 
 data class UnknownBlockDto(val type: String) : BlockDto
 

@@ -3,6 +3,7 @@ package com.flashmd.data.remote.dto
 import kotlinx.serialization.json.Json
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -72,6 +73,15 @@ class LearnerContractTest {
         assertTrue(paragraph.spans[1].bold)
         assertTrue(paragraph.spans[3].italic)
         assertTrue(paragraph.spans[5].code)
+        // A symbol in the sentence: its LaTeX in text, and the server's drawing and measurements.
+        val symbol = paragraph.spans.last()
+        assertEquals("d_k", symbol.text)
+        assertEquals("d sub k", symbol.math?.spoken)
+        assertEquals("<uuid>", symbol.math?.assetId)
+        assertEquals(1.099, symbol.math?.widthEm)
+        assertEquals(0.964, symbol.math?.heightEm)
+        assertEquals(0.179, symbol.math?.depthEm)
+        assertNull(paragraph.spans[0].math)
         assertTrue((screen.blocks[1] as ListBlockDto).ordered)
         assertEquals("python", (screen.blocks[3] as CodeBlockDto).language)
         assertEquals("warning", (screen.blocks[4] as CalloutBlockDto).tone)
@@ -82,7 +92,12 @@ class LearnerContractTest {
         val web = screen.blocks[6] as ImageBlockDto
         assertEquals("https://example.com/rc.svg", web.src)
         assertEquals("inline", web.display)
-        assertEquals("R equals V over I", (screen.blocks[7] as FormulaBlockDto).spoken)
+        val formula = screen.blocks[7] as FormulaBlockDto
+        assertEquals("R equals V over I", formula.spoken)
+        assertEquals("R = V / I", formula.latex)
+        assertEquals("<uuid>", formula.assetId)
+        assertEquals(4.373, formula.widthEm)
+        assertEquals(0.283, formula.depthEm)
 
         assertTrue((read<LessonStepResponseDto>("next-screen").step as ScreenStepDto).canGoBack)
     }
