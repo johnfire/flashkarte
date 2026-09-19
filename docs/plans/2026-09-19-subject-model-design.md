@@ -32,13 +32,15 @@ Four new tables (migration `023_subjects.sql`), additive only.
   timestamps.
 - `concepts`: `id`, `subject_id`, `slug` (stable, human-readable, unique per subject:
   `kv-cache`), `name`, `kind` (`term | idea | skill | map | capstone | assumption`), `tier`
-  (`core | extension`). Progress is keyed to the concept id, so reshuffling decks or
-  editing the graph never loses anyone's progress.
+  (`core | extension`), `position` (authoring order, the tie-break that keeps the route
+  deterministic). Progress is keyed to the concept, so reshuffling decks or editing the
+  graph never loses anyone's progress.
 - `concept_edges`: `from_concept` (the prerequisite), `to_concept` (the dependent),
-  `strength` (`requires | suggests`), `reason` (required for `requires`). May cross
-  subjects, so a course's entry floor can point at another subject's concepts. An edge is
-  a claim by the dependent concept's author: only the owner of `to_concept`'s subject may
-  add or remove it, and the prerequisite must be readable by them (their own, or public).
+  `strength` (`requires | suggests`), `reason` (required for `requires`, enforced by a DB
+  CHECK as well as the API). The schema allows edges across subjects, so a course's entry
+  floor can later point at another subject's concepts; **the API currently keeps both ends
+  in one subject**. An edge is a claim by the dependent concept's author, so only the owner
+  of that subject may add or remove it.
 - `card_concepts`: `card_id`, `concept_id`. Cross-deck: a concept's items may live in any
   of the owner's decks.
 
@@ -53,7 +55,7 @@ subject; until then they never block.
 ## Graph logic (`packages/shared/src/graph/`, pure, no I/O)
 
 Per the shared-logic guardrail, all graph semantics live in `packages/shared` and clients
-stay thin renderers. Kotlin gets a mirror when Android consumes it (phase 5).
+stay thin renderers. Kotlin gets a mirror when Android consumes it (step 6).
 
 - `wouldCreateCycle`, `topologicalOrder` (deterministic: ties broken by input order),
   `prerequisiteLevels`.
@@ -80,17 +82,27 @@ next. `suggests` edges influence order only and never lock.
 - `POST /api/subjects`, `GET /api/subjects`, `GET /api/subjects/:id`,
   `PATCH /api/subjects/:id`, `DELETE /api/subjects/:id` (cascades concepts and edges;
   cards are untouched).
-- `POST /api/subjects/:id/concepts`, `PATCH .../concepts/:conceptId`,
-  `DELETE .../concepts/:conceptId`.
+- `POST /api/subjects/import`: the whole subject (concepts, edges, card links) in one
+  transaction; the graph is linted first and a defect rejects the import, leaving nothing
+  behind. Fan-in (more than 4 `requires` parents) is returned as an advisory, not a defect.
+- `POST /api/subjects/:id/concepts`, `PATCH .../concepts/:slug`,
+  `DELETE .../concepts/:slug`. The API speaks **slugs, not concept UUIDs**; a slug is
+  immutable once created.
 - `PUT /api/subjects/:id/edges` and `DELETE .../edges/:from/:to`: rejected with a clear
   message if they create a cycle.
-- `PUT /api/concepts/:conceptId/cards` (replace the linked card set; every card must
-  belong to the caller).
-- `GET /api/subjects/:id/progress`: every concept with state, `is_unassessed`, and the
-  frontier.
+- `PUT /api/subjects/:id/concepts/:slug/cards` with `{card_ids}` (replace the linked card
+  set; every card must belong to the caller).
+- `GET /api/subjects/:id/progress`: concepts in route order with state, `is_unassessed` and
+  card counts, the frontier, and a summary. Owner-only for now; a learner using someone
+  else's public subject needs the clone step (open question below).
 - `GET /api/subjects/:id/lint`: the `lintConceptGraph` report.
 - Every mutation is written to the audit log with actor, target and correlation ID, and
-  the AI path (MCP) is attributed to the AI actor, not "system".
+  the AI path (MCP) is attributed to the AI actor, not "system". Two graph edits on one
+  subject are serialised by a row lock, so two edges that are each acyclic cannot together
+  close a cycle.
+- Subjects, concepts, edges and card links are part of the account data export, and
+  deleting the account cascades to all four tables.
+- Status: **built and verified locally** (steps 1 and 2 below).
 
 ## MCP
 
@@ -100,6 +112,30 @@ next. `suggests` edges influence order only and never lock.
 single transaction. That is how the Transformers graph goes in. The `build-a-course`
 prompt is extended with the strategy's pipeline (inventory, edges with reasons, lint,
 review) so an AI drafting a course produces the graph first.
+
+## Reading cards (added 2026-09-19, Chris)
+
+A real course is partly just reading: orientation, the missing background the graph
+exposed (the dot product, what depth buys, what an RNN is), and the map unit. So there is a
+third kind of screen beside recall and multiple choice: a **`read` card**, shown, read, and
+acknowledged with "Got it". It has no rating, no spaced-repetition state and no scheduling.
+
+- **It is exposure, not evidence.** Reading never counts toward mastery. The evidence query
+  already counts only `basic` cards, so a `read` card linked to a concept cannot hold it
+  back (covered by an integration test). Reading and testing stay separate signals.
+- **It attaches to concepts like any card** (`card_concepts`), so a concept can have a
+  lesson and questions. In the frontier, an available concept with an unread lesson reads
+  first; the questions follow.
+- **Read state** is its own small per-learner table (`card_reads`: user, card, read_at,
+  idempotent upsert), not a fake rating in `review_events`, which stays a rating ledger.
+  Android must queue it in the offline outbox like reviews.
+- **Format constraint:** reading bodies are longer and structured (lists, headings, code,
+  images). `cleanBack` collapses single newlines into spaces, which would flatten them, so
+  a `read` body must be kept verbatim (trimmed) by the parser. Markdown authoring syntax
+  is a tag line, in the style of Spec 06: `@read` above the card front.
+- **Parser parity applies.** The `read` type ships in TS and Kotlin together with corpus
+  cases, the server must accept and exclude it from the due/new queues, and both clients
+  render it. This is step 4 below, before the study UIs.
 
 ## Not in this phase
 
@@ -112,10 +148,12 @@ unit and route derivation, cloning a public subject with its card links, learner
 1. **Shared graph logic + tests.** No schema, no behaviour change.
 2. **Migration + server domain + integration tests against real Postgres.**
 3. **MCP tools + `import_subject`**, then import the Transformers DAG.
-4. **Web:** subject view (graph by unit, states) and frontier-driven study.
-5. **Android:** same, plus the Kotlin mirror of the graph logic.
-6. **Item types:** ordering and numeric first, parser + evaluator + both UIs together.
-7. **Prerequisite-aware remediation:** repeated failure on a concept re-tests its
+4. **`read` card type:** parser TS + Kotlin + corpus, server acceptance and queue
+   exclusion, `card_reads`, reading screen on web and Android.
+5. **Web:** subject view (graph by unit, states) and frontier-driven study.
+6. **Android:** same, plus the Kotlin mirror of the graph logic.
+7. **Item types:** ordering and numeric first, parser + evaluator + both UIs together.
+8. **Prerequisite-aware remediation:** repeated failure on a concept re-tests its
    `requires` parents.
 
 ## Open questions
