@@ -82,12 +82,21 @@ them ("unlocks after: Tokenizer, Embeddings"), so the learner can see the whole 
 2. **Screens**, one at a time: "Screen 3 of 8" plus the small permanent number, Back and Next.
    Position and scroll are remembered.
 3. **Questions**, 3 to 5, after the last screen. A right answer shows its reason and moves on.
+   **Open book:** a "show the screens" link lets the learner reopen the lesson while answering.
+   This is learning, not an exam; the spaced review is what tests retention.
 4. **A wrong answer** shows the reason, then the teaching screens (numbers shown), then asks
    again. The re-ask uses a **different variant** when the question has one; if it has none, the
    question goes to the back of the set with its options shuffled, so the learner is not just
    repeating an answer they saw seconds ago. Repeats until right. Real retention is tested later by
-   the spaced review.
-5. **Lesson passed** when all are right. The next lessons unlock and its questions join review.
+   the spaced review. **After two misses on the same question** the learner is offered "I need more on
+   this" and "come back later" (progress saved, the lesson stays not passed, so lessons that depend on
+   it stay locked). It never lets anyone skip a gap. Two misses are also recorded against the question,
+   because repeated misses are as likely to mean a bad question or an unclear screen as a struggling
+   learner, and the owner needs to see which.
+5. **Lesson passed** when all are right. The next lessons unlock and its questions join review. The
+   first attempt sets where each question's review schedule starts: right first time counts as "Good"
+   (a longer interval), right only after a miss counts as "Again" (comes back soon), using the same
+   ratings multiple-choice cards already use.
 6. **Review:** a due question is asked on its own; a miss sends the learner to its screen, then
    re-asks (same loop as 4).
 7. **"I need more on this"** on any screen: see 8.

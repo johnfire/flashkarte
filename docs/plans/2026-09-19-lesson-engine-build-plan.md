@@ -104,9 +104,9 @@ Depends entirely on the decision in section 9 of the spec. Not planned until Chr
 
 ## Decisions needed before slice 1 or 2
 
-1. **Pass-loop escape hatch.** What happens when a learner keeps failing a lesson? Options: nothing
-   (they loop until they pass); after N misses, offer "I need more on this" prominently; allow skipping
-   with the lesson marked as not passed (dependents stay locked).
+1. ~~**Pass-loop escape hatch.**~~ **Decided:** after two misses on the same question the learner is
+   offered "I need more on this" and "come back later" (saved, not passed, dependents stay locked);
+   misses are recorded against the question so the owner can see which ones fail.
 2. **Android offline.** Lessons read online only, or downloaded whole and progress queued offline like
    reviews? Offline progress needs a local migration and a sync change (the same trade-off as reading
    cards, which chose best-effort).
