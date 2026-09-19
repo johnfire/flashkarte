@@ -61,3 +61,10 @@ export type {
   ConceptState,
   ConceptStatus,
 } from "./graph/concept-status";
+export {
+  MAX_SCREEN_NUMBER_DECIMALS,
+  compareScreenNumbers,
+  isValidScreenNumber,
+  normalizeScreenNumber,
+  suggestScreenNumber,
+} from "./lessons/screen-number";
