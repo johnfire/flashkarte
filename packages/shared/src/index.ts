@@ -68,3 +68,42 @@ export {
   normalizeScreenNumber,
   suggestScreenNumber,
 } from "./lessons/screen-number";
+export {
+  BLOCK_TYPES,
+  CALLOUT_TONES,
+  IMAGE_DISPLAYS,
+  formulasWithoutSpokenText,
+  validateBlocks,
+} from "./lessons/lesson-blocks";
+export type {
+  Block,
+  BlockIssue,
+  BlockType,
+  CalloutTone,
+  ImageDisplay,
+  Span,
+} from "./lessons/lesson-blocks";
+export {
+  RECOMMENDED,
+  canFinish,
+  canSave,
+  lintLesson,
+} from "./lessons/lesson-lint";
+export type {
+  LessonInput,
+  LessonIssue,
+  LessonIssueLevel,
+  OptionInput,
+  QuestionInput,
+  ScreenInput,
+  VariantInput,
+} from "./lessons/lesson-lint";
+export { buildOutline } from "./lessons/lesson-outline";
+export type {
+  OutlineEdgeInput,
+  OutlineLesson,
+  OutlineLessonInput,
+  OutlineModule,
+  OutlineModuleInput,
+  OutlineUnlock,
+} from "./lessons/lesson-outline";
