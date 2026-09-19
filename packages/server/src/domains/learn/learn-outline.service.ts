@@ -15,7 +15,7 @@ export async function getLearnerOutline(
   subjectId: string,
   now: Date = new Date(),
 ) {
-  await requireOwnedSubject(userId, subjectId);
+  const subject = await requireOwnedSubject(userId, subjectId);
   const db = getPool();
   const [modules, lessons, covered, prerequisites, progress, reviews, access] =
     await Promise.all([
@@ -57,6 +57,7 @@ export async function getLearnerOutline(
   ).length;
   return {
     subject_id: subjectId,
+    subject_title: subject.title,
     reviews_due: dueCount,
     modules: outline.map((module) => ({
       ...module,

@@ -26,6 +26,17 @@ import {
   ClonedCourse,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
+import type {
+  DueReviews,
+  LearnerOutline,
+  LearnSubject,
+  LessonAnswerResponse,
+  LessonScreens,
+  LessonStepResponse,
+  ReviewAnswerResponse,
+  ReviewStepResponse,
+  ScreenComment,
+} from "./learn-types";
 
 /** Profile fields a client may patch; absent keys are left untouched. */
 export interface ProfilePatch {
@@ -106,6 +117,30 @@ function refreshAccessToken(): Promise<boolean> {
       });
   }
   return refreshPromise;
+}
+
+function lessonAction<T>(
+  subjectId: string,
+  slug: string,
+  action: string,
+  body?: object,
+): Promise<T> {
+  return request<T>(`/subjects/${subjectId}/learn/lessons/${slug}/${action}`, {
+    method: "POST",
+    body: body ? JSON.stringify(body) : undefined,
+  });
+}
+
+function reviewAction<T>(
+  subjectId: string,
+  questionId: string,
+  action: string,
+  body?: object,
+): Promise<T> {
+  return request<T>(
+    `/subjects/${subjectId}/learn/reviews/${questionId}/${action}`,
+    { method: "POST", body: body ? JSON.stringify(body) : undefined },
+  );
 }
 
 async function request<T>(path: string, opts: RequestInit = {}): Promise<T> {
@@ -463,6 +498,46 @@ export const api = {
       }),
     revoke: (prefix: string) =>
       request<void>(`/keys/${prefix}`, { method: "DELETE" }),
+  },
+  learn: {
+    subjects: () => request<LearnSubject[]>("/subjects"),
+    outline: (subjectId: string) =>
+      request<LearnerOutline>(`/subjects/${subjectId}/learn/outline`),
+    start: (subjectId: string, slug: string) =>
+      lessonAction<LessonStepResponse>(subjectId, slug, "start"),
+    step: (subjectId: string, slug: string) =>
+      request<LessonStepResponse>(
+        `/subjects/${subjectId}/learn/lessons/${slug}/step`,
+      ),
+    next: (subjectId: string, slug: string) =>
+      lessonAction<LessonStepResponse>(subjectId, slug, "next"),
+    back: (subjectId: string, slug: string) =>
+      lessonAction<LessonStepResponse>(subjectId, slug, "back"),
+    carryOn: (subjectId: string, slug: string) =>
+      lessonAction<LessonStepResponse>(subjectId, slug, "continue"),
+    pause: (subjectId: string, slug: string) =>
+      lessonAction<LessonStepResponse>(subjectId, slug, "pause"),
+    answer: (subjectId: string, slug: string, choice: number) =>
+      lessonAction<LessonAnswerResponse>(subjectId, slug, "answer", { choice }),
+    screens: (subjectId: string, slug: string) =>
+      request<LessonScreens>(
+        `/subjects/${subjectId}/learn/lessons/${slug}/screens`,
+      ),
+    comment: (subjectId: string, number: string, body: string) =>
+      request<ScreenComment>(
+        `/subjects/${subjectId}/learn/screens/${number}/comments`,
+        { method: "POST", body: JSON.stringify({ body }) },
+      ),
+    reviews: (subjectId: string) =>
+      request<DueReviews>(`/subjects/${subjectId}/learn/reviews`),
+    startReview: (subjectId: string, questionId: string) =>
+      reviewAction<ReviewStepResponse>(subjectId, questionId, "start"),
+    carryOnReview: (subjectId: string, questionId: string) =>
+      reviewAction<ReviewStepResponse>(subjectId, questionId, "continue"),
+    answerReview: (subjectId: string, questionId: string, choice: number) =>
+      reviewAction<ReviewAnswerResponse>(subjectId, questionId, "answer", {
+        choice,
+      }),
   },
   admin: {
     listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),

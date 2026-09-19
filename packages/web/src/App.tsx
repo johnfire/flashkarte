@@ -32,6 +32,11 @@ import { CourseDetailPage } from "./pages/CourseDetailPage";
 import { PublicCoursesPage } from "./pages/PublicCoursesPage";
 import { EditCardPage } from "./pages/EditCardPage";
 import { SenseReorderPage } from "./pages/SenseReorderPage";
+import { LearnPage } from "./learn/LearnPage";
+import { OutlinePage } from "./learn/OutlinePage";
+import { LessonPage } from "./learn/LessonPage";
+import { ReadLessonPage } from "./learn/ReadLessonPage";
+import { ReviewPage } from "./learn/ReviewPage";
 import { AnalyticsConsentBanner } from "./components/AnalyticsConsentBanner";
 
 export default function App() {
@@ -74,6 +79,17 @@ export default function App() {
           <Route path="/library/courses" element={<PublicCoursesPage />} />
           <Route path="/app-decks" element={<AppDecksPage />} />
           <Route path="/app-decks/:id" element={<AppDecksCollectionPage />} />
+          <Route path="/learn" element={<LearnPage />} />
+          <Route path="/learn/:subjectId" element={<OutlinePage />} />
+          <Route
+            path="/learn/:subjectId/lessons/:slug"
+            element={<LessonPage />}
+          />
+          <Route
+            path="/learn/:subjectId/lessons/:slug/read"
+            element={<ReadLessonPage />}
+          />
+          <Route path="/learn/:subjectId/reviews" element={<ReviewPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Route>
         <Route element={<AdminRoute />}>
