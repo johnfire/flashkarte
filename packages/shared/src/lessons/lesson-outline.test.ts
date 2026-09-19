@@ -74,6 +74,7 @@ describe("buildOutline", () => {
     expect(attention.unlocksAfter).toEqual([
       {
         lessonId: "tokens",
+        slug: "tokens",
         title: "Tokens",
         reason: "attention works on token vectors",
       },

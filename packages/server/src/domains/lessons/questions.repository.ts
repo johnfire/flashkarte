@@ -57,6 +57,17 @@ export async function findQuestion(
   return result.rows[0] ?? null;
 }
 
+export async function findQuestionById(
+  db: Queryable,
+  id: string,
+): Promise<QuestionRow | null> {
+  const result = await db.query<QuestionRow>(
+    `SELECT ${QUESTION_COLS} FROM lesson_questions WHERE id = $1`,
+    [id],
+  );
+  return result.rows[0] ?? null;
+}
+
 export async function listQuestions(
   db: Queryable,
   lessonId: string,

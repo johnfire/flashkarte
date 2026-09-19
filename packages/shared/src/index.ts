@@ -98,6 +98,7 @@ export type {
   ScreenInput,
   VariantInput,
 } from "./lessons/lesson-lint";
+export { seededRandom } from "./lessons/seeded-random";
 export { buildOutline } from "./lessons/lesson-outline";
 export type {
   OutlineEdgeInput,

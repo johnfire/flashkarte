@@ -38,6 +38,7 @@ export interface OutlineEdgeInput {
 
 export interface OutlineUnlock {
   lessonId: string;
+  slug: string;
   title: string;
   reason: string;
 }
@@ -90,6 +91,7 @@ export function buildOutline(
       .filter((edge) => edge.to === lesson.id && byId.has(edge.from))
       .map((edge) => ({
         lessonId: edge.from,
+        slug: byId.get(edge.from)!.slug,
         title: byId.get(edge.from)!.title,
         reason: edge.reason,
       }))

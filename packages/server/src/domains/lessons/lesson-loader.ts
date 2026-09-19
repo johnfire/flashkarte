@@ -13,12 +13,11 @@ export async function loadLessonForLint(
   db: Queryable,
   lesson: lessonsRepo.LessonRow,
 ): Promise<LessonInput> {
-  const [screens, questions, links, covered] = await Promise.all([
-    screensRepo.listScreens(db, lesson.id),
-    questionsRepo.listQuestions(db, lesson.id),
-    questionsRepo.loadQuestionLinks(db, lesson.id),
-    lessonsRepo.listLessonConcepts(db, lesson.subject_id),
-  ]);
+  // One after the other: `db` is often a single transaction connection, which runs one query at a time.
+  const screens = await screensRepo.listScreens(db, lesson.id);
+  const questions = await questionsRepo.listQuestions(db, lesson.id);
+  const links = await questionsRepo.loadQuestionLinks(db, lesson.id);
+  const covered = await lessonsRepo.listLessonConcepts(db, lesson.subject_id);
   const top = questions.filter((question) => question.parent_id === null);
   const toQuestion = (question: questionsRepo.QuestionRow): QuestionInput => ({
     id: question.id,
