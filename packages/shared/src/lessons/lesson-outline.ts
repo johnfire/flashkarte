@@ -23,6 +23,8 @@ export interface OutlineLessonInput {
   title: string;
   summary: string;
   position: number;
+  /** "testing" or "finished"; passed through so a client can label an unfinished lesson. */
+  stage?: string;
   /** What the lesson covers, for display (concept names). */
   covers: string[];
 }
@@ -44,6 +46,7 @@ export interface OutlineLesson {
   slug: string;
   title: string;
   summary: string;
+  stage: string | null;
   covers: string[];
   unlocksAfter: OutlineUnlock[];
 }
@@ -81,6 +84,7 @@ export function buildOutline(
     slug: lesson.slug,
     title: lesson.title,
     summary: lesson.summary,
+    stage: lesson.stage ?? null,
     covers: lesson.covers,
     unlocksAfter: edges
       .filter((edge) => edge.to === lesson.id && byId.has(edge.from))
