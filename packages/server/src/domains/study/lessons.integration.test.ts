@@ -227,8 +227,16 @@ describe("recording reads", () => {
   it("never touches spaced-repetition state or the review ledger", async () => {
     const deck = await seedLessonDeck();
     await recordLessonReads(USER_ID, [{ card_id: deck.lessonA }]);
-    const progress = await getPool().query("SELECT 1 FROM card_progress");
-    const events = await getPool().query("SELECT 1 FROM review_events");
+    // Scoped to this lesson: review_events is an immutable ledger that other
+    // suites leave rows in, so a global count would depend on test order.
+    const progress = await getPool().query(
+      "SELECT 1 FROM card_progress WHERE card_id = $1",
+      [deck.lessonA],
+    );
+    const events = await getPool().query(
+      "SELECT 1 FROM review_events WHERE card_id = $1",
+      [deck.lessonA],
+    );
     expect(progress.rowCount).toBe(0);
     expect(events.rowCount).toBe(0);
   });
