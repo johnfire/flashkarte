@@ -20,8 +20,8 @@ export function DeckListItem({
   const { t } = useTranslation();
   const [speechOpen, setSpeechOpen] = useState(false);
   return (
-    <li className="flex items-center justify-between rounded-lg border p-4">
-      <div>
+    <li className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 rounded-lg border p-4">
+      <div className="min-w-0 flex-1 basis-56">
         <p className="font-medium">
           {d.title}
           {d.is_official && (
@@ -60,7 +60,7 @@ export function DeckListItem({
           </span>
         </div>
       </div>
-      <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         {d.is_branching ? (
           // Branching decks are played as a decision tree, which only the
           // Android app implements. Their branch cards have no front/back, so

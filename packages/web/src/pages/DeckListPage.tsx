@@ -100,7 +100,7 @@ export function DeckListPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-2xl p-4 xl:max-w-5xl 2xl:max-w-7xl">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("decks.title")}</h1>
         <div className="flex gap-3">
@@ -178,7 +178,7 @@ export function DeckListPage() {
         <DeckListLegendHint />
       )}
 
-      <ul className="space-y-3">
+      <ul className="grid gap-3 xl:grid-cols-2">
         {decks?.map((d) => (
           <DeckListItem
             key={d.id}
