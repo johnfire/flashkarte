@@ -33,8 +33,8 @@ Answer the two questions the design admits it hasn't proven, before anything dep
 
 Migrations for modules, lessons, screens, questions (with their variants and their list of teaching
 screens) and their links; **shared TypeScript** for
-block validation and the lint from section 6 of the spec; testing/finished stage rules enforced
-server-side; MCP tools to author (create module and lesson, add screen, add question, set
+block validation and the lint from section 6 of the spec; per-lesson testing/finished stage rules enforced server-side (including the revision history, retiring a
+screen, and the two levels of checks: structural on every save, completeness at finish); MCP tools to author (create module and lesson, add screen, add question, set
 prerequisites, set stage); a derived outline endpoint. Reuses the existing subject, ownership,
 audit-log and account-export patterns.
 
@@ -85,13 +85,14 @@ be looked at without an emulator, so that is stated plainly in the commit.
 ## Slice 5: images (S/M)
 
 Inline and expandable ("Show diagram", full-screen, pinch-zoom, return to the same scroll position)
-on both platforms.
+on both platforms, and the **asset store**: SVGs stored in the database, cleaned by the server and served
+as plain images (the same store later holds the rendered maths).
 
 ## Slice 6: typeset maths (M/L, depends on slice 0)
 
 Server-side rendering on save, stored SVG plus LaTeX plus spoken text; display formulas first, then
 inline symbols. Verified in light and dark on both platforms, and by an accessibility check that
-every formula has spoken text.
+every formula has spoken text (required to finish a lesson, a warning while testing).
 
 ## Slice 7: "I need more on this" (M)
 

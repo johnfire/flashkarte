@@ -140,6 +140,14 @@ affects new learners; anyone who already passed stays passed.
   maths engine. Each formula carries author-supplied **spoken text** for screen readers. Display
   formulas first; inline symbols in a sentence next, using the renderer's exact sizes so the image
   sits on the text baseline. Dark mode needs testing on both platforms.
+- **Where lesson images live.** A diagram's SVG is stored in the database as an **asset** that the image
+  block points at. The AI authors the SVG directly through MCP; the server cleans it (strips scripts) and
+  serves it as a plain image. The rendered maths SVGs use the same asset store, so there is one mechanism.
+  Ordinary `https://` image links stay allowed as they are today. A file-upload service is not needed now.
+- **Spoken text for formulas** is required to finish a lesson (a completeness rule) and only a warning
+  while it is in testing.
+- **No table block in the first version.** Lists and images cover most cases; add one if the pilot shows
+  it is missed.
 
 ## 8. "I need more on this" (learner help)
 
