@@ -33,10 +33,9 @@ of other people's lessons; question types beyond multiple choice (later slices).
 | Maths            | Typeset maths, rendered once on the server to SVG (see 7)                                                                                                                                                                                                                                                                |
 | Learner help     | A learner can ask for more on a screen. The **owner's** requests become real screens; anyone else's become **private notes**                                                                                                                                                                                             |
 | Outline          | A course-outline screen up front (see 4)                                                                                                                                                                                                                                                                                 |
-
-| Owner comments | In the testing stage the owner can leave a note on any screen number from the reader. Included from the start, because Chris will review by learning the subject himself. It is the seed of the later help requests |
-| Pilot | The Transformers module **"Input side: text to vectors"** first (about 10 concepts, so roughly 4 lessons), chosen by me at Chris's request |
-| App section | Called **Learn** (default) |
+| Owner comments   | In the testing stage the owner can leave a note on any screen number from the reader. Included from the start, because Chris will review by learning the subject himself. It is the seed of the later help requests                                                                                                      |
+| Pilot            | The Transformers module **"Input side: text to vectors"** first (about 10 concepts, so roughly 4 lessons), chosen by me at Chris's request                                                                                                                                                                               |
+| App section      | Called **Learn** (default)                                                                                                                                                                                                                                                                                               |
 
 ## 3. The model
 
