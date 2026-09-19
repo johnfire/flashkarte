@@ -1,0 +1,1517 @@
+{
+  "module": "Input side: text to vectors",
+  "lesson": {
+    "slug": "subwords-bpe",
+    "title": "Splitting text: subwords and byte-pair encoding",
+    "summary": "Why models split text into subwords, how byte-pair encoding builds a vocabulary by merging frequent pairs, what byte-level guarantees, and what tokens-not-characters costs.",
+    "covers": [
+      "subword-tokenization",
+      "bpe"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "tokens",
+        "reason": "BPE builds the tokenizer's vocabulary, so tokens, the vocabulary and the tokenizer must already be clear."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "two-ways",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Before a model can read text, something has to decide "
+            },
+            {
+              "text": "where to cut it",
+              "italic": true
+            },
+            {
+              "text": ". There are two obvious choices, and each has a problem."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "Whole words.",
+                "bold": true
+              },
+              {
+                "text": " The vocabulary must hold every word: a huge list, and any word not on it (a new name, a typo) has no representation at all."
+              }
+            ],
+            [
+              {
+                "text": "Single characters.",
+                "bold": true
+              },
+              {
+                "text": " No unknown words at all, because any text is made of characters. But sequences become very long."
+              }
+            ]
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 22)"
+        }
+      ]
+    },
+    {
+      "ref": "long",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Long sequences are expensive. Later in the course you will see that the cost of attention grows as "
+            },
+            {
+              "text": "n²",
+              "bold": true
+            },
+            {
+              "text": ": double the tokens and the work roughly quadruples."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A word of eight letters is one token as a word but eight tokens as characters. Splitting into characters multiplies n, and n² multiplies the cost much more."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 22)"
+        }
+      ]
+    },
+    {
+      "ref": "subwords",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Subwords",
+              "bold": true
+            },
+            {
+              "text": " sit in between. Frequent words are kept whole as single tokens. Rare words are split into pieces that are themselves tokens."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The result is a moderate vocabulary that can still cover any text, and sequences that are not much longer than the words themselves."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 22)"
+        }
+      ]
+    },
+    {
+      "ref": "bpe",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Byte-pair encoding (BPE)",
+              "bold": true
+            },
+            {
+              "text": " is a common way to build a subword vocabulary. It is a counting procedure:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            [
+              {
+                "text": "Start with single symbols (characters or bytes)."
+              }
+            ],
+            [
+              {
+                "text": "Find the most frequent adjacent pair in the training text."
+              }
+            ],
+            [
+              {
+                "text": "Merge that pair into one new symbol."
+              }
+            ],
+            [
+              {
+                "text": "Repeat until the vocabulary reaches the size you want."
+              }
+            ]
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 23)"
+        }
+      ]
+    },
+    {
+      "ref": "worked",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A tiny example. The training text has these words, with how often each appears: "
+            },
+            {
+              "text": "hug",
+              "bold": true
+            },
+            {
+              "text": " (10), "
+            },
+            {
+              "text": "pug",
+              "bold": true
+            },
+            {
+              "text": " (5), "
+            },
+            {
+              "text": "pun",
+              "bold": true
+            },
+            {
+              "text": " (12), "
+            },
+            {
+              "text": "bun",
+              "bold": true
+            },
+            {
+              "text": " (4), "
+            },
+            {
+              "text": "hugs",
+              "bold": true
+            },
+            {
+              "text": " (5). Start with single letters."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Count adjacent pairs: "
+            },
+            {
+              "text": "u g",
+              "italic": true
+            },
+            {
+              "text": " appears in hug, pug and hugs: 10 + 5 + 5 = "
+            },
+            {
+              "text": "20",
+              "bold": true
+            },
+            {
+              "text": ". That is the most frequent, more than "
+            },
+            {
+              "text": "u n",
+              "italic": true
+            },
+            {
+              "text": " (12 + 4 = 16) or "
+            },
+            {
+              "text": "p u",
+              "italic": true
+            },
+            {
+              "text": " (5 + 12 = 17)."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So the first merge makes a new symbol "
+            },
+            {
+              "text": "ug",
+              "bold": true
+            },
+            {
+              "text": ". Counting again, the most frequent pair is now "
+            },
+            {
+              "text": "u n",
+              "italic": true
+            },
+            {
+              "text": " (16), then "
+            },
+            {
+              "text": "h ug",
+              "italic": true
+            },
+            {
+              "text": " (15) would come next."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 23)"
+        }
+      ]
+    },
+    {
+      "ref": "merges",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each merge is written down in order. The "
+            },
+            {
+              "text": "ordered list of merges is the tokenizer",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "To encode new text: split it into base symbols, then apply the merges in the order they were learned. Frequent pieces get merged into whole tokens; rare ones stay in small pieces."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 23)"
+        }
+      ]
+    },
+    {
+      "ref": "bytes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Byte-level BPE",
+              "bold": true
+            },
+            {
+              "text": " starts from the 256 possible byte values instead of characters. Any string in any language (or any bytes at all) can be written in bytes, so there is "
+            },
+            {
+              "text": "no unknown-token fallback",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The vocabulary is 256 base bytes, plus the learned merges, plus any special tokens. GPT-2 has 50,257 tokens: 256 + 50,000 merges + 1 special token (end of text)."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 24)"
+        }
+      ]
+    },
+    {
+      "ref": "costs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Seeing tokens instead of characters has practical consequences:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "Letter-level tasks (counting the letters in a word, spelling backwards) are harder, because a whole word may be one token and its spelling is not directly visible."
+              }
+            ],
+            [
+              {
+                "text": "How digits are grouped into tokens affects how well numbers are handled."
+              }
+            ],
+            [
+              {
+                "text": "Context limits and API prices are counted in tokens."
+              }
+            ],
+            [
+              {
+                "text": "Text in languages that were rare in the tokenizer's training data usually needs more tokens per word."
+              }
+            ]
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 26)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why do models tokenize into subwords rather than whole words?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Whole-word vocabularies are huge and cannot represent unseen words; subwords cover any text with a moderate vocabulary"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Rare words are split into pieces that are already in the vocabulary."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Subwords are always faster to type"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Typing has nothing to do with it. The reasons are vocabulary size and unseen words."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Whole words are not made of characters"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Whole words are made of characters; the problem is the size of the list."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Subwords make the vocabulary infinite"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A subword vocabulary is moderate and fixed."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "two-ways",
+        "subwords"
+      ],
+      "covers": [
+        "subword-tokenization"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What happens to a rare word under subword tokenization?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is split into several smaller tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Rare words become pieces; frequent words stay whole."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is replaced by an unknown-word marker"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Subword vocabularies can represent any text, so no such marker is needed."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is dropped from the text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Nothing is dropped; the word is represented by its pieces."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is added to the vocabulary as a new token"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary is fixed once it is built."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What is the main cost of splitting text into single characters?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Sequences become very long, and attention cost grows as n²"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Many more tokens for the same text, and a cost that grows with the square of n."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The vocabulary becomes enormous"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A character vocabulary is small. The problem is the length of the sequences."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Unseen words cannot be represented"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Characters handle any word. That is a problem of word-level tokens."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The model cannot see spaces"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Spaces are just characters here; the problem is sequence length."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "long"
+      ],
+      "covers": [
+        "subword-tokenization"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Splitting every word into single characters makes n larger. Why does that matter so much?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Attention cost grows as n², so a longer sequence is much more expensive"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Double the tokens and the attention work roughly quadruples."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Longer sequences make the vocabulary bigger"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary is decided by the tokenizer, not by sequence length."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Characters cannot be embedded"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Characters can be embedded like any token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The context window gets shorter"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The window is a fixed limit in tokens; more tokens simply fill it sooner."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A BPE tokenizer is built from these counts: low (5), lot (2), hot (4). Splitting each word into letters, which pair is merged first?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "l o"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "l o appears in low and lot: 5 + 2 = 7. That is more than o t (2 + 4 = 6) or o w (5)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "o t"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "o t appears in lot and hot: 2 + 4 = 6, less than l o at 7."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "o w"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "o w appears only in low: 5, less than l o at 7."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "h o"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "h o appears only in hot: 4, the least frequent."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "bpe",
+        "worked"
+      ],
+      "covers": [
+        "bpe"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "BPE is run on cat (6), car (3) and bat (2), split into letters. Which pair is merged first?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "c a"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "c a appears in cat and car: 6 + 3 = 9, the most frequent."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "a t"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "a t appears in cat and bat: 6 + 2 = 8, one less than c a."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "a r"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "a r appears only in car: 3."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "b a"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "b a appears only in bat: 2."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What does byte-level BPE guarantee?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Any text can be encoded: there is no unknown token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The base alphabet is all 256 byte values, so any string can be written."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Every word is a single token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Rare words are still split into several pieces."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The vocabulary has exactly 256 tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "256 is only the base; the learned merges make the vocabulary much larger."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Text is never split"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Text is split into tokens, often into pieces of words."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "bytes",
+        "merges"
+      ],
+      "covers": [
+        "bpe"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A byte-level BPE vocabulary has 256 base bytes, 1,000 learned merges and 1 special token. How many tokens is that?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1,257"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "256 + 1,000 + 1 = 1,257."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1,000"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is only the merges; the base bytes and the special token also count."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1,256"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That leaves out the special token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "257"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That leaves out the 1,000 learned merges."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which task gets harder because a model sees tokens rather than characters?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Counting the letters in a word"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A whole word may be a single token, so its spelling is not directly visible."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Adding two numbers written in words"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The listed consequence is about letter-level tasks and how digits are grouped, not this."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Translating a sentence"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Translation works on tokens directly; letter-level tasks are the difficulty."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Reading a very short text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Short texts are not a problem for tokens."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "costs"
+      ],
+      "covers": [
+        "subword-tokenization"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Why does a text in a language that was rare in the tokenizer's training data usually cost more?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It needs more tokens per word, and limits and prices are counted in tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Rare-language words are split into more pieces, so n goes up."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Its letters are more expensive to store"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is the number of tokens that is counted, not the letters."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The model refuses to read it"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The model can read it; it just takes more tokens."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary is larger for that language"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary is fixed; the text is split into more pieces."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

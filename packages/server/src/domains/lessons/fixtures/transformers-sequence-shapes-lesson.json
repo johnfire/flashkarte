@@ -1,0 +1,1300 @@
+{
+  "module": "Input side: text to vectors",
+  "lesson": {
+    "slug": "sequence-shapes",
+    "title": "Sequence length and reading shapes",
+    "summary": "How many tokens are in a text, what the context window limits, and how to read the shape n × d_model and the course's symbols.",
+    "covers": [
+      "sequence-length",
+      "shape-notation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "tokens",
+        "reason": "n counts tokens, so you need to know what a token is first."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "n",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Once text has been split into tokens, the first number you need is how many there are. That count is called the "
+            },
+            {
+              "text": "sequence length",
+              "bold": true
+            },
+            {
+              "text": ", written "
+            },
+            {
+              "text": "n",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A sentence that becomes 7 tokens has n = 7. A whole page that becomes 600 tokens has n = 600."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "n counts "
+            },
+            {
+              "text": "tokens",
+              "italic": true
+            },
+            {
+              "text": ", not words and not characters. The same sentence can have a different n under a different tokenizer."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 5)"
+        }
+      ]
+    },
+    {
+      "ref": "window",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A model cannot take in an unlimited number of tokens. The most it can handle at once is called its "
+            },
+            {
+              "text": "context window",
+              "bold": true
+            },
+            {
+              "text": ": the maximum n it supports."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The window has to hold everything: "
+            },
+            {
+              "text": "the prompt plus everything the model generates",
+              "bold": true
+            },
+            {
+              "text": ". If the window is 1,000 tokens and your prompt already uses 900, the model has room for at most 100 more."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "This is why a very long conversation eventually stops working: n has reached the window."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 5)"
+        }
+      ]
+    },
+    {
+      "ref": "table",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Later in the course each token will be represented by a list of numbers, all the same length. Do not worry yet about what those numbers mean. For now we only need the "
+            },
+            {
+              "text": "shape",
+              "italic": true
+            },
+            {
+              "text": " they make."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Put those lists on top of each other, one per token, and you get a table of numbers with "
+            },
+            {
+              "text": "one row per token",
+              "bold": true
+            },
+            {
+              "text": ". In maths a table like this is a "
+            },
+            {
+              "text": "matrix",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 7)"
+        }
+      ]
+    },
+    {
+      "ref": "shape",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The size of a matrix is written "
+            },
+            {
+              "text": "rows × columns",
+              "bold": true
+            },
+            {
+              "text": ". In this course the sequence is written "
+            },
+            {
+              "text": "n × d_model",
+              "bold": true
+            },
+            {
+              "text": ":"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "n",
+                "bold": true
+              },
+              {
+                "text": " rows: one for each token in the sequence"
+              }
+            ],
+            [
+              {
+                "text": "d_model",
+                "bold": true
+              },
+              {
+                "text": " columns: the length of each token's list of numbers (the next lesson explains where it comes from)"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So n × d_model means "
+            },
+            {
+              "text": "n tokens, each represented by a d_model-long vector",
+              "italic": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 7)"
+        }
+      ]
+    },
+    {
+      "ref": "example",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A worked example with small made-up numbers: 5 tokens, and each token's list is 4 numbers long."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "Written as a shape: "
+              },
+              {
+                "text": "5 × 4",
+                "bold": true
+              }
+            ],
+            [
+              {
+                "text": "Rows: 5 (one per token)"
+              }
+            ],
+            [
+              {
+                "text": "Columns: 4 (the length of each list)"
+              }
+            ],
+            [
+              {
+                "text": "Total numbers in the table: 5 × 4 = 20"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "If the sequence grew to 6 tokens, the table would gain one row and become 6 × 4. The number of columns does not change with the text."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 7)"
+        }
+      ]
+    },
+    {
+      "ref": "symbols",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The course uses a small set of symbols and explains each one in full where it first appears. Here is the list to come back to:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "n",
+                "bold": true
+              },
+              {
+                "text": ": sequence length"
+              }
+            ],
+            [
+              {
+                "text": "V",
+                "bold": true
+              },
+              {
+                "text": ": vocabulary size"
+              }
+            ],
+            [
+              {
+                "text": "d_model",
+                "bold": true
+              },
+              {
+                "text": ": width of the token vectors"
+              }
+            ],
+            [
+              {
+                "text": "L",
+                "bold": true
+              },
+              {
+                "text": ": number of transformer layers (blocks)"
+              }
+            ],
+            [
+              {
+                "text": "h",
+                "bold": true
+              },
+              {
+                "text": ": number of attention heads"
+              }
+            ],
+            [
+              {
+                "text": "d_k",
+                "bold": true
+              },
+              {
+                "text": ", "
+              },
+              {
+                "text": "d_v",
+                "bold": true
+              },
+              {
+                "text": ": per-head query/key size and value size"
+              }
+            ],
+            [
+              {
+                "text": "d_ff",
+                "bold": true
+              },
+              {
+                "text": ": hidden width of the feed-forward sublayer"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "One deliberate exception: when we reach the rule of thumb for training compute, "
+            },
+            {
+              "text": "N",
+              "bold": true
+            },
+            {
+              "text": " is the number of parameters and "
+            },
+            {
+              "text": "D",
+              "bold": true
+            },
+            {
+              "text": " is the number of training tokens."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 8)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What does the sequence length n count?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The tokens in the sequence being processed"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n is the number of tokens, whatever the tokenizer made of the text."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The words in the text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Words are not the unit. A word can be one token or several."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The characters in the text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Characters are not counted; a token can hold several characters."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The number of tokens in the vocabulary"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is V, the vocabulary size, not n."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "n"
+      ],
+      "covers": [
+        "sequence-length"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A text is turned into 12 tokens. Which symbol stands for 12?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n, the sequence length"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n is how many tokens are in the sequence being processed."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "V, the vocabulary size"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "V is how many different tokens the model knows, not how many are in this text."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model, the width of the vectors"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model is the length of each token's vector, not the number of tokens."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "L, the number of layers"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "L counts the model's layers, not the tokens in a text."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A model has a context window of 1,000 tokens. Your prompt is 900 tokens. At most how many tokens can the model generate?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "100"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The window holds the prompt and everything generated together: 1,000 − 900 = 100."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1,000"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The window is shared: the prompt already uses 900 of the 1,000."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "900"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the size of the prompt, not the room left."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "As many as it likes"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The window is a hard limit on prompt plus generated tokens."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "window"
+      ],
+      "covers": [
+        "sequence-length"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A context window is 4,000 tokens and the conversation so far is 3,500 tokens. How much room is left for the reply?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "500 tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Prompt and reply share the window: 4,000 − 3,500 = 500."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "4,000 tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The conversation already occupies 3,500 of the window."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "3,500 tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is what is already used, not what is left."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "No limit, because the reply is separate"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The reply must fit in the same window as the prompt."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A matrix has the shape 6 × 4 in this course's notation. What does that describe?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "6 tokens, each represented by a vector of length 4"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Rows are tokens and columns are the features of each token's vector."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "4 tokens, each represented by a vector of length 6"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The first number is the number of rows, and rows are tokens, so it is 6 tokens."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A vocabulary of 6 tokens and 4 layers"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The shape n × d_model says nothing about vocabulary or layers."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A single vector of 24 numbers"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It has 24 numbers in total, but they are arranged as 6 rows of 4, one row per token."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "table",
+        "shape",
+        "example"
+      ],
+      "covers": [
+        "shape-notation"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each of 10 tokens is represented by a vector of 8 numbers. What is the shape of the table?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "10 × 8"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One row per token (10), one column per number in a vector (8)."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "8 × 10"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That would be 8 tokens with 10 numbers each. Rows are tokens."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "18"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Shapes are written as rows × columns, not added."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "80 × 1"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "80 is the total count of numbers, but the shape keeps one row per token."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In this course, what does the symbol V stand for?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The size of the vocabulary"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "V is the number of different tokens the model can read and write."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The number of tokens in a text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is n, the sequence length."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The width of each token's vector"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is d_model."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The number of layers"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is L."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "symbols"
+      ],
+      "covers": [
+        "shape-notation"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which symbol is the width of the token vectors?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model is the length of each token's vector."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "V"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "V is the vocabulary size."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n is the number of tokens in the sequence."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "h"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "h is the number of attention heads."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

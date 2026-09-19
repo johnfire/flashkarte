@@ -1,0 +1,1475 @@
+{
+  "module": "Input side: text to vectors",
+  "lesson": {
+    "slug": "embeddings",
+    "title": "Embeddings and the embedding table",
+    "summary": "How a token ID becomes a vector: what an embedding and d_model are, the table E and the lookup, and the matrix X₀ the transformer starts from.",
+    "covers": [
+      "embedding",
+      "embedding-table"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "tokens",
+        "reason": "An embedding is what a token ID is turned into."
+      },
+      {
+        "lesson": "sequence-shapes",
+        "reason": "The table E is described by its shape, and n × d_model must already be readable."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "labels",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A token ID is just a position in the vocabulary list. Token 4217 is not 'a bit more' than token 4216 in any meaningful way: the numbers are "
+            },
+            {
+              "text": "labels",
+              "bold": true
+            },
+            {
+              "text": ", like locker numbers."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "If the network were handed the ID as a plain number, it would have almost nothing useful to work with: the number does not say which tokens are related. We need a richer description of each token."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 3, 6)"
+        }
+      ]
+    },
+    {
+      "ref": "vector",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "That richer description is an "
+            },
+            {
+              "text": "embedding",
+              "bold": true
+            },
+            {
+              "text": ": a learned list of real numbers (a "
+            },
+            {
+              "text": "vector",
+              "bold": true
+            },
+            {
+              "text": ") that represents a token as a point in a high-dimensional space."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It is "
+            },
+            {
+              "text": "learned",
+              "italic": true
+            },
+            {
+              "text": ": the numbers are adjusted during training. The useful result is that tokens used in similar ways tend to end up with similar vectors."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 6)"
+        }
+      ]
+    },
+    {
+      "ref": "width",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Every token's vector has the same length. That length is called "
+            },
+            {
+              "text": "d_model",
+              "bold": true
+            },
+            {
+              "text": ", the model's basic width."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "d_model stays constant through the whole network: every layer takes vectors of length d_model and returns vectors of length d_model."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "You met d_model as a column count in the last lesson. It is the number of columns in the table that holds the sequence."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 6)"
+        }
+      ]
+    },
+    {
+      "ref": "table-e",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Where do the vectors live? In one big table, the "
+            },
+            {
+              "text": "embedding table",
+              "bold": true
+            },
+            {
+              "text": ", written "
+            },
+            {
+              "text": "E",
+              "bold": true
+            },
+            {
+              "text": ". It has one row for every token in the vocabulary, and each row is that token's vector."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So E has "
+            },
+            {
+              "text": "V rows",
+              "bold": true
+            },
+            {
+              "text": " (one per vocabulary entry) and "
+            },
+            {
+              "text": "d_model columns",
+              "bold": true
+            },
+            {
+              "text": ": it is a "
+            },
+            {
+              "text": "V × d_model",
+              "bold": true
+            },
+            {
+              "text": " matrix."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 29)"
+        }
+      ]
+    },
+    {
+      "ref": "lookup",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Turning a token ID into a vector is a "
+            },
+            {
+              "text": "lookup",
+              "bold": true
+            },
+            {
+              "text": ": token ID "
+            },
+            {
+              "text": "i",
+              "italic": true
+            },
+            {
+              "text": " selects row "
+            },
+            {
+              "text": "i",
+              "italic": true
+            },
+            {
+              "text": " of E, written "
+            },
+            {
+              "text": "E[i]",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The same thing can be written as multiplication: a vector that is 1 in position "
+            },
+            {
+              "text": "i",
+              "italic": true
+            },
+            {
+              "text": " and 0 everywhere else (a "
+            },
+            {
+              "text": "one-hot",
+              "italic": true
+            },
+            {
+              "text": " vector) multiplied by E gives row "
+            },
+            {
+              "text": "i",
+              "italic": true
+            },
+            {
+              "text": ". The lookup is simply the fast way to do that multiplication."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "The network is never given the text or the IDs directly as numbers to compute with. It is given the rows E selects."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 29)"
+        }
+      ]
+    },
+    {
+      "ref": "x0",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A text of n tokens has n IDs. Look up each one and stack the n rows in order. The result is called "
+            },
+            {
+              "text": "X₀",
+              "bold": true
+            },
+            {
+              "text": " (say 'X zero'), an "
+            },
+            {
+              "text": "n × d_model",
+              "bold": true
+            },
+            {
+              "text": " matrix."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "X₀ is where the transformer's real work starts: one d_model-long vector per token, in order."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 29)"
+        }
+      ]
+    },
+    {
+      "ref": "size",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Because E holds V rows of d_model numbers, it has "
+            },
+            {
+              "text": "V · d_model",
+              "bold": true
+            },
+            {
+              "text": " parameters (learned numbers)."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "With a small made-up example, V = 1,000 and d_model = 8 gives 1,000 × 8 = 8,000 numbers."
+              }
+            ],
+            [
+              {
+                "text": "A lookup costs almost nothing to compute next to the transformer blocks, but the table itself can be big when V is large."
+              }
+            ]
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 29)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What is an embedding?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A learned vector of real numbers that represents a token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It places the token as a point in a high-dimensional space, and similar tokens tend to get similar vectors."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token's ID, written in a different base"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "An ID is only a label. An embedding is a learned vector with many numbers."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The text of the token, encoded as bytes"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The text is not what the network works with; the embedding is learned during training."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A count of how often the token appears"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "An embedding is not a count; it is a learned vector."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "vector"
+      ],
+      "covers": [
+        "embedding"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which is true of the embeddings of two tokens that are used in similar ways?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They tend to be similar vectors"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Training tends to give similarly used tokens similar vectors."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They must have IDs that are next to each other"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "IDs are just labels, so their order carries no meaning."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They are identical"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They tend to be similar, not identical."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They have different lengths"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Every token's vector has the same length, d_model."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What is d_model?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The length of each token's vector"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_model is the model's basic width: the length of every token vector."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The number of tokens in the text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is n, the sequence length."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The number of tokens in the vocabulary"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is V."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The number of layers in the model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is L."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "width"
+      ],
+      "covers": [
+        "embedding"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A model has d_model = 512. What does that tell you?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Every token is represented by a vector of 512 numbers"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model is the length of each token's vector."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The context window is 512 tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The context window is a different limit; d_model is the vector length."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary has 512 tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary size is V."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The model has 512 layers"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The number of layers is L."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The vocabulary has V = 1,000 tokens and d_model = 8. How many numbers are in the embedding table E?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "8,000"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "E is V × d_model, so 1,000 × 8 = 8,000 numbers."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1,008"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The shape is V × d_model, so the two are multiplied, not added."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1,000"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the number of rows. Each row holds d_model = 8 numbers."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "8"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the length of one row, not the whole table."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "table-e",
+        "size"
+      ],
+      "covers": [
+        "embedding-table"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "An embedding table has V = 50 rows and d_model = 4. What is its shape?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "50 × 4"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One row per vocabulary entry (V) and one column per vector entry (d_model)."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "4 × 50"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Rows come first, and there is one row per vocabulary entry, so 50 rows."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "54"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A shape is rows × columns, not a sum."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "200 × 1"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "200 is the number of numbers in total, but the table is 50 rows of 4."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A token has ID 3. What does the embedding table do with it?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Selects row 3 of E, that token's vector"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Token ID i selects row E[i]: a lookup."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Adds 3 to every number in E"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The ID is used to pick a row, not as a number to add."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Trains a new vector for token 3 on the spot"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The vector is learned during training; at use time it is only looked up."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Multiplies the whole table by 3"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The ID picks one row; it is not a multiplier."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "lookup"
+      ],
+      "covers": [
+        "embedding-table"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which is the same as looking up row i of E?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Multiplying a one-hot vector for i by E"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A vector with a 1 in position i and 0 elsewhere, multiplied by E, gives row i."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Adding i to every entry of E"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That changes every number; it does not pick a row."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Taking the i-th column of E"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Rows correspond to tokens; a token's vector is a row, not a column."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sorting E by size"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sorting has nothing to do with selecting a token's vector."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A text has n = 10 tokens. After looking each one up in E, what is X₀?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A 10 × d_model matrix, one row per token in order"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The n rows are stacked in the order of the tokens."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A single vector of length d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "There is one vector per token, so X₀ has n rows."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A V × d_model matrix"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "V × d_model is the shape of E itself. X₀ has one row per token in the text."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A list of 10 IDs"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The IDs have already been replaced by vectors."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": [
+        "x0"
+      ],
+      "covers": [
+        "embedding-table"
+      ],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What is the shape of X₀ for a sequence of n tokens?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n × d_model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One d_model-long vector per token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "V × d_model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the shape of the embedding table, not of the sequence."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n × V"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The rows of X₀ are embeddings of length d_model, not scores over the vocabulary."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model × d_model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The number of rows is the number of tokens, n."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
