@@ -46,7 +46,7 @@ export async function listAssets(
   subjectId: string,
 ): Promise<AssetSummaryRow[]> {
   const result = await db.query<AssetSummaryRow>(
-    `SELECT ${SUMMARY} FROM assets WHERE subject_id = $1 ORDER BY created_at, id`,
+    `SELECT ${SUMMARY} FROM assets WHERE subject_id = $1 AND kind = 'diagram' ORDER BY created_at, id`,
     [subjectId],
   );
   return result.rows;
@@ -68,7 +68,7 @@ export async function countAssets(
   subjectId: string,
 ): Promise<number> {
   const result = await db.query<{ n: number }>(
-    `SELECT count(*)::int AS n FROM assets WHERE subject_id = $1`,
+    `SELECT count(*)::int AS n FROM assets WHERE subject_id = $1 AND kind = 'diagram'`,
     [subjectId],
   );
   return result.rows[0].n;
@@ -80,7 +80,7 @@ export async function findAsset(
   id: string,
 ): Promise<AssetRow | null> {
   const result = await db.query<AssetRow>(
-    `SELECT ${SUMMARY}, content FROM assets WHERE subject_id = $1 AND id = $2`,
+    `SELECT ${SUMMARY}, content FROM assets WHERE subject_id = $1 AND id = $2 AND kind = 'diagram'`,
     [subjectId, id],
   );
   return result.rows[0] ?? null;
@@ -112,8 +112,76 @@ export async function removeAsset(
   subjectId: string,
   id: string,
 ): Promise<void> {
-  await db.query(`DELETE FROM assets WHERE subject_id = $1 AND id = $2`, [
-    subjectId,
-    id,
-  ]);
+  await db.query(
+    `DELETE FROM assets WHERE subject_id = $1 AND id = $2 AND kind = 'diagram'`,
+    [subjectId, id],
+  );
+}
+
+/** The SVG of any asset, diagram or formula, for serving. */
+export async function findServableSvg(
+  db: Queryable,
+  subjectId: string,
+  id: string,
+): Promise<string | null> {
+  const result = await db.query<{ content: string }>(
+    `SELECT content FROM assets WHERE subject_id = $1 AND id = $2`,
+    [subjectId, id],
+  );
+  return result.rows[0]?.content ?? null;
+}
+
+export interface FormulaAssetRow {
+  id: string;
+  width_em: number;
+  height_em: number;
+  depth_em: number;
+}
+
+/** The stored picture of a formula in one style, if it has been drawn before. */
+export async function findFormulaAsset(
+  db: Queryable,
+  subjectId: string,
+  latex: string,
+  display: boolean,
+): Promise<FormulaAssetRow | null> {
+  const result = await db.query<FormulaAssetRow>(
+    `SELECT id, width_em, height_em, depth_em FROM assets
+     WHERE subject_id = $1 AND kind = 'formula' AND display = $2 AND latex = $3`,
+    [subjectId, display, latex],
+  );
+  return result.rows[0] ?? null;
+}
+
+export async function insertFormulaAsset(
+  db: Queryable,
+  input: {
+    subjectId: string;
+    latex: string;
+    display: boolean;
+    svg: string;
+    widthEm: number;
+    heightEm: number;
+    depthEm: number;
+    authorKind: AssetAuthor;
+  },
+): Promise<FormulaAssetRow> {
+  const result = await db.query<FormulaAssetRow>(
+    `INSERT INTO assets (subject_id, kind, content, author_kind, latex, display, width_em, height_em, depth_em)
+     VALUES ($1, 'formula', $2, $3, $4, $5, $6, $7, $8)
+     ON CONFLICT (subject_id, display, latex) WHERE kind = 'formula'
+       DO UPDATE SET latex = EXCLUDED.latex
+     RETURNING id, width_em, height_em, depth_em`,
+    [
+      input.subjectId,
+      input.svg,
+      input.authorKind,
+      input.latex,
+      input.display,
+      input.widthEm,
+      input.heightEm,
+      input.depthEm,
+    ],
+  );
+  return result.rows[0];
 }

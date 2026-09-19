@@ -177,3 +177,33 @@ describe("formulasWithoutSpokenText", () => {
     ]);
   });
 });
+
+describe("a rendered formula", () => {
+  it("keeps its asset and size, and drops a size that is not a plain number", () => {
+    const { blocks, issues } = validateBlocks([
+      {
+        type: "formula",
+        latex: "d_k",
+        assetId: "a1",
+        widthEm: 1.099,
+        heightEm: 0.964,
+        depthEm: 0.179,
+      },
+      {
+        type: "formula",
+        latex: "x",
+        widthEm: "wide",
+        heightEm: -1,
+        depthEm: NaN,
+      },
+    ]);
+    expect(issues).toEqual([]);
+    expect(blocks[0]).toMatchObject({
+      assetId: "a1",
+      widthEm: 1.099,
+      heightEm: 0.964,
+      depthEm: 0.179,
+    });
+    expect(blocks[1]).toEqual({ type: "formula", latex: "x" });
+  });
+});

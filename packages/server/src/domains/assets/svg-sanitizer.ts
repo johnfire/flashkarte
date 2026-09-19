@@ -281,10 +281,7 @@ export function sanitizeSvg(input: string): SanitizedSvg {
         kept.push(`xmlns="${SVG_NAMESPACE}"`);
         continue;
       }
-      if (name === "xmlns:xlink" && value === XLINK_NAMESPACE) {
-        kept.push(`xmlns:xlink="${XLINK_NAMESPACE}"`);
-        continue;
-      }
+      if (name === "xmlns:xlink") continue; // added below, so a standalone file is always well-formed
       const cleaned = cleanAttribute(name, value);
       if (cleaned === null) removed.add(`${name} attribute`);
       else kept.push(`${name}="${escapeAttribute(cleaned)}"`);
@@ -294,6 +291,8 @@ export function sanitizeSvg(input: string): SanitizedSvg {
       stack.push({ name: tag.name, skipped: true });
       return;
     }
+    // Whatever is used, a standalone SVG needs the xlink prefix declared or a browser refuses it.
+    if (tag.name === "svg") kept.push(`xmlns:xlink="${XLINK_NAMESPACE}"`);
     output.push(
       `<${tag.name}${kept.length > 0 ? " " + kept.join(" ") : ""}${tag.isSelfClosing ? "/" : ""}>`,
     );

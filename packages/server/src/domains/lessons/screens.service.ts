@@ -14,6 +14,7 @@ import {
   requireLesson,
   withLockedSubject,
 } from "./lesson-context";
+import { renderBlocks } from "../maths/render-formulas";
 import { assertValidBlocks, createScreen } from "./lesson-writes";
 import { findLessonById, type LessonRow } from "./lessons.repository";
 import { newScreenSchema, screenPatchSchema } from "./lessons.schemas";
@@ -78,7 +79,11 @@ export async function updateScreen(
     const { screen, lesson } = await requireScreen(db, subject.id, number);
     if (patch.blocks !== undefined) {
       assertValidBlocks(patch.blocks);
-      await repo.writeScreenBlocks(db, screen, patch.blocks);
+      await repo.writeScreenBlocks(
+        db,
+        screen,
+        await renderBlocks(db, subject.id, patch.blocks),
+      );
     }
     let finalNumber = screen.number;
     if (patch.number !== undefined) {

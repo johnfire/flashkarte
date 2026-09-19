@@ -118,7 +118,11 @@
       {
         "type": "formula",
         "latex": "R = V / I",
-        "spoken": "R equals V over I"
+        "spoken": "R equals V over I",
+        "assetId": "<uuid>",
+        "depthEm": 0.283,
+        "widthEm": 4.373,
+        "heightEm": 1.131
       }
     ]
   },

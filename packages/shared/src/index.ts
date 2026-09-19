@@ -80,6 +80,7 @@ export type {
   BlockIssue,
   BlockType,
   CalloutTone,
+  FormulaBlock,
   ImageBlock,
   ImageDisplay,
   Span,

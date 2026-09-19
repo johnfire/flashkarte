@@ -96,6 +96,8 @@ export interface AccountExport {
       description: string | null;
       authorKind: string;
       svg: string;
+      /** For a rendered formula, its source. */
+      latex: string | null;
       createdAt: string;
     }>;
     questions: Array<{
@@ -338,6 +340,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
         description: a.description,
         authorKind: a.author_kind,
         svg: a.content,
+        latex: a.latex,
         createdAt: a.created_at,
       })),
       questions: lessonQuestions.map((q) => ({

@@ -9,11 +9,15 @@ const BLOCKS_HELP =
   "(spans allow only bold, italic, code flags; never put markdown inside text). " +
   'list: {"type":"list","ordered":false,"items":[[{"text":"one"}],[{"text":"two"}]]}. ' +
   'code: {"type":"code","language":"python","text":"x = 1"}. ' +
-  'image: {"type":"image","src":"https://... or /schematics/x.svg","alt":"describe it","display":"inline"|"expandable"} ' +
-  "(alt text is required). " +
+  'image: {"type":"image","src":"asset:<id> from create_image, or https://... or /schematics/x.svg","alt":"describe it","display":"inline"|"expandable"} ' +
+  "(alt text is required; for a diagram you draw, call create_image first and use the src it returns). " +
   'callout: {"type":"callout","tone":"note"|"tip"|"warning","spans":[{"text":"..."}]}. ' +
   'formula: {"type":"formula","latex":"R = \\\\frac{V}{I}","spoken":"R equals V over I"} ' +
-  "(spoken text is required before a lesson can be finished). One idea per screen.";
+  "(a display formula on its own line; the server draws it when you save, so write plain LaTeX with the " +
+  "standard commands (\\\\frac, \\\\sum, subscripts, Greek letters, AMS symbols). Commands that load code or " +
+  "link out (\\\\href, \\\\require, \\\\unicode, \\\\class, \\\\style) are not available. A formula it cannot " +
+  "read is refused with the reason, so fix and retry. Do not set assetId or sizes: the server does. Spoken " +
+  "text is required before a lesson can be finished). One idea per screen.";
 
 const LESSON_RULES =
   "A lesson is 4 to 10 numbered screens (one idea each, read not flipped), then 3 to 5 multiple-choice " +

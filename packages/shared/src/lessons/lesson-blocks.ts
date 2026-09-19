@@ -68,8 +68,13 @@ export interface FormulaBlock {
   latex: string;
   /** How a screen reader says the formula. Required to finish a lesson, not to save one. */
   spoken?: string;
-  /** The rendered SVG asset, filled in when the formula is rendered on save. */
+  /** The rendered SVG asset. The server sets it (and the size) when a screen is saved; an author cannot. */
   assetId?: string;
+  /** The rendered size in em, so a client can lay it out before the picture arrives. */
+  widthEm?: number;
+  heightEm?: number;
+  /** How far the picture hangs below the text baseline. */
+  depthEm?: number;
 }
 export type Block =
   | ParagraphBlock
@@ -266,11 +271,23 @@ function validateFormula(
       ? raw.spoken
       : undefined;
   const assetId = typeof raw.assetId === "string" ? raw.assetId : undefined;
+  const size = (value: unknown): number | undefined =>
+    typeof value === "number" && Number.isFinite(value) && value >= 0
+      ? value
+      : undefined;
+  const [widthEm, heightEm, depthEm] = [
+    raw.widthEm,
+    raw.heightEm,
+    raw.depthEm,
+  ].map(size);
   return {
     type: "formula",
     latex: raw.latex,
     ...(spoken && { spoken }),
     ...(assetId && { assetId }),
+    ...(widthEm !== undefined && { widthEm }),
+    ...(heightEm !== undefined && { heightEm }),
+    ...(depthEm !== undefined && { depthEm }),
   };
 }
 

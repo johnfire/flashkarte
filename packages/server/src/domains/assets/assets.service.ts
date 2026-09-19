@@ -72,11 +72,12 @@ export async function getAssetSvg(
 ): Promise<string> {
   await requireOwnedSubjectId(userId, subjectId);
   const id = idSchema.safeParse(assetId);
-  const asset = id.success
-    ? await repo.findAsset(getPool(), subjectId, id.data)
+  // A diagram or a rendered formula: both are pictures of this subject.
+  const svg = id.success
+    ? await repo.findServableSvg(getPool(), subjectId, id.data)
     : null;
-  if (!asset) throw new NotFoundError("Image not found");
-  return asset.content;
+  if (svg === null) throw new NotFoundError("Image not found");
+  return svg;
 }
 
 /** Removes an image nothing uses. One a screen or question points at (even in its history) stays. */

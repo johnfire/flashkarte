@@ -451,13 +451,14 @@ export interface AssetExportRow {
   description: string | null;
   author_kind: string;
   content: string;
+  latex: string | null;
   created_at: string;
 }
 
 /** The subject's stored images, with their SVG, since they are part of the lessons the owner wrote. */
 export function findAssets(userId: string): Promise<AssetExportRow[]> {
   return query<AssetExportRow>(
-    `SELECT a.id, a.subject_id, a.kind, a.description, a.author_kind, a.content, a.created_at
+    `SELECT a.id, a.subject_id, a.kind, a.description, a.author_kind, a.content, a.latex, a.created_at
      FROM assets a JOIN subjects s ON s.id = a.subject_id
      WHERE s.user_id = $1 ORDER BY a.created_at, a.id`,
     [userId],

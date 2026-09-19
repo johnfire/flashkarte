@@ -10,6 +10,7 @@ import {
   NotFoundError,
   ValidationError,
 } from "../../utils/errors";
+import { renderBlocks, renderQuestionBlocks } from "../maths/render-formulas";
 import * as lessonsRepo from "./lessons.repository";
 import * as questionsRepo from "./questions.repository";
 import * as screensRepo from "./screens.repository";
@@ -103,12 +104,18 @@ export async function createScreen(
   },
 ): Promise<screensRepo.ScreenRow> {
   assertValidBlocks(fields.blocks);
+  const blocks = await renderBlocks(
+    db,
+    lesson.subject_id,
+    fields.blocks,
+    fields.authorKind,
+  );
   const number = await chooseScreenNumber(db, lesson, fields.place);
   return screensRepo.insertScreen(db, {
     subjectId: lesson.subject_id,
     lessonId: lesson.id,
     number,
-    blocks: fields.blocks,
+    blocks,
     authorKind: fields.authorKind,
     sources: fields.sources ?? null,
   });
@@ -154,11 +161,12 @@ export async function createQuestion(
   fields: QuestionFields,
   refs: Map<string, string> = new Map(),
 ): Promise<questionsRepo.QuestionRow> {
+  const drawn = await renderQuestionBlocks(db, lesson.subject_id, fields);
   const question = await questionsRepo.insertQuestion(db, {
     lessonId: lesson.id,
     parentId: null,
-    prompt: fields.prompt,
-    options: fields.options,
+    prompt: drawn.prompt,
+    options: drawn.options,
   });
   await questionsRepo.replaceQuestionScreens(
     db,
@@ -171,11 +179,16 @@ export async function createQuestion(
     await resolveConceptIds(db, lesson.subject_id, fields.covers),
   );
   for (const variant of fields.variants ?? []) {
+    const drawnVariant = await renderQuestionBlocks(
+      db,
+      lesson.subject_id,
+      variant,
+    );
     await questionsRepo.insertQuestion(db, {
       lessonId: lesson.id,
       parentId: question.id,
-      prompt: variant.prompt,
-      options: variant.options,
+      prompt: drawnVariant.prompt,
+      options: drawnVariant.options,
     });
   }
   return question;

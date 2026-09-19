@@ -13,6 +13,7 @@ import {
   questionPatchSchema,
   variantSchema,
 } from "./lessons.schemas";
+import { renderQuestionBlocks } from "../maths/render-formulas";
 import * as repo from "./questions.repository";
 
 async function requireQuestion(
@@ -62,11 +63,12 @@ export async function addVariant(
         "A variant cannot have variants: add it to the original question",
       );
     }
+    const drawn = await renderQuestionBlocks(db, subject.id, fields);
     const variant = await repo.insertQuestion(db, {
       lessonId: lesson.id,
       parentId: parent.id,
-      prompt: fields.prompt,
-      options: fields.options,
+      prompt: drawn.prompt,
+      options: drawn.options,
     });
     return { id: variant.id, issues: await lintAfterEdit(db, lesson) };
   });
@@ -90,10 +92,11 @@ export async function updateQuestion(
         "A variant inherits its question's screens and concepts: change them on the question",
       );
     }
-    await repo.writeQuestion(db, question.id, {
+    const drawn = await renderQuestionBlocks(db, subject.id, {
       prompt: patch.prompt ?? question.prompt,
       options: patch.options ?? question.options,
     });
+    await repo.writeQuestion(db, question.id, drawn);
     if (patch.teaches) {
       await repo.replaceQuestionScreens(
         db,
