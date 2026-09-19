@@ -1,0 +1,54 @@
+{
+  "subject_id": "<uuid>",
+  "subject_title": "Contract",
+  "reviews_due": 0,
+  "modules": [
+    {
+      "id": "<uuid>",
+      "title": "Input side",
+      "lessons": [
+        {
+          "id": "<uuid>",
+          "slug": "tokens",
+          "title": "Tokens",
+          "summary": "What a token is.",
+          "stage": "testing",
+          "covers": [
+            "Token"
+          ],
+          "unlocksAfter": [],
+          "access": "passed",
+          "paused": false,
+          "answered": null,
+          "result": {
+            "first_try_right": 2,
+            "total": 3
+          }
+        },
+        {
+          "id": "<uuid>",
+          "slug": "embeddings",
+          "title": "Embeddings",
+          "summary": "Numbers with meaning.",
+          "stage": "testing",
+          "covers": [
+            "Token"
+          ],
+          "unlocksAfter": [
+            {
+              "lessonId": "<uuid>",
+              "slug": "tokens",
+              "title": "Tokens",
+              "reason": "Tokens first.",
+              "passed": true
+            }
+          ],
+          "access": "available",
+          "paused": false,
+          "answered": null,
+          "result": null
+        }
+      ]
+    }
+  ]
+}

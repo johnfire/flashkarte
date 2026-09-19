@@ -1,0 +1,97 @@
+{
+  "lesson": {
+    "slug": "tokens",
+    "title": "Tokens",
+    "stage": "testing"
+  },
+  "resumed": false,
+  "step": {
+    "kind": "screen",
+    "number": "1",
+    "index": 0,
+    "total": 4,
+    "can_go_back": false,
+    "blocks": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "A "
+          },
+          {
+            "bold": true,
+            "text": "token"
+          },
+          {
+            "text": " is "
+          },
+          {
+            "text": "a piece",
+            "italic": true
+          },
+          {
+            "text": " of text, like "
+          },
+          {
+            "code": true,
+            "text": "cat"
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "items": [
+          [
+            {
+              "text": "first"
+            }
+          ],
+          [
+            {
+              "bold": true,
+              "text": "second"
+            }
+          ]
+        ],
+        "ordered": true
+      },
+      {
+        "type": "list",
+        "items": [
+          [
+            {
+              "text": "dot"
+            }
+          ]
+        ],
+        "ordered": false
+      },
+      {
+        "text": "tokens = split(text)",
+        "type": "code",
+        "language": "python"
+      },
+      {
+        "tone": "warning",
+        "type": "callout",
+        "spans": [
+          {
+            "text": "Careful here"
+          }
+        ]
+      },
+      {
+        "alt": "A diagram",
+        "src": "/schematics/example.svg",
+        "type": "image",
+        "caption": "Figure 1",
+        "display": "expandable"
+      },
+      {
+        "type": "formula",
+        "latex": "R = V / I",
+        "spoken": "R equals V over I"
+      }
+    ]
+  }
+}

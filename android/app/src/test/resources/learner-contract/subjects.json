@@ -1,0 +1,13 @@
+[
+  {
+    "id": "<uuid>",
+    "user_id": "<uuid>",
+    "title": "Contract",
+    "description": null,
+    "is_public": false,
+    "version": 2,
+    "created_at": "<time>",
+    "updated_at": "<time>",
+    "concept_count": 1
+  }
+]

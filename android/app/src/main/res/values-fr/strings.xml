@@ -106,4 +106,74 @@
         <item quantity="one">Tu as lu %d leçon.</item>
         <item quantity="other">Tu as lu %d leçons.</item>
     </plurals>
+
+    <!-- Learn: structured lessons -->
+    <string name="learn_title">Apprendre</string>
+    <string name="learn_intro">Des leçons structurées, dans l\'ordre. Réussir une leçon ouvre celles qui s\'appuient dessus.</string>
+    <string name="learn_to_decks">← Paquets</string>
+    <string name="learn_to_learn">← Apprendre</string>
+    <string name="learn_to_outline">Retour au plan</string>
+    <string name="learn_to_outline_arrow">← Plan</string>
+    <string name="learn_loading">Chargement…</string>
+    <string name="learn_load_error">Impossible de charger. Réessayez.</string>
+    <string name="learn_empty">Aucun sujet pour l\'instant. Demandez à votre IA d\'en créer un.</string>
+    <string name="learn_outline_intro">Ce que vous allez apprendre, dans l\'ordre.</string>
+    <string name="learn_no_lessons">Ce sujet n\'a pas encore de leçons.</string>
+    <string name="learn_other_lessons">Autres leçons</string>
+    <string name="learn_covers">Traite : %1$s</string>
+    <string name="learn_testing_stage">Brouillon : encore en test</string>
+    <string name="learn_unlocks_after">S\'ouvre après avoir réussi : %1$s</string>
+    <string name="learn_first_try">%1$d sur %2$d justes du premier coup</string>
+    <string name="learn_start">Commencer</string>
+    <string name="learn_continue_lesson">Continuer</string>
+    <string name="learn_read_again">Relire</string>
+    <string name="learn_screen_number">Écran %1$s</string>
+    <string name="learn_screen_of">Écran %1$d sur %2$d</string>
+    <string name="learn_reread">Relire %1$d sur %2$d</string>
+    <string name="learn_back">Retour</string>
+    <string name="learn_next">Suivant</string>
+    <string name="learn_start_questions">Commencer les questions</string>
+    <string name="learn_continue">Continuer</string>
+    <string name="learn_review_screens">Revoir l\'écran</string>
+    <string name="learn_question_progress">Question %1$d sur %2$d</string>
+    <string name="learn_check_answer">Vérifier la réponse</string>
+    <string name="learn_correct">Juste.</string>
+    <string name="learn_not_quite">Pas tout à fait.</string>
+    <string name="learn_why_right_one">Pourquoi la bonne réponse est la bonne :</string>
+    <string name="learn_right_option">Bonne réponse</string>
+    <string name="learn_wrong_option">Votre réponse</string>
+    <string name="learn_show_screens">Afficher les écrans</string>
+    <string name="learn_hide_screens">Masquer les écrans</string>
+    <string name="learn_stuck_note">Celle-ci vous résiste. Cela arrive, et cela peut signifier que la leçon doit être plus claire. Vous pouvez y revenir plus tard : votre place est enregistrée, et les leçons qui en dépendent restent verrouillées jusqu\'à ce que vous la réussissiez.</string>
+    <string name="learn_come_back_later">Revenir plus tard</string>
+    <string name="learn_passed_title">Leçon réussie</string>
+    <string name="learn_passed_result">%1$d sur %2$d questions justes du premier coup.</string>
+    <string name="learn_passed_review_note">Ces questions reviendront en révision, pour qu\'elles restent.</string>
+    <string name="learn_now_open">Maintenant ouvertes :</string>
+    <string name="learn_paused_title">Enregistré pour plus tard</string>
+    <string name="learn_paused_body">Votre place est enregistrée. Cette leçon n\'est pas encore réussie, donc celles qui en dépendent restent verrouillées.</string>
+    <string name="learn_resume">Reprendre où j\'en étais</string>
+    <string name="learn_comment_open">Commenter l\'écran %1$s</string>
+    <string name="learn_comment_label">Qu\'est-ce qui n\'est pas clair ou faux sur l\'écran %1$s ?</string>
+    <string name="learn_comment_send">Enregistrer le commentaire</string>
+    <string name="learn_comment_cancel">Annuler</string>
+    <string name="learn_comment_saved">Commentaire sur l\'écran %1$s enregistré. Votre IA peut le lire.</string>
+    <string name="learn_comment_error">Impossible d\'enregistrer le commentaire.</string>
+    <string name="learn_review_title">Révision</string>
+    <string name="learn_nothing_due">Rien à réviser pour le moment.</string>
+    <string name="learn_review_done">Terminé. Elle reviendra plus tard.</string>
+    <string name="learn_next_review">Suivant</string>
+    <string name="learn_state_locked">Verrouillée</string>
+    <string name="learn_state_available">Prête</string>
+    <string name="learn_state_in_progress">En cours</string>
+    <string name="learn_state_passed">Réussie</string>
+    <string name="learn_state_paused">À reprendre plus tard</string>
+    <plurals name="learn_concept_count">
+        <item quantity="one">%1$d concept</item>
+        <item quantity="other">%1$d concepts</item>
+    </plurals>
+    <plurals name="learn_reviews_due">
+        <item quantity="one">%1$d question est à réviser</item>
+        <item quantity="other">%1$d questions sont à réviser</item>
+    </plurals>
 </resources>

@@ -43,6 +43,17 @@ import com.flashmd.data.remote.dto.TwoFactorSetupResponse
 import com.flashmd.data.remote.dto.UpdateCourseRequest
 import com.flashmd.data.remote.dto.UpdateDeckRequest
 import com.flashmd.data.remote.dto.UpdateProfileRequest
+import com.flashmd.data.remote.dto.AnswerRequest
+import com.flashmd.data.remote.dto.CommentRequest
+import com.flashmd.data.remote.dto.DueReviewsDto
+import com.flashmd.data.remote.dto.LearnSubjectDto
+import com.flashmd.data.remote.dto.LearnerOutlineDto
+import com.flashmd.data.remote.dto.LessonAnswerResponseDto
+import com.flashmd.data.remote.dto.LessonScreensDto
+import com.flashmd.data.remote.dto.LessonStepResponseDto
+import com.flashmd.data.remote.dto.ReviewAnswerResponseDto
+import com.flashmd.data.remote.dto.ReviewStepResponseDto
+import com.flashmd.data.remote.dto.ScreenCommentDto
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -221,4 +232,63 @@ interface FlashkarteApi {
 
     @POST("api/bug-reports")
     suspend fun reportBug(@Body body: BugReportRequest): BugReportResponse
+
+    // --- Learn: structured lessons (the server holds the session; the app draws the step) ---
+
+    @GET("api/subjects")
+    suspend fun listLearnSubjects(): List<LearnSubjectDto>
+
+    @GET("api/subjects/{id}/learn/outline")
+    suspend fun learnOutline(@Path("id") subjectId: String): LearnerOutlineDto
+
+    @POST("api/subjects/{id}/learn/lessons/{slug}/start")
+    suspend fun startLesson(@Path("id") subjectId: String, @Path("slug") slug: String): LessonStepResponseDto
+
+    @GET("api/subjects/{id}/learn/lessons/{slug}/step")
+    suspend fun currentLessonStep(@Path("id") subjectId: String, @Path("slug") slug: String): LessonStepResponseDto
+
+    @POST("api/subjects/{id}/learn/lessons/{slug}/next")
+    suspend fun lessonNext(@Path("id") subjectId: String, @Path("slug") slug: String): LessonStepResponseDto
+
+    @POST("api/subjects/{id}/learn/lessons/{slug}/back")
+    suspend fun lessonBack(@Path("id") subjectId: String, @Path("slug") slug: String): LessonStepResponseDto
+
+    @POST("api/subjects/{id}/learn/lessons/{slug}/continue")
+    suspend fun lessonContinue(@Path("id") subjectId: String, @Path("slug") slug: String): LessonStepResponseDto
+
+    @POST("api/subjects/{id}/learn/lessons/{slug}/pause")
+    suspend fun lessonPause(@Path("id") subjectId: String, @Path("slug") slug: String): LessonStepResponseDto
+
+    @POST("api/subjects/{id}/learn/lessons/{slug}/answer")
+    suspend fun lessonAnswer(
+        @Path("id") subjectId: String,
+        @Path("slug") slug: String,
+        @Body body: AnswerRequest,
+    ): LessonAnswerResponseDto
+
+    @GET("api/subjects/{id}/learn/lessons/{slug}/screens")
+    suspend fun lessonScreens(@Path("id") subjectId: String, @Path("slug") slug: String): LessonScreensDto
+
+    @POST("api/subjects/{id}/learn/screens/{number}/comments")
+    suspend fun commentOnScreen(
+        @Path("id") subjectId: String,
+        @Path("number") number: String,
+        @Body body: CommentRequest,
+    ): ScreenCommentDto
+
+    @GET("api/subjects/{id}/learn/reviews")
+    suspend fun dueReviews(@Path("id") subjectId: String): DueReviewsDto
+
+    @POST("api/subjects/{id}/learn/reviews/{questionId}/start")
+    suspend fun startReview(@Path("id") subjectId: String, @Path("questionId") questionId: String): ReviewStepResponseDto
+
+    @POST("api/subjects/{id}/learn/reviews/{questionId}/continue")
+    suspend fun continueReview(@Path("id") subjectId: String, @Path("questionId") questionId: String): ReviewStepResponseDto
+
+    @POST("api/subjects/{id}/learn/reviews/{questionId}/answer")
+    suspend fun answerReview(
+        @Path("id") subjectId: String,
+        @Path("questionId") questionId: String,
+        @Body body: AnswerRequest,
+    ): ReviewAnswerResponseDto
 }

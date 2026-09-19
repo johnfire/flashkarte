@@ -73,6 +73,10 @@ android {
         compose = true
         buildConfig = true
     }
+
+    // The learner API's real responses (packages/server writes them) are used by the JVM tests and
+    // by the on-device screen tests alike.
+    sourceSets.getByName("androidTest").resources.srcDir("src/test/resources")
 }
 
 sqldelight {

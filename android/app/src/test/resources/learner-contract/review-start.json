@@ -1,0 +1,48 @@
+{
+  "question_id": "<uuid>",
+  "step": {
+    "kind": "question",
+    "question_id": "<uuid>",
+    "presentation_id": "<uuid>",
+    "prompt": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Question 1, reworded"
+          }
+        ]
+      }
+    ],
+    "options": [
+      {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "spans": [
+              {
+                "text": "RIGHT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "spans": [
+              {
+                "text": "WRONG"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "answered": 0,
+    "total": 1,
+    "misses": 0,
+    "help_offered": false
+  }
+}

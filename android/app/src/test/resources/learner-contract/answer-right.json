@@ -1,0 +1,93 @@
+{
+  "lesson": {
+    "slug": "tokens",
+    "title": "Tokens",
+    "stage": "testing"
+  },
+  "answer": {
+    "correct": true,
+    "chosen_position": 0,
+    "correct_position": 0,
+    "reason": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Because it is."
+          }
+        ]
+      }
+    ],
+    "correct_reason": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Because it is."
+          }
+        ]
+      }
+    ],
+    "misses": 0,
+    "help_offered": false
+  },
+  "step": {
+    "kind": "question",
+    "question_id": "<uuid>",
+    "presentation_id": "<uuid>",
+    "prompt": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Question 3"
+          }
+        ]
+      }
+    ],
+    "options": [
+      {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "spans": [
+              {
+                "text": "WRONG"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "spans": [
+              {
+                "text": "RIGHT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "spans": [
+              {
+                "text": "WRONG"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "answered": 2,
+    "total": 3,
+    "misses": 0,
+    "help_offered": false
+  },
+  "passed": false,
+  "unlocked": []
+}

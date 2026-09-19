@@ -1,0 +1,63 @@
+{
+  "lesson": {
+    "slug": "tokens",
+    "title": "Tokens",
+    "stage": "testing"
+  },
+  "answer": {
+    "correct": true,
+    "chosen_position": 1,
+    "correct_position": 1,
+    "reason": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Because it is."
+          }
+        ]
+      }
+    ],
+    "correct_reason": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Because it is."
+          }
+        ]
+      }
+    ],
+    "misses": 0,
+    "help_offered": false
+  },
+  "step": {
+    "kind": "passed",
+    "first_try_right": 2,
+    "total": 3,
+    "questions": [
+      {
+        "question_id": "<uuid>",
+        "first_try": "right",
+        "misses": 0
+      },
+      {
+        "question_id": "<uuid>",
+        "first_try": "right",
+        "misses": 0
+      },
+      {
+        "question_id": "<uuid>",
+        "first_try": "wrong",
+        "misses": 1
+      }
+    ]
+  },
+  "passed": true,
+  "unlocked": [
+    {
+      "slug": "embeddings",
+      "title": "Embeddings"
+    }
+  ]
+}

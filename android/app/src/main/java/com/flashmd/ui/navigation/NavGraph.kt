@@ -32,6 +32,11 @@ import com.flashmd.ui.screens.createdeck.CreateDeckScreen
 import com.flashmd.ui.screens.decklist.DeckListScreen
 import com.flashmd.ui.screens.help.BranchingHelpScreen
 import com.flashmd.ui.screens.help.HelpScreen
+import com.flashmd.ui.screens.learn.LearnScreen
+import com.flashmd.ui.screens.learn.LessonScreen
+import com.flashmd.ui.screens.learn.OutlineScreen
+import com.flashmd.ui.screens.learn.ReadLessonScreen
+import com.flashmd.ui.screens.learn.ReviewScreen
 import com.flashmd.ui.screens.library.LibraryDetailScreen
 import com.flashmd.ui.screens.library.LibraryScreen
 import com.flashmd.ui.screens.play.BranchPlayScreen
@@ -106,6 +111,7 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                     onPlayDeck = { deckId -> navController.navigate("play/$deckId") },
                     onStatsDeck = { deckId -> navController.navigate("stats/$deckId") },
                     onHelp = { navController.navigate("help") },
+                    onLearn = { navController.navigate("learn") },
                 )
             }
 
@@ -149,6 +155,62 @@ fun NavGraph(onLogout: () -> Unit = {}) {
                         navController.navigate("study/$newId") { popUpTo("decks") }
                     },
                 )
+            }
+
+            composable("learn") {
+                LearnScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenSubject = { id -> navController.navigate("learn/$id") },
+                )
+            }
+
+            composable(
+                route = "learn/{subjectId}",
+                arguments = listOf(navArgument("subjectId") { type = NavType.StringType }),
+            ) { entry ->
+                val subjectId = entry.arguments!!.getString("subjectId")!!
+                OutlineScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenLesson = { slug -> navController.navigate("learn/$subjectId/lessons/$slug") },
+                    onReadLesson = { slug -> navController.navigate("learn/$subjectId/lessons/$slug/read") },
+                    onReviews = { navController.navigate("learn/$subjectId/reviews") },
+                )
+            }
+
+            composable(
+                route = "learn/{subjectId}/lessons/{slug}",
+                arguments = listOf(
+                    navArgument("subjectId") { type = NavType.StringType },
+                    navArgument("slug") { type = NavType.StringType },
+                ),
+            ) { entry ->
+                val subjectId = entry.arguments!!.getString("subjectId")!!
+                LessonScreen(
+                    onBack = { navController.popBackStack() },
+                    // A lesson the pass just opened replaces this one, so Back returns to the outline.
+                    onOpenLesson = { slug ->
+                        navController.navigate("learn/$subjectId/lessons/$slug") {
+                            popUpTo("learn/$subjectId")
+                        }
+                    },
+                )
+            }
+
+            composable(
+                route = "learn/{subjectId}/lessons/{slug}/read",
+                arguments = listOf(
+                    navArgument("subjectId") { type = NavType.StringType },
+                    navArgument("slug") { type = NavType.StringType },
+                ),
+            ) {
+                ReadLessonScreen(onBack = { navController.popBackStack() })
+            }
+
+            composable(
+                route = "learn/{subjectId}/reviews",
+                arguments = listOf(navArgument("subjectId") { type = NavType.StringType }),
+            ) {
+                ReviewScreen(onBack = { navController.popBackStack() })
             }
 
             composable("courses") {

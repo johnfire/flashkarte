@@ -106,4 +106,74 @@
         <item quantity="one">You read %d lesson.</item>
         <item quantity="other">You read %d lessons.</item>
     </plurals>
+
+    <!-- Learn: structured lessons -->
+    <string name="learn_title">Learn</string>
+    <string name="learn_intro">Structured lessons, in order. Passing a lesson opens the ones that build on it.</string>
+    <string name="learn_to_decks">← Decks</string>
+    <string name="learn_to_learn">← Learn</string>
+    <string name="learn_to_outline">Back to the outline</string>
+    <string name="learn_to_outline_arrow">← Outline</string>
+    <string name="learn_loading">Loading…</string>
+    <string name="learn_load_error">Couldn\'t load this. Try again.</string>
+    <string name="learn_empty">No subjects yet. Ask your AI to build one.</string>
+    <string name="learn_outline_intro">What you are going to learn, in order.</string>
+    <string name="learn_no_lessons">No lessons in this subject yet.</string>
+    <string name="learn_other_lessons">Other lessons</string>
+    <string name="learn_covers">Covers: %1$s</string>
+    <string name="learn_testing_stage">Draft: still being tested</string>
+    <string name="learn_unlocks_after">Opens after you pass: %1$s</string>
+    <string name="learn_first_try">%1$d of %2$d right on the first try</string>
+    <string name="learn_start">Start</string>
+    <string name="learn_continue_lesson">Continue</string>
+    <string name="learn_read_again">Read again</string>
+    <string name="learn_screen_number">Screen %1$s</string>
+    <string name="learn_screen_of">Screen %1$d of %2$d</string>
+    <string name="learn_reread">Re-read %1$d of %2$d</string>
+    <string name="learn_back">Back</string>
+    <string name="learn_next">Next</string>
+    <string name="learn_start_questions">Start the questions</string>
+    <string name="learn_continue">Continue</string>
+    <string name="learn_review_screens">Look at the screen again</string>
+    <string name="learn_question_progress">Question %1$d of %2$d</string>
+    <string name="learn_check_answer">Check answer</string>
+    <string name="learn_correct">Right.</string>
+    <string name="learn_not_quite">Not quite.</string>
+    <string name="learn_why_right_one">Why the right answer is right:</string>
+    <string name="learn_right_option">Right answer</string>
+    <string name="learn_wrong_option">Your answer</string>
+    <string name="learn_show_screens">Show the screens</string>
+    <string name="learn_hide_screens">Hide the screens</string>
+    <string name="learn_stuck_note">This one is giving you trouble. That happens, and it can mean the lesson needs to be clearer. You can come back to it later: your place is saved, and lessons that depend on it stay locked until you pass it.</string>
+    <string name="learn_come_back_later">Come back later</string>
+    <string name="learn_passed_title">Lesson passed</string>
+    <string name="learn_passed_result">%1$d of %2$d questions right on the first try.</string>
+    <string name="learn_passed_review_note">These questions will come back for review, so they stay with you.</string>
+    <string name="learn_now_open">Now open:</string>
+    <string name="learn_paused_title">Saved for later</string>
+    <string name="learn_paused_body">Your place is saved. This lesson is not passed yet, so lessons that depend on it stay locked.</string>
+    <string name="learn_resume">Pick up where I left off</string>
+    <string name="learn_comment_open">Comment on screen %1$s</string>
+    <string name="learn_comment_label">What is unclear or wrong on screen %1$s?</string>
+    <string name="learn_comment_send">Save comment</string>
+    <string name="learn_comment_cancel">Cancel</string>
+    <string name="learn_comment_saved">Comment on screen %1$s saved. Your AI can read it.</string>
+    <string name="learn_comment_error">Couldn\'t save the comment.</string>
+    <string name="learn_review_title">Review</string>
+    <string name="learn_nothing_due">Nothing is due for review right now.</string>
+    <string name="learn_review_done">Done. It will come back later.</string>
+    <string name="learn_next_review">Next</string>
+    <string name="learn_state_locked">Locked</string>
+    <string name="learn_state_available">Ready</string>
+    <string name="learn_state_in_progress">In progress</string>
+    <string name="learn_state_passed">Passed</string>
+    <string name="learn_state_paused">Come back later</string>
+    <plurals name="learn_concept_count">
+        <item quantity="one">%1$d concept</item>
+        <item quantity="other">%1$d concepts</item>
+    </plurals>
+    <plurals name="learn_reviews_due">
+        <item quantity="one">%1$d question is due for review</item>
+        <item quantity="other">%1$d questions are due for review</item>
+    </plurals>
 </resources>

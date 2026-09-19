@@ -106,4 +106,74 @@
         <item quantity="one">Leíste %d lección.</item>
         <item quantity="other">Leíste %d lecciones.</item>
     </plurals>
+
+    <!-- Learn: structured lessons -->
+    <string name="learn_title">Aprender</string>
+    <string name="learn_intro">Lecciones estructuradas, en orden. Superar una lección abre las que se apoyan en ella.</string>
+    <string name="learn_to_decks">← Mazos</string>
+    <string name="learn_to_learn">← Aprender</string>
+    <string name="learn_to_outline">Volver al esquema</string>
+    <string name="learn_to_outline_arrow">← Esquema</string>
+    <string name="learn_loading">Cargando…</string>
+    <string name="learn_load_error">No se pudo cargar. Inténtalo de nuevo.</string>
+    <string name="learn_empty">Aún no hay temas. Pide a tu IA que cree uno.</string>
+    <string name="learn_outline_intro">Lo que vas a aprender, en orden.</string>
+    <string name="learn_no_lessons">Este tema aún no tiene lecciones.</string>
+    <string name="learn_other_lessons">Otras lecciones</string>
+    <string name="learn_covers">Trata: %1$s</string>
+    <string name="learn_testing_stage">Borrador: aún en pruebas</string>
+    <string name="learn_unlocks_after">Se abre al superar: %1$s</string>
+    <string name="learn_first_try">%1$d de %2$d correctas a la primera</string>
+    <string name="learn_start">Empezar</string>
+    <string name="learn_continue_lesson">Continuar</string>
+    <string name="learn_read_again">Leer de nuevo</string>
+    <string name="learn_screen_number">Pantalla %1$s</string>
+    <string name="learn_screen_of">Pantalla %1$d de %2$d</string>
+    <string name="learn_reread">Releer %1$d de %2$d</string>
+    <string name="learn_back">Atrás</string>
+    <string name="learn_next">Siguiente</string>
+    <string name="learn_start_questions">Empezar las preguntas</string>
+    <string name="learn_continue">Continuar</string>
+    <string name="learn_review_screens">Ver la pantalla otra vez</string>
+    <string name="learn_question_progress">Pregunta %1$d de %2$d</string>
+    <string name="learn_check_answer">Comprobar respuesta</string>
+    <string name="learn_correct">Correcto.</string>
+    <string name="learn_not_quite">No del todo.</string>
+    <string name="learn_why_right_one">Por qué la respuesta correcta es correcta:</string>
+    <string name="learn_right_option">Respuesta correcta</string>
+    <string name="learn_wrong_option">Tu respuesta</string>
+    <string name="learn_show_screens">Mostrar las pantallas</string>
+    <string name="learn_hide_screens">Ocultar las pantallas</string>
+    <string name="learn_stuck_note">Esta se te está resistiendo. Pasa, y puede significar que la lección debe ser más clara. Puedes volver más tarde: tu avance está guardado, y las lecciones que dependen de esta siguen bloqueadas hasta que la superes.</string>
+    <string name="learn_come_back_later">Volver más tarde</string>
+    <string name="learn_passed_title">Lección superada</string>
+    <string name="learn_passed_result">%1$d de %2$d preguntas correctas a la primera.</string>
+    <string name="learn_passed_review_note">Estas preguntas volverán para repasarlas, así se quedan contigo.</string>
+    <string name="learn_now_open">Ahora abiertas:</string>
+    <string name="learn_paused_title">Guardado para más tarde</string>
+    <string name="learn_paused_body">Tu avance está guardado. Esta lección aún no está superada, así que las que dependen de ella siguen bloqueadas.</string>
+    <string name="learn_resume">Seguir donde lo dejé</string>
+    <string name="learn_comment_open">Comentar la pantalla %1$s</string>
+    <string name="learn_comment_label">¿Qué no está claro o es incorrecto en la pantalla %1$s?</string>
+    <string name="learn_comment_send">Guardar comentario</string>
+    <string name="learn_comment_cancel">Cancelar</string>
+    <string name="learn_comment_saved">Comentario de la pantalla %1$s guardado. Tu IA puede leerlo.</string>
+    <string name="learn_comment_error">No se pudo guardar el comentario.</string>
+    <string name="learn_review_title">Repaso</string>
+    <string name="learn_nothing_due">Ahora mismo no hay nada que repasar.</string>
+    <string name="learn_review_done">Hecho. Volverá más adelante.</string>
+    <string name="learn_next_review">Siguiente</string>
+    <string name="learn_state_locked">Bloqueada</string>
+    <string name="learn_state_available">Lista</string>
+    <string name="learn_state_in_progress">En curso</string>
+    <string name="learn_state_passed">Superada</string>
+    <string name="learn_state_paused">Volver más tarde</string>
+    <plurals name="learn_concept_count">
+        <item quantity="one">%1$d concepto</item>
+        <item quantity="other">%1$d conceptos</item>
+    </plurals>
+    <plurals name="learn_reviews_due">
+        <item quantity="one">%1$d pregunta toca repasar</item>
+        <item quantity="other">%1$d preguntas tocan repasar</item>
+    </plurals>
 </resources>

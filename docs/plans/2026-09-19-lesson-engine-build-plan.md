@@ -76,7 +76,7 @@ whether 4 to 10 screens per lesson is right, whether the questions test what was
 whether the lesson-level graph derived from the concept graph is sensible. Findings feed back
 before more slices are built on top.
 
-## Slice 4: Android learner UI (L)
+## Slice 4: Android learner UI (L) — **DONE 2026-09-19** (see "What slice 4 decided and found" below)
 
 The same flows in Compose, plus a Kotlin mirror of the shared logic with parity tests. Needs a
 decision on offline behaviour (below). Compiled and unit-tested here; the screens themselves cannot
@@ -264,3 +264,43 @@ screen, audited, in the GDPR record. The comment text is described to the AI as 
 a new screen starts at the top and moves keyboard focus to its heading); an owner-only view listing all open
 comments in the app (your AI reads them through MCP; say if you want a screen for it); a Learn entry in the
 Android app (slice 4); the entry check.
+
+## What slice 4 decided and found
+
+Built and verified locally: 25 new Android unit tests (261 in all, 0 failing), 7 on-device screen tests run
+on an emulator, a debug build that launches, and a server test that pins the API's real responses. Nothing
+pushed. **A push publishes the Android app to the Play internal track**, so this one needs your say-so
+specifically.
+
+**What exists:** the same flows as the web, drawn in Compose. A **Learn** button on the deck list opens
+your subjects, then a subject's outline (state in words, what a locked lesson waits for, reviews due), then a
+lesson: numbered screens with Back and Next, the question loop with the verdict and reasons held until you go
+on, "come back later", open book, comment on a screen, the passed screen (result and what opened), "Read
+again" for a passed lesson, and reviews. Every string is in English, German, Spanish and French.
+
+**The offline decision (yours, still open), resolved by default to online-only:** the server holds each
+learner's session and the rules, so the app is a renderer that sends "next", "back" or an answer and draws
+the step it gets back, like Courses and the Library. That is why there is **no Kotlin copy of the lesson
+rules and no parity tests**: there is only one copy of the rules. It also means lessons need a connection.
+Downloading a whole lesson for offline study would need the rules on the device, a local database migration
+and a sync change; that stays possible later and nothing here blocks it. Say if you want it.
+
+**How the app and server are kept from drifting apart:** the server's own test captures the learner API's
+real responses (every screen, question, answer, pass, pause, review, with every block type) into files under
+`android/app/src/test/resources/learner-contract/`. That server test fails if a response changes shape
+without the files being regenerated (`UPDATE_LEARNER_CONTRACT=1`), and the Android tests decode the same
+files with the app's own types. Both the Android unit tests and the on-device tests use them.
+
+**A block or step the app does not know is skipped, not a crash,** so a newer server never breaks an older
+app (checked by a test).
+
+**What I could and could not check on the emulator:** the screens were drawn on a device from the real
+responses (scripted network, real repository, view models and screens) and I looked at the screenshots, in
+light and dark. **I could not run the real app against a real server**: the app talks only to production over
+a pinned certificate, so signing in and learning a lesson end to end on a phone has to be done by you on a
+build from the internal track. TalkBack was not run (labels, headings and roles are set, but I have not
+listened to it), and the emulator's tiny screen means the layout has not been judged on a real phone.
+
+**Not in slice 4:** images and formulas are placeholders (alt text; LaTeX with its spoken text) until
+slices 5 and 6; "I need more on this" until slice 7; scroll position within a screen is not remembered (a
+new screen starts at the top).

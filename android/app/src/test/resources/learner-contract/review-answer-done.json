@@ -1,0 +1,35 @@
+{
+  "question_id": "<uuid>",
+  "answer": {
+    "correct": true,
+    "chosen_position": 2,
+    "correct_position": 2,
+    "reason": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Because it is."
+          }
+        ]
+      }
+    ],
+    "correct_reason": [
+      {
+        "type": "paragraph",
+        "spans": [
+          {
+            "text": "Because it is."
+          }
+        ]
+      }
+    ],
+    "misses": 1,
+    "help_offered": false
+  },
+  "step": {
+    "kind": "review_done",
+    "first_try": "wrong"
+  },
+  "next_due_at": "<time>"
+}

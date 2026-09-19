@@ -106,4 +106,74 @@
         <item quantity="one">Du hast %d Lektion gelesen.</item>
         <item quantity="other">Du hast %d Lektionen gelesen.</item>
     </plurals>
+
+    <!-- Learn: structured lessons -->
+    <string name="learn_title">Lernen</string>
+    <string name="learn_intro">Strukturierte Lektionen der Reihe nach. Wer eine Lektion besteht, schaltet die darauf aufbauenden frei.</string>
+    <string name="learn_to_decks">← Decks</string>
+    <string name="learn_to_learn">← Lernen</string>
+    <string name="learn_to_outline">Zurück zur Übersicht</string>
+    <string name="learn_to_outline_arrow">← Übersicht</string>
+    <string name="learn_loading">Wird geladen …</string>
+    <string name="learn_load_error">Konnte nicht geladen werden. Bitte erneut versuchen.</string>
+    <string name="learn_empty">Noch keine Themen. Bitte deine KI, eines zu erstellen.</string>
+    <string name="learn_outline_intro">Was du lernen wirst, der Reihe nach.</string>
+    <string name="learn_no_lessons">In diesem Thema gibt es noch keine Lektionen.</string>
+    <string name="learn_other_lessons">Weitere Lektionen</string>
+    <string name="learn_covers">Behandelt: %1$s</string>
+    <string name="learn_testing_stage">Entwurf: wird noch getestet</string>
+    <string name="learn_unlocks_after">Wird frei, wenn du bestehst: %1$s</string>
+    <string name="learn_first_try">%1$d von %2$d beim ersten Versuch richtig</string>
+    <string name="learn_start">Starten</string>
+    <string name="learn_continue_lesson">Weiter</string>
+    <string name="learn_read_again">Nochmal lesen</string>
+    <string name="learn_screen_number">Seite %1$s</string>
+    <string name="learn_screen_of">Seite %1$d von %2$d</string>
+    <string name="learn_reread">Nochmal lesen %1$d von %2$d</string>
+    <string name="learn_back">Zurück</string>
+    <string name="learn_next">Weiter</string>
+    <string name="learn_start_questions">Fragen beginnen</string>
+    <string name="learn_continue">Weiter</string>
+    <string name="learn_review_screens">Seite nochmal ansehen</string>
+    <string name="learn_question_progress">Frage %1$d von %2$d</string>
+    <string name="learn_check_answer">Antwort prüfen</string>
+    <string name="learn_correct">Richtig.</string>
+    <string name="learn_not_quite">Nicht ganz.</string>
+    <string name="learn_why_right_one">Warum die richtige Antwort richtig ist:</string>
+    <string name="learn_right_option">Richtige Antwort</string>
+    <string name="learn_wrong_option">Deine Antwort</string>
+    <string name="learn_show_screens">Seiten anzeigen</string>
+    <string name="learn_hide_screens">Seiten ausblenden</string>
+    <string name="learn_stuck_note">Diese Frage macht dir Mühe. Das passiert, und es kann heißen, dass die Lektion klarer werden muss. Du kannst später darauf zurückkommen: Dein Stand ist gespeichert, und Lektionen, die darauf aufbauen, bleiben gesperrt, bis du bestehst.</string>
+    <string name="learn_come_back_later">Später weitermachen</string>
+    <string name="learn_passed_title">Lektion bestanden</string>
+    <string name="learn_passed_result">%1$d von %2$d Fragen beim ersten Versuch richtig.</string>
+    <string name="learn_passed_review_note">Diese Fragen kommen zur Wiederholung zurück, damit sie hängen bleiben.</string>
+    <string name="learn_now_open">Jetzt frei:</string>
+    <string name="learn_paused_title">Für später gespeichert</string>
+    <string name="learn_paused_body">Dein Stand ist gespeichert. Diese Lektion ist noch nicht bestanden, deshalb bleiben darauf aufbauende Lektionen gesperrt.</string>
+    <string name="learn_resume">Dort weitermachen, wo ich war</string>
+    <string name="learn_comment_open">Seite %1$s kommentieren</string>
+    <string name="learn_comment_label">Was ist auf Seite %1$s unklar oder falsch?</string>
+    <string name="learn_comment_send">Kommentar speichern</string>
+    <string name="learn_comment_cancel">Abbrechen</string>
+    <string name="learn_comment_saved">Kommentar zu Seite %1$s gespeichert. Deine KI kann ihn lesen.</string>
+    <string name="learn_comment_error">Der Kommentar konnte nicht gespeichert werden.</string>
+    <string name="learn_review_title">Wiederholung</string>
+    <string name="learn_nothing_due">Gerade ist nichts zur Wiederholung fällig.</string>
+    <string name="learn_review_done">Fertig. Die Frage kommt später wieder.</string>
+    <string name="learn_next_review">Weiter</string>
+    <string name="learn_state_locked">Gesperrt</string>
+    <string name="learn_state_available">Bereit</string>
+    <string name="learn_state_in_progress">In Arbeit</string>
+    <string name="learn_state_passed">Bestanden</string>
+    <string name="learn_state_paused">Später weitermachen</string>
+    <plurals name="learn_concept_count">
+        <item quantity="one">%1$d Konzept</item>
+        <item quantity="other">%1$d Konzepte</item>
+    </plurals>
+    <plurals name="learn_reviews_due">
+        <item quantity="one">%1$d Frage ist zur Wiederholung fällig</item>
+        <item quantity="other">%1$d Fragen sind zur Wiederholung fällig</item>
+    </plurals>
 </resources>

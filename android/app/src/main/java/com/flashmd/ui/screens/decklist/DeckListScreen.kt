@@ -25,6 +25,7 @@ fun DeckListScreen(
     onPlayDeck: (String) -> Unit,
     onStatsDeck: (String) -> Unit,
     onHelp: () -> Unit,
+    onLearn: () -> Unit = {},
     viewModel: DeckListViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -37,6 +38,9 @@ fun DeckListScreen(
                 actions = {
                     if (pending > 0) {
                         SyncStatusChip(pending, onRetry = { viewModel.onRetrySync() })
+                    }
+                    TextButton(onClick = onLearn) {
+                        Text(stringResource(R.string.learn_title))
                     }
                     TextButton(onClick = onHelp) {
                         Text(stringResource(R.string.help_title))
