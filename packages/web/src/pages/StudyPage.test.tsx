@@ -9,7 +9,7 @@ import "../i18n";
 
 vi.mock("../api/client", () => ({
   api: {
-    study: { batch: vi.fn(), review: vi.fn() },
+    study: { batch: vi.fn(), review: vi.fn(), markRead: vi.fn() },
     decks: { settings: vi.fn(), get: vi.fn() },
   },
   ApiError: class ApiError extends Error {},
@@ -23,7 +23,11 @@ vi.mock("../auth/AuthContext", () => ({
 }));
 
 const mockApi = api as unknown as {
-  study: { batch: ReturnType<typeof vi.fn>; review: ReturnType<typeof vi.fn> };
+  study: {
+    batch: ReturnType<typeof vi.fn>;
+    review: ReturnType<typeof vi.fn>;
+    markRead: ReturnType<typeof vi.fn>;
+  };
   decks: { settings: ReturnType<typeof vi.fn>; get: ReturnType<typeof vi.fn> };
 };
 const mockReportClientError = reportClientError as ReturnType<typeof vi.fn>;
@@ -620,5 +624,138 @@ describe("StudyPage", () => {
       expect(await screen.findByText("Q2")).toBeInTheDocument();
       expect(mockReportClientError).toHaveBeenCalled();
     });
+  });
+});
+
+describe("StudyPage: reading cards (lessons)", () => {
+  const lesson = {
+    id: "l1",
+    type: "read",
+    content: {
+      front: "How a dot product measures similarity",
+      back: "It multiplies matching entries.\n\n- large: same direction\n- zero: unrelated",
+    },
+    category: "Basics",
+    position: 0,
+  };
+  const question = {
+    id: "q1",
+    type: "basic",
+    content: { front: "Front?", back: "Back!" },
+    category: null,
+    position: 1,
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    resetVoiceCache();
+    mockUser = null;
+    mockApi.decks.settings.mockResolvedValue(DECK_SILENT);
+    mockApi.decks.get.mockResolvedValue({ cards: [] });
+    mockApi.study.review.mockResolvedValue({});
+    mockApi.study.markRead.mockResolvedValue({ recorded: 1 });
+    installSpeech([]);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    window.sessionStorage.clear();
+    window.localStorage.clear();
+  });
+
+  test("shows a lesson to read, with no answer to reveal and no rating buttons", async () => {
+    mockApi.study.batch.mockResolvedValue([lesson, question]);
+    renderStudy();
+
+    expect(
+      await screen.findByText("How a dot product measures similarity"),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/It multiplies matching entries/),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/isn't graded/)).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Got it" })).toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: /Show answer/ })).toBeNull();
+    expect(screen.queryByRole("button", { name: "Good" })).toBeNull();
+  });
+
+  test("keeps the body's line breaks so lists stay readable", async () => {
+    mockApi.study.batch.mockResolvedValue([lesson]);
+    renderStudy();
+    const body = await screen.findByText(/It multiplies matching entries/);
+    expect(body.textContent).toContain(
+      "\n- large: same direction\n- zero: unrelated",
+    );
+    expect(body.closest(".whitespace-pre-wrap")).not.toBeNull();
+  });
+
+  test("Got it records the read (never a review) and moves on to the next card", async () => {
+    mockApi.study.batch.mockResolvedValue([lesson, question]);
+    renderStudy();
+
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Got it" }),
+    );
+
+    expect(mockApi.study.markRead).toHaveBeenCalledWith("l1");
+    expect(mockApi.study.review).not.toHaveBeenCalled();
+    expect(await screen.findByText("Front?")).toBeInTheDocument();
+  });
+
+  test("Enter also acknowledges a lesson", async () => {
+    mockApi.study.batch.mockResolvedValue([lesson, question]);
+    renderStudy();
+    await screen.findByRole("button", { name: "Got it" });
+    await userEvent.keyboard("{Enter}");
+    expect(mockApi.study.markRead).toHaveBeenCalledWith("l1");
+  });
+
+  test("a session of only lessons ends by saying what was read, not 'nothing due'", async () => {
+    mockApi.study.batch.mockResolvedValue([lesson]);
+    renderStudy();
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Got it" }),
+    );
+    expect(await screen.findByText("You read 1 lesson.")).toBeInTheDocument();
+    expect(screen.queryByText(/Nothing due/)).toBeNull();
+  });
+
+  test("reviewing questions still reports reviews when lessons came first", async () => {
+    mockApi.study.batch.mockResolvedValue([lesson, question]);
+    renderStudy();
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Got it" }),
+    );
+    await userEvent.click(
+      await screen.findByRole("button", { name: /Show answer/ }),
+    );
+    await userEvent.click(screen.getByRole("button", { name: "Good" }));
+    expect(await screen.findByText("You reviewed 1 card.")).toBeInTheDocument();
+  });
+
+  test("a failed read is reported but never traps the learner on the lesson", async () => {
+    mockApi.study.markRead.mockRejectedValue(new Error("offline"));
+    mockApi.study.batch.mockResolvedValue([lesson, question]);
+    renderStudy();
+
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Got it" }),
+    );
+
+    expect(await screen.findByText("Front?")).toBeInTheDocument();
+    expect(mockReportClientError).toHaveBeenCalledWith(
+      expect.objectContaining({ context: "StudyPage.markRead" }),
+    );
+  });
+
+  test("a lesson's body is never used as a wrong answer in Choice mode", async () => {
+    window.localStorage.setItem("flashkarte_study_mode", "choice");
+    mockApi.study.batch.mockResolvedValue([lesson, question]);
+    renderStudy();
+    await userEvent.click(
+      await screen.findByRole("button", { name: "Got it" }),
+    );
+    await screen.findByText("Front?");
+    expect(screen.queryByText(/It multiplies matching entries/)).toBeNull();
   });
 });

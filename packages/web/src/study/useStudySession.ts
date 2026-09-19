@@ -30,6 +30,11 @@ function isFlippable(card: StudyCard): boolean {
   return typeof front === "string" && front.trim() !== "";
 }
 
+/** A lesson (reading card): read and acknowledged, never rated or scheduled. */
+function isLesson(card: StudyCard): boolean {
+  return card.type === "read";
+}
+
 /**
  * What a card asks. A sense card (Spec 10) is prompted by its hint while its word is
  * still chained and by its context sentence once the word has graduated; the phase is
@@ -77,6 +82,8 @@ export function useStudySession(deckId: string | undefined) {
   // Distinct cards, not reviews: a lapsed card is re-queued and rated again in
   // the same session, and "reviewed 12 cards" must not count it twice.
   const [reviewedIds, setReviewedIds] = useState<Set<string>>(new Set());
+  // Lessons read this session: not reviews, so they are counted apart.
+  const [readIds, setReadIds] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [unstudiable, setUnstudiable] = useState(false);
 
@@ -102,7 +109,10 @@ export function useStudySession(deckId: string | undefined) {
       // same reasoning as the verification gate below.
       setUnstudiable(batch.length > 0 && flippable.length === 0);
       setCards(flippable);
-      setSessionPool(flippable.map((c) => c.content.back));
+      // Distractors come from real answers; a lesson body is not one.
+      setSessionPool(
+        flippable.filter((c) => !isLesson(c)).map((c) => c.content.back),
+      );
 
       // Diagnostic cards' remediation targets are ordinary cards elsewhere in
       // the deck (Spec 01). The study batch only carries due cards, so fetch
@@ -146,7 +156,7 @@ export function useStudySession(deckId: string | undefined) {
   // depend on this object's identity — a fresh one each render would re-speak.
   const spoken = useMemo(
     () =>
-      current
+      current && !isLesson(current)
         ? { front: cardPrompt(current), back: current.content.back }
         : null,
     [current],
@@ -164,7 +174,7 @@ export function useStudySession(deckId: string | undefined) {
   // not on every render, so a re-render mid-pick (e.g. a speech state change)
   // doesn't reshuffle the options out from under the learner's selection.
   useEffect(() => {
-    if (!current || mode !== "choice") {
+    if (!current || isLesson(current) || mode !== "choice") {
       setOptions([]);
       setSelectedOption(null);
       return;
@@ -215,6 +225,27 @@ export function useStudySession(deckId: string | undefined) {
     setIdx((i) => i + 1);
   }
 
+  /**
+   * "Got it" on a lesson. Fails open: the read is best-effort, so a network error
+   * is reported and the learner moves on (the lesson is offered again next time)
+   * instead of being stuck on a screen that only asks them to continue.
+   */
+  async function markRead() {
+    if (!cards) return;
+    const card = cards[idx];
+    try {
+      await api.study.markRead(card.id);
+    } catch (err) {
+      reportClientError({
+        message: err instanceof Error ? err.message : String(err),
+        context: "StudyPage.markRead",
+      });
+    }
+    setReadIds((seen) => new Set(seen).add(card.id));
+    setRevealed(false);
+    setIdx((i) => i + 1);
+  }
+
   function chooseAnswer(option: StudyOption) {
     if (selectedOption) return;
     setSelectedOption(option);
@@ -256,8 +287,17 @@ export function useStudySession(deckId: string | undefined) {
   // Choice-mode keyboard shortcuts: digits pick an option before answering,
   // Space/Enter advances afterward (or dismisses a remediation interlude).
   useEffect(() => {
-    if (mode !== "choice" || !current) return;
+    if (!current) return;
+    const onLesson = isLesson(current);
+    if (mode !== "choice" && !onLesson) return;
     function onKeyDown(e: KeyboardEvent) {
+      if (onLesson) {
+        if (e.key === " " || e.key === "Enter") {
+          e.preventDefault();
+          markRead();
+        }
+        return;
+      }
       if (remediation) {
         if (e.key === " " || e.key === "Enter") {
           e.preventDefault();
@@ -292,6 +332,9 @@ export function useStudySession(deckId: string | undefined) {
     promptText: current ? cardPrompt(current) : "",
     done: cards !== null && idx >= cards.length,
     reviewedCount: reviewedIds.size,
+    readCount: readIds.size,
+    isReading: current ? isLesson(current) : false,
+    markRead,
     revealed,
     reveal: () => setRevealed(true),
     grade,

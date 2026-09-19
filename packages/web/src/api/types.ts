@@ -112,6 +112,9 @@ export interface DeckWithCounts extends DeckSpeech {
   updated_at: string;
   card_count: number;
   due_count: number;
+  // Lessons (reading cards) are counted apart from the review numbers above.
+  lesson_count?: number;
+  unread_lesson_count?: number;
   is_public: boolean;
   // True for an official (app-owned) deck the caller has subscribed to.
   // Owner-only actions (rename/delete/share/speech) are hidden for these in
@@ -179,6 +182,9 @@ export interface DeckDetail {
 
 export interface StudyCard {
   id: string;
+  // "read" for a lesson (reading card): shown for reading and acknowledged with
+  // "Got it", never rated. Absent or "basic" for every other card.
+  type?: string;
   // `sense` is present only on cards that are one meaning of a word block (Spec 10);
   // `label`/`options` only on a diagnostic card (Spec 01) -- one option targets
   // the reserved CORRECT_TARGET, the rest route to remediation labels or "end".

@@ -266,7 +266,9 @@
     "uncategorized": "Unkategorisiert",
     "itemCount_one": "{{count}} Eintrag",
     "itemCount_other": "{{count}} Einträge",
-    "manage": "Verwalten"
+    "manage": "Verwalten",
+    "lessonsToRead_one": "{{count}} Lektion zu lesen",
+    "lessonsToRead_other": "{{count}} Lektionen zu lesen"
   },
   "courses": {
     "title": "Meine Kurse",
@@ -346,7 +348,12 @@
     "continue": "Weiter",
     "remediation": {
       "title": "Das klären wir noch"
-    }
+    },
+    "reading": "Lesen",
+    "readingHint": "Lies das, dann geht's weiter. Das wird nicht bewertet.",
+    "gotIt": "Verstanden",
+    "readOnly_one": "Du hast {{count}} Lektion gelesen.",
+    "readOnly_other": "Du hast {{count}} Lektionen gelesen."
   },
   "library": {
     "title": "Bibliothek",

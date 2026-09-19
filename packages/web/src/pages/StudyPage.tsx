@@ -7,6 +7,18 @@ import { StudyHeader } from "./StudyHeader";
 import { FlipStudyCard } from "./FlipStudyCard";
 import { ChoicePanel } from "./ChoicePanel";
 import { RemediationInterlude } from "./RemediationInterlude";
+import { ReadingCard } from "./ReadingCard";
+
+/** What to say when a session ends: reviews, lessons read, or nothing to do. */
+function completionMessage(
+  t: (key: string, options?: Record<string, unknown>) => string,
+  reviewed: number,
+  read: number,
+): string {
+  if (reviewed > 0) return t("study.reviewed", { count: reviewed });
+  if (read > 0) return t("study.readOnly", { count: read });
+  return t("study.nothingDue");
+}
 
 export function StudyPage() {
   const { t } = useTranslation();
@@ -35,11 +47,7 @@ export function StudyPage() {
     return (
       <StudyNotice
         title={t("study.complete")}
-        body={
-          s.reviewedCount === 0
-            ? t("study.nothingDue")
-            : t("study.reviewed", { count: s.reviewedCount })
-        }
+        body={completionMessage(t, s.reviewedCount, s.readCount)}
       />
     );
   }
@@ -75,6 +83,21 @@ export function StudyPage() {
   }
 
   const cardNumberLabel = t("study.cardNumber", { number: card.position + 1 });
+
+  if (s.isReading) {
+    return (
+      <div className="mx-auto max-w-xl p-4">
+        {header}
+        <ReadingCard
+          cardNumberLabel={cardNumberLabel}
+          category={card.category}
+          title={card.content.front}
+          body={card.content.back}
+          onGotIt={s.markRead}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-xl p-4">

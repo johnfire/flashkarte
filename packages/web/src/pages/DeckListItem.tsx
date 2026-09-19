@@ -38,6 +38,17 @@ export function DeckListItem({
         <p className="text-sm text-gray-500 dark:text-gray-400">
           {t("decks.cardCount", { count: d.card_count })} ·{" "}
           {t("decks.dueCount", { count: d.due_count })}
+          {Number(d.unread_lesson_count ?? 0) > 0 && (
+            <>
+              {" "}
+              ·{" "}
+              <span className="font-medium text-indigo-600 dark:text-indigo-300">
+                {t("decks.lessonsToRead", {
+                  count: Number(d.unread_lesson_count),
+                })}
+              </span>
+            </>
+          )}
         </p>
         <div className="mt-1.5 flex flex-wrap gap-1.5 text-xs">
           <span className="rounded bg-gray-100 px-1.5 py-0.5 text-gray-600 dark:bg-gray-700 dark:text-gray-300">

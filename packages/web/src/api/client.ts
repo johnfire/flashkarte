@@ -431,7 +431,15 @@ export const api = {
       request<PublicDeckPreview>(`/public/library/${id}/preview`),
   },
   study: {
-    batch: (deckId: string) => request<StudyCard[]>(`/decks/${deckId}/study`),
+    // `lessons=1` opts in to reading cards; the server never sends them otherwise.
+    batch: (deckId: string) =>
+      request<StudyCard[]>(`/decks/${deckId}/study?lessons=1`),
+    // Idempotent: reading a lesson again changes nothing.
+    markRead: (cardId: string) =>
+      request<{ recorded: number }>("/study/reads", {
+        method: "POST",
+        body: JSON.stringify({ reads: [{ card_id: cardId }] }),
+      }),
     stats: (deckId: string) => request<DeckStats>(`/decks/${deckId}/stats`),
     // optionIndex identifies which authored option a diagnostic-card (Spec 01)
     // pick chose, for the review_events ledger; omitted for ordinary cards and

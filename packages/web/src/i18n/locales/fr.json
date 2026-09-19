@@ -266,7 +266,9 @@
     "uncategorized": "Sans catégorie",
     "itemCount_one": "{{count}} élément",
     "itemCount_other": "{{count}} éléments",
-    "manage": "Gérer"
+    "manage": "Gérer",
+    "lessonsToRead_one": "{{count}} leçon à lire",
+    "lessonsToRead_other": "{{count}} leçons à lire"
   },
   "courses": {
     "title": "Mes cours",
@@ -346,7 +348,12 @@
     "continue": "Continuer",
     "remediation": {
       "title": "Éclaircissons ça"
-    }
+    },
+    "reading": "Lecture",
+    "readingHint": "Lis ceci, puis continue. Ce n'est pas noté.",
+    "gotIt": "Compris",
+    "readOnly_one": "Tu as lu {{count}} leçon.",
+    "readOnly_other": "Tu as lu {{count}} leçons."
   },
   "library": {
     "title": "Bibliothèque",

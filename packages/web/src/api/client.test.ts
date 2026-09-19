@@ -119,3 +119,31 @@ describe("api client", () => {
     await expect(api.decks.create("x")).rejects.toBeInstanceOf(ApiError);
   });
 });
+
+describe("api client: reading cards", () => {
+  beforeEach(() => {
+    setAccessToken(null);
+    vi.restoreAllMocks();
+  });
+
+  test("the study batch opts in to lessons", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(200, []));
+    vi.stubGlobal("fetch", fetchMock);
+    await api.study.batch("d1");
+    expect(fetchMock.mock.calls[0][0]).toBe("/api/decks/d1/study?lessons=1");
+  });
+
+  test("markRead posts a single read", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValue(jsonResponse(200, { recorded: 1 }));
+    vi.stubGlobal("fetch", fetchMock);
+    await api.study.markRead("l1");
+    const [url, opts] = fetchMock.mock.calls[0];
+    expect(url).toBe("/api/study/reads");
+    expect(opts.method).toBe("POST");
+    expect(JSON.parse(opts.body as string)).toEqual({
+      reads: [{ card_id: "l1" }],
+    });
+  });
+});

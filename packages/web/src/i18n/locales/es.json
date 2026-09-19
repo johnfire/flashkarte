@@ -266,7 +266,9 @@
     "uncategorized": "Sin categoría",
     "itemCount_one": "{{count}} elemento",
     "itemCount_other": "{{count}} elementos",
-    "manage": "Administrar"
+    "manage": "Administrar",
+    "lessonsToRead_one": "{{count}} lección por leer",
+    "lessonsToRead_other": "{{count}} lecciones por leer"
   },
   "courses": {
     "title": "Mis cursos",
@@ -346,7 +348,12 @@
     "continue": "Continuar",
     "remediation": {
       "title": "Aclaremos eso"
-    }
+    },
+    "reading": "Lectura",
+    "readingHint": "Léelo y continúa. No se puntúa.",
+    "gotIt": "Entendido",
+    "readOnly_one": "Leíste {{count}} lección.",
+    "readOnly_other": "Leíste {{count}} lecciones."
   },
   "library": {
     "title": "Biblioteca",
