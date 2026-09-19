@@ -16,14 +16,31 @@ actual source to write cards you're confident are accurate -- a good rule \
 of thumb: if you can't point to where a fact came from, don't put it in a \
 card.
 
-3. **Design a syllabus.** Break the goal into an ordered sequence of \
+3. **Model the subject as a prerequisite graph before writing any cards.** \
+A course is only as good as its order, and order should come from what \
+depends on what, not from a textbook's chapter order. List the concepts \
+(atomic: one thing assessable by one question; split anything that needs \
+"and"), then draw edges. An edge from A to B is "requires" only if a bright \
+newcomer could not follow B's explanation without A; if A merely helps, use \
+"suggests". Data-flow order (how a machine runs) is not learning order. \
+Write a one-sentence reason for every "requires" edge, name what the course \
+assumes but does not teach as "assumption" concepts, and add a "map" \
+concept for an ungated overview to read first. Then call import_subject \
+(see its description for the rules) and lint_subject. **The graph is a \
+hypothesis, not a fact: show the user the edges and their reasons and ask \
+them to correct it before building on it** -- they are the only check on \
+whether it is right, and a clean lint only means it is consistent. Link \
+cards to their concepts with link_concept_cards as you author them.
+
+4. **Design a syllabus** from the graph's route, prerequisites first, \
+grouping roughly 5-10 concepts per unit. Break the goal into an ordered sequence of \
 right-sized units (each a deck of maybe 20-100 cards, one clear topic). \
 Create the course first with create_course, then create each unit with \
 create_deck's course_id parameter, in learning order -- this attaches each \
 deck to the course as you go instead of create-then-attach. Use \
 add_deck_to_course only for an already-existing deck you want to fold in.
 
-4. **Author each deck to fit what's actually being taught, not for its own \
+5. **Author each deck to fit what's actually being taught, not for its own \
 sake:**
    - Plain front/back for straightforward facts and definitions.
    - Diagnostic (multiple-choice) cards -- see create_deck's own \
@@ -38,7 +55,7 @@ distinct meanings.
    - Do NOT use "@concept"/"@depth" tags -- that syntax isn't implemented \
 yet and would corrupt card content.
 
-5. **Review the structure with the user** before considering it done -- \
+6. **Review the structure with the user** before considering it done -- \
 show them the course (get_course lists it with each deck's card count) and \
 ask if the sequencing and depth feel right, rather than silently building \
 everything and walking away.

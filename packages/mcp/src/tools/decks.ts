@@ -1,7 +1,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { get, post, patch, del } from "../api";
-import { logger } from "../logger";
+import { asText, runTool } from "./tool-runner";
 
 const MARKDOWN_HELP =
   "Markdown deck format — one `# Title` line, optional `## Category` lines to " +
@@ -100,37 +100,6 @@ function speechPatch(input: {
     patchBody.speechAutoplay = input.speech_autoplay;
   if (input.speech_rate !== undefined) patchBody.speechRate = input.speech_rate;
   return patchBody;
-}
-
-function asText(payload: unknown) {
-  return {
-    content: [
-      { type: "text" as const, text: JSON.stringify(payload, null, 2) },
-    ],
-  };
-}
-
-async function runTool<T>(
-  toolName: string,
-  action: () => Promise<T>,
-): Promise<T> {
-  const startedAt = Date.now();
-  logger.info("mcp.tool", "started", { toolName });
-  try {
-    const response = await action();
-    logger.info("mcp.tool", "completed", {
-      toolName,
-      durationMs: Date.now() - startedAt,
-    });
-    return response;
-  } catch (error) {
-    logger.error("mcp.tool", "failed", {
-      toolName,
-      durationMs: Date.now() - startedAt,
-      error: error instanceof Error ? error.message : String(error),
-    });
-    throw error;
-  }
 }
 
 export function registerDeckTools(server: McpServer) {

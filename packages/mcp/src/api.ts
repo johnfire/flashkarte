@@ -50,6 +50,8 @@ export const post = <T = unknown>(path: string, body?: unknown) =>
   api<T>("POST", path, body);
 export const patch = <T = unknown>(path: string, body?: unknown) =>
   api<T>("PATCH", path, body);
+export const put = <T = unknown>(path: string, body?: unknown) =>
+  api<T>("PUT", path, body);
 export const del = <T = unknown>(path: string) => api<T>("DELETE", path);
 
 interface LoginResult {
