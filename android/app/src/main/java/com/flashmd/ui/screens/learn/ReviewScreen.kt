@@ -32,8 +32,13 @@ import com.flashmd.data.remote.dto.ReviewDoneStepDto
 
 /** Questions that have come due, asked one at a time. */
 @Composable
-fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel()) {
+fun ReviewScreen(
+    onBack: () -> Unit,
+    viewModel: ReviewViewModel = hiltViewModel(),
+    images: LessonImages = rememberLessonImages(viewModel.subjectId),
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    androidx.compose.runtime.CompositionLocalProvider(LocalLessonImages provides images) {
     Scaffold(topBar = { LearnTopBar(stringResource(R.string.learn_review_title), onBack) }) { padding ->
         Box(Modifier.fillMaxSize().padding(padding)) {
             if (state.busy && state.step == null && state.feedback == null) {
@@ -90,5 +95,6 @@ fun ReviewScreen(onBack: () -> Unit, viewModel: ReviewViewModel = hiltViewModel(
                 }
             }
         }
+    }
     }
 }

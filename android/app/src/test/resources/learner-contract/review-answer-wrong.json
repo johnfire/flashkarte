@@ -104,10 +104,16 @@
       },
       {
         "alt": "A diagram",
-        "src": "/schematics/example.svg",
+        "src": "asset:0a1b2c3d-0000-4000-8000-000000000001",
         "type": "image",
         "caption": "Figure 1",
         "display": "expandable"
+      },
+      {
+        "alt": "A web picture",
+        "src": "https://example.com/rc.svg",
+        "type": "image",
+        "display": "inline"
       },
       {
         "type": "formula",

@@ -176,4 +176,10 @@
         <item quantity="one">%1$d pregunta toca repasar</item>
         <item quantity="other">%1$d preguntas tocan repasar</item>
     </plurals>
+    <string name="learn_show_diagram">Mostrar diagrama</string>
+    <string name="learn_close_diagram">Cerrar</string>
+    <string name="learn_zoom_in">Acercar</string>
+    <string name="learn_zoom_out">Alejar</string>
+    <string name="learn_zoom_fit">Ajustar a la pantalla</string>
+    <string name="learn_image_unavailable">No se pudo cargar esta imagen.</string>
 </resources>

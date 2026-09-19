@@ -82,7 +82,7 @@ The same flows in Compose, plus a Kotlin mirror of the shared logic with parity 
 decision on offline behaviour (below). Compiled and unit-tested here; the screens themselves cannot
 be looked at without an emulator, so that is stated plainly in the commit.
 
-## Slice 5: images (S/M)
+## Slice 5: images (S/M) — **DONE 2026-09-19** (see "What slice 5 decided and found" below)
 
 Inline and expandable ("Show diagram", full-screen, pinch-zoom, return to the same scroll position)
 on both platforms, and the **asset store**: SVGs stored in the database, cleaned by the server and served
@@ -304,3 +304,47 @@ listened to it), and the emulator's tiny screen means the layout has not been ju
 **Not in slice 4:** images and formulas are placeholders (alt text; LaTeX with its spoken text) until
 slices 5 and 6; "I need more on this" until slice 7; scroll position within a screen is not remembered (a
 new screen starts at the top).
+
+## What slice 5 decided and found
+
+Built and verified locally: sanitizer tests against known SVG attack forms (with mutation checks that
+loosening it fails a test), real-Postgres integration and HTTP tests, web component tests, the Playwright
+lesson spec with a real diagram (axe in light, dark and the open dialog), Android unit tests, and on-device
+tests on the emulator with screenshots. Nothing pushed.
+
+**What exists:** an AI (or you) stores a diagram with the MCP tool `create_image` and gets back a `src`
+(`asset:<id>`) for an image block; `list_images` and `delete_image` complete it. Screens show it **inline**
+or as an **expandable** diagram: a "Show diagram" button opens it full-screen with zoom (pinch on a phone,
+buttons for anyone who cannot pinch) and closes back to the same place. On web the picture is fetched with
+your sign-in and shown as a data URL; on Android it goes through an image loader that uses the app's own
+signed-in client.
+
+**Decisions taken while building** (flag any you disagree with):
+
+1. **An allowlist sanitizer, not a blocklist.** Only known drawing elements and attributes survive. Scripts,
+   event handlers, external links, `<style>`, `<image>`, embedded HTML and animation are removed, and the
+   reply lists what was removed so the AI can fix its source. A file that is not well-formed SVG, has a
+   DOCTYPE (so no entity tricks), lacks a `viewBox`, or is too large or deep is refused, not repaired.
+2. **Several layers, not one.** Besides the sanitizer, pictures are shown as images (where scripts and outside
+   requests never run), and the server serves them with a policy that lets nothing run or load.
+3. **Stored diagrams need the sign-in to read**, even though they are only pictures. They belong to your private
+   subject, so a leaked address shows nothing. Costs: the web client fetches them itself, and Android keeps
+   them out of its disk cache.
+4. **A diagram keeps a light background in dark mode** on both platforms, so one drawn with dark lines stays
+   readable. (Maths in slice 6 can be inverted instead, because it is one colour.)
+5. **A diagram in use cannot be deleted**, including when it appears in an old version of a screen, or in a
+   question's option: point the screen at another image first. This keeps a finished lesson's history whole.
+6. **300 images per subject and 200 KB each**, so a runaway loop is caught early.
+7. **Lint:** an image pointing at a diagram the subject does not have is reported, and blocks finishing (not saving).
+
+**Real bugs found before they shipped:**
+
+- **The page's own security policy blocked the pictures.** Blob addresses are not allowed for images, so the
+  diagram was in the page but drew nothing. Only the real-browser test against the production-style server
+  showed it; the fix was to use data URLs, which the policy already allows, rather than loosen the policy.
+- **The Android full-screen view's buttons ran off a narrow screen** (a label broke letter by letter and Close
+  was pushed off). Only the emulator screenshot showed it; the controls now wrap.
+
+**Not in slice 5:** typeset maths (slice 6, which reuses this store); uploading a photo or raster image (SVG
+only, as the design said); scroll position within a screen; an in-app list of your images (your AI reads them
+through MCP).

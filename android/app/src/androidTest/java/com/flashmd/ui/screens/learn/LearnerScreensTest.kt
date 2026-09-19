@@ -8,8 +8,11 @@ import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.onAllNodesWithContentDescription
 import androidx.compose.ui.test.onAllNodesWithText
 import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.isRoot
+import androidx.compose.ui.test.onLast
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
@@ -34,6 +37,18 @@ import org.junit.Test
 import java.io.File
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Proxy
+import androidx.compose.runtime.CompositionLocalProvider
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import com.flashmd.data.remote.dto.ImageBlockDto
+import com.flashmd.data.remote.dto.ParagraphBlockDto
+import com.flashmd.data.remote.dto.ScreenStepDto
+import com.flashmd.data.remote.dto.SpanDto
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Response
+import okhttp3.ResponseBody.Companion.toResponseBody
 
 /**
  * The learner screens drawn on a device from the server's real responses (the same files the JVM
@@ -79,8 +94,18 @@ class LearnerScreensTest {
         return nodes[nodes.fetchSemanticsNodes().lastIndex]
     }
 
-    private fun shot(name: String) {
-        val bitmap = compose.onRoot().captureToImage().asAndroidBitmap()
+    /** The whole display, which (unlike a composable's own capture) includes an open dialog's window. */
+    private fun wholeScreenShot(name: String) {
+        val bitmap = InstrumentationRegistry.getInstrumentation().uiAutomation.takeScreenshot()
+        val dir = InstrumentationRegistry.getInstrumentation().targetContext.getExternalFilesDir(null)!!
+        File(dir, "$name.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
+    }
+
+    private fun shot(name: String, root: Int? = null) {
+        // With a dialog open there are two roots (the screen and the dialog); by default take the last.
+        val roots = compose.onAllNodes(isRoot())
+        val target = if (root != null) roots[root] else roots.onLast()
+        val bitmap = target.captureToImage().asAndroidBitmap()
         val dir = InstrumentationRegistry.getInstrumentation().targetContext.getExternalFilesDir(null)!!
         File(dir, "$name.png").outputStream().use { bitmap.compress(Bitmap.CompressFormat.PNG, 100, it) }
     }
@@ -89,12 +114,14 @@ class LearnerScreensTest {
     fun a_screen_shows_its_position_number_and_every_block_type() {
         val api = scriptedApi(mapOf("startLesson" to listOf(read<LessonStepResponseDto>("start-screen"))))
         val vm = lessonViewModel(api)
-        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = vm) }
+        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = vm, images = LessonImages("s1", null)) }
 
         compose.onNodeWithText("Screen 1 of 4").assertExists()
         compose.onNodeWithText("Screen 1").assertExists()
         compose.onNodeWithText("Careful here").assertExists()
-        compose.onNodeWithText("A diagram").assertExists()
+        // The expandable diagram is a button (its picture opens full-screen), with its caption.
+        compose.onNodeWithText("Show diagram").assertExists()
+        compose.onNodeWithText("Figure 1").assertExists()
         compose.onNodeWithContentDescription("R equals V over I").assertExists()
         compose.onNodeWithText("Back").assertIsNotEnabled()
         compose.onNodeWithText("Next").assertIsEnabled()
@@ -109,7 +136,7 @@ class LearnerScreensTest {
                 "commentOnScreen" to listOf(read<ScreenCommentDto>("comment")),
             ),
         )
-        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api)) }
+        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api), images = LessonImages("s1", null)) }
 
         compose.onNodeWithText("Comment on screen 1").performScrollTo().performClick()
         compose.onNodeWithText("What is unclear or wrong on screen 1?").performTextInput("What is a byte?")
@@ -130,7 +157,7 @@ class LearnerScreensTest {
                 "lessonContinue" to listOf(read<LessonStepResponseDto>("continue-remediation")),
             ),
         )
-        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api)) }
+        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api), images = LessonImages("s1", null)) }
 
         compose.onNodeWithText("Question 1 of 3").assertExists()
         // No verdict before answering, and Check is off until something is chosen.
@@ -163,7 +190,7 @@ class LearnerScreensTest {
                 "lessonAnswer" to listOf(read<LessonAnswerResponseDto>("answer-wrong")),
             ),
         )
-        show(dark = true) { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api)) }
+        show(dark = true) { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api), images = LessonImages("s1", null)) }
         compose.onAllNodesWithTextLast("WRONG").performClick()
         compose.onNodeWithText("Check answer").performClick()
         compose.onNodeWithText("Not quite.").assertExists()
@@ -178,7 +205,7 @@ class LearnerScreensTest {
                 "lessonAnswer" to listOf(read<LessonAnswerResponseDto>("answer-passed")),
             ),
         )
-        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api)) }
+        show { LessonScreen(onBack = {}, onOpenLesson = {}, viewModel = lessonViewModel(api), images = LessonImages("s1", null)) }
         compose.onAllNodesWithTextLast("RIGHT").performClick()
         compose.onNodeWithText("Check answer").performClick()
         compose.onNodeWithText("Continue").performScrollTo().performClick()
@@ -211,6 +238,105 @@ class LearnerScreensTest {
         compose.onNodeWithText("2 of 3 right on the first try").assertExists()
         compose.onNodeWithText("Read again").assertExists()
         compose.onNodeWithText("Start").assertExists()
+    }
+
+    // --- stored diagrams ---
+
+    private val diagram = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+        <rect x="10" y="30" width="60" height="40" fill="#fff" stroke="#111" stroke-width="4"/>
+        <line x1="70" y1="50" x2="150" y2="50" stroke="#111" stroke-width="4"/></svg>"""
+    private val assetId = "0a1b2c3d-0000-4000-8000-000000000001"
+    private val requested = mutableListOf<String>()
+
+    /** An image loader whose network is a function, so no server is needed. */
+    private fun imageLoaderAnswering(code: Int): ImageLoader {
+        val client = OkHttpClient.Builder().addInterceptor { chain ->
+            requested += chain.request().url.toString()
+            Response.Builder().request(chain.request()).protocol(Protocol.HTTP_1_1).code(code)
+                .message(if (code == 200) "OK" else "Not Found")
+                .body(diagram.toResponseBody("image/svg+xml".toMediaType())).build()
+        }.build()
+        return ImageLoader.Builder(compose.activity).okHttpClient(client)
+            .components { add(SvgDecoder.Factory()) }.build()
+    }
+
+    private fun screenWith(display: String) = LessonUiState(
+        title = "Circuits",
+        busy = false,
+        step = ScreenStepDto(
+            number = "1", index = 0, total = 4, canGoBack = false,
+            blocks = listOf(
+                ParagraphBlockDto(listOf(SpanDto("An RC filter"))),
+                ImageBlockDto(src = "asset:$assetId", alt = "An RC circuit", display = display, caption = "Figure 1"),
+            ),
+        ),
+    )
+
+    private val noActions = LessonActions(
+        next = {}, back = {}, carryOn = {}, pause = {}, resume = {}, answer = {},
+        afterFeedback = {}, comment = { _, _ -> }, dismissComment = {}, toggleOpenBook = {},
+        toOutline = {}, openLesson = {},
+    )
+
+    private fun showDiagramScreen(display: String, code: Int = 200, dark: Boolean = false) {
+        val images = LessonImages("s1", imageLoaderAnswering(code))
+        show(dark = dark) {
+            CompositionLocalProvider(LocalLessonImages provides images) {
+                LessonBody(screenWith(display), noActions)
+            }
+        }
+    }
+
+    @Test
+    fun a_stored_diagram_is_fetched_with_the_subjects_route_and_drawn_inline() {
+        showDiagramScreen("inline")
+        compose.waitUntil(5_000) {
+            compose.onAllNodesWithContentDescription("An RC circuit").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.onNodeWithText("Figure 1").assertExists()
+        assertEquals(true, requested.single().endsWith("/api/subjects/s1/assets/$assetId"))
+        compose.waitForIdle()
+        shot("learn-diagram-inline")
+    }
+
+    @Test
+    fun a_stored_diagram_keeps_its_light_surface_in_dark_mode() {
+        showDiagramScreen("inline", dark = true)
+        compose.waitUntil(5_000) {
+            compose.onAllNodesWithContentDescription("An RC circuit").fetchSemanticsNodes().isNotEmpty()
+        }
+        compose.waitForIdle()
+        shot("learn-diagram-inline-dark")
+    }
+
+    @Test
+    fun an_expandable_diagram_opens_full_screen_zooms_and_closes_back_to_the_screen() {
+        showDiagramScreen("expandable")
+        compose.onNodeWithText("Show diagram").performClick()
+        compose.waitUntil(5_000) { compose.onAllNodesWithText("Close").fetchSemanticsNodes().isNotEmpty() }
+        compose.onNodeWithText("Zoom in").performClick()
+        compose.onNodeWithText("Zoom out").performClick()
+        compose.onNodeWithText("Fit to screen").performClick()
+        compose.waitForIdle()
+        wholeScreenShot("learn-diagram-open")
+        compose.onNodeWithText("Close").performClick()
+        compose.onNodeWithText("Show diagram").assertExists()
+        compose.onNodeWithText("An RC filter").assertExists()
+    }
+
+    @Test
+    fun a_diagram_that_cannot_be_fetched_says_so_and_keeps_its_description() {
+        val images = LessonImages("s1", ImageLoader.Builder(compose.activity).okHttpClient(
+            OkHttpClient.Builder().addInterceptor { throw java.io.IOException("offline") }.build(),
+        ).build())
+        show {
+            CompositionLocalProvider(LocalLessonImages provides images) {
+                LessonBody(screenWith("inline"), noActions)
+            }
+        }
+        compose.waitUntil(5_000) {
+            compose.onAllNodesWithText("This image could not be loaded.").fetchSemanticsNodes().isNotEmpty()
+        }
     }
 }
 

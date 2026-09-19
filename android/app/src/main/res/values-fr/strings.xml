@@ -176,4 +176,10 @@
         <item quantity="one">%1$d question est à réviser</item>
         <item quantity="other">%1$d questions sont à réviser</item>
     </plurals>
+    <string name="learn_show_diagram">Afficher le schéma</string>
+    <string name="learn_close_diagram">Fermer</string>
+    <string name="learn_zoom_in">Agrandir</string>
+    <string name="learn_zoom_out">Réduire</string>
+    <string name="learn_zoom_fit">Ajuster à l\'écran</string>
+    <string name="learn_image_unavailable">Cette image n\'a pas pu être chargée.</string>
 </resources>

@@ -64,7 +64,7 @@ class LearnerContractTest {
         assertEquals(
             listOf(
                 ParagraphBlockDto::class, ListBlockDto::class, ListBlockDto::class, CodeBlockDto::class,
-                CalloutBlockDto::class, ImageBlockDto::class, FormulaBlockDto::class,
+                CalloutBlockDto::class, ImageBlockDto::class, ImageBlockDto::class, FormulaBlockDto::class,
             ),
             screen.blocks.map { it::class },
         )
@@ -75,10 +75,14 @@ class LearnerContractTest {
         assertTrue((screen.blocks[1] as ListBlockDto).ordered)
         assertEquals("python", (screen.blocks[3] as CodeBlockDto).language)
         assertEquals("warning", (screen.blocks[4] as CalloutBlockDto).tone)
-        val image = screen.blocks[5] as ImageBlockDto
-        assertEquals("A diagram", image.alt)
-        assertEquals("expandable", image.display)
-        assertEquals("R equals V over I", (screen.blocks[6] as FormulaBlockDto).spoken)
+        val stored = screen.blocks[5] as ImageBlockDto
+        assertEquals("A diagram", stored.alt)
+        assertEquals("expandable", stored.display)
+        assertEquals("asset:0a1b2c3d-0000-4000-8000-000000000001", stored.src)
+        val web = screen.blocks[6] as ImageBlockDto
+        assertEquals("https://example.com/rc.svg", web.src)
+        assertEquals("inline", web.display)
+        assertEquals("R equals V over I", (screen.blocks[7] as FormulaBlockDto).spoken)
 
         assertTrue((read<LessonStepResponseDto>("next-screen").step as ScreenStepDto).canGoBack)
     }

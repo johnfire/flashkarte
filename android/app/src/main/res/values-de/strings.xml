@@ -176,4 +176,10 @@
         <item quantity="one">%1$d Frage ist zur Wiederholung fällig</item>
         <item quantity="other">%1$d Fragen sind zur Wiederholung fällig</item>
     </plurals>
+    <string name="learn_show_diagram">Diagramm anzeigen</string>
+    <string name="learn_close_diagram">Schließen</string>
+    <string name="learn_zoom_in">Vergrößern</string>
+    <string name="learn_zoom_out">Verkleinern</string>
+    <string name="learn_zoom_fit">An Bildschirm anpassen</string>
+    <string name="learn_image_unavailable">Dieses Bild konnte nicht geladen werden.</string>
 </resources>

@@ -57,7 +57,7 @@ class OutlineViewModel @Inject constructor(
     private val repo: LearnRepository,
     savedState: SavedStateHandle,
 ) : ViewModel() {
-    private val subjectId: String = checkNotNull(savedState["subjectId"])
+    val subjectId: String = checkNotNull(savedState["subjectId"])
     private val _state = MutableStateFlow(OutlineUiState())
     val state: StateFlow<OutlineUiState> = _state.asStateFlow()
 
@@ -89,7 +89,7 @@ class ReadLessonViewModel @Inject constructor(
     private val repo: LearnRepository,
     savedState: SavedStateHandle,
 ) : ViewModel() {
-    private val subjectId: String = checkNotNull(savedState["subjectId"])
+    val subjectId: String = checkNotNull(savedState["subjectId"])
     private val slug: String = checkNotNull(savedState["slug"])
     private val _state = MutableStateFlow(ReadLessonUiState())
     val state: StateFlow<ReadLessonUiState> = _state.asStateFlow()

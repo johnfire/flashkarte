@@ -57,7 +57,7 @@ class LessonViewModel @Inject constructor(
     private val repo: LearnRepository,
     savedState: SavedStateHandle,
 ) : ViewModel() {
-    private val subjectId: String = checkNotNull(savedState["subjectId"])
+    val subjectId: String = checkNotNull(savedState["subjectId"])
     private val slug: String = checkNotNull(savedState["slug"])
     private val _state = MutableStateFlow(LessonUiState())
     val state: StateFlow<LessonUiState> = _state.asStateFlow()

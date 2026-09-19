@@ -102,20 +102,7 @@ private fun LessonBlock(block: BlockDto) {
                 .background(MaterialTheme.colorScheme.secondaryContainer)
                 .padding(12.dp),
         )
-        is ImageBlockDto -> Column(
-            Modifier
-                .fillMaxWidth()
-                .clip(RoundedCornerShape(8.dp))
-                .background(MaterialTheme.colorScheme.surfaceVariant)
-                .padding(12.dp)
-                .semantics { contentDescription = block.alt },
-        ) {
-            Text(block.alt, style = MaterialTheme.typography.bodyMedium)
-            block.caption?.let {
-                Spacer(Modifier.width(4.dp))
-                Text(it, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            }
-        }
+        is ImageBlockDto -> LessonImageBlock(block)
         is FormulaBlockDto -> Text(
             block.latex,
             fontFamily = FontFamily.Monospace,

@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -53,8 +54,10 @@ fun LessonScreen(
     onBack: () -> Unit,
     onOpenLesson: (String) -> Unit,
     viewModel: LessonViewModel = hiltViewModel(),
+    images: LessonImages = rememberLessonImages(viewModel.subjectId),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    CompositionLocalProvider(LocalLessonImages provides images) {
     Scaffold(
         topBar = {
             TopAppBar(
@@ -85,6 +88,7 @@ fun LessonScreen(
             ),
             modifier = Modifier.padding(padding),
         )
+    }
     }
 }
 

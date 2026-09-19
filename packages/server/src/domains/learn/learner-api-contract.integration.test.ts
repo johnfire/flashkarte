@@ -110,10 +110,16 @@ const RICH_SCREEN = [
   { type: "callout", tone: "warning", spans: [{ text: "Careful here" }] },
   {
     type: "image",
-    src: "/schematics/example.svg",
+    src: "asset:0a1b2c3d-0000-4000-8000-000000000001",
     alt: "A diagram",
     display: "expandable",
     caption: "Figure 1",
+  },
+  {
+    type: "image",
+    src: "https://example.com/rc.svg",
+    alt: "A web picture",
+    display: "inline",
   },
   { type: "formula", latex: "R = V / I", spoken: "R equals V over I" },
 ];

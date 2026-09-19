@@ -34,7 +34,7 @@ class ReviewViewModel @Inject constructor(
     private val repo: LearnRepository,
     savedState: SavedStateHandle,
 ) : ViewModel() {
-    private val subjectId: String = checkNotNull(savedState["subjectId"])
+    val subjectId: String = checkNotNull(savedState["subjectId"])
     private var questionId: String? = null
     private val _state = MutableStateFlow(ReviewUiState())
     val state: StateFlow<ReviewUiState> = _state.asStateFlow()

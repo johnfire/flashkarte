@@ -211,8 +211,13 @@ private fun LessonRow(lesson: LearnerLessonDto, onOpen: (String) -> Unit, onRead
 
 /** Every screen of a passed lesson, for looking back. */
 @Composable
-fun ReadLessonScreen(onBack: () -> Unit, viewModel: ReadLessonViewModel = hiltViewModel()) {
+fun ReadLessonScreen(
+    onBack: () -> Unit,
+    viewModel: ReadLessonViewModel = hiltViewModel(),
+    images: LessonImages = rememberLessonImages(viewModel.subjectId),
+) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    androidx.compose.runtime.CompositionLocalProvider(LocalLessonImages provides images) {
     Scaffold(topBar = { LearnTopBar(state.lesson?.lesson?.title ?: "", onBack) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             if (state.isLoading) CircularProgressIndicator()
@@ -230,5 +235,6 @@ fun ReadLessonScreen(onBack: () -> Unit, viewModel: ReadLessonViewModel = hiltVi
                 }
             }
         }
+    }
     }
 }
