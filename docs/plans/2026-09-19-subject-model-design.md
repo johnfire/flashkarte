@@ -113,29 +113,56 @@ single transaction. That is how the Transformers graph goes in. The `build-a-cou
 prompt is extended with the strategy's pipeline (inventory, edges with reasons, lint,
 review) so an AI drafting a course produces the graph first.
 
-## Reading cards (added 2026-09-19, Chris)
+## Reading cards (added 2026-09-19, Chris) — built
 
 A real course is partly just reading: orientation, the missing background the graph
 exposed (the dot product, what depth buys, what an RNN is), and the map unit. So there is a
 third kind of screen beside recall and multiple choice: a **`read` card**, shown, read, and
 acknowledged with "Got it". It has no rating, no spaced-repetition state and no scheduling.
 
-- **It is exposure, not evidence.** Reading never counts toward mastery. The evidence query
-  already counts only `basic` cards, so a `read` card linked to a concept cannot hold it
-  back (covered by an integration test). Reading and testing stay separate signals.
-- **It attaches to concepts like any card** (`card_concepts`), so a concept can have a
-  lesson and questions. In the frontier, an available concept with an unread lesson reads
-  first; the questions follow.
-- **Read state** is its own small per-learner table (`card_reads`: user, card, read_at,
-  idempotent upsert), not a fake rating in `review_events`, which stays a rating ledger.
-  Android must queue it in the offline outbox like reviews.
-- **Format constraint:** reading bodies are longer and structured (lists, headings, code,
-  images). `cleanBack` collapses single newlines into spaces, which would flatten them, so
-  a `read` body must be kept verbatim (trimmed) by the parser. Markdown authoring syntax
-  is a tag line, in the style of Spec 06: `@read` above the card front.
-- **Parser parity applies.** The `read` type ships in TS and Kotlin together with corpus
-  cases, the server must accept and exclude it from the due/new queues, and both clients
-  render it. This is step 4 below, before the study UIs.
+**Built and verified (steps below, all committed locally, none pushed):**
+
+- **Authoring.** `@read` on its own line above a card front. The title is the front; the
+  body is kept as written (paragraphs, `- ` lists, indented code), where a basic back has its
+  single newlines collapsed. Option-like and sense-like lines in a body are plain text. TS and
+  Kotlin parsers ship together with 8 mirrored tests each; existing decks parse identically.
+  A `## ` line or a bold numbered line still starts a new category/card, so a body must avoid
+  them. A lesson can't be mixed with branch cards and can't carry options or senses.
+- **It is exposure, not evidence.** Mastery counts only `basic` cards, so a lesson can never
+  hold a concept back. Lessons are also excluded from deck due/new/total counts, study stats and
+  Courses gating (a lesson can never be "mastered"; counting it would lock every later deck).
+  Deck lists carry `lesson_count` and `unread_lesson_count` separately.
+- **Read state** is `card_reads` (user, card, first `read_at`; migration 024), never
+  `card_progress` or `review_events`. `POST /api/study/reads` is idempotent and the first read
+  wins; it is separate from `/sync` so a bad payload can't cost a learner their reviews.
+- **Clients opt in** with `?lessons=1` on the study batch. Clients that predate lessons (APKs
+  in the field, old web bundles) never send it, so they never receive a card they would show as
+  a flip card and rate.
+- **In a subject.** A concept's progress reports `lesson_count`, `unread_lesson_count` and
+  `needs_reading`. A reachable concept with an unread lesson is offered on the frontier, a
+  lesson-only concept (a map, say) is done once read, and the lessons of a locked concept are
+  not offered early.
+- **Web** and **Android** show a reading screen (title, body as written, Got it, no rating
+  buttons). Web is verified end to end in a browser (Playwright, incl. an axe WCAG A/AA check);
+  Android is compiled and its ViewModel/offline/API logic unit-tested, but the Compose screen was
+  not rendered (no emulator was available). Strings are in en/de/es/fr; the MCP tools and the
+  `build_a_course` prompt teach the syntax.
+
+**Decisions taken while building (flag if you disagree):**
+
+1. **Reading never gates.** An unread lesson does not lock its concept's questions or any
+   dependent; it is only offered first. Making "read the lesson before the questions" a hard gate
+   is a one-line change in the shared status logic, but it changes what a learner can do, so it
+   is your call.
+2. **Android records reads best-effort, not offline-queued.** A failed read is dropped and the
+   lesson comes back next session. Queueing reads in the outbox needs a database migration and
+   a WorkManager change; the server already accepts batches, so it can be added without a
+   contract change.
+3. **Web shows a lesson as plain text with line breaks preserved.** There is no general markdown
+   engine (only images render), so `**bold**` or headings would show literally. Lists read fine.
+
+**Not done:** Android deck-list "lessons to read" hint, Android in-app help text, reading a
+lesson aloud, offline read queue (above), and rendering richer markdown in lesson bodies.
 
 ## Not in this phase
 
@@ -152,7 +179,8 @@ unit and route derivation, cloning a public subject with its card links, learner
    (`domains/subjects/fixtures/transformers-subject.json`) that a real-Postgres test imports
    and walks end to end. Importing it into production waits for the deploy._
 4. **`read` card type:** parser TS + Kotlin + corpus, server acceptance and queue
-   exclusion, `card_reads`, reading screen on web and Android.
+   exclusion, `card_reads`, reading screen on web and Android. _Built and verified
+   locally (see the section above)._
 5. **Web:** subject view (graph by unit, states) and frontier-driven study.
 6. **Android:** same, plus the Kotlin mirror of the graph logic.
 7. **Item types:** ordering and numeric first, parser + evaluator + both UIs together.
