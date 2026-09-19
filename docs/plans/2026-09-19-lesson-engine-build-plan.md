@@ -17,7 +17,7 @@ Companion to [the design spec](2026-09-19-lesson-engine-design.md); read that fi
   Android screen with no emulator here) the slice says so in its commit.
 - Sizes are relative (S/M/L), not time estimates. I do not have a basis for dates.
 
-## Slice 0: spikes (no product code, S)
+## Slice 0: spikes (S) — **DONE 2026-09-19, both GO** ([findings](2026-09-19-lesson-engine-spikes.md))
 
 Answer the two questions the design admits it hasn't proven, before anything depends on them.
 
