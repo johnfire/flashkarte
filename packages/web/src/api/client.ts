@@ -28,6 +28,7 @@ import {
 import type { SpeechAutoplay } from "@flashkarte/shared";
 import type {
   DueReviews,
+  HelpRequestSent,
   LearnerOutline,
   LearnSubject,
   LessonAnswerResponse,
@@ -560,6 +561,17 @@ export const api = {
       request<ScreenComment>(
         `/subjects/${subjectId}/learn/screens/${number}/comments`,
         { method: "POST", body: JSON.stringify({ body }) },
+      ),
+    askForMore: (
+      subjectId: string,
+      target: { screen: string } | { question: string },
+      help: { selection?: string; note?: string },
+    ) =>
+      request<HelpRequestSent>(
+        "screen" in target
+          ? `/subjects/${subjectId}/learn/screens/${target.screen}/help`
+          : `/subjects/${subjectId}/learn/questions/${target.question}/help`,
+        { method: "POST", body: JSON.stringify(help) },
       ),
     reviews: (subjectId: string) =>
       request<DueReviews>(`/subjects/${subjectId}/learn/reviews`),

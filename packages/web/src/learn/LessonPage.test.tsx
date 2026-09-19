@@ -35,6 +35,9 @@ const screenStep = (index: number, total = 2): LessonStep => ({
   total,
   can_go_back: index > 0,
   blocks: para(`Screen text ${index + 1}`),
+  sources: null,
+  added_in_answer: null,
+  help: [],
 });
 const questionStep = (over: object = {}): LessonStep => ({
   kind: "question",
@@ -46,6 +49,7 @@ const questionStep = (over: object = {}): LessonStep => ({
   total: 1,
   misses: 0,
   help_offered: false,
+  help: [],
   ...over,
 });
 const revealed = (over: object = {}) => ({
@@ -113,6 +117,9 @@ describe("LessonPage", () => {
         of: 1,
         help_offered: false,
         blocks: para("Teach it again"),
+        sources: null,
+        added_in_answer: null,
+        help: [],
       },
       passed: false,
       unlocked: [],

@@ -785,6 +785,20 @@
     "zoomIn": "Zoom in",
     "zoomOut": "Zoom out",
     "zoomFit": "Fit to screen",
-    "imageUnavailable": "This image could not be loaded."
+    "imageUnavailable": "This image could not be loaded.",
+    "helpOpen": "I need more on this",
+    "helpLabel": "What would help? (optional)",
+    "helpPassage": "About:",
+    "helpHow": "Your AI reads this the next time it runs, researches it, and adds short screens next to this one, with their sources. You do not have to wait: you can also copy a message to give it now.",
+    "helpSend": "Ask my AI",
+    "helpError": "Couldn't send the request.",
+    "helpWaiting": "You asked for more on this. It is waiting for your AI, which will add screens next to this one.",
+    "helpCopyPrompt": "Copy a message for my AI",
+    "helpCopied": "Copied. Paste it to your AI.",
+    "helpAnswered": "Answered: see {{list}} (the next screens).",
+    "addedByAi": "Added by your AI in answer to your question",
+    "addedInAnswer": "Added in answer to your question",
+    "sources_one": "{{count}} source",
+    "sources_other": "{{count}} sources"
   }
 }

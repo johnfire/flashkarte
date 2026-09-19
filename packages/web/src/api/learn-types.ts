@@ -46,6 +46,19 @@ export interface LearnerOutline {
 export interface QuestionOption {
   blocks: Block[];
 }
+export interface HelpNotice {
+  id: string;
+  status: "open" | "answered";
+  /** The screens added in answer, in order. */
+  answers: string[];
+}
+export interface ScreenSource {
+  title: string;
+  url?: string;
+}
+/** Where a screen came from when it was added in answer to a "need more" request. */
+export type AddedInAnswer = "ai" | "human" | null;
+
 export type LessonStep =
   | {
       kind: "screen";
@@ -54,6 +67,9 @@ export type LessonStep =
       total: number;
       can_go_back: boolean;
       blocks: Block[];
+      sources: ScreenSource[] | null;
+      added_in_answer: AddedInAnswer;
+      help: HelpNotice[];
     }
   | {
       kind: "question";
@@ -65,6 +81,7 @@ export type LessonStep =
       total: number;
       misses: number;
       help_offered: boolean;
+      help: HelpNotice[];
     }
   | {
       kind: "remediation";
@@ -74,6 +91,9 @@ export type LessonStep =
       of: number;
       help_offered: boolean;
       blocks: Block[];
+      sources: ScreenSource[] | null;
+      added_in_answer: AddedInAnswer;
+      help: HelpNotice[];
     }
   | {
       kind: "passed";
@@ -131,10 +151,21 @@ export interface ReviewAnswerResponse extends ReviewStepResponse {
 
 export interface LessonScreens {
   lesson: LessonSummary;
-  screens: { number: string; blocks: Block[] }[];
+  screens: {
+    number: string;
+    blocks: Block[];
+    sources: ScreenSource[] | null;
+    added_in_answer: AddedInAnswer;
+  }[];
 }
 export interface ScreenComment {
   id: string;
   number: string;
   body: string;
+}
+
+export interface HelpRequestSent {
+  id: string;
+  number: string;
+  question_id: string | null;
 }

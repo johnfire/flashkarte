@@ -5,6 +5,7 @@ import { api, ApiError } from "../api/client";
 import type { LessonScreens } from "../api/learn-types";
 import { useAsync } from "../hooks/use-async";
 import { LessonBlocks } from "./LessonBlocks";
+import { ScreenOrigin } from "./ScreenOrigin";
 
 /** /learn/:subjectId/lessons/:slug/read — every screen of a lesson, for looking back after passing it. */
 export function ReadLessonPage() {
@@ -43,6 +44,10 @@ export function ReadLessonPage() {
                   {t("learn.screenNumber", { number: screen.number })}
                 </p>
                 <LessonBlocks blocks={screen.blocks} />
+                <ScreenOrigin
+                  addedInAnswer={screen.added_in_answer}
+                  sources={screen.sources}
+                />
               </section>
             ))}
           </div>

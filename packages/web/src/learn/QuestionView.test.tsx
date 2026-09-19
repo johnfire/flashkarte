@@ -21,6 +21,7 @@ const question: Extract<LessonStep, { kind: "question" }> = {
   total: 3,
   misses: 0,
   help_offered: false,
+  help: [],
 };
 const revealed = (over: Partial<RevealedAnswer>): RevealedAnswer => ({
   correct: true,

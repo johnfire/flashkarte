@@ -361,4 +361,67 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
   await expect(row("Embeddings").getByText("Ready")).toBeVisible();
   await row("Embeddings").getByRole("link", { name: "Start" }).click();
   await expect(page.getByText("Screen 1 of 4")).toBeVisible();
+
+  // "I need more on this": the request waits for the owner's AI, which answers with a sourced screen.
+  await page.getByRole("button", { name: "I need more on this" }).click();
+  await page
+    .getByLabel("What would help? (optional)")
+    .fill("Why are they numbers?");
+  await expectNoAxeViolations(page, "the ask-for-more form");
+  await page.getByRole("button", { name: "Ask my AI" }).click();
+  await expect(page.getByText(/It is waiting for your AI/)).toBeVisible();
+  await page.screenshot({
+    path: path.join(artifacts, "learn-help-waiting.png"),
+  });
+  await expectNoAxeViolations(page, "a screen with a waiting request");
+
+  const queue = await api.send(
+    "GET",
+    `/subjects/${subject.id}/help?lesson=embeddings`,
+  );
+  expect(queue.requests).toEqual([
+    expect.objectContaining({
+      note: "Why are they numbers?",
+      lesson: "embeddings",
+    }),
+  ]);
+  await api.send(
+    "POST",
+    `/subjects/${subject.id}/help/${queue.requests[0].id}/answer`,
+    {
+      screens: [
+        {
+          blocks: para(
+            "Numbers can be compared, added and measured; words cannot.",
+          ),
+          sources: [
+            { title: "The deck, card 6", url: "https://example.com/card6" },
+          ],
+        },
+      ],
+    },
+  );
+
+  // The learner is told, and the new screen says where it came from and cites its source.
+  await page.reload();
+  await expect(
+    page.getByText(/Answered: see .* \(the next screens\)\./),
+  ).toBeVisible();
+  await page.getByRole("button", { name: "Next" }).click();
+  await expect(
+    page.getByText(
+      "Numbers can be compared, added and measured; words cannot.",
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Added in answer to your question"),
+  ).toBeVisible();
+  await page.getByText("1 source").click();
+  await expect(
+    page.getByRole("link", { name: "The deck, card 6" }),
+  ).toHaveAttribute("rel", "noopener noreferrer");
+  await page.screenshot({
+    path: path.join(artifacts, "learn-help-answered.png"),
+  });
+  await expectNoAxeViolations(page, "an answer screen with its sources");
 });

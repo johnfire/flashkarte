@@ -53,6 +53,9 @@ export function ReviewPage() {
         <ScreenView
           subjectId={subjectId!}
           number={step.number}
+          sources={step.sources}
+          addedInAnswer={step.added_in_answer}
+          help={step.help}
           label={t("learn.reread", {
             current: step.position + 1,
             total: step.of,

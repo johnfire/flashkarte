@@ -1,8 +1,15 @@
 import { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import type { Block } from "@flashkarte/shared";
+import type {
+  AddedInAnswer,
+  HelpNotice,
+  ScreenSource,
+} from "../api/learn-types";
 import { CommentOnScreen } from "./CommentOnScreen";
 import { LessonBlocks } from "./LessonBlocks";
+import { NeedMoreOnThis } from "./NeedMoreOnThis";
+import { ScreenOrigin } from "./ScreenOrigin";
 
 /**
  * One numbered teaching screen: "Screen 3 of 8" and its small permanent number, with Back and Next.
@@ -10,7 +17,11 @@ import { LessonBlocks } from "./LessonBlocks";
  */
 export function ScreenView({
   subjectId,
+  slug,
   number,
+  sources,
+  addedInAnswer,
+  help,
   label,
   blocks,
   canGoBack,
@@ -21,7 +32,12 @@ export function ScreenView({
   note,
 }: {
   subjectId: string;
+  /** The lesson's slug. Without it (a review) there is no "need more" button. */
+  slug?: string;
   number: string;
+  sources: ScreenSource[] | null;
+  addedInAnswer: AddedInAnswer;
+  help: HelpNotice[];
   label: string;
   blocks: Block[];
   canGoBack: boolean;
@@ -54,7 +70,18 @@ export function ScreenView({
           {t("learn.screenNumber", { number })}
         </p>
         <LessonBlocks blocks={blocks} />
+        <ScreenOrigin addedInAnswer={addedInAnswer} sources={sources} />
         {note}
+        {slug && (
+          <NeedMoreOnThis
+            key={number}
+            subjectId={subjectId}
+            slug={slug}
+            target={{ screen: number }}
+            screenNumber={number}
+            notices={help}
+          />
+        )}
         <CommentOnScreen subjectId={subjectId} number={number} />
       </article>
       <div className="mt-4 flex gap-3">

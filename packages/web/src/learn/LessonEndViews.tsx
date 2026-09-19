@@ -83,7 +83,14 @@ export function PausedView({
 }
 
 /** Shown from the second miss: the honest options. "I need more on this" arrives with help requests. */
-export function StuckNote({ onPause }: { onPause: () => void }) {
+export function StuckNote({
+  onPause,
+  more,
+}: {
+  onPause: () => void;
+  /** The "I need more on this" control for the question, when there is one. */
+  more?: React.ReactNode;
+}) {
   const { t } = useTranslation();
   return (
     <div className="mt-6 rounded-lg border border-amber-400 bg-amber-50 p-4 text-sm dark:bg-amber-950">
@@ -95,6 +102,7 @@ export function StuckNote({ onPause }: { onPause: () => void }) {
       >
         {t("learn.comeBackLater")}
       </button>
+      {more}
     </div>
   );
 }

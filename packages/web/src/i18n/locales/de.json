@@ -785,6 +785,20 @@
     "zoomIn": "Vergrößern",
     "zoomOut": "Verkleinern",
     "zoomFit": "An Bildschirm anpassen",
-    "imageUnavailable": "Dieses Bild konnte nicht geladen werden."
+    "imageUnavailable": "Dieses Bild konnte nicht geladen werden.",
+    "helpOpen": "Dazu brauche ich mehr",
+    "helpLabel": "Was würde helfen? (optional)",
+    "helpPassage": "Zu:",
+    "helpHow": "Deine KI liest das beim nächsten Mal, recherchiert es und fügt neben dieser Seite kurze Seiten mit Quellen hinzu. Du musst nicht warten: Du kannst auch eine Nachricht kopieren und ihr sofort geben.",
+    "helpSend": "Meine KI fragen",
+    "helpError": "Die Anfrage konnte nicht gesendet werden.",
+    "helpWaiting": "Du hast um mehr dazu gebeten. Es wartet auf deine KI, die Seiten neben dieser hinzufügt.",
+    "helpCopyPrompt": "Nachricht für meine KI kopieren",
+    "helpCopied": "Kopiert. Gib sie deiner KI.",
+    "helpAnswered": "Beantwortet: siehe {{list}} (die nächsten Seiten).",
+    "addedByAi": "Von deiner KI als Antwort auf deine Frage hinzugefügt",
+    "addedInAnswer": "Als Antwort auf deine Frage hinzugefügt",
+    "sources_one": "{{count}} Quelle",
+    "sources_other": "{{count}} Quellen"
   }
 }

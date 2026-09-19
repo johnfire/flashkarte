@@ -785,6 +785,20 @@
     "zoomIn": "Acercar",
     "zoomOut": "Alejar",
     "zoomFit": "Ajustar a la pantalla",
-    "imageUnavailable": "No se pudo cargar esta imagen."
+    "imageUnavailable": "No se pudo cargar esta imagen.",
+    "helpOpen": "Necesito más sobre esto",
+    "helpLabel": "¿Qué ayudaría? (opcional)",
+    "helpPassage": "Sobre:",
+    "helpHow": "Tu IA lo lee la próxima vez que se ejecute, lo investiga y añade pantallas cortas junto a esta, con sus fuentes. No tienes que esperar: también puedes copiar un mensaje para dárselo ahora.",
+    "helpSend": "Preguntar a mi IA",
+    "helpError": "No se pudo enviar la solicitud.",
+    "helpWaiting": "Pediste más sobre esto. Espera a tu IA, que añadirá pantallas junto a esta.",
+    "helpCopyPrompt": "Copiar un mensaje para mi IA",
+    "helpCopied": "Copiado. Pégalo en tu IA.",
+    "helpAnswered": "Respondido: mira {{list}} (las siguientes pantallas).",
+    "addedByAi": "Añadido por tu IA en respuesta a tu pregunta",
+    "addedInAnswer": "Añadido en respuesta a tu pregunta",
+    "sources_one": "{{count}} fuente",
+    "sources_other": "{{count}} fuentes"
   }
 }

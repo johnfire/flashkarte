@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { NeedMoreOnThis } from "./NeedMoreOnThis";
 import { OpenBook } from "./OpenBook";
 import { PassedView, PausedView, StuckNote } from "./LessonEndViews";
 import { QuestionView } from "./QuestionView";
@@ -31,7 +32,19 @@ export function LessonStepBody({
         onContinue={run.afterFeedback}
         extra={
           response.answer.help_offered && !response.passed ? (
-            <StuckNote onPause={run.pause} />
+            <StuckNote
+              onPause={run.pause}
+              more={
+                <NeedMoreOnThis
+                  key={question.question_id}
+                  subjectId={subjectId}
+                  slug={slug}
+                  target={{ question: question.question_id }}
+                  screenNumber={null}
+                  notices={question.help}
+                />
+              }
+            />
           ) : null
         }
       />
@@ -44,7 +57,11 @@ export function LessonStepBody({
       return (
         <ScreenView
           subjectId={subjectId}
+          slug={slug}
           number={step.number}
+          sources={step.sources}
+          addedInAnswer={step.added_in_answer}
+          help={step.help}
           label={t("learn.screenOf", {
             current: step.index + 1,
             total: step.total,
@@ -65,7 +82,11 @@ export function LessonStepBody({
       return (
         <ScreenView
           subjectId={subjectId}
+          slug={slug}
           number={step.number}
+          sources={step.sources}
+          addedInAnswer={step.added_in_answer}
+          help={step.help}
           label={t("learn.reread", {
             current: step.position + 1,
             total: step.of,
@@ -89,7 +110,21 @@ export function LessonStepBody({
           onContinue={run.afterFeedback}
           extra={
             <>
-              {step.help_offered && <StuckNote onPause={run.pause} />}
+              {step.help_offered && (
+                <StuckNote
+                  onPause={run.pause}
+                  more={
+                    <NeedMoreOnThis
+                      key={step.question_id}
+                      subjectId={subjectId}
+                      slug={slug}
+                      target={{ question: step.question_id }}
+                      screenNumber={null}
+                      notices={step.help}
+                    />
+                  }
+                />
+              )}
               <OpenBook subjectId={subjectId} slug={slug} />
             </>
           }

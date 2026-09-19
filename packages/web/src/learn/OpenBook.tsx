@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { api } from "../api/client";
 import type { LessonScreens } from "../api/learn-types";
 import { LessonBlocks } from "./LessonBlocks";
+import { ScreenOrigin } from "./ScreenOrigin";
 
 /** Open book: while answering, the learner may reopen the lesson's screens. This is learning, not an exam. */
 export function OpenBook({
@@ -53,6 +54,10 @@ export function OpenBook({
                 {t("learn.screenNumber", { number: screen.number })}
               </p>
               <LessonBlocks blocks={screen.blocks} />
+              <ScreenOrigin
+                addedInAnswer={screen.added_in_answer}
+                sources={screen.sources}
+              />
             </section>
           ))}
         </div>
