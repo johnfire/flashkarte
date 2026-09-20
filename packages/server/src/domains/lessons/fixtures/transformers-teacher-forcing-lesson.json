@@ -1,0 +1,1317 @@
+{
+  "module": "Training: how the numbers are learned",
+  "lesson": {
+    "slug": "teacher-forcing",
+    "title": "Teacher forcing: training on all positions at once",
+    "summary": "How training uses one forward pass to get a prediction, and a loss, at every position of a text: the shifted targets, feeding the true tokens, and why this is not how the model generates.",
+    "covers": ["teacher-forcing"],
+    "prerequisites": [
+      {
+        "lesson": "next-token-loss",
+        "reason": "Teacher forcing is how the next-token loss is computed for a whole text at once."
+      },
+      {
+        "lesson": "generation-loop",
+        "reason": "It is defined in contrast with generating one token at a time."
+      },
+      {
+        "lesson": "training-basics",
+        "reason": "It is a trick used only in training, so training and inference must already be clear."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "slow-way",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "When the model "
+            },
+            {
+              "text": "generates",
+              "italic": true
+            },
+            {
+              "text": ", it works one token at a time: a full pass to produce one token, then another pass for the next."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "If training worked the same way, learning from a text of 1,000 tokens would take 1,000 separate passes. That would be very slow, and there is a better way."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 20, 73)"
+        }
+      ]
+    },
+    {
+      "ref": "shifted-targets",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In training we already have the whole text. So the "
+            },
+            {
+              "text": "targets",
+              "bold": true
+            },
+            {
+              "text": " are simply the same text "
+            },
+            {
+              "text": "shifted by one position",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "For the text "
+            },
+            {
+              "text": "The cat sat on the mat",
+              "italic": true
+            },
+            {
+              "text": ":"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "input: The, cat, sat, on, the"
+              }
+            ],
+            [
+              {
+                "text": "target: cat, sat, on, the, mat"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "At the position of "
+            },
+            {
+              "text": "The",
+              "italic": true
+            },
+            {
+              "text": " the right answer is "
+            },
+            {
+              "text": "cat",
+              "italic": true
+            },
+            {
+              "text": ". At "
+            },
+            {
+              "text": "cat",
+              "italic": true
+            },
+            {
+              "text": " it is "
+            },
+            {
+              "text": "sat",
+              "italic": true
+            },
+            {
+              "text": ", and so on."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 73)"
+        }
+      ]
+    },
+    {
+      "ref": "true-tokens",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Notice what the input contains: the "
+            },
+            {
+              "text": "true",
+              "bold": true
+            },
+            {
+              "text": " tokens from the text, not tokens the model itself guessed."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Feeding the true tokens as input, instead of the model's own guesses, is called "
+            },
+            {
+              "text": "teacher forcing",
+              "bold": true
+            },
+            {
+              "text": ". Even if the model would have guessed badly at one position, the next position still gets the true text."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 73)"
+        }
+      ]
+    },
+    {
+      "ref": "one-pass",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Because every input token is already known, one forward pass gives predictions at "
+            },
+            {
+              "text": "all n positions at once",
+              "bold": true
+            },
+            {
+              "text": ". You saw that the model produces a next-token distribution at every position."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each position's prediction is compared with its target, the loss is averaged over all positions, and that one loss is backpropagated through the whole network."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So a 1,000-token text costs one pass, not 1,000."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 73)"
+        }
+      ]
+    },
+    {
+      "ref": "no-peeking",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "There is an obvious worry: the target for position "
+            },
+            {
+              "text": "t",
+              "italic": true
+            },
+            {
+              "text": " is the token at "
+            },
+            {
+              "text": "t + 1",
+              "italic": true
+            },
+            {
+              "text": ", and that token is in the input. Could position "
+            },
+            {
+              "text": "t",
+              "italic": true
+            },
+            {
+              "text": " just look at it?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It cannot. Position t is never allowed to see its own target. The mechanism that guarantees this is called the causal mask, covered in the attention module."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 73)"
+        }
+      ]
+    },
+    {
+      "ref": "only-training",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Teacher forcing is a "
+            },
+            {
+              "text": "training",
+              "bold": true
+            },
+            {
+              "text": " technique. When the model generates, there is no true text to feed in. It has to use its own earlier outputs, one token at a time."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So the same model is used in two ways: all positions at once with the true tokens in training, and one token at a time with its own tokens in generation."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 20, 73)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What is teacher forcing?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Feeding the true tokens of the text as input during training, instead of the model's own guesses"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is what allows all positions to be predicted in one pass."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Making the model generate one token at a time"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is generation, which is the opposite of what teacher forcing avoids."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Forcing the parameters to stay frozen"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Freezing the parameters is inference."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Giving the model extra tokens to choose between"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is about what goes into the input, not about the choices."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["true-tokens"],
+      "covers": ["teacher-forcing"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "In training with teacher forcing, what are the input tokens?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The true tokens from the text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The model's guesses are not fed back in."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The tokens the model guessed at the previous position"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That would be the model's own outputs, as in generation."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Random tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The input is the real text."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Only the final token of the text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All the tokens are fed in."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The training text is "
+            },
+            {
+              "text": "The cat sat on",
+              "italic": true
+            },
+            {
+              "text": ". The input is "
+            },
+            {
+              "text": "The cat sat",
+              "italic": true
+            },
+            {
+              "text": ". What is the target at the position of "
+            },
+            {
+              "text": "cat",
+              "italic": true
+            },
+            {
+              "text": "?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "sat",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The targets are the input shifted by one, so the target at "
+                },
+                {
+                  "text": "cat",
+                  "italic": true
+                },
+                {
+                  "text": " is the next token, "
+                },
+                {
+                  "text": "sat",
+                  "italic": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "cat",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The target is the token that follows, not the token itself."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The prediction looks forward, not backward."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "on",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "on",
+                  "italic": true
+                },
+                {
+                  "text": " is the target at the position of "
+                },
+                {
+                  "text": "sat",
+                  "italic": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["shifted-targets"],
+      "covers": ["teacher-forcing"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "For the input "
+                },
+                {
+                  "text": "the dog ran",
+                  "italic": true
+                },
+                {
+                  "text": ", followed in the text by "
+                },
+                {
+                  "text": "home",
+                  "italic": true
+                },
+                {
+                  "text": ", which pair is right?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "At "
+                    },
+                    {
+                      "text": "ran",
+                      "italic": true
+                    },
+                    {
+                      "text": " the target is "
+                    },
+                    {
+                      "text": "home",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The target at each position is the following token in the text."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "At "
+                    },
+                    {
+                      "text": "ran",
+                      "italic": true
+                    },
+                    {
+                      "text": " the target is "
+                    },
+                    {
+                      "text": "the",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "the",
+                      "italic": true
+                    },
+                    {
+                      "text": " is the start of the input. It is the target of nothing."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "At "
+                    },
+                    {
+                      "text": "dog",
+                      "italic": true
+                    },
+                    {
+                      "text": " the target is "
+                    },
+                    {
+                      "text": "home",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the target at "
+                    },
+                    {
+                      "text": "ran",
+                      "italic": true
+                    },
+                    {
+                      "text": ". At "
+                    },
+                    {
+                      "text": "dog",
+                      "italic": true
+                    },
+                    {
+                      "text": " it is "
+                    },
+                    {
+                      "text": "ran",
+                      "italic": true
+                    },
+                    {
+                      "text": "."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "At "
+                    },
+                    {
+                      "text": "the",
+                      "italic": true
+                    },
+                    {
+                      "text": " the target is "
+                    },
+                    {
+                      "text": "the",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The target is the next token, not the token itself."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "How many forward passes does teacher forcing need to get predictions for all n positions of a training text?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "One"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "All the input tokens are already known, so every position is predicted in the same pass."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n, one per position"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the slow way. It is how generation works."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "2, one forward and one backward pass per position"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is one forward pass, and then one backward pass for the whole text."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n squared"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "No pass count grows like that here."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["slow-way", "one-pass"],
+      "covers": ["teacher-forcing"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Why doesn't training on a 200-token text need 200 passes the way generating 200 tokens does?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The true tokens are all known, so every position can be predicted in one pass"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "In generation each token is unknown until the previous one has been chosen."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because training skips the loss"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Training needs the loss."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because training only looks at the last position"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The loss is averaged over all the positions."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because training uses fewer parameters"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It uses the same parameters."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "When does teacher forcing apply?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Only in training, where the true text is available. In generation the model must use its own earlier tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "There is no true text to feed in when generating."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Only in generation, to keep the reply on topic"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Generation has no true tokens to feed in."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "In both training and generation"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Generation feeds the model its own output."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Only when the temperature is 0"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Temperature is about sampling. Teacher forcing is about training."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["only-training"],
+      "covers": ["teacher-forcing"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "In generation, what plays the role that the true tokens play in training?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The model's own earlier tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Each chosen token is appended and becomes part of the input."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The correct answers from the training text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They are not available when generating."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Nothing: the input is empty"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The prompt and the tokens chosen so far are the input."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The gradients"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Gradients belong to training and are not fed in as input."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
