@@ -1,0 +1,1370 @@
+{
+  "module": "Position: where tokens are in the sequence",
+  "lesson": {
+    "slug": "absolute-positions",
+    "title": "Adding a position vector: sinusoidal and learned",
+    "summary": "Two ways to give each position its own vector and add it to the token embedding at the input: a fixed sine and cosine formula, and a learned table.",
+    "covers": ["sinusoidal-position", "learned-absolute-position"],
+    "prerequisites": [
+      {
+        "lesson": "position-need",
+        "reason": "These are two fixes for the problem it describes."
+      },
+      {
+        "lesson": "embeddings",
+        "reason": "The position vector is added to the token embedding, and the learned version is a table like the embedding table."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "add-a-vector",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The first family of fixes gives every "
+            },
+            {
+              "text": "position",
+              "bold": true
+            },
+            {
+              "text": " its own vector, the same length as a token embedding, and "
+            },
+            {
+              "text": "adds",
+              "bold": true
+            },
+            {
+              "text": " it to the token's embedding at the input."
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "x_{\\mathrm{pos}} = E[\\mathrm{token}] + P_{\\mathrm{pos}}",
+          "spoken": "x at position pos equals the embedding of the token plus the position vector for pos"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Now the token "
+            },
+            {
+              "text": "dog",
+              "italic": true
+            },
+            {
+              "text": " at position 2 and "
+            },
+            {
+              "text": "dog",
+              "italic": true
+            },
+            {
+              "text": " at position 9 start out with different vectors. The schemes differ in where the position vectors come from."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 46, 47)"
+        }
+      ]
+    },
+    {
+      "ref": "sinusoidal",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Sinusoidal",
+              "bold": true
+            },
+            {
+              "text": " encoding, from the original Transformer, computes them with a fixed formula of sines and cosines. Position pos and vector entry 2i and 2i + 1 give:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "PE(pos, 2i) = \\sin\\!\\left(\\frac{pos}{10000^{2i/d_{\\mathrm{model}}}}\\right) \\qquad PE(pos, 2i{+}1) = \\cos\\!\\left(\\frac{pos}{10000^{2i/d_{\\mathrm{model}}}}\\right)",
+          "spoken": "P E of pos and 2 i equals sine of pos over 10000 to the power 2 i over d model. P E of pos and 2 i plus 1 equals cosine of the same"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It is "
+            },
+            {
+              "text": "fixed, not learned",
+              "bold": true
+            },
+            {
+              "text": ": nothing in it is a parameter. The vector is added elementwise to the token embedding."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 46)"
+        }
+      ]
+    },
+    {
+      "ref": "sinusoidal-toy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A toy case with d_model = 4. The entries are (sin, cos) of pos, then (sin, cos) of pos / 100:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "position 0: (0.000, 1.000, 0.000, 1.000)"
+              }
+            ],
+            [
+              {
+                "text": "position 1: (0.841, 0.540, 0.010, 1.000)"
+              }
+            ],
+            [
+              {
+                "text": "position 2: (0.909, -0.416, 0.020, 1.000)"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each position gets a different vector. The first pair changes quickly with position and the second pair changes slowly. The wavelengths across the pairs form a geometric progression, so the vector works like a set of clocks running at different speeds."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "The original authors hypothesised that this design would help the model attend by relative offset, since PE(pos + k) is a linear function of PE(pos). That is their hypothesis, not a proven property."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 46)"
+        }
+      ]
+    },
+    {
+      "ref": "learned",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Learned absolute position embeddings",
+              "bold": true
+            },
+            {
+              "text": ", as in GPT-2, take the other route: a table P of shape "
+            },
+            {
+              "text": "n_ctx × d_model",
+              "bold": true
+            },
+            {
+              "text": ", learned by training like every other parameter. Row pos is added to the token embedding."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "GPT-2 used n_ctx = 1024. With d_model = 768, the table has 1024 × 768 = 786,432 parameters."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 47)"
+        }
+      ]
+    },
+    {
+      "ref": "limit",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A learned table has a limit built in: there is "
+            },
+            {
+              "text": "no row for positions beyond the context length it was trained with",
+              "bold": true
+            },
+            {
+              "text": ". Text longer than n_ctx has no natural position vectors, so there is no natural way to extrapolate to longer inputs."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "This is one of the things that limits how long a context can be."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 47)"
+        }
+      ]
+    },
+    {
+      "ref": "added-once",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Both schemes are "
+            },
+            {
+              "text": "absolute",
+              "bold": true
+            },
+            {
+              "text": ": a position gets its vector from its number alone. And both add it "
+            },
+            {
+              "text": "once, at the input",
+              "bold": true
+            },
+            {
+              "text": ". After that, position travels along with the token's vector into the later layers."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The next lesson shows a scheme that works differently: it adds nothing to the input at all."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 50)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which is true of sinusoidal position encoding?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is computed from a fixed formula of sines and cosines, not learned, and added to the token embedding at the input"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "No parameters are involved."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is a table of parameters learned by training"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That describes learned position embeddings."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is applied to the query and key vectors inside each layer"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The sinusoidal vector is added to the token embedding, once, at the input."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It replaces the token embedding"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is added to the token embedding, not used instead of it."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["sinusoidal", "add-a-vector"],
+      "covers": ["sinusoidal-position"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Where does the sinusoidal position vector go?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is added elementwise to the token embedding at the input"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Then the sum goes into the network."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is multiplied into every attention weight"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is added to the input vectors."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is added to the output logits"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is added at the input, before the network."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is stored as a row of the vocabulary"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is computed from the position number."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With d_model = 4, what is the sinusoidal vector for position 0?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(0, 1, 0, 1)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "sin(0) = 0 and cos(0) = 1, for each pair."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(0, 0, 0, 0)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The cosine entries are cos(0) = 1, not 0."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(1, 1, 1, 1)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The sine entries are sin(0) = 0, not 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(1, 0, 1, 0)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That has sine and cosine the wrong way round."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["sinusoidal-toy"],
+      "covers": ["sinusoidal-position"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "At position 0, what do the entries 2i (sines) and 2i + 1 (cosines) equal?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The sine entries are 0 and the cosine entries are 1"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because sin(0) = 0 and cos(0) = 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All entries are 0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Cosines of 0 are 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All entries are 1"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sines of 0 are 0."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The sine entries are 1 and the cosine entries are 0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Those are the values at a quarter turn, not at 0."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A learned position table has n_ctx = 1024 rows and d_model = 768 columns. How many parameters is that?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1024 × 768 = 786,432"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "One vector of length d_model for each position."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1024 + 768 = 1,792"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The table has a row of d_model numbers for every position, so the counts multiply."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "768² = 589,824"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That would be a square table, which this is not."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1024² = 1,048,576"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The table is n_ctx by d_model, not n_ctx by n_ctx."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["learned"],
+      "covers": ["learned-absolute-position"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A learned position table has 512 rows and d_model = 768. How many parameters is that?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "512 × 768 = 393,216"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Rows times columns."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1,280"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That adds the two sizes."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "589,824"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is 768 squared."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "262,144"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is 512 squared."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What is the main limitation of a learned position table?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "There is no row for positions beyond the trained context length, so it cannot extrapolate to longer inputs"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n_ctx rows means n_ctx positions."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It cannot be trained"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is trained like any other parameters."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It makes every token vector the same"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It gives each position its own vector."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It needs a different table for every token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "There is one row per position, shared by all tokens."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["learned", "limit"],
+      "covers": ["learned-absolute-position"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A learned table has 1,024 rows. What happens for a token at position 1,500?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "There is no row for it, so it has no natural position vector"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The table stops at its trained length."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It reuses row 1,500 of the token embedding table"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Position and token tables are separate."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It gets a zero vector, and that works perfectly"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "There is simply no row to look up."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The table grows by itself"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Its size is fixed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which of these is learned by training and which is fixed?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The learned position table is trained. The sinusoidal encoding is a fixed formula"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Only the table holds parameters."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The sinusoidal encoding is trained. The learned table is a fixed formula"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is the other way round."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Both are trained"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The sinusoidal encoding has no parameters."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Neither is trained"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The learned table is made of parameters."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["sinusoidal", "learned"],
+      "covers": ["sinusoidal-position", "learned-absolute-position"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Both schemes add a position vector to the token embedding. What is the difference in where the vectors come from?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sinusoidal vectors come from a formula, learned ones from a table trained with the model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One is computed, one is stored."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sinusoidal vectors come from the tokenizer, learned ones from attention"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Neither comes from those."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They come from the same formula"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One of them is a table of parameters."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sinusoidal vectors are added to the output, learned ones to the input"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Both are added at the input."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

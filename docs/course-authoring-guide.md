@@ -225,9 +225,11 @@ taught. Authored from an 86-card deck, one module at a time, each sourced to the
 | Output side: from scores to text (4)           | logits and softmax, the next-token distribution and sampling, the generation loop, temperature/top-k/top-p                 |
 | Training: how the numbers are learned (6)      | parameters and loss, gradient descent, the next-token loss, teacher forcing, pretraining vs post-training, fixed tokenizer |
 | Attention: how tokens exchange information (7) | the gist, Q/K/V, scores and weights, scaling and n² cost, the output and self vs cross, the causal mask, multi-head        |
+| Position: where tokens are in the sequence (3) | why position is needed, sinusoidal and learned position vectors, RoPE                                                      |
 
-Still to write at this date: position, the block, the output head, inference, and the closing perspective
-lessons. The planned sizes came out larger than first estimated (Training was guessed at 3 lessons and needed 6)
+Still to write at this date: the block, the output head, inference, and the closing perspective lessons. One
+concept, "absolute versus RoPE", is deliberately not in the Position module: the graph says it requires the
+residual stream, which the block module teaches, so it waits for that. The planned sizes came out larger than first estimated (Training was guessed at 3 lessons and needed 6)
 because the concept edges split the material; plan from the graph, not from a guess.
 
 ## Where this lives
