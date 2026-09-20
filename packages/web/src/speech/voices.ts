@@ -23,7 +23,9 @@ export function loadVoices(): Promise<SpeechSynthesisVoice[]> {
   if (!speechSupported()) return Promise.resolve([]);
   if (cached && cached.length > 0) return Promise.resolve(cached);
 
-  const immediate = window.speechSynthesis.getVoices();
+  // Held once: the poll and timeout outlive this call and must not re-read a global that can go away.
+  const synth = window.speechSynthesis;
+  const immediate = synth.getVoices();
   if (immediate.length > 0) {
     cached = immediate;
     return Promise.resolve(immediate);
@@ -36,17 +38,17 @@ export function loadVoices(): Promise<SpeechSynthesisVoice[]> {
       settled = true;
       window.clearInterval(poll);
       window.clearTimeout(timeout);
-      window.speechSynthesis.removeEventListener("voiceschanged", onChanged);
+      synth.removeEventListener("voiceschanged", onChanged);
       if (voices.length > 0) cached = voices;
       resolve(voices);
     };
-    const onChanged = () => finish(window.speechSynthesis.getVoices());
+    const onChanged = () => finish(synth.getVoices());
     const poll = window.setInterval(() => {
-      const voices = window.speechSynthesis.getVoices();
+      const voices = synth.getVoices();
       if (voices.length > 0) finish(voices);
     }, VOICES_POLL_MS);
     const timeout = window.setTimeout(() => finish([]), VOICES_TIMEOUT_MS);
-    window.speechSynthesis.addEventListener("voiceschanged", onChanged);
+    synth.addEventListener("voiceschanged", onChanged);
   });
 }
 
