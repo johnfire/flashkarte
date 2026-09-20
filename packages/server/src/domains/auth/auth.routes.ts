@@ -8,13 +8,30 @@ authRouter.post("/login", ctrl.login);
 authRouter.post("/2fa/verify", ctrl.twoFactorLogin);
 authRouter.post("/refresh", ctrl.refresh);
 authRouter.post("/logout", ctrl.logout);
-authRouter.get("/me", requireAuth, ctrl.me);
-authRouter.patch("/me", requireAuth, ctrl.updateMe);
+// Account-level routes below are for the person, not for an AI: a deck-scoped (AI authoring or MCP) key is
+// refused, so it cannot read the profile or change account settings.
+authRouter.get("/me", requireAuth, requireFullScope, ctrl.me);
+authRouter.patch("/me", requireAuth, requireFullScope, ctrl.updateMe);
 authRouter.post("/verify-email", ctrl.verifyEmail);
 authRouter.post("/confirm-email-change", ctrl.confirmEmailChange);
-authRouter.post("/resend-verification", requireAuth, ctrl.resendVerification);
-authRouter.post("/change-password", requireAuth, ctrl.changePassword);
-authRouter.post("/change-email", requireAuth, ctrl.requestEmailChange);
+authRouter.post(
+  "/resend-verification",
+  requireAuth,
+  requireFullScope,
+  ctrl.resendVerification,
+);
+authRouter.post(
+  "/change-password",
+  requireAuth,
+  requireFullScope,
+  ctrl.changePassword,
+);
+authRouter.post(
+  "/change-email",
+  requireAuth,
+  requireFullScope,
+  ctrl.requestEmailChange,
+);
 authRouter.post("/forgot-password", ctrl.forgotPassword);
 authRouter.post("/reset-password", ctrl.resetPassword);
 authRouter.delete(
