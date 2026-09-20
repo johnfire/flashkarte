@@ -1,0 +1,1186 @@
+{
+  "module": "The transformer block",
+  "lesson": {
+    "slug": "feed-forward",
+    "title": "The feed-forward sublayer",
+    "summary": "The small two-layer network applied to every token's vector on its own: its formula, its shapes, the wider middle, and why the same weights are used at every position.",
+    "covers": ["ffn"],
+    "prerequisites": [
+      {
+        "lesson": "layers-hidden-states",
+        "reason": "It transforms each token's hidden-state vector."
+      },
+      {
+        "lesson": "sequence-shapes",
+        "reason": "It is described by its shapes, d_model × d_ff and d_ff × d_model."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "per-token-network",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each layer contains a "
+            },
+            {
+              "text": "feed-forward",
+              "bold": true
+            },
+            {
+              "text": " sublayer, often written "
+            },
+            {
+              "text": "FFN",
+              "bold": true
+            },
+            {
+              "text": ". It is a small network that takes "
+            },
+            {
+              "text": "one token's vector",
+              "bold": true
+            },
+            {
+              "text": " and transforms it, without looking at any other token."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It has two weight matrices with a nonlinear step between them."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 58)"
+        }
+      ]
+    },
+    {
+      "ref": "the-formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "For a token's vector x (a row of length d_model):"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "\\mathrm{FFN}(x) = \\mathrm{act}(x W_1 + b_1)\\, W_2 + b_2",
+          "spoken": "FFN of x equals the activation of x times W 1 plus b 1, times W 2, plus b 2"
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "W₁",
+                "bold": true
+              },
+              {
+                "text": " has shape d_model × d_ff"
+              }
+            ],
+            [
+              {
+                "text": "W₂",
+                "bold": true
+              },
+              {
+                "text": " has shape d_ff × d_model"
+              }
+            ],
+            [
+              {
+                "text": "b₁",
+                "bold": true
+              },
+              {
+                "text": " and "
+              },
+              {
+                "text": "b₂",
+                "bold": true
+              },
+              {
+                "text": " are bias vectors, and "
+              },
+              {
+                "text": "act",
+                "bold": true
+              },
+              {
+                "text": " is an activation function"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The deck writes the same thing with the matrices on the left of x. Here the vector is a row, as in the earlier lessons."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 58)"
+        }
+      ]
+    },
+    {
+      "ref": "wider-middle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The middle width "
+            },
+            {
+              "text": "d_ff",
+              "bold": true
+            },
+            {
+              "text": " is usually bigger than d_model. The classic choice is "
+            },
+            {
+              "text": "d_ff = 4 · d_model",
+              "bold": true
+            },
+            {
+              "text": ": 2,048 when d_model = 512."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So the vector is "
+            },
+            {
+              "text": "widened",
+              "bold": true
+            },
+            {
+              "text": " from d_model to d_ff by W₁, and "
+            },
+            {
+              "text": "narrowed",
+              "bold": true
+            },
+            {
+              "text": " back to d_model by W₂. The output has the same length as the input."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 58)"
+        }
+      ]
+    },
+    {
+      "ref": "the-activation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Between the two matrices is an "
+            },
+            {
+              "text": "activation",
+              "bold": true
+            },
+            {
+              "text": " function. A common simple one is ReLU: ReLU(z) = max(0, z), which keeps positive numbers and turns negative ones into 0."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It matters. Two matrix multiplications with nothing between them are the same as one bigger matrix multiplication. The activation is what makes the FFN a "
+            },
+            {
+              "text": "nonlinear",
+              "bold": true
+            },
+            {
+              "text": " transformation."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 58, 59)"
+        }
+      ]
+    },
+    {
+      "ref": "toy-ffn",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A toy case: d_model = 2, d_ff = 3, ReLU, biases left out. W₁ = (1, 0, −1 / 0, 1, 1) and W₂ = (1, 2 / 0, 1 / 3, 0)."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "x = (1, −1). Then x W₁ = (1, -1, -2)"
+              }
+            ],
+            [
+              {
+                "text": "After ReLU: (1, 0, 0)"
+              }
+            ],
+            [
+              {
+                "text": "Times W₂: (1, 2)"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With x = (0, 2): x W₁ = (0, 2, 2), after ReLU (0, 2, 2), and the output is (6, 2)."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 58)"
+        }
+      ]
+    },
+    {
+      "ref": "every-position",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The FFN is applied to "
+            },
+            {
+              "text": "each position independently, with the same weights at every position",
+              "bold": true
+            },
+            {
+              "text": ". The vector at position 3 goes through exactly the same W₁ and W₂ as the vector at position 8."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So two positions holding the same vector get the same FFN output, and what happens at one position does not depend on the other positions."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 58, 59)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What are the shapes of the two FFN weight matrices?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "W₁ is d_model × d_ff, and W₂ is d_ff × d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The vector is widened, then narrowed back."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Both are d_model × d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The middle is d_ff wide, which is usually larger."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "W₁ is n × d_model, and W₂ is d_model × n"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The FFN does not depend on the number of tokens."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "W₁ is d_ff × d_ff, and W₂ is d_model × d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The matrices connect d_model to d_ff and back."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["the-formula", "wider-middle"],
+      "covers": ["ffn"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What is the shape of W₂?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_ff × d_model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It takes the wide middle back to d_model."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model × d_ff"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is W₁."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_ff × d_ff"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The output must be d_model long, as the input was."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n × d_ff"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The FFN does not depend on the number of tokens."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With the classic choice d_ff = 4 · d_model, what is d_ff for d_model = 512?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "2,048"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "4 × 512."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "512"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is d_model."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1,024"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is 2 × 512."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "131,072"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is 512 × 256, not 4 × 512."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["wider-middle"],
+      "covers": ["ffn"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "With d_ff = 4 · d_model, what is d_ff for d_model = 768?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "3,072"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "4 × 768."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "768"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is d_model."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1,536"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is 2 × 768."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "589,824"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is 768 squared."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In the toy case (ReLU, no biases), x = (1, −1) gives x W₁ = (1, −1, −2). What is the final output?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(1, 2)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "After ReLU it is (1, 0, 0), and times W₂ that is (1, 2)."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(1, −1, −2)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the middle, before ReLU. The output is d_model long."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(1, 0, 0)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the middle, after ReLU."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(−2, 1)"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The ReLU turns the negative numbers into 0 first."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["toy-ffn", "the-activation"],
+      "covers": ["ffn"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Same weights, x = (0, 2). What is the FFN output?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "(6, 2)"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "x W₁ = (0, 2, 2), unchanged by ReLU, and times W₂ that is (6, 2)."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "(0, 2, 2)"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the middle. The output is d_model long."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "(0, 0)"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The middle is not all 0."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "(2, 6)"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The entries are the wrong way round."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The same vector appears at position 3 and at position 8 of a text. What are the two FFN outputs?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Identical, since the FFN applies the same weights to each position independently"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It does not look at the other positions."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Different, because the positions differ"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Position is not an input to the FFN."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Different, because each position has its own W₁ and W₂"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "All positions share the same weights."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Undefined, because the FFN needs the whole text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It works on one vector at a time."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["every-position"],
+      "covers": ["ffn"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Does the FFN output at a position depend on the vectors at other positions?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "No: it works on that position's vector alone"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It transforms each token independently."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Yes: it averages over all the positions"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the job of a different sublayer."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Yes, but only the previous position"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It uses no other position."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It depends on the position number"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The same vector gives the same output anywhere."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
