@@ -76,6 +76,7 @@ describe("SettingsPage", () => {
       name: "My AI",
       key_prefix: "fk_supersec",
       created_at: new Date(0).toISOString(),
+      scope: "full",
     });
 
     renderPage();
@@ -85,7 +86,52 @@ describe("SettingsPage", () => {
 
     expect(await screen.findByText("fk_supersecretrawkey")).toBeInTheDocument();
     expect(screen.getByText(/won't be shown again/)).toBeInTheDocument();
-    expect(mockApi.keys.create).toHaveBeenCalledWith("My AI");
+    expect(mockApi.keys.create).toHaveBeenCalledWith("My AI", "full");
+  });
+
+  test("an AI authoring key is one radio choice away, and is sent as deck-scoped", async () => {
+    mockApi.keys.list.mockResolvedValue([]);
+    mockApi.keys.create.mockResolvedValue({
+      key: "fk_aikeyvalue",
+      name: "My AI",
+      key_prefix: "fk_aikeyval",
+      created_at: new Date(0).toISOString(),
+      scope: "deck",
+    });
+
+    renderPage();
+    await waitFor(() => expect(mockApi.keys.list).toHaveBeenCalled());
+
+    // Full access stays the default, so existing behaviour does not change.
+    expect(screen.getByRole("radio", { name: /Full access/ })).toBeChecked();
+    await userEvent.click(screen.getByRole("radio", { name: /AI authoring/ }));
+    expect(screen.getByRole("radio", { name: /AI authoring/ })).toBeChecked();
+    await userEvent.click(screen.getByRole("button", { name: /Generate key/ }));
+
+    expect(await screen.findByText("fk_aikeyvalue")).toBeInTheDocument();
+    expect(mockApi.keys.create).toHaveBeenCalledWith("My AI", "deck");
+  });
+
+  test("each listed key shows what kind of access it has", async () => {
+    mockApi.keys.list.mockResolvedValue([
+      {
+        name: "Claude",
+        key_prefix: "fk_deck0001",
+        created_at: new Date(0).toISOString(),
+        scope: "deck",
+      },
+      {
+        name: "My script",
+        key_prefix: "fk_full0001",
+        created_at: new Date(0).toISOString(),
+        scope: "full",
+      },
+    ]);
+    renderPage();
+    const claude = (await screen.findByText("Claude")).closest("li")!;
+    const script = screen.getByText("My script").closest("li")!;
+    expect(within(claude).getByText("AI authoring")).toBeInTheDocument();
+    expect(within(script).getByText("Full access")).toBeInTheDocument();
   });
 
   test("shows the MCP server URL to connect an AI client", async () => {

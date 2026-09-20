@@ -63,6 +63,7 @@ describe("key command validation", () => {
       name: "MCP",
       key_prefix: "fk_aaaaaaaaa",
       created_at: "2026-01-01",
+      scope: "full",
     });
 
     await createKey("user-1", "   ");
@@ -76,6 +77,27 @@ describe("key command validation", () => {
 
     await createKey("user-1", "a".repeat(80));
     expect(mockedRepository.insertApiKey.mock.calls[1][2]).toHaveLength(50);
+  });
+
+  test("creates a deck-scoped (AI authoring) key when asked, and says so", async () => {
+    mockedRepository.insertApiKey.mockResolvedValue({
+      name: "AI authoring",
+      key_prefix: "fk_bbbbbbbbb",
+      created_at: "2026-01-01",
+      scope: "deck",
+    });
+
+    const created = await createKey("user-1", "AI authoring", "deck");
+
+    expect(mockedRepository.insertApiKey).toHaveBeenCalledWith(
+      expect.any(String),
+      "user-1",
+      "AI authoring",
+      expect.any(String),
+      "deck",
+    );
+    expect(created.scope).toBe("deck");
+    expect(created.key).toMatch(/^fk_[0-9a-f]{64}$/);
   });
 
   test("rejects a blank prefix before deleting", async () => {

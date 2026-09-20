@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
 import { api, ApiError } from "../../api/client";
-import type { ApiKey, CreatedApiKey } from "../../api/types";
+import type { ApiKey, ApiKeyScope, CreatedApiKey } from "../../api/types";
+import { KeyAccessChoice, KeyScopeBadge } from "./KeyAccess";
 
 const MCP_URL =
   import.meta.env.VITE_MCP_URL ??
@@ -13,6 +14,7 @@ export function ApiKeysSection() {
   const [keys, setKeys] = useState<ApiKey[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newName, setNewName] = useState("My AI");
+  const [scope, setScope] = useState<ApiKeyScope>("full");
   const [created, setCreated] = useState<CreatedApiKey | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -35,7 +37,7 @@ export function ApiKeysSection() {
     setBusy(true);
     setError(null);
     try {
-      const key = await api.keys.create(newName.trim() || "My AI");
+      const key = await api.keys.create(newName.trim() || "My AI", scope);
       setCreated(key);
       setKeys((k) => (k ? [{ ...key }, ...k] : [key]));
     } catch (err) {
@@ -86,7 +88,9 @@ export function ApiKeysSection() {
         />
       </p>
 
-      <div className="flex gap-2">
+      <KeyAccessChoice value={scope} onChange={setScope} />
+
+      <div className="mt-3 flex gap-2">
         <input
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
@@ -125,7 +129,10 @@ export function ApiKeysSection() {
               className="flex items-center justify-between rounded-lg border p-3"
             >
               <div>
-                <p className="font-medium">{k.name}</p>
+                <p className="font-medium">
+                  {k.name}
+                  <KeyScopeBadge scope={k.scope} />
+                </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   <code>{k.key_prefix}…</code> · {t("settings.created")}{" "}
                   {new Date(k.created_at).toLocaleDateString()}

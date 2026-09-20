@@ -4,6 +4,8 @@ export interface ApiKeyRow {
   name: string;
   key_prefix: string;
   created_at: string;
+  /** "full" works like the owner's login; "deck" is limited to deck data and is recorded as AI-authored. */
+  scope: string;
 }
 
 export function insertApiKey(
@@ -16,14 +18,14 @@ export function insertApiKey(
   return queryOne<ApiKeyRow>(
     `INSERT INTO user_api_keys (key_hash, user_id, name, key_prefix, scope)
      VALUES ($1, $2, $3, $4, $5)
-     RETURNING name, key_prefix, created_at`,
+     RETURNING name, key_prefix, created_at, scope`,
     [keyHash, userId, name, keyPrefix, scope],
   );
 }
 
 export function listApiKeys(userId: string) {
   return query<ApiKeyRow>(
-    `SELECT name, key_prefix, created_at FROM user_api_keys
+    `SELECT name, key_prefix, created_at, scope FROM user_api_keys
      WHERE user_id = $1 ORDER BY created_at DESC`,
     [userId],
   );

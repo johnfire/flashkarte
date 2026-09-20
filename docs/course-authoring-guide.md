@@ -184,8 +184,11 @@ for a symbol drawn inside a sentence: a `spans` list may mix strings and span ob
   ```
 
   Files go in the order given, so list prerequisite lessons first; it stops at the first failure so nothing is
-  imported out of order. Each file is the JSON `import_lesson` takes, in either form. It needs an **AI
-  (deck-scoped) key**, because that is what makes the server record the content as AI-authored. It refuses a
+  It needs an **AI
+  (deck-scoped) key**, because that is what makes the server record the content as AI-authored. The owner creates
+  one in Settings, under _Connect your AI_: choose **AI authoring**, name it, generate it and copy it once (it is
+  never shown again). An AI authoring key reaches decks, courses and lessons, but the server refuses it on account
+  routes such as the profile, key management and data export. It refuses a
   full-scope key (which would record it as the owner's own writing) unless told `--allow-full-key`, refuses a
   non-`https` URL other than localhost, and reads the key from the environment, never from an argument.
 

@@ -59,6 +59,7 @@ export async function createKey(
     name: row.name,
     key_prefix: row.key_prefix,
     created_at: row.created_at,
+    scope: row.scope,
   };
 }
 

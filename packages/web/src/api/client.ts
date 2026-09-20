@@ -8,6 +8,7 @@ import {
   ReviewResult,
   DeckStats,
   ApiKey,
+  ApiKeyScope,
   CreatedApiKey,
   LibraryDeck,
   LibraryDeckDetail,
@@ -525,10 +526,10 @@ export const api = {
   },
   keys: {
     list: () => request<ApiKey[]>("/keys"),
-    create: (name: string) =>
+    create: (name: string, scope: ApiKeyScope = "full") =>
       request<CreatedApiKey>("/keys", {
         method: "POST",
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ name, scope }),
       }),
     revoke: (prefix: string) =>
       request<void>(`/keys/${prefix}`, { method: "DELETE" }),

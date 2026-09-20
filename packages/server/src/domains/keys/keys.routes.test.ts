@@ -65,6 +65,34 @@ describe("keys routes", () => {
     expect(res.body[0].key).toBeUndefined();
   });
 
+  test("GET /api/keys says which scope each key has", async () => {
+    mock.listKeys.mockResolvedValue([
+      { name: "ai", key_prefix: "fk_deck0001", created_at: "x", scope: "deck" },
+      { name: "me", key_prefix: "fk_full0001", created_at: "x", scope: "full" },
+    ] as never);
+    const res = await request(app).get("/api/keys");
+    expect(res.body.map((k: { scope: string }) => k.scope)).toEqual([
+      "deck",
+      "full",
+    ]);
+  });
+
+  test("POST /api/keys passes the chosen scope through", async () => {
+    mock.createKey.mockResolvedValue({
+      key: "fk_abcdef",
+      name: "AI",
+      key_prefix: "fk_abcdef12",
+      created_at: "x",
+      scope: "deck",
+    } as never);
+    const res = await request(app)
+      .post("/api/keys")
+      .send({ name: "AI", scope: "deck" });
+    expect(res.status).toBe(201);
+    expect(res.body.scope).toBe("deck");
+    expect(mock.createKey).toHaveBeenCalledWith("u1", "AI", "deck");
+  });
+
   test("DELETE /api/keys/:prefix -> 204", async () => {
     mock.revokeKey.mockResolvedValue(undefined as never);
     const res = await request(app).delete("/api/keys/fk_abcdef12");

@@ -220,10 +220,14 @@ export interface DeckStats {
   learned: number;
 }
 
+/** "full" works like the owner's login. "deck" is limited to deck data and is recorded as AI-authored. */
+export type ApiKeyScope = "full" | "deck";
+
 export interface ApiKey {
   name: string;
   key_prefix: string;
   created_at: string;
+  scope: ApiKeyScope;
 }
 
 export interface CreatedApiKey extends ApiKey {
