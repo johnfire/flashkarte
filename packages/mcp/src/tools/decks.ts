@@ -133,8 +133,8 @@ export function registerDeckTools(server: McpServer) {
       READING_HELP +
       "\n\n" +
       SPEECH_HELP +
-      "\n\nPass course_id to create this deck as the next unit of an " +
-      "existing course (see create_course) in one call, instead of " +
+      "\n\nPass course_id to create this deck as the next unit of an existing " +
+      "legacy deck course (see create_course) in one call, instead of " +
       "create-then-add_deck_to_course.",
     {
       markdown: z

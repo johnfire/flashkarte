@@ -6,8 +6,9 @@ fails if the two copies drift (see [Where this lives](#where-this-lives))._
 
 A **course** here means the lesson engine: a **subject** (a prerequisite graph of concepts) taught by
 **lessons** (numbered read screens, then multiple-choice questions), grouped into **modules**. It is not the
-older deck "Course" (an ordered, gated list of flashcard decks). For flashcards use `build_a_course`; for
-structured learning follow this guide. The design behind it is in
+older deck "Course" (an ordered, gated list of flashcard decks). For a structured course, use
+`build_lesson_course` and follow this guide. Use `build_flashcard_course` only when the owner explicitly wants
+flashcards or decks; `build_a_course` is its deprecated compatibility alias. The design behind it is in
 [`plans/2026-09-19-course-authoring-strategy.md`](plans/2026-09-19-course-authoring-strategy.md) and
 [`plans/2026-09-19-lesson-engine-design.md`](plans/2026-09-19-lesson-engine-design.md).
 
@@ -267,8 +268,8 @@ because the concept edges split the material; plan from the graph, not from a gu
 ## Where this lives
 
 - **This file**: `docs/course-authoring-guide.md`. Edit it here.
-- **Over MCP**: the `get_course_authoring_guide` tool returns the same text, and the `build_a_course` prompt
-  points to it. The MCP server ships without `docs/`, so the text is compiled into
+- **Over MCP**: the `get_course_authoring_guide` tool returns the same text, and the `build_lesson_course` prompt
+  directs agents to it. The MCP server ships without `docs/`, so the text is compiled into
   `packages/mcp/src/guides/course-authoring-guide.generated.ts`.
 - **After editing this file**, run `npm run sync:guide -w packages/mcp` and commit both. A test in `packages/mcp`
   fails if the generated copy does not match this file.

@@ -4,7 +4,7 @@ import { get, post, patch, del } from "../api";
 import { asText, runTool } from "./tool-runner";
 
 const GATING_HELP =
-  "Courses gate cross-deck: deck N+1 unlocks only once every card in deck N " +
+  "Legacy deck courses gate cross-deck: deck N+1 unlocks only once every card in deck N " +
   "is stable (repeated correctly enough times without lapsing). get_course " +
   "reports each deck's lock state so you can tell the user what's next and " +
   "what's still locked.";
@@ -12,8 +12,9 @@ const GATING_HELP =
 export function registerCourseTools(server: McpServer) {
   server.tool(
     "create_course",
-    "Create a new course: an ordered, gated grouping of decks for a learner's " +
-      'goal (e.g. "Intro to Circuit Analysis"). Build it out by creating ' +
+    "Create a LEGACY deck course: an ordered, gated grouping of flashcard decks. " +
+      "Do not use this for a structured lesson course; use import_subject and " +
+      "import_lesson instead. Build this legacy course out by creating " +
       "each unit as a deck with create_deck's course_id, in learning order. " +
       GATING_HELP,
     {
@@ -31,7 +32,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "list_courses",
-    "List the user's courses, each with a decks_total / decks_mastered summary.",
+    "List the user's legacy deck courses, each with a decks_total / decks_mastered summary.",
     {},
     async () =>
       runTool("list_courses", async () => asText(await get("/api/courses"))),
@@ -39,7 +40,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "get_course",
-    "Get a course's full detail: its ordered decks, each with card_count, " +
+    "Get a legacy deck course's full detail: its ordered decks, each with card_count, " +
       "mastered_count, and locked. " +
       GATING_HELP,
     { course_id: z.string().uuid().describe("The course's UUID.") },
@@ -51,7 +52,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "update_course",
-    "Rename a course, edit its description, or publish/unpublish it. Only " +
+    "Rename a legacy deck course, edit its description, or publish/unpublish it. Only " +
       "the fields you pass are changed.",
     {
       course_id: z.string().uuid().describe("The course's UUID."),

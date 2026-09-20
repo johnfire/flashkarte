@@ -15,6 +15,7 @@ import { createTokenRouter } from "./oauth/token";
 import { createMcpAuthMiddleware } from "./oauth/middleware";
 import { requestCorrelationStore } from "./api";
 import { logger } from "./logger";
+import { COURSE_AUTHORING_INSTRUCTIONS } from "./course-authoring-instructions";
 
 function requireEnv(name: string): string {
   const value = process.env[name];
@@ -43,7 +44,10 @@ const MCP_ALLOWED_REDIRECT_URIS = (
   .filter(Boolean);
 
 function buildServer(): McpServer {
-  const server = new McpServer({ name: "flashkarte", version: "0.1.0" });
+  const server = new McpServer(
+    { name: "flashkarte", version: "0.1.0" },
+    { instructions: COURSE_AUTHORING_INSTRUCTIONS },
+  );
   registerDeckTools(server);
   registerCourseTools(server);
   registerSubjectTools(server);

@@ -52,6 +52,12 @@ describe("course authoring guide", () => {
     expect(COURSE_AUTHORING_GUIDE).toMatch(/draft/i);
     expect(COURSE_AUTHORING_GUIDE).toMatch(/never call `finish_lesson`/);
     expect(COURSE_AUTHORING_GUIDE).toMatch(/Ground every claim/);
+    expect(descriptions.get_course_authoring_guide).toMatch(
+      /structured lesson course/i,
+    );
+    expect(descriptions.get_course_authoring_guide).toMatch(
+      /legacy deck course/i,
+    );
   });
 
   it("names only tools the server really registers", async () => {

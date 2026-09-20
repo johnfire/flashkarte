@@ -1,108 +1,75 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
-const BUILD_A_COURSE_PROMPT = `The user wants help learning something new in flashkarte. \
-First call get_course_authoring_guide and follow it: it is the full method for a structured course of lessons \
-(a prerequisite concept graph taught by numbered read screens and questions, grouped into modules), and it \
-states the rules that matter most: what you write is a draft for the owner to review by learning it, never \
-finish a lesson unless they ask, and ground every claim in a real source. The steps below are for a course of \
-flashcard decks; the first three (clarify, ground, model the subject) apply to both.\n\n\
+const BUILD_FLASHCARD_COURSE_PROMPT = `The user explicitly wants a legacy flashcard course: an ordered, gated set of decks. This is not Flashkarte's structured lesson engine. For a structured course of subjects, modules, lessons, screens, and questions, use the build_lesson_course prompt instead.
+
 Walk through this process rather than jumping straight to authoring cards:
 
-1. **Clarify the goal.** What do they actually want to learn, how much do \
-they already know, and roughly how much material is reasonable (a few \
-decks, or a dozen)? Don't guess at scope -- ask if it's unclear.
+1. Clarify the goal, the learner's starting point, and a sensible number of decks. Ask if scope is unclear.
+2. Ground cards in real sources. Do not invent facts from memory.
+3. Model atomic concepts and prerequisite edges. Show the learner-facing sequence for review.
+4. Create the legacy deck course with create_course, then attach decks in learning order with create_deck and course_id.
+5. Use straightforward cards for facts, diagnostic cards for real confusions, and reading cards for explanations.
+6. Review the deck sequence with the owner before calling it done.
 
-2. **Ground it in real sources.** Ask what the user already has (a \
-textbook, a course syllabus, their own notes) before inventing content. If \
-they don't have a source and want you to find one, say so explicitly and \
-look for one rather than fabricating facts from memory. Read enough of the \
-actual source to write cards you're confident are accurate -- a good rule \
-of thumb: if you can't point to where a fact came from, don't put it in a \
-card.
+Legacy deck courses unlock each deck after the preceding deck is stable.`;
 
-3. **Model the subject as a prerequisite graph before writing any cards.** \
-A course is only as good as its order, and order should come from what \
-depends on what, not from a textbook's chapter order. List the concepts \
-(atomic: one thing assessable by one question; split anything that needs \
-"and"), then draw edges. An edge from A to B is "requires" only if a bright \
-newcomer could not follow B's explanation without A; if A merely helps, use \
-"suggests". Data-flow order (how a machine runs) is not learning order. \
-Write a one-sentence reason for every "requires" edge, name what the course \
-assumes but does not teach as "assumption" concepts, and add a "map" \
-concept for an ungated overview to read first. Then call import_subject \
-(see its description for the rules) and lint_subject. **The graph is a \
-hypothesis, not a fact: show the user the edges and their reasons and ask \
-them to correct it before building on it** -- they are the only check on \
-whether it is right, and a clean lint only means it is consistent. Link \
-cards to their concepts with link_concept_cards as you author them.
+const BUILD_LESSON_COURSE_PROMPT = `The user wants a structured lesson course in Flashkarte. First call get_course_authoring_guide and follow it. A structured course is a subject with a prerequisite graph, taught by modules of lessons containing read screens and multiple-choice questions; it is not an ordered group of decks.
 
-4. **Design a syllabus** from the graph's route, prerequisites first, \
-grouping roughly 5-10 concepts per unit. Break the goal into an ordered sequence of \
-right-sized units (each a deck of maybe 20-100 cards, one clear topic). \
-Create the course first with create_course, then create each unit with \
-create_deck's course_id parameter, in learning order -- this attaches each \
-deck to the course as you go instead of create-then-attach. Use \
-add_deck_to_course only for an already-existing deck you want to fold in.
+Follow the guide's checkpoints in order:
 
-5. **Author each deck to fit what's actually being taught, not for its own \
-sake:**
-   - Plain front/back for straightforward facts and definitions.
-   - Diagnostic (multiple-choice) cards -- see create_deck's own \
-description for the exact "-> correct" / "-> label" / "-> end" syntax -- \
-for genuine points of confusion: things learners plausibly get backwards or \
-mix up. A wrong pick can route to a short follow-up card explaining that \
-specific mistake. Don't force every card into this shape; use it where a \
-real confusion exists.
-   - Sense blocks (see create_deck's own description for the \
-"- meaning | example | hint" syntax) for a term with multiple genuinely \
-distinct meanings.
-   - Reading cards (see create_deck's own description for the "@read" \
-syntax) for the parts of learning that are just reading: the orientation \
-overview, background a later concept assumes, a worked explanation. Reading \
-is not tested, so pair each lesson with question cards on the same concept.
-   - Do NOT use "@concept"/"@depth" tags -- that syntax isn't implemented \
-yet and would corrupt card content.
+1. Clarify the learner's starting point, 3 to 7 testable outcomes, and a size cap. Ask rather than guessing.
+2. Read and list the real sources. Every drafted screen must cite its source.
+3. Model atomic concepts and their prerequisite edges, then call import_subject and lint_subject.
+4. Stop and ask the owner to review every prerequisite edge and its reason.
+5. Plan modules and 3 to 8 lessons per module. Stop and ask the owner to approve the syllabus.
+6. Only then author one module at a time with import_lesson. Each lesson needs 4 to 10 screens, 3 to 5 questions, variants, reasons for every option, and checks with lint_lesson and get_outline.
 
-6. **Review the structure with the user** before considering it done -- \
-show them the course (get_course lists it with each deck's card count) and \
-ask if the sequencing and depth feel right, rather than silently building \
-everything and walking away.
+Everything is a draft. Never finish a lesson unless the owner explicitly asks.`;
 
-Courses gate cross-deck automatically: a later deck unlocks once every \
-card in the deck before it is stable (reviewed correctly enough times \
-without lapsing) -- you don't need to build that yourself, just get the \
-order right.`;
+function promptMessage(prompt: string, goal?: string): string {
+  if (!goal) return prompt;
+  return `${prompt}\n\nThe user's stated goal: ${goal}`;
+}
 
-export function registerCoursePrompts(server: McpServer) {
+function registerCoursePrompt(
+  server: McpServer,
+  name: string,
+  description: string,
+  prompt: string,
+): void {
   server.prompt(
-    "build_a_course",
-    "Walks through building a structured, gated, multi-deck course for a " +
-      "learning goal: clarify the goal, ground it in real sources, design a " +
-      "syllabus, author each deck with the card type that actually fits, " +
-      "then review the result with the user. Use this whenever a user asks " +
-      'something like "help me learn X" rather than requesting one deck.',
-    {
-      goal: z
-        .string()
-        .optional()
-        .describe(
-          "What the user wants to learn, if already known (e.g. " +
-            '"the basics of circuit analysis").',
-        ),
-    },
+    name,
+    description,
+    { goal: z.string().optional().describe("The learner's goal.") },
     ({ goal }) => ({
       messages: [
         {
           role: "user",
-          content: {
-            type: "text",
-            text: goal
-              ? `${BUILD_A_COURSE_PROMPT}\n\nThe user's stated goal: ${goal}`
-              : BUILD_A_COURSE_PROMPT,
-          },
+          content: { type: "text", text: promptMessage(prompt, goal) },
         },
       ],
     }),
+  );
+}
+
+export function registerCoursePrompts(server: McpServer): void {
+  registerCoursePrompt(
+    server,
+    "build_a_course",
+    "Deprecated alias for build_flashcard_course. Builds a legacy, gated course of flashcard decks; do not use for structured lesson courses.",
+    BUILD_FLASHCARD_COURSE_PROMPT,
+  );
+  registerCoursePrompt(
+    server,
+    "build_flashcard_course",
+    "Builds a legacy, gated course of flashcard decks. Use only when the user explicitly requests flashcards, decks, or a legacy deck course.",
+    BUILD_FLASHCARD_COURSE_PROMPT,
+  );
+  registerCoursePrompt(
+    server,
+    "build_lesson_course",
+    "Builds a structured course with a subject, modules, lessons, screens, and questions. This is the default for a request to build a course.",
+    BUILD_LESSON_COURSE_PROMPT,
   );
 }
