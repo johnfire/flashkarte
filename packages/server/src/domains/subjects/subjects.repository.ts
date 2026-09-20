@@ -17,6 +17,11 @@ export interface SubjectRow {
 const SUBJECT_COLS =
   "id, user_id, title, description, is_public, version, created_at, updated_at, course_family_id, locale";
 
+// The learner and Android app decode this established subject-list shape. Course-edition metadata
+// is available from the explicit edition endpoints, so adding it here would be a breaking change.
+const SUBJECT_SUMMARY_COLS =
+  "s.id, s.user_id, s.title, s.description, s.is_public, s.version, s.created_at, s.updated_at";
+
 export async function insertSubject(
   db: Queryable,
   userId: string,
@@ -95,13 +100,21 @@ export async function listCourseEditions(
   return result.rows;
 }
 
-export interface SubjectSummaryRow extends SubjectRow {
+export interface SubjectSummaryRow {
+  id: string;
+  user_id: string;
+  title: string;
+  description: string | null;
+  is_public: boolean;
+  version: number;
+  created_at: string;
+  updated_at: string;
   concept_count: number;
 }
 
 export function listSubjects(userId: string) {
   return query<SubjectSummaryRow>(
-    `SELECT s.*,
+    `SELECT ${SUBJECT_SUMMARY_COLS},
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
      WHERE s.user_id = $1
