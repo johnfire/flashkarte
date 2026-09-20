@@ -571,7 +571,7 @@
                   "type": "paragraph",
                   "spans": [
                     {
-                      "text": "It loses its embedding table"
+                      "text": "It loses some of its parameters"
                     }
                   ]
                 }
@@ -581,7 +581,7 @@
                   "type": "paragraph",
                   "spans": [
                     {
-                      "text": "Nothing is removed."
+                      "text": "The same network is kept, with changed values."
                     }
                   ]
                 }

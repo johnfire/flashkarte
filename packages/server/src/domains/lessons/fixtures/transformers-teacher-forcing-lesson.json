@@ -1185,7 +1185,7 @@
               "type": "paragraph",
               "spans": [
                 {
-                  "text": "Only when the temperature is 0"
+                  "text": "Only when the loss has reached 0"
                 }
               ]
             }
@@ -1195,7 +1195,7 @@
               "type": "paragraph",
               "spans": [
                 {
-                  "text": "Temperature is about sampling. Teacher forcing is about training."
+                  "text": "The loss value does not decide it. Teacher forcing is about what is fed in during training."
                 }
               ]
             }
