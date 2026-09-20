@@ -1,0 +1,1126 @@
+{
+  "module": "Attention: how tokens exchange information",
+  "lesson": {
+    "slug": "scores-weights",
+    "title": "Scores and attention weights",
+    "summary": "How queries and keys are compared to give a score for every pair of positions, and how a row-wise softmax turns each row of scores into attention weights.",
+    "covers": ["attention-scores", "attention-weights"],
+    "prerequisites": [
+      {
+        "lesson": "qkv-projections",
+        "reason": "Scores are built from Q and K."
+      },
+      {
+        "lesson": "logits-softmax",
+        "reason": "The weights are a softmax of the scores."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "compare",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "To decide how relevant position "
+            },
+            {
+              "text": "j",
+              "italic": true
+            },
+            {
+              "text": " is to position "
+            },
+            {
+              "text": "i",
+              "italic": true
+            },
+            {
+              "text": ", compare the "
+            },
+            {
+              "text": "query",
+              "bold": true
+            },
+            {
+              "text": " of "
+            },
+            {
+              "text": "i",
+              "italic": true
+            },
+            {
+              "text": " with the "
+            },
+            {
+              "text": "key",
+              "bold": true
+            },
+            {
+              "text": " of "
+            },
+            {
+              "text": "j",
+              "italic": true
+            },
+            {
+              "text": ". The comparison is a "
+            },
+            {
+              "text": "dot product",
+              "bold": true
+            },
+            {
+              "text": ": multiply matching entries and add them up."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A larger dot product means the query and key match better. This is a score."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 31)"
+        }
+      ]
+    },
+    {
+      "ref": "score-matrix",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Doing this for every query against every key at once is one matrix product, "
+            },
+            {
+              "text": "Q Kᵀ",
+              "bold": true
+            },
+            {
+              "text": ". It has one score for every pair of positions:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "S = Q K^{\\top}",
+          "spoken": "S equals Q times K transposed"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Q is n × d_k and Kᵀ is d_k × n, so S is "
+            },
+            {
+              "text": "n × n",
+              "bold": true
+            },
+            {
+              "text": ". Row i holds the scores of query i against every key."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 31)"
+        }
+      ]
+    },
+    {
+      "ref": "toy-scores",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A toy case with 3 tokens and invented 2-dimensional queries and keys. Queries and keys are both (1, 0), (0, 1), (1, 1). The scores are:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "row 1: 1, 0, 1"
+              }
+            ],
+            [
+              {
+                "text": "row 2: 0, 1, 1"
+              }
+            ],
+            [
+              {
+                "text": "row 3: 1, 1, 2"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "For example, the score of query 3 against key 3 is 1 × 1 + 1 × 1 = 2."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 31)"
+        }
+      ]
+    },
+    {
+      "ref": "softmax-rows",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Scores are not yet weights, since they can be any size. Softmax turns them into weights, separately for "
+            },
+            {
+              "text": "each row",
+              "bold": true
+            },
+            {
+              "text": ": row i becomes query i's distribution of attention over all the positions."
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "A = \\mathrm{softmax}(S) \\text{ along each row}",
+          "spoken": "A equals softmax of S, taken along each row"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Every row of A is non-negative and adds up to 1."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 31, 34)"
+        }
+      ]
+    },
+    {
+      "ref": "toy-weights",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Row 1 of the toy scores is 1, 0, 1. Its softmax is 0.422, 0.155, 0.422."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Row 3 is 1, 1, 2, and its softmax is 0.212, 0.212, 0.576: query 3 puts most of its attention on key 3."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each row adds up to 1. The columns do not have to: a token that many queries attend to can receive a total weight well above 1."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 34, 35)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Q and K are each n × d_k. What is the shape of the score matrix Q Kᵀ?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × n"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "One score for every query-key pair."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × d_k"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the shape of Q and K themselves."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_k × d_k"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The product has one row per query and one column per key."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "There is a score against every key, not just one."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["score-matrix"],
+      "covers": ["attention-scores"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What does entry (i, j) of the score matrix hold?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The dot product of query i with key j"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One score per query-key pair."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The value vector of token j"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Values are used later, after the weights are known."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The token ID of position i"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "IDs are not part of the score."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The probability that token j comes next"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That comes from the output, not from the scores."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A query is q = (1, 2) and a key is k = (3, 1). What is their score, the dot product?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "5"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1 × 3 + 2 × 1 = 5."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "4"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That would be 1 + 3, adding instead of multiplying the matching entries."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "7"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That would be 3 × 2 + 1, mixing up which entries are paired."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "6"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is 2 × 3 alone. The pairs 1 × 3 and 2 × 1 must both be added."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["compare", "toy-scores"],
+      "covers": ["attention-scores"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A query is q = (2, 0) and a key is k = (1, 5). What is their score?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "2"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "2 × 1 + 0 × 5 = 2."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "10"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The second entry of q is 0, so it adds nothing."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "7"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That adds the entries instead of multiplying matching pairs."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The first pair gives 2 × 1 = 2."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Softmax in attention is taken along which axis of the n × n score matrix?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Along each row: across the keys, separately for each query"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each row then adds up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Along each column: across the queries, separately for each key"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The columns do not have to add up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Over the whole matrix as one distribution"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each query gets its own distribution."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is not applied to the scores"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax turns the scores into weights."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["softmax-rows"],
+      "covers": ["attention-weights"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "In the weight matrix A, what does row i mean?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "How query i divides one unit of attention over all the positions"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Its entries are non-negative and add up to 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "How key i is used by all the queries"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That would be a column."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The value vector of token i"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Values are separate vectors."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The token IDs the query looks at"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The weights are numbers between 0 and 1."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "One query's scores against three keys are 1, 0 and 1. What are its attention weights, about?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "0.42, 0.16, 0.42"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax of (1, 0, 1). The two equal scores get equal weights, and the smaller score gets a smaller one."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1, 0, 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Those are the scores. The weights are between 0 and 1 and add up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "0.5, 0, 0.5"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A score of 0 still gets a small positive weight from softmax."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "0.33, 0.33, 0.33"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Different scores give different weights."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["toy-weights"],
+      "covers": ["attention-weights", "attention-scores"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A query's scores against three keys are all 0. What are its attention weights?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Equal: one third each"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Equal scores give equal weights."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All 0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Weights add up to 1, so they cannot all be 0."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1, 0, 0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That would need one score to be much larger than the others."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They are not defined"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax of equal scores is well defined and gives equal weights."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

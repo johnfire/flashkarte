@@ -1,0 +1,1375 @@
+{
+  "module": "Attention: how tokens exchange information",
+  "lesson": {
+    "slug": "causal-mask",
+    "title": "The causal mask",
+    "summary": "How attention is stopped from looking at later tokens: the lower-triangular mask, why it is applied to the scores before softmax, and why training needs it.",
+    "covers": ["causal-mask", "mask-in-training"],
+    "prerequisites": [
+      {
+        "lesson": "scores-weights",
+        "reason": "The mask edits the scores that become the weights."
+      },
+      {
+        "lesson": "logits-softmax",
+        "reason": "It works through softmax renormalising over the allowed positions."
+      },
+      {
+        "lesson": "teacher-forcing",
+        "reason": "It matters most in the setting where whole sequences are fed at once."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "problem",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "As described so far, every position can attend to "
+            },
+            {
+              "text": "every",
+              "bold": true
+            },
+            {
+              "text": " position, including the ones that come after it. But a model that generates text must predict a token "
+            },
+            {
+              "text": "without seeing the future",
+              "italic": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So attention has to be restricted: position i may use only the tokens up to and including i."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 41)"
+        }
+      ]
+    },
+    {
+      "ref": "the-mask",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The restriction is the "
+            },
+            {
+              "text": "causal mask",
+              "bold": true
+            },
+            {
+              "text": ", a lower-triangular pattern: position i may attend to positions j ≤ i only."
+            }
+          ]
+        },
+        {
+          "type": "image",
+          "src": "/schematics/transformer-causal-mask.svg",
+          "alt": "Causal attention mask for five tokens, The cat sat on mat. A lower-triangular grid of queries against keys: each query may attend to itself and earlier tokens, and every later position is marked minus infinity. After softmax the minus infinity entries become 0.",
+          "display": "expandable"
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 41)"
+        }
+      ]
+    },
+    {
+      "ref": "how",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It is applied to the "
+            },
+            {
+              "text": "scores",
+              "bold": true
+            },
+            {
+              "text": ", before softmax: every score S_ij with j > i is set to "
+            },
+            {
+              "text": "−∞",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Take query 2 of the toy case, with scores 0, 1, 1. The third key is in the future, so the scores become 0, 1, −∞."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Now "
+            },
+            {
+              "text": "exp(−∞) = 0",
+              "code": true
+            },
+            {
+              "text": ", so softmax gives 0.269, 0.731, 0.000: the future position gets weight exactly 0, and the other weights still add up to 1."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 41, 42)"
+        }
+      ]
+    },
+    {
+      "ref": "before-not-after",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why not just softmax first, and then zero the future weights? Because then the row no longer adds up to 1."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Query 2 without a mask has weights 0.155, 0.422, 0.422. Zeroing the third leaves 0.155, 0.422, 0.000, which add up to only 0.578. That is not a proper weighted average."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Masking the scores first lets softmax "
+            },
+            {
+              "text": "renormalise over the allowed positions",
+              "bold": true
+            },
+            {
+              "text": " automatically."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 43)"
+        }
+      ]
+    },
+    {
+      "ref": "in-training",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In generation there are no future tokens anyway, so why is the mask needed in "
+            },
+            {
+              "text": "training",
+              "bold": true
+            },
+            {
+              "text": "?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Because training feeds the "
+            },
+            {
+              "text": "whole sequence at once",
+              "bold": true
+            },
+            {
+              "text": ", and every position predicts its own next token in parallel. Without the mask, position i could read token i + 1, which is exactly its label, and simply learn to copy it."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 44)"
+        }
+      ]
+    },
+    {
+      "ref": "same-computation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The mask has a second benefit. It makes each position's result "
+            },
+            {
+              "text": "independent of later tokens",
+              "bold": true
+            },
+            {
+              "text": ", so training and generation compute the same thing for a given position."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Without that, a model trained one way would behave differently when used the other way."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 44)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What does the causal mask do?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It lets position i attend only to positions j ≤ i: itself and earlier tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Later positions are blocked."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It lets every position attend to every other position"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is attention without a mask."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It hides the earlier tokens from position i"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is the later tokens that are hidden."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It removes tokens from the vocabulary"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The mask acts on attention scores, not on the vocabulary."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["problem", "the-mask"],
+      "covers": ["causal-mask"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which scores are set to −∞ for the query at position 3 of a 5-token text?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Those against keys 4 and 5, the later positions"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Position 3 may still see keys 1, 2 and 3."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Those against keys 1 and 2, the earlier positions"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Earlier positions stay visible."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Only the score against key 3"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Position 3 may attend to itself."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "None of them"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The later positions are masked."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Where is the causal mask applied?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To the scores before softmax, setting the future entries to −∞"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax then gives those positions weight 0."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To the weights after softmax, by zeroing the future entries"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Then the rows would no longer add up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To the input, by deleting the future tokens from the prompt"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The tokens stay in the sequence. Only attention to them is blocked."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To the values V, by setting them to 0"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The mask acts on the scores."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["how"],
+      "covers": ["causal-mask"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Why is −∞ used for the masked scores?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "exp(−∞) = 0, so those positions get weight exactly 0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The other weights renormalise to add up to 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because −∞ is a very likely score"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is the smallest possible score, so the weight is the smallest possible."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because it makes the scores larger"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It makes the masked scores as small as possible."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because softmax cannot be applied to finite numbers"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax works on any real scores."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why must the mask be applied before softmax rather than after?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Zeroing weights after softmax leaves each row adding up to less than 1, so it is not a proper weighted average"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Masking the scores first lets softmax renormalise over the allowed positions."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Because softmax cannot be applied to zeros"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It can. The problem is that the row would not add up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Because the mask is a different size from the scores"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The mask has the same n × n size."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "There is no difference"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The order changes the weights."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["before-not-after"],
+      "covers": ["causal-mask"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax weights are (0.5, 0.3, 0.2), and the last one is zeroed afterwards. What is the sum of the row?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "0.8, so it is no longer a proper weighted average"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Masking the scores before softmax avoids this."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1, as always"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Zeroing an entry after softmax lowers the sum."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1.2"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Zeroing cannot increase the sum."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Only the last entry is zeroed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why is the mask needed in training, when generation has no future tokens anyway?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Training feeds the whole sequence at once, and without the mask a position could read the next token, which is exactly its label, and learn to copy it"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The mask keeps each prediction honest."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Because training is slower and the mask speeds it up"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The reason is about what a position is allowed to see."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Because the loss cannot be computed without a mask"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The loss can be computed. The model would learn a useless shortcut."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is not needed in training"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is essential when all positions are predicted in parallel."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["in-training"],
+      "covers": ["mask-in-training"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A model is trained on "
+                },
+                {
+                  "text": "The cat sat",
+                  "italic": true
+                },
+                {
+                  "text": " without a mask. The position of "
+                },
+                {
+                  "text": "cat",
+                  "italic": true
+                },
+                {
+                  "text": " can read "
+                },
+                {
+                  "text": "sat",
+                  "italic": true
+                },
+                {
+                  "text": ". What goes wrong?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It can just copy "
+                    },
+                    {
+                      "text": "sat",
+                      "italic": true
+                    },
+                    {
+                      "text": ", its own target, and learns nothing useful"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The mask hides the target from the position that must predict it."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Nothing: reading the target is helpful"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It defeats the purpose of predicting it."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The tokenizer fails"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The tokenizer is not involved."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary shrinks"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary is fixed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What does the mask guarantee about each position's result?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It does not depend on later tokens, so training and generation compute the same thing for that position"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is why what is learned in training carries over to generation."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It depends on every token in the text, later ones included"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is what the mask prevents."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is always the same for every position"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Positions differ because they see different earlier tokens."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It depends on the vocabulary size"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The mask is about which positions can be seen."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["same-computation"],
+      "covers": ["mask-in-training"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Why does it matter that a position's result does not depend on later tokens?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Then training, with the whole sequence present, computes what generation will compute, with only the earlier tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The two settings agree."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because later tokens are always wrong"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is not about them being wrong."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because it makes the text shorter"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The length is not affected."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because it removes the need for a vocabulary"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary is still needed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

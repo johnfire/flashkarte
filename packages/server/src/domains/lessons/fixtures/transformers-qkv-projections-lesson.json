@@ -1,0 +1,1153 @@
+{
+  "module": "Attention: how tokens exchange information",
+  "lesson": {
+    "slug": "qkv-projections",
+    "title": "Queries, keys and values",
+    "summary": "How each token's vector is turned into three new vectors, a query, a key and a value, by three learned matrices, and what shapes they have.",
+    "covers": ["qkv-projections"],
+    "prerequisites": [
+      {
+        "lesson": "attention-gist",
+        "reason": "Q, K and V are how attention is carried out."
+      },
+      {
+        "lesson": "sequence-shapes",
+        "reason": "The projections are described by their shapes, such as n × d_model."
+      },
+      {
+        "lesson": "training-basics",
+        "reason": "The three matrices are learned parameters."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "three-roles",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "To take a weighted mix, each position needs three different things: something to "
+            },
+            {
+              "text": "look for",
+              "bold": true
+            },
+            {
+              "text": " relevant positions with, something for others to "
+            },
+            {
+              "text": "match against",
+              "bold": true
+            },
+            {
+              "text": ", and the "
+            },
+            {
+              "text": "content",
+              "bold": true
+            },
+            {
+              "text": " to contribute."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So each token's vector is turned into three new vectors: a "
+            },
+            {
+              "text": "query",
+              "bold": true
+            },
+            {
+              "text": ", a "
+            },
+            {
+              "text": "key",
+              "bold": true
+            },
+            {
+              "text": " and a "
+            },
+            {
+              "text": "value",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 30)"
+        }
+      ]
+    },
+    {
+      "ref": "the-analogy",
+      "blocks": [
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "The "
+              },
+              {
+                "text": "query",
+                "bold": true
+              },
+              {
+                "text": " is what this position is looking for."
+              }
+            ],
+            [
+              {
+                "text": "The "
+              },
+              {
+                "text": "key",
+                "bold": true
+              },
+              {
+                "text": " is what each position advertises, for others to match against."
+              }
+            ],
+            [
+              {
+                "text": "The "
+              },
+              {
+                "text": "value",
+                "bold": true
+              },
+              {
+                "text": " is the content a position contributes if it is attended to."
+              }
+            ]
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "This is an analogy for intuition, not a description of the mechanism. What the numbers in a query or a key mean is decided by training, and nobody writes them by hand."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 30)"
+        }
+      ]
+    },
+    {
+      "ref": "projections",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "X is the matrix of token vectors, one row per token, with shape n × d_model. Three matrices turn it into Q, K and V:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "Q = X W_Q \\qquad K = X W_K \\qquad V = X W_V",
+          "spoken": "Q equals X times W Q, K equals X times W K, V equals X times W V"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each of these is a "
+            },
+            {
+              "text": "projection",
+              "bold": true
+            },
+            {
+              "text": ": a matrix multiplication that turns every row of X into a row of the result."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 30)"
+        }
+      ]
+    },
+    {
+      "ref": "shapes",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "W_Q and W_K have shape d_model × d_k, and W_V has shape d_model × d_v. A matrix product (a × b)(b × c) has shape a × c, so:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "Q = X W_Q is n × d_k"
+              }
+            ],
+            [
+              {
+                "text": "K = X W_K is n × d_k"
+              }
+            ],
+            [
+              {
+                "text": "V = X W_V is n × d_v"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "For example, with n = 3 tokens, d_model = 4 and d_k = 2: X is 3 × 4, W_Q is 4 × 2, and Q is 3 × 2."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Every token has its own query, its own key and its own value: one row each."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 30)"
+        }
+      ]
+    },
+    {
+      "ref": "learned",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "W_Q, W_K and W_V are "
+            },
+            {
+              "text": "parameters",
+              "bold": true
+            },
+            {
+              "text": ", learned during training like all the others. At inference they are frozen."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Q, K and V are different: they are "
+            },
+            {
+              "text": "computed from the input",
+              "bold": true
+            },
+            {
+              "text": ", so they change for every new text."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 30, 9)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "X is n × d_model and W_Q is d_model × d_k. What is the shape of Q = X W_Q?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × d_k"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "(n × d_model)(d_model × d_k) gives n × d_k: one query per token."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_model × d_k"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the shape of W_Q itself."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the shape of X. The projection changes the width to d_k."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_k × d_k"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The product keeps n rows, one per token."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["projections", "shapes"],
+      "covers": ["qkv-projections"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "X is n × d_model and W_V is d_model × d_v. What is the shape of V?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n × d_v"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One value vector per token, of length d_v."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model × d_v"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the shape of W_V."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n × n"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the shape of the score matrix, which comes later."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_v × n"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The rows stay one per token."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which of these are parameters, learned during training?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "W_Q, W_K and W_V"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "They are the learned projection matrices."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Q, K and V"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "They are computed from the input, so they change with every text."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "X for a given prompt"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "X comes from the prompt through the embedding step."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Nothing here is learned"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The three projection matrices are learned."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["learned"],
+      "covers": ["qkv-projections"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "You feed the trained model a new text. Which changes: W_Q or Q?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Q changes, and W_Q stays the same"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Q is computed from the new input. W_Q is frozen at inference."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "W_Q changes, and Q stays the same"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is the other way round."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Both change"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "W_Q is a frozen parameter at inference."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Neither changes"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Q depends on the input text."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In the query, key and value analogy, what is the query?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What this position is looking for"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is used to match against other positions' keys."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What each position advertises for matching"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the key."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The content a position contributes if attended to"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the value."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token's ID"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The ID is a label. Queries are vectors computed by W_Q."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["the-analogy", "three-roles"],
+      "covers": ["qkv-projections"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "In the same analogy, what is the value?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The content a position contributes if it is attended to"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is what gets mixed into other positions' results."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "What this position is looking for"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the query."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "What each position advertises for matching"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the key."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The number of tokens n"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n is the sequence length."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "How many query vectors are there for a text of n tokens?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n: one per token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Q has n rows."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "1, shared by all the tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each token has its own query."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_k"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_k is the length of each query, not how many there are."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × n"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the number of query-key pairs, which comes later."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["shapes"],
+      "covers": ["qkv-projections"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "K is n × d_k. What does each row of K describe?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The key of one token"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "There is one key per token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One parameter of the model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Parameters live in W_K. K is computed from the input."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One vocabulary entry"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The rows follow the tokens of the text, not the vocabulary."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One attention weight"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Weights are worked out from queries and keys later."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

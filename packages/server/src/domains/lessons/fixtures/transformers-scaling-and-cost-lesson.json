@@ -1,0 +1,1075 @@
+{
+  "module": "Attention: how tokens exchange information",
+  "lesson": {
+    "slug": "scaling-and-cost",
+    "title": "Scaling the scores, and the n² cost",
+    "summary": "Why the scores are divided by the square root of d_k before softmax, and why attention costs grow with the square of the sequence length.",
+    "covers": ["score-scaling", "attention-cost"],
+    "prerequisites": [
+      {
+        "lesson": "scores-weights",
+        "reason": "Both are properties of the score matrix and of the softmax that follows it."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "big-scores",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A dot product adds up d_k products. The more terms there are, the larger the typical result."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "If the entries of a query and a key are roughly independent, with zero mean and unit variance, the dot product has "
+            },
+            {
+              "text": "variance d_k",
+              "bold": true
+            },
+            {
+              "text": ". Its typical size grows like "
+            },
+            {
+              "text": "√d_k",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 32)"
+        }
+      ]
+    },
+    {
+      "ref": "saturation",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With d_k = 64, a typical score is around 8 in size. Suppose one query gives the scores 8, 0, 0. Softmax gives 0.9993, 0.0003, 0.0003."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Nearly all the weight lands on one position. This is "
+            },
+            {
+              "text": "saturation",
+              "bold": true
+            },
+            {
+              "text": ": the softmax is almost a hard choice, and its gradients nearly vanish, which makes learning hard."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 32)"
+        }
+      ]
+    },
+    {
+      "ref": "divide",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The fix is to divide the scores by √d_k before softmax. This brings their variance back to 1."
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "\\mathrm{softmax}\\!\\left(\\frac{Q K^{\\top}}{\\sqrt{d_k}}\\right)",
+          "spoken": "softmax of Q times K transposed, divided by the square root of d k"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In the example, dividing by √64 = 8 turns the scores into 1, 0, 0, and softmax gives 0.576, 0.212, 0.212. The attention is still focused, but no longer all on one position."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 32, 31)"
+        }
+      ]
+    },
+    {
+      "ref": "n-squared",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Now the cost. The score matrix has one entry for every pair of positions, so a text of n tokens gives "
+            },
+            {
+              "text": "n² scores",
+              "bold": true
+            },
+            {
+              "text": " for each head."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "n = 1,000: 1,000,000 scores"
+              }
+            ],
+            [
+              {
+                "text": "n = 2,000: 4,000,000 scores"
+              }
+            ],
+            [
+              {
+                "text": "n = 4,000: 16,000,000 scores"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Doubling n makes attention roughly four times as expensive. The amount of arithmetic grows like n² times the vector width."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 37)"
+        }
+      ]
+    },
+    {
+      "ref": "quadratic-note",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The n² growth is a real limit on how long a context can be. A technique called FlashAttention gives exactly the same result while working through the matrix in small tiles held in fast memory, which cuts memory use and memory traffic."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "The number of arithmetic operations stays quadratic even then. FlashAttention avoids storing the whole n × n matrix, it does not shrink n²."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 37)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why are the attention scores divided by √d_k?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Dot products grow like √d_k, and large scores push softmax into saturation. Dividing restores unit variance"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That keeps the softmax from becoming an almost hard choice."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To make the weights add up to 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The softmax does that, and it would anyway."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To make the score matrix smaller than n × n"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The shape stays n × n."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To remove the negative scores"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Dividing by a positive number does not change signs."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["big-scores", "divide"],
+      "covers": ["score-scaling"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "How does the typical size of a dot product of two d_k-long vectors with unit-variance entries grow?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Like √d_k"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The variance is d_k, so the typical size is its square root."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Like d_k"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the variance. The typical size is its square root."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It does not depend on d_k"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "More terms in the sum make larger values."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Like d_k²"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That grows faster than the dot product does."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "One query's scores are 8, 0 and 0, with no scaling. What does softmax give?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Almost all the weight on the first position: about 0.999, 0.0003, 0.0003"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A gap of 8 between scores is a factor of about 3,000 after "
+                },
+                {
+                  "text": "exp",
+                  "code": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "About one third each"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Equal weights would need equal scores."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "About 0.58, 0.21, 0.21"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is what you get after dividing the scores by 8."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "8, 0, 0"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax outputs weights between 0 and 1."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["saturation"],
+      "covers": ["score-scaling"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The same scores 8, 0, 0 are divided by 8 first, since √64 = 8. What are the weights, about?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "0.58, 0.21, 0.21"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The scores become 1, 0, 0, and softmax gives a focused but not one-hot result."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1, 0, 0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That was the unscaled, saturated result, roughly."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "0.33, 0.33, 0.33"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The scores still differ after dividing, so the weights differ."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "8, 0, 0"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax outputs weights between 0 and 1."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "How does the number of scores per head change when the sequence length n doubles?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It roughly quadruples"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "There are n² scores, and (2n)² = 4n²."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It doubles"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That would be linear growth. The score matrix is n × n."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It stays the same"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "More positions mean more query-key pairs."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It halves"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Longer texts have more pairs, not fewer."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["n-squared"],
+      "covers": ["attention-cost"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n grows from 1,000 to 4,000 tokens. How many times more scores per head?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "16 times"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "4,000² is 16 times 1,000²."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "4 times"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is how much n grew. The scores grow with its square."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "8 times"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Doubling twice gives 4 times the length, and 16 times the scores."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The same"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The number of pairs depends on n."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "How many scores does one head compute for a text of 2,000 tokens?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "4,000,000: one for each pair of positions, 2,000 × 2,000"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The score matrix is n × n."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "2,000"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That would be one score per token."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "4,000"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is n added to itself. The matrix has n × n entries."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "8,000,000"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is double the number of pairs."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["n-squared", "quadratic-note"],
+      "covers": ["attention-cost"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "How many scores does one head compute for a text of 3,000 tokens?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "9,000,000"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "3,000 × 3,000."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "3,000"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is one per token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "6,000"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is n + n."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "27,000,000"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That would be n cubed."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

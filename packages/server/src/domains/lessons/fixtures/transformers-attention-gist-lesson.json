@@ -1,0 +1,1095 @@
+{
+  "module": "Attention: how tokens exchange information",
+  "lesson": {
+    "slug": "attention-gist",
+    "title": "Attention, at the highest level",
+    "summary": "Why a token's starting vector is not enough, and the idea of attention: each position updates its vector with a weighted mix of information from the other positions.",
+    "covers": ["attention-gist"],
+    "prerequisites": [
+      {
+        "lesson": "embeddings",
+        "reason": "Attention updates the token vectors the embedding step produces."
+      },
+      {
+        "lesson": "sequence-shapes",
+        "reason": "Attention looks across the n positions of the sequence."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "context-blind",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "After the embedding lookup, every token has a vector. But each vector was picked from the table "
+            },
+            {
+              "text": "on its own",
+              "bold": true
+            },
+            {
+              "text": ", without looking at the tokens around it."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So the word "
+            },
+            {
+              "text": "bank",
+              "italic": true
+            },
+            {
+              "text": " gets exactly the same starting vector in "
+            },
+            {
+              "text": "the river bank",
+              "italic": true
+            },
+            {
+              "text": " and in "
+            },
+            {
+              "text": "the bank account",
+              "italic": true
+            },
+            {
+              "text": ". Its vector cannot yet reflect what the sentence is about."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 6, 17)"
+        }
+      ]
+    },
+    {
+      "ref": "the-idea",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Attention",
+              "bold": true
+            },
+            {
+              "text": " is the mechanism that fixes this. It lets each token's vector be "
+            },
+            {
+              "text": "updated using information from other tokens",
+              "bold": true
+            },
+            {
+              "text": " in the sequence."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Afterwards the vector for "
+            },
+            {
+              "text": "bank",
+              "italic": true
+            },
+            {
+              "text": " can carry something about "
+            },
+            {
+              "text": "river",
+              "italic": true
+            },
+            {
+              "text": " or about "
+            },
+            {
+              "text": "account",
+              "italic": true
+            },
+            {
+              "text": ", depending on which neighbours it took information from."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 17)"
+        }
+      ]
+    },
+    {
+      "ref": "weighted-mix",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "How does a position decide what to take? For each position, the model works out "
+            },
+            {
+              "text": "how relevant every other position is",
+              "bold": true
+            },
+            {
+              "text": ", and then takes a "
+            },
+            {
+              "text": "weighted mix",
+              "bold": true
+            },
+            {
+              "text": " of their information."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A position that is very relevant gets a large weight and contributes a lot. One that is not relevant gets a small weight and contributes little."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 17)"
+        }
+      ]
+    },
+    {
+      "ref": "only-exchange",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Attention is the place where "
+            },
+            {
+              "text": "different positions exchange information",
+              "bold": true
+            },
+            {
+              "text": ". The embedding lookup treats each token separately, and so does the tokenizer."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The rest of the details of how the relevance is computed come in the next lessons. For now, hold on to the picture: "
+            },
+            {
+              "text": "each position updates itself from a weighted mix of the others",
+              "italic": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "The word \"attention\" describes what the mechanism does. It is a piece of arithmetic on vectors. Nothing in it is paying attention in a human sense."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 17)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What does attention do, at the highest level?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It lets each token's vector be updated using information from other tokens in the sequence"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The update is a weighted mix of the other positions' information."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It splits the text into tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the tokenizer's job, and it happens before the network."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It chooses which token comes next"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Choosing a token is sampling, after the network has finished."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It measures how wrong the model is"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the loss."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["the-idea", "weighted-mix"],
+      "covers": ["attention-gist"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "For each position, attention works out what?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "How relevant every other position is, and then takes a weighted mix of their information"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "More relevant positions get larger weights."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Which parameters to adjust next"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Adjusting parameters is training, not attention."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "How to split the word into subwords"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Splitting is done by the tokenizer beforehand."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Which token ID the position has"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The ID was fixed by the tokenizer."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The embedding of a token is looked up from a table. Why is that not enough on its own?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each vector is looked up without looking at the neighbouring tokens, so it cannot reflect the context"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Attention is what brings the context in."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The table is too small to hold every token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The table has one row for every token in the vocabulary."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The vectors have different lengths for different tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Every token's vector has the same length, d_model."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The vectors change at random each time"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A lookup gives the same vector every time."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["context-blind"],
+      "covers": ["attention-gist"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The word "
+                },
+                {
+                  "text": "bank",
+                  "italic": true
+                },
+                {
+                  "text": " appears in two different sentences. Straight after the embedding lookup, what is true of its vector?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is the same in both, because the lookup ignores the neighbouring tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Only attention makes it differ."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It differs, because the sentences have different lengths"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The lookup does not depend on the length of the text."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It differs, because the meaning of the word is different"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The table has no way of knowing the meaning in context."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It does not exist until attention has run"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The lookup provides it before attention."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which part of a transformer lets different positions exchange information?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Attention"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is the place where positions exchange information."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The embedding lookup"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It handles each token separately."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The tokenizer"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It splits text before the network and treats each piece on its own."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The loss"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The loss measures error during training. It does not move information between positions."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["only-exchange"],
+      "covers": ["attention-gist"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which statement about attention is correct?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Each position updates itself from a weighted mix of the other positions"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the whole idea."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Each position is looked at alone, with no information from the others"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That describes the embedding lookup."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Only the first position is updated"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Every position is updated."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It replaces the vectors with token IDs"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "IDs are only labels."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In attention, the mix of information from other positions is weighted. What do the weights express?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "How relevant each other position is to the position being updated"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "More relevant positions contribute more."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "How many characters each token has"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Weights are about relevance, not length."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "How many times each token appeared in the training text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "They are worked out for this text, not counted over the training data."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token IDs of the other positions"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "IDs are labels and are not used as weights."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["weighted-mix"],
+      "covers": ["attention-gist"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A position gives a very large weight to another position. What does that mean?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It takes a lot of information from that position"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A large weight means a large contribution to the mix."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It ignores that position"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A small weight would mean that."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The two tokens have the same ID"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Weights and IDs are unrelated."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That position is deleted from the text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Nothing is deleted."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

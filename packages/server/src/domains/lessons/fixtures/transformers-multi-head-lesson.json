@@ -1,0 +1,1090 @@
+{
+  "module": "Attention: how tokens exchange information",
+  "lesson": {
+    "slug": "multi-head",
+    "title": "Multi-head attention",
+    "summary": "Why attention is run as several heads in parallel, how the heads are split and joined, and how many parameters the layer has.",
+    "covers": ["multi-head-attention", "mha-parameter-count"],
+    "prerequisites": [
+      {
+        "lesson": "attention-output",
+        "reason": "A head is one attention computation like the one just described."
+      },
+      {
+        "lesson": "sequence-shapes",
+        "reason": "The heads split d_model, so the shape notation must already be readable."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "one-head-limit",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "One attention computation produces a single set of weights for each position. But a position may need to attend to different tokens for "
+            },
+            {
+              "text": "different reasons",
+              "bold": true
+            },
+            {
+              "text": ", all at once."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A single softmax head would have to "
+            },
+            {
+              "text": "average",
+              "bold": true
+            },
+            {
+              "text": " those different patterns into one distribution."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 39)"
+        }
+      ]
+    },
+    {
+      "ref": "several-heads",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The solution is "
+            },
+            {
+              "text": "h heads",
+              "bold": true
+            },
+            {
+              "text": " running in parallel. Each head has its "
+            },
+            {
+              "text": "own",
+              "bold": true
+            },
+            {
+              "text": " W_Q, W_K and W_V, which project d_model "
+            },
+            {
+              "text": "down",
+              "bold": true
+            },
+            {
+              "text": " to a smaller size:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "d_k = d_v = d_{\\mathrm{model}} / h",
+          "spoken": "d k equals d v equals d model divided by h"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In the original paper, h = 8 and d_model = 512, so each head works with d_k = 512 / 8 = 64."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 38)"
+        }
+      ]
+    },
+    {
+      "ref": "join",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each head produces an output of shape n × d_v. The h outputs are "
+            },
+            {
+              "text": "concatenated",
+              "bold": true
+            },
+            {
+              "text": " side by side, giving n × (h · d_v) = n × d_model, and then multiplied by an output matrix W_O of shape d_model × d_model:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "\\mathrm{MultiHead}(X) = \\mathrm{Concat}(\\mathrm{head}_1, \\ldots, \\mathrm{head}_h)\\, W_O",
+          "spoken": "Multi-head of X equals the concatenation of head 1 up to head h, times W O"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The result has the same shape as the input, n × d_model."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "Implementations usually do one big projection for all heads and then reshape it into heads. The result is the same."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 38)"
+        }
+      ]
+    },
+    {
+      "ref": "why-several",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each head can learn a "
+            },
+            {
+              "text": "different attention pattern",
+              "bold": true
+            },
+            {
+              "text": ", looking for a different kind of relation in a different subspace, all in parallel."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It also costs about the same as one full-width head, because each head works in the reduced size d_model / h."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 39)"
+        }
+      ]
+    },
+    {
+      "ref": "parameters",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "How many parameters does the layer have? W_Q, W_K, W_V and W_O are each d_model × d_model when all the heads are counted together, so:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "4\\, d_{\\mathrm{model}}^{2}",
+          "spoken": "four times d model squared"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "For d_model = 768 that is 4 × 768² = 2,359,296, about 2.36 million. For d_model = 512 it is 4 × 512² = 1,048,576. (Biases are ignored.)"
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 40)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The model has d_model = 512 and h = 8 heads. What is d_k for each head?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "64"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_k = d_model / h = 512 / 8."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "512"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is d_model, the full width."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "4,096"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is 512 × 8. The heads split d_model, they do not multiply it."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "8"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the number of heads."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["several-heads"],
+      "covers": ["multi-head-attention"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_model = 768 and h = 12. What is d_k for each head?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "64"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "768 / 12 = 64."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "9,216"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is 768 × 12."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "768"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is d_model."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "12"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the number of heads."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why use several heads instead of one large head?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each head can learn a different attention pattern in a different subspace, in parallel, at about the same cost"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "One softmax head would have to average the patterns."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To make the model skip most of the tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Every position is still updated."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To reduce the number of parameters to almost none"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The layer still has 4 · d_model² parameters."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "To let each position see the tokens that come after it"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Heads do not change which positions can be seen."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["one-head-limit", "why-several"],
+      "covers": ["multi-head-attention"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What limitation of a single head do several heads address?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One softmax distribution has to average all the different patterns a position might need"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Several heads can each keep their own pattern."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A single head cannot compute a dot product"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It can."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A single head cannot handle more than 8 tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "There is no such limit."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A single head has no values"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Every head has queries, keys and values."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each of h heads outputs n × d_v, with d_v = d_model / h. What is the shape after the heads are concatenated, before W_O?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "h · d_v = d_model, so the width is back to d_model."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × d_v"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is one head's output. Concatenating joins all h of them."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "n × n"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the shape of the weights."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "d_model × d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the shape of W_O."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["join"],
+      "covers": ["multi-head-attention"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "What is the shape of the output matrix W_O?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model × d_model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It takes the concatenated n × d_model result and returns n × d_model."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model × d_v"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It has to take the concatenation of all the heads."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n × d_model"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the shape of X and of the layer's output, not of W_O."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "h × h"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The number of heads does not set W_O's size."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "How many parameters does a multi-head attention layer with d_model = 768 have, ignoring biases?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "4 · 768² = 2,359,296, about 2.36 million"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "W_Q, W_K, W_V and W_O are each 768 × 768."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "768² = 589,824"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That counts only one of the four matrices."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "3 · 768² = 1,769,472"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That leaves out W_O."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "12 · 768²"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is the count for a whole block, which comes later."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["parameters"],
+      "covers": ["mha-parameter-count"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "How many parameters does a multi-head attention layer with d_model = 512 have, ignoring biases?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "4 · 512² = 1,048,576"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Four matrices of 512 × 512."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "512² = 262,144"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That counts one matrix."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "4 · 512 = 2,048"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The matrices are d_model × d_model, so the count grows with d_model squared."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "8 · 512²"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "There are four matrices, not eight."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
