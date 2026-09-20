@@ -17,7 +17,8 @@ const GRAPH_RULES =
   'use strength "suggests" (orders the route, never locks). Data-flow order ' +
   "is not learning order. Every requires edge needs a one-sentence reason. " +
   "Aim for at most 4 requires parents per concept. Slugs are lowercase " +
-  "letters, digits and hyphens, and cannot change once created.";
+  "letters, digits and hyphens, and cannot change once created. The whole method is in " +
+  "get_course_authoring_guide.";
 
 const CARD_REFERENCE_HELP =
   "Cards are named by UUID, or as {deck_id, card_number} where card_number " +

@@ -42,6 +42,15 @@ describe("build_a_course prompt", () => {
     expect(text).toMatch(/do not use.*@concept/i);
   });
 
+  test("sends the AI to the authoring guide first, and keeps the draft rule", () => {
+    const { handlers, server } = capturePrompts();
+    registerCoursePrompts(server as never);
+    const text = handlers.build_a_course({}).messages[0].content.text;
+    expect(text).toMatch(/get_course_authoring_guide/);
+    expect(text).toMatch(/draft/i);
+    expect(text).toMatch(/never\s+finish a lesson/i);
+  });
+
   test("folds a given goal into the returned message", () => {
     const { handlers, server } = capturePrompts();
     registerCoursePrompts(server as never);

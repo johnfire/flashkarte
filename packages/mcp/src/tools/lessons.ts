@@ -27,7 +27,7 @@ const LESSON_RULES =
   "is re-asked as a different question. Each option needs a short reason shown after the pick, and exactly one " +
   "option is correct. Write for someone learning the subject from nothing, and ground every claim in a real " +
   "source: put the sources you used on the screens you drafted. What you write is a DRAFT for the owner to " +
-  "review by learning it; never present it as finished.";
+  "review by learning it; never present it as finished. The whole method is in get_course_authoring_guide.";
 
 const STAGES_HELP =
   "Each lesson is in the testing stage (anything can change) until it is finished; a finished lesson is " +

@@ -43,15 +43,16 @@ Docker Compose stack (app + MCP + Postgres + daily backups), served at
 
 ## Docs
 
-| Path                                                 | What it covers                                                   |
-| ---------------------------------------------------- | ---------------------------------------------------------------- |
-| [`docs/deployment.md`](docs/deployment.md)           | Docker Compose prod stack, VPS deploy, env, backups              |
-| [`docs/android-release.md`](docs/android-release.md) | Building and publishing the Android app to Play                  |
-| [`docs/specs/`](docs/specs/README.md)                | Learning-engine spec pack (read `00-guardrails.md` first)        |
-| [`docs/plans/`](docs/plans/)                         | Validated designs not yet broken into specs                      |
-| [`docs/store-assets/`](docs/store-assets/)           | Play Store listing assets (icon, feature graphic, screenshots)   |
-| [`docs/superpowers/`](docs/superpowers/)             | Historical plan/spec archive (dated, point-in-time; not current) |
-| [`docs/older-docs/`](docs/older-docs/)               | Retired docs kept for history; not current                       |
+| Path                                                               | What it covers                                                                 |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| [`docs/deployment.md`](docs/deployment.md)                         | Docker Compose prod stack, VPS deploy, env, backups                            |
+| [`docs/course-authoring-guide.md`](docs/course-authoring-guide.md) | How to produce a course (also served over MCP as `get_course_authoring_guide`) |
+| [`docs/android-release.md`](docs/android-release.md)               | Building and publishing the Android app to Play                                |
+| [`docs/specs/`](docs/specs/README.md)                              | Learning-engine spec pack (read `00-guardrails.md` first)                      |
+| [`docs/plans/`](docs/plans/)                                       | Validated designs not yet broken into specs                                    |
+| [`docs/store-assets/`](docs/store-assets/)                         | Play Store listing assets (icon, feature graphic, screenshots)                 |
+| [`docs/superpowers/`](docs/superpowers/)                           | Historical plan/spec archive (dated, point-in-time; not current)               |
+| [`docs/older-docs/`](docs/older-docs/)                             | Retired docs kept for history; not current                                     |
 
 ## History
 

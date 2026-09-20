@@ -7,6 +7,7 @@ import { registerDeckTools } from "./tools/decks";
 import { registerCourseTools } from "./tools/courses";
 import { registerSubjectTools } from "./tools/subjects";
 import { registerLessonTools } from "./tools/lessons";
+import { registerAuthoringGuideTool } from "./tools/authoring-guide";
 import { registerCoursePrompts } from "./prompts/build-a-course";
 import { createDiscoveryRouter } from "./oauth/discovery";
 import { createAuthorizeRouter } from "./oauth/authorize";
@@ -47,6 +48,7 @@ function buildServer(): McpServer {
   registerCourseTools(server);
   registerSubjectTools(server);
   registerLessonTools(server);
+  registerAuthoringGuideTool(server);
   registerCoursePrompts(server);
   return server;
 }

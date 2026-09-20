@@ -1,8 +1,13 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
-const BUILD_A_COURSE_PROMPT = `The user wants help learning something new in flashkarte. Walk through this \
-process rather than jumping straight to authoring cards:
+const BUILD_A_COURSE_PROMPT = `The user wants help learning something new in flashkarte. \
+First call get_course_authoring_guide and follow it: it is the full method for a structured course of lessons \
+(a prerequisite concept graph taught by numbered read screens and questions, grouped into modules), and it \
+states the rules that matter most: what you write is a draft for the owner to review by learning it, never \
+finish a lesson unless they ask, and ground every claim in a real source. The steps below are for a course of \
+flashcard decks; the first three (clarify, ground, model the subject) apply to both.\n\n\
+Walk through this process rather than jumping straight to authoring cards:
 
 1. **Clarify the goal.** What do they actually want to learn, how much do \
 they already know, and roughly how much material is reasonable (a few \
