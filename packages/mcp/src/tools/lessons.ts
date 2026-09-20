@@ -4,20 +4,24 @@ import { get, post, put, patch, del } from "../api";
 import { asText, runTool } from "./tool-runner";
 
 const BLOCKS_HELP =
-  "A screen, and a question's prompt, option text and reasons, are each a list of typed blocks. " +
-  'paragraph: {"type":"paragraph","spans":[{"text":"A "},{"text":"token","bold":true},{"text":" is a piece."}]} ' +
-  "(spans allow only bold, italic, code flags; never put markdown inside text). " +
-  'list: {"type":"list","ordered":false,"items":[[{"text":"one"}],[{"text":"two"}]]}. ' +
+  "A screen, and a question's prompt, option text and reasons, are each a list of blocks. Write text COMPACTLY: " +
+  "a block that is a plain string is a paragraph, and inside a string **bold**, *italic*, ***both*** and `code` " +
+  "work (a backslash escapes a * or `; no nesting; a lone * as in 4 * 768 stays plain). Where the whole list is " +
+  'one paragraph, give that string itself instead of a list: "A **token** is a piece." ' +
+  'list: {"type":"list","ordered":true,"items":["one","two with *italic*"]} (ordered defaults to false). ' +
+  'callout: {"type":"callout","tone":"note"|"tip"|"warning","text":"..."} (tone defaults to note). ' +
   'code: {"type":"code","language":"python","text":"x = 1"}. ' +
   'image: {"type":"image","src":"asset:<id> from create_image, or https://... or /schematics/x.svg","alt":"describe it","display":"inline"|"expandable"} ' +
   "(alt text is required; for a diagram you draw, call create_image first and use the src it returns). " +
-  'callout: {"type":"callout","tone":"note"|"tip"|"warning","spans":[{"text":"..."}]}. ' +
   'formula: {"type":"formula","latex":"R = \\\\frac{V}{I}","spoken":"R equals V over I"} ' +
   "(a display formula on its own line; the server draws it when you save, so write plain LaTeX with the " +
   "standard commands (\\\\frac, \\\\sum, subscripts, Greek letters, AMS symbols). Commands that load code or " +
   "link out (\\\\href, \\\\require, \\\\unicode, \\\\class, \\\\style) are not available. A formula it cannot " +
   "read is refused with the reason, so fix and retry. Do not set assetId or sizes: the server does. Spoken " +
-  "text is required before a lesson can be finished). One idea per screen.";
+  "text is required before a lesson can be finished). The longer form " +
+  '{"type":"paragraph","spans":[{"text":"A "},{"text":"token","bold":true}]} is also accepted, and is needed for ' +
+  "a symbol drawn inside a sentence: a spans list may mix strings and span objects, and a span object's text is " +
+  "taken literally (no markup). Everything is stored the same way whichever form you send. One idea per screen.";
 
 const LESSON_RULES =
   "A lesson is 4 to 10 numbered screens (one idea each, read not flipped), then 3 to 5 multiple-choice " +
@@ -56,14 +60,24 @@ const path = (id: string) => `/api/subjects/${encodeURIComponent(id)}`;
 const lessonPath = (id: string, lesson: string) =>
   `${path(id)}/lessons/${encodeURIComponent(lesson)}`;
 
-const blockSchema = z
-  .object({
-    type: z.enum(["paragraph", "list", "code", "image", "callout", "formula"]),
-  })
-  .passthrough();
+const blockSchema = z.union([
+  z.string(),
+  z
+    .object({
+      type: z.enum([
+        "paragraph",
+        "list",
+        "code",
+        "image",
+        "callout",
+        "formula",
+      ]),
+    })
+    .passthrough(),
+]);
 const blocks = z
-  .array(blockSchema)
-  .describe("A list of blocks. " + BLOCKS_HELP);
+  .union([z.string(), z.array(blockSchema)])
+  .describe("A paragraph string, or a list of blocks. " + BLOCKS_HELP);
 const sourcesSchema = z
   .array(z.object({ title: z.string(), url: z.string().url().optional() }))
   .optional()

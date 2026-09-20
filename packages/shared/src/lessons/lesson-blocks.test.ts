@@ -109,7 +109,9 @@ describe("validateBlocks: structural problems, all reported with their path", ()
     expect(messages([{ type: "table" }])[0]).toMatch(
       /blocks\[0\]\.type must be one of/,
     );
-    expect(messages(["hello"])).toEqual(["blocks[0] must be an object"]);
+    expect(messages([42])).toEqual(["blocks[0] must be a string or an object"]);
+    // A string is a paragraph now (the compact form), so it is no longer rejected.
+    expect(messages(["hello"])).toEqual([]);
   });
 
   it("requires alt text on an image and a valid source", () => {
@@ -283,5 +285,113 @@ describe("maths inside a sentence", () => {
       "a",
       "c",
     ]);
+  });
+});
+
+describe("compact forms", () => {
+  const ok = (input: unknown) => {
+    const result = validateBlocks(input);
+    expect(result.issues).toEqual([]);
+    return result.blocks;
+  };
+
+  it("takes a bare string as one paragraph, with markup turned into spans", () => {
+    expect(ok("A **token** is a *piece*.")).toEqual([
+      {
+        type: "paragraph",
+        spans: [
+          { text: "A " },
+          { text: "token", bold: true },
+          { text: " is a " },
+          { text: "piece", italic: true },
+          { text: "." },
+        ],
+      },
+    ]);
+  });
+
+  it("takes strings among blocks, and mixes them with full blocks", () => {
+    expect(
+      ok(["First.", { type: "formula", latex: "x", spoken: "x" }, "Last."]),
+    ).toHaveLength(3);
+  });
+
+  it("takes text as shorthand for spans, and a default tone and list order", () => {
+    expect(
+      ok([
+        { type: "paragraph", text: "Hi *there*." },
+        { type: "callout", text: "Careful." },
+        { type: "list", items: ["one", "**two**"] },
+      ]),
+    ).toEqual([
+      {
+        type: "paragraph",
+        spans: [
+          { text: "Hi " },
+          { text: "there", italic: true },
+          { text: "." },
+        ],
+      },
+      { type: "callout", tone: "note", spans: [{ text: "Careful." }] },
+      {
+        type: "list",
+        ordered: false,
+        items: [[{ text: "one" }], [{ text: "two", bold: true }]],
+      },
+    ]);
+  });
+
+  it("lets a spans array mix strings and span objects (for inline maths)", () => {
+    const [block] = ok([
+      {
+        type: "paragraph",
+        spans: [
+          "Take ",
+          { text: "x^2", math: { spoken: "x squared" } },
+          " and **go**",
+        ],
+      },
+    ]);
+    expect(block).toMatchObject({ type: "paragraph" });
+    const spans = (
+      block as { spans: { text: string; math?: unknown; bold?: boolean }[] }
+    ).spans;
+    expect(spans.map((span) => span.text)).toEqual([
+      "Take ",
+      "x^2",
+      " and ",
+      "go",
+    ]);
+    expect(spans[1].math).toBeDefined();
+    expect(spans[3].bold).toBe(true);
+  });
+
+  it("does not parse markup inside a span object: its text is literal", () => {
+    expect(
+      ok([{ type: "paragraph", spans: [{ text: "keep **these** literal" }] }]),
+    ).toEqual([
+      { type: "paragraph", spans: [{ text: "keep **these** literal" }] },
+    ]);
+  });
+
+  it("still rejects bad input with a path, in either form", () => {
+    expect(validateBlocks("").issues[0].message).toMatch(/is empty/);
+    expect(validateBlocks([42]).issues[0]).toEqual({
+      path: "blocks[0]",
+      message: "must be a string or an object",
+    });
+    expect(
+      validateBlocks([{ type: "callout", tone: "loud", text: "x" }]).issues[0],
+    ).toEqual({
+      path: "blocks[0].tone",
+      message: "must be one of: note, tip, warning",
+    });
+    expect(validateBlocks(["x".repeat(2001)]).issues[0].message).toMatch(
+      /longer than 2000/,
+    );
+    expect(
+      validateBlocks([{ type: "list", ordered: "yes", items: ["a"] }]).issues[0]
+        .message,
+    ).toMatch(/true or false/);
   });
 });

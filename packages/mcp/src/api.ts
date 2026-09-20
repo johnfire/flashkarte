@@ -22,6 +22,17 @@ function authHeaders(extra?: Record<string, string>): Record<string, string> {
   return headers;
 }
 
+/** An API error that keeps the HTTP status, so a caller can tell a 403 from a 500. */
+export class ApiError extends Error {
+  constructor(
+    readonly status: number,
+    message: string,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
 export async function api<T = unknown>(
   method: string,
   path: string,
@@ -36,7 +47,10 @@ export async function api<T = unknown>(
   });
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`API ${method} ${path} returned ${res.status}: ${text}`);
+    throw new ApiError(
+      res.status,
+      `API ${method} ${path} returned ${res.status}: ${text}`,
+    );
   }
   const contentType = res.headers.get("content-type") ?? "";
   if (contentType.includes("application/json")) {

@@ -3,9 +3,13 @@
  * server validates them on save, and web and Android each draw every block type natively, so
  * they cannot drift apart the way two markdown renderers would.
  *
- * Paragraph formatting is a list of spans (text plus bold, italic or code flags), not markup
- * inside a string, so there is no parser to keep in step between platforms.
+ * Paragraph formatting is STORED as a list of spans (text plus bold, italic or code flags), not
+ * markup inside a string, so there is no parser to keep in step between platforms. Authors may also
+ * SEND a compact form (a string with **bold**, *italic* and `code`, see inline-markup.ts); this
+ * validator turns it into spans on the way in, so clients only ever see spans.
  */
+
+import { parseInlineMarkup } from "./inline-markup";
 
 export const BLOCK_TYPES = [
   "paragraph",
@@ -166,25 +170,47 @@ function validateInlineMath(
   return { ...(spoken && { spoken }), ...renderedFields(math) };
 }
 
+/** A compact string as spans, or a report and null when it is too long. */
+function spansOfString(
+  text: string,
+  path: string,
+  report: Reporter,
+): Span[] | null {
+  if (text.length > MAX_TEXT_LENGTH) {
+    report(path, `is longer than ${MAX_TEXT_LENGTH} characters`);
+    return null;
+  }
+  return parseInlineMarkup(text);
+}
+
 function validateSpans(
   value: unknown,
   path: string,
   report: Reporter,
 ): Span[] | null {
-  if (!Array.isArray(value) || value.length === 0) {
+  const items = typeof value === "string" ? [value] : value;
+  if (!Array.isArray(items) || items.length === 0) {
     report(path, "needs at least one piece of text");
     return null;
   }
-  if (value.length > MAX_SPANS) {
+  if (items.length > MAX_SPANS) {
     report(path, `has more than ${MAX_SPANS} pieces of text`);
     return null;
   }
   const spans: Span[] = [];
   let hasText = false;
-  value.forEach((raw, index) => {
-    const at = `${path}[${index}]`;
+  items.forEach((raw, index) => {
+    const at = typeof value === "string" ? path : `${path}[${index}]`;
+    if (typeof raw === "string") {
+      const parsed = spansOfString(raw, at, report);
+      for (const span of parsed ?? []) {
+        if (span.text.trim() !== "") hasText = true;
+        spans.push(span);
+      }
+      return;
+    }
     if (!isRecord(raw) || typeof raw.text !== "string") {
-      report(at, "must be an object with a text string");
+      report(at, "must be a string, or an object with a text string");
       return;
     }
     if (raw.text.length > MAX_TEXT_LENGTH) {
@@ -216,22 +242,37 @@ function validateBlock(
   path: string,
   report: Reporter,
 ): Block | null {
+  if (typeof raw === "string") {
+    const spans = validateSpans(raw, path, report);
+    return spans && { type: "paragraph", spans };
+  }
   if (!isRecord(raw)) {
-    report(path, "must be an object");
+    report(path, "must be a string or an object");
     return null;
   }
+  // `text` is shorthand for `spans` on a paragraph or callout.
+  const spanField = raw.spans !== undefined ? "spans" : "text";
   switch (raw.type) {
     case "paragraph": {
-      const spans = validateSpans(raw.spans, `${path}.spans`, report);
+      const spans = validateSpans(
+        raw[spanField],
+        `${path}.${spanField}`,
+        report,
+      );
       return spans && { type: "paragraph", spans };
     }
     case "callout": {
-      const spans = validateSpans(raw.spans, `${path}.spans`, report);
-      if (!CALLOUT_TONES.includes(raw.tone as CalloutTone)) {
+      const spans = validateSpans(
+        raw[spanField],
+        `${path}.${spanField}`,
+        report,
+      );
+      const tone = raw.tone ?? "note";
+      if (!CALLOUT_TONES.includes(tone as CalloutTone)) {
         report(`${path}.tone`, `must be one of: ${CALLOUT_TONES.join(", ")}`);
         return null;
       }
-      return spans && { type: "callout", tone: raw.tone as CalloutTone, spans };
+      return spans && { type: "callout", tone: tone as CalloutTone, spans };
     }
     case "list":
       return validateList(raw, path, report);
@@ -263,7 +304,8 @@ function validateList(
   path: string,
   report: Reporter,
 ): Block | null {
-  if (typeof raw.ordered !== "boolean") {
+  const ordered = raw.ordered ?? false;
+  if (typeof ordered !== "boolean") {
     report(`${path}.ordered`, "must be true or false");
     return null;
   }
@@ -280,7 +322,7 @@ function validateList(
     const spans = validateSpans(item, `${path}.items[${index}]`, report);
     if (spans) items.push(spans);
   });
-  return { type: "list", ordered: raw.ordered, items };
+  return { type: "list", ordered, items };
 }
 
 function validateImage(
@@ -359,11 +401,13 @@ export function validateBlocks(
 ): { blocks: Block[]; issues: BlockIssue[] } {
   const issues: BlockIssue[] = [];
   const report: Reporter = (at, message) => issues.push({ path: at, message });
-  if (!Array.isArray(input) || input.length === 0) {
+  // A bare string is one paragraph.
+  const list = typeof input === "string" ? [input] : input;
+  if (!Array.isArray(list) || list.length === 0) {
     report(path, "needs at least one block");
     return { blocks: [], issues };
   }
-  if (input.length > MAX_BLOCKS_PER_LIST) {
+  if (list.length > MAX_BLOCKS_PER_LIST) {
     report(
       path,
       `has more than ${MAX_BLOCKS_PER_LIST} blocks; one idea per screen is a good rule`,
@@ -371,7 +415,7 @@ export function validateBlocks(
     return { blocks: [], issues };
   }
   const blocks: Block[] = [];
-  input.forEach((raw, index) => {
+  list.forEach((raw, index) => {
     const block = validateBlock(raw, `${path}[${index}]`, report);
     if (block) blocks.push(block);
   });

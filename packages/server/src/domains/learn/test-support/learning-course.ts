@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { compactLesson } from "@flashkarte/shared";
 import { closePool, getPool } from "../../../db/client";
 import { runMigrations } from "../../../db/migrate";
 import { importLesson } from "../../lessons/lesson-import.service";
@@ -237,10 +238,12 @@ const readFixture = (...parts: string[]) =>
 
 /**
  * Imports the reviewed Transformers concept graph as a fresh subject, then the given real lesson
- * fixtures in order (each must import with no issues). Returns the subject id.
+ * fixtures in order (each must import with no issues). Returns the subject id. With `compact`, each
+ * lesson is sent in its compact form instead of the stored full form.
  */
 export async function importTransformersLessons(
   files: string[],
+  options: { compact?: boolean } = {},
 ): Promise<string> {
   await resetCourse("unused");
   const graph = readFixture(
@@ -260,7 +263,9 @@ export async function importTransformersLessons(
     const result = await importLesson(
       LEARNER,
       real.subject.id,
-      readFixture(LESSON_FIXTURES, file),
+      options.compact
+        ? compactLesson(readFixture(LESSON_FIXTURES, file))
+        : readFixture(LESSON_FIXTURES, file),
       "ai",
     );
     expect({ file, issues: result.issues }).toEqual({ file, issues: [] });

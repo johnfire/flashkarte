@@ -155,3 +155,9 @@ export {
   scheduleReview,
 } from "./lessons/question-review";
 export type { ScheduledReview } from "./lessons/question-review";
+export {
+  parseInlineMarkup,
+  spansToMarkup,
+  escapeMarkup,
+} from "./lessons/inline-markup";
+export { toCompactBlocks, compactLesson } from "./lessons/compact-blocks";

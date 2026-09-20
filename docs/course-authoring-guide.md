@@ -131,16 +131,27 @@ cycle (the server rejects one); the order reads sensibly. Then show the owner.
 
 ### Blocks
 
-A screen, and a question's prompt, option text and reasons, are lists of typed blocks:
+A screen, and a question's prompt, option text and reasons, are lists of blocks. **Write text compactly.** It is
+about a third shorter to send, and the server stores exactly the same thing either way:
 
-| Block       | Shape                                                                                                     |
+- A block that is a **plain string is a paragraph**, and inside a string `**bold**`, `*italic*`, `***both***` and
+  `` `code` `` work. A backslash escapes a `*`, a backtick or a backslash. There is no nesting. A lone `*`, as in
+  `4 * 768` or `2*3`, stays plain text.
+- Where a whole list is one paragraph, give the string itself: `"prompt": "What is a token?"`.
+- An option is `{correct, blocks: "text", reason: "why"}`.
+
+| Block       | Compact shape                                                                                             |
 | ----------- | --------------------------------------------------------------------------------------------------------- |
-| `paragraph` | `{type, spans:[{text, bold?, italic?, code?}]}`. Never put markdown inside `text`.                        |
-| `list`      | `{type:"list", ordered, items:[[span…],[span…]]}`                                                         |
+| `paragraph` | just a string, or `{type:"paragraph", text:"…"}`                                                          |
+| `list`      | `{type:"list", ordered?:true, items:["one","two with *italic*"]}` (`ordered` defaults to false)           |
 | `code`      | `{type:"code", language, text}`                                                                           |
-| `callout`   | `{type:"callout", tone:"note"\|"tip"\|"warning", spans:[…]}`                                              |
+| `callout`   | `{type:"callout", tone?:"note"\|"tip"\|"warning", text:"…"}` (`tone` defaults to note)                    |
 | `formula`   | `{type:"formula", latex, spoken}`. Plain LaTeX; **`spoken` is required** before a lesson can be finished. |
 | `image`     | `{type:"image", src, alt, display:"inline"\|"expandable", caption?}`. **`alt` is required.**              |
+
+The long form, `{type:"paragraph", spans:[{text, bold?, italic?, code?}]}`, is still accepted, and you need it
+for a symbol drawn inside a sentence: a `spans` list may mix strings and span objects, and a span object's
+`text` is taken literally (no markup).
 
 - **Formulas** are drawn by the server when you save. `\href`, `\require`, `\unicode`, `\class` and `\style` are
   not available; a formula it cannot read is refused with the reason, so fix it and retry.
@@ -161,7 +172,24 @@ A screen, and a question's prompt, option text and reasons, are lists of typed b
    the range, a question with no variant. Fix them; `lint_lesson` re-checks a lesson at any time.
 4. `get_outline` shows the module and its lessons in prerequisite order, with what each one needs first.
 
-The whole lesson goes in the tool call. It is long. Generate it from a script and keep that script.
+**Getting a lesson in without retyping it.** Two ways, and they combine:
+
+- **Compact form** (above). Most of a lesson is its own text, which cannot shrink, so this saves about a third.
+- **Import from a file.** If you can run commands on a machine that holds the lesson files (for example a script
+  wrote them), skip the tool call altogether:
+
+  ```
+  FLASHKARTE_API_URL=https://… FLASHKARTE_API_KEY=fk_… \
+    npm run import-lessons -w packages/mcp -- --subject <subject-uuid> lesson-a.json lesson-b.json
+  ```
+
+  Files go in the order given, so list prerequisite lessons first; it stops at the first failure so nothing is
+  imported out of order. Each file is the JSON `import_lesson` takes, in either form. It needs an **AI
+  (deck-scoped) key**, because that is what makes the server record the content as AI-authored. It refuses a
+  full-scope key (which would record it as the owner's own writing) unless told `--allow-full-key`, refuses a
+  non-`https` URL other than localhost, and reads the key from the environment, never from an argument.
+
+An MCP connector cannot read files on your machine, so over MCP the lesson always travels in the tool call.
 
 ## 7. The owner reviews by learning
 
@@ -197,7 +225,8 @@ A lesson imports in the **testing** stage, where anything can change. The owner 
   `list_help_requests` and `answer_help_request` can be missing until the owner reconnects it. If a tool the
   server should have is absent, say so and ask them to reconnect; do not conclude the feature does not exist.
 - **Keep your generator.** If the content is maintained in a repository, keep the JSON as a fixture and add a test
-  that imports it against a real database and walks the unlock order.
+  that imports it against a real database and walks the unlock order. A helper can also import every fixture in the
+  compact form and require the stored result to be identical to the full form.
 - **Do not overclaim.** "Imported with zero issues, arithmetic re-derived, unlock order tested" is a true statement.
   "This teaches well" is not one you can make.
 

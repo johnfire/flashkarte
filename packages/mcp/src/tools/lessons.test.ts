@@ -1,3 +1,4 @@
+import { z } from "zod";
 import * as apiModule from "../api";
 import { registerLessonTools } from "./lessons";
 
@@ -14,13 +15,15 @@ type Handler = (args: Record<string, unknown>) => Promise<unknown>;
 function setup() {
   const handlers: Record<string, Handler> = {};
   const descriptions: Record<string, string> = {};
+  const shapes: Record<string, z.ZodRawShape> = {};
   registerLessonTools({
     tool: (...args: unknown[]) => {
       handlers[args[0] as string] = args[args.length - 1] as Handler;
       descriptions[args[0] as string] = args[1] as string;
+      shapes[args[0] as string] = args[2] as z.ZodRawShape;
     },
   } as never);
-  return { handlers, descriptions };
+  return { handlers, descriptions, shapes };
 }
 
 const S = "10000000-0000-4000-8000-000000000001";
@@ -240,5 +243,47 @@ describe("lesson MCP tools", () => {
     expect(descriptions.add_screen).toMatch(/213\.010/);
     expect(descriptions.finish_lesson).toMatch(/NEVER finish a lesson/);
     expect(descriptions.retire_screen).toMatch(/Re-point any question/);
+  });
+
+  it("accepts the compact block forms as well as the full ones", () => {
+    const { shapes } = setup();
+    const lesson = (blocks: unknown, option: unknown = "A right answer") => ({
+      subject_id: S,
+      lesson: { slug: "x", title: "X" },
+      screens: [{ ref: "a", blocks }],
+      questions: [
+        {
+          prompt: "What?",
+          options: [
+            { correct: true, blocks: option, reason: "Because *it is*." },
+            { correct: false, blocks: "Another", reason: "No." },
+          ],
+          teaches: ["a"],
+          covers: ["c"],
+        },
+      ],
+    });
+    const schema = z.object(shapes.import_lesson);
+    const compact = lesson([
+      "A **token** is a piece.",
+      { type: "list", items: ["one", "two"] },
+      { type: "callout", text: "Careful." },
+    ]);
+    expect(schema.safeParse(compact).success).toBe(true);
+    expect(schema.safeParse(lesson("Just one paragraph.")).success).toBe(true);
+    expect(schema.safeParse(lesson(para, para)).success).toBe(true); // the full form still works
+    // Not a block at all: still refused before it reaches the server.
+    expect(schema.safeParse(lesson([42])).success).toBe(false);
+    expect(schema.safeParse(lesson([{ type: "nonsense" }])).success).toBe(
+      false,
+    );
+  });
+
+  it("teaches the compact form in the tools that take blocks", () => {
+    const { descriptions } = setup();
+    for (const name of ["import_lesson", "add_screen", "add_question"]) {
+      expect(descriptions[name]).toMatch(/COMPACTLY/);
+    }
+    expect(descriptions.import_lesson).toMatch(/\*\*bold\*\*/);
   });
 });
