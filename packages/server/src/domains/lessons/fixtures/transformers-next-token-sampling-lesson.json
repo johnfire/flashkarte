@@ -1,0 +1,1420 @@
+{
+  "module": "Output side: from scores to text",
+  "lesson": {
+    "slug": "next-token-sampling",
+    "title": "The next-token distribution and choosing a token",
+    "summary": "What one pass of the model produces (a probability for each possible next token, at every position) and how a token is then chosen from it by sampling.",
+    "covers": ["next-token-distribution", "sampling"],
+    "prerequisites": [
+      {
+        "lesson": "logits-softmax",
+        "reason": "The distribution is the softmax of the logits, so both must already be understood."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "one-pass",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Put a piece of text through the model once, a single "
+            },
+            {
+              "text": "forward pass",
+              "bold": true
+            },
+            {
+              "text": ". What comes out?"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Not a token, and not a reply. At each position in the text the network produces a set of logits, and softmax turns each set into probabilities."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So the output of one pass is a "
+            },
+            {
+              "text": "probability for every token in the vocabulary",
+              "bold": true
+            },
+            {
+              "text": ", saying how likely it is to come next."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 19)"
+        }
+      ]
+    },
+    {
+      "ref": "every-position",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "It does this at "
+            },
+            {
+              "text": "every position",
+              "bold": true
+            },
+            {
+              "text": " in the text at once, not only at the end."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Take the text "
+            },
+            {
+              "text": "The cat sat",
+              "italic": true
+            },
+            {
+              "text": ". The result is three distributions:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "at "
+              },
+              {
+                "text": "The",
+                "italic": true
+              },
+              {
+                "text": ": how likely each token is to follow "
+              },
+              {
+                "text": "The",
+                "italic": true
+              }
+            ],
+            [
+              {
+                "text": "at "
+              },
+              {
+                "text": "cat",
+                "italic": true
+              },
+              {
+                "text": ": how likely each token is to follow "
+              },
+              {
+                "text": "The cat",
+                "italic": true
+              }
+            ],
+            [
+              {
+                "text": "at "
+              },
+              {
+                "text": "sat",
+                "italic": true
+              },
+              {
+                "text": ": how likely each token is to follow "
+              },
+              {
+                "text": "The cat sat",
+                "italic": true
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each one is conditioned on the tokens up to and including that position, and nothing after it. When you want the model to continue a text, it is the last one that matters."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 19, 68)"
+        }
+      ]
+    },
+    {
+      "ref": "toy-distribution",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A toy example. After the text "
+            },
+            {
+              "text": "The cat sat on the",
+              "italic": true
+            },
+            {
+              "text": ", a model might give these probabilities to four candidate tokens. The numbers are invented for illustration:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "mat: 0.657"
+              }
+            ],
+            [
+              {
+                "text": "sofa: 0.242"
+              }
+            ],
+            [
+              {
+                "text": "floor: 0.089"
+              }
+            ],
+            [
+              {
+                "text": "moon: 0.012"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "This is everything the network itself gives you. It has not picked "
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": ", or any other token. It has only said how likely each one is."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 19)"
+        }
+      ]
+    },
+    {
+      "ref": "sampling",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Choosing an actual token from that distribution is a "
+            },
+            {
+              "text": "separate step",
+              "bold": true
+            },
+            {
+              "text": ", called "
+            },
+            {
+              "text": "sampling",
+              "bold": true
+            },
+            {
+              "text": ". It happens outside the network."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The network computes the distribution. Sampling is the rule you apply to it to get one token."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "Softmax and sampling are different jobs. Softmax turns scores into probabilities. Sampling turns probabilities into one chosen token."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 15, 19)"
+        }
+      ]
+    },
+    {
+      "ref": "greedy",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The simplest rule is "
+            },
+            {
+              "text": "greedy",
+              "bold": true
+            },
+            {
+              "text": ": always take the most probable token."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With the toy distribution, greedy always picks "
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": ". Given the same distribution, it always picks the same token."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "That is predictable, but it means the text can never take an unlikely turn."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 15)"
+        }
+      ]
+    },
+    {
+      "ref": "random-draw",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The other basic rule is to "
+            },
+            {
+              "text": "draw at random in proportion to the probabilities",
+              "bold": true
+            },
+            {
+              "text": ", like rolling a weighted die."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With the toy distribution, "
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": " is drawn about two times in three (66%), "
+            },
+            {
+              "text": "sofa",
+              "italic": true
+            },
+            {
+              "text": " about one time in four (24%), "
+            },
+            {
+              "text": "floor",
+              "italic": true
+            },
+            {
+              "text": " about one time in eleven, and "
+            },
+            {
+              "text": "moon",
+              "italic": true
+            },
+            {
+              "text": " about one time in eighty."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Now the same text can be continued in different ways from one run to the next, and unlikely tokens do sometimes appear."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 15)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "One forward pass of the model gives, at each position, what?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A probability distribution over the vocabulary for the next token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Logits from the network, turned into probabilities by softmax."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The single next token, already chosen"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Choosing a token is a separate sampling step outside the network."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The complete reply to the text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "One pass gives one distribution per position, not a whole reply."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token IDs of the input text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Those are the input. The output is a set of probabilities."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["one-pass", "toy-distribution"],
+      "covers": ["next-token-distribution"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "In the next-token distribution, what does the entry for the token "
+                },
+                {
+                  "text": "mat",
+                  "italic": true
+                },
+                {
+                  "text": " mean?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "How likely the model thinks "
+                    },
+                    {
+                      "text": "mat",
+                      "italic": true
+                    },
+                    {
+                      "text": " is to come next, given the tokens so far"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is what each entry of the distribution says."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "How many times "
+                    },
+                    {
+                      "text": "mat",
+                      "italic": true
+                    },
+                    {
+                      "text": " appeared in the training text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is a probability for this particular position, not a count."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The token ID of "
+                    },
+                    {
+                      "text": "mat",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The ID is a label. The entry is a probability between 0 and 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The probability that "
+                    },
+                    {
+                      "text": "mat",
+                      "italic": true
+                    },
+                    {
+                      "text": " is the last word of the text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It is the probability of "
+                    },
+                    {
+                      "text": "mat",
+                      "italic": true
+                    },
+                    {
+                      "text": " being the very next token."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The text is "
+            },
+            {
+              "text": "The cat sat",
+              "italic": true
+            },
+            {
+              "text": ". What does the distribution at the position of "
+            },
+            {
+              "text": "cat",
+              "italic": true
+            },
+            {
+              "text": " predict?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token that comes right after "
+                },
+                {
+                  "text": "The cat",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each position predicts the token that follows the text up to and including that position."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token "
+                },
+                {
+                  "text": "cat",
+                  "italic": true
+                },
+                {
+                  "text": " itself"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is given as input. The output predicts what comes next."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token after "
+                },
+                {
+                  "text": "The cat sat",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is predicted by the distribution at "
+                },
+                {
+                  "text": "sat",
+                  "italic": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token "
+                },
+                {
+                  "text": "The",
+                  "italic": true
+                },
+                {
+                  "text": ", the first one"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The prediction looks forward, not backward."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["every-position"],
+      "covers": ["next-token-distribution"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "For the text "
+                },
+                {
+                  "text": "The cat sat on",
+                  "italic": true
+                },
+                {
+                  "text": ", which position's distribution predicts the token after "
+                },
+                {
+                  "text": "sat",
+                  "italic": true
+                },
+                {
+                  "text": "?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The one at "
+                    },
+                    {
+                      "text": "sat",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The distribution at a position covers the token that comes immediately after it."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The one at "
+                    },
+                    {
+                      "text": "on",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That one predicts the token after "
+                    },
+                    {
+                      "text": "on",
+                      "italic": true
+                    },
+                    {
+                      "text": "."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The one at "
+                    },
+                    {
+                      "text": "The",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That one predicts the token after "
+                    },
+                    {
+                      "text": "The",
+                      "italic": true
+                    },
+                    {
+                      "text": "."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "None of them, the model only predicts at the last position"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The model produces a distribution at every position in one pass."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Where is the actual next token chosen?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "In a separate sampling step outside the network"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The network outputs the distribution. A sampling rule then picks one token from it."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Inside the network, by its last layer"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The network stops at logits. Choosing is done by sampling."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "By the tokenizer"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The tokenizer converts between text and IDs. It does not choose."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "By softmax"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax turns scores into probabilities. It does not choose a token."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["sampling"],
+      "covers": ["sampling"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which of these is the job of sampling?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Turning a probability distribution into one chosen token"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is what sampling means."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Turning text into token IDs"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the tokenizer."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Turning logits into probabilities"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is softmax."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Producing the logits"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The network does that, before any sampling."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A distribution gives mat 0.66, sofa 0.24, floor 0.09, moon 0.01. Which statement is true?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Greedy always picks "
+                },
+                {
+                  "text": "mat",
+                  "italic": true
+                },
+                {
+                  "text": ". A random draw picks "
+                },
+                {
+                  "text": "mat",
+                  "italic": true
+                },
+                {
+                  "text": " about two times in three but can pick the others"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Greedy takes the top token. A random draw follows the probabilities."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Greedy picks any token at random, and a random draw always picks "
+                },
+                {
+                  "text": "mat",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "This is the wrong way round."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A random draw can never pick "
+                },
+                {
+                  "text": "moon",
+                  "italic": true
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "moon",
+                  "italic": true
+                },
+                {
+                  "text": " has probability 0.01, so it is drawn about once in a hundred."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Greedy and a random draw always give the same token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "They agree only when the draw happens to land on "
+                },
+                {
+                  "text": "mat",
+                  "italic": true
+                },
+                {
+                  "text": "."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["greedy", "random-draw"],
+      "covers": ["sampling"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The same distribution is used ten times with greedy choice. What happens?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The same token is chosen every time"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Greedy always takes the highest-probability token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A different token is chosen each time"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Greedy has no randomness."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The least likely token is chosen"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Greedy takes the most likely."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Tokens are chosen in proportion to their probabilities"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is the random draw, not greedy."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

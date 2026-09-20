@@ -1,0 +1,1286 @@
+{
+  "module": "Output side: from scores to text",
+  "lesson": {
+    "slug": "logits-softmax",
+    "title": "Logits and softmax",
+    "summary": "How the model's raw output scores (logits) are turned into probabilities: what logits are, why they are not probabilities, and how softmax converts them.",
+    "covers": ["logits", "softmax"],
+    "prerequisites": [
+      {
+        "lesson": "tokens",
+        "reason": "There is one logit per token in the vocabulary, so the vocabulary must already be clear."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "scores",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "When the network has finished working on a piece of text, it has to say which token is likely to come next. It does that with "
+            },
+            {
+              "text": "one score for every token in the vocabulary",
+              "bold": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "These raw output scores are called "
+            },
+            {
+              "text": "logits",
+              "bold": true
+            },
+            {
+              "text": ". A higher logit means that token is more likely to come next."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "A vocabulary of V tokens means V logits: Llama 2 has 32,000 of them at each position, GPT-2 has 50,257."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 2, 13)"
+        }
+      ]
+    },
+    {
+      "ref": "not-probabilities",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Logits are "
+            },
+            {
+              "text": "not probabilities",
+              "bold": true
+            },
+            {
+              "text": ". They can be negative, they can be larger than 1, and they do not add up to 1."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Here is a toy example with a vocabulary of only four tokens. The invented logits are 3, 2, 1, -1 for the tokens "
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": ", "
+            },
+            {
+              "text": "sofa",
+              "italic": true
+            },
+            {
+              "text": ", "
+            },
+            {
+              "text": "floor",
+              "italic": true
+            },
+            {
+              "text": ", "
+            },
+            {
+              "text": "moon",
+              "italic": true
+            },
+            {
+              "text": "."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "You can see which token the model prefers, but you cannot read them as chances. A score of 3 does not mean a 300% chance."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 13)"
+        }
+      ]
+    },
+    {
+      "ref": "distribution",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What we want is a "
+            },
+            {
+              "text": "probability distribution",
+              "bold": true
+            },
+            {
+              "text": ": one number for each token, where every number is between 0 and 1 and all the numbers add up to exactly 1."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "That is something you can sample from, and something that says how likely each token is. So we need a step that turns any list of scores into such a distribution, keeping larger scores as larger probabilities."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 14)"
+        }
+      ]
+    },
+    {
+      "ref": "exp-step",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The first half of the trick is the exponential function, "
+            },
+            {
+              "text": "exp",
+              "code": true
+            },
+            {
+              "text": ". Whatever you put in, negative or positive, it returns a number that is "
+            },
+            {
+              "text": "always positive",
+              "bold": true
+            },
+            {
+              "text": ", and a bigger input gives a bigger output."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "exp(3) is about 20.09"
+              }
+            ],
+            [
+              {
+                "text": "exp(2) is about 7.39"
+              }
+            ],
+            [
+              {
+                "text": "exp(1) is about 2.72"
+              }
+            ],
+            [
+              {
+                "text": "exp(-1) is about 0.37"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "So applying "
+            },
+            {
+              "text": "exp",
+              "code": true
+            },
+            {
+              "text": " to the logits removes the negative numbers and keeps the order. The second half is to make the numbers add up to 1: divide each one by the total of all of them."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 14)"
+        }
+      ]
+    },
+    {
+      "ref": "softmax-formula",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Putting both halves together gives "
+            },
+            {
+              "text": "softmax",
+              "bold": true
+            },
+            {
+              "text": ". For a list of scores z, the probability of entry i is:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "\\mathrm{softmax}(z)_i = \\frac{e^{z_i}}{\\sum_j e^{z_j}}",
+          "spoken": "softmax of z, at position i, equals e to the power z i, divided by the sum over j of e to the power z j"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The top is "
+            },
+            {
+              "text": "exp",
+              "code": true
+            },
+            {
+              "text": " of that token's score. The bottom is the total of "
+            },
+            {
+              "text": "exp",
+              "code": true
+            },
+            {
+              "text": " over all tokens, which is what makes everything add up to 1."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 14)"
+        }
+      ]
+    },
+    {
+      "ref": "worked-example",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Apply it to the toy logits 3, 2, 1, -1."
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "After "
+              },
+              {
+                "text": "exp",
+                "code": true
+              },
+              {
+                "text": ": 20.09, 7.39, 2.72, 0.37"
+              }
+            ],
+            [
+              {
+                "text": "Their total: 30.56"
+              }
+            ],
+            [
+              {
+                "text": "Divide each by the total: 0.657, 0.242, 0.089, 0.012"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The four results are all between 0 and 1 and add up to 1. The token with the biggest logit ("
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": ") has the biggest probability, and the order of the tokens has not changed."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "Two tokens whose logits differ by 1 always end up with probabilities in the ratio e, about 2.7 to 1. Here 0.657 is about 2.7 times 0.242."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 14)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What are logits?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The network's raw output scores: one real number for each token in the vocabulary"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A higher logit means that token is more likely to come next."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The probabilities of the next token, which add up to 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Logits are not probabilities: they can be negative and do not add up to 1. Softmax is what turns them into probabilities."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The token IDs the tokenizer produced from the text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Token IDs are the input labels. Logits are the network's output scores."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The embedding vectors, each of length d_model"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Embeddings are vectors of length d_model at the start of the network. Logits have one number per vocabulary token."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["scores", "not-probabilities"],
+      "covers": ["logits"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A model has a vocabulary of 50,000 tokens. How many logits does it produce for one position?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "50,000, one per vocabulary token"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "There is one logit for every token in the vocabulary."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "1, for the token it prefers"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The network scores every token, not just the winner."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model, the length of a token vector"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "d_model is the width of the vectors inside the network, not the number of output scores."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n, the number of tokens in the text"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "n is the length of the text. The number of logits per position is set by the vocabulary."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which of these could be the output of softmax over three scores?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "0.7, 0.2, 0.1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "All are between 0 and 1 and they add up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "0.7, 0.5, -0.2"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "These add up to 1, but a probability cannot be negative. Softmax outputs are always positive."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "0.5, 0.4, 0.3"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "These add up to 1.2. Softmax outputs always add up to exactly 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "5, 0, -2"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "These look like the scores going in. The output of softmax is a distribution between 0 and 1."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["distribution", "softmax-formula"],
+      "covers": ["softmax"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which property does a softmax output always have?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Every entry is between 0 and 1, and the entries add up to 1"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is what makes it a probability distribution."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Every entry is a whole number"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The entries are fractions between 0 and 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The entries add up to the number of tokens"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They add up to 1, however many tokens there are."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Some entries are negative, matching the negative scores"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Even a negative score gives a positive probability, because "
+                    },
+                    {
+                      "text": "exp",
+                      "code": true
+                    },
+                    {
+                      "text": " is always positive."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The logits for tokens A, B and C are 1, 4 and 2. After softmax, which token has the highest probability?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "B, the token with the biggest logit"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax keeps the order: the biggest score gets the biggest probability."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A, because it has the smallest logit"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A larger logit means a larger probability, so A ends up the least likely."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "None of them, because the three probabilities become equal"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax makes them add up to 1, not become equal. Different scores give different probabilities."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "C, because it is in the middle"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Only the size of the score matters, not the position in the list."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["worked-example"],
+      "covers": ["softmax", "logits"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Two tokens have logits 2 and 5. After softmax, what is true about them?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The token with logit 5 has the higher probability"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax preserves the order of the scores."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The token with logit 2 has the higher probability"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A larger logit gives a larger probability."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Both have probability 1"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All the probabilities together add up to 1, so two tokens cannot each have 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Their probabilities are 2/7 and 5/7"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That divides the raw scores by their total. Softmax takes "
+                    },
+                    {
+                      "text": "exp",
+                      "code": true
+                    },
+                    {
+                      "text": " of the scores first, and raw scores can be negative."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why does softmax use "
+            },
+            {
+              "text": "exp",
+              "code": true
+            },
+            {
+              "text": " on the scores?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It makes every score positive while keeping bigger scores bigger"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Positive numbers can be turned into probabilities, and the order of the tokens is not disturbed."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It makes the scores add up to 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The sum-to-1 comes from dividing each value by the total. "
+                },
+                {
+                  "text": "exp",
+                  "code": true
+                },
+                {
+                  "text": " alone does not do it."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It turns the scores into whole numbers"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "exp",
+                  "code": true
+                },
+                {
+                  "text": " returns decimals. The scores are not rounded."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It removes tokens with low scores from the vocabulary"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Every token keeps a probability, however small."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["exp-step"],
+      "covers": ["softmax"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which step of softmax makes the outputs add up to 1?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Dividing each "
+                    },
+                    {
+                      "text": "exp",
+                      "code": true
+                    },
+                    {
+                      "text": " value by the total of all the "
+                    },
+                    {
+                      "text": "exp",
+                      "code": true
+                    },
+                    {
+                      "text": " values"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "This normalises the values so their total is exactly 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Taking "
+                    },
+                    {
+                      "text": "exp",
+                      "code": true
+                    },
+                    {
+                      "text": " of each score"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "exp",
+                      "code": true
+                    },
+                    {
+                      "text": " makes the values positive, but their total can be any size."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sorting the tokens from the highest score to the lowest"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sorting does not change any of the numbers."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Choosing the token with the largest score"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax keeps a probability for every token. It does not choose one."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

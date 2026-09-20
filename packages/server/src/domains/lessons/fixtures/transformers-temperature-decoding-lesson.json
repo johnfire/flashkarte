@@ -1,0 +1,1538 @@
+{
+  "module": "Output side: from scores to text",
+  "lesson": {
+    "slug": "temperature-decoding",
+    "title": "Temperature, top-k and top-p",
+    "summary": "How the choice of next token can be steered: temperature reshapes the distribution, and greedy, top-k and top-p decide which tokens can be picked.",
+    "covers": ["temperature", "decoding-strategies"],
+    "prerequisites": [
+      {
+        "lesson": "logits-softmax",
+        "reason": "Temperature divides the logits before softmax, so both must already be understood."
+      },
+      {
+        "lesson": "next-token-sampling",
+        "reason": "Greedy, top-k and top-p are ways of choosing the sample from the next-token distribution."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "knobs",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Sampling is not one fixed rule. Some settings let you steer how adventurous or how safe the chosen token is."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Four ideas cover most of what you will meet: "
+            },
+            {
+              "text": "temperature",
+              "bold": true
+            },
+            {
+              "text": ", "
+            },
+            {
+              "text": "greedy",
+              "bold": true
+            },
+            {
+              "text": ", "
+            },
+            {
+              "text": "top-k",
+              "bold": true
+            },
+            {
+              "text": " and "
+            },
+            {
+              "text": "top-p",
+              "bold": true
+            },
+            {
+              "text": ". Temperature reshapes the distribution before a token is chosen. The other three are rules for choosing."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 15, 70, 71)"
+        }
+      ]
+    },
+    {
+      "ref": "temperature",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Temperature",
+              "bold": true
+            },
+            {
+              "text": ", written T, is a number that divides the logits before softmax:"
+            }
+          ]
+        },
+        {
+          "type": "formula",
+          "latex": "\\mathrm{softmax}(z / T)",
+          "spoken": "softmax of z divided by T"
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With "
+            },
+            {
+              "text": "T = 1",
+              "bold": true
+            },
+            {
+              "text": " nothing changes: you get the model's own distribution. Any other T reshapes it."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 70)"
+        }
+      ]
+    },
+    {
+      "ref": "low-temperature",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A "
+            },
+            {
+              "text": "temperature below 1",
+              "bold": true
+            },
+            {
+              "text": " makes the distribution "
+            },
+            {
+              "text": "sharper",
+              "italic": true
+            },
+            {
+              "text": ". On the toy logits 3, 2, 1, -1:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "T = 1: 0.657, 0.242, 0.089, 0.012"
+              }
+            ],
+            [
+              {
+                "text": "T = 0.5: 0.867, 0.117, 0.016, 0.000"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The likely token becomes even more likely and the others fade. As T approaches 0 the distribution collapses onto the top token, which is exactly "
+            },
+            {
+              "text": "greedy",
+              "bold": true
+            },
+            {
+              "text": " choice."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 70)"
+        }
+      ]
+    },
+    {
+      "ref": "high-temperature",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A "
+            },
+            {
+              "text": "temperature above 1",
+              "bold": true
+            },
+            {
+              "text": " makes the distribution "
+            },
+            {
+              "text": "flatter",
+              "italic": true
+            },
+            {
+              "text": ":"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "T = 1: 0.657, 0.242, 0.089, 0.012"
+              }
+            ],
+            [
+              {
+                "text": "T = 2: 0.474, 0.287, 0.174, 0.064"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Now unlikely tokens get a bigger share. The samples become more diverse, and also more random."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "Temperature changes the probabilities. It does not remove any token from the vocabulary."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 70)"
+        }
+      ]
+    },
+    {
+      "ref": "top-k",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Top-k",
+              "bold": true
+            },
+            {
+              "text": " sampling cuts off the tail. Keep only the "
+            },
+            {
+              "text": "k",
+              "italic": true
+            },
+            {
+              "text": " most probable tokens, "
+            },
+            {
+              "text": "renormalise",
+              "bold": true
+            },
+            {
+              "text": " so they add up to 1 again, and then sample from those."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "On the toy distribution with k = 2, keep "
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": " and "
+            },
+            {
+              "text": "sofa",
+              "italic": true
+            },
+            {
+              "text": ". Together they hold 0.899, so dividing by that gives 0.731, 0.269. "
+            },
+            {
+              "text": "floor",
+              "italic": true
+            },
+            {
+              "text": " and "
+            },
+            {
+              "text": "moon",
+              "italic": true
+            },
+            {
+              "text": " can no longer be picked."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Greedy is the extreme case of k = 1."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 71)"
+        }
+      ]
+    },
+    {
+      "ref": "top-p",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Top-p",
+              "bold": true
+            },
+            {
+              "text": ", also called "
+            },
+            {
+              "text": "nucleus",
+              "italic": true
+            },
+            {
+              "text": " sampling, keeps the smallest set of tokens whose probabilities add up to at least "
+            },
+            {
+              "text": "p",
+              "italic": true
+            },
+            {
+              "text": ", renormalises, and samples."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "With p = 0.9 on the toy distribution: "
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": " alone gives 0.657, "
+            },
+            {
+              "text": "mat",
+              "italic": true
+            },
+            {
+              "text": " and "
+            },
+            {
+              "text": "sofa",
+              "italic": true
+            },
+            {
+              "text": " give 0.899, still below 0.9, and with "
+            },
+            {
+              "text": "floor",
+              "italic": true
+            },
+            {
+              "text": " the total reaches 0.988. So three tokens are kept, with renormalised probabilities 0.665, 0.245, 0.090."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The size of the kept set "
+            },
+            {
+              "text": "adapts",
+              "bold": true
+            },
+            {
+              "text": ". If the model is very sure and one token holds 0.95, that token alone is enough. If it is unsure, many tokens are kept. Top-k always keeps exactly k."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 71)"
+        },
+        {
+          "title": "Holtzman et al. 2019, The Curious Case of Neural Text Degeneration",
+          "url": "https://arxiv.org/abs/1904.09751"
+        }
+      ]
+    },
+    {
+      "ref": "combining",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "These are different kinds of change. Temperature "
+            },
+            {
+              "text": "reshapes",
+              "bold": true
+            },
+            {
+              "text": " the whole distribution. Top-k and top-p "
+            },
+            {
+              "text": "restrict",
+              "bold": true
+            },
+            {
+              "text": " which tokens are allowed. Greedy skips the randomness altogether."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "They can be used together: for example, set a temperature first, and then apply top-p to the reshaped distribution."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 15, 70, 71)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What does temperature do?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It divides the logits by T before softmax: T above 1 flattens the distribution, T below 1 sharpens it"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax is applied to z / T."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It multiplies the probabilities by T after softmax"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The change is made to the logits, before softmax, and the result still adds up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It changes the weights of the network"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Temperature is applied when choosing a token. The network's weights do not change."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It shrinks the vocabulary to T tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Temperature does not remove tokens. It reshapes their probabilities."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["temperature", "low-temperature", "high-temperature"],
+      "covers": ["temperature"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax is applied to z / T. What happens when T = 1?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "You get the model's own distribution, unchanged"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Dividing by 1 changes nothing."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The top token is always chosen"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That happens as T approaches 0."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All tokens become equally likely"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That is what a very high T tends towards. T = 1 does not."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax is skipped"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax is still applied, on the unchanged logits."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "You want the model's text to be more varied and less predictable. Which change of temperature helps?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Raise T above 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A higher temperature flattens the distribution, so less likely tokens are picked more often."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Lower T towards 0"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That sharpens the distribution towards greedy choice, which is more predictable."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Set T to exactly 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "T = 1 leaves the model's own distribution as it is."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Any change of T gives the same amount of variety"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Higher T gives more variety, and lower T gives less."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["low-temperature", "high-temperature"],
+      "covers": ["temperature"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "As T approaches 0, the sampling approaches which behaviour?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Greedy decoding: always the most probable token"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The distribution collapses onto the top token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Choosing uniformly at random from the whole vocabulary"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A very high T flattens towards that. Low T does the opposite."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Always choosing the least likely token"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Low T favours the most likely token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "No change at all"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Very low T makes the distribution extremely sharp."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The distribution is A 0.50, B 0.30, C 0.15, D 0.05. Top-k with k = 2 is applied. What is sampled from?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Only A and B, renormalised to 0.625 and 0.375"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "0.50 and 0.30 add up to 0.80. Dividing each by 0.80 makes them add up to 1."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Only A and B, keeping 0.50 and 0.30"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Those add up to 0.80, not 1. They need to be renormalised."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A, B and C, because C is close to B"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "k = 2 keeps exactly two tokens."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "C and D, the unlikely ones, to add variety"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Top-k keeps the most probable tokens, not the least."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["top-k"],
+      "covers": ["decoding-strategies"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The distribution is A 0.6, B 0.2, C 0.1, D 0.1. With k = 3, what happens?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A, B and C are kept and renormalised to about 0.667, 0.222 and 0.111"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "They add up to 0.9, and dividing each by 0.9 makes them add up to 1."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A, B and C are kept with 0.6, 0.2 and 0.1"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Those add up to 0.9. They must be renormalised."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Only A is kept"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That would be k = 1, which is greedy."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All four are kept"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "k = 3 drops the least likely token."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The distribution is A 0.50, B 0.30, C 0.15, D 0.05. Which tokens does top-p with p = 0.9 keep?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A, B and C"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The running totals are 0.50, 0.80, 0.95. The total first reaches 0.9 at C."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A and B"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Together they only reach 0.80, below 0.9."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A only"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A alone is only 0.50."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "All four tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The set only has to reach 0.9. D is not needed."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["top-p"],
+      "covers": ["decoding-strategies"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A model is very confident: A has 0.95, and B, C, D have 0.03, 0.01 and 0.01. How many tokens does top-p with p = 0.9 keep?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One: A alone already reaches 0.9"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The kept set is the smallest one whose total reaches p."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Two"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A alone already gives 0.95, so B is not needed."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Three"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A alone is enough."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "All four"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Top-p stops as soon as the total reaches p."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which statement about the methods is correct?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Greedy always takes the top token. Top-k samples among the k most probable. Top-p samples among the smallest set that reaches probability p"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Those are the three definitions."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Greedy samples among the top k tokens. Top-k always takes the single top token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Greedy and top-k are swapped."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Top-p always keeps exactly p tokens"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "p is a total probability such as 0.9, not a count of tokens. The number kept varies."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Top-k and top-p need no renormalisation, because the kept probabilities already add up to 1"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "After cutting tokens, the remaining probabilities add up to less than 1, so they are renormalised."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["top-k", "top-p", "combining"],
+      "covers": ["decoding-strategies"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Which method adapts the number of candidate tokens to how confident the model is?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Top-p"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Confident distributions keep few tokens, and unsure ones keep many."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Top-k"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Top-k always keeps exactly k tokens."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Greedy"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Greedy always uses exactly one token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Temperature"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Temperature reshapes the probabilities but does not select a set of tokens."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

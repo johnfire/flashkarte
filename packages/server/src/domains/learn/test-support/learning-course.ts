@@ -1,6 +1,10 @@
+import fs from "fs";
+import path from "path";
 import { closePool, getPool } from "../../../db/client";
 import { runMigrations } from "../../../db/migrate";
+import { importLesson } from "../../lessons/lesson-import.service";
 import * as concepts from "../../subjects/concepts.service";
+import { importSubject } from "../../subjects/subjects-import.service";
 import * as subjects from "../../subjects/subjects.service";
 import * as lessons from "../../lessons/lessons.service";
 import * as questions from "../../lessons/questions.service";
@@ -192,4 +196,74 @@ export async function rightPositionFromDatabase(step: {
   ).rows[0].options;
   const rightText = textOf(stored.find((option) => option.correct)!.blocks);
   return step.options.findIndex((shown) => textOf(shown.blocks) === rightText);
+}
+
+/**
+ * Learns a lesson of real content all the way to a pass: reads the screens, answers every question
+ * right (looked up in the database), and steps through any remediation. Returns the passing reply.
+ */
+export async function learnToPass(
+  subjectId: string,
+  slug: string,
+  random: Rand,
+) {
+  let step = (await readToQuestions(subjectId, slug, random)) as never as {
+    kind: string;
+    presentation_id: string;
+    options: { blocks: unknown }[];
+  };
+  for (let guard = 0; guard < 60; guard++) {
+    if (step.kind === "remediation") {
+      step = (await learn.continueLesson(LEARNER, subjectId, slug, random))
+        .step as never;
+      continue;
+    }
+    const reply = await learn.answerLesson(
+      LEARNER,
+      subjectId,
+      slug,
+      await rightPositionFromDatabase(step),
+      random,
+    );
+    if (reply.passed) return reply;
+    step = reply.step as never;
+  }
+  throw new Error(`${slug} did not finish`);
+}
+
+const LESSON_FIXTURES = path.join(__dirname, "..", "..", "lessons", "fixtures");
+const readFixture = (...parts: string[]) =>
+  JSON.parse(fs.readFileSync(path.join(...parts), "utf8"));
+
+/**
+ * Imports the reviewed Transformers concept graph as a fresh subject, then the given real lesson
+ * fixtures in order (each must import with no issues). Returns the subject id.
+ */
+export async function importTransformersLessons(
+  files: string[],
+): Promise<string> {
+  await resetCourse("unused");
+  const graph = readFixture(
+    __dirname,
+    "..",
+    "..",
+    "subjects",
+    "fixtures",
+    "transformers-subject.json",
+  );
+  const real = await importSubject(LEARNER, {
+    title: graph.title,
+    concepts: graph.concepts.map((c: object) => ({ ...c, cards: [] })),
+    edges: graph.edges,
+  });
+  for (const file of files) {
+    const result = await importLesson(
+      LEARNER,
+      real.subject.id,
+      readFixture(LESSON_FIXTURES, file),
+      "ai",
+    );
+    expect({ file, issues: result.issues }).toEqual({ file, issues: [] });
+  }
+  return real.subject.id;
 }

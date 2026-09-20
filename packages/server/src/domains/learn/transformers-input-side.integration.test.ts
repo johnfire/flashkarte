@@ -1,17 +1,11 @@
-import fs from "fs";
-import path from "path";
 import { seededRandom } from "@flashkarte/shared";
-import { importLesson } from "../lessons/lesson-import.service";
 import * as lessons from "../lessons/lessons.service";
 import { getOutline } from "../lessons/outline.service";
-import { importSubject } from "../subjects/subjects-import.service";
-import * as learn from "./learn-lessons.service";
 import { getLearnerOutline } from "./learn-outline.service";
 import {
   LEARNER,
-  readToQuestions,
-  resetCourse,
-  rightPositionFromDatabase,
+  importTransformersLessons,
+  learnToPass,
   startDatabase,
   stopDatabase,
 } from "./test-support/learning-course";
@@ -21,69 +15,17 @@ import {
  * This proves they import and lint clean, form the order the concept graph implies, and can be
  * learned through the learner path, and that nothing opens before its prerequisites are passed.
  */
-const FIXTURES = path.join(__dirname, "..", "lessons", "fixtures");
 const ORDER = [
   "transformers-tokens-lesson.json",
   "transformers-sequence-shapes-lesson.json",
   "transformers-embeddings-lesson.json",
   "transformers-subwords-bpe-lesson.json",
 ];
-const readJson = (file: string) =>
-  JSON.parse(fs.readFileSync(path.join(FIXTURES, file), "utf8"));
 
 beforeAll(startDatabase);
 afterAll(stopDatabase);
 
-async function importModule(): Promise<string> {
-  await resetCourse("unused");
-  const graph = readJson(
-    path.join("..", "..", "subjects", "fixtures", "transformers-subject.json"),
-  );
-  const real = await importSubject(LEARNER, {
-    title: graph.title,
-    concepts: graph.concepts.map((c: object) => ({ ...c, cards: [] })),
-    edges: graph.edges,
-  });
-  for (const file of ORDER) {
-    const result = await importLesson(
-      LEARNER,
-      real.subject.id,
-      readJson(file),
-      "ai",
-    );
-    expect({ file, issues: result.issues }).toEqual({ file, issues: [] });
-  }
-  return real.subject.id;
-}
-
-async function learnToPass(
-  subjectId: string,
-  slug: string,
-  random: () => number,
-) {
-  let step = (await readToQuestions(subjectId, slug, random)) as never as {
-    kind: string;
-    presentation_id: string;
-    options: { blocks: unknown }[];
-  };
-  for (let guard = 0; guard < 60; guard++) {
-    if (step.kind === "remediation") {
-      step = (await learn.continueLesson(LEARNER, subjectId, slug, random))
-        .step as never;
-      continue;
-    }
-    const reply = await learn.answerLesson(
-      LEARNER,
-      subjectId,
-      slug,
-      await rightPositionFromDatabase(step),
-      random,
-    );
-    if (reply.passed) return reply;
-    step = reply.step as never;
-  }
-  throw new Error(`${slug} did not finish`);
-}
+const importModule = () => importTransformersLessons(ORDER);
 
 describe("Transformers: Input side (draft content for the pilot)", () => {
   it("imports clean, finishes, and forms one module in prerequisite order", async () => {

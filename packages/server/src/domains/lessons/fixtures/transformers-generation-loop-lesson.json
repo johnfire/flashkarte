@@ -1,0 +1,1202 @@
+{
+  "module": "Output side: from scores to text",
+  "lesson": {
+    "slug": "generation-loop",
+    "title": "Generating text one token at a time",
+    "summary": "How a reply is produced: the loop of running the model, sampling a token, appending it and running again, what autoregressive means, and why a long reply needs many passes.",
+    "covers": ["autoregressive-generation"],
+    "prerequisites": [
+      {
+        "lesson": "next-token-sampling",
+        "reason": "Each step of the loop samples one token from the next-token distribution."
+      },
+      {
+        "lesson": "sequence-shapes",
+        "reason": "The loop grows the sequence length n by one each step, so n must already be clear."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "one-token",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "One pass gives one distribution, and sampling turns that into "
+            },
+            {
+              "text": "one token",
+              "bold": true
+            },
+            {
+              "text": ". So a single pass is enough to add a single token to a text, not to write a reply."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "To write a whole reply, the model does the same thing again and again."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 20)"
+        }
+      ]
+    },
+    {
+      "ref": "the-loop",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "This is the generation loop:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            [
+              {
+                "text": "Run the model on the tokens so far"
+              }
+            ],
+            [
+              {
+                "text": "Turn the logits at the last position into probabilities with softmax"
+              }
+            ],
+            [
+              {
+                "text": "Sample one token from those probabilities"
+              }
+            ],
+            [
+              {
+                "text": "Append that token to the end of the text, then go back to the first step"
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Only the last position's distribution is needed, because that is the one that predicts what comes next."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 18, 20)"
+        }
+      ]
+    },
+    {
+      "ref": "walk-through",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "A toy walk-through, with invented choices. To keep it simple, assume each word is one token, so the text starts as "
+            },
+            {
+              "text": "The cat",
+              "italic": true
+            },
+            {
+              "text": ", which is 2 tokens:"
+            }
+          ]
+        },
+        {
+          "type": "list",
+          "ordered": false,
+          "items": [
+            [
+              {
+                "text": "Pass 1 on "
+              },
+              {
+                "text": "The cat",
+                "italic": true
+              },
+              {
+                "text": " (n = 2). Sample "
+              },
+              {
+                "text": "sat",
+                "italic": true
+              },
+              {
+                "text": ". The text is now "
+              },
+              {
+                "text": "The cat sat",
+                "italic": true
+              },
+              {
+                "text": " (n = 3)."
+              }
+            ],
+            [
+              {
+                "text": "Pass 2 on "
+              },
+              {
+                "text": "The cat sat",
+                "italic": true
+              },
+              {
+                "text": " (n = 3). Sample "
+              },
+              {
+                "text": "on",
+                "italic": true
+              },
+              {
+                "text": ". The text is now "
+              },
+              {
+                "text": "The cat sat on",
+                "italic": true
+              },
+              {
+                "text": " (n = 4)."
+              }
+            ],
+            [
+              {
+                "text": "Pass 3 on "
+              },
+              {
+                "text": "The cat sat on",
+                "italic": true
+              },
+              {
+                "text": " (n = 4). Sample "
+              },
+              {
+                "text": "the",
+                "italic": true
+              },
+              {
+                "text": ". The text is now "
+              },
+              {
+                "text": "The cat sat on the",
+                "italic": true
+              },
+              {
+                "text": " (n = 5)."
+              }
+            ]
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Each pass starts from a text one token longer than the one before, because the chosen token is added to the input."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 16, 20)"
+        }
+      ]
+    },
+    {
+      "ref": "autoregressive",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Generating a sequence one element at a time, with each element predicted from all the earlier ones, is called "
+            },
+            {
+              "text": "autoregressive",
+              "bold": true
+            },
+            {
+              "text": " generation."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The earlier elements include the model's "
+            },
+            {
+              "text": "own earlier outputs",
+              "bold": true
+            },
+            {
+              "text": ". A token it chose two steps ago is now just part of the input, and every later choice is made in light of it."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 16)"
+        }
+      ]
+    },
+    {
+      "ref": "cost",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "This is why a reply of 200 tokens takes about "
+            },
+            {
+              "text": "200 forward passes",
+              "bold": true
+            },
+            {
+              "text": ": each pass yields a distribution for one next token, that token is appended, and the model runs again."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "The prompt is different. The tokens you supply are all known in advance, so they are processed together in one parallel pass. Every token the model generates then needs its own pass."
+            }
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "spans": [
+            {
+              "text": "A trick called the KV cache, covered later in the course, makes each of those later passes much cheaper."
+            }
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "Transformers in LLMs: mechanics and pipeline (flashkarte deck, cards 20)"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Why does generating a 200-token reply take about 200 forward passes?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each pass gives a distribution for one next token, which is appended before the model runs again"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The reply is built one token per pass."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The model can only read one token of the prompt per pass"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The prompt is processed together in one parallel pass."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each pass chooses all 200 tokens, and 200 passes are needed to check them"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A pass gives one distribution, and one token is sampled from it."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The tokenizer needs one step for each token"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The count of passes is about generating tokens, not tokenizing."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["one-token", "cost"],
+      "covers": ["autoregressive-generation"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A reply is made twice as long. How does the number of forward passes change?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It roughly doubles"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Each generated token needs its own pass."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It stays the same, because the model runs once"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "One pass gives only one token."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It quadruples"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Each extra token costs one extra pass, so the number of passes grows in line with the length."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "It halves"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Longer replies need more passes, not fewer."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "In the loop, what happens to the token that has just been sampled?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is appended to the text, and the model runs again on the longer text"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The sampled token becomes part of the input for the next step."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is thrown away once it is shown"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It must be kept, because later predictions depend on it."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It replaces the whole prompt"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The text grows. Nothing before it is removed."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It is sent back to the tokenizer to be retrained"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Nothing is trained during generation."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["the-loop", "walk-through"],
+      "covers": ["autoregressive-generation"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The text is "
+                },
+                {
+                  "text": "The cat",
+                  "italic": true
+                },
+                {
+                  "text": " and the model samples "
+                },
+                {
+                  "text": "sat",
+                  "italic": true
+                },
+                {
+                  "text": ". What is the input to the next pass?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The cat sat",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The chosen token is appended at the end."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "sat",
+                      "italic": true
+                    },
+                    {
+                      "text": " on its own"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The model needs the earlier tokens to predict what follows."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The cat",
+                      "italic": true
+                    },
+                    {
+                      "text": " again"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Then the model would give the same distribution and never make progress."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "cat sat",
+                      "italic": true
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The start of the text is not dropped."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "What does "
+            },
+            {
+              "text": "autoregressive",
+              "italic": true
+            },
+            {
+              "text": " mean?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Producing a sequence one element at a time, each predicted from all the earlier ones, including the model's own earlier outputs"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "That is how a reply is written."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Predicting every token of the reply at once, in one pass"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The reply is built one token at a time."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Predicting each token from the tokens that come after it"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "It only uses earlier tokens."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Choosing tokens completely at random"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Each choice is drawn from the model's distribution, which depends on the text so far."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["autoregressive"],
+      "covers": ["autoregressive-generation"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Why does the sequence length n grow by one at each step of generation?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because the token just chosen is added to the input"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The text is one token longer each time."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because the tokenizer adds a token every step"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The tokenizer is not run inside the loop."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because the vocabulary gets one token bigger"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The vocabulary is fixed."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Because the prompt is repeated once each step"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The prompt is not repeated. One new token is appended."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": [
+        {
+          "type": "paragraph",
+          "spans": [
+            {
+              "text": "Which is the correct order for one step of the generation loop?"
+            }
+          ]
+        }
+      ],
+      "options": [
+        {
+          "correct": true,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Run the model, apply softmax to the last position's logits, sample a token, append it"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "The model gives logits, softmax makes probabilities, sampling chooses, and appending grows the text."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Sample a token, apply softmax, run the model, append it"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "You cannot sample before there is a distribution to sample from."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Run the model, append a token, sample it, apply softmax"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "A token has to be chosen before it can be appended."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "correct": false,
+          "blocks": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Apply softmax, run the model, sample a token, append it"
+                }
+              ]
+            }
+          ],
+          "reason": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Softmax needs the logits the model produces."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "teaches": ["the-loop"],
+      "covers": ["autoregressive-generation"],
+      "variants": [
+        {
+          "prompt": [
+            {
+              "type": "paragraph",
+              "spans": [
+                {
+                  "text": "Right after the model has produced its logits, what comes next in the loop?"
+                }
+              ]
+            }
+          ],
+          "options": [
+            {
+              "correct": true,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Softmax turns the last position's logits into probabilities"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "That gives the distribution to sample from."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The chosen token is appended"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "No token has been chosen yet."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "A token is sampled straight from the logits"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "Sampling works on a probability distribution, which softmax produces first."
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "correct": false,
+              "blocks": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The prompt is fed in again from the beginning"
+                    }
+                  ]
+                }
+              ],
+              "reason": [
+                {
+                  "type": "paragraph",
+                  "spans": [
+                    {
+                      "text": "The loop does not restart. Softmax comes next, and the prompt stays as it is."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
