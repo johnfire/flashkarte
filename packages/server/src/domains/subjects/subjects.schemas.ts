@@ -13,6 +13,15 @@ export const titleSchema = z
 
 export const descriptionSchema = z.string().trim().max(2000).nullable();
 
+export const localeSchema = z
+  .string()
+  .trim()
+  .toLowerCase()
+  .regex(
+    /^[a-z]{2,3}(?:-[a-z0-9]{2,8})*$/,
+    "locale must be a BCP-47 language tag",
+  );
+
 export const slugSchema = z
   .string({ error: "slug is required" })
   .regex(
@@ -25,6 +34,13 @@ export const conceptNameSchema = z
   .trim()
   .min(1, "name is required")
   .max(200, "name is too long");
+
+export const editionSchema = z.object({
+  locale: localeSchema,
+  title: titleSchema,
+  description: descriptionSchema.nullish(),
+  concept_names: z.record(slugSchema, conceptNameSchema),
+});
 
 export const kindSchema = z.enum(CONCEPT_KINDS, {
   error: `kind must be one of: ${CONCEPT_KINDS.join(", ")}`,

@@ -61,6 +61,39 @@ export const lint = wrapAsync(async (req: Request, res: Response) => {
   res.json({ issues: await service.lintSubject(req.userId!, req.params.id) });
 });
 
+export const createCourseFamily = wrapAsync(
+  async (req: Request, res: Response) => {
+    const result = await service.createCourseFamily(
+      req.userId!,
+      req.params.id,
+      req.body.locale,
+    );
+    await auditSubject(req, "course_family.created", req.params.id, {
+      courseFamilyId: result.family.id,
+      locale: result.edition.locale,
+    });
+    res.status(201).json(result);
+  },
+);
+
+export const createEdition = wrapAsync(async (req: Request, res: Response) => {
+  const result = await service.createLocalizedEdition(
+    req.userId!,
+    req.params.id,
+    req.body,
+  );
+  await auditSubject(req, "course_edition.created", result.edition.id, {
+    courseFamilyId: result.family.id,
+    locale: result.edition.locale,
+    canonicalSubjectId: req.params.id,
+  });
+  res.status(201).json(result);
+});
+
+export const listEditions = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.getCourseEditions(req.userId!, req.params.id));
+});
+
 export const update = wrapAsync(async (req: Request, res: Response) => {
   const updated = await service.updateSubject(req.userId!, req.params.id, {
     title: req.body.title,

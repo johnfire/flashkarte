@@ -123,3 +123,58 @@ test("a subject id that is not a UUID is a 404, not a 500", async () => {
   const res = await request(app).get("/api/subjects/not-a-uuid");
   expect(res.status).toBe(404);
 });
+
+test("a canonical subject can create and list a localized graph edition", async () => {
+  const imported = await request(app)
+    .post("/api/subjects/import")
+    .send({
+      title: "AI literacy",
+      concepts: [
+        { slug: "token", name: "Token", kind: "term" },
+        { slug: "model", name: "Model", kind: "idea" },
+      ],
+      edges: [
+        {
+          from: "token",
+          to: "model",
+          strength: "requires",
+          reason: "Models process tokens.",
+        },
+      ],
+    });
+  const canonicalId: string = imported.body.subject.id;
+
+  const family = await request(app)
+    .post(`/api/subjects/${canonicalId}/course-family`)
+    .send({ locale: "en" });
+  expect(family.status).toBe(201);
+  expect(family.body.edition.locale).toBe("en");
+
+  const german = await request(app)
+    .post(`/api/subjects/${canonicalId}/editions`)
+    .send({
+      locale: "de",
+      title: "KI-Grundlagen",
+      description: "Ein Einstieg.",
+      concept_names: { token: "Token", model: "Modell" },
+    });
+  expect(german.status).toBe(201);
+  expect(german.body.concept_count).toBe(2);
+  expect(german.body.edge_count).toBe(1);
+
+  const edition = await request(app).get(
+    `/api/subjects/${german.body.edition.id}`,
+  );
+  expect(edition.body.locale).toBe("de");
+  expect(
+    edition.body.concepts.map((concept: { name: string }) => concept.name),
+  ).toEqual(["Token", "Modell"]);
+
+  const editions = await request(app).get(
+    `/api/subjects/${canonicalId}/editions`,
+  );
+  expect(editions.status).toBe(200);
+  expect(
+    editions.body.editions.map((subject: { locale: string }) => subject.locale),
+  ).toEqual(["de", "en"]);
+});

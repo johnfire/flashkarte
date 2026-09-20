@@ -77,6 +77,51 @@ export function registerSubjectTools(server: McpServer) {
   );
 
   server.tool(
+    "create_course_family",
+    "Promote a subject to the canonical edition of a multilingual course. Existing lessons stay in place; later editions receive the same concept graph with translated names.",
+    {
+      subject_id: subjectId,
+      locale: z
+        .string()
+        .describe("Canonical edition locale, such as en or de."),
+    },
+    async ({ subject_id, locale }) =>
+      runTool("create_course_family", async () =>
+        asText(await post(`${path(subject_id)}/course-family`, { locale })),
+      ),
+  );
+
+  server.tool(
+    "create_localized_edition",
+    "Create a translated subject edition from a canonical course. It copies the canonical concept graph by stable slug; author translated modules, lessons, screens and questions afterwards. Learner progress stays separate per edition. Shared diagrams remain usable by every edition in the course family.",
+    {
+      subject_id: subjectId,
+      locale: z.string().describe("Edition locale, such as de."),
+      title: z.string(),
+      description: z.string().optional(),
+      concept_names: z
+        .record(z.string(), z.string())
+        .describe(
+          "One localized display name for every canonical concept slug.",
+        ),
+    },
+    async ({ subject_id, ...body }) =>
+      runTool("create_localized_edition", async () =>
+        asText(await post(`${path(subject_id)}/editions`, body)),
+      ),
+  );
+
+  server.tool(
+    "list_course_editions",
+    "List every language edition in the course family that contains this subject.",
+    { subject_id: subjectId },
+    async ({ subject_id }) =>
+      runTool("list_course_editions", async () =>
+        asText(await get(`${path(subject_id)}/editions`)),
+      ),
+  );
+
+  server.tool(
     "import_subject",
     "Create a whole subject in one call: concepts, prerequisite edges with " +
       "reasons, and the cards that assess each concept. All-or-nothing: the " +

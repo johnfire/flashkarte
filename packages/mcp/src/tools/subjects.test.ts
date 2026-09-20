@@ -43,6 +43,8 @@ describe("subject MCP tools", () => {
   it("registers the subject tools", () => {
     expect(Object.keys(setup()).sort()).toEqual([
       "add_concept",
+      "create_course_family",
+      "create_localized_edition",
       "create_subject",
       "delete_subject",
       "get_subject",
@@ -50,6 +52,7 @@ describe("subject MCP tools", () => {
       "import_subject",
       "link_concept_cards",
       "lint_subject",
+      "list_course_editions",
       "list_subjects",
       "remove_prerequisite",
       "set_prerequisite",

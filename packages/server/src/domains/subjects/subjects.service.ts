@@ -6,8 +6,8 @@ import {
   topologicalOrder,
   type ConceptEvidence,
 } from "@flashkarte/shared";
-import { getPool } from "../../db/client";
-import { NotFoundError } from "../../utils/errors";
+import { getPool, withTransaction } from "../../db/client";
+import { NotFoundError, ValidationError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
 import * as repo from "./subjects.repository";
 import * as conceptsRepo from "./concepts.repository";
@@ -16,7 +16,12 @@ import {
   loadConceptLessons,
   type ConceptLessonRow,
 } from "./concept-cards.repository";
-import { descriptionSchema, titleSchema } from "./subjects.schemas";
+import {
+  descriptionSchema,
+  editionSchema,
+  localeSchema,
+  titleSchema,
+} from "./subjects.schemas";
 import {
   slugById,
   toGraphEdges,
@@ -38,6 +43,127 @@ export async function createSubject(
   const title = parse(titleSchema, titleInput);
   const description = parse(descriptionSchema, descriptionInput ?? null);
   return repo.insertSubject(getPool(), userId, title, description);
+}
+
+/** Promote an existing subject into a course family's canonical edition. */
+export async function createCourseFamily(
+  userId: string,
+  subjectId: string,
+  localeInput: unknown,
+) {
+  const locale = parse(localeSchema, localeInput);
+  return withTransaction(async (db) => {
+    const subject = await repo.lockOwnedSubject(db, userId, subjectId);
+    if (!subject) throw new NotFoundError("Subject not found");
+    if (subject.course_family_id) {
+      throw new ValidationError("Subject already belongs to a course family");
+    }
+    const family = await repo.createCourseFamily(
+      db,
+      userId,
+      subject.id,
+      locale,
+    );
+    const edition = await repo.setCourseEdition(
+      db,
+      subject.id,
+      family.id,
+      locale,
+    );
+    return { family, edition };
+  });
+}
+
+/** Clone a canonical graph into a locale edition; lesson content is authored separately. */
+export async function createLocalizedEdition(
+  userId: string,
+  canonicalSubjectId: string,
+  input: unknown,
+) {
+  const fields = parse(editionSchema, input);
+  return withTransaction(async (db) => {
+    const canonical = await repo.lockOwnedSubject(
+      db,
+      userId,
+      canonicalSubjectId,
+    );
+    if (!canonical) throw new NotFoundError("Subject not found");
+    const family = await repo.findCourseFamilyBySubject(
+      db,
+      userId,
+      canonical.id,
+    );
+    if (!family || family.canonical_subject_id !== canonical.id) {
+      throw new ValidationError("Subject is not a canonical course edition");
+    }
+    const [sourceConcepts, sourceEdges, existingEditions] = await Promise.all([
+      conceptsRepo.listConcepts(db, canonical.id),
+      conceptsRepo.listEdges(db, canonical.id),
+      repo.listCourseEditions(db, family.id),
+    ]);
+    if (existingEditions.some((edition) => edition.locale === fields.locale)) {
+      throw new ValidationError(
+        `Course already has a ${fields.locale} edition`,
+      );
+    }
+    const sourceSlugs = new Set(sourceConcepts.map((concept) => concept.slug));
+    const translatedSlugs = Object.keys(fields.concept_names);
+    if (
+      translatedSlugs.length !== sourceSlugs.size ||
+      translatedSlugs.some((slug) => !sourceSlugs.has(slug))
+    ) {
+      throw new ValidationError(
+        "concept_names must name every canonical concept exactly once",
+      );
+    }
+    const edition = await repo.insertSubject(
+      db,
+      userId,
+      fields.title,
+      fields.description ?? null,
+    );
+    const attached = await repo.setCourseEdition(
+      db,
+      edition.id,
+      family.id,
+      fields.locale,
+    );
+    const idBySourceId = new Map<string, string>();
+    for (const concept of sourceConcepts) {
+      const copy = await conceptsRepo.insertConcept(db, attached.id, {
+        slug: concept.slug,
+        name: fields.concept_names[concept.slug],
+        kind: concept.kind,
+        tier: concept.tier,
+      });
+      idBySourceId.set(concept.id, copy.id);
+    }
+    for (const edge of sourceEdges) {
+      await conceptsRepo.upsertEdge(db, {
+        from_concept: idBySourceId.get(edge.from_concept)!,
+        to_concept: idBySourceId.get(edge.to_concept)!,
+        strength: edge.strength,
+        reason: edge.reason,
+      });
+    }
+    return {
+      family,
+      edition: attached,
+      concept_count: sourceConcepts.length,
+      edge_count: sourceEdges.length,
+    };
+  });
+}
+
+export async function getCourseEditions(userId: string, subjectId: string) {
+  const family = await repo.findCourseFamilyBySubject(
+    getPool(),
+    userId,
+    subjectId,
+  );
+  if (!family) throw new NotFoundError("Course family not found");
+  const editions = await repo.listCourseEditions(getPool(), family.id);
+  return { family, editions };
 }
 
 export function listSubjects(userId: string) {

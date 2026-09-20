@@ -16,6 +16,8 @@ export interface AssetRow extends AssetSummaryRow {
 }
 
 const SUMMARY = `id, kind, description, author_kind, length(content)::int AS size, created_at`;
+const ASSET_SUMMARY =
+  "a.id, a.kind, a.description, a.author_kind, length(a.content)::int AS size, a.created_at";
 
 export async function insertAsset(
   db: Queryable,
@@ -46,7 +48,14 @@ export async function listAssets(
   subjectId: string,
 ): Promise<AssetSummaryRow[]> {
   const result = await db.query<AssetSummaryRow>(
-    `SELECT ${SUMMARY} FROM assets WHERE subject_id = $1 AND kind = 'diagram' ORDER BY created_at, id`,
+    `SELECT ${ASSET_SUMMARY}
+     FROM assets a
+     JOIN subjects owner ON owner.id = a.subject_id
+     JOIN subjects requested ON requested.id = $1
+     WHERE a.kind = 'diagram'
+       AND (a.subject_id = requested.id
+         OR (owner.course_family_id IS NOT NULL AND owner.course_family_id = requested.course_family_id))
+     ORDER BY a.created_at, a.id`,
     [subjectId],
   );
   return result.rows;
@@ -125,7 +134,12 @@ export async function findServableSvg(
   id: string,
 ): Promise<string | null> {
   const result = await db.query<{ content: string }>(
-    `SELECT content FROM assets WHERE subject_id = $1 AND id = $2`,
+    `SELECT a.content FROM assets a
+     JOIN subjects owner ON owner.id = a.subject_id
+     JOIN subjects requested ON requested.id = $1
+     WHERE a.id = $2
+       AND (a.subject_id = requested.id
+         OR (owner.course_family_id IS NOT NULL AND owner.course_family_id = requested.course_family_id))`,
     [subjectId, id],
   );
   return result.rows[0]?.content ?? null;

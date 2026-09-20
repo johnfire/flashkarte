@@ -10,10 +10,12 @@ export interface SubjectRow {
   version: number;
   created_at: string;
   updated_at: string;
+  course_family_id: string | null;
+  locale: string | null;
 }
 
 const SUBJECT_COLS =
-  "id, user_id, title, description, is_public, version, created_at, updated_at";
+  "id, user_id, title, description, is_public, version, created_at, updated_at, course_family_id, locale";
 
 export async function insertSubject(
   db: Queryable,
@@ -28,6 +30,69 @@ export async function insertSubject(
     [userId, title, description],
   );
   return result.rows[0];
+}
+
+export interface CourseFamilyRow {
+  id: string;
+  user_id: string;
+  canonical_subject_id: string;
+  default_locale: string;
+  created_at: string;
+}
+
+export async function createCourseFamily(
+  db: Queryable,
+  userId: string,
+  canonicalSubjectId: string,
+  locale: string,
+): Promise<CourseFamilyRow> {
+  const result = await db.query<CourseFamilyRow>(
+    `INSERT INTO course_families (user_id, canonical_subject_id, default_locale)
+     VALUES ($1, $2, $3)
+     RETURNING id, user_id, canonical_subject_id, default_locale, created_at`,
+    [userId, canonicalSubjectId, locale],
+  );
+  return result.rows[0];
+}
+
+export async function setCourseEdition(
+  db: Queryable,
+  subjectId: string,
+  courseFamilyId: string,
+  locale: string,
+): Promise<SubjectRow> {
+  const result = await db.query<SubjectRow>(
+    `UPDATE subjects SET course_family_id = $2, locale = $3, updated_at = now()
+     WHERE id = $1 RETURNING ${SUBJECT_COLS}`,
+    [subjectId, courseFamilyId, locale],
+  );
+  return result.rows[0];
+}
+
+export async function findCourseFamilyBySubject(
+  db: Queryable,
+  userId: string,
+  subjectId: string,
+): Promise<CourseFamilyRow | null> {
+  const result = await db.query<CourseFamilyRow>(
+    `SELECT f.id, f.user_id, f.canonical_subject_id, f.default_locale, f.created_at
+     FROM course_families f JOIN subjects s ON s.course_family_id = f.id
+     WHERE s.id = $1 AND f.user_id = $2`,
+    [subjectId, userId],
+  );
+  return result.rows[0] ?? null;
+}
+
+export async function listCourseEditions(
+  db: Queryable,
+  courseFamilyId: string,
+): Promise<SubjectRow[]> {
+  const result = await db.query<SubjectRow>(
+    `SELECT ${SUBJECT_COLS} FROM subjects
+     WHERE course_family_id = $1 ORDER BY locale, created_at`,
+    [courseFamilyId],
+  );
+  return result.rows;
 }
 
 export interface SubjectSummaryRow extends SubjectRow {
