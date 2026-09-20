@@ -162,7 +162,7 @@
           "type": "paragraph",
           "spans": [
             {
-              "text": "Query 2 without a mask has weights 0.155, 0.422, 0.422. Zeroing the third leaves 0.155, 0.422, 0.000, which add up to only 0.578. That is not a proper weighted average."
+              "text": "Query 2 without a mask has weights 0.155, 0.422, 0.422. Zeroing the third leaves 0.155, 0.422, 0.000, which add up to only about 0.58. That is not a proper weighted average."
             }
           ]
         },
