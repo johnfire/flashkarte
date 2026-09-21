@@ -4,7 +4,7 @@ import { CourseSummary } from "../api/types";
 
 interface CourseListItemProps {
   course: CourseSummary;
-  onDelete: (id: string, title: string) => void;
+  onDelete?: (id: string, title: string) => void;
 }
 
 export function CourseListItem({ course: c, onDelete }: CourseListItemProps) {
@@ -36,12 +36,14 @@ export function CourseListItem({ course: c, onDelete }: CourseListItemProps) {
         <Link to={`/courses/${c.id}`} className="text-sm text-indigo-600">
           {t("courses.open")}
         </Link>
-        <button
-          onClick={() => onDelete(c.id, c.title)}
-          className="text-sm text-red-600"
-        >
-          {t("decks.delete")}
-        </button>
+        {onDelete && (
+          <button
+            onClick={() => onDelete(c.id, c.title)}
+            className="text-sm text-red-600"
+          >
+            {t("decks.delete")}
+          </button>
+        )}
       </div>
     </li>
   );

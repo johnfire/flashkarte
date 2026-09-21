@@ -206,6 +206,9 @@
     "public": "Public",
     "official": "Official",
     "appDecks": "App Decks",
+    "officialDecks": "Official Decks",
+    "myCourses": "My Courses",
+    "deckCourses": "Deck Courses",
     "courses": "Courses",
     "appDecksTitle": "App Decks",
     "appDecksSearchPlaceholder": "Search…",
@@ -276,6 +279,13 @@
     "lessonsToRead_other": "{{count}} lessons to read"
   },
   "courses": {
+    "myCoursesTitle": "My Courses",
+    "myCoursesIntro": "Your guided learning, whether it is a lesson course or an ordered deck course.",
+    "lessonCourses": "Lesson Courses",
+    "lessonCourseBadge": "Lesson course",
+    "noLessonCourses": "No lesson courses yet.",
+    "deckCourses": "Deck Courses",
+    "deckCoursesIntro": "Ordered flashcard decks with progress gates.",
     "title": "My Courses",
     "browsePublic": "Browse public courses",
     "myDecks": "My decks",
