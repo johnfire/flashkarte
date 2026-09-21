@@ -1,7 +1,7 @@
 import { buildOutline, dueQuestionIds, lessonResult } from "@flashkarte/shared";
 import { getPool } from "../../db/client";
 import * as lessonsRepo from "../lessons/lessons.repository";
-import { requireOwnedSubject } from "../subjects/subjects.service";
+import { requireLearningSubject } from "../subjects/subjects.service";
 import { lessonAccess } from "./learn-context";
 import * as repo from "./learn.repository";
 
@@ -15,7 +15,7 @@ export async function getLearnerOutline(
   subjectId: string,
   now: Date = new Date(),
 ) {
-  const subject = await requireOwnedSubject(userId, subjectId);
+  const subject = await requireLearningSubject(userId, subjectId);
   const db = getPool();
   const [modules, lessons, covered, prerequisites, progress, reviews, access] =
     await Promise.all([
