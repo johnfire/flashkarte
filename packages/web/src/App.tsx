@@ -22,6 +22,7 @@ import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { HomeRoute } from "./components/HomeRoute";
 import { LibraryPage } from "./pages/LibraryPage";
+import { LibraryHubPage } from "./pages/LibraryHubPage";
 import { AppDecksPage } from "./pages/AppDecksPage";
 import { AppDecksCollectionPage } from "./pages/AppDecksCollectionPage";
 import { ExplorePage } from "./pages/ExplorePage";
@@ -75,7 +76,9 @@ export default function App() {
             path="/decks/:id/senses/:word/reorder"
             element={<SenseReorderPage />}
           />
-          <Route path="/library" element={<LibraryPage />} />
+          <Route path="/library" element={<LibraryHubPage />} />
+          <Route path="/library/community/decks" element={<LibraryPage />} />
+          <Route path="/library/official/decks" element={<AppDecksPage />} />
           <Route path="/courses" element={<MyCoursesPage />} />
           <Route
             path="/library/courses/:source"

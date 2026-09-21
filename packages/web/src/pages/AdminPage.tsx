@@ -25,6 +25,8 @@ export function AdminPage() {
   const [creating, setCreating] = useState(false);
   const [createMsg, setCreateMsg] = useState<string | null>(null);
   const [mutationError, setMutationError] = useState<string | null>(null);
+  const [courseId, setCourseId] = useState("");
+  const [updatingCourse, setUpdatingCourse] = useState(false);
 
   const loadUsers = useCallback(async () => {
     const response = await api.admin.listUsers();
@@ -81,6 +83,22 @@ export function AdminPage() {
       setMutationError(
         err instanceof ApiError ? err.message : t("admin.updateTypeError"),
       );
+    }
+  }
+
+  async function setCourseOfficial(official: boolean) {
+    if (!courseId.trim()) return;
+    setUpdatingCourse(true);
+    setMutationError(null);
+    try {
+      await api.admin.setSubjectOfficial(courseId.trim(), official);
+      setCourseId("");
+    } catch (err) {
+      setMutationError(
+        err instanceof ApiError ? err.message : "Could not update course",
+      );
+    } finally {
+      setUpdatingCourse(false);
     }
   }
 
@@ -152,6 +170,36 @@ export function AdminPage() {
       </section>
 
       <CategoriesSection />
+
+      <section className="mb-8 rounded-lg border p-4">
+        <h2 className="mb-2 text-xl font-semibold">Official course catalog</h2>
+        <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
+          Promoting a course publishes it in the Official Courses library.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <input
+            aria-label="Course ID"
+            value={courseId}
+            onChange={(event) => setCourseId(event.target.value)}
+            placeholder="Course UUID"
+            className="flex-1 rounded-lg border px-3 py-2"
+          />
+          <button
+            disabled={updatingCourse || !courseId.trim()}
+            onClick={() => setCourseOfficial(true)}
+            className="rounded-lg bg-indigo-600 px-3 py-2 text-white disabled:opacity-60"
+          >
+            Make official
+          </button>
+          <button
+            disabled={updatingCourse || !courseId.trim()}
+            onClick={() => setCourseOfficial(false)}
+            className="rounded-lg border px-3 py-2 disabled:opacity-60"
+          >
+            Remove official status
+          </button>
+        </div>
+      </section>
 
       <section>
         <h2 className="mb-3 text-xl font-semibold">

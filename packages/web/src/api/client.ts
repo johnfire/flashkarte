@@ -601,6 +601,11 @@ export const api = {
         method: "PATCH",
         body: JSON.stringify({ accountType }),
       }),
+    setSubjectOfficial: (id: string, official: boolean) =>
+      request<void>(`/admin/subjects/${id}/official`, {
+        method: "PATCH",
+        body: JSON.stringify({ official }),
+      }),
     categoryTree: () =>
       request<{ categories: DeckCategory[] }>("/admin/categories"),
     createCategory: (title: string, parentId?: string) =>

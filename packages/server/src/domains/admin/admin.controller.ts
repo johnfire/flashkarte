@@ -75,6 +75,23 @@ export const promoteOfficialDeck = wrapAsync(
   },
 );
 
+export const setSubjectOfficial = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.setSubjectOfficial(
+      req.params.id,
+      Boolean(req.body?.official),
+    );
+    await auditFromRequest(
+      req,
+      "admin.subject_official_changed",
+      "subject",
+      req.params.id,
+      "success",
+    );
+    res.status(204).end();
+  },
+);
+
 export const demoteOfficialDeck = wrapAsync(
   async (req: Request, res: Response) => {
     await service.demoteOfficialDeck(req.params.id, req.body.ownerId);

@@ -1,5 +1,6 @@
 import bcrypt from "bcryptjs";
 import { z } from "zod";
+import { getPool } from "../../db/client";
 import { ValidationError, NotFoundError } from "../../utils/errors";
 import { parse, emailSchema, passwordSchema } from "../../utils/validate";
 import * as repo from "./admin.repository";
@@ -107,6 +108,18 @@ export async function promoteOfficialDeck(
         : parse(collectionTitleSchema, collectionTitleIn);
   const deck = await decksRepo.promoteToOfficial(id, collectionTitle);
   if (!deck) throw new NotFoundError("Deck not found");
+}
+
+/** Official structured courses stay owned by their author but are curated by admins. */
+export async function setSubjectOfficial(
+  id: string,
+  official: boolean,
+): Promise<void> {
+  const result = await getPool().query(
+    `UPDATE subjects SET is_official = $2, is_public = CASE WHEN $2 THEN true ELSE is_public END WHERE id = $1`,
+    [id, official],
+  );
+  if ((result.rowCount ?? 0) === 0) throw new NotFoundError("Course not found");
 }
 
 const ownerIdSchema = z.string({ error: "ownerId is required" }).min(1);
