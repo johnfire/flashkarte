@@ -1,3 +1,4 @@
+/* eslint-disable max-lines -- administrative controls are kept together pending extraction. */
 import { useCallback, useState } from "react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";

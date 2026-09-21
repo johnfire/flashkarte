@@ -120,7 +120,7 @@ export function DeckListPage() {
             to="/learn"
             className="self-center text-sm text-gray-500 dark:text-gray-400"
           >
-            {t("decks.myCourses")}
+            {t("learn.title")}
           </Link>
           <Link
             to="/courses/decks"
