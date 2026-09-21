@@ -95,6 +95,7 @@ data class DeckListItemDto(
     @SerialName("speech_back_lang") val speechBackLang: String? = null,
     @SerialName("speech_autoplay") val speechAutoplay: String? = null,
     @SerialName("speech_rate") val speechRate: Double? = null,
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 /** GET /api/decks/{id}/settings — the deck row without its cards. */
@@ -109,6 +110,7 @@ data class DeckSettingsDto(
     @SerialName("speech_back_lang") val speechBackLang: String? = null,
     @SerialName("speech_autoplay") val speechAutoplay: String? = null,
     @SerialName("speech_rate") val speechRate: Double? = null,
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 /** Response from POST /api/decks — here `card_count` is a real number. */
@@ -117,6 +119,7 @@ data class DeckCreatedDto(
     val id: String,
     val title: String,
     @SerialName("card_count") val cardCount: Int = 0,
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 @Serializable
@@ -133,6 +136,7 @@ data class DeckDetailDto(
     @SerialName("speech_autoplay") val speechAutoplay: String? = null,
     @SerialName("speech_rate") val speechRate: Double? = null,
     val cards: List<DeckCardDto> = emptyList(),
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 @Serializable

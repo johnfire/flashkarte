@@ -12,6 +12,7 @@ data class CourseDto(
     @SerialName("is_public") val isPublic: Boolean = false,
     @SerialName("created_at") val createdAt: String,
     @SerialName("updated_at") val updatedAt: String,
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 /** A course as listed on "My Courses" -- a summary, not its full deck list. */
@@ -26,6 +27,7 @@ data class CourseSummaryDto(
     @SerialName("updated_at") val updatedAt: String,
     @SerialName("decks_total") val decksTotal: Int = 0,
     @SerialName("decks_mastered") val decksMastered: Int = 0,
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 /** One member deck of a course, with the gating state Study needs. */
@@ -50,6 +52,7 @@ data class CourseDetailDto(
     @SerialName("created_at") val createdAt: String,
     @SerialName("updated_at") val updatedAt: String,
     val decks: List<CourseDeckDto> = emptyList(),
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 @Serializable
@@ -84,6 +87,7 @@ data class PublicCourseSummaryDto(
     val title: String,
     val description: String? = null,
     @SerialName("decks_total") val decksTotal: Int = 0,
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 @Serializable
@@ -92,6 +96,7 @@ data class PublicCourseDetailDto(
     val title: String,
     val description: String? = null,
     val decks: List<PublicCourseDeckDto> = emptyList(),
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 @Serializable

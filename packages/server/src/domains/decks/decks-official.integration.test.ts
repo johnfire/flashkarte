@@ -62,6 +62,31 @@ afterAll(async () => {
 });
 
 describe("official decks", () => {
+  test("decks and both course formats receive different stable reference numbers", async () => {
+    const pool = getPool();
+    const deckNumbers = await pool.query<{ reference_number: number }>(
+      "SELECT reference_number FROM decks ORDER BY id",
+    );
+    const course = await pool.query<{ reference_number: number }>(
+      `INSERT INTO courses (user_id, title) VALUES ($1, 'Deck course')
+       RETURNING reference_number`,
+      [OWNER_ID],
+    );
+    const subject = await pool.query<{ reference_number: number }>(
+      `INSERT INTO subjects (user_id, title) VALUES ($1, 'Lesson course')
+       RETURNING reference_number`,
+      [OWNER_ID],
+    );
+
+    const numbers = [
+      ...deckNumbers.rows.map((row) => row.reference_number),
+      course.rows[0].reference_number,
+      subject.rows[0].reference_number,
+    ];
+    expect(new Set(numbers).size).toBe(numbers.length);
+    expect(numbers.every((number) => number > 0)).toBe(true);
+  });
+
   test("promote makes a deck read-only-shared; subscribe/unsubscribe gate access; progress and mutations stay per-owner", async () => {
     const promoted = await decksRepo.promoteToOfficial(DECK_ID);
     expect(promoted?.is_official).toBe(true);

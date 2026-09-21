@@ -24,6 +24,11 @@ export function DeckListItem({
       <div className="min-w-0 flex-1 basis-56">
         <p className="font-medium">
           {d.title}
+          {d.reference_number !== undefined && (
+            <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+              #{d.reference_number}
+            </span>
+          )}
           {d.is_official && (
             <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">
               {t("decks.official")}

@@ -78,7 +78,14 @@ export function MyCoursesPage() {
                     <span className="rounded-full bg-violet-100 px-2 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-900/50 dark:text-violet-300">
                       {t("courses.lessonCourseBadge")}
                     </span>
-                    <h3 className="mt-2 font-medium">{course.title}</h3>
+                    <h3 className="mt-2 font-medium">
+                      {course.title}
+                      {course.reference_number !== undefined && (
+                        <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+                          #{course.reference_number}
+                        </span>
+                      )}
+                    </h3>
                     {course.description && (
                       <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                         {course.description}

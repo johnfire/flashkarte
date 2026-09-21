@@ -54,7 +54,7 @@ class PlaintextDatabaseMigratorTest {
     private fun seedSource(db: FlashkarteDb) {
         db.decksQueries.upsertDeck(
             "d1", "Deck", "deck.md", "created", null, 1,
-            true, "de-DE", "en-GB", "front", 0.8,
+            true, "de-DE", "en-GB", "front", 0.8, 42,
         )
         db.cardsQueries.upsertCard("c1", "d1", "front", "back", null, 0, "label", "[]", null)
         // A lesson (reading card): its type must survive the copy, or it would turn

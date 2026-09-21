@@ -46,6 +46,7 @@ describe("library routes", () => {
     mock.list.mockResolvedValue([
       {
         id: "d1",
+        referenceNumber: 1,
         title: "AI Terms",
         author: "Chris",
         cardCount: 50,
@@ -85,6 +86,7 @@ describe("library routes", () => {
     mock.clone.mockResolvedValue({
       deck: {
         id: "new1",
+        reference_number: 1,
         title: "AI Terms",
         card_count: 50,
       },

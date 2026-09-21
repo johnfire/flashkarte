@@ -54,7 +54,11 @@ fun LibraryScreen(
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                         ) {
                             Column(Modifier.fillMaxWidth().padding(16.dp)) {
-                                Text(deck.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                                Text(
+                                    listOfNotNull(deck.title, deck.referenceNumber?.let { "#$it" }).joinToString("  "),
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.SemiBold,
+                                )
                                 Spacer(Modifier.height(4.dp))
                                 Text(
                                     "${deck.cardCount} cards  •  by ${deck.author ?: "Anonymous"}",

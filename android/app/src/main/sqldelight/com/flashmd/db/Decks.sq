@@ -12,15 +12,16 @@ CREATE TABLE deckEntity (
   speech_front_lang TEXT,
   speech_back_lang TEXT,
   speech_autoplay TEXT,
-  speech_rate REAL
+  speech_rate REAL,
+  reference_number INTEGER
 );
 
 upsertDeck:
 INSERT OR REPLACE INTO deckEntity(
   id, title, source_file, created_at, last_studied, total_cards,
-  speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate
+  speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate, reference_number
 )
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
 
 selectAllDecks:
 SELECT * FROM deckEntity ORDER BY title;

@@ -81,7 +81,11 @@ fun CoursesScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Column(Modifier.weight(1f)) {
-                                    Text(course.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                                    Text(
+                                        listOfNotNull(course.title, course.referenceNumber?.let { "#$it" }).joinToString("  "),
+                                        style = MaterialTheme.typography.titleMedium,
+                                        fontWeight = FontWeight.SemiBold,
+                                    )
                                     Spacer(Modifier.height(4.dp))
                                     Text(
                                         "${course.decksMastered} / ${course.decksTotal} decks mastered",

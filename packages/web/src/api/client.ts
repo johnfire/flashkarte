@@ -446,10 +446,12 @@ export const api = {
       ),
     get: (id: string) => request<LibraryDeckDetail>(`/library/${id}`),
     clone: (id: string) =>
-      request<{ id: string; title: string; card_count: number }>(
-        `/library/${id}/clone`,
-        { method: "POST" },
-      ),
+      request<{
+        id: string;
+        reference_number: number;
+        title: string;
+        card_count: number;
+      }>(`/library/${id}/clone`, { method: "POST" }),
   },
   courses: {
     list: () => request<CourseSummary[]>("/courses"),

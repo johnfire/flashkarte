@@ -19,6 +19,7 @@ import { deckSlug } from "@flashkarte/shared";
 const libMock = libraryService as jest.Mocked<typeof libraryService>;
 const PREVIEW = {
   id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  referenceNumber: 1,
   title: "Spanish Basics",
   author: "Chris",
   cardCount: 1,
@@ -86,6 +87,7 @@ describe("production deck SEO wiring", () => {
     libMock.list.mockResolvedValue([
       {
         id: PREVIEW.id,
+        referenceNumber: PREVIEW.referenceNumber,
         title: PREVIEW.title,
         author: "Chris",
         cardCount: 1,

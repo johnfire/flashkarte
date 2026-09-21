@@ -5,6 +5,7 @@ import { escapeLike, categoryFilterSql } from "../library/library.repository";
 
 export interface DeckRow {
   id: string;
+  reference_number: number;
   title: string;
   source_filename: string | null;
   created_at: string;
@@ -28,7 +29,7 @@ export const SYSTEM_ACCOUNT_ID = "00000000-0000-4000-8000-000000000000";
 const SPEECH_COLS =
   "speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate";
 
-const DECK_COLS = `id, title, source_filename, created_at, updated_at, is_public, is_official, is_ordered, ${SPEECH_COLS}`;
+const DECK_COLS = `id, reference_number, title, source_filename, created_at, updated_at, is_public, is_official, is_ordered, ${SPEECH_COLS}`;
 
 // A caller may read a deck/card they don't own when it's official and they've
 // opted in. Shared by every read-path query below; `$N` is the caller's
@@ -278,7 +279,7 @@ export interface DeckListRow extends DeckRow {
 
 export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
-    `SELECT d.id, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered,
+    `SELECT d.id, d.reference_number, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered,
        d.speech_enabled, d.speech_front_lang, d.speech_back_lang, d.speech_autoplay, d.speech_rate,
        s.total AS card_count,
        s.due AS due_count,
@@ -423,6 +424,7 @@ export function adminUnpublish(id: string) {
 
 export interface OfficialDeckRow {
   id: string;
+  reference_number: number;
   title: string;
   created_at: string;
   card_count: string;
@@ -448,7 +450,7 @@ export function listStandaloneOfficial(
   const categoryClause = categoryFilterSql("d.category_id", categoryId, values);
   values.push(limit, offset);
   return query<OfficialDeckRow>(
-    `SELECT d.id, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
+    `SELECT d.id, d.reference_number, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
        EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1
@@ -520,7 +522,7 @@ export function listCollectionDecks(
 ) {
   const term = q === null ? null : escapeLike(q);
   return query<OfficialDeckRow>(
-    `SELECT d.id, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
+    `SELECT d.id, d.reference_number, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
        EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1

@@ -55,7 +55,7 @@ class LocalStudyStore @Inject constructor(
             db.decksQueries.upsertDeck(
                 d.id, d.title, d.sourceFile, d.createdAt, d.lastStudied, d.totalCards.toLong(),
                 d.speechEnabled, d.speechFrontLang, d.speechBackLang,
-                d.speechAutoplay, d.speechRate,
+                d.speechAutoplay, d.speechRate, d.referenceNumber?.toLong(),
             )
         }
     }
@@ -74,6 +74,7 @@ class LocalStudyStore @Inject constructor(
                 speechBackLang = it.speech_back_lang,
                 speechAutoplay = it.speech_autoplay,
                 speechRate = it.speech_rate,
+                referenceNumber = it.reference_number?.toInt(),
             )
         }
 

@@ -67,7 +67,11 @@ fun LearnScreen(
                             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                         ) {
                             Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text(subject.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                                Text(
+                                    listOfNotNull(subject.title, subject.referenceNumber?.let { "#$it" }).joinToString("  "),
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.SemiBold,
+                                )
                                 subject.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
                                 Text(
                                     pluralStringResource(R.plurals.learn_concept_count, subject.conceptCount, subject.conceptCount),

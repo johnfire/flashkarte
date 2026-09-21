@@ -14,6 +14,11 @@ export function CourseListItem({ course: c, onDelete }: CourseListItemProps) {
       <div>
         <p className="font-medium">
           {c.title}
+          {c.reference_number !== undefined && (
+            <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+              #{c.reference_number}
+            </span>
+          )}
           {c.is_public && (
             <span className="ml-2 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
               {t("decks.public")}

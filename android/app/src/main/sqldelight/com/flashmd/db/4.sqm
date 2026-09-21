@@ -1,0 +1,3 @@
+-- Migration v4 -> v5: preserve the server's stable human-readable content id
+-- for offline deck lists as well as live ones.
+ALTER TABLE deckEntity ADD COLUMN reference_number INTEGER;

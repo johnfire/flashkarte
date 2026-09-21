@@ -56,6 +56,11 @@ export function ManageDeckCardsPage() {
         <>
           <h1 className="mb-1 text-2xl font-bold">
             {t("manageCards.title", { deck: deck.title })}
+            {deck.reference_number !== undefined && (
+              <span className="ml-2 text-base font-normal text-gray-500 dark:text-gray-400">
+                #{deck.reference_number}
+              </span>
+            )}
           </h1>
           <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
             {t("manageCards.cardCount", { count: deck.cards.length })}

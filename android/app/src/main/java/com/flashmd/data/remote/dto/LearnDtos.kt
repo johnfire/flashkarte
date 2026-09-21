@@ -17,6 +17,7 @@ data class LearnSubjectDto(
     val title: String,
     val description: String? = null,
     @SerialName("concept_count") val conceptCount: Int = 0,
+    @SerialName("reference_number") val referenceNumber: Int? = null,
 )
 
 @Serializable

@@ -63,6 +63,7 @@ class DeckRepository @Inject constructor(
                         speechAutoplay = it.speechAutoplay,
                         speechRate = it.speechRate,
                         isBranching = it.cards.any { c -> c.type == "branch" },
+                        referenceNumber = it.referenceNumber,
                     )
                 }
             }.getOrNull()
@@ -162,5 +163,6 @@ class DeckRepository @Inject constructor(
         speechAutoplay = speechAutoplay,
         speechRate = speechRate,
         isBranching = isBranching,
+        referenceNumber = referenceNumber,
     )
 }

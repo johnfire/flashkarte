@@ -13,7 +13,14 @@ export function OfficialDeckRow({ deck, busy, onAdd }: OfficialDeckRowProps) {
   return (
     <li className="flex items-center justify-between rounded-lg border border-dashed p-4">
       <div>
-        <p className="font-medium">{deck.title}</p>
+        <p className="font-medium">
+          {deck.title}
+          {deck.reference_number !== undefined && (
+            <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+              #{deck.reference_number}
+            </span>
+          )}
+        </p>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           {t("decks.cardCount", { count: deck.card_count })}
         </p>

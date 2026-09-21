@@ -64,7 +64,14 @@ export function PublicDeckPage() {
           {t("publicDeck.explore")}
         </Link>
       </header>
-      <h1 className="text-3xl font-bold">{deck.title}</h1>
+      <h1 className="text-3xl font-bold">
+        {deck.title}
+        {deck.referenceNumber !== undefined && (
+          <span className="ml-2 text-base font-normal text-gray-500 dark:text-gray-400">
+            #{deck.referenceNumber}
+          </span>
+        )}
+      </h1>
       <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
         {t("decks.cardCount", { count: deck.cardCount })} ·{" "}
         {t("explore.by", { author: deck.author })}

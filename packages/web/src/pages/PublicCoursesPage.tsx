@@ -67,7 +67,14 @@ export function PublicCoursesPage() {
             className="flex items-center justify-between rounded-lg border p-4"
           >
             <div>
-              <p className="font-medium">{c.title}</p>
+              <p className="font-medium">
+                {c.title}
+                {c.reference_number !== undefined && (
+                  <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+                    #{c.reference_number}
+                  </span>
+                )}
+              </p>
               {c.description && (
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   {c.description}

@@ -19,4 +19,5 @@ data class Deck(
     val speechAutoplay: String? = null,
     val speechRate: Double? = null,
     val isBranching: Boolean = false,
+    val referenceNumber: Int? = null,
 )

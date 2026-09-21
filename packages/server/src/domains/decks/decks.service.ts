@@ -280,6 +280,7 @@ function parsePagination(query: unknown) {
 function toOfficialDeck(row: repo.OfficialDeckRow) {
   return {
     id: row.id,
+    reference_number: row.reference_number,
     title: row.title,
     created_at: row.created_at,
     card_count: Number(row.card_count),

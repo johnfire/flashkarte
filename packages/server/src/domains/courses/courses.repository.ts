@@ -2,6 +2,7 @@ import { query, queryOne, withTransaction } from "../../db/client";
 
 export interface CourseRow {
   id: string;
+  reference_number: number;
   user_id: string;
   title: string;
   description: string | null;
@@ -11,7 +12,7 @@ export interface CourseRow {
 }
 
 const COURSE_COLS =
-  "id, user_id, title, description, is_public, created_at, updated_at";
+  "id, reference_number, user_id, title, description, is_public, created_at, updated_at";
 
 export function createCourse(
   userId: string,

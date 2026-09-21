@@ -27,6 +27,7 @@ import javax.inject.Singleton
 class LearnRepository @Inject constructor(private val api: FlashkarteApi) {
     suspend fun subjects(): List<LearnSubjectDto> = apiCall { api.listLearnSubjects() }
 
+
     suspend fun outline(subjectId: String): LearnerOutlineDto = apiCall { api.learnOutline(subjectId) }
 
     suspend fun start(subjectId: String, slug: String): LessonStepResponseDto =

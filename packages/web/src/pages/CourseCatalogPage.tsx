@@ -44,7 +44,14 @@ export function CourseCatalogPage() {
       <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
         {courses?.map((course) => (
           <li key={course.id} className="rounded-lg border p-4">
-            <h2 className="font-medium">{course.title}</h2>
+            <h2 className="font-medium">
+              {course.title}
+              {course.reference_number !== undefined && (
+                <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+                  #{course.reference_number}
+                </span>
+              )}
+            </h2>
             {course.description && (
               <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
                 {course.description}

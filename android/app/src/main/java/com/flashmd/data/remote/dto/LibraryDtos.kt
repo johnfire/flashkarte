@@ -9,6 +9,7 @@ data class LibraryDeckDto(
     val author: String? = null,
     val cardCount: Int = 0,
     val publishedAt: String? = null,
+    val referenceNumber: Int? = null,
 )
 
 @Serializable
@@ -22,4 +23,5 @@ data class LibraryDeckDetailDto(
     val cardCount: Int = 0,
     val publishedAt: String? = null,
     val cards: List<CardContentDto> = emptyList(),
+    val referenceNumber: Int? = null,
 )

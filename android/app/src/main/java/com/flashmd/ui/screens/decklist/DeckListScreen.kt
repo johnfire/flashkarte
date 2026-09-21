@@ -136,7 +136,11 @@ private fun DeckCard(
     ) {
         Row(Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.weight(1f)) {
-                Text(row.deck.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(
+                    listOfNotNull(row.deck.title, row.deck.referenceNumber?.let { "#$it" }).joinToString("  "),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold,
+                )
                 Spacer(Modifier.height(4.dp))
                 val last = row.deck.lastStudied?.take(10) ?: "Never studied"
                 val shared = if (row.deck.isPublic) "  •  Shared" else ""

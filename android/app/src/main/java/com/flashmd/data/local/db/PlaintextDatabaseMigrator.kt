@@ -15,7 +15,7 @@ internal object PlaintextDatabaseMigrator {
                     row.id, row.title, row.source_file, row.created_at,
                     row.last_studied, row.total_cards,
                     row.speech_enabled, row.speech_front_lang, row.speech_back_lang,
-                    row.speech_autoplay, row.speech_rate,
+                    row.speech_autoplay, row.speech_rate, row.reference_number,
                 )
             }
             cards.forEach { row ->

@@ -122,7 +122,14 @@ export function CourseDetailPage() {
         </div>
       </div>
 
-      <h1 className="mb-1 text-2xl font-bold">{course.title}</h1>
+      <h1 className="mb-1 text-2xl font-bold">
+        {course.title}
+        {course.reference_number !== undefined && (
+          <span className="ml-2 text-base font-normal text-gray-500 dark:text-gray-400">
+            #{course.reference_number}
+          </span>
+        )}
+      </h1>
       {course.description && (
         <p className="mb-4 text-gray-600 dark:text-gray-400">
           {course.description}

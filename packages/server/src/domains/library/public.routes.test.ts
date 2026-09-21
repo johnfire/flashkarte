@@ -19,6 +19,7 @@ describe("public library API", () => {
     mock.list.mockResolvedValue([
       {
         id: "d1",
+        referenceNumber: 1,
         title: "T",
         author: "A",
         cardCount: 2,
@@ -34,6 +35,7 @@ describe("public library API", () => {
   it("GET /api/public/library/:id/preview returns fronts only — never backs", async () => {
     mock.getPreview.mockResolvedValue({
       id: "d1",
+      referenceNumber: 1,
       title: "T",
       author: "A",
       cardCount: 1,

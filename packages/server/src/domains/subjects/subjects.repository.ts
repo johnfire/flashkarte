@@ -3,6 +3,7 @@ import type { Queryable } from "../../db/queryable";
 
 export interface SubjectRow {
   id: string;
+  reference_number: number;
   user_id: string;
   title: string;
   description: string | null;
@@ -16,12 +17,12 @@ export interface SubjectRow {
 }
 
 const SUBJECT_COLS =
-  "id, user_id, title, description, is_public, is_official, version, created_at, updated_at, course_family_id, locale";
+  "id, reference_number, user_id, title, description, is_public, is_official, version, created_at, updated_at, course_family_id, locale";
 
 // The learner and Android app decode this established subject-list shape. Course-edition metadata
 // is available from the explicit edition endpoints, so adding it here would be a breaking change.
 const SUBJECT_SUMMARY_COLS =
-  "s.id, s.user_id, s.title, s.description, s.is_public, s.version, s.created_at, s.updated_at";
+  "s.id, s.reference_number, s.user_id, s.title, s.description, s.is_public, s.version, s.created_at, s.updated_at";
 
 export async function insertSubject(
   db: Queryable,
@@ -103,6 +104,7 @@ export async function listCourseEditions(
 
 export interface SubjectSummaryRow {
   id: string;
+  reference_number: number;
   user_id: string;
   title: string;
   description: string | null;

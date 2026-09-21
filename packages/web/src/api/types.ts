@@ -33,6 +33,7 @@ export interface User {
 
 export interface LibraryDeck {
   id: string;
+  referenceNumber?: number;
   title: string;
   author: string;
   cardCount: number;
@@ -46,6 +47,7 @@ export interface LibraryDeckDetail extends LibraryDeck {
 
 export interface PublicDeckPreview {
   id: string;
+  referenceNumber?: number;
   title: string;
   author: string;
   cardCount: number;
@@ -64,6 +66,7 @@ export interface AdminUser {
 
 export interface OfficialDeck {
   id: string;
+  reference_number?: number;
   title: string;
   created_at: string;
   card_count: number;
@@ -106,6 +109,7 @@ export interface DeckCategory {
 
 export interface DeckWithCounts extends DeckSpeech {
   id: string;
+  reference_number?: number;
   title: string;
   source_filename: string | null;
   created_at: string;
@@ -173,6 +177,7 @@ export interface DeckSettings extends DeckSpeech {
 
 export interface DeckDetail {
   id: string;
+  reference_number?: number;
   title: string;
   source_filename: string | null;
   created_at: string;
@@ -236,6 +241,7 @@ export interface CreatedApiKey extends ApiKey {
 
 export interface Course {
   id: string;
+  reference_number?: number;
   user_id: string;
   title: string;
   description: string | null;

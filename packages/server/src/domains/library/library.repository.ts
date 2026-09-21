@@ -2,6 +2,7 @@ import { query, queryOne } from "../../db/client";
 
 export interface LibraryDeckRow {
   id: string;
+  reference_number: number;
   title: string;
   author: string;
   card_count: string;
@@ -55,7 +56,7 @@ export function listPublic(
   const categoryClause = categoryFilterSql("d.category_id", categoryId, values);
   values.push(limit, offset);
   return query<LibraryDeckRow>(
-    `SELECT d.id, d.title, ${AUTHOR} AS author,
+    `SELECT d.id, d.reference_number, d.title, ${AUTHOR} AS author,
        (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
        d.published_at, d.category_id
      FROM decks d JOIN users u ON u.id = d.user_id
@@ -70,7 +71,7 @@ export function listPublic(
 
 export function getPublicDeck(id: string) {
   return queryOne<LibraryDeckRow & { source_filename: string | null }>(
-    `SELECT d.id, d.title, d.source_filename, ${AUTHOR} AS author,
+    `SELECT d.id, d.reference_number, d.title, d.source_filename, ${AUTHOR} AS author,
        (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
        d.published_at, d.category_id
      FROM decks d JOIN users u ON u.id = d.user_id

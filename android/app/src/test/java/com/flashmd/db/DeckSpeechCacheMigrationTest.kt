@@ -8,7 +8,7 @@ import org.junit.Assert.assertNull
 import org.junit.Test
 
 /**
- * The v2 -> v3 migration (Spec 09) against a *populated* v2 cache.
+ * The v2 -> v3 migration (Spec 09) against a populated v2 cache.
  *
  * SQLDelight's verifyMigration task is vacuous here — the project keeps no
  * schema snapshots for it to compare against — so the migration is exercised
@@ -41,6 +41,10 @@ class DeckSpeechCacheMigrationTest {
         )
 
         FlashkarteDb.Schema.migrate(driver, 2, 3)
+        // This focused v2 fixture has no card/outbox tables, so it cannot run
+        // the later general migrations. Add the v4->v5 nullable column here
+        // before reading with the current generated query.
+        driver.execute(null, "ALTER TABLE deckEntity ADD COLUMN reference_number INTEGER;", 0)
 
         val cached = LocalStudyStore(FlashkarteDb(driver)).cachedDecks().single()
         assertEquals("d1", cached.id)
@@ -53,6 +57,7 @@ class DeckSpeechCacheMigrationTest {
         assertNull(cached.speechBackLang)
         assertNull(cached.speechAutoplay)
         assertNull(cached.speechRate)
+        assertNull(cached.referenceNumber)
     }
 
     @Test

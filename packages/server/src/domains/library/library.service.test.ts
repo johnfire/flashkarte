@@ -25,6 +25,7 @@ beforeEach(() => {
   } as never);
   mockDecks.createDeckWithCards.mockResolvedValue({
     id: "new1",
+    reference_number: 1,
     title: "Source",
   } as never);
 });
@@ -73,7 +74,12 @@ describe("library.clone validation (matches importDeck)", () => {
     ] as never);
     const res = await clone("u1", "src");
     expect(res).toEqual({
-      deck: { id: "new1", title: "Source", card_count: 1 },
+      deck: {
+        id: "new1",
+        reference_number: 1,
+        title: "Source",
+        card_count: 1,
+      },
       sourceId: "src",
     });
     expect(mockDecks.createDeckWithCards).toHaveBeenCalledTimes(1);

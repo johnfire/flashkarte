@@ -9,6 +9,7 @@ import { MAX_CARDS_PER_DECK } from "../decks/decks.service";
 
 export interface LibraryDeck {
   id: string;
+  referenceNumber: number;
   title: string;
   author: string;
   cardCount: number;
@@ -48,6 +49,7 @@ const paginationSchema = z.object({
 function toLibraryDeck(row: repo.LibraryDeckRow): LibraryDeck {
   return {
     id: row.id,
+    referenceNumber: row.reference_number,
     title: row.title,
     author: row.author,
     cardCount: Number(row.card_count),
@@ -90,6 +92,7 @@ export async function getPreview(id: string) {
   const cards = await repo.getPublicCards(id);
   return {
     id: deck.id,
+    referenceNumber: deck.reference_number,
     title: deck.title,
     author: deck.author,
     cardCount: Number(deck.card_count),
@@ -133,7 +136,12 @@ export async function clone(userId: string, id: string) {
   if (!deck) throw new Error("Failed to create deck");
 
   return {
-    deck: { id: deck.id, title: deck.title, card_count: cards.length },
+    deck: {
+      id: deck.id,
+      reference_number: deck.reference_number,
+      title: deck.title,
+      card_count: cards.length,
+    },
     sourceId: id,
   };
 }

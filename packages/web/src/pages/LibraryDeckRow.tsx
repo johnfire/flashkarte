@@ -13,7 +13,14 @@ export function LibraryDeckRow({ deck, busy, onClone }: LibraryDeckRowProps) {
   return (
     <li className="flex items-center justify-between gap-3 rounded-lg border p-3">
       <div className="min-w-0">
-        <p className="truncate font-medium">{deck.title}</p>
+        <p className="truncate font-medium">
+          {deck.title}
+          {deck.referenceNumber !== undefined && (
+            <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+              #{deck.referenceNumber}
+            </span>
+          )}
+        </p>
         <p className="text-sm text-gray-500 dark:text-gray-400">
           {t("library.cardsByAuthor", {
             count: deck.cardCount,
