@@ -35,6 +35,19 @@ export async function requireOwnedSubject(userId: string, id: string) {
   return subject;
 }
 
+export async function requireLearningSubject(userId: string, id: string) {
+  const subject = await repo.findLearningSubject(userId, id);
+  if (!subject) throw new NotFoundError("Subject not found");
+  return subject;
+}
+
+export async function enrollInPublicSubject(userId: string, id: string) {
+  if (!(await repo.enrollInPublicSubject(userId, id))) {
+    const existing = await repo.findLearningSubject(userId, id);
+    if (!existing) throw new NotFoundError("Course not found");
+  }
+}
+
 export async function createSubject(
   userId: string,
   titleInput: unknown,
@@ -168,6 +181,10 @@ export async function getCourseEditions(userId: string, subjectId: string) {
 
 export function listSubjects(userId: string) {
   return repo.listSubjects(userId);
+}
+
+export function listCatalogSubjects(official: boolean) {
+  return repo.listCatalogSubjects(official);
 }
 
 export async function getSubject(userId: string, id: string) {

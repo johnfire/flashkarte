@@ -12,7 +12,7 @@ import {
 } from "@flashkarte/shared";
 import { withTransaction } from "../../db/client";
 import { NotFoundError, ValidationError } from "../../utils/errors";
-import { requireOwnedSubject } from "../subjects/subjects.service";
+import { requireLearningSubject } from "../subjects/subjects.service";
 import * as subjectsRepo from "../subjects/subjects.repository";
 import { getPool } from "../../db/client";
 import * as lessonsRepo from "../lessons/lessons.repository";
@@ -32,7 +32,7 @@ export async function listDueReviews(
   subjectId: string,
   now: Date = new Date(),
 ) {
-  await requireOwnedSubject(userId, subjectId);
+  await requireLearningSubject(userId, subjectId);
   const db = getPool();
   const [reviews, lessons] = await Promise.all([
     repo.listReviews(db, userId, subjectId),
@@ -76,7 +76,7 @@ async function withReview<T>(
   }) => Promise<T>,
 ): Promise<T> {
   return withTransaction(async (db) => {
-    if (!(await subjectsRepo.findOwnedSubject(userId, subjectId, db))) {
+    if (!(await subjectsRepo.findLearningSubject(userId, subjectId, db))) {
       throw new NotFoundError("Subject not found");
     }
     await repo.lockLearner(db, userId, `review:${questionId}`);

@@ -3,10 +3,12 @@ import * as ctrl from "./subjects.controller";
 
 export const subjectsRouter = Router();
 subjectsRouter.get("/", ctrl.list);
+subjectsRouter.get("/catalog", ctrl.listCatalog);
 subjectsRouter.post("/", ctrl.create);
 // Before "/:id" so "import" is never read as a subject id.
 subjectsRouter.post("/import", ctrl.importFromJson);
 subjectsRouter.get("/:id", ctrl.get);
+subjectsRouter.post("/:id/enroll", ctrl.enroll);
 subjectsRouter.patch("/:id", ctrl.update);
 subjectsRouter.delete("/:id", ctrl.remove);
 subjectsRouter.get("/:id/progress", ctrl.progress);

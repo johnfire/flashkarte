@@ -7,6 +7,7 @@ export interface SubjectRow {
   title: string;
   description: string | null;
   is_public: boolean;
+  is_official: boolean;
   version: number;
   created_at: string;
   updated_at: string;
@@ -15,7 +16,7 @@ export interface SubjectRow {
 }
 
 const SUBJECT_COLS =
-  "id, user_id, title, description, is_public, version, created_at, updated_at, course_family_id, locale";
+  "id, user_id, title, description, is_public, is_official, version, created_at, updated_at, course_family_id, locale";
 
 // The learner and Android app decode this established subject-list shape. Course-edition metadata
 // is available from the explicit edition endpoints, so adding it here would be a breaking change.
@@ -118,9 +119,47 @@ export function listSubjects(userId: string) {
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
      WHERE s.user_id = $1
+        OR EXISTS (SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $1)
      ORDER BY s.created_at DESC`,
     [userId],
   );
+}
+
+export function listCatalogSubjects(official: boolean) {
+  return query<SubjectSummaryRow>(
+    `SELECT ${SUBJECT_SUMMARY_COLS},
+            (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
+     FROM subjects s
+     WHERE s.is_public AND s.is_official = $1
+     ORDER BY s.title COLLATE de_phonebook ASC`,
+    [official],
+  );
+}
+
+/** A learner may use their own course or a public course they explicitly added. */
+export async function findLearningSubject(
+  userId: string,
+  id: string,
+  db: Queryable = getPool(),
+): Promise<SubjectRow | null> {
+  const result = await db.query<SubjectRow>(
+    `SELECT ${SUBJECT_COLS} FROM subjects s
+     WHERE s.id = $1 AND (s.user_id = $2 OR (s.is_public AND EXISTS (
+       SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $2
+     )))`,
+    [id, userId],
+  );
+  return result.rows[0] ?? null;
+}
+
+export async function enrollInPublicSubject(userId: string, subjectId: string): Promise<boolean> {
+  const result = await getPool().query(
+    `INSERT INTO subject_enrollments (user_id, subject_id)
+     SELECT $1, id FROM subjects WHERE id = $2 AND is_public
+     ON CONFLICT DO NOTHING`,
+    [userId, subjectId],
+  );
+  return (result.rowCount ?? 0) > 0;
 }
 
 /** Owner-only: every read and write of a subject goes through this. */

@@ -49,6 +49,16 @@ export const list = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.listSubjects(req.userId!));
 });
 
+export const listCatalog = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.listCatalogSubjects(req.query.source === "official"));
+});
+
+export const enroll = wrapAsync(async (req: Request, res: Response) => {
+  await service.enrollInPublicSubject(req.userId!, req.params.id);
+  await auditSubject(req, "subject.enrolled", req.params.id);
+  res.status(204).end();
+});
+
 export const get = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.getSubject(req.userId!, req.params.id));
 });

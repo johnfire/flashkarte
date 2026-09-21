@@ -43,9 +43,14 @@ export function MyCoursesPage() {
             {t("courses.myCoursesIntro")}
           </p>
         </div>
-        <Link to="/" className="text-sm text-indigo-600">
-          {t("courses.myDecks")}
-        </Link>
+        <nav
+          aria-label="Course library"
+          className="flex gap-3 text-sm text-indigo-600"
+        >
+          <Link to="/library/courses/official">Official Courses</Link>
+          <Link to="/library/courses/community">Community Courses</Link>
+          <Link to="/">{t("courses.myDecks")}</Link>
+        </nav>
       </header>
       {loading && <p>{t("common.loading")}</p>}
       {errorMessage && (

@@ -536,6 +536,10 @@ export const api = {
   },
   learn: {
     subjects: () => request<LearnSubject[]>("/subjects"),
+    catalog: (source: "official" | "community") =>
+      request<LearnSubject[]>(`/subjects/catalog?source=${source}`),
+    enroll: (subjectId: string) =>
+      request<void>(`/subjects/${subjectId}/enroll`, { method: "POST" }),
     outline: (subjectId: string) =>
       request<LearnerOutline>(`/subjects/${subjectId}/learn/outline`),
     start: (subjectId: string, slug: string) =>

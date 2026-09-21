@@ -28,6 +28,7 @@ import { ExplorePage } from "./pages/ExplorePage";
 import { PublicDeckPage } from "./pages/PublicDeckPage";
 import { ManageDeckCardsPage } from "./pages/ManageDeckCardsPage";
 import { MyCoursesPage } from "./pages/MyCoursesPage";
+import { CourseCatalogPage } from "./pages/CourseCatalogPage";
 import { CoursesPage } from "./pages/CoursesPage";
 import { CourseDetailPage } from "./pages/CourseDetailPage";
 import { PublicCoursesPage } from "./pages/PublicCoursesPage";
@@ -76,6 +77,10 @@ export default function App() {
           />
           <Route path="/library" element={<LibraryPage />} />
           <Route path="/courses" element={<MyCoursesPage />} />
+          <Route
+            path="/library/courses/:source"
+            element={<CourseCatalogPage />}
+          />
           <Route path="/courses/decks" element={<CoursesPage />} />
           <Route path="/courses/:id" element={<CourseDetailPage />} />
           <Route path="/library/courses" element={<PublicCoursesPage />} />

@@ -44,7 +44,7 @@ export function withLearnerLesson<T>(
   action: (ctx: LearnerContext) => Promise<T>,
 ): Promise<T> {
   return withTransaction(async (db) => {
-    const subject = await subjectsRepo.findOwnedSubject(userId, subjectId, db);
+    const subject = await subjectsRepo.findLearningSubject(userId, subjectId, db);
     if (!subject) throw new NotFoundError("Subject not found");
     const lesson = await requireLesson(db, subject.id, slug);
     await repo.lockLearner(db, userId, lesson.id);
