@@ -40,13 +40,19 @@ const CONTRACT_DIR = path.join(
 );
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 const TIME = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
+const CONTRACT_REFERENCE_NUMBER = 1;
 
 /** Random ids and clock times replaced by fixed placeholders, so the files are stable. */
 function stable(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(stable);
   if (value && typeof value === "object") {
     return Object.fromEntries(
-      Object.entries(value).map(([key, inner]) => [key, stable(inner)]),
+      Object.entries(value).map(([key, inner]) => [
+        key,
+        key === "reference_number" && typeof inner === "number"
+          ? CONTRACT_REFERENCE_NUMBER
+          : stable(inner),
+      ]),
     );
   }
   if (typeof value === "string" && UUID.test(value)) return "<uuid>";

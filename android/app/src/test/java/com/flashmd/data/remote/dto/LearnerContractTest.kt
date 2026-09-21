@@ -31,6 +31,7 @@ class LearnerContractTest {
         val subjects = read<List<LearnSubjectDto>>("subjects")
         assertEquals("Contract", subjects.single().title)
         assertEquals(1, subjects.single().conceptCount)
+        assertEquals(1, subjects.single().referenceNumber)
     }
 
     @Test

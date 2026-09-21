@@ -23,7 +23,7 @@ export function DeckListItem({
     <li className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 rounded-lg border p-4">
       <div className="min-w-0 flex-1 basis-56">
         <p className="font-medium">
-          {d.title}
+          <span>{d.title}</span>
           {d.reference_number !== undefined && (
             <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
               #{d.reference_number}
