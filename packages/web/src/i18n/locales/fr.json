@@ -206,6 +206,9 @@
     "public": "Public",
     "official": "Officiel",
     "appDecks": "Decks de l'appli",
+    "officialDecks": "Decks officiels",
+    "myCourses": "Mes cours",
+    "deckCourses": "Cours par decks",
     "courses": "Cours",
     "appDecksTitle": "Decks de l'appli",
     "appDecksSearchPlaceholder": "Rechercher…",
@@ -276,6 +279,13 @@
     "lessonsToRead_other": "{{count}} leçons à lire"
   },
   "courses": {
+    "myCoursesTitle": "Mes cours",
+    "myCoursesIntro": "Ton apprentissage guidé, qu’il s’agisse d’un cours avec leçons ou d’un cours par decks ordonné.",
+    "lessonCourses": "Cours avec leçons",
+    "lessonCourseBadge": "Cours avec leçons",
+    "noLessonCourses": "Pas encore de cours avec leçons.",
+    "deckCourses": "Cours par decks",
+    "deckCoursesIntro": "Des decks de cartes ordonnés avec des seuils de progression.",
     "title": "Mes cours",
     "browsePublic": "Parcourir les cours publics",
     "myDecks": "Mes decks",

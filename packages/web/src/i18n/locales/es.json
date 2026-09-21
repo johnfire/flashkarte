@@ -206,6 +206,9 @@
     "public": "Público",
     "official": "Oficial",
     "appDecks": "Mazos de la app",
+    "officialDecks": "Mazos oficiales",
+    "myCourses": "Mis cursos",
+    "deckCourses": "Cursos con mazos",
     "courses": "Cursos",
     "appDecksTitle": "Mazos de la app",
     "appDecksSearchPlaceholder": "Buscar…",
@@ -276,6 +279,13 @@
     "lessonsToRead_other": "{{count}} lecciones por leer"
   },
   "courses": {
+    "myCoursesTitle": "Mis cursos",
+    "myCoursesIntro": "Tu aprendizaje guiado, ya sea un curso de lecciones o un curso ordenado de mazos.",
+    "lessonCourses": "Cursos de lecciones",
+    "lessonCourseBadge": "Curso de lecciones",
+    "noLessonCourses": "Todavía no hay cursos de lecciones.",
+    "deckCourses": "Cursos con mazos",
+    "deckCoursesIntro": "Mazos de tarjetas ordenados con requisitos de progreso.",
     "title": "Mis cursos",
     "browsePublic": "Explorar cursos públicos",
     "myDecks": "Mis mazos",
