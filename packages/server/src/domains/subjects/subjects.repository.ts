@@ -152,7 +152,10 @@ export async function findLearningSubject(
   return result.rows[0] ?? null;
 }
 
-export async function enrollInPublicSubject(userId: string, subjectId: string): Promise<boolean> {
+export async function enrollInPublicSubject(
+  userId: string,
+  subjectId: string,
+): Promise<boolean> {
   const result = await getPool().query(
     `INSERT INTO subject_enrollments (user_id, subject_id)
      SELECT $1, id FROM subjects WHERE id = $2 AND is_public
