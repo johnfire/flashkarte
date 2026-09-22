@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import { PublicCourseSummary } from "../api/types";
 import { useAsync } from "../hooks/use-async";
+import { PublicDeckCollectionRow } from "./PublicDeckCollectionRow";
 
 export function PublicCoursesPage() {
   const { t } = useTranslation();
@@ -61,37 +62,13 @@ export function PublicCoursesPage() {
       )}
 
       <ul className="space-y-3">
-        {courses?.map((c) => (
-          <li
-            key={c.id}
-            className="flex items-center justify-between rounded-lg border p-4"
-          >
-            <div>
-              <p className="font-medium">
-                {c.title}
-                {c.reference_number !== undefined && (
-                  <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
-                    #{c.reference_number}
-                  </span>
-                )}
-              </p>
-              {c.description && (
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {c.description}
-                </p>
-              )}
-              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-                {t("decks.deckCount", { count: c.decks_total })}
-              </p>
-            </div>
-            <button
-              onClick={() => onClone(c.id)}
-              disabled={cloningId === c.id}
-              className="rounded-lg bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white disabled:opacity-60"
-            >
-              {cloningId === c.id ? t("courses.cloning") : t("courses.clone")}
-            </button>
-          </li>
+        {courses?.map((course) => (
+          <PublicDeckCollectionRow
+            key={course.id}
+            collection={course}
+            busy={cloningId === course.id}
+            onClone={onClone}
+          />
         ))}
       </ul>
     </div>

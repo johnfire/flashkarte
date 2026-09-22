@@ -487,7 +487,8 @@ export const api = {
       ),
   },
   publicCourses: {
-    list: () => request<PublicCourseSummary[]>("/library/courses"),
+    list: (params?: BrowseParams) =>
+      request<PublicCourseSummary[]>(`/library/courses${browseQuery(params)}`),
     get: (id: string) => request<PublicCourseDetail>(`/library/courses/${id}`),
     clone: (id: string) =>
       request<ClonedCourse>(`/library/courses/${id}/clone`, {

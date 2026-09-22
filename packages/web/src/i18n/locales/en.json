@@ -329,7 +329,12 @@
     "communityCoursesTitle": "Community Structured Learning Courses",
     "communityCoursesDetail": "Structured courses published by other learners.",
     "communityDecksTitle": "Community Flashcard Decks",
-    "communityDecksDetail": "Decks published by other learners."
+    "communityDecksDetail": "Decks published by other learners.",
+    "deckCollections": "Flashcard Deck Collections",
+    "flashcardDecks": "Flashcard Decks",
+    "emptyCourses": "No structured learning courses are available yet.",
+    "emptyOfficialDecks": "No official flashcard decks are available yet.",
+    "emptyCommunityDecks": "No community flashcard decks are available yet."
   },
   "courseCatalog": {
     "loadError": "Couldn't load courses.",

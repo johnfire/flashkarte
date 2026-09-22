@@ -329,7 +329,12 @@
     "communityCoursesTitle": "Strukturierte Community-Lernkurse",
     "communityCoursesDetail": "Strukturierte Kurse anderer Lernender.",
     "communityDecksTitle": "Community-Karteikarten-Decks",
-    "communityDecksDetail": "Decks, die andere Lernende veröffentlicht haben."
+    "communityDecksDetail": "Decks, die andere Lernende veröffentlicht haben.",
+    "deckCollections": "Karteikarten-Deck-Sammlungen",
+    "flashcardDecks": "Karteikarten-Decks",
+    "emptyCourses": "Noch keine strukturierten Lernkurse verfügbar.",
+    "emptyOfficialDecks": "Noch keine offiziellen Karteikarten-Decks verfügbar.",
+    "emptyCommunityDecks": "Noch keine Community-Karteikarten-Decks verfügbar."
   },
   "courseCatalog": {
     "loadError": "Kurse konnten nicht geladen werden.",

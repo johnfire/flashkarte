@@ -103,6 +103,15 @@ describe("api client", () => {
     expect(typeof d.new_count).toBe("number");
   });
 
+  test("public deck collections accept the Library page limit", async () => {
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(200, []));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await api.publicCourses.list({ limit: 100 });
+
+    expect(fetchMock.mock.calls[0][0]).toBe("/api/library/courses?limit=100");
+  });
+
   test("non-ok maps to ApiError with code + message", async () => {
     const fetchMock = vi.fn().mockResolvedValue(
       jsonResponse(422, {

@@ -329,7 +329,12 @@
     "communityCoursesTitle": "Cursos estructurados de la comunidad",
     "communityCoursesDetail": "Cursos estructurados publicados por otros estudiantes.",
     "communityDecksTitle": "Mazos de la comunidad",
-    "communityDecksDetail": "Mazos publicados por otros estudiantes."
+    "communityDecksDetail": "Mazos publicados por otros estudiantes.",
+    "deckCollections": "Colecciones de mazos de tarjetas",
+    "flashcardDecks": "Mazos de tarjetas",
+    "emptyCourses": "Aún no hay cursos estructurados disponibles.",
+    "emptyOfficialDecks": "Aún no hay mazos de tarjetas oficiales disponibles.",
+    "emptyCommunityDecks": "Aún no hay mazos de tarjetas de la comunidad disponibles."
   },
   "courseCatalog": {
     "loadError": "No se pudieron cargar los cursos.",

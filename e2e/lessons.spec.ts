@@ -171,7 +171,7 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
   );
   const artifacts = path.dirname(MAIL_SINK);
 
-  // Library > My Courses > the subject > its outline.
+  // The Library shows the published community course directly.
   await page.goto("/");
   await page.getByRole("link", { name: "Library", exact: true }).click();
   await page.getByRole("link", { name: "My Courses", exact: true }).click();
@@ -180,12 +180,10 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
     .click();
   await expect(page.getByText("In Community", { exact: true })).toBeVisible();
   await page.goto("/library");
-  await page
-    .getByRole("link", { name: "Community Courses", exact: true })
-    .click();
   await expect(
     page.getByRole("heading", { name: "Transformers e2e" }),
   ).toBeVisible();
+  await expectNoAxeViolations(page, "the Library");
   await page.goto("/learn");
   await page.getByRole("link", { name: /Transformers e2e/ }).click();
   await expect(

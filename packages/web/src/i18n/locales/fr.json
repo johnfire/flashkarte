@@ -329,7 +329,12 @@
     "communityCoursesTitle": "Cours structurés de la communauté",
     "communityCoursesDetail": "Cours structurés publiés par d’autres apprenants.",
     "communityDecksTitle": "Decks de la communauté",
-    "communityDecksDetail": "Decks publiés par d’autres apprenants."
+    "communityDecksDetail": "Decks publiés par d’autres apprenants.",
+    "deckCollections": "Collections de decks de fiches",
+    "flashcardDecks": "Decks de fiches",
+    "emptyCourses": "Aucun cours structuré n’est encore disponible.",
+    "emptyOfficialDecks": "Aucun deck de fiches officiel n’est encore disponible.",
+    "emptyCommunityDecks": "Aucun deck de fiches de la communauté n’est encore disponible."
   },
   "courseCatalog": {
     "loadError": "Impossible de charger les cours.",
