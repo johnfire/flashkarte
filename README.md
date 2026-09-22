@@ -1,8 +1,9 @@
 # flashkarte
 
-**flashkarte** is a Markdown-based flashcard app with SM-2 spaced repetition.
-Write decks as plain Markdown, sign up, and study them anywhere — progress is
-synced to your account. AI assistants can create decks on your behalf through a
+**flashkarte** is a learning app with Markdown flashcard decks, flashcard deck
+collections, and structured learning courses. Write decks as plain Markdown,
+sign up, and study them anywhere — progress is synced to your account. AI
+assistants can create all three kinds of content on your behalf through a
 hosted MCP server, using your own AI account.
 
 Deck format: `# Title`, `## Category`, then numbered bold fronts
@@ -17,7 +18,7 @@ A full stack sharing one Markdown parser + SM-2 implementation:
 | [`packages/shared`](packages/shared) | Markdown parser + SM-2 algorithm (TypeScript), parity-tested                                       |
 | [`packages/server`](packages/server) | REST API — Express + TypeScript + Postgres; JWT auth, decks, study, API keys, client-error logging |
 | [`packages/web`](packages/web)       | Web app — React + Vite + Tailwind SPA                                                              |
-| [`packages/mcp`](packages/mcp)       | Hosted MCP server — lets a user's AI create/manage decks via a personal API key                    |
+| [`packages/mcp`](packages/mcp)       | Hosted MCP server — lets a user's AI create/manage decks, deck collections, and structured courses |
 | [`android/`](android/)               | Android app — Kotlin / Compose / Hilt, talks to the API                                            |
 | [`python/`](python/)                 | Original desktop app — Python / tkinter (reference)                                                |
 
@@ -46,10 +47,11 @@ Docker Compose stack (app + MCP + Postgres + daily backups), served at
 | Path                                                               | What it covers                                                                 |
 | ------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | [`docs/deployment.md`](docs/deployment.md)                         | Docker Compose prod stack, VPS deploy, env, backups                            |
-| [`docs/course-authoring-guide.md`](docs/course-authoring-guide.md) | How to produce a course (also served over MCP as `get_course_authoring_guide`) |
+| [`docs/ai-content-authoring-guide.md`](docs/ai-content-authoring-guide.md) | Current guide to creating decks, deck collections, and structured learning courses with AI |
+| [`docs/course-authoring-guide.md`](docs/course-authoring-guide.md) | Detailed structured-learning-course method (also served over MCP as `get_course_authoring_guide`) |
 | [`docs/android-release.md`](docs/android-release.md)               | Building and publishing the Android app to Play                                |
-| [`docs/specs/`](docs/specs/README.md)                              | Learning-engine spec pack (read `00-guardrails.md` first)                      |
-| [`docs/plans/`](docs/plans/)                                       | Validated designs not yet broken into specs                                    |
+| [`docs/specs/`](docs/specs/README.md)                              | Historical learning-engine specs; do not treat feature plans as current product documentation |
+| [`docs/plans/`](docs/plans/)                                       | Historical decision and design records; use the current guides above for product behavior |
 | [`docs/store-assets/`](docs/store-assets/)                         | Play Store listing assets (icon, feature graphic, screenshots)                 |
 | [`docs/superpowers/`](docs/superpowers/)                           | Historical plan/spec archive (dated, point-in-time; not current)               |
 | [`docs/older-docs/`](docs/older-docs/)                             | Retired docs kept for history; not current                                     |

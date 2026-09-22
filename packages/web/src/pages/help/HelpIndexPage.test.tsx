@@ -28,7 +28,7 @@ describe("HelpIndexPage", () => {
       ["/help/advanced-cards", "Multiple choice, mix-ups"],
       ["/help/branching-decks", "Branching decks"],
       ["/help/studying", "Studying & spaced repetition"],
-      ["/help/ai", "Creating decks with AI"],
+      ["/help/ai", "Creating learning content with AI"],
       ["/help/sharing", "Sharing & exploring"],
     ] as const) {
       const link = screen.getByRole("link", { name: new RegExp(name) });

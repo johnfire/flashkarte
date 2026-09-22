@@ -134,7 +134,7 @@ export function registerDeckTools(server: McpServer) {
       "\n\n" +
       SPEECH_HELP +
       "\n\nPass course_id to create this deck as the next unit of an existing " +
-      "legacy deck course (see create_course) in one call, instead of " +
+      "flashcard deck collection (the legacy API calls it a course; see create_course) in one call, instead of " +
       "create-then-add_deck_to_course.",
     {
       markdown: z
@@ -151,7 +151,7 @@ export function registerDeckTools(server: McpServer) {
         .uuid()
         .optional()
         .describe(
-          "Optional: attach this deck to an existing course as its next unit.",
+          "Optional: attach this deck to an existing flashcard deck collection as its next unit.",
         ),
       ...speechShape,
     },

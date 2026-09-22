@@ -4,7 +4,7 @@ import { get, post, patch, del } from "../api";
 import { asText, runTool } from "./tool-runner";
 
 const GATING_HELP =
-  "Legacy deck courses gate cross-deck: deck N+1 unlocks only once every card in deck N " +
+  "Flashcard deck collections gate cross-deck: deck N+1 unlocks only once every card in deck N " +
   "is stable (repeated correctly enough times without lapsing). get_course " +
   "reports each deck's lock state so you can tell the user what's next and " +
   "what's still locked.";
@@ -12,8 +12,8 @@ const GATING_HELP =
 export function registerCourseTools(server: McpServer) {
   server.tool(
     "create_course",
-    "Create a LEGACY deck course: an ordered, gated grouping of flashcard decks. " +
-      "Do not use this for a structured lesson course; use import_subject and " +
+    "Create a flashcard deck collection (the legacy API calls it a course): an ordered, gated grouping of flashcard decks. " +
+      "Do not use this for a structured learning course; use import_subject and " +
       "import_lesson instead. Build this legacy course out by creating " +
       "each unit as a deck with create_deck's course_id, in learning order. " +
       GATING_HELP,
@@ -32,7 +32,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "list_courses",
-    "List the user's legacy deck courses, each with a decks_total / decks_mastered summary.",
+    "List the user's flashcard deck collections, each with a decks_total / decks_mastered summary.",
     {},
     async () =>
       runTool("list_courses", async () => asText(await get("/api/courses"))),
@@ -40,7 +40,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "get_course",
-    "Get a legacy deck course's full detail: its ordered decks, each with card_count, " +
+    "Get a flashcard deck collection's full detail: its ordered decks, each with card_count, " +
       "mastered_count, and locked. " +
       GATING_HELP,
     { course_id: z.string().uuid().describe("The course's UUID.") },
@@ -52,7 +52,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "update_course",
-    "Rename a legacy deck course, edit its description, or publish/unpublish it. Only " +
+    "Rename a flashcard deck collection, edit its description, or publish/unpublish it. Only " +
       "the fields you pass are changed.",
     {
       course_id: z.string().uuid().describe("The course's UUID."),
@@ -84,7 +84,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "delete_course",
-    "Permanently delete a course. Its member decks are NOT deleted -- they " +
+    "Permanently delete a flashcard deck collection. Its member decks are NOT deleted -- they " +
       "just stop being grouped/gated, and stay in the user's own deck list.",
     { course_id: z.string().uuid().describe("The course's UUID.") },
     async ({ course_id }) =>
@@ -96,7 +96,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "add_deck_to_course",
-    "Attach an existing deck to a course, appending it as the new last unit. " +
+    "Attach an existing deck to a flashcard deck collection, appending it as the new last unit. " +
       "Prefer create_deck's course_id when authoring a new unit from scratch " +
       "-- reach for this only to add an already-existing deck.",
     {
@@ -115,7 +115,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "remove_deck_from_course",
-    "Detach a deck from a course. The deck itself is not deleted.",
+    "Detach a deck from a flashcard deck collection. The deck itself is not deleted.",
     {
       course_id: z.string().uuid().describe("The course's UUID."),
       deck_id: z.string().uuid().describe("The deck's UUID."),
@@ -131,7 +131,7 @@ export function registerCourseTools(server: McpServer) {
 
   server.tool(
     "reorder_course_decks",
-    "Set the learning order of a course's decks. Pass every member deck's " +
+    "Set the learning order of a flashcard deck collection's decks. Pass every member deck's " +
       "ID, in the desired order -- the whole set must match exactly, or the " +
       "reorder is rejected.",
     {

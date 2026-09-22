@@ -14,6 +14,12 @@
     <string name="help_getting_started_map_library">Bibliothek — durchsuche öffentliche Stapel anderer Nutzer und kopiere einen in dein Konto.</string>
     <string name="help_getting_started_map_settings">Einstellungen — Konto, Darstellung, KI-Verbindung und Daten.</string>
 
+    <string name="help_content_types_title">Drei Arten von Lerninhalten</string>
+    <string name="help_content_types_body">flashkarte verwendet diese Namen für unterschiedliche Werkzeuge. Sag deiner KI, welchen Typ du möchtest.</string>
+    <string name="help_content_types_deck">Lernkartenstapel — Markdown-Fragen oder Impulse mit kurzen Antworten für verteilte Wiederholung.</string>
+    <string name="help_content_types_collection">Lernkarten-Stapelsammlung — eine geordnete Sammlung von Stapeln; der nächste Stapel wird frei, wenn der vorherige stabil sitzt.</string>
+    <string name="help_content_types_course">Strukturierter Lernkurs — ein geführter Lehrplan aus Themen, Modulen, Lektionen, Leseseiten, Fragen, Voraussetzungen und Wiederholungen.</string>
+
     <string name="help_writing_decks_title">Stapel schreiben</string>
     <string name="help_writing_ways_heading">Drei Wege, einen Stapel zu erstellen</string>
     <string name="help_writing_ways_app">Tippe unten in der Navigationsleiste auf Neu, um einen Stapel im untenstehenden Format zu erstellen oder zu importieren.</string>
@@ -44,22 +50,24 @@
     <string name="help_studying_choice_heading">Multiple-Choice-Modus</string>
     <string name="help_studying_choice_body">Wechsle während einer Sitzung in den Auswahl-Modus, um Antwortoptionen zu erhalten, die automatisch aus deinen anderen Karten erstellt werden — du wirst bewertet, sobald du eine antippst.</string>
 
-    <string name="help_ai_title">Stapel mit KI erstellen</string>
-    <string name="help_ai_body">Ein KI-Assistent kann Stapel für dich erstellen und sie direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt — die KI läuft nicht auf dem Server von flashkarte.</string>
+    <string name="help_ai_title">Lerninhalte mit KI erstellen</string>
+    <string name="help_ai_body">Ein KI-Assistent kann Lernkartenstapel, Stapelsammlungen oder strukturierte Lernkurse für dich erstellen und direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt — die KI läuft nicht auf dem Server von flashkarte.</string>
     <string name="help_ai_step1">Erzeuge in den Einstellungen einen API-Schlüssel und kopiere die MCP-Server-URL.</string>
     <string name="help_ai_step2">Füge die URL als benutzerdefinierten Connector in deinem KI-Client hinzu (zum Beispiel claude.ai oder Claude Desktop) und melde dich mit deinem flashkarte-Konto an.</string>
-    <string name="help_ai_step3">Bitte ihn, einen Stapel zu erstellen, zum Beispiel: Turn this into a flashkarte deck: … — der neue Stapel erscheint in deinem Konto, bereit zum Lernen.</string>
+    <string name="help_ai_step3">Bitte sie um den gewählten Inhaltstyp, zum Beispiel: Turn this into a flashkarte deck: … oder Create a structured learning course about … — der neue Inhalt erscheint in deinem Konto, bereit zum Prüfen und Lernen.</string>
 
     <string name="help_sharing_title">Teilen &amp; entdecken</string>
     <string name="help_sharing_public_heading">Einen Stapel öffentlich machen</string>
     <string name="help_sharing_public_body">Veröffentliche einen deiner Stapel über sein Menü, um einen teilbaren Link zu erhalten und ihn in der Bibliothek auffindbar zu machen. Du kannst die Veröffentlichung jederzeit wieder aufheben.</string>
     <string name="help_sharing_library_heading">Bibliothek</string>
     <string name="help_sharing_library_body">Durchsuche öffentliche Stapel anderer flashkarte-Nutzer und kopiere jeden davon direkt in dein Konto, um sofort mit dem Lernen zu beginnen.</string>
+    <string name="help_sharing_courses_heading">Strukturierte Lernkurse</string>
+    <string name="help_sharing_courses_body">Öffne im Web Bibliothek → Meine Kurse, um deine strukturierten Lernkurse zu sehen. Als Besitzer kannst du einen Kurs mit der Community teilen oder wieder entfernen; offizielle Kurse können nicht in Community-Kurse geändert werden.</string>
 
     <!-- Bottom navigation -->
     <string name="nav_decks">Stapel</string>
     <string name="nav_new">Neu</string>
-    <string name="nav_courses">Kurse</string>
+    <string name="nav_courses">Stapelsammlungen</string>
     <string name="nav_library">Bibliothek</string>
     <string name="nav_settings">Einstellungen</string>
 
@@ -108,10 +116,10 @@
     </plurals>
 
     <!-- Learn: structured lessons -->
-    <string name="learn_title">Lernen</string>
+    <string name="learn_title">Strukturierte Kurse</string>
     <string name="learn_intro">Strukturierte Lektionen der Reihe nach. Wer eine Lektion besteht, schaltet die darauf aufbauenden frei.</string>
     <string name="learn_to_decks">← Decks</string>
-    <string name="learn_to_learn">← Lernen</string>
+    <string name="learn_to_learn">← Strukturierte Kurse</string>
     <string name="learn_to_outline">Zurück zur Übersicht</string>
     <string name="learn_to_outline_arrow">← Übersicht</string>
     <string name="learn_loading">Wird geladen …</string>

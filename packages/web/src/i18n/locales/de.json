@@ -279,12 +279,12 @@
     "lessonsToRead_other": "{{count}} Lektionen zu lesen"
   },
   "courses": {
-    "myCoursesTitle": "Meine Kurse",
-    "myCoursesIntro": "Dein angeleitetes Lernen – ob als Lektionskurs oder als geordneter Deck-Kurs.",
-    "lessonCourses": "Lektionskurse",
-    "lessonCourseBadge": "Lektionskurs",
-    "noLessonCourses": "Noch keine Lektionskurse.",
-    "deckCourses": "Deck-Kurse",
+    "myCoursesTitle": "Mein Lernen",
+    "myCoursesIntro": "Deine strukturierten Lernkurse und Lernkarten-Stapelsammlungen.",
+    "lessonCourses": "Strukturierte Lernkurse",
+    "lessonCourseBadge": "Strukturierter Kurs",
+    "noLessonCourses": "Noch keine strukturierten Lernkurse.",
+    "deckCourses": "Lernkarten-Stapelsammlungen",
     "deckCoursesIntro": "Geordnete Karteikarten-Decks mit Fortschritts-Sperren.",
     "title": "Meine Kurse",
     "browsePublic": "Öffentliche Kurse durchsuchen",
@@ -320,13 +320,13 @@
   "libraryHub": {
     "title": "Bibliothek",
     "navigation": "Mein Lernen",
-    "myCourses": "Meine Kurse",
+    "myCourses": "Meine strukturierten Lernkurse",
     "myDecks": "Meine Karteikarten-Decks",
-    "officialCoursesTitle": "Offizielle Kurse",
+    "officialCoursesTitle": "Offizielle strukturierte Lernkurse",
     "officialCoursesDetail": "Strukturierte Kurse der App.",
     "officialDecksTitle": "Offizielle Karteikarten-Decks",
     "officialDecksDetail": "Karteikarten-Decks der App.",
-    "communityCoursesTitle": "Community-Kurse",
+    "communityCoursesTitle": "Strukturierte Community-Lernkurse",
     "communityCoursesDetail": "Strukturierte Kurse anderer Lernender.",
     "communityDecksTitle": "Community-Karteikarten-Decks",
     "communityDecksDetail": "Decks, die andere Lernende veröffentlicht haben."
@@ -334,7 +334,7 @@
   "courseCatalog": {
     "loadError": "Kurse konnten nicht geladen werden.",
     "adding": "Wird hinzugefügt…",
-    "add": "Zu meinen Kursen hinzufügen"
+    "add": "Zu meinen strukturierten Lernkursen hinzufügen"
   },
   "createDeck": {
     "title": "Neuer Stapel",
@@ -542,7 +542,7 @@
     "next": "Weiter: {{title}} →",
     "index": {
       "metaTitle": "Hilfe — flashkarte",
-      "metaDescription": "Alles, was du für flashkarte brauchst: Markdown-Stapel schreiben, verzweigte Stapel, Lernen mit verteilter Wiederholung, Stapel teilen und deine eigene KI verbinden.",
+      "metaDescription": "Alles, was du für flashkarte brauchst: Markdown-Lernkartenstapel schreiben, Stapelsammlungen und strukturierte Lernkurse nutzen, Inhalte teilen und deine eigene KI verbinden.",
       "title": "Hilfe",
       "intro": "flashkarte verwandelt einfaches Markdown in Lernkarten mit verteilter Wiederholung, die du im Web und unter Android lernen kannst — immer synchron. Wähle unten ein Thema.",
       "topics": {
@@ -567,12 +567,12 @@
           "description": "Wie die SM-2-Planung funktioniert, was die Bewertungs-Buttons bewirken und was die Zähler an einem Stapel bedeuten."
         },
         "ai": {
-          "title": "Stapel mit KI erstellen",
-          "description": "Verbinde deinen eigenen KI-Assistenten, damit er Stapel für dich erstellt."
+          "title": "Lerninhalte mit KI erstellen",
+          "description": "Verbinde deinen eigenen KI-Assistenten, damit er Lernkartenstapel, Stapelsammlungen oder strukturierte Lernkurse erstellt."
         },
         "sharing": {
           "title": "Teilen & entdecken",
-          "description": "Mache einen Stapel öffentlich, durchsuche die Bibliothek und kopiere Stapel, die andere geteilt haben."
+          "description": "Teile Lernkartenstapel oder strukturierte Lernkurse und durchsuche die Bibliothek."
         }
       }
     },
@@ -586,7 +586,7 @@
       "loopBody": "flashkarte hat einen zentralen Kreislauf: einen Stapel schreiben, dann lernen. Neue Karten erscheinen als „Neu“; sobald du eine Karte wiederholt hast, entscheidet die verteilte Wiederholung, wann sie als Nächstes „fällig“ ist. Regelmäßiges Lernen, auch kurz, ist das, was den Zeitplan funktionieren lässt.",
       "mapHeading": "Wo du was findest",
       "mapDecks": "Meine Stapel — deine Stapel mit Fälligkeitszählern und schnellen Aktionen zum Lernen, Teilen oder Löschen.",
-      "mapLibrary": "Bibliothek — durchsuche öffentliche Stapel anderer Nutzer und kopiere einen in dein Konto.",
+      "mapLibrary": "Bibliothek — durchsuche offizielle und Community-Lernkartenstapel sowie strukturierte Lernkurse. Unter Meine Kurse findest und teilst du deine eigenen strukturierten Lernkurse.",
       "mapExplore": "Entdecken — durchstöbere öffentliche Stapel, ohne dich anzumelden.",
       "mapSettings": "Einstellungen — Konto, Darstellung, Sprache, KI-Verbindung und Daten."
     },
@@ -597,7 +597,7 @@
       "waysHeading": "Drei Wege, einen Stapel zu erstellen",
       "waysWeb": "Öffne im Web den Stapel-Editor, füge Markdown im untenstehenden Format ein oder tippe es, und speichere. Eine Live-Vorschau zeigt die erkannten Karten, bevor du speicherst.",
       "waysAndroid": "Erstelle oder importiere in der Android-App einen Stapel auf dieselbe Weise mit demselben Markdown-Format.",
-      "waysAI": "Lass einen KI-Assistenten einen Stapel für dich erstellen — siehe „Stapel mit KI erstellen“.",
+      "waysAI": "Lass einen KI-Assistenten einen Stapel für dich erstellen — siehe „Lerninhalte mit KI erstellen“.",
       "formatHeading": "Das Format",
       "formatIntro": "Ein Stapel ist einfaches Markdown. Die erste Überschrift ist der Titel; eine optionale kursive Zeile darunter ist dekorativ und wird ignoriert. Verwende Überschriften der zweiten Ebene, um Karten in Kategorien zu gruppieren.",
       "formatCardsIntro": "Schreibe Karten in einem von zwei Stilen — du kannst beide in einem Stapel mischen:",
@@ -665,25 +665,34 @@
       "choiceBody": "Sowohl die Web-App als auch die Android-App bieten einen Multiple-Choice-Modus. Bei einer normalen Karte werden die Antwortoptionen automatisch aus deinen anderen fälligen Karten gebildet; bei einer diagnostischen Karte (siehe Erweiterte Kartentypen) werden die von dir geschriebenen Optionen verwendet, und eine falsche Antwort kann vor dem Weitergehen eine Vertiefungskarte anzeigen."
     },
     "ai": {
-      "metaTitle": "Stapel mit KI erstellen — flashkarte-Hilfe",
-      "metaDescription": "So verbindest du deinen eigenen KI-Assistenten über MCP mit flashkarte, damit er Stapel für dich erstellt.",
-      "title": "Stapel mit KI erstellen",
-      "body": "Ein KI-Assistent kann Stapel für dich erstellen und sie direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt — die KI läuft nicht auf dem Server von flashkarte.",
+      "metaTitle": "Lerninhalte mit KI erstellen — flashkarte-Hilfe",
+      "metaDescription": "So verbindest du deinen eigenen KI-Assistenten über MCP mit flashkarte, damit er Lernkartenstapel, Stapelsammlungen und strukturierte Lernkurse erstellt.",
+      "title": "Lerninhalte mit KI erstellen",
+      "body": "Ein KI-Assistent kann Lerninhalte für dich erstellen und direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt — die KI läuft nicht auf dem Server von flashkarte.",
+      "typesHeading": "Den richtigen Inhaltstyp wählen",
+      "typesBody": "Sag, welchen dieser Typen du möchtest. Es sind unterschiedliche Lernwerkzeuge, auch wenn ältere technische Werkzeuge für eine Stapelsammlung noch das Wort „course“ verwenden.",
+      "flashcardDeck": "Lernkartenstapel — ein Markdown-Satz aus Fragen oder Impulsen und kurzen Antworten für verteilte Wiederholung.",
+      "deckCollection": "Lernkarten-Stapelsammlung — eine geordnete Sammlung von Lernkartenstapeln; jeder nächste Stapel wird frei, wenn der vorherige stabil sitzt.",
+      "structuredCourse": "Strukturierter Lernkurs — ein geführter Lehrplan aus Themen, Modulen, Lektionen, Leseseiten, Fragen, Voraussetzungen und Wiederholungen.",
+      "askHeading": "Frag deine KI eindeutig",
+      "askBody": "Bitte sie zum Beispiel um „einen Lernkartenstapel über …“ oder „einen strukturierten Lernkurs über …“. Für einen strukturierten Lernkurs gib ihr echte Quellen und bitte sie, dir den Voraussetzungen-Graphen und das erste Modul zu zeigen, bevor sie Lektionen schreibt.",
       "step1": "Erzeuge in den Einstellungen einen API-Schlüssel und kopiere die MCP-Server-URL.",
       "step2": "Füge die URL als benutzerdefinierten Connector in deinem KI-Client hinzu (zum Beispiel claude.ai oder Claude Desktop) und melde dich mit deinem flashkarte-Konto an.",
-      "step3": "Bitte ihn, einen Stapel zu erstellen, z. B. \"Turn this into a flashkarte deck: …\", und der neue Stapel erscheint in deinem Konto, bereit zum Lernen.",
+      "step3": "Bitte sie um den gewählten Inhaltstyp, z. B. \"Turn this into a flashkarte deck: …\" oder \"Create a structured learning course about …\". Der neue Inhalt erscheint in deinem Konto, bereit zum Prüfen und Lernen.",
       "settingsLink": "Einstellungen öffnen →"
     },
     "sharing": {
       "metaTitle": "Teilen & entdecken — flashkarte-Hilfe",
-      "metaDescription": "So machst du einen Stapel öffentlich, durchstöberst die Entdecken-Seite und kopierst Stapel aus der Bibliothek.",
+      "metaDescription": "So teilst du Lernkartenstapel und strukturierte Lernkurse, durchstöberst Entdecken und nutzt die Bibliothek.",
       "title": "Teilen & entdecken",
       "publicHeading": "Einen Stapel öffentlich machen",
       "publicBody": "Mache einen deiner Stapel auf der Seite Meine Stapel öffentlich, um eine teilbare Seite zu erhalten und ihn für andere auffindbar zu machen. Du kannst die Freigabe jederzeit wieder aufheben. Die Antworten bleiben für Besucher verborgen, bis sie sich registrieren, um den Stapel zu lernen.",
       "exploreHeading": "Entdecken",
       "exploreBody": "Auf der Entdecken-Seite kann jeder — angemeldet oder nicht — öffentliche Stapel anderer flashkarte-Nutzer durchstöbern und in der Vorschau ansehen.",
       "libraryHeading": "Bibliothek",
-      "libraryBody": "Die Bibliothek ist die Variante für angemeldete Nutzer: durchsuche öffentliche Stapel und kopiere jeden davon direkt in dein eigenes Konto, um sofort mit dem Lernen zu beginnen."
+      "libraryBody": "Die Bibliothek trennt offizielle und Community-Lernkartenstapel von offiziellen und Community-strukturierten Lernkursen. Füge einen Kurs aus dem Katalog zu deinem Lernen hinzu; kopiere einen Lernkartenstapel in dein Konto, um ihn zu lernen.",
+      "coursesHeading": "Strukturierte Lernkurse",
+      "coursesBody": "Öffne Bibliothek → Meine Kurse, um deine strukturierten Lernkurse zu sehen. Bei einem eigenen Kurs wählst du Mit der Community teilen, um ihn unter Community-Kurse aufzuführen, oder Aus der Community entfernen. Offizielle Kurse sind als Offiziell markiert und können nicht in Community-Kurse geändert werden."
     }
   },
   "explore": {
@@ -748,10 +757,10 @@
     "saveError": "Die neue Reihenfolge konnte nicht gespeichert werden — bitte erneut versuchen."
   },
   "learn": {
-    "title": "Kurse",
+    "title": "Strukturierte Lernkurse",
     "intro": "Strukturierte Lektionen der Reihe nach. Wer eine Lektion besteht, schaltet die darauf aufbauenden frei.",
     "toDecks": "← Decks",
-    "toLearn": "← Kurse",
+    "toLearn": "← Strukturierte Lernkurse",
     "toOutline": "Zurück zur Übersicht",
     "toOutlineArrow": "← Übersicht",
     "loading": "Wird geladen …",

@@ -14,11 +14,17 @@
     <string name="help_getting_started_map_library">Library — search public decks shared by other users and clone one into your account.</string>
     <string name="help_getting_started_map_settings">Settings — account, appearance, AI connection, and data.</string>
 
+    <string name="help_content_types_title">Three kinds of learning content</string>
+    <string name="help_content_types_body">flashkarte uses these names for different tools. Tell your AI which one you want.</string>
+    <string name="help_content_types_deck">Flashcard deck — Markdown questions or prompts with concise answers for spaced-repetition practice.</string>
+    <string name="help_content_types_collection">Flashcard deck collection — an ordered collection of decks; the next deck opens after the previous one is stable.</string>
+    <string name="help_content_types_course">Structured learning course — a guided curriculum of subjects, modules, lessons, reading screens, questions, prerequisites, and reviews.</string>
+
     <string name="help_writing_decks_title">Writing decks</string>
     <string name="help_writing_ways_heading">Three ways to create a deck</string>
     <string name="help_writing_ways_app">Tap New in the bottom bar to create or import a deck using the format below.</string>
     <string name="help_writing_ways_web">On the web, use the deck editor with the same Markdown format.</string>
-    <string name="help_writing_ways_ai">Let an AI assistant build a deck for you — see Creating decks with AI below.</string>
+    <string name="help_writing_ways_ai">Let an AI assistant build a deck for you — see Creating learning content with AI below.</string>
     <string name="help_writing_format_heading">The format</string>
     <string name="help_writing_format_intro">A deck is plain Markdown. The first heading is the title. Use second-level headings to group cards into categories.</string>
     <string name="help_writing_format_bold">Numbered bold front: a bold line like **1. front** starts a card; the lines below it are the answer.</string>
@@ -44,22 +50,24 @@
     <string name="help_studying_choice_heading">Multiple-choice mode</string>
     <string name="help_studying_choice_body">Switch to Choice mode during a session to get answer options built automatically from your other cards — you are graded the moment you tap one.</string>
 
-    <string name="help_ai_title">Creating decks with AI</string>
-    <string name="help_ai_body">An AI assistant can build decks for you and push them straight into your account, using your own AI account — flashkarte\'s server never runs the AI itself.</string>
+    <string name="help_ai_title">Creating learning content with AI</string>
+    <string name="help_ai_body">An AI assistant can build flashcard decks, flashcard deck collections, or structured learning courses and push them straight into your account, using your own AI account — flashkarte\'s server never runs the AI itself.</string>
     <string name="help_ai_step1">In Settings, generate an API key and copy the MCP server URL.</string>
     <string name="help_ai_step2">Add the URL as a custom connector in your AI client (for example claude.ai or Claude Desktop) and sign in with your flashkarte account.</string>
-    <string name="help_ai_step3">Ask it to build a deck, for example: Turn this into a flashkarte deck: … — the new deck appears in your account, ready to study.</string>
+    <string name="help_ai_step3">Ask for the content type you chose, for example: Turn this into a flashkarte deck: … or Create a structured learning course about … — the new content appears in your account, ready to review and study.</string>
 
     <string name="help_sharing_title">Sharing &amp; exploring</string>
     <string name="help_sharing_public_heading">Making a deck public</string>
     <string name="help_sharing_public_body">Publish one of your decks from its menu to get a shareable link and have it listed in the Library for others to find. You can unpublish it again at any time.</string>
     <string name="help_sharing_library_heading">Library</string>
     <string name="help_sharing_library_body">Search public decks shared by other flashkarte users and clone any of them straight into your account to start studying immediately.</string>
+    <string name="help_sharing_courses_heading">Structured learning courses</string>
+    <string name="help_sharing_courses_body">On the web, open Library → My Courses to see your structured learning courses. An owner can share a course to the Community or remove it again; official courses cannot be changed into community courses.</string>
 
     <!-- Bottom navigation -->
     <string name="nav_decks">Decks</string>
     <string name="nav_new">New</string>
-    <string name="nav_courses">Courses</string>
+    <string name="nav_courses">Deck Collections</string>
     <string name="nav_library">Library</string>
     <string name="nav_settings">Settings</string>
 
@@ -108,10 +116,10 @@
     </plurals>
 
     <!-- Learn: structured lessons -->
-    <string name="learn_title">Learn</string>
+    <string name="learn_title">Structured Courses</string>
     <string name="learn_intro">Structured lessons, in order. Passing a lesson opens the ones that build on it.</string>
     <string name="learn_to_decks">← Decks</string>
-    <string name="learn_to_learn">← Learn</string>
+    <string name="learn_to_learn">← Structured Courses</string>
     <string name="learn_to_outline">Back to the outline</string>
     <string name="learn_to_outline_arrow">← Outline</string>
     <string name="learn_loading">Loading…</string>

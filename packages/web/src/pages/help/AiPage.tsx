@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useDocumentHead } from "../../seo/useDocumentHead";
-import { HelpTopicShell } from "./HelpShell";
+import { HelpTopicShell, helpH2 } from "./HelpShell";
 
 export function AiPage() {
   const { t } = useTranslation();
@@ -18,6 +18,15 @@ export function AiPage() {
     >
       <section id="ai" className="scroll-mt-6">
         <p className="mt-2">{t("help.ai.body")}</p>
+        <h2 className={`${helpH2} mt-6`}>{t("help.ai.typesHeading")}</h2>
+        <p className="mt-2">{t("help.ai.typesBody")}</p>
+        <ul className="mt-2 list-disc space-y-1 pl-5">
+          <li>{t("help.ai.flashcardDeck")}</li>
+          <li>{t("help.ai.deckCollection")}</li>
+          <li>{t("help.ai.structuredCourse")}</li>
+        </ul>
+        <h2 className={`${helpH2} mt-6`}>{t("help.ai.askHeading")}</h2>
+        <p className="mt-2">{t("help.ai.askBody")}</p>
         <ol className="mt-2 list-decimal space-y-1 pl-5">
           <li>{t("help.ai.step1")}</li>
           <li>{t("help.ai.step2")}</li>

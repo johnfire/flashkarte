@@ -280,10 +280,10 @@
   },
   "courses": {
     "myCoursesTitle": "My Learning",
-    "myCoursesIntro": "Your structured courses and deck collections.",
-    "lessonCourses": "Courses",
-    "lessonCourseBadge": "Course",
-    "noLessonCourses": "No courses yet.",
+    "myCoursesIntro": "Your structured learning courses and flashcard deck collections.",
+    "lessonCourses": "Structured Learning Courses",
+    "lessonCourseBadge": "Structured Course",
+    "noLessonCourses": "No structured learning courses yet.",
     "deckCourses": "Deck Collections",
     "deckCoursesIntro": "Ordered flashcard decks with progress gates.",
     "title": "Deck Collections",
@@ -320,13 +320,13 @@
   "libraryHub": {
     "title": "Library",
     "navigation": "My learning",
-    "myCourses": "My Courses",
+    "myCourses": "My Structured Learning Courses",
     "myDecks": "My Flashcard Decks",
-    "officialCoursesTitle": "Official Courses",
+    "officialCoursesTitle": "Official Structured Learning Courses",
     "officialCoursesDetail": "Structured courses maintained by the app.",
     "officialDecksTitle": "Official Flashcard Decks",
     "officialDecksDetail": "Flashcard decks maintained by the app.",
-    "communityCoursesTitle": "Community Courses",
+    "communityCoursesTitle": "Community Structured Learning Courses",
     "communityCoursesDetail": "Structured courses published by other learners.",
     "communityDecksTitle": "Community Flashcard Decks",
     "communityDecksDetail": "Decks published by other learners."
@@ -334,7 +334,7 @@
   "courseCatalog": {
     "loadError": "Couldn't load courses.",
     "adding": "Adding…",
-    "add": "Add to My Courses"
+    "add": "Add to My Structured Learning Courses"
   },
   "createDeck": {
     "title": "New Deck",
@@ -542,7 +542,7 @@
     "next": "Next: {{title}} →",
     "index": {
       "metaTitle": "Help — flashkarte",
-      "metaDescription": "Everything you need to use flashkarte: writing Markdown decks, branching decks, studying with spaced repetition, sharing decks, and connecting your own AI.",
+      "metaDescription": "Everything you need to use flashkarte: writing Markdown flashcard decks, deck collections, structured learning courses, sharing, and connecting your own AI.",
       "title": "Help",
       "intro": "flashkarte turns plain Markdown into spaced-repetition flashcards you can study on the web and on Android, always in sync. Pick a topic below.",
       "topics": {
@@ -567,12 +567,12 @@
           "description": "How SM-2 scheduling works, what the rating buttons do, and what the deck counters mean."
         },
         "ai": {
-          "title": "Creating decks with AI",
-          "description": "Connect your own AI assistant to build decks for you."
+          "title": "Creating learning content with AI",
+          "description": "Connect your own AI assistant to build flashcard decks, deck collections, or structured learning courses."
         },
         "sharing": {
           "title": "Sharing & exploring",
-          "description": "Make a deck public, browse the library, and clone decks other people shared."
+          "description": "Share flashcard decks or structured learning courses, and browse the library."
         }
       }
     },
@@ -586,7 +586,7 @@
       "loopBody": "flashkarte has one core loop: write a deck, then study it. New cards appear as \"New\"; once you've reviewed a card, spaced repetition decides when it's next \"due\". Studying regularly, even briefly, is what makes the schedule work.",
       "mapHeading": "Where things are",
       "mapDecks": "My Decks — your decks, with due counts and quick actions to study, share, or delete.",
-      "mapLibrary": "Library — search public decks shared by other users and clone one into your account.",
+      "mapLibrary": "Library — browse Official and Community flashcard decks and structured learning courses. My Courses is where you find and share your own structured learning courses.",
       "mapExplore": "Explore — browse public decks without signing in.",
       "mapSettings": "Settings — account, appearance, language, AI connection, and data."
     },
@@ -597,7 +597,7 @@
       "waysHeading": "Three ways to create a deck",
       "waysWeb": "On the web, open the deck editor, paste or type Markdown in the format below, and save. A live preview shows the parsed cards before you save.",
       "waysAndroid": "In the Android app, create or import a deck the same way, using the same Markdown format.",
-      "waysAI": "Let an AI assistant build a deck for you — see Creating decks with AI.",
+      "waysAI": "Let an AI assistant build a deck for you — see Creating learning content with AI.",
       "formatHeading": "The format",
       "formatIntro": "A deck is plain Markdown. The first heading is the title; an optional italic line under it is decorative and ignored. Use second-level headings to group cards into categories.",
       "formatCardsIntro": "Write cards in either of two styles — you can mix both in one deck:",
@@ -665,25 +665,34 @@
       "choiceBody": "Both the web app and the Android app offer a multiple-choice mode. For an ordinary card it builds answer options automatically from your other due cards; for a diagnostic card (see Advanced card types) it uses the options you wrote, and a wrong pick can show a follow-up card before you continue."
     },
     "ai": {
-      "metaTitle": "Creating decks with AI — flashkarte Help",
-      "metaDescription": "How to connect your own AI assistant to flashkarte over MCP to build decks for you.",
-      "title": "Creating decks with AI",
-      "body": "An AI assistant can build decks for you and push them straight into your account, using your own AI account — flashkarte's server never runs the AI itself.",
+      "metaTitle": "Creating learning content with AI — flashkarte Help",
+      "metaDescription": "How to connect your own AI assistant to flashkarte over MCP to build flashcard decks, deck collections, and structured learning courses.",
+      "title": "Creating learning content with AI",
+      "body": "An AI assistant can build learning content and push it straight into your account, using your own AI account — flashkarte's server never runs the AI itself.",
+      "typesHeading": "Choose the right content type",
+      "typesBody": "Say which of these you want. They are different learning tools, even though older technical tools still use the word “course” for a deck collection.",
+      "flashcardDeck": "Flashcard deck — a Markdown set of questions or prompts and concise answers for spaced-repetition practice.",
+      "deckCollection": "Flashcard deck collection — an ordered collection of flashcard decks; each next deck unlocks after the preceding deck is stable.",
+      "structuredCourse": "Structured learning course — a guided curriculum of subjects, modules, lessons, reading screens, questions, prerequisites, and reviews.",
+      "askHeading": "Ask your AI clearly",
+      "askBody": "For example, ask for “a flashcard deck about …” or “a structured learning course about …”. For a structured learning course, give it real sources and ask it to show you the prerequisite graph and first module before writing lessons.",
       "step1": "In Settings, generate an API key and copy the MCP server URL.",
       "step2": "Add the URL as a custom connector in your AI client (for example claude.ai or Claude Desktop) and sign in with your flashkarte account.",
-      "step3": "Ask it to build a deck, e.g. \"Turn this into a flashkarte deck: …\", and the new deck appears in your account, ready to study.",
+      "step3": "Ask it for the content type you chose, e.g. \"Turn this into a flashkarte deck: …\" or \"Create a structured learning course about …\". The new content appears in your account, ready for you to review and study.",
       "settingsLink": "Open Settings →"
     },
     "sharing": {
       "metaTitle": "Sharing & exploring — flashkarte Help",
-      "metaDescription": "How to make a deck public, browse the Explore page, and clone decks from the Library.",
+      "metaDescription": "How to share flashcard decks and structured learning courses, browse Explore, and use the Library.",
       "title": "Sharing & exploring",
       "publicHeading": "Making a deck public",
       "publicBody": "Make one of your decks public from the My Decks page to get a shareable link and have it listed for others to find. You can unshare it again at any time. The answers stay hidden to visitors until they sign up to study it.",
       "exploreHeading": "Explore",
       "exploreBody": "Explore lets anyone — signed in or not — browse and preview public decks shared by other flashkarte users.",
       "libraryHeading": "Library",
-      "libraryBody": "Library is the signed-in version: search public decks and clone any of them straight into your own account to start studying immediately."
+      "libraryBody": "Library separates Official and Community flashcard decks from Official and Community structured learning courses. Add a course from its catalogue to your learning; clone a flashcard deck into your account to study it.",
+      "coursesHeading": "Structured learning courses",
+      "coursesBody": "Open Library → My Courses to see your structured learning courses. For a course you own, choose Share to Community to list it in Community Courses, or Remove from Community to take it back out. Official courses are marked Official and cannot be changed into community courses."
     }
   },
   "explore": {
@@ -748,10 +757,10 @@
     "saveError": "Couldn't save the new order — try again."
   },
   "learn": {
-    "title": "Courses",
+    "title": "Structured Learning Courses",
     "intro": "Structured lessons, in order. Passing a lesson opens the ones that build on it.",
     "toDecks": "← Decks",
-    "toLearn": "← Courses",
+    "toLearn": "← Structured Learning Courses",
     "toOutline": "Back to the outline",
     "toOutlineArrow": "← Outline",
     "loading": "Loading…",

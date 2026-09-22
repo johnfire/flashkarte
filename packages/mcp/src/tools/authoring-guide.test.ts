@@ -53,14 +53,15 @@ describe("course authoring guide", () => {
     expect(COURSE_AUTHORING_GUIDE).toMatch(/never call `finish_lesson`/);
     expect(COURSE_AUTHORING_GUIDE).toMatch(/Ground every claim/);
     expect(descriptions.get_course_authoring_guide).toMatch(
-      /structured lesson course/i,
+      /structured learning course/i,
     );
     expect(descriptions.get_course_authoring_guide).toMatch(
-      /legacy deck course/i,
+      /flashcard deck collection/i,
     );
   });
 
   it("names only tools the server really registers", async () => {
+    const { registerCourseTools } = await import("./courses");
     const { registerLessonTools } = await import("./lessons");
     const { registerSubjectTools } = await import("./subjects");
     const registered = new Set<string>();
@@ -69,6 +70,7 @@ describe("course authoring guide", () => {
         registered.add(args[0] as string);
       },
     };
+    registerCourseTools(collect as never);
     registerLessonTools(collect as never);
     registerSubjectTools(collect as never);
     const named = new Set(

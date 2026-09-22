@@ -1,5 +1,7 @@
 # Lesson engine — Design spec (DRAFT)
 
+> Historical design record. Its lesson-engine “course” is now named a **structured learning course**. A gated group of flashcard decks is separately named a **flashcard deck collection**.
+
 _Date: 2026-09-19 · Status: **draft for Chris to review at the computer. Nothing here is built.**
 Decisions marked **Decided** came from Chris in conversation on 2026-09-19; everything marked
 **Open** is waiting for an answer. Builds on

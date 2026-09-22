@@ -1,6 +1,6 @@
 # Help System Plan
 
-Status: implemented (2026-07-23). Web `/help` center + hints and Android `HelpScreen` + hints are built, tested, and building cleanly on both platforms.
+> Historical implementation record (2026-07-23). Its original deck-only AI and sharing copy has been superseded by the current in-app Help and [AI content authoring guide](ai-content-authoring-guide.md). Do not use this plan as current product documentation.
 
 ## Goal
 

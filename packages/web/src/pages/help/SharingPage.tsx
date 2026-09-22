@@ -25,6 +25,11 @@ export function SharingPage() {
         <h2 className={helpH2}>{t("help.sharing.libraryHeading")}</h2>
         <p className="mt-2">{t("help.sharing.libraryBody")}</p>
       </section>
+
+      <section id="courses" className="scroll-mt-6">
+        <h2 className={helpH2}>{t("help.sharing.coursesHeading")}</h2>
+        <p className="mt-2">{t("help.sharing.coursesBody")}</p>
+      </section>
     </HelpTopicShell>
   );
 }

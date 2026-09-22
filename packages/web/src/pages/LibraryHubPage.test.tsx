@@ -13,10 +13,14 @@ describe("LibraryHubPage", () => {
     );
 
     expect(
-      screen.getByRole("link", { name: /Official Courses/ }),
+      screen.getByRole("link", {
+        name: /Official Structured Learning Courses/,
+      }),
     ).toHaveAttribute("href", "/library/courses/official");
     expect(
-      screen.getByRole("link", { name: /Community Courses/ }),
+      screen.getByRole("link", {
+        name: /Community Structured Learning Courses/,
+      }),
     ).toHaveAttribute("href", "/library/courses/community");
     expect(
       screen.getByRole("link", { name: /Official Flashcard Decks/ }),
@@ -24,9 +28,8 @@ describe("LibraryHubPage", () => {
     expect(
       screen.getByRole("link", { name: /Community Flashcard Decks/ }),
     ).toHaveAttribute("href", "/library/community/decks");
-    expect(screen.getByRole("link", { name: "My Courses" })).toHaveAttribute(
-      "href",
-      "/learn",
-    );
+    expect(
+      screen.getByRole("link", { name: "My Structured Learning Courses" }),
+    ).toHaveAttribute("href", "/learn");
   });
 });

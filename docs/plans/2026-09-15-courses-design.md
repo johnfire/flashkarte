@@ -1,5 +1,7 @@
 # Courses — Design
 
+> Historical design record for what is now called a **flashcard deck collection**. The technical API still uses `/courses` for compatibility, but the current product term is “flashcard deck collection.”
+
 _Date: 2026-09-15 · Scope: server + MCP + web + Android · Phase 1 of the
 "Duolingo-direction" product shift (see the AI-driven course-builder discussion
 in this date's session notes for the fuller context)_

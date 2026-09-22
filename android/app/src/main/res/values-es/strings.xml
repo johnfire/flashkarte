@@ -14,6 +14,12 @@
     <string name="help_getting_started_map_library">Biblioteca — busca mazos públicos compartidos por otros usuarios y clona uno en tu cuenta.</string>
     <string name="help_getting_started_map_settings">Ajustes — cuenta, apariencia, conexión con IA y datos.</string>
 
+    <string name="help_content_types_title">Tres tipos de contenido de aprendizaje</string>
+    <string name="help_content_types_body">flashkarte usa estos nombres para herramientas diferentes. Dile a tu IA cuál quieres.</string>
+    <string name="help_content_types_deck">Mazo de tarjetas — preguntas o indicaciones Markdown con respuestas concisas para practicar con repetición espaciada.</string>
+    <string name="help_content_types_collection">Colección de mazos de tarjetas — una colección ordenada de mazos; el siguiente se desbloquea cuando el anterior es estable.</string>
+    <string name="help_content_types_course">Curso estructurado — un plan guiado con temas, módulos, lecciones, pantallas de lectura, preguntas, requisitos previos y repasos.</string>
+
     <string name="help_writing_decks_title">Escribir mazos</string>
     <string name="help_writing_ways_heading">Tres formas de crear un mazo</string>
     <string name="help_writing_ways_app">Toca Nuevo en la barra inferior para crear o importar un mazo con el formato de abajo.</string>
@@ -44,22 +50,24 @@
     <string name="help_studying_choice_heading">Modo de opción múltiple</string>
     <string name="help_studying_choice_body">Cambia al modo Opción durante una sesión para obtener opciones de respuesta generadas automáticamente a partir de tus otras tarjetas — se te califica en cuanto tocas una.</string>
 
-    <string name="help_ai_title">Crear mazos con IA</string>
-    <string name="help_ai_body">Un asistente de IA puede crear mazos por ti y enviarlos directamente a tu cuenta, usando tu propia cuenta de IA — el servidor de flashkarte nunca ejecuta la IA.</string>
+    <string name="help_ai_title">Crear contenido de aprendizaje con IA</string>
+    <string name="help_ai_body">Un asistente de IA puede crear mazos de tarjetas, colecciones o cursos estructurados y enviarlos directamente a tu cuenta, usando tu propia cuenta de IA — el servidor de flashkarte nunca ejecuta la IA.</string>
     <string name="help_ai_step1">En Ajustes, genera una clave API y copia la URL del servidor MCP.</string>
     <string name="help_ai_step2">Añade la URL como conector personalizado en tu cliente de IA (por ejemplo claude.ai o Claude Desktop) e inicia sesión con tu cuenta de flashkarte.</string>
-    <string name="help_ai_step3">Pídele que cree un mazo, por ejemplo: Turn this into a flashkarte deck: … — el nuevo mazo aparecerá en tu cuenta, listo para estudiar.</string>
+    <string name="help_ai_step3">Pídele el tipo de contenido elegido, por ejemplo: Turn this into a flashkarte deck: … o Create a structured learning course about … — el nuevo contenido aparecerá en tu cuenta, listo para revisar y estudiar.</string>
 
     <string name="help_sharing_title">Compartir &amp; explorar</string>
     <string name="help_sharing_public_heading">Hacer público un mazo</string>
     <string name="help_sharing_public_body">Publica uno de tus mazos desde su menú para obtener un enlace que puedas compartir y que aparezca en la Biblioteca para que otros lo encuentren. Puedes despublicarlo en cualquier momento.</string>
     <string name="help_sharing_library_heading">Biblioteca</string>
     <string name="help_sharing_library_body">Busca mazos públicos compartidos por otros usuarios de flashkarte y clona cualquiera de ellos directamente en tu cuenta para empezar a estudiar de inmediato.</string>
+    <string name="help_sharing_courses_heading">Cursos estructurados</string>
+    <string name="help_sharing_courses_body">En la web, abre Biblioteca → Mis cursos para ver tus cursos estructurados. El propietario puede compartir un curso con la comunidad o retirarlo; los cursos oficiales no pueden convertirse en cursos de la comunidad.</string>
 
     <!-- Bottom navigation -->
     <string name="nav_decks">Mazos</string>
     <string name="nav_new">Nuevo</string>
-    <string name="nav_courses">Cursos</string>
+    <string name="nav_courses">Colecciones</string>
     <string name="nav_library">Biblioteca</string>
     <string name="nav_settings">Ajustes</string>
 
@@ -108,10 +116,10 @@
     </plurals>
 
     <!-- Learn: structured lessons -->
-    <string name="learn_title">Aprender</string>
+    <string name="learn_title">Cursos estructurados</string>
     <string name="learn_intro">Lecciones estructuradas, en orden. Superar una lección abre las que se apoyan en ella.</string>
     <string name="learn_to_decks">← Mazos</string>
-    <string name="learn_to_learn">← Aprender</string>
+    <string name="learn_to_learn">← Cursos estructurados</string>
     <string name="learn_to_outline">Volver al esquema</string>
     <string name="learn_to_outline_arrow">← Esquema</string>
     <string name="learn_loading">Cargando…</string>

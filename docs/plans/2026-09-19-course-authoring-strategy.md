@@ -1,5 +1,7 @@
 # From subject to course — authoring strategy
 
+> Historical design record. In current product language, its lesson-engine “course” is a **structured learning course**; a “course” made from decks is a **flashcard deck collection**.
+
 _Date: 2026-09-19 · Status: **draft for discussion, nothing built** · Scope: method first,
 then what it implies for the app (web + Android, never one without the other)_
 

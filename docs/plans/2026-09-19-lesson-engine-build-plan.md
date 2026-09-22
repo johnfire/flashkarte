@@ -1,5 +1,7 @@
 # Lesson engine — Build plan (DRAFT)
 
+> Historical build record. It describes the implementation of what the product now calls **structured learning courses**; use the current authoring guides for behavior and terminology.
+
 _Date: 2026-09-19 · Status: **draft for Chris to review. Nothing is started.**
 Companion to [the design spec](2026-09-19-lesson-engine-design.md); read that first._
 

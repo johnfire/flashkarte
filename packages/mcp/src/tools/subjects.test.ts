@@ -5,6 +5,7 @@ jest.mock("../api", () => ({
   get: jest.fn(),
   post: jest.fn(),
   put: jest.fn(),
+  patch: jest.fn(),
   del: jest.fn(),
 }));
 const mockApi = apiModule as jest.Mocked<typeof apiModule>;
@@ -56,7 +57,16 @@ describe("subject MCP tools", () => {
       "list_subjects",
       "remove_prerequisite",
       "set_prerequisite",
+      "update_subject",
     ]);
+  });
+
+  it("updates a structured learning course and maps community sharing", async () => {
+    mockApi.patch.mockResolvedValue({ id: SUBJECT, is_public: true });
+    await setup().update_subject({ subject_id: SUBJECT, is_public: true });
+    expect(mockApi.patch).toHaveBeenCalledWith(`/api/subjects/${SUBJECT}`, {
+      isPublic: true,
+    });
   });
 
   it("import_subject resolves card numbers to ids before posting", async () => {

@@ -1,8 +1,10 @@
-# Multilingual course editions
+# Multilingual structured learning course editions
+
+_Status: current design for structured learning courses. This does not apply to flashcard decks or flashcard deck collections._
 
 ## Purpose
 
-Flashkarte can host a library of courses in several languages without treating a translation as an unrelated
+Flashkarte can host a library of structured learning courses in several languages without treating a translation as an unrelated
 course. A **course family** has one canonical subject and one or more locale-specific subject editions.
 The canonical edition is the source of truth for the concept graph; each edition holds learner-facing content
 and progress in its own language.

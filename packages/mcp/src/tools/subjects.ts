@@ -1,11 +1,11 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
-import { get, post, put, del } from "../api";
+import { get, post, put, patch, del } from "../api";
 import { cardReferenceSchema, resolveCardIds } from "./card-references";
 import { asText, runTool } from "./tool-runner";
 
 const GRAPH_RULES =
-  "A subject is a prerequisite graph, and it is a HYPOTHESIS the user must " +
+  "A structured learning course is a subject with a prerequisite graph, and that graph is a HYPOTHESIS the user must " +
   "review, not a fact. Concepts are atomic: one thing assessable by one " +
   'question (split anything that needs "and"). kind: term (vocabulary), ' +
   "idea (a relationship or mechanism), skill (a procedure or calculation), " +
@@ -257,6 +257,34 @@ export function registerSubjectTools(server: McpServer) {
       runTool("get_subject_progress", async () =>
         asText(await get(`${path(subject_id)}/progress`)),
       ),
+  );
+
+  server.tool(
+    "update_subject",
+    "Rename a structured learning course, edit its description, or share it to the Community. Only the fields you pass are changed. Official courses cannot change community sharing.",
+    {
+      subject_id: subjectId,
+      title: z.string().optional().describe("New title."),
+      description: z
+        .string()
+        .nullable()
+        .optional()
+        .describe("New description, or null to clear it."),
+      is_public: z
+        .boolean()
+        .optional()
+        .describe(
+          "true shares this owner-created structured learning course to the Community; false removes it from the Community.",
+        ),
+    },
+    async ({ subject_id, title, description, is_public }) =>
+      runTool("update_subject", async () => {
+        const body: Record<string, unknown> = {};
+        if (title !== undefined) body.title = title;
+        if (description !== undefined) body.description = description;
+        if (is_public !== undefined) body.isPublic = is_public;
+        return asText(await patch(path(subject_id), body));
+      }),
   );
 
   server.tool(

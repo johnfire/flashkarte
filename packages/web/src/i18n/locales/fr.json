@@ -279,12 +279,12 @@
     "lessonsToRead_other": "{{count}} leçons à lire"
   },
   "courses": {
-    "myCoursesTitle": "Mes cours",
-    "myCoursesIntro": "Ton apprentissage guidé, qu’il s’agisse d’un cours avec leçons ou d’un cours par decks ordonné.",
-    "lessonCourses": "Cours avec leçons",
-    "lessonCourseBadge": "Cours avec leçons",
-    "noLessonCourses": "Pas encore de cours avec leçons.",
-    "deckCourses": "Cours par decks",
+    "myCoursesTitle": "Mon apprentissage",
+    "myCoursesIntro": "Tes cours structurés et tes collections de paquets de cartes.",
+    "lessonCourses": "Cours structurés",
+    "lessonCourseBadge": "Cours structuré",
+    "noLessonCourses": "Pas encore de cours structurés.",
+    "deckCourses": "Collections de paquets de cartes",
     "deckCoursesIntro": "Des decks de cartes ordonnés avec des seuils de progression.",
     "title": "Mes cours",
     "browsePublic": "Parcourir les cours publics",
@@ -320,13 +320,13 @@
   "libraryHub": {
     "title": "Bibliothèque",
     "navigation": "Mon apprentissage",
-    "myCourses": "Mes cours",
+    "myCourses": "Mes cours structurés",
     "myDecks": "Mes decks de cartes",
-    "officialCoursesTitle": "Cours officiels",
+    "officialCoursesTitle": "Cours structurés officiels",
     "officialCoursesDetail": "Cours structurés maintenus par l’application.",
     "officialDecksTitle": "Decks officiels",
     "officialDecksDetail": "Decks de cartes maintenus par l’application.",
-    "communityCoursesTitle": "Cours de la communauté",
+    "communityCoursesTitle": "Cours structurés de la communauté",
     "communityCoursesDetail": "Cours structurés publiés par d’autres apprenants.",
     "communityDecksTitle": "Decks de la communauté",
     "communityDecksDetail": "Decks publiés par d’autres apprenants."
@@ -334,7 +334,7 @@
   "courseCatalog": {
     "loadError": "Impossible de charger les cours.",
     "adding": "Ajout…",
-    "add": "Ajouter à mes cours"
+    "add": "Ajouter à mes cours structurés"
   },
   "createDeck": {
     "title": "Nouveau paquet",
@@ -567,12 +567,12 @@
           "description": "Comment fonctionne la planification SM-2, ce que font les boutons de notation et ce que signifient les compteurs du paquet."
         },
         "ai": {
-          "title": "Créer des paquets avec l'IA",
-          "description": "Connecte ton propre assistant IA pour qu'il crée des paquets pour toi."
+          "title": "Créer du contenu d'apprentissage avec l'IA",
+          "description": "Connecte ton assistant IA pour créer des paquets de cartes, des collections ou des cours structurés."
         },
         "sharing": {
           "title": "Partager & explorer",
-          "description": "Rends un paquet public, parcours la bibliothèque et clone des paquets partagés par d'autres."
+          "description": "Partage des paquets de cartes ou des cours structurés et parcours la bibliothèque."
         }
       }
     },
@@ -586,7 +586,7 @@
       "loopBody": "flashkarte repose sur un cycle central : écrire un paquet, puis le réviser. Les nouvelles cartes apparaissent comme « Nouvelles » ; une fois qu'une carte a été révisée, la répétition espacée détermine sa prochaine échéance. Réviser régulièrement, même brièvement, est ce qui fait fonctionner le système.",
       "mapHeading": "Où trouver quoi",
       "mapDecks": "Mes paquets — tes paquets, avec les compteurs d'échéances et des actions rapides pour réviser, partager ou supprimer.",
-      "mapLibrary": "Bibliothèque — recherche des paquets publics partagés par d'autres utilisateurs et clones-en un dans ton compte.",
+      "mapLibrary": "Bibliothèque — parcours les paquets de cartes et les cours structurés officiels et communautaires. Mes cours permet de retrouver et partager tes propres cours structurés.",
       "mapExplore": "Explorer — parcours les paquets publics sans te connecter.",
       "mapSettings": "Réglages — compte, apparence, langue, connexion IA et données."
     },
@@ -597,7 +597,7 @@
       "waysHeading": "Trois façons de créer un paquet",
       "waysWeb": "Sur le web, ouvre l'éditeur de paquets, colle ou saisis du Markdown au format ci-dessous, puis enregistre. Un aperçu en direct affiche les cartes détectées avant l'enregistrement.",
       "waysAndroid": "Dans l'application Android, crée ou importe un paquet de la même manière en utilisant le même format Markdown.",
-      "waysAI": "Laisse un assistant IA créer un paquet pour toi — voir « Créer des paquets avec l'IA ».",
+      "waysAI": "Laisse un assistant IA créer un paquet pour toi — voir « Créer du contenu d'apprentissage avec l'IA ».",
       "formatHeading": "Le format",
       "formatIntro": "Un paquet est du simple Markdown. Le premier titre est le nom du paquet ; une ligne en italique facultative en dessous est décorative et ignorée. Utilise des titres de deuxième niveau pour regrouper les cartes en catégories.",
       "formatCardsIntro": "Rédige les cartes dans l'un de ces deux styles — tu peux mélanger les deux dans un même paquet :",
@@ -665,25 +665,34 @@
       "choiceBody": "L'application web et l'application Android proposent toutes deux un mode à choix multiples. Pour une carte ordinaire, les options de réponse sont générées automatiquement à partir de tes autres cartes dues ; pour une carte de diagnostic (voir Types de cartes avancés), ce sont les options que tu as écrites qui sont utilisées, et une mauvaise réponse peut afficher une carte de suivi avant de continuer."
     },
     "ai": {
-      "metaTitle": "Créer des paquets avec l'IA — Aide flashkarte",
-      "metaDescription": "Comment connecter ton propre assistant IA à flashkarte via MCP pour qu'il crée des paquets pour toi.",
-      "title": "Créer des paquets avec l'IA",
-      "body": "Un assistant IA peut créer des paquets pour toi et les envoyer directement dans ton compte, en utilisant ton propre compte IA — le serveur de flashkarte ne fait jamais tourner l'IA lui-même.",
+      "metaTitle": "Créer du contenu d'apprentissage avec l'IA — Aide flashkarte",
+      "metaDescription": "Comment connecter ton assistant IA à flashkarte via MCP pour créer des paquets de cartes, des collections et des cours structurés.",
+      "title": "Créer du contenu d'apprentissage avec l'IA",
+      "body": "Un assistant IA peut créer du contenu d'apprentissage et l'envoyer directement dans ton compte, en utilisant ton propre compte IA — le serveur de flashkarte ne fait jamais tourner l'IA lui-même.",
+      "typesHeading": "Choisir le bon type de contenu",
+      "typesBody": "Précise lequel de ces types tu veux. Ce sont des outils d'apprentissage différents, même si les anciens outils techniques emploient encore le mot « course » pour une collection.",
+      "flashcardDeck": "Paquet de cartes — un ensemble Markdown de questions ou d'invites et de réponses concises pour la répétition espacée.",
+      "deckCollection": "Collection de paquets de cartes — une collection ordonnée de paquets ; le paquet suivant s'ouvre lorsque le précédent est stabilisé.",
+      "structuredCourse": "Cours structuré — un parcours guidé avec sujets, modules, leçons, écrans de lecture, questions, prérequis et révisions.",
+      "askHeading": "Formule clairement ta demande à l'IA",
+      "askBody": "Par exemple, demande « un paquet de cartes sur … » ou « un cours structuré sur … ». Pour un cours structuré, donne-lui de vraies sources et demande à voir le graphe de prérequis et le premier module avant l'écriture des leçons.",
       "step1": "Dans les Réglages, génère une clé API et copie l'URL du serveur MCP.",
       "step2": "Ajoute l'URL comme connecteur personnalisé dans ton client IA (par exemple claude.ai ou Claude Desktop) et connecte-toi avec ton compte flashkarte.",
-      "step3": "Demande-lui de créer un paquet, p. ex. \"Turn this into a flashkarte deck: …\", et le nouveau paquet apparaît dans ton compte, prêt à être révisé.",
+      "step3": "Demande-lui le type de contenu choisi, par exemple \"Turn this into a flashkarte deck: …\" ou \"Create a structured learning course about …\". Le nouveau contenu apparaît dans ton compte, prêt à être vérifié et étudié.",
       "settingsLink": "Ouvrir les Réglages →"
     },
     "sharing": {
       "metaTitle": "Partager & explorer — Aide flashkarte",
-      "metaDescription": "Comment rendre un paquet public, parcourir la page Explorer et cloner des paquets depuis la Bibliothèque.",
+      "metaDescription": "Comment partager des paquets de cartes et des cours structurés, parcourir Explorer et utiliser la Bibliothèque.",
       "title": "Partager & explorer",
       "publicHeading": "Rendre un paquet public",
       "publicBody": "Rends l'un de tes paquets public depuis la page Mes paquets pour obtenir un lien partageable et le faire figurer pour que d'autres le trouvent. Tu peux annuler le partage à tout moment. Les réponses restent cachées aux visiteurs tant qu'ils ne se sont pas inscrits pour réviser le paquet.",
       "exploreHeading": "Explorer",
       "exploreBody": "Explorer permet à n'importe qui — connecté ou non — de parcourir et de prévisualiser les paquets publics partagés par d'autres utilisateurs de flashkarte.",
       "libraryHeading": "Bibliothèque",
-      "libraryBody": "Bibliothèque est la version pour les utilisateurs connectés : recherche des paquets publics et clones-en n'importe lequel directement dans ton propre compte pour commencer à réviser immédiatement."
+      "libraryBody": "La Bibliothèque sépare les paquets de cartes officiels et communautaires des cours structurés officiels et communautaires. Ajoute un cours du catalogue à ton apprentissage ; clone un paquet de cartes dans ton compte pour le réviser.",
+      "coursesHeading": "Cours structurés",
+      "coursesBody": "Ouvre Bibliothèque → Mes cours pour voir tes cours structurés. Pour un cours qui t'appartient, choisis Partager avec la communauté pour le lister dans les cours communautaires, ou Retirer de la communauté. Les cours officiels sont marqués Officiel et ne peuvent pas devenir des cours communautaires."
     }
   },
   "explore": {
@@ -748,10 +757,10 @@
     "saveError": "Impossible d'enregistrer le nouvel ordre — réessayez."
   },
   "learn": {
-    "title": "Cours",
+    "title": "Cours structurés",
     "intro": "Des leçons structurées, dans l'ordre. Réussir une leçon ouvre celles qui s'appuient dessus.",
     "toDecks": "← Paquets",
-    "toLearn": "← Cours",
+    "toLearn": "← Cours structurés",
     "toOutline": "Retour au plan",
     "toOutlineArrow": "← Plan",
     "loading": "Chargement…",

@@ -279,12 +279,12 @@
     "lessonsToRead_other": "{{count}} lecciones por leer"
   },
   "courses": {
-    "myCoursesTitle": "Mis cursos",
-    "myCoursesIntro": "Tu aprendizaje guiado, ya sea un curso de lecciones o un curso ordenado de mazos.",
-    "lessonCourses": "Cursos de lecciones",
-    "lessonCourseBadge": "Curso de lecciones",
-    "noLessonCourses": "Todavía no hay cursos de lecciones.",
-    "deckCourses": "Cursos con mazos",
+    "myCoursesTitle": "Mi aprendizaje",
+    "myCoursesIntro": "Tus cursos estructurados y tus colecciones de mazos de tarjetas.",
+    "lessonCourses": "Cursos estructurados",
+    "lessonCourseBadge": "Curso estructurado",
+    "noLessonCourses": "Todavía no hay cursos estructurados.",
+    "deckCourses": "Colecciones de mazos de tarjetas",
     "deckCoursesIntro": "Mazos de tarjetas ordenados con requisitos de progreso.",
     "title": "Mis cursos",
     "browsePublic": "Explorar cursos públicos",
@@ -320,13 +320,13 @@
   "libraryHub": {
     "title": "Biblioteca",
     "navigation": "Mi aprendizaje",
-    "myCourses": "Mis cursos",
+    "myCourses": "Mis cursos estructurados",
     "myDecks": "Mis mazos de tarjetas",
-    "officialCoursesTitle": "Cursos oficiales",
+    "officialCoursesTitle": "Cursos estructurados oficiales",
     "officialCoursesDetail": "Cursos estructurados mantenidos por la aplicación.",
     "officialDecksTitle": "Mazos oficiales",
     "officialDecksDetail": "Mazos de tarjetas mantenidos por la aplicación.",
-    "communityCoursesTitle": "Cursos de la comunidad",
+    "communityCoursesTitle": "Cursos estructurados de la comunidad",
     "communityCoursesDetail": "Cursos estructurados publicados por otros estudiantes.",
     "communityDecksTitle": "Mazos de la comunidad",
     "communityDecksDetail": "Mazos publicados por otros estudiantes."
@@ -334,7 +334,7 @@
   "courseCatalog": {
     "loadError": "No se pudieron cargar los cursos.",
     "adding": "Añadiendo…",
-    "add": "Añadir a mis cursos"
+    "add": "Añadir a mis cursos estructurados"
   },
   "createDeck": {
     "title": "Nuevo mazo",
@@ -567,12 +567,12 @@
           "description": "Cómo funciona la programación SM-2, qué hacen los botones de valoración y qué significan los contadores del mazo."
         },
         "ai": {
-          "title": "Crear mazos con IA",
-          "description": "Conecta tu propio asistente de IA para que cree mazos por ti."
+          "title": "Crear contenido de aprendizaje con IA",
+          "description": "Conecta tu asistente de IA para crear mazos de tarjetas, colecciones o cursos estructurados."
         },
         "sharing": {
           "title": "Compartir y explorar",
-          "description": "Haz público un mazo, busca en la biblioteca y clona mazos que otros han compartido."
+          "description": "Comparte mazos de tarjetas o cursos estructurados y explora la biblioteca."
         }
       }
     },
@@ -586,7 +586,7 @@
       "loopBody": "flashkarte tiene un ciclo central: escribir un mazo y luego estudiarlo. Las tarjetas nuevas aparecen como «Nuevas»; una vez que has repasado una tarjeta, la repetición espaciada decide cuándo «vence» de nuevo. Estudiar con regularidad, aunque sea poco, es lo que hace que el sistema funcione.",
       "mapHeading": "Dónde está todo",
       "mapDecks": "Mis mazos — tus mazos, con contadores de vencidas y accesos rápidos para estudiar, compartir o eliminar.",
-      "mapLibrary": "Biblioteca — busca mazos públicos compartidos por otros usuarios y clona uno en tu cuenta.",
+      "mapLibrary": "Biblioteca — explora mazos de tarjetas y cursos estructurados oficiales y de la comunidad. Mis cursos permite encontrar y compartir tus propios cursos estructurados.",
       "mapExplore": "Explorar — navega por mazos públicos sin iniciar sesión.",
       "mapSettings": "Ajustes — cuenta, apariencia, idioma, conexión con IA y datos."
     },
@@ -597,7 +597,7 @@
       "waysHeading": "Tres formas de crear un mazo",
       "waysWeb": "En la web, abre el editor de mazos, pega o escribe Markdown con el formato de abajo y guarda. Una vista previa en vivo muestra las tarjetas detectadas antes de guardar.",
       "waysAndroid": "En la app de Android, crea o importa un mazo de la misma manera usando el mismo formato Markdown.",
-      "waysAI": "Deja que un asistente de IA cree un mazo por ti — consulta «Crear mazos con IA».",
+      "waysAI": "Deja que un asistente de IA cree un mazo por ti — consulta «Crear contenido de aprendizaje con IA».",
       "formatHeading": "El formato",
       "formatIntro": "Un mazo es Markdown sencillo. El primer encabezado es el título; una línea opcional en cursiva debajo es decorativa y se ignora. Usa encabezados de segundo nivel para agrupar las tarjetas en categorías.",
       "formatCardsIntro": "Escribe las tarjetas en uno de estos dos estilos — puedes mezclar ambos en un mismo mazo:",
@@ -665,25 +665,34 @@
       "choiceBody": "Tanto la app web como la de Android ofrecen un modo de opción múltiple. Para una tarjeta normal, genera opciones automáticamente a partir de tus otras tarjetas pendientes; para una tarjeta de diagnóstico (ver Tipos de tarjeta avanzados) usa las opciones que escribiste, y elegir mal puede mostrar una tarjeta de refuerzo antes de continuar."
     },
     "ai": {
-      "metaTitle": "Crear mazos con IA — Ayuda de flashkarte",
-      "metaDescription": "Cómo conectar tu propio asistente de IA a flashkarte mediante MCP para que cree mazos por ti.",
-      "title": "Crear mazos con IA",
-      "body": "Un asistente de IA puede crear mazos por ti y enviarlos directamente a tu cuenta, usando tu propia cuenta de IA — el servidor de flashkarte nunca ejecuta la IA.",
+      "metaTitle": "Crear contenido de aprendizaje con IA — Ayuda de flashkarte",
+      "metaDescription": "Cómo conectar tu asistente de IA a flashkarte mediante MCP para crear mazos de tarjetas, colecciones y cursos estructurados.",
+      "title": "Crear contenido de aprendizaje con IA",
+      "body": "Un asistente de IA puede crear contenido de aprendizaje y enviarlo directamente a tu cuenta, usando tu propia cuenta de IA — el servidor de flashkarte nunca ejecuta la IA.",
+      "typesHeading": "Elige el tipo de contenido correcto",
+      "typesBody": "Di cuál de estos tipos quieres. Son herramientas de aprendizaje distintas, aunque las herramientas técnicas antiguas aún usen la palabra «course» para una colección.",
+      "flashcardDeck": "Mazo de tarjetas — un conjunto Markdown de preguntas o indicaciones y respuestas concisas para practicar con repetición espaciada.",
+      "deckCollection": "Colección de mazos de tarjetas — una colección ordenada de mazos; el siguiente mazo se desbloquea cuando el anterior es estable.",
+      "structuredCourse": "Curso estructurado — un plan guiado con temas, módulos, lecciones, pantallas de lectura, preguntas, requisitos previos y repasos.",
+      "askHeading": "Pídele a tu IA con claridad",
+      "askBody": "Por ejemplo, pide «un mazo de tarjetas sobre …» o «un curso estructurado sobre …». Para un curso estructurado, dale fuentes reales y pídele que muestre el grafo de requisitos previos y el primer módulo antes de escribir lecciones.",
       "step1": "En Ajustes, genera una clave API y copia la URL del servidor MCP.",
       "step2": "Añade la URL como conector personalizado en tu cliente de IA (por ejemplo claude.ai o Claude Desktop) e inicia sesión con tu cuenta de flashkarte.",
-      "step3": "Pídele que cree un mazo, p. ej. \"Turn this into a flashkarte deck: …\", y el nuevo mazo aparecerá en tu cuenta, listo para estudiar.",
+      "step3": "Pídele el tipo de contenido elegido, por ejemplo \"Turn this into a flashkarte deck: …\" o \"Create a structured learning course about …\". El nuevo contenido aparecerá en tu cuenta, listo para revisar y estudiar.",
       "settingsLink": "Abrir Ajustes →"
     },
     "sharing": {
       "metaTitle": "Compartir y explorar — Ayuda de flashkarte",
-      "metaDescription": "Cómo hacer público un mazo, explorar la página Explorar y clonar mazos desde la Biblioteca.",
+      "metaDescription": "Cómo compartir mazos de tarjetas y cursos estructurados, explorar y usar la Biblioteca.",
       "title": "Compartir y explorar",
       "publicHeading": "Hacer público un mazo",
       "publicBody": "Haz público uno de tus mazos desde la página Mis mazos para obtener una página que puedas compartir y que otros puedan encontrar. Puedes quitarlo de público en cualquier momento. Las respuestas permanecen ocultas para los visitantes hasta que se registran para estudiar el mazo.",
       "exploreHeading": "Explorar",
       "exploreBody": "Explorar permite que cualquiera — con sesión iniciada o no — navegue y vea en vista previa los mazos públicos compartidos por otros usuarios de flashkarte.",
       "libraryHeading": "Biblioteca",
-      "libraryBody": "Biblioteca es la versión para usuarios con sesión iniciada: busca mazos públicos y clona cualquiera de ellos directamente en tu propia cuenta para empezar a estudiar de inmediato."
+      "libraryBody": "Biblioteca separa los mazos de tarjetas oficiales y de la comunidad de los cursos estructurados oficiales y de la comunidad. Añade un curso del catálogo a tu aprendizaje; clona un mazo de tarjetas en tu cuenta para estudiarlo.",
+      "coursesHeading": "Cursos estructurados",
+      "coursesBody": "Abre Biblioteca → Mis cursos para ver tus cursos estructurados. Para un curso tuyo, elige Compartir con la comunidad para incluirlo en Cursos de la comunidad, o Quitar de la comunidad. Los cursos oficiales están marcados como Oficial y no pueden convertirse en cursos de la comunidad."
     }
   },
   "explore": {
@@ -748,10 +757,10 @@
     "saveError": "No se pudo guardar el nuevo orden — inténtalo de nuevo."
   },
   "learn": {
-    "title": "Cursos",
+    "title": "Cursos estructurados",
     "intro": "Lecciones estructuradas, en orden. Superar una lección abre las que se apoyan en ella.",
     "toDecks": "← Mazos",
-    "toLearn": "← Cursos",
+    "toLearn": "← Cursos estructurados",
     "toOutline": "Volver al esquema",
     "toOutlineArrow": "← Esquema",
     "loading": "Cargando…",

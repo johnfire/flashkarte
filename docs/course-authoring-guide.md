@@ -1,14 +1,16 @@
-# How to produce a course in flashkarte
+# How to produce a structured learning course in flashkarte
 
-_Status: current as of 2026-09-20. Audience: an AI agent authoring for an owner, and the owner reviewing it.
+_Status: current as of 2026-09-22. Audience: an AI agent authoring a structured learning course for an owner, and the owner reviewing it.
 This file is the source of truth. It is served over MCP by the `get_course_authoring_guide` tool, and a test
 fails if the two copies drift (see [Where this lives](#where-this-lives))._
 
-A **course** here means the lesson engine: a **subject** (a prerequisite graph of concepts) taught by
-**lessons** (numbered read screens, then multiple-choice questions), grouped into **modules**. It is not the
-older deck "Course" (an ordered, gated list of flashcard decks). For a structured course, use
-`build_lesson_course` and follow this guide. Use `build_flashcard_course` only when the owner explicitly wants
-flashcards or decks; `build_a_course` is its deprecated compatibility alias. The design behind it is in
+A **structured learning course** is a **subject** (a prerequisite graph of concepts) taught by **lessons**
+(numbered read screens, then multiple-choice questions), grouped into **modules**. It is distinct from a
+**flashcard deck** and a **flashcard deck collection** (an ordered, gated collection of flashcard decks). The
+older API calls a deck collection a `course`; therefore `build_flashcard_course` and `create_course` remain
+technical compatibility names for deck collections. Use `build_lesson_course` and follow this guide for a
+structured learning course. For the complete vocabulary and both AI workflows, read
+[Create flashkarte learning content with AI](ai-content-authoring-guide.md). The design behind this system is in
 [`plans/2026-09-19-course-authoring-strategy.md`](plans/2026-09-19-course-authoring-strategy.md) and
 [`plans/2026-09-19-lesson-engine-design.md`](plans/2026-09-19-lesson-engine-design.md).
 
@@ -185,10 +187,11 @@ for a symbol drawn inside a sentence: a `spans` list may mix strings and span ob
   ```
 
   Files go in the order given, so list prerequisite lessons first; it stops at the first failure so nothing is
-  It needs an **AI
+  saved after the failing import. It needs an **AI
   (deck-scoped) key**, because that is what makes the server record the content as AI-authored. The owner creates
   one in Settings, under _Connect your AI_: choose **AI authoring**, name it, generate it and copy it once (it is
-  never shown again). An AI authoring key reaches decks, courses and lessons, but the server refuses it on account
+  never shown again). An AI authoring key reaches flashcard decks, flashcard deck collections and structured
+  learning courses, but the server refuses it on account
   routes such as the profile, key management and data export. It refuses a
   full-scope key (which would record it as the owner's own writing) unless told `--allow-full-key`, refuses a
   non-`https` URL other than localhost, and reads the key from the environment, never from an argument.

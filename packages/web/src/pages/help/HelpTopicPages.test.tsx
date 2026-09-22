@@ -75,7 +75,10 @@ describe("help topic pages", () => {
   it("AiPage links to Settings", () => {
     renderPage(<AiPage />);
     expect(
-      screen.getByRole("heading", { level: 1, name: "Creating decks with AI" }),
+      screen.getByRole("heading", {
+        level: 1,
+        name: "Creating learning content with AI",
+      }),
     ).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Open Settings/ })).toHaveAttribute(
       "href",
@@ -93,6 +96,12 @@ describe("help topic pages", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", { level: 2, name: "Library" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "Structured learning courses",
+      }),
     ).toBeInTheDocument();
   });
 });

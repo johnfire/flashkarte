@@ -1,5 +1,7 @@
 # Subject model — Design
 
+> Historical design record. It uses earlier terminology; current product documentation distinguishes **flashcard decks**, **flashcard deck collections**, and **structured learning courses**.
+
 _Date: 2026-09-19 · Scope: shared + server + MCP first, then web + Android · Builds on
 [the authoring strategy](2026-09-19-course-authoring-strategy.md) and
 [the Transformers DAG](2026-09-19-transformers-concept-dag.md). Decisions taken by Chris on

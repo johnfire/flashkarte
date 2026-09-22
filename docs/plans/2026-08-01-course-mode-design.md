@@ -1,5 +1,7 @@
 # Course Mode — Design
 
+> Historical design record. The implemented product uses the terms **flashcard deck collection** and **structured learning course**; this document preserves its original terminology and must not be read as current product documentation.
+
 **Date:** 2026-08-01 · **Status:** validated design, not yet specced into PRs
 **Supersedes nothing.** Extends [`docs/learning-engine-ideas.md`](../learning-engine-ideas.md)
 and the spec pack in [`docs/specs/`](../specs/README.md).

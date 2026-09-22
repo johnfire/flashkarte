@@ -32,8 +32,10 @@ describe("course prompts", () => {
       "build_lesson_course",
     ]);
     expect(descriptions.build_a_course).toMatch(/deprecated/i);
-    expect(descriptions.build_flashcard_course).toMatch(/legacy/i);
-    expect(descriptions.build_lesson_course).toMatch(/default/i);
+    expect(descriptions.build_flashcard_course).toMatch(/deck collection/i);
+    expect(descriptions.build_lesson_course).toMatch(
+      /structured learning course/i,
+    );
   });
 
   test("keeps the deprecated prompt as a flashcard-course compatibility alias", () => {
@@ -45,7 +47,7 @@ describe("course prompts", () => {
       .text;
 
     expect(alias).toBe(flashcard);
-    expect(alias).toMatch(/legacy flashcard course/i);
+    expect(alias).toMatch(/flashcard deck collection/i);
     expect(alias).toMatch(/create_course/);
     expect(alias).toMatch(/create_deck/);
     expect(alias).toMatch(/build_lesson_course/);

@@ -45,12 +45,24 @@ fun HelpScreen(onBack: () -> Unit, onOpenBranchingHelp: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(28.dp),
         ) {
             GettingStartedSection()
+            ContentTypesSection()
             WritingDecksSection()
             BranchingSection(onOpenBranchingHelp)
             StudyingSection()
             AiSection()
             SharingSection()
         }
+    }
+}
+
+@Composable
+private fun ContentTypesSection() {
+    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        TopicTitle(stringResource(R.string.help_content_types_title))
+        Body(stringResource(R.string.help_content_types_body))
+        Bullet(stringResource(R.string.help_content_types_deck))
+        Bullet(stringResource(R.string.help_content_types_collection))
+        Bullet(stringResource(R.string.help_content_types_course))
     }
 }
 
@@ -158,5 +170,7 @@ private fun SharingSection() {
         Body(stringResource(R.string.help_sharing_public_body))
         SectionHeading(stringResource(R.string.help_sharing_library_heading))
         Body(stringResource(R.string.help_sharing_library_body))
+        SectionHeading(stringResource(R.string.help_sharing_courses_heading))
+        Body(stringResource(R.string.help_sharing_courses_body))
     }
 }

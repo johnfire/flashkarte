@@ -1,20 +1,20 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
-const BUILD_FLASHCARD_COURSE_PROMPT = `The user explicitly wants a legacy flashcard course: an ordered, gated set of decks. This is not Flashkarte's structured lesson engine. For a structured course of subjects, modules, lessons, screens, and questions, use the build_lesson_course prompt instead.
+const BUILD_FLASHCARD_COURSE_PROMPT = `The user explicitly wants a flashcard deck collection: an ordered, gated collection of flashcard decks. The technical tool names retain the older word "course" for compatibility. This is not Flashkarte's structured learning course. For a structured course of subjects, modules, lessons, screens, and questions, use the build_lesson_course prompt instead.
 
 Walk through this process rather than jumping straight to authoring cards:
 
 1. Clarify the goal, the learner's starting point, and a sensible number of decks. Ask if scope is unclear.
 2. Ground cards in real sources. Do not invent facts from memory.
 3. Model atomic concepts and prerequisite edges. Show the learner-facing sequence for review.
-4. Create the legacy deck course with create_course, then attach decks in learning order with create_deck and course_id.
+4. Create the flashcard deck collection with create_course, then attach decks in learning order with create_deck and course_id.
 5. Use straightforward cards for facts, diagnostic cards for real confusions, and reading cards for explanations.
 6. Review the deck sequence with the owner before calling it done.
 
-Legacy deck courses unlock each deck after the preceding deck is stable.`;
+Flashcard deck collections unlock each deck after the preceding deck is stable.`;
 
-const BUILD_LESSON_COURSE_PROMPT = `The user wants a structured lesson course in Flashkarte. First call get_course_authoring_guide and follow it. A structured course is a subject with a prerequisite graph, taught by modules of lessons containing read screens and multiple-choice questions; it is not an ordered group of decks.
+const BUILD_LESSON_COURSE_PROMPT = `The user wants a structured learning course in Flashkarte. First call get_course_authoring_guide and follow it. A structured learning course is a subject with a prerequisite graph, taught by modules of lessons containing read screens and multiple-choice questions; it is not a flashcard deck collection.
 
 Follow the guide's checkpoints in order:
 
@@ -57,19 +57,19 @@ export function registerCoursePrompts(server: McpServer): void {
   registerCoursePrompt(
     server,
     "build_a_course",
-    "Deprecated alias for build_flashcard_course. Builds a legacy, gated course of flashcard decks; do not use for structured lesson courses.",
+    "Deprecated alias for build_flashcard_course. Builds a gated flashcard deck collection; do not use for structured learning courses.",
     BUILD_FLASHCARD_COURSE_PROMPT,
   );
   registerCoursePrompt(
     server,
     "build_flashcard_course",
-    "Builds a legacy, gated course of flashcard decks. Use only when the user explicitly requests flashcards, decks, or a legacy deck course.",
+    "Builds a gated flashcard deck collection. Use only when the user explicitly requests flashcards, decks, or a deck collection.",
     BUILD_FLASHCARD_COURSE_PROMPT,
   );
   registerCoursePrompt(
     server,
     "build_lesson_course",
-    "Builds a structured course with a subject, modules, lessons, screens, and questions. This is the default for a request to build a course.",
+    "Builds a structured learning course with a subject, modules, lessons, screens, and questions. Use when the owner asks for a guided curriculum or lessons.",
     BUILD_LESSON_COURSE_PROMPT,
   );
 }

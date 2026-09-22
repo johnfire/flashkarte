@@ -1,5 +1,7 @@
 # flashkarte — From Flashcard App to Learning Engine
 
+> Historical product exploration (2026-07-02). Some proposals were implemented, changed, or rejected. For current terminology and behavior, use [Create flashkarte learning content with AI](ai-content-authoring-guide.md) and the current in-app Help.
+
 **Date:** 2026-07-02 · **Reviewed:** full repo at `~/ppp2/flashkarte` (shared parser + SM-2, server, web, Android, MCP, branching design spec)
 
 ---

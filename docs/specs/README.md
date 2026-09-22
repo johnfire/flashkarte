@@ -1,5 +1,7 @@
 # flashkarte Spec Pack — Learning Engine
 
+> Historical specifications and implementation records. They may describe proposed or superseded behavior; use the current user and AI authoring guides for product behavior.
+
 Agent-ready specs derived from `docs/learning-engine-ideas.md` (2026-07-02).
 **Read `00-guardrails.md` first, always.** One spec = one PR. Parser/scheduler changes
 ship TS + Kotlin together with corpus cases — no exceptions.

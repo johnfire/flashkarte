@@ -14,6 +14,12 @@
     <string name="help_getting_started_map_library">Bibliothèque — recherche des paquets publics partagés par d\'autres utilisateurs et clones-en un dans ton compte.</string>
     <string name="help_getting_started_map_settings">Réglages — compte, apparence, connexion IA et données.</string>
 
+    <string name="help_content_types_title">Trois types de contenu d\'apprentissage</string>
+    <string name="help_content_types_body">flashkarte utilise ces noms pour des outils différents. Indique à ton IA lequel tu veux.</string>
+    <string name="help_content_types_deck">Paquet de cartes — questions ou invites Markdown avec des réponses concises pour la répétition espacée.</string>
+    <string name="help_content_types_collection">Collection de paquets de cartes — une collection ordonnée de paquets ; le suivant s\'ouvre lorsque le précédent est stabilisé.</string>
+    <string name="help_content_types_course">Cours structuré — un parcours guidé avec sujets, modules, leçons, écrans de lecture, questions, prérequis et révisions.</string>
+
     <string name="help_writing_decks_title">Écrire des paquets</string>
     <string name="help_writing_ways_heading">Trois façons de créer un paquet</string>
     <string name="help_writing_ways_app">Touche Nouveau dans la barre du bas pour créer ou importer un paquet au format ci-dessous.</string>
@@ -44,22 +50,24 @@
     <string name="help_studying_choice_heading">Mode à choix multiples</string>
     <string name="help_studying_choice_body">Passe en mode Choix pendant une session pour obtenir des options de réponse générées automatiquement à partir de tes autres cartes — tu es noté dès que tu en touches une.</string>
 
-    <string name="help_ai_title">Créer des paquets avec l\'IA</string>
-    <string name="help_ai_body">Un assistant IA peut créer des paquets pour toi et les envoyer directement dans ton compte, en utilisant ton propre compte IA — le serveur de flashkarte ne fait jamais tourner l\'IA lui-même.</string>
+    <string name="help_ai_title">Créer du contenu d\'apprentissage avec l\'IA</string>
+    <string name="help_ai_body">Un assistant IA peut créer des paquets de cartes, des collections ou des cours structurés et les envoyer directement dans ton compte, en utilisant ton propre compte IA — le serveur de flashkarte ne fait jamais tourner l\'IA lui-même.</string>
     <string name="help_ai_step1">Dans les Réglages, génère une clé API et copie l\'URL du serveur MCP.</string>
     <string name="help_ai_step2">Ajoute l\'URL comme connecteur personnalisé dans ton client IA (par exemple claude.ai ou Claude Desktop) et connecte-toi avec ton compte flashkarte.</string>
-    <string name="help_ai_step3">Demande-lui de créer un paquet, par exemple : Turn this into a flashkarte deck: … — le nouveau paquet apparaît dans ton compte, prêt à être révisé.</string>
+    <string name="help_ai_step3">Demande-lui le type de contenu choisi, par exemple : Turn this into a flashkarte deck: … ou Create a structured learning course about … — le nouveau contenu apparaît dans ton compte, prêt à être vérifié et étudié.</string>
 
     <string name="help_sharing_title">Partager &amp; explorer</string>
     <string name="help_sharing_public_heading">Rendre un paquet public</string>
     <string name="help_sharing_public_body">Publie l\'un de tes paquets depuis son menu pour obtenir un lien partageable et le faire figurer dans la Bibliothèque pour que d\'autres le trouvent. Tu peux annuler la publication à tout moment.</string>
     <string name="help_sharing_library_heading">Bibliothèque</string>
     <string name="help_sharing_library_body">Recherche des paquets publics partagés par d\'autres utilisateurs de flashkarte et clones-en n\'importe lequel directement dans ton compte pour commencer à réviser immédiatement.</string>
+    <string name="help_sharing_courses_heading">Cours structurés</string>
+    <string name="help_sharing_courses_body">Sur le web, ouvre Bibliothèque → Mes cours pour voir tes cours structurés. Le propriétaire peut partager un cours avec la communauté ou le retirer ; les cours officiels ne peuvent pas devenir des cours communautaires.</string>
 
     <!-- Bottom navigation -->
     <string name="nav_decks">Paquets</string>
     <string name="nav_new">Nouveau</string>
-    <string name="nav_courses">Cours</string>
+    <string name="nav_courses">Collections</string>
     <string name="nav_library">Bibliothèque</string>
     <string name="nav_settings">Réglages</string>
 
@@ -108,10 +116,10 @@
     </plurals>
 
     <!-- Learn: structured lessons -->
-    <string name="learn_title">Apprendre</string>
+    <string name="learn_title">Cours structurés</string>
     <string name="learn_intro">Des leçons structurées, dans l\'ordre. Réussir une leçon ouvre celles qui s\'appuient dessus.</string>
     <string name="learn_to_decks">← Paquets</string>
-    <string name="learn_to_learn">← Apprendre</string>
+    <string name="learn_to_learn">← Cours structurés</string>
     <string name="learn_to_outline">Retour au plan</string>
     <string name="learn_to_outline_arrow">← Plan</string>
     <string name="learn_loading">Chargement…</string>
