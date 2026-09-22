@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import type { LearnerOutline } from "../api/learn-types";
+import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { OutlineLessonRow } from "./OutlineLessonRow";
 
@@ -17,12 +18,7 @@ export function OutlinePage() {
 
   return (
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
-      <Link
-        to="/learn"
-        className="mb-4 inline-block text-sm text-gray-700 dark:text-gray-300"
-      >
-        {t("learn.toLearn")}
-      </Link>
+      <PersonalContentTabs />
       {loading && <p>{t("learn.loading")}</p>}
       {error != null && (
         <p role="alert" className="text-red-700 dark:text-red-400">

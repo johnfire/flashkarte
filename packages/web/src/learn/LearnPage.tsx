@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import type { LearnSubject } from "../api/learn-types";
+import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { useAuth } from "../auth/AuthContext";
 
@@ -43,12 +44,7 @@ export function LearnPage() {
 
   return (
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
-      <Link
-        to="/"
-        className="mb-4 inline-block text-sm text-gray-700 dark:text-gray-300"
-      >
-        {t("learn.toDecks")}
-      </Link>
+      <PersonalContentTabs />
       <h1 className="text-3xl font-bold">{t("learn.title")}</h1>
       <p className="mt-2 text-gray-700 dark:text-gray-300">
         {t("learn.intro")}

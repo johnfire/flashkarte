@@ -9,6 +9,7 @@ import {
 } from "../api/client";
 import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
+import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { DeckListItem } from "./DeckListItem";
 import {
@@ -101,6 +102,7 @@ export function DeckListPage() {
 
   return (
     <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
+      <PersonalContentTabs />
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("decks.title")}</h1>
         <div className="flex gap-3">
