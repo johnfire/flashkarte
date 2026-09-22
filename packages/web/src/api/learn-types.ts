@@ -4,8 +4,11 @@ import type { Block } from "@flashkarte/shared";
 export interface LearnSubject {
   id: string;
   reference_number?: number;
+  user_id: string;
   title: string;
   description: string | null;
+  is_public: boolean;
+  is_official: boolean;
   concept_count: number;
 }
 

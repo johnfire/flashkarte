@@ -6,6 +6,7 @@
     "title": "Contract",
     "description": null,
     "is_public": false,
+    "is_official": false,
     "version": 2,
     "created_at": "<time>",
     "updated_at": "<time>",

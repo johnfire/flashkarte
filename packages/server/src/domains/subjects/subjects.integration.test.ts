@@ -155,6 +155,29 @@ describe("subjects and concepts", () => {
     expect(listed[0].concept_count).toBe(2);
   });
 
+  it("publishes an owner's course to the community catalogue but not an official course", async () => {
+    const subject = await seedSubject(["a"]);
+
+    const unpublished = await subjects.listSubjects(OWNER_ID);
+    expect(unpublished[0]).toMatchObject({
+      user_id: OWNER_ID,
+      is_public: false,
+      is_official: false,
+    });
+    expect(await subjects.listCatalogSubjects(false)).toEqual([]);
+
+    await subjects.updateSubject(OWNER_ID, subject.id, { isPublic: true });
+    expect(await subjects.listCatalogSubjects(false)).toHaveLength(1);
+
+    await getPool().query(
+      "UPDATE subjects SET is_official = true WHERE id = $1",
+      [subject.id],
+    );
+    await expect(
+      subjects.updateSubject(OWNER_ID, subject.id, { isPublic: false }),
+    ).rejects.toBeInstanceOf(ValidationError);
+  });
+
   it("keeps concepts in authoring order and bumps the version on every edit", async () => {
     const subject = await seedSubject(["zeta", "alpha"]);
     const loaded = await subjects.getSubject(OWNER_ID, subject.id);

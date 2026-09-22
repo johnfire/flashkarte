@@ -175,6 +175,18 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
   await page.goto("/");
   await page.getByRole("link", { name: "Library", exact: true }).click();
   await page.getByRole("link", { name: "My Courses", exact: true }).click();
+  await page
+    .getByRole("button", { name: "Share to Community", exact: true })
+    .click();
+  await expect(page.getByText("In Community", { exact: true })).toBeVisible();
+  await page.goto("/library");
+  await page
+    .getByRole("link", { name: "Community Courses", exact: true })
+    .click();
+  await expect(
+    page.getByRole("heading", { name: "Transformers e2e" }),
+  ).toBeVisible();
+  await page.goto("/learn");
   await page.getByRole("link", { name: /Transformers e2e/ }).click();
   await expect(
     page.getByRole("heading", { name: "Transformers e2e" }),

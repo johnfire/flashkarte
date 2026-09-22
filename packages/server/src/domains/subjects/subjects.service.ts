@@ -213,6 +213,11 @@ export async function updateSubject(
   patch: { title?: unknown; description?: unknown; isPublic?: unknown },
 ) {
   const current = await requireOwnedSubject(userId, id);
+  if (current.is_official && patch.isPublic !== undefined) {
+    throw new ValidationError(
+      "Official courses cannot change community sharing",
+    );
+  }
   const next = {
     title:
       patch.title !== undefined

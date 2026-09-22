@@ -542,6 +542,11 @@ export const api = {
       request<LearnSubject[]>(`/subjects/catalog?source=${source}`),
     enroll: (subjectId: string) =>
       request<void>(`/subjects/${subjectId}/enroll`, { method: "POST" }),
+    setPublic: (subjectId: string, isPublic: boolean) =>
+      request<LearnSubject>(`/subjects/${subjectId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ isPublic }),
+      }),
     outline: (subjectId: string) =>
       request<LearnerOutline>(`/subjects/${subjectId}/learn/outline`),
     start: (subjectId: string, slug: string) =>
