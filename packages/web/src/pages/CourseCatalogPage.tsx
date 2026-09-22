@@ -46,7 +46,7 @@ export function CourseCatalogPage() {
           {t("courseCatalog.loadError")}
         </p>
       )}
-      <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {courses?.map((course) => (
           <li key={course.id} className="rounded-lg border p-4">
             <h2 className="font-medium">

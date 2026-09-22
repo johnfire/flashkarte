@@ -132,7 +132,7 @@ export function AppDecksCollectionPage() {
         </p>
       )}
 
-      <ul className="space-y-3">
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {decks.items?.map((d) => (
           <OfficialDeckRow
             key={d.id}

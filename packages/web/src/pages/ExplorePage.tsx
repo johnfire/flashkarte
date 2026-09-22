@@ -67,7 +67,7 @@ export function ExplorePage() {
       {decks && decks.length === 0 && (
         <p className="text-gray-500 dark:text-gray-400">{t("explore.empty")}</p>
       )}
-      <ul className="space-y-2">
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {decks?.map((d) => (
           <li key={d.id} className="rounded-lg border p-3">
             <Link

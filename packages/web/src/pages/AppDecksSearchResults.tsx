@@ -93,7 +93,7 @@ export function AppDecksSearchResults({ q }: AppDecksSearchResultsProps) {
             {t("decks.collectionsEmpty")}
           </p>
         )}
-        <ul className="space-y-3">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {collections.items?.map((c) => (
             <CollectionRow key={c.id} collection={c} />
           ))}
@@ -125,7 +125,7 @@ export function AppDecksSearchResults({ q }: AppDecksSearchResultsProps) {
             {t("decks.standaloneEmpty")}
           </p>
         )}
-        <ul className="space-y-3">
+        <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {standalone.items?.map((d) => (
             <OfficialDeckRow
               key={d.id}

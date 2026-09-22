@@ -140,6 +140,9 @@ describe("LibraryHubPage", () => {
     expect(
       screen.getByRole("link", { name: "My Structured Learning Courses" }),
     ).toHaveAttribute("href", "/learn");
+    for (const catalogList of screen.getAllByRole("list")) {
+      expect(catalogList).toHaveClass("grid", "lg:grid-cols-3");
+    }
 
     await waitFor(() =>
       expect(deckApi.listCollections).toHaveBeenCalledWith({ limit: 100 }),

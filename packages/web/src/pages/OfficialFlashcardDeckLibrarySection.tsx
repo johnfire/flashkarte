@@ -104,7 +104,7 @@ export function OfficialFlashcardDeckLibrarySection() {
           <h3 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
             {t("libraryHub.deckCollections")}
           </h3>
-          <ul className="space-y-3">
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {collections.data?.map((collection) => (
               <CollectionRow key={collection.id} collection={collection} />
             ))}
@@ -116,7 +116,7 @@ export function OfficialFlashcardDeckLibrarySection() {
           <h3 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
             {t("libraryHub.flashcardDecks")}
           </h3>
-          <ul className="space-y-3">
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {decks.data?.map((deck) => (
               <OfficialDeckRow
                 key={deck.id}
