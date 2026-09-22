@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { Link, useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 import {
   api,
@@ -9,6 +8,7 @@ import {
 } from "../api/client";
 import { DeckWithCounts } from "../api/types";
 import { useAuth } from "../auth/AuthContext";
+import { PersonalContentMenu } from "../components/PersonalContentMenu";
 import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { DeckListItem } from "./DeckListItem";
@@ -20,8 +20,7 @@ import {
 
 export function DeckListPage() {
   const { t } = useTranslation();
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const { user } = useAuth();
   // Product APIs are gated behind a verified email, and verification can only
   // be outstanding on a brand-new account (changing an email keeps the old
   // address verified until the new one is confirmed) — so an unverified user
@@ -103,51 +102,9 @@ export function DeckListPage() {
   return (
     <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <PersonalContentTabs />
-      <header className="mb-6 flex items-center justify-between">
+      <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <h1 className="text-3xl font-bold">{t("decks.title")}</h1>
-        <div className="flex gap-3">
-          <Link
-            to="/decks/new"
-            className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white"
-          >
-            {t("decks.newDeck")}
-          </Link>
-          <Link
-            to="/library"
-            className="self-center text-sm text-gray-500 dark:text-gray-400"
-          >
-            {t("decks.library")}
-          </Link>
-          <Link
-            to="/help"
-            className="self-center text-sm text-gray-500 dark:text-gray-400"
-          >
-            {t("common.help")}
-          </Link>
-          {user?.accountType === "admin" && (
-            <Link
-              to="/admin"
-              className="self-center text-sm text-gray-500 dark:text-gray-400"
-            >
-              {t("decks.admin")}
-            </Link>
-          )}
-          <Link
-            to="/settings"
-            className="self-center text-sm text-gray-500 dark:text-gray-400"
-          >
-            {t("decks.settings")}
-          </Link>
-          <button
-            onClick={async () => {
-              await logout();
-              navigate("/login");
-            }}
-            className="text-sm text-gray-500 dark:text-gray-400"
-          >
-            {t("decks.signOut")}
-          </button>
-        </div>
+        <PersonalContentMenu />
       </header>
 
       {error && <p className="mb-4 text-red-600">{error}</p>}

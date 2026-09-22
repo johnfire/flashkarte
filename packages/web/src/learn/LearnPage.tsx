@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import type { LearnSubject } from "../api/learn-types";
+import { PersonalContentMenu } from "../components/PersonalContentMenu";
 import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { useAuth } from "../auth/AuthContext";
@@ -45,7 +46,10 @@ export function LearnPage() {
   return (
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <PersonalContentTabs />
-      <h1 className="text-3xl font-bold">{t("learn.title")}</h1>
+      <header className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="text-3xl font-bold">{t("learn.title")}</h1>
+        <PersonalContentMenu />
+      </header>
       <p className="mt-2 text-gray-700 dark:text-gray-300">
         {t("learn.intro")}
       </p>
