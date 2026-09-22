@@ -174,7 +174,9 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
   // The Library shows the published community course directly.
   await page.goto("/");
   await page.getByRole("link", { name: "Library", exact: true }).click();
-  await page.getByRole("link", { name: "My Courses", exact: true }).click();
+  await page
+    .getByRole("link", { name: "My Structured Learning Courses", exact: true })
+    .click();
   await page
     .getByRole("button", { name: "Share to Community", exact: true })
     .click();
