@@ -39,6 +39,11 @@ export function LearnPage() {
             >
               <span className="block text-lg font-semibold">
                 {subject.title}
+                {subject.reference_number !== undefined && (
+                  <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+                    #{subject.reference_number}
+                  </span>
+                )}
               </span>
               {subject.description && (
                 <span className="block text-sm text-gray-700 dark:text-gray-300">

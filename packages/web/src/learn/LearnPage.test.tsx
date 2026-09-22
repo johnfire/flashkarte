@@ -17,6 +17,7 @@ describe("LearnPage", () => {
     subjects.mockResolvedValue([
       {
         id: "s1",
+        reference_number: 42,
         title: "Transformers",
         description: "How they work",
         concept_count: 1,
@@ -29,6 +30,7 @@ describe("LearnPage", () => {
     );
     const link = await screen.findByRole("link", { name: /Transformers/ });
     expect(link.getAttribute("href")).toBe("/learn/s1");
+    expect(screen.getByText("#42")).toBeTruthy();
     expect(screen.getByText("1 concept")).toBeTruthy();
   });
 
