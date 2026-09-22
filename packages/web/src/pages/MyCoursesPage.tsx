@@ -12,7 +12,7 @@ interface MyCourses {
   lessonCourses: LearnSubject[];
 }
 
-/** Shows both course engines without asking a learner to know the difference. */
+/** Transitional overview for old bookmarks; the two concepts stay visibly distinct. */
 export function MyCoursesPage() {
   const { t } = useTranslation();
   const loadMyCourses = useCallback(async (): Promise<MyCourses> => {
@@ -47,8 +47,7 @@ export function MyCoursesPage() {
           aria-label="Course library"
           className="flex gap-3 text-sm text-indigo-600"
         >
-          <Link to="/library/courses/official">Official Courses</Link>
-          <Link to="/library/courses/community">Community Courses</Link>
+          <Link to="/library">{t("libraryHub.title")}</Link>
           <Link to="/">{t("courses.myDecks")}</Link>
         </nav>
       </header>

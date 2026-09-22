@@ -42,7 +42,7 @@ export function PublicCoursesPage() {
     <div className="mx-auto max-w-2xl p-4">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("courses.browsePublic")}</h1>
-        <Link to="/courses" className="text-sm text-indigo-600">
+        <Link to="/library/community/decks" className="text-sm text-indigo-600">
           {t("courses.backToCourses")}
         </Link>
       </header>

@@ -317,6 +317,25 @@
     "cloning": "Clonando…",
     "cloneError": "No se pudo clonar ese curso. Inténtalo de nuevo."
   },
+  "libraryHub": {
+    "title": "Biblioteca",
+    "navigation": "Mi aprendizaje",
+    "myCourses": "Mis cursos",
+    "myDecks": "Mis mazos de tarjetas",
+    "officialCoursesTitle": "Cursos oficiales",
+    "officialCoursesDetail": "Cursos estructurados mantenidos por la aplicación.",
+    "officialDecksTitle": "Mazos oficiales",
+    "officialDecksDetail": "Mazos de tarjetas mantenidos por la aplicación.",
+    "communityCoursesTitle": "Cursos de la comunidad",
+    "communityCoursesDetail": "Cursos estructurados publicados por otros estudiantes.",
+    "communityDecksTitle": "Mazos de la comunidad",
+    "communityDecksDetail": "Mazos publicados por otros estudiantes."
+  },
+  "courseCatalog": {
+    "loadError": "No se pudieron cargar los cursos.",
+    "adding": "Añadiendo…",
+    "add": "Añadir a mis cursos"
+  },
   "createDeck": {
     "title": "Nuevo mazo",
     "instructions": "Pega Markdown o sube un archivo <0>.md</0>/<1>.txt</1>. Usa <2># Title</2>, <3>## Category</3> y <4>**1. Question**</4> seguido de la respuesta.",
@@ -729,15 +748,15 @@
     "saveError": "No se pudo guardar el nuevo orden — inténtalo de nuevo."
   },
   "learn": {
-    "title": "Aprender",
+    "title": "Cursos",
     "intro": "Lecciones estructuradas, en orden. Superar una lección abre las que se apoyan en ella.",
     "toDecks": "← Mazos",
-    "toLearn": "← Aprender",
+    "toLearn": "← Cursos",
     "toOutline": "Volver al esquema",
     "toOutlineArrow": "← Esquema",
     "loading": "Cargando…",
     "loadError": "No se pudo cargar. Inténtalo de nuevo.",
-    "empty": "Aún no hay temas. Pide a tu IA que cree uno.",
+    "empty": "Aún no hay cursos. Pide a tu IA que cree uno.",
     "conceptCount_one": "{{count}} concepto",
     "conceptCount_other": "{{count}} conceptos",
     "outlineIntro": "Lo que vas a aprender, en orden.",

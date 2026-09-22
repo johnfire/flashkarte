@@ -1,10 +1,12 @@
 import { useCallback, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import { api } from "../api/client";
 import type { LearnSubject } from "../api/learn-types";
 import { useAsync } from "../hooks/use-async";
 
 export function CourseCatalogPage() {
+  const { t } = useTranslation();
   const { source = "official" } = useParams<{
     source: "official" | "community";
   }>();
@@ -25,20 +27,23 @@ export function CourseCatalogPage() {
       setEnrollingId(null);
     }
   }
-  const title =
-    source === "official" ? "Official Courses" : "Community Courses";
+  const title = t(
+    source === "official"
+      ? "libraryHub.officialCoursesTitle"
+      : "libraryHub.communityCoursesTitle",
+  );
   return (
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex justify-between">
         <h1 className="text-3xl font-bold">{title}</h1>
-        <Link to="/courses" className="text-sm text-indigo-600">
-          My Courses
+        <Link to="/library" className="text-sm text-indigo-600">
+          {t("libraryHub.title")}
         </Link>
       </header>
-      {loading && <p>Loading…</p>}
+      {loading && <p>{t("common.loading")}</p>}
       {Boolean(error) && (
         <p role="alert" className="text-red-600">
-          Could not load courses.
+          {t("courseCatalog.loadError")}
         </p>
       )}
       <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
@@ -62,7 +67,9 @@ export function CourseCatalogPage() {
               onClick={() => enroll(course)}
               className="mt-3 rounded bg-indigo-600 px-3 py-1.5 text-sm text-white disabled:opacity-60"
             >
-              {enrollingId === course.id ? "Adding…" : "Add to My Courses"}
+              {enrollingId === course.id
+                ? t("courseCatalog.adding")
+                : t("courseCatalog.add")}
             </button>
           </li>
         ))}

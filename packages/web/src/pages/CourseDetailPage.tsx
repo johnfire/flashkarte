@@ -83,7 +83,7 @@ export function CourseDetailPage() {
       return;
     try {
       await api.courses.remove(course.id);
-      navigate("/courses");
+      navigate("/courses/decks");
     } catch (err) {
       reportClientError({
         message: err instanceof Error ? err.message : String(err),
@@ -109,7 +109,7 @@ export function CourseDetailPage() {
   return (
     <div className="mx-auto max-w-2xl p-4">
       <div className="mb-4 flex items-center justify-between text-sm">
-        <Link to="/courses" className="text-indigo-600">
+        <Link to="/courses/decks" className="text-indigo-600">
           {t("courses.backToCourses")}
         </Link>
         <div className="flex gap-3">

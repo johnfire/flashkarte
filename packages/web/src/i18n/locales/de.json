@@ -317,6 +317,25 @@
     "cloning": "Wird kopiert…",
     "cloneError": "Der Kurs konnte nicht kopiert werden. Versuche es erneut."
   },
+  "libraryHub": {
+    "title": "Bibliothek",
+    "navigation": "Mein Lernen",
+    "myCourses": "Meine Kurse",
+    "myDecks": "Meine Karteikarten-Decks",
+    "officialCoursesTitle": "Offizielle Kurse",
+    "officialCoursesDetail": "Strukturierte Kurse der App.",
+    "officialDecksTitle": "Offizielle Karteikarten-Decks",
+    "officialDecksDetail": "Karteikarten-Decks der App.",
+    "communityCoursesTitle": "Community-Kurse",
+    "communityCoursesDetail": "Strukturierte Kurse anderer Lernender.",
+    "communityDecksTitle": "Community-Karteikarten-Decks",
+    "communityDecksDetail": "Decks, die andere Lernende veröffentlicht haben."
+  },
+  "courseCatalog": {
+    "loadError": "Kurse konnten nicht geladen werden.",
+    "adding": "Wird hinzugefügt…",
+    "add": "Zu meinen Kursen hinzufügen"
+  },
   "createDeck": {
     "title": "Neuer Stapel",
     "instructions": "Füge Markdown ein oder lade eine <0>.md</0>/<1>.txt</1>-Datei hoch. Verwende <2># Title</2>, <3>## Category</3> und <4>**1. Question**</4> gefolgt von der Antwort.",
@@ -729,15 +748,15 @@
     "saveError": "Die neue Reihenfolge konnte nicht gespeichert werden — bitte erneut versuchen."
   },
   "learn": {
-    "title": "Lernen",
+    "title": "Kurse",
     "intro": "Strukturierte Lektionen der Reihe nach. Wer eine Lektion besteht, schaltet die darauf aufbauenden frei.",
     "toDecks": "← Decks",
-    "toLearn": "← Lernen",
+    "toLearn": "← Kurse",
     "toOutline": "Zurück zur Übersicht",
     "toOutlineArrow": "← Übersicht",
     "loading": "Wird geladen …",
     "loadError": "Konnte nicht geladen werden. Bitte erneut versuchen.",
-    "empty": "Noch keine Themen. Bitte deine KI, eines zu erstellen.",
+    "empty": "Noch keine Kurse. Bitte deine KI, einen zu erstellen.",
     "conceptCount_one": "{{count}} Konzept",
     "conceptCount_other": "{{count}} Konzepte",
     "outlineIntro": "Was du lernen wirst, der Reihe nach.",

@@ -171,9 +171,10 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
   );
   const artifacts = path.dirname(MAIL_SINK);
 
-  // Learn > the subject > its outline.
+  // Library > My Courses > the subject > its outline.
   await page.goto("/");
-  await page.getByRole("link", { name: "Learn", exact: true }).click();
+  await page.getByRole("link", { name: "Library", exact: true }).click();
+  await page.getByRole("link", { name: "My Courses", exact: true }).click();
   await page.getByRole("link", { name: /Transformers e2e/ }).click();
   await expect(
     page.getByRole("heading", { name: "Transformers e2e" }),

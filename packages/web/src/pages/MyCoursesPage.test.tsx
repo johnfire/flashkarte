@@ -47,7 +47,7 @@ describe("MyCoursesPage", () => {
     );
     expect(await screen.findByText("Lesson route")).toBeInTheDocument();
     expect(screen.getByText("Deck route")).toBeInTheDocument();
-    expect(screen.getByText("Lesson course")).toBeInTheDocument();
-    expect(screen.getByText("Deck Courses")).toBeInTheDocument();
+    expect(screen.getByText("Course")).toBeInTheDocument();
+    expect(screen.getByText("Deck Collections")).toBeInTheDocument();
   });
 });

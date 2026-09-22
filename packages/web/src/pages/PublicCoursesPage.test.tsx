@@ -44,13 +44,13 @@ function renderPage() {
   );
 }
 
-describe("PublicCoursesPage", () => {
+describe("PublicCoursesPage (deck collections)", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockedApi.list.mockResolvedValue([course]);
   });
 
-  test("lists public courses", async () => {
+  test("lists public deck collections", async () => {
     renderPage();
     expect(await screen.findByText("Intro to Circuits")).toBeInTheDocument();
     expect(screen.getByText("4 decks")).toBeInTheDocument();
@@ -60,11 +60,11 @@ describe("PublicCoursesPage", () => {
     mockedApi.list.mockResolvedValue([]);
     renderPage();
     expect(
-      await screen.findByText(/No public courses yet/),
+      await screen.findByText(/No public deck collections yet/),
     ).toBeInTheDocument();
   });
 
-  test("clones a course and navigates to it", async () => {
+  test("clones a deck collection and navigates to it", async () => {
     mockedApi.clone.mockResolvedValue({
       course: { ...course, id: "new-c1" },
       decks_cloned: 4,

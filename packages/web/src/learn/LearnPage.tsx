@@ -5,7 +5,7 @@ import { api, ApiError } from "../api/client";
 import type { LearnSubject } from "../api/learn-types";
 import { useAsync } from "../hooks/use-async";
 
-/** /learn — the subjects you can learn, each opening on its outline. */
+/** /learn — the real courses a learner owns or has added, each opening on its outline. */
 export function LearnPage() {
   const { t } = useTranslation();
   const load = useCallback(() => api.learn.subjects(), []);

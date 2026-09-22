@@ -45,25 +45,27 @@ function renderPage() {
   );
 }
 
-describe("CoursesPage", () => {
+describe("CoursesPage (deck collections)", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockedApi.list.mockResolvedValue([course]);
   });
 
-  test("lists the user's courses with progress", async () => {
+  test("lists the user's deck collections with progress", async () => {
     renderPage();
     expect(await screen.findByText("Circuits 101")).toBeInTheDocument();
     expect(screen.getByText("1 / 3 decks mastered")).toBeInTheDocument();
   });
 
-  test("shows an empty hint when there are no courses", async () => {
+  test("shows an empty hint when there are no deck collections", async () => {
     mockedApi.list.mockResolvedValue([]);
     renderPage();
-    expect(await screen.findByText(/No courses yet/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/No deck collections yet/),
+    ).toBeInTheDocument();
   });
 
-  test("creates a course and adds it to the list", async () => {
+  test("creates a deck collection and adds it to the list", async () => {
     mockedApi.list.mockResolvedValue([]);
     mockedApi.create.mockResolvedValue({
       ...course,
@@ -71,19 +73,21 @@ describe("CoursesPage", () => {
       title: "New Skill",
     });
     renderPage();
-    await screen.findByText(/No courses yet/);
+    await screen.findByText(/No deck collections yet/);
 
     await userEvent.type(
-      screen.getByPlaceholderText("New course title"),
+      screen.getByPlaceholderText("New collection title"),
       "New Skill",
     );
-    await userEvent.click(screen.getByRole("button", { name: "New course" }));
+    await userEvent.click(
+      screen.getByRole("button", { name: "New collection" }),
+    );
 
     expect(mockedApi.create).toHaveBeenCalledWith("New Skill");
     expect(await screen.findByText("New Skill")).toBeInTheDocument();
   });
 
-  test("deletes a course after confirmation", async () => {
+  test("deletes a deck collection after confirmation", async () => {
     vi.stubGlobal("confirm", () => true);
     mockedApi.remove.mockResolvedValue(undefined);
     renderPage();

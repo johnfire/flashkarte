@@ -93,6 +93,21 @@ describe("DeckListPage", () => {
     expect(await screen.findByText("German nouns")).toBeInTheDocument();
   });
 
+  test("uses Library as the single discovery link", async () => {
+    mockedDecksApi.list.mockResolvedValue([]);
+    renderPage();
+
+    expect(
+      await screen.findByRole("link", { name: "Library" }),
+    ).toHaveAttribute("href", "/library");
+    expect(
+      screen.queryByRole("link", { name: "Courses" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: "Official Decks" }),
+    ).not.toBeInTheDocument();
+  });
+
   // A branch card has { label, prompt, options } and no front/back, so a Study
   // link here would open blank cards whose ratings write real SM-2 events.
   test("offers Study for a flip deck but not for a branching deck", async () => {

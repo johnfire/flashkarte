@@ -41,6 +41,6 @@ describe("LearnPage", () => {
         <LearnPage />
       </MemoryRouter>,
     );
-    expect(await screen.findByText(/No subjects yet/)).toBeTruthy();
+    expect(await screen.findByText(/No courses yet/)).toBeTruthy();
   });
 });

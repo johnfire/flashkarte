@@ -317,6 +317,25 @@
     "cloning": "Clonage…",
     "cloneError": "Impossible de cloner ce cours. Réessaie."
   },
+  "libraryHub": {
+    "title": "Bibliothèque",
+    "navigation": "Mon apprentissage",
+    "myCourses": "Mes cours",
+    "myDecks": "Mes decks de cartes",
+    "officialCoursesTitle": "Cours officiels",
+    "officialCoursesDetail": "Cours structurés maintenus par l’application.",
+    "officialDecksTitle": "Decks officiels",
+    "officialDecksDetail": "Decks de cartes maintenus par l’application.",
+    "communityCoursesTitle": "Cours de la communauté",
+    "communityCoursesDetail": "Cours structurés publiés par d’autres apprenants.",
+    "communityDecksTitle": "Decks de la communauté",
+    "communityDecksDetail": "Decks publiés par d’autres apprenants."
+  },
+  "courseCatalog": {
+    "loadError": "Impossible de charger les cours.",
+    "adding": "Ajout…",
+    "add": "Ajouter à mes cours"
+  },
   "createDeck": {
     "title": "Nouveau paquet",
     "instructions": "Colle du Markdown ou importe un fichier <0>.md</0>/<1>.txt</1>. Utilise <2># Title</2>, <3>## Category</3> et <4>**1. Question**</4> suivi de la réponse.",
@@ -729,15 +748,15 @@
     "saveError": "Impossible d'enregistrer le nouvel ordre — réessayez."
   },
   "learn": {
-    "title": "Apprendre",
+    "title": "Cours",
     "intro": "Des leçons structurées, dans l'ordre. Réussir une leçon ouvre celles qui s'appuient dessus.",
     "toDecks": "← Paquets",
-    "toLearn": "← Apprendre",
+    "toLearn": "← Cours",
     "toOutline": "Retour au plan",
     "toOutlineArrow": "← Plan",
     "loading": "Chargement…",
     "loadError": "Impossible de charger. Réessayez.",
-    "empty": "Aucun sujet pour l'instant. Demandez à votre IA d'en créer un.",
+    "empty": "Pas encore de cours. Demandez à votre IA d’en créer un.",
     "conceptCount_one": "{{count}} concept",
     "conceptCount_other": "{{count}} concepts",
     "outlineIntro": "Ce que vous allez apprendre, dans l'ordre.",
