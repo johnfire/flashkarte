@@ -39,7 +39,7 @@ export function AppDecksPage() {
         : null;
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("decks.appDecksTitle")}</h1>
         <Link

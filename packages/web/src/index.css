@@ -27,6 +27,13 @@
   }
 }
 
+@layer components {
+  /* Reusable layout for cards that represent courses, decks, or lessons. */
+  .content-card-grid {
+    @apply grid gap-3 sm:grid-cols-2 lg:grid-cols-3;
+  }
+}
+
 @layer utilities {
   /* Landing-page background motion: drifting aurora glows + floating cards. */
   @keyframes fk-aurora {

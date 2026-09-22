@@ -135,7 +135,7 @@ export function CommunityFlashcardDeckLibrarySection() {
           <h3 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
             {t("libraryHub.deckCollections")}
           </h3>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="content-card-grid">
             {collections.data?.map((collection) => (
               <PublicDeckCollectionRow
                 key={collection.id}
@@ -152,7 +152,7 @@ export function CommunityFlashcardDeckLibrarySection() {
           <h3 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
             {t("libraryHub.flashcardDecks")}
           </h3>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="content-card-grid">
             {decks.data?.map((deck) => (
               <LibraryDeckRow
                 key={deck.id}

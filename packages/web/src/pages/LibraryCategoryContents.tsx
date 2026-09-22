@@ -47,7 +47,7 @@ export function LibraryCategoryContents({
       {decks.items && decks.items.length === 0 && !errorMessage && (
         <p className="text-gray-500 dark:text-gray-400">{t("library.empty")}</p>
       )}
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="content-card-grid">
         {decks.items?.map((d) => (
           <LibraryDeckRow
             key={d.id}

@@ -71,7 +71,7 @@ export function MyCoursesPage() {
                 {t("courses.noLessonCourses")}
               </p>
             ) : (
-              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <ul className="content-card-grid">
                 {myCourses.lessonCourses.map((course) => (
                   <li key={course.id} className="rounded-lg border p-4">
                     <span className="rounded-full bg-violet-100 px-2 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-900/50 dark:text-violet-300">
@@ -119,7 +119,7 @@ export function MyCoursesPage() {
                 {t("courses.empty")}
               </p>
             ) : (
-              <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <ul className="content-card-grid">
                 {myCourses.deckCourses.map((course) => (
                   <CourseListItem key={course.id} course={course} />
                 ))}

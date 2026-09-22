@@ -78,7 +78,7 @@ export function AppDecksCollectionPage() {
         : null;
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6">
         <Link
           to="/app-decks"
@@ -132,7 +132,7 @@ export function AppDecksCollectionPage() {
         </p>
       )}
 
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="content-card-grid">
         {decks.items?.map((d) => (
           <OfficialDeckRow
             key={d.id}

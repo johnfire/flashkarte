@@ -42,7 +42,7 @@ export function LearnPage() {
   }
 
   return (
-    <main className="mx-auto max-w-2xl p-4 sm:p-8">
+    <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <Link
         to="/"
         className="mb-4 inline-block text-sm text-gray-700 dark:text-gray-300"
@@ -65,7 +65,7 @@ export function LearnPage() {
         </p>
       )}
       {data && data.length === 0 && <p className="mt-6">{t("learn.empty")}</p>}
-      <ul className="mt-6 space-y-3">
+      <ul className="mt-6 content-card-grid">
         {data?.map((subject) => (
           <li key={subject.id} className="rounded-xl border">
             <Link

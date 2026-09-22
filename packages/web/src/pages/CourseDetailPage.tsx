@@ -107,7 +107,7 @@ export function CourseDetailPage() {
   );
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <div className="mb-4 flex items-center justify-between text-sm">
         <Link to="/courses/decks" className="text-indigo-600">
           {t("courses.backToCourses")}
@@ -136,7 +136,7 @@ export function CourseDetailPage() {
         </p>
       )}
 
-      <ul className="mb-6 space-y-3">
+      <ul className="mb-6 content-card-grid">
         {course.decks.map((d) => (
           <CourseDeckRow key={d.deck_id} deck={d} onRemove={onRemoveDeck} />
         ))}

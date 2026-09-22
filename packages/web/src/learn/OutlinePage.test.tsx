@@ -92,6 +92,7 @@ describe("OutlinePage", () => {
       await screen.findByRole("heading", { name: "Transformers" }),
     ).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Input side" })).toBeTruthy();
+    expect(screen.getByRole("list")).toHaveClass("content-card-grid");
     const row = (title: string) =>
       screen.getByRole("heading", { name: title }).closest("li")!;
 

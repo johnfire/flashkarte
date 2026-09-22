@@ -64,7 +64,7 @@ export function CoursesPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("courses.title")}</h1>
         <div className="flex gap-4 text-sm">
@@ -104,7 +104,7 @@ export function CoursesPage() {
         <p className="text-gray-500 dark:text-gray-400">{t("courses.empty")}</p>
       )}
 
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="content-card-grid">
         {courses?.map((c) => (
           <CourseListItem key={c.id} course={c} onDelete={onDelete} />
         ))}

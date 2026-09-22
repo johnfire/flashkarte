@@ -86,7 +86,7 @@ export function CategoryContents({ categoryId }: CategoryContentsProps) {
           <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
             {t("decks.collectionsSectionTitle")}
           </h4>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="content-card-grid">
             {collections.items?.map((c) => (
               <CollectionRow key={c.id} collection={c} />
             ))}
@@ -110,7 +110,7 @@ export function CategoryContents({ categoryId }: CategoryContentsProps) {
           <h4 className="mb-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
             {t("decks.standaloneSectionTitle")}
           </h4>
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="content-card-grid">
             {standalone.items?.map((d) => (
               <OfficialDeckRow
                 key={d.id}

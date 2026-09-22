@@ -39,6 +39,7 @@ describe("LearnPage", () => {
     );
     const link = await screen.findByRole("link", { name: /Transformers/ });
     expect(link.getAttribute("href")).toBe("/learn/s1");
+    expect(screen.getByRole("list")).toHaveClass("content-card-grid");
     expect(screen.getByText("#42")).toBeTruthy();
     expect(screen.getByText("1 concept")).toBeTruthy();
   });

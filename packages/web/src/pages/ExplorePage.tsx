@@ -39,7 +39,7 @@ export function ExplorePage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("explore.title")}</h1>
         <Link to="/" className="text-sm text-indigo-600">
@@ -67,7 +67,7 @@ export function ExplorePage() {
       {decks && decks.length === 0 && (
         <p className="text-gray-500 dark:text-gray-400">{t("explore.empty")}</p>
       )}
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="content-card-grid">
         {decks?.map((d) => (
           <li key={d.id} className="rounded-lg border p-3">
             <Link

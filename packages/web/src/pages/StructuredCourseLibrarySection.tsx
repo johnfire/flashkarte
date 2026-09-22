@@ -104,7 +104,7 @@ export function StructuredCourseLibrarySection({
           {t("libraryHub.emptyCourses")}
         </p>
       )}
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="content-card-grid">
         {courses?.map((course) => (
           <li key={course.id} className="rounded-lg border p-4">
             <h3 className="font-medium">

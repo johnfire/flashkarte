@@ -16,7 +16,7 @@ export function OutlinePage() {
     data?.modules.reduce((sum, m) => sum + m.lessons.length, 0) ?? 0;
 
   return (
-    <main className="mx-auto max-w-2xl p-4 sm:p-8">
+    <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <Link
         to="/learn"
         className="mb-4 inline-block text-sm text-gray-700 dark:text-gray-300"
@@ -53,7 +53,7 @@ export function OutlinePage() {
               <h2 id={`module-${index}`} className="mb-3 text-xl font-semibold">
                 {module.title ?? t("learn.otherLessons")}
               </h2>
-              <ol className="space-y-3">
+              <ol className="content-card-grid">
                 {module.lessons.map((lesson) => (
                   <OutlineLessonRow
                     key={lesson.id}

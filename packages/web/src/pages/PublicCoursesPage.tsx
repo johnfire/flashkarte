@@ -40,7 +40,7 @@ export function PublicCoursesPage() {
   }
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("courses.browsePublic")}</h1>
         <Link to="/library/community/decks" className="text-sm text-indigo-600">
@@ -61,7 +61,7 @@ export function PublicCoursesPage() {
         </p>
       )}
 
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="content-card-grid">
         {courses?.map((course) => (
           <PublicDeckCollectionRow
             key={course.id}

@@ -166,7 +166,7 @@ export function DeckListPage() {
         <DeckListLegendHint />
       )}
 
-      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="content-card-grid">
         {decks?.map((d) => (
           <DeckListItem
             key={d.id}
