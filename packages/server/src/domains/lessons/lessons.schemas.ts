@@ -69,6 +69,8 @@ export const newScreenSchema = z.object({
 export const screenPatchSchema = z.object({
   blocks: z.unknown().optional(),
   number: z.string().optional(),
+  // Replaces the whole source list; an empty list clears it.
+  sources: sourcesSchema,
 });
 
 const optionSchema = z.object({

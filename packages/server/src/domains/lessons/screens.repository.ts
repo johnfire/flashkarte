@@ -143,6 +143,17 @@ export async function writeScreenBlocks(
   );
 }
 
+export async function writeScreenSources(
+  db: Queryable,
+  id: string,
+  sources: unknown,
+): Promise<void> {
+  await db.query(
+    `UPDATE screens SET sources = $2::jsonb, updated_at = now() WHERE id = $1`,
+    [id, JSON.stringify(sources)],
+  );
+}
+
 export async function writeScreenNumber(
   db: Queryable,
   id: string,

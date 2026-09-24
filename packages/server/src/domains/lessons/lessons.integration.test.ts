@@ -306,6 +306,21 @@ describe("screens and their numbers", () => {
     expect(JSON.stringify(revisions[2].blocks)).toContain("third version");
   });
 
+  it("replaces a screen's sources without touching its content", async () => {
+    await makeLesson();
+    await addScreen("tokens", "sourced text");
+    const fixed = [{ title: "Fixed source", url: "https://example.org/a" }];
+    await screens.updateScreen(OWNER, subjectId, "1", { sources: fixed });
+    const [screen] = (await lessons.getLesson(OWNER, subjectId, "tokens"))
+      .screens;
+    expect(screen.sources).toEqual(fixed);
+    expect(JSON.stringify(screen.blocks)).toContain("sourced text");
+    await screens.updateScreen(OWNER, subjectId, "1", { sources: [] });
+    const [cleared] = (await lessons.getLesson(OWNER, subjectId, "tokens"))
+      .screens;
+    expect(cleared.sources).toEqual([]);
+  });
+
   it("a rejected edit leaves the screen as it was", async () => {
     await makeLesson();
     await addScreen("tokens", "keep me");

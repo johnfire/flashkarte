@@ -399,19 +399,24 @@ export function registerLessonTools(server: McpServer) {
   server.tool(
     "update_screen",
     "Edit a screen's content (the previous version is kept in its revision history, in either stage). To move " +
-      "it to a different number pass `number` (testing stage only). " +
+      "it to a different number pass `new_number` (testing stage only). Pass `sources` to replace the screen's " +
+      "whole source list (an empty list clears it), for example to fix a broken or wrong source link. " +
       BLOCKS_HELP,
     {
       subject_id: subjectId,
       number,
       blocks: blocks.optional(),
       new_number: z.string().optional().describe("Testing stage only."),
+      sources: sourcesSchema.describe(
+        "Replaces the screen's whole source list; an empty list clears it.",
+      ),
     },
     async ({
       subject_id,
       number: screenNumber,
       blocks: screenBlocks,
       new_number,
+      sources,
     }) =>
       runTool("update_screen", async () =>
         asText(
@@ -420,6 +425,7 @@ export function registerLessonTools(server: McpServer) {
             {
               blocks: screenBlocks,
               number: new_number,
+              sources,
             },
           ),
         ),
@@ -506,7 +512,9 @@ export function registerLessonTools(server: McpServer) {
   server.tool(
     "update_question",
     "Edit a question's wording, options, teaching screens (`teaches`) or tested concepts (`covers`). Allowed in " +
-      "both stages; re-pointing `teaches` is how you swap in a replacement screen before retiring the old one.",
+      "both stages; re-pointing `teaches` is how you swap in a replacement screen before retiring the old one. " +
+      "It also edits a variant: pass the variant's id (from get_lesson, questions[].variants[].id) as " +
+      "question_id and give only prompt and options, since a variant inherits `teaches` and `covers`.",
     {
       subject_id: subjectId,
       lesson: slug,
@@ -525,6 +533,36 @@ export function registerLessonTools(server: McpServer) {
           ),
         ),
       ),
+  );
+
+  server.tool(
+    "retire_question",
+    "Stop asking a wrong question (or a wrong variant) while keeping it, and learners' history with it. Allowed " +
+      "in both stages; this is how a finished lesson drops a question. Pass a variant's id (from get_lesson, " +
+      "questions[].variants[].id) to retire just that variant. Add a replacement first if a concept would " +
+      "otherwise go untested.",
+    { subject_id: subjectId, lesson: slug, question_id: z.string().uuid() },
+    async ({ subject_id, lesson, question_id }) =>
+      runTool("retire_question", async () =>
+        asText(
+          await post(
+            `${lessonPath(subject_id, lesson)}/questions/${encodeURIComponent(question_id)}/retire`,
+          ),
+        ),
+      ),
+  );
+
+  server.tool(
+    "delete_question",
+    "Delete a question or a variant outright. Testing stage only; in a finished lesson use retire_question.",
+    { subject_id: subjectId, lesson: slug, question_id: z.string().uuid() },
+    async ({ subject_id, lesson, question_id }) =>
+      runTool("delete_question", async () => {
+        await del(
+          `${lessonPath(subject_id, lesson)}/questions/${encodeURIComponent(question_id)}`,
+        );
+        return asText({ deleted: question_id });
+      }),
   );
 
   server.tool(

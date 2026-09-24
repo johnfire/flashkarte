@@ -41,6 +41,7 @@ describe("lesson MCP tools", () => {
       "create_image",
       "create_module",
       "delete_image",
+      "delete_question",
       "delete_screen",
       "finish_lesson",
       "get_lesson",
@@ -52,6 +53,7 @@ describe("lesson MCP tools", () => {
       "list_images",
       "list_screen_comments",
       "resolve_screen_comment",
+      "retire_question",
       "retire_screen",
       "set_lesson_prerequisite",
       "update_question",
@@ -200,7 +202,7 @@ describe("lesson MCP tools", () => {
     });
     expect(mockApi.patch).toHaveBeenCalledWith(
       `/api/subjects/${S}/screens/213.010`,
-      { blocks: para, number: undefined },
+      { blocks: para, number: undefined, sources: undefined },
     );
     await handlers.retire_screen({ subject_id: S, number: "213.010" });
     expect(mockApi.post).toHaveBeenCalledWith(
@@ -218,6 +220,48 @@ describe("lesson MCP tools", () => {
       `/api/subjects/${S}/lessons/tokens/questions/${qid}/variants`,
       { prompt: para, options: [] },
     );
+  });
+
+  it("update_screen can replace a screen's sources on their own", async () => {
+    mockApi.patch.mockResolvedValue({});
+    const { handlers } = setup();
+    const sources = [{ title: "Fixed", url: "https://example.org/a" }];
+    await handlers.update_screen({ subject_id: S, number: "10", sources });
+    expect(mockApi.patch).toHaveBeenCalledWith(
+      `/api/subjects/${S}/screens/10`,
+      {
+        blocks: undefined,
+        number: undefined,
+        sources,
+      },
+    );
+  });
+
+  it("retires or deletes a question or a variant by its id", async () => {
+    mockApi.post.mockResolvedValue({ id: "q", issues: [] });
+    mockApi.del.mockResolvedValue(undefined);
+    const { handlers } = setup();
+    const vid = "20000000-0000-4000-8000-000000000002";
+    const q = `/api/subjects/${S}/lessons/tokens/questions/${vid}`;
+    await handlers.retire_question({
+      subject_id: S,
+      lesson: "tokens",
+      question_id: vid,
+    });
+    expect(mockApi.post).toHaveBeenCalledWith(`${q}/retire`);
+    const result = await handlers.delete_question({
+      subject_id: S,
+      lesson: "tokens",
+      question_id: vid,
+    });
+    expect(mockApi.del).toHaveBeenCalledWith(q);
+    expect(JSON.stringify(result)).toContain(vid);
+  });
+
+  it("tells the author how to edit or retire a variant", () => {
+    const { descriptions } = setup();
+    expect(descriptions.update_question).toContain("variants[].id");
+    expect(descriptions.retire_question).toContain("variants[].id");
   });
 
   it("set_lesson_prerequisite maps 'requires' to the API's from", async () => {

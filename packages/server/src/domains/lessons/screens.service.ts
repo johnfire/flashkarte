@@ -85,6 +85,9 @@ export async function updateScreen(
         await renderBlocks(db, subject.id, patch.blocks),
       );
     }
+    if (patch.sources !== undefined) {
+      await repo.writeScreenSources(db, screen.id, patch.sources);
+    }
     let finalNumber = screen.number;
     if (patch.number !== undefined) {
       assertTesting(lesson, "renumber a screen");

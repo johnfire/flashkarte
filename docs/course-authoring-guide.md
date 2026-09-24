@@ -215,10 +215,12 @@ A lesson imports in the **testing** stage, where anything can change. The owner 
 
 - **In either stage:** add screens and questions (`add_screen`, `add_question`), edit a screen's wording or a
   question's wording, options, `teaches` and `covers` (`update_screen`, `update_question`; earlier versions of a
-  screen are kept in its revision history), add variants (`add_question_variant`), and retire a wrong screen
+  screen are kept in its revision history), fix a screen's source list (`update_screen` with `sources`), add
+  variants (`add_question_variant`), edit a variant (`update_question` with the variant's id from `get_lesson`,
+  `questions[].variants[].id`), retire a wrong question or variant (`retire_question`), and retire a wrong screen
   (`retire_screen`) after re-pointing any question that teaches it to the replacement.
-- **In testing only:** delete a screen (and only if no question teaches it), move or renumber a screen, and add
-  lesson prerequisites (`set_lesson_prerequisite`, which rejects a cycle).
+- **In testing only:** delete a screen (and only if no question teaches it) or a question (`delete_question`),
+  move or renumber a screen, and add lesson prerequisites (`set_lesson_prerequisite`, which rejects a cycle).
 - Add with no position to append, or `after: "213"` / `before: "214"` to insert; the server numbers it. Numbers
   are permanent and unique across the subject.
 - Once a lesson is **finished** it is additive-only. **Finishing is the owner's decision.** Do not call
