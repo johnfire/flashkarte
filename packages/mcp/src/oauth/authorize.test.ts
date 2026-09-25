@@ -150,6 +150,44 @@ describe("authorize POST", () => {
     expect(res.text).toContain("Could not create an API key");
   });
 
+  test("passes the person's IP (from the proxy) to the backend login", async () => {
+    mockApi.backendLogin.mockResolvedValue({ kind: "rejected" });
+    const app = express()
+      .set("trust proxy", 1)
+      .use(express.urlencoded({ extended: false }))
+      .use(createAuthorizeRouter(CLIENT, ALLOWED_REDIRECTS));
+    const form = await request(app).get("/oauth/authorize").query(goodQuery);
+    const ts = /name="csrf_ts" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+    const sig = /name="csrf_sig" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
+    await request(app)
+      .post("/oauth/authorize")
+      .set("X-Forwarded-For", "203.0.113.9")
+      .set("Cookie", form.headers["set-cookie"])
+      .type("form")
+      .send({
+        ...goodQuery,
+        csrf_ts: ts,
+        csrf_sig: sig,
+        email: "a@b.com",
+        password: "pw",
+      });
+    expect(mockApi.backendLogin).toHaveBeenCalledWith(
+      "a@b.com",
+      "pw",
+      "203.0.113.9",
+    );
+  });
+
+  test("the backend's own rate limit is shown as such, not as a bad password", async () => {
+    mockApi.backendLogin.mockResolvedValue({ kind: "rate-limited" });
+    const res = await postAuthorize(makeApp(), {
+      email: "a@b.com",
+      password: "pw",
+    });
+    expect(res.status).toBe(429);
+    expect(res.text).toContain("Too many attempts");
+  });
+
   // MCP-004: login CSRF + brute-force protection.
   test("rejects a POST with no/invalid CSRF token (login CSRF)", async () => {
     const res = await request(makeApp())
@@ -333,6 +371,7 @@ describe("authorize POST with two-step verification", () => {
     expect(mockApi.backendVerifyTwoFactor).toHaveBeenCalledWith(
       "challenge-jwt",
       "123456",
+      expect.any(String),
     );
     expect(res.status).toBe(302);
     const code = new URL(res.headers.location).searchParams.get("code");

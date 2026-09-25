@@ -105,12 +105,19 @@ function missingFieldMessage(body: FormBody): string | null {
     : "Email and password are required.";
 }
 
-function signIn(body: FormBody): Promise<LoginOutcome> {
+function signIn(
+  body: FormBody,
+  clientIp: string | undefined,
+): Promise<LoginOutcome> {
   if (body.challenge) {
-    return backendVerifyTwoFactor(body.challenge, (body.code ?? "").trim());
+    const code = (body.code ?? "").trim();
+    return backendVerifyTwoFactor(body.challenge, code, clientIp);
   }
-  return backendLogin(body.email ?? "", body.password ?? "");
+  return backendLogin(body.email ?? "", body.password ?? "", clientIp);
 }
+
+const TOO_MANY_ATTEMPTS =
+  "Too many attempts. Please wait a few minutes and try again.";
 
 function rejectionMessage(body: FormBody): string {
   return body.challenge
@@ -182,14 +189,14 @@ export function createAuthorizeRouter(
       return;
     }
     if (limiter.isLimited(req.ip)) {
-      sendLoginPage(res, params, 429, {
-        error: "Too many attempts. Please wait a few minutes and try again.",
-      });
+      sendLoginPage(res, params, 429, { error: TOO_MANY_ATTEMPTS });
       return;
     }
-    const outcome = await signIn(body);
+    const outcome = await signIn(body, req.ip);
     if (outcome.kind === "needs-2fa") {
       sendLoginPage(res, params, 200, { challenge: outcome.challenge });
+    } else if (outcome.kind === "rate-limited") {
+      sendLoginPage(res, params, 429, { error: TOO_MANY_ATTEMPTS, challenge });
     } else if (outcome.kind === "rejected") {
       sendLoginPage(res, params, 401, { error: rejectionMessage(body) });
     } else {

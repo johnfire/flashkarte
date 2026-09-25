@@ -48,6 +48,20 @@ describe("backend helpers", () => {
     });
   });
 
+  test("backendLogin forwards the person's IP so the backend limits per person", async () => {
+    mockFetch.mockResolvedValue(jsonResponse(true, 200, { accessToken: "j" }));
+    await backendLogin("a@b.com", "pw", "203.0.113.9");
+    const [, opts] = mockFetch.mock.calls[0];
+    expect(opts.headers["X-Forwarded-For"]).toBe("203.0.113.9");
+  });
+
+  test("backendLogin reports the backend's rate limit as such", async () => {
+    mockFetch.mockResolvedValue(jsonResponse(false, 429, { error: "slow" }));
+    expect(await backendLogin("a@b.com", "pw")).toEqual({
+      kind: "rate-limited",
+    });
+  });
+
   test("backendVerifyTwoFactor posts challenge and code to the verify route", async () => {
     mockFetch.mockResolvedValue(
       jsonResponse(true, 200, { accessToken: "jwt2fa" }),

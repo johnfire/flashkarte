@@ -72,6 +72,7 @@ export const del = <T = unknown>(path: string) => api<T>("DELETE", path);
 export type LoginOutcome =
   | { kind: "signed-in"; accessToken: string }
   | { kind: "needs-2fa"; challenge: string }
+  | { kind: "rate-limited" }
   | { kind: "rejected" };
 
 interface BackendLoginBody {
@@ -85,12 +86,29 @@ interface CreatedKey {
   key_prefix: string;
 }
 
-async function postAuth(path: string, body: object): Promise<LoginOutcome> {
+// The backend rate-limits logins per client IP. Every MCP login reaches it
+// from the MCP container, so without the person's own IP they would all share
+// one bucket and a few wrong passwords would lock everyone out. The backend
+// trusts exactly one proxy hop, so this header is the IP it counts.
+function loginHeaders(clientIp: string | undefined): Record<string, string> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (clientIp) headers["X-Forwarded-For"] = clientIp;
+  return headers;
+}
+
+async function postAuth(
+  path: string,
+  body: object,
+  clientIp: string | undefined,
+): Promise<LoginOutcome> {
   const res = await fetch(`${BASE_URL}${path}`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: loginHeaders(clientIp),
     body: JSON.stringify(body),
   });
+  if (res.status === 429) return { kind: "rate-limited" };
   if (!res.ok) return { kind: "rejected" };
   const answer = (await res.json()) as BackendLoginBody;
   if (answer.requiresTwoFactor && answer.challenge) {
@@ -106,16 +124,18 @@ async function postAuth(path: string, body: object): Promise<LoginOutcome> {
 export function backendLogin(
   email: string,
   password: string,
+  clientIp?: string,
 ): Promise<LoginOutcome> {
-  return postAuth("/api/auth/login", { email, password });
+  return postAuth("/api/auth/login", { email, password }, clientIp);
 }
 
 /** Finish a 2FA login with the backend's challenge and the person's code. */
 export function backendVerifyTwoFactor(
   challenge: string,
   code: string,
+  clientIp?: string,
 ): Promise<LoginOutcome> {
-  return postAuth("/api/auth/2fa/verify", { challenge, code });
+  return postAuth("/api/auth/2fa/verify", { challenge, code }, clientIp);
 }
 
 /**
