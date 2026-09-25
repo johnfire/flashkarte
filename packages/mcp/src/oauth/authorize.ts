@@ -15,18 +15,15 @@ import {
 } from "./csrf";
 import { createLoginLimiter } from "./login-limiter";
 import { renderLoginPage } from "./login-page";
+import { ClientInfo, lookupClient, matchesRegistered } from "./redirect-policy";
 
 type FormBody = Record<string, string | undefined>;
 
 type Validation =
-  | { ok: true; params: OAuthParams }
+  | { ok: true; params: OAuthParams; client: ClientInfo }
   | { ok: false; status: number; body: object };
 
-function validate(
-  clientId: string,
-  allowedRedirectUris: string[],
-  q: FormBody,
-): Validation {
+function validate(staticClientId: string, q: FormBody): Validation {
   const {
     response_type,
     client_id,
@@ -41,12 +38,13 @@ function validate(
       status: 400,
       body: { error: "unsupported_response_type" },
     };
-  if (client_id !== clientId)
+  const client = client_id ? lookupClient(client_id, staticClientId) : null;
+  if (!client_id || !client)
     return { ok: false, status: 400, body: { error: "invalid_client" } };
-  // Exact-match allowlist. An open redirect_uri lets an attacker initiate the
-  // flow with their own callback + PKCE and steal the victim's auth code, so a
-  // mere "is HTTPS" check is not enough — the URI must be pre-registered.
-  if (!redirect_uri || !allowedRedirectUris.includes(redirect_uri))
+  // An open redirect_uri lets an attacker start the flow with their own
+  // callback + PKCE and steal the victim's auth code, so a mere "is HTTPS"
+  // check is not enough — the URI must be one this client registered.
+  if (!redirect_uri || !matchesRegistered(redirect_uri, client.redirectUris))
     return {
       ok: false,
       status: 400,
@@ -66,6 +64,7 @@ function validate(
     };
   return {
     ok: true,
+    client,
     params: {
       client_id,
       redirect_uri,
@@ -151,16 +150,13 @@ async function issueCode(
   res.redirect(dest.toString());
 }
 
-export function createAuthorizeRouter(
-  clientId: string,
-  allowedRedirectUris: string[],
-): Router {
+export function createAuthorizeRouter(staticClientId: string): Router {
   const router = Router();
   // Per-instance so each app gets a fresh limiter (one instance in prod).
   const limiter = createLoginLimiter();
 
   router.get("/oauth/authorize", (req, res) => {
-    const v = validate(clientId, allowedRedirectUris, req.query as FormBody);
+    const v = validate(staticClientId, req.query as FormBody);
     if (!v.ok) {
       res.status(v.status).json(v.body);
       return;
@@ -170,7 +166,7 @@ export function createAuthorizeRouter(
 
   router.post("/oauth/authorize", async (req, res) => {
     const body = req.body as FormBody;
-    const v = validate(clientId, allowedRedirectUris, body);
+    const v = validate(staticClientId, body);
     if (!v.ok) {
       res.status(v.status).json(v.body);
       return;

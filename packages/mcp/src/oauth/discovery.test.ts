@@ -29,5 +29,8 @@ describe("oauth discovery", () => {
       "https://mcp.example.com/oauth/authorize",
     );
     expect(res.body.token_endpoint).toBe("https://mcp.example.com/oauth/token");
+    expect(res.body.registration_endpoint).toBe(
+      "https://mcp.example.com/oauth/register",
+    );
   });
 });

@@ -14,6 +14,13 @@ interface RefreshTokenEntry {
   expires_at: number;
 }
 
+/** A client that registered itself (RFC 7591), e.g. Claude Code. */
+export interface RegisteredClient {
+  redirect_uris: string[];
+  client_name?: string;
+  created_at: number;
+}
+
 const AUTH_CODE_TTL_MS = 10 * 60 * 1000;
 const REFRESH_TOKEN_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 // Keep in sync with ACCESS_TOKEN_TTL_SEC in tokens.ts (1h). Access sessions are
@@ -30,6 +37,10 @@ const accessSessions = new Map<string, RefreshTokenEntry>();
 // fk_key and keeps it across rotations). Presenting a tombstoned token is a
 // replay, so we revoke the whole lineage — OAuth 2.1 refresh-reuse detection.
 const consumedTokens = new Map<string, RefreshTokenEntry>();
+// Registration is unauthenticated, so the table is capped: past the cap the
+// oldest registration is dropped (its app just registers again).
+const MAX_REGISTERED_CLIENTS = 1000;
+const registeredClients = new Map<string, RegisteredClient>();
 
 // Restart survival: refresh tokens are write-through persisted to
 // MCP_STORE_PATH (a docker volume in prod). Without this every deploy
@@ -45,6 +56,7 @@ const STORE_ENC_PREFIX = "enc:v1:";
 interface PersistedStore {
   refreshTokens?: [string, RefreshTokenEntry][];
   consumedTokens?: [string, RefreshTokenEntry][];
+  registeredClients?: [string, RegisteredClient][];
 }
 
 function storeKey(): Buffer | null {
@@ -88,6 +100,8 @@ function loadStore(): void {
     const raw = deserializeStore(fs.readFileSync(STORE_PATH, "utf8"));
     for (const [k, v] of raw.refreshTokens ?? []) refreshTokens.set(k, v);
     for (const [k, v] of raw.consumedTokens ?? []) consumedTokens.set(k, v);
+    for (const [k, v] of raw.registeredClients ?? [])
+      registeredClients.set(k, v);
     pruneExpired(refreshTokens);
     pruneExpired(consumedTokens);
   } catch (e) {
@@ -115,6 +129,7 @@ function persistNow(): void {
       serializeStore({
         refreshTokens: [...refreshTokens],
         consumedTokens: [...consumedTokens],
+        registeredClients: [...registeredClients],
       }),
       {
         mode: 0o600,
@@ -215,4 +230,26 @@ export function consumeRefreshToken(token: string): { fk_key: string } | null {
     persistStore();
   }
   return null;
+}
+
+export function registerClient(
+  redirect_uris: string[],
+  client_name?: string,
+): string {
+  if (registeredClients.size >= MAX_REGISTERED_CLIENTS) {
+    const oldest = registeredClients.keys().next().value;
+    if (oldest !== undefined) registeredClients.delete(oldest);
+  }
+  const clientId = `dcr_${crypto.randomBytes(16).toString("hex")}`;
+  registeredClients.set(clientId, {
+    redirect_uris,
+    client_name,
+    created_at: Date.now(),
+  });
+  persistStore();
+  return clientId;
+}
+
+export function getRegisteredClient(clientId: string): RegisteredClient | null {
+  return registeredClients.get(clientId) ?? null;
 }

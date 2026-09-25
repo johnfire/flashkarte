@@ -8,7 +8,7 @@ import { createAccessSession } from "./store";
 
 function makeApp() {
   const app = express();
-  app.use(createMcpAuthMiddleware());
+  app.use(createMcpAuthMiddleware("https://mcp.test"));
   app.get("/probe", (_req, res) => {
     res.json({ key: requestKeyStore.getStore() ?? null });
   });
@@ -19,6 +19,16 @@ describe("mcp auth middleware", () => {
   test("401s without a credential", async () => {
     const res = await request(makeApp()).get("/probe");
     expect(res.status).toBe(401);
+  });
+
+  test("a 401 points the client at the protected-resource metadata", async () => {
+    const res = await request(makeApp())
+      .get("/probe")
+      .set("Authorization", "Bearer not-a-token");
+    expect(res.status).toBe(401);
+    expect(res.headers["www-authenticate"]).toBe(
+      'Bearer resource_metadata="https://mcp.test/.well-known/oauth-protected-resource"',
+    );
   });
 
   test("threads a raw fk_ key", async () => {

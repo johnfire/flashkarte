@@ -1,16 +1,24 @@
-import { RequestHandler } from "express";
+import { RequestHandler, Response } from "express";
 import { requestKeyStore } from "../api";
 import { verifyMcpAccessToken } from "./tokens";
 import { resolveAccessSession } from "./store";
 
-export function createMcpAuthMiddleware(): RequestHandler {
+export function createMcpAuthMiddleware(baseUrl: string): RequestHandler {
+  // RFC 9728 §5.1: a 401 names the protected-resource metadata, so an MCP
+  // client can find the login flow without being told the URL.
+  const challenge = `Bearer resource_metadata="${baseUrl}/.well-known/oauth-protected-resource"`;
+  const unauthorized = (res: Response, error: string) => {
+    res.setHeader("WWW-Authenticate", challenge);
+    res.status(401).json({ error });
+  };
+
   return (req, res, next) => {
     const raw =
       (req.headers["x-api-key"] as string | undefined) ??
       req.headers.authorization?.replace(/^Bearer\s+/i, "");
 
     if (!raw) {
-      res.status(401).json({ error: "API key required" });
+      unauthorized(res, "API key required");
       return;
     }
 
@@ -29,6 +37,6 @@ export function createMcpAuthMiddleware(): RequestHandler {
       return;
     }
 
-    res.status(401).json({ error: "Invalid or expired token" });
+    unauthorized(res, "Invalid or expired token");
   };
 }

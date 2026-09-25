@@ -15,11 +15,11 @@ jest.mock("../api", () => ({
 const mockApi = apiModule as jest.Mocked<typeof apiModule>;
 
 const CLIENT = "test-client";
-const ALLOWED_REDIRECTS = ["https://claude.ai/cb"];
+process.env.MCP_ALLOWED_REDIRECT_URIS = "https://claude.ai/cb";
 function makeApp() {
   return express()
     .use(express.urlencoded({ extended: false }))
-    .use(createAuthorizeRouter(CLIENT, ALLOWED_REDIRECTS));
+    .use(createAuthorizeRouter(CLIENT));
 }
 
 const goodQuery = {
@@ -78,6 +78,40 @@ describe("authorize GET", () => {
       .get("/oauth/authorize")
       .query({ ...goodQuery, redirect_uri: "https://evil.test/cb" });
     expect(res.status).toBe(400);
+  });
+
+  test("accepts Claude Code's loopback callback on any port", async () => {
+    const res = await request(makeApp())
+      .get("/oauth/authorize")
+      .query({ ...goodQuery, redirect_uri: "http://localhost:53682/callback" });
+    expect(res.status).toBe(200);
+  });
+
+  test("rejects a loopback URI on another path", async () => {
+    const res = await request(makeApp())
+      .get("/oauth/authorize")
+      .query({ ...goodQuery, redirect_uri: "http://localhost:53682/steal" });
+    expect(res.status).toBe(400);
+  });
+
+  test("a registered client may use only its own redirect URIs", async () => {
+    const clientId = store.registerClient(["https://app.example/cb"], "App");
+    const ok = await request(makeApp())
+      .get("/oauth/authorize")
+      .query({
+        ...goodQuery,
+        client_id: clientId,
+        redirect_uri: "https://app.example/cb",
+      });
+    expect(ok.status).toBe(200);
+    const stolen = await request(makeApp())
+      .get("/oauth/authorize")
+      .query({
+        ...goodQuery,
+        client_id: clientId,
+        redirect_uri: "https://claude.ai/cb",
+      });
+    expect(stolen.status).toBe(400);
   });
 
   test("rejects a wrong client_id", async () => {
@@ -155,7 +189,7 @@ describe("authorize POST", () => {
     const app = express()
       .set("trust proxy", 1)
       .use(express.urlencoded({ extended: false }))
-      .use(createAuthorizeRouter(CLIENT, ALLOWED_REDIRECTS));
+      .use(createAuthorizeRouter(CLIENT));
     const form = await request(app).get("/oauth/authorize").query(goodQuery);
     const ts = /name="csrf_ts" value="([^"]+)"/.exec(form.text)?.[1] ?? "";
     const sig = /name="csrf_sig" value="([^"]+)"/.exec(form.text)?.[1] ?? "";

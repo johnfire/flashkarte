@@ -41,6 +41,15 @@ describe("oauth store persistence", () => {
     expect(b.consumeRefreshToken(token)).toBeNull();
   });
 
+  it("registered clients survive a restart", async () => {
+    const a = freshStore();
+    const clientId = a.registerClient(["http://localhost/callback"], "CC");
+    await new Promise((r) => setTimeout(r, 250));
+
+    const b = freshStore();
+    expect(b.getRegisteredClient(clientId)?.client_name).toBe("CC");
+  });
+
   it("corrupt store file starts empty instead of crashing", () => {
     fs.writeFileSync(STORE, "{not json");
     const a = freshStore();
