@@ -80,18 +80,24 @@ interface PageOptions {
   challenge?: string;
 }
 
+interface Connection {
+  params: OAuthParams;
+  client: ClientInfo;
+}
+
 function sendLoginPage(
   res: express.Response,
-  params: OAuthParams,
+  { params, client }: Connection,
   status: number,
   options: PageOptions = {},
 ): void {
   const nonce = setCsrfCookie(res);
   const csrf = issueCsrfToken(params, nonce);
+  const app = { name: client.name, isSelfRegistered: client.isSelfRegistered };
   res
     .status(status)
     .type("html")
-    .send(renderLoginPage({ params, csrf, ...options }));
+    .send(renderLoginPage({ params, app, csrf, ...options }));
 }
 
 /** The form is step 2 (2FA code) when it carries the backend's challenge. */
@@ -126,14 +132,15 @@ function rejectionMessage(body: FormBody): string {
 
 async function issueCode(
   res: express.Response,
-  params: OAuthParams,
+  connection: Connection,
   accessToken: string,
 ): Promise<void> {
+  const params = connection.params;
   let fkKey: string;
   try {
     fkKey = (await backendCreateKey(accessToken, "claude.ai")).key;
   } catch {
-    sendLoginPage(res, params, 500, {
+    sendLoginPage(res, connection, 500, {
       error: "Could not create an API key. Please try again.",
     });
     return;
@@ -161,7 +168,7 @@ export function createAuthorizeRouter(staticClientId: string): Router {
       res.status(v.status).json(v.body);
       return;
     }
-    sendLoginPage(res, v.params, 200);
+    sendLoginPage(res, { params: v.params, client: v.client }, 200);
   });
 
   router.post("/oauth/authorize", async (req, res) => {
@@ -172,31 +179,35 @@ export function createAuthorizeRouter(staticClientId: string): Router {
       return;
     }
     const params = v.params;
+    const connection = { params, client: v.client };
     const challenge = body.challenge;
     if (!csrfValid(params, body.csrf_ts, body.csrf_sig, readCsrfCookie(req))) {
-      sendLoginPage(res, params, 400, {
+      sendLoginPage(res, connection, 400, {
         error: "Your session expired. Please try again.",
       });
       return;
     }
     const missing = missingFieldMessage(body);
     if (missing) {
-      sendLoginPage(res, params, 400, { error: missing, challenge });
+      sendLoginPage(res, connection, 400, { error: missing, challenge });
       return;
     }
     if (limiter.isLimited(req.ip)) {
-      sendLoginPage(res, params, 429, { error: TOO_MANY_ATTEMPTS });
+      sendLoginPage(res, connection, 429, { error: TOO_MANY_ATTEMPTS });
       return;
     }
     const outcome = await signIn(body, req.ip);
     if (outcome.kind === "needs-2fa") {
-      sendLoginPage(res, params, 200, { challenge: outcome.challenge });
+      sendLoginPage(res, connection, 200, { challenge: outcome.challenge });
     } else if (outcome.kind === "rate-limited") {
-      sendLoginPage(res, params, 429, { error: TOO_MANY_ATTEMPTS, challenge });
+      sendLoginPage(res, connection, 429, {
+        error: TOO_MANY_ATTEMPTS,
+        challenge,
+      });
     } else if (outcome.kind === "rejected") {
-      sendLoginPage(res, params, 401, { error: rejectionMessage(body) });
+      sendLoginPage(res, connection, 401, { error: rejectionMessage(body) });
     } else {
-      await issueCode(res, params, outcome.accessToken);
+      await issueCode(res, connection, outcome.accessToken);
     }
   });
 

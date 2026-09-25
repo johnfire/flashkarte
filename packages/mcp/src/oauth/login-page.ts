@@ -1,12 +1,21 @@
 import { CsrfToken, OAuthParams } from "./csrf";
 
 // The page a person sees when an AI app asks to connect to their flashkarte
-// account. Script-free; every value is HTML-escaped. Step 1 asks for email and
+// account. It names the app and where the person will be sent afterwards, so a
+// phishing link that borrows the real login page shows itself for what it is.
+// Script-free; every value is HTML-escaped. Step 1 asks for email and
 // password; step 2 (only for accounts with two-step verification) asks for the
 // authenticator or backup code.
 
+export interface ConnectingApp {
+  name: string;
+  /** True when the name comes from the app's own registration, unverified. */
+  isSelfRegistered: boolean;
+}
+
 export interface LoginPageView {
   params: OAuthParams;
+  app: ConnectingApp;
   csrf: CsrfToken;
   error?: string;
   /** Present on step 2: the backend's short-lived 2FA challenge. */
@@ -45,10 +54,28 @@ function oauthFields(view: LoginPageView): string {
   ].join("\n");
 }
 
+/** Where the code goes: a host name, or "this computer" for a loopback app. */
+export function redirectDestination(redirectUri: string): string {
+  const host = new URL(redirectUri).hostname;
+  const isLoopback = ["localhost", "127.0.0.1", "[::1]"].includes(host);
+  return isLoopback ? "an app on this computer (localhost)" : host;
+}
+
+function consentText(view: LoginPageView): string {
+  const selfNamed = view.app.isSelfRegistered
+    ? `<p class="note">The app chose this name itself; flashkarte has not checked it.</p>`
+    : "";
+  return `<h1>Allow <strong>${escapeHtml(view.app.name)}</strong> to use your flashkarte account?</h1>
+${selfNamed}
+<p>It will be able to read, create, change and delete your decks, cards, courses, subjects and lessons, and see your study progress.</p>
+<p>It cannot see or change your email, password or two-step verification, create API keys, export your data or delete your account.</p>
+<p class="note">After you log in you will be sent to <strong>${escapeHtml(redirectDestination(view.params.redirect_uri))}</strong>. Only continue if you started this connection yourself. You can disconnect it at any time under Settings → Connect your AI.</p>`;
+}
+
 function credentialFields(): string {
   return `<input name="email" type="email" placeholder="Email" autocomplete="username" required>
 <input name="password" type="password" placeholder="Password" autocomplete="current-password" required>
-<button type="submit">Log in &amp; connect</button>`;
+<button type="submit">Allow and connect</button>`;
 }
 
 function twoFactorFields(challenge: string): string {
@@ -72,10 +99,10 @@ body{font-family:system-ui,sans-serif;max-width:22rem;margin:4rem auto;padding:0
 input{display:block;width:100%;padding:.6rem;margin:.4rem 0;box-sizing:border-box}
 button{padding:.65rem 1rem;width:100%;cursor:pointer}
 .err{color:#b00020}
+.note{color:#555;font-size:.9rem}
 </style></head>
 <body>
-<h1>Connect flashkarte to your AI</h1>
-<p>Log in to let your AI create decks in your account.</p>
+${consentText(view)}
 ${view.error ? `<p class="err" role="alert">${escapeHtml(view.error)}</p>` : ""}
 <form method="post" action="/oauth/authorize">
 ${oauthFields(view)}
