@@ -9,6 +9,7 @@ process.env.MCP_JWT_SECRET = "test-secret-that-is-long-enough-32chars";
 
 jest.mock("../api", () => ({
   backendLogin: jest.fn(),
+  backendVerifyTwoFactor: jest.fn(),
   backendCreateKey: jest.fn(),
 }));
 const mockApi = apiModule as jest.Mocked<typeof apiModule>;
@@ -91,7 +92,10 @@ describe("authorize POST", () => {
   beforeEach(() => jest.clearAllMocks());
 
   test("good credentials mint a key and redirect with a code", async () => {
-    mockApi.backendLogin.mockResolvedValue({ accessToken: "jwt" });
+    mockApi.backendLogin.mockResolvedValue({
+      kind: "signed-in",
+      accessToken: "jwt",
+    });
     mockApi.backendCreateKey.mockResolvedValue({
       key: "fk_minted",
       key_prefix: "fk_minted",
@@ -112,7 +116,7 @@ describe("authorize POST", () => {
   });
 
   test("bad credentials re-render the form with an error", async () => {
-    mockApi.backendLogin.mockResolvedValue(null);
+    mockApi.backendLogin.mockResolvedValue({ kind: "rejected" });
     const res = await postAuthorize(makeApp(), {
       email: "a@b.com",
       password: "wrong",
@@ -132,7 +136,10 @@ describe("authorize POST", () => {
   });
 
   test("a backend key-creation failure re-renders the form with a 500", async () => {
-    mockApi.backendLogin.mockResolvedValue({ accessToken: "jwt" });
+    mockApi.backendLogin.mockResolvedValue({
+      kind: "signed-in",
+      accessToken: "jwt",
+    });
     mockApi.backendCreateKey.mockRejectedValue(new Error("boom"));
     const res = await postAuthorize(makeApp(), {
       email: "a@b.com",
@@ -154,7 +161,7 @@ describe("authorize POST", () => {
   });
 
   test("rate-limits repeated login attempts from one client", async () => {
-    mockApi.backendLogin.mockResolvedValue(null); // always "wrong"
+    mockApi.backendLogin.mockResolvedValue({ kind: "rejected" }); // always "wrong"
     const app = makeApp(); // shared instance -> shared limiter
     let last = 0;
     for (let i = 0; i < 12; i++) {
@@ -266,5 +273,94 @@ describe("authorize POST", () => {
         password: "pw",
       });
     expect(res.status).toBe(400);
+  });
+});
+
+// Accounts with two-step verification: the password step returns the
+// backend's challenge, and a second form trades challenge + code for a session.
+describe("authorize POST with two-step verification", () => {
+  beforeEach(() => jest.clearAllMocks());
+
+  function formFields(html: string): Record<string, string> {
+    const fields: Record<string, string> = {};
+    for (const match of html.matchAll(
+      /<input type="hidden" name="([^"]+)" value="([^"]*)">/g,
+    )) {
+      fields[match[1]] = match[2];
+    }
+    return fields;
+  }
+
+  function cookiesOf(res: request.Response): string[] {
+    const cookies = res.headers["set-cookie"];
+    return Array.isArray(cookies) ? cookies : [cookies].filter(Boolean);
+  }
+
+  async function passwordStep(app: ReturnType<typeof makeApp>) {
+    mockApi.backendLogin.mockResolvedValue({
+      kind: "needs-2fa",
+      challenge: "challenge-jwt",
+    });
+    return postAuthorize(app, { email: "a@b.com", password: "pw" });
+  }
+
+  test("a 2FA account gets a code form carrying the challenge", async () => {
+    const res = await passwordStep(makeApp());
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('name="code"');
+    expect(res.text).not.toContain('name="password"');
+    expect(formFields(res.text).challenge).toBe("challenge-jwt");
+    expect(mockApi.backendCreateKey).not.toHaveBeenCalled();
+  });
+
+  test("a correct code mints a key and redirects with a code", async () => {
+    const app = makeApp();
+    const step1 = await passwordStep(app);
+    mockApi.backendVerifyTwoFactor.mockResolvedValue({
+      kind: "signed-in",
+      accessToken: "jwt",
+    });
+    mockApi.backendCreateKey.mockResolvedValue({
+      key: "fk_2fa",
+      key_prefix: "fk_2fa",
+    });
+    const res = await request(app)
+      .post("/oauth/authorize")
+      .set("Cookie", cookiesOf(step1))
+      .type("form")
+      .send({ ...formFields(step1.text), code: " 123456 " });
+
+    expect(mockApi.backendVerifyTwoFactor).toHaveBeenCalledWith(
+      "challenge-jwt",
+      "123456",
+    );
+    expect(res.status).toBe(302);
+    const code = new URL(res.headers.location).searchParams.get("code");
+    expect(store.consumeAuthCode(code as string)?.fk_key).toBe("fk_2fa");
+  });
+
+  test("a wrong code is refused without minting a key", async () => {
+    const app = makeApp();
+    const step1 = await passwordStep(app);
+    mockApi.backendVerifyTwoFactor.mockResolvedValue({ kind: "rejected" });
+    const res = await request(app)
+      .post("/oauth/authorize")
+      .set("Cookie", cookiesOf(step1))
+      .type("form")
+      .send({ ...formFields(step1.text), code: "000000" });
+    expect(res.status).toBe(401);
+    expect(res.text).toContain("That code didn");
+    expect(mockApi.backendCreateKey).not.toHaveBeenCalled();
+  });
+
+  test("the code step is CSRF-protected too", async () => {
+    const app = makeApp();
+    const step1 = await passwordStep(app);
+    const res = await request(app)
+      .post("/oauth/authorize")
+      .type("form")
+      .send({ ...formFields(step1.text), code: "123456" }); // no cookie
+    expect(res.status).toBe(400);
+    expect(mockApi.backendVerifyTwoFactor).not.toHaveBeenCalled();
   });
 });

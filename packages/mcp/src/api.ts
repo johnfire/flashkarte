@@ -68,8 +68,16 @@ export const put = <T = unknown>(path: string, body?: unknown) =>
   api<T>("PUT", path, body);
 export const del = <T = unknown>(path: string) => api<T>("DELETE", path);
 
-interface LoginResult {
-  accessToken: string;
+/** What a password or 2FA login led to: a session, a 2FA challenge, or a refusal. */
+export type LoginOutcome =
+  | { kind: "signed-in"; accessToken: string }
+  | { kind: "needs-2fa"; challenge: string }
+  | { kind: "rejected" };
+
+interface BackendLoginBody {
+  accessToken?: string;
+  requiresTwoFactor?: boolean;
+  challenge?: string;
 }
 
 interface CreatedKey {
@@ -77,18 +85,37 @@ interface CreatedKey {
   key_prefix: string;
 }
 
-/** Authenticate against the flashkarte backend; null on bad credentials. */
-export async function backendLogin(
-  email: string,
-  password: string,
-): Promise<LoginResult | null> {
-  const res = await fetch(`${BASE_URL}/api/auth/login`, {
+async function postAuth(path: string, body: object): Promise<LoginOutcome> {
+  const res = await fetch(`${BASE_URL}${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(body),
   });
-  if (!res.ok) return null;
-  return (await res.json()) as LoginResult;
+  if (!res.ok) return { kind: "rejected" };
+  const answer = (await res.json()) as BackendLoginBody;
+  if (answer.requiresTwoFactor && answer.challenge) {
+    return { kind: "needs-2fa", challenge: answer.challenge };
+  }
+  if (answer.accessToken) {
+    return { kind: "signed-in", accessToken: answer.accessToken };
+  }
+  return { kind: "rejected" };
+}
+
+/** Check email + password against the flashkarte backend. */
+export function backendLogin(
+  email: string,
+  password: string,
+): Promise<LoginOutcome> {
+  return postAuth("/api/auth/login", { email, password });
+}
+
+/** Finish a 2FA login with the backend's challenge and the person's code. */
+export function backendVerifyTwoFactor(
+  challenge: string,
+  code: string,
+): Promise<LoginOutcome> {
+  return postAuth("/api/auth/2fa/verify", { challenge, code });
 }
 
 /**

@@ -1,6 +1,7 @@
 import {
   api,
   backendLogin,
+  backendVerifyTwoFactor,
   backendCreateKey,
   requestCorrelationStore,
 } from "./api";
@@ -21,20 +22,41 @@ function jsonResponse(ok: boolean, status: number, body: unknown) {
 describe("backend helpers", () => {
   beforeEach(() => mockFetch.mockReset());
 
-  test("backendLogin returns the parsed body on 200", async () => {
+  test("backendLogin reports a signed-in session on 200", async () => {
     mockFetch.mockResolvedValue(
       jsonResponse(true, 200, { accessToken: "jwt123" }),
     );
     const out = await backendLogin("a@b.com", "pw");
-    expect(out).toEqual({ accessToken: "jwt123" });
+    expect(out).toEqual({ kind: "signed-in", accessToken: "jwt123" });
     const [url, opts] = mockFetch.mock.calls[0];
     expect(String(url)).toContain("/api/auth/login");
     expect(opts.method).toBe("POST");
   });
 
-  test("backendLogin returns null on bad credentials", async () => {
+  test("backendLogin reports rejection on bad credentials", async () => {
     mockFetch.mockResolvedValue(jsonResponse(false, 401, { error: "no" }));
-    expect(await backendLogin("a@b.com", "pw")).toBeNull();
+    expect(await backendLogin("a@b.com", "pw")).toEqual({ kind: "rejected" });
+  });
+
+  test("backendLogin passes on the 2FA challenge for accounts with 2FA", async () => {
+    mockFetch.mockResolvedValue(
+      jsonResponse(true, 200, { requiresTwoFactor: true, challenge: "ch" }),
+    );
+    expect(await backendLogin("a@b.com", "pw")).toEqual({
+      kind: "needs-2fa",
+      challenge: "ch",
+    });
+  });
+
+  test("backendVerifyTwoFactor posts challenge and code to the verify route", async () => {
+    mockFetch.mockResolvedValue(
+      jsonResponse(true, 200, { accessToken: "jwt2fa" }),
+    );
+    const out = await backendVerifyTwoFactor("ch", "123456");
+    expect(out).toEqual({ kind: "signed-in", accessToken: "jwt2fa" });
+    const [url, opts] = mockFetch.mock.calls[0];
+    expect(String(url)).toContain("/api/auth/2fa/verify");
+    expect(JSON.parse(opts.body)).toEqual({ challenge: "ch", code: "123456" });
   });
 
   test("backendCreateKey sends the JWT and requests a deck-scoped key", async () => {
