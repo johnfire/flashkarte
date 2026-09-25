@@ -130,6 +130,15 @@ function rejectionMessage(body: FormBody): string {
     : "Invalid email or password.";
 }
 
+// The backend caps key names at 50 characters.
+const MAX_KEY_NAME_LENGTH = 50;
+
+/** e.g. "Claude (claude.ai)" — so the person can tell keys apart in Settings. */
+export function keyName({ params, client }: Connection): string {
+  const host = new URL(params.redirect_uri).hostname;
+  return `${client.name} (${host})`.slice(0, MAX_KEY_NAME_LENGTH);
+}
+
 async function issueCode(
   res: express.Response,
   connection: Connection,
@@ -138,7 +147,7 @@ async function issueCode(
   const params = connection.params;
   let fkKey: string;
   try {
-    fkKey = (await backendCreateKey(accessToken, "claude.ai")).key;
+    fkKey = (await backendCreateKey(accessToken, keyName(connection))).key;
   } catch {
     sendLoginPage(res, connection, 500, {
       error: "Could not create an API key. Please try again.",

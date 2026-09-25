@@ -227,6 +227,10 @@ export function consumeRefreshToken(token: string): { fk_key: string } | null {
     for (const [t, e] of refreshTokens) {
       if (e.fk_key === replayed.fk_key) refreshTokens.delete(t);
     }
+    // Access tokens already issued to the lineage die too, not in up to 1h.
+    for (const [sid, e] of accessSessions) {
+      if (e.fk_key === replayed.fk_key) accessSessions.delete(sid);
+    }
     persistStore();
   }
   return null;

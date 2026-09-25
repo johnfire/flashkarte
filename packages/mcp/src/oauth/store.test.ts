@@ -3,6 +3,8 @@ import {
   consumeAuthCode,
   createRefreshToken,
   consumeRefreshToken,
+  createAccessSession,
+  resolveAccessSession,
 } from "./store";
 
 const baseCode = {
@@ -44,5 +46,15 @@ describe("oauth store", () => {
     expect(consumeRefreshToken(a)).toBeNull();
     // ...and the legitimate live token B is revoked too.
     expect(consumeRefreshToken(b)).toBeNull();
+  });
+
+  test("a replay also ends the lineage's live access tokens", () => {
+    const a = createRefreshToken("fk_stolen");
+    consumeRefreshToken(a);
+    const sid = createAccessSession("fk_stolen");
+    const other = createAccessSession("fk_someone_else");
+    consumeRefreshToken(a); // replay
+    expect(resolveAccessSession(sid)).toBeNull();
+    expect(resolveAccessSession(other)).toEqual({ fk_key: "fk_someone_else" });
   });
 });

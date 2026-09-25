@@ -1,7 +1,7 @@
 import crypto from "crypto";
 import express from "express";
 import request from "supertest";
-import { createAuthorizeRouter } from "./authorize";
+import { createAuthorizeRouter, keyName } from "./authorize";
 import * as apiModule from "../api";
 import * as store from "./store";
 
@@ -147,6 +147,11 @@ describe("authorize POST", () => {
     expect(code).toBeTruthy();
     // the issued code is bound to the minted fk_ key
     expect(store.consumeAuthCode(code as string)?.fk_key).toBe("fk_minted");
+    // named after the app and its destination, so keys can be told apart
+    expect(mockApi.backendCreateKey).toHaveBeenCalledWith(
+      "jwt",
+      "Claude (claude.ai)",
+    );
   });
 
   test("bad credentials re-render the form with an error", async () => {
@@ -435,5 +440,30 @@ describe("authorize POST with two-step verification", () => {
       .send({ ...formFields(step1.text), code: "123456" }); // no cookie
     expect(res.status).toBe(400);
     expect(mockApi.backendVerifyTwoFactor).not.toHaveBeenCalled();
+  });
+});
+
+describe("keyName", () => {
+  const params = {
+    ...goodQuery,
+    redirect_uri: "http://localhost:4567/callback",
+  };
+
+  test("names the key after the app and its destination host", () => {
+    const client = {
+      name: "Claude Code",
+      isSelfRegistered: true,
+      redirectUris: [],
+    };
+    expect(keyName({ params, client })).toBe("Claude Code (localhost)");
+  });
+
+  test("fits the backend's 50-character limit", () => {
+    const client = {
+      name: "x".repeat(80),
+      isSelfRegistered: true,
+      redirectUris: [],
+    };
+    expect(keyName({ params, client })).toHaveLength(50);
   });
 });
