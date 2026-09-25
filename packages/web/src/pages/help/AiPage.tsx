@@ -41,7 +41,11 @@ export function AiPage() {
           <Trans
             i18nKey="help.ai.agentsNote"
             components={[
-              <a key="llms" href="/llms.txt" className="text-indigo-600 underline" />,
+              <a
+                key="llms"
+                href="/llms.txt"
+                className="text-indigo-600 underline"
+              />,
             ]}
           />
         </p>
