@@ -686,7 +686,8 @@
       "step1": "Erzeuge in den Einstellungen einen API-Schlüssel und kopiere die MCP-Server-URL.",
       "step2": "Füge die URL als benutzerdefinierten Connector in deinem KI-Client hinzu (zum Beispiel claude.ai oder Claude Desktop) und melde dich mit deinem flashkarte-Konto an.",
       "step3": "Bitte sie um den gewählten Inhaltstyp, z. B. \"Turn this into a flashkarte deck: …\" oder \"Create a structured learning course about …\". Der neue Inhalt erscheint in deinem Konto, bereit zum Prüfen und Lernen.",
-      "settingsLink": "Einstellungen öffnen →"
+      "settingsLink": "Einstellungen öffnen →",
+      "agentsNote": "Für KI-Agenten gibt es unter <0>/llms.txt</0> eine Klartext-Anleitung zu flashkarte und seinem MCP-Server."
     },
     "sharing": {
       "metaTitle": "Teilen & entdecken — flashkarte-Hilfe",

@@ -686,7 +686,8 @@
       "step1": "In Settings, generate an API key and copy the MCP server URL.",
       "step2": "Add the URL as a custom connector in your AI client (for example claude.ai or Claude Desktop) and sign in with your flashkarte account.",
       "step3": "Ask it for the content type you chose, e.g. \"Turn this into a flashkarte deck: …\" or \"Create a structured learning course about …\". The new content appears in your account, ready for you to review and study.",
-      "settingsLink": "Open Settings →"
+      "settingsLink": "Open Settings →",
+      "agentsNote": "For AI agents, a plain-text guide to flashkarte and its MCP server is at <0>/llms.txt</0>."
     },
     "sharing": {
       "metaTitle": "Sharing & exploring — flashkarte Help",

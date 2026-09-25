@@ -99,4 +99,22 @@ describe("production deck SEO wiring", () => {
     expect(res.status).toBe(200);
     expect(res.text).toContain(`/d/${deckSlug(PREVIEW.title, PREVIEW.id)}`);
   });
+  it("serves /llms.txt as UTF-8 plain text listing public decks", async () => {
+    libMock.list.mockResolvedValue([
+      {
+        id: PREVIEW.id,
+        referenceNumber: PREVIEW.referenceNumber,
+        title: PREVIEW.title,
+        author: "Chris",
+        cardCount: 1,
+        publishedAt: null,
+        categoryId: null,
+      },
+    ]);
+    const res = await request(app()).get("/llms.txt");
+    expect(res.status).toBe(200);
+    expect(res.headers["content-type"]).toBe("text/plain; charset=utf-8");
+    expect(res.text).toContain("# flashkarte");
+    expect(res.text).toContain(`/d/${deckSlug(PREVIEW.title, PREVIEW.id)}`);
+  });
 });

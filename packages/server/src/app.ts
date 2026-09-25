@@ -34,8 +34,9 @@ import { requestId } from "./middleware/requestId";
 import { accessLog } from "./middleware/accessLog";
 import { mountSeo } from "./seo/mount";
 import { loadTemplate } from "./seo/template";
-import { getSiteOrigin } from "./seo/siteOrigin";
+import { getMcpPublicUrl, getSiteOrigin } from "./seo/siteOrigin";
 import { SitemapUrl } from "./seo/sitemap";
+import { buildLlmsTxt } from "./seo/llms";
 import * as libraryService from "./domains/library/library.service";
 import { deckPath } from "@flashkarte/shared";
 import { getPool } from "./db/client";
@@ -289,11 +290,26 @@ export function configureProductionWeb(
     return base;
   };
 
+  const llmsTxt = async (): Promise<string> => {
+    const decks = await libraryService.list(undefined);
+    return buildLlmsTxt({
+      origin: getSiteOrigin(),
+      mcpUrl: getMcpPublicUrl(),
+      decks: decks.map((d) => ({
+        title: d.title,
+        author: d.author,
+        cardCount: d.cardCount,
+        path: deckPath(d.title, d.id),
+      })),
+    });
+  };
+
   if (template) {
     mountSeo(app, {
       template,
       sitemapUrls,
       getDeckPreview: (id) => libraryService.getPreview(id),
+      llmsTxt,
     });
   }
   app.use(express.static(webDist, { index: false }));

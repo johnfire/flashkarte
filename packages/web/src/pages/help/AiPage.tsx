@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { useDocumentHead } from "../../seo/useDocumentHead";
 import { HelpTopicShell, helpH2 } from "./HelpShell";
 
@@ -36,6 +36,14 @@ export function AiPage() {
           <Link to="/settings" className="text-indigo-600">
             {t("help.ai.settingsLink")}
           </Link>
+        </p>
+        <p className="mt-3 text-sm">
+          <Trans
+            i18nKey="help.ai.agentsNote"
+            components={[
+              <a key="llms" href="/llms.txt" className="text-indigo-600" />,
+            ]}
+          />
         </p>
       </section>
     </HelpTopicShell>

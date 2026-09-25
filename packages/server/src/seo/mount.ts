@@ -9,6 +9,8 @@ export interface MountSeoOptions {
   template: string;
   sitemapUrls: () => SitemapUrl[] | Promise<SitemapUrl[]>;
   getDeckPreview?: (id: string) => Promise<DeckPreview | null>;
+  /** The /llms.txt guide for AI agents. */
+  llmsTxt?: () => Promise<string>;
 }
 
 // HTML routes that get server-injected meta.
@@ -31,6 +33,17 @@ export function mountSeo(app: Express, opts: MountSeoOptions): void {
       res.sendStatus(500);
     }
   });
+
+  if (opts.llmsTxt) {
+    const llmsTxt = opts.llmsTxt;
+    app.get("/llms.txt", async (_req, res) => {
+      try {
+        res.type("text/plain; charset=utf-8").send(await llmsTxt());
+      } catch {
+        res.sendStatus(500);
+      }
+    });
+  }
 
   for (const route of STATIC_HTML_ROUTES) {
     app.get(route, (req, res) => {

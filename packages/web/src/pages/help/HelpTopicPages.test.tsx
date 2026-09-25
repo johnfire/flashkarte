@@ -72,6 +72,14 @@ describe("help topic pages", () => {
     ).toBeInTheDocument();
   });
 
+  it("AiPage points AI agents at /llms.txt", () => {
+    renderPage(<AiPage />);
+    expect(screen.getByRole("link", { name: "/llms.txt" })).toHaveAttribute(
+      "href",
+      "/llms.txt",
+    );
+  });
+
   it("AiPage links to Settings", () => {
     renderPage(<AiPage />);
     expect(

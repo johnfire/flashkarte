@@ -46,14 +46,15 @@ Chapter V transfer safeguard:
 
 ## Retention controls implemented
 
-| Category                 | Control                                                                |
-| ------------------------ | ---------------------------------------------------------------------- |
-| Account/content/progress | Backups expire within three months; restoration must preserve expiry.  |
-| Audit records            | Daily privileged 12-month purge is installed and must be monitored.    |
-| Logs and proxy logs      | Dedicated daily 90-day rotation policies are installed.                |
-| GitHub tickets           | Daily 90-day deletion workflow and verified-erasure path are defined.  |
-| MCP OAuth store          | Refresh-token and tombstone expiry is 30 days; access sessions 1 hour. |
-| Analytics                | Consent gate and daily 90-day Umami purge are installed.               |
+| Category                 | Control                                                                                   |
+| ------------------------ | ----------------------------------------------------------------------------------------- |
+| Account/content/progress | Backups expire within three months; restoration must preserve expiry.                     |
+| Audit records            | Daily privileged 12-month purge is installed and must be monitored.                       |
+| Logs and proxy logs      | Dedicated daily 90-day rotation policies are installed.                                   |
+| GitHub tickets           | Daily 90-day deletion workflow and verified-erasure path are defined.                     |
+| MCP OAuth store          | Refresh-token and tombstone expiry is 30 days; access sessions 1 hour.                    |
+| MCP registered apps      | App name and redirect URIs only (no personal data); capped at 1000, oldest dropped first. |
+| Analytics                | Consent gate and daily 90-day Umami purge are installed.                                  |
 
 ## Evidence of technical and organisational measures
 
