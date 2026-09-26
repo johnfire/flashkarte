@@ -187,17 +187,26 @@ export function deleteRefreshToken(tokenHash: string) {
   return query("DELETE FROM refresh_tokens WHERE token_hash = $1", [tokenHash]);
 }
 
-export function deleteRefreshTokensForUser(userId: string) {
-  return query("DELETE FROM refresh_tokens WHERE user_id = $1", [userId]);
+export function deleteRefreshTokensForUser(
+  userId: string,
+  client?: PoolClient,
+) {
+  const sql = "DELETE FROM refresh_tokens WHERE user_id = $1";
+  return client ? client.query(sql, [userId]) : query(sql, [userId]);
 }
 
 // --- Password reset tokens (#5) ---
 
-export function updatePasswordHash(userId: string, passwordHash: string) {
-  return query(
-    "UPDATE users SET password_hash = $2, updated_at = now() WHERE id = $1",
-    [userId, passwordHash],
-  );
+export function updatePasswordHash(
+  userId: string,
+  passwordHash: string,
+  client?: PoolClient,
+) {
+  const sql =
+    "UPDATE users SET password_hash = $2, updated_at = now() WHERE id = $1";
+  return client
+    ? client.query(sql, [userId, passwordHash])
+    : query(sql, [userId, passwordHash]);
 }
 
 export function insertPasswordResetToken(
@@ -218,10 +227,29 @@ export function findPasswordResetToken(tokenHash: string) {
   );
 }
 
-export function deletePasswordResetTokensForUser(userId: string) {
-  return query("DELETE FROM password_reset_tokens WHERE user_id = $1", [
-    userId,
-  ]);
+// Atomically claim an unexpired reset token. DELETE … RETURNING takes a row
+// lock, so of two concurrent claims for the same token exactly one gets the
+// row back; the other waits, then sees nothing. Must run inside the same
+// transaction as the password update so a failed update releases the token.
+export async function consumePasswordResetToken(
+  client: PoolClient,
+  tokenHash: string,
+): Promise<string | null> {
+  const result = await client.query<{ user_id: string }>(
+    `DELETE FROM password_reset_tokens
+      WHERE token_hash = $1 AND expires_at > now()
+      RETURNING user_id`,
+    [tokenHash],
+  );
+  return result.rows[0]?.user_id ?? null;
+}
+
+export function deletePasswordResetTokensForUser(
+  userId: string,
+  client?: PoolClient,
+) {
+  const sql = "DELETE FROM password_reset_tokens WHERE user_id = $1";
+  return client ? client.query(sql, [userId]) : query(sql, [userId]);
 }
 
 // Two separate statements: pg runs parameterized queries as prepared

@@ -143,11 +143,44 @@ describe("twoFactor.verifyCode", () => {
         two_factor_backup: [otherHash, usedHash],
       }),
     );
-    mock.updateTwoFactorBackup.mockResolvedValue([]);
+    mock.consumeTwoFactorBackup.mockResolvedValue(true);
 
     expect(await verifyCode("u1", backup)).toBe("backup");
-    // consumed: only the unused hash remains
-    expect(mock.updateTwoFactorBackup).toHaveBeenCalledWith("u1", [otherHash]);
+    // consumed atomically: exactly the matched hash is removed
+    expect(mock.consumeTwoFactorBackup).toHaveBeenCalledWith("u1", usedHash);
+  });
+
+  it("rejects a backup code a concurrent request already consumed", async () => {
+    const bcrypt = await import("bcryptjs");
+    const backup = "a3f2c-9b01d";
+    mock.findTwoFactor.mockResolvedValue(
+      twoFactorRow({
+        two_factor_enabled: true,
+        two_factor_secret_enc: encryptSecret(secret),
+        two_factor_backup: [await bcrypt.hash(backup, 10)],
+      }),
+    );
+    // The stale snapshot still lists the code, but the atomic removal lost.
+    mock.consumeTwoFactorBackup.mockResolvedValue(false);
+
+    expect(await verifyCode("u1", backup)).toBeNull();
+  });
+
+  it("does not consume a backup code when consumeBackup is false", async () => {
+    const bcrypt = await import("bcryptjs");
+    const backup = "a3f2c-9b01d";
+    mock.findTwoFactor.mockResolvedValue(
+      twoFactorRow({
+        two_factor_enabled: true,
+        two_factor_secret_enc: encryptSecret(secret),
+        two_factor_backup: [await bcrypt.hash(backup, 10)],
+      }),
+    );
+
+    expect(await verifyCode("u1", backup, { consumeBackup: false })).toBe(
+      "backup",
+    );
+    expect(mock.consumeTwoFactorBackup).not.toHaveBeenCalled();
   });
 });
 

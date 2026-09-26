@@ -126,11 +126,12 @@ export async function verifyCode(
 
   for (const hash of row.two_factor_backup) {
     if (await bcrypt.compare(code, hash)) {
+      // Only the request that actually removed the code may succeed; a
+      // concurrent request that verified the same code loses here.
       if (opts.consumeBackup) {
-        await repo.updateTwoFactorBackup(
-          userId,
-          row.two_factor_backup.filter((h) => h !== hash),
-        );
+        return (await repo.consumeTwoFactorBackup(userId, hash))
+          ? "backup"
+          : null;
       }
       return "backup";
     }

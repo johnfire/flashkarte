@@ -146,9 +146,17 @@ async function createAndSendVerification(
   await sendVerificationEmail(email, link);
 }
 
+// Access tokens and 2FA challenges are signed with the same key, so each kind
+// carries its own audience and every verifier requires exactly its own. A
+// password-only 2FA challenge must never pass as an access token
+// (RFC 8725 §3.12, explicit typing / mutually exclusive validation).
+const ACCESS_TOKEN_AUDIENCE = "flashkarte:access";
+const TWO_FACTOR_CHALLENGE_AUDIENCE = "flashkarte:2fa-challenge";
+
 function signAccessToken(userId: string, email: string): string {
   return jwt.sign({ sub: userId, email } satisfies JwtPayload, getJwtSecret(), {
     algorithm: "HS256",
+    audience: ACCESS_TOKEN_AUDIENCE,
     expiresIn: ACCESS_TOKEN_TTL_SEC,
   });
 }
@@ -156,10 +164,22 @@ function signAccessToken(userId: string, email: string): string {
 export function verifyAccessToken(token: string): JwtPayload {
   try {
     // Pin the algorithm so a token can't be verified under a different scheme
-    // (defense against algorithm-confusion attacks).
-    return jwt.verify(token, getJwtSecret(), {
+    // (defense against algorithm-confusion attacks), and pin the audience so
+    // only access tokens are accepted.
+    const payload = jwt.verify(token, getJwtSecret(), {
       algorithms: ["HS256"],
-    }) as JwtPayload;
+      audience: ACCESS_TOKEN_AUDIENCE,
+    });
+    if (
+      typeof payload !== "object" ||
+      typeof payload.sub !== "string" ||
+      payload.sub.length === 0 ||
+      typeof payload.email !== "string" ||
+      "purpose" in payload
+    ) {
+      throw new Error("not an access token");
+    }
+    return { sub: payload.sub, email: payload.email };
   } catch {
     throw new AuthError("Invalid or expired token");
   }
@@ -311,7 +331,11 @@ function signTwoFactorChallenge(userId: string): string {
       purpose: TWO_FACTOR_CHALLENGE_PURPOSE,
     } satisfies TwoFactorChallengePayload,
     getJwtSecret(),
-    { algorithm: "HS256", expiresIn: TWO_FACTOR_CHALLENGE_TTL_SEC },
+    {
+      algorithm: "HS256",
+      audience: TWO_FACTOR_CHALLENGE_AUDIENCE,
+      expiresIn: TWO_FACTOR_CHALLENGE_TTL_SEC,
+    },
   );
 }
 
@@ -319,9 +343,16 @@ function verifyTwoFactorChallenge(challenge: string): string {
   try {
     const payload = jwt.verify(challenge, getJwtSecret(), {
       algorithms: ["HS256"],
-    }) as TwoFactorChallengePayload;
-    if (payload.purpose !== TWO_FACTOR_CHALLENGE_PURPOSE) {
-      throw new Error("wrong purpose");
+      audience: TWO_FACTOR_CHALLENGE_AUDIENCE,
+    });
+    if (
+      typeof payload !== "object" ||
+      payload.purpose !== TWO_FACTOR_CHALLENGE_PURPOSE ||
+      typeof payload.sub !== "string" ||
+      payload.sub.length === 0 ||
+      "email" in payload
+    ) {
+      throw new Error("not a two-factor challenge");
     }
     return payload.sub;
   } catch {
@@ -596,13 +627,23 @@ export async function resetPassword(
 ): Promise<string> {
   const token = parse(resetTokenSchema, rawToken);
   const password = parse(passwordSchema, passwordIn);
-  const found = await repo.findPasswordResetToken(hashToken(token));
+  const tokenHash = hashToken(token);
+  // Cheap pre-check so an invalid link doesn't cost a bcrypt hash. It is not
+  // the single-use guard — the atomic claim below is.
+  const found = await repo.findPasswordResetToken(tokenHash);
   if (!found || found.expires_at < new Date()) {
     throw new ValidationError("This reset link is invalid or expired");
   }
   const hash = await bcrypt.hash(password, BCRYPT_ROUNDS);
-  await repo.updatePasswordHash(found.user_id, hash);
-  await repo.deletePasswordResetTokensForUser(found.user_id); // single-use
-  await repo.deleteRefreshTokensForUser(found.user_id); // invalidate sessions
-  return found.user_id;
+  return withTransaction(async (client) => {
+    const userId = await repo.consumePasswordResetToken(client, tokenHash);
+    if (!userId) {
+      // Lost a race with a concurrent reset, or expired meanwhile.
+      throw new ValidationError("This reset link is invalid or expired");
+    }
+    await repo.updatePasswordHash(userId, hash, client);
+    await repo.deletePasswordResetTokensForUser(userId, client); // single-use
+    await repo.deleteRefreshTokensForUser(userId, client); // invalidate sessions
+    return userId;
+  });
 }

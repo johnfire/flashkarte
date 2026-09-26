@@ -350,16 +350,26 @@ export function disableTwoFactor(userId: string): Promise<unknown[]> {
   );
 }
 
-/** Replace the backup-code hashes (used to consume a spent code). */
-export function updateTwoFactorBackup(
+/**
+ * Atomically consume one backup-code hash. The predicate requires the hash to
+ * still be present, and Postgres re-checks it after waiting on a concurrent
+ * update of the row, so of two requests racing on the same code exactly one
+ * gets `true`. array_remove works on the current row value, so concurrent use
+ * of different codes can't overwrite each other's removals.
+ */
+export async function consumeTwoFactorBackup(
   userId: string,
-  backupHashes: string[],
-): Promise<unknown[]> {
-  return query(
-    `UPDATE users SET two_factor_backup = $2, updated_at = now()
-      WHERE id = $1`,
-    [userId, backupHashes],
+  backupHash: string,
+): Promise<boolean> {
+  const rows = await query<{ id: string }>(
+    `UPDATE users
+        SET two_factor_backup = array_remove(two_factor_backup, $2),
+            updated_at = now()
+      WHERE id = $1 AND two_factor_enabled AND $2 = ANY(two_factor_backup)
+      RETURNING id`,
+    [userId, backupHash],
   );
+  return rows.length === 1;
 }
 
 export interface LessonProgressExportRow {

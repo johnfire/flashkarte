@@ -25,6 +25,7 @@ import {
   requestEmailChange,
   confirmEmailChange,
   updateProfile,
+  verifyAccessToken,
   verifyEmail,
 } from "./auth.service";
 
@@ -230,6 +231,42 @@ describe("auth command validation", () => {
       expect(mockRepo.findPasswordResetToken).not.toHaveBeenCalled();
     },
   );
+
+  it("consumes the reset token and updates the password in one transaction", async () => {
+    mockRepo.findPasswordResetToken.mockResolvedValue({
+      user_id: "u1",
+      expires_at: new Date(Date.now() + 60_000),
+    });
+    mockBcrypt.hash.mockResolvedValue("new-hash" as never);
+    mockRepo.consumePasswordResetToken.mockResolvedValue("u1");
+
+    await expect(resetPassword("tok", "new-password")).resolves.toBe("u1");
+    expect(withTransaction).toHaveBeenCalledTimes(1);
+    const client = mockRepo.consumePasswordResetToken.mock.calls[0][0];
+    expect(mockRepo.updatePasswordHash).toHaveBeenCalledWith(
+      "u1",
+      "new-hash",
+      client,
+    );
+    expect(mockRepo.deleteRefreshTokensForUser).toHaveBeenCalledWith(
+      "u1",
+      client,
+    );
+  });
+
+  it("rejects a reset whose token a concurrent request already claimed", async () => {
+    mockRepo.findPasswordResetToken.mockResolvedValue({
+      user_id: "u1",
+      expires_at: new Date(Date.now() + 60_000),
+    });
+    mockBcrypt.hash.mockResolvedValue("new-hash" as never);
+    mockRepo.consumePasswordResetToken.mockResolvedValue(null);
+
+    await expect(resetPassword("tok", "new-password")).rejects.toThrow(
+      "This reset link is invalid or expired",
+    );
+    expect(mockRepo.updatePasswordHash).not.toHaveBeenCalled();
+  });
 
   it("keeps malformed two-factor challenges as authentication errors", async () => {
     await expect(
@@ -449,6 +486,59 @@ describe("login with 2FA enabled", () => {
     await expect(
       completeTwoFactorLogin("not-a-jwt", "123456", false),
     ).rejects.toThrow(/challenge/i);
+  });
+
+  it("rejects a 2FA challenge used as an access token", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(true));
+    const first = await login("a@b.com", "password123", false);
+    if (!first.requiresTwoFactor) throw new Error("expected challenge");
+
+    expect(() => verifyAccessToken(first.challenge)).toThrow(
+      "Invalid or expired token",
+    );
+  });
+
+  it("accepts the access token issued after the second factor", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(true));
+    const first = await login("a@b.com", "password123", false);
+    if (!first.requiresTwoFactor) throw new Error("expected challenge");
+    mockTwoFactor.verifyCode.mockResolvedValue("totp");
+    mockRepo.findById.mockResolvedValue(userRow(true));
+    const done = await completeTwoFactorLogin(first.challenge, "123456", false);
+
+    expect(verifyAccessToken(done.accessToken)).toEqual({
+      sub: "u1",
+      email: "a@b.com",
+    });
+    // …and the access token is not a valid challenge either.
+    await expect(
+      completeTwoFactorLogin(done.accessToken, "123456", false),
+    ).rejects.toThrow(/challenge/i);
+  });
+
+  it.each([
+    ["no audience", { sub: "u1", email: "a@b.com" }, {}],
+    [
+      "the challenge audience",
+      { sub: "u1", email: "a@b.com" },
+      { audience: "flashkarte:2fa-challenge" },
+    ],
+    [
+      "a purpose claim",
+      { sub: "u1", email: "a@b.com", purpose: "2fa-challenge" },
+      { audience: "flashkarte:access" },
+    ],
+    ["no email", { sub: "u1" }, { audience: "flashkarte:access" }],
+    ["no subject", { email: "a@b.com" }, { audience: "flashkarte:access" }],
+  ])("rejects an access token with %s", (_label, claims, opts) => {
+    const jwt = jest.requireActual("jsonwebtoken");
+    const { getJwtSecret } = jest.requireActual("../../config/env");
+    const token = jwt.sign(claims, getJwtSecret(), {
+      algorithm: "HS256",
+      expiresIn: 60,
+      ...opts,
+    });
+    expect(() => verifyAccessToken(token)).toThrow("Invalid or expired token");
   });
 
   it("rejects an access token used as a challenge (purpose binding)", async () => {
