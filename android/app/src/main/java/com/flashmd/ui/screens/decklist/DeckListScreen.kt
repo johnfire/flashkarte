@@ -6,6 +6,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.*
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.R
+import com.flashmd.ui.components.RefreshOnResume
 import com.flashmd.ui.components.SyncStatusChip
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,6 +32,8 @@ fun DeckListScreen(
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val pending by viewModel.pending.collectAsStateWithLifecycle()
+
+    RefreshOnResume(viewModel::refresh)
 
     Scaffold(
         topBar = {
@@ -49,61 +53,67 @@ fun DeckListScreen(
             )
         },
     ) { padding ->
-        if (state.decks.isEmpty() && state.isLoading) {
-            Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                CircularProgressIndicator()
-            }
-        } else if (state.decks.isEmpty() && state.listError != null) {
-            Column(
-                Modifier.fillMaxSize().padding(padding).padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
-            ) {
-                Text(
-                    state.listError!!,
-                    color = MaterialTheme.colorScheme.error,
-                    style = MaterialTheme.typography.bodyLarge,
-                )
-                Button(onClick = { viewModel.refresh() }) { Text("Retry") }
-            }
-        } else if (state.decks.isEmpty()) {
-            Column(
-                Modifier.fillMaxSize().padding(padding).padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
-            ) {
-                Text(
-                    "No decks yet.\nTap New below to create or import one.",
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    style = MaterialTheme.typography.bodyLarge,
-                    textAlign = TextAlign.Center,
-                )
-                TextButton(onClick = onHelp) {
-                    Text(stringResource(R.string.decks_empty_hint))
+        PullToRefreshBox(
+            isRefreshing = state.isLoading,
+            onRefresh = viewModel::refresh,
+            modifier = Modifier.fillMaxSize().padding(padding),
+        ) {
+            if (state.decks.isEmpty() && state.isLoading) {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
                 }
-            }
-        } else {
-            LazyColumn(
-                Modifier.fillMaxSize().padding(padding),
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                items(state.decks, key = { it.deck.id }) { row ->
-                    DeckCard(
-                        row = row,
-                        onStudy = { onStudyDeck(row.deck.id) },
-                        onPlay = { onPlayDeck(row.deck.id) },
-                        onStats = { onStatsDeck(row.deck.id) },
-                        onRename = { t -> viewModel.rename(row.deck.id, t) },
-                        onAddCards = { md -> viewModel.addCards(row.deck.id, md) },
-                        onTogglePublic = { viewModel.setPublic(row.deck.id, !row.deck.isPublic) },
-                        onToggleOrdered = { viewModel.setOrdered(row.deck.id, !row.deck.isOrdered) },
-                        onDelete = { viewModel.delete(row.deck.id) },
-                        voiceLanguages = viewModel::voiceLanguages,
-                        onSetSpeech = { enabled, front, back, autoplay, rate ->
-                            viewModel.setSpeech(row.deck.id, enabled, front, back, autoplay, rate)
-                        },
+            } else if (state.decks.isEmpty() && state.listError != null) {
+                Column(
+                    Modifier.fillMaxSize().padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterVertically),
+                ) {
+                    Text(
+                        state.listError!!,
+                        color = MaterialTheme.colorScheme.error,
+                        style = MaterialTheme.typography.bodyLarge,
                     )
+                    Button(onClick = { viewModel.refresh() }) { Text("Retry") }
+                }
+            } else if (state.decks.isEmpty()) {
+                Column(
+                    Modifier.fillMaxSize().padding(24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
+                ) {
+                    Text(
+                        "No decks yet.\nTap New below to create or import one.",
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        style = MaterialTheme.typography.bodyLarge,
+                        textAlign = TextAlign.Center,
+                    )
+                    TextButton(onClick = onHelp) {
+                        Text(stringResource(R.string.decks_empty_hint))
+                    }
+                }
+            } else {
+                LazyColumn(
+                    Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    items(state.decks, key = { it.deck.id }) { row ->
+                        DeckCard(
+                            row = row,
+                            onStudy = { onStudyDeck(row.deck.id) },
+                            onPlay = { onPlayDeck(row.deck.id) },
+                            onStats = { onStatsDeck(row.deck.id) },
+                            onRename = { t -> viewModel.rename(row.deck.id, t) },
+                            onAddCards = { md -> viewModel.addCards(row.deck.id, md) },
+                            onTogglePublic = { viewModel.setPublic(row.deck.id, !row.deck.isPublic) },
+                            onToggleOrdered = { viewModel.setOrdered(row.deck.id, !row.deck.isOrdered) },
+                            onDelete = { viewModel.delete(row.deck.id) },
+                            voiceLanguages = viewModel::voiceLanguages,
+                            onSetSpeech = { enabled, front, back, autoplay, rate ->
+                                viewModel.setSpeech(row.deck.id, enabled, front, back, autoplay, rate)
+                            },
+                        )
+                    }
                 }
             }
         }
