@@ -32,7 +32,7 @@ export async function listDueReviews(
   subjectId: string,
   now: Date = new Date(),
 ) {
-  await requireLearningSubject(userId, subjectId);
+  const subject = await requireLearningSubject(userId, subjectId);
   const db = getPool();
   const [reviews, lessons] = await Promise.all([
     repo.listReviews(db, userId, subjectId),
@@ -51,6 +51,8 @@ export async function listDueReviews(
     .filter((r) => !dueIds.includes(r.question_id))
     .map((r) => new Date(r.due_at).getTime());
   return {
+    // Owner-only feedback tools are hidden for enrolled learners.
+    is_owner: subject.user_id === userId,
     due: dueIds.map((id) => ({
       question_id: id,
       lesson: slugOf.get(byId.get(id)!.lesson_id) ?? null,

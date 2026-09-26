@@ -802,6 +802,7 @@
     "reviewsDue_one": "{{count}} question is due for review",
     "reviewsDue_other": "{{count}} questions are due for review",
     "screenNumber": "Screen {{number}}",
+    "feedbackOwnerOnly": "Comments and requests for more explanation are available to the course author only.",
     "screenOf": "Screen {{current}} of {{total}}",
     "reread": "Re-read {{current}} of {{total}}",
     "back": "Back",

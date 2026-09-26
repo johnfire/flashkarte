@@ -28,6 +28,9 @@ const summary = (ctx: LearnerContext) => ({
   slug: ctx.lesson.slug,
   title: ctx.lesson.title,
   stage: ctx.lesson.stage,
+  // Feedback tools (comment, "I need more on this") are owner-only; the
+  // lesson page hides them for learners enrolled in someone else's course.
+  is_owner: ctx.isOwner,
 });
 
 function stepOf(ctx: LearnerContext, session: LessonSession): RenderedStep {

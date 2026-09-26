@@ -191,6 +191,43 @@ test("answering before the questions is a 422, and a stranger sees 404", async (
   ).toBe(404);
 });
 
+test("an enrolled learner of a public course is told feedback is owner-only, and it stays owner-only", async () => {
+  const id = await makeSubject();
+  const S = `/api/subjects/${id}`;
+  const owner = await request(app).post(`${S}/learn/lessons/tokens/start`);
+  expect(owner.body.lesson.is_owner).toBe(true);
+  expect((await request(app).get(`${S}/learn/reviews`)).body.is_owner).toBe(
+    true,
+  );
+
+  await getPool().query("UPDATE subjects SET is_public = true WHERE id = $1", [
+    id,
+  ]);
+  await getPool().query(
+    "INSERT INTO subject_enrollments (user_id, subject_id) VALUES ($1, $2)",
+    [STRANGER, id],
+  );
+  currentUser = STRANGER;
+  const learner = await request(app).post(`${S}/learn/lessons/tokens/start`);
+  expect(learner.status).toBe(200);
+  expect(learner.body.lesson.is_owner).toBe(false);
+  const reviews = await request(app).get(`${S}/learn/reviews`);
+  expect(reviews.status).toBe(200);
+  expect(reviews.body.is_owner).toBe(false);
+
+  // The UI hides the controls; the server still refuses non-owners.
+  expect(
+    (
+      await request(app)
+        .post(`${S}/learn/screens/2/comments`)
+        .send({ body: "Why?" })
+    ).status,
+  ).toBe(404);
+  expect(
+    (await request(app).post(`${S}/learn/screens/2/help`).send({})).status,
+  ).toBe(404);
+});
+
 test("an AI (deck-scoped) key cannot learn, but can read where questions fail", async () => {
   const id = await makeSubject();
   keyScope = "deck";

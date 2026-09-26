@@ -2,7 +2,8 @@
   "lesson": {
     "slug": "tokens",
     "title": "Tokens",
-    "stage": "testing"
+    "stage": "testing",
+    "is_owner": true
   },
   "step": {
     "kind": "paused"

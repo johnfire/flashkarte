@@ -63,3 +63,14 @@ Fix: decide whether feedback is supported for enrolled learners. If supported, a
 Tests used a disposable local Postgres 16 container bound to `127.0.0.1:55439`, with synthetic data only. HTTP tests needed localhost socket access outside the filesystem sandbox. Dependency auditing initially failed under restricted DNS, then succeeded with network access.
 
 Review covered authentication, account recovery, API-key scope, MCP OAuth, selected ownership/learning boundaries, SVG handling, browser API handling, and CI/deployment configuration. It is a bounded source and test audit, not proof that all vulnerabilities or bugs have been found. Android/Python suites and production infrastructure were outside this web deployment audit. Existing tests passing did not detect the four findings above.
+
+## Remediation (2026-09-26)
+
+All four findings fixed on branch `claude/security-bug-audit-3ottue`.
+
+1. **Fixed.** Access tokens and 2FA challenges carry distinct JWT audiences (`flashkarte:access`, `flashkarte:2fa-challenge`); each verifier requires its own audience and checks claim shape at runtime. Access tokens issued before the change are refused once and silently re-issued through the existing refresh path. HTTP regression: a password-only challenge gets 401 on `/api/auth/me`, `/api/decks`, and `POST /api/keys`, and no key row is created.
+2. **Fixed.** The reset token is claimed with `DELETE … RETURNING` in the same transaction as the password update and session revocation. Real-DB tests: concurrent resets yield exactly one success; a failed update rolls back and leaves the link usable.
+3. **Fixed.** Backup codes are consumed with a conditional `array_remove` UPDATE; only the request that removed the hash succeeds. Real-DB tests cover same-code and different-code concurrency at production bcrypt cost.
+4. **Fixed by hiding (owner decision).** Feedback stays owner-only. Lesson and review responses carry `is_owner`; the web lesson view shows the comment and "I need more on this" controls only to the course author, and shows enrolled learners a short note. Server ownership checks are unchanged. API regression covers an enrolled non-owner. The Android app is not yet updated to use `is_owner` and still shows the controls to enrolled learners.
+
+Regression tests for findings 1–3 (`auth.security.integration.test.ts`) were run against the pre-fix code and failed there, as intended.

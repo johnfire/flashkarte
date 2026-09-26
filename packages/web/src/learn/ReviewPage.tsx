@@ -62,6 +62,7 @@ export function ReviewPage() {
           })}
           blocks={step.blocks}
           canGoBack={false}
+          isOwner={due?.is_owner ?? false}
           nextLabel={t("learn.continue")}
           disabled={run.busy}
           onNext={run.carryOn}

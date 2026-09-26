@@ -30,6 +30,7 @@ export function ScreenView({
   onBack,
   onNext,
   note,
+  isOwner,
 }: {
   subjectId: string;
   /** The lesson's slug. Without it (a review) there is no "need more" button. */
@@ -46,6 +47,11 @@ export function ScreenView({
   onBack?: () => void;
   onNext: () => void;
   note?: React.ReactNode;
+  /**
+   * Commenting and "need more on this" reach the course author's own tools, so only the author
+   * gets them; an enrolled learner sees a short note instead.
+   */
+  isOwner: boolean;
 }) {
   const { t } = useTranslation();
   const heading = useRef<HTMLHeadingElement>(null);
@@ -72,17 +78,25 @@ export function ScreenView({
         <LessonBlocks blocks={blocks} />
         <ScreenOrigin addedInAnswer={addedInAnswer} sources={sources} />
         {note}
-        {slug && (
-          <NeedMoreOnThis
-            key={number}
-            subjectId={subjectId}
-            slug={slug}
-            target={{ screen: number }}
-            screenNumber={number}
-            notices={help}
-          />
+        {isOwner ? (
+          <>
+            {slug && (
+              <NeedMoreOnThis
+                key={number}
+                subjectId={subjectId}
+                slug={slug}
+                target={{ screen: number }}
+                screenNumber={number}
+                notices={help}
+              />
+            )}
+            <CommentOnScreen subjectId={subjectId} number={number} />
+          </>
+        ) : (
+          <p className="mt-4 text-xs text-gray-600 dark:text-gray-400">
+            {t("learn.feedbackOwnerOnly")}
+          </p>
         )}
-        <CommentOnScreen subjectId={subjectId} number={number} />
       </article>
       <div className="mt-4 flex gap-3">
         {onBack && (

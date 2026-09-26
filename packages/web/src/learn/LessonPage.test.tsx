@@ -27,7 +27,12 @@ const learn = api.learn as unknown as Record<string, ReturnType<typeof vi.fn>>;
 const para = (text: string) => [
   { type: "paragraph" as const, spans: [{ text }] },
 ];
-const lesson = { slug: "tokens", title: "Tokens", stage: "testing" };
+const lesson = {
+  slug: "tokens",
+  title: "Tokens",
+  stage: "testing",
+  is_owner: true,
+};
 const screenStep = (index: number, total = 2): LessonStep => ({
   kind: "screen",
   number: String(index + 1),
@@ -227,6 +232,21 @@ describe("LessonPage", () => {
       expect(learn.comment).toHaveBeenCalledWith("s1", "2", "Why?"),
     );
     expect(await screen.findByText(/Comment on screen 2 saved/)).toBeTruthy();
+  });
+
+  test("a learner enrolled in someone else's course gets no feedback controls", async () => {
+    learn.start.mockResolvedValue({
+      lesson: { ...lesson, is_owner: false },
+      step: screenStep(1),
+    });
+    open();
+    expect(
+      await screen.findByText(/available to the course author only/),
+    ).toBeTruthy();
+    expect(
+      screen.queryByRole("button", { name: "Comment on screen 2" }),
+    ).toBeNull();
+    expect(screen.queryByRole("button", { name: /need more/i })).toBeNull();
   });
 
   test("shows the server's message when the lesson cannot be opened", async () => {

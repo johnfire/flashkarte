@@ -802,6 +802,7 @@
     "reviewsDue_one": "{{count}} Frage ist zur Wiederholung fällig",
     "reviewsDue_other": "{{count}} Fragen sind zur Wiederholung fällig",
     "screenNumber": "Seite {{number}}",
+    "feedbackOwnerOnly": "Kommentare und Bitten um mehr Erklärung stehen nur dem Autor des Kurses zur Verfügung.",
     "screenOf": "Seite {{current}} von {{total}}",
     "reread": "Nochmal lesen {{current}} von {{total}}",
     "back": "Zurück",

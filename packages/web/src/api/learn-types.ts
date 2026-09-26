@@ -121,6 +121,8 @@ export interface LessonSummary {
   slug: string;
   title: string;
   stage: string;
+  /** The caller authored this course; feedback tools are owner-only. */
+  is_owner: boolean;
 }
 export interface LessonStepResponse {
   lesson: LessonSummary;
@@ -136,6 +138,8 @@ export interface LessonAnswerResponse {
 }
 
 export interface DueReviews {
+  /** The caller authored this course; feedback tools are owner-only. */
+  is_owner: boolean;
   due: { question_id: string; lesson: string | null; due_at: string }[];
   upcoming: number;
   next_due_at: string | null;

@@ -22,6 +22,8 @@ export interface LearnerContext {
   lesson: lessonsRepo.LessonRow;
   loaded: LoadedLesson;
   progress: repo.LessonProgressRow | null;
+  /** The learner authored this subject (vs. is enrolled in someone's public course). */
+  isOwner: boolean;
 }
 
 /** An engine error is the learner doing something the rules do not allow: a 422, not a crash. */
@@ -55,7 +57,14 @@ export function withLearnerLesson<T>(
     const loaded = await loadLesson(db, lesson, userId);
     const progress = await repo.findProgress(db, userId, lesson.id);
     try {
-      return await action({ db, subject, lesson, loaded, progress });
+      return await action({
+        db,
+        subject,
+        lesson,
+        loaded,
+        progress,
+        isOwner: subject.user_id === userId,
+      });
     } catch (error) {
       return asValidationError(error);
     }

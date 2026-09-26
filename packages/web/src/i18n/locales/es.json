@@ -802,6 +802,7 @@
     "reviewsDue_one": "{{count}} pregunta toca repasar",
     "reviewsDue_other": "{{count}} preguntas tocan repasar",
     "screenNumber": "Pantalla {{number}}",
+    "feedbackOwnerOnly": "Los comentarios y las solicitudes de más explicación solo están disponibles para el autor del curso.",
     "screenOf": "Pantalla {{current}} de {{total}}",
     "reread": "Releer {{current}} de {{total}}",
     "back": "Atrás",

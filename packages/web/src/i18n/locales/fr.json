@@ -802,6 +802,7 @@
     "reviewsDue_one": "{{count}} question est à réviser",
     "reviewsDue_other": "{{count}} questions sont à réviser",
     "screenNumber": "Écran {{number}}",
+    "feedbackOwnerOnly": "Les commentaires et les demandes d'explications supplémentaires sont réservés à l'auteur du cours.",
     "screenOf": "Écran {{current}} sur {{total}}",
     "reread": "Relire {{current}} sur {{total}}",
     "back": "Retour",

@@ -18,6 +18,7 @@ export function LessonStepBody({
 }) {
   const { t } = useTranslation();
   const { step, feedback, busy } = run;
+  const isOwner = run.lesson?.is_owner ?? false;
 
   // Right after an answer: the verdict and reasons, before anything else.
   if (feedback) {
@@ -35,14 +36,16 @@ export function LessonStepBody({
             <StuckNote
               onPause={run.pause}
               more={
-                <NeedMoreOnThis
-                  key={question.question_id}
-                  subjectId={subjectId}
-                  slug={slug}
-                  target={{ question: question.question_id }}
-                  screenNumber={null}
-                  notices={question.help}
-                />
+                isOwner && (
+                  <NeedMoreOnThis
+                    key={question.question_id}
+                    subjectId={subjectId}
+                    slug={slug}
+                    target={{ question: question.question_id }}
+                    screenNumber={null}
+                    notices={question.help}
+                  />
+                )
               }
             />
           ) : null
@@ -68,6 +71,7 @@ export function LessonStepBody({
           })}
           blocks={step.blocks}
           canGoBack={step.can_go_back}
+          isOwner={isOwner}
           nextLabel={
             step.index + 1 === step.total
               ? t("learn.startQuestions")
@@ -93,6 +97,7 @@ export function LessonStepBody({
           })}
           blocks={step.blocks}
           canGoBack={false}
+          isOwner={isOwner}
           nextLabel={t("learn.continue")}
           disabled={busy}
           onNext={run.carryOn}
@@ -114,14 +119,16 @@ export function LessonStepBody({
                 <StuckNote
                   onPause={run.pause}
                   more={
-                    <NeedMoreOnThis
-                      key={step.question_id}
-                      subjectId={subjectId}
-                      slug={slug}
-                      target={{ question: step.question_id }}
-                      screenNumber={null}
-                      notices={step.help}
-                    />
+                    isOwner && (
+                      <NeedMoreOnThis
+                        key={step.question_id}
+                        subjectId={subjectId}
+                        slug={slug}
+                        target={{ question: step.question_id }}
+                        screenNumber={null}
+                        notices={step.help}
+                      />
+                    )
                   }
                 />
               )}
