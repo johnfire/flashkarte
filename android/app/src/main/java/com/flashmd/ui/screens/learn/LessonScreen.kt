@@ -241,14 +241,22 @@ private fun ScreenPanel(
             LessonBlocks(blocks)
             ScreenOrigin(addedInAnswer, sources)
             note()
-            NeedMoreOnThis(
-                target = HelpTarget.Screen(number),
-                notices = notices,
-                help = state.help,
-                prompt = helpPrompt(state.subjectId, state.slug, number),
-                actions = actions,
-            )
-            CommentOnScreen(number, state.comment, actions)
+            if (state.isOwner) {
+                NeedMoreOnThis(
+                    target = HelpTarget.Screen(number),
+                    notices = notices,
+                    help = state.help,
+                    prompt = helpPrompt(state.subjectId, state.slug, number),
+                    actions = actions,
+                )
+                CommentOnScreen(number, state.comment, actions)
+            } else {
+                Text(
+                    stringResource(R.string.learn_feedback_owner_only),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
         }
     }
     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -322,6 +330,7 @@ private fun PausedPanel(actions: LessonActions) {
 /** "I need more on this" for a question the learner keeps missing. */
 @Composable
 private fun QuestionHelp(question: QuestionStepDto, state: LessonUiState, actions: LessonActions) {
+    if (!state.isOwner) return
     NeedMoreOnThis(
         target = HelpTarget.Question(question.questionId),
         notices = question.help,

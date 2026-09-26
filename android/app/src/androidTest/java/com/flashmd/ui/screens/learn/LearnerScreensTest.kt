@@ -426,8 +426,9 @@ class LearnerScreensTest {
         notices: List<HelpNoticeDto> = emptyList(),
         addedInAnswer: String? = null,
         sources: List<ScreenSourceDto>? = null,
+        isOwner: Boolean = true,
     ) = LessonUiState(
-        title = "Embeddings", busy = false, subjectId = "s1", slug = "embeddings",
+        title = "Embeddings", busy = false, subjectId = "s1", slug = "embeddings", isOwner = isOwner,
         step = ScreenStepDto(
             number = "5", index = 0, total = 4, canGoBack = false,
             blocks = listOf(ParagraphBlockDto(listOf(SpanDto("Numbers can be compared.")))),
@@ -452,6 +453,14 @@ class LearnerScreensTest {
         compose.onNodeWithText("Ask my AI").performScrollTo().performClick()
         assertEquals(listOf<Pair<HelpTarget, String>>(HelpTarget.Screen("5") to "Why numbers?"), asked)
         compose.onNodeWithText("Ask my AI").assertDoesNotExist()
+    }
+
+    @Test
+    fun an_enrolled_learner_sees_no_feedback_tools_only_a_note() {
+        show { LessonBody(helpScreen(isOwner = false), noActions) }
+        compose.onNodeWithText("I need more on this").assertDoesNotExist()
+        compose.onNodeWithText("Comment on screen 5").assertDoesNotExist()
+        compose.onNodeWithText("available to the course author only", substring = true).assertExists()
     }
 
     @Test

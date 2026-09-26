@@ -60,6 +60,11 @@ data class LessonUiState(
     val comment: CommentState = CommentState.Idle,
     val openBook: OpenBookState = OpenBookState.Closed,
     val help: HelpState = HelpState.Idle,
+    /**
+     * The learner authored this course. Commenting and "I need more on this" reach the author's
+     * own tools, so only the author gets them; an enrolled learner sees a short note instead.
+     */
+    val isOwner: Boolean = false,
     /** For the ready-made message to the learner's AI. */
     val subjectId: String = "",
     val slug: String = "",
@@ -88,7 +93,14 @@ class LessonViewModel @Inject constructor(
             try {
                 val reply = call()
                 _state.update {
-                    it.copy(title = reply.lesson.title, step = reply.step, feedback = null, busy = false, help = HelpState.Idle)
+                    it.copy(
+                        title = reply.lesson.title,
+                        isOwner = reply.lesson.isOwner,
+                        step = reply.step,
+                        feedback = null,
+                        busy = false,
+                        help = HelpState.Idle,
+                    )
                 }
             } catch (e: Exception) {
                 _state.update { it.copy(busy = false, error = messageOf(e, "Something went wrong.")) }
@@ -119,6 +131,7 @@ class LessonViewModel @Inject constructor(
                 _state.update {
                     it.copy(
                         title = response.lesson.title,
+                        isOwner = response.lesson.isOwner,
                         feedback = AnswerFeedback(question, response),
                         unlocked = if (response.passed) response.unlocked else it.unlocked,
                         busy = false,

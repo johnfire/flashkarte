@@ -181,7 +181,13 @@ private object UnknownStepSerializer : kotlinx.serialization.KSerializer<StepDto
 }
 
 @Serializable
-data class LessonSummaryDto(val slug: String, val title: String, val stage: String = "")
+data class LessonSummaryDto(
+    val slug: String,
+    val title: String,
+    val stage: String = "",
+    /** The caller authored this course. Feedback tools are owner-only; absent means not owner. */
+    @SerialName("is_owner") val isOwner: Boolean = false,
+)
 
 @Serializable
 data class LessonStepResponseDto(

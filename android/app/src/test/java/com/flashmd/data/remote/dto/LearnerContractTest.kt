@@ -58,6 +58,7 @@ class LearnerContractTest {
     @Test
     fun `a screen step carries its number and every block type is understood`() {
         val started = read<LessonStepResponseDto>("start-screen")
+        assertTrue("is_owner decodes", started.lesson.isOwner)
         val screen = started.step as ScreenStepDto
         assertEquals("1", screen.number)
         assertEquals(0, screen.index)

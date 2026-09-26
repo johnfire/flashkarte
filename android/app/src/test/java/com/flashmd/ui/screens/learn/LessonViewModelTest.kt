@@ -55,6 +55,14 @@ class LessonViewModelTest {
         assertEquals("1", (state.step as ScreenStepDto).number)
         assertFalse(state.busy)
         assertNull(state.error)
+        assertTrue("the owner gets the feedback tools", state.isOwner)
+    }
+
+    @Test
+    fun `a learner enrolled in someone else's course is not the owner`() {
+        coEvery { repo.start("s1", "tokens") } returns
+            start.copy(lesson = start.lesson.copy(isOwner = false))
+        assertFalse(viewModel().state.value.isOwner)
     }
 
     @Test

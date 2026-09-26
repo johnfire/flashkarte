@@ -28,12 +28,10 @@ Status of the fixes: see the "Remediation" section of
 
 ## 3. Open work
 
-- [ ] **Android: finding 4 still open.** The API now returns `is_owner` on
-      lesson responses (`lesson.is_owner`) and on the reviews list
-      (`is_owner`), but the app ignores it. Enrolled learners on Android
-      still see the comment / "I need more on this" controls, which fail
-      with "Subject not found". Hide them when `is_owner` is false, as the
-      web does.
+- [x] **Android: finding 4.** Fixed: the lesson screen reads `lesson.is_owner`
+      and shows the comment / "I need more on this" controls only to the
+      course author; enrolled learners see a short note. Unit tests pass; the
+      new Compose UI test compiles but needs an emulator to run.
 - [ ] **Android: confirm refresh on 401.** Confirm the app refreshes its
       access token after a 401, not only at expiry. If it doesn't, the
       one-time token rejection from fix 1 logs Android users out once.

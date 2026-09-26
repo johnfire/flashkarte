@@ -136,6 +136,7 @@
     <string name="learn_continue_lesson">Continuer</string>
     <string name="learn_read_again">Relire</string>
     <string name="learn_screen_number">Écran %1$s</string>
+    <string name="learn_feedback_owner_only">Les commentaires et les demandes d\'explications supplémentaires sont réservés à l\'auteur du cours.</string>
     <string name="learn_screen_of">Écran %1$d sur %2$d</string>
     <string name="learn_reread">Relire %1$d sur %2$d</string>
     <string name="learn_back">Retour</string>
