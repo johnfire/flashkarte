@@ -2,7 +2,7 @@ package com.flashmd.di
 
 import okhttp3.CertificatePinner
 
-internal const val API_TLS_HOSTNAME = "flashkarte.christopherrehm.de"
+internal const val API_TLS_HOSTNAME = "learnwohl.app"
 
 // Let’s Encrypt's active ECDSA intermediates, valid through 2028-09-02.
 // Keep both pins so routine CA rotation between YE1 and YE2 remains available.

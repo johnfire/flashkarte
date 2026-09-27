@@ -35,7 +35,7 @@ android {
         buildConfigField(
             "String",
             "API_BASE_URL",
-            "\"https://flashkarte.christopherrehm.de/\"",
+            "\"https://learnwohl.app/\"",
         )
     }
 

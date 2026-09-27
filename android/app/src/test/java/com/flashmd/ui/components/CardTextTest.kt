@@ -75,11 +75,11 @@ class CardTextTest {
     }
 
     @Test fun `resolveImageUrl resolves a root-relative path against the API host`() {
-        // BuildConfig.API_BASE_URL is "https://flashkarte.christopherrehm.de/" in
-        // every build variant (see app/build.gradle.kts) — trailing slash trimmed
-        // so the join never doubles up.
+        // BuildConfig.API_BASE_URL is "https://learnwohl.app/" in every build
+        // variant (see app/build.gradle.kts) — trailing slash trimmed so the
+        // join never doubles up.
         assertEquals(
-            "https://flashkarte.christopherrehm.de/schematics/ch1-rc-lowpass.svg",
+            "https://learnwohl.app/schematics/ch1-rc-lowpass.svg",
             resolveImageUrl("/schematics/ch1-rc-lowpass.svg"),
         )
     }
