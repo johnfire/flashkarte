@@ -95,9 +95,9 @@ const FLOATERS = [
 
 export function LandingPage() {
   useDocumentHead({
-    title: "flashkarte — Learn anything with spaced-repetition flashcards",
+    title: "LearnWohl — Flashcard decks and full custom courses",
     description:
-      "flashkarte is a free spaced-repetition flashcard app. Write decks in plain Markdown, or hand it to your own AI — it already knows how the app works, and can build a graduated course from a textbook chapter or your notes. Study on web and Android, always in sync.",
+      "Flashcard decks and full custom courses for your study needs.",
   });
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-slate-100">

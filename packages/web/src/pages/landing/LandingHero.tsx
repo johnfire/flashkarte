@@ -6,7 +6,7 @@ export function LandingHero() {
   return (
     <div className="text-center">
       <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-2xl font-bold text-white shadow-lg shadow-indigo-900/50">
-        fk
+        LW
       </div>
       <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
         {t("landing.heroTitle")}

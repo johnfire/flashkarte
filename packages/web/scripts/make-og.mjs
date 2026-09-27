@@ -10,10 +10,11 @@ const svg = `
   <circle cx="170" cy="200" r="220" fill="#4f46e5" opacity="0.35"/>
   <circle cx="1050" cy="470" r="240" fill="#a21caf" opacity="0.25"/>
   <rect x="90" y="250" width="120" height="120" rx="28" fill="#4f46e5"/>
-  <text x="150" y="332" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#ffffff" text-anchor="middle">fk</text>
-  <text x="250" y="300" font-family="Arial, sans-serif" font-size="84" font-weight="bold" fill="#ffffff">flashkarte</text>
-  <text x="252" y="372" font-family="Arial, sans-serif" font-size="40" fill="#cbd5e1">Learn anything, faster.</text>
-  <text x="252" y="430" font-family="Arial, sans-serif" font-size="30" fill="#94a3b8">Spaced-repetition flashcards · web &amp; Android</text>
+  <text x="150" y="332" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#ffffff" text-anchor="middle">LW</text>
+  <text x="250" y="300" font-family="Arial, sans-serif" font-size="84" font-weight="bold" fill="#ffffff">LearnWohl</text>
+  <text x="252" y="372" font-family="Arial, sans-serif" font-size="39" fill="#cbd5e1">Flashcard decks and full custom courses</text>
+  <text x="252" y="424" font-family="Arial, sans-serif" font-size="39" fill="#cbd5e1">for your study needs.</text>
+  <text x="252" y="490" font-family="Arial, sans-serif" font-size="30" fill="#94a3b8">Spaced-repetition flashcards · web &amp; Android</text>
 </svg>`;
 
 const dir = path.dirname(fileURLToPath(import.meta.url));

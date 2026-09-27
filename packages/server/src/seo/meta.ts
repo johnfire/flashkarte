@@ -26,9 +26,9 @@ const PAGES: Record<
   { title: string; description: string; jsonLd?: boolean }
 > = {
   "/": {
-    title: "flashkarte — Learn anything with spaced-repetition flashcards",
+    title: "LearnWohl — Flashcard decks and full custom courses",
     description:
-      "flashkarte is a free spaced-repetition flashcard app. Write decks in plain Markdown or let your own AI build them, and study on web and Android — always in sync.",
+      "Flashcard decks and full custom courses for your study needs.",
     jsonLd: true,
   },
   "/explore": {
@@ -72,7 +72,7 @@ export function staticMeta(path: string): PageMeta {
     meta.jsonLd = {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      name: "flashkarte",
+      name: "LearnWohl",
       url: abs("/"),
       description: page.description,
       applicationCategory: "EducationalApplication",

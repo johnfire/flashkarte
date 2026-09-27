@@ -7,8 +7,11 @@ describe("staticMeta", () => {
     expect(m.og.url).toBe(m.canonical);
     expect(m.og.image).toBe("https://flashkarte.christopherrehm.de/og.png");
     expect(m.jsonLd).toMatchObject({ "@type": "WebApplication" });
-    expect(m.title.length).toBeGreaterThan(10);
-    expect(m.description.length).toBeGreaterThan(20);
+    expect(m.title).toBe("LearnWohl — Flashcard decks and full custom courses");
+    expect(m.description).toBe(
+      "Flashcard decks and full custom courses for your study needs.",
+    );
+    expect(m.jsonLd).toMatchObject({ name: "LearnWohl" });
   });
   it("privacy and impressum have their own canonical, no JSON-LD", () => {
     expect(staticMeta("/privacy").canonical).toBe(
