@@ -1,19 +1,24 @@
 # Library content languages — proposal and build plan
 
-_Date: 2026-09-27 · Status: draft for discussion; implementation has not started._
+_Date: 2026-09-27 · Status: draft, updated after Chris's language-switcher decisions;
+implementation has not started._
 
 ## Goal
 
 A learner can choose **All**, **Deutsch**, **English**, or **العربية** in the
-Library and see courses and flashcard decks whose teaching material uses that
-language. This choice is about the content, independent of the language of the
-Flashkarte interface. A course teaching German with Arabic explanations belongs
-under Arabic. The language being taught can be described separately later.
+Library, My Courses, and My Decks and see items whose teaching material uses
+that language. Each page remembers its own choice for that user. The filter is
+about the content, independent of the language of the Flashkarte interface. A
+course teaching German with Arabic explanations belongs under Arabic. The
+language being taught can be described separately later.
 
 ## Current state
 
 - `/library` contains official/community structured courses and official/community
   flashcard decks. Both deck sections also contain deck collections.
+- `/learn` is the current My Courses page and `/` is My Decks. Their lists are
+  currently loaded without a content-language filter. `/courses` is a legacy
+  overview that remains available for older bookmarks.
 - Course editions already have `subjects.locale`, but only courses assigned to a
   `course_family` have it. The subject catalogue omits this field from its
   response and does not filter by it.
@@ -27,24 +32,35 @@ under Arabic. The language being taught can be described separately later.
 
 ## Recommendation
 
-1. Put a compact, accessible language switcher above the Library sections.
+1. Put a compact, accessible language switcher above the Library sections and
+   on My Courses and My Decks.
    Use native labels so a learner can recognize their language regardless of
-   interface locale. Show the selected choice clearly. Keep **All** as the
-   initial choice so existing content remains discoverable while metadata is
-   assigned.
+   interface locale. Show the selected choice clearly. One language is active
+   at a time; **All** shows everything, including unlabelled older items.
+   Start each page at All until the user chooses otherwise.
 2. Treat `en`, `de`, and `ar` as canonical content-language codes. Store one
-   primary language per published catalogue item. Store it on structured
-   courses, individual decks, official deck collections, and community deck
-   collections. A collection's language describes its presentation as a whole;
-   it is assigned explicitly rather than inferred from a member deck.
+   primary language per item, including private items in My Courses and My
+   Decks. Store it on structured courses, individual decks, official deck
+   collections, and community deck collections. A collection's language
+   describes its presentation as a whole; it is assigned explicitly rather
+   than inferred from a member deck.
 3. Filter on the server before pagination and preserve the choice in the URL,
    for example `/library?language=ar`. Carry it through links to the four
    browse pages and back navigation. A copied link should open the same view.
-4. Show a small language label on cards and detail pages. Include a clear
+4. Remember **three independent choices per account**: Library, My Courses,
+   and My Decks. Changing one must not change either of the others. An explicit
+   language in a URL wins for that visit (`language=all` explicitly selects
+   All); choosing a button saves that page's new preference. On a page URL
+   without a language parameter, use its saved preference. This keeps choices
+   consistent across devices without mixing them with the account's
+   interface-language setting.
+5. Show a small language label on cards and detail pages. Include a clear
    empty state such as “No Arabic courses yet” and a route back to All.
-5. Keep course/deck ownership and source as the existing Library sections.
+6. Keep course/deck ownership and source as the existing Library sections.
    Language is a filter across them, so selecting Arabic shows Arabic official
    courses, official decks, community courses, and community decks together.
+   On personal pages the switcher changes only visible list items; progress,
+   review counts, and saved learning state remain unchanged.
 
 ### Why a metadata field
 
@@ -57,19 +73,22 @@ the catalogue grows.
 
 ### 1. Catalogue data and assignment
 
-- Add a content-language value to published decks and the two collection
+- Add a content-language value to decks and the two collection
   models. Use the existing `subjects.locale` for structured courses, including
   standalone subjects outside a course family. Define one shared set of
   supported codes and validation for catalogue writes and filter requests.
-- Provide owner/admin ways to set or correct the value when authoring or
-  publishing. Carry the value through import, clone, and edition workflows
-  where the new item clearly inherits the original content language.
+- Provide owner/admin ways to set or correct the value when authoring,
+  editing, or publishing. Carry the value through import, clone, and edition
+  workflows where the new item clearly inherits the original content language.
 - Audit existing published items and assign language by reviewing their actual
   teaching content. Do not infer it from titles, categories, UI settings, or
   speech settings. Keep unreviewed items visible under All until assigned;
   decide the publication rule for future unlabelled items before release.
 - Record language changes in the existing audit trail. Add indexes only where
   query plans show they help the filtered browse paths.
+- Add account-scoped saved filter preferences for Library, My Courses, and My
+  Decks, with All as the default. Keep these distinct from `users.language`,
+  which controls the interface.
 
 ### 2. Catalogue APIs
 
@@ -80,6 +99,9 @@ the catalogue grows.
 - Apply the filter in SQL before `LIMIT`/`OFFSET`. Compose it with existing
   search and category filters. Keep responses unchanged when the parameter is
   absent. Reject unsupported language values instead of silently showing All.
+- Make the category tree's official/community item counts use the selected
+  language too, so a German category count does not include Arabic items or
+  expose empty categories as if they had matches.
 - Ensure a collection result is selected by its own language and that its
   member list remains intact when opened. Preserve language metadata when a
   deck or community collection is cloned.
@@ -95,28 +117,50 @@ the catalogue grows.
 - Do not couple this filter to the profile UI-language setting. An English UI
   user must still be able to browse Arabic and German content.
 
-### 4. Verification and release
+### 4. Personal courses and decks
+
+- Add the same switcher to `/learn` and `/`. Each reads and updates only its
+  own saved account preference; page links may carry an explicit language
+  parameter without changing another page's choice.
+- Return content language in the existing owned/enrolled subject, owned deck,
+  and subscribed deck list responses. Filter those currently unpaginated lists
+  on the client; keep the full list and study counts available so changing
+  language is immediate and does not alter review calculations.
+- Show a distinct “No items in this language” state, with an All button, when
+  a filtered list is empty. Apply the My Courses preference to the legacy
+  `/courses` overview as long as that route remains accessible.
+- When a personal list is filtered, show how many items are hidden by that
+  choice, so a learner can tell that other decks or courses still exist.
+
+### 5. Verification and release
 
 - Server unit and real-Postgres integration tests: validation, SQL filtering
   before pagination, combinations with search/category, null metadata,
   course editions, collection membership, and clone inheritance.
 - Web component and Playwright coverage: switching languages across all four
-  sections, direct URL and back navigation, empty state, small screen, keyboard
-  access, and Arabic labels without changing the whole page direction.
+  Library sections and both personal pages; independent account preferences;
+  direct URL and back navigation; empty state; small screen; keyboard access;
+  and Arabic labels without changing the whole page direction.
 - Run focused tests, typecheck, lint, format check, and relevant builds. Commit
   the implementation on `main`; push only when Chris requests it.
 
 ## Decisions to settle before implementation
 
-1. **Scope:** should the same switcher also filter personal “My Courses” and
-   “My Decks” views? This proposal starts with Library discovery.
-2. **Future languages:** should authors be able to use any valid BCP-47 code,
+1. **Future languages:** should authors be able to use any valid BCP-47 code,
    or should catalogue languages be restricted to `en`, `de`, and `ar` until
    more content exists? The first version above uses the three known codes.
-3. **Publication rule:** after existing content is labelled, require a language
+2. **Publication rule:** after existing content is labelled, require a language
    before new content becomes public, or permit “Unspecified” under All. A
    required value gives cleaner filtering; an unspecified state eases migration.
-4. **Mixed-language collections:** if the instructions are mostly Arabic but
+3. **Mixed-language collections:** if the instructions are mostly Arabic but
    cards contain German examples, label the collection Arabic. If a collection
    has genuinely mixed teaching languages, decide whether to split it or offer
    multiple language tags in a later iteration.
+
+## Decisions already made
+
+- Language means the language used to explain the material. A German course
+  explained in Arabic is Arabic for this filter.
+- The switcher belongs on Library, My Courses, and My Decks.
+- A page selects one language at a time, with All as an option. Its selection
+  stays separate from the other pages' selections.
