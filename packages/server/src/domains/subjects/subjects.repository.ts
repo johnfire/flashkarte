@@ -22,19 +22,20 @@ const SUBJECT_COLS =
 // Course-edition metadata stays on the explicit edition endpoints. The publication and owner fields
 // let a learner distinguish their own courses from an official or community catalogue entry.
 const SUBJECT_SUMMARY_COLS =
-  "s.id, s.reference_number, s.user_id, s.title, s.description, s.is_public, s.is_official, s.version, s.created_at, s.updated_at";
+  "s.id, s.reference_number, s.user_id, s.title, s.description, s.is_public, s.is_official, s.version, s.created_at, s.updated_at, s.locale";
 
 export async function insertSubject(
   db: Queryable,
   userId: string,
   title: string,
   description: string | null,
+  locale: string | null = null,
 ): Promise<SubjectRow> {
   const result = await db.query<SubjectRow>(
-    `INSERT INTO subjects (user_id, title, description)
-     VALUES ($1, $2, $3)
+    `INSERT INTO subjects (user_id, title, description, locale)
+     VALUES ($1, $2, $3, $4)
      RETURNING ${SUBJECT_COLS}`,
-    [userId, title, description],
+    [userId, title, description, locale],
   );
   return result.rows[0];
 }
@@ -114,6 +115,7 @@ export interface SubjectSummaryRow {
   created_at: string;
   updated_at: string;
   concept_count: number;
+  locale: string | null;
 }
 
 export function listSubjects(userId: string) {
@@ -128,14 +130,15 @@ export function listSubjects(userId: string) {
   );
 }
 
-export function listCatalogSubjects(official: boolean) {
+export function listCatalogSubjects(official: boolean, language?: string) {
   return query<SubjectSummaryRow>(
     `SELECT ${SUBJECT_SUMMARY_COLS},
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
      WHERE s.is_public AND s.is_official = $1
+       AND ($2::text IS NULL OR s.locale = $2 OR s.locale LIKE $2 || '-%')
      ORDER BY s.title COLLATE de_phonebook ASC`,
-    [official],
+    [official, language ?? null],
   );
 }
 
@@ -200,13 +203,18 @@ export async function lockOwnedSubject(
 
 export async function writeSubject(
   id: string,
-  next: { title: string; description: string | null; is_public: boolean },
+  next: {
+    title: string;
+    description: string | null;
+    is_public: boolean;
+    locale: string | null;
+  },
 ): Promise<SubjectRow | null> {
   const result = await getPool().query<SubjectRow>(
-    `UPDATE subjects SET title = $2, description = $3, is_public = $4, updated_at = now()
+    `UPDATE subjects SET title = $2, description = $3, is_public = $4, locale = $5, updated_at = now()
      WHERE id = $1
      RETURNING ${SUBJECT_COLS}`,
-    [id, next.title, next.description, next.is_public],
+    [id, next.title, next.description, next.is_public, next.locale],
   );
   return result.rows[0] ?? null;
 }

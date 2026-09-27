@@ -10,6 +10,16 @@
     "impressum": "Impressum",
     "help": "Help"
   },
+  "contentLanguage": {
+    "all": "All",
+    "label": "Explanation language",
+    "choose": "Choose language",
+    "emptyCourses": "No {{language}} courses yet.",
+    "emptyDecks": "No {{language}} decks yet.",
+    "showAll": "Show all",
+    "saveError": "Could not save the language.",
+    "hiddenCount": "{{count}} items hidden by this filter"
+  },
   "auth": {
     "signInToAccount": "Sign in to your account",
     "createAccount": "Create an account",

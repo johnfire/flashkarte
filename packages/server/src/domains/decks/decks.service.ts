@@ -11,6 +11,10 @@ import * as repo from "./decks.repository";
 import { validateBranching } from "./branching";
 import { validateReadingCards } from "./reading-cards";
 import { validateSenses } from "./senses";
+import {
+  contentLanguageSchema,
+  contentLanguageFilterSchema,
+} from "../library/content-language";
 
 // Cap cards per request: bounds the multi-row INSERT (well under Postgres'
 // 65535-parameter limit at 6 params/card) and prevents a huge upload from
@@ -22,6 +26,7 @@ const markdownSchema = z
     message: "Markdown content is required",
   });
 const deckUpdateSchema = z.object({
+  contentLanguage: contentLanguageSchema.optional(),
   title: z
     .string({ error: "Title is required" })
     .trim()
@@ -47,7 +52,12 @@ export async function importDeck(
   userId: string,
   markdown: unknown,
   filename: string | null = null,
+  languageInput?: unknown,
 ) {
+  const language =
+    languageInput === undefined
+      ? null
+      : parse(contentLanguageSchema, languageInput);
   const validMarkdown = parse(markdownSchema, markdown);
   const parsed = parseDeck(validMarkdown, filename ?? "");
   if (parsed.cards.length === 0) {
@@ -66,6 +76,7 @@ export async function importDeck(
     parsed.title,
     filename,
     parsed.cards,
+    language,
   );
   if (!deck) throw new Error("Failed to create deck");
   return { ...deck, card_count: parsed.cards.length };
@@ -264,6 +275,7 @@ const paginationSchema = z.object({
     (v) => (typeof v === "string" && v.trim() ? v.trim() : undefined),
     z.string().optional(),
   ),
+  language: contentLanguageFilterSchema,
 });
 
 function parsePagination(query: unknown) {
@@ -286,29 +298,32 @@ function toOfficialDeck(row: repo.OfficialDeckRow) {
     card_count: Number(row.card_count),
     subscribed: row.subscribed,
     category_id: row.category_id,
+    content_language: row.content_language,
   };
 }
 
 /** Standalone official decks (no collection) — the "browse" list. */
 export async function listStandaloneOfficial(userId: string, query: unknown) {
-  const { q, limit, offset, categoryFilter } = parsePagination(query);
+  const { q, limit, offset, categoryFilter, language } = parsePagination(query);
   const rows = await repo.listStandaloneOfficial(
     userId,
     q,
     limit,
     offset,
     categoryFilter,
+    language,
   );
   return rows.map(toOfficialDeck);
 }
 
 export async function listCollections(query: unknown) {
-  const { q, limit, offset, categoryFilter } = parsePagination(query);
+  const { q, limit, offset, categoryFilter, language } = parsePagination(query);
   const rows = await repo.listOfficialCollections(
     q,
     limit,
     offset,
     categoryFilter,
+    language,
   );
   return rows.map((row) => ({
     id: row.id,
@@ -316,6 +331,7 @@ export async function listCollections(query: unknown) {
     description: row.description,
     deck_count: Number(row.deck_count),
     category_id: row.category_id,
+    content_language: row.content_language,
   }));
 }
 
@@ -385,11 +401,34 @@ export async function update(
     speechBackLang?: unknown;
     speechAutoplay?: unknown;
     speechRate?: unknown;
+    contentLanguage?: unknown;
   },
 ) {
   let deck = await repo.getDeck(userId, id);
   if (!deck) throw new NotFoundError("Deck not found");
   const patch = parse(deckUpdateSchema, patchInput);
+
+  if (deck.is_official && patch.contentLanguage !== undefined) {
+    throw new ValidationError(
+      "Official deck language can only be changed by an admin",
+    );
+  }
+
+  if (
+    patch.isPublic === true &&
+    !deck.is_public &&
+    !patch.contentLanguage &&
+    !deck.content_language
+  ) {
+    throw new ValidationError(
+      "Choose an explanation language before publishing",
+    );
+  }
+  if (patch.contentLanguage !== undefined) {
+    deck =
+      (await repo.setDeckContentLanguage(userId, id, patch.contentLanguage)) ??
+      deck;
+  }
 
   if (patch.title !== undefined) {
     deck = (await repo.renameDeck(userId, id, patch.title)) ?? deck;

@@ -8,6 +8,7 @@ export const create = wrapAsync(async (req: Request, res: Response) => {
     req.userId!,
     req.body.title,
     req.body.description,
+    req.body.contentLanguage,
   );
   await auditFromRequest(
     req,
@@ -34,6 +35,7 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
     title: req.body.title,
     description: req.body.description,
     isPublic: req.body.isPublic,
+    contentLanguage: req.body.contentLanguage,
   });
   await auditFromRequest(
     req,
@@ -42,7 +44,11 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
     req.params.id,
     "success",
     undefined,
-    { title: updated.title, isPublic: updated.is_public },
+    {
+      title: updated.title,
+      isPublic: updated.is_public,
+      contentLanguage: updated.content_language,
+    },
   );
   res.json(updated);
 });

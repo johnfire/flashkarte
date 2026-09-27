@@ -46,6 +46,79 @@ afterAll(async () => {
 });
 
 describe("category tree constraints", () => {
+  test("language filters apply before pagination and category counts", async () => {
+    const pool = getPool();
+    const category = await categoriesService.create("Study", undefined);
+    await pool.query(
+      `INSERT INTO decks (user_id, title, is_public, content_language, category_id) VALUES
+       ($1, 'A English', true, 'en', $2),
+       ($1, 'B Arabic', true, 'ar', $2),
+       ($1, 'C English', true, 'en', $2)`,
+      [OWNER_ID, category.id],
+    );
+    await pool.query(
+      `INSERT INTO decks (user_id, title, is_official, content_language, category_id)
+       VALUES ($1, 'D German', true, 'de', $2)`,
+      [decksRepo.SYSTEM_ACCOUNT_ID, category.id],
+    );
+    await pool.query(
+      `INSERT INTO deck_collections (title, content_language, category_id)
+       VALUES ('Arabic collection', 'ar', $1)`,
+      [category.id],
+    );
+
+    const arabicPage = await libraryRepo.listPublic(
+      null,
+      1,
+      0,
+      category.id,
+      "ar",
+    );
+    expect(arabicPage.map((deck) => deck.title)).toEqual(["B Arabic"]);
+    expect(
+      (await libraryRepo.listPublic(null, 1, 0, category.id, "en")).map(
+        (deck) => deck.title,
+      ),
+    ).toEqual(["A English"]);
+    const arabicTree = await categoriesService.getTree("ar");
+    expect(
+      arabicTree.find((node) => node.id === category.id)?.publicCount,
+    ).toBe(1);
+    const allTree = await categoriesService.getTree();
+    expect(allTree.find((node) => node.id === category.id)?.publicCount).toBe(
+      3,
+    );
+    expect(
+      (
+        await decksRepo.listStandaloneOfficial(
+          OWNER_ID,
+          null,
+          1,
+          0,
+          category.id,
+          "de",
+        )
+      ).map((deck) => deck.title),
+    ).toEqual(["D German"]);
+    expect(
+      await decksRepo.listStandaloneOfficial(
+        OWNER_ID,
+        null,
+        1,
+        0,
+        category.id,
+        "ar",
+      ),
+    ).toEqual([]);
+    expect(
+      (
+        await decksRepo.listOfficialCollections(null, 1, 0, category.id, "ar")
+      ).map((collection) => collection.title),
+    ).toEqual(["Arabic collection"]);
+    expect(
+      arabicTree.find((node) => node.id === category.id)?.officialCount,
+    ).toBe(1);
+  });
   test("service enforces two levels and blocks delete-with-children; DB trigger backstops depth", async () => {
     const languageLearning = await categoriesService.create(
       "Language Learning",

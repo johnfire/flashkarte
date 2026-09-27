@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { get, post, patch, del } from "../api";
 import { asText, runTool } from "./tool-runner";
+import { CONTENT_LANGUAGES } from "@flashkarte/shared";
 
 const GATING_HELP =
   "Flashcard deck collections gate cross-deck: deck N+1 unlocks only once every card in deck N " +
@@ -23,10 +24,22 @@ export function registerCourseTools(server: McpServer) {
         .string()
         .optional()
         .describe("Optional: what this course teaches and who it's for."),
+      content_language: z
+        .enum(CONTENT_LANGUAGES)
+        .optional()
+        .describe(
+          "Language of the explanations: en, de, or ar. Required before publishing.",
+        ),
     },
-    async ({ title, description }) =>
+    async ({ title, description, content_language }) =>
       runTool("create_course", async () =>
-        asText(await post("/api/courses", { title, description })),
+        asText(
+          await post("/api/courses", {
+            title,
+            description,
+            contentLanguage: content_language,
+          }),
+        ),
       ),
   );
 
@@ -69,13 +82,19 @@ export function registerCourseTools(server: McpServer) {
           "true publishes the course (and its decks, when cloned) for " +
             "anyone to browse and clone; false makes it private again.",
         ),
+      content_language: z
+        .enum(CONTENT_LANGUAGES)
+        .optional()
+        .describe("Language of the explanations: en, de, or ar."),
     },
-    async ({ course_id, title, description, is_public }) =>
+    async ({ course_id, title, description, is_public, content_language }) =>
       runTool("update_course", async () => {
         const body: Record<string, unknown> = {};
         if (title !== undefined) body.title = title;
         if (description !== undefined) body.description = description;
         if (is_public !== undefined) body.isPublic = is_public;
+        if (content_language !== undefined)
+          body.contentLanguage = content_language;
         return asText(
           await patch(`/api/courses/${encodeURIComponent(course_id)}`, body),
         );

@@ -6,6 +6,8 @@ import type { CourseSummary } from "../api/types";
 import type { LearnSubject } from "../api/learn-types";
 import { useAsync } from "../hooks/use-async";
 import { CourseListItem } from "./CourseListItem";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 interface MyCourses {
   deckCourses: CourseSummary[];
@@ -15,6 +17,7 @@ interface MyCourses {
 /** Transitional overview for old bookmarks; the two concepts stay visibly distinct. */
 export function MyCoursesPage() {
   const { t } = useTranslation();
+  const { language, choose } = useContentLanguage("courses");
   const loadMyCourses = useCallback(async (): Promise<MyCourses> => {
     const [deckCourses, lessonCourses] = await Promise.all([
       api.courses.list(),
@@ -51,6 +54,7 @@ export function MyCoursesPage() {
           <Link to="/">{t("courses.myDecks")}</Link>
         </nav>
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
       {loading && <p>{t("common.loading")}</p>}
       {errorMessage && (
         <p role="alert" className="text-red-600">
@@ -66,41 +70,50 @@ export function MyCoursesPage() {
             >
               {t("courses.lessonCourses")}
             </h2>
-            {myCourses.lessonCourses.length === 0 ? (
+            {myCourses.lessonCourses.filter(
+              (course) => language === "all" || course.locale === language,
+            ).length === 0 ? (
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {t("courses.noLessonCourses")}
               </p>
             ) : (
               <ul className="content-card-grid">
-                {myCourses.lessonCourses.map((course) => (
-                  <li key={course.id} className="rounded-lg border p-4">
-                    <span className="rounded-full bg-violet-100 px-2 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-900/50 dark:text-violet-300">
-                      {t("courses.lessonCourseBadge")}
-                    </span>
-                    <h3 className="mt-2 font-medium">
-                      {course.title}
-                      {course.reference_number !== undefined && (
-                        <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
-                          #{course.reference_number}
-                        </span>
+                {myCourses.lessonCourses
+                  .filter(
+                    (course) =>
+                      language === "all" || course.locale === language,
+                  )
+                  .map((course) => (
+                    <li key={course.id} className="rounded-lg border p-4">
+                      <span className="rounded-full bg-violet-100 px-2 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-900/50 dark:text-violet-300">
+                        {t("courses.lessonCourseBadge")}
+                      </span>
+                      <h3 className="mt-2 font-medium">
+                        {course.title}
+                        {course.reference_number !== undefined && (
+                          <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
+                            #{course.reference_number}
+                          </span>
+                        )}
+                      </h3>
+                      {course.description && (
+                        <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                          {course.description}
+                        </p>
                       )}
-                    </h3>
-                    {course.description && (
-                      <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                        {course.description}
+                      <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                        {t("learn.conceptCount", {
+                          count: course.concept_count,
+                        })}
                       </p>
-                    )}
-                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                      {t("learn.conceptCount", { count: course.concept_count })}
-                    </p>
-                    <Link
-                      to={`/learn/${course.id}`}
-                      className="mt-3 inline-block text-sm text-indigo-600"
-                    >
-                      {t("courses.open")}
-                    </Link>
-                  </li>
-                ))}
+                      <Link
+                        to={`/learn/${course.id}`}
+                        className="mt-3 inline-block text-sm text-indigo-600"
+                      >
+                        {t("courses.open")}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             )}
           </section>
@@ -114,15 +127,24 @@ export function MyCoursesPage() {
             <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
               {t("courses.deckCoursesIntro")}
             </p>
-            {myCourses.deckCourses.length === 0 ? (
+            {myCourses.deckCourses.filter(
+              (course) =>
+                language === "all" || course.content_language === language,
+            ).length === 0 ? (
               <p className="text-sm text-gray-600 dark:text-gray-400">
                 {t("courses.empty")}
               </p>
             ) : (
               <ul className="content-card-grid">
-                {myCourses.deckCourses.map((course) => (
-                  <CourseListItem key={course.id} course={course} />
-                ))}
+                {myCourses.deckCourses
+                  .filter(
+                    (course) =>
+                      language === "all" ||
+                      course.content_language === language,
+                  )
+                  .map((course) => (
+                    <CourseListItem key={course.id} course={course} />
+                  ))}
               </ul>
             )}
           </section>

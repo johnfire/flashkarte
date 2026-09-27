@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import type { PublicCourseSummary } from "../api/types";
+import { contentLanguageLabel } from "../components/ContentLanguageSwitcher";
 
 interface PublicDeckCollectionRowProps {
   collection: PublicCourseSummary;
@@ -19,6 +20,11 @@ export function PublicDeckCollectionRow({
       <div className="min-w-0">
         <p className="truncate font-medium">
           {collection.title}
+          {contentLanguageLabel(collection.content_language) && (
+            <span className="ml-2 text-xs font-normal">
+              {contentLanguageLabel(collection.content_language)}
+            </span>
+          )}
           {collection.reference_number !== undefined && (
             <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
               #{collection.reference_number}

@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import { api, ApiError } from "../api/client";
@@ -7,6 +8,10 @@ import { LibraryHubPage } from "./LibraryHubPage";
 
 vi.mock("../api/client", () => ({
   api: {
+    contentLanguages: {
+      list: vi.fn().mockResolvedValue({}),
+      save: vi.fn().mockResolvedValue({}),
+    },
     learn: { catalog: vi.fn(), enroll: vi.fn() },
     decks: {
       listCollections: vi.fn(),
@@ -23,6 +28,10 @@ vi.mock("../api/client", () => ({
     }
   },
   reportClientError: vi.fn(),
+}));
+
+vi.mock("../auth/AuthContext", () => ({
+  useAuth: () => ({ user: { id: "library-reader" } }),
 }));
 
 const learnApi = api.learn as unknown as {
@@ -125,18 +134,18 @@ describe("LibraryHubPage", () => {
       screen.getByRole("link", {
         name: "Official Structured Learning Courses",
       }),
-    ).toHaveAttribute("href", "/library/courses/official");
+    ).toHaveAttribute("href", "/library/courses/official?language=all");
     expect(
       screen.getByRole("link", {
         name: "Community Structured Learning Courses",
       }),
-    ).toHaveAttribute("href", "/library/courses/community");
+    ).toHaveAttribute("href", "/library/courses/community?language=all");
     expect(
       screen.getByRole("link", { name: "Official Flashcard Decks" }),
-    ).toHaveAttribute("href", "/library/official/decks");
+    ).toHaveAttribute("href", "/library/official/decks?language=all");
     expect(
       screen.getByRole("link", { name: "Community Flashcard Decks" }),
-    ).toHaveAttribute("href", "/library/community/decks");
+    ).toHaveAttribute("href", "/library/community/decks?language=all");
     expect(
       screen.getByRole("link", { name: "My Structured Learning Courses" }),
     ).toHaveAttribute("href", "/learn");
@@ -165,5 +174,35 @@ describe("LibraryHubPage", () => {
     expect(await screen.findByText("Courses unavailable")).toBeInTheDocument();
     expect(screen.getByText("Official deck collection")).toBeInTheDocument();
     expect(screen.getByText("Community standalone deck")).toBeInTheDocument();
+  });
+
+  test("switches all four Library sources to Arabic and saves only the Library choice", async () => {
+    renderPage();
+    await userEvent.click(screen.getByRole("button", { name: "العربية" }));
+    await waitFor(() =>
+      expect(learnApi.catalog).toHaveBeenCalledWith("official", "ar"),
+    );
+    expect(learnApi.catalog).toHaveBeenCalledWith("community", "ar");
+    expect(deckApi.listCollections).toHaveBeenCalledWith({
+      limit: 100,
+      language: "ar",
+    });
+    expect(deckApi.listOfficial).toHaveBeenCalledWith({
+      limit: 100,
+      language: "ar",
+    });
+    expect(publicCoursesApi.list).toHaveBeenCalledWith({
+      limit: 100,
+      language: "ar",
+    });
+    expect(libraryApi.list).toHaveBeenCalledWith({
+      limit: 100,
+      language: "ar",
+    });
+    expect(api.contentLanguages.save).toHaveBeenCalledWith("library", "ar");
+    expect(screen.getByRole("button", { name: "العربية" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
   });
 });

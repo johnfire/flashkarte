@@ -7,6 +7,7 @@ import { LibraryDeckRow } from "./LibraryDeckRow";
 
 interface LibrarySearchResultsProps {
   q: string;
+  language?: "en" | "de" | "ar";
   cloningId: string | null;
   onClone: (id: string) => void;
 }
@@ -19,14 +20,15 @@ interface LibrarySearchResultsProps {
  */
 export function LibrarySearchResults({
   q,
+  language,
   cloningId,
   onClone,
 }: LibrarySearchResultsProps) {
   const { t } = useTranslation();
 
   const loadDecks = useCallback(
-    (params: BrowseParams) => api.library.list(params),
-    [],
+    (params: BrowseParams) => api.library.list({ ...params, language }),
+    [language],
   );
   const decks = usePaginatedList<LibraryDeck>(loadDecks, 30, q);
 

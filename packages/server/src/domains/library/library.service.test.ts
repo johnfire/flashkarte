@@ -45,25 +45,44 @@ describe("library.list input normalization", () => {
       100,
       0,
       undefined,
+      undefined,
     );
   });
 
   test("defaults to no filter/pagination when the query is empty", async () => {
     mockRepo.listPublic.mockResolvedValue([]);
     await list({});
-    expect(mockRepo.listPublic).toHaveBeenCalledWith(null, 100, 0, undefined);
+    expect(mockRepo.listPublic).toHaveBeenCalledWith(
+      null,
+      100,
+      0,
+      undefined,
+      undefined,
+    );
   });
 
   test("maps categoryId=uncategorized to the null bucket filter", async () => {
     mockRepo.listPublic.mockResolvedValue([]);
     await list({ categoryId: "uncategorized" });
-    expect(mockRepo.listPublic).toHaveBeenCalledWith(null, 100, 0, null);
+    expect(mockRepo.listPublic).toHaveBeenCalledWith(
+      null,
+      100,
+      0,
+      null,
+      undefined,
+    );
   });
 
   test("passes a specific categoryId through unchanged", async () => {
     mockRepo.listPublic.mockResolvedValue([]);
     await list({ categoryId: "cat-1", limit: 20, offset: 10 });
-    expect(mockRepo.listPublic).toHaveBeenCalledWith(null, 20, 10, "cat-1");
+    expect(mockRepo.listPublic).toHaveBeenCalledWith(
+      null,
+      20,
+      10,
+      "cat-1",
+      undefined,
+    );
   });
 });
 

@@ -2,9 +2,12 @@ import { Request, Response } from "express";
 import { wrapAsync } from "../../utils/wrapAsync";
 import { auditFromRequest } from "../audit/audit.service";
 import * as service from "./categories.service";
+import { contentLanguageFilterSchema } from "../library/content-language";
+import { parse } from "../../utils/validate";
 
-export const tree = wrapAsync(async (_req: Request, res: Response) => {
-  res.json({ categories: await service.getTree() });
+export const tree = wrapAsync(async (req: Request, res: Response) => {
+  const language = parse(contentLanguageFilterSchema, req.query.language);
+  res.json({ categories: await service.getTree(language) });
 });
 
 export const create = wrapAsync(async (req: Request, res: Response) => {

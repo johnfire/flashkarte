@@ -12,15 +12,19 @@ import { PersonalContentMenu } from "../components/PersonalContentMenu";
 import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { DeckListItem } from "./DeckListItem";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 import {
   DeckListEmptyHint,
   DeckListLegendHint,
+  DeckListLanguageEmpty,
   DeckListVerifyPanel,
 } from "./DeckListHints";
 
 export function DeckListPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { language, choose } = useContentLanguage("decks");
   // Product APIs are gated behind a verified email, and verification can only
   // be outstanding on a brand-new account (changing an email keeps the old
   // address verified until the new one is confirmed) — so an unverified user
@@ -89,15 +93,48 @@ export function DeckListPage() {
     );
     try {
       await api.decks.setPublic(id, makePublic);
-    } catch {
+    } catch (failure) {
       setDecks((d) =>
         d
           ? d.map((x) => (x.id === id ? { ...x, is_public: !makePublic } : x))
           : d,
       );
-      window.alert(t("decks.togglePublicError"));
+      window.alert(
+        failure instanceof ApiError
+          ? failure.message
+          : t("decks.togglePublicError"),
+      );
     }
   }
+
+  async function onLanguageChange(
+    id: string,
+    contentLanguage: "en" | "de" | "ar",
+  ) {
+    try {
+      await api.decks.setContentLanguage(id, contentLanguage);
+      setDecks(
+        (current) =>
+          current?.map((deck) =>
+            deck.id === id
+              ? { ...deck, content_language: contentLanguage }
+              : deck,
+          ) ?? null,
+      );
+    } catch (failure) {
+      window.alert(
+        failure instanceof ApiError
+          ? failure.message
+          : t("contentLanguage.saveError"),
+      );
+    }
+  }
+
+  const visibleDecks =
+    decks?.filter(
+      (deck) => language === "all" || deck.content_language === language,
+    ) ?? [];
+  const hiddenCount = (decks?.length ?? 0) - visibleDecks.length;
 
   return (
     <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
@@ -106,6 +143,7 @@ export function DeckListPage() {
         <h1 className="text-3xl font-bold">{t("decks.title")}</h1>
         <PersonalContentMenu />
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
 
@@ -125,12 +163,28 @@ export function DeckListPage() {
         <DeckListLegendHint />
       )}
 
+      {verified && decks && decks.length > 0 && hiddenCount > 0 && (
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {t("contentLanguage.hiddenCount", { count: hiddenCount })}
+        </p>
+      )}
+      {verified &&
+        decks &&
+        decks.length > 0 &&
+        language !== "all" &&
+        visibleDecks.length === 0 && (
+          <DeckListLanguageEmpty
+            language={language}
+            showAll={() => choose("all")}
+          />
+        )}
       <ul className="content-card-grid">
-        {decks?.map((d) => (
+        {visibleDecks.map((d) => (
           <DeckListItem
             key={d.id}
             deck={d}
             onTogglePublic={onTogglePublic}
+            onLanguageChange={onLanguageChange}
             onDelete={onDelete}
             onUnsubscribe={onUnsubscribe}
           />

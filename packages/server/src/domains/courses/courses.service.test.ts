@@ -29,6 +29,7 @@ const courseRow = {
   title: "My Course",
   description: null,
   is_public: false,
+  content_language: "en",
   created_at: "x",
   updated_at: "x",
 };
@@ -90,7 +91,12 @@ describe("createCourse", () => {
   test("creates with a trimmed title and null description", async () => {
     mockRepo.createCourse.mockResolvedValue(courseRow as never);
     const course = await createCourse("u1", "  My Course  ");
-    expect(mockRepo.createCourse).toHaveBeenCalledWith("u1", "My Course", null);
+    expect(mockRepo.createCourse).toHaveBeenCalledWith(
+      "u1",
+      "My Course",
+      null,
+      null,
+    );
     expect(course.id).toBe("c1");
   });
 
@@ -131,11 +137,22 @@ describe("getCourse", () => {
 });
 
 describe("updateCourse", () => {
+  test("requires an explanation language before publication", async () => {
+    mockRepo.getOwnedCourse.mockResolvedValue({
+      ...courseRow,
+      content_language: null,
+    } as never);
+    await expect(updateCourse("u1", "c1", { isPublic: true })).rejects.toThrow(
+      "Choose an explanation language",
+    );
+    expect(mockRepo.updateCourseRow).not.toHaveBeenCalled();
+  });
   test("merges only the given fields onto the current row", async () => {
     mockRepo.getOwnedCourse.mockResolvedValue(courseRow as never);
     mockRepo.updateCourseRow.mockResolvedValue({
       ...courseRow,
       is_public: true,
+      content_language: "en",
     } as never);
 
     await updateCourse("u1", "c1", { isPublic: true });
@@ -144,6 +161,7 @@ describe("updateCourse", () => {
       title: "My Course",
       description: null,
       is_public: true,
+      content_language: "en",
     });
   });
 
@@ -238,7 +256,7 @@ describe("listPublicCourses", () => {
   test("defaults to limit 50, offset 0", async () => {
     mockRepo.listPublicCourses.mockResolvedValue([]);
     await listPublicCourses({});
-    expect(mockRepo.listPublicCourses).toHaveBeenCalledWith(50, 0);
+    expect(mockRepo.listPublicCourses).toHaveBeenCalledWith(50, 0, undefined);
   });
 });
 
@@ -260,7 +278,13 @@ describe("getPublicCoursePreview", () => {
   test("returns the course with its ordered decks", async () => {
     mockRepo.getCourse.mockResolvedValue(publicCourseRow as never);
     mockRepo.getPublicCourseDecks.mockResolvedValue([
-      { deck_id: "d1", position: 0, title: "Deck 1", card_count: 5 },
+      {
+        deck_id: "d1",
+        position: 0,
+        title: "Deck 1",
+        card_count: 5,
+        content_language: "en",
+      },
     ]);
     const result = await getPublicCoursePreview("u1", "c1");
     expect(result.decks).toHaveLength(1);
@@ -298,8 +322,20 @@ describe("cloneCourse", () => {
   test("clones every member deck into the caller's account, in order", async () => {
     mockRepo.getCourse.mockResolvedValue(publicCourseRow as never);
     mockRepo.getPublicCourseDecks.mockResolvedValue([
-      { deck_id: "d1", position: 0, title: "Unit 1", card_count: 2 },
-      { deck_id: "d2", position: 1, title: "Unit 2", card_count: 1 },
+      {
+        deck_id: "d1",
+        position: 0,
+        title: "Unit 1",
+        card_count: 2,
+        content_language: "en",
+      },
+      {
+        deck_id: "d2",
+        position: 1,
+        title: "Unit 2",
+        card_count: 1,
+        content_language: "en",
+      },
     ]);
     mockRepo.getCardsForDeck.mockResolvedValue([
       { type: "basic", content: {}, category: null, position: 0 },
@@ -319,6 +355,7 @@ describe("cloneCourse", () => {
       "u2",
       publicCourseRow.title,
       publicCourseRow.description,
+      publicCourseRow.content_language,
     );
     expect(mockDecksRepo.createDeckWithCards).toHaveBeenNthCalledWith(
       1,
@@ -326,6 +363,7 @@ describe("cloneCourse", () => {
       "Unit 1",
       null,
       expect.any(Array),
+      "en",
     );
     expect(mockDecksRepo.createDeckWithCards).toHaveBeenNthCalledWith(
       2,
@@ -333,6 +371,7 @@ describe("cloneCourse", () => {
       "Unit 2",
       null,
       expect.any(Array),
+      "en",
     );
     expect(mockRepo.addDeckToCourse).toHaveBeenNthCalledWith(
       1,

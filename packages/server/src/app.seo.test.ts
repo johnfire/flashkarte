@@ -93,6 +93,7 @@ describe("production deck SEO wiring", () => {
         cardCount: 1,
         publishedAt: null,
         categoryId: null,
+        contentLanguage: null,
       },
     ]);
     const res = await request(app()).get("/sitemap.xml");
@@ -109,6 +110,7 @@ describe("production deck SEO wiring", () => {
         cardCount: 1,
         publishedAt: null,
         categoryId: null,
+        contentLanguage: null,
       },
     ]);
     const res = await request(app()).get("/llms.txt");

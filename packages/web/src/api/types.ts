@@ -32,6 +32,7 @@ export interface User {
 }
 
 export interface LibraryDeck {
+  contentLanguage?: string | null;
   id: string;
   referenceNumber?: number;
   title: string;
@@ -65,6 +66,7 @@ export interface AdminUser {
 }
 
 export interface OfficialDeck {
+  content_language?: string | null;
   id: string;
   reference_number?: number;
   title: string;
@@ -75,6 +77,7 @@ export interface OfficialDeck {
 }
 
 export interface DeckCollection {
+  content_language?: string | null;
   id: string;
   title: string;
   description: string | null;
@@ -83,6 +86,7 @@ export interface DeckCollection {
 }
 
 export interface DeckCollectionDetail {
+  content_language?: string | null;
   id: string;
   title: string;
   description: string | null;
@@ -108,6 +112,7 @@ export interface DeckCategory {
 }
 
 export interface DeckWithCounts extends DeckSpeech {
+  content_language?: string | null;
   id: string;
   reference_number?: number;
   title: string;
@@ -240,6 +245,7 @@ export interface CreatedApiKey extends ApiKey {
 }
 
 export interface Course {
+  content_language?: string | null;
   id: string;
   reference_number?: number;
   user_id: string;

@@ -10,6 +10,16 @@
     "impressum": "Mentions légales",
     "help": "Aide"
   },
+  "contentLanguage": {
+    "all": "Tout",
+    "label": "Langue des explications",
+    "choose": "Choisir une langue",
+    "emptyCourses": "Aucun cours en {{language}} pour le moment.",
+    "emptyDecks": "Aucun paquet en {{language}} pour le moment.",
+    "showAll": "Tout afficher",
+    "saveError": "Impossible d’enregistrer la langue.",
+    "hiddenCount": "{{count}} éléments masqués par ce filtre"
+  },
   "auth": {
     "signInToAccount": "Connecte-toi à ton compte",
     "createAccount": "Créer un compte",

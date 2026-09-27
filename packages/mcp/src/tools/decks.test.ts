@@ -40,6 +40,7 @@ describe("deck MCP tools", () => {
       "get_deck",
       "list_decks",
       "reorder_senses",
+      "set_deck_content_language",
       "set_deck_speech",
       "update_card",
     ]);
@@ -53,6 +54,36 @@ describe("deck MCP tools", () => {
     expect(mockApi.post).toHaveBeenCalledWith("/api/decks", {
       markdown: "# D\n**1. Q**\nA",
       title: "D",
+      contentLanguage: undefined,
+    });
+  });
+
+  test("create_deck sends the explanation language", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.post.mockResolvedValue({ id: "d1" });
+
+    await handlers.create_deck({ markdown: "# D", content_language: "ar" });
+
+    expect(mockApi.post).toHaveBeenCalledWith("/api/decks", {
+      markdown: "# D",
+      title: undefined,
+      contentLanguage: "ar",
+    });
+  });
+
+  test("set_deck_content_language patches the explanation language", async () => {
+    const { handlers, server } = captureTools();
+    registerDeckTools(server as never);
+    mockApi.patch.mockResolvedValue({ id: "d1" });
+
+    await handlers.set_deck_content_language({
+      deck_id: "d1",
+      content_language: "de",
+    });
+
+    expect(mockApi.patch).toHaveBeenCalledWith("/api/decks/d1", {
+      contentLanguage: "de",
     });
   });
 

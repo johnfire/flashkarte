@@ -6,6 +6,10 @@ import { api, ApiError } from "../api/client";
 import "../i18n";
 import { LibraryPage } from "./LibraryPage";
 
+vi.mock("../hooks/use-content-language", () => ({
+  useContentLanguage: () => ({ language: "all", choose: vi.fn() }),
+}));
+
 vi.mock("../api/client", () => ({
   api: {
     categories: { tree: vi.fn() },

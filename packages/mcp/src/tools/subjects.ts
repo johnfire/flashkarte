@@ -3,6 +3,7 @@ import { z } from "zod";
 import { get, post, put, patch, del } from "../api";
 import { cardReferenceSchema, resolveCardIds } from "./card-references";
 import { asText, runTool } from "./tool-runner";
+import { CONTENT_LANGUAGES } from "@flashkarte/shared";
 
 const GRAPH_RULES =
   "A structured learning course is a subject with a prerequisite graph, and that graph is a HYPOTHESIS the user must " +
@@ -135,6 +136,10 @@ export function registerSubjectTools(server: McpServer) {
     {
       title: z.string(),
       description: z.string().optional(),
+      locale: z
+        .enum(CONTENT_LANGUAGES)
+        .optional()
+        .describe("Language of the explanations: en, de, or ar."),
       concepts: z
         .array(
           z.object({
@@ -148,7 +153,7 @@ export function registerSubjectTools(server: McpServer) {
         .describe("In authoring order; the order breaks route ties."),
       edges: z.array(z.object(edgeShape)),
     },
-    async ({ title, description, concepts, edges }) =>
+    async ({ title, description, locale, concepts, edges }) =>
       runTool("import_subject", async () => {
         const resolved = await Promise.all(
           concepts.map(async ({ cards, ...concept }) => ({
@@ -160,6 +165,7 @@ export function registerSubjectTools(server: McpServer) {
           await post("/api/subjects/import", {
             title,
             description,
+            locale,
             concepts: resolved,
             edges,
           }),
@@ -276,13 +282,18 @@ export function registerSubjectTools(server: McpServer) {
         .describe(
           "true shares this owner-created structured learning course to the Community; false removes it from the Community.",
         ),
+      locale: z
+        .enum(CONTENT_LANGUAGES)
+        .optional()
+        .describe("Language of the explanations: en, de, or ar."),
     },
-    async ({ subject_id, title, description, is_public }) =>
+    async ({ subject_id, title, description, is_public, locale }) =>
       runTool("update_subject", async () => {
         const body: Record<string, unknown> = {};
         if (title !== undefined) body.title = title;
         if (description !== undefined) body.description = description;
         if (is_public !== undefined) body.isPublic = is_public;
+        if (locale !== undefined) body.locale = locale;
         return asText(await patch(path(subject_id), body));
       }),
   );

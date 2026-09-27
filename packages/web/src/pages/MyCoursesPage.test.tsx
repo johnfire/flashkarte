@@ -5,6 +5,10 @@ import { api } from "../api/client";
 import "../i18n";
 import { MyCoursesPage } from "./MyCoursesPage";
 
+vi.mock("../hooks/use-content-language", () => ({
+  useContentLanguage: () => ({ language: "all", choose: vi.fn() }),
+}));
+
 vi.mock("../api/client", async (importOriginal) => ({
   ...(await importOriginal<typeof import("../api/client")>()),
   api: {

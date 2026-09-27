@@ -161,3 +161,4 @@ export {
   escapeMarkup,
 } from "./lessons/inline-markup";
 export { toCompactBlocks, compactLesson } from "./lessons/compact-blocks";
+export { CONTENT_LANGUAGES, type ContentLanguage } from "./content-language";

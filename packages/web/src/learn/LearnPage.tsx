@@ -7,11 +7,18 @@ import { PersonalContentMenu } from "../components/PersonalContentMenu";
 import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { useAuth } from "../auth/AuthContext";
+import {
+  ContentLanguageSwitcher,
+  ContentLanguageField,
+  contentLanguageLabel,
+} from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 /** /learn — the real courses a learner owns or has added, each opening on its outline. */
 export function LearnPage() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { language, choose } = useContentLanguage("courses");
   const load = useCallback(() => api.learn.subjects(), []);
   const { data, error, loading, setData } = useAsync<LearnSubject[], []>(
     load,
@@ -43,6 +50,33 @@ export function LearnPage() {
     }
   }
 
+  async function changeLanguage(
+    course: LearnSubject,
+    locale: "en" | "de" | "ar",
+  ) {
+    try {
+      await api.learn.setContentLanguage(course.id, locale);
+      setData(
+        (courses) =>
+          courses?.map((existing) =>
+            existing.id === course.id ? { ...existing, locale } : existing,
+          ) ?? null,
+      );
+    } catch (failure) {
+      setSharingError(
+        failure instanceof ApiError
+          ? failure.message
+          : t("contentLanguage.saveError"),
+      );
+    }
+  }
+
+  const visibleCourses =
+    data?.filter(
+      (course) => language === "all" || course.locale === language,
+    ) ?? [];
+  const hiddenCount = (data?.length ?? 0) - visibleCourses.length;
+
   return (
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <PersonalContentTabs />
@@ -64,9 +98,31 @@ export function LearnPage() {
           {sharingError}
         </p>
       )}
+      <ContentLanguageSwitcher value={language} onChange={choose} />
       {data && data.length === 0 && <p className="mt-6">{t("learn.empty")}</p>}
+      {data && data.length > 0 && hiddenCount > 0 && (
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {t("contentLanguage.hiddenCount", { count: hiddenCount })}
+        </p>
+      )}
+      {data &&
+        data.length > 0 &&
+        language !== "all" &&
+        visibleCourses.length === 0 && (
+          <p className="mt-6">
+            {t("contentLanguage.emptyCourses", {
+              language: contentLanguageLabel(language),
+            })}{" "}
+            <button
+              className="text-indigo-600 underline"
+              onClick={() => choose("all")}
+            >
+              {t("contentLanguage.showAll")}
+            </button>
+          </p>
+        )}
       <ul className="mt-6 content-card-grid">
-        {data?.map((subject) => (
+        {visibleCourses.map((subject) => (
           <li key={subject.id} className="rounded-xl border">
             <Link
               to={`/learn/${subject.id}`}
@@ -74,6 +130,11 @@ export function LearnPage() {
             >
               <span className="block text-lg font-semibold">
                 {subject.title}
+                {contentLanguageLabel(subject.locale) && (
+                  <span className="ml-2 text-xs font-normal">
+                    {contentLanguageLabel(subject.locale)}
+                  </span>
+                )}
                 {subject.reference_number !== undefined && (
                   <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
                     #{subject.reference_number}
@@ -101,6 +162,10 @@ export function LearnPage() {
             </Link>
             {subject.user_id === user?.id && !subject.is_official && (
               <div className="px-4 pb-4">
+                <ContentLanguageField
+                  value={subject.locale}
+                  onChange={(locale) => void changeLanguage(subject, locale)}
+                />
                 <button
                   onClick={() => void toggleCommunitySharing(subject)}
                   disabled={sharingId === subject.id}

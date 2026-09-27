@@ -250,6 +250,7 @@ function withNumericCounts(deck: DeckWithCounts): DeckWithCounts {
 
 /** Search + pagination for the App Decks browse endpoints. */
 export interface BrowseParams {
+  language?: "en" | "de" | "ar";
   q?: string;
   limit?: number;
   offset?: number;
@@ -262,6 +263,7 @@ function browseQuery(params?: BrowseParams): string {
   if (!params) return "";
   const search = new URLSearchParams();
   if (params.q) search.set("q", params.q);
+  if (params.language) search.set("language", params.language);
   if (params.limit !== undefined) search.set("limit", String(params.limit));
   if (params.offset !== undefined) search.set("offset", String(params.offset));
   if (params.categoryId !== undefined)
@@ -271,6 +273,17 @@ function browseQuery(params?: BrowseParams): string {
 }
 
 export const api = {
+  contentLanguages: {
+    list: () => request<Record<string, string>>("/account/content-languages"),
+    save: (page: "library" | "courses" | "decks", language: string) =>
+      request<{ page: string; language: string }>(
+        `/account/content-languages/${page}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({ language }),
+        },
+      ),
+  },
   auth: {
     signup: (email: string, password: string) =>
       request<{ user: User; accessToken: string; expiresIn: number }>(
@@ -376,14 +389,19 @@ export const api = {
     list: () =>
       request<DeckWithCounts[]>("/decks").then((d) => d.map(withNumericCounts)),
     get: (id: string) => request<DeckDetail>(`/decks/${id}`),
-    create: (markdown: string, title?: string) =>
+    create: (
+      markdown: string,
+      title?: string,
+      contentLanguage?: "en" | "de" | "ar",
+    ) =>
       request<{ id: string; title: string; card_count: number }>("/decks", {
         method: "POST",
-        body: JSON.stringify({ markdown, title }),
+        body: JSON.stringify({ markdown, title, contentLanguage }),
       }),
-    createFromFile: (file: File) => {
+    createFromFile: (file: File, contentLanguage?: "en" | "de" | "ar") => {
       const fd = new FormData();
       fd.append("file", file);
+      if (contentLanguage) fd.append("contentLanguage", contentLanguage);
       return request<{ id: string; title: string; card_count: number }>(
         "/decks",
         { method: "POST", body: fd },
@@ -398,6 +416,11 @@ export const api = {
       request<DeckWithCounts>(`/decks/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ isPublic }),
+      }),
+    setContentLanguage: (id: string, contentLanguage: "en" | "de" | "ar") =>
+      request<DeckWithCounts>(`/decks/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ contentLanguage }),
       }),
     settings: (id: string) => request<DeckSettings>(`/decks/${id}/settings`),
     setSpeech: (id: string, patch: DeckSpeechPatch) =>
@@ -437,7 +460,10 @@ export const api = {
       request<void>(`/decks/${id}/subscribe`, { method: "DELETE" }),
   },
   categories: {
-    tree: () => request<{ categories: DeckCategory[] }>("/categories"),
+    tree: (language?: "en" | "de" | "ar") =>
+      request<{ categories: DeckCategory[] }>(
+        `/categories${language ? `?language=${language}` : ""}`,
+      ),
   },
   library: {
     list: (params?: BrowseParams) =>
@@ -456,10 +482,14 @@ export const api = {
   courses: {
     list: () => request<CourseSummary[]>("/courses"),
     get: (id: string) => request<CourseDetail>(`/courses/${id}`),
-    create: (title: string, description?: string) =>
+    create: (
+      title: string,
+      description?: string,
+      contentLanguage?: "en" | "de" | "ar",
+    ) =>
       request<CourseSummary>("/courses", {
         method: "POST",
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify({ title, description, contentLanguage }),
       }),
     rename: (id: string, title: string) =>
       request<CourseSummary>(`/courses/${id}`, {
@@ -470,6 +500,11 @@ export const api = {
       request<CourseSummary>(`/courses/${id}`, {
         method: "PATCH",
         body: JSON.stringify({ isPublic }),
+      }),
+    setContentLanguage: (id: string, contentLanguage: "en" | "de" | "ar") =>
+      request<CourseSummary>(`/courses/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ contentLanguage }),
       }),
     remove: (id: string) =>
       request<void>(`/courses/${id}`, { method: "DELETE" }),
@@ -539,14 +574,24 @@ export const api = {
   },
   learn: {
     subjects: () => request<LearnSubject[]>("/subjects"),
-    catalog: (source: "official" | "community") =>
-      request<LearnSubject[]>(`/subjects/catalog?source=${source}`),
+    catalog: (
+      source: "official" | "community",
+      language?: "en" | "de" | "ar",
+    ) =>
+      request<LearnSubject[]>(
+        `/subjects/catalog?source=${source}${language ? `&language=${language}` : ""}`,
+      ),
     enroll: (subjectId: string) =>
       request<void>(`/subjects/${subjectId}/enroll`, { method: "POST" }),
     setPublic: (subjectId: string, isPublic: boolean) =>
       request<LearnSubject>(`/subjects/${subjectId}`, {
         method: "PATCH",
         body: JSON.stringify({ isPublic }),
+      }),
+    setContentLanguage: (subjectId: string, locale: "en" | "de" | "ar") =>
+      request<LearnSubject>(`/subjects/${subjectId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ locale }),
       }),
     outline: (subjectId: string) =>
       request<LearnerOutline>(`/subjects/${subjectId}/learn/outline`),

@@ -6,6 +6,7 @@ import * as repo from "./library.repository";
 import * as decksRepo from "../decks/decks.repository";
 import { validateBranching } from "../decks/branching";
 import { MAX_CARDS_PER_DECK } from "../decks/decks.service";
+import { contentLanguageFilterSchema } from "./content-language";
 
 export interface LibraryDeck {
   id: string;
@@ -15,6 +16,7 @@ export interface LibraryDeck {
   cardCount: number;
   publishedAt: string | null;
   categoryId: string | null;
+  contentLanguage: string | null;
 }
 
 // Shared by list(): an optional title search plus limit/offset/categoryId,
@@ -44,6 +46,7 @@ const paginationSchema = z.object({
     (v) => (typeof v === "string" && v.trim() ? v.trim() : undefined),
     z.string().optional(),
   ),
+  language: contentLanguageFilterSchema,
 });
 
 function toLibraryDeck(row: repo.LibraryDeckRow): LibraryDeck {
@@ -57,18 +60,28 @@ function toLibraryDeck(row: repo.LibraryDeckRow): LibraryDeck {
       ? new Date(row.published_at).toISOString()
       : null,
     categoryId: row.category_id,
+    contentLanguage: row.content_language,
   };
 }
 
 export async function list(query: unknown): Promise<LibraryDeck[]> {
-  const { q, limit, offset, categoryId } = parse(paginationSchema, query ?? {});
+  const { q, limit, offset, categoryId, language } = parse(
+    paginationSchema,
+    query ?? {},
+  );
   const categoryFilter: string | null | undefined =
     categoryId === undefined
       ? undefined
       : categoryId === "uncategorized"
         ? null
         : categoryId;
-  const rows = await repo.listPublic(q, limit, offset, categoryFilter);
+  const rows = await repo.listPublic(
+    q,
+    limit,
+    offset,
+    categoryFilter,
+    language,
+  );
   return rows.map(toLibraryDeck);
 }
 
@@ -132,6 +145,7 @@ export async function clone(userId: string, id: string) {
     source.title,
     null,
     cards,
+    source.content_language,
   );
   if (!deck) throw new Error("Failed to create deck");
 

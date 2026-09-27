@@ -7,6 +7,7 @@ import * as repo from "./admin.repository";
 import type { AdminUserRow } from "./admin.repository";
 import * as decksRepo from "../decks/decks.repository";
 import * as categoriesRepo from "../categories/categories.repository";
+import { contentLanguageSchema } from "../library/content-language";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -116,10 +117,45 @@ export async function setSubjectOfficial(
   official: boolean,
 ): Promise<void> {
   const result = await getPool().query(
-    `UPDATE subjects SET is_official = $2, is_public = CASE WHEN $2 THEN true ELSE is_public END WHERE id = $1`,
+    `UPDATE subjects SET is_official = $2, is_public = CASE WHEN $2 THEN true ELSE is_public END
+     WHERE id = $1 AND (NOT $2 OR locale IS NOT NULL)`,
     [id, official],
   );
-  if ((result.rowCount ?? 0) === 0) throw new NotFoundError("Course not found");
+  if ((result.rowCount ?? 0) === 0) {
+    const exists = await getPool().query(
+      "SELECT 1 FROM subjects WHERE id = $1",
+      [id],
+    );
+    if (exists.rowCount)
+      throw new ValidationError(
+        "Choose an explanation language before publishing",
+      );
+    throw new NotFoundError("Course not found");
+  }
+}
+
+export async function setOfficialDeckContentLanguage(
+  id: string,
+  languageInput: unknown,
+): Promise<void> {
+  const language = parse(contentLanguageSchema, languageInput);
+  const changed = await getPool().query(
+    "UPDATE decks SET content_language = $2, updated_at = now() WHERE id = $1 AND is_official",
+    [id, language],
+  );
+  if (!changed.rowCount) throw new NotFoundError("Official deck not found");
+}
+
+export async function setCollectionContentLanguage(
+  id: string,
+  languageInput: unknown,
+): Promise<void> {
+  const language = parse(contentLanguageSchema, languageInput);
+  const changed = await getPool().query(
+    "UPDATE deck_collections SET content_language = $2 WHERE id = $1",
+    [id, language],
+  );
+  if (!changed.rowCount) throw new NotFoundError("Collection not found");
 }
 
 const ownerIdSchema = z.string({ error: "ownerId is required" }).min(1);

@@ -8,6 +8,10 @@ import type { CourseDeckRow } from "./courses.repository";
 import * as decksRepo from "../decks/decks.repository";
 import { validateBranching } from "../decks/branching";
 import { MAX_CARDS_PER_DECK } from "../decks/decks.service";
+import {
+  contentLanguageSchema,
+  contentLanguageFilterSchema,
+} from "../library/content-language";
 
 const titleSchema = z
   .string({ error: "Title is required" })
@@ -17,6 +21,7 @@ const titleSchema = z
 const descriptionSchema = z.string().trim().max(2000).nullable();
 const isPublicSchema = z.boolean();
 const publicListSchema = z.object({
+  language: contentLanguageFilterSchema,
   limit: z.coerce.number().int().min(1).max(100).optional().default(50),
   offset: z.coerce.number().int().min(0).optional().default(0),
 });
@@ -46,10 +51,15 @@ export async function createCourse(
   userId: string,
   titleInput: unknown,
   descriptionInput: unknown = null,
+  languageInput?: unknown,
 ) {
   const title = parse(titleSchema, titleInput);
   const description = parse(descriptionSchema, descriptionInput ?? null);
-  const course = await repo.createCourse(userId, title, description);
+  const language =
+    languageInput === undefined
+      ? null
+      : parse(contentLanguageSchema, languageInput);
+  const course = await repo.createCourse(userId, title, description, language);
   if (!course) throw new Error("Failed to create course");
   return course;
 }
@@ -86,6 +96,7 @@ export async function updateCourse(
     title?: unknown;
     description?: unknown;
     isPublic?: unknown;
+    contentLanguage?: unknown;
   },
 ) {
   const current = await repo.getOwnedCourse(userId, id);
@@ -103,7 +114,16 @@ export async function updateCourse(
       patchInput.isPublic !== undefined
         ? parse(isPublicSchema, patchInput.isPublic)
         : current.is_public,
+    content_language:
+      patchInput.contentLanguage !== undefined
+        ? parse(contentLanguageSchema, patchInput.contentLanguage)
+        : current.content_language,
   };
+  if (next.is_public && !current.is_public && !next.content_language) {
+    throw new ValidationError(
+      "Choose an explanation language before publishing",
+    );
+  }
   const updated = await repo.updateCourseRow(id, next);
   if (!updated) throw new NotFoundError("Course not found");
   return updated;
@@ -178,8 +198,8 @@ export async function reorderCourseDecks(
 }
 
 export async function listPublicCourses(queryInput: unknown) {
-  const { limit, offset } = parse(publicListSchema, queryInput);
-  return repo.listPublicCourses(limit, offset);
+  const { limit, offset, language } = parse(publicListSchema, queryInput);
+  return repo.listPublicCourses(limit, offset, language);
 }
 
 export async function getPublicCoursePreview(userId: string, id: string) {
@@ -208,6 +228,7 @@ export async function cloneCourse(userId: string, id: string) {
     userId,
     course.title,
     course.description,
+    course.content_language,
   );
   if (!newCourse) throw new Error("Failed to create course");
 
@@ -233,6 +254,7 @@ export async function cloneCourse(userId: string, id: string) {
       member.title,
       null,
       cards,
+      member.content_language,
     );
     if (!clonedDeck) throw new Error("Failed to clone a course deck");
     await repo.addDeckToCourse(newCourse.id, clonedDeck.id);

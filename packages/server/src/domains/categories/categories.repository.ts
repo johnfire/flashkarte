@@ -97,7 +97,7 @@ export interface CategoryCountRow {
  * only what it actually displays. `category_id: null` is the uncategorized
  * bucket, grouped the same way any other value is.
  */
-export function countItemsPerCategory() {
+export function countItemsPerCategory(language?: string) {
   return query<CategoryCountRow>(
     `SELECT category_id,
        count(*) FILTER (WHERE kind = 'collection') AS collection_count,
@@ -105,13 +105,15 @@ export function countItemsPerCategory() {
        count(*) FILTER (WHERE kind = 'public_deck') AS public_deck_count
      FROM (
        SELECT category_id, 'collection' AS kind FROM deck_collections
+       WHERE ($1::text IS NULL OR content_language = $1)
        UNION ALL
        SELECT category_id, 'deck' AS kind FROM decks
-       WHERE is_official AND collection_id IS NULL
+       WHERE is_official AND collection_id IS NULL AND ($1::text IS NULL OR content_language = $1)
        UNION ALL
        SELECT category_id, 'public_deck' AS kind FROM decks
-       WHERE is_public AND NOT is_official
+       WHERE is_public AND NOT is_official AND ($1::text IS NULL OR content_language = $1)
      ) items
      GROUP BY category_id`,
+    [language ?? null],
   );
 }

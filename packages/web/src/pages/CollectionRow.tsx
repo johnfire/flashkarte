@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, reportClientError } from "../api/client";
 import { DeckCollection } from "../api/types";
+import { contentLanguageLabel } from "../components/ContentLanguageSwitcher";
 
 interface CollectionRowProps {
   collection: DeckCollection;
@@ -11,6 +12,7 @@ interface CollectionRowProps {
 /** One collection row on the App Decks page: title, count, and a bulk Add all. */
 export function CollectionRow({ collection: c }: CollectionRowProps) {
   const { t } = useTranslation();
+  const location = useLocation();
   const [addingAll, setAddingAll] = useState(false);
   const [addedAll, setAddedAll] = useState(false);
 
@@ -33,8 +35,16 @@ export function CollectionRow({ collection: c }: CollectionRowProps) {
   return (
     <li className="flex items-center justify-between rounded-lg border p-4">
       <div className="min-w-0">
-        <Link to={`/app-decks/${c.id}`} className="font-medium hover:underline">
+        <Link
+          to={`/app-decks/${c.id}${location.search}`}
+          className="font-medium hover:underline"
+        >
           {c.title}
+          {contentLanguageLabel(c.content_language) && (
+            <span className="ml-2 text-xs font-normal">
+              {contentLanguageLabel(c.content_language)}
+            </span>
+          )}
         </Link>
         {c.description && (
           <p className="text-sm text-gray-500 dark:text-gray-400">

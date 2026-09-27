@@ -5,14 +5,21 @@ import { api, ApiError } from "../api/client";
 import { PublicCourseSummary } from "../api/types";
 import { useAsync } from "../hooks/use-async";
 import { PublicDeckCollectionRow } from "./PublicDeckCollectionRow";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 export function PublicCoursesPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { language, choose } = useContentLanguage("library");
+  const filter = language === "all" ? undefined : language;
   const [cloningId, setCloningId] = useState<string | null>(null);
   const [cloneError, setCloneError] = useState<string | null>(null);
 
-  const loadCourses = useCallback(() => api.publicCourses.list(), []);
+  const loadCourses = useCallback(
+    () => api.publicCourses.list({ language: filter }),
+    [filter],
+  );
   const {
     data: courses,
     error: loadError,
@@ -43,10 +50,14 @@ export function PublicCoursesPage() {
     <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("courses.browsePublic")}</h1>
-        <Link to="/library/community/decks" className="text-sm text-indigo-600">
+        <Link
+          to={`/library/community/decks?language=${language}`}
+          className="text-sm text-indigo-600"
+        >
           {t("courses.backToCourses")}
         </Link>
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
       {cloneError && <p className="mb-4 text-red-600">{cloneError}</p>}

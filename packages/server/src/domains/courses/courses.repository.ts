@@ -7,23 +7,25 @@ export interface CourseRow {
   title: string;
   description: string | null;
   is_public: boolean;
+  content_language: string | null;
   created_at: string;
   updated_at: string;
 }
 
 const COURSE_COLS =
-  "id, reference_number, user_id, title, description, is_public, created_at, updated_at";
+  "id, reference_number, user_id, title, description, is_public, content_language, created_at, updated_at";
 
 export function createCourse(
   userId: string,
   title: string,
   description: string | null,
+  contentLanguage: string | null = null,
 ) {
   return queryOne<CourseRow>(
-    `INSERT INTO courses (user_id, title, description)
-     VALUES ($1, $2, $3)
+    `INSERT INTO courses (user_id, title, description, content_language)
+     VALUES ($1, $2, $3, $4)
      RETURNING ${COURSE_COLS}`,
-    [userId, title, description],
+    [userId, title, description, contentLanguage],
   );
 }
 
@@ -56,13 +58,18 @@ export function getOwnedCourse(userId: string, id: string) {
  *  onto the current row first, mirroring decks.service's applyCardPatch. */
 export function updateCourseRow(
   id: string,
-  next: { title: string; description: string | null; is_public: boolean },
+  next: {
+    title: string;
+    description: string | null;
+    is_public: boolean;
+    content_language: string | null;
+  },
 ) {
   return queryOne<CourseRow>(
-    `UPDATE courses SET title = $2, description = $3, is_public = $4, updated_at = now()
+    `UPDATE courses SET title = $2, description = $3, is_public = $4, content_language = $5, updated_at = now()
      WHERE id = $1
      RETURNING ${COURSE_COLS}`,
-    [id, next.title, next.description, next.is_public],
+    [id, next.title, next.description, next.is_public, next.content_language],
   );
 }
 
@@ -110,15 +117,19 @@ export interface PublicCourseRow extends CourseRow {
   decks_total: number;
 }
 
-export function listPublicCourses(limit: number, offset: number) {
+export function listPublicCourses(
+  limit: number,
+  offset: number,
+  language?: string,
+) {
   return query<PublicCourseRow>(
     `SELECT c.*,
             (SELECT count(*) FROM course_decks cd WHERE cd.course_id = c.id)::int AS decks_total
      FROM courses c
-     WHERE c.is_public
+     WHERE c.is_public AND ($3::text IS NULL OR c.content_language = $3)
      ORDER BY c.created_at DESC
      LIMIT $1 OFFSET $2`,
-    [limit, offset],
+    [limit, offset, language ?? null],
   );
 }
 
@@ -127,13 +138,14 @@ export interface PublicCourseDeckRow {
   position: number;
   title: string;
   card_count: number;
+  content_language: string | null;
 }
 
 /** Ordered member decks of a course, with no progress/gating -- for
  *  browsing before a clone, where the caller doesn't own any of it yet. */
 export function getPublicCourseDecks(courseId: string) {
   return query<PublicCourseDeckRow>(
-    `SELECT cd.deck_id, cd.position, d.title,
+    `SELECT cd.deck_id, cd.position, d.title, d.content_language,
             (SELECT count(*) FROM cards c WHERE c.deck_id = d.id)::int AS card_count
      FROM course_decks cd
      JOIN decks d ON d.id = cd.deck_id

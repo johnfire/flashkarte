@@ -138,10 +138,10 @@ interface Counts {
 
 const ZERO_COUNTS: Counts = { officialCount: 0, publicCount: 0 };
 
-export async function getTree(): Promise<CategoryNode[]> {
+export async function getTree(language?: string): Promise<CategoryNode[]> {
   const [rows, counts] = await Promise.all([
     repo.listAll(),
-    repo.countItemsPerCategory(),
+    repo.countItemsPerCategory(language),
   ]);
 
   const countByCategory = new Map<string | null, Counts>();

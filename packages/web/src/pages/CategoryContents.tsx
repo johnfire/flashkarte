@@ -8,6 +8,7 @@ import { CollectionRow } from "./CollectionRow";
 
 interface CategoryContentsProps {
   categoryId: string;
+  language?: "en" | "de" | "ar";
 }
 
 /**
@@ -16,20 +17,24 @@ interface CategoryContentsProps {
  * only while that section is expanded, so nothing fetches until the user
  * opens it.
  */
-export function CategoryContents({ categoryId }: CategoryContentsProps) {
+export function CategoryContents({
+  categoryId,
+  language,
+}: CategoryContentsProps) {
   const { t } = useTranslation();
   const [subscribingId, setSubscribingId] = useState<string | null>(null);
 
   const loadCollections = useCallback(
     (params: BrowseParams) =>
-      api.decks.listCollections({ ...params, categoryId }),
-    [categoryId],
+      api.decks.listCollections({ ...params, categoryId, language }),
+    [categoryId, language],
   );
   const collections = usePaginatedList<DeckCollection>(loadCollections);
 
   const loadStandalone = useCallback(
-    (params: BrowseParams) => api.decks.listOfficial({ ...params, categoryId }),
-    [categoryId],
+    (params: BrowseParams) =>
+      api.decks.listOfficial({ ...params, categoryId, language }),
+    [categoryId, language],
   );
   const standalone = usePaginatedList<OfficialDeck>(loadStandalone);
 

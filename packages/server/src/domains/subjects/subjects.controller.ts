@@ -28,9 +28,11 @@ export const create = wrapAsync(async (req: Request, res: Response) => {
     req.userId!,
     req.body.title,
     req.body.description,
+    req.body.locale,
   );
   await auditSubject(req, "subject.created", subject.id, {
     title: subject.title,
+    locale: subject.locale,
   });
   res.status(201).json(subject);
 });
@@ -39,6 +41,7 @@ export const importFromJson = wrapAsync(async (req: Request, res: Response) => {
   const result = await importSubject(req.userId!, req.body);
   await auditSubject(req, "subject.imported", result.subject.id, {
     title: result.subject.title,
+    locale: result.subject.locale,
     concepts: result.concept_count,
     edges: result.edge_count,
   });
@@ -50,7 +53,12 @@ export const list = wrapAsync(async (req: Request, res: Response) => {
 });
 
 export const listCatalog = wrapAsync(async (req: Request, res: Response) => {
-  res.json(await service.listCatalogSubjects(req.query.source === "official"));
+  res.json(
+    await service.listCatalogSubjects(
+      req.query.source === "official",
+      req.query.language,
+    ),
+  );
 });
 
 export const enroll = wrapAsync(async (req: Request, res: Response) => {
@@ -109,10 +117,12 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
     title: req.body.title,
     description: req.body.description,
     isPublic: req.body.isPublic,
+    locale: req.body.locale,
   });
   await auditSubject(req, "subject.updated", req.params.id, {
     title: updated.title,
     isPublic: updated.is_public,
+    locale: updated.locale,
   });
   res.json(updated);
 });

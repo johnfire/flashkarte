@@ -10,18 +10,24 @@ import { PublicDeckCollectionRow } from "./PublicDeckCollectionRow";
 const LIBRARY_PAGE_SIZE = 100;
 
 /** Community flashcard deck collections and standalone decks in the Library. */
-export function CommunityFlashcardDeckLibrarySection() {
+export function CommunityFlashcardDeckLibrarySection({
+  language,
+  selectedLanguage,
+}: {
+  language?: "en" | "de" | "ar";
+  selectedLanguage?: string;
+}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [cloningId, setCloningId] = useState<string | null>(null);
   const [cloneError, setCloneError] = useState<string | null>(null);
   const loadCollections = useCallback(
-    () => api.publicCourses.list({ limit: LIBRARY_PAGE_SIZE }),
-    [],
+    () => api.publicCourses.list({ limit: LIBRARY_PAGE_SIZE, language }),
+    [language],
   );
   const loadDecks = useCallback(
-    () => api.library.list({ limit: LIBRARY_PAGE_SIZE }),
-    [],
+    () => api.library.list({ limit: LIBRARY_PAGE_SIZE, language }),
+    [language],
   );
   const collections = useAsync<PublicCourseSummary[], []>(loadCollections, []);
   const decks = useAsync<LibraryDeck[], []>(loadDecks, []);
@@ -101,7 +107,10 @@ export function CommunityFlashcardDeckLibrarySection() {
           id="community-flashcard-decks-heading"
           className="text-xl font-semibold"
         >
-          <Link to="/library/community/decks" className="hover:underline">
+          <Link
+            to={`/library/community/decks${selectedLanguage ? `?language=${selectedLanguage}` : ""}`}
+            className="hover:underline"
+          >
             {t("libraryHub.communityDecksTitle")}
           </Link>
         </h2>

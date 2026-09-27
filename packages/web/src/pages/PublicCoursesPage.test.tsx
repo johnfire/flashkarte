@@ -7,6 +7,10 @@ import type { PublicCourseSummary } from "../api/types";
 import "../i18n";
 import { PublicCoursesPage } from "./PublicCoursesPage";
 
+vi.mock("../hooks/use-content-language", () => ({
+  useContentLanguage: () => ({ language: "all", choose: vi.fn() }),
+}));
+
 const navigate = vi.fn();
 vi.mock("react-router", async (importOriginal) => ({
   ...(await importOriginal<typeof import("react-router")>()),

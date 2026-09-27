@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { LibraryDeck } from "../api/types";
+import { contentLanguageLabel } from "../components/ContentLanguageSwitcher";
 
 interface LibraryDeckRowProps {
   deck: LibraryDeck;
@@ -15,6 +16,11 @@ export function LibraryDeckRow({ deck, busy, onClone }: LibraryDeckRowProps) {
       <div className="min-w-0">
         <p className="truncate font-medium">
           {deck.title}
+          {contentLanguageLabel(deck.contentLanguage) && (
+            <span className="ml-2 text-xs font-normal">
+              {contentLanguageLabel(deck.contentLanguage)}
+            </span>
+          )}
           {deck.referenceNumber !== undefined && (
             <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
               #{deck.referenceNumber}

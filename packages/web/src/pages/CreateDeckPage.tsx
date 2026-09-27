@@ -4,6 +4,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { parseDeck } from "@flashkarte/shared";
 import { api, ApiError } from "../api/client";
 import { CardText } from "../components/CardText";
+import { ContentLanguageField } from "../components/ContentLanguageSwitcher";
 
 export function CreateDeckPage() {
   const { t } = useTranslation();
@@ -12,6 +13,9 @@ export function CreateDeckPage() {
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [contentLanguage, setContentLanguage] = useState<
+    "en" | "de" | "ar" | null
+  >(null);
 
   const preview = useMemo(
     () => (markdown.trim() ? parseDeck(markdown, "") : null),
@@ -31,8 +35,12 @@ export function CreateDeckPage() {
     setBusy(true);
     try {
       const deck = file
-        ? await api.decks.createFromFile(file)
-        : await api.decks.create(markdown);
+        ? await api.decks.createFromFile(file, contentLanguage ?? undefined)
+        : await api.decks.create(
+            markdown,
+            undefined,
+            contentLanguage ?? undefined,
+          );
       void deck;
       navigate("/");
     } catch (err) {
@@ -66,6 +74,10 @@ export function CreateDeckPage() {
       </p>
 
       <form onSubmit={onSubmit} className="space-y-4">
+        <ContentLanguageField
+          value={contentLanguage}
+          onChange={setContentLanguage}
+        />
         <input
           type="file"
           accept=".md,.txt,text/markdown,text/plain"

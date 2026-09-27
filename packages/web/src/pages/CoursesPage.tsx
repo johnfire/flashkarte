@@ -5,9 +5,12 @@ import { api, ApiError, reportClientError } from "../api/client";
 import { CourseSummary } from "../api/types";
 import { useAsync } from "../hooks/use-async";
 import { CourseListItem } from "./CourseListItem";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 export function CoursesPage() {
   const { t } = useTranslation();
+  const { language, choose } = useContentLanguage("courses");
   const [title, setTitle] = useState("");
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState<string | null>(null);
@@ -76,6 +79,7 @@ export function CoursesPage() {
           </Link>
         </div>
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
 
       <form onSubmit={onCreate} className="mb-6 flex gap-2">
         <input
@@ -105,9 +109,14 @@ export function CoursesPage() {
       )}
 
       <ul className="content-card-grid">
-        {courses?.map((c) => (
-          <CourseListItem key={c.id} course={c} onDelete={onDelete} />
-        ))}
+        {courses
+          ?.filter(
+            (course) =>
+              language === "all" || course.content_language === language,
+          )
+          .map((c) => (
+            <CourseListItem key={c.id} course={c} onDelete={onDelete} />
+          ))}
       </ul>
     </div>
   );

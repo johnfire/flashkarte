@@ -1,5 +1,9 @@
 import { Link } from "react-router";
 import { Trans, useTranslation } from "react-i18next";
+import {
+  contentLanguageLabel,
+  type ContentLanguageChoice,
+} from "../components/ContentLanguageSwitcher";
 
 interface DeckListVerifyPanelProps {
   email: string;
@@ -69,6 +73,26 @@ export function DeckListLegendHint() {
           />,
         ]}
       />
+    </p>
+  );
+}
+
+export function DeckListLanguageEmpty({
+  language,
+  showAll,
+}: {
+  language: ContentLanguageChoice;
+  showAll: () => void;
+}) {
+  const { t } = useTranslation();
+  return (
+    <p>
+      {t("contentLanguage.emptyDecks", {
+        language: contentLanguageLabel(language),
+      })}{" "}
+      <button className="text-indigo-600 underline" onClick={showAll}>
+        {t("contentLanguage.showAll")}
+      </button>
     </p>
   );
 }

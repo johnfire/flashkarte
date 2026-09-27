@@ -25,6 +25,7 @@ describe("public library API", () => {
         cardCount: 2,
         publishedAt: null,
         categoryId: null,
+        contentLanguage: null,
       },
     ]);
     const res = await request(app).get("/api/public/library");

@@ -7,6 +7,7 @@ import { LibraryDeckRow } from "./LibraryDeckRow";
 
 interface LibraryCategoryContentsProps {
   categoryId: string;
+  language?: "en" | "de" | "ar";
   cloningId: string | null;
   onClone: (id: string) => void;
 }
@@ -18,14 +19,16 @@ interface LibraryCategoryContentsProps {
  */
 export function LibraryCategoryContents({
   categoryId,
+  language,
   cloningId,
   onClone,
 }: LibraryCategoryContentsProps) {
   const { t } = useTranslation();
 
   const loadDecks = useCallback(
-    (params: BrowseParams) => api.library.list({ ...params, categoryId }),
-    [categoryId],
+    (params: BrowseParams) =>
+      api.library.list({ ...params, categoryId, language }),
+    [categoryId, language],
   );
   const decks = usePaginatedList<LibraryDeck>(loadDecks);
 

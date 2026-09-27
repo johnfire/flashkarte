@@ -7,18 +7,21 @@ import { useAsync } from "../hooks/use-async";
 import { CategorySection } from "./CategorySection";
 import { CategoryContents } from "./CategoryContents";
 import { AppDecksSearchResults } from "./AppDecksSearchResults";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 const getOfficialCount = (category: DeckCategory) => category.officialCount;
-const renderOfficialContents = (categoryId: string) => (
-  <CategoryContents categoryId={categoryId} />
-);
-
 export function AppDecksPage() {
   const { t } = useTranslation();
+  const { language, choose } = useContentLanguage("library");
+  const filter = language === "all" ? undefined : language;
   const [q, setQ] = useState("");
   const [activeQuery, setActiveQuery] = useState<string | null>(null);
 
-  const loadTree = useCallback(() => api.categories.tree(), []);
+  const loadTree = useCallback(() => api.categories.tree(filter), [filter]);
+  const renderOfficialContents = (categoryId: string) => (
+    <CategoryContents categoryId={categoryId} language={filter} />
+  );
   const {
     data: treeResponse,
     error: treeError,
@@ -42,13 +45,14 @@ export function AppDecksPage() {
     <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("decks.appDecksTitle")}</h1>
-        <Link
-          to="/"
-          className="self-center text-sm text-gray-500 dark:text-gray-400"
-        >
-          {t("library.myDecks")}
-        </Link>
+        <nav className="flex gap-4 text-sm text-indigo-600">
+          <Link to={`/library?language=${language}`}>
+            {t("libraryHub.title")}
+          </Link>
+          <Link to="/">{t("library.myDecks")}</Link>
+        </nav>
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
 
       <form onSubmit={onSearchSubmit} className="mb-6 flex gap-2">
         <input
@@ -66,7 +70,11 @@ export function AppDecksPage() {
       </form>
 
       {activeQuery !== null ? (
-        <AppDecksSearchResults q={activeQuery} />
+        <AppDecksSearchResults
+          key={`${activeQuery}:${language}`}
+          q={activeQuery}
+          language={filter}
+        />
       ) : (
         <>
           {treeLoading && (
@@ -81,7 +89,7 @@ export function AppDecksPage() {
             <ul className="space-y-3">
               {treeResponse.categories.map((category: DeckCategory) => (
                 <CategorySection
-                  key={category.id}
+                  key={`${category.id}:${language}`}
                   category={category}
                   getItemCount={getOfficialCount}
                   renderContents={renderOfficialContents}

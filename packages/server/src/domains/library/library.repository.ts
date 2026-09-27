@@ -8,6 +8,7 @@ export interface LibraryDeckRow {
   card_count: string;
   published_at: string;
   category_id: string | null;
+  content_language: string | null;
 }
 
 const AUTHOR = "COALESCE(NULLIF(trim(u.display_name), ''), 'Anonymous')";
@@ -50,19 +51,21 @@ export function listPublic(
   limit: number,
   offset: number,
   categoryId?: string | null,
+  language?: string,
 ) {
   const term = q === null ? null : escapeLike(q);
   const values: unknown[] = [term];
   const categoryClause = categoryFilterSql("d.category_id", categoryId, values);
-  values.push(limit, offset);
+  values.push(language ?? null, limit, offset);
   return query<LibraryDeckRow>(
     `SELECT d.id, d.reference_number, d.title, ${AUTHOR} AS author,
        (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
-       d.published_at, d.category_id
+       d.published_at, d.category_id, d.content_language
      FROM decks d JOIN users u ON u.id = d.user_id
      WHERE d.is_public AND NOT d.is_official
        AND ($1::text IS NULL OR d.title ILIKE '%' || $1 || '%' ESCAPE '\\')
        AND (${categoryClause})
+       AND ($${values.length - 2}::text IS NULL OR d.content_language = $${values.length - 2})
      ORDER BY d.title COLLATE de_phonebook ASC
      LIMIT $${values.length - 1} OFFSET $${values.length}`,
     values,
@@ -73,7 +76,7 @@ export function getPublicDeck(id: string) {
   return queryOne<LibraryDeckRow & { source_filename: string | null }>(
     `SELECT d.id, d.reference_number, d.title, d.source_filename, ${AUTHOR} AS author,
        (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
-       d.published_at, d.category_id
+       d.published_at, d.category_id, d.content_language
      FROM decks d JOIN users u ON u.id = d.user_id
      WHERE d.id = $1 AND d.is_public AND NOT d.is_official`,
     [id],

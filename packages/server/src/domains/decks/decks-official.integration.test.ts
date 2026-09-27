@@ -39,8 +39,8 @@ async function resetFixtures(): Promise<void> {
     [OWNER_ID, SUBSCRIBER_ID, OUTSIDER_ID],
   );
   await pool.query(
-    `INSERT INTO decks (id, user_id, title) VALUES
-       ($1, $3, 'Original Deck'), ($2, $3, 'Second Deck')`,
+    `INSERT INTO decks (id, user_id, title, content_language) VALUES
+       ($1, $3, 'Original Deck', 'en'), ($2, $3, 'Second Deck', 'en')`,
     [DECK_ID, DECK_ID_2, OWNER_ID],
   );
   await pool.query(

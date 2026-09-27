@@ -12,4 +12,9 @@ adminRouter.patch("/subjects/:id/official", ctrl.setSubjectOfficial);
 adminRouter.post("/decks/:id/demote-official", ctrl.demoteOfficialDeck);
 adminRouter.patch("/decks/:id/category", ctrl.setDeckCategory);
 adminRouter.patch("/collections/:id/category", ctrl.setCollectionCategory);
+adminRouter.patch("/decks/:id/content-language", ctrl.setDeckContentLanguage);
+adminRouter.patch(
+  "/collections/:id/content-language",
+  ctrl.setCollectionContentLanguage,
+);
 adminRouter.use("/categories", categoriesAdminRouter);

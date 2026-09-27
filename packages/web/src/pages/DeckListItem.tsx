@@ -3,12 +3,17 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { DeckWithCounts } from "../api/types";
 import { DeckSpeechDialog } from "./DeckSpeechDialog";
+import {
+  ContentLanguageField,
+  contentLanguageLabel,
+} from "../components/ContentLanguageSwitcher";
 
 interface DeckListItemProps {
   deck: DeckWithCounts;
   onTogglePublic: (id: string, makePublic: boolean) => void;
   onDelete: (id: string, title: string) => void;
   onUnsubscribe: (id: string, title: string) => void;
+  onLanguageChange?: (id: string, language: "en" | "de" | "ar") => void;
 }
 
 export function DeckListItem({
@@ -16,6 +21,7 @@ export function DeckListItem({
   onTogglePublic,
   onDelete,
   onUnsubscribe,
+  onLanguageChange,
 }: DeckListItemProps) {
   const { t } = useTranslation();
   const [speechOpen, setSpeechOpen] = useState(false);
@@ -24,6 +30,11 @@ export function DeckListItem({
       <div className="min-w-0 flex-1 basis-56">
         <p className="font-medium">
           <span>{d.title}</span>
+          {contentLanguageLabel(d.content_language) && (
+            <span className="ml-2 text-xs font-normal">
+              {contentLanguageLabel(d.content_language)}
+            </span>
+          )}
           {d.reference_number !== undefined && (
             <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
               #{d.reference_number}
@@ -108,6 +119,12 @@ export function DeckListItem({
           </button>
         ) : (
           <>
+            {onLanguageChange && (
+              <ContentLanguageField
+                value={d.content_language}
+                onChange={(language) => onLanguageChange(d.id, language)}
+              />
+            )}
             <button
               onClick={() => onTogglePublic(d.id, !d.is_public)}
               className="text-sm text-indigo-600"

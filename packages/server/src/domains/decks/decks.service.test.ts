@@ -10,10 +10,22 @@ beforeEach(() => {
   mockedRepository.getDeck.mockResolvedValue({
     id: "deck-1",
     title: "Existing deck",
+    content_language: "en",
   } as never);
 });
 
 describe("deck input validation", () => {
+  test("requires an explanation language before sharing a new deck", async () => {
+    mockedRepository.getDeck.mockResolvedValue({
+      id: "deck-1",
+      is_public: false,
+      content_language: null,
+    } as never);
+    await expect(
+      update("user-1", "deck-1", { isPublic: true }),
+    ).rejects.toThrow("Choose an explanation language");
+    expect(mockedRepository.setDeckPublic).not.toHaveBeenCalled();
+  });
   test.each([undefined, 42, "   "])(
     "rejects invalid import markdown %p",
     async (markdown) => {

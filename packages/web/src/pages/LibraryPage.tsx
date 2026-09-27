@@ -7,18 +7,22 @@ import { useAsync } from "../hooks/use-async";
 import { CategorySection } from "./CategorySection";
 import { LibraryCategoryContents } from "./LibraryCategoryContents";
 import { LibrarySearchResults } from "./LibrarySearchResults";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 const getPublicCount = (category: DeckCategory) => category.publicCount;
 
 export function LibraryPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { language, choose } = useContentLanguage("library");
+  const filter = language === "all" ? undefined : language;
   const [q, setQ] = useState("");
   const [activeQuery, setActiveQuery] = useState<string | null>(null);
   const [cloningId, setCloningId] = useState<string | null>(null);
   const [cloneError, setCloneError] = useState<string | null>(null);
 
-  const loadTree = useCallback(() => api.categories.tree(), []);
+  const loadTree = useCallback(() => api.categories.tree(filter), [filter]);
   const {
     data: treeResponse,
     error: treeError,
@@ -49,12 +53,13 @@ export function LibraryPage() {
     (categoryId: string) => (
       <LibraryCategoryContents
         categoryId={categoryId}
+        language={filter}
         cloningId={cloningId}
         onClone={onClone}
       />
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [cloningId],
+    [cloningId, filter],
   );
 
   const treeErrorMessage =
@@ -69,6 +74,12 @@ export function LibraryPage() {
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("library.title")}</h1>
         <div className="flex gap-4 text-sm">
+          <Link
+            to={`/library?language=${language}`}
+            className="text-indigo-600"
+          >
+            {t("libraryHub.title")}
+          </Link>
           <Link to="/help" className="text-indigo-600">
             {t("common.help")}
           </Link>
@@ -77,6 +88,7 @@ export function LibraryPage() {
           </Link>
         </div>
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
 
       <form onSubmit={onSearchSubmit} className="mb-6 flex gap-2">
         <input
@@ -97,7 +109,9 @@ export function LibraryPage() {
 
       {activeQuery !== null ? (
         <LibrarySearchResults
+          key={`${activeQuery}:${language}`}
           q={activeQuery}
+          language={filter}
           cloningId={cloningId}
           onClone={onClone}
         />
@@ -115,7 +129,7 @@ export function LibraryPage() {
             <ul className="space-y-3">
               {treeResponse.categories.map((category: DeckCategory) => (
                 <CategorySection
-                  key={category.id}
+                  key={`${category.id}:${language}`}
                   category={category}
                   getItemCount={getPublicCount}
                   renderContents={renderPublicContents}

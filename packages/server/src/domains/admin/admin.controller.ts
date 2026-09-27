@@ -139,3 +139,41 @@ export const setCollectionCategory = wrapAsync(
     res.status(204).end();
   },
 );
+
+export const setDeckContentLanguage = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.setOfficialDeckContentLanguage(
+      req.params.id,
+      req.body?.contentLanguage,
+    );
+    await auditFromRequest(
+      req,
+      "admin.deck_content_language_changed",
+      "deck",
+      req.params.id,
+      "success",
+      undefined,
+      { contentLanguage: req.body?.contentLanguage },
+    );
+    res.status(204).end();
+  },
+);
+
+export const setCollectionContentLanguage = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.setCollectionContentLanguage(
+      req.params.id,
+      req.body?.contentLanguage,
+    );
+    await auditFromRequest(
+      req,
+      "admin.collection_content_language_changed",
+      "deck_collection",
+      req.params.id,
+      "success",
+      undefined,
+      { contentLanguage: req.body?.contentLanguage },
+    );
+    res.status(204).end();
+  },
+);

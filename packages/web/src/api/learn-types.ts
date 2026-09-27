@@ -2,6 +2,7 @@ import type { Block } from "@flashkarte/shared";
 
 /** A subject as the Learn page lists it. */
 export interface LearnSubject {
+  locale?: string | null;
   id: string;
   reference_number?: number;
   user_id: string;

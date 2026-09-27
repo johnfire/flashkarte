@@ -59,6 +59,24 @@ describe("course MCP tools", () => {
     expect(mockApi.post).toHaveBeenCalledWith("/api/courses", {
       title: "Circuits 101",
       description: undefined,
+      contentLanguage: undefined,
+    });
+  });
+
+  test("create_course sends the explanation language", async () => {
+    const { handlers, server } = captureTools();
+    registerCourseTools(server as never);
+    mockApi.post.mockResolvedValue({ id: "c1" });
+
+    await handlers.create_course({
+      title: "Deutsch A1",
+      content_language: "ar",
+    });
+
+    expect(mockApi.post).toHaveBeenCalledWith("/api/courses", {
+      title: "Deutsch A1",
+      description: undefined,
+      contentLanguage: "ar",
     });
   });
 
@@ -86,6 +104,18 @@ describe("course MCP tools", () => {
     await handlers.update_course({ course_id: "c1", is_public: true });
     expect(mockApi.patch).toHaveBeenCalledWith("/api/courses/c1", {
       isPublic: true,
+    });
+  });
+
+  test("update_course can set the explanation language", async () => {
+    const { handlers, server } = captureTools();
+    registerCourseTools(server as never);
+    mockApi.patch.mockResolvedValue({ id: "c1" });
+
+    await handlers.update_course({ course_id: "c1", content_language: "de" });
+
+    expect(mockApi.patch).toHaveBeenCalledWith("/api/courses/c1", {
+      contentLanguage: "de",
     });
   });
 

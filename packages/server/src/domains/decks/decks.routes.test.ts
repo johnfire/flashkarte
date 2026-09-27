@@ -63,6 +63,7 @@ describe("decks routes", () => {
       "u1",
       "# Test Deck\n\n**1. Q**\nA\n",
       null,
+      undefined,
     );
   });
 
@@ -83,7 +84,12 @@ describe("decks routes", () => {
 
     expect(res.status).toBe(201);
     // The multipart body reached the controller intact and kept its filename.
-    expect(mock.importDeck).toHaveBeenCalledWith("u1", markdown, "deck.md");
+    expect(mock.importDeck).toHaveBeenCalledWith(
+      "u1",
+      markdown,
+      "deck.md",
+      undefined,
+    );
   });
 
   test("POST /api/decks rejects an upload over the 5MB limit", async () => {

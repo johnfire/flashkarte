@@ -10,16 +10,22 @@ import { OfficialDeckRow } from "./OfficialDeckRow";
 const LIBRARY_PAGE_SIZE = 100;
 
 /** Official flashcard deck collections and standalone decks in the Library. */
-export function OfficialFlashcardDeckLibrarySection() {
+export function OfficialFlashcardDeckLibrarySection({
+  language,
+  selectedLanguage,
+}: {
+  language?: "en" | "de" | "ar";
+  selectedLanguage?: string;
+}) {
   const { t } = useTranslation();
   const [subscribingId, setSubscribingId] = useState<string | null>(null);
   const loadCollections = useCallback(
-    () => api.decks.listCollections({ limit: LIBRARY_PAGE_SIZE }),
-    [],
+    () => api.decks.listCollections({ limit: LIBRARY_PAGE_SIZE, language }),
+    [language],
   );
   const loadDecks = useCallback(
-    () => api.decks.listOfficial({ limit: LIBRARY_PAGE_SIZE }),
-    [],
+    () => api.decks.listOfficial({ limit: LIBRARY_PAGE_SIZE, language }),
+    [language],
   );
   const collections = useAsync<DeckCollection[], []>(loadCollections, []);
   const decks = useAsync<OfficialDeck[], []>(loadDecks, []);
@@ -75,7 +81,10 @@ export function OfficialFlashcardDeckLibrarySection() {
           id="official-flashcard-decks-heading"
           className="text-xl font-semibold"
         >
-          <Link to="/library/official/decks" className="hover:underline">
+          <Link
+            to={`/library/official/decks${selectedLanguage ? `?language=${selectedLanguage}` : ""}`}
+            className="hover:underline"
+          >
             {t("libraryHub.officialDecksTitle")}
           </Link>
         </h2>

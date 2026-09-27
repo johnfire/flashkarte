@@ -131,7 +131,10 @@ describe("CourseDetailPage", () => {
     renderPage();
     await screen.findByText(/Voltage & Current/);
 
-    await userEvent.selectOptions(screen.getByRole("combobox"), "d3");
+    await userEvent.selectOptions(
+      screen.getByRole("combobox", { name: /deck/i }),
+      "d3",
+    );
     await userEvent.click(screen.getByRole("button", { name: "Add" }));
 
     await waitFor(() =>

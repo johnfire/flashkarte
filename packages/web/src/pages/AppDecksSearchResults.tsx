@@ -8,6 +8,7 @@ import { CollectionRow } from "./CollectionRow";
 
 interface AppDecksSearchResultsProps {
   q: string;
+  language?: "en" | "de" | "ar";
 }
 
 /**
@@ -16,19 +17,23 @@ interface AppDecksSearchResultsProps {
  * regardless of where it's filed. Mounted only while a search is active;
  * `q` is the query at mount time, and later changes re-search in place.
  */
-export function AppDecksSearchResults({ q }: AppDecksSearchResultsProps) {
+export function AppDecksSearchResults({
+  q,
+  language,
+}: AppDecksSearchResultsProps) {
   const { t } = useTranslation();
   const [subscribingId, setSubscribingId] = useState<string | null>(null);
 
   const loadCollections = useCallback(
-    (params: BrowseParams) => api.decks.listCollections(params),
-    [],
+    (params: BrowseParams) =>
+      api.decks.listCollections({ ...params, language }),
+    [language],
   );
   const collections = usePaginatedList<DeckCollection>(loadCollections, 30, q);
 
   const loadStandalone = useCallback(
-    (params: BrowseParams) => api.decks.listOfficial(params),
-    [],
+    (params: BrowseParams) => api.decks.listOfficial({ ...params, language }),
+    [language],
   );
   const standalone = usePaginatedList<OfficialDeck>(loadStandalone, 30, q);
 

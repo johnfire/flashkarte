@@ -3,9 +3,13 @@ import { useTranslation } from "react-i18next";
 import { CommunityFlashcardDeckLibrarySection } from "./CommunityFlashcardDeckLibrarySection";
 import { OfficialFlashcardDeckLibrarySection } from "./OfficialFlashcardDeckLibrarySection";
 import { StructuredCourseLibrarySection } from "./StructuredCourseLibrarySection";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 export function LibraryHubPage() {
   const { t } = useTranslation();
+  const { language, choose } = useContentLanguage("library");
+  const filter = language === "all" ? undefined : language;
   return (
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -18,11 +22,26 @@ export function LibraryHubPage() {
           <Link to="/">{t("libraryHub.myDecks")}</Link>
         </nav>
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
       <div className="space-y-10">
-        <StructuredCourseLibrarySection source="official" />
-        <OfficialFlashcardDeckLibrarySection />
-        <StructuredCourseLibrarySection source="community" />
-        <CommunityFlashcardDeckLibrarySection />
+        <StructuredCourseLibrarySection
+          source="official"
+          language={filter}
+          selectedLanguage={language}
+        />
+        <OfficialFlashcardDeckLibrarySection
+          language={filter}
+          selectedLanguage={language}
+        />
+        <StructuredCourseLibrarySection
+          source="community"
+          language={filter}
+          selectedLanguage={language}
+        />
+        <CommunityFlashcardDeckLibrarySection
+          language={filter}
+          selectedLanguage={language}
+        />
       </div>
     </main>
   );

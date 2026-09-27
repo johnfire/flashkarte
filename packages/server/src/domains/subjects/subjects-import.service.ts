@@ -72,6 +72,7 @@ export async function importSubject(userId: string, input: unknown) {
       userId,
       data.title,
       data.description ?? null,
+      data.locale ?? null,
     );
     const idBySlug = new Map<string, string>();
     for (const concept of data.concepts) {

@@ -7,6 +7,10 @@ import type { CourseSummary } from "../api/types";
 import "../i18n";
 import { CoursesPage } from "./CoursesPage";
 
+vi.mock("../hooks/use-content-language", () => ({
+  useContentLanguage: () => ({ language: "all", choose: vi.fn() }),
+}));
+
 vi.mock("../api/client", async (importOriginal) => ({
   ...(await importOriginal<typeof import("../api/client")>()),
   api: {

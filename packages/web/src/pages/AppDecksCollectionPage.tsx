@@ -1,25 +1,29 @@
 import { useCallback, useState } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError, reportClientError, BrowseParams } from "../api/client";
 import { OfficialDeck } from "../api/types";
 import { usePaginatedList } from "../hooks/use-paginated-list";
 import { OfficialDeckRow } from "./OfficialDeckRow";
+import { contentLanguageLabel } from "../components/ContentLanguageSwitcher";
 
 export function AppDecksCollectionPage() {
   const { t } = useTranslation();
+  const location = useLocation();
   const { id } = useParams<{ id: string }>();
   const [q, setQ] = useState("");
   const [subscribingId, setSubscribingId] = useState<string | null>(null);
   const [addingAll, setAddingAll] = useState(false);
   const [title, setTitle] = useState<string | null>(null);
   const [description, setDescription] = useState<string | null>(null);
+  const [contentLanguage, setContentLanguage] = useState<string | null>(null);
 
   const loadDecks = useCallback(
     async (params: BrowseParams) => {
       const collection = await api.decks.getCollection(id!, params);
       setTitle(collection.title);
       setDescription(collection.description);
+      setContentLanguage(collection.content_language ?? null);
       return collection.decks;
     },
     [id],
@@ -81,7 +85,7 @@ export function AppDecksCollectionPage() {
     <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6">
         <Link
-          to="/app-decks"
+          to={`/library/official/decks${location.search}`}
           className="mb-2 inline-block text-sm text-gray-500 dark:text-gray-400"
         >
           {t("decks.backToAppDecks")}
@@ -90,6 +94,11 @@ export function AppDecksCollectionPage() {
           <div>
             <h1 className="text-3xl font-bold">
               {title ?? t("common.loading")}
+              {contentLanguageLabel(contentLanguage) && (
+                <span className="ml-2 text-sm font-normal">
+                  {contentLanguageLabel(contentLanguage)}
+                </span>
+              )}
             </h1>
             {description && (
               <p className="text-gray-600 dark:text-gray-300">{description}</p>

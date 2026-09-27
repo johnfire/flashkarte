@@ -10,6 +10,16 @@
     "impressum": "Impressum",
     "help": "Hilfe"
   },
+  "contentLanguage": {
+    "all": "Alle",
+    "label": "Erklärungssprache",
+    "choose": "Sprache wählen",
+    "emptyCourses": "Noch keine Kurse auf {{language}}.",
+    "emptyDecks": "Noch keine Kartensätze auf {{language}}.",
+    "showAll": "Alle anzeigen",
+    "saveError": "Die Sprache konnte nicht gespeichert werden.",
+    "hiddenCount": "{{count}} Einträge durch diesen Filter ausgeblendet"
+  },
   "auth": {
     "signInToAccount": "Melde dich bei deinem Konto an",
     "createAccount": "Konto erstellen",

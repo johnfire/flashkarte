@@ -8,7 +8,17 @@ import { LearnPage } from "./LearnPage";
 
 vi.mock("../api/client", async (importOriginal) => ({
   ...(await importOriginal<typeof import("../api/client")>()),
-  api: { learn: { subjects: vi.fn(), setPublic: vi.fn() } },
+  api: {
+    contentLanguages: {
+      list: vi.fn().mockResolvedValue({}),
+      save: vi.fn().mockResolvedValue({}),
+    },
+    learn: {
+      subjects: vi.fn(),
+      setPublic: vi.fn(),
+      setContentLanguage: vi.fn(),
+    },
+  },
 }));
 const subjects = api.learn.subjects as unknown as ReturnType<typeof vi.fn>;
 const setPublic = api.learn.setPublic as unknown as ReturnType<typeof vi.fn>;
@@ -106,5 +116,40 @@ describe("LearnPage", () => {
       </MemoryRouter>,
     );
     expect(await screen.findByText(/No courses yet/)).toBeTruthy();
+  });
+
+  test("filters owned courses by explanation language", async () => {
+    subjects.mockResolvedValue([
+      {
+        id: "en",
+        user_id: "owner-1",
+        title: "English course",
+        locale: "en",
+        description: null,
+        is_public: false,
+        is_official: false,
+        concept_count: 0,
+      },
+      {
+        id: "ar",
+        user_id: "owner-1",
+        title: "Arabic course",
+        locale: "ar",
+        description: null,
+        is_public: false,
+        is_official: false,
+        concept_count: 0,
+      },
+    ]);
+    render(
+      <MemoryRouter>
+        <LearnPage />
+      </MemoryRouter>,
+    );
+    expect(await screen.findByText("English course")).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "العربية" }));
+    expect(screen.queryByText("English course")).not.toBeInTheDocument();
+    expect(screen.getByText("Arabic course")).toBeInTheDocument();
+    expect(api.contentLanguages.save).toHaveBeenCalledWith("courses", "ar");
   });
 });

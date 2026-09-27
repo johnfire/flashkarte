@@ -8,7 +8,12 @@ export const create = wrapAsync(async (req: Request, res: Response) => {
     ? req.file.buffer.toString("utf8")
     : req.body.markdown;
   const filename = req.file ? req.file.originalname : (req.body.title ?? null);
-  const deck = await service.importDeck(req.userId!, markdown, filename);
+  const deck = await service.importDeck(
+    req.userId!,
+    markdown,
+    filename,
+    req.body.contentLanguage,
+  );
   await auditFromRequest(
     req,
     "deck.created",
@@ -19,6 +24,7 @@ export const create = wrapAsync(async (req: Request, res: Response) => {
     {
       title: deck.title,
       cardCount: deck.card_count,
+      contentLanguage: deck.content_language,
     },
   );
   res.status(201).json(deck);
@@ -158,6 +164,7 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
     speechBackLang: req.body.speechBackLang,
     speechAutoplay: req.body.speechAutoplay,
     speechRate: req.body.speechRate,
+    contentLanguage: req.body.contentLanguage,
   });
   await auditFromRequest(
     req,
@@ -175,6 +182,7 @@ export const update = wrapAsync(async (req: Request, res: Response) => {
       speechBackLang: updated.speech_back_lang,
       speechAutoplay: updated.speech_autoplay,
       speechRate: updated.speech_rate,
+      contentLanguage: updated.content_language,
     },
   );
   res.json(updated);

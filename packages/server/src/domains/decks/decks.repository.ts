@@ -2,6 +2,7 @@ import { query, queryOne, withTransaction } from "../../db/client";
 import { ParsedCard, ParsedOption, CardSense } from "@flashkarte/shared";
 import type { PoolClient } from "pg";
 import { escapeLike, categoryFilterSql } from "../library/library.repository";
+import { ValidationError } from "../../utils/errors";
 
 export interface DeckRow {
   id: string;
@@ -13,6 +14,7 @@ export interface DeckRow {
   is_public: boolean;
   is_official: boolean;
   is_ordered: boolean;
+  content_language: string | null;
   speech_enabled: boolean | null;
   speech_front_lang: string | null;
   speech_back_lang: string | null;
@@ -29,7 +31,7 @@ export const SYSTEM_ACCOUNT_ID = "00000000-0000-4000-8000-000000000000";
 const SPEECH_COLS =
   "speech_enabled, speech_front_lang, speech_back_lang, speech_autoplay, speech_rate";
 
-const DECK_COLS = `id, reference_number, title, source_filename, created_at, updated_at, is_public, is_official, is_ordered, ${SPEECH_COLS}`;
+const DECK_COLS = `id, reference_number, title, source_filename, created_at, updated_at, is_public, is_official, is_ordered, content_language, ${SPEECH_COLS}`;
 
 // A caller may read a deck/card they don't own when it's official and they've
 // opted in. Shared by every read-path query below; `$N` is the caller's
@@ -83,13 +85,14 @@ export function createDeckWithCards(
   title: string,
   sourceFilename: string | null,
   cards: ParsedCard[],
+  contentLanguage: string | null = null,
 ) {
   return withTransaction(async (client) => {
     const res = await client.query<DeckRow>(
-      `INSERT INTO decks (user_id, title, source_filename)
-       VALUES ($1, $2, $3)
+      `INSERT INTO decks (user_id, title, source_filename, content_language)
+       VALUES ($1, $2, $3, $4)
        RETURNING ${DECK_COLS}`,
-      [userId, title, sourceFilename],
+      [userId, title, sourceFilename, contentLanguage],
     );
     const deck = res.rows[0];
     await insertCardsBatch(client, userId, deck.id, cards, 0);
@@ -279,7 +282,7 @@ export interface DeckListRow extends DeckRow {
 
 export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
-    `SELECT d.id, d.reference_number, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered,
+    `SELECT d.id, d.reference_number, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered, d.content_language,
        d.speech_enabled, d.speech_front_lang, d.speech_back_lang, d.speech_autoplay, d.speech_rate,
        s.total AS card_count,
        s.due AS due_count,
@@ -364,6 +367,18 @@ export function setDeckPublic(userId: string, id: string, isPublic: boolean) {
   );
 }
 
+export function setDeckContentLanguage(
+  userId: string,
+  id: string,
+  language: string,
+) {
+  return queryOne<DeckRow>(
+    `UPDATE decks SET content_language = $1, updated_at = now()
+     WHERE id = $2 AND user_id = $3 RETURNING ${DECK_COLS}`,
+    [language, id, userId],
+  );
+}
+
 /** The deck-level speech overrides a caller may set. Null means "inherit". */
 export interface DeckSpeechPatch {
   speech_enabled?: boolean | null;
@@ -430,6 +445,7 @@ export interface OfficialDeckRow {
   card_count: string;
   subscribed: boolean;
   category_id: string | null;
+  content_language: string | null;
 }
 
 /**
@@ -444,13 +460,14 @@ export function listStandaloneOfficial(
   limit: number,
   offset: number,
   categoryId?: string | null,
+  language?: string,
 ) {
   const term = q === null ? null : escapeLike(q);
   const values: unknown[] = [userId, term];
   const categoryClause = categoryFilterSql("d.category_id", categoryId, values);
-  values.push(limit, offset);
+  values.push(language ?? null, limit, offset);
   return query<OfficialDeckRow>(
-    `SELECT d.id, d.reference_number, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
+    `SELECT d.id, d.reference_number, d.title, d.created_at, d.category_id, d.content_language, count(c.*) AS card_count,
        EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1
@@ -460,6 +477,7 @@ export function listStandaloneOfficial(
      WHERE d.is_official AND d.collection_id IS NULL
        AND ($2::text IS NULL OR d.title ILIKE '%' || $2 || '%' ESCAPE '\\')
        AND (${categoryClause})
+       AND ($${values.length - 2}::text IS NULL OR d.content_language = $${values.length - 2})
      GROUP BY d.id
      ORDER BY d.title COLLATE de_phonebook ASC
      LIMIT $${values.length - 1} OFFSET $${values.length}`,
@@ -474,6 +492,7 @@ export interface CollectionRow {
   created_at: string;
   deck_count: string;
   category_id: string | null;
+  content_language: string | null;
 }
 
 /** Official-deck collections, searchable and paginated — the primary browse view. */
@@ -482,6 +501,7 @@ export function listOfficialCollections(
   limit: number,
   offset: number,
   categoryId?: string | null,
+  language?: string,
 ) {
   const term = q === null ? null : escapeLike(q);
   const values: unknown[] = [term];
@@ -490,14 +510,15 @@ export function listOfficialCollections(
     categoryId,
     values,
   );
-  values.push(limit, offset);
+  values.push(language ?? null, limit, offset);
   return query<CollectionRow>(
-    `SELECT dc.id, dc.title, dc.description, dc.created_at, dc.category_id,
+    `SELECT dc.id, dc.title, dc.description, dc.created_at, dc.category_id, dc.content_language,
        count(d.*) AS deck_count
      FROM deck_collections dc
      LEFT JOIN decks d ON d.collection_id = dc.id AND d.is_official
      WHERE ($1::text IS NULL OR dc.title ILIKE '%' || $1 || '%' ESCAPE '\\')
        AND (${categoryClause})
+       AND ($${values.length - 2}::text IS NULL OR dc.content_language = $${values.length - 2})
      GROUP BY dc.id
      ORDER BY dc.title COLLATE de_phonebook ASC
      LIMIT $${values.length - 1} OFFSET $${values.length}`,
@@ -506,8 +527,13 @@ export function listOfficialCollections(
 }
 
 export function getCollection(id: string) {
-  return queryOne<{ id: string; title: string; description: string | null }>(
-    "SELECT id, title, description FROM deck_collections WHERE id = $1",
+  return queryOne<{
+    id: string;
+    title: string;
+    description: string | null;
+    content_language: string | null;
+  }>(
+    "SELECT id, title, description, content_language FROM deck_collections WHERE id = $1",
     [id],
   );
 }
@@ -522,7 +548,7 @@ export function listCollectionDecks(
 ) {
   const term = q === null ? null : escapeLike(q);
   return query<OfficialDeckRow>(
-    `SELECT d.id, d.reference_number, d.title, d.created_at, d.category_id, count(c.*) AS card_count,
+    `SELECT d.id, d.reference_number, d.title, d.created_at, d.category_id, d.content_language, count(c.*) AS card_count,
        EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1
@@ -593,15 +619,35 @@ export async function unsubscribeOfficial(
 async function findOrCreateCollection(
   client: PoolClient,
   title: string,
+  language: string,
 ): Promise<string> {
-  const existing = await client.query<{ id: string }>(
-    "SELECT id FROM deck_collections WHERE title = $1",
-    [title],
-  );
-  if (existing.rowCount && existing.rowCount > 0) return existing.rows[0].id;
+  const existing = await client.query<{
+    id: string;
+    content_language: string | null;
+  }>("SELECT id, content_language FROM deck_collections WHERE title = $1", [
+    title,
+  ]);
+  if (existing.rowCount && existing.rowCount > 0) {
+    const collection = existing.rows[0];
+    if (
+      collection.content_language &&
+      collection.content_language !== language
+    ) {
+      throw new ValidationError(
+        "A collection can only contain one explanation language",
+      );
+    }
+    if (!collection.content_language) {
+      await client.query(
+        "UPDATE deck_collections SET content_language = $2 WHERE id = $1",
+        [collection.id, language],
+      );
+    }
+    return collection.id;
+  }
   const created = await client.query<{ id: string }>(
-    "INSERT INTO deck_collections (title) VALUES ($1) RETURNING id",
-    [title],
+    "INSERT INTO deck_collections (title, content_language) VALUES ($1, $2) RETURNING id",
+    [title, language],
   );
   return created.rows[0].id;
 }
@@ -622,15 +668,34 @@ export function promoteToOfficial(
   collectionTitle?: string | null,
 ) {
   return withTransaction(async (client) => {
+    const source = await client.query<{
+      content_language: string | null;
+      is_official: boolean;
+    }>(
+      "SELECT content_language, is_official FROM decks WHERE id = $1 FOR UPDATE",
+      [deckId],
+    );
+    if (!source.rows[0]) return null;
+    if (!source.rows[0].is_official && !source.rows[0].content_language) {
+      throw new ValidationError(
+        "Choose an explanation language before publishing",
+      );
+    }
     let collectionAssignment = "";
     const values: unknown[] = [deckId, SYSTEM_ACCOUNT_ID];
     if (collectionTitle === null) {
       collectionAssignment =
         ", collection_id = NULL, collection_position = NULL";
     } else if (collectionTitle !== undefined) {
+      if (!source.rows[0].content_language) {
+        throw new ValidationError(
+          "Choose an explanation language before adding a collection",
+        );
+      }
       const collectionId = await findOrCreateCollection(
         client,
         collectionTitle,
+        source.rows[0].content_language,
       );
       const maxPos = await client.query<{ max: number | null }>(
         "SELECT max(collection_position) AS max FROM decks WHERE collection_id = $1",

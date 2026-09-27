@@ -74,6 +74,7 @@ describe("subject MCP tools", () => {
     mockApi.post.mockResolvedValue({ concept_count: 2 });
     await setup().import_subject({
       title: "Transformers",
+      locale: "en",
       concepts: [
         {
           slug: "token",
@@ -89,6 +90,7 @@ describe("subject MCP tools", () => {
     expect(mockApi.post).toHaveBeenCalledWith("/api/subjects/import", {
       title: "Transformers",
       description: undefined,
+      locale: "en",
       concepts: [
         { slug: "token", name: "Token", kind: "term", cards: [CARD_18] },
         { slug: "embedding", name: "Embedding", kind: "idea", cards: [] },

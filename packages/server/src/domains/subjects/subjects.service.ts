@@ -9,6 +9,10 @@ import {
 import { getPool, withTransaction } from "../../db/client";
 import { NotFoundError, ValidationError } from "../../utils/errors";
 import { parse } from "../../utils/validate";
+import {
+  contentLanguageSchema,
+  contentLanguageFilterSchema,
+} from "../library/content-language";
 import * as repo from "./subjects.repository";
 import * as conceptsRepo from "./concepts.repository";
 import {
@@ -52,10 +56,15 @@ export async function createSubject(
   userId: string,
   titleInput: unknown,
   descriptionInput: unknown = null,
+  localeInput?: unknown,
 ) {
   const title = parse(titleSchema, titleInput);
   const description = parse(descriptionSchema, descriptionInput ?? null);
-  return repo.insertSubject(getPool(), userId, title, description);
+  const locale =
+    localeInput === undefined
+      ? null
+      : parse(contentLanguageSchema, localeInput);
+  return repo.insertSubject(getPool(), userId, title, description, locale);
 }
 
 /** Promote an existing subject into a course family's canonical edition. */
@@ -183,8 +192,12 @@ export function listSubjects(userId: string) {
   return repo.listSubjects(userId);
 }
 
-export function listCatalogSubjects(official: boolean) {
-  return repo.listCatalogSubjects(official);
+export function listCatalogSubjects(
+  official: boolean,
+  languageInput?: unknown,
+) {
+  const language = parse(contentLanguageFilterSchema, languageInput);
+  return repo.listCatalogSubjects(official, language);
 }
 
 export async function getSubject(userId: string, id: string) {
@@ -210,7 +223,12 @@ export async function getSubject(userId: string, id: string) {
 export async function updateSubject(
   userId: string,
   id: string,
-  patch: { title?: unknown; description?: unknown; isPublic?: unknown },
+  patch: {
+    title?: unknown;
+    description?: unknown;
+    isPublic?: unknown;
+    locale?: unknown;
+  },
 ) {
   const current = await requireOwnedSubject(userId, id);
   if (current.is_official && patch.isPublic !== undefined) {
@@ -229,7 +247,16 @@ export async function updateSubject(
         : current.description,
     is_public:
       typeof patch.isPublic === "boolean" ? patch.isPublic : current.is_public,
+    locale:
+      patch.locale !== undefined
+        ? parse(contentLanguageSchema, patch.locale)
+        : current.locale,
   };
+  if (next.is_public && !current.is_public && !next.locale) {
+    throw new ValidationError(
+      "Choose an explanation language before publishing",
+    );
+  }
   const updated = await repo.writeSubject(id, next);
   if (!updated) throw new NotFoundError("Subject not found");
   return updated;

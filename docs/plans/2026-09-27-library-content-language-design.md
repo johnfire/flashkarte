@@ -1,7 +1,6 @@
 # Library content languages — proposal and build plan
 
-_Date: 2026-09-27 · Status: draft, updated after Chris's language-switcher decisions;
-implementation has not started._
+_Date: 2026-09-27 · Status: implemented locally; awaiting push and deployment._
 
 ## Goal
 
@@ -12,12 +11,12 @@ about the content, independent of the language of the Flashkarte interface. A
 course teaching German with Arabic explanations belongs under Arabic. The
 language being taught can be described separately later.
 
-## Current state
+## State before implementation
 
 - `/library` contains official/community structured courses and official/community
   flashcard decks. Both deck sections also contain deck collections.
-- `/learn` is the current My Courses page and `/` is My Decks. Their lists are
-  currently loaded without a content-language filter. `/courses` is a legacy
+- `/learn` is the My Courses page and `/` is My Decks. Their lists were
+  loaded without a content-language filter. `/courses` is a legacy
   overview that remains available for older bookmarks.
 - Course editions already have `subjects.locale`, but only courses assigned to a
   `course_family` have it. The subject catalogue omits this field from its
@@ -144,15 +143,11 @@ the catalogue grows.
 - Run focused tests, typecheck, lint, format check, and relevant builds. Commit
   the implementation on `main`; push only when Chris requests it.
 
-## Decisions to settle before implementation
+## Future extensions
 
-1. **Future languages:** should authors be able to use any valid BCP-47 code,
-   or should catalogue languages be restricted to `en`, `de`, and `ar` until
-   more content exists? The first version above uses the three known codes.
-2. **Publication rule:** after existing content is labelled, require a language
-   before new content becomes public, or permit “Unspecified” under All. A
-   required value gives cleaner filtering; an unspecified state eases migration.
-3. **Mixed-language collections:** if the instructions are mostly Arabic but
+1. **Future languages:** extend the three supported choices when new teaching
+   languages are added to the catalogue.
+2. **Mixed-language collections:** if the instructions are mostly Arabic but
    cards contain German examples, label the collection Arabic. If a collection
    has genuinely mixed teaching languages, decide whether to split it or offer
    multiple language tags in a later iteration.
@@ -164,3 +159,8 @@ the catalogue grows.
 - The switcher belongs on Library, My Courses, and My Decks.
 - A page selects one language at a time, with All as an option. Its selection
   stays separate from the other pages' selections.
+- Newly published courses and decks require an explanation language. Existing
+  items with uncertain language remain under All until an author assigns one.
+- The first release supports English, German, and Arabic. The migration
+  classifies clear existing content after inspecting lesson summaries and card
+  backs; the Smoke Test deck remains unlabelled.

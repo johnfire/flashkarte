@@ -166,8 +166,16 @@ describe("subjects and concepts", () => {
     });
     expect(await subjects.listCatalogSubjects(false)).toEqual([]);
 
-    await subjects.updateSubject(OWNER_ID, subject.id, { isPublic: true });
+    await expect(
+      subjects.updateSubject(OWNER_ID, subject.id, { isPublic: true }),
+    ).rejects.toThrow("Choose an explanation language");
+    await subjects.updateSubject(OWNER_ID, subject.id, {
+      locale: "en",
+      isPublic: true,
+    });
     expect(await subjects.listCatalogSubjects(false)).toHaveLength(1);
+    expect(await subjects.listCatalogSubjects(false, "en")).toHaveLength(1);
+    expect(await subjects.listCatalogSubjects(false, "de")).toHaveLength(0);
 
     await getPool().query(
       "UPDATE subjects SET is_official = true WHERE id = $1",

@@ -5,6 +5,7 @@ import { api, ApiError, reportClientError } from "../api/client";
 import { CourseDetail, DeckWithCounts } from "../api/types";
 import { useAsync } from "../hooks/use-async";
 import { CourseDeckRow } from "./CourseDeckRow";
+import { CourseContentLanguageField } from "./CourseContentLanguageField";
 
 export function CourseDetailPage() {
   const { t } = useTranslation();
@@ -71,9 +72,13 @@ export function CourseDetailPage() {
     setCourse((c) => (c ? { ...c, is_public: next } : c));
     try {
       await api.courses.setPublic(course.id, next);
-    } catch {
+    } catch (failure) {
       setCourse((c) => (c ? { ...c, is_public: !next } : c));
-      window.alert(t("courses.togglePublicError"));
+      window.alert(
+        failure instanceof ApiError
+          ? failure.message
+          : t("courses.togglePublicError"),
+      );
     }
   }
 
@@ -122,6 +127,16 @@ export function CourseDetailPage() {
         </div>
       </div>
 
+      <CourseContentLanguageField
+        courseId={course.id}
+        value={course.content_language}
+        onSaved={(language) =>
+          setCourse((current) =>
+            current ? { ...current, content_language: language } : current,
+          )
+        }
+      />
+
       <h1 className="mb-1 text-2xl font-bold">
         {course.title}
         {course.reference_number !== undefined && (
@@ -150,6 +165,7 @@ export function CourseDetailPage() {
       {availableDecks.length > 0 && (
         <form onSubmit={onAddDeck} className="flex gap-2">
           <select
+            aria-label={t("courses.addDeckPlaceholder")}
             value={selectedDeckId}
             onChange={(e) => setSelectedDeckId(e.target.value)}
             className="flex-1 rounded-lg border px-3 py-2"

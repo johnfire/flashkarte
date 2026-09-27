@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { get, post, patch, del } from "../api";
 import { asText, runTool } from "./tool-runner";
+import { CONTENT_LANGUAGES } from "@flashkarte/shared";
 
 const MARKDOWN_HELP =
   "Markdown deck format — one `# Title` line, optional `## Category` lines to " +
@@ -153,17 +154,24 @@ export function registerDeckTools(server: McpServer) {
         .describe(
           "Optional: attach this deck to an existing flashcard deck collection as its next unit.",
         ),
+      content_language: z
+        .enum(CONTENT_LANGUAGES)
+        .optional()
+        .describe(
+          "Language used to explain the deck: en, de, or ar. Required before publishing.",
+        ),
       ...speechShape,
     },
-    async ({ markdown, title, course_id, ...speech }) =>
+    async ({ markdown, title, course_id, content_language, ...speech }) =>
       runTool("create_deck", async () => {
         const deck = await post<{ id: string }>("/api/decks", {
           markdown,
           title,
+          contentLanguage: content_language,
         });
         const warnings: string[] = [];
 
-        // Creation takes Markdown only, so the speech settings and the
+        // Creation accepts Markdown and explanation language; speech settings and the
         // course attachment are applied as follow-up calls. A failure in
         // either must not lose the deck: report it alongside the created
         // deck rather than throwing.
@@ -332,6 +340,25 @@ export function registerDeckTools(server: McpServer) {
     async ({ deck_id }) =>
       runTool("get_deck", async () =>
         asText(await get(`/api/decks/${encodeURIComponent(deck_id)}`)),
+      ),
+  );
+
+  server.tool(
+    "set_deck_content_language",
+    "Set the language used to explain a deck. Choose this before sharing the deck publicly.",
+    {
+      deck_id: z.string().uuid().describe("The deck's UUID."),
+      content_language: z
+        .enum(CONTENT_LANGUAGES)
+        .describe("English (en), German (de), or Arabic (ar)."),
+    },
+    async ({ deck_id, content_language }) =>
+      runTool("set_deck_content_language", async () =>
+        asText(
+          await patch(`/api/decks/${encodeURIComponent(deck_id)}`, {
+            contentLanguage: content_language,
+          }),
+        ),
       ),
   );
 

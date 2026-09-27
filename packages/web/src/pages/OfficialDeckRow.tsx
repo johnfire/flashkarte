@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { OfficialDeck } from "../api/types";
+import { contentLanguageLabel } from "../components/ContentLanguageSwitcher";
 
 interface OfficialDeckRowProps {
   deck: OfficialDeck;
@@ -15,6 +16,11 @@ export function OfficialDeckRow({ deck, busy, onAdd }: OfficialDeckRowProps) {
       <div>
         <p className="font-medium">
           {deck.title}
+          {contentLanguageLabel(deck.content_language) && (
+            <span className="ml-2 text-xs font-normal">
+              {contentLanguageLabel(deck.content_language)}
+            </span>
+          )}
           {deck.reference_number !== undefined && (
             <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
               #{deck.reference_number}

@@ -4,6 +4,11 @@ import { useTranslation } from "react-i18next";
 import { api } from "../api/client";
 import type { LearnSubject } from "../api/learn-types";
 import { useAsync } from "../hooks/use-async";
+import {
+  ContentLanguageSwitcher,
+  contentLanguageLabel,
+} from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 
 export function CourseCatalogPage() {
   const { t } = useTranslation();
@@ -11,8 +16,13 @@ export function CourseCatalogPage() {
     source: "official" | "community";
   }>();
   const navigate = useNavigate();
+  const { language, choose } = useContentLanguage("library");
+  const filter = language === "all" ? undefined : language;
   const [enrollingId, setEnrollingId] = useState<string | null>(null);
-  const loadCourses = useCallback(() => api.learn.catalog(source), [source]);
+  const loadCourses = useCallback(
+    () => api.learn.catalog(source, filter),
+    [source, filter],
+  );
   const {
     data: courses,
     loading,
@@ -36,10 +46,14 @@ export function CourseCatalogPage() {
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex justify-between">
         <h1 className="text-3xl font-bold">{title}</h1>
-        <Link to="/library" className="text-sm text-indigo-600">
+        <Link
+          to={`/library?language=${language}`}
+          className="text-sm text-indigo-600"
+        >
           {t("libraryHub.title")}
         </Link>
       </header>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
       {loading && <p>{t("common.loading")}</p>}
       {Boolean(error) && (
         <p role="alert" className="text-red-600">
@@ -51,6 +65,11 @@ export function CourseCatalogPage() {
           <li key={course.id} className="rounded-lg border p-4">
             <h2 className="font-medium">
               {course.title}
+              {contentLanguageLabel(course.locale) && (
+                <span className="ml-2 text-xs font-normal">
+                  {contentLanguageLabel(course.locale)}
+                </span>
+              )}
               {course.reference_number !== undefined && (
                 <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
                   #{course.reference_number}

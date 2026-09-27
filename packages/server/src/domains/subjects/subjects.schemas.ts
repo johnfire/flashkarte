@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { contentLanguageSchema } from "../library/content-language";
 import {
   CONCEPT_KINDS,
   CONCEPT_TIERS,
@@ -82,6 +83,7 @@ export const edgeSchema = z
   });
 
 export const importSchema = z.object({
+  locale: contentLanguageSchema.optional(),
   title: titleSchema,
   description: descriptionSchema.nullish(),
   concepts: z
