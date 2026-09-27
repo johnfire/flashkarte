@@ -1,13 +1,11 @@
 export function getSiteOrigin(): string {
-  return (
-    process.env.SITE_ORIGIN ?? "https://flashkarte.christopherrehm.de"
-  ).replace(/\/$/, "");
+  return (process.env.SITE_ORIGIN ?? "https://learnwohl.app").replace(
+    /\/$/,
+    "",
+  );
 }
 
-/** The hosted MCP endpoint, as advertised to AI agents in /llms.txt. */
-export function getMcpPublicUrl(): string {
-  return (
-    process.env.MCP_PUBLIC_URL ??
-    "https://mcp.flashkarte.christopherrehm.de/mcp"
-  );
+/** Advertise MCP only after a public endpoint has been configured. */
+export function getMcpPublicUrl(): string | undefined {
+  return process.env.MCP_PUBLIC_URL?.trim() || undefined;
 }

@@ -3,13 +3,13 @@ import request from "supertest";
 import { mountSeo } from "./mount";
 import { deckSlug } from "@flashkarte/shared";
 
-const TEMPLATE = `<!doctype html><html><head><title>flashkarte</title></head><body><div id="root"></div></body></html>`;
+const TEMPLATE = `<!doctype html><html><head><title>LearnWohl</title></head><body><div id="root"></div></body></html>`;
 
 function app() {
   const a = express();
   mountSeo(a, {
     template: TEMPLATE,
-    sitemapUrls: () => [{ loc: "https://flashkarte.christopherrehm.de/" }],
+    sitemapUrls: () => [{ loc: "https://learnwohl.app/" }],
   });
   return a;
 }
@@ -24,9 +24,7 @@ describe("mountSeo", () => {
   });
   it("GET /privacy injects privacy canonical", async () => {
     const res = await request(app()).get("/privacy");
-    expect(res.text).toContain(
-      'href="https://flashkarte.christopherrehm.de/privacy"',
-    );
+    expect(res.text).toContain('href="https://learnwohl.app/privacy"');
   });
   it("GET /welcome 301-redirects to /", async () => {
     const res = await request(app()).get("/welcome");
@@ -54,7 +52,7 @@ function deckApp() {
   const a = express();
   mountSeo(a, {
     template: TEMPLATE,
-    sitemapUrls: () => [{ loc: "https://flashkarte.christopherrehm.de/" }],
+    sitemapUrls: () => [{ loc: "https://learnwohl.app/" }],
     getDeckPreview: async (id: string) => (id === PREVIEW.id ? PREVIEW : null),
   });
   return a;

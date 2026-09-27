@@ -10,4 +10,4 @@ Disallow: /verify-email
 Disallow: /forgot-password
 Disallow: /reset-password
 
-Sitemap: https://flashkarte.christopherrehm.de/sitemap.xml
+Sitemap: https://learnwohl.app/sitemap.xml

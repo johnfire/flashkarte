@@ -1,65 +1,74 @@
 # Deployment
 
-flashkarte deploys to the VPS via **GitHub Actions → GHCR → SSH**. On every push
+LearnWohl deploys to the VPS via **GitHub Actions → GHCR → SSH**. On every push
 to `main`, CI runs the test suite, builds the **app** and **mcp** Docker images,
-pushes them to the GitHub Container Registry, then SSHes to the VPS and restarts
-the stack from the freshly-pulled images. The VPS itself never builds — it only
-pulls.
+and pushes them to the GitHub Container Registry. The deploy job SSHes to the
+VPS and updates the stack in `/opt/learnwohl`. The VPS itself never builds — it
+only pulls. `/opt/flashkarte` is retired and CI must not enter it.
 
-The stack (defined in `docker-compose.prod.yml`) is: one **app** container
-(Express, serves the built web SPA + `/api`), one **mcp** container (hosted MCP
-server), a **postgres** container, and a daily **db-backup** sidecar. The app and
-mcp publish only to `127.0.0.1` (`${APP_PORT:-8090}` / `${MCP_PORT:-8091}`); the
-VPS's **Apache** front proxy terminates TLS and reverse-proxies the public
-hostnames to them.
+The stack (defined in `docker-compose.prod.yml`) has an **app** container
+(Express, serving the built web SPA + `/api`), a **postgres** container, and a
+daily **db-backup** sidecar. The **mcp** container is selected explicitly when
+its new hostname is ready. Containers publish only to `127.0.0.1`; the VPS's
+**Apache** front proxy terminates TLS and reverse-proxies the public hostnames.
 
-| Public hostname                     | → localhost | Container |
-| ----------------------------------- | ----------- | --------- |
-| `flashkarte.christopherrehm.de`     | `8090`      | app       |
-| `mcp.flashkarte.christopherrehm.de` | `8091`      | mcp       |
+| Public hostname  | → localhost | Container |
+| ---------------- | ----------- | --------- |
+| `learnwohl.app`  | `8096`      | app       |
 
 > **Going live is a deliberate one-time setup** (DNS + VPS bootstrap + secrets +
 > Apache vhosts + certbot). After that, deploys are automatic on push to `main`.
 
 ## Images
 
-CI builds two images and tags each with `:latest` and `:<commit-sha>`:
+CI builds two images and tags each with `:latest` and `:<commit-sha>`. Their
+registry names retain `flashkarte` until the code and package names are
+separately migrated:
 
 - `ghcr.io/johnfire/flashkarte-app` (Dockerfile target `production`)
 - `ghcr.io/johnfire/flashkarte-mcp` (Dockerfile target `mcp`)
 
-Both packages are **public**, so the VPS pulls without authenticating. (They
-contain no secrets — secrets are injected at runtime from `.env`.) After the
-first CI build creates them, set each package's visibility to Public once in the
-GitHub package settings.
+The workflow logs in to GHCR with its short-lived GitHub token before pulling.
+Images contain no runtime secrets; those are injected from the VPS `.env`.
 
 ## One-time VPS bootstrap
 
 ```bash
 ssh claude@82.165.32.162
-sudo git clone https://github.com/johnfire/flashkarte.git /opt/flashkarte
-sudo chown -R claude:claude /opt/flashkarte
-cd /opt/flashkarte
+sudo git clone https://github.com/johnfire/flashkarte.git /opt/learnwohl
+sudo chown -R claude:claude /opt/learnwohl
+cd /opt/learnwohl
 cp .env.example .env && nano .env        # fill in the values below
 ```
 
 `.env` (never committed):
 
 - `POSTGRES_PASSWORD` — `openssl rand -hex 24`
+- `POSTGRES_DB=learnwohl` and `POSTGRES_USER=learnwohl` — match the existing
+  LearnWohl database. The Compose defaults are `flashkarte` for compatibility.
+- `POSTGRES_VOLUME_NAME=learnwohl_learnwohl_pgdata` and
+  `POSTGRES_VOLUME_EXTERNAL=true` — reuse the existing live database volume.
+  For a genuinely new installation, choose a new volume name and set
+  `POSTGRES_VOLUME_EXTERNAL=false` so Compose creates it.
 - `JWT_SECRET` — `openssl rand -hex 32`
-- `NGINX_HOST` — `flashkarte.christopherrehm.de` (drives `CORS_ORIGIN`)
-- `FLASHKARTE_LOG_PATH` — a host path under `~/logs/`, e.g. `/home/claude/logs/flashkarte`
-- `APP_PORT` — `8090`
-- `MCP_PORT` — `8091`
+- `NGINX_HOST=learnwohl.app` (drives `CORS_ORIGIN`)
+- `APP_URL=https://learnwohl.app`
+- `FLASHKARTE_LOG_PATH=/home/claude/logs/learnwohl` — the variable name remains
+  for compatibility with the current Compose file.
+- `APP_PORT=8096`
 - `TZ` — `Europe/Berlin`
+
+`/opt/learnwohl` is already a Git checkout on the current VPS. Its `.env`,
+database volume, backup directory, and previous hand-built Compose file were
+preserved during bootstrap. Do not replace its `.env` with `.env.example`.
 
 First deploy (subsequent ones are automatic via CI):
 
 ```bash
 export IMAGE_TAG=latest
-docker compose -f docker-compose.prod.yml pull
-docker compose -f docker-compose.prod.yml up -d
-curl http://127.0.0.1:8090/health        # -> {"status":"ok"}
+docker compose -f docker-compose.prod.yml pull app db db-backup
+docker compose -f docker-compose.prod.yml up -d app db db-backup
+curl http://127.0.0.1:8096/health        # -> {"status":"ok"}
 ```
 
 Migrations run automatically on app startup (idempotent).
@@ -80,63 +89,53 @@ Set these in the repo (Settings → Secrets and variables → Actions) so the
 
 ## Apache reverse proxy + TLS
 
-Two vhosts (same pattern as the other apps on this VPS), then certbot issues the
-certs and rewrites them to `:443`.
+The app vhost terminates TLS for `learnwohl.app` and `www.learnwohl.app` and
+proxies to loopback port `8096`. It is already enabled on the current VPS.
 
-`/etc/apache2/sites-available/flashkarte.conf`:
-
-```apache
-<VirtualHost *:80>
-    ServerName flashkarte.christopherrehm.de
-    ProxyPreserveHost On
-    ProxyPass / http://localhost:8090/
-    ProxyPassReverse / http://localhost:8090/
-    ErrorLog ${APACHE_LOG_DIR}/flashkarte-error.log
-    CustomLog ${APACHE_LOG_DIR}/flashkarte-access.log combined
-</VirtualHost>
-```
-
-`/etc/apache2/sites-available/mcp.flashkarte.conf`:
+`/etc/apache2/sites-available/learnwohl.conf`:
 
 ```apache
 <VirtualHost *:80>
-    ServerName mcp.flashkarte.christopherrehm.de
+    ServerName learnwohl.app
+    ServerAlias www.learnwohl.app
     ProxyPreserveHost On
-    ProxyPass / http://localhost:8091/
-    ProxyPassReverse / http://localhost:8091/
-    ErrorLog ${APACHE_LOG_DIR}/mcp-flashkarte-error.log
-    CustomLog ${APACHE_LOG_DIR}/mcp-flashkarte-access.log combined
+    ProxyPass /.well-known/acme-challenge/ !
+    ProxyPass / http://localhost:8096/
+    ProxyPassReverse / http://localhost:8096/
+    ErrorLog /var/log/apache2/learnwohl/web-error.log
+    CustomLog /var/log/apache2/learnwohl/web-access.log combined
 </VirtualHost>
 ```
 
-```bash
-sudo a2ensite flashkarte mcp.flashkarte
-sudo apache2ctl configtest && sudo systemctl reload apache2
-sudo certbot --apache \
-  -d flashkarte.christopherrehm.de -d mcp.flashkarte.christopherrehm.de \
-  --non-interactive --agree-tos -m christopher.rehm.63@protonmail.com
-```
+MCP needs its own DNS name, Apache vhost, TLS certificate, port, and
+`MCP_BASE_URL` before its profile is enabled. Once it is live, set
+`MCP_PUBLIC_URL` in the app environment and wire `VITE_MCP_URL` into the web
+image build so Settings can display it. Until then, the site does not advertise
+an MCP URL.
 
 ## Rollback
 
 Each deploy pins images to a commit SHA. To roll back, on the VPS:
 
 ```bash
-cd /opt/flashkarte
+cd /opt/learnwohl
 export IMAGE_TAG=<previous-sha>
-docker compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml pull app
+docker compose -f docker-compose.prod.yml up -d app db db-backup
 ```
 
-(Or re-run the GitHub Actions `deploy` job from an earlier green commit.)
+The deploy job checks that the VPS checkout matches its GitHub commit, so an
+older workflow run is not a rollback mechanism after `main` has advanced.
 
 ## Logs
 
-The master log is JSON-lines at `${FLASHKARTE_LOG_PATH}/flashkarte.log`.
+The master log is JSON-lines at `${FLASHKARTE_LOG_PATH}/flashkarte.log` (the
+filename remains from the earlier app name).
 Unhandled server errors and all client-error reports (`POST /api/client-errors`
 from web/Android) land here:
 
 ```bash
-tail -f ~/logs/flashkarte/flashkarte.log
+tail -f ~/logs/learnwohl/flashkarte.log
 ```
 
 The log contains structured request IDs. MCP tool logs forward the same

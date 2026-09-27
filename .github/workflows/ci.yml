@@ -204,7 +204,7 @@ jobs:
           cache-from: type=gha,scope=mcp
           cache-to: type=gha,scope=mcp,mode=max
 
-  # Pull the freshly-built images on the VPS and restart the stack.
+  # Deploy the app to LearnWohl. MCP is built but not started on this site.
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-push
@@ -226,13 +226,24 @@ jobs:
           envs: GHCR_TOKEN,GHCR_USER
           script: |
             set -euo pipefail
-            cd /opt/flashkarte
+            cd /opt/learnwohl
             git pull --ff-only
+            test "$(git rev-parse HEAD)" = "${{ github.sha }}"
+            # Refuse a deploy that would attach the app to the retired database
+            # or create a fresh empty volume in place of the live one.
+            grep -qx 'NGINX_HOST=learnwohl.app' .env
+            grep -qx 'APP_PORT=8096' .env
+            grep -qx 'POSTGRES_DB=learnwohl' .env
+            grep -qx 'POSTGRES_USER=learnwohl' .env
+            grep -qx 'POSTGRES_VOLUME_NAME=learnwohl_learnwohl_pgdata' .env
+            grep -qx 'POSTGRES_VOLUME_EXTERNAL=true' .env
+            docker volume inspect learnwohl_learnwohl_pgdata >/dev/null
+            docker compose -f docker-compose.prod.yml config --quiet
             # Log in to GHCR with the workflow's ephemeral token (images are private).
             echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
             export IMAGE_TAG=${{ github.sha }}
-            docker compose -f docker-compose.prod.yml pull
-            docker compose -f docker-compose.prod.yml up -d
+            docker compose -f docker-compose.prod.yml pull app db db-backup
+            docker compose -f docker-compose.prod.yml up -d app db db-backup
             docker logout ghcr.io
             docker image prune -f
             echo "Deployed IMAGE_TAG=${IMAGE_TAG}"

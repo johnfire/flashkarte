@@ -3,9 +3,9 @@ import { staticMeta, metaToHeadHtml } from "./meta";
 describe("staticMeta", () => {
   it("home has absolute canonical and WebApplication JSON-LD", () => {
     const m = staticMeta("/");
-    expect(m.canonical).toBe("https://flashkarte.christopherrehm.de/");
+    expect(m.canonical).toBe("https://learnwohl.app/");
     expect(m.og.url).toBe(m.canonical);
-    expect(m.og.image).toBe("https://flashkarte.christopherrehm.de/og.png");
+    expect(m.og.image).toBe("https://learnwohl.app/og.png");
     expect(m.jsonLd).toMatchObject({ "@type": "WebApplication" });
     expect(m.title).toBe("LearnWohl — Flashcard decks and full custom courses");
     expect(m.description).toBe(
@@ -15,14 +15,14 @@ describe("staticMeta", () => {
   });
   it("privacy and impressum have their own canonical, no JSON-LD", () => {
     expect(staticMeta("/privacy").canonical).toBe(
-      "https://flashkarte.christopherrehm.de/privacy",
+      "https://learnwohl.app/privacy",
     );
     expect(staticMeta("/impressum").jsonLd).toBeUndefined();
   });
   it("guide has its own title and canonical, no JSON-LD", () => {
     const m = staticMeta("/guide");
     expect(m.title).toContain("Guide");
-    expect(m.canonical).toBe("https://flashkarte.christopherrehm.de/guide");
+    expect(m.canonical).toBe("https://learnwohl.app/guide");
     expect(m.jsonLd).toBeUndefined();
   });
 });

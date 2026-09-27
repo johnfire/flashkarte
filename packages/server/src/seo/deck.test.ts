@@ -15,9 +15,7 @@ const P: DeckPreview = {
 describe("deckMeta", () => {
   it("builds canonical from deckPath and a synthesized description", () => {
     const m = deckMeta(P);
-    expect(m.canonical).toBe(
-      `https://flashkarte.christopherrehm.de/d/spanish-basics-${P.id}`,
-    );
+    expect(m.canonical).toBe(`https://learnwohl.app/d/spanish-basics-${P.id}`);
     expect(m.title).toContain("Spanish Basics");
     expect(m.description).toContain("2 flashcards");
     expect(m.description).toContain("hola");

@@ -1,4 +1,4 @@
-import { describe, test, expect, vi, beforeEach } from "vitest";
+import { describe, test, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
@@ -69,6 +69,8 @@ describe("SettingsPage", () => {
     mockUser = null;
   });
 
+  afterEach(() => vi.unstubAllEnvs());
+
   test("generating a key shows the raw value once", async () => {
     mockApi.keys.list.mockResolvedValue([]);
     mockApi.keys.create.mockResolvedValue({
@@ -134,17 +136,21 @@ describe("SettingsPage", () => {
     expect(within(script).getByText("Full access")).toBeInTheDocument();
   });
 
-  test("shows the MCP server URL to connect an AI client", async () => {
-    mockApi.keys.list.mockResolvedValue([]);
-    renderPage();
-    expect(await screen.findByText(/\/mcp$/)).toBeInTheDocument();
-  });
-
-  test("shows the configured MCP connect URL", async () => {
+  test("does not advertise an unconfigured MCP server", async () => {
     mockApi.keys.list.mockResolvedValue([]);
     renderPage();
     expect(
-      await screen.findByText(/mcp\.flashkarte\.christopherrehm\.de\/mcp/),
+      await screen.findByText("The LearnWohl MCP connection is being set up."),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("MCP server URL:")).not.toBeInTheDocument();
+  });
+
+  test("shows the configured MCP connect URL", async () => {
+    vi.stubEnv("VITE_MCP_URL", "https://mcp.learnwohl.app/mcp");
+    mockApi.keys.list.mockResolvedValue([]);
+    renderPage();
+    expect(
+      await screen.findByText("https://mcp.learnwohl.app/mcp"),
     ).toBeInTheDocument();
   });
 

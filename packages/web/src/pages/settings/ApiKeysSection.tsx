@@ -5,12 +5,9 @@ import { api, ApiError } from "../../api/client";
 import type { ApiKey, ApiKeyScope, CreatedApiKey } from "../../api/types";
 import { KeyAccessChoice, KeyScopeBadge } from "./KeyAccess";
 
-const MCP_URL =
-  import.meta.env.VITE_MCP_URL ??
-  "https://mcp.flashkarte.christopherrehm.de/mcp";
-
 export function ApiKeysSection() {
   const { t } = useTranslation();
+  const mcpUrl = import.meta.env.VITE_MCP_URL?.trim();
   const [keys, setKeys] = useState<ApiKey[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newName, setNewName] = useState("My AI");
@@ -66,15 +63,24 @@ export function ApiKeysSection() {
       <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
         {t("settings.connectAIHint")}
       </p>
-      <p className="mb-2 text-sm">
-        {t("settings.mcpUrlLabel")}{" "}
-        <code className="rounded bg-gray-100 px-1.5 py-0.5 dark:bg-gray-700">
-          {MCP_URL}
-        </code>
-      </p>
-      <p className="mb-2 text-sm text-gray-600 dark:text-gray-300">
-        {t("settings.claudeAiHint")} <em>{t("settings.claudeAiExample")}</em>
-      </p>
+      {mcpUrl ? (
+        <>
+          <p className="mb-2 text-sm">
+            {t("settings.mcpUrlLabel")}{" "}
+            <code className="rounded bg-gray-100 px-1.5 py-0.5 dark:bg-gray-700">
+              {mcpUrl}
+            </code>
+          </p>
+          <p className="mb-2 text-sm text-gray-600 dark:text-gray-300">
+            {t("settings.claudeAiHint")}{" "}
+            <em>{t("settings.claudeAiExample")}</em>
+          </p>
+        </>
+      ) : (
+        <p className="mb-2 text-sm text-gray-600 dark:text-gray-300">
+          {t("settings.mcpUnavailable")}
+        </p>
+      )}
       <p className="mb-4 text-sm text-gray-500 dark:text-gray-400">
         <Trans
           i18nKey="settings.aiLearnMore"

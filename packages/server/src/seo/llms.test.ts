@@ -18,7 +18,7 @@ describe("buildLlmsTxt", () => {
   const text = buildLlmsTxt(site);
 
   it("starts with the llms.txt title and summary", () => {
-    expect(text.startsWith("# flashkarte\n\n> ")).toBe(true);
+    expect(text.startsWith("# LearnWohl\n\n> ")).toBe(true);
   });
 
   it("explains the MCP connection and where clients register", () => {
@@ -39,5 +39,12 @@ describe("buildLlmsTxt", () => {
     const empty = buildLlmsTxt({ ...site, decks: [] });
     expect(empty).not.toContain("## Public decks");
     expect(empty).toContain("## Optional");
+  });
+
+  it("does not advertise an MCP endpoint until one is configured", () => {
+    const withoutMcp = buildLlmsTxt({ ...site, mcpUrl: undefined });
+    expect(withoutMcp).not.toContain("## For AI agents");
+    expect(withoutMcp).not.toContain("mcp.fk.test");
+    expect(withoutMcp).toContain("## Public decks");
   });
 });
