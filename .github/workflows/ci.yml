@@ -259,6 +259,12 @@ jobs:
               sleep 3
             done
             curl -fsS http://127.0.0.1:8096/health >/dev/null
+            for attempt in $(seq 1 30); do
+              if curl -fsS http://127.0.0.1:8097/health >/dev/null 2>&1; then
+                break
+              fi
+              sleep 3
+            done
             curl -fsS http://127.0.0.1:8097/health >/dev/null
             curl -fsS https://learnwohl.app/.well-known/oauth-authorization-server | python3 -c 'import json,sys; metadata=json.load(sys.stdin); assert metadata["issuer"] == "https://learnwohl.app"; assert metadata["token_endpoint"] == "https://learnwohl.app/oauth/token"'
             test "$(curl -s -o /dev/null -w '%{http_code}' https://learnwohl.app/mcp)" = 401
