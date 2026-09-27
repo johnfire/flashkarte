@@ -184,6 +184,7 @@ jobs:
         with:
           context: .
           target: production
+          build-args: VITE_MCP_URL=https://learnwohl.app/mcp
           push: true
           tags: |
             ghcr.io/johnfire/flashkarte-app:latest
@@ -204,7 +205,7 @@ jobs:
           cache-from: type=gha,scope=mcp
           cache-to: type=gha,scope=mcp,mode=max
 
-  # Deploy the app to LearnWohl. MCP is built but not started on this site.
+  # Deploy the app and same-domain MCP service to LearnWohl.
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-push
@@ -238,13 +239,19 @@ jobs:
             grep -qx 'POSTGRES_VOLUME_NAME=learnwohl_learnwohl_pgdata' .env
             grep -qx 'POSTGRES_VOLUME_EXTERNAL=true' .env
             grep -Eq '^COMPOSE_FILE=docker-compose\.(pre-git|prod)\.yml$' .env
+            grep -qx 'MCP_BASE_URL=https://learnwohl.app' .env
+            grep -qx 'MCP_PUBLIC_URL=https://learnwohl.app/mcp' .env
+            grep -qx 'MCP_PORT=8097' .env
+            grep -qx 'MCP_OAUTH_CLIENT_ID=learnwohl-app-mcp' .env
+            grep -Eq '^MCP_JWT_SECRET=.{32,}$' .env
+            grep -qx 'COMPOSE_PROFILES=mcp' .env
             docker volume inspect learnwohl_learnwohl_pgdata >/dev/null
-            docker compose -f docker-compose.prod.yml config --quiet
+            docker compose --profile mcp -f docker-compose.prod.yml config --quiet
             # Log in to GHCR with the workflow's ephemeral token (images are private).
             echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
             export IMAGE_TAG=${{ github.sha }}
-            docker compose -f docker-compose.prod.yml pull app db db-backup
-            docker compose -f docker-compose.prod.yml up -d app db db-backup
+            docker compose --profile mcp -f docker-compose.prod.yml pull app mcp db db-backup
+            docker compose --profile mcp -f docker-compose.prod.yml up -d app mcp db db-backup
             for attempt in $(seq 1 30); do
               if curl -fsS http://127.0.0.1:8096/health >/dev/null 2>&1; then
                 break
@@ -252,6 +259,9 @@ jobs:
               sleep 3
             done
             curl -fsS http://127.0.0.1:8096/health >/dev/null
+            curl -fsS http://127.0.0.1:8097/health >/dev/null
+            curl -fsS https://learnwohl.app/.well-known/oauth-authorization-server | python3 -c 'import json,sys; metadata=json.load(sys.stdin); assert metadata["issuer"] == "https://learnwohl.app"; assert metadata["token_endpoint"] == "https://learnwohl.app/oauth/token"'
+            test "$(curl -s -o /dev/null -w '%{http_code}' https://learnwohl.app/mcp)" = 401
             sed -i 's/^COMPOSE_FILE=.*/COMPOSE_FILE=docker-compose.prod.yml/' .env
             docker logout ghcr.io
             docker image prune -f

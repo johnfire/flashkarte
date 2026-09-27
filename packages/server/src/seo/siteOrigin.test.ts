@@ -26,7 +26,7 @@ describe("public site URLs", () => {
     delete process.env.MCP_PUBLIC_URL;
     expect(getMcpPublicUrl()).toBeUndefined();
 
-    process.env.MCP_PUBLIC_URL = "  https://mcp.learnwohl.app/mcp  ";
-    expect(getMcpPublicUrl()).toBe("https://mcp.learnwohl.app/mcp");
+    process.env.MCP_PUBLIC_URL = "  https://learnwohl.app/mcp  ";
+    expect(getMcpPublicUrl()).toBe("https://learnwohl.app/mcp");
   });
 });

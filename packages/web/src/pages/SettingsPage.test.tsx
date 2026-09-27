@@ -146,11 +146,11 @@ describe("SettingsPage", () => {
   });
 
   test("shows the configured MCP connect URL", async () => {
-    vi.stubEnv("VITE_MCP_URL", "https://mcp.learnwohl.app/mcp");
+    vi.stubEnv("VITE_MCP_URL", "https://learnwohl.app/mcp");
     mockApi.keys.list.mockResolvedValue([]);
     renderPage();
     expect(
-      await screen.findByText("https://mcp.learnwohl.app/mcp"),
+      await screen.findByText("https://learnwohl.app/mcp"),
     ).toBeInTheDocument();
   });
 

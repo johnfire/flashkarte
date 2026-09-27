@@ -8,13 +8,14 @@ only pulls. `/opt/flashkarte` is retired and CI must not enter it.
 
 The stack (defined in `docker-compose.prod.yml`) has an **app** container
 (Express, serving the built web SPA + `/api`), a **postgres** container, and a
-daily **db-backup** sidecar. The **mcp** container is selected explicitly when
-its new hostname is ready. Containers publish only to `127.0.0.1`; the VPS's
-**Apache** front proxy terminates TLS and reverse-proxies the public hostnames.
+daily **db-backup** sidecar. The **mcp** container serves AI clients on the same
+domain. Containers publish only to `127.0.0.1`; the VPS's **Apache** front proxy
+terminates TLS and routes requests by path.
 
-| Public hostname  | → localhost | Container |
-| ---------------- | ----------- | --------- |
-| `learnwohl.app`  | `8096`      | app       |
+| Public path on `learnwohl.app`                         | → localhost | Container |
+| ----------------------------------------------------- | ----------- | --------- |
+| `/` and app routes                                    | `8096`      | app       |
+| `/mcp`, `/oauth/*`, `/.well-known/oauth-*`             | `8097`      | mcp       |
 
 > **Going live is a deliberate one-time setup** (DNS + VPS bootstrap + secrets +
 > Apache vhosts + certbot). After that, deploys are automatic on push to `main`.
@@ -56,6 +57,11 @@ cp .env.example .env && nano .env        # fill in the values below
 - `FLASHKARTE_LOG_PATH=/home/claude/logs/learnwohl` — the variable name remains
   for compatibility with the current Compose file.
 - `APP_PORT=8096`
+- `MCP_PORT=8097`, `MCP_BASE_URL=https://learnwohl.app`, and
+  `MCP_PUBLIC_URL=https://learnwohl.app/mcp`
+- `MCP_OAUTH_CLIENT_ID=learnwohl-app-mcp` and a fresh `MCP_JWT_SECRET` from
+  `openssl rand -hex 32`. Existing clients must reconnect to the new endpoint.
+- `COMPOSE_PROFILES=mcp` — include MCP in manual Compose commands.
 - `COMPOSE_FILE=docker-compose.prod.yml` — use the production file for manual
   `docker compose` commands on a new VPS installation.
 - `TZ` — `Europe/Berlin`
@@ -73,9 +79,10 @@ First deploy (subsequent ones are automatic via CI):
 
 ```bash
 export IMAGE_TAG=latest
-docker compose -f docker-compose.prod.yml pull app db db-backup
-docker compose -f docker-compose.prod.yml up -d app db db-backup
+docker compose --profile mcp -f docker-compose.prod.yml pull app mcp db db-backup
+docker compose --profile mcp -f docker-compose.prod.yml up -d app mcp db db-backup
 curl http://127.0.0.1:8096/health        # -> {"status":"ok"}
+curl http://127.0.0.1:8097/health        # -> ok
 ```
 
 Migrations run automatically on app startup (idempotent).
@@ -96,8 +103,13 @@ Set these in the repo (Settings → Secrets and variables → Actions) so the
 
 ## Apache reverse proxy + TLS
 
-The app vhost terminates TLS for `learnwohl.app` and `www.learnwohl.app` and
-proxies to loopback port `8096`. It is already enabled on the current VPS.
+The vhosts terminate TLS for `learnwohl.app` and `www.learnwohl.app`. Their
+specific MCP paths must appear before the catch-all app proxy. The same routing
+belongs in both HTTP and HTTPS vhosts; Certbot's HTTP redirect still sends
+clients to HTTPS.
+On the current VPS, `sites-enabled/learnwohl-le-ssl.conf` is a regular file,
+not a symlink. Keep it and `sites-available/learnwohl-le-ssl.conf` synchronized;
+the enabled file also contains the existing analytics injection rule.
 
 `/etc/apache2/sites-available/learnwohl.conf`:
 
@@ -107,6 +119,14 @@ proxies to loopback port `8096`. It is already enabled on the current VPS.
     ServerAlias www.learnwohl.app
     ProxyPreserveHost On
     ProxyPass /.well-known/acme-challenge/ !
+    ProxyPass /.well-known/oauth-protected-resource http://127.0.0.1:8097/.well-known/oauth-protected-resource
+    ProxyPassReverse /.well-known/oauth-protected-resource http://127.0.0.1:8097/.well-known/oauth-protected-resource
+    ProxyPass /.well-known/oauth-authorization-server http://127.0.0.1:8097/.well-known/oauth-authorization-server
+    ProxyPassReverse /.well-known/oauth-authorization-server http://127.0.0.1:8097/.well-known/oauth-authorization-server
+    ProxyPass /oauth/ http://127.0.0.1:8097/oauth/
+    ProxyPassReverse /oauth/ http://127.0.0.1:8097/oauth/
+    ProxyPass /mcp http://127.0.0.1:8097/mcp
+    ProxyPassReverse /mcp http://127.0.0.1:8097/mcp
     ProxyPass / http://localhost:8096/
     ProxyPassReverse / http://localhost:8096/
     ErrorLog /var/log/apache2/learnwohl/web-error.log
@@ -114,11 +134,8 @@ proxies to loopback port `8096`. It is already enabled on the current VPS.
 </VirtualHost>
 ```
 
-MCP needs its own DNS name, Apache vhost, TLS certificate, port, and
-`MCP_BASE_URL` before its profile is enabled. Once it is live, set
-`MCP_PUBLIC_URL` in the app environment and wire `VITE_MCP_URL` into the web
-image build so Settings can display it. Until then, the site does not advertise
-an MCP URL.
+The app image build sets `VITE_MCP_URL=https://learnwohl.app/mcp` for Settings.
+The server reads `MCP_PUBLIC_URL` at runtime for `/llms.txt`.
 
 ## Rollback
 
@@ -127,8 +144,8 @@ Each deploy pins images to a commit SHA. To roll back, on the VPS:
 ```bash
 cd /opt/learnwohl
 export IMAGE_TAG=<previous-sha>
-docker compose -f docker-compose.prod.yml pull app
-docker compose -f docker-compose.prod.yml up -d app db db-backup
+docker compose --profile mcp -f docker-compose.prod.yml pull app mcp
+docker compose --profile mcp -f docker-compose.prod.yml up -d app mcp db db-backup
 ```
 
 The deploy job checks that the VPS checkout matches its GitHub commit, so an

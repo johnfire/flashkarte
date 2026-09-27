@@ -1,6 +1,8 @@
 # ---- build (all workspaces) ----
 FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS build
 WORKDIR /app
+ARG VITE_MCP_URL
+ENV VITE_MCP_URL=${VITE_MCP_URL}
 COPY package.json package-lock.json ./
 COPY packages/shared/package.json packages/shared/
 COPY packages/server/package.json packages/server/

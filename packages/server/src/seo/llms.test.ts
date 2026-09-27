@@ -2,7 +2,7 @@ import { buildLlmsTxt } from "./llms";
 
 const site = {
   origin: "https://fk.test",
-  mcpUrl: "https://mcp.fk.test/mcp",
+  mcpUrl: "https://fk.test/mcp",
   decks: [
     {
       title: "Spanish [Basics]\nPart 1",
@@ -22,8 +22,8 @@ describe("buildLlmsTxt", () => {
   });
 
   it("explains the MCP connection and where clients register", () => {
-    expect(text).toContain("`https://mcp.fk.test/mcp`");
-    expect(text).toContain("`https://mcp.fk.test/oauth/register`");
+    expect(text).toContain("`https://fk.test/mcp`");
+    expect(text).toContain("`https://fk.test/oauth/register`");
     expect(text).toContain("2FA code");
     expect(text).toContain("An agent should ask its person to sign up");
   });
@@ -44,7 +44,7 @@ describe("buildLlmsTxt", () => {
   it("does not advertise an MCP endpoint until one is configured", () => {
     const withoutMcp = buildLlmsTxt({ ...site, mcpUrl: undefined });
     expect(withoutMcp).not.toContain("## For AI agents");
-    expect(withoutMcp).not.toContain("mcp.fk.test");
+    expect(withoutMcp).not.toContain("/mcp");
     expect(withoutMcp).toContain("## Public decks");
   });
 });
