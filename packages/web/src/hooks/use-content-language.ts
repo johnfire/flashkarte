@@ -14,7 +14,7 @@ function validChoice(value: string | null): ContentLanguageChoice | null {
 export function useContentLanguage(page: ContentPage) {
   const { user } = useAuth();
   const userId = user?.id;
-  const isVerified = user?.emailVerifiedAt !== null;
+  const isVerified = Boolean(user?.emailVerifiedAt);
   const [searchParams, setSearchParams] = useSearchParams();
   const explicit = validChoice(searchParams.get("language"));
   const [saved, setSaved] = useState<ContentLanguageChoice>("all");

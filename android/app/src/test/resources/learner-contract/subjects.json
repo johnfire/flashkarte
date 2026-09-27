@@ -8,6 +8,7 @@
     "is_public": false,
     "is_official": false,
     "version": 2,
+    "locale": null,
     "created_at": "<time>",
     "updated_at": "<time>",
     "concept_count": 1

@@ -141,8 +141,10 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
 }) => {
   await signUpVerifyAndSignIn(page, `e2e-learn-${Date.now()}@example.com`);
   const api = await apiAsSignedInUser(page);
+  const subjectTitle = `Transformers e2e ${Date.now()}`;
   const subject = await api.send("POST", "/subjects", {
-    title: "Transformers e2e",
+    title: subjectTitle,
+    locale: "en",
   });
   for (const [slug, name] of [
     ["token", "Token"],
@@ -182,15 +184,11 @@ test("learn a lesson in the browser: read, miss on purpose, be re-taught, pass, 
     .click();
   await expect(page.getByText("In Community", { exact: true })).toBeVisible();
   await page.goto("/library");
-  await expect(
-    page.getByRole("heading", { name: "Transformers e2e" }),
-  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: subjectTitle })).toBeVisible();
   await expectNoAxeViolations(page, "the Library");
   await page.goto("/learn");
-  await page.getByRole("link", { name: /Transformers e2e/ }).click();
-  await expect(
-    page.getByRole("heading", { name: "Transformers e2e" }),
-  ).toBeVisible();
+  await page.getByRole("link", { name: subjectTitle }).click();
+  await expect(page.getByRole("heading", { name: subjectTitle })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Input side" })).toBeVisible();
   const row = (title: string) =>
     page

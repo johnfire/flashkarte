@@ -1,6 +1,7 @@
 import fs from "fs";
 import { test, expect } from "@playwright/test";
 import { MAIL_SINK } from "./playwright.config";
+import { declineAnalytics } from "./support";
 
 // End-to-end coverage for editing an existing card in place (front/back/
 // category), the flow that used to require deleting and recreating a card
@@ -23,6 +24,7 @@ test("editing a card's front, back, and category persists the change", async ({
   const email = `e2e-edit-card-${Date.now()}@example.com`;
   const password = "E2ePassword-1";
 
+  await declineAnalytics(page);
   await page.goto("/login?mode=signup");
   await page.getByLabel("Email").fill(email);
   await page
