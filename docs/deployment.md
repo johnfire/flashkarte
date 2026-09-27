@@ -56,11 +56,18 @@ cp .env.example .env && nano .env        # fill in the values below
 - `FLASHKARTE_LOG_PATH=/home/claude/logs/learnwohl` — the variable name remains
   for compatibility with the current Compose file.
 - `APP_PORT=8096`
+- `COMPOSE_FILE=docker-compose.prod.yml` — use the production file for manual
+  `docker compose` commands on a new VPS installation.
 - `TZ` — `Europe/Berlin`
 
 `/opt/learnwohl` is already a Git checkout on the current VPS. Its `.env`,
 database volume, backup directory, and previous hand-built Compose file were
 preserved during bootstrap. Do not replace its `.env` with `.env.example`.
+Its `.env` currently has `COMPOSE_FILE=docker-compose.pre-git.yml`, so plain
+`docker compose` commands use the preserved live configuration instead of the
+repository's development `docker-compose.yml`. After a successful CI deploy and
+health check, the deploy job changes that value to `docker-compose.prod.yml`.
+CI always specifies `-f docker-compose.prod.yml` explicitly.
 
 First deploy (subsequent ones are automatic via CI):
 
