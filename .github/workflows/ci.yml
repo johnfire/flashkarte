@@ -204,6 +204,10 @@ jobs:
           labels: org.opencontainers.image.source=https://github.com/johnfire/flashkarte
           cache-from: type=gha,scope=mcp
           cache-to: type=gha,scope=mcp,mode=max
+      - name: Smoke test MCP image imports
+        run: |
+          docker pull ghcr.io/johnfire/flashkarte-mcp:${{ github.sha }}
+          docker run --rm --entrypoint node ghcr.io/johnfire/flashkarte-mcp:${{ github.sha }} -e "require('./dist/tools/decks')"
 
   # Deploy the app and same-domain MCP service to LearnWohl.
   deploy:

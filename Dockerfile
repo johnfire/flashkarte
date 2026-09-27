@@ -47,6 +47,7 @@ CMD ["node", "dist/server.js"]
 FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS mcpdeps
 WORKDIR /app
 COPY package.json package-lock.json ./
+COPY packages/shared/package.json packages/shared/
 COPY packages/mcp/package.json packages/mcp/
 RUN npm ci --omit=dev --workspace=packages/mcp
 
@@ -55,6 +56,8 @@ FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=mcpdeps /app/node_modules ./node_modules
+COPY --from=build /app/packages/shared/dist ./node_modules/@flashkarte/shared/dist
+COPY --from=build /app/packages/shared/package.json ./node_modules/@flashkarte/shared/package.json
 COPY --from=build /app/packages/mcp/dist ./packages/mcp/dist
 WORKDIR /app/packages/mcp
 # Drop root. /data holds the persisted OAuth store (a named volume in

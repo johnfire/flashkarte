@@ -12,6 +12,7 @@
     "import-lessons": "node dist/cli/import-lessons.js"
   },
   "dependencies": {
+    "@flashkarte/shared": "0.1.0",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "dotenv": "^17.4.2",
     "express": "^4.19.2",
