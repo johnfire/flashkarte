@@ -31,7 +31,9 @@ vi.mock("../api/client", () => ({
 }));
 
 vi.mock("../auth/AuthContext", () => ({
-  useAuth: () => ({ user: { id: "library-reader" } }),
+  useAuth: () => ({
+    user: { id: "library-reader", emailVerifiedAt: "2026-01-01T00:00:00Z" },
+  }),
 }));
 
 const learnApi = api.learn as unknown as {

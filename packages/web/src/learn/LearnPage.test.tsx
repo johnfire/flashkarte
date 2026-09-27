@@ -24,7 +24,9 @@ const subjects = api.learn.subjects as unknown as ReturnType<typeof vi.fn>;
 const setPublic = api.learn.setPublic as unknown as ReturnType<typeof vi.fn>;
 
 vi.mock("../auth/AuthContext", () => ({
-  useAuth: () => ({ user: { id: "owner-1" } }),
+  useAuth: () => ({
+    user: { id: "owner-1", emailVerifiedAt: "2026-01-01T00:00:00Z" },
+  }),
 }));
 beforeEach(() => vi.clearAllMocks());
 
