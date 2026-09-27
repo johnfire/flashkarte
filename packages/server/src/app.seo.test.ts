@@ -114,7 +114,7 @@ describe("production deck SEO wiring", () => {
     const res = await request(app()).get("/llms.txt");
     expect(res.status).toBe(200);
     expect(res.headers["content-type"]).toBe("text/plain; charset=utf-8");
-    expect(res.text).toContain("# flashkarte");
+    expect(res.text).toContain("# LearnWohl");
     expect(res.text).toContain(`/d/${deckSlug(PREVIEW.title, PREVIEW.id)}`);
   });
 });
