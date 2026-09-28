@@ -49,7 +49,15 @@ describe("auth routes", () => {
 
     expect(res.status).toBe(200);
     expect(res.body.accessToken).toBe("tok");
-    expect(mock.login).toHaveBeenCalledWith("a@b.com", "password123", true);
+    expect(mock.login).toHaveBeenCalledWith(
+      "a@b.com",
+      "password123",
+      true,
+      expect.objectContaining({
+        browser: "other",
+        platform: "other",
+      }),
+    );
   });
 
   test("POST /api/auth/login without rememberMe -> session cookie (no Max-Age)", async () => {

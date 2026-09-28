@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { wrapAsync } from "../../utils/wrapAsync";
 import { record, userActor } from "../audit/audit.service";
 import * as service from "./auth.service";
+import { loginSecurityContext } from "./login-security-context";
 
 const REFRESH_COOKIE = "fk_refresh";
 
@@ -43,6 +44,7 @@ export const login = wrapAsync(async (req: Request, res: Response) => {
     req.body.email,
     req.body.password,
     req.body.rememberMe,
+    loginSecurityContext(req),
   );
   if (result.requiresTwoFactor) {
     // Password verified but no session yet — the client must present a
@@ -61,6 +63,7 @@ export const twoFactorLogin = wrapAsync(async (req: Request, res: Response) => {
       req.body.challenge,
       req.body.code,
       req.body.rememberMe,
+      loginSecurityContext(req),
     );
   if (usedBackupCode) {
     await record({

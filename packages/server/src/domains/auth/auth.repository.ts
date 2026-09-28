@@ -163,11 +163,17 @@ export function storeRefreshToken(
   tokenHash: string,
   expiresAt: Date,
   persistent: boolean,
+  client?: PoolClient,
 ) {
-  return query(
-    "INSERT INTO refresh_tokens (user_id, token_hash, expires_at, persistent) VALUES ($1, $2, $3, $4)",
-    [userId, tokenHash, expiresAt, persistent],
-  );
+  const sql = `INSERT INTO refresh_tokens (user_id, token_hash, expires_at, persistent)
+    VALUES ($1, $2, $3, $4) RETURNING id`;
+  const params = [userId, tokenHash, expiresAt, persistent];
+  if (client) {
+    return client
+      .query<{ id: string }>(sql, params)
+      .then((response) => response.rows[0]);
+  }
+  return queryOne<{ id: string }>(sql, params);
 }
 
 /**

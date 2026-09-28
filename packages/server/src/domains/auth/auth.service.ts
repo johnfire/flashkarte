@@ -25,10 +25,12 @@ import {
 } from "../../email/mailer";
 import { withTransaction } from "../../db/client";
 import { logger } from "../../utils/logger";
-import { record, userActor } from "../audit/audit.service";
+import { anonymousActor, record, userActor } from "../audit/audit.service";
 import * as twoFactor from "../account/twoFactor.service";
 import * as repo from "./auth.repository";
 import type { UserRow } from "./auth.repository";
+import type { LoginSecurityContext } from "./login-security-context";
+import type { PoolClient } from "pg";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -52,6 +54,11 @@ export const REFRESH_TOKEN_TTL_DAYS = 90;
 const VERIFICATION_TOKEN_TTL_HOURS = 24;
 const PASSWORD_RESET_TOKEN_TTL_HOURS = 1;
 const EMAIL_CHANGE_TOKEN_TTL_HOURS = 24;
+const UNKNOWN_LOGIN_SECURITY_CONTEXT: LoginSecurityContext = {
+  sourceIp: null,
+  browser: "other",
+  platform: "other",
+};
 const verificationTokenSchema = z
   .string({ error: "Verification token is required" })
   .min(1, "Verification token is required");
@@ -189,17 +196,78 @@ function hashToken(token: string): string {
   return crypto.createHash("sha256").update(token).digest("hex");
 }
 
-async function issueTokens(userId: string, email: string, persistent: boolean) {
+async function issueTokens(
+  userId: string,
+  email: string,
+  persistent: boolean,
+  client?: PoolClient,
+) {
   const accessToken = signAccessToken(userId, email);
   const rawRefresh = crypto.randomBytes(32).toString("hex");
   const expiresAt = new Date(Date.now() + REFRESH_TOKEN_TTL_DAYS * 86400_000);
-  await repo.storeRefreshToken(
+  const session = await repo.storeRefreshToken(
     userId,
     hashToken(rawRefresh),
     expiresAt,
     persistent,
+    client,
   );
-  return { accessToken, rawRefresh, persistent };
+  if (!session) throw new Error("Failed to create login session");
+  return { accessToken, rawRefresh, persistent, sessionId: session.id };
+}
+
+type LoginAuthenticationMethod =
+  "password" | "two_factor" | "password_totp" | "password_backup_code";
+
+function loginAuditState(
+  context: LoginSecurityContext,
+  method: LoginAuthenticationMethod,
+  sessionId?: string,
+) {
+  return {
+    authenticationMethod: method,
+    sourceIp: context.sourceIp,
+    browser: context.browser,
+    platform: context.platform,
+    ...(sessionId ? { sessionId } : {}),
+  };
+}
+
+async function recordFailedLogin(
+  userId: string | null,
+  context: LoginSecurityContext,
+  method: "password" | "two_factor",
+): Promise<void> {
+  await record({
+    actor: userId ? userActor(userId) : anonymousActor(),
+    action: "auth.login_failed",
+    targetType: userId ? "user" : undefined,
+    targetId: userId ?? undefined,
+    outcome: "failure",
+    afterState: loginAuditState(context, method),
+  });
+}
+
+async function issueLoginTokens(
+  user: UserRow,
+  persistent: boolean,
+  context: LoginSecurityContext,
+  method: LoginAuthenticationMethod,
+) {
+  return withTransaction(async (client) => {
+    const tokens = await issueTokens(user.id, user.email, persistent, client);
+    await record(
+      {
+        actor: userActor(user.id),
+        action: "auth.login_succeeded",
+        targetType: "user",
+        targetId: user.id,
+        afterState: loginAuditState(context, method, tokens.sessionId),
+      },
+      client,
+    );
+    return tokens;
+  });
 }
 
 const credentialsSchema = z.object({
@@ -377,6 +445,7 @@ export async function login(
   emailIn: unknown,
   passwordIn: unknown,
   rememberMeIn: unknown,
+  context: LoginSecurityContext = UNKNOWN_LOGIN_SECURITY_CONTEXT,
 ): Promise<LoginResult> {
   const [email, password] = validateCredentials(emailIn, passwordIn);
   const persistent = rememberMeIn === true;
@@ -392,6 +461,7 @@ export async function login(
   // role='system' marks the account that owns official decks (#33) — it must
   // never be a real session, only an ownership anchor for the FK.
   if (!row || !passwordOk || row.role === "system") {
+    await recordFailedLogin(row?.id ?? null, context, "password");
     throw new AuthError("Invalid email or password");
   }
   if (row.two_factor_enabled) {
@@ -406,7 +476,7 @@ export async function login(
     accessToken,
     rawRefresh,
     persistent: p,
-  } = await issueTokens(row.id, row.email, persistent);
+  } = await issueLoginTokens(row, persistent, context, "password");
   return { user: toUser(row), accessToken, rawRefresh, persistent: p };
 }
 
@@ -418,23 +488,30 @@ export async function completeTwoFactorLogin(
   challengeIn: unknown,
   codeIn: unknown,
   rememberMeIn: unknown,
+  context: LoginSecurityContext = UNKNOWN_LOGIN_SECURITY_CONTEXT,
 ) {
-  let challenge: string;
+  let userId: string;
   try {
-    challenge = parse(twoFactorChallengeSchema, challengeIn);
+    const challenge = parse(twoFactorChallengeSchema, challengeIn);
+    userId = verifyTwoFactorChallenge(challenge);
   } catch {
+    await recordFailedLogin(null, context, "two_factor");
     throw new AuthError("Invalid or expired two-factor challenge");
   }
-  const userId = verifyTwoFactorChallenge(challenge);
   const kind = await twoFactor.verifyCode(userId, codeIn);
-  if (!kind) throw new AuthError("Invalid two-factor code");
+  if (!kind) {
+    await recordFailedLogin(userId, context, "two_factor");
+    throw new AuthError("Invalid two-factor code");
+  }
   const row = await repo.findById(userId);
   if (!row) throw new AuthError("Invalid or expired two-factor challenge");
   const persistent = rememberMeIn === true;
-  const { accessToken, rawRefresh } = await issueTokens(
-    row.id,
-    row.email,
+  const method = kind === "backup" ? "password_backup_code" : "password_totp";
+  const { accessToken, rawRefresh } = await issueLoginTokens(
+    row,
     persistent,
+    context,
+    method,
   );
   return {
     user: toUser(row),

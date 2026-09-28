@@ -8,6 +8,11 @@ export function userActor(userId: string): AuditActor {
   return { type: "user", id: userId };
 }
 
+/** Represents an unauthenticated actor without retaining an attempted email. */
+export function anonymousActor(): AuditActor {
+  return { type: "anonymous", id: "anonymous" };
+}
+
 export function actorFromRequest(req: Request): AuditActor {
   if (req.keyScope === "deck" && req.keyPrefix) {
     return { type: "ai-agent", id: `ai-agent:${req.keyPrefix}` };

@@ -27,7 +27,7 @@ beforeAll(async () => {
 });
 beforeEach(async () => {
   const pool = getPool();
-  await pool.query("TRUNCATE TABLE users CASCADE");
+  await pool.query("TRUNCATE TABLE audit_log, users CASCADE");
   await pool.query(
     `INSERT INTO users (id, email, password_hash, email_verified_at)
      VALUES ($1, $2, $3, now())`,
@@ -61,6 +61,108 @@ async function enableTwoFactor(backupCodes: string[]): Promise<string> {
   );
   return secret;
 }
+
+async function latestLoginAudit() {
+  const rows = await getPool().query<{
+    actor_type: string;
+    actor_id: string;
+    action: string;
+    target_id: string | null;
+    outcome: string;
+    correlation_id: string;
+    after_state: Record<string, unknown>;
+  }>(
+    `SELECT actor_type, actor_id, action, target_id, outcome, correlation_id, after_state
+     FROM audit_log
+     WHERE action IN ('auth.login_succeeded', 'auth.login_failed')
+     ORDER BY created_at DESC
+     LIMIT 1`,
+  );
+  return rows.rows[0];
+}
+
+describe("login security history", () => {
+  test("records a successful password login with request context and session ID", async () => {
+    const login = await request(app)
+      .post("/api/auth/login")
+      .set("X-Forwarded-For", "203.0.113.12")
+      .set("User-Agent", "Mozilla/5.0 (X11; Linux x86_64) Firefox/132.0")
+      .send({ email: EMAIL, password: PASSWORD });
+
+    expect(login.status).toBe(200);
+    const audit = await latestLoginAudit();
+    expect(audit).toMatchObject({
+      actor_type: "user",
+      actor_id: USER_ID,
+      action: "auth.login_succeeded",
+      target_id: USER_ID,
+      outcome: "success",
+      correlation_id: login.headers["x-request-id"],
+      after_state: {
+        authenticationMethod: "password",
+        sourceIp: "203.0.113.12",
+        browser: "firefox",
+        platform: "linux",
+      },
+    });
+    expect(audit.after_state.sessionId).toEqual(expect.any(String));
+  });
+
+  test("records an unknown-account failure without storing the attempted email", async () => {
+    const login = await request(app)
+      .post("/api/auth/login")
+      .set("X-Forwarded-For", "203.0.113.13")
+      .send({ email: "not-a-user@example.com", password: PASSWORD });
+
+    expect(login.status).toBe(401);
+    const audit = await latestLoginAudit();
+    expect(audit).toEqual({
+      actor_type: "anonymous",
+      actor_id: "anonymous",
+      action: "auth.login_failed",
+      target_id: null,
+      outcome: "failure",
+      correlation_id: login.headers["x-request-id"],
+      after_state: {
+        authenticationMethod: "password",
+        sourceIp: "203.0.113.13",
+        browser: "other",
+        platform: "other",
+      },
+    });
+  });
+
+  test("does not issue a refresh session when its success audit write fails", async () => {
+    const pool = getPool();
+    await pool.query(`
+      CREATE OR REPLACE FUNCTION reject_login_audit() RETURNS trigger AS $$
+      BEGIN
+        IF NEW.action = 'auth.login_succeeded' THEN
+          RAISE EXCEPTION 'forced login audit failure';
+        END IF;
+        RETURN NEW;
+      END;
+      $$ LANGUAGE plpgsql`);
+    await pool.query(
+      `CREATE TRIGGER reject_login_audit BEFORE INSERT ON audit_log
+       FOR EACH ROW EXECUTE FUNCTION reject_login_audit()`,
+    );
+    try {
+      const login = await request(app)
+        .post("/api/auth/login")
+        .send({ email: EMAIL, password: PASSWORD });
+      expect(login.status).toBe(500);
+    } finally {
+      await pool.query("DROP TRIGGER reject_login_audit ON audit_log");
+      await pool.query("DROP FUNCTION reject_login_audit()");
+    }
+    const sessions = await pool.query(
+      "SELECT 1 FROM refresh_tokens WHERE user_id = $1",
+      [USER_ID],
+    );
+    expect(sessions.rowCount).toBe(0);
+  });
+});
 
 describe("finding 1: a 2FA challenge is not an access token", () => {
   async function passwordOnlyChallenge(): Promise<string> {

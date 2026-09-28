@@ -8,12 +8,17 @@
 Every state-changing action by a user or an AI agent (deck-scoped MCP key):
 decks, study reviews and syncs, API keys, admin actions, account lifecycle
 (created / deleted / data exported), profile updates, password events, email
-verification, bug-report submission, and every 2FA transition. Study audit
-records are committed in the same database transaction as the progress write.
-Each row carries actor type + id, action, target, outcome, correlation ID,
-and optional before/after state. Failed AI deck mutations are also recorded
-with a failure outcome. The account-deletion entry deliberately
-contains **no PII** — who (user id) and when only.
+verification, bug-report submission, and every 2FA transition. It also records
+successful and failed sign-in attempts. Study audit records are committed in the
+same database transaction as the progress write.
+
+Each row carries actor type + id, action, target, outcome, correlation ID, and
+optional before/after state. Login rows carry the exact source IP address,
+browser and platform categories, authentication method, and (on success) the
+opaque refresh-session ID. They never contain a password, refresh token, raw
+user agent, or attempted email address for an unknown account. Failed AI deck
+mutations are also recorded with a failure outcome. The account-deletion entry
+deliberately contains **no PII** — who (user id) and when only.
 
 ## Immutability
 

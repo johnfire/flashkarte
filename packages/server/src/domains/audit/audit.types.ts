@@ -1,5 +1,5 @@
 export interface AuditActor {
-  type: "user" | "ai-agent";
+  type: "user" | "ai-agent" | "anonymous";
   id: string;
 }
 

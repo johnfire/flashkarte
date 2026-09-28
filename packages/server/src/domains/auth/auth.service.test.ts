@@ -12,7 +12,7 @@ import {
   sendEmailChangeVerification,
   sendPasswordResetEmail,
 } from "../../email/mailer";
-import { record, userActor } from "../audit/audit.service";
+import { anonymousActor, record, userActor } from "../audit/audit.service";
 import * as twoFactor from "../account/twoFactor.service";
 import * as repo from "./auth.repository";
 import {
@@ -32,7 +32,8 @@ import {
 const mockTwoFactor = twoFactor as jest.Mocked<typeof twoFactor>;
 
 const mockRepo = repo as jest.Mocked<typeof repo>;
-const mockAudit = { record, userActor } as {
+const mockAudit = { anonymousActor, record, userActor } as {
+  anonymousActor: jest.MockedFunction<typeof anonymousActor>;
   record: jest.MockedFunction<typeof record>;
   userActor: jest.MockedFunction<typeof userActor>;
 };
@@ -73,11 +74,16 @@ function setupRepoRow(
 
 beforeEach(() => {
   jest.clearAllMocks();
+  mockAudit.anonymousActor.mockReturnValue({
+    type: "anonymous",
+    id: "anonymous",
+  });
   mockAudit.userActor.mockReturnValue({ type: "user", id: "u1" });
   mockBcrypt.compare.mockResolvedValue(true as never);
   mockAudit.record.mockResolvedValue(undefined);
   mockGetAppUrl.mockReturnValue("https://flashkarte.example");
   mockRepo.deleteUserAccount.mockResolvedValue(undefined);
+  mockRepo.storeRefreshToken.mockResolvedValue({ id: "session-1" });
   // withTransaction calls the callback with a mock client
   const mockClient = { query: jest.fn() } as unknown as import("pg").PoolClient;
   (withTransaction as jest.Mock).mockImplementation(
@@ -442,6 +448,58 @@ describe("login with 2FA enabled", () => {
     expect(mockRepo.storeRefreshToken).toHaveBeenCalled();
   });
 
+  it("records a successful login with its session in the token transaction", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(userRow(false));
+
+    await login("a@b.com", "password123", false, {
+      sourceIp: "203.0.113.12",
+      browser: "firefox",
+      platform: "linux",
+    });
+
+    expect(withTransaction).toHaveBeenCalledTimes(1);
+    expect(mockAudit.record).toHaveBeenCalledWith(
+      expect.objectContaining({
+        action: "auth.login_succeeded",
+        afterState: {
+          authenticationMethod: "password",
+          sourceIp: "203.0.113.12",
+          browser: "firefox",
+          platform: "linux",
+          sessionId: "session-1",
+        },
+      }),
+      expect.any(Object),
+    );
+  });
+
+  it("records a failed unknown-account login without retaining the email", async () => {
+    mockRepo.findByEmailWithHash.mockResolvedValue(null);
+
+    await expect(
+      login("missing@example.com", "password123", false, {
+        sourceIp: "203.0.113.12",
+        browser: "firefox",
+        platform: "linux",
+      }),
+    ).rejects.toThrow("Invalid email or password");
+
+    expect(mockAudit.record).toHaveBeenCalledWith(
+      expect.objectContaining({
+        actor: { type: "anonymous", id: "anonymous" },
+        action: "auth.login_failed",
+        targetId: undefined,
+        outcome: "failure",
+        afterState: {
+          authenticationMethod: "password",
+          sourceIp: "203.0.113.12",
+          browser: "firefox",
+          platform: "linux",
+        },
+      }),
+    );
+  });
+
   it("completes the login with a valid code", async () => {
     mockRepo.findByEmailWithHash.mockResolvedValue(userRow(true));
     const first = await login("a@b.com", "password123", false);
@@ -453,6 +511,16 @@ describe("login with 2FA enabled", () => {
     expect(done.user.id).toBe("u1");
     expect(done.usedBackupCode).toBe(false);
     expect(mockRepo.storeRefreshToken).toHaveBeenCalled();
+    expect(mockAudit.record).toHaveBeenCalledWith(
+      expect.objectContaining({
+        action: "auth.login_succeeded",
+        afterState: expect.objectContaining({
+          authenticationMethod: "password_totp",
+          sessionId: "session-1",
+        }),
+      }),
+      expect.any(Object),
+    );
   });
 
   it("flags backup-code use so the controller can audit it", async () => {
@@ -480,6 +548,15 @@ describe("login with 2FA enabled", () => {
       completeTwoFactorLogin(first.challenge, "000000", false),
     ).rejects.toThrow("Invalid two-factor code");
     expect(mockRepo.storeRefreshToken).not.toHaveBeenCalled();
+    expect(mockAudit.record).toHaveBeenCalledWith(
+      expect.objectContaining({
+        action: "auth.login_failed",
+        outcome: "failure",
+        afterState: expect.objectContaining({
+          authenticationMethod: "two_factor",
+        }),
+      }),
+    );
   });
 
   it("rejects a garbage challenge", async () => {
