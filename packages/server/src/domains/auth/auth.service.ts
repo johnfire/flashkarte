@@ -639,6 +639,10 @@ export async function deleteAccount(
   const row = await repo.findByIdWithHash(userId);
   if (!row) throw new AuthError("Not found");
 
+  if (row.is_deletion_protected) {
+    throw new ValidationError("This protected owner account cannot be deleted");
+  }
+
   const currentPassword = parse(currentPasswordSchema, currentPasswordIn);
   const currentOk = await bcrypt.compare(currentPassword, row.password_hash);
   if (!currentOk) {

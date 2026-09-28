@@ -81,6 +81,35 @@ async function latestLoginAudit() {
   return rows.rows[0];
 }
 
+describe("protected owner accounts", () => {
+  test("rejects self-deletion while preserving the account", async () => {
+    const pool = getPool();
+    await pool.query(
+      "UPDATE users SET is_deletion_protected = true WHERE id = $1",
+      [USER_ID],
+    );
+
+    const login = await request(app)
+      .post("/api/auth/login")
+      .send({ email: EMAIL, password: PASSWORD });
+    expect(login.status).toBe(200);
+
+    const deletion = await request(app)
+      .delete("/api/auth/account")
+      .set("Authorization", `Bearer ${login.body.accessToken}`)
+      .send({ currentPassword: PASSWORD });
+
+    expect(deletion.status).toBe(422);
+    expect(deletion.body.error.message).toBe(
+      "This protected owner account cannot be deleted",
+    );
+    const account = await pool.query("SELECT 1 FROM users WHERE id = $1", [
+      USER_ID,
+    ]);
+    expect(account.rowCount).toBe(1);
+  });
+});
+
 describe("login security history", () => {
   test("records a successful password login with request context and session ID", async () => {
     const login = await request(app)

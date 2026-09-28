@@ -14,6 +14,7 @@ export interface UserRow {
   speech_lang: string | null;
   speech_autoplay: string;
   speech_rate: number;
+  is_deletion_protected: boolean;
 }
 
 interface UserWithHash extends UserRow {
@@ -22,7 +23,7 @@ interface UserWithHash extends UserRow {
 
 const USER_COLS =
   "id, email, role, account_type, email_verified_at, display_name, language, two_factor_enabled, " +
-  "speech_enabled, speech_lang, speech_autoplay, speech_rate";
+  "speech_enabled, speech_lang, speech_autoplay, speech_rate, is_deletion_protected";
 
 export function findByEmailWithHash(email: string) {
   return queryOne<UserWithHash>(

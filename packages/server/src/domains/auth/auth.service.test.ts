@@ -66,6 +66,7 @@ function setupRepoRow(
     speech_lang: null,
     speech_autoplay: "back",
     speech_rate: 1.0,
+    is_deletion_protected: false,
     password_hash: overrides.password_hash ?? "$2a$12$hashhashhash",
   };
   mockRepo.findByIdWithHash.mockResolvedValue(row);
@@ -352,6 +353,19 @@ describe("verified email changes", () => {
 });
 
 describe("deleteAccount", () => {
+  it("refuses to delete a protected owner account before checking its password", async () => {
+    const protectedOwner = setupRepoRow();
+    protectedOwner.is_deletion_protected = true;
+
+    await expect(deleteAccount("u1", "password")).rejects.toThrow(
+      "This protected owner account cannot be deleted",
+    );
+
+    expect(mockBcrypt.compare).not.toHaveBeenCalled();
+    expect(mockAudit.record).not.toHaveBeenCalled();
+    expect(mockRepo.deleteUserAccount).not.toHaveBeenCalled();
+  });
+
   it("rejects when current password is missing", async () => {
     setupRepoRow();
     await expect(deleteAccount("u1", undefined)).rejects.toThrow(
@@ -427,6 +441,7 @@ describe("login with 2FA enabled", () => {
       speech_lang: null,
       speech_autoplay: "back",
       speech_rate: 1.0,
+      is_deletion_protected: false,
       password_hash: "$2a$12$hashhashhash",
     };
   }
