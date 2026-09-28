@@ -13,6 +13,7 @@ vi.mock("../api/client", () => ({
       save: vi.fn().mockResolvedValue({}),
     },
     learn: { catalog: vi.fn(), enroll: vi.fn() },
+    courseCollections: { list: vi.fn() },
     decks: {
       listCollections: vi.fn(),
       listOfficial: vi.fn(),
@@ -39,6 +40,9 @@ vi.mock("../auth/AuthContext", () => ({
 const learnApi = api.learn as unknown as {
   catalog: ReturnType<typeof vi.fn>;
   enroll: ReturnType<typeof vi.fn>;
+};
+const courseCollectionsApi = api.courseCollections as unknown as {
+  list: ReturnType<typeof vi.fn>;
 };
 const deckApi = api.decks as unknown as {
   listCollections: ReturnType<typeof vi.fn>;
@@ -78,6 +82,21 @@ describe("LibraryHubPage", () => {
           concept_count: 3,
         },
       ]),
+    );
+    courseCollectionsApi.list.mockImplementation((source) =>
+      Promise.resolve(
+        source === "official"
+          ? [
+              {
+                id: "official-course-collection",
+                title: "Artificial Intelligence",
+                description: "How AI systems work",
+                is_official: true,
+                course_count: 1,
+              },
+            ]
+          : [],
+      ),
     );
     deckApi.listCollections.mockResolvedValue([
       {
@@ -132,16 +151,25 @@ describe("LibraryHubPage", () => {
     expect(screen.getByText("Official standalone deck")).toBeInTheDocument();
     expect(screen.getByText("Community deck collection")).toBeInTheDocument();
     expect(screen.getByText("Community standalone deck")).toBeInTheDocument();
+    expect(screen.getByText("Artificial Intelligence")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: "Other Official Structured Learning Courses",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: "Other Community Structured Learning Courses",
+      }),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("link", {
-        name: "Official Structured Learning Courses",
+        name: /Artificial Intelligence How AI systems work 1 course/,
       }),
-    ).toHaveAttribute("href", "/library/courses/official?language=all");
-    expect(
-      screen.getByRole("link", {
-        name: "Community Structured Learning Courses",
-      }),
-    ).toHaveAttribute("href", "/library/courses/community?language=all");
+    ).toHaveAttribute(
+      "href",
+      "/library/courses/official/collections/official-course-collection?language=all",
+    );
     expect(
       screen.getByRole("link", { name: "Official Flashcard Decks" }),
     ).toHaveAttribute("href", "/library/official/decks?language=all");
@@ -157,6 +185,10 @@ describe("LibraryHubPage", () => {
 
     await waitFor(() =>
       expect(deckApi.listCollections).toHaveBeenCalledWith({ limit: 100 }),
+    );
+    expect(courseCollectionsApi.list).toHaveBeenCalledWith(
+      "official",
+      undefined,
     );
     expect(deckApi.listOfficial).toHaveBeenCalledWith({ limit: 100 });
     expect(publicCoursesApi.list).toHaveBeenCalledWith({ limit: 100 });
@@ -182,9 +214,10 @@ describe("LibraryHubPage", () => {
     renderPage();
     await userEvent.click(screen.getByRole("button", { name: "العربية" }));
     await waitFor(() =>
-      expect(learnApi.catalog).toHaveBeenCalledWith("official", "ar"),
+      expect(learnApi.catalog).toHaveBeenCalledWith("official", "ar", true),
     );
-    expect(learnApi.catalog).toHaveBeenCalledWith("community", "ar");
+    expect(learnApi.catalog).toHaveBeenCalledWith("community", "ar", true);
+    expect(courseCollectionsApi.list).toHaveBeenCalledWith("official", "ar");
     expect(deckApi.listCollections).toHaveBeenCalledWith({
       limit: 100,
       language: "ar",

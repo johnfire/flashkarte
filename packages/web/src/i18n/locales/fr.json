@@ -341,6 +341,11 @@
     "officialDecksDetail": "Decks de cartes maintenus par l’application.",
     "communityCoursesTitle": "Cours structurés de la communauté",
     "communityCoursesDetail": "Cours structurés publiés par d’autres apprenants.",
+    "officialCourseCollections": "Collections de cours officielles",
+    "communityCourseCollections": "Collections de cours de la communauté",
+    "otherOfficialCourses": "Autres cours structurés officiels",
+    "otherCommunityCourses": "Autres cours structurés de la communauté",
+    "otherCoursesDetail": "Cours structurés qui ne sont pas encore dans une collection.",
     "communityDecksTitle": "Decks de la communauté",
     "communityDecksDetail": "Decks publiés par d’autres apprenants.",
     "deckCollections": "Collections de decks de fiches",
@@ -353,6 +358,16 @@
     "loadError": "Impossible de charger les cours.",
     "adding": "Ajout…",
     "add": "Ajouter à mes cours structurés"
+  },
+  "courseCollections": {
+    "title": "Collections de cours",
+    "otherCourses": "Autres cours",
+    "courseCount_one": "{{count}} cours",
+    "courseCount_other": "{{count}} cours",
+    "backToLibrary": "Retour à la bibliothèque",
+    "backToMyCourses": "Retour à mes cours",
+    "emptyInLanguage": "Aucun cours de cette collection n’utilise la langue sélectionnée.",
+    "emptyMine": "Vous n’avez encore aucun cours de cette collection."
   },
   "createDeck": {
     "title": "Nouveau paquet",

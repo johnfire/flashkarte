@@ -341,6 +341,11 @@
     "officialDecksDetail": "Karteikarten-Decks der App.",
     "communityCoursesTitle": "Strukturierte Community-Lernkurse",
     "communityCoursesDetail": "Strukturierte Kurse anderer Lernender.",
+    "officialCourseCollections": "Offizielle Kurssammlungen",
+    "communityCourseCollections": "Kurssammlungen der Community",
+    "otherOfficialCourses": "Weitere offizielle strukturierte Lernkurse",
+    "otherCommunityCourses": "Weitere strukturierte Community-Lernkurse",
+    "otherCoursesDetail": "Strukturierte Kurse, die noch keiner Sammlung zugeordnet sind.",
     "communityDecksTitle": "Community-Karteikarten-Decks",
     "communityDecksDetail": "Decks, die andere Lernende veröffentlicht haben.",
     "deckCollections": "Karteikarten-Deck-Sammlungen",
@@ -353,6 +358,16 @@
     "loadError": "Kurse konnten nicht geladen werden.",
     "adding": "Wird hinzugefügt…",
     "add": "Zu meinen strukturierten Lernkursen hinzufügen"
+  },
+  "courseCollections": {
+    "title": "Kurssammlungen",
+    "otherCourses": "Weitere Kurse",
+    "courseCount_one": "{{count}} Kurs",
+    "courseCount_other": "{{count}} Kurse",
+    "backToLibrary": "Zurück zur Bibliothek",
+    "backToMyCourses": "Zurück zu meinen Kursen",
+    "emptyInLanguage": "In dieser Sammlung gibt es keine Kurse in der gewählten Sprache.",
+    "emptyMine": "Du hast noch keine Kurse aus dieser Sammlung."
   },
   "createDeck": {
     "title": "Neuer Stapel",

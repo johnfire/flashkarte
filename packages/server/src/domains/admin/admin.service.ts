@@ -8,6 +8,7 @@ import type { AdminUserRow } from "./admin.repository";
 import * as decksRepo from "../decks/decks.repository";
 import * as categoriesRepo from "../categories/categories.repository";
 import { contentLanguageSchema } from "../library/content-language";
+import * as courseCollections from "../course-collections/course-collections.service";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -132,6 +133,16 @@ export async function setSubjectOfficial(
       );
     throw new NotFoundError("Course not found");
   }
+}
+
+/** Create a curated collection for either official or community learning courses. */
+export function createCourseCollection(input: unknown) {
+  return courseCollections.createCollection(input);
+}
+
+/** Place a course in a matching official or community collection, or detach it. */
+export function setSubjectCourseCollection(id: string, input: unknown) {
+  return courseCollections.changeSubjectMembership(id, input);
 }
 
 export async function setOfficialDeckContentLanguage(

@@ -92,6 +92,44 @@ export const setSubjectOfficial = wrapAsync(
   },
 );
 
+export const createCourseCollection = wrapAsync(
+  async (req: Request, res: Response) => {
+    const collection = await service.createCourseCollection(req.body);
+    await auditFromRequest(
+      req,
+      "admin.course_collection_created",
+      "course_collection",
+      collection.id,
+      "success",
+      undefined,
+      {
+        title: collection.title,
+        isOfficial: collection.is_official,
+      },
+    );
+    res.status(201).json(collection);
+  },
+);
+
+export const setSubjectCourseCollection = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.setSubjectCourseCollection(req.params.id, req.body);
+    await auditFromRequest(
+      req,
+      "admin.subject_course_collection_changed",
+      "subject",
+      req.params.id,
+      "success",
+      undefined,
+      {
+        collectionId: req.body?.collectionId ?? null,
+        position: req.body?.position ?? null,
+      },
+    );
+    res.status(204).end();
+  },
+);
+
 export const demoteOfficialDeck = wrapAsync(
   async (req: Request, res: Response) => {
     await service.demoteOfficialDeck(req.params.id, req.body.ownerId);

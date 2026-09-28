@@ -30,12 +30,14 @@ import { PublicDeckPage } from "./pages/PublicDeckPage";
 import { ManageDeckCardsPage } from "./pages/ManageDeckCardsPage";
 import { MyCoursesPage } from "./pages/MyCoursesPage";
 import { CourseCatalogPage } from "./pages/CourseCatalogPage";
+import { CourseCollectionPage } from "./pages/CourseCollectionPage";
 import { CoursesPage } from "./pages/CoursesPage";
 import { CourseDetailPage } from "./pages/CourseDetailPage";
 import { PublicCoursesPage } from "./pages/PublicCoursesPage";
 import { EditCardPage } from "./pages/EditCardPage";
 import { SenseReorderPage } from "./pages/SenseReorderPage";
 import { LearnPage } from "./learn/LearnPage";
+import { CourseCollectionPage as MyCourseCollectionPage } from "./learn/CourseCollectionPage";
 import { OutlinePage } from "./learn/OutlinePage";
 import { LessonPage } from "./learn/LessonPage";
 import { ReadLessonPage } from "./learn/ReadLessonPage";
@@ -81,6 +83,10 @@ export default function App() {
           <Route path="/library/official/decks" element={<AppDecksPage />} />
           <Route path="/courses" element={<MyCoursesPage />} />
           <Route
+            path="/library/courses/:source/collections/:id"
+            element={<CourseCollectionPage />}
+          />
+          <Route
             path="/library/courses/:source"
             element={<CourseCatalogPage />}
           />
@@ -90,6 +96,10 @@ export default function App() {
           <Route path="/app-decks" element={<AppDecksPage />} />
           <Route path="/app-decks/:id" element={<AppDecksCollectionPage />} />
           <Route path="/learn" element={<LearnPage />} />
+          <Route
+            path="/learn/collections/:collectionId"
+            element={<MyCourseCollectionPage />}
+          />
           <Route path="/learn/:subjectId" element={<OutlinePage />} />
           <Route
             path="/learn/:subjectId/lessons/:slug"

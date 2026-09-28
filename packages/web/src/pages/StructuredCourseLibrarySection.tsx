@@ -12,19 +12,26 @@ interface StructuredCourseLibrarySectionProps {
   source: CourseSource;
   language?: "en" | "de" | "ar";
   selectedLanguage?: string;
+  ungrouped?: boolean;
 }
 
 function catalogPath(source: CourseSource) {
   return `/library/courses/${source}`;
 }
 
-function titleKey(source: CourseSource) {
+function titleKey(source: CourseSource, ungrouped: boolean) {
+  if (ungrouped) {
+    return source === "official"
+      ? "libraryHub.otherOfficialCourses"
+      : "libraryHub.otherCommunityCourses";
+  }
   return source === "official"
     ? "libraryHub.officialCoursesTitle"
     : "libraryHub.communityCoursesTitle";
 }
 
-function detailKey(source: CourseSource) {
+function detailKey(source: CourseSource, ungrouped: boolean) {
+  if (ungrouped) return "libraryHub.otherCoursesDetail";
   return source === "official"
     ? "libraryHub.officialCoursesDetail"
     : "libraryHub.communityCoursesDetail";
@@ -35,14 +42,15 @@ export function StructuredCourseLibrarySection({
   source,
   language,
   selectedLanguage,
+  ungrouped = false,
 }: StructuredCourseLibrarySectionProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [enrollingId, setEnrollingId] = useState<string | null>(null);
   const [enrollError, setEnrollError] = useState<string | null>(null);
   const loadCourses = useCallback(
-    () => api.learn.catalog(source, language),
-    [source, language],
+    () => api.learn.catalog(source, language, ungrouped),
+    [source, language, ungrouped],
   );
   const {
     data: courses,
@@ -88,15 +96,19 @@ export function StructuredCourseLibrarySection({
           id={`${source}-structured-courses-heading`}
           className="text-xl font-semibold"
         >
-          <Link
-            to={`${catalogPath(source)}${selectedLanguage ? `?language=${selectedLanguage}` : ""}`}
-            className="hover:underline"
-          >
-            {t(titleKey(source))}
-          </Link>
+          {ungrouped ? (
+            t(titleKey(source, ungrouped))
+          ) : (
+            <Link
+              to={`${catalogPath(source)}${selectedLanguage ? `?language=${selectedLanguage}` : ""}`}
+              className="hover:underline"
+            >
+              {t(titleKey(source, ungrouped))}
+            </Link>
+          )}
         </h2>
         <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-          {t(detailKey(source))}
+          {t(detailKey(source, ungrouped))}
         </p>
       </header>
       {loading && <p>{t("common.loading")}</p>}

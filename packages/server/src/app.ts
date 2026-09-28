@@ -16,6 +16,7 @@ import { adminRouter } from "./domains/admin/admin.routes";
 import { libraryRouter } from "./domains/library/library.routes";
 import { coursesRouter } from "./domains/courses/courses.routes";
 import { subjectsRouter } from "./domains/subjects/subjects.routes";
+import { courseCollectionsRouter } from "./domains/course-collections/course-collections.routes";
 import { lessonsRouter } from "./domains/lessons/lessons.routes";
 import { learnRouter } from "./domains/learn/learn.routes";
 import { assetsRouter } from "./domains/assets/assets.routes";
@@ -224,6 +225,7 @@ export function createApp() {
   app.use("/api/library", libraryRouter);
   app.use("/api/courses", coursesRouter);
   app.use("/api/subjects", subjectsRouter);
+  app.use("/api/course-collections", courseCollectionsRouter);
   app.use("/api/subjects", lessonsRouter);
   app.use("/api/subjects", learnRouter);
   app.use("/api/subjects", assetsRouter);

@@ -195,9 +195,10 @@ export function listSubjects(userId: string) {
 export function listCatalogSubjects(
   official: boolean,
   languageInput?: unknown,
+  ungrouped = false,
 ) {
   const language = parse(contentLanguageFilterSchema, languageInput);
-  return repo.listCatalogSubjects(official, language);
+  return repo.listCatalogSubjects(official, language, ungrouped);
 }
 
 export async function getSubject(userId: string, id: string) {

@@ -11,6 +11,21 @@ export interface LearnSubject {
   is_public: boolean;
   is_official: boolean;
   concept_count: number;
+  course_collection_id?: string | null;
+  course_collection_position?: number | null;
+  course_collection_title?: string | null;
+}
+
+export interface CourseCollectionSummary {
+  id: string;
+  title: string;
+  description: string | null;
+  is_official: boolean;
+  course_count: number;
+}
+
+export interface CourseCollectionDetail extends CourseCollectionSummary {
+  courses: LearnSubject[];
 }
 
 export type LessonAccess = "locked" | "available" | "in_progress" | "passed";

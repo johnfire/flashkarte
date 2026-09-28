@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CommunityFlashcardDeckLibrarySection } from "./CommunityFlashcardDeckLibrarySection";
 import { OfficialFlashcardDeckLibrarySection } from "./OfficialFlashcardDeckLibrarySection";
 import { StructuredCourseLibrarySection } from "./StructuredCourseLibrarySection";
+import { CourseCollectionCatalogSection } from "./CourseCollectionCatalogSection";
 import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
 import { useContentLanguage } from "../hooks/use-content-language";
 
@@ -24,12 +25,23 @@ export function LibraryHubPage() {
       </header>
       <ContentLanguageSwitcher value={language} onChange={choose} />
       <div className="space-y-10">
-        <StructuredCourseLibrarySection
+        <CourseCollectionCatalogSection
           source="official"
           language={filter}
           selectedLanguage={language}
         />
+        <StructuredCourseLibrarySection
+          source="official"
+          language={filter}
+          selectedLanguage={language}
+          ungrouped
+        />
         <OfficialFlashcardDeckLibrarySection
+          language={filter}
+          selectedLanguage={language}
+        />
+        <CourseCollectionCatalogSection
+          source="community"
           language={filter}
           selectedLanguage={language}
         />
@@ -37,6 +49,7 @@ export function LibraryHubPage() {
           source="community"
           language={filter}
           selectedLanguage={language}
+          ungrouped
         />
         <CommunityFlashcardDeckLibrarySection
           language={filter}

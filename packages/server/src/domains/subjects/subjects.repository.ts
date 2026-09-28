@@ -13,16 +13,18 @@ export interface SubjectRow {
   created_at: string;
   updated_at: string;
   course_family_id: string | null;
+  course_collection_id: string | null;
+  course_collection_position: number | null;
   locale: string | null;
 }
 
 const SUBJECT_COLS =
-  "id, reference_number, user_id, title, description, is_public, is_official, version, created_at, updated_at, course_family_id, locale";
+  "id, reference_number, user_id, title, description, is_public, is_official, version, created_at, updated_at, course_family_id, course_collection_id, course_collection_position, locale";
 
 // Course-edition metadata stays on the explicit edition endpoints. The publication and owner fields
 // let a learner distinguish their own courses from an official or community catalogue entry.
 const SUBJECT_SUMMARY_COLS =
-  "s.id, s.reference_number, s.user_id, s.title, s.description, s.is_public, s.is_official, s.version, s.created_at, s.updated_at, s.locale";
+  "s.id, s.reference_number, s.user_id, s.title, s.description, s.is_public, s.is_official, s.version, s.created_at, s.updated_at, s.locale, s.course_collection_id, s.course_collection_position, cc.title AS course_collection_title";
 
 export async function insertSubject(
   db: Queryable,
@@ -116,6 +118,9 @@ export interface SubjectSummaryRow {
   updated_at: string;
   concept_count: number;
   locale: string | null;
+  course_collection_id: string | null;
+  course_collection_position: number | null;
+  course_collection_title: string | null;
 }
 
 export function listSubjects(userId: string) {
@@ -123,6 +128,7 @@ export function listSubjects(userId: string) {
     `SELECT ${SUBJECT_SUMMARY_COLS},
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
+     LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
      WHERE s.user_id = $1
         OR EXISTS (SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $1)
      ORDER BY s.created_at DESC`,
@@ -130,15 +136,21 @@ export function listSubjects(userId: string) {
   );
 }
 
-export function listCatalogSubjects(official: boolean, language?: string) {
+export function listCatalogSubjects(
+  official: boolean,
+  language?: string,
+  ungrouped = false,
+) {
   return query<SubjectSummaryRow>(
     `SELECT ${SUBJECT_SUMMARY_COLS},
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
+     LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
      WHERE s.is_public AND s.is_official = $1
        AND ($2::text IS NULL OR s.locale = $2 OR s.locale LIKE $2 || '-%')
+       AND (NOT $3::boolean OR s.course_collection_id IS NULL)
      ORDER BY s.title COLLATE de_phonebook ASC`,
-    [official, language ?? null],
+    [official, language ?? null, ungrouped],
   );
 }
 

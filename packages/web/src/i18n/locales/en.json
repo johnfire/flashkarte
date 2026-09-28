@@ -341,6 +341,11 @@
     "officialDecksDetail": "Flashcard decks maintained by the app.",
     "communityCoursesTitle": "Community Structured Learning Courses",
     "communityCoursesDetail": "Structured courses published by other learners.",
+    "officialCourseCollections": "Official Course Collections",
+    "communityCourseCollections": "Community Course Collections",
+    "otherOfficialCourses": "Other Official Structured Learning Courses",
+    "otherCommunityCourses": "Other Community Structured Learning Courses",
+    "otherCoursesDetail": "Structured courses not yet placed in a collection.",
     "communityDecksTitle": "Community Flashcard Decks",
     "communityDecksDetail": "Decks published by other learners.",
     "deckCollections": "Flashcard Deck Collections",
@@ -353,6 +358,16 @@
     "loadError": "Couldn't load courses.",
     "adding": "Adding…",
     "add": "Add to My Structured Learning Courses"
+  },
+  "courseCollections": {
+    "title": "Course Collections",
+    "otherCourses": "Other Courses",
+    "courseCount_one": "{{count}} course",
+    "courseCount_other": "{{count}} courses",
+    "backToLibrary": "Back to Library",
+    "backToMyCourses": "Back to My Courses",
+    "emptyInLanguage": "No courses in this collection use the selected language.",
+    "emptyMine": "You do not have any courses from this collection yet."
   },
   "createDeck": {
     "title": "New Deck",

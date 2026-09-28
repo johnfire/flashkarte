@@ -57,6 +57,7 @@ export const listCatalog = wrapAsync(async (req: Request, res: Response) => {
     await service.listCatalogSubjects(
       req.query.source === "official",
       req.query.language,
+      req.query.ungrouped === "true",
     ),
   );
 });

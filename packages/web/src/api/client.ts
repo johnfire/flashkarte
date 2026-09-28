@@ -32,6 +32,8 @@ import type {
   HelpRequestSent,
   LearnerOutline,
   LearnSubject,
+  CourseCollectionDetail,
+  CourseCollectionSummary,
   LessonAnswerResponse,
   LessonScreens,
   LessonStepResponse,
@@ -577,9 +579,10 @@ export const api = {
     catalog: (
       source: "official" | "community",
       language?: "en" | "de" | "ar",
+      ungrouped = false,
     ) =>
       request<LearnSubject[]>(
-        `/subjects/catalog?source=${source}${language ? `&language=${language}` : ""}`,
+        `/subjects/catalog?source=${source}${language ? `&language=${language}` : ""}${ungrouped ? "&ungrouped=true" : ""}`,
       ),
     enroll: (subjectId: string) =>
       request<void>(`/subjects/${subjectId}/enroll`, { method: "POST" }),
@@ -641,6 +644,20 @@ export const api = {
       reviewAction<ReviewAnswerResponse>(subjectId, questionId, "answer", {
         choice,
       }),
+  },
+  courseCollections: {
+    list: (source: "official" | "community", language?: "en" | "de" | "ar") =>
+      request<CourseCollectionSummary[]>(
+        `/course-collections?source=${source}${language ? `&language=${language}` : ""}`,
+      ),
+    get: (
+      id: string,
+      source: "official" | "community",
+      language?: "en" | "de" | "ar",
+    ) =>
+      request<CourseCollectionDetail>(
+        `/course-collections/${id}?source=${source}${language ? `&language=${language}` : ""}`,
+      ),
   },
   admin: {
     listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),

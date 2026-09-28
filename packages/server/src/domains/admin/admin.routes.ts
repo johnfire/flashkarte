@@ -9,6 +9,11 @@ adminRouter.patch("/users/:id", ctrl.update);
 adminRouter.post("/decks/:id/unpublish", ctrl.unpublishDeck);
 adminRouter.post("/decks/:id/promote-official", ctrl.promoteOfficialDeck);
 adminRouter.patch("/subjects/:id/official", ctrl.setSubjectOfficial);
+adminRouter.post("/course-collections", ctrl.createCourseCollection);
+adminRouter.patch(
+  "/subjects/:id/course-collection",
+  ctrl.setSubjectCourseCollection,
+);
 adminRouter.post("/decks/:id/demote-official", ctrl.demoteOfficialDeck);
 adminRouter.patch("/decks/:id/category", ctrl.setDeckCategory);
 adminRouter.patch("/collections/:id/category", ctrl.setCollectionCategory);

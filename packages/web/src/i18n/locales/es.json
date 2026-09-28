@@ -341,6 +341,11 @@
     "officialDecksDetail": "Mazos de tarjetas mantenidos por la aplicación.",
     "communityCoursesTitle": "Cursos estructurados de la comunidad",
     "communityCoursesDetail": "Cursos estructurados publicados por otros estudiantes.",
+    "officialCourseCollections": "Colecciones oficiales de cursos",
+    "communityCourseCollections": "Colecciones de cursos de la comunidad",
+    "otherOfficialCourses": "Otros cursos estructurados oficiales",
+    "otherCommunityCourses": "Otros cursos estructurados de la comunidad",
+    "otherCoursesDetail": "Cursos estructurados que aún no pertenecen a una colección.",
     "communityDecksTitle": "Mazos de la comunidad",
     "communityDecksDetail": "Mazos publicados por otros estudiantes.",
     "deckCollections": "Colecciones de mazos de tarjetas",
@@ -353,6 +358,16 @@
     "loadError": "No se pudieron cargar los cursos.",
     "adding": "Añadiendo…",
     "add": "Añadir a mis cursos estructurados"
+  },
+  "courseCollections": {
+    "title": "Colecciones de cursos",
+    "otherCourses": "Otros cursos",
+    "courseCount_one": "{{count}} curso",
+    "courseCount_other": "{{count}} cursos",
+    "backToLibrary": "Volver a la biblioteca",
+    "backToMyCourses": "Volver a mis cursos",
+    "emptyInLanguage": "No hay cursos de esta colección en el idioma seleccionado.",
+    "emptyMine": "Aún no tienes cursos de esta colección."
   },
   "createDeck": {
     "title": "Nuevo mazo",

@@ -56,6 +56,32 @@ describe("LearnPage", () => {
     expect(screen.getByText("1 concept")).toBeTruthy();
   });
 
+  test("groups enrolled courses into a collection card", async () => {
+    subjects.mockResolvedValue([
+      {
+        id: "s1",
+        user_id: "owner-1",
+        title: "Transformer basics",
+        description: null,
+        is_public: true,
+        is_official: true,
+        concept_count: 3,
+        course_collection_id: "ai",
+        course_collection_title: "Artificial Intelligence",
+      },
+    ]);
+    render(
+      <MemoryRouter>
+        <LearnPage />
+      </MemoryRouter>,
+    );
+
+    const collection = await screen.findByRole("link", {
+      name: /Artificial Intelligence 1 course/,
+    });
+    expect(collection).toHaveAttribute("href", "/learn/collections/ai");
+  });
+
   test("lets an owner share their course with the community", async () => {
     subjects.mockResolvedValue([
       {

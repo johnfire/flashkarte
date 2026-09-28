@@ -9,10 +9,10 @@ import { useAsync } from "../hooks/use-async";
 import { useAuth } from "../auth/AuthContext";
 import {
   ContentLanguageSwitcher,
-  ContentLanguageField,
   contentLanguageLabel,
 } from "../components/ContentLanguageSwitcher";
 import { useContentLanguage } from "../hooks/use-content-language";
+import { LearnCourseCard } from "./LearnCourseCard";
 
 /** /learn — the real courses a learner owns or has added, each opening on its outline. */
 export function LearnPage() {
@@ -76,6 +76,29 @@ export function LearnPage() {
       (course) => language === "all" || course.locale === language,
     ) ?? [];
   const hiddenCount = (data?.length ?? 0) - visibleCourses.length;
+  const collectionCourses = visibleCourses.filter(
+    (course) =>
+      course.course_collection_id !== null &&
+      course.course_collection_id !== undefined,
+  );
+  const ungroupedCourses = visibleCourses.filter(
+    (course) =>
+      course.course_collection_id === null ||
+      course.course_collection_id === undefined,
+  );
+  const collections = Array.from(
+    collectionCourses.reduce((groups, course) => {
+      const collectionId = course.course_collection_id!;
+      const existing = groups.get(collectionId) ?? {
+        id: collectionId,
+        title: course.course_collection_title ?? t("courseCollections.title"),
+        courses: [],
+      };
+      existing.courses.push(course);
+      groups.set(collectionId, existing);
+      return groups;
+    }, new Map<string, { id: string; title: string; courses: LearnSubject[] }>()),
+  ).map(([, collection]) => collection);
 
   return (
     <main className="mx-auto max-w-screen-2xl p-4 sm:p-8">
@@ -121,67 +144,61 @@ export function LearnPage() {
             </button>
           </p>
         )}
-      <ul className="mt-6 content-card-grid">
-        {visibleCourses.map((subject) => (
-          <li key={subject.id} className="rounded-xl border">
-            <Link
-              to={`/learn/${subject.id}`}
-              className="block rounded-xl p-4 hover:bg-gray-100 dark:hover:bg-gray-800"
-            >
-              <span className="block text-lg font-semibold">
-                {subject.title}
-                {contentLanguageLabel(subject.locale) && (
-                  <span className="ml-2 text-xs font-normal">
-                    {contentLanguageLabel(subject.locale)}
-                  </span>
-                )}
-                {subject.reference_number !== undefined && (
-                  <span className="ml-2 text-xs font-normal text-gray-500 dark:text-gray-400">
-                    #{subject.reference_number}
-                  </span>
-                )}
-                {subject.is_official && (
-                  <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">
-                    {t("learn.official")}
-                  </span>
-                )}
-                {subject.is_public && !subject.is_official && (
-                  <span className="ml-2 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
-                    {t("learn.community")}
-                  </span>
-                )}
-              </span>
-              {subject.description && (
-                <span className="block text-sm text-gray-700 dark:text-gray-300">
-                  {subject.description}
-                </span>
-              )}
-              <span className="block text-xs text-gray-600 dark:text-gray-400">
-                {t("learn.conceptCount", { count: subject.concept_count })}
-              </span>
-            </Link>
-            {subject.user_id === user?.id && !subject.is_official && (
-              <div className="px-4 pb-4">
-                <ContentLanguageField
-                  value={subject.locale}
-                  onChange={(locale) => void changeLanguage(subject, locale)}
-                />
-                <button
-                  onClick={() => void toggleCommunitySharing(subject)}
-                  disabled={sharingId === subject.id}
-                  className="text-sm text-indigo-600 disabled:opacity-60"
+      {collections.length > 0 && (
+        <section className="mt-6" aria-labelledby="course-collections-heading">
+          <h2
+            id="course-collections-heading"
+            className="mb-3 text-xl font-semibold"
+          >
+            {t("courseCollections.title")}
+          </h2>
+          <ul className="content-card-grid">
+            {collections.map((collection) => (
+              <li key={collection.id} className="rounded-xl border">
+                <Link
+                  to={`/learn/collections/${collection.id}`}
+                  className="block rounded-xl p-4 hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
-                  {sharingId === subject.id
-                    ? t("learn.sharing")
-                    : subject.is_public
-                      ? t("learn.unshare")
-                      : t("learn.share")}
-                </button>
-              </div>
-            )}
-          </li>
-        ))}
-      </ul>
+                  <h3 className="text-lg font-semibold">{collection.title}</h3>
+                  <p className="mt-2 text-xs text-gray-600 dark:text-gray-400">
+                    {t("courseCollections.courseCount", {
+                      count: collection.courses.length,
+                    })}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+      {ungroupedCourses.length > 0 && (
+        <section className="mt-6" aria-labelledby="ungrouped-courses-heading">
+          {collections.length > 0 && (
+            <h2
+              id="ungrouped-courses-heading"
+              className="mb-3 text-xl font-semibold"
+            >
+              {t("courseCollections.otherCourses")}
+            </h2>
+          )}
+          <ul className="content-card-grid">
+            {ungroupedCourses.map((course) => (
+              <LearnCourseCard
+                key={course.id}
+                course={course}
+                currentUserId={user?.id}
+                sharingId={sharingId}
+                onChangeLanguage={(nextCourse, locale) =>
+                  void changeLanguage(nextCourse, locale)
+                }
+                onToggleCommunitySharing={(nextCourse) =>
+                  void toggleCommunitySharing(nextCourse)
+                }
+              />
+            ))}
+          </ul>
+        </section>
+      )}
     </main>
   );
 }
