@@ -20,7 +20,7 @@ export function CategoriesSection() {
         : null;
 
   return (
-    <section className="mb-8 rounded-lg border p-4">
+    <section className="rounded-lg border p-4">
       {loading && (
         <p className="text-gray-500 dark:text-gray-400">
           {t("common.loading")}

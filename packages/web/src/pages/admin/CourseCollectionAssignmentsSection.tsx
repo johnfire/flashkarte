@@ -113,7 +113,7 @@ export function CourseCollectionAssignmentsSection() {
 
   return (
     <section
-      className="mb-8 rounded-lg border p-4"
+      className="rounded-lg border p-4"
       aria-labelledby="course-collections-heading"
     >
       <h2

@@ -105,7 +105,7 @@ export function AdminPage() {
   }
 
   return (
-    <div className="mx-auto max-w-3xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("admin.title")}</h1>
         <Link to="/" className="text-sm text-indigo-600">
@@ -115,140 +115,154 @@ export function AdminPage() {
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
 
-      <section className="mb-8 rounded-lg border p-4">
-        <h2 className="mb-3 text-xl font-semibold">{t("admin.createUser")}</h2>
-        <form onSubmit={createUser} className="space-y-3">
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <input
-              id="new-user-email"
-              type="email"
-              required
-              autoComplete="off"
-              aria-label={t("admin.emailPlaceholder")}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={t("admin.emailPlaceholder")}
-              className="flex-1 rounded-lg border px-3 py-2"
-            />
-            <PasswordInput
-              id="new-user-password"
-              value={password}
-              onChange={setPassword}
-              autoComplete="new-password"
-              required
-              minLength={8}
-              ariaLabel={t("admin.passwordPlaceholder")}
-              placeholder={t("admin.passwordPlaceholder")}
-              wrapperClassName="relative flex-1"
-            />
-          </div>
-          <div className="flex items-center gap-3">
-            <select
-              value={accountType}
-              onChange={(e) => setAccountType(e.target.value as AccountType)}
-              className="rounded-lg border bg-white px-3 py-2 dark:bg-gray-800"
-            >
-              {ACCOUNT_TYPES.map((at) => (
-                <option key={at} value={at}>
-                  {t(TYPE_LABEL_KEY[at])}
-                </option>
-              ))}
-            </select>
-            <button
-              type="submit"
-              disabled={creating}
-              className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
-            >
-              {creating ? t("admin.creating") : t("admin.create")}
-            </button>
-            {createMsg && (
-              <span className="text-sm text-green-600">{createMsg}</span>
-            )}
-          </div>
-        </form>
-        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-          {t("admin.verifiedHint")}
-        </p>
-      </section>
-
-      <CategoriesSection />
-
-      <CourseCollectionAssignmentsSection />
-
-      <section className="mb-8 rounded-lg border p-4">
-        <h2 className="mb-2 text-xl font-semibold">Official course catalog</h2>
-        <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
-          Promoting a course publishes it in the Official Courses library.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          <input
-            aria-label="Course ID"
-            value={courseId}
-            onChange={(event) => setCourseId(event.target.value)}
-            placeholder="Course UUID"
-            className="flex-1 rounded-lg border px-3 py-2"
-          />
-          <button
-            disabled={updatingCourse || !courseId.trim()}
-            onClick={() => setCourseOfficial(true)}
-            className="rounded-lg bg-indigo-600 px-3 py-2 text-white disabled:opacity-60"
-          >
-            Make official
-          </button>
-          <button
-            disabled={updatingCourse || !courseId.trim()}
-            onClick={() => setCourseOfficial(false)}
-            className="rounded-lg border px-3 py-2 disabled:opacity-60"
-          >
-            Remove official status
-          </button>
-        </div>
-      </section>
-
-      <section>
-        <h2 className="mb-3 text-xl font-semibold">
-          {users ? t("admin.users", { count: users.length }) : t("admin.users")}
-        </h2>
-        {loading && !error && (
-          <p className="text-gray-500 dark:text-gray-400">
-            {t("admin.loading")}
-          </p>
-        )}
-        <ul className="space-y-2">
-          {users?.map((u) => (
-            <li
-              key={u.id}
-              className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-3"
-            >
-              <div className="min-w-0">
-                <p className="truncate font-medium">{u.email}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  {u.emailVerifiedAt
-                    ? t("admin.verified")
-                    : t("admin.unverified")}{" "}
-                  ·{" "}
-                  {t("admin.joined", {
-                    date: new Date(u.createdAt).toLocaleDateString(),
-                  })}
-                </p>
+      <div className="grid items-start gap-6 lg:grid-cols-2 2xl:grid-cols-3">
+        <div className="space-y-6">
+          <section className="rounded-lg border p-4">
+            <h2 className="mb-3 text-xl font-semibold">
+              {t("admin.createUser")}
+            </h2>
+            <form onSubmit={createUser} className="space-y-3">
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <input
+                  id="new-user-email"
+                  type="email"
+                  required
+                  autoComplete="off"
+                  aria-label={t("admin.emailPlaceholder")}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t("admin.emailPlaceholder")}
+                  className="flex-1 rounded-lg border px-3 py-2"
+                />
+                <PasswordInput
+                  id="new-user-password"
+                  value={password}
+                  onChange={setPassword}
+                  autoComplete="new-password"
+                  required
+                  minLength={8}
+                  ariaLabel={t("admin.passwordPlaceholder")}
+                  placeholder={t("admin.passwordPlaceholder")}
+                  wrapperClassName="relative flex-1"
+                />
               </div>
-              <select
-                value={u.accountType}
-                onChange={(e) =>
-                  changeType(u.id, e.target.value as AccountType)
-                }
-                className="rounded-lg border bg-white px-2 py-1 text-sm dark:bg-gray-800"
+              <div className="flex items-center gap-3">
+                <select
+                  value={accountType}
+                  onChange={(e) =>
+                    setAccountType(e.target.value as AccountType)
+                  }
+                  className="rounded-lg border bg-white px-3 py-2 dark:bg-gray-800"
+                >
+                  {ACCOUNT_TYPES.map((at) => (
+                    <option key={at} value={at}>
+                      {t(TYPE_LABEL_KEY[at])}
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="submit"
+                  disabled={creating}
+                  className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
+                >
+                  {creating ? t("admin.creating") : t("admin.create")}
+                </button>
+                {createMsg && (
+                  <span className="text-sm text-green-600">{createMsg}</span>
+                )}
+              </div>
+            </form>
+            <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              {t("admin.verifiedHint")}
+            </p>
+          </section>
+
+          <section className="rounded-lg border p-4">
+            <h2 className="mb-2 text-xl font-semibold">
+              Official course catalog
+            </h2>
+            <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
+              Promoting a course publishes it in the Official Courses library.
+            </p>
+            <div className="flex flex-wrap gap-2">
+              <input
+                aria-label="Course ID"
+                value={courseId}
+                onChange={(event) => setCourseId(event.target.value)}
+                placeholder="Course UUID"
+                className="flex-1 rounded-lg border px-3 py-2"
+              />
+              <button
+                disabled={updatingCourse || !courseId.trim()}
+                onClick={() => setCourseOfficial(true)}
+                className="rounded-lg bg-indigo-600 px-3 py-2 text-white disabled:opacity-60"
               >
-                {ACCOUNT_TYPES.map((at) => (
-                  <option key={at} value={at}>
-                    {t(TYPE_LABEL_KEY[at])}
-                  </option>
-                ))}
-              </select>
-            </li>
-          ))}
-        </ul>
-      </section>
+                Make official
+              </button>
+              <button
+                disabled={updatingCourse || !courseId.trim()}
+                onClick={() => setCourseOfficial(false)}
+                className="rounded-lg border px-3 py-2 disabled:opacity-60"
+              >
+                Remove official status
+              </button>
+            </div>
+          </section>
+        </div>
+
+        <CategoriesSection />
+
+        <div className="space-y-6">
+          <CourseCollectionAssignmentsSection />
+
+          <section className="rounded-lg border p-4">
+            <h2 className="mb-3 text-xl font-semibold">
+              {users
+                ? t("admin.users", { count: users.length })
+                : t("admin.users")}
+            </h2>
+            {loading && !error && (
+              <p className="text-gray-500 dark:text-gray-400">
+                {t("admin.loading")}
+              </p>
+            )}
+            <ul className="space-y-2">
+              {users?.map((u) => (
+                <li
+                  key={u.id}
+                  className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-3"
+                >
+                  <div className="min-w-0">
+                    <p className="truncate font-medium">{u.email}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {u.emailVerifiedAt
+                        ? t("admin.verified")
+                        : t("admin.unverified")}{" "}
+                      ·{" "}
+                      {t("admin.joined", {
+                        date: new Date(u.createdAt).toLocaleDateString(),
+                      })}
+                    </p>
+                  </div>
+                  <select
+                    value={u.accountType}
+                    onChange={(e) =>
+                      changeType(u.id, e.target.value as AccountType)
+                    }
+                    className="rounded-lg border bg-white px-2 py-1 text-sm dark:bg-gray-800"
+                  >
+                    {ACCOUNT_TYPES.map((at) => (
+                      <option key={at} value={at}>
+                        {t(TYPE_LABEL_KEY[at])}
+                      </option>
+                    ))}
+                  </select>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

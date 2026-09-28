@@ -86,6 +86,17 @@ describe("AdminPage", () => {
     expect(await screen.findByText("new@example.com")).toBeInTheDocument();
   });
 
+  test("uses a fluid three-column dashboard layout", async () => {
+    mockedAdminApi.listUsers.mockResolvedValue({ users: [] });
+    const { container } = renderPage();
+
+    expect(container.querySelector('[class*="2xl:grid-cols-3"]')).toHaveClass(
+      "grid",
+      "lg:grid-cols-2",
+      "2xl:grid-cols-3",
+    );
+  });
+
   test("renders API load failures", async () => {
     mockedAdminApi.listUsers.mockRejectedValue(
       new ApiError(500, "FAILED", "Admin service unavailable"),
