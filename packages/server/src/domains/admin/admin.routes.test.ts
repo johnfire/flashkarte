@@ -111,6 +111,34 @@ describe("admin routes", () => {
     expect(mock.createUser).not.toHaveBeenCalled();
   });
 
+  test("PUT collection subjects as admin -> 204", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    mock.setCourseCollectionMembers.mockResolvedValue();
+
+    const response = await request(app)
+      .put(
+        "/api/admin/course-collections/28c5885a-2488-4e9f-b15c-1ab006f2239e/subjects",
+      )
+      .set("Authorization", AUTH)
+      .send({
+        subjectIds: [
+          "84de1460-7ef1-4a0e-a4f0-842856e11ce7",
+          "6cbec507-6773-424d-95dc-876016f028ad",
+        ],
+      });
+
+    expect(response.status).toBe(204);
+    expect(mock.setCourseCollectionMembers).toHaveBeenCalledWith(
+      "28c5885a-2488-4e9f-b15c-1ab006f2239e",
+      {
+        subjectIds: [
+          "84de1460-7ef1-4a0e-a4f0-842856e11ce7",
+          "6cbec507-6773-424d-95dc-876016f028ad",
+        ],
+      },
+    );
+  });
+
   test("POST /api/admin/users with bad account type -> 422", async () => {
     authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
     mock.createUser.mockRejectedValue(

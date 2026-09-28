@@ -145,6 +145,11 @@ export function setSubjectCourseCollection(id: string, input: unknown) {
   return courseCollections.changeSubjectMembership(id, input);
 }
 
+/** Atomically arrange a course sequence under one collection. */
+export function setCourseCollectionMembers(id: string, input: unknown) {
+  return courseCollections.changeSubjectMemberships(id, input);
+}
+
 export async function setOfficialDeckContentLanguage(
   id: string,
   languageInput: unknown,

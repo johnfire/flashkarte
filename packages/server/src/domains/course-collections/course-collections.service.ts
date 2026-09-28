@@ -5,6 +5,7 @@ import { contentLanguageFilterSchema } from "../library/content-language";
 import * as repository from "./course-collections.repository";
 import {
   courseCollectionMembershipSchema,
+  courseCollectionMembersSchema,
   courseCollectionSchema,
 } from "./course-collections.schemas";
 
@@ -50,16 +51,43 @@ export async function changeSubjectMembership(
       membership.collectionId,
     );
     if (!collection) throw new NotFoundError("Course collection not found");
-    if (collection.is_official !== subjectSource) {
-      throw new ValidationError(
-        "A course can only join a collection from the same catalogue source",
-      );
-    }
     await repository.setSubjectCollection(
       db,
       subjectId,
       collection.id,
       membership.position ?? null,
     );
+  });
+}
+
+/** Move a complete teaching sequence into one collection, in its displayed order. */
+export async function changeSubjectMemberships(
+  collectionIdInput: unknown,
+  input: unknown,
+): Promise<void> {
+  const { subjectIds } = parse(courseCollectionMembersSchema, input);
+  const membership = parse(courseCollectionMembershipSchema, {
+    collectionId: collectionIdInput,
+  });
+  const collectionId = membership.collectionId;
+  if (collectionId === null) {
+    throw new ValidationError("Choose a course collection");
+  }
+  await withTransaction(async (db) => {
+    const collection = await repository.findCollectionForUpdate(
+      db,
+      collectionId,
+    );
+    if (!collection) throw new NotFoundError("Course collection not found");
+    for (const [position, subjectId] of subjectIds.entries()) {
+      const subjectSource = await repository.findSubjectSource(db, subjectId);
+      if (subjectSource === null) throw new NotFoundError("Course not found");
+      await repository.setSubjectCollection(
+        db,
+        subjectId,
+        collection.id,
+        position,
+      );
+    }
   });
 }

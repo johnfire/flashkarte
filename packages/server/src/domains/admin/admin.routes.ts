@@ -14,6 +14,10 @@ adminRouter.patch(
   "/subjects/:id/course-collection",
   ctrl.setSubjectCourseCollection,
 );
+adminRouter.put(
+  "/course-collections/:id/subjects",
+  ctrl.setCourseCollectionMembers,
+);
 adminRouter.post("/decks/:id/demote-official", ctrl.demoteOfficialDeck);
 adminRouter.patch("/decks/:id/category", ctrl.setDeckCategory);
 adminRouter.patch("/collections/:id/category", ctrl.setCollectionCategory);

@@ -676,6 +676,20 @@ export const api = {
         method: "PATCH",
         body: JSON.stringify({ official }),
       }),
+    createCourseCollection: (
+      title: string,
+      description: string,
+      isOfficial: boolean,
+    ) =>
+      request<CourseCollectionSummary>("/admin/course-collections", {
+        method: "POST",
+        body: JSON.stringify({ title, description, isOfficial }),
+      }),
+    setCourseCollectionMembers: (collectionId: string, subjectIds: string[]) =>
+      request<void>(`/admin/course-collections/${collectionId}/subjects`, {
+        method: "PUT",
+        body: JSON.stringify({ subjectIds }),
+      }),
     categoryTree: () =>
       request<{ categories: DeckCategory[] }>("/admin/categories"),
     createCategory: (title: string, parentId?: string) =>

@@ -7,6 +7,7 @@ import { AdminUser, AccountType } from "../api/types";
 import { PasswordInput } from "../components/PasswordInput";
 import { useAsync } from "../hooks/use-async";
 import { CategoriesSection } from "./admin/CategoriesSection";
+import { CourseCollectionAssignmentsSection } from "./admin/CourseCollectionAssignmentsSection";
 
 const ACCOUNT_TYPES: AccountType[] = ["free", "paid", "admin-gifted", "admin"];
 
@@ -171,6 +172,8 @@ export function AdminPage() {
       </section>
 
       <CategoriesSection />
+
+      <CourseCollectionAssignmentsSection />
 
       <section className="mb-8 rounded-lg border p-4">
         <h2 className="mb-2 text-xl font-semibold">Official course catalog</h2>

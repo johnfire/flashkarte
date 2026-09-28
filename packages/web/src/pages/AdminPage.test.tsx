@@ -13,7 +13,16 @@ vi.mock("../api/client", () => ({
       listUsers: vi.fn(),
       createUser: vi.fn(),
       setAccountType: vi.fn(),
+      setSubjectOfficial: vi.fn(),
+      createCourseCollection: vi.fn(),
+      setCourseCollectionMembers: vi.fn(),
       categoryTree: vi.fn(),
+    },
+    learn: {
+      subjects: vi.fn(),
+    },
+    courseCollections: {
+      list: vi.fn(),
     },
     decks: {
       listOfficial: vi.fn(),
@@ -34,7 +43,14 @@ const mockedAdminApi = api.admin as unknown as {
   listUsers: ReturnType<typeof vi.fn>;
   createUser: ReturnType<typeof vi.fn>;
   setAccountType: ReturnType<typeof vi.fn>;
+  setCourseCollectionMembers: ReturnType<typeof vi.fn>;
   categoryTree: ReturnType<typeof vi.fn>;
+};
+const mockedLearnApi = api.learn as unknown as {
+  subjects: ReturnType<typeof vi.fn>;
+};
+const mockedCourseCollectionsApi = api.courseCollections as unknown as {
+  list: ReturnType<typeof vi.fn>;
 };
 
 const adminUser: AdminUser = {
@@ -58,6 +74,8 @@ describe("AdminPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockedAdminApi.categoryTree.mockResolvedValue({ categories: [] });
+    mockedLearnApi.subjects.mockResolvedValue([]);
+    mockedCourseCollectionsApi.list.mockResolvedValue([]);
   });
 
   test("renders loading and loaded states", async () => {
@@ -110,5 +128,51 @@ describe("AdminPage", () => {
       "paid",
     );
     expect(accountTypeSelect).toHaveValue("paid");
+  });
+
+  test("organizes each matching course under its collection", async () => {
+    mockedAdminApi.listUsers.mockResolvedValue({ users: [] });
+    mockedLearnApi.subjects.mockResolvedValue([
+      {
+        id: "ai-security",
+        user_id: "owner-1",
+        title: "AI Security at Work",
+        description: null,
+        is_public: true,
+        is_official: false,
+        concept_count: 20,
+      },
+    ]);
+    mockedCourseCollectionsApi.list.mockImplementation((source) =>
+      Promise.resolve(
+        source === "official"
+          ? [
+              {
+                id: "artificial-intelligence",
+                title: "Artificial Intelligence",
+                description: null,
+                is_official: true,
+                course_count: 3,
+              },
+            ]
+          : [],
+      ),
+    );
+    renderPage();
+
+    const collectionCard = (
+      await screen.findByRole("heading", {
+        name: "Artificial Intelligence",
+      })
+    ).closest("li") as HTMLElement;
+    await userEvent.click(
+      within(collectionCard).getByRole("button", { name: "Organize" }),
+    );
+
+    expect(mockedAdminApi.setCourseCollectionMembers).toHaveBeenCalledWith(
+      "artificial-intelligence",
+      ["ai-security"],
+    );
+    expect(await screen.findByText(/1 courses organized/)).toBeInTheDocument();
   });
 });

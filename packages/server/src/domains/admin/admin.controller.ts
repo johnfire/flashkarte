@@ -130,6 +130,22 @@ export const setSubjectCourseCollection = wrapAsync(
   },
 );
 
+export const setCourseCollectionMembers = wrapAsync(
+  async (req: Request, res: Response) => {
+    await service.setCourseCollectionMembers(req.params.id, req.body);
+    await auditFromRequest(
+      req,
+      "admin.course_collection_members_assigned",
+      "course_collection",
+      req.params.id,
+      "success",
+      undefined,
+      { subjectCount: req.body?.subjectIds?.length ?? 0 },
+    );
+    res.status(204).end();
+  },
+);
+
 export const demoteOfficialDeck = wrapAsync(
   async (req: Request, res: Response) => {
     await service.demoteOfficialDeck(req.params.id, req.body.ownerId);
