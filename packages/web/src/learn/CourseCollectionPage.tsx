@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { Link, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
@@ -11,11 +12,8 @@ import {
 export function CourseCollectionPage() {
   const { t } = useTranslation();
   const { collectionId } = useParams();
-  const {
-    data: courses,
-    error,
-    loading,
-  } = useAsync(() => api.learn.subjects(), []);
+  const loadCourses = useCallback(() => api.learn.subjects(), []);
+  const { data: courses, error, loading } = useAsync(loadCourses, []);
   const collectionCourses = courses?.filter(
     (course) => course.course_collection_id === collectionId,
   );
