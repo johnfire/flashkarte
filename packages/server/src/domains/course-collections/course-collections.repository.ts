@@ -27,8 +27,7 @@ export function listCatalogCollections(isOfficial: boolean, language?: string) {
     `SELECT ${COLLECTION_SUMMARY_COLS}, count(s.id)::int AS course_count
      FROM course_collections cc
      JOIN subjects s ON s.course_collection_id = cc.id
-     WHERE cc.is_official = $1
-       AND s.is_public
+     WHERE s.is_public
        AND s.is_official = $1
        AND ($2::text IS NULL OR s.locale = $2 OR s.locale LIKE $2 || '-%')
      GROUP BY cc.id
@@ -43,7 +42,13 @@ export async function findCatalogCollection(
 ): Promise<CourseCollectionRow | null> {
   const rows = await query<CourseCollectionRow>(
     `SELECT ${COLLECTION_COLS} FROM course_collections
-     WHERE id = $1 AND is_official = $2`,
+     WHERE id = $1
+       AND EXISTS (
+         SELECT 1 FROM subjects
+         WHERE course_collection_id = course_collections.id
+           AND is_public
+           AND is_official = $2
+       )`,
     [id, isOfficial],
   );
   return rows[0] ?? null;
@@ -65,6 +70,26 @@ export function listCatalogCourses(
      ORDER BY s.course_collection_position NULLS LAST, s.title COLLATE de_phonebook ASC`,
     [collectionId, isOfficial, language ?? null],
   );
+}
+
+/** Add every public course from one catalogue collection to a learner's plan. */
+export async function enrollAllInCatalogCollection(
+  userId: string,
+  collectionId: string,
+  isOfficial: boolean,
+): Promise<number> {
+  const result = await query(
+    `INSERT INTO subject_enrollments (user_id, subject_id)
+     SELECT $1, s.id
+     FROM subjects s
+     WHERE s.course_collection_id = $2
+       AND s.is_public
+       AND s.is_official = $3
+     ON CONFLICT DO NOTHING
+     RETURNING subject_id`,
+    [userId, collectionId, isOfficial],
+  );
+  return result.length;
 }
 
 export async function createCollection(
@@ -140,6 +165,7 @@ export const courseCollectionsRepository = {
   findCatalogCollection,
   findCollectionForUpdate,
   findSubjectSource,
+  enrollAllInCatalogCollection,
   listCatalogCollections,
   listCatalogCourses,
   listUngroupedCatalogSubjects,

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { wrapAsync } from "../../utils/wrapAsync";
+import { auditFromRequest } from "../audit/audit.service";
 import * as service from "./course-collections.service";
 
 function sourceIsOfficial(source: unknown): boolean {
@@ -23,4 +24,23 @@ export const getCatalog = wrapAsync(async (req: Request, res: Response) => {
       req.query.language,
     ),
   );
+});
+
+export const enrollAll = wrapAsync(async (req: Request, res: Response) => {
+  const isOfficial = sourceIsOfficial(req.query.source);
+  const enrolled = await service.enrollInCatalogCollection(
+    req.userId!,
+    req.params.id,
+    isOfficial,
+  );
+  await auditFromRequest(
+    req,
+    "course_collection.enrolled",
+    "course_collection",
+    req.params.id,
+    "success",
+    undefined,
+    { source: isOfficial ? "official" : "community", enrolled },
+  );
+  res.json({ enrolled });
 });

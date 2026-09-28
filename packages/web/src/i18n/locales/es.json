@@ -357,7 +357,11 @@
   "courseCatalog": {
     "loadError": "No se pudieron cargar los cursos.",
     "adding": "Añadiendo…",
-    "add": "Añadir a mis cursos estructurados"
+    "add": "Añadir a mis cursos estructurados",
+    "addAll": "Añadir todos los cursos",
+    "addingAll": "Añadiendo todos los cursos…",
+    "addedAll": "Todos los cursos añadidos",
+    "enrollCollectionError": "No se pudo añadir esta colección de cursos. Inténtalo de nuevo."
   },
   "courseCollections": {
     "title": "Colecciones de cursos",

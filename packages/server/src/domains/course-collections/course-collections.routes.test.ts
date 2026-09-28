@@ -1,12 +1,18 @@
 import request from "supertest";
 
 jest.mock("./course-collections.service");
+jest.mock("../audit/audit.service", () => ({
+  auditFromRequest: jest.fn().mockResolvedValue(undefined),
+}));
 jest.mock("../../middleware/auth", () => {
   const pass = (
-    _req: import("express").Request,
+    req: import("express").Request,
     _res: import("express").Response,
     next: import("express").NextFunction,
-  ) => next();
+  ) => {
+    req.userId = "u1";
+    next();
+  };
   return {
     requireFullScope: pass,
     requireVerified: pass,
@@ -67,5 +73,21 @@ describe("course collection catalogue routes", () => {
     );
 
     expect(response.status).toBe(404);
+  });
+
+  test("adds every course from a community collection to the learner plan", async () => {
+    serviceMock.enrollInCatalogCollection.mockResolvedValue(15);
+
+    const response = await request(app).post(
+      "/api/course-collections/electronics/enroll?source=community",
+    );
+
+    expect(response.status).toBe(200);
+    expect(response.body).toEqual({ enrolled: 15 });
+    expect(serviceMock.enrollInCatalogCollection).toHaveBeenCalledWith(
+      "u1",
+      "electronics",
+      false,
+    );
   });
 });

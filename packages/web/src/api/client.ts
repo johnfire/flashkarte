@@ -658,6 +658,11 @@ export const api = {
       request<CourseCollectionDetail>(
         `/course-collections/${id}?source=${source}${language ? `&language=${language}` : ""}`,
       ),
+    enrollAll: (id: string, source: "official" | "community") =>
+      request<{ enrolled: number }>(
+        `/course-collections/${id}/enroll?source=${source}`,
+        { method: "POST" },
+      ),
   },
   admin: {
     listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),

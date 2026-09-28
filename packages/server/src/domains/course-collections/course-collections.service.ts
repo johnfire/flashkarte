@@ -29,6 +29,24 @@ export async function getCatalogCollection(
   return { ...collection, courses };
 }
 
+/** Add all public courses from one catalogue collection to a learner's plan. */
+export async function enrollInCatalogCollection(
+  userId: string,
+  collectionId: string,
+  isOfficial: boolean,
+): Promise<number> {
+  const collection = await repository.findCatalogCollection(
+    collectionId,
+    isOfficial,
+  );
+  if (!collection) throw new NotFoundError("Course collection not found");
+  return repository.enrollAllInCatalogCollection(
+    userId,
+    collectionId,
+    isOfficial,
+  );
+}
+
 export async function createCollection(input: unknown) {
   const fields = parse(courseCollectionSchema, input);
   return repository.createCollection(getPool(), fields);

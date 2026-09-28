@@ -357,7 +357,11 @@
   "courseCatalog": {
     "loadError": "Couldn't load courses.",
     "adding": "Adding…",
-    "add": "Add to My Structured Learning Courses"
+    "add": "Add to My Structured Learning Courses",
+    "addAll": "Add all courses",
+    "addingAll": "Adding all courses…",
+    "addedAll": "Added all courses",
+    "enrollCollectionError": "Couldn't add that course collection. Try again."
   },
   "courseCollections": {
     "title": "Course Collections",

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import type { CourseCollectionSummary } from "../api/learn-types";
 import { useAsync } from "../hooks/use-async";
+import { CourseCollectionEnrollButton } from "./CourseCollectionEnrollButton";
 
 type CourseSource = "official" | "community";
 
@@ -74,6 +75,12 @@ export function CourseCollectionCatalogSection({
                 })}
               </p>
             </Link>
+            <div className="px-4 pb-4">
+              <CourseCollectionEnrollButton
+                collectionId={collection.id}
+                source={source}
+              />
+            </div>
           </li>
         ))}
       </ul>

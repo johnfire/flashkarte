@@ -8,6 +8,7 @@ import * as repository from "./course-collections.repository";
 import {
   changeSubjectMembership,
   changeSubjectMemberships,
+  enrollInCatalogCollection,
 } from "./course-collections.service";
 
 const repositoryMock = repository as jest.Mocked<typeof repository>;
@@ -63,5 +64,33 @@ describe("course collection membership", () => {
       COLLECTION_ID,
       1,
     );
+  });
+});
+
+describe("catalogue collection enrollment", () => {
+  test("enrolls every public community course in an available collection", async () => {
+    repositoryMock.findCatalogCollection.mockResolvedValue({
+      id: COLLECTION_ID,
+      title: "Art of Electronics",
+    } as never);
+    repositoryMock.enrollAllInCatalogCollection.mockResolvedValue(15);
+
+    await expect(
+      enrollInCatalogCollection("learner-1", COLLECTION_ID, false),
+    ).resolves.toBe(15);
+    expect(repositoryMock.enrollAllInCatalogCollection).toHaveBeenCalledWith(
+      "learner-1",
+      COLLECTION_ID,
+      false,
+    );
+  });
+
+  test("does not enroll courses from a collection outside the catalogue source", async () => {
+    repositoryMock.findCatalogCollection.mockResolvedValue(null);
+
+    await expect(
+      enrollInCatalogCollection("learner-1", COLLECTION_ID, true),
+    ).rejects.toThrow("Course collection not found");
+    expect(repositoryMock.enrollAllInCatalogCollection).not.toHaveBeenCalled();
   });
 });

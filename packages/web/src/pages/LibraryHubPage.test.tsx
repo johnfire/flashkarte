@@ -13,7 +13,7 @@ vi.mock("../api/client", () => ({
       save: vi.fn().mockResolvedValue({}),
     },
     learn: { catalog: vi.fn(), enroll: vi.fn() },
-    courseCollections: { list: vi.fn() },
+    courseCollections: { list: vi.fn(), enrollAll: vi.fn() },
     decks: {
       listCollections: vi.fn(),
       listOfficial: vi.fn(),
@@ -43,6 +43,7 @@ const learnApi = api.learn as unknown as {
 };
 const courseCollectionsApi = api.courseCollections as unknown as {
   list: ReturnType<typeof vi.fn>;
+  enrollAll: ReturnType<typeof vi.fn>;
 };
 const deckApi = api.decks as unknown as {
   listCollections: ReturnType<typeof vi.fn>;
@@ -98,6 +99,7 @@ describe("LibraryHubPage", () => {
           : [],
       ),
     );
+    courseCollectionsApi.enrollAll.mockResolvedValue({ enrolled: 1 });
     deckApi.listCollections.mockResolvedValue([
       {
         id: "official-collection",
@@ -179,6 +181,16 @@ describe("LibraryHubPage", () => {
     expect(
       screen.getByRole("link", { name: "My Structured Learning Courses" }),
     ).toHaveAttribute("href", "/learn");
+    await userEvent.click(
+      screen.getByRole("button", { name: "Add all courses" }),
+    );
+    expect(courseCollectionsApi.enrollAll).toHaveBeenCalledWith(
+      "official-course-collection",
+      "official",
+    );
+    expect(
+      screen.getByRole("button", { name: "Added all courses" }),
+    ).toBeDisabled();
     for (const catalogList of screen.getAllByRole("list")) {
       expect(catalogList).toHaveClass("content-card-grid");
     }

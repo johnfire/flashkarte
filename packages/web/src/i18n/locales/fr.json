@@ -357,7 +357,11 @@
   "courseCatalog": {
     "loadError": "Impossible de charger les cours.",
     "adding": "Ajout…",
-    "add": "Ajouter à mes cours structurés"
+    "add": "Ajouter à mes cours structurés",
+    "addAll": "Ajouter tous les cours",
+    "addingAll": "Ajout de tous les cours…",
+    "addedAll": "Tous les cours sont ajoutés",
+    "enrollCollectionError": "Impossible d’ajouter cette collection de cours. Réessayez."
   },
   "courseCollections": {
     "title": "Collections de cours",

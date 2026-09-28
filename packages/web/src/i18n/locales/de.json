@@ -357,7 +357,11 @@
   "courseCatalog": {
     "loadError": "Kurse konnten nicht geladen werden.",
     "adding": "Wird hinzugefügt…",
-    "add": "Zu meinen strukturierten Lernkursen hinzufügen"
+    "add": "Zu meinen strukturierten Lernkursen hinzufügen",
+    "addAll": "Alle Kurse hinzufügen",
+    "addingAll": "Alle Kurse werden hinzugefügt…",
+    "addedAll": "Alle Kurse hinzugefügt",
+    "enrollCollectionError": "Diese Kurssammlung konnte nicht hinzugefügt werden. Bitte erneut versuchen."
   },
   "courseCollections": {
     "title": "Kurssammlungen",
