@@ -121,11 +121,22 @@ export interface SubjectSummaryRow {
   course_collection_id: string | null;
   course_collection_position: number | null;
   course_collection_title: string | null;
+  course_progress?: "not_started" | "in_progress" | "completed";
 }
+
+const COURSE_PROGRESS_COL = `
+  (SELECT CASE
+    WHEN count(p.lesson_id) = 0 THEN 'not_started'
+    WHEN count(p.lesson_id) FILTER (WHERE p.status = 'passed') = count(l.id) THEN 'completed'
+    ELSE 'in_progress'
+  END
+  FROM lessons l
+  LEFT JOIN lesson_progress p ON p.lesson_id = l.id AND p.user_id = $1
+  WHERE l.subject_id = s.id) AS course_progress`;
 
 export function listSubjects(userId: string) {
   return query<SubjectSummaryRow>(
-    `SELECT ${SUBJECT_SUMMARY_COLS},
+    `SELECT ${SUBJECT_SUMMARY_COLS}, ${COURSE_PROGRESS_COL},
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
      LEFT JOIN course_collections cc ON cc.id = s.course_collection_id

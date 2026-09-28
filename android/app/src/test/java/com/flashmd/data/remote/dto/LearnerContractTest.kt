@@ -32,6 +32,7 @@ class LearnerContractTest {
         assertEquals("Contract", subjects.single().title)
         assertEquals(1, subjects.single().conceptCount)
         assertEquals(1, subjects.single().referenceNumber)
+        assertEquals("in_progress", subjects.single().courseProgress)
     }
 
     @Test

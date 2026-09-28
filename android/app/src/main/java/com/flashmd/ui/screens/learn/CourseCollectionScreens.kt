@@ -110,7 +110,7 @@ private fun CollectionCard(
 internal fun PersonalCourseCard(course: LearnSubjectDto, onOpenSubject: (String) -> Unit) {
     Card(
         Modifier.fillMaxWidth().clickable { onOpenSubject(course.id) },
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+        colors = CardDefaults.cardColors(containerColor = courseProgressColor(course.courseProgress)),
     ) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(
@@ -119,6 +119,7 @@ internal fun PersonalCourseCard(course: LearnSubjectDto, onOpenSubject: (String)
                 fontWeight = FontWeight.SemiBold,
             )
             course.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+            CourseProgressLabel(course.courseProgress)
             Text(
                 pluralStringResource(R.plurals.learn_concept_count, course.conceptCount, course.conceptCount),
                 style = MaterialTheme.typography.labelSmall,
@@ -126,6 +127,28 @@ internal fun PersonalCourseCard(course: LearnSubjectDto, onOpenSubject: (String)
             )
         }
     }
+}
+
+@Composable
+private fun courseProgressColor(progress: String?): androidx.compose.ui.graphics.Color =
+    when (progress) {
+        "completed" -> MaterialTheme.colorScheme.tertiaryContainer
+        "in_progress" -> MaterialTheme.colorScheme.secondaryContainer
+        else -> MaterialTheme.colorScheme.surfaceVariant
+    }
+
+@Composable
+private fun CourseProgressLabel(progress: String?) {
+    val label = when (progress) {
+        "completed" -> R.string.learn_course_completed
+        "in_progress" -> R.string.learn_course_in_progress
+        else -> return
+    }
+    Text(
+        stringResource(label),
+        style = MaterialTheme.typography.labelSmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

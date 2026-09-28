@@ -42,6 +42,7 @@ describe("LearnPage", () => {
         is_public: false,
         is_official: false,
         concept_count: 1,
+        course_progress: "in_progress",
       },
     ]);
     render(
@@ -54,6 +55,8 @@ describe("LearnPage", () => {
     expect(screen.getByRole("list")).toHaveClass("content-card-grid");
     expect(screen.getByText("#42")).toBeTruthy();
     expect(screen.getByText("1 concept")).toBeTruthy();
+    expect(screen.getByText("In progress")).toBeTruthy();
+    expect(link.closest("li")).toHaveClass("bg-sky-50");
   });
 
   test("groups enrolled courses into a collection card", async () => {

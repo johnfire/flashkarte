@@ -822,6 +822,7 @@
       "passed": "Passed",
       "paused": "Come back later"
     },
+    "courseCompleted": "Course complete",
     "start": "Start",
     "continueLesson": "Continue",
     "readAgain": "Read again",

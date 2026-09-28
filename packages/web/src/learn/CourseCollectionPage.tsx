@@ -2,6 +2,10 @@ import { Link, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import { useAsync } from "../hooks/use-async";
+import {
+  CourseProgressBadge,
+  courseProgressCardClass,
+} from "./LearnCourseCard";
 
 /** The courses a learner has access to inside one Course Collection. */
 export function CourseCollectionPage() {
@@ -42,12 +46,18 @@ export function CourseCollectionPage() {
       )}
       <ul className="mt-6 content-card-grid">
         {collectionCourses?.map((course) => (
-          <li key={course.id} className="rounded-xl border">
+          <li
+            key={course.id}
+            className={`rounded-xl ${courseProgressCardClass(course.course_progress)}`}
+          >
             <Link
               to={`/learn/${course.id}`}
               className="block rounded-xl p-4 hover:bg-gray-100 dark:hover:bg-gray-800"
             >
-              <h2 className="text-lg font-semibold">{course.title}</h2>
+              <h2 className="text-lg font-semibold">
+                {course.title}
+                <CourseProgressBadge progress={course.course_progress} />
+              </h2>
               {course.description && (
                 <p className="mt-1 text-sm text-gray-700 dark:text-gray-300">
                   {course.description}

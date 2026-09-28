@@ -6,6 +6,37 @@ import {
   contentLanguageLabel,
 } from "../components/ContentLanguageSwitcher";
 
+export function courseProgressCardClass(
+  progress?: LearnSubject["course_progress"],
+) {
+  if (progress === "completed")
+    return "border-emerald-400 bg-emerald-50 dark:border-emerald-700 dark:bg-emerald-950/40";
+  if (progress === "in_progress")
+    return "border-sky-400 bg-sky-50 dark:border-sky-700 dark:bg-sky-950/40";
+  return "border";
+}
+
+export function CourseProgressBadge({
+  progress,
+}: {
+  progress?: LearnSubject["course_progress"];
+}) {
+  const { t } = useTranslation();
+  if (progress === "completed")
+    return (
+      <span className="ml-2 rounded-full bg-emerald-200 px-2 py-0.5 text-xs font-medium text-emerald-800 dark:bg-emerald-900 dark:text-emerald-200">
+        {t("learn.courseCompleted")}
+      </span>
+    );
+  if (progress === "in_progress")
+    return (
+      <span className="ml-2 rounded-full bg-sky-200 px-2 py-0.5 text-xs font-medium text-sky-800 dark:bg-sky-900 dark:text-sky-200">
+        {t("learn.state.in_progress")}
+      </span>
+    );
+  return null;
+}
+
 interface LearnCourseCardProps {
   course: LearnSubject;
   currentUserId?: string;
@@ -26,7 +57,9 @@ export function LearnCourseCard({
   const isOwnedCommunityCourse =
     course.user_id === currentUserId && !course.is_official;
   return (
-    <li className="rounded-xl border">
+    <li
+      className={`rounded-xl ${courseProgressCardClass(course.course_progress)}`}
+    >
       <Link
         to={`/learn/${course.id}`}
         className="block rounded-xl p-4 hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -53,6 +86,7 @@ export function LearnCourseCard({
               {t("learn.community")}
             </span>
           )}
+          <CourseProgressBadge progress={course.course_progress} />
         </span>
         {course.description && (
           <span className="block text-sm text-gray-700 dark:text-gray-300">

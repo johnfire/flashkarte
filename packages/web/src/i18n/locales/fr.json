@@ -822,6 +822,7 @@
       "passed": "Réussie",
       "paused": "À reprendre plus tard"
     },
+    "courseCompleted": "Cours terminé",
     "start": "Commencer",
     "continueLesson": "Continuer",
     "readAgain": "Relire",

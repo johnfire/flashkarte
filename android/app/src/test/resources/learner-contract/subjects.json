@@ -11,6 +11,7 @@
     "locale": null,
     "created_at": "<time>",
     "updated_at": "<time>",
-    "concept_count": 1
+    "concept_count": 1,
+    "course_progress": "in_progress"
   }
 ]

@@ -21,6 +21,7 @@ data class LearnSubjectDto(
     @SerialName("course_collection_id") val courseCollectionId: String? = null,
     @SerialName("course_collection_position") val courseCollectionPosition: Int? = null,
     @SerialName("course_collection_title") val courseCollectionTitle: String? = null,
+    @SerialName("course_progress") val courseProgress: String? = null,
 )
 
 @Serializable

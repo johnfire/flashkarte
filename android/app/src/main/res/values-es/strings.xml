@@ -208,6 +208,8 @@
         <item quantity="other">%1$d fuentes</item>
     </plurals>
     <string name="learn_course_collections">Colecciones de cursos</string>
+    <string name="learn_course_in_progress">En curso</string>
+    <string name="learn_course_completed">Curso completado</string>
     <string name="learn_other_courses">Otros cursos</string>
     <string name="learn_collection_empty">No hay cursos disponibles en esta colección.</string>
     <plurals name="learn_course_count">

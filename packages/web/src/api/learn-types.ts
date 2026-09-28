@@ -14,6 +14,7 @@ export interface LearnSubject {
   course_collection_id?: string | null;
   course_collection_position?: number | null;
   course_collection_title?: string | null;
+  course_progress?: "not_started" | "in_progress" | "completed";
 }
 
 export interface CourseCollectionSummary {
