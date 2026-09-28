@@ -8,10 +8,13 @@
     "is_public": false,
     "is_official": false,
     "version": 2,
-    "locale": null,
     "created_at": "<time>",
     "updated_at": "<time>",
-    "concept_count": 1,
-    "course_progress": "in_progress"
+    "locale": null,
+    "course_collection_id": null,
+    "course_collection_position": null,
+    "course_collection_title": null,
+    "course_progress": "not_started",
+    "concept_count": 1
   }
 ]

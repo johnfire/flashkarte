@@ -28,11 +28,14 @@ class LearnerContractTest {
 
     @Test
     fun `the subject list decodes`() {
-        val subjects = read<List<LearnSubjectDto>>("subjects")
-        assertEquals("Contract", subjects.single().title)
-        assertEquals(1, subjects.single().conceptCount)
-        assertEquals(1, subjects.single().referenceNumber)
-        assertEquals("in_progress", subjects.single().courseProgress)
+        val subject = read<List<LearnSubjectDto>>("subjects").single()
+        assertEquals("Contract", subject.title)
+        assertEquals(1, subject.conceptCount)
+        assertEquals(1, subject.referenceNumber)
+        assertNull(subject.courseCollectionId)
+        assertNull(subject.courseCollectionPosition)
+        assertNull(subject.courseCollectionTitle)
+        assertEquals("not_started", subject.courseProgress)
     }
 
     @Test
