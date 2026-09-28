@@ -207,4 +207,20 @@
         <item quantity="one">%1$d fuente</item>
         <item quantity="other">%1$d fuentes</item>
     </plurals>
+    <string name="learn_course_collections">Colecciones de cursos</string>
+    <string name="learn_other_courses">Otros cursos</string>
+    <string name="learn_collection_empty">No hay cursos disponibles en esta colección.</string>
+    <plurals name="learn_course_count">
+        <item quantity="one">%1$d curso</item>
+        <item quantity="other">%1$d cursos</item>
+    </plurals>
+    <string name="library_browse_structured_courses">Explorar cursos estructurados</string>
+    <string name="library_browse_structured_courses_detail">Explora colecciones de cursos oficiales y de la comunidad.</string>
+    <string name="course_catalog_title">Biblioteca de cursos</string>
+    <string name="course_catalog_official">Oficial</string>
+    <string name="course_catalog_community">Comunidad</string>
+    <string name="course_catalog_empty">Aún no hay colecciones de cursos disponibles.</string>
+    <string name="course_catalog_add">Añadir curso</string>
+    <string name="course_catalog_adding">Añadiendo…</string>
+    <string name="course_catalog_added">Añadido</string>
 </resources>

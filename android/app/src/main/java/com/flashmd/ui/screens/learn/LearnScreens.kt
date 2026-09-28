@@ -41,16 +41,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.R
 import com.flashmd.data.remote.dto.LearnerLessonDto
+import com.flashmd.ui.components.RefreshOnResume
 
 /** Your subjects, each opening on its outline. */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LearnScreen(
     onBack: () -> Unit,
+    onOpenCollection: (String) -> Unit,
     onOpenSubject: (String) -> Unit,
     viewModel: LearnSubjectsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    RefreshOnResume(viewModel::refresh)
     Scaffold(topBar = { LearnTopBar(stringResource(R.string.learn_title), onBack) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text(stringResource(R.string.learn_intro), color = MaterialTheme.colorScheme.onSurfaceVariant)
@@ -60,28 +63,7 @@ fun LearnScreen(
                 state.error != null && state.subjects.isEmpty() ->
                     Text(state.error!!, color = MaterialTheme.colorScheme.error)
                 state.subjects.isEmpty() -> Text(stringResource(R.string.learn_empty))
-                else -> LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    items(state.subjects, key = { it.id }) { subject ->
-                        Card(
-                            Modifier.fillMaxWidth().clickable { onOpenSubject(subject.id) },
-                            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-                        ) {
-                            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                Text(
-                                    listOfNotNull(subject.title, subject.referenceNumber?.let { "#$it" }).joinToString("  "),
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.SemiBold,
-                                )
-                                subject.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
-                                Text(
-                                    pluralStringResource(R.plurals.learn_concept_count, subject.conceptCount, subject.conceptCount),
-                                    style = MaterialTheme.typography.labelSmall,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
-                            }
-                        }
-                    }
-                }
+                else -> PersonalCoursesContent(state.subjects, onOpenCollection, onOpenSubject)
             }
         }
     }

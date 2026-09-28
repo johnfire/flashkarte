@@ -207,4 +207,20 @@
         <item quantity="one">%1$d source</item>
         <item quantity="other">%1$d sources</item>
     </plurals>
+    <string name="learn_course_collections">Course Collections</string>
+    <string name="learn_other_courses">Other Courses</string>
+    <string name="learn_collection_empty">No courses are available in this collection.</string>
+    <plurals name="learn_course_count">
+        <item quantity="one">%1$d course</item>
+        <item quantity="other">%1$d courses</item>
+    </plurals>
+    <string name="library_browse_structured_courses">Browse structured courses</string>
+    <string name="library_browse_structured_courses_detail">Explore official and community course collections.</string>
+    <string name="course_catalog_title">Course Library</string>
+    <string name="course_catalog_official">Official</string>
+    <string name="course_catalog_community">Community</string>
+    <string name="course_catalog_empty">No course collections are available yet.</string>
+    <string name="course_catalog_add">Add course</string>
+    <string name="course_catalog_adding">Adding…</string>
+    <string name="course_catalog_added">Added</string>
 </resources>

@@ -33,6 +33,9 @@ import com.flashmd.ui.screens.decklist.DeckListScreen
 import com.flashmd.ui.screens.help.BranchingHelpScreen
 import com.flashmd.ui.screens.help.HelpScreen
 import com.flashmd.ui.screens.learn.LearnScreen
+import com.flashmd.ui.screens.learn.CourseCollectionCatalogScreen
+import com.flashmd.ui.screens.learn.CourseCollectionDetailScreen
+import com.flashmd.ui.screens.learn.MyCourseCollectionScreen
 import com.flashmd.ui.screens.learn.LessonScreen
 import com.flashmd.ui.screens.learn.OutlineScreen
 import com.flashmd.ui.screens.learn.ReadLessonScreen
@@ -141,7 +144,10 @@ fun NavGraph(onLogout: () -> Unit = {}) {
             }
 
             composable("library") {
-                LibraryScreen(onOpenDeck = { id -> navController.navigate("library/$id") })
+                LibraryScreen(
+                    onOpenDeck = { id -> navController.navigate("library/$id") },
+                    onBrowseCourseCollections = { navController.navigate("course-catalog") },
+                )
             }
 
             composable(
@@ -159,6 +165,38 @@ fun NavGraph(onLogout: () -> Unit = {}) {
 
             composable("learn") {
                 LearnScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenCollection = { id -> navController.navigate("learn/collections/$id") },
+                    onOpenSubject = { id -> navController.navigate("learn/$id") },
+                )
+            }
+
+            composable("course-catalog") {
+                CourseCollectionCatalogScreen(
+                    onBack = { navController.popBackStack() },
+                    onOpenCollection = { source, id ->
+                        navController.navigate("course-catalog/${source.queryValue}/$id")
+                    },
+                )
+            }
+
+            composable(
+                route = "course-catalog/{source}/{collectionId}",
+                arguments = listOf(
+                    navArgument("source") { type = NavType.StringType },
+                    navArgument("collectionId") { type = NavType.StringType },
+                ),
+            ) {
+                CourseCollectionDetailScreen(onBack = { navController.popBackStack() })
+            }
+
+            composable(
+                route = "learn/collections/{collectionId}",
+                arguments = listOf(navArgument("collectionId") { type = NavType.StringType }),
+            ) { entry ->
+                val collectionId = requireNotNull(entry.arguments?.getString("collectionId"))
+                MyCourseCollectionScreen(
+                    collectionId = collectionId,
                     onBack = { navController.popBackStack() },
                     onOpenSubject = { id -> navController.navigate("learn/$id") },
                 )

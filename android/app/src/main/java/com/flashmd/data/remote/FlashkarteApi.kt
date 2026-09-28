@@ -45,6 +45,8 @@ import com.flashmd.data.remote.dto.UpdateDeckRequest
 import com.flashmd.data.remote.dto.UpdateProfileRequest
 import com.flashmd.data.remote.dto.AnswerRequest
 import com.flashmd.data.remote.dto.CommentRequest
+import com.flashmd.data.remote.dto.CourseCollectionDetailDto
+import com.flashmd.data.remote.dto.CourseCollectionDto
 import com.flashmd.data.remote.dto.DueReviewsDto
 import com.flashmd.data.remote.dto.HelpRequest
 import com.flashmd.data.remote.dto.HelpSentDto
@@ -239,6 +241,26 @@ interface FlashkarteApi {
 
     @GET("api/subjects")
     suspend fun listLearnSubjects(): List<LearnSubjectDto>
+
+    @GET("api/course-collections")
+    suspend fun listCourseCollections(
+        @Query("source") source: String,
+    ): List<CourseCollectionDto>
+
+    @GET("api/course-collections/{id}")
+    suspend fun getCourseCollection(
+        @Path("id") collectionId: String,
+        @Query("source") source: String,
+    ): CourseCollectionDetailDto
+
+    @GET("api/subjects/catalog")
+    suspend fun listUngroupedCourseCatalog(
+        @Query("source") source: String,
+        @Query("ungrouped") ungrouped: Boolean = true,
+    ): List<LearnSubjectDto>
+
+    @POST("api/subjects/{id}/enroll")
+    suspend fun enrollInCourse(@Path("id") subjectId: String)
 
     @GET("api/subjects/{id}/learn/outline")
     suspend fun learnOutline(@Path("id") subjectId: String): LearnerOutlineDto
