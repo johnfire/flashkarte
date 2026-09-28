@@ -8,7 +8,8 @@ changes, or manually (Actions → "Android Release" → Run workflow).
 - Upload keystore: `~/keystores/flashkarte-upload.jks` (password in
   `~/keystores/flashkarte-upload.creds.txt` — back this up to your password
   manager; **not** in git)
-- `versionCode` = GitHub run number + 10 (monotonic); `versionName` = `0.1.0`
+- `versionCode` = GitHub run number + 10 (monotonic); `versionName` =
+  `1.0.<GitHub run number>` (visible in Android and Play)
 
 ## CI / repo side — DONE
 
@@ -42,9 +43,9 @@ changes, or manually (Actions → "Android Release" → Run workflow).
    gh secret set PLAY_SERVICE_ACCOUNT_JSON < path/to/service-account.json
    ```
 
-After step 5, every `android/**` push to `main` auto-publishes a new build to the
-internal track. Add testers via Play Console → Internal testing → Testers, and
-share the opt-in link.
+After step 5, every push to `main` auto-publishes a new build to the internal
+track. Add testers via Play Console → Internal testing → Testers, and share the
+opt-in link.
 
 ## Manual / local build of the signed AAB
 

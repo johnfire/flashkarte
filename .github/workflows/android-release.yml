@@ -1,14 +1,10 @@
 name: Android Release
 
-# Publishes a signed AAB to the Play "internal" testing track. Runs when the
-# Android app changes on main, or on demand. Server/web-only commits don't
-# trigger a new Play release.
+# Publishes a signed AAB to the Play "internal" testing track on every main
+# push, keeping the visible Android version aligned with the deployed product.
 on:
   push:
     branches: [main]
-    paths:
-      - "android/**"
-      - ".github/workflows/android-release.yml"
   workflow_dispatch:
 
 concurrency:
@@ -59,15 +55,18 @@ jobs:
           echo "$UPLOAD_KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.keystore"
           printf '%s' "$PLAY_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/play-sa.json"
 
-      - name: Compute versionCode (run number + offset; must be monotonic)
+      - name: Compute Android version from the workflow run
         if: steps.guard.outputs.skip != 'true'
-        run: echo "VERSION_CODE=$(( ${{ github.run_number }} + 10 ))" >> "$GITHUB_ENV"
+        run: |
+          echo "VERSION_CODE=$(( ${{ github.run_number }} + 10 ))" >> "$GITHUB_ENV"
+          echo "VERSION_NAME=1.0.${{ github.run_number }}" >> "$GITHUB_ENV"
 
       - name: Build + publish AAB to Play (internal)
         if: steps.guard.outputs.skip != 'true'
         working-directory: android
         env:
           VERSION_CODE: ${{ env.VERSION_CODE }}
+          VERSION_NAME: ${{ env.VERSION_NAME }}
           UPLOAD_KEYSTORE_FILE: ${{ runner.temp }}/upload.keystore
           UPLOAD_KEYSTORE_PASSWORD: ${{ secrets.UPLOAD_KEYSTORE_PASSWORD }}
           UPLOAD_KEY_ALIAS: ${{ secrets.UPLOAD_KEY_ALIAS }}

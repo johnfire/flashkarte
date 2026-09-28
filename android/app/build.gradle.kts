@@ -14,6 +14,8 @@ plugins {
 // unchanged; release signing + publishing only engage when these are present.
 val uploadKeystore = System.getenv("UPLOAD_KEYSTORE_FILE")?.let { file(it) }
 val playCredentials = System.getenv("PLAY_SERVICE_ACCOUNT_FILE")?.let { file(it) }
+val appVersionCode = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
+val appVersionName = System.getenv("VERSION_NAME")?.takeIf { it.isNotBlank() } ?: "1.0.2"
 
 android {
     namespace = "com.flashmd"
@@ -23,10 +25,10 @@ android {
         applicationId = "de.christopherrehm.flashkarte"
         minSdk = 26
         targetSdk = 36
-        // Play requires a monotonically increasing versionCode; CI passes the
-        // workflow run number. Defaults to 1 for local builds.
-        versionCode = System.getenv("VERSION_CODE")?.toIntOrNull() ?: 1
-        versionName = "1.0.2"
+        // CI derives both values from its run number. Local builds retain a
+        // stable fallback without requiring release-only environment values.
+        versionCode = appVersionCode
+        versionName = appVersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
