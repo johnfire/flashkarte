@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flashmd.data.remote.dto.CourseCollectionDetailDto
 import com.flashmd.data.remote.dto.CourseCollectionDto
+import com.flashmd.data.remote.dto.CourseLanguageFilter
 import com.flashmd.data.remote.dto.CourseCollectionSource
 import com.flashmd.data.remote.dto.LearnSubjectDto
 import com.flashmd.data.repository.CourseCollectionRepository
@@ -18,6 +19,7 @@ import javax.inject.Inject
 
 data class CourseCollectionCatalogUiState(
     val source: CourseCollectionSource = CourseCollectionSource.OFFICIAL,
+    val language: CourseLanguageFilter = CourseLanguageFilter.ALL,
     val collections: List<CourseCollectionDto> = emptyList(),
     val ungroupedCourses: List<LearnSubjectDto> = emptyList(),
     val enrolledSubjectIds: Set<String> = emptySet(),
@@ -42,12 +44,19 @@ class CourseCollectionCatalogViewModel @Inject constructor(
         refresh()
     }
 
+    fun selectLanguage(language: CourseLanguageFilter) {
+        if (language == _state.value.language) return
+        _state.update { it.copy(language = language) }
+        refresh()
+    }
+
     fun refresh() {
         val source = _state.value.source
+        val language = _state.value.language
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
-            val collections = runCatching { repository.list(source) }
-            val ungroupedCourses = runCatching { repository.listUngrouped(source) }
+            val collections = runCatching { repository.list(source, language) }
+            val ungroupedCourses = runCatching { repository.listUngrouped(source, language) }
             _state.update {
                 it.copy(
                     collections = collections.getOrDefault(emptyList()),
@@ -107,6 +116,7 @@ class CourseCollectionDetailViewModel @Inject constructor(
 ) : ViewModel() {
     private val collectionId: String = checkNotNull(savedState["collectionId"])
     private val source = CourseCollectionSource.fromRoute(checkNotNull(savedState["source"]))
+    private val language = CourseLanguageFilter.fromRoute(checkNotNull(savedState["language"]))
     private val _state = MutableStateFlow(CourseCollectionDetailUiState())
     val state: StateFlow<CourseCollectionDetailUiState> = _state.asStateFlow()
 
@@ -116,7 +126,7 @@ class CourseCollectionDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
             try {
-                val collection = repository.get(collectionId, source)
+                val collection = repository.get(collectionId, source, language)
                 _state.update { it.copy(collection = collection, isLoading = false) }
             } catch (error: Exception) {
                 _state.update {

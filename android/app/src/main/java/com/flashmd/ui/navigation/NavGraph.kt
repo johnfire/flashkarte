@@ -166,7 +166,9 @@ fun NavGraph(onLogout: () -> Unit = {}) {
             composable("learn") {
                 LearnScreen(
                     onBack = { navController.popBackStack() },
-                    onOpenCollection = { id -> navController.navigate("learn/collections/$id") },
+                    onOpenCollection = { id, language ->
+                        navController.navigate("learn/collections/$id/${language.routeValue}")
+                    },
                     onOpenSubject = { id -> navController.navigate("learn/$id") },
                 )
             }
@@ -174,16 +176,19 @@ fun NavGraph(onLogout: () -> Unit = {}) {
             composable("course-catalog") {
                 CourseCollectionCatalogScreen(
                     onBack = { navController.popBackStack() },
-                    onOpenCollection = { source, id ->
-                        navController.navigate("course-catalog/${source.queryValue}/$id")
+                    onOpenCollection = { source, language, id ->
+                        navController.navigate(
+                            "course-catalog/${source.queryValue}/${language.routeValue}/$id",
+                        )
                     },
                 )
             }
 
             composable(
-                route = "course-catalog/{source}/{collectionId}",
+                route = "course-catalog/{source}/{language}/{collectionId}",
                 arguments = listOf(
                     navArgument("source") { type = NavType.StringType },
+                    navArgument("language") { type = NavType.StringType },
                     navArgument("collectionId") { type = NavType.StringType },
                 ),
             ) {
@@ -191,12 +196,19 @@ fun NavGraph(onLogout: () -> Unit = {}) {
             }
 
             composable(
-                route = "learn/collections/{collectionId}",
-                arguments = listOf(navArgument("collectionId") { type = NavType.StringType }),
+                route = "learn/collections/{collectionId}/{language}",
+                arguments = listOf(
+                    navArgument("collectionId") { type = NavType.StringType },
+                    navArgument("language") { type = NavType.StringType },
+                ),
             ) { entry ->
                 val collectionId = requireNotNull(entry.arguments?.getString("collectionId"))
+                val language = com.flashmd.data.remote.dto.CourseLanguageFilter.fromRoute(
+                    requireNotNull(entry.arguments?.getString("language")),
+                )
                 MyCourseCollectionScreen(
                     collectionId = collectionId,
+                    language = language,
                     onBack = { navController.popBackStack() },
                     onOpenSubject = { id -> navController.navigate("learn/$id") },
                 )

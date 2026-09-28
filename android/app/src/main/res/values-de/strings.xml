@@ -225,4 +225,9 @@
     <string name="course_catalog_add">Kurs hinzufügen</string>
     <string name="course_catalog_adding">Wird hinzugefügt …</string>
     <string name="course_catalog_added">Hinzugefügt</string>
+    <string name="course_language_all">Alle</string>
+    <string name="course_language_german">Deutsch</string>
+    <string name="course_language_english">Englisch</string>
+    <string name="course_language_arabic">Arabisch</string>
+    <string name="course_language_empty">Für diese Sprache sind keine Kurse verfügbar.</string>
 </resources>

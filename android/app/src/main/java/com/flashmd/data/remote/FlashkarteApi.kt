@@ -245,17 +245,20 @@ interface FlashkarteApi {
     @GET("api/course-collections")
     suspend fun listCourseCollections(
         @Query("source") source: String,
+        @Query("language") language: String? = null,
     ): List<CourseCollectionDto>
 
     @GET("api/course-collections/{id}")
     suspend fun getCourseCollection(
         @Path("id") collectionId: String,
         @Query("source") source: String,
+        @Query("language") language: String? = null,
     ): CourseCollectionDetailDto
 
     @GET("api/subjects/catalog")
     suspend fun listUngroupedCourseCatalog(
         @Query("source") source: String,
+        @Query("language") language: String? = null,
         @Query("ungrouped") ungrouped: Boolean = true,
     ): List<LearnSubjectDto>
 

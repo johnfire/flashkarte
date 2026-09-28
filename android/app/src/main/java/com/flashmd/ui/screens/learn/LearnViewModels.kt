@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flashmd.data.remote.ApiException
+import com.flashmd.data.remote.dto.CourseLanguageFilter
 import com.flashmd.data.remote.dto.LearnSubjectDto
 import com.flashmd.data.remote.dto.LearnerOutlineDto
 import com.flashmd.data.remote.dto.LessonScreensDto
@@ -22,6 +23,7 @@ internal fun messageOf(error: Throwable, fallback: String): String =
 
 data class LearnSubjectsUiState(
     val subjects: List<LearnSubjectDto> = emptyList(),
+    val language: CourseLanguageFilter = CourseLanguageFilter.ALL,
     val isLoading: Boolean = true,
     val error: String? = null,
 )
@@ -32,6 +34,10 @@ class LearnSubjectsViewModel @Inject constructor(private val repo: LearnReposito
     val state: StateFlow<LearnSubjectsUiState> = _state.asStateFlow()
 
     init { refresh() }
+
+    fun selectLanguage(language: CourseLanguageFilter) {
+        _state.update { it.copy(language = language) }
+    }
 
     fun refresh() {
         viewModelScope.launch {

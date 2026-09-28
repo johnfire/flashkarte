@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.R
+import com.flashmd.data.remote.dto.CourseLanguageFilter
 import com.flashmd.data.remote.dto.LearnerLessonDto
 import com.flashmd.ui.components.RefreshOnResume
 
@@ -48,7 +49,7 @@ import com.flashmd.ui.components.RefreshOnResume
 @Composable
 fun LearnScreen(
     onBack: () -> Unit,
-    onOpenCollection: (String) -> Unit,
+    onOpenCollection: (String, CourseLanguageFilter) -> Unit,
     onOpenSubject: (String) -> Unit,
     viewModel: LearnSubjectsViewModel = hiltViewModel(),
 ) {
@@ -63,7 +64,15 @@ fun LearnScreen(
                 state.error != null && state.subjects.isEmpty() ->
                     Text(state.error!!, color = MaterialTheme.colorScheme.error)
                 state.subjects.isEmpty() -> Text(stringResource(R.string.learn_empty))
-                else -> PersonalCoursesContent(state.subjects, onOpenCollection, onOpenSubject)
+                else -> {
+                    CourseLanguageFilters(state.language, viewModel::selectLanguage)
+                    PersonalCoursesContent(
+                        state.subjects,
+                        state.language,
+                        onOpenCollection,
+                        onOpenSubject,
+                    )
+                }
             }
         }
     }

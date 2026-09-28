@@ -1,6 +1,7 @@
 package com.flashmd.remote
 
 import com.flashmd.data.remote.FlashkarteApi
+import com.flashmd.data.remote.dto.CourseLanguageFilter
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -33,18 +34,24 @@ class CourseCollectionApiContractTest {
 
     @Test fun courseCollectionEndpointsUseTheExpectedCatalogContract() = runBlocking {
         server.enqueue(MockResponse().setBody("""[{"id":"ai","title":"Artificial Intelligence","description":"Learn AI","is_official":true,"course_count":2}]"""))
-        val collections = api.listCourseCollections("official")
+        val collections = api.listCourseCollections("official", CourseLanguageFilter.ENGLISH.queryValue)
         assertEquals("Artificial Intelligence", collections.single().title)
-        assertEquals("/api/course-collections?source=official", server.takeRequest().path)
+        assertEquals("/api/course-collections?source=official&language=en", server.takeRequest().path)
 
         server.enqueue(MockResponse().setBody("""{"id":"ai","title":"Artificial Intelligence","description":null,"is_official":true,"courses":[{"id":"s1","title":"Foundations","concept_count":3,"course_collection_id":"ai","course_collection_position":1,"course_collection_title":"Artificial Intelligence"}]}"""))
-        val detail = api.getCourseCollection("ai", "official")
+        val detail = api.getCourseCollection("ai", "official", CourseLanguageFilter.ENGLISH.queryValue)
         assertEquals("ai", detail.courses.single().courseCollectionId)
-        assertEquals("/api/course-collections/ai?source=official", server.takeRequest().path)
+        assertEquals("/api/course-collections/ai?source=official&language=en", server.takeRequest().path)
 
         server.enqueue(MockResponse().setBody("""[{"id":"s2","title":"Standalone","concept_count":1}]"""))
-        assertEquals("Standalone", api.listUngroupedCourseCatalog("community").single().title)
-        assertEquals("/api/subjects/catalog?source=community&ungrouped=true", server.takeRequest().path)
+        assertEquals(
+            "Standalone",
+            api.listUngroupedCourseCatalog("community", CourseLanguageFilter.ENGLISH.queryValue).single().title,
+        )
+        assertEquals(
+            "/api/subjects/catalog?source=community&language=en&ungrouped=true",
+            server.takeRequest().path,
+        )
 
         server.enqueue(MockResponse().setResponseCode(204))
         api.enrollInCourse("s1")

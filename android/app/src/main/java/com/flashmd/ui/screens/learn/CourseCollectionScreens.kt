@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.flashmd.R
+import com.flashmd.data.remote.dto.CourseLanguageFilter
 import com.flashmd.data.remote.dto.CourseCollectionSource
 import com.flashmd.data.remote.dto.LearnSubjectDto
 import com.flashmd.ui.components.RefreshOnResume
@@ -42,6 +43,11 @@ internal data class PersonalCourseCollection(
     val title: String,
     val courses: List<LearnSubjectDto>,
 )
+
+internal fun filterCoursesByLanguage(
+    subjects: List<LearnSubjectDto>,
+    language: CourseLanguageFilter,
+): List<LearnSubjectDto> = subjects.filter { language.includes(it.locale) }
 
 internal fun groupPersonalCourses(subjects: List<LearnSubjectDto>): List<PersonalCourseCollection> =
     subjects
@@ -59,20 +65,25 @@ internal fun groupPersonalCourses(subjects: List<LearnSubjectDto>): List<Persona
 @Composable
 internal fun PersonalCoursesContent(
     subjects: List<LearnSubjectDto>,
-    onOpenCollection: (String) -> Unit,
+    language: CourseLanguageFilter,
+    onOpenCollection: (String, CourseLanguageFilter) -> Unit,
     onOpenSubject: (String) -> Unit,
 ) {
-    val collections = groupPersonalCourses(subjects)
-    val ungroupedCourses = subjects.filter { it.courseCollectionId == null }
+    val visibleSubjects = filterCoursesByLanguage(subjects, language)
+    val collections = groupPersonalCourses(visibleSubjects)
+    val ungroupedCourses = visibleSubjects.filter { it.courseCollectionId == null }
     LazyColumn(
         Modifier.fillMaxSize(),
         contentPadding = PaddingValues(bottom = 16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
+        if (visibleSubjects.isEmpty()) {
+            item { Text(stringResource(R.string.course_language_empty)) }
+        }
         if (collections.isNotEmpty()) {
             item { Text(stringResource(R.string.learn_course_collections), style = MaterialTheme.typography.titleLarge) }
             items(collections, key = { it.id }) { collection ->
-                CollectionCard(collection, onOpenCollection)
+                CollectionCard(collection) { onOpenCollection(collection.id, language) }
             }
         }
         if (ungroupedCourses.isNotEmpty()) {
@@ -118,6 +129,7 @@ internal fun PersonalCourseCard(course: LearnSubjectDto, onOpenSubject: (String)
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold,
             )
+            course.locale?.let { Text(courseLanguageLabel(it), style = MaterialTheme.typography.labelSmall) }
             course.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
             CourseProgressLabel(course.courseProgress)
             Text(
@@ -155,13 +167,15 @@ private fun CourseProgressLabel(progress: String?) {
 @Composable
 fun MyCourseCollectionScreen(
     collectionId: String,
+    language: CourseLanguageFilter,
     onBack: () -> Unit,
     onOpenSubject: (String) -> Unit,
     viewModel: LearnSubjectsViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val error = state.error
-    val courses = state.subjects.filter { it.courseCollectionId == collectionId }
+    val courses = filterCoursesByLanguage(state.subjects, language)
+        .filter { it.courseCollectionId == collectionId }
     val title = courses.firstOrNull()?.courseCollectionTitle ?: stringResource(R.string.learn_course_collections)
     RefreshOnResume(viewModel::refresh)
     Scaffold(topBar = { LearnTopBar(title, onBack) }) { padding ->
@@ -184,14 +198,19 @@ fun MyCourseCollectionScreen(
 @Composable
 fun CourseCollectionCatalogScreen(
     onBack: () -> Unit,
-    onOpenCollection: (CourseCollectionSource, String) -> Unit,
+    onOpenCollection: (CourseCollectionSource, CourseLanguageFilter, String) -> Unit,
     viewModel: CourseCollectionCatalogViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     RefreshOnResume(viewModel::refresh)
     Scaffold(topBar = { LearnTopBar(stringResource(R.string.course_catalog_title), onBack) }) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
-            CourseCatalogSourceFilters(state.source, viewModel::selectSource)
+            CourseCatalogFilters(
+                state.source,
+                state.language,
+                viewModel::selectSource,
+                viewModel::selectLanguage,
+            )
             CourseCollectionCatalogBody(
                 state,
                 viewModel::refresh,
@@ -208,7 +227,7 @@ fun CourseCollectionCatalogScreen(
 private fun CourseCollectionCatalogBody(
     state: CourseCollectionCatalogUiState,
     onRefresh: () -> Unit,
-    onOpenCollection: (CourseCollectionSource, String) -> Unit,
+    onOpenCollection: (CourseCollectionSource, CourseLanguageFilter, String) -> Unit,
     onEnroll: (String) -> Unit,
     modifier: Modifier,
 ) {
@@ -228,20 +247,61 @@ private fun CourseCollectionCatalogBody(
 }
 
 @Composable
-private fun CourseCatalogSourceFilters(
+private fun CourseCatalogFilters(
     selectedSource: CourseCollectionSource,
+    selectedLanguage: CourseLanguageFilter,
     onSelect: (CourseCollectionSource) -> Unit,
+    onSelectLanguage: (CourseLanguageFilter) -> Unit,
 ) {
-    Row(Modifier.padding(horizontal = 16.dp, vertical = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        CourseSourceChip(CourseCollectionSource.OFFICIAL, selectedSource, onSelect)
-        CourseSourceChip(CourseCollectionSource.COMMUNITY, selectedSource, onSelect)
+    Column(Modifier.padding(horizontal = 16.dp, vertical = 8.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            CourseSourceChip(CourseCollectionSource.OFFICIAL, selectedSource, onSelect)
+            CourseSourceChip(CourseCollectionSource.COMMUNITY, selectedSource, onSelect)
+        }
+        CourseLanguageFilters(selectedLanguage, onSelectLanguage)
     }
 }
 
 @Composable
+internal fun CourseLanguageFilters(
+    selectedLanguage: CourseLanguageFilter,
+    onSelect: (CourseLanguageFilter) -> Unit,
+) {
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CourseLanguageFilter.entries.forEach { language ->
+            FilterChip(
+                selected = language == selectedLanguage,
+                onClick = { onSelect(language) },
+                label = { Text(courseLanguageLabel(language)) },
+            )
+        }
+    }
+}
+
+@Composable
+private fun courseLanguageLabel(language: CourseLanguageFilter): String =
+    stringResource(
+        when (language) {
+            CourseLanguageFilter.ALL -> R.string.course_language_all
+            CourseLanguageFilter.GERMAN -> R.string.course_language_german
+            CourseLanguageFilter.ENGLISH -> R.string.course_language_english
+            CourseLanguageFilter.ARABIC -> R.string.course_language_arabic
+        },
+    )
+
+@Composable
+private fun courseLanguageLabel(locale: String): String =
+    when (locale.substringBefore('-')) {
+        "de" -> stringResource(R.string.course_language_german)
+        "en" -> stringResource(R.string.course_language_english)
+        "ar" -> stringResource(R.string.course_language_arabic)
+        else -> locale
+    }
+
+@Composable
 private fun CourseCollectionCatalogList(
     state: CourseCollectionCatalogUiState,
-    onOpenCollection: (CourseCollectionSource, String) -> Unit,
+    onOpenCollection: (CourseCollectionSource, CourseLanguageFilter, String) -> Unit,
     onEnroll: (String) -> Unit,
 ) {
     LazyColumn(
@@ -254,7 +314,7 @@ private fun CourseCollectionCatalogList(
         }
         items(state.collections, key = { it.id }) { collection ->
             CatalogCollectionCard(collection.title, collection.description, collection.courseCount) {
-                onOpenCollection(state.source, collection.id)
+                onOpenCollection(state.source, state.language, collection.id)
             }
         }
         if (state.ungroupedCourses.isNotEmpty()) {
@@ -305,6 +365,7 @@ private fun CatalogCourseCard(
     Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
         Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
             Text(course.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            course.locale?.let { Text(courseLanguageLabel(it), style = MaterialTheme.typography.labelSmall) }
             course.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
             Button(
                 onClick = { onEnroll(course.id) },
@@ -367,6 +428,7 @@ private fun CourseCollectionDetailContent(
             Card(colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
                 Column(Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(course.title, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    course.locale?.let { Text(courseLanguageLabel(it), style = MaterialTheme.typography.labelSmall) }
                     course.description?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
                     Button(
                         onClick = { onEnroll(course.id) },

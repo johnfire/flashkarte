@@ -3,11 +3,13 @@ package com.flashmd.ui
 import androidx.lifecycle.SavedStateHandle
 import com.flashmd.data.remote.dto.CourseCollectionDetailDto
 import com.flashmd.data.remote.dto.CourseCollectionDto
+import com.flashmd.data.remote.dto.CourseLanguageFilter
 import com.flashmd.data.remote.dto.CourseCollectionSource
 import com.flashmd.data.remote.dto.LearnSubjectDto
 import com.flashmd.data.repository.CourseCollectionRepository
 import com.flashmd.ui.screens.learn.CourseCollectionCatalogViewModel
 import com.flashmd.ui.screens.learn.CourseCollectionDetailViewModel
+import com.flashmd.ui.screens.learn.filterCoursesByLanguage
 import com.flashmd.ui.screens.learn.groupPersonalCourses
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -33,8 +35,8 @@ class CourseCollectionViewModelTest {
     @After fun tearDown() = Dispatchers.resetMain()
 
     @Test fun catalogLoadsOfficialCollectionsOnStart() = runTest {
-        coEvery { repository.list(CourseCollectionSource.OFFICIAL) } returns listOf(collection())
-        coEvery { repository.listUngrouped(CourseCollectionSource.OFFICIAL) } returns emptyList()
+        coEvery { repository.list(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.ALL) } returns listOf(collection())
+        coEvery { repository.listUngrouped(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.ALL) } returns emptyList()
         val viewModel = CourseCollectionCatalogViewModel(repository)
 
         advanceUntilIdle()
@@ -44,10 +46,10 @@ class CourseCollectionViewModelTest {
     }
 
     @Test fun catalogRetainsUngroupedCoursesWhenCollectionLoadFails() = runTest {
-        coEvery { repository.list(CourseCollectionSource.OFFICIAL) } returns emptyList()
-        coEvery { repository.listUngrouped(CourseCollectionSource.OFFICIAL) } returns emptyList()
-        coEvery { repository.list(CourseCollectionSource.COMMUNITY) } throws IllegalStateException("offline")
-        coEvery { repository.listUngrouped(CourseCollectionSource.COMMUNITY) } returns listOf(subject("s1"))
+        coEvery { repository.list(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.ALL) } returns emptyList()
+        coEvery { repository.listUngrouped(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.ALL) } returns emptyList()
+        coEvery { repository.list(CourseCollectionSource.COMMUNITY, CourseLanguageFilter.ALL) } throws IllegalStateException("offline")
+        coEvery { repository.listUngrouped(CourseCollectionSource.COMMUNITY, CourseLanguageFilter.ALL) } returns listOf(subject("s1"))
         val viewModel = CourseCollectionCatalogViewModel(repository)
         advanceUntilIdle()
 
@@ -61,11 +63,11 @@ class CourseCollectionViewModelTest {
 
     @Test fun detailMarksCourseAsAddedAfterEnrollment() = runTest {
         val subject = subject("s1")
-        coEvery { repository.get("ai", CourseCollectionSource.OFFICIAL) } returns detail(subject)
+        coEvery { repository.get("ai", CourseCollectionSource.OFFICIAL, CourseLanguageFilter.ALL) } returns detail(subject)
         coEvery { repository.enroll("s1") } returns Unit
         val viewModel = CourseCollectionDetailViewModel(
             repository,
-            SavedStateHandle(mapOf("collectionId" to "ai", "source" to "official")),
+            SavedStateHandle(mapOf("collectionId" to "ai", "source" to "official", "language" to "all")),
         )
         advanceUntilIdle()
 
@@ -87,6 +89,32 @@ class CourseCollectionViewModelTest {
 
         assertEquals(1, collections.size)
         assertEquals(listOf("s1", "s2"), collections.single().courses.map { it.id })
+    }
+
+    @Test fun catalogReloadsCollectionsForTheSelectedLanguage() = runTest {
+        coEvery { repository.list(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.ALL) } returns emptyList()
+        coEvery { repository.listUngrouped(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.ALL) } returns emptyList()
+        coEvery { repository.list(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.GERMAN) } returns listOf(collection())
+        coEvery { repository.listUngrouped(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.GERMAN) } returns emptyList()
+        val viewModel = CourseCollectionCatalogViewModel(repository)
+        advanceUntilIdle()
+
+        viewModel.selectLanguage(CourseLanguageFilter.GERMAN)
+        advanceUntilIdle()
+
+        assertEquals(CourseLanguageFilter.GERMAN, viewModel.state.value.language)
+        assertEquals("AI", viewModel.state.value.collections.single().title)
+        coVerify { repository.list(CourseCollectionSource.OFFICIAL, CourseLanguageFilter.GERMAN) }
+    }
+
+    @Test fun personalCourseLanguageFilterKeepsOnlyMatchingCourses() {
+        val courses = listOf(
+            subject("de", collectionId = null).copy(locale = "de"),
+            subject("en", collectionId = null).copy(locale = "en"),
+        )
+
+        assertEquals(listOf("de"), filterCoursesByLanguage(courses, CourseLanguageFilter.GERMAN).map { it.id })
+        assertEquals(2, filterCoursesByLanguage(courses, CourseLanguageFilter.ALL).size)
     }
 
     private fun collection() = CourseCollectionDto("ai", "AI", null, true, 2)

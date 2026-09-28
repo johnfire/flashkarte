@@ -16,6 +16,7 @@ data class LearnSubjectDto(
     val id: String,
     val title: String,
     val description: String? = null,
+    val locale: String? = null,
     @SerialName("concept_count") val conceptCount: Int = 0,
     @SerialName("reference_number") val referenceNumber: Int? = null,
     @SerialName("course_collection_id") val courseCollectionId: String? = null,
