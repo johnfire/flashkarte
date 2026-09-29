@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../api/client";
 import { useAsync } from "../hooks/use-async";
+import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
+import { useContentLanguage } from "../hooks/use-content-language";
 import {
   CourseProgressBadge,
   courseProgressCardClass,
@@ -12,12 +14,18 @@ import {
 export function CourseCollectionPage() {
   const { t } = useTranslation();
   const { collectionId } = useParams();
+  const { language, choose } = useContentLanguage("courses");
   const loadCourses = useCallback(() => api.learn.subjects(), []);
   const { data: courses, error, loading } = useAsync(loadCourses, []);
-  const collectionCourses = courses?.filter(
+  const allCollectionCourses = courses?.filter(
     (course) => course.course_collection_id === collectionId,
   );
-  const collectionTitle = collectionCourses?.[0]?.course_collection_title;
+  const collectionCourses = allCollectionCourses?.filter(
+    (course) => language === "all" || course.locale === language,
+  );
+  const collectionTitle =
+    allCollectionCourses?.[0]?.course_collection_title ??
+    collectionCourses?.[0]?.course_collection_title;
   const errorMessage =
     error instanceof ApiError
       ? error.message
@@ -33,6 +41,7 @@ export function CourseCollectionPage() {
       <h1 className="mt-3 text-3xl font-bold">
         {collectionTitle ?? t("courseCollections.title")}
       </h1>
+      <ContentLanguageSwitcher value={language} onChange={choose} />
       {loading && <p className="mt-6">{t("common.loading")}</p>}
       {errorMessage && (
         <p role="alert" className="mt-6 text-red-600">
@@ -40,7 +49,13 @@ export function CourseCollectionPage() {
         </p>
       )}
       {collectionCourses && collectionCourses.length === 0 && (
-        <p className="mt-6">{t("courseCollections.emptyMine")}</p>
+        <p className="mt-6">
+          {t(
+            allCollectionCourses && allCollectionCourses.length > 0
+              ? "courseCollections.emptyInLanguage"
+              : "courseCollections.emptyMine",
+          )}
+        </p>
       )}
       <ul className="mt-6 content-card-grid">
         {collectionCourses?.map((course) => (

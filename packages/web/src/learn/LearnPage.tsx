@@ -156,7 +156,7 @@ export function LearnPage() {
             {collections.map((collection) => (
               <li key={collection.id} className="rounded-xl border">
                 <Link
-                  to={`/learn/collections/${collection.id}`}
+                  to={`/learn/collections/${collection.id}${language !== "all" ? `?language=${language}` : ""}`}
                   className="block rounded-xl p-4 hover:bg-gray-100 dark:hover:bg-gray-800"
                 >
                   <h3 className="text-lg font-semibold">{collection.title}</h3>
