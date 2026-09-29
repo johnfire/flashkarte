@@ -4,11 +4,16 @@ export interface InjectPayload {
 }
 
 const ROOT = '<div id="root"></div>';
+const TITLE = /<title>[\s\S]*?<\/title>\s*/gi;
 
 export function inject(template: string, payload: InjectPayload): string {
   if (!template.includes("</head>")) return template; // fail safe
   let out = template;
   if (payload.headHtml) {
+    // A page has one <title>. The built template ships a generic one; leaving it
+    // in front of ours would give crawlers and link-preview scrapers, which often
+    // take the first, the generic name instead of the page's own.
+    if (/<title>/i.test(payload.headHtml)) out = out.replace(TITLE, "");
     out = out.replace("</head>", `${payload.headHtml}</head>`);
   }
   if (payload.bodyHtml && out.includes(ROOT)) {
