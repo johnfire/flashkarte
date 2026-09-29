@@ -1,5 +1,5 @@
 import type { Express } from "express";
-import { staticMeta, metaToHeadHtml, HELP_PATHS, PageMeta } from "./meta";
+import { staticMeta, metaToHeadHtml, notFoundMeta, HELP_PATHS } from "./meta";
 import { inject } from "./inject";
 import { buildSitemap, SitemapUrl } from "./sitemap";
 import { extractDeckId, deckSlug } from "@flashkarte/shared";
@@ -64,19 +64,10 @@ export function mountSeo(app: Express, opts: MountSeoOptions): void {
         const id = extractDeckId(req.params.slug);
         const preview = id ? await getDeckPreview(id) : null;
         if (!preview) {
-          const notFound: PageMeta = {
-            title: "Deck not found — LearnWohl",
-            description: "This deck is not available.",
-            canonical: "",
-            og: {
-              title: "Deck not found — LearnWohl",
-              description: "",
-              image: "",
-              url: "",
-              type: "website",
-            },
-            robots: "noindex",
-          };
+          const notFound = notFoundMeta(
+            "Deck not found — LearnWohl",
+            "This deck is not available.",
+          );
           res
             .status(404)
             .send(

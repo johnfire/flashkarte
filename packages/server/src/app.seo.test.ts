@@ -59,6 +59,28 @@ describe("production web + SEO wiring", () => {
     expect(res.status).toBe(200);
     expect(res.text).toContain('<div id="root"></div>');
   });
+  it("answers 404 + noindex, with the app shell, for a URL that is not a page", async () => {
+    const res = await request(app()).get("/this-page-does-not-exist");
+    expect(res.status).toBe(404);
+    expect(res.text).toContain('name="robots" content="noindex"');
+    expect(res.text.match(/<title>/g)).toHaveLength(1);
+    expect(res.text).not.toContain('rel="canonical"');
+    expect(res.text).toContain('<div id="root"></div>');
+  });
+  it("404s a missing asset instead of serving the app shell as JavaScript", async () => {
+    const res = await request(app()).get("/assets/index-deadbeef.js");
+    expect(res.status).toBe(404);
+  });
+  it("still serves real app routes with 200, even on a hard refresh", async () => {
+    for (const p of [
+      "/decks/new",
+      "/learn/s1/lessons/intro",
+      "/library",
+      "/admin",
+    ]) {
+      expect((await request(app()).get(p)).status).toBe(200);
+    }
+  });
 });
 
 describe("production deck SEO wiring", () => {

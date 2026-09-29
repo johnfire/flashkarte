@@ -123,20 +123,44 @@ export function staticMeta(path: string): PageMeta {
   return meta;
 }
 
+/** Meta for a URL that is not a page: findable by nobody, indexed by nobody. */
+export function notFoundMeta(
+  title = "Page not found — LearnWohl",
+  description = "This page does not exist.",
+): PageMeta {
+  return {
+    title,
+    description,
+    canonical: "",
+    og: { title, description, image: "", url: "", type: "website" },
+    robots: "noindex",
+  };
+}
+
 export function metaToHeadHtml(meta: PageMeta): string {
   const tags = [
     `<title>${escapeHtml(meta.title)}</title>`,
     `<meta name="description" content="${escapeHtml(meta.description)}" />`,
-    `<link rel="canonical" href="${escapeHtml(meta.canonical)}" />`,
+    // An empty canonical or og:url is worse than none: it reads as "this page
+    // is the empty address". Not-found pages have neither.
+    ...(meta.canonical
+      ? [`<link rel="canonical" href="${escapeHtml(meta.canonical)}" />`]
+      : []),
     `<meta property="og:title" content="${escapeHtml(meta.og.title)}" />`,
     `<meta property="og:description" content="${escapeHtml(meta.og.description)}" />`,
-    `<meta property="og:image" content="${escapeHtml(meta.og.image)}" />`,
-    `<meta property="og:url" content="${escapeHtml(meta.og.url)}" />`,
+    ...(meta.og.image
+      ? [`<meta property="og:image" content="${escapeHtml(meta.og.image)}" />`]
+      : []),
+    ...(meta.og.url
+      ? [`<meta property="og:url" content="${escapeHtml(meta.og.url)}" />`]
+      : []),
     `<meta property="og:type" content="${escapeHtml(meta.og.type)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escapeHtml(meta.og.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(meta.og.description)}" />`,
-    `<meta name="twitter:image" content="${escapeHtml(meta.og.image)}" />`,
+    ...(meta.og.image
+      ? [`<meta name="twitter:image" content="${escapeHtml(meta.og.image)}" />`]
+      : []),
     `<meta name="theme-color" content="#4f46e5" />`,
   ];
   if (meta.robots) {

@@ -34,7 +34,9 @@ import { errorHandler } from "./middleware/errorHandler";
 import { requestId } from "./middleware/requestId";
 import { accessLog } from "./middleware/accessLog";
 import { mountSeo } from "./seo/mount";
-import { HELP_PATHS } from "./seo/meta";
+import { HELP_PATHS, metaToHeadHtml, notFoundMeta } from "./seo/meta";
+import { inject } from "./seo/inject";
+import { isKnownAppPath } from "./seo/routes";
 import { loadTemplate } from "./seo/template";
 import { getMcpPublicUrl, getSiteOrigin } from "./seo/siteOrigin";
 import { SitemapUrl } from "./seo/sitemap";
@@ -320,7 +322,23 @@ export function configureProductionWeb(
     });
   }
   app.use(express.static(webDist, { index: false }));
-  app.get("*", (_req, res) => {
-    res.sendFile(path.join(webDist, "index.html"));
+  app.get("*", (req, res) => {
+    const indexHtml = path.join(webDist, "index.html");
+    if (isKnownAppPath(req.path)) {
+      res.sendFile(indexHtml);
+      return;
+    }
+    // Not a page (a mistyped link, a removed URL, a probe): answer 404 with
+    // noindex so search engines drop it rather than indexing the app shell there.
+    // The app shell is still sent, so a person who lands here is redirected home
+    // by the client router exactly as before.
+    res.status(404);
+    if (template) {
+      res
+        .type("html")
+        .send(inject(template, { headHtml: metaToHeadHtml(notFoundMeta()) }));
+    } else {
+      res.sendFile(indexHtml);
+    }
   });
 }
