@@ -45,12 +45,52 @@ const PAGES: Record<
     title: "Impressum — LearnWohl",
     description: "Legal provider information for LearnWohl (Impressum).",
   },
-  "/guide": {
-    title: "Guide — LearnWohl",
+  // Help center. Titles and descriptions mirror help.*.metaTitle/metaDescription in
+  // web/src/i18n/locales/en.json; help-meta.test.ts fails if the two drift apart.
+  "/help": {
+    title: "Help — LearnWohl",
     description:
-      "How to use LearnWohl: write Markdown flashcard decks, study with spaced repetition, share decks, and let your AI build decks for you.",
+      "Everything you need to use LearnWohl: writing Markdown flashcard decks, deck collections, structured learning courses, sharing, and connecting your own AI.",
+  },
+  "/help/getting-started": {
+    title: "Getting started — LearnWohl Help",
+    description: "How to sign up and get studying with LearnWohl.",
+  },
+  "/help/writing-decks": {
+    title: "Writing decks — LearnWohl Help",
+    description:
+      "The Markdown format LearnWohl uses for cards, and the three ways to create a deck.",
+  },
+  "/help/advanced-cards": {
+    title: "Advanced card types — LearnWohl Help",
+    description:
+      "How to write diagnostic multiple-choice cards with follow-up remediation, and cards for words with more than one meaning.",
+  },
+  "/help/branching-decks": {
+    title: "Branching decks — LearnWohl Help",
+    description: "How to write a choose-your-path branching deck in LearnWohl.",
+  },
+  "/help/studying": {
+    title: "Studying & spaced repetition — LearnWohl Help",
+    description:
+      "How LearnWohl schedules reviews, what the rating buttons do, and what the deck counters mean.",
+  },
+  "/help/ai": {
+    title: "Creating learning content with AI — LearnWohl Help",
+    description:
+      "How to connect your own AI assistant to LearnWohl over MCP to build flashcard decks, deck collections, and structured learning courses.",
+  },
+  "/help/sharing": {
+    title: "Sharing & exploring — LearnWohl Help",
+    description:
+      "How to share flashcard decks and structured learning courses, browse Explore, and use the Library.",
   },
 };
+
+/** Every help-center page that has its own server-rendered meta, in menu order. */
+export const HELP_PATHS = Object.keys(PAGES).filter(
+  (path) => path === "/help" || path.startsWith("/help/"),
+);
 
 export function staticMeta(path: string): PageMeta {
   const page = PAGES[path] ?? PAGES["/"];

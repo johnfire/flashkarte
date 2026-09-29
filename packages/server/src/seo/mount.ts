@@ -1,5 +1,5 @@
 import type { Express } from "express";
-import { staticMeta, metaToHeadHtml, PageMeta } from "./meta";
+import { staticMeta, metaToHeadHtml, HELP_PATHS, PageMeta } from "./meta";
 import { inject } from "./inject";
 import { buildSitemap, SitemapUrl } from "./sitemap";
 import { extractDeckId, deckSlug } from "@flashkarte/shared";
@@ -19,11 +19,14 @@ const STATIC_HTML_ROUTES = [
   "/explore",
   "/privacy",
   "/impressum",
-  "/guide",
+  ...HELP_PATHS,
 ];
 
 export function mountSeo(app: Express, opts: MountSeoOptions): void {
   app.get("/welcome", (_req, res) => res.redirect(301, "/"));
+  // The single guide page became the help center. Redirect on the server so a
+  // crawler gets a real 301 rather than a 200 that only JavaScript turns into /help.
+  app.get("/guide", (_req, res) => res.redirect(301, "/help"));
 
   app.get("/sitemap.xml", async (_req, res) => {
     try {

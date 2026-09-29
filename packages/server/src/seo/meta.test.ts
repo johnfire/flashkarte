@@ -19,11 +19,14 @@ describe("staticMeta", () => {
     );
     expect(staticMeta("/impressum").jsonLd).toBeUndefined();
   });
-  it("guide has its own title and canonical, no JSON-LD", () => {
-    const m = staticMeta("/guide");
-    expect(m.title).toContain("Guide");
-    expect(m.canonical).toBe("https://learnwohl.app/guide");
+  it("the help index has its own title and canonical, no JSON-LD", () => {
+    const m = staticMeta("/help");
+    expect(m.title).toBe("Help — LearnWohl");
+    expect(m.canonical).toBe("https://learnwohl.app/help");
     expect(m.jsonLd).toBeUndefined();
+  });
+  it("/guide no longer has page meta of its own (it is a 301 to /help)", () => {
+    expect(staticMeta("/guide").title).not.toContain("Guide");
   });
 });
 

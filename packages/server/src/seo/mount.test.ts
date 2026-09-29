@@ -1,6 +1,7 @@
 import express from "express";
 import request from "supertest";
 import { mountSeo } from "./mount";
+import { HELP_PATHS } from "./meta";
 import { deckSlug } from "@flashkarte/shared";
 
 const TEMPLATE = `<!doctype html><html><head><title>LearnWohl</title></head><body><div id="root"></div></body></html>`;
@@ -25,6 +26,34 @@ describe("mountSeo", () => {
   it("GET /privacy injects privacy canonical", async () => {
     const res = await request(app()).get("/privacy");
     expect(res.text).toContain('href="https://learnwohl.app/privacy"');
+  });
+  it("GET /help/getting-started serves its own single title, canonical and OG url", async () => {
+    const res = await request(app()).get("/help/getting-started");
+    expect(res.status).toBe(200);
+    expect(res.text.match(/<title>/g)).toHaveLength(1);
+    expect(res.text).toContain(
+      "<title>Getting started — LearnWohl Help</title>",
+    );
+    expect(res.text).toContain(
+      'href="https://learnwohl.app/help/getting-started"',
+    );
+    expect(res.text).toContain(
+      'content="https://learnwohl.app/help/getting-started"',
+    );
+  });
+  it("serves every help page with distinct meta", async () => {
+    const titles = new Set<string>();
+    for (const p of HELP_PATHS) {
+      const res = await request(app()).get(p);
+      expect(res.status).toBe(200);
+      titles.add(res.text.match(/<title>(.*?)<\/title>/)![1]);
+    }
+    expect(titles.size).toBe(HELP_PATHS.length);
+  });
+  it("GET /guide 301-redirects to /help (a real redirect, not a JS one)", async () => {
+    const res = await request(app()).get("/guide");
+    expect(res.status).toBe(301);
+    expect(res.headers.location).toBe("/help");
   });
   it("GET /welcome 301-redirects to /", async () => {
     const res = await request(app()).get("/welcome");

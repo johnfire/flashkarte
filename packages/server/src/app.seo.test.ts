@@ -15,6 +15,7 @@ import { configureProductionWeb } from "./app";
 import express from "express";
 import * as libraryService from "./domains/library/library.service";
 import { deckSlug } from "@flashkarte/shared";
+import { HELP_PATHS } from "./seo/meta";
 
 const libMock = libraryService as jest.Mocked<typeof libraryService>;
 const PREVIEW = {
@@ -99,6 +100,15 @@ describe("production deck SEO wiring", () => {
     const res = await request(app()).get("/sitemap.xml");
     expect(res.status).toBe(200);
     expect(res.text).toContain(`/d/${deckSlug(PREVIEW.title, PREVIEW.id)}`);
+  });
+  it("sitemap lists the help center and no longer lists the /guide redirect", async () => {
+    libMock.list.mockResolvedValue([]);
+    const res = await request(app()).get("/sitemap.xml");
+    expect(res.status).toBe(200);
+    for (const p of HELP_PATHS) {
+      expect(res.text).toContain(`<loc>https://learnwohl.app${p}</loc>`);
+    }
+    expect(res.text).not.toContain("/guide");
   });
   it("serves /llms.txt as UTF-8 plain text listing public decks", async () => {
     libMock.list.mockResolvedValue([
