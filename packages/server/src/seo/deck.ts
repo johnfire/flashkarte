@@ -16,6 +16,12 @@ function oneLine(s: string): string {
   return s.replace(/\s+/g, " ").trim();
 }
 
+// Ends a sentence without doubling punctuation: an author shown as "Chris R."
+// already ends in a full stop.
+function endSentence(s: string): string {
+  return /[.!?]$/.test(s) ? s : `${s}.`;
+}
+
 export function deckMeta(p: DeckPreview): PageMeta {
   const canonical = `${getSiteOrigin()}${deckPath(p.title, p.id)}`;
   const image = `${getSiteOrigin()}/og.png`;
@@ -24,9 +30,9 @@ export function deckMeta(p: DeckPreview): PageMeta {
     .map((c) => oneLine(c.front))
     .filter(Boolean)
     .join("; ");
-  const title = `${p.title} — flashcards by ${p.author} | flashkarte`;
+  const title = `${p.title} — flashcards by ${p.author} | LearnWohl`;
   const description = oneLine(
-    `${p.cardCount} flashcards by ${p.author}.${samples ? ` Includes: ${samples}` : ""}`,
+    `${endSentence(`${p.cardCount} flashcards by ${p.author}`)}${samples ? ` Includes: ${samples}` : ""}`,
   ).slice(0, 300);
   return {
     title,

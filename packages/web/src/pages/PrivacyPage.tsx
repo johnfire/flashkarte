@@ -5,9 +5,9 @@ import { useDocumentHead } from "../seo/useDocumentHead";
 
 export function PrivacyPage() {
   useDocumentHead({
-    title: "Privacy Policy — flashkarte",
+    title: "Privacy Policy — LearnWohl",
     description:
-      "How flashkarte handles your data: what we collect, what we never do, and your rights.",
+      "How LearnWohl handles your data: what we collect, what we never do, and your rights.",
   });
   const { t } = useTranslation();
   return (

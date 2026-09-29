@@ -10,9 +10,9 @@ import { useAsync } from "../hooks/use-async";
 export function ExplorePage() {
   const { t } = useTranslation();
   useDocumentHead({
-    title: "Explore public flashcard decks — flashkarte",
+    title: "Explore public flashcard decks — LearnWohl",
     description:
-      "Browse free, community-shared flashcard decks on flashkarte and clone any of them into your account to start studying.",
+      "Browse free, community-shared flashcard decks on LearnWohl and clone any of them into your account to start studying.",
   });
   const [q, setQ] = useState("");
 

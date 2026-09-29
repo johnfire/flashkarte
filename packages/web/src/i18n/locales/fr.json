@@ -578,8 +578,8 @@
     "backToHome": "← Accueil",
     "next": "Suivant : {{title}} →",
     "index": {
-      "metaTitle": "Aide — flashkarte",
-      "metaDescription": "Tout ce qu'il faut savoir pour utiliser flashkarte : écrire des paquets en Markdown, les paquets à embranchements, réviser avec la répétition espacée, partager des paquets et connecter ta propre IA.",
+      "metaTitle": "Aide — LearnWohl",
+      "metaDescription": "Tout ce qu'il faut savoir pour utiliser LearnWohl : écrire des paquets en Markdown, les paquets à embranchements, réviser avec la répétition espacée, partager des paquets et connecter ta propre IA.",
       "title": "Aide",
       "intro": "flashkarte transforme du simple Markdown en cartes mémoire à répétition espacée que tu peux réviser sur le web et sur Android, toujours synchronisées. Choisis un thème ci-dessous.",
       "topics": {
@@ -614,8 +614,8 @@
       }
     },
     "gettingStarted": {
-      "metaTitle": "Premiers pas — Aide flashkarte",
-      "metaDescription": "Comment t'inscrire et commencer à réviser avec flashkarte.",
+      "metaTitle": "Premiers pas — Aide LearnWohl",
+      "metaDescription": "Comment t'inscrire et commencer à réviser avec LearnWohl.",
       "title": "Premiers pas",
       "signupHeading": "Inscription",
       "signupBody": "Crée un compte avec une adresse e-mail et un mot de passe, puis confirme l'e-mail de vérification que flashkarte t'envoie. Tes paquets et ta progression de révision sont liés à ce compte et se synchronisent sur chaque appareil où tu te connectes — web et Android.",
@@ -628,8 +628,8 @@
       "mapSettings": "Réglages — compte, apparence, langue, connexion IA et données."
     },
     "writingDecks": {
-      "metaTitle": "Écrire des paquets — Aide flashkarte",
-      "metaDescription": "Le format Markdown utilisé par flashkarte pour les cartes et les trois façons de créer un paquet.",
+      "metaTitle": "Écrire des paquets — Aide LearnWohl",
+      "metaDescription": "Le format Markdown utilisé par LearnWohl pour les cartes et les trois façons de créer un paquet.",
       "title": "Écrire des paquets",
       "waysHeading": "Trois façons de créer un paquet",
       "waysWeb": "Sur le web, ouvre l'éditeur de paquets, colle ou saisis du Markdown au format ci-dessous, puis enregistre. Un aperçu en direct affiche les cartes détectées avant l'enregistrement.",
@@ -646,7 +646,7 @@
       "settingsOrdered": "Réviser dans l'ordre : les cartes sont affichées dans l'ordre où tu les as créées et tu dois répondre correctement à la carte en cours avant de continuer — utile pour les séquences qui s'enchaînent."
     },
     "advancedCards": {
-      "metaTitle": "Types de cartes avancés — Aide flashkarte",
+      "metaTitle": "Types de cartes avancés — Aide LearnWohl",
       "metaDescription": "Comment écrire des cartes de diagnostic à choix multiples avec une carte de suivi, et des cartes pour des mots ayant plusieurs sens.",
       "title": "Types de cartes avancés",
       "diagnosticHeading": "Cartes de diagnostic (choix multiples)",
@@ -668,15 +668,15 @@
       "readingLimits": "Dans une leçon, évite les lignes qui commencent par « ## » ou par un numéro en gras comme « **3. …** » : elles démarrent une nouvelle catégorie ou une nouvelle carte. Un paquet avec des leçons ne peut pas non plus contenir de cartes de branchement."
     },
     "branchingDecks": {
-      "metaTitle": "Paquets à embranchements — Aide flashkarte",
-      "metaDescription": "Comment écrire un paquet à embranchements « choisis ton chemin » dans flashkarte.",
+      "metaTitle": "Paquets à embranchements — Aide LearnWohl",
+      "metaDescription": "Comment écrire un paquet à embranchements « choisis ton chemin » dans LearnWohl.",
       "title": "Paquets à embranchements",
       "body": "Transforme un paquet en une séquence « choisis ton chemin » plutôt qu'une simple révision. Place une ancre comme \"[label]\" sur sa propre ligne avant une carte, puis indique chaque option sous la forme d'une ligne \"- choice text -> target\", où target est une autre étiquette d'ancre (ou \"end\" pour terminer). Une carte sans options est une carte normale, sans suite. Tout paquet contenant au moins une carte à options devient automatiquement un paquet à embranchements, qui se joue plutôt qu'il ne se révise.",
       "exampleCaption": "Exemple de paquet à embranchements :"
     },
     "studying": {
-      "metaTitle": "Réviser & répétition espacée — Aide flashkarte",
-      "metaDescription": "Comment flashkarte planifie les révisions, ce que font les boutons d'évaluation et ce que signifient les compteurs d'un paquet.",
+      "metaTitle": "Réviser & répétition espacée — Aide LearnWohl",
+      "metaDescription": "Comment LearnWohl planifie les révisions, ce que font les boutons d'évaluation et ce que signifient les compteurs d'un paquet.",
       "title": "Réviser & répétition espacée",
       "srsHeading": "Comment les révisions sont planifiées",
       "srsBody": "Chaque carte a une date de révision, fixée par ton évaluation précédente. Difficile la ramène demain et Correct la ramène dans deux jours, quel qu'ait été son délai auparavant. Seul Facile l'éloigne dans le temps, et chaque Facile consécutif l'éloigne davantage : c'est ainsi qu'une carte bien maîtrisée quitte la rotation quotidienne.",
@@ -702,8 +702,8 @@
       "choiceBody": "L'application web et l'application Android proposent toutes deux un mode à choix multiples. Pour une carte ordinaire, les options de réponse sont générées automatiquement à partir de tes autres cartes dues ; pour une carte de diagnostic (voir Types de cartes avancés), ce sont les options que tu as écrites qui sont utilisées, et une mauvaise réponse peut afficher une carte de suivi avant de continuer."
     },
     "ai": {
-      "metaTitle": "Créer du contenu d'apprentissage avec l'IA — Aide flashkarte",
-      "metaDescription": "Comment connecter ton assistant IA à flashkarte via MCP pour créer des paquets de cartes, des collections et des cours structurés.",
+      "metaTitle": "Créer du contenu d'apprentissage avec l'IA — Aide LearnWohl",
+      "metaDescription": "Comment connecter ton assistant IA à LearnWohl via MCP pour créer des paquets de cartes, des collections et des cours structurés.",
       "title": "Créer du contenu d'apprentissage avec l'IA",
       "body": "Un assistant IA peut créer du contenu d'apprentissage et l'envoyer directement dans ton compte, en utilisant ton propre compte IA — le serveur de flashkarte ne fait jamais tourner l'IA lui-même.",
       "typesHeading": "Choisir le bon type de contenu",
@@ -720,7 +720,7 @@
       "agentsNote": "Pour les agents IA, un guide en texte brut sur flashkarte et son serveur MCP se trouve sur <0>/llms.txt</0>."
     },
     "sharing": {
-      "metaTitle": "Partager & explorer — Aide flashkarte",
+      "metaTitle": "Partager & explorer — Aide LearnWohl",
       "metaDescription": "Comment partager des paquets de cartes et des cours structurés, parcourir Explorer et utiliser la Bibliothèque.",
       "title": "Partager & explorer",
       "publicHeading": "Rendre un paquet public",

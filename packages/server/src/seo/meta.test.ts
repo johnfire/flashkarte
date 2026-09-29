@@ -61,3 +61,16 @@ describe("metaToHeadHtml", () => {
     );
   });
 });
+
+describe("staticMeta branding", () => {
+  // The product is LearnWohl. Mixed names split brand searches and confuse the
+  // result snippet, so no server-rendered page may use the old name.
+  it.each(["/", "/explore", "/privacy", "/impressum"])(
+    "%s never says flashkarte",
+    (path) => {
+      const meta = staticMeta(path);
+      expect(JSON.stringify(meta).toLowerCase()).not.toContain("flashkarte");
+      expect(meta.title).toContain("LearnWohl");
+    },
+  );
+});

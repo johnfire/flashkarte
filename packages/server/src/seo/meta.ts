@@ -32,23 +32,23 @@ const PAGES: Record<
     jsonLd: true,
   },
   "/explore": {
-    title: "Explore public flashcard decks — flashkarte",
+    title: "Explore public flashcard decks — LearnWohl",
     description:
-      "Browse free, community-shared flashcard decks on flashkarte and clone any of them into your account to start studying.",
+      "Browse free, community-shared flashcard decks on LearnWohl and clone any of them into your account to start studying.",
   },
   "/privacy": {
-    title: "Privacy Policy — flashkarte",
+    title: "Privacy Policy — LearnWohl",
     description:
-      "How flashkarte handles your data: what we collect, what we never do, and your rights.",
+      "How LearnWohl handles your data: what we collect, what we never do, and your rights.",
   },
   "/impressum": {
-    title: "Impressum — flashkarte",
-    description: "Legal provider information for flashkarte (Impressum).",
+    title: "Impressum — LearnWohl",
+    description: "Legal provider information for LearnWohl (Impressum).",
   },
   "/guide": {
-    title: "Guide — flashkarte",
+    title: "Guide — LearnWohl",
     description:
-      "How to use flashkarte: write Markdown flashcard decks, study with spaced repetition, share decks, and let your AI build decks for you.",
+      "How to use LearnWohl: write Markdown flashcard decks, study with spaced repetition, share decks, and let your AI build decks for you.",
   },
 };
 

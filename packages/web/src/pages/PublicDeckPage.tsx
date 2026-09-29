@@ -31,10 +31,10 @@ export function PublicDeckPage() {
 
   useDocumentHead({
     title: deck
-      ? `${deck.title} — flashcards by ${deck.author} | flashkarte`
-      : "flashkarte",
+      ? `${deck.title} — flashcards by ${deck.author} | LearnWohl`
+      : "LearnWohl",
     description: deck
-      ? `${deck.cardCount} flashcards by ${deck.author} on flashkarte.`
+      ? `${deck.cardCount} flashcards by ${deck.author} on LearnWohl.`
       : undefined,
   });
 

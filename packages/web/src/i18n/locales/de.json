@@ -578,8 +578,8 @@
     "backToHome": "← Start",
     "next": "Weiter: {{title}} →",
     "index": {
-      "metaTitle": "Hilfe — flashkarte",
-      "metaDescription": "Alles, was du für flashkarte brauchst: Markdown-Lernkartenstapel schreiben, Stapelsammlungen und strukturierte Lernkurse nutzen, Inhalte teilen und deine eigene KI verbinden.",
+      "metaTitle": "Hilfe — LearnWohl",
+      "metaDescription": "Alles, was du für LearnWohl brauchst: Markdown-Lernkartenstapel schreiben, Stapelsammlungen und strukturierte Lernkurse nutzen, Inhalte teilen und deine eigene KI verbinden.",
       "title": "Hilfe",
       "intro": "flashkarte verwandelt einfaches Markdown in Lernkarten mit verteilter Wiederholung, die du im Web und unter Android lernen kannst — immer synchron. Wähle unten ein Thema.",
       "topics": {
@@ -614,8 +614,8 @@
       }
     },
     "gettingStarted": {
-      "metaTitle": "Erste Schritte — flashkarte-Hilfe",
-      "metaDescription": "So registrierst du dich und beginnst mit flashkarte zu lernen.",
+      "metaTitle": "Erste Schritte — LearnWohl-Hilfe",
+      "metaDescription": "So registrierst du dich und beginnst mit LearnWohl zu lernen.",
       "title": "Erste Schritte",
       "signupHeading": "Registrieren",
       "signupBody": "Erstelle ein Konto mit E-Mail-Adresse und Passwort und bestätige dann die Verifizierungs-E-Mail, die dir flashkarte sendet. Deine Stapel und dein Lernfortschritt sind mit diesem Konto verknüpft und synchronisieren sich auf jedem Gerät, auf dem du dich anmeldest — Web und Android.",
@@ -628,8 +628,8 @@
       "mapSettings": "Einstellungen — Konto, Darstellung, Sprache, KI-Verbindung und Daten."
     },
     "writingDecks": {
-      "metaTitle": "Stapel schreiben — flashkarte-Hilfe",
-      "metaDescription": "Das Markdown-Format, das flashkarte für Karten verwendet, und die drei Wege, einen Stapel zu erstellen.",
+      "metaTitle": "Stapel schreiben — LearnWohl-Hilfe",
+      "metaDescription": "Das Markdown-Format, das LearnWohl für Karten verwendet, und die drei Wege, einen Stapel zu erstellen.",
       "title": "Stapel schreiben",
       "waysHeading": "Drei Wege, einen Stapel zu erstellen",
       "waysWeb": "Öffne im Web den Stapel-Editor, füge Markdown im untenstehenden Format ein oder tippe es, und speichere. Eine Live-Vorschau zeigt die erkannten Karten, bevor du speicherst.",
@@ -646,7 +646,7 @@
       "settingsOrdered": "In Reihenfolge lernen: Karten werden in der von dir festgelegten Reihenfolge angezeigt, und du musst die aktuelle Karte richtig beantworten, bevor du weitergehst — nützlich für Abfolgen, die aufeinander aufbauen."
     },
     "advancedCards": {
-      "metaTitle": "Erweiterte Kartentypen — flashkarte-Hilfe",
+      "metaTitle": "Erweiterte Kartentypen — LearnWohl-Hilfe",
       "metaDescription": "Wie man diagnostische Multiple-Choice-Karten mit Vertiefungskarten schreibt, und Karten für Wörter mit mehreren Bedeutungen.",
       "title": "Erweiterte Kartentypen",
       "diagnosticHeading": "Diagnostische (Multiple-Choice-)Karten",
@@ -668,15 +668,15 @@
       "readingLimits": "Vermeide in einer Lektion Zeilen, die mit „## “ oder mit einer fetten Nummer wie „**3. …**“ beginnen: Sie starten eine neue Kategorie oder Karte. Ein Deck mit Lektionen darf keine Verzweigungskarten enthalten."
     },
     "branchingDecks": {
-      "metaTitle": "Verzweigte Stapel — flashkarte-Hilfe",
-      "metaDescription": "So schreibst du einen verzweigten Stapel nach dem Prinzip „Wähle deinen Weg“ in flashkarte.",
+      "metaTitle": "Verzweigte Stapel — LearnWohl-Hilfe",
+      "metaDescription": "So schreibst du einen verzweigten Stapel nach dem Prinzip „Wähle deinen Weg“ in LearnWohl.",
       "title": "Verzweigte Stapel",
       "body": "Verwandle einen Stapel in eine Abfolge nach dem Prinzip „Wähle deinen Weg“ statt einer normalen Wiederholung. Setze einen Anker wie \"[label]\" in eine eigene Zeile vor eine Karte und gib dann jede Option als Zeile \"- choice text -> target\" an, wobei target ein anderer Anker-Label ist (oder \"end\", um abzuschließen). Eine Karte ohne Optionen ist eine normale Karte ohne Fortsetzung. Jeder Stapel mit mindestens einer Options-Karte wird automatisch zu einem verzweigten Stapel, der gespielt statt wiederholt wird.",
       "exampleCaption": "Beispiel für einen verzweigten Stapel:"
     },
     "studying": {
-      "metaTitle": "Lernen & verteilte Wiederholung — flashkarte-Hilfe",
-      "metaDescription": "Wie flashkarte Wiederholungen plant, was die Bewertungsknöpfe bewirken und was die Zähler eines Decks bedeuten.",
+      "metaTitle": "Lernen & verteilte Wiederholung — LearnWohl-Hilfe",
+      "metaDescription": "Wie LearnWohl Wiederholungen plant, was die Bewertungsknöpfe bewirken und was die Zähler eines Decks bedeuten.",
       "title": "Lernen & verteilte Wiederholung",
       "srsHeading": "Wie Wiederholungen geplant werden",
       "srsBody": "Jede Karte hat ein Fälligkeitsdatum, das sich aus deiner letzten Bewertung ergibt. Schwer bringt eine Karte morgen zurück, Gut in zwei Tagen — unabhängig davon, wie lange sie vorher pausiert hatte. Nur Einfach schiebt eine Karte weiter nach hinten, und jedes weitere Einfach in Folge noch weiter. So verlässt eine Karte, die du sicher beherrschst, den täglichen Umlauf.",
@@ -702,8 +702,8 @@
       "choiceBody": "Sowohl die Web-App als auch die Android-App bieten einen Multiple-Choice-Modus. Bei einer normalen Karte werden die Antwortoptionen automatisch aus deinen anderen fälligen Karten gebildet; bei einer diagnostischen Karte (siehe Erweiterte Kartentypen) werden die von dir geschriebenen Optionen verwendet, und eine falsche Antwort kann vor dem Weitergehen eine Vertiefungskarte anzeigen."
     },
     "ai": {
-      "metaTitle": "Lerninhalte mit KI erstellen — flashkarte-Hilfe",
-      "metaDescription": "So verbindest du deinen eigenen KI-Assistenten über MCP mit flashkarte, damit er Lernkartenstapel, Stapelsammlungen und strukturierte Lernkurse erstellt.",
+      "metaTitle": "Lerninhalte mit KI erstellen — LearnWohl-Hilfe",
+      "metaDescription": "So verbindest du deinen eigenen KI-Assistenten über MCP mit LearnWohl, damit er Lernkartenstapel, Stapelsammlungen und strukturierte Lernkurse erstellt.",
       "title": "Lerninhalte mit KI erstellen",
       "body": "Ein KI-Assistent kann Lerninhalte für dich erstellen und direkt in dein Konto übertragen, indem er dein eigenes KI-Konto nutzt — die KI läuft nicht auf dem Server von flashkarte.",
       "typesHeading": "Den richtigen Inhaltstyp wählen",
@@ -720,7 +720,7 @@
       "agentsNote": "Für KI-Agenten gibt es unter <0>/llms.txt</0> eine Klartext-Anleitung zu flashkarte und seinem MCP-Server."
     },
     "sharing": {
-      "metaTitle": "Teilen & entdecken — flashkarte-Hilfe",
+      "metaTitle": "Teilen & entdecken — LearnWohl-Hilfe",
       "metaDescription": "So teilst du Lernkartenstapel und strukturierte Lernkurse, durchstöberst Entdecken und nutzt die Bibliothek.",
       "title": "Teilen & entdecken",
       "publicHeading": "Einen Stapel öffentlich machen",

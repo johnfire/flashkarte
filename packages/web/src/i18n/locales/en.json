@@ -578,8 +578,8 @@
     "backToHome": "← Home",
     "next": "Next: {{title}} →",
     "index": {
-      "metaTitle": "Help — flashkarte",
-      "metaDescription": "Everything you need to use flashkarte: writing Markdown flashcard decks, deck collections, structured learning courses, sharing, and connecting your own AI.",
+      "metaTitle": "Help — LearnWohl",
+      "metaDescription": "Everything you need to use LearnWohl: writing Markdown flashcard decks, deck collections, structured learning courses, sharing, and connecting your own AI.",
       "title": "Help",
       "intro": "flashkarte turns plain Markdown into spaced-repetition flashcards you can study on the web and on Android, always in sync. Pick a topic below.",
       "topics": {
@@ -614,8 +614,8 @@
       }
     },
     "gettingStarted": {
-      "metaTitle": "Getting started — flashkarte Help",
-      "metaDescription": "How to sign up and get studying with flashkarte.",
+      "metaTitle": "Getting started — LearnWohl Help",
+      "metaDescription": "How to sign up and get studying with LearnWohl.",
       "title": "Getting started",
       "signupHeading": "Sign up",
       "signupBody": "Create an account with an email and password, then confirm the verification email flashkarte sends you. Your decks and study progress are tied to that account and sync across every device you sign in on — web and Android.",
@@ -628,8 +628,8 @@
       "mapSettings": "Settings — account, appearance, language, AI connection, and data."
     },
     "writingDecks": {
-      "metaTitle": "Writing decks — flashkarte Help",
-      "metaDescription": "The Markdown format flashkarte uses for cards, and the three ways to create a deck.",
+      "metaTitle": "Writing decks — LearnWohl Help",
+      "metaDescription": "The Markdown format LearnWohl uses for cards, and the three ways to create a deck.",
       "title": "Writing decks",
       "waysHeading": "Three ways to create a deck",
       "waysWeb": "On the web, open the deck editor, paste or type Markdown in the format below, and save. A live preview shows the parsed cards before you save.",
@@ -646,7 +646,7 @@
       "settingsOrdered": "Study in order: cards are shown in their authored order, and you must answer the current card correctly before advancing — useful for sequences that build on each other."
     },
     "advancedCards": {
-      "metaTitle": "Advanced card types — flashkarte Help",
+      "metaTitle": "Advanced card types — LearnWohl Help",
       "metaDescription": "How to write diagnostic multiple-choice cards with follow-up remediation, and cards for words with more than one meaning.",
       "title": "Advanced card types",
       "diagnosticHeading": "Diagnostic (multiple-choice) cards",
@@ -668,15 +668,15 @@
       "readingLimits": "Inside a lesson, avoid lines that start with \"## \" or with a bold number like \"**3. …**\": they start a new category or a new card. A deck with lessons can't also contain branch cards."
     },
     "branchingDecks": {
-      "metaTitle": "Branching decks — flashkarte Help",
-      "metaDescription": "How to write a choose-your-path branching deck in flashkarte.",
+      "metaTitle": "Branching decks — LearnWohl Help",
+      "metaDescription": "How to write a choose-your-path branching deck in LearnWohl.",
       "title": "Branching decks",
       "body": "Turn a deck into a choose-your-path sequence instead of a plain review. Put an anchor like \"[label]\" on its own line before a card, then give each option as a line \"- choice text -> target\", where target is another anchor's label (or \"end\" to finish). A card with no options is a normal, dead-end card. Any deck with at least one option card automatically becomes a branching deck, played rather than reviewed.",
       "exampleCaption": "Example branching deck:"
     },
     "studying": {
-      "metaTitle": "Studying & spaced repetition — flashkarte Help",
-      "metaDescription": "How flashkarte schedules reviews, what the rating buttons do, and what the deck counters mean.",
+      "metaTitle": "Studying & spaced repetition — LearnWohl Help",
+      "metaDescription": "How LearnWohl schedules reviews, what the rating buttons do, and what the deck counters mean.",
       "title": "Studying & spaced repetition",
       "srsHeading": "How reviews are scheduled",
       "srsBody": "Every card has a due date, set by how you rated it last time. Hard brings a card back tomorrow and Good brings it back in two days, however long it had been waiting before. Only Easy pushes a card further out, and each Easy in a row pushes it further still — that is how a card you know well leaves the daily rotation.",
@@ -702,8 +702,8 @@
       "choiceBody": "Both the web app and the Android app offer a multiple-choice mode. For an ordinary card it builds answer options automatically from your other due cards; for a diagnostic card (see Advanced card types) it uses the options you wrote, and a wrong pick can show a follow-up card before you continue."
     },
     "ai": {
-      "metaTitle": "Creating learning content with AI — flashkarte Help",
-      "metaDescription": "How to connect your own AI assistant to flashkarte over MCP to build flashcard decks, deck collections, and structured learning courses.",
+      "metaTitle": "Creating learning content with AI — LearnWohl Help",
+      "metaDescription": "How to connect your own AI assistant to LearnWohl over MCP to build flashcard decks, deck collections, and structured learning courses.",
       "title": "Creating learning content with AI",
       "body": "An AI assistant can build learning content and push it straight into your account, using your own AI account — flashkarte's server never runs the AI itself.",
       "typesHeading": "Choose the right content type",
@@ -720,7 +720,7 @@
       "agentsNote": "For AI agents, a plain-text guide to flashkarte and its MCP server is at <0>/llms.txt</0>."
     },
     "sharing": {
-      "metaTitle": "Sharing & exploring — flashkarte Help",
+      "metaTitle": "Sharing & exploring — LearnWohl Help",
       "metaDescription": "How to share flashcard decks and structured learning courses, browse Explore, and use the Library.",
       "title": "Sharing & exploring",
       "publicHeading": "Making a deck public",

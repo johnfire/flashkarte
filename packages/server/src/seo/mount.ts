@@ -62,11 +62,11 @@ export function mountSeo(app: Express, opts: MountSeoOptions): void {
         const preview = id ? await getDeckPreview(id) : null;
         if (!preview) {
           const notFound: PageMeta = {
-            title: "Deck not found — flashkarte",
+            title: "Deck not found — LearnWohl",
             description: "This deck is not available.",
             canonical: "",
             og: {
-              title: "Deck not found — flashkarte",
+              title: "Deck not found — LearnWohl",
               description: "",
               image: "",
               url: "",

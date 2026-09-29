@@ -578,8 +578,8 @@
     "backToHome": "← Inicio",
     "next": "Siguiente: {{title}} →",
     "index": {
-      "metaTitle": "Ayuda — flashkarte",
-      "metaDescription": "Todo lo que necesitas para usar flashkarte: escribir mazos en Markdown, mazos ramificados, estudiar con repetición espaciada, compartir mazos y conectar tu propia IA.",
+      "metaTitle": "Ayuda — LearnWohl",
+      "metaDescription": "Todo lo que necesitas para usar LearnWohl: escribir mazos en Markdown, mazos ramificados, estudiar con repetición espaciada, compartir mazos y conectar tu propia IA.",
       "title": "Ayuda",
       "intro": "flashkarte convierte Markdown sencillo en tarjetas de memoria con repetición espaciada que puedes estudiar en la web y en Android, siempre sincronizadas. Elige un tema a continuación.",
       "topics": {
@@ -614,8 +614,8 @@
       }
     },
     "gettingStarted": {
-      "metaTitle": "Primeros pasos — Ayuda de flashkarte",
-      "metaDescription": "Cómo registrarte y empezar a estudiar con flashkarte.",
+      "metaTitle": "Primeros pasos — Ayuda de LearnWohl",
+      "metaDescription": "Cómo registrarte y empezar a estudiar con LearnWohl.",
       "title": "Primeros pasos",
       "signupHeading": "Regístrate",
       "signupBody": "Crea una cuenta con un correo electrónico y una contraseña, y luego confirma el correo de verificación que te envía flashkarte. Tus mazos y tu progreso de estudio están vinculados a esa cuenta y se sincronizan en todos los dispositivos en los que inicies sesión — web y Android.",
@@ -628,8 +628,8 @@
       "mapSettings": "Ajustes — cuenta, apariencia, idioma, conexión con IA y datos."
     },
     "writingDecks": {
-      "metaTitle": "Escribir mazos — Ayuda de flashkarte",
-      "metaDescription": "El formato Markdown que usa flashkarte para las tarjetas y las tres formas de crear un mazo.",
+      "metaTitle": "Escribir mazos — Ayuda de LearnWohl",
+      "metaDescription": "El formato Markdown que usa LearnWohl para las tarjetas y las tres formas de crear un mazo.",
       "title": "Escribir mazos",
       "waysHeading": "Tres formas de crear un mazo",
       "waysWeb": "En la web, abre el editor de mazos, pega o escribe Markdown con el formato de abajo y guarda. Una vista previa en vivo muestra las tarjetas detectadas antes de guardar.",
@@ -646,7 +646,7 @@
       "settingsOrdered": "Estudiar en orden: las tarjetas se muestran en el orden en que las creaste y debes responder correctamente la tarjeta actual antes de avanzar — útil para secuencias que se construyen unas sobre otras."
     },
     "advancedCards": {
-      "metaTitle": "Tipos de tarjeta avanzados — Ayuda de flashkarte",
+      "metaTitle": "Tipos de tarjeta avanzados — Ayuda de LearnWohl",
       "metaDescription": "Cómo escribir tarjetas de diagnóstico de opción múltiple con una tarjeta de refuerzo, y tarjetas para palabras con más de un significado.",
       "title": "Tipos de tarjeta avanzados",
       "diagnosticHeading": "Tarjetas de diagnóstico (opción múltiple)",
@@ -668,15 +668,15 @@
       "readingLimits": "Dentro de una lección evita líneas que empiecen por «## » o por un número en negrita como «**3. …**»: inician una categoría o una tarjeta nueva. Un mazo con lecciones tampoco puede contener tarjetas ramificadas."
     },
     "branchingDecks": {
-      "metaTitle": "Mazos ramificados — Ayuda de flashkarte",
-      "metaDescription": "Cómo escribir un mazo ramificado de «elige tu camino» en flashkarte.",
+      "metaTitle": "Mazos ramificados — Ayuda de LearnWohl",
+      "metaDescription": "Cómo escribir un mazo ramificado de «elige tu camino» en LearnWohl.",
       "title": "Mazos ramificados",
       "body": "Convierte un mazo en una secuencia de «elige tu camino» en lugar de un repaso normal. Coloca un ancla como \"[label]\" en su propia línea antes de una tarjeta, y luego indica cada opción como una línea \"- choice text -> target\", donde target es otra etiqueta de ancla (o \"end\" para terminar). Una tarjeta sin opciones es una tarjeta normal sin continuación. Cualquier mazo con al menos una tarjeta de opciones se convierte automáticamente en un mazo ramificado, que se juega en lugar de repasarse.",
       "exampleCaption": "Ejemplo de mazo ramificado:"
     },
     "studying": {
-      "metaTitle": "Estudiar y repetición espaciada — Ayuda de flashkarte",
-      "metaDescription": "Cómo programa flashkarte los repasos, qué hacen los botones de valoración y qué significan los contadores de cada mazo.",
+      "metaTitle": "Estudiar y repetición espaciada — Ayuda de LearnWohl",
+      "metaDescription": "Cómo programa LearnWohl los repasos, qué hacen los botones de valoración y qué significan los contadores de cada mazo.",
       "title": "Estudiar y repetición espaciada",
       "srsHeading": "Cómo se programan los repasos",
       "srsBody": "Cada tarjeta tiene una fecha de repaso, fijada por cómo la valoraste la última vez. Difícil la devuelve mañana y Bien la devuelve en dos días, por mucho que hubiera esperado antes. Solo Fácil la aleja en el tiempo, y cada Fácil seguido la aleja todavía más: así una tarjeta que ya dominas sale de la rotación diaria.",
@@ -702,8 +702,8 @@
       "choiceBody": "Tanto la app web como la de Android ofrecen un modo de opción múltiple. Para una tarjeta normal, genera opciones automáticamente a partir de tus otras tarjetas pendientes; para una tarjeta de diagnóstico (ver Tipos de tarjeta avanzados) usa las opciones que escribiste, y elegir mal puede mostrar una tarjeta de refuerzo antes de continuar."
     },
     "ai": {
-      "metaTitle": "Crear contenido de aprendizaje con IA — Ayuda de flashkarte",
-      "metaDescription": "Cómo conectar tu asistente de IA a flashkarte mediante MCP para crear mazos de tarjetas, colecciones y cursos estructurados.",
+      "metaTitle": "Crear contenido de aprendizaje con IA — Ayuda de LearnWohl",
+      "metaDescription": "Cómo conectar tu asistente de IA a LearnWohl mediante MCP para crear mazos de tarjetas, colecciones y cursos estructurados.",
       "title": "Crear contenido de aprendizaje con IA",
       "body": "Un asistente de IA puede crear contenido de aprendizaje y enviarlo directamente a tu cuenta, usando tu propia cuenta de IA — el servidor de flashkarte nunca ejecuta la IA.",
       "typesHeading": "Elige el tipo de contenido correcto",
@@ -720,7 +720,7 @@
       "agentsNote": "Para agentes de IA, hay una guía en texto plano sobre flashkarte y su servidor MCP en <0>/llms.txt</0>."
     },
     "sharing": {
-      "metaTitle": "Compartir y explorar — Ayuda de flashkarte",
+      "metaTitle": "Compartir y explorar — Ayuda de LearnWohl",
       "metaDescription": "Cómo compartir mazos de tarjetas y cursos estructurados, explorar y usar la Biblioteca.",
       "title": "Compartir y explorar",
       "publicHeading": "Hacer público un mazo",

@@ -4,8 +4,8 @@ import { useDocumentHead } from "../seo/useDocumentHead";
 
 export function ImpressumPage() {
   useDocumentHead({
-    title: "Impressum — flashkarte",
-    description: "Legal provider information for flashkarte (Impressum).",
+    title: "Impressum — LearnWohl",
+    description: "Legal provider information for LearnWohl (Impressum).",
   });
   const { t } = useTranslation();
   return (
