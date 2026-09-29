@@ -31,7 +31,7 @@ export function DataExportSection() {
   }
 
   return (
-    <section className="mb-8">
+    <section className="rounded-lg border p-4">
       <h2 className="mb-1 text-xl font-semibold">{t("settings.dataExport")}</h2>
       <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
         {t("settings.dataExportHint")}

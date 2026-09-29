@@ -373,3 +373,80 @@ describe("SettingsPage", () => {
     });
   });
 });
+
+describe("SettingsPage layout", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    // The account section renders nothing for a logged-out visitor.
+    mockUser = { displayName: "Chris R.", accountType: "admin" };
+    mockApi.keys.list.mockResolvedValue([]);
+  });
+
+  test("uses the admin page's fluid three-column layout", async () => {
+    const { container } = renderPage();
+    await screen.findByRole("heading", { name: "Connect your AI" });
+
+    expect(container.querySelector('[class*="2xl:grid-cols-3"]')).toHaveClass(
+      "grid",
+      "items-start",
+      "lg:grid-cols-2",
+      "2xl:grid-cols-3",
+    );
+    expect(container.firstElementChild).toHaveClass("max-w-screen-2xl");
+  });
+
+  test("groups the sections into sign-in, preferences and data columns", async () => {
+    const { container } = renderPage();
+    await screen.findByRole("heading", { name: "Connect your AI" });
+
+    const grid = container.querySelector('[class*="2xl:grid-cols-3"]')!;
+    const columns = Array.from(grid.children) as HTMLElement[];
+    expect(columns).toHaveLength(3);
+
+    const headings = (column: HTMLElement) =>
+      within(column)
+        .getAllByRole("heading", { level: 2 })
+        .map((h) => h.textContent?.trim());
+    expect(headings(columns[0])).toEqual([
+      "Account",
+      "Change password",
+      expect.stringMatching(/^Two-factor authentication/), // + its on/off badge
+    ]);
+    expect(headings(columns[1])).toEqual([
+      "Appearance",
+      "Language",
+      "Spoken cards",
+    ]);
+    expect(headings(columns[2])).toEqual([
+      "Connect your AI",
+      "Your keys",
+      "Your data",
+      "Danger zone",
+    ]);
+  });
+
+  test("the grid owns the spacing: sections carry no bottom margin of their own", async () => {
+    const { container } = renderPage();
+    await screen.findByRole("heading", { name: "Connect your AI" });
+
+    expect(container.querySelectorAll("section.mb-8")).toHaveLength(0);
+    for (const column of container.querySelectorAll(
+      '[class*="2xl:grid-cols-3"] > div',
+    )) {
+      expect(column).toHaveClass("space-y-6");
+    }
+  });
+
+  test("every section is a bordered card, so the columns read as one grid", async () => {
+    const { container } = renderPage();
+    await screen.findByRole("heading", { name: "Connect your AI" });
+
+    const cards = container.querySelectorAll(
+      '[class*="2xl:grid-cols-3"] > div > section',
+    );
+    expect(cards).toHaveLength(9);
+    for (const card of cards) {
+      expect(card).toHaveClass("rounded-lg", "border", "p-4");
+    }
+  });
+});

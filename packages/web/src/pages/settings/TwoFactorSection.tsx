@@ -55,7 +55,7 @@ export function TwoFactorSection() {
   }
 
   return (
-    <section className="mb-8">
+    <section className="rounded-lg border p-4">
       <h2 className="mb-1 text-xl font-semibold">
         {t("settings.twoFactor")}{" "}
         <span

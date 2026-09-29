@@ -14,7 +14,7 @@ export function SettingsPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="mx-auto max-w-2xl p-4">
+    <div className="mx-auto max-w-screen-2xl p-4 sm:p-8">
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("settings.title")}</h1>
         <Link to="/" className="text-sm text-indigo-600">
@@ -22,15 +22,23 @@ export function SettingsPage() {
         </Link>
       </header>
 
-      <AccountSection />
-      <PasswordSection />
-      <TwoFactorSection />
-      <AppearanceSection />
-      <LanguageSection />
-      <SpeechSection />
-      <ApiKeysSection />
-      <DataExportSection />
-      <DangerZoneSection />
+      <div className="grid items-start gap-6 lg:grid-cols-2 2xl:grid-cols-3">
+        <div className="space-y-6">
+          <AccountSection />
+          <PasswordSection />
+          <TwoFactorSection />
+        </div>
+        <div className="space-y-6">
+          <AppearanceSection />
+          <LanguageSection />
+          <SpeechSection />
+        </div>
+        <div className="space-y-6">
+          <ApiKeysSection />
+          <DataExportSection />
+          <DangerZoneSection />
+        </div>
+      </div>
     </div>
   );
 }

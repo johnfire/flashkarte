@@ -48,7 +48,7 @@ export function SpeechSection() {
   }
 
   return (
-    <section className="mb-8 rounded-lg border p-4">
+    <section className="rounded-lg border p-4">
       <h2 className="mb-1 text-xl font-semibold">
         {t("settings.speech.title")}
       </h2>

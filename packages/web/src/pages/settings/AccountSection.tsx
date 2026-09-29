@@ -62,7 +62,7 @@ export function AccountSection() {
   }
 
   return (
-    <section className="mb-8 rounded-lg border p-4">
+    <section className="rounded-lg border p-4">
       <h2 className="mb-1 text-xl font-semibold">{t("settings.account")}</h2>
       <p className="text-sm text-gray-600 dark:text-gray-300">{user.email}</p>
       <p className="mt-2 text-sm">

@@ -58,7 +58,7 @@ export function ApiKeysSection() {
   }
 
   return (
-    <section className="mb-8 rounded-lg border p-4">
+    <section className="rounded-lg border p-4">
       <h2 className="mb-1 text-xl font-semibold">{t("settings.connectAI")}</h2>
       <p className="mb-3 text-sm text-gray-600 dark:text-gray-300">
         {t("settings.connectAIHint")}

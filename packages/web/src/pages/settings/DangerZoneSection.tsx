@@ -43,7 +43,7 @@ export function DangerZoneSection() {
   }
 
   return (
-    <section className="mb-8 rounded-lg border border-red-200 p-4 dark:border-red-900/50">
+    <section className="rounded-lg border border-red-200 p-4 dark:border-red-900/50">
       <h2 className="mb-1 text-xl font-semibold text-red-700 dark:text-red-400">
         {t("settings.dangerZone")}
       </h2>
