@@ -15,6 +15,64 @@ function app() {
   return a;
 }
 
+describe("mountSeo www redirect", () => {
+  it("301s www.<domain> to the canonical host, keeping path and query", async () => {
+    const res = await request(app())
+      .get("/help/ai?utm_source=x")
+      .set("Host", "www.learnwohl.app");
+    expect(res.status).toBe(301);
+    expect(res.headers.location).toBe(
+      "https://learnwohl.app/help/ai?utm_source=x",
+    );
+  });
+  it("redirects the home page and HEAD requests too", async () => {
+    const home = await request(app()).get("/").set("Host", "www.learnwohl.app");
+    expect(home.headers.location).toBe("https://learnwohl.app/");
+    const head = await request(app())
+      .head("/explore")
+      .set("Host", "WWW.LearnWohl.app");
+    expect(head.status).toBe(301);
+  });
+  it("does not redirect the canonical host", async () => {
+    const res = await request(app()).get("/").set("Host", "learnwohl.app");
+    expect(res.status).toBe(200);
+  });
+  it("does not redirect other hosts or lookalikes", async () => {
+    for (const host of [
+      "localhost:3001",
+      "www.evil.test",
+      "wwwlearnwohl.app",
+      "www.learnwohl.app.evil.test",
+    ]) {
+      const res = await request(app()).get("/").set("Host", host);
+      expect({ host, status: res.status }).toEqual({ host, status: 200 });
+    }
+  });
+  it("leaves POST alone (a redirect would turn it into a GET)", async () => {
+    const res = await request(app())
+      .post("/sitemap.xml")
+      .set("Host", "www.learnwohl.app");
+    expect(res.status).not.toBe(301);
+  });
+  it("follows SITE_ORIGIN, and cannot loop when it names a www host", async () => {
+    const previous = process.env.SITE_ORIGIN;
+    try {
+      process.env.SITE_ORIGIN = "https://example.org";
+      const moved = await request(app())
+        .get("/x")
+        .set("Host", "www.example.org");
+      expect(moved.headers.location).toBe("https://example.org/x");
+
+      process.env.SITE_ORIGIN = "https://www.example.org";
+      const same = await request(app()).get("/").set("Host", "www.example.org");
+      expect(same.status).toBe(200); // already canonical: no redirect, no loop
+    } finally {
+      if (previous === undefined) delete process.env.SITE_ORIGIN;
+      else process.env.SITE_ORIGIN = previous;
+    }
+  });
+});
+
 describe("mountSeo", () => {
   it("GET / injects home meta + JSON-LD", async () => {
     const res = await request(app()).get("/");

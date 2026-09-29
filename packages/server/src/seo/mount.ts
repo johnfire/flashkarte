@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { staticMeta, metaToHeadHtml, notFoundMeta, HELP_PATHS } from "./meta";
 import { inject } from "./inject";
+import { getSiteOrigin } from "./siteOrigin";
 import { buildSitemap, SitemapUrl } from "./sitemap";
 import { extractDeckId, deckSlug } from "@flashkarte/shared";
 import { deckMeta, deckBodyHtml, DeckPreview } from "./deck";
@@ -23,6 +24,21 @@ const STATIC_HTML_ROUTES = [
 ];
 
 export function mountSeo(app: Express, opts: MountSeoOptions): void {
+  // One site, one address. The same pages answering on www.<domain> split links
+  // and ranking signals between two hosts; canonical tags only ask crawlers to
+  // merge them, a 301 makes them. Only GET/HEAD: a redirect would turn a POST
+  // into a GET. Derived from SITE_ORIGIN, so it can neither point at the wrong
+  // host nor loop.
+  app.use((req, res, next) => {
+    if (req.method !== "GET" && req.method !== "HEAD") return next();
+    const origin = new URL(getSiteOrigin());
+    if (req.hostname.toLowerCase() === `www.${origin.hostname}`) {
+      res.redirect(301, `${origin.origin}${req.originalUrl}`);
+      return;
+    }
+    next();
+  });
+
   app.get("/welcome", (_req, res) => res.redirect(301, "/"));
   // The single guide page became the help center. Redirect on the server so a
   // crawler gets a real 301 rather than a 200 that only JavaScript turns into /help.
