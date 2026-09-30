@@ -34,6 +34,8 @@ export interface Mail {
   subject: string;
   text: string;
   html: string;
+  from?: string;
+  replyTo?: string;
   messageId?: string;
 }
 
@@ -45,7 +47,9 @@ export interface MailDeliveryResult {
 
 export async function sendMail(mail: Mail): Promise<MailDeliveryResult> {
   const from =
-    process.env.MAIL_FROM ?? "flashkarte <contact@christopherrehm.de>";
+    mail.from ??
+    process.env.MAIL_FROM ??
+    "flashkarte <contact@christopherrehm.de>";
   // Test sink: append outbound mail as JSON lines so E2E tests can read
   // verification/reset links without a real SMTP server. Never set in prod.
   const sinkPath = process.env.MAIL_FILE_SINK;

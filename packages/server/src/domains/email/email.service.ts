@@ -146,7 +146,9 @@ export async function runEmailWorker(): Promise<void> {
   const workerId = `${process.pid}-${crypto.randomUUID()}`;
   for (;;) {
     try {
-      const processed = await processNextDelivery(workerId);
+      const processed =
+        (await processNextDelivery(workerId)) ||
+        (await processNextSharedDelivery(workerId));
       if (!processed) await waitForWorkerPoll();
     } catch (error) {
       logger.error("email.worker", "delivery loop failed; retrying", {
@@ -156,6 +158,12 @@ export async function runEmailWorker(): Promise<void> {
       await waitForWorkerPoll();
     }
   }
+}
+
+async function processNextSharedDelivery(workerId: string): Promise<boolean> {
+  const { processNextDelivery: processSharedDelivery } =
+    await import("../shared-email/shared-email.service");
+  return processSharedDelivery(workerId);
 }
 
 function waitForWorkerPoll(): Promise<void> {

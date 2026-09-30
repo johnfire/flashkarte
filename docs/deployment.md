@@ -59,6 +59,10 @@ cp .env.example .env && nano .env        # fill in the values below
   `MAIL_FROM` — authenticated SMTP submission settings. These values are passed
   to both the app and the email worker; never commit them or put them in a
   campaign record.
+- `EMAIL_SERVICE_TENANTS` — optional JSON mapping of tenant slugs to strong
+  bearer secrets and sender identities. The service derives the tenant from the
+  credential; callers cannot choose an arbitrary tenant in a request. Configure
+  `flashkarte`, `notes-world`, and `leguilde` here before enabling integrations.
 - `FLASHKARTE_LOG_PATH=/home/claude/logs/learnwohl` — the variable name remains
   for compatibility with the current Compose file.
 - `APP_PORT=8096`
@@ -101,10 +105,16 @@ one transaction. The worker claims those rows atomically, sends one message per
 recipient, retries transient failures with bounded exponential backoff, and
 records the final state in the database.
 
-This first version is deliberately limited to service announcements. It does
-not provide marketing campaigns, tracking pixels, unsubscribe preferences, or
-cross-product tenants yet. It also does not replace the existing verification,
-password-reset, or email-change mail paths.
+The shared backend API is available at `/api/service-email` for configured
+product tenants. It supports recipient synchronization, transactional messages,
+service announcements, product-update opt-in checks, tenant-scoped campaign
+status, and the same queued worker/retry path. Product backends authenticate
+with their tenant bearer secret; no product uses another product's users or
+JWTs. The existing Flashkarte admin UI and account-mail paths remain compatible.
+
+The shared API does not provide tracking pixels or cross-product audiences. A
+product must synchronize its own recipients and preferences, and product-update
+messages must target recipients explicitly opted in for that tenant.
 
 After deployment, check the worker with:
 

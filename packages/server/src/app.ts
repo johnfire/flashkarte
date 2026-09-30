@@ -45,6 +45,8 @@ import * as libraryService from "./domains/library/library.service";
 import { deckPath } from "@flashkarte/shared";
 import { getPool } from "./db/client";
 import { renderHttpMetrics } from "./observability/httpMetrics";
+import { requireSharedEmailTenant } from "./domains/shared-email/shared-email.auth";
+import { sharedEmailRouter } from "./domains/shared-email/shared-email.routes";
 
 // For IPv6, bucket by the /64 prefix so a client can't trivially bypass rate
 // limits by rotating through addresses within their allocated /64 block.
@@ -232,6 +234,22 @@ export function createApp() {
   app.use("/api/auth", authRouter);
   app.use("/api/client-errors", clientErrorsLimiter, clientErrorsRouter);
   app.use("/api/public/library", publicLibraryRouter);
+
+  // Product backends use tenant credentials, not LearnWohl user credentials.
+  // The credential middleware runs before the limiter so one tenant cannot
+  // consume another tenant's quota.
+  const sharedEmailLimiter = rateLimit({
+    windowMs: 60_000,
+    limit: 120,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+    keyGenerator: (req) =>
+      req.sharedEmailTenant?.slug ??
+      normalizeIp(req.ip ?? req.socket.remoteAddress ?? "unknown"),
+    skip: isTest,
+  });
+  app.use("/api/service-email", requireSharedEmailTenant);
+  app.use("/api/service-email", sharedEmailLimiter, sharedEmailRouter);
 
   // Everything below requires a valid JWT or API key
   app.use("/api", requireAuth);
