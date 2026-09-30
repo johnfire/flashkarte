@@ -66,9 +66,7 @@ export async function sendMail(mail: Mail): Promise<MailDeliveryResult> {
   return {
     accepted,
     messageId: delivery.messageId,
-    reason: accepted
-      ? undefined
-      : "SMTP did not accept the recipient",
+    reason: accepted ? undefined : "SMTP did not accept the recipient",
   };
 }
 
