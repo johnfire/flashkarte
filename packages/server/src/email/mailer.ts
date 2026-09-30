@@ -62,10 +62,11 @@ export async function sendMail(mail: Mail): Promise<MailDeliveryResult> {
     return { accepted: false, reason: "SMTP is not configured" };
   }
   const delivery = await tx.sendMail({ from, ...mail });
+  const accepted = delivery.accepted?.includes(mail.to) ?? false;
   return {
-    accepted: delivery.accepted.includes(mail.to),
+    accepted,
     messageId: delivery.messageId,
-    reason: delivery.accepted.includes(mail.to)
+    reason: accepted
       ? undefined
       : "SMTP did not accept the recipient",
   };
