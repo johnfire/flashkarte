@@ -7,15 +7,16 @@ VPS and updates the stack in `/opt/learnwohl`. The VPS itself never builds — i
 only pulls. `/opt/flashkarte` is retired and CI must not enter it.
 
 The stack (defined in `docker-compose.prod.yml`) has an **app** container
-(Express, serving the built web SPA + `/api`), a **postgres** container, and a
-daily **db-backup** sidecar. The **mcp** container serves AI clients on the same
-domain. Containers publish only to `127.0.0.1`; the VPS's **Apache** front proxy
-terminates TLS and routes requests by path.
+(Express, serving the built web SPA + `/api`), a **worker** container for queued
+email delivery, a **postgres** container, and a daily **db-backup** sidecar. The
+**mcp** container serves AI clients on the same domain. Containers publish only
+to `127.0.0.1`; the VPS's **Apache** front proxy terminates TLS and routes
+requests by path.
 
-| Public path on `learnwohl.app`                         | → localhost | Container |
-| ----------------------------------------------------- | ----------- | --------- |
-| `/` and app routes                                    | `8096`      | app       |
-| `/mcp`, `/oauth/*`, `/.well-known/oauth-*`             | `8097`      | mcp       |
+| Public path on `learnwohl.app`             | → localhost | Container |
+| ------------------------------------------ | ----------- | --------- |
+| `/` and app routes                         | `8096`      | app       |
+| `/mcp`, `/oauth/*`, `/.well-known/oauth-*` | `8097`      | mcp       |
 
 > **Going live is a deliberate one-time setup** (DNS + VPS bootstrap + secrets +
 > Apache vhosts + certbot). After that, deploys are automatic on push to `main`.
@@ -54,6 +55,10 @@ cp .env.example .env && nano .env        # fill in the values below
 - `JWT_SECRET` — `openssl rand -hex 32`
 - `NGINX_HOST=learnwohl.app` (drives `CORS_ORIGIN`)
 - `APP_URL=https://learnwohl.app`
+- `MAIL_HOST`, `MAIL_PORT`, `MAIL_USER`, `MAIL_PASS`, `MAIL_SECURE`, and
+  `MAIL_FROM` — authenticated SMTP submission settings. These values are passed
+  to both the app and the email worker; never commit them or put them in a
+  campaign record.
 - `FLASHKARTE_LOG_PATH=/home/claude/logs/learnwohl` — the variable name remains
   for compatibility with the current Compose file.
 - `APP_PORT=8096`
@@ -79,13 +84,34 @@ First deploy (subsequent ones are automatic via CI):
 
 ```bash
 export IMAGE_TAG=latest
-docker compose --profile mcp -f docker-compose.prod.yml pull app mcp db db-backup
-docker compose --profile mcp -f docker-compose.prod.yml up -d app mcp db db-backup
+docker compose --profile mcp -f docker-compose.prod.yml pull app worker mcp db db-backup
+docker compose --profile mcp -f docker-compose.prod.yml up -d app worker mcp db db-backup
 curl http://127.0.0.1:8096/health        # -> {"status":"ok"}
 curl http://127.0.0.1:8097/health        # -> ok
 ```
 
 Migrations run automatically on app startup (idempotent).
+
+## Contacting users
+
+An administrator can open **Admin**, select verified users, enter a subject and
+plain-text service message, confirm the recipient count, and choose **Queue
+email**. The app writes the campaign and one delivery row per selected user in
+one transaction. The worker claims those rows atomically, sends one message per
+recipient, retries transient failures with bounded exponential backoff, and
+records the final state in the database.
+
+This first version is deliberately limited to service announcements. It does
+not provide marketing campaigns, tracking pixels, unsubscribe preferences, or
+cross-product tenants yet. It also does not replace the existing verification,
+password-reset, or email-change mail paths.
+
+After deployment, check the worker with:
+
+```bash
+docker compose -f docker-compose.prod.yml ps app worker db
+docker compose -f docker-compose.prod.yml logs --tail=100 worker
+```
 
 ## GitHub Actions secrets
 
@@ -144,8 +170,8 @@ Each deploy pins images to a commit SHA. To roll back, on the VPS:
 ```bash
 cd /opt/learnwohl
 export IMAGE_TAG=<previous-sha>
-docker compose --profile mcp -f docker-compose.prod.yml pull app mcp
-docker compose --profile mcp -f docker-compose.prod.yml up -d app mcp db db-backup
+docker compose --profile mcp -f docker-compose.prod.yml pull app worker mcp
+docker compose --profile mcp -f docker-compose.prod.yml up -d app worker mcp db db-backup
 ```
 
 The deploy job checks that the VPS checkout matches its GitHub commit, so an

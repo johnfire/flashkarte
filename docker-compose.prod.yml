@@ -26,6 +26,7 @@ services:
       - MAIL_PORT=${MAIL_PORT:-587}
       - MAIL_USER=${MAIL_USER:-}
       - MAIL_PASS=${MAIL_PASS:-}
+      - MAIL_SECURE=${MAIL_SECURE:-false}
       - MAIL_FROM=${MAIL_FROM:-}
       - APP_URL=${APP_URL:-https://${NGINX_HOST}}
       - MCP_PUBLIC_URL=${MCP_PUBLIC_URL:-}
@@ -58,6 +59,34 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+
+  worker:
+    image: ghcr.io/johnfire/flashkarte-app:${IMAGE_TAG:-latest}
+    command: ["node", "dist/email-worker.js"]
+    environment:
+      - NODE_ENV=production
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=${POSTGRES_DB:-flashkarte}
+      - POSTGRES_USER=${POSTGRES_USER:-flashkarte}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - MAIL_HOST=${MAIL_HOST:-}
+      - MAIL_PORT=${MAIL_PORT:-587}
+      - MAIL_USER=${MAIL_USER:-}
+      - MAIL_PASS=${MAIL_PASS:-}
+      - MAIL_SECURE=${MAIL_SECURE:-false}
+      - MAIL_FROM=${MAIL_FROM:-}
+      - LOG_DIR=/logs
+    volumes:
+      - ${FLASHKARTE_LOG_PATH:-./logs}:/logs
+    depends_on:
+      app:
+        condition: service_healthy
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
 
   mcp:
     profiles: [mcp]
@@ -103,7 +132,11 @@ services:
     volumes:
       - flashkarte_pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-flashkarte} -d ${POSTGRES_DB:-flashkarte}"]
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-flashkarte} -d ${POSTGRES_DB:-flashkarte}",
+        ]
       interval: 5s
       timeout: 5s
       retries: 10

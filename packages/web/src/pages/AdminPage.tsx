@@ -29,6 +29,14 @@ export function AdminPage() {
   const [mutationError, setMutationError] = useState<string | null>(null);
   const [courseId, setCourseId] = useState("");
   const [updatingCourse, setUpdatingCourse] = useState(false);
+  const [selectedRecipientIds, setSelectedRecipientIds] = useState<string[]>(
+    [],
+  );
+  const [contactSubject, setContactSubject] = useState("");
+  const [contactBody, setContactBody] = useState("");
+  const [contactConfirmation, setContactConfirmation] = useState(false);
+  const [contacting, setContacting] = useState(false);
+  const [contactMessage, setContactMessage] = useState<string | null>(null);
 
   const loadUsers = useCallback(async () => {
     const response = await api.admin.listUsers();
@@ -47,6 +55,7 @@ export function AdminPage() {
       : loadError
         ? t("admin.loadError")
         : null);
+  const verifiedUsers = users?.filter((user) => user.emailVerifiedAt) ?? [];
 
   async function createUser(e: React.FormEvent) {
     e.preventDefault();
@@ -101,6 +110,49 @@ export function AdminPage() {
       );
     } finally {
       setUpdatingCourse(false);
+    }
+  }
+
+  function toggleRecipient(userId: string) {
+    setSelectedRecipientIds((current) =>
+      current.includes(userId)
+        ? current.filter((id) => id !== userId)
+        : [...current, userId],
+    );
+  }
+
+  function toggleAllVerifiedRecipients() {
+    setSelectedRecipientIds((current) =>
+      current.length === verifiedUsers.length
+        ? []
+        : verifiedUsers.map((user) => user.id),
+    );
+  }
+
+  async function contactSelectedUsers(event: React.FormEvent) {
+    event.preventDefault();
+    setContacting(true);
+    setContactMessage(null);
+    setMutationError(null);
+    try {
+      const { campaign } = await api.admin.contactUsers(
+        contactSubject.trim(),
+        contactBody.trim(),
+        selectedRecipientIds,
+      );
+      setContactMessage(
+        t("admin.contactQueued", { count: campaign.recipientCount }),
+      );
+      setContactSubject("");
+      setContactBody("");
+      setContactConfirmation(false);
+      setSelectedRecipientIds([]);
+    } catch (err) {
+      setMutationError(
+        err instanceof ApiError ? err.message : t("admin.contactError"),
+      );
+    } finally {
+      setContacting(false);
     }
   }
 
@@ -179,6 +231,77 @@ export function AdminPage() {
 
           <section className="rounded-lg border p-4">
             <h2 className="mb-2 text-xl font-semibold">
+              {t("admin.contactTitle")}
+            </h2>
+            <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+              {t("admin.contactHint")}
+            </p>
+            <form onSubmit={contactSelectedUsers} className="space-y-3">
+              <label
+                htmlFor="contact-subject"
+                className="block text-sm font-medium"
+              >
+                {t("admin.contactSubject")}
+              </label>
+              <input
+                id="contact-subject"
+                required
+                maxLength={200}
+                value={contactSubject}
+                onChange={(event) => setContactSubject(event.target.value)}
+                placeholder={t("admin.contactSubjectPlaceholder")}
+                className="w-full rounded-lg border px-3 py-2"
+              />
+              <label
+                htmlFor="contact-message"
+                className="block text-sm font-medium"
+              >
+                {t("admin.contactMessage")}
+              </label>
+              <textarea
+                id="contact-message"
+                required
+                maxLength={20_000}
+                rows={8}
+                value={contactBody}
+                onChange={(event) => setContactBody(event.target.value)}
+                placeholder={t("admin.contactMessagePlaceholder")}
+                className="w-full rounded-lg border px-3 py-2"
+              />
+              <label className="flex items-start gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={contactConfirmation}
+                  onChange={(event) =>
+                    setContactConfirmation(event.target.checked)
+                  }
+                  className="mt-1"
+                />
+                <span>{t("admin.contactConfirmation")}</span>
+              </label>
+              <button
+                type="submit"
+                disabled={
+                  contacting ||
+                  !contactConfirmation ||
+                  selectedRecipientIds.length === 0
+                }
+                className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white disabled:opacity-50"
+              >
+                {contacting
+                  ? t("admin.contacting")
+                  : t("admin.contactSend", {
+                      count: selectedRecipientIds.length,
+                    })}
+              </button>
+              {contactMessage && (
+                <p className="text-sm text-green-600">{contactMessage}</p>
+              )}
+            </form>
+          </section>
+
+          <section className="rounded-lg border p-4">
+            <h2 className="mb-2 text-xl font-semibold">
               Official course catalog
             </h2>
             <p className="mb-3 text-sm text-gray-600 dark:text-gray-400">
@@ -221,6 +344,16 @@ export function AdminPage() {
                 ? t("admin.users", { count: users.length })
                 : t("admin.users")}
             </h2>
+            <button
+              type="button"
+              onClick={toggleAllVerifiedRecipients}
+              disabled={verifiedUsers.length === 0}
+              className="mb-3 rounded-lg border px-3 py-2 text-sm disabled:opacity-50"
+            >
+              {selectedRecipientIds.length === verifiedUsers.length
+                ? t("admin.clearSelection")
+                : t("admin.selectVerified", { count: verifiedUsers.length })}
+            </button>
             {loading && !error && (
               <p className="text-gray-500 dark:text-gray-400">
                 {t("admin.loading")}
@@ -232,6 +365,14 @@ export function AdminPage() {
                   key={u.id}
                   className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-3"
                 >
+                  <input
+                    type="checkbox"
+                    aria-label={t("admin.selectUser", { email: u.email })}
+                    checked={selectedRecipientIds.includes(u.id)}
+                    disabled={!u.emailVerifiedAt}
+                    onChange={() => toggleRecipient(u.id)}
+                    className="h-4 w-4"
+                  />
                   <div className="min-w-0">
                     <p className="truncate font-medium">{u.email}</p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">

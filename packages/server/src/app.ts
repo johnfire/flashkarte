@@ -212,6 +212,22 @@ export function createApp() {
     },
   });
 
+  const adminEmailLimiter = rateLimit({
+    windowMs: 60 * 60_000,
+    limit: 10,
+    standardHeaders: "draft-7",
+    legacyHeaders: false,
+    keyGenerator: (req) =>
+      req.userId ?? normalizeIp(req.ip ?? req.socket.remoteAddress ?? "anon"),
+    skip: isTest,
+    message: {
+      error: {
+        code: "RATE_LIMIT_EXCEEDED",
+        message: "Too many email campaigns — please try again later",
+      },
+    },
+  });
+
   // Public routes (no JWT)
   app.use("/api/auth", authRouter);
   app.use("/api/client-errors", clientErrorsLimiter, clientErrorsRouter);
@@ -257,6 +273,7 @@ export function createApp() {
   app.use("/api/account", accountRouter);
   app.use("/api/keys", keysRouter);
   app.use("/api/bug-reports", bugReportLimiter, bugReportsRouter);
+  app.use("/api/admin/email", adminEmailLimiter);
   app.use("/api/admin", requireAdmin, adminRouter);
 
   // Serve the built web SPA in production (Dockerfile copies web/dist → public).

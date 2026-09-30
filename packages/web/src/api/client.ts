@@ -25,6 +25,7 @@ import {
   PublicCourseSummary,
   PublicCourseDetail,
   ClonedCourse,
+  EmailCampaignSummary,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 import type {
@@ -666,6 +667,11 @@ export const api = {
   },
   admin: {
     listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),
+    contactUsers: (subject: string, textBody: string, recipientIds: string[]) =>
+      request<{ campaign: EmailCampaignSummary }>("/admin/email/contact", {
+        method: "POST",
+        body: JSON.stringify({ subject, textBody, recipientIds }),
+      }),
     createUser: (email: string, password: string, accountType: AccountType) =>
       request<{ user: AdminUser }>("/admin/users", {
         method: "POST",

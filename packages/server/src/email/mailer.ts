@@ -29,14 +29,21 @@ export function getAppUrl(): string {
   return (process.env.APP_URL ?? "http://localhost:8090").replace(/\/+$/, "");
 }
 
-interface Mail {
+export interface Mail {
   to: string;
   subject: string;
   text: string;
   html: string;
+  messageId?: string;
 }
 
-export async function sendMail(mail: Mail): Promise<void> {
+export interface MailDeliveryResult {
+  accepted: boolean;
+  messageId?: string;
+  reason?: string;
+}
+
+export async function sendMail(mail: Mail): Promise<MailDeliveryResult> {
   const from =
     process.env.MAIL_FROM ?? "flashkarte <contact@christopherrehm.de>";
   // Test sink: append outbound mail as JSON lines so E2E tests can read
@@ -45,16 +52,23 @@ export async function sendMail(mail: Mail): Promise<void> {
   if (sinkPath) {
     const fs = await import("fs");
     fs.appendFileSync(sinkPath, JSON.stringify(mail) + "\n");
-    return;
+    return { accepted: true, messageId: mail.messageId ?? "file-sink" };
   }
   const tx = getTransporter();
   if (!tx) {
     logger.info("email.mailer", "smtp not configured; message skipped", {
       subject: mail.subject,
     });
-    return;
+    return { accepted: false, reason: "SMTP is not configured" };
   }
-  await tx.sendMail({ from, ...mail });
+  const delivery = await tx.sendMail({ from, ...mail });
+  return {
+    accepted: delivery.accepted.includes(mail.to),
+    messageId: delivery.messageId,
+    reason: delivery.accepted.includes(mail.to)
+      ? undefined
+      : "SMTP did not accept the recipient",
+  };
 }
 
 function layout(

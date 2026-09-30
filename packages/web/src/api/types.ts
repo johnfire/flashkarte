@@ -65,6 +65,15 @@ export interface AdminUser {
   createdAt: string;
 }
 
+export interface EmailCampaignSummary {
+  id: string;
+  status: "queued" | "sending" | "completed" | "failed" | "cancelled";
+  recipientCount: number;
+  sentCount: number;
+  failedCount: number;
+  createdAt: string;
+}
+
 export interface OfficialDeck {
   content_language?: string | null;
   id: string;

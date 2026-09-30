@@ -11,6 +11,7 @@ vi.mock("../api/client", () => ({
   api: {
     admin: {
       listUsers: vi.fn(),
+      contactUsers: vi.fn(),
       createUser: vi.fn(),
       setAccountType: vi.fn(),
       setSubjectOfficial: vi.fn(),
@@ -41,6 +42,7 @@ vi.mock("../api/client", () => ({
 
 const mockedAdminApi = api.admin as unknown as {
   listUsers: ReturnType<typeof vi.fn>;
+  contactUsers: ReturnType<typeof vi.fn>;
   createUser: ReturnType<typeof vi.fn>;
   setAccountType: ReturnType<typeof vi.fn>;
   setCourseCollectionMembers: ReturnType<typeof vi.fn>;
@@ -139,6 +141,48 @@ describe("AdminPage", () => {
       "paid",
     );
     expect(accountTypeSelect).toHaveValue("paid");
+  });
+
+  test("queues a service message for selected verified users", async () => {
+    mockedAdminApi.listUsers.mockResolvedValue({ users: [adminUser] });
+    mockedAdminApi.contactUsers.mockResolvedValue({
+      campaign: {
+        id: "campaign-1",
+        status: "queued",
+        recipientCount: 1,
+        sentCount: 0,
+        failedCount: 0,
+        createdAt: "2026-01-01T00:00:00.000Z",
+      },
+    });
+    renderPage();
+    await screen.findByText("new@example.com");
+
+    await userEvent.click(
+      screen.getByRole("checkbox", { name: "Select new@example.com" }),
+    );
+    await userEvent.type(screen.getByLabelText("Subject"), "Service update");
+    await userEvent.type(
+      screen.getByLabelText("Message"),
+      "The service will be unavailable tonight.",
+    );
+    await userEvent.click(
+      screen.getByRole("checkbox", {
+        name: "I understand this will send an email to every selected user.",
+      }),
+    );
+    await userEvent.click(
+      screen.getByRole("button", { name: "Queue email to 1 users" }),
+    );
+
+    expect(mockedAdminApi.contactUsers).toHaveBeenCalledWith(
+      "Service update",
+      "The service will be unavailable tonight.",
+      [adminUser.id],
+    );
+    expect(
+      await screen.findByText("Email queued for 1 users."),
+    ).toBeInTheDocument();
   });
 
   test("organizes each matching course under its collection", async () => {

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as ctrl from "./admin.controller";
 import { categoriesAdminRouter } from "../categories/categories.routes";
+import { emailAdminRouter } from "../email/email.routes";
 
 export const adminRouter = Router();
 adminRouter.get("/users", ctrl.list);
@@ -27,3 +28,4 @@ adminRouter.patch(
   ctrl.setCollectionContentLanguage,
 );
 adminRouter.use("/categories", categoriesAdminRouter);
+adminRouter.use("/email", emailAdminRouter);
