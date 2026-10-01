@@ -71,7 +71,7 @@ async function countActiveUnitsFrom(
   userId: string,
 ): Promise<number> {
   const rows = await db.query<{ count: number }>(
-    `SELECT count(DISTINCT (unit_type, unit_id))::int AS count
+    `SELECT count(DISTINCT (units.unit_type, units.unit_id))::int AS count
      FROM (
        SELECT 'deck'::text AS unit_type, d.id AS unit_id
        FROM decks d
