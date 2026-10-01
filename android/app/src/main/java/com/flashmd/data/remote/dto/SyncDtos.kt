@@ -21,7 +21,7 @@ data class SyncRequest(val events: List<SyncEventDto>)
 data class SyncProgressDto(
     val card_id: String,
     val easiness: Double,
-    val interval: Int,
+    val interval: Double,
     val repetitions: Int,
     val due_at: String,
     @SerialName("last_rating") val lastRating: Int? = null,

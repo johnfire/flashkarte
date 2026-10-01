@@ -46,7 +46,7 @@ class StudyChoiceViewModelTest {
 
     private fun due(id: String, back: String) = DueCard(
         Card(id, "d1", "front-$id", back),
-        CardProgress(id, id, 2.5, 0, 0, "", null, null),
+        CardProgress(id, id, 2.5, 0.0, 0, "", null, null),
     )
 
     private fun diagnosticDue(id: String) = DueCard(
@@ -55,7 +55,7 @@ class StudyChoiceViewModelTest {
             label = "dx",
             options = listOf(BranchOption("Right", "correct"), BranchOption("Wrong", "fix")),
         ),
-        CardProgress(id, id, 2.5, 0, 0, "", null, null),
+        CardProgress(id, id, 2.5, 0.0, 0, "", null, null),
     )
 
     @Before fun setUp() {

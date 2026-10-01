@@ -10,7 +10,12 @@ import androidx.compose.ui.unit.dp
 import com.flashmd.R
 import com.flashmd.ui.theme.RatingColor
 
-private val RATING_LABELS = mapOf(1 to "Again", 2 to "Hard", 3 to "Good", 4 to "Easy", 5 to "Perfect")
+private val RATING_ROWS = listOf(
+    Triple(1, "Hard", RatingColor[1]),
+    Triple(3, "Medium", RatingColor[3]),
+    Triple(4, "Good", RatingColor[4]),
+    Triple(5, "Perfect", RatingColor[5]),
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,8 +65,12 @@ fun SessionSummaryScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
                 ) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        for (r in 1..5) {
-                            val cnt = ratingCounts[r] ?: 0
+                        for ((rating, label, color) in RATING_ROWS) {
+                            val cnt = if (rating == 1) {
+                                (ratingCounts[1] ?: 0) + (ratingCounts[2] ?: 0)
+                            } else {
+                                ratingCounts[rating] ?: 0
+                            }
                             if (cnt == 0) continue
                             Row(
                                 Modifier.fillMaxWidth(),
@@ -69,8 +78,8 @@ fun SessionSummaryScreen(
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
                                 Text(
-                                    "$r  ${RATING_LABELS[r]}",
-                                    color = RatingColor[r] ?: MaterialTheme.colorScheme.primary,
+                                    label,
+                                    color = color ?: MaterialTheme.colorScheme.primary,
                                     fontWeight = FontWeight.Medium,
                                 )
                                 Text("$cnt", color = MaterialTheme.colorScheme.onSurfaceVariant)

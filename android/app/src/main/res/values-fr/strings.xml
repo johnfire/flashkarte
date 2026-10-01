@@ -39,14 +39,15 @@
 
     <string name="help_studying_title">Réviser &amp; répétition espacée</string>
     <string name="help_studying_srs_heading">Répétition espacée (SM-2)</string>
-    <string name="help_studying_srs_body">flashkarte planifie les révisions avec l\'algorithme SM-2. Chaque carte a une échéance. Les cartes bien notées avancent plus loin dans le futur ; celles qui te posent problème reviennent plus tôt — souvent dès le lendemain. L\'objectif est de revoir chaque carte juste avant que tu ne l\'oublies, pour que les sessions de révision restent courtes.</string>
+    <string name="help_studying_srs_body">flashkarte planifie les révisions avec l\'algorithme SM-2. Choisis Difficile pour 12 heures, Moyen pour 1 jour, Bien pour 3 jours ou Parfait pour 1 semaine. L\'objectif est de revoir chaque carte juste avant que tu ne l\'oublies, pour que les sessions de révision restent courtes.</string>
     <string name="help_studying_ratings_heading">Les boutons de notation</string>
     <string name="help_studying_ratings_intro">Après avoir retourné une carte, évalue ta mémorisation. C\'est ce qui planifie la prochaine révision — sois honnête, pas optimiste.</string>
-    <string name="help_studying_rating_again">À refaire — tu ne t\'en es pas souvenu. La carte est réinitialisée et revient dès demain.</string>
-    <string name="help_studying_rating_hard">Difficile — tu t\'en es souvenu, mais c\'était difficile. Le prochain intervalle augmente moins qu\'avec Correct.</string>
-    <string name="help_studying_rating_good">Correct — tu t\'en es souvenu correctement avec un effort raisonnable. L\'intervalle augmente au rythme normal.</string>
-    <string name="help_studying_rating_easy">Facile — t\'en souvenir n\'a demandé aucun effort. L\'intervalle augmente plus qu\'avec Correct.</string>
-    <string name="help_studying_rating_perfect">Parfait — mémorisation instantanée et sans effort. L\'intervalle augmente le plus.</string>
+    <string name="help_studying_rating_again">Difficile — la carte revient dans 12 heures.</string>
+    <string name="help_studying_rating_hard">Difficile — la carte revient dans 12 heures.</string>
+    <string name="help_studying_rating_good">Bien — la carte revient dans 3 jours.</string>
+    <string name="help_studying_rating_easy">Parfait — la carte revient dans 1 semaine.</string>
+    <string name="help_studying_rating_perfect">Parfait — la carte revient dans 1 semaine.</string>
+    <string name="help_studying_rating_medium">Moyen — la carte revient dans 1 jour.</string>
     <string name="help_studying_choice_heading">Mode à choix multiples</string>
     <string name="help_studying_choice_body">Passe en mode Choix pendant une session pour obtenir des options de réponse générées automatiquement à partir de tes autres cartes — tu es noté dès que tu en touches une.</string>
 
@@ -74,6 +75,14 @@
     <!-- Inline hints -->
     <string name="decks_empty_hint">Nouveau ici ? Ouvre l\'Aide pour apprendre les bases.</string>
     <string name="study_rating_hint">Tu ne sais pas à quoi servent ces boutons ? Découvre comment fonctionne la répétition espacée dans l\'Aide.</string>
+    <string name="study_rating_hard">Difficile</string>
+    <string name="study_rating_medium">Moyen</string>
+    <string name="study_rating_good">Bien</string>
+    <string name="study_rating_perfect">Parfait</string>
+    <string name="study_interval_12_hours">12 heures</string>
+    <string name="study_interval_1_day">1 jour</string>
+    <string name="study_interval_3_days">3 jours</string>
+    <string name="study_interval_1_week">1 semaine</string>
     <string name="settings_help">Aide</string>
 
     <!-- Spoken cards (Spec 09) -->

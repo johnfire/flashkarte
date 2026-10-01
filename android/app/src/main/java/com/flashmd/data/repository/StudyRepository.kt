@@ -47,7 +47,7 @@ class StudyRepository @Inject constructor(
                         id = dto.id,
                         cardId = dto.id,
                         easiness = 2.5,
-                        interval = 0,
+                        interval = 0.0,
                         repetitions = 0,
                         dueDate = "",
                         lastReviewed = null,
@@ -108,10 +108,10 @@ class StudyRepository @Inject constructor(
                 due = stats.due,
                 learned = stats.learned,
                 viewed = stats.viewed,
-                again = stats.again,
-                hard = stats.hard,
+                hard = stats.again,
+                medium = stats.hard,
                 good = stats.good,
-                easy = stats.easy,
+                perfect = stats.easy,
             )
         } catch (exception: ApiException) {
             if (exception.status != 0) throw exception
@@ -126,10 +126,10 @@ private fun CachedStudyStats.toDeckStudyStats(): DeckStudyStats = DeckStudyStats
     due = due,
     learned = learned,
     viewed = viewed,
-    again = again,
     hard = hard,
+    medium = medium,
     good = good,
-    easy = easy,
+    perfect = perfect,
 )
 
 /** Whole-deck card (from GET /api/decks/:id) to a domain Card. Branch cards use
@@ -151,8 +151,8 @@ data class DeckStudyStats(
     val due: Int,
     val learned: Int,
     val viewed: Int = 0,
-    val again: Int = 0,
     val hard: Int = 0,
+    val medium: Int = 0,
     val good: Int = 0,
-    val easy: Int = 0,
+    val perfect: Int = 0,
 )

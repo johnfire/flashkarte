@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from flashmd.gui.app import App
 
 
-RATING_LABELS = {1: "Again", 2: "Hard", 3: "Good", 4: "Easy", 5: "Perfect"}
+RATING_LABELS = {1: "Hard", 2: "Hard", 3: "Medium", 4: "Good", 5: "Perfect"}
 
 
 class SessionSummaryScreen(ttk.Frame):

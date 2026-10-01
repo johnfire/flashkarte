@@ -39,14 +39,15 @@
 
     <string name="help_studying_title">Studying &amp; spaced repetition</string>
     <string name="help_studying_srs_heading">Spaced repetition (SM-2)</string>
-    <string name="help_studying_srs_body">flashkarte schedules reviews with the SM-2 algorithm. Every card has a due date. Cards rated highly move further into the future; cards you struggle with come back sooner — often the next day. The goal is to see each card right before you would otherwise forget it, so review sessions stay short.</string>
+    <string name="help_studying_srs_body">flashkarte schedules reviews with the SM-2 algorithm. Every card has a due date. Choose Hard for 12 hours, Medium for 1 day, Good for 3 days, or Perfect for 1 week. The goal is to see each card right before you would otherwise forget it, so review sessions stay short.</string>
     <string name="help_studying_ratings_heading">The rating buttons</string>
     <string name="help_studying_ratings_intro">After flipping a card, rate how well you recalled it. This is what schedules the next review — be honest, not optimistic.</string>
-    <string name="help_studying_rating_again">Again — you did not recall it. The card resets and comes back tomorrow.</string>
-    <string name="help_studying_rating_hard">Hard — you recalled it, but it was a struggle. The next interval grows by less than Good.</string>
-    <string name="help_studying_rating_good">Good — you recalled it correctly with reasonable effort. The interval grows at the normal pace.</string>
-    <string name="help_studying_rating_easy">Easy — recalling it felt effortless. The interval grows more than Good.</string>
-    <string name="help_studying_rating_perfect">Perfect — instant, effortless recall. The interval grows the most.</string>
+    <string name="help_studying_rating_again">Hard — the card comes back in 12 hours.</string>
+    <string name="help_studying_rating_hard">Hard — the card comes back in 12 hours.</string>
+    <string name="help_studying_rating_good">Good — the card comes back in 3 days.</string>
+    <string name="help_studying_rating_easy">Perfect — the card comes back in 1 week.</string>
+    <string name="help_studying_rating_perfect">Perfect — the card comes back in 1 week.</string>
+    <string name="help_studying_rating_medium">Medium — the card comes back in 1 day.</string>
     <string name="help_studying_choice_heading">Multiple-choice mode</string>
     <string name="help_studying_choice_body">Switch to Choice mode during a session to get answer options built automatically from your other cards — you are graded the moment you tap one.</string>
 
@@ -74,6 +75,14 @@
     <!-- Inline hints -->
     <string name="decks_empty_hint">New here? Open Help to learn the basics.</string>
     <string name="study_rating_hint">Not sure what these do? See how spaced repetition works in Help.</string>
+    <string name="study_rating_hard">Hard</string>
+    <string name="study_rating_medium">Medium</string>
+    <string name="study_rating_good">Good</string>
+    <string name="study_rating_perfect">Perfect</string>
+    <string name="study_interval_12_hours">12 hours</string>
+    <string name="study_interval_1_day">1 day</string>
+    <string name="study_interval_3_days">3 days</string>
+    <string name="study_interval_1_week">1 week</string>
     <string name="settings_help">Help</string>
 
     <!-- Spoken cards (Spec 09) -->

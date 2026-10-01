@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from flashmd.gui.app import App
 
 
-RATING_LABELS = {1: "Again", 2: "Hard", 3: "Good", 4: "Easy", 5: "Perfect"}
+RATING_LABELS = {1: "Hard", 2: "Hard", 3: "Medium", 4: "Good", 5: "Perfect"}
 
 
 class DeckStatsScreen(ttk.Frame):
@@ -74,12 +74,14 @@ class DeckStatsScreen(ttk.Frame):
                 font=theme.FONT_SMALL, fg=theme.SUBTEXT, bg=theme.SURFACE,
             ).grid(row=0, column=0, columnspan=3, padx=16, pady=12, sticky="w")
         else:
-            for row_idx, r in enumerate(range(1, 6)):
+            for row_idx, r in enumerate((1, 3, 4, 5)):
                 cnt = counts.get(r, 0)
+                if r == 1:
+                    cnt += counts.get(2, 0)
                 color = theme.RATING_COLORS[r]
 
                 tk.Label(
-                    tbl, text=f"{r}  {RATING_LABELS[r]}",
+                    tbl, text=RATING_LABELS[r],
                     font=theme.FONT_NORMAL, fg=color, bg=theme.SURFACE, anchor="w", width=12,
                 ).grid(row=row_idx, column=0, padx=(16, 8), pady=4, sticky="w")
 

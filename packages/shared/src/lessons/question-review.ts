@@ -3,9 +3,9 @@ import type { FirstTry } from "./lesson-session";
 
 /**
  * Spaced review of lesson questions, on the scheduler flashcards already use. The first attempt
- * at a question sets its schedule: right first time is a "Good" (a longer interval), right only
- * after a miss is an "Again" (it comes back soon). A review works the same way, so a question a
- * learner keeps missing keeps coming back.
+ * at a question sets its schedule: right first time is a "Good" (three days), right only after a
+ * miss is a "Hard" (twelve hours). A review works the same way, so a question a learner keeps
+ * missing keeps coming back.
  */
 
 /** The ratings multiple-choice cards already use: 4 for right, 1 for wrong. */

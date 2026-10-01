@@ -46,7 +46,7 @@ class StudyLessonsViewModelTest {
     private val speechSettings = mockk<SpeechSettingsStore>(relaxed = true)
 
     private fun dueCard(card: Card) =
-        DueCard(card, CardProgress(card.id, card.id, 2.5, 0, 0, "", null, null))
+        DueCard(card, CardProgress(card.id, card.id, 2.5, 0.0, 0, "", null, null))
 
     private val lesson = dueCard(
         Card("l1", "d1", "How a dot product works", "LESSON BODY", position = 0, type = "read"),

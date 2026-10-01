@@ -14,17 +14,17 @@ describe("scheduleReview", () => {
     expect(ratingFor("wrong")).toBe(1);
   });
 
-  it("right first time starts a longer interval (Good: two days)", () => {
+  it("right first time starts a longer interval (Good: three days)", () => {
     const scheduled = scheduleReview(null, "right", at);
-    expect(scheduled.state.interval).toBe(2);
-    expect(scheduled.dueAt).toEqual(days(2));
+    expect(scheduled.state.interval).toBe(3);
+    expect(scheduled.dueAt).toEqual(days(3));
     expect(scheduled.state.repetitions).toBe(1);
   });
 
-  it("right only after a miss starts short (Again: tomorrow) and resets the streak", () => {
+  it("right only after a miss starts short (Hard: twelve hours) and resets the streak", () => {
     const scheduled = scheduleReview(null, "wrong", at);
-    expect(scheduled.state.interval).toBe(1);
-    expect(scheduled.dueAt).toEqual(days(1));
+    expect(scheduled.state.interval).toBe(0.5);
+    expect(scheduled.dueAt).toEqual(new Date(at.getTime() + 0.5 * 86_400_000));
     expect(scheduled.state.repetitions).toBe(0);
   });
 
@@ -32,12 +32,14 @@ describe("scheduleReview", () => {
     const good = scheduleReview(
       scheduleReview(null, "right", at).state,
       "right",
-      days(2),
+      days(3),
     );
     expect(good.state.repetitions).toBe(2);
-    const lapsed = scheduleReview(good.state, "wrong", days(4));
+    const lapsed = scheduleReview(good.state, "wrong", days(6));
     expect(lapsed.state.repetitions).toBe(0);
-    expect(lapsed.dueAt).toEqual(days(5));
+    expect(lapsed.dueAt).toEqual(
+      new Date(days(6).getTime() + 0.5 * 86_400_000),
+    );
   });
 });
 

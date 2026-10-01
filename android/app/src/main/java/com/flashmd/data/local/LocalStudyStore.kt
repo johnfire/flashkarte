@@ -35,10 +35,10 @@ data class CachedStudyStats(
     val due: Int,
     val learned: Int,
     val viewed: Int,
-    val again: Int,
     val hard: Int,
+    val medium: Int,
     val good: Int,
-    val easy: Int,
+    val perfect: Int,
 )
 
 /**
@@ -107,7 +107,7 @@ class LocalStudyStore @Inject constructor(
         db.cardProgressQueries.upsertProgress(
             p.cardId,
             p.easiness,
-            p.interval.toLong(),
+            p.interval,
             p.repetitions.toLong(),
             p.dueDate.ifEmpty { null },
             p.lastReviewed,
@@ -128,7 +128,7 @@ class LocalStudyStore @Inject constructor(
                     id = c.id,
                     cardId = c.id,
                     easiness = p?.easiness ?: 2.5,
-                    interval = (p?.interval_days ?: 0L).toInt(),
+                    interval = p?.interval_days ?: 0.0,
                     repetitions = (p?.repetitions ?: 0L).toInt(),
                     dueDate = p?.due_at ?: "",
                     lastReviewed = p?.last_reviewed_at,
@@ -156,17 +156,17 @@ class LocalStudyStore @Inject constructor(
             },
             learned = progressByCardId.values.count { progress -> progress.repetitions > 0 },
             viewed = progressByCardId.size,
-            // The rating scale is 1-2 Again, 3 Hard, 4 Good, 5 Easy - not one
+            // The rating scale is 1-2 Hard, 3 Medium, 4 Good, 5 Perfect - not one
             // bucket per index. These must stay in step with the server's
             // deckStats query, or the counters visibly shift the moment a sync
             // replaces these local numbers with the server's.
-            again = progressByCardId.values.count { progress ->
+            hard = progressByCardId.values.count { progress ->
                 val rating = progress.last_rating
                 rating != null && rating <= 2L
             },
-            hard = progressByCardId.values.count { progress -> progress.last_rating == 3L },
+            medium = progressByCardId.values.count { progress -> progress.last_rating == 3L },
             good = progressByCardId.values.count { progress -> progress.last_rating == 4L },
-            easy = progressByCardId.values.count { progress -> progress.last_rating == 5L },
+            perfect = progressByCardId.values.count { progress -> progress.last_rating == 5L },
         )
     }
 
@@ -175,20 +175,18 @@ class LocalStudyStore @Inject constructor(
         val prev = db.cardProgressQueries.selectProgress(cardId).executeAsOneOrNull()
         val current = Sm2Progress(
             easiness = prev?.easiness ?: 2.5,
-            interval = (prev?.interval_days ?: 0L).toInt(),
+            interval = prev?.interval_days ?: 0.0,
             repetitions = (prev?.repetitions ?: 0L).toInt(),
-            // Without this the scheduler can never see an Easy streak, so an
-            // Easy card would reset to the entry interval on every review.
             lastRating = prev?.last_rating?.toInt(),
         )
         val next = Sm2Algorithm.calculate(current, rating)
         val dueIso = Instant.parse(reviewedAtIso)
-            .plusSeconds(next.interval.toLong() * 86_400L)
+            .plusSeconds((next.interval * 86_400.0).toLong())
             .toString()
         db.cardProgressQueries.upsertProgress(
             cardId,
             next.easiness,
-            next.interval.toLong(),
+            next.interval,
             next.repetitions.toLong(),
             dueIso,
             reviewedAtIso,

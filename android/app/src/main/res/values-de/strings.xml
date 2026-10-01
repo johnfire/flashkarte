@@ -39,14 +39,15 @@
 
     <string name="help_studying_title">Lernen &amp; verteilte Wiederholung</string>
     <string name="help_studying_srs_heading">Verteilte Wiederholung (SM-2)</string>
-    <string name="help_studying_srs_body">flashkarte plant Wiederholungen mit dem SM-2-Algorithmus. Jede Karte hat ein Fälligkeitsdatum. Gut bewertete Karten rücken weiter in die Zukunft; Karten, bei denen du dich schwertust, kommen früher wieder — oft schon am nächsten Tag. Ziel ist es, jede Karte genau dann zu sehen, bevor du sie sonst vergessen würdest, damit die Lerneinheiten kurz bleiben.</string>
+    <string name="help_studying_srs_body">flashkarte plant Wiederholungen mit dem SM-2-Algorithmus. Wähle Schwer für 12 Stunden, Mittel für 1 Tag, Gut für 3 Tage oder Perfekt für 1 Woche. Ziel ist es, jede Karte genau dann zu sehen, bevor du sie sonst vergessen würdest, damit die Lerneinheiten kurz bleiben.</string>
     <string name="help_studying_ratings_heading">Die Bewertungs-Buttons</string>
     <string name="help_studying_ratings_intro">Nachdem du eine Karte umgedreht hast, bewertest du, wie gut du dich erinnert hast. Das legt fest, wann die Karte als Nächstes fällig ist — sei ehrlich, nicht optimistisch.</string>
-    <string name="help_studying_rating_again">Nochmal — du konntest dich nicht erinnern. Die Karte wird zurückgesetzt und kommt morgen wieder.</string>
-    <string name="help_studying_rating_hard">Schwer — du konntest dich erinnern, aber es war mühsam. Das nächste Intervall wächst weniger stark als bei Gut.</string>
-    <string name="help_studying_rating_good">Gut — du konntest dich mit angemessenem Aufwand richtig erinnern. Das Intervall wächst im normalen Tempo.</string>
-    <string name="help_studying_rating_easy">Einfach — die Erinnerung fiel dir mühelos. Das Intervall wächst stärker als bei Gut.</string>
-    <string name="help_studying_rating_perfect">Perfekt — sofortige, mühelose Erinnerung. Das Intervall wächst am stärksten.</string>
+    <string name="help_studying_rating_again">Schwer — die Karte kommt in 12 Stunden wieder.</string>
+    <string name="help_studying_rating_hard">Schwer — die Karte kommt in 12 Stunden wieder.</string>
+    <string name="help_studying_rating_good">Gut — die Karte kommt in 3 Tagen wieder.</string>
+    <string name="help_studying_rating_easy">Perfekt — die Karte kommt in 1 Woche wieder.</string>
+    <string name="help_studying_rating_perfect">Perfekt — die Karte kommt in 1 Woche wieder.</string>
+    <string name="help_studying_rating_medium">Mittel — die Karte kommt in 1 Tag wieder.</string>
     <string name="help_studying_choice_heading">Multiple-Choice-Modus</string>
     <string name="help_studying_choice_body">Wechsle während einer Sitzung in den Auswahl-Modus, um Antwortoptionen zu erhalten, die automatisch aus deinen anderen Karten erstellt werden — du wirst bewertet, sobald du eine antippst.</string>
 
@@ -74,6 +75,14 @@
     <!-- Inline hints -->
     <string name="decks_empty_hint">Neu hier? Öffne die Hilfe, um die Grundlagen zu lernen.</string>
     <string name="study_rating_hint">Nicht sicher, was das bewirkt? Sieh dir in der Hilfe an, wie verteilte Wiederholung funktioniert.</string>
+    <string name="study_rating_hard">Schwer</string>
+    <string name="study_rating_medium">Mittel</string>
+    <string name="study_rating_good">Gut</string>
+    <string name="study_rating_perfect">Perfekt</string>
+    <string name="study_interval_12_hours">12 Stunden</string>
+    <string name="study_interval_1_day">1 Tag</string>
+    <string name="study_interval_3_days">3 Tage</string>
+    <string name="study_interval_1_week">1 Woche</string>
     <string name="settings_help">Hilfe</string>
 
     <!-- Spoken cards (Spec 09) -->

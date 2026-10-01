@@ -76,12 +76,12 @@ fun StatsScreen(
                 modifier = Modifier.padding(top = 8.dp),
             )
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                StatCard("Again", stats.again.toString(), Modifier.weight(1f))
                 StatCard("Hard", stats.hard.toString(), Modifier.weight(1f))
+                StatCard("Medium", stats.medium.toString(), Modifier.weight(1f))
             }
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
                 StatCard("Good", stats.good.toString(), Modifier.weight(1f))
-                StatCard("Easy", stats.easy.toString(), Modifier.weight(1f))
+                StatCard("Perfect", stats.perfect.toString(), Modifier.weight(1f))
             }
 
             val learnedPct =

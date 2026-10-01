@@ -63,7 +63,7 @@ class StudySpeechViewModelTest {
 
     private fun due(id: String) = DueCard(
         Card(id, "d1", "front-$id", "back-$id"),
-        CardProgress(id, id, 2.5, 0, 0, "", null, null),
+        CardProgress(id, id, 2.5, 0.0, 0, "", null, null),
     )
 
     private val languageDeck = Deck(

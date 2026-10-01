@@ -6,10 +6,30 @@ import { Link } from "react-router";
  * linking to the help page that explains what each rating schedules.
  */
 const RATINGS = [
-  { value: 1, labelKey: "again", className: "bg-red-600" },
-  { value: 3, labelKey: "hard", className: "bg-amber-600" },
-  { value: 4, labelKey: "good", className: "bg-green-600" },
-  { value: 5, labelKey: "easy", className: "bg-emerald-600" },
+  {
+    value: 1,
+    labelKey: "hard",
+    intervalKey: "hardInterval",
+    className: "bg-red-600",
+  },
+  {
+    value: 3,
+    labelKey: "medium",
+    intervalKey: "mediumInterval",
+    className: "bg-amber-600",
+  },
+  {
+    value: 4,
+    labelKey: "good",
+    intervalKey: "goodInterval",
+    className: "bg-green-600",
+  },
+  {
+    value: 5,
+    labelKey: "perfect",
+    intervalKey: "perfectInterval",
+    className: "bg-emerald-600",
+  },
 ];
 
 interface StudyControlsProps {
@@ -43,7 +63,12 @@ export function StudyControls({
                 onClick={() => onGrade(r.value)}
                 className={`rounded-lg ${r.className} py-3 text-sm font-medium text-white`}
               >
-                {t(`study.${r.labelKey}`)}
+                <span className="flex flex-col">
+                  <span>{t(`study.${r.labelKey}`)}</span>
+                  <span className="text-xs font-normal opacity-90">
+                    {t(`study.${r.intervalKey}`)}
+                  </span>
+                </span>
               </button>
             ))}
           </div>

@@ -66,7 +66,7 @@ describe("help topic pages", () => {
         name: "Studying & spaced repetition",
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/comes back tomorrow/)).toBeInTheDocument();
+    expect(screen.getByText(/comes back in 12 hours/)).toBeInTheDocument();
     expect(
       screen.getByText(/always add up to the Viewed count/),
     ).toBeInTheDocument();

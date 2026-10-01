@@ -46,7 +46,7 @@ def init_db(conn: sqlite3.Connection) -> None:
             id            TEXT PRIMARY KEY,
             card_id       TEXT NOT NULL UNIQUE REFERENCES card(id) ON DELETE CASCADE,
             easiness      REAL NOT NULL DEFAULT 2.5,
-            interval      INTEGER NOT NULL DEFAULT 0,
+            interval      REAL NOT NULL DEFAULT 0,
             repetitions   INTEGER NOT NULL DEFAULT 0,
             due_date      TEXT NOT NULL,
             last_reviewed TEXT,

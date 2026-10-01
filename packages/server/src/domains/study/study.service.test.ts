@@ -38,13 +38,11 @@ describe("sync", () => {
         reviewed_at: "2026-06-05T09:00:00.000Z",
       },
     ]);
-    // The two ratings must differ for this test to mean anything: fixed
-    // cadences make a Good-then-Good pair land on the same interval whichever
-    // order it is applied in. e1 (Good) -> 2 days, then e2 (Easy, entering from
-    // Good) -> 4 days. Applied in the wrong order the card would end on Good's
-    // 2 days instead.
+    // The two ratings must differ for this test to mean anything: e1 (Good)
+    // schedules three days, then e2 (Perfect) schedules one week. Applied in
+    // the wrong order the card would end on Good's three days instead.
     const p = res.progress.find((x) => x.card_id === "c1");
-    expect(p!.interval).toBe(4);
+    expect(p!.interval).toBe(7);
     expect(p!.repetitions).toBe(2);
     expect(res.acked_event_ids).toEqual(expect.arrayContaining(["e1", "e2"]));
     expect(mockRepo.upsertProgressAt).toHaveBeenCalledTimes(1);

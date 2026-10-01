@@ -1,16 +1,11 @@
 import sqlite3
 import uuid
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 
 from flashmd.sm2.algorithm import SM2Progress, calculate
 
 
-def _today() -> str:
-    return date.today().isoformat()
-
-
 def _tomorrow() -> str:
-    from datetime import timedelta
     return (date.today() + timedelta(days=1)).isoformat()
 
 
@@ -55,7 +50,7 @@ def get_due_cards(
           AND cp.due_date <= ?
         ORDER BY cp.due_date ASC
         """,
-        (deck_id, _today()),
+        (deck_id, _now()),
     ).fetchall()
 
 
@@ -75,14 +70,12 @@ def apply_rating(conn: sqlite3.Connection, card_id: str, rating: int) -> None:
         easiness=row["easiness"],
         interval=row["interval"],
         repetitions=row["repetitions"],
-        # Without this the scheduler can never see an Easy streak, so an Easy
-        # card would reset to the entry interval on every review.
         last_rating=row["last_rating"],
     )
     result = calculate(progress, rating)
 
     from datetime import timedelta
-    new_due = (date.today() + timedelta(days=result.interval)).isoformat()
+    new_due = (datetime.now(timezone.utc) + timedelta(days=result.interval)).isoformat()
 
     conn.execute(
         "UPDATE card_progress "
@@ -111,7 +104,7 @@ def get_stats(conn: sqlite3.Connection, deck_id: str) -> dict:
         "SELECT COUNT(*) FROM card c "
         "JOIN card_progress cp ON cp.card_id = c.id "
         "WHERE c.deck_id = ? AND cp.due_date <= ?",
-        (deck_id, _today()),
+        (deck_id, _now()),
     ).fetchone()[0]
 
     ratings = conn.execute(

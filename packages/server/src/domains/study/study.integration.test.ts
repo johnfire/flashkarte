@@ -111,8 +111,8 @@ describe("study persistence", () => {
     );
 
     // `repetitions: 2` is what proves both reviews applied — under fixed cadences
-    // Good is always 2 days, so the interval alone can no longer tell one applied
+    // Good is always 3 days, so the interval alone can no longer tell one applied
     // review from two.
-    expect(progress.rows[0]).toEqual({ repetitions: 2, interval_days: 2 });
+    expect(progress.rows[0]).toEqual({ repetitions: 2, interval_days: 3 });
   });
 });

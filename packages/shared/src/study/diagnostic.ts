@@ -35,7 +35,7 @@ export interface ChoiceResolution {
  * Resolve a picked authored option on a diagnostic card by its stable index.
  * Deterministic (no RNG) — the TS and Kotlin ports must agree exactly.
  *
- * The right option (`-> correct`) rates Good (4); any other rates Again (1). A
+ * The right option (`-> correct`) rates Good (4); any other rates Hard (1). A
  * wrong option routing to a label yields that remediation label; one routing to
  * `end` (or an out-of-range index) yields none.
  */

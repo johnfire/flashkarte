@@ -60,7 +60,7 @@ class PlaintextDatabaseMigratorTest {
         // A lesson (reading card): its type must survive the copy, or it would turn
         // into an ordinary card the moment the cache moves to the encrypted database.
         db.cardsQueries.upsertCard("c2", "d1", "Lesson", "Body", null, 1, null, null, "read")
-        db.cardProgressQueries.upsertProgress("c1", 2.6, 3, 2, "due", "reviewed", 4)
+        db.cardProgressQueries.upsertProgress("c1", 2.6, 3.0, 2, "due", "reviewed", 4)
         db.outboxQueries.enqueue("e1", "c1", 4, "reviewed", "created", 1)
     }
 }

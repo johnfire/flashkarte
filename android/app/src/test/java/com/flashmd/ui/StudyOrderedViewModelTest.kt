@@ -41,7 +41,7 @@ class StudyOrderedViewModelTest {
 
     private fun due(id: String) = DueCard(
         Card(id, "d1", "front-$id", "back-$id"),
-        CardProgress(id, id, 2.5, 0, 0, "", null, null),
+        CardProgress(id, id, 2.5, 0.0, 0, "", null, null),
     )
 
     @Before fun setUp() {
@@ -57,11 +57,11 @@ class StudyOrderedViewModelTest {
         speechPlayer, speechSettings,
     )
 
-    @Test fun orderedDeckRepeatsCardUntilPassed() = runTest {
+    @Test fun orderedDeckAdvancesAfterHard() = runTest {
         coEvery { deckRepo.getDeckById("d1") } returns Deck("d1", "D", "", "", null, isOrdered = true)
         val vm = vm(); advanceUntilIdle()
         vm.flip(); vm.rate(1); advanceUntilIdle()
-        assertEquals("c1", vm.uiState.value.currentCard?.card?.id) // still on c1
+        assertEquals("c2", vm.uiState.value.currentCard?.card?.id) // Hard is not an immediate retry
     }
 
     @Test fun unorderedDeckAdvancesOnWrong() = runTest {

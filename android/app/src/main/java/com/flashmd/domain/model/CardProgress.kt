@@ -4,7 +4,7 @@ data class CardProgress(
     val id: String,
     val cardId: String,
     val easiness: Double,
-    val interval: Int,
+    val interval: Double,
     val repetitions: Int,
     val dueDate: String,
     val lastReviewed: String?,

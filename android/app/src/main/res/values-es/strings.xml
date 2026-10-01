@@ -39,14 +39,15 @@
 
     <string name="help_studying_title">Estudiar &amp; repetición espaciada</string>
     <string name="help_studying_srs_heading">Repetición espaciada (SM-2)</string>
-    <string name="help_studying_srs_body">flashkarte programa los repasos con el algoritmo SM-2. Cada tarjeta tiene una fecha de vencimiento. Las tarjetas bien valoradas avanzan más hacia el futuro; las que te cuestan vuelven antes — a menudo al día siguiente. El objetivo es ver cada tarjeta justo antes de que la olvidarías, para que las sesiones de estudio se mantengan cortas.</string>
+    <string name="help_studying_srs_body">flashkarte programa los repasos con el algoritmo SM-2. Elige Difícil para 12 horas, Medio para 1 día, Bien para 3 días o Perfecto para 1 semana. El objetivo es ver cada tarjeta justo antes de que la olvidarías, para que las sesiones de estudio se mantengan cortas.</string>
     <string name="help_studying_ratings_heading">Los botones de valoración</string>
     <string name="help_studying_ratings_intro">Después de voltear una tarjeta, valora qué tan bien la recordaste. Esto es lo que programa el siguiente repaso — sé honesto, no optimista.</string>
-    <string name="help_studying_rating_again">Repetir — no la recordaste. La tarjeta se reinicia y vuelve mañana.</string>
-    <string name="help_studying_rating_hard">Difícil — la recordaste, pero te costó. El siguiente intervalo crece menos que con Bien.</string>
-    <string name="help_studying_rating_good">Bien — la recordaste correctamente con un esfuerzo razonable. El intervalo crece al ritmo normal.</string>
-    <string name="help_studying_rating_easy">Fácil — recordarla te resultó fácil. El intervalo crece más que con Bien.</string>
-    <string name="help_studying_rating_perfect">Perfecto — recuerdo instantáneo y sin esfuerzo. El intervalo crece al máximo.</string>
+    <string name="help_studying_rating_again">Difícil — la tarjeta vuelve en 12 horas.</string>
+    <string name="help_studying_rating_hard">Difícil — la tarjeta vuelve en 12 horas.</string>
+    <string name="help_studying_rating_good">Bien — la tarjeta vuelve en 3 días.</string>
+    <string name="help_studying_rating_easy">Perfecto — la tarjeta vuelve en 1 semana.</string>
+    <string name="help_studying_rating_perfect">Perfecto — la tarjeta vuelve en 1 semana.</string>
+    <string name="help_studying_rating_medium">Medio — la tarjeta vuelve en 1 día.</string>
     <string name="help_studying_choice_heading">Modo de opción múltiple</string>
     <string name="help_studying_choice_body">Cambia al modo Opción durante una sesión para obtener opciones de respuesta generadas automáticamente a partir de tus otras tarjetas — se te califica en cuanto tocas una.</string>
 
@@ -74,6 +75,14 @@
     <!-- Inline hints -->
     <string name="decks_empty_hint">¿Eres nuevo aquí? Abre la Ayuda para aprender lo básico.</string>
     <string name="study_rating_hint">¿No sabes qué hace cada botón? Descubre cómo funciona la repetición espaciada en la Ayuda.</string>
+    <string name="study_rating_hard">Difícil</string>
+    <string name="study_rating_medium">Medio</string>
+    <string name="study_rating_good">Bien</string>
+    <string name="study_rating_perfect">Perfecto</string>
+    <string name="study_interval_12_hours">12 horas</string>
+    <string name="study_interval_1_day">1 día</string>
+    <string name="study_interval_3_days">3 días</string>
+    <string name="study_interval_1_week">1 semana</string>
     <string name="settings_help">Ayuda</string>
 
     <!-- Spoken cards (Spec 09) -->

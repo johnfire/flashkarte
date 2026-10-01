@@ -34,7 +34,7 @@ class SyncApiContractTest {
             SyncRequest(listOf(SyncEventDto("e1", "c1", 4, "2026-06-05T09:00:00Z"))),
         )
         assertEquals(listOf("e1"), res.acked_event_ids)
-        assertEquals(1, res.progress.single().interval)
+        assertEquals(1.0, res.progress.single().interval, 0.0)
         server.shutdown()
     }
 }

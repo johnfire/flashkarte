@@ -22,17 +22,14 @@ describe("scheduler parity with python/Kotlin", () => {
   ][] = [
     // Fixed cadences apply from the very first review, whatever came before.
     [2.5, 0, 0, null, 3, 1, 2.36],
-    [2.5, 0, 0, null, 4, 2, 2.5],
-    [2.5, 0, 0, null, 5, 4, 2.6],
-    [2.5, 3720, 9, 4, 4, 2, 2.5],
+    [2.5, 0, 0, null, 4, 3, 2.5],
+    [2.5, 0, 0, null, 5, 7, 2.6],
+    [2.5, 3720, 9, 4, 4, 3, 2.5],
     [2.5, 3720, 9, 4, 3, 1, 2.36],
-    // Easy compounds only when the previous review was also Easy.
-    [2.6, 4, 1, 5, 5, 11, 2.7],
-    [2.6, 4, 1, 4, 5, 4, 2.7],
     [1.3, 100, 9, 5, 3, 1, 1.3],
-    // A lapse resets to tomorrow from any interval.
-    [2.5, 270, 6, 5, 1, 1, 1.96],
-    [2.5, 270, 6, 5, 2, 1, 2.18],
+    // A Hard rating returns in twelve hours and resets the streak.
+    [2.5, 270, 6, 5, 1, 0.5, 1.96],
+    [2.5, 270, 6, 5, 2, 0.5, 2.18],
   ];
 
   test.each(cases)(
@@ -46,63 +43,53 @@ describe("scheduler parity with python/Kotlin", () => {
 });
 
 describe("fixed cadences", () => {
-  test("Hard is always tomorrow, Good always two days", () => {
+  test("Hard, Medium, Good, and Perfect use the product intervals", () => {
     let hard: Sm2State = FRESH;
+    let medium: Sm2State = FRESH;
     let good: Sm2State = FRESH;
+    let perfect: Sm2State = FRESH;
     for (let i = 0; i < 6; i++) {
-      hard = calculate(hard, 3);
+      hard = calculate(hard, 1);
+      medium = calculate(medium, 3);
       good = calculate(good, 4);
-      expect(hard.interval).toBe(1);
-      expect(good.interval).toBe(2);
+      perfect = calculate(perfect, 5);
+      expect(hard.interval).toBe(0.5);
+      expect(medium.interval).toBe(1);
+      expect(good.interval).toBe(3);
+      expect(perfect.interval).toBe(7);
     }
   });
 
   test("a rating takes effect immediately, not one review late", () => {
-    // The old SM-2 used the easiness from *before* the rating, so a promotion
-    // was delayed a review. Hard->Good must be two days, not one.
-    const hard = calculate(FRESH, 3);
-    expect(calculate(hard, 4).interval).toBe(2);
-    expect(calculate(hard, 5).interval).toBe(4);
+    const medium = calculate(FRESH, 3);
+    expect(calculate(medium, 4).interval).toBe(3);
+    expect(calculate(medium, 5).interval).toBe(7);
   });
 });
 
-describe("Easy", () => {
-  test("enters at four days and then compounds", () => {
-    let s: Sm2State = FRESH;
-    const seq: number[] = [];
+describe("Perfect", () => {
+  test("stays at one week rather than compounding", () => {
+    let state: Sm2State = FRESH;
     for (let i = 0; i < 6; i++) {
-      s = calculate(s, 5);
-      seq.push(s.interval);
+      state = calculate(state, 5);
+      expect(state.interval).toBe(7);
     }
-    expect(seq).toEqual([4, 11, 31, 90, 270, 837]);
-  });
-
-  test("dropping off Easy and back on restarts at the entry value", () => {
-    let s: Sm2State = calculate(calculate(FRESH, 5), 5);
-    expect(s.interval).toBe(11);
-    s = calculate(s, 4);
-    expect(s.interval).toBe(2);
-    expect(calculate(s, 5).interval).toBe(4);
-  });
-
-  test("a zero interval on an Easy row cannot schedule zero days", () => {
-    expect(calculate(S(2.5, 0, 3, 5), 5).interval).toBe(4);
   });
 });
 
 describe("state bookkeeping", () => {
-  test("rating < 3 resets repetitions and interval", () => {
+  test("Hard resets repetitions and uses a half-day interval", () => {
     expect(calculate(S(2.5, 20, 3, 4), 1)).toMatchObject({
       repetitions: 0,
-      interval: 1,
+      interval: 0.5,
     });
     expect(calculate(S(2.5, 10, 5, 5), 2)).toMatchObject({
       repetitions: 0,
-      interval: 1,
+      interval: 0.5,
     });
   });
 
-  test("repetitions count consecutive non-lapsed reviews, not Easy streaks", () => {
+  test("repetitions count consecutive non-lapsed reviews", () => {
     expect(calculate(S(2.5, 6, 2, 4), 4).repetitions).toBe(3);
     expect(calculate(S(2.5, 6, 2, 5), 3).repetitions).toBe(3);
   });

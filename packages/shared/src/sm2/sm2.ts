@@ -8,27 +8,25 @@ export interface Sm2State {
 
 export type Sm2Result = Required<Sm2State>;
 
-/** Days until the next review, per rating. Easy is only the entry value. */
-const LAPSE_INTERVAL = 1;
-const HARD_INTERVAL = 1;
-const GOOD_INTERVAL = 2;
-const EASY_ENTRY_INTERVAL = 4;
+/** Days until the next review, per rating. Half a day means twelve hours. */
+const HARD_INTERVAL = 0.5;
+const MEDIUM_INTERVAL = 1;
+const GOOD_INTERVAL = 3;
+const PERFECT_INTERVAL = 7;
 
 const MIN_EASINESS = 1.3;
 
 /**
- * Flashkarte's scheduler: fixed cadences for Again/Hard/Good, compounding for Easy.
- * `rating` must be an integer 1–5 (1–2 Again, 3 Hard, 4 Good, 5 Easy).
+ * Flashkarte's scheduler: fixed cadences for Hard/Medium/Good/Perfect.
+ * `rating` must be an integer 1–5 (1–2 Hard, 3 Medium, 4 Good, 5 Perfect).
  *
  * Unlike textbook SM-2, a rating takes effect on the interval it is given for,
- * not the one after: Hard always means tomorrow and Good always means two days,
- * whatever the card did before. Only a card that stays on Easy compounds, and it
- * compounds by the easiness this review just produced.
+ * not the one after: every rating always means its displayed interval, whatever
+ * the card did before. Rating 1 remains the compatibility value used by wrong
+ * diagnostic answers; rating 2 is accepted as the same Hard bucket.
  *
  * `repetitions` still counts consecutive non-lapsed reviews — the `learned`
- * deck stat filters on it, so it must not be repurposed as an Easy streak.
- * Staying on Easy is detected via `lastRating` instead.
- *
+ * deck stat filters on it, independent of the displayed rating names.
  * Kept identical in python/flashmd/sm2/algorithm.py and Kotlin Sm2Algorithm.
  */
 export function calculate(state: Sm2State, rating: number): Sm2Result {
@@ -40,29 +38,21 @@ export function calculate(state: Sm2State, rating: number): Sm2Result {
     state.easiness + (0.1 - (5 - rating) * (0.08 + (5 - rating) * 0.02));
   const easiness = Math.round(Math.max(MIN_EASINESS, ef) * 1e6) / 1e6;
 
-  if (rating < 3) {
+  if (rating <= 2) {
     return {
       easiness,
-      interval: LAPSE_INTERVAL,
+      interval: HARD_INTERVAL,
       repetitions: 0,
       lastRating: rating,
     };
   }
 
-  let interval: number;
-  if (rating === 3) {
-    interval = HARD_INTERVAL;
-  } else if (rating === 4) {
-    interval = GOOD_INTERVAL;
-  } else {
-    // Entering Easy from any other level restarts at the entry value; only an
-    // Easy-after-Easy compounds. Guard the interval so a corrupt or zero row
-    // can't schedule a card at 0 days and wedge it as permanently due.
-    const stayedOnEasy = state.lastRating === 5 && state.interval > 0;
-    interval = stayedOnEasy
-      ? Math.round(state.interval * easiness)
-      : EASY_ENTRY_INTERVAL;
-  }
+  const interval =
+    rating === 3
+      ? MEDIUM_INTERVAL
+      : rating === 4
+        ? GOOD_INTERVAL
+        : PERFECT_INTERVAL;
 
   return {
     easiness,

@@ -14,10 +14,10 @@ WARN = "#dcdcaa"
 BORDER = "#444444"
 
 RATING_COLORS = {
-    1: "#f44747",   # Again  — red
+    1: "#f44747",   # Hard  — red
     2: "#ce9178",   # Hard   — orange
     3: "#dcdcaa",   # Good   — yellow
-    4: "#4ec9b0",   # Easy   — teal
+    4: "#4ec9b0",   # Good   — teal
     5: "#569cd6",   # Perfect— blue
 }
 

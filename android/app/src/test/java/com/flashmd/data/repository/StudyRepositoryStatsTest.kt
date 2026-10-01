@@ -27,10 +27,10 @@ class StudyRepositoryStatsTest {
             due = 2,
             learned = 3,
             viewed = 4,
-            again = 1,
             hard = 1,
+            medium = 1,
             good = 1,
-            easy = 1,
+            perfect = 1,
         )
         val repository = StudyRepository(api, local, outbox, scheduler)
 

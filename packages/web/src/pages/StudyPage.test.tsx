@@ -120,8 +120,23 @@ describe("StudyPage", () => {
 
     await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
     expect(screen.getByText("Back!")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Hard.*12 hours/ }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Medium.*1 day/ }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Good.*3 days/ }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Perfect.*1 week/ }),
+    ).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /Again|Easy/ }),
+    ).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByRole("button", { name: "Good" }));
+    await userEvent.click(screen.getByRole("button", { name: /Good/ }));
     expect(mockApi.study.review).toHaveBeenCalledWith("c1", 4, undefined);
 
     await waitFor(() =>
@@ -129,7 +144,7 @@ describe("StudyPage", () => {
     );
   });
 
-  test("a lapsed card comes back later in the same session", async () => {
+  test("Hard schedules twelve hours later without re-queueing the card", async () => {
     mockApi.study.batch.mockResolvedValue([
       {
         id: "c1",
@@ -148,33 +163,24 @@ describe("StudyPage", () => {
 
     renderStudy();
 
-    // Fail the first card: it should be re-queued behind the second one.
     await userEvent.click(
       await screen.findByRole("button", { name: /Show answer/ }),
     );
-    await userEvent.click(screen.getByRole("button", { name: "Again" }));
+    await userEvent.click(screen.getByRole("button", { name: /Hard/ }));
     expect(mockApi.study.review).toHaveBeenCalledWith("c1", 1, undefined);
 
     expect(await screen.findByText("Second?")).toBeInTheDocument();
     expect(screen.getByText("Card #2")).toBeInTheDocument();
     await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
-    await userEvent.click(screen.getByRole("button", { name: "Good" }));
-
-    // The failed card is drilled again before the session can end. It still
-    // shows its own deck position (#1), not the session's running slot (3rd).
-    expect(await screen.findByText("Front?")).toBeInTheDocument();
-    expect(screen.getByText("Card #1")).toBeInTheDocument();
-    await userEvent.click(screen.getByRole("button", { name: /Show answer/ }));
-    await userEvent.click(screen.getByRole("button", { name: "Good" }));
+    await userEvent.click(screen.getByRole("button", { name: /Good/ }));
 
     await waitFor(() =>
       expect(screen.getByText(/Session complete/)).toBeInTheDocument(),
     );
-    // Two distinct cards, three reviews - the summary counts cards.
     expect(screen.getByText(/2 cards/)).toBeInTheDocument();
   });
 
-  test("Hard and Good do not re-queue the card", async () => {
+  test("Medium and Good do not re-queue the card", async () => {
     mockApi.study.batch.mockResolvedValue([
       {
         id: "c1",
@@ -190,7 +196,7 @@ describe("StudyPage", () => {
     await userEvent.click(
       await screen.findByRole("button", { name: /Show answer/ }),
     );
-    await userEvent.click(screen.getByRole("button", { name: "Hard" }));
+    await userEvent.click(screen.getByRole("button", { name: /Medium/ }));
     expect(mockApi.study.review).toHaveBeenCalledWith("c1", 3, undefined);
 
     await waitFor(() =>
@@ -281,7 +287,7 @@ describe("StudyPage", () => {
     // Never the "complete" screen, which would claim the deck was reviewed.
     expect(screen.queryByText(/Session complete/)).not.toBeInTheDocument();
     expect(
-      screen.queryByRole("button", { name: "Good" }),
+      screen.queryByRole("button", { name: /Good/ }),
     ).not.toBeInTheDocument();
     expect(mockApi.study.review).not.toHaveBeenCalled();
   });
@@ -676,7 +682,7 @@ describe("StudyPage: reading cards (lessons)", () => {
     expect(screen.getByText(/isn't graded/)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Got it" })).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: /Show answer/ })).toBeNull();
-    expect(screen.queryByRole("button", { name: "Good" })).toBeNull();
+    expect(screen.queryByRole("button", { name: /Good/ })).toBeNull();
   });
 
   test("keeps the body's line breaks so lists stay readable", async () => {
@@ -729,7 +735,7 @@ describe("StudyPage: reading cards (lessons)", () => {
     await userEvent.click(
       await screen.findByRole("button", { name: /Show answer/ }),
     );
-    await userEvent.click(screen.getByRole("button", { name: "Good" }));
+    await userEvent.click(screen.getByRole("button", { name: /Good/ }));
     expect(await screen.findByText("You reviewed 1 card.")).toBeInTheDocument();
   });
 

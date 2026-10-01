@@ -102,13 +102,18 @@ class StudySessionScreen(ttk.Frame):
         self._rating_frame = ttk.Frame(self)
         self._rating_frame.grid(row=3, column=0, pady=16)
 
-        labels = {1: "Again", 2: "Hard", 3: "Good", 4: "Easy", 5: "Perfect"}
+        ratings = {
+            1: ("Hard", "12 hours"),
+            3: ("Medium", "1 day"),
+            4: ("Good", "3 days"),
+            5: ("Perfect", "1 week"),
+        }
         self._rating_buttons = {}
-        for rating in range(1, 6):
+        for column, (rating, (label, interval)) in enumerate(ratings.items()):
             color = theme.RATING_COLORS[rating]
             btn = tk.Button(
                 self._rating_frame,
-                text=f"{rating}  {labels[rating]}",
+                text=f"{label}\n{interval}",
                 font=theme.FONT_NORMAL,
                 bg=color,
                 fg="#1e1e1e",
@@ -120,15 +125,15 @@ class StudySessionScreen(ttk.Frame):
                 cursor="hand2",
                 command=lambda r=rating: self._rate(r),
             )
-            btn.grid(row=0, column=rating - 1, padx=4)
+            btn.grid(row=0, column=column, padx=4)
             self._rating_buttons[rating] = btn
 
         self._hide_ratings()
 
         # Keyboard bindings
         self.bind_all("<space>", lambda e: self._flip() if not self._flipped else None)
-        for i in range(1, 6):
-            self.bind_all(str(i), lambda e, r=i: self._rate(r) if self._flipped else None)
+        for rating in ratings:
+            self.bind_all(str(rating), lambda e, r=rating: self._rate(r) if self._flipped else None)
 
     def _load_queue(self) -> None:
         deck = deck_repo.get_by_id(self._conn, self._deck_id)
@@ -183,11 +188,8 @@ class StudySessionScreen(ttk.Frame):
 
         self._rating_counts[rating] = self._rating_counts.get(rating, 0) + 1
 
-        if rating < 3:
-            # Place at end of queue to review again this session
-            self._queue.append(card)
-        else:
-            self._reviewed += 1
+        # Hard is a twelve-hour schedule, not an immediate same-session retry.
+        self._reviewed += 1
 
         if not self._queue:
             self._finish()
@@ -196,8 +198,8 @@ class StudySessionScreen(ttk.Frame):
 
     def _finish(self) -> None:
         self.unbind_all("<space>")
-        for i in range(1, 6):
-            self.unbind_all(str(i))
+        for rating in (1, 3, 4, 5):
+            self.unbind_all(str(rating))
         self._app.show_session_summary(
             deck_id=self._deck_id,
             results={
@@ -209,8 +211,8 @@ class StudySessionScreen(ttk.Frame):
 
     def _back(self) -> None:
         self.unbind_all("<space>")
-        for i in range(1, 6):
-            self.unbind_all(str(i))
+        for rating in (1, 3, 4, 5):
+            self.unbind_all(str(rating))
         self._app.show_deck_list()
 
     def _update_progress(self) -> None:

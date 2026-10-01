@@ -28,7 +28,14 @@ import com.flashmd.domain.study.StudyOption
 import com.flashmd.ui.components.CardText
 import com.flashmd.ui.theme.RatingColor
 
-private val RATING_LABELS = mapOf(1 to "Again", 2 to "Hard", 3 to "Good", 4 to "Easy", 5 to "Perfect")
+private data class RatingButton(val value: Int, val label: Int, val interval: Int)
+
+private val RATING_BUTTONS = listOf(
+    RatingButton(1, R.string.study_rating_hard, R.string.study_interval_12_hours),
+    RatingButton(3, R.string.study_rating_medium, R.string.study_interval_1_day),
+    RatingButton(4, R.string.study_rating_good, R.string.study_interval_3_days),
+    RatingButton(5, R.string.study_rating_perfect, R.string.study_interval_1_week),
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -446,10 +453,10 @@ private fun RatingRow(onRate: (Int) -> Unit) {
             .padding(horizontal = 12.dp, vertical = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
     ) {
-        for (r in 1..5) {
-            val color = RatingColor[r] ?: MaterialTheme.colorScheme.primary
+        for (rating in RATING_BUTTONS) {
+            val color = RatingColor[rating.value] ?: MaterialTheme.colorScheme.primary
             Button(
-                onClick = { onRate(r) },
+                onClick = { onRate(rating.value) },
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = color,
@@ -458,8 +465,8 @@ private fun RatingRow(onRate: (Int) -> Unit) {
                 contentPadding = PaddingValues(horizontal = 4.dp, vertical = 10.dp),
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text("$r", style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
-                    Text(RATING_LABELS[r] ?: "", style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(rating.label), style = MaterialTheme.typography.labelSmall, fontWeight = FontWeight.Bold)
+                    Text(stringResource(rating.interval), style = MaterialTheme.typography.labelSmall)
                 }
             }
         }

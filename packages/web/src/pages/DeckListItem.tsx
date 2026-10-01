@@ -74,16 +74,16 @@ export function DeckListItem({
             {t("decks.new", { count: d.new_count })}
           </span>
           <span className="rounded bg-red-100 px-1.5 py-0.5 text-red-700 dark:bg-red-900/40 dark:text-red-300">
-            {t("decks.again", { count: d.again_count })}
+            {t("decks.hard", { count: d.again_count })}
           </span>
           <span className="rounded bg-amber-100 px-1.5 py-0.5 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-            {t("decks.hard", { count: d.hard_count })}
+            {t("decks.medium", { count: d.hard_count })}
           </span>
           <span className="rounded bg-green-100 px-1.5 py-0.5 text-green-700 dark:bg-green-900/40 dark:text-green-300">
             {t("decks.good", { count: d.good_count })}
           </span>
           <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
-            {t("decks.easy", { count: d.easy_count })}
+            {t("decks.perfect", { count: d.easy_count })}
           </span>
         </div>
       </div>

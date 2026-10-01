@@ -29,10 +29,10 @@ export function StudyingPage() {
         <h2 className={helpH2}>{t("help.studying.ratingsHeading")}</h2>
         <p className="mt-2">{t("help.studying.ratingsIntro")}</p>
         <ul className="mt-2 list-disc space-y-1 pl-5">
-          <li>{t("help.studying.ratingAgain")}</li>
           <li>{t("help.studying.ratingHard")}</li>
+          <li>{t("help.studying.ratingMedium")}</li>
           <li>{t("help.studying.ratingGood")}</li>
-          <li>{t("help.studying.ratingEasy")}</li>
+          <li>{t("help.studying.ratingPerfect")}</li>
         </ul>
       </section>
 
@@ -43,10 +43,10 @@ export function StudyingPage() {
           <li>{t("help.studying.counterDue")}</li>
           <li>{t("help.studying.counterNew")}</li>
           <li>{t("help.studying.counterViewed")}</li>
-          <li>{t("help.studying.counterAgain")}</li>
           <li>{t("help.studying.counterHard")}</li>
+          <li>{t("help.studying.counterMedium")}</li>
           <li>{t("help.studying.counterGood")}</li>
-          <li>{t("help.studying.counterEasy")}</li>
+          <li>{t("help.studying.counterPerfect")}</li>
         </ul>
         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
           {t("help.studying.counterNote")}

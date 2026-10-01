@@ -66,8 +66,6 @@ function toParsedCard(card: StudyCard): ParsedCard {
 }
 
 /** Ratings below this are lapses: the card comes back before the session ends. */
-const LAPSE_CEILING = 3;
-
 /**
  * All state and behavior for a study session: loading the queue, Flip-mode
  * grading, Choice-mode picking with diagnostic remediation interludes (Spec
@@ -195,7 +193,12 @@ export function useStudySession(deckId: string | undefined) {
    *  on a lapse. Returns whether it succeeded, so callers can decide what to
    *  do next (advance immediately, or show a remediation interlude first). */
   const submitRating = useCallback(
-    async (card: StudyCard, rating: number, optionIndex?: number) => {
+    async (
+      card: StudyCard,
+      rating: number,
+      optionIndex?: number,
+      requeueOnLapse = false,
+    ) => {
       cancel();
       try {
         await api.study.review(card.id, rating, optionIndex);
@@ -208,7 +211,7 @@ export function useStudySession(deckId: string | undefined) {
         return false;
       }
       setReviewedIds((seen) => new Set(seen).add(card.id));
-      if (rating < LAPSE_CEILING) {
+      if (requeueOnLapse && rating <= 2) {
         setCards((queue) => (queue ? [...queue, card] : queue));
       }
       return true;
@@ -259,6 +262,7 @@ export function useStudySession(deckId: string | undefined) {
       card,
       rating,
       selectedOption.optionIndex ?? undefined,
+      true,
     );
     if (!ok) return;
 

@@ -30,20 +30,20 @@ class LocalStudyStoreTest {
         // new card is due
         assertEquals(1, store.dueCards("d1").size)
 
-        // rating 4 (Good) on a new card -> interval 2, reps 1; due date moves out,
+        // rating 4 (Good) on a new card -> interval 3, reps 1; due date moves out,
         // so the card is no longer due "now"
         store.applyRatingLocally("c1", 4, "2026-06-05T09:00:00Z")
         val p = db.cardProgressQueries.selectProgress("c1").executeAsOne()
-        assertEquals(2L, p.interval_days)
+        assertEquals(3.0, p.interval_days, 0.0)
         assertEquals(1L, p.repetitions)
         assertEquals(4L, p.last_rating)
         assertTrue(p.due_at!! > "2026-06-05T09:00:00Z")
     }
 
     // Regression: the counters used to be one bucket per index (1/2/3/4), which
-    // silently shifted every card down a level — Hard counted as Again, Easy not
-    // counted at all — until a sync replaced them with the server's numbers.
-    // The scale is 1-2 Again, 3 Hard, 4 Good, 5 Easy.
+    // silently shifted every card down a level — Medium counted as Hard, Perfect
+    // not counted at all — until a sync replaced them with the server's numbers.
+    // The scale is 1-2 Hard, 3 Medium, 4 Good, 5 Perfect.
     @Test
     fun cachedStatsBucketEachRatingLikeTheServer() {
         store.cacheDeckCards(
@@ -65,15 +65,15 @@ class LocalStudyStoreTest {
         store.applyRatingLocally("easy", 5, reviewedAt)
 
         val stats = store.cachedStudyStats("d1")
-        assertEquals(2, stats.again)
-        assertEquals(1, stats.hard)
+        assertEquals(2, stats.hard)
+        assertEquals(1, stats.medium)
         assertEquals(1, stats.good)
-        assertEquals(1, stats.easy)
+        assertEquals(1, stats.perfect)
 
         // The help page promises the four buckets add up to Viewed; that only
         // holds while every rating lands in exactly one of them.
         assertEquals(5, stats.viewed)
-        assertEquals(stats.viewed, stats.again + stats.hard + stats.good + stats.easy)
+        assertEquals(stats.viewed, stats.hard + stats.medium + stats.good + stats.perfect)
     }
 
     // Spec 01 — diagnostic options + label survive the local cache round-trip,
@@ -124,13 +124,13 @@ class LocalStudyStoreTest {
         assertEquals(1, stats.due)
         assertEquals(2, stats.learned)
         assertEquals(4, stats.viewed)
-        // Ratings 1 and 2 are both Again, and nothing here was rated 5, so no
-        // card is Easy. This test previously expected one card per bucket,
+        // Ratings 1 and 2 are both Hard, and nothing here was rated 5, so no
+        // card is Perfect. This test previously expected one card per bucket,
         // which is what kept the off-by-one in the counters alive.
-        assertEquals(2, stats.again)
-        assertEquals(1, stats.hard)
+        assertEquals(2, stats.hard)
+        assertEquals(1, stats.medium)
         assertEquals(1, stats.good)
-        assertEquals(0, stats.easy)
+        assertEquals(0, stats.perfect)
     }
 
     // Regression: cacheDeckCards used to write each card's list *index* as its

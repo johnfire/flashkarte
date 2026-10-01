@@ -284,7 +284,7 @@ class StudyViewModel @Inject constructor(
                 pendingRating = rating
                 _uiState.value = _uiState.value.copy(remediation = remediationCard)
             } else {
-                applyAndAdvance(card, rating)
+                applyAndAdvance(card, rating, requeueOnLapse = !picked.correct)
             }
         }
     }
@@ -312,17 +312,17 @@ class StudyViewModel @Inject constructor(
         val rating = pendingRating ?: return
         pendingRating = null
         _uiState.value = _uiState.value.copy(remediation = null)
-        applyAndAdvance(card, rating)
+        applyAndAdvance(card, rating, requeueOnLapse = true)
     }
 
-    private fun applyAndAdvance(card: DueCard, rating: Int) {
+    private fun applyAndAdvance(card: DueCard, rating: Int, requeueOnLapse: Boolean = false) {
         // Stop before advancing: the previous card's answer must not talk over
         // the next card's question.
         speechPlayer.stop()
         queue.poll()
         ratingCounts[rating] = (ratingCounts[rating] ?: 0) + 1
 
-        if (rating < 3) {
+        if (requeueOnLapse && rating <= 2) {
             // Ordered decks: keep the same card up front until it's passed, so the
             // next card never unlocks early. Unordered: re-queue at the end.
             if (ordered) queue.addFirst(card) else queue.add(card)
