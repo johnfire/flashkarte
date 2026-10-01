@@ -2,6 +2,7 @@ import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { useDocumentHead } from "../seo/useDocumentHead";
 import { LandingHero } from "./landing/LandingHero";
 import { LandingFeatures } from "./landing/LandingFeatures";
+import { LandingVideo } from "./landing/LandingVideo";
 import { LandingAI } from "./landing/LandingAI";
 import { LandingFooter } from "./landing/LandingFooter";
 
@@ -144,6 +145,7 @@ export function LandingPage() {
           <LanguageSwitcher compact onDark />
         </div>
         <LandingHero />
+        <LandingVideo />
         <LandingFeatures />
         <LandingAI />
         <LandingFooter />
