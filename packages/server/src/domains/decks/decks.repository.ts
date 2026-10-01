@@ -1,4 +1,5 @@
 import { query, queryOne, withTransaction } from "../../db/client";
+import type { Queryable } from "../../db/queryable";
 import { ParsedCard, ParsedOption, CardSense } from "@flashkarte/shared";
 import type { PoolClient } from "pg";
 import { escapeLike, categoryFilterSql } from "../library/library.repository";
@@ -49,7 +50,7 @@ function subscribedOrOwned(deckAlias: string, userIdParam: number): string {
  * client, numbering positions from `startPos`. One round-trip, all-or-nothing.
  */
 async function insertCardsBatch(
-  client: PoolClient,
+  client: Queryable,
   userId: string,
   deckId: string,
   cards: ParsedCard[],
@@ -86,8 +87,9 @@ export function createDeckWithCards(
   sourceFilename: string | null,
   cards: ParsedCard[],
   contentLanguage: string | null = null,
+  db?: Queryable,
 ) {
-  return withTransaction(async (client) => {
+  const create = async (client: Queryable) => {
     const res = await client.query<DeckRow>(
       `INSERT INTO decks (user_id, title, source_filename, content_language)
        VALUES ($1, $2, $3, $4)
@@ -97,7 +99,8 @@ export function createDeckWithCards(
     const deck = res.rows[0];
     await insertCardsBatch(client, userId, deck.id, cards, 0);
     return deck;
-  });
+  };
+  return db ? create(db) : withTransaction(create);
 }
 
 /** The `sense.word` keys already stored in a deck — see validateSenses. */

@@ -2,6 +2,10 @@ jest.mock("./courses.repository");
 jest.mock("../decks/decks.repository");
 jest.mock("../decks/branching", () => ({ validateBranching: jest.fn() }));
 jest.mock("../audit/audit.service", () => ({ recordRequired: jest.fn() }));
+jest.mock("../billing/billing.service", () => ({
+  assertCanCreateUnit: jest.fn().mockResolvedValue(undefined),
+  withUnitCreation: jest.fn((_userId, work) => work({})),
+}));
 import * as repo from "./courses.repository";
 import type { CourseDeckRow } from "./courses.repository";
 import * as decksRepo from "../decks/decks.repository";
@@ -96,6 +100,7 @@ describe("createCourse", () => {
       "My Course",
       null,
       null,
+      expect.anything(),
     );
     expect(course.id).toBe("c1");
   });
@@ -356,6 +361,7 @@ describe("cloneCourse", () => {
       publicCourseRow.title,
       publicCourseRow.description,
       publicCourseRow.content_language,
+      expect.anything(),
     );
     expect(mockDecksRepo.createDeckWithCards).toHaveBeenNthCalledWith(
       1,
@@ -364,6 +370,7 @@ describe("cloneCourse", () => {
       null,
       expect.any(Array),
       "en",
+      expect.anything(),
     );
     expect(mockDecksRepo.createDeckWithCards).toHaveBeenNthCalledWith(
       2,
@@ -372,16 +379,19 @@ describe("cloneCourse", () => {
       null,
       expect.any(Array),
       "en",
+      expect.anything(),
     );
     expect(mockRepo.addDeckToCourse).toHaveBeenNthCalledWith(
       1,
       "new-c1",
       "new-d1",
+      expect.anything(),
     );
     expect(mockRepo.addDeckToCourse).toHaveBeenNthCalledWith(
       2,
       "new-c1",
       "new-d2",
+      expect.anything(),
     );
     expect(result.decks_cloned).toBe(2);
     expect(result.course.id).toBe("new-c1");

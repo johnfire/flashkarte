@@ -1,5 +1,6 @@
 package com.flashmd.ui.screens.settings
 
+import android.app.Activity
 import android.graphics.BitmapFactory
 import android.util.Base64
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -40,10 +41,13 @@ fun SettingsScreen(
     onHelp: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
     themeViewModel: ThemeViewModel = hiltViewModel(),
+    billingViewModel: BillingViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val billingState by billingViewModel.state.collectAsStateWithLifecycle()
     val themeMode by themeViewModel.mode.collectAsStateWithLifecycle()
     val themeError by themeViewModel.error.collectAsStateWithLifecycle()
+    val activity = LocalContext.current as? Activity
 
     Scaffold(
         topBar = { TopAppBar(title = { Text("Settings", fontWeight = FontWeight.Bold) }) },
@@ -74,6 +78,13 @@ fun SettingsScreen(
             if (!verified && state.user != null) {
                 OutlinedButton(onClick = { viewModel.resendVerification() }) { Text("Resend verification email") }
             }
+
+            BillingSection(
+                state = billingState,
+                onPurchase = { offer ->
+                    activity?.let { billingViewModel.launchPurchase(it, offer) }
+                },
+            )
 
             HorizontalDivider()
             Text("Appearance", style = MaterialTheme.typography.titleMedium)
@@ -219,6 +230,49 @@ fun SettingsScreen(
             )
         }
     }
+}
+
+@Composable
+private fun BillingSection(
+    state: BillingUiState,
+    onPurchase: (com.flashmd.data.billing.PlaySubscriptionOffer) -> Unit,
+) {
+    HorizontalDivider()
+    Text("Subscription", style = MaterialTheme.typography.titleMedium)
+    val status = state.status
+    if (status != null) {
+        val limit = status.activeUnitLimit?.toString() ?: "unlimited"
+        Text("Active decks and courses: ${status.activeUnitCount} / $limit")
+        if (status.overLimit) {
+            Text(
+                "Existing content remains available, but deactivate content before adding more.",
+                color = MaterialTheme.colorScheme.tertiary,
+                style = MaterialTheme.typography.bodySmall,
+            )
+        }
+        if (status.plan == "paid") {
+            Text("Paid plan active", color = MaterialTheme.colorScheme.primary)
+        } else {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                state.offers
+                    .sortedBy { it.basePlanId }
+                    .forEach { offer ->
+                        OutlinedButton(onClick = { onPurchase(offer) }) {
+                            Text(
+                                if (offer.basePlanId == com.flashmd.BuildConfig.PLAY_YEARLY_BASE_PLAN_ID) {
+                                    "Yearly ${offer.formattedPrice}"
+                                } else {
+                                    "Monthly ${offer.formattedPrice}"
+                                },
+                            )
+                        }
+                    }
+            }
+        }
+    }
+    if (state.isLoading) Text("Loading subscription…")
+    if (state.message != null) Text(state.message!!, color = MaterialTheme.colorScheme.primary)
+    if (state.error != null) Text(state.error!!, color = MaterialTheme.colorScheme.error)
 }
 
 @Composable

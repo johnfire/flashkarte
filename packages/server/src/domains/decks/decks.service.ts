@@ -11,6 +11,7 @@ import * as repo from "./decks.repository";
 import { validateBranching } from "./branching";
 import { validateReadingCards } from "./reading-cards";
 import { validateSenses } from "./senses";
+import { withUnitCreation } from "../billing/billing.service";
 import {
   contentLanguageSchema,
   contentLanguageFilterSchema,
@@ -71,12 +72,15 @@ export async function importDeck(
   validateBranching(parsed.cards);
   validateReadingCards(parsed.cards);
   validateSenses(parsed.cards);
-  const deck = await repo.createDeckWithCards(
-    userId,
-    parsed.title,
-    filename,
-    parsed.cards,
-    language,
+  const deck = await withUnitCreation(userId, async (db) =>
+    repo.createDeckWithCards(
+      userId,
+      parsed.title,
+      filename,
+      parsed.cards,
+      language,
+      db,
+    ),
   );
   if (!deck) throw new Error("Failed to create deck");
   return { ...deck, card_count: parsed.cards.length };

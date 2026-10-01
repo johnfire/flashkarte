@@ -47,6 +47,11 @@ import { getPool } from "./db/client";
 import { renderHttpMetrics } from "./observability/httpMetrics";
 import { requireSharedEmailTenant } from "./domains/shared-email/shared-email.auth";
 import { sharedEmailRouter } from "./domains/shared-email/shared-email.routes";
+import { billingRouter } from "./domains/billing/billing.routes";
+import {
+  googlePlayRtdn,
+  stripeWebhook,
+} from "./domains/billing/billing.controller";
 
 // For IPv6, bucket by the /64 prefix so a client can't trivially bypass rate
 // limits by rotating through addresses within their allocated /64 block.
@@ -88,11 +93,21 @@ export function createApp() {
       credentials: true,
     }),
   );
-  app.use(express.json({ limit: "5mb" }));
   app.use(cookieParser());
-
-  // Trace every request. Must be before any code that reads / logs the ID.
+  // Trace every request, including provider webhooks. Must be before any code
+  // that reads or logs the correlation ID.
   app.use(requestId);
+  // Stripe signs the exact request bytes. This must be registered before the
+  // JSON parser turns the body into an object.
+  app.post(
+    "/api/billing/stripe/webhook",
+    express.raw({ type: "application/json" }),
+    stripeWebhook,
+  );
+  app.use(express.json({ limit: "5mb" }));
+  // Google Pub/Sub pushes subscription lifecycle events here. It is protected
+  // by a dedicated bearer token; normal user auth must not be required.
+  app.post("/api/billing/google-play/rtdn", googlePlayRtdn);
 
   if (process.env.NODE_ENV === "production") {
     // Structured access logs in production; dev keeps human-readable morgan.
@@ -289,6 +304,7 @@ export function createApp() {
   });
   app.use("/api/account/export", exportLimiter);
   app.use("/api/account", accountRouter);
+  app.use("/api/billing", billingRouter);
   app.use("/api/keys", keysRouter);
   app.use("/api/bug-reports", bugReportLimiter, bugReportsRouter);
   app.use("/api/admin/email", adminEmailLimiter);

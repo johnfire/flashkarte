@@ -7,6 +7,31 @@ import type {
 
 export type AccountType = "free" | "paid" | "admin-gifted" | "admin";
 
+export interface BillingStatus {
+  plan: "free" | "paid";
+  accountType: AccountType;
+  activeUnitCount: number;
+  activeUnitLimit: number | null;
+  overLimit: boolean;
+  subscription: {
+    provider: "stripe" | "google_play";
+    plan: "monthly" | "yearly";
+    status: string;
+    currentPeriodEnd: string | null;
+    cancelAtPeriodEnd: boolean;
+  } | null;
+}
+
+export type BillingUnitType =
+  "deck" | "course" | "subject" | "course_collection";
+
+export interface BillingUnit {
+  unit_type: BillingUnitType;
+  unit_id: string;
+  title: string;
+  active: boolean;
+}
+
 /** A deck's speech overrides. Null means "inherit the global default". */
 export interface DeckSpeech {
   speech_enabled: boolean | null;

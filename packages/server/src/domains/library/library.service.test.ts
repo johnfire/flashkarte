@@ -5,6 +5,10 @@ jest.mock("../decks/decks.repository", () => {
   const actual = jest.requireActual("../decks/decks.repository");
   return { ...actual, createDeckWithCards: jest.fn() };
 });
+jest.mock("../billing/billing.service", () => ({
+  assertCanCreateUnit: jest.fn().mockResolvedValue(undefined),
+  withUnitCreation: jest.fn((_userId, work) => work({})),
+}));
 
 import * as repo from "./library.repository";
 import * as decksRepo from "../decks/decks.repository";

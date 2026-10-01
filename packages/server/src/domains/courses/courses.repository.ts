@@ -1,4 +1,5 @@
-import { query, queryOne, withTransaction } from "../../db/client";
+import { getPool, query, queryOne, withTransaction } from "../../db/client";
+import type { Queryable } from "../../db/queryable";
 
 export interface CourseRow {
   id: string;
@@ -20,13 +21,16 @@ export function createCourse(
   title: string,
   description: string | null,
   contentLanguage: string | null = null,
+  db: Queryable = getPool(),
 ) {
-  return queryOne<CourseRow>(
-    `INSERT INTO courses (user_id, title, description, content_language)
+  return db
+    .query<CourseRow>(
+      `INSERT INTO courses (user_id, title, description, content_language)
      VALUES ($1, $2, $3, $4)
      RETURNING ${COURSE_COLS}`,
-    [userId, title, description, contentLanguage],
-  );
+      [userId, title, description, contentLanguage],
+    )
+    .then((result) => result.rows[0] ?? null);
 }
 
 export function listCourses(userId: string) {
@@ -161,17 +165,19 @@ export function getPublicCourseDecks(courseId: string) {
  * the sole caller (courses.service's cloneCourse) has already verified the
  * owning course is public before reading any deck's cards this way.
  */
-export function getCardsForDeck(deckId: string) {
-  return query<{
-    type: string;
-    content: Record<string, unknown>;
-    category: string | null;
-    position: number;
-  }>(
-    `SELECT c.type, c.content, c.category, c.position
+export function getCardsForDeck(deckId: string, db: Queryable = getPool()) {
+  return db
+    .query<{
+      type: string;
+      content: Record<string, unknown>;
+      category: string | null;
+      position: number;
+    }>(
+      `SELECT c.type, c.content, c.category, c.position
      FROM cards c WHERE c.deck_id = $1 ORDER BY c.position ASC`,
-    [deckId],
-  );
+      [deckId],
+    )
+    .then((result) => result.rows);
 }
 
 export function deckBelongsToUser(userId: string, deckId: string) {
@@ -188,8 +194,12 @@ export function isDeckInCourse(courseId: string, deckId: string) {
   );
 }
 
-export async function addDeckToCourse(courseId: string, deckId: string) {
-  await withTransaction(async (client) => {
+export async function addDeckToCourse(
+  courseId: string,
+  deckId: string,
+  db?: Queryable,
+) {
+  const add = async (client: Queryable) => {
     const rows = await client.query<{ next: number }>(
       `SELECT COALESCE(MAX(position), -1) + 1 AS next FROM course_decks WHERE course_id = $1`,
       [courseId],
@@ -199,7 +209,8 @@ export async function addDeckToCourse(courseId: string, deckId: string) {
       `INSERT INTO course_decks (course_id, deck_id, position) VALUES ($1, $2, $3)`,
       [courseId, deckId, position],
     );
-  });
+  };
+  await (db ? add(db) : withTransaction(add));
 }
 
 export async function removeDeckFromCourse(courseId: string, deckId: string) {

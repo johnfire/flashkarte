@@ -158,6 +158,23 @@
       "saveError": "Spracheinstellungen konnten nicht gespeichert werden."
     }
   },
+  "billing": {
+    "title": "Abonnement",
+    "activeUnits": "Aktive Stapel und Kurse: {{units}}",
+    "unlimited": "unbegrenzt",
+    "overLimit": "Du überschreitest das kostenlose Limit. Vorhandene Inhalte bleiben verfügbar, aber deaktiviere Inhalte, bevor du weitere hinzufügst.",
+    "paidPlan": "Bezahlter Tarif aktiv",
+    "monthly": "Monatlich upgraden — 5 €",
+    "yearly": "Jährlich upgraden — 50 €",
+    "loadError": "Abonnementstatus konnte nicht geladen werden.",
+    "checkoutError": "Checkout konnte nicht gestartet werden.",
+    "manageUnits": "Aktive Inhalte verwalten",
+    "activate": "Aktivieren",
+    "deactivate": "Deaktivieren",
+    "unitError": "Dieser Inhalt konnte nicht aktualisiert werden.",
+    "manageSubscription": "Abonnement verwalten",
+    "portalError": "Die Abonnementverwaltung konnte nicht geöffnet werden."
+  },
   "theme": {
     "toLight": "Zum hellen Modus wechseln",
     "toDark": "Zum dunklen Modus wechseln",

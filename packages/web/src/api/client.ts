@@ -26,6 +26,9 @@ import {
   PublicCourseDetail,
   ClonedCourse,
   EmailCampaignSummary,
+  BillingStatus,
+  BillingUnit,
+  BillingUnitType,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 import type {
@@ -276,6 +279,28 @@ function browseQuery(params?: BrowseParams): string {
 }
 
 export const api = {
+  billing: {
+    status: () => request<BillingStatus>("/billing/status"),
+    units: () => request<BillingUnit[]>("/billing/units"),
+    setUnitActive: (
+      unitType: BillingUnitType,
+      unitId: string,
+      active: boolean,
+    ) =>
+      request<BillingUnit>(`/billing/units/${unitType}/${unitId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ active }),
+      }),
+    checkout: (plan: "monthly" | "yearly") =>
+      request<{ url: string }>("/billing/stripe/checkout", {
+        method: "POST",
+        body: JSON.stringify({ plan }),
+      }),
+    portal: () =>
+      request<{ url: string }>("/billing/stripe/portal", {
+        method: "POST",
+      }),
+  },
   contentLanguages: {
     list: () => request<Record<string, string>>("/account/content-languages"),
     save: (page: "library" | "courses" | "decks", language: string) =>

@@ -3,6 +3,13 @@ jest.mock("../../db/client", () => ({
   withTransaction: jest.fn((work) => work({})),
 }));
 jest.mock("./course-collections.repository");
+jest.mock("../billing/billing.service", () => ({
+  assertCanCreateUnit: jest.fn().mockResolvedValue(undefined),
+  withBillingTransaction: jest.fn((_userId, work) => work({})),
+}));
+jest.mock("../billing/billing.repository", () => ({
+  assertCanCreateUnitInTransaction: jest.fn().mockResolvedValue(undefined),
+}));
 
 import * as repository from "./course-collections.repository";
 import {
@@ -74,6 +81,7 @@ describe("catalogue collection enrollment", () => {
       title: "Art of Electronics",
     } as never);
     repositoryMock.enrollAllInCatalogCollection.mockResolvedValue(15);
+    repositoryMock.hasCollectionEnrollment.mockResolvedValue(false);
 
     await expect(
       enrollInCatalogCollection("learner-1", COLLECTION_ID, false),
@@ -82,6 +90,7 @@ describe("catalogue collection enrollment", () => {
       "learner-1",
       COLLECTION_ID,
       false,
+      expect.anything(),
     );
   });
 

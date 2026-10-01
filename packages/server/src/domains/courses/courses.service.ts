@@ -12,6 +12,7 @@ import {
   contentLanguageSchema,
   contentLanguageFilterSchema,
 } from "../library/content-language";
+import { withUnitCreation } from "../billing/billing.service";
 
 const titleSchema = z
   .string({ error: "Title is required" })
@@ -59,7 +60,9 @@ export async function createCourse(
     languageInput === undefined
       ? null
       : parse(contentLanguageSchema, languageInput);
-  const course = await repo.createCourse(userId, title, description, language);
+  const course = await withUnitCreation(userId, (db) =>
+    repo.createCourse(userId, title, description, language, db),
+  );
   if (!course) throw new Error("Failed to create course");
   return course;
 }
@@ -223,42 +226,46 @@ export async function cloneCourse(userId: string, id: string) {
   if (members.length === 0) {
     throw new ValidationError("This course has no decks to clone");
   }
-
-  const newCourse = await repo.createCourse(
-    userId,
-    course.title,
-    course.description,
-    course.content_language,
-  );
-  if (!newCourse) throw new Error("Failed to create course");
-
-  for (const member of members) {
-    const cardRows = await repo.getCardsForDeck(member.deck_id);
-    const cards: ParsedCard[] = cardRows.map((c) =>
-      decksRepo.rowToParsedCard({
-        type: c.type,
-        content: c.content,
-        category: c.category,
-      }),
-    );
-    // Same guards as a fresh import/deck-clone, so a public course can never
-    // bypass the card cap or graph validation by being cloned.
-    if (cards.length > MAX_CARDS_PER_DECK) {
-      throw new ValidationError(
-        `A deck can have at most ${MAX_CARDS_PER_DECK} cards`,
-      );
-    }
-    validateBranching(cards);
-    const clonedDeck = await decksRepo.createDeckWithCards(
+  const result = await withUnitCreation(userId, async (db) => {
+    const newCourse = await repo.createCourse(
       userId,
-      member.title,
-      null,
-      cards,
-      member.content_language,
+      course.title,
+      course.description,
+      course.content_language,
+      db,
     );
-    if (!clonedDeck) throw new Error("Failed to clone a course deck");
-    await repo.addDeckToCourse(newCourse.id, clonedDeck.id);
-  }
+    if (!newCourse) throw new Error("Failed to create course");
 
-  return { course: newCourse, decks_cloned: members.length, source_id: id };
+    for (const member of members) {
+      const cardRows = await repo.getCardsForDeck(member.deck_id, db);
+      const cards: ParsedCard[] = cardRows.map((c) =>
+        decksRepo.rowToParsedCard({
+          type: c.type,
+          content: c.content,
+          category: c.category,
+        }),
+      );
+      // Same guards as a fresh import/deck-clone, so a public course can never
+      // bypass the card cap or graph validation by being cloned.
+      if (cards.length > MAX_CARDS_PER_DECK) {
+        throw new ValidationError(
+          `A deck can have at most ${MAX_CARDS_PER_DECK} cards`,
+        );
+      }
+      validateBranching(cards);
+      const clonedDeck = await decksRepo.createDeckWithCards(
+        userId,
+        member.title,
+        null,
+        cards,
+        member.content_language,
+        db,
+      );
+      if (!clonedDeck) throw new Error("Failed to clone a course deck");
+      await repo.addDeckToCourse(newCourse.id, clonedDeck.id, db);
+    }
+    return newCourse;
+  });
+
+  return { course: result, decks_cloned: members.length, source_id: id };
 }

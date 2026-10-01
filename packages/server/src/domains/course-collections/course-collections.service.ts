@@ -8,6 +8,8 @@ import {
   courseCollectionMembersSchema,
   courseCollectionSchema,
 } from "./course-collections.schemas";
+import { withBillingTransaction } from "../billing/billing.service";
+import * as billingRepository from "../billing/billing.repository";
 
 export function listCatalogCollections(
   isOfficial: boolean,
@@ -40,11 +42,24 @@ export async function enrollInCatalogCollection(
     isOfficial,
   );
   if (!collection) throw new NotFoundError("Course collection not found");
-  return repository.enrollAllInCatalogCollection(
-    userId,
-    collectionId,
-    isOfficial,
-  );
+  return withBillingTransaction(userId, async (db) => {
+    if (
+      !(await repository.hasCollectionEnrollment(
+        userId,
+        collectionId,
+        isOfficial,
+        db,
+      ))
+    ) {
+      await billingRepository.assertCanCreateUnitInTransaction(db, userId);
+    }
+    return repository.enrollAllInCatalogCollection(
+      userId,
+      collectionId,
+      isOfficial,
+      db,
+    );
+  });
 }
 
 export async function createCollection(input: unknown) {

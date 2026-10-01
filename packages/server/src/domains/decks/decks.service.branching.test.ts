@@ -1,4 +1,8 @@
 jest.mock("./decks.repository");
+jest.mock("../billing/billing.service", () => ({
+  assertCanCreateUnit: jest.fn().mockResolvedValue(undefined),
+  withUnitCreation: jest.fn((_userId, work) => work({})),
+}));
 import * as repo from "./decks.repository";
 import { importDeck } from "./decks.service";
 

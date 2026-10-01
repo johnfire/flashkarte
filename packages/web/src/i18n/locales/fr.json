@@ -158,6 +158,23 @@
       "saveError": "Impossible d'enregistrer vos réglages de lecture."
     }
   },
+  "billing": {
+    "title": "Abonnement",
+    "activeUnits": "Paquets et cours actifs : {{units}}",
+    "unlimited": "illimité",
+    "overLimit": "Vous dépassez la limite gratuite. Le contenu existant reste disponible, mais désactivez du contenu avant d'en ajouter.",
+    "paidPlan": "Abonnement payant actif",
+    "monthly": "Passer au mensuel — 5 €",
+    "yearly": "Passer à l'annuel — 50 €",
+    "loadError": "Impossible de charger l'état de l'abonnement.",
+    "checkoutError": "Impossible de démarrer le paiement.",
+    "manageUnits": "Gérer les contenus actifs",
+    "activate": "Activer",
+    "deactivate": "Désactiver",
+    "unitError": "Impossible de mettre à jour ce contenu.",
+    "manageSubscription": "Gérer l'abonnement",
+    "portalError": "Impossible d'ouvrir la gestion de l'abonnement."
+  },
   "theme": {
     "toLight": "Passer au mode clair",
     "toDark": "Passer au mode sombre",

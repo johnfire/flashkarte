@@ -158,6 +158,23 @@
       "saveError": "Could not save your speech settings."
     }
   },
+  "billing": {
+    "title": "Subscription",
+    "activeUnits": "Active decks and courses: {{units}}",
+    "unlimited": "unlimited",
+    "overLimit": "You are over the free limit. Existing content remains available, but deactivate content before adding more.",
+    "paidPlan": "Paid plan active",
+    "monthly": "Upgrade monthly — €5",
+    "yearly": "Upgrade yearly — €50",
+    "loadError": "Couldn't load subscription status.",
+    "checkoutError": "Couldn't start checkout.",
+    "manageUnits": "Manage active content",
+    "activate": "Activate",
+    "deactivate": "Deactivate",
+    "unitError": "Couldn't update this content.",
+    "manageSubscription": "Manage subscription",
+    "portalError": "Couldn't open subscription management."
+  },
   "theme": {
     "toLight": "Switch to light mode",
     "toDark": "Switch to dark mode",

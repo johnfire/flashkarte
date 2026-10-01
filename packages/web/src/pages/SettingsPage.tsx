@@ -9,6 +9,7 @@ import { ApiKeysSection } from "./settings/ApiKeysSection";
 import { TwoFactorSection } from "./settings/TwoFactorSection";
 import { DataExportSection } from "./settings/DataExportSection";
 import { DangerZoneSection } from "./settings/DangerZoneSection";
+import { BillingSection } from "./settings/BillingSection";
 
 export function SettingsPage() {
   const { t } = useTranslation();
@@ -25,6 +26,7 @@ export function SettingsPage() {
       <div className="grid items-start gap-6 lg:grid-cols-2 2xl:grid-cols-3">
         <div className="space-y-6">
           <AccountSection />
+          <BillingSection />
           <PasswordSection />
           <TwoFactorSection />
         </div>

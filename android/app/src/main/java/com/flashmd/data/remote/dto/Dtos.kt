@@ -32,6 +32,28 @@ data class UserDto(
 )
 
 @Serializable
+data class BillingSubscriptionDto(
+    val provider: String,
+    val plan: String,
+    val status: String,
+    val currentPeriodEnd: String? = null,
+    val cancelAtPeriodEnd: Boolean = false,
+)
+
+@Serializable
+data class BillingStatusDto(
+    val plan: String,
+    val accountType: String,
+    val activeUnitCount: Int,
+    val activeUnitLimit: Int? = null,
+    val overLimit: Boolean = false,
+    val subscription: BillingSubscriptionDto? = null,
+)
+
+@Serializable
+data class GooglePlayPurchaseRequest(val purchaseToken: String)
+
+@Serializable
 data class AuthResponse(
     val user: UserDto,
     val accessToken: String,

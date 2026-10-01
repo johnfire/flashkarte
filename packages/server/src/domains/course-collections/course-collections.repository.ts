@@ -1,4 +1,4 @@
-import { query } from "../../db/client";
+import { getPool, query } from "../../db/client";
 import type { Queryable } from "../../db/queryable";
 import type { SubjectSummaryRow } from "../subjects/subjects.repository";
 
@@ -77,8 +77,9 @@ export async function enrollAllInCatalogCollection(
   userId: string,
   collectionId: string,
   isOfficial: boolean,
+  db: Queryable = getPool(),
 ): Promise<number> {
-  const result = await query(
+  const result = await db.query(
     `INSERT INTO subject_enrollments (user_id, subject_id)
      SELECT $1, s.id
      FROM subjects s
@@ -89,7 +90,27 @@ export async function enrollAllInCatalogCollection(
      RETURNING subject_id`,
     [userId, collectionId, isOfficial],
   );
-  return result.length;
+  return result.rows.length;
+}
+
+export async function hasCollectionEnrollment(
+  userId: string,
+  collectionId: string,
+  isOfficial: boolean,
+  db: Queryable = getPool(),
+): Promise<boolean> {
+  const result = await db.query<{ exists: boolean }>(
+    `SELECT EXISTS (
+       SELECT 1
+       FROM subject_enrollments e
+       JOIN subjects s ON s.id = e.subject_id
+       WHERE e.user_id = $1
+         AND s.course_collection_id = $2
+         AND s.is_official = $3
+     ) AS exists`,
+    [userId, collectionId, isOfficial],
+  );
+  return result.rows[0]?.exists ?? false;
 }
 
 export async function createCollection(
@@ -166,6 +187,7 @@ export const courseCollectionsRepository = {
   findCollectionForUpdate,
   findSubjectSource,
   enrollAllInCatalogCollection,
+  hasCollectionEnrollment,
   listCatalogCollections,
   listCatalogCourses,
   listUngroupedCatalogSubjects,

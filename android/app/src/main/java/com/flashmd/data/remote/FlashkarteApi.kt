@@ -50,6 +50,8 @@ import com.flashmd.data.remote.dto.CourseCollectionDto
 import com.flashmd.data.remote.dto.DueReviewsDto
 import com.flashmd.data.remote.dto.HelpRequest
 import com.flashmd.data.remote.dto.HelpSentDto
+import com.flashmd.data.remote.dto.BillingStatusDto
+import com.flashmd.data.remote.dto.GooglePlayPurchaseRequest
 import com.flashmd.data.remote.dto.LearnSubjectDto
 import com.flashmd.data.remote.dto.LearnerOutlineDto
 import com.flashmd.data.remote.dto.LessonAnswerResponseDto
@@ -195,6 +197,12 @@ interface FlashkarteApi {
     // Account
     @GET("api/auth/me")
     suspend fun getMe(): MeResponse
+
+    @GET("api/billing/status")
+    suspend fun getBillingStatus(): BillingStatusDto
+
+    @POST("api/billing/google-play/purchases")
+    suspend fun submitGooglePlayPurchase(@Body body: GooglePlayPurchaseRequest): Response<Unit>
 
     @PATCH("api/auth/me")
     suspend fun updateMe(@Body body: UpdateProfileRequest): MeResponse

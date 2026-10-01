@@ -23,8 +23,8 @@ export class AuthError extends AppError {
 }
 
 export class ForbiddenError extends AppError {
-  constructor(message = "Forbidden") {
-    super(message, "FORBIDDEN", 403);
+  constructor(message = "Forbidden", context?: unknown) {
+    super(message, "FORBIDDEN", 403, context);
   }
 }
 
@@ -41,6 +41,12 @@ export class EmailVerificationRequiredError extends AppError {
 export class NotFoundError extends AppError {
   constructor(message = "Not found") {
     super(message, "NOT_FOUND", 404);
+  }
+}
+
+export class BillingConfigurationError extends AppError {
+  constructor(message = "Billing is not configured") {
+    super(message, "BILLING_NOT_CONFIGURED", 503);
   }
 }
 

@@ -39,6 +39,21 @@ android {
             "API_BASE_URL",
             "\"https://learnwohl.app/\"",
         )
+        buildConfigField(
+            "String",
+            "PLAY_SUBSCRIPTION_ID",
+            "\"${System.getenv("PLAY_SUBSCRIPTION_ID") ?: "flashkarte_pro"}\"",
+        )
+        buildConfigField(
+            "String",
+            "PLAY_MONTHLY_BASE_PLAN_ID",
+            "\"${System.getenv("PLAY_MONTHLY_BASE_PLAN_ID") ?: "monthly"}\"",
+        )
+        buildConfigField(
+            "String",
+            "PLAY_YEARLY_BASE_PLAN_ID",
+            "\"${System.getenv("PLAY_YEARLY_BASE_PLAN_ID") ?: "yearly"}\"",
+        )
     }
 
     if (uploadKeystore != null && uploadKeystore.exists()) {
@@ -136,6 +151,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.compose)
     implementation(libs.coil.svg)
+    implementation(libs.billing)
 
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)

@@ -8,6 +8,13 @@ import { api } from "../api/client";
 
 vi.mock("../api/client", () => ({
   api: {
+    billing: {
+      status: vi.fn(),
+      units: vi.fn(),
+      setUnitActive: vi.fn(),
+      checkout: vi.fn(),
+      portal: vi.fn(),
+    },
     keys: { list: vi.fn(), create: vi.fn(), revoke: vi.fn() },
     auth: {
       changePassword: vi.fn(),
@@ -44,6 +51,13 @@ const mockApi = api as unknown as {
     create: ReturnType<typeof vi.fn>;
     revoke: ReturnType<typeof vi.fn>;
   };
+  billing: {
+    status: ReturnType<typeof vi.fn>;
+    units: ReturnType<typeof vi.fn>;
+    setUnitActive: ReturnType<typeof vi.fn>;
+    checkout: ReturnType<typeof vi.fn>;
+    portal: ReturnType<typeof vi.fn>;
+  };
   auth: {
     changePassword: ReturnType<typeof vi.fn>;
     updateProfile: ReturnType<typeof vi.fn>;
@@ -67,6 +81,15 @@ describe("SettingsPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockUser = null;
+    mockApi.billing.status.mockResolvedValue({
+      plan: "free",
+      accountType: "free",
+      activeUnitCount: 0,
+      activeUnitLimit: 10,
+      overLimit: false,
+      subscription: null,
+    });
+    mockApi.billing.units.mockResolvedValue([]);
   });
 
   afterEach(() => vi.unstubAllEnvs());
@@ -409,6 +432,7 @@ describe("SettingsPage layout", () => {
         .map((h) => h.textContent?.trim());
     expect(headings(columns[0])).toEqual([
       "Account",
+      "Subscription",
       "Change password",
       expect.stringMatching(/^Two-factor authentication/), // + its on/off badge
     ]);
@@ -444,7 +468,7 @@ describe("SettingsPage layout", () => {
     const cards = container.querySelectorAll(
       '[class*="2xl:grid-cols-3"] > div > section',
     );
-    expect(cards).toHaveLength(9);
+    expect(cards).toHaveLength(10);
     for (const card of cards) {
       expect(card).toHaveClass("rounded-lg", "border", "p-4");
     }

@@ -7,6 +7,7 @@ import * as decksRepo from "../decks/decks.repository";
 import { validateBranching } from "../decks/branching";
 import { MAX_CARDS_PER_DECK } from "../decks/decks.service";
 import { contentLanguageFilterSchema } from "./content-language";
+import { withUnitCreation } from "../billing/billing.service";
 
 export interface LibraryDeck {
   id: string;
@@ -140,12 +141,15 @@ export async function clone(userId: string, id: string) {
     );
   }
   validateBranching(cards);
-  const deck = await decksRepo.createDeckWithCards(
-    userId,
-    source.title,
-    null,
-    cards,
-    source.content_language,
+  const deck = await withUnitCreation(userId, (db) =>
+    decksRepo.createDeckWithCards(
+      userId,
+      source.title,
+      null,
+      cards,
+      source.content_language,
+      db,
+    ),
   );
   if (!deck) throw new Error("Failed to create deck");
 

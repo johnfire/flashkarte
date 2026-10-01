@@ -158,6 +158,23 @@
       "saveError": "No se han podido guardar tus ajustes de voz."
     }
   },
+  "billing": {
+    "title": "Suscripción",
+    "activeUnits": "Mazos y cursos activos: {{units}}",
+    "unlimited": "ilimitado",
+    "overLimit": "Has superado el límite gratuito. El contenido existente sigue disponible, pero desactiva contenido antes de añadir más.",
+    "paidPlan": "Plan de pago activo",
+    "monthly": "Mejorar mensualmente — 5 €",
+    "yearly": "Mejorar anualmente — 50 €",
+    "loadError": "No se pudo cargar el estado de la suscripción.",
+    "checkoutError": "No se pudo iniciar el pago.",
+    "manageUnits": "Gestionar contenido activo",
+    "activate": "Activar",
+    "deactivate": "Desactivar",
+    "unitError": "No se pudo actualizar este contenido.",
+    "manageSubscription": "Gestionar suscripción",
+    "portalError": "No se pudo abrir la gestión de la suscripción."
+  },
   "theme": {
     "toLight": "Cambiar al modo claro",
     "toDark": "Cambiar al modo oscuro",
