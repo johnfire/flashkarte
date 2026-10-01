@@ -12,6 +12,7 @@ services:
       - POSTGRES_USER=flashkarte
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - JWT_SECRET=${JWT_SECRET}
+      - TWO_FACTOR_SECRET_KEY=${TWO_FACTOR_SECRET_KEY}
       - CORS_ORIGIN=https://${NGINX_HOST}
       - LOG_DIR=/logs
       - MAIL_HOST=${MAIL_HOST:-}
