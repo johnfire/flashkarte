@@ -240,6 +240,24 @@ describe("SettingsPage", () => {
     expect(mockApi.auth.changePassword).not.toHaveBeenCalled();
   });
 
+  test("keeps subscription controls visible when content loading fails", async () => {
+    mockUser = { displayName: null, accountType: "free" };
+    mockApi.keys.list.mockResolvedValue([]);
+    mockApi.billing.units.mockRejectedValue(new Error("database unavailable"));
+
+    renderPage();
+
+    expect(
+      await screen.findByRole("heading", { name: "Subscription" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /Upgrade monthly/ }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByText("Couldn't load subscription status."),
+    ).toBeInTheDocument();
+  });
+
   describe("TwoFactorSection", () => {
     test("enable flow: QR shown, code verified, backup codes displayed once", async () => {
       mockUser = { displayName: null, accountType: "free" };

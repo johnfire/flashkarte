@@ -15,16 +15,28 @@ export function BillingSection() {
 
   useEffect(() => {
     if (!user) return;
-    Promise.all([api.billing.status(), api.billing.units()])
-      .then(([nextStatus, nextUnits]) => {
-        setStatus(nextStatus);
-        setUnits(nextUnits);
-      })
-      .catch((err: unknown) => {
-        setError(
-          err instanceof ApiError ? err.message : t("billing.loadError"),
-        );
-      });
+    Promise.allSettled([api.billing.status(), api.billing.units()]).then(
+      ([statusResult, unitsResult]) => {
+        if (statusResult.status === "fulfilled") {
+          setStatus(statusResult.value);
+        } else {
+          setError(
+            statusResult.reason instanceof ApiError
+              ? statusResult.reason.message
+              : t("billing.loadError"),
+          );
+        }
+        if (unitsResult.status === "fulfilled") {
+          setUnits(unitsResult.value);
+        } else {
+          setError(
+            unitsResult.reason instanceof ApiError
+              ? unitsResult.reason.message
+              : t("billing.loadError"),
+          );
+        }
+      },
+    );
   }, [t, user]);
 
   if (!user || !status) {

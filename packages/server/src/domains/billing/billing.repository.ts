@@ -227,8 +227,7 @@ export async function listUnits(userId: string): Promise<BillingUnitRow[]> {
          CASE WHEN s.course_collection_id IS NULL
            THEN 'subject'::text ELSE 'course_collection'::text END,
          COALESCE(s.course_collection_id, s.id),
-         CASE WHEN s.course_collection_id IS NULL
-           THEN s.title ELSE cc.title::text END
+         COALESCE(cc.title::text, s.title)
      )
      SELECT u.unit_type, u.unit_id, max(u.title) AS title,
             COALESCE(state.active, true) AS active
@@ -283,8 +282,7 @@ export async function setUnitActive(
            CASE WHEN s.course_collection_id IS NULL
              THEN 'subject'::text ELSE 'course_collection'::text END,
            COALESCE(s.course_collection_id, s.id),
-           CASE WHEN s.course_collection_id IS NULL
-             THEN s.title ELSE cc.title::text END
+           COALESCE(cc.title::text, s.title)
        )
        SELECT unit_type, unit_id, max(title) AS title, true AS active
        FROM units

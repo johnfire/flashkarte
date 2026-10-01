@@ -66,6 +66,39 @@ test("counts a legacy course once and a course collection once", async () => {
   );
 
   await expect(repository.countActiveUnits(userId)).resolves.toBe(3);
+  await expect(repository.listUnits(userId)).resolves.toEqual([
+    {
+      unit_type: "course_collection",
+      unit_id: collection.rows[0].id,
+      title: "billing collection",
+      active: true,
+    },
+    {
+      unit_type: "course",
+      unit_id: course.rows[0].id,
+      title: "course",
+      active: true,
+    },
+    {
+      unit_type: "deck",
+      unit_id: standaloneDeck.rows[0].id,
+      title: "standalone",
+      active: true,
+    },
+  ]);
+  await expect(
+    repository.setUnitActive(
+      userId,
+      "course_collection",
+      collection.rows[0].id,
+      false,
+    ),
+  ).resolves.toMatchObject({
+    unit_type: "course_collection",
+    unit_id: collection.rows[0].id,
+    title: "billing collection",
+    active: false,
+  });
   expect(standaloneDeck.rows[0].id).toBeTruthy();
 });
 
