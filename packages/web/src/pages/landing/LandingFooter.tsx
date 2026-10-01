@@ -23,14 +23,13 @@ export function LandingFooter() {
         </Link>
       </p>
       <p className="mt-4 text-xs text-slate-500">
-        {t("landing.productOf")}{" "}
         <a
           href="https://christopherrehm.de"
           target="_blank"
           rel="noopener noreferrer"
           className="hover:text-slate-300"
         >
-          Rehm Consulting
+          {t("landing.productOf")} Rehm Consulting
         </a>
       </p>
     </footer>
