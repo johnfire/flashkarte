@@ -2,9 +2,10 @@ import { useState, FormEvent } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../auth/AuthContext";
-import { ApiError } from "../api/client";
+import { api, ApiError } from "../api/client";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { PasswordInput } from "../components/PasswordInput";
+import { SignupPlanPicker, SignupPlan } from "./auth/SignupPlanPicker";
 import { TwoFactorLoginForm } from "./auth/TwoFactorLoginForm";
 
 /**
@@ -29,6 +30,7 @@ export function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [signupPlan, setSignupPlan] = useState<SignupPlan>("free");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   // Non-null while the server is waiting for the second factor.
@@ -49,6 +51,11 @@ export function AuthPage() {
         }
       } else {
         await signup(email, password);
+        if (signupPlan !== "free") {
+          const { url } = await api.billing.checkout(signupPlan);
+          window.location.assign(url);
+          return;
+        }
       }
       navigate(safeNext(params.get("next")));
     } catch (err) {
@@ -108,6 +115,10 @@ export function AuthPage() {
           ariaLabel={t("auth.passwordPlaceholder")}
           placeholder={t("auth.passwordPlaceholder")}
         />
+
+        {mode === "signup" && (
+          <SignupPlanPicker value={signupPlan} onChange={setSignupPlan} />
+        )}
 
         {mode === "login" && (
           <label className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300 cursor-pointer">

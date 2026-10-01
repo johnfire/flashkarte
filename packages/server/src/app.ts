@@ -47,7 +47,10 @@ import { getPool } from "./db/client";
 import { renderHttpMetrics } from "./observability/httpMetrics";
 import { requireSharedEmailTenant } from "./domains/shared-email/shared-email.auth";
 import { sharedEmailRouter } from "./domains/shared-email/shared-email.routes";
-import { billingRouter } from "./domains/billing/billing.routes";
+import {
+  billingRouter,
+  preVerificationBillingRouter,
+} from "./domains/billing/billing.routes";
 import {
   googlePlayRtdn,
   stripeWebhook,
@@ -268,6 +271,10 @@ export function createApp() {
 
   // Everything below requires a valid JWT or API key
   app.use("/api", requireAuth);
+  // A newly registered user may start Stripe checkout before verifying their
+  // email. Keep this route full-scope only; all other billing routes remain
+  // behind the verified-account gate below.
+  app.use("/api/billing", requireFullScope, preVerificationBillingRouter);
   // Auth/profile/recovery routes above remain available so an unverified user
   // can complete verification or delete the account. Product routes do not.
   app.use("/api", requireVerified);
