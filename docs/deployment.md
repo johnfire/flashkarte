@@ -59,6 +59,17 @@ cp .env.example .env && nano .env        # fill in the values below
   `MAIL_FROM` — authenticated SMTP submission settings. These values are passed
   to both the app and the email worker; never commit them or put them in a
   campaign record.
+- `SIGNUP_NOTIFICATION_EMAIL` — signup alerts default to
+  `chris@christopherrehm.de`. Set a different single email address to override,
+  or explicitly set an empty value to disable. The app records the alert in the
+  same database transaction as the new account/session; the email worker sends
+  it as soon as available without waiting for verification, prioritizing alerts
+  over bulk announcements. It contains the signup email,
+  account ID, UTC signup time, and pending verification status, never passwords
+  or tokens. SMTP failures do not block signup: the worker retries up to five
+  times and preserves final failures in `email_deliveries`. An event key prevents
+  duplicate enqueues; SMTP cannot guarantee exactly-once delivery after a crash.
+  Both web and Android use this signup path. Existing accounts are not backfilled.
 - `EMAIL_SERVICE_TENANTS` — optional JSON mapping of tenant slugs to strong
   bearer secrets and sender identities. The service derives the tenant from the
   credential; callers cannot choose an arbitrary tenant in a request. Configure

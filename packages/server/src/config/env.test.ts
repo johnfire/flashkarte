@@ -6,6 +6,7 @@ const KEYS = [
   "TWO_FACTOR_SECRET_KEY",
   "CORS_ORIGIN",
   "POSTGRES_PASSWORD",
+  "SIGNUP_NOTIFICATION_EMAIL",
 ] as const;
 const SAVED = Object.fromEntries(KEYS.map((k) => [k, process.env[k]]));
 
@@ -28,6 +29,36 @@ function load(over: Record<string, string | undefined>) {
 }
 
 const STRONG = "x".repeat(40);
+
+describe("signup notification configuration", () => {
+  test("defaults to the requested owner address", () => {
+    const { getSignupNotificationEmail } = load({
+      SIGNUP_NOTIFICATION_EMAIL: undefined,
+    });
+    expect(getSignupNotificationEmail()).toBe("chris@christopherrehm.de");
+  });
+
+  test("supports a trimmed override and explicit disabling", () => {
+    const { getSignupNotificationEmail } = load({
+      SIGNUP_NOTIFICATION_EMAIL: " owner@example.com ",
+    });
+    expect(getSignupNotificationEmail()).toBe("owner@example.com");
+    process.env.SIGNUP_NOTIFICATION_EMAIL = " ";
+    expect(getSignupNotificationEmail()).toBeNull();
+  });
+
+  test.each([
+    "not-an-email",
+    "a@example.com,b@example.com",
+    "a@example.com\r\nBcc: b@example.com",
+  ])("rejects invalid recipients at startup: %s", (recipient) => {
+    const { validateEnv } = load({
+      SIGNUP_NOTIFICATION_EMAIL: recipient,
+      NODE_ENV: "test",
+    });
+    expect(() => validateEnv()).toThrow(/SIGNUP_NOTIFICATION_EMAIL/);
+  });
+});
 
 describe("getJwtSecret (AUTH-001)", () => {
   test("throws in production when JWT_SECRET is unset", () => {

@@ -45,11 +45,22 @@ export function findByIdWithHash(id: string) {
   );
 }
 
-export function createUser(email: string, passwordHash: string) {
-  return queryOne<UserRow>(
-    `INSERT INTO users (email, password_hash) VALUES ($1, $2) RETURNING ${USER_COLS}`,
-    [email, passwordHash],
-  );
+export async function createUser(
+  email: string,
+  passwordHash: string,
+  client?: PoolClient,
+) {
+  const sql = `INSERT INTO users (email, password_hash) VALUES ($1, $2)
+    RETURNING ${USER_COLS}, created_at`;
+  const params = [email, passwordHash];
+  if (client) {
+    const inserted = await client.query<UserRow & { created_at: Date }>(
+      sql,
+      params,
+    );
+    return inserted.rows[0] ?? null;
+  }
+  return queryOne<UserRow & { created_at: Date }>(sql, params);
 }
 
 /** Editable profile columns. Absent keys are left untouched by the UPDATE. */

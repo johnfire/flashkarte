@@ -31,6 +31,7 @@ import * as repo from "./auth.repository";
 import type { UserRow } from "./auth.repository";
 import type { LoginSecurityContext } from "./login-security-context";
 import type { PoolClient } from "pg";
+import { queueSignupNotification } from "../email/signup-notification.service";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -293,12 +294,14 @@ export async function signup(emailIn: unknown, passwordIn: unknown) {
     throw new ValidationError("An account with this email already exists");
   }
   const hash = await bcrypt.hash(password, BCRYPT_ROUNDS);
-  const user = await repo.createUser(email, hash);
-  if (!user) throw new Error("Failed to create user");
-  const { accessToken, rawRefresh, persistent } = await issueTokens(
-    user.id,
-    user.email,
-    true,
+  const { user, accessToken, rawRefresh, persistent } = await withTransaction(
+    async (client) => {
+      const user = await repo.createUser(email, hash, client);
+      if (!user) throw new Error("Failed to create user");
+      const tokens = await issueTokens(user.id, user.email, true, client);
+      await queueSignupNotification(client, user);
+      return { user, ...tokens };
+    },
   );
   // Best-effort: don't fail signup if the verification email can't be sent.
   try {

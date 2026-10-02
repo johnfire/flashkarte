@@ -1,4 +1,18 @@
 import crypto from "crypto";
+import { z } from "zod";
+
+export function getSignupNotificationEmail(): string | null {
+  const recipient = (
+    process.env.SIGNUP_NOTIFICATION_EMAIL ?? "chris@christopherrehm.de"
+  ).trim();
+  if (!recipient) return null;
+  if (!z.email().safeParse(recipient).success) {
+    throw new Error(
+      "SIGNUP_NOTIFICATION_EMAIL must be a single valid email address",
+    );
+  }
+  return recipient;
+}
 
 function required(name: string): string {
   const v = process.env[name];
@@ -23,6 +37,7 @@ function assertStrongSecret(name: string, value: string): void {
 }
 
 export function validateEnv() {
+  getSignupNotificationEmail();
   const NODE_ENV = process.env.NODE_ENV ?? "development";
   if (NODE_ENV === "production") {
     assertStrongSecret("JWT_SECRET", required("JWT_SECRET"));

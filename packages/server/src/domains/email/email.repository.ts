@@ -31,6 +31,7 @@ interface DeliveryRow {
   text_body: string;
   html_body: string;
   attempt_count: number;
+  correlation_id: string | null;
 }
 
 function toCampaignSummary(row: EmailCampaignRow): EmailCampaignSummary {
@@ -62,6 +63,7 @@ function toDelivery(row: DeliveryRow): ClaimedEmailDelivery {
     textBody: row.text_body,
     htmlBody: row.html_body,
     attemptCount: row.attempt_count,
+    correlationId: row.correlation_id,
   };
 }
 
@@ -164,7 +166,8 @@ export async function claimNextDelivery(
               AND d.attempt_count < 5
             )
           )
-        ORDER BY d.created_at ASC
+        ORDER BY CASE WHEN c.category = 'signup_notification' THEN 0 ELSE 1 END,
+                 d.created_at ASC
         FOR UPDATE SKIP LOCKED
         LIMIT 1
       ), claimed AS (
@@ -178,7 +181,7 @@ export async function claimNextDelivery(
       )
       SELECT claimed.id, claimed.campaign_id, claimed.recipient_email,
              claimed.recipient_name, c.subject, c.text_body, c.html_body,
-             claimed.attempt_count
+             claimed.attempt_count, c.correlation_id
       FROM claimed
       JOIN email_campaigns c ON c.id = claimed.campaign_id
     `,

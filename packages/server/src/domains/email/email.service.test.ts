@@ -63,6 +63,11 @@ describe("renderMessageHtml", () => {
     expect(html).toContain("<p>Next</p>");
     expect(html).not.toContain("<user>");
   });
+  test("escapes a custom footer", () => {
+    expect(renderMessageHtml("Body", "Admin <notice>")).toContain(
+      "Admin &lt;notice&gt;",
+    );
+  });
 });
 
 describe("contactUsers", () => {

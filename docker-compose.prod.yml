@@ -35,6 +35,7 @@ services:
       - MAIL_PASS=${MAIL_PASS:-}
       - MAIL_SECURE=${MAIL_SECURE:-false}
       - MAIL_FROM=${MAIL_FROM:-}
+      - SIGNUP_NOTIFICATION_EMAIL=${SIGNUP_NOTIFICATION_EMAIL-chris@christopherrehm.de}
       - EMAIL_SERVICE_TENANTS=${EMAIL_SERVICE_TENANTS:-}
       - APP_URL=${APP_URL:-https://${NGINX_HOST}}
       - MCP_PUBLIC_URL=${MCP_PUBLIC_URL:-}

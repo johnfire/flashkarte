@@ -53,6 +53,7 @@ export default defineConfig({
       CORS_ORIGIN: `http://localhost:${PORT}`,
       APP_URL: `http://localhost:${PORT}`,
       MAIL_FILE_SINK: MAIL_SINK,
+      SIGNUP_NOTIFICATION_EMAIL: "signup-notifications@example.com",
       // The suite drives dozens of real logins/refreshes from one IP; keep
       // the limiter middleware active but out of the way.
       RATE_LIMIT_AUTH: "1000",

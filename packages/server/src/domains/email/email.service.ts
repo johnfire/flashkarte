@@ -3,7 +3,7 @@ import { withTransaction } from "../../db/client";
 import { NotFoundError, ValidationError } from "../../utils/errors";
 import { logger } from "../../utils/logger";
 import * as repository from "./email.repository";
-import type { EmailCampaignSummary } from "./email.types";
+import type { ClaimedEmailDelivery, EmailCampaignSummary } from "./email.types";
 
 const MAX_RECIPIENTS_PER_CAMPAIGN = 1_000;
 function validateSubject(value: unknown): string {
@@ -60,14 +60,17 @@ function escapeHtml(value: string): string {
   );
 }
 
-export function renderMessageHtml(textBody: string): string {
+export function renderMessageHtml(
+  textBody: string,
+  footer = "You received this service message because you have a flashkarte account.",
+): string {
   const paragraphs = textBody
     .split(/\n{2,}/)
     .map(
       (paragraph) => `<p>${escapeHtml(paragraph).replace(/\n/g, "<br>")}</p>`,
     )
     .join("");
-  return `<div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;color:#111">${paragraphs}<p style="color:#666;font-size:13px">You received this service message because you have a flashkarte account.</p></div>`;
+  return `<div style="font-family:system-ui,sans-serif;max-width:600px;margin:0 auto;color:#111">${paragraphs}<p style="color:#666;font-size:13px">${escapeHtml(footer)}</p></div>`;
 }
 
 export async function contactUsers(
@@ -112,6 +115,15 @@ export async function getCampaignStatus(
 export async function processNextDelivery(workerId: string): Promise<boolean> {
   const delivery = await repository.claimNextDelivery(workerId);
   if (!delivery) return false;
+  await logger.withCorrelationId(delivery.correlationId ?? delivery.id, () =>
+    sendClaimedDelivery(delivery),
+  );
+  return true;
+}
+
+async function sendClaimedDelivery(
+  delivery: ClaimedEmailDelivery,
+): Promise<void> {
   const messageId = `<${delivery.id}@flashkarte.local>`;
   try {
     const { sendMail } = await import("../../email/mailer");
@@ -139,7 +151,6 @@ export async function processNextDelivery(workerId: string): Promise<boolean> {
       message,
     );
   }
-  return true;
 }
 
 export async function runEmailWorker(): Promise<void> {

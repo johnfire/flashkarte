@@ -25,4 +25,5 @@ export interface ClaimedEmailDelivery {
   textBody: string;
   htmlBody: string;
   attemptCount: number;
+  correlationId?: string | null;
 }
