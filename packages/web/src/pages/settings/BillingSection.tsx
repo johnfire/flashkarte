@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../../api/client";
 import type { BillingStatus, BillingUnit } from "../../api/types";
 import { useAuth } from "../../auth/AuthContext";
+import { PromoStatus } from "./PromoStatus";
 
 export function BillingSection() {
   const { t } = useTranslation();
@@ -111,6 +112,7 @@ export function BillingSection() {
   return (
     <section className="rounded-lg border p-4">
       <h2 className="text-xl font-semibold">{t("billing.title")}</h2>
+      <PromoStatus status={status} />
       <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
         {t("billing.activeUnits", { units: unitSummary })}
       </p>

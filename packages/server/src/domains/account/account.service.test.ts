@@ -23,6 +23,7 @@ const profileRow: repo.ProfileRow = {
 beforeEach(() => {
   jest.clearAllMocks();
   mock.findProfile.mockResolvedValue(profileRow);
+  mock.findPromoActivations.mockResolvedValue([]);
   mock.findDecks.mockResolvedValue([]);
   mock.findCards.mockResolvedValue([]);
   mock.findProgress.mockResolvedValue([]);
@@ -44,6 +45,18 @@ beforeEach(() => {
 });
 
 describe("account.service exportData", () => {
+  it("includes the customer's promo activation and expiry", async () => {
+    const activation = {
+      code: "FREE30",
+      kind: "free_access",
+      signup_plan: "free",
+      activated_at: "2026-10-05T00:00:00Z",
+      access_expires_at: "2026-11-04T00:00:00Z",
+    };
+    mock.findPromoActivations.mockResolvedValue([activation]);
+    expect((await exportData("u1")).promoActivations).toEqual([activation]);
+    expect(mock.findPromoActivations).toHaveBeenCalledWith("u1");
+  });
   it("exports the subject's stored images with their SVG", async () => {
     mock.findAssets.mockResolvedValue([
       {

@@ -22,10 +22,15 @@ function cookieOpts(persistent: boolean) {
 }
 
 export const signup = wrapAsync(async (req: Request, res: Response) => {
-  const { user, accessToken, rawRefresh, persistent } = await service.signup(
-    req.body.email,
-    req.body.password,
-  );
+  const { user, accessToken, rawRefresh, persistent } = await (req.body
+    .promoCode !== undefined || req.body.signupPlan !== undefined
+    ? service.signup(
+        req.body.email,
+        req.body.password,
+        req.body.promoCode,
+        req.body.signupPlan,
+      )
+    : service.signup(req.body.email, req.body.password));
   await record({
     actor: userActor(user.id),
     action: "account.created",

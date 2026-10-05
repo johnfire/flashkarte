@@ -5,6 +5,7 @@ import { parse } from "../../utils/validate";
 import * as repository from "./billing.repository";
 import * as googlePlay from "./google-play.provider";
 import * as stripe from "./stripe.provider";
+import { createSignupDiscountCheckout } from "../promos/promo-checkout.service";
 
 export const FREE_ACTIVE_UNIT_LIMIT = 10;
 const unitTypeSchema = z.enum([
@@ -25,13 +26,14 @@ function hasUnlimitedAccess(
 
 export async function getStatus(userId: string) {
   const status = await repository.getBillingStatus(userId);
-  const unlimited = hasUnlimitedAccess(
-    status.account_type,
-    status.active_subscription,
-  );
+  const unlimited =
+    hasUnlimitedAccess(status.account_type, status.active_subscription) ||
+    Boolean(status.promo_access_ends_at);
   return {
     plan: unlimited ? "paid" : "free",
     accountType: status.account_type,
+    promoAccessEndsAt: status.promo_access_ends_at ?? null,
+    signupDiscount: status.signup_discount ?? null,
     activeUnitCount: status.active_unit_count,
     activeUnitLimit: unlimited ? null : FREE_ACTIVE_UNIT_LIMIT,
     overLimit: !unlimited && status.active_unit_count > FREE_ACTIVE_UNIT_LIMIT,
@@ -109,11 +111,9 @@ export async function createStripeCheckout(
         : null;
   if (!plan)
     throw new ValidationError("Billing plan must be monthly or yearly");
-  return stripe.createCheckoutSession(
-    userId,
-    await repository.getUserEmail(userId),
-    plan,
-  );
+  const email = await repository.getUserEmail(userId);
+  const promoCheckout = await createSignupDiscountCheckout(userId, email, plan);
+  return promoCheckout ?? stripe.createCheckoutSession(userId, email, plan);
 }
 
 export function createStripePortal(userId: string): Promise<string> {

@@ -8,6 +8,7 @@ import { PasswordInput } from "../components/PasswordInput";
 import { useAsync } from "../hooks/use-async";
 import { CategoriesSection } from "./admin/CategoriesSection";
 import { CourseCollectionAssignmentsSection } from "./admin/CourseCollectionAssignmentsSection";
+import { PromosSection } from "./admin/PromosSection";
 
 const ACCOUNT_TYPES: AccountType[] = ["free", "paid", "admin-gifted", "admin"];
 
@@ -334,6 +335,7 @@ export function AdminPage() {
         </div>
 
         <CategoriesSection />
+        <PromosSection />
 
         <div className="space-y-6">
           <CourseCollectionAssignmentsSection />

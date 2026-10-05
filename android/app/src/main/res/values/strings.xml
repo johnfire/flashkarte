@@ -239,4 +239,17 @@
     <string name="course_language_english">English</string>
     <string name="course_language_arabic">العربية</string>
     <string name="course_language_empty">No courses are available in this language.</string>
+    <string name="promo_code">Promo code</string>
+    <string name="promo_apply">Apply code</string>
+    <string name="promo_remove">Remove code</string>
+    <string name="promo_applied">Code applied: %1$s</string>
+    <string name="promo_free_summary">%1$d days of free access</string>
+    <string name="promo_free_note">No payment details needed. Your account returns to Free when the promo ends.</string>
+    <string name="promo_discount_summary">%1$d%% off · %2$s</string>
+    <string name="promo_once">First payment only</string>
+    <string name="promo_forever">Every renewal</string>
+    <string name="promo_monthly">Monthly</string>
+    <string name="promo_yearly">Yearly</string>
+    <string name="promo_website_note">This discount is saved for subscription purchases on the website. Google Play purchases use Google Play prices.</string>
+    <string name="promo_ends_at">Your free promo access ends on %1$s. You will then return to Free.</string>
 </resources>

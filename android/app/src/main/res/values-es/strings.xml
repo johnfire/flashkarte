@@ -239,4 +239,17 @@
     <string name="course_language_english">Inglés</string>
     <string name="course_language_arabic">Árabe</string>
     <string name="course_language_empty">No hay cursos disponibles en este idioma.</string>
+    <string name="promo_code">Código promocional</string>
+    <string name="promo_apply">Aplicar código</string>
+    <string name="promo_remove">Quitar código</string>
+    <string name="promo_applied">Código aplicado: %1$s</string>
+    <string name="promo_free_summary">%1$d días de acceso gratuito</string>
+    <string name="promo_free_note">No se necesitan datos de pago. Al finalizar la promoción, tu cuenta vuelve al plan gratuito.</string>
+    <string name="promo_discount_summary">%1$d%% de descuento · %2$s</string>
+    <string name="promo_once">Solo el primer pago</string>
+    <string name="promo_forever">Cada renovación</string>
+    <string name="promo_monthly">Mensual</string>
+    <string name="promo_yearly">Anual</string>
+    <string name="promo_website_note">Este descuento está guardado para suscripciones en el sitio web. Las compras en Google Play usan los precios de Google Play.</string>
+    <string name="promo_ends_at">Tu acceso promocional gratuito termina el %1$s. Después volverás al plan gratuito.</string>
 </resources>

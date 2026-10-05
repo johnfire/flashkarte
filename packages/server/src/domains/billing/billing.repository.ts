@@ -1,6 +1,8 @@
 import { getPool, query, queryOne, withTransaction } from "../../db/client";
 import type { Queryable } from "../../db/queryable";
 import { ConflictError, ForbiddenError } from "../../utils/errors";
+import { findPromoAccessEnd } from "../promos/promo-access.repository";
+import { findSignupDiscountBenefit } from "../promos/promo.repository";
 
 export type BillingProvider = "stripe" | "google_play";
 export type BillingPlan = "monthly" | "yearly";
@@ -27,6 +29,8 @@ export interface SubscriptionRow {
 }
 
 export interface BillingStatusRow {
+  signup_discount?: Awaited<ReturnType<typeof findSignupDiscountBenefit>>;
+  promo_access_ends_at?: string | null;
   account_type: string;
   active_subscription: SubscriptionRow | null;
   active_unit_count: number;
@@ -138,6 +142,8 @@ export async function getBillingStatus(
     account_type: user.account_type,
     active_subscription: subscription,
     active_unit_count: await countActiveUnits(userId),
+    promo_access_ends_at: await findPromoAccessEnd(getPool(), userId),
+    signup_discount: await findSignupDiscountBenefit(userId),
   };
 }
 
@@ -168,6 +174,7 @@ export async function assertCanCreateUnitInTransaction(
   const accountType = user.rows[0]?.account_type;
   if (!accountType) throw new Error("User not found while checking billing");
   if (["paid", "admin-gifted", "admin"].includes(accountType)) return;
+  if (await findPromoAccessEnd(db, userId)) return;
 
   const subscription = await db.query<{ id: string }>(
     `SELECT id FROM billing_subscriptions

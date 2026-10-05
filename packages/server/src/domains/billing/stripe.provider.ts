@@ -6,6 +6,7 @@ import type {
   SubscriptionInput,
 } from "./billing.repository";
 import * as repository from "./billing.repository";
+import type { PromoInput } from "../promos/promo.validation";
 
 interface StripeSubscription {
   id: string;
@@ -72,11 +73,61 @@ async function stripeRequest<T>(path: string, init?: RequestInit): Promise<T> {
   return body;
 }
 
+export async function createPromoCoupon(
+  promoId: string,
+  promo: Extract<PromoInput, { kind: "discount" }>,
+): Promise<string> {
+  const coupon = await stripeRequest<{ id: string }>("coupons", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Idempotency-Key": `promo-${promoId}`,
+    },
+    body: new URLSearchParams({
+      id: `fk-${promoId}`,
+      name: promo.code,
+      percent_off: String(promo.percentOff),
+      duration: promo.discountDuration,
+    }),
+  });
+  return coupon.id;
+}
+
 export async function createCheckoutSession(
   userId: string,
   email: string,
   plan: BillingPlan,
 ): Promise<string> {
+  return (await requestCheckoutSession(userId, email, plan)).url;
+}
+
+interface CheckoutSession {
+  id: string;
+  url: string;
+  status?: string;
+}
+
+export function createDiscountCheckoutSession(
+  userId: string,
+  email: string,
+  plan: BillingPlan,
+  couponId: string,
+  idempotencyKey: string,
+) {
+  return requestCheckoutSession(userId, email, plan, couponId, idempotencyKey);
+}
+
+export function retrieveCheckoutSession(checkoutId: string) {
+  return stripeRequest<{ id: string; url: string | null; status: string }>(
+    `checkout/sessions/${encodeURIComponent(checkoutId)}`,
+  );
+}
+
+function checkoutParameters(
+  userId: string,
+  email: string,
+  plan: BillingPlan,
+): URLSearchParams {
   const successUrl = process.env.STRIPE_SUCCESS_URL;
   const cancelUrl = process.env.STRIPE_CANCEL_URL;
   if (!successUrl || !cancelUrl) {
@@ -84,7 +135,7 @@ export async function createCheckoutSession(
       "STRIPE_SUCCESS_URL and STRIPE_CANCEL_URL are required",
     );
   }
-  const params = new URLSearchParams({
+  return new URLSearchParams({
     mode: "subscription",
     customer_email: email,
     "line_items[0][price]": priceId(plan),
@@ -96,13 +147,29 @@ export async function createCheckoutSession(
     "subscription_data[metadata][userId]": userId,
     "subscription_data[metadata][plan]": plan,
   });
-  const session = await stripeRequest<{ url?: string }>("checkout/sessions", {
+}
+
+async function requestCheckoutSession(
+  userId: string,
+  email: string,
+  plan: BillingPlan,
+  couponId?: string,
+  idempotencyKey?: string,
+): Promise<CheckoutSession> {
+  const params = checkoutParameters(userId, email, plan);
+  if (couponId) params.set("discounts[0][coupon]", couponId);
+  const session = await stripeRequest<CheckoutSession>("checkout/sessions", {
     method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      ...(idempotencyKey ? { "Idempotency-Key": idempotencyKey } : {}),
+    },
     body: params,
   });
   if (!session.url) throw new Error("Stripe did not return a checkout URL");
-  return session.url;
+  if (couponId && !session.id)
+    throw new Error("Stripe did not return a checkout ID");
+  return session;
 }
 
 export async function createCustomerPortalSession(

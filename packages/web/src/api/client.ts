@@ -32,6 +32,12 @@ import {
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 import type {
+  CreatePromo,
+  PromoPreview,
+  SignupPromo,
+  SignupPromoChoice,
+} from "./promo-types";
+import type {
   DueReviews,
   HelpRequestSent,
   LearnerOutline,
@@ -313,10 +319,15 @@ export const api = {
       ),
   },
   auth: {
-    signup: (email: string, password: string) =>
+    previewPromo: (code: string) =>
+      request<PromoPreview>("/auth/promos/preview", {
+        method: "POST",
+        body: JSON.stringify({ code }),
+      }),
+    signup: (email: string, password: string, promo?: SignupPromoChoice) =>
       request<{ user: User; accessToken: string; expiresIn: number }>(
         "/auth/signup",
-        { method: "POST", body: JSON.stringify({ email, password }) },
+        { method: "POST", body: JSON.stringify({ email, password, ...promo }) },
       ),
     login: (email: string, password: string, rememberMe: boolean) =>
       request<
@@ -691,6 +702,17 @@ export const api = {
       ),
   },
   admin: {
+    listPromos: () => request<{ promos: SignupPromo[] }>("/admin/promos"),
+    createPromo: (promo: CreatePromo) =>
+      request<{ promo: SignupPromo }>("/admin/promos", {
+        method: "POST",
+        body: JSON.stringify(promo),
+      }),
+    setPromoActive: (id: string, active: boolean) =>
+      request<{ promo: SignupPromo }>(`/admin/promos/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ active }),
+      }),
     listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),
     contactUsers: (subject: string, textBody: string, recipientIds: string[]) =>
       request<{ campaign: EmailCampaignSummary }>("/admin/email/contact", {

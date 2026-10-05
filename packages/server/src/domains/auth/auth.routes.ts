@@ -1,8 +1,10 @@
 import { Router } from "express";
 import { requireAuth, requireFullScope } from "../../middleware/auth";
 import * as ctrl from "./auth.controller";
+import { promoPreview } from "../promos/promo.routes";
 
 export const authRouter = Router();
+authRouter.post("/promos/preview", ...promoPreview);
 authRouter.post("/signup", ctrl.signup);
 authRouter.post("/login", ctrl.login);
 authRouter.post("/2fa/verify", ctrl.twoFactorLogin);

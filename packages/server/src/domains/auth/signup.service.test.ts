@@ -3,6 +3,10 @@ jest.mock("./auth.repository");
 jest.mock("../email/signup-notification.service");
 jest.mock("../../email/mailer");
 jest.mock("bcryptjs");
+jest.mock("../promos/promo-signup.service", () => ({
+  ...jest.requireActual("../promos/promo-signup.service"),
+  activateSignupPromo: jest.fn(),
+}));
 
 import bcrypt from "bcryptjs";
 import type { PoolClient } from "pg";
@@ -11,6 +15,7 @@ import { sendVerificationEmail } from "../../email/mailer";
 import { queueSignupNotification } from "../email/signup-notification.service";
 import * as repository from "./auth.repository";
 import { signup } from "./auth.service";
+import { activateSignupPromo } from "../promos/promo-signup.service";
 
 const CLIENT = {} as PoolClient;
 const USER = {
@@ -96,5 +101,28 @@ test("queue storage failure rejects before sending verification", async () => {
   await expect(signup(USER.email, "StrongPassword-1")).rejects.toThrow(
     "queue unavailable",
   );
+  expect(sendVerificationEmail).not.toHaveBeenCalled();
+});
+
+test("activates a normalized promo in the account transaction", async () => {
+  await signup(USER.email, "StrongPassword-1", " free30 ", "free");
+  expect(activateSignupPromo).toHaveBeenCalledWith(
+    CLIENT,
+    USER.id,
+    "FREE30",
+    "free",
+  );
+  expect(queueSignupNotification).toHaveBeenCalledTimes(1);
+});
+
+test("invalid promo prevents issuing a session or notification", async () => {
+  jest
+    .mocked(activateSignupPromo)
+    .mockRejectedValue(new Error("Promo code is fully used"));
+  await expect(
+    signup(USER.email, "StrongPassword-1", "FREE30", "free"),
+  ).rejects.toThrow("fully used");
+  expect(repository.storeRefreshToken).not.toHaveBeenCalled();
+  expect(queueSignupNotification).not.toHaveBeenCalled();
   expect(sendVerificationEmail).not.toHaveBeenCalled();
 });

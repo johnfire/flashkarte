@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.flashmd.data.remote.ApiException
 import com.flashmd.data.remote.ErrorReporter
 import com.flashmd.data.repository.AuthRepository
+import com.flashmd.data.remote.dto.PromoPreviewDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +22,10 @@ data class AuthUiState(
     // Non-null while the server waits for the second factor of a 2FA login.
     val twoFactorChallenge: String? = null,
     val twoFactorCode: String = "",
+    val promoCode: String = "",
+    val promo: PromoPreviewDto? = null,
+    val isApplyingPromo: Boolean = false,
+    val signupPlan: String = "free",
 )
 
 @HiltViewModel
@@ -31,6 +36,36 @@ class AuthViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(AuthUiState())
     val uiState: StateFlow<AuthUiState> = _uiState
+    private var promoRequestVersion = 0
+
+    fun onPromoCodeChange(value: String) {
+        promoRequestVersion += 1
+        _uiState.value = _uiState.value.copy(promoCode = value, promo = null, isApplyingPromo = false, error = null)
+    }
+
+    fun onSignupPlanChange(value: String) {
+        if (value in listOf("monthly", "yearly")) _uiState.value = _uiState.value.copy(signupPlan = value)
+    }
+
+    fun applyPromo() {
+        val state = _uiState.value
+        if (state.isApplyingPromo || state.isSubmitting || state.promoCode.isBlank()) return
+        val version = ++promoRequestVersion
+        _uiState.value = state.copy(isApplyingPromo = true, error = null)
+        viewModelScope.launch {
+            try {
+                val promo = authRepo.previewPromo(state.promoCode)
+                if (version != promoRequestVersion) return@launch
+                val plan = if (promo.kind == "free_access") "free"
+                    else if (promo.eligiblePlan != "any") promo.eligiblePlan else "monthly"
+                _uiState.value = _uiState.value.copy(promoCode = promo.code, promo = promo, signupPlan = plan, isApplyingPromo = false)
+            } catch (exception: Exception) {
+                if (version != promoRequestVersion) return@launch
+                if (exception !is ApiException) errorReporter.report(exception.message ?: "promo preview failed", "Auth.applyPromo", exception)
+                _uiState.value = _uiState.value.copy(isApplyingPromo = false, error = if (exception is ApiException) exception.message else "Could not apply this promo code.")
+            }
+        }
+    }
 
     fun onEmailChange(value: String) {
         _uiState.value = _uiState.value.copy(email = value, error = null, info = null)
@@ -41,6 +76,7 @@ class AuthViewModel @Inject constructor(
     }
 
     fun toggleMode() {
+        onPromoCodeChange("")
         _uiState.value = _uiState.value.copy(
             isSignup = !_uiState.value.isSignup,
             error = null,
@@ -54,7 +90,7 @@ class AuthViewModel @Inject constructor(
      */
     fun forgotPassword() {
         val state = _uiState.value
-        if (state.isSubmitting) return
+        if (state.isSubmitting || state.isApplyingPromo) return
         val email = state.email.trim()
         if (email.isEmpty() || !email.contains("@")) {
             _uiState.value = state.copy(
@@ -82,7 +118,7 @@ class AuthViewModel @Inject constructor(
 
     fun submit() {
         val state = _uiState.value
-        if (state.isSubmitting) return
+        if (state.isSubmitting || state.isApplyingPromo) return
 
         val email = state.email.trim()
         if (email.isEmpty() || !email.contains("@")) {
@@ -98,7 +134,11 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 if (state.isSignup) {
-                    authRepo.signup(email, state.password)
+                    if (state.promo != null) authRepo.signup(email, state.password, state.promo.code, state.signupPlan)
+                    else if (state.promoCode.isNotBlank()) {
+                        _uiState.value = _uiState.value.copy(isSubmitting = false, error = "Apply or remove the promo code before signing up.")
+                        return@launch
+                    } else authRepo.signup(email, state.password)
                 } else {
                     val outcome = authRepo.login(email, state.password)
                     if (outcome is AuthRepository.LoginOutcome.NeedsTwoFactor) {

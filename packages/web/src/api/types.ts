@@ -8,6 +8,13 @@ import type {
 export type AccountType = "free" | "paid" | "admin-gifted" | "admin";
 
 export interface BillingStatus {
+  signupDiscount?: {
+    code: string;
+    percentOff: number;
+    discountDuration: "once" | "forever";
+    plan: "monthly" | "yearly";
+  } | null;
+  promoAccessEndsAt?: string | null;
   plan: "free" | "paid";
   accountType: AccountType;
   activeUnitCount: number;

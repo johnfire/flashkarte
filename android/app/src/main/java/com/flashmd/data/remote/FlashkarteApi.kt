@@ -76,6 +76,9 @@ interface FlashkarteApi {
     @POST("api/auth/signup")
     suspend fun signup(@Body body: CredentialsRequest): AuthResponse
 
+    @POST("api/auth/promos/preview")
+    suspend fun previewPromo(@Body body: com.flashmd.data.remote.dto.PromoCodeRequest): com.flashmd.data.remote.dto.PromoPreviewDto
+
     @POST("api/auth/login")
     suspend fun login(@Body body: CredentialsRequest): LoginResponse
 

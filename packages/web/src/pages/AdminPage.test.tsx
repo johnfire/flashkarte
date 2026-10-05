@@ -10,6 +10,7 @@ import { AdminPage } from "./AdminPage";
 vi.mock("../api/client", () => ({
   api: {
     admin: {
+      listPromos: vi.fn().mockResolvedValue({ promos: [] }),
       listUsers: vi.fn(),
       contactUsers: vi.fn(),
       createUser: vi.fn(),

@@ -2,6 +2,8 @@ package com.flashmd.ui.auth
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,6 +33,8 @@ fun AuthScreen(
         Column(
             Modifier
                 .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .imePadding()
                 .padding(horizontal = 28.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically),
@@ -67,6 +71,8 @@ fun AuthScreen(
                 modifier = Modifier.fillMaxWidth(),
             )
 
+            if (state.isSignup) SignupPromoFields(state, viewModel)
+
             if (state.error != null) {
                 Text(
                     state.error!!,
@@ -89,7 +95,8 @@ fun AuthScreen(
 
             Button(
                 onClick = viewModel::submit,
-                enabled = !state.isSubmitting,
+                enabled = !state.isSubmitting && !state.isApplyingPromo &&
+                    (!state.isSignup || state.promoCode.isBlank() || state.promo != null),
                 modifier = Modifier.fillMaxWidth(),
             ) {
                 if (state.isSubmitting) {

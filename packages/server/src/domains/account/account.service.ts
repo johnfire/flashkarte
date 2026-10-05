@@ -2,6 +2,7 @@ import { NotFoundError } from "../../utils/errors";
 import * as repo from "./account.repository";
 
 export interface AccountExport {
+  promoActivations: Awaited<ReturnType<typeof repo.findPromoActivations>>;
   exportedAt: string;
   profile: {
     email: string;
@@ -243,6 +244,7 @@ export async function exportData(userId: string): Promise<AccountExport> {
 
   return {
     exportedAt: new Date().toISOString(),
+    promoActivations: await repo.findPromoActivations(userId),
     profile: {
       email: profile.email,
       displayName: profile.display_name,

@@ -32,6 +32,11 @@ import type { UserRow } from "./auth.repository";
 import type { LoginSecurityContext } from "./login-security-context";
 import type { PoolClient } from "pg";
 import { queueSignupNotification } from "../email/signup-notification.service";
+import {
+  activateSignupPromo,
+  parseSignupPromoCode,
+} from "../promos/promo-signup.service";
+import { validateSignupPlan } from "../promos/promo.validation";
 
 const BCRYPT_ROUNDS = 12;
 
@@ -287,8 +292,15 @@ function validateCredentials(
   return [validatedCredentials.email, validatedCredentials.password];
 }
 
-export async function signup(emailIn: unknown, passwordIn: unknown) {
+export async function signup(
+  emailIn: unknown,
+  passwordIn: unknown,
+  promoCodeIn?: unknown,
+  signupPlanIn?: unknown,
+) {
   const [email, password] = validateCredentials(emailIn, passwordIn);
+  const promoCode = parseSignupPromoCode(promoCodeIn);
+  const signupPlan = validateSignupPlan(signupPlanIn);
   const existing = await repo.findByEmailWithHash(email);
   if (existing) {
     throw new ValidationError("An account with this email already exists");
@@ -298,6 +310,8 @@ export async function signup(emailIn: unknown, passwordIn: unknown) {
     async (client) => {
       const user = await repo.createUser(email, hash, client);
       if (!user) throw new Error("Failed to create user");
+      if (promoCode)
+        await activateSignupPromo(client, user.id, promoCode, signupPlan);
       const tokens = await issueTokens(user.id, user.email, true, client);
       await queueSignupNotification(client, user);
       return { user, ...tokens };

@@ -14,6 +14,20 @@ export interface ProfileRow {
   created_at: string;
 }
 
+export function findPromoActivations(userId: string) {
+  return query<{
+    code: string;
+    kind: string;
+    signup_plan: string;
+    activated_at: string;
+    access_expires_at: string | null;
+  }>(
+    `SELECT p.code, p.kind, a.signup_plan, a.activated_at, a.access_expires_at
+     FROM signup_promo_activations a JOIN signup_promos p ON p.id = a.promo_id WHERE a.user_id = $1`,
+    [userId],
+  );
+}
+
 export interface DeckRow {
   id: string;
   title: string;

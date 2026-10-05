@@ -239,4 +239,17 @@
     <string name="course_language_english">Englisch</string>
     <string name="course_language_arabic">Arabisch</string>
     <string name="course_language_empty">Für diese Sprache sind keine Kurse verfügbar.</string>
+    <string name="promo_code">Aktionscode</string>
+    <string name="promo_apply">Code anwenden</string>
+    <string name="promo_remove">Code entfernen</string>
+    <string name="promo_applied">Code angewendet: %1$s</string>
+    <string name="promo_free_summary">%1$d Tage kostenloser Zugang</string>
+    <string name="promo_free_note">Keine Zahlungsdaten erforderlich. Nach der Aktion gilt wieder der kostenlose Tarif.</string>
+    <string name="promo_discount_summary">%1$d%% Rabatt · %2$s</string>
+    <string name="promo_once">Nur die erste Zahlung</string>
+    <string name="promo_forever">Bei jeder Verlängerung</string>
+    <string name="promo_monthly">Monatlich</string>
+    <string name="promo_yearly">Jährlich</string>
+    <string name="promo_website_note">Dieser Rabatt ist für Abo-Abschlüsse auf der Website gespeichert. Für Käufe bei Google Play gelten die Preise von Google Play.</string>
+    <string name="promo_ends_at">Dein kostenloser Aktionszugang endet am %1$s. Danach gilt wieder der kostenlose Tarif.</string>
 </resources>

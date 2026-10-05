@@ -7,6 +7,7 @@ import {
 } from "react";
 import { api, setAccessToken } from "../api/client";
 import { User } from "../api/types";
+import type { SignupPromoChoice } from "../api/promo-types";
 import i18n from "../i18n";
 import { resolveLocale } from "../i18n/resolveLocale";
 
@@ -25,7 +26,11 @@ interface AuthValue {
     code: string,
     rememberMe: boolean,
   ) => Promise<void>;
-  signup: (email: string, password: string) => Promise<void>;
+  signup: (
+    email: string,
+    password: string,
+    promo?: SignupPromoChoice,
+  ) => Promise<void>;
   logout: () => Promise<void>;
   updateUser: (user: User) => void;
 }
@@ -98,8 +103,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setAuthed(true);
   };
 
-  const signup = async (email: string, password: string) => {
-    const r = await api.auth.signup(email, password);
+  const signup = async (
+    email: string,
+    password: string,
+    promo?: SignupPromoChoice,
+  ) => {
+    const r = await (promo
+      ? api.auth.signup(email, password, promo)
+      : api.auth.signup(email, password));
     setAccessToken(r.accessToken);
     setUser(r.user);
     applyUserLanguage(r.user);

@@ -8,6 +8,22 @@ const repositoryMock = repository as jest.Mocked<typeof repository>;
 beforeEach(() => jest.clearAllMocks());
 
 describe("billing status", () => {
+  test("reports current promo access without creating a subscription", async () => {
+    repositoryMock.getBillingStatus.mockResolvedValue({
+      account_type: "free",
+      active_subscription: null,
+      active_unit_count: 15,
+      promo_access_ends_at: "2027-01-01T00:00:00Z",
+    });
+    await expect(getStatus("u1")).resolves.toMatchObject({
+      plan: "paid",
+      accountType: "free",
+      activeUnitLimit: null,
+      overLimit: false,
+      subscription: null,
+      promoAccessEndsAt: "2027-01-01T00:00:00Z",
+    });
+  });
   test("reports the free plan and ten-unit limit", async () => {
     repositoryMock.getBillingStatus.mockResolvedValue({
       account_type: "free",

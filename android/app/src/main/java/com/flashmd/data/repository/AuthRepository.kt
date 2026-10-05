@@ -15,6 +15,8 @@ import com.flashmd.data.remote.dto.TwoFactorLoginRequest
 import com.flashmd.data.remote.dto.TwoFactorSetupResponse
 import com.flashmd.data.remote.dto.UpdateProfileRequest
 import com.flashmd.data.remote.dto.UserDto
+import com.flashmd.data.remote.dto.PromoCodeRequest
+import com.flashmd.data.remote.dto.PromoPreviewDto
 import com.flashmd.db.FlashkarteDb
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -77,9 +79,11 @@ class AuthRepository @Inject constructor(
         apiCall { api.twoFactorDisable(TwoFactorCodeRequest(code.trim())) }
     }
 
-    suspend fun signup(email: String, password: String) {
+    suspend fun previewPromo(code: String): PromoPreviewDto = apiCall { api.previewPromo(PromoCodeRequest(code.trim())) }
+
+    suspend fun signup(email: String, password: String, promoCode: String? = null, signupPlan: String? = null) {
         val res = apiCall {
-            api.signup(CredentialsRequest(email.trim(), password, rememberMe = true))
+            api.signup(CredentialsRequest(email.trim(), password, rememberMe = true, promoCode = promoCode, signupPlan = signupPlan))
         }
         sessionStore.saveSession(res.accessToken, res.user)
         speechStore.mirror(res.user)

@@ -241,6 +241,7 @@ private fun BillingSection(
     Text("Subscription", style = MaterialTheme.typography.titleMedium)
     val status = state.status
     if (status != null) {
+        PromoBillingStatus(status)
         val limit = status.activeUnitLimit?.toString() ?: "unlimited"
         Text("Active decks and courses: ${status.activeUnitCount} / $limit")
         if (status.overLimit) {

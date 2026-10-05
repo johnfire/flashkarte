@@ -11,6 +11,8 @@ data class CredentialsRequest(
     val email: String,
     val password: String,
     val rememberMe: Boolean,
+    val promoCode: String? = null,
+    val signupPlan: String? = null,
 )
 
 @Serializable
@@ -48,6 +50,8 @@ data class BillingStatusDto(
     val activeUnitLimit: Int? = null,
     val overLimit: Boolean = false,
     val subscription: BillingSubscriptionDto? = null,
+    val promoAccessEndsAt: String? = null,
+    val signupDiscount: SignupDiscountDto? = null,
 )
 
 @Serializable

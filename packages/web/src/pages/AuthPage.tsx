@@ -5,8 +5,10 @@ import { useAuth } from "../auth/AuthContext";
 import { api, ApiError } from "../api/client";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
 import { PasswordInput } from "../components/PasswordInput";
-import { SignupPlanPicker, SignupPlan } from "./auth/SignupPlanPicker";
 import { TwoFactorLoginForm } from "./auth/TwoFactorLoginForm";
+import { SignupOptions } from "./auth/SignupOptions";
+import { useSignupPromo } from "./auth/use-signup-promo";
+import { AuthFooter } from "./auth/AuthFooter";
 
 /**
  * Resolve a post-auth redirect target from an untrusted `?next=` param. Only
@@ -30,16 +32,35 @@ export function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const [signupPlan, setSignupPlan] = useState<SignupPlan>("free");
+  const promoSelection = useSignupPromo();
+  const { plan: signupPlan, promo, code, applying } = promoSelection;
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [hasCreatedAccount, setHasCreatedAccount] = useState(false);
   // Non-null while the server is waiting for the second factor.
   const [twoFactorChallenge, setTwoFactorChallenge] = useState<string | null>(
     null,
   );
 
+  async function completeSignup() {
+    if (!hasCreatedAccount) {
+      if (promo)
+        await signup(email, password, { promoCode: promo.code, signupPlan });
+      else await signup(email, password);
+      setHasCreatedAccount(true);
+    }
+    if (signupPlan === "free") return false;
+    const { url } = await api.billing.checkout(signupPlan);
+    window.location.assign(url);
+    return true;
+  }
+
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
+    if (mode === "signup" && code.trim() && !promo) {
+      setError(t("promos.applyFirst"));
+      return;
+    }
     setError(null);
     setBusy(true);
     try {
@@ -49,14 +70,7 @@ export function AuthPage() {
           setTwoFactorChallenge(result.challenge);
           return;
         }
-      } else {
-        await signup(email, password);
-        if (signupPlan !== "free") {
-          const { url } = await api.billing.checkout(signupPlan);
-          window.location.assign(url);
-          return;
-        }
-      }
+      } else if (await completeSignup()) return;
       navigate(safeNext(params.get("next")));
     } catch (err) {
       setError(err instanceof ApiError ? err.message : t("auth.genericError"));
@@ -92,32 +106,39 @@ export function AuthPage() {
             : t("auth.createAccount")}
         </p>
 
-        <label htmlFor="email" className="sr-only">
-          {t("auth.email")}
-        </label>
-        <input
-          id="email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder={t("auth.email")}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-lg border px-3 py-2"
-        />
-        <PasswordInput
-          id="password"
-          value={password}
-          onChange={setPassword}
-          autoComplete={mode === "login" ? "current-password" : "new-password"}
-          required
-          minLength={8}
-          ariaLabel={t("auth.passwordPlaceholder")}
-          placeholder={t("auth.passwordPlaceholder")}
-        />
+        <fieldset disabled={busy || hasCreatedAccount} className="space-y-4">
+          <label htmlFor="email" className="sr-only">
+            {t("auth.email")}
+          </label>
+          <input
+            id="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder={t("auth.email")}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full rounded-lg border px-3 py-2"
+          />
+          <PasswordInput
+            id="password"
+            value={password}
+            onChange={setPassword}
+            autoComplete={
+              mode === "login" ? "current-password" : "new-password"
+            }
+            required
+            minLength={8}
+            ariaLabel={t("auth.passwordPlaceholder")}
+            placeholder={t("auth.passwordPlaceholder")}
+          />
+        </fieldset>
 
         {mode === "signup" && (
-          <SignupPlanPicker value={signupPlan} onChange={setSignupPlan} />
+          <SignupOptions
+            selection={promoSelection}
+            disabled={busy || hasCreatedAccount}
+          />
         )}
 
         {mode === "login" && (
@@ -133,20 +154,36 @@ export function AuthPage() {
         )}
 
         {error && <p className="text-sm text-red-600">{error}</p>}
+        {hasCreatedAccount && error && (
+          <p role="status" className="text-sm">
+            {t("promos.retryNote")}
+          </p>
+        )}
 
         <button
           type="submit"
-          disabled={busy}
+          disabled={
+            busy ||
+            (mode === "signup" && (applying || Boolean(code.trim() && !promo)))
+          }
           className="w-full rounded-lg bg-indigo-600 py-2 font-medium text-white disabled:opacity-50"
         >
-          {busy ? "…" : mode === "login" ? t("auth.signIn") : t("auth.signUp")}
+          {busy
+            ? "…"
+            : mode === "login"
+              ? t("auth.signIn")
+              : hasCreatedAccount
+                ? t("promos.retryCheckout")
+                : t("auth.signUp")}
         </button>
 
         <button
           type="button"
+          disabled={busy || hasCreatedAccount}
           onClick={() => {
             setMode(mode === "login" ? "signup" : "login");
             setError(null);
+            promoSelection.changeCode("");
           }}
           className="w-full text-sm text-indigo-600"
         >
@@ -162,26 +199,7 @@ export function AuthPage() {
           </Link>
         )}
 
-        <p className="space-x-4 text-center text-xs text-gray-600 dark:text-gray-400">
-          <Link
-            to="/help"
-            className="hover:text-gray-600 dark:hover:text-gray-300"
-          >
-            {t("common.help")}
-          </Link>
-          <Link
-            to="/privacy"
-            className="hover:text-gray-600 dark:hover:text-gray-300"
-          >
-            {t("common.privacy")}
-          </Link>
-          <Link
-            to="/impressum"
-            className="hover:text-gray-600 dark:hover:text-gray-300"
-          >
-            {t("common.impressum")}
-          </Link>
-        </p>
+        <AuthFooter />
       </form>
     </div>
   );
