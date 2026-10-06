@@ -1,0 +1,214 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i02",
+    "title": "What counts as an AI system",
+    "summary": "Distinguish an AI system from ordinary automation and from a general-purpose model.",
+    "covers": ["ai-system", "gpai-model"],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An **AI system** is machine-based, operates with some autonomy and infers from inputs how to generate outputs for explicit or implicit objectives. Its predictions, content, recommendations or decisions can influence physical or digital environments.",
+        "Ask what the system actually does, how it was built and where its output goes. A product being marketed as 'AI' is evidence to investigate, not a legal definition."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(1), 3(63), 3(66), recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI-system definition guidelines C(2025) 5053 final, paragraphs 8–10, 14–23, 26–31, 46–47, 61–64; non-binding",
+          "url": "https://ec.europa.eu/newsroom/dae/redirection/document/112455"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Inference is central to the definition. Learning approaches can derive patterns from data; logic or knowledge-based approaches can infer from encoded knowledge. Ordinary sorting or arithmetic that simply executes fixed human instructions is not automatically AI.",
+        "In our fictional example, an ordinary list sorted by a specified date is different from a learned system predicting a person's suitability. Assess the actual architecture rather than relying only on the output's label."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(1), 3(63), 3(66), recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI-system definition guidelines C(2025) 5053 final, paragraphs 8–10, 14–23, 26–31, 46–47, 61–64; non-binding",
+          "url": "https://ec.europa.eu/newsroom/dae/redirection/document/112455"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Autonomy does not mean complete independence from people. A person may submit an input while the system generates the output itself. A later human review does not, by itself, remove the system from the definition.",
+        "Adaptiveness after deployment is optional: the Act says a system may adapt. A trained system can remain an AI system even when its deployed parameters stay fixed. The Commission guidelines explain these elements but are non-binding."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(1), 3(63), 3(66), recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI-system definition guidelines C(2025) 5053 final, paragraphs 8–10, 14–23, 26–31, 46–47, 61–64; non-binding",
+          "url": "https://ec.europa.eu/newsroom/dae/redirection/document/112455"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **general-purpose AI model** has significant generality and can competently perform many distinct tasks and be integrated into downstream applications. A model and an AI system are related but different objects.",
+        "Northbridge integrates a model into an assistant with documents, an interface and permissions. Assess the assistant's actual function as a system. Do not copy a model-level conclusion to every application using it. Research/prototyping exclusions and model obligations require their own checks."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(1), 3(63), 3(66), recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI-system definition guidelines C(2025) 5053 final, paragraphs 8–10, 14–23, 26–31, 46–47, 61–64; non-binding",
+          "url": "https://ec.europa.eu/newsroom/dae/redirection/document/112455"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["ai-system"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A sales tool sorts entries by a fixed date rule. What is the sound starting point?",
+      "options": [
+        {
+          "blocks": "Check the definition; automation alone is insufficient",
+          "correct": true,
+          "reason": "Inference and the other definition elements need evidence."
+        },
+        {
+          "blocks": "Classify all automated software as AI",
+          "correct": false,
+          "reason": "Automation alone does not establish the statutory definition."
+        },
+        {
+          "blocks": "Classify it solely from its marketing label",
+          "correct": false,
+          "reason": "Branding cannot replace architecture and functionality evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A spreadsheet follows explicit sorting instructions only. What should an assessor avoid?",
+          "options": [
+            {
+              "blocks": "Classify all automated software as AI",
+              "correct": false,
+              "reason": "Automation alone does not establish the statutory definition."
+            },
+            {
+              "blocks": "Classify it solely from its marketing label",
+              "correct": false,
+              "reason": "Branding cannot replace architecture and functionality evidence."
+            },
+            {
+              "blocks": "Check the definition; automation alone is insufficient",
+              "correct": true,
+              "reason": "Inference and the other definition elements need evidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["ai-system"],
+      "teaches": ["screen-3"],
+      "prompt": "A learned recommendation system never retrains after deployment. Does that fact alone exclude it?",
+      "options": [
+        {
+          "blocks": "Every AI system must keep retraining",
+          "correct": false,
+          "reason": "The statutory definition does not require continuing learning."
+        },
+        {
+          "blocks": "Human review always removes AI status",
+          "correct": false,
+          "reason": "Review does not remove the system's inference capability."
+        },
+        {
+          "blocks": "Post-deployment adaptation is optional",
+          "correct": true,
+          "reason": "The definition uses an optional adaptation element."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a system with fixed deployed parameters still satisfy the AI-system definition?",
+          "options": [
+            {
+              "blocks": "Human review always removes AI status",
+              "correct": false,
+              "reason": "Review does not remove the system's inference capability."
+            },
+            {
+              "blocks": "Post-deployment adaptation is optional",
+              "correct": true,
+              "reason": "The definition uses an optional adaptation element."
+            },
+            {
+              "blocks": "Every AI system must keep retraining",
+              "correct": false,
+              "reason": "The statutory definition does not require continuing learning."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["gpai-model"],
+      "teaches": ["screen-4"],
+      "prompt": "One general-purpose model powers a chat assistant and a separate hiring tool. What follows?",
+      "options": [
+        {
+          "blocks": "The interface makes model rules disappear",
+          "correct": false,
+          "reason": "System and model rules are distinct and may both matter."
+        },
+        {
+          "blocks": "Their system functions and contexts can differ",
+          "correct": true,
+          "reason": "A shared model does not give applications identical purposes or legal treatment."
+        },
+        {
+          "blocks": "Every application has the same classification",
+          "correct": false,
+          "reason": "The application and its intended use still matter."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why must two different applications built on one general-purpose model be examined separately?",
+          "options": [
+            {
+              "blocks": "Their system functions and contexts can differ",
+              "correct": true,
+              "reason": "A shared model does not give applications identical purposes or legal treatment."
+            },
+            {
+              "blocks": "Every application has the same classification",
+              "correct": false,
+              "reason": "The application and its intended use still matter."
+            },
+            {
+              "blocks": "The interface makes model rules disappear",
+              "correct": false,
+              "reason": "System and model rules are distinct and may both matter."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

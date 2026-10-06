@@ -1,6 +1,6 @@
 # EU AI Act: course programme and first-release plan
 
-Date: 6 October 2026. Status: scope approved; Stage 1 source and concept-graph package prepared for review. Lesson authoring has not started.
+Date: 6 October 2026. Status: Chris approved the saved graph/syllabus and requested all 52 lessons in English. They are authored, validated and deployed as Community course #61. See the [deployment record](../courses/eu-ai-act/deployment.md). The plan below preserves the programme design; English lessons remain editable in testing, with specialist legal review unclaimed.
 
 ## Decisions and intended result
 

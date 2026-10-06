@@ -1,0 +1,235 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i03",
+    "title": "Intended purpose and the actual use case",
+    "summary": "Describe a concrete use case, distinguish intended use from misuse, and recognise personal profiling.",
+    "covers": ["intended-purpose", "use-case-description", "profiling"],
+    "prerequisites": [
+      {
+        "lesson": "i02",
+        "reason": "The intended purpose attaches to a defined AI system. The learner needs to identify the system before evaluating whether it performs automated personal evaluation."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Intended purpose** is the provider's specified use, context and conditions. Evidence includes instructions, technical documentation, sales materials and statements. Read these together rather than taking one reassuring sentence as the whole purpose.",
+        "Northbridge's assistant is advertised for internal policy questions. A new function ranking applicants changes the facts to be assessed. The provider's description and the actual configuration both belong in the record."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(12), 3(13), 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR Article 4(4): profiling",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        },
+        {
+          "title": "Law Enforcement Directive Article 3(4): profiling",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1748537587593&uri=CELEX:32016L0680"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A useful **use-case description** states the system boundary, the people using it, inputs, outputs, people affected and the action following each output. This is a practical assessment method, not a statutory certificate.",
+        "Compare 'uses an assistant' with 'HR enters applicants' experience; the tool predicts suitability; recruiters see a ranking before interviews'. The second description exposes decisions and people that a classification test can examine."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(12), 3(13), 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR Article 4(4): profiling",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        },
+        {
+          "title": "Law Enforcement Directive Article 3(4): profiling",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1748537587593&uri=CELEX:32016L0680"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Profiling** uses automated processing of personal data to evaluate aspects of a natural person, such as work performance, reliability, interests, health or behaviour. The AI Act refers to GDPR, law-enforcement and Union-institution definitions according to context.",
+        "Predicting an applicant's suitability from their personal history is an illustrative profiling case. Merely alphabetising names does not, by that fact alone, evaluate personal aspects. A person approving the final decision does not mean the prior evaluation was not automated."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(12), 3(13), 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR Article 4(4): profiling",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        },
+        {
+          "title": "Law Enforcement Directive Article 3(4): profiling",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1748537587593&uri=CELEX:32016L0680"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Reasonably foreseeable misuse** is use outside intended purpose that can result from foreseeable human behaviour or interaction with systems. Record it separately from the specified purpose. Do not rewrite actual use as compliant by copying the provider's disclaimer.",
+        "Northbridge records who sees the ranking, whether it changes interview selection and which documents support that conclusion. When a needed fact is unknown, mark it unknown and obtain evidence before issuing a definitive assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(12), 3(13), 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR Article 4(4): profiling",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        },
+        {
+          "title": "Law Enforcement Directive Article 3(4): profiling",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1748537587593&uri=CELEX:32016L0680"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["intended-purpose"],
+      "teaches": ["screen-1"],
+      "prompt": "A sales page promises applicant ranking while instructions say 'general office assistance'. What should Northbridge do?",
+      "options": [
+        {
+          "blocks": "Examine all purpose evidence and resolve the conflict",
+          "correct": true,
+          "reason": "Article 3(12) includes several provider information sources."
+        },
+        {
+          "blocks": "Use only the least demanding description",
+          "correct": false,
+          "reason": "Selecting a convenient statement hides contradictory evidence."
+        },
+        {
+          "blocks": "Ignore every provider statement",
+          "correct": false,
+          "reason": "Provider information is central to intended purpose."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Conflicting instructions and sales claims describe different uses. How should intended purpose be checked?",
+          "options": [
+            {
+              "blocks": "Use only the least demanding description",
+              "correct": false,
+              "reason": "Selecting a convenient statement hides contradictory evidence."
+            },
+            {
+              "blocks": "Ignore every provider statement",
+              "correct": false,
+              "reason": "Provider information is central to intended purpose."
+            },
+            {
+              "blocks": "Examine all purpose evidence and resolve the conflict",
+              "correct": true,
+              "reason": "Article 3(12) includes several provider information sources."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["use-case-description"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "Which description lets an assessor examine Northbridge's hiring use?",
+      "options": [
+        {
+          "blocks": "Only the vendor's name and monthly price",
+          "correct": false,
+          "reason": "Those facts omit what the system does to people."
+        },
+        {
+          "blocks": "Only the phrase 'responsible AI assistant'",
+          "correct": false,
+          "reason": "A slogan supplies no assessable operation or context."
+        },
+        {
+          "blocks": "Inputs, ranking output, affected people and recruitment action",
+          "correct": true,
+          "reason": "These facts connect the system to the actual use and decisions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should a use-case record say before a hiring tool is assessed?",
+          "options": [
+            {
+              "blocks": "Only the phrase 'responsible AI assistant'",
+              "correct": false,
+              "reason": "A slogan supplies no assessable operation or context."
+            },
+            {
+              "blocks": "Inputs, ranking output, affected people and recruitment action",
+              "correct": true,
+              "reason": "These facts connect the system to the actual use and decisions."
+            },
+            {
+              "blocks": "Only the vendor's name and monthly price",
+              "correct": false,
+              "reason": "Those facts omit what the system does to people."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["profiling"],
+      "teaches": ["screen-3"],
+      "prompt": "Software predicts an applicant's reliability from their personal history; a human later chooses. What is relevant?",
+      "options": [
+        {
+          "blocks": "All alphabetical sorting is personal evaluation",
+          "correct": false,
+          "reason": "Handling a name does not itself evaluate personal aspects."
+        },
+        {
+          "blocks": "The automated evaluation can still be profiling",
+          "correct": true,
+          "reason": "Profiling concerns evaluating personal aspects, not only final decisions."
+        },
+        {
+          "blocks": "Profiling requires the final decision to be automatic",
+          "correct": false,
+          "reason": "That adds a condition not present in the profiling definition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does human approval erase automated evaluation of an applicant's personal reliability?",
+          "options": [
+            {
+              "blocks": "The automated evaluation can still be profiling",
+              "correct": true,
+              "reason": "Profiling concerns evaluating personal aspects, not only final decisions."
+            },
+            {
+              "blocks": "Profiling requires the final decision to be automatic",
+              "correct": false,
+              "reason": "That adds a condition not present in the profiling definition."
+            },
+            {
+              "blocks": "All alphabetical sorting is personal evaluation",
+              "correct": false,
+              "reason": "Handling a name does not itself evaluate personal aspects."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

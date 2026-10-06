@@ -1,0 +1,215 @@
+{
+  "module": "Article 5: harmful decisions and behaviour",
+  "lesson": {
+    "slug": "b01",
+    "title": "A method for reading prohibitions",
+    "summary": "Read the regulated action and every prohibition element before comparing high-risk duties.",
+    "covers": [
+      "regulated-action",
+      "prohibition-elements",
+      "prohibited-versus-high-risk"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i04",
+        "reason": "Market and service triggers depend on the supply actions and actors defined earlier."
+      },
+      {
+        "lesson": "i08",
+        "reason": "The detailed distinction develops the initial separation between classification and permission."
+      },
+      {
+        "lesson": "p01",
+        "reason": "The distinction needs a prior definition of high-risk classification."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **regulated action** is what a prohibition restricts: placing on the market, putting into service, use, or a specifically qualified combination. Read the action in the relevant point.",
+        "Some Article 5 points qualify supply by a specific purpose; the real-time remote-identification point restricts use in a particular setting. Do not replace these distinctions with 'all development is banned'. Scope exclusions still need their own test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), 5(8); Article 6; Article 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Prohibition elements** are the conditions that must be examined together. A point may specify a technique, people affected, context, effect or harm, plus an exception or qualification.",
+        "Northbridge's practical table gives each element its own evidence and records unknowns. A troubling product label may justify investigation, but does not substitute for showing the legal elements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), 5(8); Article 6; Article 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Prohibited versus high-risk** separates two legal questions. A permitted practice can be high-risk and have requirements. A prohibited practice does not become permitted by meeting a high-risk checklist.",
+        "A human reviewer, consent assertion, warning label or certificate is not a universal exception. Read the exact point to see whether and how it matters."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), 5(8); Article 6; Article 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Also record the application date and other-law limits. Most original Chapter II rules apply from 2 February 2025; specified new provisions apply from 2 December 2026. Article 5(8) preserves prohibitions arising under other Union law.",
+        "Our fictional cases test specified elements. Their conclusions are tied to those facts and dates; they do not authorise an actual deployment or settle every related legal issue."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), 5(8); Article 6; Article 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["regulated-action"],
+      "teaches": ["screen-1"],
+      "prompt": "A reviewer says Article 5 bans every form of research and development. What should be checked?",
+      "options": [
+        {
+          "blocks": "The exact regulated action and relevant scope provisions",
+          "correct": true,
+          "reason": "The points regulate specified conduct with different qualifications."
+        },
+        {
+          "blocks": "Only a general dislike of the technology",
+          "correct": false,
+          "reason": "That does not establish the statutory action."
+        },
+        {
+          "blocks": "Only the phrase 'AI ban' in a headline",
+          "correct": false,
+          "reason": "A headline collapses the legal distinctions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should a prohibition's action scope be established?",
+          "options": [
+            {
+              "blocks": "Only a general dislike of the technology",
+              "correct": false,
+              "reason": "That does not establish the statutory action."
+            },
+            {
+              "blocks": "Only the phrase 'AI ban' in a headline",
+              "correct": false,
+              "reason": "A headline collapses the legal distinctions."
+            },
+            {
+              "blocks": "The exact regulated action and relevant scope provisions",
+              "correct": true,
+              "reason": "The points regulate specified conduct with different qualifications."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["prohibition-elements"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A case has missing harm or purpose facts. What is the sound prohibition record?",
+      "options": [
+        {
+          "blocks": "Declare the label proves every element",
+          "correct": false,
+          "reason": "A name does not prove the legal conditions."
+        },
+        {
+          "blocks": "Hide missing facts to make a clear answer",
+          "correct": false,
+          "reason": "Clarity does not justify unsupported conclusions."
+        },
+        {
+          "blocks": "Identify each element and its evidence or gap",
+          "correct": true,
+          "reason": "A full test requires facts rather than assumed satisfaction."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should unresolved elements of a prohibition be handled?",
+          "options": [
+            {
+              "blocks": "Hide missing facts to make a clear answer",
+              "correct": false,
+              "reason": "Clarity does not justify unsupported conclusions."
+            },
+            {
+              "blocks": "Identify each element and its evidence or gap",
+              "correct": true,
+              "reason": "A full test requires facts rather than assumed satisfaction."
+            },
+            {
+              "blocks": "Declare the label proves every element",
+              "correct": false,
+              "reason": "A name does not prove the legal conditions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["prohibited-versus-high-risk"],
+      "teaches": ["screen-3"],
+      "prompt": "A prohibited practice has a vendor certificate for high-risk compliance. What follows?",
+      "options": [
+        {
+          "blocks": "A disclosure alone removes the prohibition",
+          "correct": false,
+          "reason": "Disclosure is not a universal Article 5 exception."
+        },
+        {
+          "blocks": "The prohibition still needs to be respected",
+          "correct": true,
+          "reason": "Classification compliance is not permission for forbidden conduct."
+        },
+        {
+          "blocks": "The certificate overrides every prohibition",
+          "correct": false,
+          "reason": "No general certificate exception is supplied."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a high-risk checklist cure an Article 5 prohibition?",
+          "options": [
+            {
+              "blocks": "The prohibition still needs to be respected",
+              "correct": true,
+              "reason": "Classification compliance is not permission for forbidden conduct."
+            },
+            {
+              "blocks": "The certificate overrides every prohibition",
+              "correct": false,
+              "reason": "No general certificate exception is supplied."
+            },
+            {
+              "blocks": "A disclosure alone removes the prohibition",
+              "correct": false,
+              "reason": "Disclosure is not a universal Article 5 exception."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

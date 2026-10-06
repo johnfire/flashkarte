@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: services and public decisions",
+  "lesson": {
+    "slug": "s05",
+    "title": "Migration, asylum and borders",
+    "summary": "Identify migration risk, polygraph, application and identity uses and the travel-document limit.",
+    "covers": ["migration-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "The learner must distinguish the listed-use enquiry from the product route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **migration use** area covers specified AI used by or on behalf of competent public authorities or Union bodies in migration, asylum and border management, insofar as use is legally permitted.",
+        "Point 7(a) covers polygraphs or similar tools. Point 7(b) covers assessing security, irregular-migration or health risk posed by a person entering or already in a Member State. Do not replace these exact functions with a generic border-software label."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 7(a)–(d); Articles 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Point 7(c) covers assistance in examining asylum, visa or residence-permit applications and associated complaints concerning eligibility, including evidence-reliability assessments.",
+        "Fictional Northbridge authority compares an application-review assistant with that point. A general opening-hours chatbot has different facts from evaluating whether an applicant qualifies."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 7(a)–(d); Articles 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Point 7(d) covers detecting, recognising or identifying people in migration/asylum/border management, except verification of travel documents.",
+        "The exact travel-document exception is not an exemption for every identity system used at a border. Record what is verified and whether the tool also identifies people or performs another listed assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 7(a)–(d); Articles 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A multi-function border platform may engage several points. Record each intended use, public-authority connection, data, person affected and decision influence, then examine the other Article 6 and Article 5 tests.",
+        "The high-risk list supplies no independent legal authorisation to collect data or use the system. National and Union law, scope and dates need their own evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 7(a)–(d); Articles 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["migration-use"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "AI assists a competent authority in evaluating an asylum application and its evidence. Which point needs comparison?",
+      "options": [
+        {
+          "blocks": "Annex III 7(c)",
+          "correct": true,
+          "reason": "That point specifies the application-examination function."
+        },
+        {
+          "blocks": "Only general office-hours support",
+          "correct": false,
+          "reason": "Eligibility/evidence evaluation has different facts."
+        },
+        {
+          "blocks": "Only internal stationery purchasing",
+          "correct": false,
+          "reason": "That is not an application assessment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which migration listed use concerns eligibility and evidence in asylum, visa or residence applications?",
+          "options": [
+            {
+              "blocks": "Only general office-hours support",
+              "correct": false,
+              "reason": "Eligibility/evidence evaluation has different facts."
+            },
+            {
+              "blocks": "Only internal stationery purchasing",
+              "correct": false,
+              "reason": "That is not an application assessment."
+            },
+            {
+              "blocks": "Annex III 7(c)",
+              "correct": true,
+              "reason": "That point specifies the application-examination function."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["migration-use"],
+      "teaches": ["screen-3"],
+      "prompt": "A supplier claims every border identity tool fits the travel-document exception. What should be checked?",
+      "options": [
+        {
+          "blocks": "It excludes all border software automatically",
+          "correct": false,
+          "reason": "The exception is narrower than the whole listed area."
+        },
+        {
+          "blocks": "The vendor's slogan is sufficient evidence",
+          "correct": false,
+          "reason": "A slogan does not establish the exact purpose."
+        },
+        {
+          "blocks": "The actual document-verification function and added uses",
+          "correct": true,
+          "reason": "The exception cannot erase separate identity or risk-assessment functions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How broad is the travel-document verification exception in point 7(d)?",
+          "options": [
+            {
+              "blocks": "The vendor's slogan is sufficient evidence",
+              "correct": false,
+              "reason": "A slogan does not establish the exact purpose."
+            },
+            {
+              "blocks": "The actual document-verification function and added uses",
+              "correct": true,
+              "reason": "The exception cannot erase separate identity or risk-assessment functions."
+            },
+            {
+              "blocks": "It excludes all border software automatically",
+              "correct": false,
+              "reason": "The exception is narrower than the whole listed area."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["migration-use"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "A listed migration purpose is found. What does 'insofar as legally permitted' require?",
+      "options": [
+        {
+          "blocks": "Only a software subscription receipt",
+          "correct": false,
+          "reason": "A purchase does not establish public-authority legal permission."
+        },
+        {
+          "blocks": "A separate permitted-use analysis under relevant law",
+          "correct": true,
+          "reason": "Classification is not independent permission."
+        },
+        {
+          "blocks": "No further legality check",
+          "correct": false,
+          "reason": "That omits the list's express lawfulness condition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the migration high-risk list itself supply a legal basis for every proposed use?",
+          "options": [
+            {
+              "blocks": "A separate permitted-use analysis under relevant law",
+              "correct": true,
+              "reason": "Classification is not independent permission."
+            },
+            {
+              "blocks": "No further legality check",
+              "correct": false,
+              "reason": "That omits the list's express lawfulness condition."
+            },
+            {
+              "blocks": "Only a software subscription receipt",
+              "correct": false,
+              "reason": "A purchase does not establish public-authority legal permission."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: services and public decisions",
+  "lesson": {
+    "slug": "s02",
+    "title": "Credit and insurance",
+    "summary": "Distinguish creditworthiness, fraud detection and life/health insurance purposes.",
+    "covers": ["credit-use", "life-health-insurance-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Creditworthiness is examined as a listed-use match rather than a product classification. Insurance is examined as a listed-use match rather than a product classification."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **credit use** in Annex III 5(b) concerns evaluating a natural person's creditworthiness or establishing their credit score. The point expressly excepts systems used to detect financial fraud.",
+        "Northbridge's fictional lender must separate repayment-risk scoring from fraud detection. The exception is purpose-specific; it does not exempt every product marketed to financial institutions."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(b), 5(c); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **life/health insurance use** in point 5(c) concerns risk assessment and pricing in relation to natural persons for life and health insurance.",
+        "Do not silently expand this exact point to every insurance product. Other functions can still meet another listed use or other law. Record the insurance type, person and output purpose."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(b), 5(c); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A combined tool both detects suspicious transactions and evaluates creditworthiness. The fraud purpose does not erase the separate credit function.",
+        "For each function, retain inputs, personal evaluation and its role in eligibility or pricing. A final human reviewer does not automatically remove the intended evaluation purpose."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(b), 5(c); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Compare the precise Annex III point before the later paragraph 3 and profiling checks. A not-listed result under one point is a narrow conclusion, not a general compliance certificate.",
+        "Changing from fraud flags to repayment scoring or life-insurance pricing changes the facts. Northbridge should update the record rather than copy the old exception."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(b), 5(c); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["credit-use"],
+      "teaches": ["screen-1"],
+      "prompt": "A lender's tool predicts a person's repayment ability. Which purpose is directly relevant?",
+      "options": [
+        {
+          "blocks": "Creditworthiness under Annex III 5(b)",
+          "correct": true,
+          "reason": "The actual repayment evaluation is the listed purpose."
+        },
+        {
+          "blocks": "The fraud exception solely from the bank context",
+          "correct": false,
+          "reason": "The exception depends on detection purpose, not industry alone."
+        },
+        {
+          "blocks": "No relevant purpose if a person approves",
+          "correct": false,
+          "reason": "Human approval alone does not remove credit evaluation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does creditworthiness evaluation become fraud detection simply because a bank operates the tool?",
+          "options": [
+            {
+              "blocks": "The fraud exception solely from the bank context",
+              "correct": false,
+              "reason": "The exception depends on detection purpose, not industry alone."
+            },
+            {
+              "blocks": "No relevant purpose if a person approves",
+              "correct": false,
+              "reason": "Human approval alone does not remove credit evaluation."
+            },
+            {
+              "blocks": "Creditworthiness under Annex III 5(b)",
+              "correct": true,
+              "reason": "The actual repayment evaluation is the listed purpose."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["life-health-insurance-use"],
+      "teaches": ["screen-2"],
+      "prompt": "Which insurance types are expressly named in point 5(c)?",
+      "options": [
+        {
+          "blocks": "Every kind of insurance without distinction",
+          "correct": false,
+          "reason": "That expands the point beyond its wording."
+        },
+        {
+          "blocks": "Only warehouse property insurance",
+          "correct": false,
+          "reason": "That is not the life/health purpose stated in the point."
+        },
+        {
+          "blocks": "Life and health insurance for natural persons",
+          "correct": true,
+          "reason": "Those are the named insurance contexts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which insurance risk/pricing purpose does Annex III 5(c) specify?",
+          "options": [
+            {
+              "blocks": "Only warehouse property insurance",
+              "correct": false,
+              "reason": "That is not the life/health purpose stated in the point."
+            },
+            {
+              "blocks": "Life and health insurance for natural persons",
+              "correct": true,
+              "reason": "Those are the named insurance contexts."
+            },
+            {
+              "blocks": "Every kind of insurance without distinction",
+              "correct": false,
+              "reason": "That expands the point beyond its wording."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["credit-use", "life-health-insurance-use"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "One tool detects fraud and also sets personal credit scores. What should the analysis retain?",
+      "options": [
+        {
+          "blocks": "Only whether the supplier calls it analytics",
+          "correct": false,
+          "reason": "A broad label cannot replace the use-case facts."
+        },
+        {
+          "blocks": "Separate the purposes and assess each relevant function",
+          "correct": true,
+          "reason": "The exception is not platform-wide permission."
+        },
+        {
+          "blocks": "Only the fraud function's result",
+          "correct": false,
+          "reason": "That hides the listed credit evaluation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a combined product's fraud feature erase its credit-scoring function?",
+          "options": [
+            {
+              "blocks": "Separate the purposes and assess each relevant function",
+              "correct": true,
+              "reason": "The exception is not platform-wide permission."
+            },
+            {
+              "blocks": "Only the fraud function's result",
+              "correct": false,
+              "reason": "That hides the listed credit evaluation."
+            },
+            {
+              "blocks": "Only whether the supplier calls it analytics",
+              "correct": false,
+              "reason": "A broad label cannot replace the use-case facts."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

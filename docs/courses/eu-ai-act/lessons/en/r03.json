@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: remote identification and synthesis",
+  "lesson": {
+    "slug": "r03",
+    "title": "Authorisation and urgency",
+    "summary": "Apply prior binding authorisation, the urgent request deadline and immediate refusal consequences.",
+    "covers": [
+      "prior-authorisation",
+      "urgent-authorisation-rule",
+      "refusal-consequences"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r02",
+        "reason": "The authority evaluates necessity and strict temporal, geographic and personal limits."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Each use requires **prior authorisation** by a judicial authority or an independent administrative authority whose decision is binding in the Member State of use, following a reasoned request and national detailed rules.",
+        "The competent authority needs objective evidence or clear indications that use is necessary and proportionate to a listed objective. Permission from a supplier or an operational colleague is not this binding authorisation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(3), first and second subparagraphs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "In a duly justified situation of urgency, use may commence without authorisation if authorisation is requested **without undue delay, at the latest within 24 hours**.",
+        "Twenty-four hours is the outside limit, not a normal waiting period. Record why urgency is justified and why the request is prompt. This rule concerns the request; it does not promise approval."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(3), first and second subparagraphs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "If authorisation is rejected, use must stop with immediate effect. All data, results and outputs of that use must be immediately discarded and deleted.",
+        "Fictional Northbridge case: the authority refuses an urgent search request. Continuing while appealing or keeping outputs for possible future identification contradicts the specified immediate consequences."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(3), first and second subparagraphs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The authorising authority must keep time, geography and personal scope strictly necessary and consider the paragraph 2 harm/rights factors. A broad request cannot bypass these limits through urgency.",
+        "Maintain the request, evidence, decision and compliance record. An urgent request submitted promptly remains only a request until decided; the separate no-adverse-decision rule is taught in R05."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(3), first and second subparagraphs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["prior-authorisation"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "An operational manager approves a scan, but there is no decision from the competent judicial or independent binding administrative authority. What is missing?",
+      "options": [
+        {
+          "blocks": "The competent judicial or independent binding administrative decision",
+          "correct": true,
+          "reason": "Article 5(3) specifies the authorising authority and binding character."
+        },
+        {
+          "blocks": "Any internal manager's informal agreement",
+          "correct": false,
+          "reason": "That does not establish the specified competent authorisation."
+        },
+        {
+          "blocks": "A supplier's technical readiness certificate",
+          "correct": false,
+          "reason": "Technical readiness is not legal authorisation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which decision fulfils the prior-authorisation requirement?",
+          "options": [
+            {
+              "blocks": "Any internal manager's informal agreement",
+              "correct": false,
+              "reason": "That does not establish the specified competent authorisation."
+            },
+            {
+              "blocks": "A supplier's technical readiness certificate",
+              "correct": false,
+              "reason": "Technical readiness is not legal authorisation."
+            },
+            {
+              "blocks": "The competent judicial or independent binding administrative decision",
+              "correct": true,
+              "reason": "Article 5(3) specifies the authorising authority and binding character."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["urgent-authorisation-rule"],
+      "teaches": ["screen-2"],
+      "prompt": "A duly justified urgent use starts now. What is the request timing rule?",
+      "options": [
+        {
+          "blocks": "Wait at least 24 hours before requesting",
+          "correct": false,
+          "reason": "The statute requires promptness, not a waiting period."
+        },
+        {
+          "blocks": "Request only when the operation has finished",
+          "correct": false,
+          "reason": "That could breach both timing requirements."
+        },
+        {
+          "blocks": "Without undue delay, and no later than 24 hours",
+          "correct": true,
+          "reason": "Both the promptness requirement and outside limit apply."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the 24-hour limit entitle the authority to wait routinely until its end?",
+          "options": [
+            {
+              "blocks": "Request only when the operation has finished",
+              "correct": false,
+              "reason": "That could breach both timing requirements."
+            },
+            {
+              "blocks": "Without undue delay, and no later than 24 hours",
+              "correct": true,
+              "reason": "Both the promptness requirement and outside limit apply."
+            },
+            {
+              "blocks": "Wait at least 24 hours before requesting",
+              "correct": false,
+              "reason": "The statute requires promptness, not a waiting period."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["refusal-consequences"],
+      "teaches": ["screen-3"],
+      "prompt": "The competent authority rejects an urgent authorisation request. What follows immediately?",
+      "options": [
+        {
+          "blocks": "Keep every output pending a convenient review",
+          "correct": false,
+          "reason": "That contradicts immediate discard/deletion."
+        },
+        {
+          "blocks": "Stop use and discard/delete all its data, results and outputs",
+          "correct": true,
+          "reason": "The refusal consequences are immediate and cover each listed category."
+        },
+        {
+          "blocks": "Continue use but rename the operation",
+          "correct": false,
+          "reason": "A name change cannot avoid immediate stopping."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "May rejected-use data be retained just in case it is useful later?",
+          "options": [
+            {
+              "blocks": "Stop use and discard/delete all its data, results and outputs",
+              "correct": true,
+              "reason": "The refusal consequences are immediate and cover each listed category."
+            },
+            {
+              "blocks": "Continue use but rename the operation",
+              "correct": false,
+              "reason": "A name change cannot avoid immediate stopping."
+            },
+            {
+              "blocks": "Keep every output pending a convenient review",
+              "correct": false,
+              "reason": "That contradicts immediate discard/deletion."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

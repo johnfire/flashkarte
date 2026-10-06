@@ -2,7 +2,7 @@
 
 Working version: **CELEX 02024R1689-20260727**, consolidated on 27 July 2026. The official English, German and Czech consolidated PDFs and the three language versions of Regulation (EU) 2026/1744 are retained in `sources/`. The original English Official Journal Act is also retained. See the [source register](source-register.md) for URLs, hashes and actual reading limits.
 
-Regulation (EU) 2024/1689 was published on 12 July 2024 and entered into force on 2 August 2024. Regulation (EU) 2026/1744 was published on 24 July 2026 and entered into force on 27 July 2026. The authentic Official Journal instruments govern; consolidation is a convenient working reference with a documentation-only notice.
+Regulation (EU) 2024/1689 was published on 12 July 2024 and entered into force on 1 August 2024, twenty days after publication. Regulation (EU) 2026/1744 was published on 24 July 2026 and entered into force on 27 July 2026. The authentic Official Journal instruments govern; consolidation is a convenient working reference with a documentation-only notice.
 
 ## First-release changes that must survive simplification
 
@@ -27,7 +27,7 @@ These are provision-specific starting points, not a single “AI Act deadline”
 
 | Date             | Provision or event                                                                                                                                                                                |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 2 August 2024    | Original Act enters into force.                                                                                                                                                                   |
+| 1 August 2024    | Original Act enters into force.                                                                                                                                                                   |
 | 2 February 2025  | Chapters I and II apply, subject to the separate dates of the newly inserted Article 5 provisions.                                                                                                |
 | 2 August 2025    | Chapter III Section 4, Chapter V, Chapter VII, Chapter XII and Article 78 apply; Article 101 is excepted from this early date.                                                                    |
 | 27 July 2026     | Amending regulation enters into force; Article 113(d) gives this date to Articles 102–110.                                                                                                        |
@@ -49,6 +49,10 @@ The German corrigendum, OJ 2025/90802 of 9 October 2025, corrects recital 177, A
 
 ## Interpretation and reading queue
 
+English authoring update, 6 October 2026: the definition guideline was read, the incorporated profiling, child-protection and critical-infrastructure definitions were checked, and Annex II's full offence list was read. The retained Article 6 drafts and Article 5 guideline received targeted reading; their complete example libraries have not been audited. Operative tests in the 52 lessons come from the statute. Product coverage and mandatory assessment facts are explicitly stipulated in fictional cases, rather than assigning unsourced MDR/PPE/machinery categories. National permission and defence questions stay unresolved where jurisdiction is unspecified.
+
+The table below preserves the original review queue. Q01, the definition portion of Q05, the incorporated-definition portion of Q06, Q07 and the Annex II portion of Q08 have been addressed for this release. Full interpretive/example review, real product classifications, national procedures and specialist legal review remain further work. No specialist legal reviewer or legal approval is claimed.
+
 | ID  | Before writing       | Work still needed                                                                                                                                                                                                                                                                                                                                                          |
 | --- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Q01 | I02                  | Read the complete 2025 AI-system-definition guideline and supporting examples; publication identity is verified, but the PDF has not yet been fully read. Preserve non-binding status.                                                                                                                                                                                     |
@@ -64,4 +68,4 @@ The German corrigendum, OJ 2025/90802 of 9 October 2025, corrects recital 177, A
 | Q11 | Conformity follow-on | Check current Official Journal standard citations and sector scope. The slides' “no harmonised standard listed” is not adopted as a verified-current course fact.                                                                                                                                                                                                          |
 | Q12 | Public release       | Record legal reviewer, review scope and date, resolve or clearly delimit borderline readings, and review all language editions. Structural checks and owner learning review do not supply specialist legal approval.                                                                                                                                                       |
 
-The queue is a lesson-specific reading gate, not a reason to defer the entire programme. Resolve it as each module is drafted and retain the exact supporting paragraphs. The current package is a complete first-release graph proposal with honest source-reading boundaries.
+The public English release is an editable educational draft with these boundaries. Any later real-product or jurisdiction-specific conclusion requires the outstanding sources for that conclusion. Structural checks and a complete learner-path test establish course consistency and runtime behaviour; they do not establish specialist legal approval.

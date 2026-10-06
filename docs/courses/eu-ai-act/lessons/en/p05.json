@@ -1,0 +1,211 @@
+{
+  "module": "Article 6: product and safety classification",
+  "lesson": {
+    "slug": "p05",
+    "title": "Product classification case",
+    "summary": "Apply the full product-route test to changed facts while retaining separate scope and date checks.",
+    "covers": ["product-route-assessment"],
+    "prerequisites": [
+      {
+        "lesson": "p02",
+        "reason": "The product case requires the final safety-component rule including its failure qualification."
+      },
+      {
+        "lesson": "p03",
+        "reason": "The case must distinguish classification from the provisions that apply to the sector."
+      },
+      {
+        "lesson": "p04",
+        "reason": "The product case must establish the mandatory third-party condition with evidence. The case includes a route required solely because of a non-health/safety risk."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Product-route assessment** combines function, listed coverage and required assessment. We use a fictional protective device. Stipulated facts: it is covered by a current Annex I instrument, AI fulfils its safety function, and the product must undergo third-party assessment for health and safety risks.",
+        "These are supplied case facts, not a sector classification derived by this lesson. Record them and their evidence in a real assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1), 6(1a)–(1c); Annex I; Article 2(2)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "On those facts, both paragraph 1 conditions are met. The solely non-safety-function limit does not fit a genuine protective function, and paragraph 1c does not remove a health/safety assessment route.",
+        "The conclusion is high-risk by the product route. It still requires separate examination of Article 2 sector limits, prohibition facts, applicable obligations and dates."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1), 6(1a)–(1c); Annex I; Article 2(2)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed fact: the AI now changes display colours only, with evidence that its failure has no safety effect. Paragraph 1a may remove safety-component status. But check whether the AI is itself a covered product; paragraph 1(a) has that alternative.",
+        "Changed fact: a claimed convenience feature's failure disables protection. Paragraph 1b restores safety-component status. Assess actual failure consequences rather than relabelling the feature."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1), 6(1a)–(1c); Annex I; Article 2(2)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Changed fact: only voluntary external testing is documented. The required-assessment condition is not established. The sound record names that gap rather than assuming the same result.",
+        "A conclusion should state which route was tested, which facts were stipulated or verified, and which conclusions remain open. Annex III can still matter where a separate listed use is present."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1), 6(1a)–(1c); Annex I; Article 2(2)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["product-route-assessment"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "The fictional case establishes listed coverage, an AI safety function and a required safety assessment. What is the Article 6 route result?",
+      "options": [
+        {
+          "blocks": "High-risk by Article 6(1)",
+          "correct": true,
+          "reason": "The stipulated facts meet the cumulative product-route test."
+        },
+        {
+          "blocks": "Excluded because an AI component is separately supplied",
+          "correct": false,
+          "reason": "Independent supply does not remove the paragraph 1 test."
+        },
+        {
+          "blocks": "Exempt because a user operates it",
+          "correct": false,
+          "reason": "Human operation is not a product-route exemption."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "With both product-route conditions established and no stated qualification removing them, what classification follows?",
+          "options": [
+            {
+              "blocks": "Excluded because an AI component is separately supplied",
+              "correct": false,
+              "reason": "Independent supply does not remove the paragraph 1 test."
+            },
+            {
+              "blocks": "Exempt because a user operates it",
+              "correct": false,
+              "reason": "Human operation is not a product-route exemption."
+            },
+            {
+              "blocks": "High-risk by Article 6(1)",
+              "correct": true,
+              "reason": "The stipulated facts meet the cumulative product-route test."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["product-route-assessment"],
+      "teaches": ["screen-3"],
+      "prompt": "The component is renamed 'convenience', but its failure disables protection. Which fact controls this part of the test?",
+      "options": [
+        {
+          "blocks": "Only the new feature name",
+          "correct": false,
+          "reason": "A name cannot negate the failure evidence."
+        },
+        {
+          "blocks": "Only the colour of the interface",
+          "correct": false,
+          "reason": "Appearance does not resolve safety-component status."
+        },
+        {
+          "blocks": "The safety-endangering failure consequence",
+          "correct": true,
+          "reason": "Article 6(1b) qualifies the non-safety limit."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a convenience label exclude a component whose malfunction endangers safety?",
+          "options": [
+            {
+              "blocks": "Only the colour of the interface",
+              "correct": false,
+              "reason": "Appearance does not resolve safety-component status."
+            },
+            {
+              "blocks": "The safety-endangering failure consequence",
+              "correct": true,
+              "reason": "Article 6(1b) qualifies the non-safety limit."
+            },
+            {
+              "blocks": "Only the new feature name",
+              "correct": false,
+              "reason": "A name cannot negate the failure evidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["product-route-assessment"],
+      "teaches": ["screen-4"],
+      "prompt": "The supplier replaces the legal assessment evidence with a voluntary test report. What should the record say?",
+      "options": [
+        {
+          "blocks": "Every other legal question is now answered",
+          "correct": false,
+          "reason": "Missing evidence cannot complete the wider assessment."
+        },
+        {
+          "blocks": "The required-assessment fact remains unresolved",
+          "correct": true,
+          "reason": "An optional test is not proof of a mandatory route."
+        },
+        {
+          "blocks": "Nothing changes because any testing is enough",
+          "correct": false,
+          "reason": "The statutory condition specifically concerns required assessment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What happens if the compulsory assessment route is not established in a product case?",
+          "options": [
+            {
+              "blocks": "The required-assessment fact remains unresolved",
+              "correct": true,
+              "reason": "An optional test is not proof of a mandatory route."
+            },
+            {
+              "blocks": "Nothing changes because any testing is enough",
+              "correct": false,
+              "reason": "The statutory condition specifically concerns required assessment."
+            },
+            {
+              "blocks": "Every other legal question is now answered",
+              "correct": false,
+              "reason": "Missing evidence cannot complete the wider assessment."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

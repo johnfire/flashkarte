@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: harmful decisions and behaviour",
+  "lesson": {
+    "slug": "b02",
+    "title": "Manipulation, deception and significant harm",
+    "summary": "Trace the manipulation/deception test from technique through impaired decision-making to significant harm.",
+    "covers": ["manipulation-technique", "manipulation-causal-test"],
+    "prerequisites": [
+      {
+        "lesson": "i01",
+        "reason": "The harm link includes reasonably likely harm and cannot be reduced to an already observed injury."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The technique is one element of a prohibition rather than proof of the whole prohibition."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **manipulation-technique test** concerns subliminal techniques beyond awareness or purposefully manipulative or deceptive techniques deployed by an AI system.",
+        "Not every persuasive recommendation automatically meets this point. Identify the technique and facts supporting its character instead of treating 'advertising' as either always banned or always permitted."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The point requires an objective or effect of materially distorting behaviour by appreciably impairing the ability to make an informed decision. That leads to a decision the person would not otherwise take.",
+        "Our **causal test** traces the chain: technique, impaired informed choice, changed decision and harm. Each connection needs evidence; mere AI use or an unpopular decision does not prove the chain."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The decision must cause or be reasonably likely to cause significant harm to that person, another person or a group. Harm need not already have happened, but its likelihood and significance cannot simply be asserted.",
+        "Fictional Northbridge case: stipulated deceptive pressure impairs an informed choice and produces a purchase decision reasonably likely to cause significant harm. The stipulated facts support the element exercise, not a general conclusion about all recommendations."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Changed fact: the communication is clear and informative with no appreciable impairment. The same sale outcome does not by itself prove the prohibition. Changed fact: intended manipulation causes no completed injury yet. Examine the reasonably-likely harm branch.",
+        "Record technique, objective/effect, behavioural distortion, changed decision and significant harm. Do not invent a universal monetary threshold that the point does not supply."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["manipulation-technique"],
+      "teaches": ["screen-1"],
+      "prompt": "An AI-generated advert exists. Does that fact alone establish the manipulation prohibition?",
+      "options": [
+        {
+          "blocks": "A relevant subliminal/manipulative/deceptive technique",
+          "correct": true,
+          "reason": "The point specifies techniques rather than all advertising."
+        },
+        {
+          "blocks": "Only that a product was promoted",
+          "correct": false,
+          "reason": "Promotion alone does not establish the technique."
+        },
+        {
+          "blocks": "Only that a viewer disagreed with the message",
+          "correct": false,
+          "reason": "Disagreement is not the specified technique test."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which starting fact does Article 5(1)(a) require beyond the mere presence of persuasion?",
+          "options": [
+            {
+              "blocks": "Only that a product was promoted",
+              "correct": false,
+              "reason": "Promotion alone does not establish the technique."
+            },
+            {
+              "blocks": "Only that a viewer disagreed with the message",
+              "correct": false,
+              "reason": "Disagreement is not the specified technique test."
+            },
+            {
+              "blocks": "A relevant subliminal/manipulative/deceptive technique",
+              "correct": true,
+              "reason": "The point specifies techniques rather than all advertising."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["manipulation-causal-test"],
+      "teaches": ["screen-2"],
+      "prompt": "What must connect the technique to the changed decision?",
+      "options": [
+        {
+          "blocks": "Only the same software being installed",
+          "correct": false,
+          "reason": "Installation does not establish impaired choice or causation."
+        },
+        {
+          "blocks": "Only a human being somewhere in the business",
+          "correct": false,
+          "reason": "General human presence does not supply the causal test."
+        },
+        {
+          "blocks": "Appreciably impaired informed choice and material distortion",
+          "correct": true,
+          "reason": "The point requires this causal decision-making relationship."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why does a harmful outcome alone not establish every element of Article 5(1)(a)?",
+          "options": [
+            {
+              "blocks": "Only a human being somewhere in the business",
+              "correct": false,
+              "reason": "General human presence does not supply the causal test."
+            },
+            {
+              "blocks": "Appreciably impaired informed choice and material distortion",
+              "correct": true,
+              "reason": "The point requires this causal decision-making relationship."
+            },
+            {
+              "blocks": "Only the same software being installed",
+              "correct": false,
+              "reason": "Installation does not establish impaired choice or causation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["manipulation-causal-test"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "No injury has occurred yet, but the changed decision is reasonably likely to cause significant harm. Is completed harm required?",
+      "options": [
+        {
+          "blocks": "No harm analysis is ever necessary",
+          "correct": false,
+          "reason": "Likelihood and significance still need evidence."
+        },
+        {
+          "blocks": "Reasonably likely significant harm is also covered",
+          "correct": true,
+          "reason": "The point expressly includes a reasonably-likely branch."
+        },
+        {
+          "blocks": "Completed harm is always required",
+          "correct": false,
+          "reason": "That omits the alternative statutory branch."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the harm branch apply before significant harm actually occurs?",
+          "options": [
+            {
+              "blocks": "Reasonably likely significant harm is also covered",
+              "correct": true,
+              "reason": "The point expressly includes a reasonably-likely branch."
+            },
+            {
+              "blocks": "Completed harm is always required",
+              "correct": false,
+              "reason": "That omits the alternative statutory branch."
+            },
+            {
+              "blocks": "No harm analysis is ever necessary",
+              "correct": false,
+              "reason": "Likelihood and significance still need evidence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

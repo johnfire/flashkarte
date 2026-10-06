@@ -1,0 +1,207 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e01",
+    "title": "The paragraph 3 gateway",
+    "summary": "Apply the no-significant-risk gateway as well as a listed condition; assess actual influence.",
+    "covers": ["harm-significance-test", "decision-influence"],
+    "prerequisites": [
+      {
+        "lesson": "i01",
+        "reason": "The gateway evaluates a risk of harm, which combines likelihood and severity."
+      },
+      {
+        "lesson": "p01",
+        "reason": "The derogation applies to the Annex III route and cannot be extended to the product route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **paragraph 3 derogation** is a limited departure from Annex III high-risk classification. The system must not pose significant harm risk to health, safety or fundamental rights, including by not materially influencing decision outcomes.",
+        "This gateway is not satisfied by an 'administrative' label. Explain the possible harms and influence using the actual system and context."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), first and second subparagraphs; final subparagraph",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A listed condition must also fit: narrow procedural task, improvement of completed human activity, the specified decision-pattern/review function, or preparation for a relevant assessment.",
+        "At least one condition is required; it is not necessary to satisfy all four. But selecting one condition does not remove the gateway. Later lessons test each condition's own wording."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), first and second subparagraphs; final subparagraph",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Decision influence** is the role an output plays in what happens to a person. A suggestion can materially shape a decision even when someone signs the final form.",
+        "Fictional Northbridge: staff almost always accept an AI shortlist without reassessing excluded applicants. The final human signature does not prove that the output lacks material influence. Investigate the actual review process."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), first and second subparagraphs; final subparagraph",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The final subparagraph supplies a profiling override for Annex III systems. Keep it in the checklist, alongside documentation and registration if a provider concludes the system is not high-risk.",
+        "Our teaching checklist is: listed use; gateway; matching condition; profiling; supporting record. It is an application method, not a new statutory safe harbour or complete set of other-law duties."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), first and second subparagraphs; final subparagraph",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["harm-significance-test"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A listed-use tool performs a narrow task but still creates significant rights risks. Is one condition enough?",
+      "options": [
+        {
+          "blocks": "No; the gateway and a condition both matter",
+          "correct": true,
+          "reason": "Paragraph 3 combines the gateway with at least one listed condition."
+        },
+        {
+          "blocks": "Yes; a task label alone settles it",
+          "correct": false,
+          "reason": "That omits the gateway's substantive test."
+        },
+        {
+          "blocks": "Yes; all four conditions are irrelevant",
+          "correct": false,
+          "reason": "At least one listed condition is required."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the narrow-procedural condition replace the no-significant-risk gateway?",
+          "options": [
+            {
+              "blocks": "Yes; a task label alone settles it",
+              "correct": false,
+              "reason": "That omits the gateway's substantive test."
+            },
+            {
+              "blocks": "Yes; all four conditions are irrelevant",
+              "correct": false,
+              "reason": "At least one listed condition is required."
+            },
+            {
+              "blocks": "No; the gateway and a condition both matter",
+              "correct": true,
+              "reason": "Paragraph 3 combines the gateway with at least one listed condition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["decision-influence"],
+      "teaches": ["screen-3"],
+      "prompt": "Staff accept an AI shortlist almost automatically, then sign the final choice. What should be assessed?",
+      "options": [
+        {
+          "blocks": "Only the presence of a signature",
+          "correct": false,
+          "reason": "A signature can accompany substantial AI influence."
+        },
+        {
+          "blocks": "Only whether outputs are called suggestions",
+          "correct": false,
+          "reason": "A label does not determine how decisions are shaped."
+        },
+        {
+          "blocks": "The actual influence and quality of review",
+          "correct": true,
+          "reason": "A human step does not establish lack of material influence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a final signature alone show that AI did not materially influence selection?",
+          "options": [
+            {
+              "blocks": "Only whether outputs are called suggestions",
+              "correct": false,
+              "reason": "A label does not determine how decisions are shaped."
+            },
+            {
+              "blocks": "The actual influence and quality of review",
+              "correct": true,
+              "reason": "A human step does not establish lack of material influence."
+            },
+            {
+              "blocks": "Only the presence of a signature",
+              "correct": false,
+              "reason": "A signature can accompany substantial AI influence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["harm-significance-test", "decision-influence"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "How many paragraph 3 conditions must fit, in addition to the gateway and profiling check?",
+      "options": [
+        {
+          "blocks": "None if a vendor says the risk is low",
+          "correct": false,
+          "reason": "A vendor claim cannot dispense with a listed condition."
+        },
+        {
+          "blocks": "At least one, with the other tests still satisfied",
+          "correct": true,
+          "reason": "The statute uses alternative conditions within the gateway."
+        },
+        {
+          "blocks": "All four in every case",
+          "correct": false,
+          "reason": "That incorrectly turns alternatives into cumulative conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Must a system satisfy all four listed conditions to use the paragraph 3 derogation?",
+          "options": [
+            {
+              "blocks": "At least one, with the other tests still satisfied",
+              "correct": true,
+              "reason": "The statute uses alternative conditions within the gateway."
+            },
+            {
+              "blocks": "All four in every case",
+              "correct": false,
+              "reason": "That incorrectly turns alternatives into cumulative conditions."
+            },
+            {
+              "blocks": "None if a vendor says the risk is low",
+              "correct": false,
+              "reason": "A vendor claim cannot dispense with a listed condition."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

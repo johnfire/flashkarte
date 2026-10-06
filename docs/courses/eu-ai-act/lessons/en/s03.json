@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: services and public decisions",
+  "lesson": {
+    "slug": "s03",
+    "title": "Public benefits and emergency services",
+    "summary": "Recognise public-assistance eligibility and emergency triage/dispatch decisions.",
+    "covers": ["public-benefits-use", "emergency-triage-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Public assistance is examined as a listed-use match rather than a product classification. Emergency-service functions are examined as listed-use matches rather than product classifications."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **public-benefits use** covers AI used by or on behalf of public authorities to evaluate eligibility for essential public assistance benefits or services, including healthcare, and to grant, reduce, revoke or reclaim them.",
+        "A fictional municipal Northbridge service evaluates applications for essential assistance. Identify the public-authority connection and the particular decision; not all public-sector administration performs this function."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(a), 5(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **emergency-triage use** includes evaluating/classifying emergency calls, dispatching or prioritising emergency first response, including police, firefighters and medical aid, and emergency healthcare patient triage.",
+        "A tool sorting callers by urgency directly raises the listed comparison. A tool organising an unrelated office rota has different facts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(a), 5(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed case: a benefits assistant only provides office hours. It later recommends whether an applicant's entitlement should be withdrawn. That is a substantial change in the intended decision function.",
+        "Changed case: a call transcription tool also assigns priority. Record the added evaluation instead of treating it as mere text conversion."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(a), 5(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Northbridge's packet records actor, person affected, decision type, input, output and influence. The point identifies the classification route; it does not supply a lawful basis under every benefits, health or data-protection rule.",
+        "Apply the remaining paragraph 3, profiling, scope and timing checks. Keep a missing decision-use fact explicit rather than assuming outputs have no effect."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 5(a), 5(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["public-benefits-use"],
+      "teaches": ["screen-1"],
+      "prompt": "AI used for a municipality recommends reclaiming an essential assistance benefit. Which listed purpose is relevant?",
+      "options": [
+        {
+          "blocks": "Public-benefits use in point 5(a)",
+          "correct": true,
+          "reason": "The point includes evaluation and grant/reduction/revocation/reclaim functions."
+        },
+        {
+          "blocks": "Only an office-hours information service",
+          "correct": false,
+          "reason": "The case makes an entitlement recommendation."
+        },
+        {
+          "blocks": "Only a private supplier's billing process",
+          "correct": false,
+          "reason": "That does not describe the public assistance decision."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which Annex III function includes public-authority decisions to revoke or reclaim essential benefits?",
+          "options": [
+            {
+              "blocks": "Only an office-hours information service",
+              "correct": false,
+              "reason": "The case makes an entitlement recommendation."
+            },
+            {
+              "blocks": "Only a private supplier's billing process",
+              "correct": false,
+              "reason": "That does not describe the public assistance decision."
+            },
+            {
+              "blocks": "Public-benefits use in point 5(a)",
+              "correct": true,
+              "reason": "The point includes evaluation and grant/reduction/revocation/reclaim functions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["emergency-triage-use"],
+      "teaches": ["screen-2"],
+      "prompt": "An AI assigns priority to emergency medical responses. Which listed use is indicated?",
+      "options": [
+        {
+          "blocks": "Only ordinary office scheduling",
+          "correct": false,
+          "reason": "Emergency response consequences are different."
+        },
+        {
+          "blocks": "Only building access verification",
+          "correct": false,
+          "reason": "That is an unrelated purpose."
+        },
+        {
+          "blocks": "Emergency-triage/dispatch use in point 5(d)",
+          "correct": true,
+          "reason": "The point expressly includes establishing dispatch priority."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does emergency response prioritisation belong to the emergency call/dispatch point?",
+          "options": [
+            {
+              "blocks": "Only building access verification",
+              "correct": false,
+              "reason": "That is an unrelated purpose."
+            },
+            {
+              "blocks": "Emergency-triage/dispatch use in point 5(d)",
+              "correct": true,
+              "reason": "The point expressly includes establishing dispatch priority."
+            },
+            {
+              "blocks": "Only ordinary office scheduling",
+              "correct": false,
+              "reason": "Emergency response consequences are different."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["public-benefits-use", "emergency-triage-use"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A transcription assistant adds priority scoring for emergency calls. What changes in the assessment?",
+      "options": [
+        {
+          "blocks": "All rules disappear because it started as transcription",
+          "correct": false,
+          "reason": "The historical label does not settle the new use."
+        },
+        {
+          "blocks": "It now contributes to a listed emergency decision",
+          "correct": true,
+          "reason": "The added evaluation changes the relevant intended purpose."
+        },
+        {
+          "blocks": "Nothing because text still appears on screen",
+          "correct": false,
+          "reason": "Output format does not erase decision influence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why should adding emergency priority recommendations trigger a new function check?",
+          "options": [
+            {
+              "blocks": "It now contributes to a listed emergency decision",
+              "correct": true,
+              "reason": "The added evaluation changes the relevant intended purpose."
+            },
+            {
+              "blocks": "Nothing because text still appears on screen",
+              "correct": false,
+              "reason": "Output format does not erase decision influence."
+            },
+            {
+              "blocks": "All rules disappear because it started as transcription",
+              "correct": false,
+              "reason": "The historical label does not settle the new use."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: biometrics and synthetic media",
+  "lesson": {
+    "slug": "b09",
+    "title": "Sensitive biometric categorisation",
+    "summary": "Read the named sensitive-inference categories and the lawful-dataset/law-enforcement boundaries.",
+    "covers": ["sensitive-categorisation-ban", "lawful-dataset-boundary"],
+    "prerequisites": [
+      {
+        "lesson": "a02",
+        "reason": "The sensitive-attribute test applies to individual biometric categorisation."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The learner must check the listed inference purpose rather than infer a ban from the category name."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **sensitive-categorisation ban** concerns categorising individual people from biometric data to deduce/infer race, political opinions, trade-union membership, religious/philosophical beliefs, sex life or sexual orientation.",
+        "Record the actual inferred category. The point's list is specific; do not silently substitute every imaginable attribute or ignore the biometric basis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(40); Article 5(1)(g); Annex III 1(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The point excludes specified labelling/filtering of lawfully acquired biometric datasets based on biometric data, and categorising biometric data in law enforcement. Read these stated boundaries without turning them into blanket permission.",
+        "**Lawfully acquired** is a factual and legal condition. Public availability or an internal dataset label alone does not establish it. The precise processing purpose still matters."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(40); Article 5(1)(g); Annex III 1(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional Northbridge case: a workplace tool infers union membership from individual facial data. Those stipulated sensitive-inference facts raise the named prohibition.",
+        "Changed case: an actual lawful-dataset filtering operation is established. Examine the boundary as written, then privacy and other rules. Do not use a dataset-management label to hide individual sensitive inference."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(40); Article 5(1)(g); Annex III 1(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A function outside this particular ban can still be a listed sensitive/protected categorisation under Annex III. Conversely, high-risk classification cannot authorise the prohibited inference.",
+        "The record should identify biometric data, individual categories, precise purpose, acquisition legality and regulated action. Keep each conclusion bounded to the actual processing."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(40); Article 5(1)(g); Annex III 1(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["sensitive-categorisation-ban"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "A tool infers individual trade-union membership from biometric data. Which listed category matters?",
+      "options": [
+        {
+          "blocks": "Trade-union membership",
+          "correct": true,
+          "reason": "That is one of the point's named sensitive categories."
+        },
+        {
+          "blocks": "Only a device's battery level",
+          "correct": false,
+          "reason": "That is not an individual sensitive biometric category."
+        },
+        {
+          "blocks": "Only an image's file extension",
+          "correct": false,
+          "reason": "That is not the stated personal inference."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which sensitive inference is expressly named in Article 5(1)(g)?",
+          "options": [
+            {
+              "blocks": "Only a device's battery level",
+              "correct": false,
+              "reason": "That is not an individual sensitive biometric category."
+            },
+            {
+              "blocks": "Only an image's file extension",
+              "correct": false,
+              "reason": "That is not the stated personal inference."
+            },
+            {
+              "blocks": "Trade-union membership",
+              "correct": true,
+              "reason": "That is one of the point's named sensitive categories."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["lawful-dataset-boundary"],
+      "teaches": ["screen-2"],
+      "prompt": "A vendor claims a lawful-dataset boundary because images were visible online. What fact remains to be checked?",
+      "options": [
+        {
+          "blocks": "Nothing; all visible images are unrestricted",
+          "correct": false,
+          "reason": "Public availability is not blanket legal permission."
+        },
+        {
+          "blocks": "Only whether the folder is labelled lawful",
+          "correct": false,
+          "reason": "A label does not establish acquisition legality."
+        },
+        {
+          "blocks": "The lawful acquisition and actual processing purpose",
+          "correct": true,
+          "reason": "The boundary cannot be established from visibility alone."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does public visibility automatically establish a lawfully acquired biometric dataset?",
+          "options": [
+            {
+              "blocks": "Only whether the folder is labelled lawful",
+              "correct": false,
+              "reason": "A label does not establish acquisition legality."
+            },
+            {
+              "blocks": "The lawful acquisition and actual processing purpose",
+              "correct": true,
+              "reason": "The boundary cannot be established from visibility alone."
+            },
+            {
+              "blocks": "Nothing; all visible images are unrestricted",
+              "correct": false,
+              "reason": "Public availability is not blanket legal permission."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["sensitive-categorisation-ban", "lawful-dataset-boundary"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A categorisation function is outside this exact prohibition. Can the assessor skip Annex III and privacy law?",
+      "options": [
+        {
+          "blocks": "The entire Act has no more relevant rules",
+          "correct": false,
+          "reason": "Other purposes and duties can apply."
+        },
+        {
+          "blocks": "Other classification and legal checks still remain",
+          "correct": true,
+          "reason": "The boundary is not a complete compliance conclusion."
+        },
+        {
+          "blocks": "All sensitive inference is automatically authorised",
+          "correct": false,
+          "reason": "The conclusion must stay limited to the established facts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What follows from a point-specific sensitive-categorisation boundary result?",
+          "options": [
+            {
+              "blocks": "Other classification and legal checks still remain",
+              "correct": true,
+              "reason": "The boundary is not a complete compliance conclusion."
+            },
+            {
+              "blocks": "All sensitive inference is automatically authorised",
+              "correct": false,
+              "reason": "The conclusion must stay limited to the established facts."
+            },
+            {
+              "blocks": "The entire Act has no more relevant rules",
+              "correct": false,
+              "reason": "Other purposes and duties can apply."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

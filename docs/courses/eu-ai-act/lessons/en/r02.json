@@ -1,0 +1,211 @@
+{
+  "module": "Article 5: remote identification and synthesis",
+  "lesson": {
+    "slug": "r02",
+    "title": "Necessity, proportionality and safeguards",
+    "summary": "Balance use and non-use harms, limit the target and separate impact assessment from urgent registration.",
+    "covers": [
+      "necessity-proportionality-test",
+      "targeted-use-safeguards",
+      "identification-impact-registration"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i01",
+        "reason": "The assessment compares likelihood and severity of harm and rights effects."
+      },
+      {
+        "lesson": "r01",
+        "reason": "Necessity and proportionality must be assessed against one of the limited objectives."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A listed objective starts the assessment; **necessity and proportionality** still need evidence. Consider the nature of the situation, particularly the seriousness, probability and scale of harm if the system were not used.",
+        "Also consider the consequences of using it for the rights and freedoms of all concerned, particularly seriousness, probability and scale. A record discussing only operational benefits omits this second side."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(2); Articles 27 and 49 (cross-references)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Permitted use must confirm the identity of the **specifically targeted individual**. Necessary and proportionate national safeguards include temporal, geographic and personal limitations.",
+        "Fictional Northbridge search: specify the person, limited station area and necessary duration. Do not expand a particular missing-person objective into indefinite identity screening of everyone throughout the city."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(2); Articles 27 and 49 (cross-references)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Authorisation requires the law-enforcement authority to have completed a **fundamental rights impact assessment** under Article 27 and registered the system under Article 49.",
+        "In duly justified urgency, use may begin before EU database registration if registration follows without undue delay. This paragraph's urgency allowance concerns registration; it does not waive the completed impact assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(2); Articles 27 and 49 (cross-references)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Keep three records distinct: impact assessment, database registration and the authorisation process in R03. Different urgency provisions have different conditions and deadlines.",
+        "For the fictional case, evidence must support target, objective, both sides of the harm analysis, narrow limits, completed assessment and registration or its justified urgent sequence. Missing facts remain missing facts, even if the search is important."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(2); Articles 27 and 49 (cross-references)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["necessity-proportionality-test"],
+      "teaches": ["screen-1"],
+      "prompt": "A request records only the harm of not using identification. What analysis is missing?",
+      "options": [
+        {
+          "blocks": "Rights/freedoms consequences of use for all concerned",
+          "correct": true,
+          "reason": "Article 5(2) expressly requires consideration of both sides."
+        },
+        {
+          "blocks": "Only the supplier's subscription cost",
+          "correct": false,
+          "reason": "Cost alone does not supply the missing rights analysis."
+        },
+        {
+          "blocks": "Nothing if police consider the objective useful",
+          "correct": false,
+          "reason": "A useful objective does not replace the required assessment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What must accompany non-use harm in the necessity/proportionality record?",
+          "options": [
+            {
+              "blocks": "Only the supplier's subscription cost",
+              "correct": false,
+              "reason": "Cost alone does not supply the missing rights analysis."
+            },
+            {
+              "blocks": "Nothing if police consider the objective useful",
+              "correct": false,
+              "reason": "A useful objective does not replace the required assessment."
+            },
+            {
+              "blocks": "Rights/freedoms consequences of use for all concerned",
+              "correct": true,
+              "reason": "Article 5(2) expressly requires consideration of both sides."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["targeted-use-safeguards"],
+      "teaches": ["screen-2"],
+      "prompt": "A specific-person search becomes indefinite city-wide screening without further justification. What safeguard problem arises?",
+      "options": [
+        {
+          "blocks": "Only the model's brand",
+          "correct": false,
+          "reason": "A brand does not limit time, place or persons."
+        },
+        {
+          "blocks": "No limits once an objective is named",
+          "correct": false,
+          "reason": "The objective does not erase paragraph 2 safeguards."
+        },
+        {
+          "blocks": "Necessary temporal, geographic and personal limits",
+          "correct": true,
+          "reason": "The use must remain specifically targeted and limited."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which limits must stay tied to the specifically targeted individual?",
+          "options": [
+            {
+              "blocks": "No limits once an objective is named",
+              "correct": false,
+              "reason": "The objective does not erase paragraph 2 safeguards."
+            },
+            {
+              "blocks": "Necessary temporal, geographic and personal limits",
+              "correct": true,
+              "reason": "The use must remain specifically targeted and limited."
+            },
+            {
+              "blocks": "Only the model's brand",
+              "correct": false,
+              "reason": "A brand does not limit time, place or persons."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["identification-impact-registration"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "Duly justified urgency delays EU database registration. Can the authority also skip its completed impact assessment under this allowance?",
+      "options": [
+        {
+          "blocks": "Every safeguard until the investigation ends",
+          "correct": false,
+          "reason": "The exception does not erase other requirements."
+        },
+        {
+          "blocks": "Registration alone, completed without undue delay",
+          "correct": true,
+          "reason": "The paragraph does not waive the completed fundamental rights impact assessment."
+        },
+        {
+          "blocks": "Both registration and the impact assessment indefinitely",
+          "correct": false,
+          "reason": "The allowance is narrower and requires prompt registration."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which requirement is deferred by Article 5(2)'s urgent registration allowance?",
+          "options": [
+            {
+              "blocks": "Registration alone, completed without undue delay",
+              "correct": true,
+              "reason": "The paragraph does not waive the completed fundamental rights impact assessment."
+            },
+            {
+              "blocks": "Both registration and the impact assessment indefinitely",
+              "correct": false,
+              "reason": "The allowance is narrower and requires prompt registration."
+            },
+            {
+              "blocks": "Every safeguard until the investigation ends",
+              "correct": false,
+              "reason": "The exception does not erase other requirements."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: people, education and work",
+  "lesson": {
+    "slug": "a04",
+    "title": "Educational level and examination monitoring",
+    "summary": "Recognise educational-level assessment and exam-behaviour monitoring without conflating them.",
+    "covers": ["educational-level-use", "examination-monitoring-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "The learner must distinguish a listed-use match from the product route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Educational-level assessment** concerns deciding the appropriate level of education a person receives or can access in or within educational and vocational institutions at all levels.",
+        "An institution's AI deciding which level of programme a learner can enter illustrates the purpose. Voluntary study advice outside that institutional decision requires its own factual comparison rather than inheriting this case's result."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(c), 3(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Examination monitoring** includes AI monitoring and detecting prohibited student behaviour during tests in or within these institutions.",
+        "A fictional exam tool flagging suspected prohibited conduct is relevant even if a teacher later reviews its output. A human in the workflow does not automatically remove the listed intended purpose."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(c), 3(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Keep purpose and reliability separate. A product can have the relevant listed purpose while its claims about accuracy remain unproven. Record both what it is designed to do and how its output affects people.",
+        "Northbridge records whether a flag is shown, ignored, investigated or used to stop an exam. Those downstream consequences matter to the later significant-risk and decision-influence analysis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(c), 3(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "In a combined system, identify level-placement and exam-monitoring functions separately. Compare their institutional facts with points 3(c) and 3(d); then examine the remaining legal tests.",
+        "Calling a monitoring system 'student support' does not alter its actual conduct-detection purpose. Equally, do not claim every camera or every study tool fits the point without those facts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(c), 3(d); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["educational-level-use"],
+      "teaches": ["screen-1"],
+      "prompt": "An institution's AI assesses which level of education an individual can access. Which function is indicated?",
+      "options": [
+        {
+          "blocks": "Educational-level assessment",
+          "correct": true,
+          "reason": "Point 3(c) concerns the appropriate level received or accessible."
+        },
+        {
+          "blocks": "Only exam misconduct monitoring",
+          "correct": false,
+          "reason": "Monitoring test behaviour is a separate purpose."
+        },
+        {
+          "blocks": "Only general room booking",
+          "correct": false,
+          "reason": "Room logistics do not establish educational-level decisions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What educational purpose does individual programme-level placement describe?",
+          "options": [
+            {
+              "blocks": "Only exam misconduct monitoring",
+              "correct": false,
+              "reason": "Monitoring test behaviour is a separate purpose."
+            },
+            {
+              "blocks": "Only general room booking",
+              "correct": false,
+              "reason": "Room logistics do not establish educational-level decisions."
+            },
+            {
+              "blocks": "Educational-level assessment",
+              "correct": true,
+              "reason": "Point 3(c) concerns the appropriate level received or accessible."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["examination-monitoring-use"],
+      "teaches": ["screen-2"],
+      "prompt": "An exam tool detects suspected prohibited conduct for teacher review. Does teacher review alone remove the listed purpose?",
+      "options": [
+        {
+          "blocks": "Yes; every reviewed output is exempt",
+          "correct": false,
+          "reason": "That is not the intended-purpose test."
+        },
+        {
+          "blocks": "Yes; the support label controls",
+          "correct": false,
+          "reason": "A label does not override the actual function."
+        },
+        {
+          "blocks": "No; compare the actual purpose with point 3(d)",
+          "correct": true,
+          "reason": "The point concerns monitoring/detection, not only automatic final penalties."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can human review alone erase an AI tool's exam-behaviour monitoring purpose?",
+          "options": [
+            {
+              "blocks": "Yes; the support label controls",
+              "correct": false,
+              "reason": "A label does not override the actual function."
+            },
+            {
+              "blocks": "No; compare the actual purpose with point 3(d)",
+              "correct": true,
+              "reason": "The point concerns monitoring/detection, not only automatic final penalties."
+            },
+            {
+              "blocks": "Yes; every reviewed output is exempt",
+              "correct": false,
+              "reason": "That is not the intended-purpose test."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["educational-level-use", "examination-monitoring-use"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "What should Northbridge record about an exam flag's use?",
+      "options": [
+        {
+          "blocks": "Only the vendor's accuracy slogan",
+          "correct": false,
+          "reason": "A slogan is not evidence of actual decision use."
+        },
+        {
+          "blocks": "Its effects on review, examination and people",
+          "correct": true,
+          "reason": "Actual consequences support later risk and influence analysis."
+        },
+        {
+          "blocks": "Only the screen's colour scheme",
+          "correct": false,
+          "reason": "That omits the consequential use of the output."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why describe what happens after the system detects suspected exam misconduct?",
+          "options": [
+            {
+              "blocks": "Its effects on review, examination and people",
+              "correct": true,
+              "reason": "Actual consequences support later risk and influence analysis."
+            },
+            {
+              "blocks": "Only the screen's colour scheme",
+              "correct": false,
+              "reason": "That omits the consequential use of the output."
+            },
+            {
+              "blocks": "Only the vendor's accuracy slogan",
+              "correct": false,
+              "reason": "A slogan is not evidence of actual decision use."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

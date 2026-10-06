@@ -1,0 +1,207 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i05",
+    "title": "When the Act applies",
+    "summary": "Check the EU connection, exact exclusions and laws that continue to apply.",
+    "covers": [
+      "eu-scope-test",
+      "scope-exclusion-check",
+      "other-law-relationship"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i04",
+        "reason": "Territorial scope requires identifying which provider is connected to the Union. The territorial test separately considers where the deployer is located."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Territorial scope** is the Act's connection to the Union. It includes providers supplying systems or models in the Union, deployers established or located there, and certain third-country providers or deployers when system outputs are used in the Union.",
+        "A non-EU vendor serving Northbridge in the EU is not outside scope merely because its server or office is overseas. First identify the actors and the relevant supply or use; location alone does not settle every paragraph."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 2(1)–(13)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Scope exclusions** have exact conditions. Article 2 addresses exclusively military, defence or national-security purposes; sole scientific research and development; and research, testing or development before market placement or service.",
+        "A commercial hiring pilot is not automatically excluded because someone calls it research. The pre-market research exclusion does not cover testing in real-world conditions. Exclusivity and the exact stage need evidence; other applicable law still matters."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 2(1)–(13)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Personal non-professional activity is treated differently from professional deployment. Free and open-source system releases have a conditional exclusion, with high-risk, Article 5 and Article 50 cases outside that exclusion.",
+        "Northbridge cannot assume an open-source recruitment system is exempt. Article 2 also contains specific sector limits and conditional equivalent-protection provisions. Their exact product and obligation scope must be looked up; they are not a general exemption for regulated industries."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 2(1)–(13)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The **relationship with other law** is cumulative. Personal-data, privacy, consumer and product-safety rules can remain applicable. More protective worker rules can also matter. Completing an AI Act assessment does not grant permission under every other law.",
+        "For Northbridge, retain a separate list of data-protection, employment and sector questions. A legally excluded AI Act activity may still be regulated elsewhere; 'out of this Act's scope' is a narrow conclusion."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 2(1)–(13)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["eu-scope-test"],
+      "teaches": ["screen-1"],
+      "prompt": "A vendor outside the EU supplies an AI system for Northbridge's EU use. What should the assessor do?",
+      "options": [
+        {
+          "blocks": "Examine the Union supply and use connections",
+          "correct": true,
+          "reason": "Article 2 covers relevant connections regardless of supplier location."
+        },
+        {
+          "blocks": "Exclude it because the server is overseas",
+          "correct": false,
+          "reason": "Server location is not the entire territorial test."
+        },
+        {
+          "blocks": "Ignore the customer and assess only nationality",
+          "correct": false,
+          "reason": "Relevant actors, establishment and use must be examined."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an overseas supplier's location alone settle AI Act territorial scope for an EU customer?",
+          "options": [
+            {
+              "blocks": "Exclude it because the server is overseas",
+              "correct": false,
+              "reason": "Server location is not the entire territorial test."
+            },
+            {
+              "blocks": "Ignore the customer and assess only nationality",
+              "correct": false,
+              "reason": "Relevant actors, establishment and use must be examined."
+            },
+            {
+              "blocks": "Examine the Union supply and use connections",
+              "correct": true,
+              "reason": "Article 2 covers relevant connections regardless of supplier location."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["scope-exclusion-check"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "Northbridge labels live applicant testing a research pilot. What follows?",
+      "options": [
+        {
+          "blocks": "All research-labelled activity is excluded",
+          "correct": false,
+          "reason": "The rule has purpose, stage and real-world limits."
+        },
+        {
+          "blocks": "Every open-source tool is excluded automatically",
+          "correct": false,
+          "reason": "High-risk and specified practice cases limit that exclusion."
+        },
+        {
+          "blocks": "Check the exclusion's conditions; the label is insufficient",
+          "correct": true,
+          "reason": "Real-world testing is not covered by that particular exclusion."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a professional real-world pilot claim the pre-market research exclusion from its label alone?",
+          "options": [
+            {
+              "blocks": "Every open-source tool is excluded automatically",
+              "correct": false,
+              "reason": "High-risk and specified practice cases limit that exclusion."
+            },
+            {
+              "blocks": "Check the exclusion's conditions; the label is insufficient",
+              "correct": true,
+              "reason": "Real-world testing is not covered by that particular exclusion."
+            },
+            {
+              "blocks": "All research-labelled activity is excluded",
+              "correct": false,
+              "reason": "The rule has purpose, stage and real-world limits."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["other-law-relationship"],
+      "teaches": ["screen-4"],
+      "prompt": "A use falls outside one AI Act rule. What should Northbridge record about personal-data law?",
+      "options": [
+        {
+          "blocks": "A vendor can waive all laws by contract",
+          "correct": false,
+          "reason": "A contract does not supply a general legal exemption."
+        },
+        {
+          "blocks": "Other applicable laws require their own analysis",
+          "correct": true,
+          "reason": "Article 2 preserves other legal protections."
+        },
+        {
+          "blocks": "All other laws cease to apply",
+          "correct": false,
+          "reason": "An AI Act scope conclusion has no such effect."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an AI Act exclusion automatically remove GDPR or employment-law duties?",
+          "options": [
+            {
+              "blocks": "Other applicable laws require their own analysis",
+              "correct": true,
+              "reason": "Article 2 preserves other legal protections."
+            },
+            {
+              "blocks": "All other laws cease to apply",
+              "correct": false,
+              "reason": "An AI Act scope conclusion has no such effect."
+            },
+            {
+              "blocks": "A vendor can waive all laws by contract",
+              "correct": false,
+              "reason": "A contract does not supply a general legal exemption."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

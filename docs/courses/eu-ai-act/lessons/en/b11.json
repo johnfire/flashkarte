@@ -1,0 +1,223 @@
+{
+  "module": "Article 5: biometrics and synthetic media",
+  "lesson": {
+    "slug": "b11",
+    "title": "Child sexual abuse material",
+    "summary": "Use the incorporated child-abuse material/performance definitions and check national-law qualifications without graphic content.",
+    "covers": ["child-abuse-material-lookup", "child-abuse-generation-ban"],
+    "prerequisites": [
+      {
+        "lesson": "i06",
+        "reason": "The incorporated material/performance definitions require following exact legal locators."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The learner must distinguish the action and purpose elements from the material definition."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The new point (bb) addresses AI generating or manipulating material or performance within Directive 2011/93/EU Article 2(c) and (e). The **incorporated-definition lookup** is essential: a cross-reference supplies part of the legal test.",
+        "The Directive defines a child as under 18. Its material definitions include specified real/simulated depictions, persons appearing to be children, and realistic synthetic depictions. We teach the lookup without images or graphic examples."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(bb), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Directive 2011/93/EU, Article 2(a), 2(c), 2(e): incorporated definitions",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1447190728317&uri=CELEX:32011L0093"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 2(e) concerns a live exhibition aimed at an audience, including via communication technology, with specified child sexual-abuse content. A file and a live performance need comparison with the appropriate incorporated definitions.",
+        "A synthetic origin does not by itself exclude the realistic-material category. Do not invent a blanket 'no real child means lawful' rule."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(bb), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Directive 2011/93/EU, Article 2(a), 2(c), 2(e): incorporated definitions",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1447190728317&uri=CELEX:32011L0093"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The **generation/manipulation ban** includes an exception where a 'without right' defence applies under national law. This requires the actual national provision and facts; it is not a self-declared exemption.",
+        "Our fictional safeguarding case leaves jurisdiction unspecified. The correct outcome is to identify the national-law question, not assume a defence or give a jurisdiction-specific permission without a source."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(bb), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Directive 2011/93/EU, Article 2(a), 2(c), 2(e): incorporated definitions",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1447190728317&uri=CELEX:32011L0093"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Point (bb) and paragraph 1a apply from **2 December 2026** in the working baseline. The next lesson separates supplier and deployer tests. Other criminal and safeguarding law remains independently relevant.",
+        "An assessment needs the incorporated content category, actor/action, date and any verified national-law qualification. No creation, demonstration or storage of abusive material is needed to learn this legal method."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(bb), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Directive 2011/93/EU, Article 2(a), 2(c), 2(e): incorporated definitions",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?qid=1447190728317&uri=CELEX:32011L0093"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["child-abuse-material-lookup"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A claim says realistic synthetic material is excluded because no real child was photographed. What should the legal lookup check?",
+      "options": [
+        {
+          "blocks": "Article 2(c)'s actual incorporated categories",
+          "correct": true,
+          "reason": "The definition includes a realistic synthetic-material category."
+        },
+        {
+          "blocks": "Only whether a camera was used",
+          "correct": false,
+          "reason": "Camera use alone does not decide those definitions."
+        },
+        {
+          "blocks": "Only whether the supplier calls it fictional",
+          "correct": false,
+          "reason": "A fiction label cannot replace the statutory lookup."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does synthetic origin alone remove the incorporated realistic-material category?",
+          "options": [
+            {
+              "blocks": "Only whether a camera was used",
+              "correct": false,
+              "reason": "Camera use alone does not decide those definitions."
+            },
+            {
+              "blocks": "Only whether the supplier calls it fictional",
+              "correct": false,
+              "reason": "A fiction label cannot replace the statutory lookup."
+            },
+            {
+              "blocks": "Article 2(c)'s actual incorporated categories",
+              "correct": true,
+              "reason": "The definition includes a realistic synthetic-material category."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["child-abuse-generation-ban"],
+      "teaches": ["screen-3"],
+      "prompt": "The jurisdiction is unknown and a supplier asserts a 'without right' defence. What is the sound conclusion?",
+      "options": [
+        {
+          "blocks": "Any supplier assertion establishes the defence",
+          "correct": false,
+          "reason": "A claim is not the applicable legal provision."
+        },
+        {
+          "blocks": "The course should invent a national exception",
+          "correct": false,
+          "reason": "Inventing a defence would be unsupported."
+        },
+        {
+          "blocks": "The defence remains unverified; obtain the law and facts",
+          "correct": true,
+          "reason": "The qualification depends on actual national law."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should a national-law defence claim be handled without the governing national source?",
+          "options": [
+            {
+              "blocks": "The course should invent a national exception",
+              "correct": false,
+              "reason": "Inventing a defence would be unsupported."
+            },
+            {
+              "blocks": "The defence remains unverified; obtain the law and facts",
+              "correct": true,
+              "reason": "The qualification depends on actual national law."
+            },
+            {
+              "blocks": "Any supplier assertion establishes the defence",
+              "correct": false,
+              "reason": "A claim is not the applicable legal provision."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["child-abuse-material-lookup", "child-abuse-generation-ban"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "What is needed for this lesson's legal assessment exercise?",
+      "options": [
+        {
+          "blocks": "All other law can be ignored until December",
+          "correct": false,
+          "reason": "The AI Act date does not postpone independent law."
+        },
+        {
+          "blocks": "Non-graphic legal categories and case facts",
+          "correct": true,
+          "reason": "The legal reasoning needs definitions and facts, not harmful demonstrations."
+        },
+        {
+          "blocks": "Real images must be generated to understand the rule",
+          "correct": false,
+          "reason": "No such generation is required for the legal lookup."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the incorporated-definition and actor tests be learned without abusive material demonstrations?",
+          "options": [
+            {
+              "blocks": "Non-graphic legal categories and case facts",
+              "correct": true,
+              "reason": "The legal reasoning needs definitions and facts, not harmful demonstrations."
+            },
+            {
+              "blocks": "Real images must be generated to understand the rule",
+              "correct": false,
+              "reason": "No such generation is required for the legal lookup."
+            },
+            {
+              "blocks": "All other law can be ignored until December",
+              "correct": false,
+              "reason": "The AI Act date does not postpone independent law."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

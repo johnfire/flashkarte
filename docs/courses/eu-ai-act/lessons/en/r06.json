@@ -1,0 +1,227 @@
+{
+  "module": "Article 5: remote identification and synthesis",
+  "lesson": {
+    "slug": "r06",
+    "title": "Prohibition and classification capstone",
+    "summary": "Combine biometric-practice analysis with prohibition, classification, timing and evidence in a bounded final assessment.",
+    "covers": ["biometric-prohibition-assessment", "final-assessment"],
+    "prerequisites": [
+      {
+        "lesson": "e08",
+        "reason": "The final case requires a classification conclusion after prohibition screening."
+      },
+      {
+        "lesson": "b06",
+        "reason": "The final case includes the harmful-decision prohibition tests."
+      },
+      {
+        "lesson": "b07",
+        "reason": "The synthesis includes untargeted scraping for a facial-recognition database."
+      },
+      {
+        "lesson": "b08",
+        "reason": "The synthesis includes the medical/safety boundary of the emotion prohibition."
+      },
+      {
+        "lesson": "b09",
+        "reason": "The synthesis includes the categorisation prohibition and its stated boundary."
+      },
+      {
+        "lesson": "b12",
+        "reason": "The final case includes the distinct tests and date for the added synthetic-media prohibitions."
+      },
+      {
+        "lesson": "r03",
+        "reason": "The synthesis includes a remote-identification authorisation refusal."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "For **biometric-practice synthesis**, identify the function before the legal label: identity verification, remote identification, categorisation or emotion inference. Then establish data, purpose, actor, setting and timing.",
+        "Fictional Northbridge bundle contains workplace facial emotion scoring, post-event identification and a missing-person real-time station search. Shared camera hardware does not make their intended functions or prohibition tests identical."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2–6, 5(1a)–(8), 6(3)–(4), 113; Annexes I–III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The workplace emotion function needs Article 5(1)(f)'s elements and medical/safety boundary; do not substitute a wellbeing label. The real-time search needs a listed strictly necessary objective plus paragraphs 2–3 and applicable national rules.",
+        "The post-event function has a different real-time fact, but may remain listed under Annex III and subject to other law. A narrowly permitted use remains subject to independent classification, privacy and decision requirements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2–6, 5(1a)–(8), 6(3)–(4), 113; Annexes I–III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **final prohibition and classification assessment** begins with source version, scope, AI-system/actor definitions, intended purpose and evidence. Apply each relevant prohibition with its complete elements. Then test the appropriate Annex I or Annex III classification route.",
+        "For an Annex III exception, retain the no-significant-harm/material-influence gateway, a qualifying condition and the profiling override. Document any exemption assessment and registration obligations. Stipulated sector facts are case assumptions, not an unsourced real-world product classification."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2–6, 5(1a)–(8), 6(3)–(4), 113; Annexes I–III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Finish with dates and unresolved questions. In this baseline, the new synthetic-media points apply on 2 December 2026; Annex III high-risk obligations have a 2 December 2027 date and Annex I a 2 August 2028 date under Article 113's specified section rules. Other applicable rules have their own dates.",
+        "A useful handoff identifies the conclusion, exact provision, facts supporting each element, remaining evidence, responsible reviewer and applicable date. This English first release teaches foundations, Article 6 and Article 5; full downstream obligations and the dedicated Article 50 block remain follow-on teaching."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2–6, 5(1a)–(8), 6(3)–(4), 113; Annexes I–III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["biometric-prohibition-assessment"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Three functions share a camera: emotion scoring, post-event identification and real-time missing-person search. What is the sound first step?",
+      "options": [
+        {
+          "blocks": "Separate intended functions, settings and relevant tests",
+          "correct": true,
+          "reason": "Different functions and facts engage different definitions and conditions."
+        },
+        {
+          "blocks": "Treat all three as automatically permitted identity verification",
+          "correct": false,
+          "reason": "The bundle contains materially different functions."
+        },
+        {
+          "blocks": "Assign one result from the camera brand",
+          "correct": false,
+          "reason": "Brand does not establish the legal function or purpose."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can common hardware establish one identical prohibition result for every biometric function?",
+          "options": [
+            {
+              "blocks": "Treat all three as automatically permitted identity verification",
+              "correct": false,
+              "reason": "The bundle contains materially different functions."
+            },
+            {
+              "blocks": "Assign one result from the camera brand",
+              "correct": false,
+              "reason": "Brand does not establish the legal function or purpose."
+            },
+            {
+              "blocks": "Separate intended functions, settings and relevant tests",
+              "correct": true,
+              "reason": "Different functions and facts engage different definitions and conditions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["final-assessment"],
+      "teaches": ["screen-3"],
+      "prompt": "An Annex III workflow is called administrative but significantly influences decisions and profiles people. What can be concluded about the exception?",
+      "options": [
+        {
+          "blocks": "Any administrative label automatically grants exemption",
+          "correct": false,
+          "reason": "The full statutory exception conditions must be met."
+        },
+        {
+          "blocks": "Only the low subscription price decides classification",
+          "correct": false,
+          "reason": "Price is not the gateway or profiling test."
+        },
+        {
+          "blocks": "Those facts do not establish the Article 6(3) exception",
+          "correct": true,
+          "reason": "Labels cannot waive the gateway, and profiling keeps an Annex III system high-risk."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Do administrative labels remove the harm/material-influence gateway and profiling override?",
+          "options": [
+            {
+              "blocks": "Only the low subscription price decides classification",
+              "correct": false,
+              "reason": "Price is not the gateway or profiling test."
+            },
+            {
+              "blocks": "Those facts do not establish the Article 6(3) exception",
+              "correct": true,
+              "reason": "Labels cannot waive the gateway, and profiling keeps an Annex III system high-risk."
+            },
+            {
+              "blocks": "Any administrative label automatically grants exemption",
+              "correct": false,
+              "reason": "The full statutory exception conditions must be met."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["biometric-prohibition-assessment", "final-assessment"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A final memo gives a classification but no version, supporting facts or applicable date. What should be added?",
+      "options": [
+        {
+          "blocks": "A new jurisdiction-specific defence invented for the case",
+          "correct": false,
+          "reason": "National qualifications require actual governing sources."
+        },
+        {
+          "blocks": "Sources, element-by-element evidence, dates and unresolved questions",
+          "correct": true,
+          "reason": "A bounded conclusion must be supported and timed, with gaps visible."
+        },
+        {
+          "blocks": "Only a confident claim of universal compliance",
+          "correct": false,
+          "reason": "Confidence does not replace evidence or scope."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What makes the course's final assessment useful for a responsible reviewer?",
+          "options": [
+            {
+              "blocks": "Sources, element-by-element evidence, dates and unresolved questions",
+              "correct": true,
+              "reason": "A bounded conclusion must be supported and timed, with gaps visible."
+            },
+            {
+              "blocks": "Only a confident claim of universal compliance",
+              "correct": false,
+              "reason": "Confidence does not replace evidence or scope."
+            },
+            {
+              "blocks": "A new jurisdiction-specific defence invented for the case",
+              "correct": false,
+              "reason": "National qualifications require actual governing sources."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

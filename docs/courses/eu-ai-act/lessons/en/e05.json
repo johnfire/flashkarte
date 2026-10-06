@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e05",
+    "title": "Preparatory tasks",
+    "summary": "Test genuinely preparatory work without assuming everything early in a pipeline is exempt.",
+    "covers": ["preparatory-task-condition"],
+    "prerequisites": [
+      {
+        "lesson": "e01",
+        "reason": "A preparatory-task label does not bypass the gateway or its decision-influence analysis."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **preparatory-task condition** concerns work preparing an assessment relevant to an Annex III use case. Identify the assessment, what the preparation supplies, and what it does not decide.",
+        "Preparation is an intended-function question. A component appearing early in a pipeline may still make substantive choices that shape the final result."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(d), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Fictional Northbridge: a tool arranges already supplied materials into a neutral indexed bundle for a later assessment, without personal evaluation or substantive recommendations. This illustrates a preparation hypothesis.",
+        "The gateway, actual decision effects and profiling rule still need evidence. A useful index can be different from a generated suitability score, even if both occur before the final reviewer."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(d), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed fact: the bundle silently omits unfavourably scored applicants. The tool now influences who can be assessed. Calling the omission 'preparation' does not prove it is harmless.",
+        "Changed fact: it summarises materials selectively in a way that changes substantive assessment. Record that effect and investigate significance rather than declaring the output neutral."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(d), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Record inputs, transformation, selection rules, output and downstream reliance. Distinguish purely preparing material from evaluating people or steering outcomes.",
+        "The full test remains the no-significant-risk gateway plus a fitting condition and no applicable profiling override. The four conditions are alternatives; their shared gateway is not optional."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(d), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["preparatory-task-condition"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A tool creates a neutral material index before a listed assessment. How should its role be considered?",
+      "options": [
+        {
+          "blocks": "The assessment prepared and the exact non-decision function",
+          "correct": true,
+          "reason": "The condition depends on actual preparation, not just chronology."
+        },
+        {
+          "blocks": "Only that it runs first",
+          "correct": false,
+          "reason": "An early component can still steer a substantive decision."
+        },
+        {
+          "blocks": "Only the file's size",
+          "correct": false,
+          "reason": "Size does not establish the task's legal character."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should a preparatory-task analysis identify?",
+          "options": [
+            {
+              "blocks": "Only that it runs first",
+              "correct": false,
+              "reason": "An early component can still steer a substantive decision."
+            },
+            {
+              "blocks": "Only the file's size",
+              "correct": false,
+              "reason": "Size does not establish the task's legal character."
+            },
+            {
+              "blocks": "The assessment prepared and the exact non-decision function",
+              "correct": true,
+              "reason": "The condition depends on actual preparation, not just chronology."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["preparatory-task-condition"],
+      "teaches": ["screen-3"],
+      "prompt": "A preparatory bundle omits applicants based on suitability predictions. What is the key change?",
+      "options": [
+        {
+          "blocks": "There is no change because it runs early",
+          "correct": false,
+          "reason": "Chronology does not erase evaluation or influence."
+        },
+        {
+          "blocks": "The omissions always establish insignificant harm",
+          "correct": false,
+          "reason": "Their consequences must be assessed."
+        },
+        {
+          "blocks": "Its substantive selection and influence need reassessment",
+          "correct": true,
+          "reason": "The tool now affects who reaches the decision process."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can predictive applicant exclusion be ignored because the bundle is generated before final assessment?",
+          "options": [
+            {
+              "blocks": "The omissions always establish insignificant harm",
+              "correct": false,
+              "reason": "Their consequences must be assessed."
+            },
+            {
+              "blocks": "Its substantive selection and influence need reassessment",
+              "correct": true,
+              "reason": "The tool now affects who reaches the decision process."
+            },
+            {
+              "blocks": "There is no change because it runs early",
+              "correct": false,
+              "reason": "Chronology does not erase evaluation or influence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["preparatory-task-condition"],
+      "teaches": ["screen-4"],
+      "prompt": "Which checks remain after a preparatory function is established?",
+      "options": [
+        {
+          "blocks": "Only the subscription renewal date",
+          "correct": false,
+          "reason": "Commercial renewal is not the required classification check."
+        },
+        {
+          "blocks": "The harm gateway and profiling rule still apply",
+          "correct": true,
+          "reason": "A fitting condition is one part of the combined test."
+        },
+        {
+          "blocks": "None; preparation is blanket permission",
+          "correct": false,
+          "reason": "That omits independent requirements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does proving one preparatory task settle the whole paragraph 3 derogation?",
+          "options": [
+            {
+              "blocks": "The harm gateway and profiling rule still apply",
+              "correct": true,
+              "reason": "A fitting condition is one part of the combined test."
+            },
+            {
+              "blocks": "None; preparation is blanket permission",
+              "correct": false,
+              "reason": "That omits independent requirements."
+            },
+            {
+              "blocks": "Only the subscription renewal date",
+              "correct": false,
+              "reason": "Commercial renewal is not the required classification check."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

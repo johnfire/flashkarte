@@ -1,0 +1,198 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i01",
+    "title": "What the Act regulates",
+    "summary": "Find the right regulatory layer, distinguish likelihood from severity, and support practical AI literacy.",
+    "covers": ["ai-act-map", "risk", "ai-literacy-support"],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**The AI Act** is Regulation (EU) 2024/1689. It promotes trustworthy AI and innovation while protecting health, safety and fundamental rights. It regulates specific activities and actors, rather than giving every technology a single permission label.",
+        "We follow a fictional organisation, **Northbridge**, considering several AI tools. Its name and cases are invented. Each case needs its own facts and legal test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 1, 3(2), 3(56), 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 1 maps several regulatory layers: prohibited practices, high-risk systems, transparency, general-purpose models, governance and innovation support. A prohibition asks whether a particular practice is forbidden. High-risk classification asks which regulatory route a system enters.",
+        "These questions can overlap. Passing one test does not answer all the others. This first course develops foundations, high-risk classification and prohibited practices; later parts cover the remaining layers."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 1, 3(2), 3(56), 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Risk** combines how likely harm is with how severe it would be. A frequent small inconvenience and a rare serious injury have different risk profiles. A low error rate alone cannot show that the consequences are acceptable.",
+        "Northbridge records both the chance of a tool making a mistake and what that mistake could do to people. The statutory definition does not prescribe one numerical formula for every assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 1, 3(2), 3(56), 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**AI literacy** is knowledge and judgment enabling informed use and awareness of opportunities, risks and harm. Under amended Article 4, providers and deployers must take measures supporting staff and other people operating AI on their behalf, considering experience, training, use context and affected people.",
+        "Northbridge trains its recruitment team on the tool's limits and review process. The rule does not require a particular certificate or a guaranteed level for each individual. Tailor the support to the actual work."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 1, 3(2), 3(56), 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["ai-act-map"],
+      "teaches": ["screen-2"],
+      "prompt": "Northbridge wants to know whether a practice is forbidden. Which layer should it examine first?",
+      "options": [
+        {
+          "blocks": "The prohibited-practices rules",
+          "correct": true,
+          "reason": "Article 5 addresses prohibitions; a classification alone is insufficient."
+        },
+        {
+          "blocks": "The model's general capabilities",
+          "correct": false,
+          "reason": "Model capabilities do not answer the specific prohibition test."
+        },
+        {
+          "blocks": "The innovation-support measures",
+          "correct": false,
+          "reason": "Support measures do not decide whether a practice is forbidden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which regulatory layer answers whether a proposed AI practice is prohibited?",
+          "options": [
+            {
+              "blocks": "The model's general capabilities",
+              "correct": false,
+              "reason": "Model capabilities do not answer the specific prohibition test."
+            },
+            {
+              "blocks": "The innovation-support measures",
+              "correct": false,
+              "reason": "Support measures do not decide whether a practice is forbidden."
+            },
+            {
+              "blocks": "The prohibited-practices rules",
+              "correct": true,
+              "reason": "Article 5 addresses prohibitions; a classification alone is insufficient."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["risk"],
+      "teaches": ["screen-3"],
+      "prompt": "A tool rarely makes errors, but one error could seriously injure someone. What must the risk record include?",
+      "options": [
+        {
+          "blocks": "Only the number of recorded errors",
+          "correct": false,
+          "reason": "Frequency omits the seriousness of the outcome."
+        },
+        {
+          "blocks": "Only the tool's purchase price",
+          "correct": false,
+          "reason": "Price does not establish the probability or severity of harm."
+        },
+        {
+          "blocks": "Both likelihood and severity of harm",
+          "correct": true,
+          "reason": "Article 3(2) combines probability and severity."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why is an error-frequency report insufficient when an error could cause serious harm?",
+          "options": [
+            {
+              "blocks": "Only the tool's purchase price",
+              "correct": false,
+              "reason": "Price does not establish the probability or severity of harm."
+            },
+            {
+              "blocks": "Both likelihood and severity of harm",
+              "correct": true,
+              "reason": "Article 3(2) combines probability and severity."
+            },
+            {
+              "blocks": "Only the number of recorded errors",
+              "correct": false,
+              "reason": "Frequency omits the seriousness of the outcome."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["ai-literacy-support"],
+      "teaches": ["screen-4"],
+      "prompt": "Which measure best fits Northbridge's literacy duty for staff using a recruitment tool?",
+      "options": [
+        {
+          "blocks": "Buy a certificate and omit practical support",
+          "correct": false,
+          "reason": "A certificate alone does not establish relevant literacy support."
+        },
+        {
+          "blocks": "Train them on its limits and use context",
+          "correct": true,
+          "reason": "Support should reflect experience, context and people affected."
+        },
+        {
+          "blocks": "Guarantee every employee passes one exam",
+          "correct": false,
+          "reason": "Article 4 does not require a guaranteed individual level."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should Northbridge support staff who operate an unfamiliar AI tool?",
+          "options": [
+            {
+              "blocks": "Train them on its limits and use context",
+              "correct": true,
+              "reason": "Support should reflect experience, context and people affected."
+            },
+            {
+              "blocks": "Guarantee every employee passes one exam",
+              "correct": false,
+              "reason": "Article 4 does not require a guaranteed individual level."
+            },
+            {
+              "blocks": "Buy a certificate and omit practical support",
+              "correct": false,
+              "reason": "A certificate alone does not establish relevant literacy support."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

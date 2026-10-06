@@ -1,0 +1,223 @@
+{
+  "module": "Article 6: product and safety classification",
+  "lesson": {
+    "slug": "p06",
+    "title": "How classification rules can change",
+    "summary": "Track guidance and delegated changes without confusing drafts or proposals with binding amendments.",
+    "covers": [
+      "classification-guidance",
+      "delegated-classification-change",
+      "protection-constraint"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i06",
+        "reason": "The learner must distinguish guidance status before reading the classification guidance mandate. The learner must identify the legal provision that a delegated act would change."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "This **extension lesson** explains change mechanisms. It does not gate the core classification path. Article 6(5) provides for Commission classification guidance and examples. Examples help compare facts but are not exhaustive or replacements for the law.",
+        "The publication checked on 6 October 2026 remains labelled draft. Always check document identity, status and date again before applying an example to a live decision."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(5)–(8), Article 7, Article 97",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission draft classification guidance: publication and draft status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **delegated act** is a legal mechanism for specified changes under a regulation's authority. Article 6(6) allows adding or modifying paragraph 3 conditions where concrete, reliable evidence shows relevant Annex III systems lack significant harm risk.",
+        "A consultation or vendor request is not itself such an amendment. Track the adopted instrument and when it has legal effect."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(5)–(8), Article 7, Article 97",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission draft classification guidance: publication and draft status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Article 6(7) requires deleting a derogation condition when concrete, reliable evidence shows that doing so is needed to maintain protection. Paragraph 8 bars decreasing the overall level of protection and requires consistency with the Annex III change mechanism.",
+        "Change powers are therefore constrained. The lesson does not predict which conditions will be added or deleted."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(5)–(8), Article 7, Article 97",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission draft classification guidance: publication and draft status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Article 7 concerns adding or modifying Annex III use cases in the listed areas using its risk criteria; removal has separate conditions. Keep this distinct from paragraph 3 derogation changes.",
+        "A maintainable assessment stores the baseline, monitors actual amendments and rechecks affected facts and rules. Do not freeze a draft example as a permanent statutory exemption."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(5)–(8), Article 7, Article 97",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission draft classification guidance: publication and draft status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["classification-guidance"],
+      "teaches": ["screen-1"],
+      "prompt": "A draft guideline supplies a useful classification example. What status should the record preserve?",
+      "options": [
+        {
+          "blocks": "Draft non-binding guidance with its date",
+          "correct": true,
+          "reason": "Its interpretive and draft status must remain visible."
+        },
+        {
+          "blocks": "A binding statutory exemption",
+          "correct": false,
+          "reason": "Guidance does not itself amend the Act."
+        },
+        {
+          "blocks": "An exhaustive list of every possible system",
+          "correct": false,
+          "reason": "The publication does not claim exhaustive coverage."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an assessor cite an example from a still-draft classification document?",
+          "options": [
+            {
+              "blocks": "A binding statutory exemption",
+              "correct": false,
+              "reason": "Guidance does not itself amend the Act."
+            },
+            {
+              "blocks": "An exhaustive list of every possible system",
+              "correct": false,
+              "reason": "The publication does not claim exhaustive coverage."
+            },
+            {
+              "blocks": "Draft non-binding guidance with its date",
+              "correct": true,
+              "reason": "Its interpretive and draft status must remain visible."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["delegated-classification-change"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A consultation proposes a new paragraph 3 condition. What should an assessor verify before applying it as law?",
+      "options": [
+        {
+          "blocks": "Only the consultation's popularity",
+          "correct": false,
+          "reason": "Popularity does not establish legal effect."
+        },
+        {
+          "blocks": "Only a supplier's agreement with it",
+          "correct": false,
+          "reason": "Supplier agreement cannot enact an amendment."
+        },
+        {
+          "blocks": "The adopted legal instrument and its effect date",
+          "correct": true,
+          "reason": "A proposal is distinct from a legally effective change."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a proposed change become an operative derogation when a consultation opens?",
+          "options": [
+            {
+              "blocks": "Only a supplier's agreement with it",
+              "correct": false,
+              "reason": "Supplier agreement cannot enact an amendment."
+            },
+            {
+              "blocks": "The adopted legal instrument and its effect date",
+              "correct": true,
+              "reason": "A proposal is distinct from a legally effective change."
+            },
+            {
+              "blocks": "Only the consultation's popularity",
+              "correct": false,
+              "reason": "Popularity does not establish legal effect."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["protection-constraint"],
+      "teaches": ["screen-3"],
+      "prompt": "What constrains paragraph 3 changes under Article 6(8)?",
+      "options": [
+        {
+          "blocks": "They automatically repeal Article 5",
+          "correct": false,
+          "reason": "The mechanism does not confer a power to erase prohibitions."
+        },
+        {
+          "blocks": "They must preserve overall protection and consistency",
+          "correct": true,
+          "reason": "Paragraph 8 supplies those express constraints."
+        },
+        {
+          "blocks": "They may ignore health and fundamental rights",
+          "correct": false,
+          "reason": "That contradicts the protection constraint."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the paragraph 3 change mechanism reduce overall protection without qualification?",
+          "options": [
+            {
+              "blocks": "They must preserve overall protection and consistency",
+              "correct": true,
+              "reason": "Paragraph 8 supplies those express constraints."
+            },
+            {
+              "blocks": "They may ignore health and fundamental rights",
+              "correct": false,
+              "reason": "That contradicts the protection constraint."
+            },
+            {
+              "blocks": "They automatically repeal Article 5",
+              "correct": false,
+              "reason": "The mechanism does not confer a power to erase prohibitions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

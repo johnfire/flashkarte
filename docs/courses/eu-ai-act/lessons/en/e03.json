@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e03",
+    "title": "Improving completed human work",
+    "summary": "Test improvement of genuinely completed human work rather than replacement of an unfinished judgment.",
+    "covers": ["completed-human-work-condition"],
+    "prerequisites": [
+      {
+        "lesson": "e01",
+        "reason": "Completed human work does not bypass the gateway or its decision-influence analysis."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **completed-human-work condition** concerns AI intended to improve the result of a human activity already completed. Identify that earlier activity and its completed result.",
+        "Do not treat a blank form or an unfinished recommendation as completed human assessment. Completion is a factual requirement, not a synonym for 'a person is somewhere in the process'."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(b), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Fictional Northbridge: a person has completed a written report; a tool corrects spelling without changing findings. The case illustrates an improvement-of-completed-work hypothesis.",
+        "The actual function and effects still require the gateway and profiling checks. This example is not a guarantee that every writing assistant satisfies a derogation in every listed context."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(b), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed case: before the person has evaluated an applicant, the tool supplies the substantive suitability recommendation. That is different from improving a completed result.",
+        "Changed case: the tool rewrites a completed finding and alters its meaning. Assess whether the claimed improvement now materially influences the decision or creates significant risk."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(b), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The record should identify the completed activity, the allowed changes, the person reviewing them and the effect on conclusions. Retain before/after evidence appropriate to the case.",
+        "A contract saying 'editing only' does not answer whether the system actually changes findings. Apply the full paragraph 3 test to the demonstrated operation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(b), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["completed-human-work-condition"],
+      "teaches": ["screen-1"],
+      "prompt": "What must be identified for the completed-human-work condition?",
+      "options": [
+        {
+          "blocks": "A previously completed human activity and result",
+          "correct": true,
+          "reason": "The condition expressly requires completion before improvement."
+        },
+        {
+          "blocks": "Only any human in the organisation",
+          "correct": false,
+          "reason": "General human presence does not establish prior completion."
+        },
+        {
+          "blocks": "Only a form awaiting assessment",
+          "correct": false,
+          "reason": "An unfinished assessment is not a completed result."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which fact distinguishes Article 6(3)(b) from AI supplying a judgment before a person completes it?",
+          "options": [
+            {
+              "blocks": "Only any human in the organisation",
+              "correct": false,
+              "reason": "General human presence does not establish prior completion."
+            },
+            {
+              "blocks": "Only a form awaiting assessment",
+              "correct": false,
+              "reason": "An unfinished assessment is not a completed result."
+            },
+            {
+              "blocks": "A previously completed human activity and result",
+              "correct": true,
+              "reason": "The condition expressly requires completion before improvement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["completed-human-work-condition"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "A tool corrects spelling in a completed report, then adds a new adverse finding. What should happen?",
+      "options": [
+        {
+          "blocks": "Ignore findings because spelling is also corrected",
+          "correct": false,
+          "reason": "A cosmetic function cannot erase the substantive change."
+        },
+        {
+          "blocks": "Assume every edit is non-influential",
+          "correct": false,
+          "reason": "Edits can affect conclusions and harm risks."
+        },
+        {
+          "blocks": "Reassess the actual change and decision influence",
+          "correct": true,
+          "reason": "The full condition and gateway depend on actual effects."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does altering a completed report's substantive conclusions preserve an automatic editing exemption?",
+          "options": [
+            {
+              "blocks": "Assume every edit is non-influential",
+              "correct": false,
+              "reason": "Edits can affect conclusions and harm risks."
+            },
+            {
+              "blocks": "Reassess the actual change and decision influence",
+              "correct": true,
+              "reason": "The full condition and gateway depend on actual effects."
+            },
+            {
+              "blocks": "Ignore findings because spelling is also corrected",
+              "correct": false,
+              "reason": "A cosmetic function cannot erase the substantive change."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["completed-human-work-condition"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "A vendor says 'improvement only' but cannot show the earlier completed activity. What should be recorded?",
+      "options": [
+        {
+          "blocks": "The condition is irrelevant to this derogation",
+          "correct": false,
+          "reason": "Completion is central to this condition."
+        },
+        {
+          "blocks": "The condition remains unsupported pending evidence",
+          "correct": true,
+          "reason": "The claimed factual requirement has not been established."
+        },
+        {
+          "blocks": "The marketing phrase proves completion",
+          "correct": false,
+          "reason": "A label is not proof of the earlier human activity."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should missing prior-completion evidence affect a paragraph 3(b) claim?",
+          "options": [
+            {
+              "blocks": "The condition remains unsupported pending evidence",
+              "correct": true,
+              "reason": "The claimed factual requirement has not been established."
+            },
+            {
+              "blocks": "The marketing phrase proves completion",
+              "correct": false,
+              "reason": "A label is not proof of the earlier human activity."
+            },
+            {
+              "blocks": "The condition is irrelevant to this derogation",
+              "correct": false,
+              "reason": "Completion is central to this condition."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

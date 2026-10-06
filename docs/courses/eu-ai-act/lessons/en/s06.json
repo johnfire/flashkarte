@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: services and public decisions",
+  "lesson": {
+    "slug": "s06",
+    "title": "Justice and democratic processes",
+    "summary": "Distinguish judicial assistance and voter influence from narrowly described administrative functions.",
+    "covers": ["justice-use", "election-influence-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "The learner must distinguish the listed-use enquiry from the product route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **justice use** in point 8(a) concerns AI used by a judicial authority or on its behalf to help research/interpret facts and law and apply law to concrete facts, or similarly in alternative dispute resolution.",
+        "A fictional decision assistant suggesting how law applies to a case differs from a tool only booking meeting rooms. The actual decision-related purpose needs evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 8(a), 8(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **election-influence use** in point 8(b) concerns influencing election/referendum outcomes or people's voting behaviour when exercising their vote.",
+        "Targeted voter persuasion is different from organising a campaign's internal calendar. The exclusion describes tools whose outputs people are not directly exposed to, such as administrative/logistical campaign organisation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 8(a), 8(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Examine both intended function and who encounters the output. A campaign tool beginning as internal scheduling may later generate messages directly shown to voters.",
+        "Do not infer the administrative exclusion merely from the customer being a campaign organisation. A tool supporting interpretation in a judicial case similarly differs from general administrative support."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 8(a), 8(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Northbridge's fictional public-decision clinic records the exact point and boundary. The evidence should show whether outputs assist case reasoning or directly influence voters, not just the platform's customer category.",
+        "Then complete paragraph 3, profiling, prohibition, scope, other-law and date analyses. Neither a judge's review nor a logistical label automatically supplies an exemption."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 8(a), 8(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["justice-use"],
+      "teaches": ["screen-1"],
+      "prompt": "AI suggests how law applies to specific facts for a judicial authority. Which purpose is relevant?",
+      "options": [
+        {
+          "blocks": "Annex III 8(a)",
+          "correct": true,
+          "reason": "That point addresses judicial reasoning assistance and similar dispute resolution."
+        },
+        {
+          "blocks": "Only ordinary meeting-room booking",
+          "correct": false,
+          "reason": "The stated function concerns case reasoning."
+        },
+        {
+          "blocks": "No listed use because a judge reviews it",
+          "correct": false,
+          "reason": "Human review alone does not erase the intended assistance purpose."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which justice listed use concerns assistance with applying law to a concrete case?",
+          "options": [
+            {
+              "blocks": "Only ordinary meeting-room booking",
+              "correct": false,
+              "reason": "The stated function concerns case reasoning."
+            },
+            {
+              "blocks": "No listed use because a judge reviews it",
+              "correct": false,
+              "reason": "Human review alone does not erase the intended assistance purpose."
+            },
+            {
+              "blocks": "Annex III 8(a)",
+              "correct": true,
+              "reason": "That point addresses judicial reasoning assistance and similar dispute resolution."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["election-influence-use"],
+      "teaches": ["screen-2"],
+      "prompt": "An internal campaign calendar has no outputs shown directly to voters. Which boundary matters?",
+      "options": [
+        {
+          "blocks": "Only whether a political group bought it",
+          "correct": false,
+          "reason": "The customer's identity alone does not determine the purpose."
+        },
+        {
+          "blocks": "Only whether the server is large",
+          "correct": false,
+          "reason": "Server size is not the statutory function distinction."
+        },
+        {
+          "blocks": "Administrative function and no direct voter exposure",
+          "correct": true,
+          "reason": "The point's exception refers to that output/purpose boundary."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which fact distinguishes administrative campaign logistics from the point 8(b) voter-facing purpose?",
+          "options": [
+            {
+              "blocks": "Only whether the server is large",
+              "correct": false,
+              "reason": "Server size is not the statutory function distinction."
+            },
+            {
+              "blocks": "Administrative function and no direct voter exposure",
+              "correct": true,
+              "reason": "The point's exception refers to that output/purpose boundary."
+            },
+            {
+              "blocks": "Only whether a political group bought it",
+              "correct": false,
+              "reason": "The customer's identity alone does not determine the purpose."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["justice-use", "election-influence-use"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A logistics tool starts creating targeted messages shown to voters. What should the assessor do?",
+      "options": [
+        {
+          "blocks": "Assume voter exposure is irrelevant",
+          "correct": false,
+          "reason": "Exposure and influence are material to this point."
+        },
+        {
+          "blocks": "Reassess the changed purpose and output exposure",
+          "correct": true,
+          "reason": "The new function changes the listed-use comparison."
+        },
+        {
+          "blocks": "Keep the old result because the invoice is unchanged",
+          "correct": false,
+          "reason": "An invoice does not establish unchanged intended use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a campaign tool keep its administrative result after adding voter-facing persuasion?",
+          "options": [
+            {
+              "blocks": "Reassess the changed purpose and output exposure",
+              "correct": true,
+              "reason": "The new function changes the listed-use comparison."
+            },
+            {
+              "blocks": "Keep the old result because the invoice is unchanged",
+              "correct": false,
+              "reason": "An invoice does not establish unchanged intended use."
+            },
+            {
+              "blocks": "Assume voter exposure is irrelevant",
+              "correct": false,
+              "reason": "Exposure and influence are material to this point."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

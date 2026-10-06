@@ -112,17 +112,19 @@ Lesson targets: I04.
 
 [Official source](https://digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-ai-system-definition-facilitate-first-ai-acts-rules-application). Status: **published-non-binding-guidance**.
 
-Reading: Publication/status page read; complete guidance PDF must be read before I02 drafting.
+Reading: Adopted PDF C(2025) 5053 final, 29 July 2025, read in English. Publication page initially dated 6 February 2025; PDF identity takes precedence for the retained adopted version.
 
-Version: See publication page. Publication: 2025-02-06. Checked: 2026-10-06.
+Version: C(2025) 5053 final. Publication: 2025-02-06. Checked: 2026-10-06.
 
 Lesson targets: I02, I06.
+
+Retained: [sources/ai-system-definition-guidelines-en.pdf](sources/ai-system-definition-guidelines-en.pdf). SHA-256: `fe39f41d061184a913c32f1f92aaaa30a096858fa168c6053e22a19eef58910e`.
 
 ## A6-DRAFT — Draft classification guidance publication (en)
 
 [Official source](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems). Status: **draft-non-binding-guidance**.
 
-Reading: Publication page read; still labelled draft, last update 2026-07-23. Three guidance sections not yet fully read.
+Reading: Three draft parts retained; general framework and selected product, gateway and justice examples read. Not a complete example-by-example reading. Lessons use the amended statute for operative tests; no draft example is treated as a binding permission.
 
 Version: See publication page. Publication: 2026-05-19. Checked: 2026-10-06.
 
@@ -132,17 +134,19 @@ Lesson targets: P06, E01, E02, E03, E04, E05.
 
 [Official source](https://ai-act-service-desk.ec.europa.eu/sites/default/files/2025-08/guidelines_on_prohibited_artificial_intelligence_practices_established_by_regulation_eu_20241689_ai_act_english_ied3r5nwo50xggpcfmwckm3nuc_112367-1.PDF). Status: **published-non-binding-guidance**.
 
-Reading: Official guidance identified; full reading pending before prohibition lesson drafting. Predates 2026 additions.
+Reading: Retained; selected criminal-risk and emotion sections read. Not a full guideline audit. Lessons teach the operative Article 5 elements from the consolidated statute and do not infer borderline permission from unread guideline examples. Predates the 2026 additions.
 
 Version: See publication page. Publication: Not recorded. Checked: 2026-10-06.
 
 Lesson targets: B01, B02, B03, B04, B05, B07, B08, B09, R01, R02, R03.
 
+Retained: [sources/prohibited-practices-guidelines-en.pdf](sources/prohibited-practices-guidelines-en.pdf). SHA-256: `298bf8677884b333fae6d5f84aac947f45a59dff6027ca038ba08615092fd82f`.
+
 ## GDPR — Regulation (EU) 2016/679 (en)
 
-[Official source](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng). Status: **cross-reference-reading-pending**.
+[Official source](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng). Status: **incorporated-law-targeted-check**.
 
-Reading: Required before lesson drafting: Articles 4(4), 9
+Reading: Article 4(4) profiling definition checked through official EU material; Article 5 AI Act preservation of GDPR Article 9 read. No lesson claims a complete GDPR lawful-basis assessment.
 
 Version: See publication page. Publication: Not recorded. Checked: 2026-10-06.
 
@@ -150,9 +154,9 @@ Lesson targets: I03, R05.
 
 ## LED — Directive (EU) 2016/680 (en)
 
-[Official source](https://eur-lex.europa.eu/eli/dir/2016/680/oj/eng). Status: **cross-reference-reading-pending**.
+[Official source](https://eur-lex.europa.eu/eli/dir/2016/680/oj/eng). Status: **incorporated-law-targeted-check**.
 
-Reading: Required before lesson drafting: Article 3(4)
+Reading: Article 3(4) profiling definition read in official text; no national law-enforcement permission is inferred.
 
 Version: See publication page. Publication: Not recorded. Checked: 2026-10-06.
 
@@ -160,9 +164,9 @@ Lesson targets: I03, S04, R05.
 
 ## CSA — Directive 2011/93/EU (en)
 
-[Official source](https://eur-lex.europa.eu/eli/dir/2011/93/oj/eng). Status: **cross-reference-reading-pending**.
+[Official source](https://eur-lex.europa.eu/eli/dir/2011/93/oj/eng). Status: **incorporated-law-targeted-check**.
 
-Reading: Required before lesson drafting: Article 2(c), (e) and national-law defence context
+Reading: Article 2(a), (c), (e) read in official text. National without-right defence left unresolved because cases specify no jurisdiction; no exception is invented.
 
 Version: See publication page. Publication: Not recorded. Checked: 2026-10-06.
 
@@ -170,9 +174,9 @@ Lesson targets: B11.
 
 ## CER — Directive (EU) 2022/2557 (en)
 
-[Official source](https://eur-lex.europa.eu/eli/dir/2022/2557/oj/eng). Status: **cross-reference-reading-pending**.
+[Official source](https://eur-lex.europa.eu/eli/dir/2022/2557/oj/eng). Status: **incorporated-law-targeted-check**.
 
-Reading: Required before lesson drafting: Article 2(4)
+Reading: Article 2(4) critical-infrastructure definition and related essential-service definition read in official text.
 
 Version: See publication page. Publication: Not recorded. Checked: 2026-10-06.
 
@@ -182,7 +186,7 @@ Lesson targets: S01.
 
 [Official source](https://eur-lex.europa.eu/eli/reg/2023/1230/oj/eng). Status: **cross-reference-reading-pending**.
 
-Reading: Required before lesson drafting: Selected machinery scope/assessment provisions, to be chosen for the case
+Reading: Annex I Section B placement and amended Article 2/6 read. Sector-law scope and assessment route are supplied as explicit fictional case assumptions; no actual machinery category is assigned.
 
 Version: See publication page. Publication: Not recorded. Checked: 2026-10-06.
 
@@ -214,7 +218,7 @@ Lesson targets: Article 50 follow-on.
 
 [Official source](https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng). Status: **required-incorporated-sector-source**.
 
-Reading: Identified from Annex I; medical-device classification and conformity route must be read before drafting the case. Not yet retrieved/read.
+Reading: Annex I identity read. Cases explicitly stipulate sector coverage and assessment requirements to exercise Article 6; actual medical-device category and sector compliance are not determined.
 
 Version: 2017/745. Publication: 2017-05-05. Checked: 2026-10-06.
 
@@ -224,8 +228,44 @@ Lesson targets: P04, P05.
 
 [Official source](https://eur-lex.europa.eu/eli/reg/2016/425/oj/eng). Status: **required-incorporated-sector-source**.
 
-Reading: Identified from Annex I; Annex I risk categories and Article 19 conformity route must be read before drafting the hearing-protection case. Not yet retrieved/read.
+Reading: Annex I identity read. Cases explicitly stipulate sector coverage and assessment requirements to exercise Article 6; actual PPE category and sector compliance are not determined.
 
 Version: 2016/425. Publication: 2016-03-31. Checked: 2026-10-06.
 
 Lesson targets: P02, P04, P05.
+
+## A6-GENERAL — Article 6 draft guidance: general (en)
+
+[Official source](https://ec.europa.eu/newsroom/dae/redirection/document/128559). Status: **draft-non-binding-guidance**.
+
+Reading: Retained official draft; reading limits recorded in A6-DRAFT. Statute governs the lesson tests.
+
+Version: See publication page. Publication: 2026-05-19. Checked: 2026-10-06.
+
+Lesson targets: P06, E01, E02, E03, E04, E05.
+
+Retained: [sources/classification-general-draft-en.pdf](sources/classification-general-draft-en.pdf). SHA-256: `b127bbdc50b1741bb2d97e8aff5839cccd1a4484445be4e8cca246c12541fc42`.
+
+## A6-ANNEX-I — Article 6 draft guidance: annex-i (en)
+
+[Official source](https://ec.europa.eu/newsroom/dae/redirection/document/128560). Status: **draft-non-binding-guidance**.
+
+Reading: Retained official draft; reading limits recorded in A6-DRAFT. Statute governs the lesson tests.
+
+Version: See publication page. Publication: 2026-05-19. Checked: 2026-10-06.
+
+Lesson targets: P06, E01, E02, E03, E04, E05.
+
+Retained: [sources/classification-annex-i-draft-en.pdf](sources/classification-annex-i-draft-en.pdf). SHA-256: `10f1302c9090d2bcfdb8eacd2b36ff7a09860fc7909f7c1c4b42cc3b9bed3b50`.
+
+## A6-ANNEX-III — Article 6 draft guidance: annex-iii (en)
+
+[Official source](https://ec.europa.eu/newsroom/dae/redirection/document/128561). Status: **draft-non-binding-guidance**.
+
+Reading: Retained official draft; reading limits recorded in A6-DRAFT. Statute governs the lesson tests.
+
+Version: See publication page. Publication: 2026-05-19. Checked: 2026-10-06.
+
+Lesson targets: P06, E01, E02, E03, E04, E05.
+
+Retained: [sources/classification-annex-iii-draft-en.pdf](sources/classification-annex-iii-draft-en.pdf). SHA-256: `b1df0ffb30310e126c7e060e03c9b5aab97c0a2ab61a2f3e3e00ede3655e2792`.

@@ -1,0 +1,211 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i08",
+    "title": "Start a classification assessment",
+    "summary": "Prepare an evidence packet and check prohibitions before treating classification as permission.",
+    "covers": ["prohibition-precheck", "assessment-evidence-packet"],
+    "prerequisites": [
+      {
+        "lesson": "i03",
+        "reason": "The opening case needs a complete factual description before any legal route can be selected."
+      },
+      {
+        "lesson": "i04",
+        "reason": "The evidence packet must assign the actions in the case to the relevant actors."
+      },
+      {
+        "lesson": "i05",
+        "reason": "The opening case must establish scope and identify any unresolved exclusion."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **prohibition precheck** asks whether the proposed conduct falls under Article 5 before a high-risk classification is mistaken for permission. 'High-risk' means a regulatory category; it is not a licence to perform a forbidden practice.",
+        "At this stage, identify a potentially relevant prohibition and collect its missing facts. Later modules teach the complete tests. A disclosure, human reviewer or supplier certificate cannot by itself cure a prohibited practice."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(3), 3(4), 3(12), 5, 6, 111, 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "An **assessment evidence packet** is a practical record: system/version and boundary, intended and actual purpose, inputs and outputs, actors, affected people, location, documents and dates. Separate verified facts, assumptions and unresolved questions.",
+        "Northbridge's vendor supplies one broad platform, but its document helper and applicant ranking have different functions. Record each use rather than issuing a platform-wide conclusion from the safest function."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(3), 3(4), 3(12), 5, 6, 111, 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional case: Northbridge buys an applicant-ranking assistant for EU hiring. The vendor supplies it under its own name; Northbridge uses the ranking to decide interviews. The tool evaluates personal work histories.",
+        "The opening packet therefore identifies vendor and employer actions, applicant data, a recruitment decision and a profiling question. Scope and timing still need documentation. The next classification modules determine the legal route; this screen does not claim the whole compliance assessment is complete."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(3), 3(4), 3(12), 5, 6, 111, 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A defensible next step matches each needed legal fact to evidence. Request unclear instructions, review contradictory claims, record who actually makes decisions and check relevant dates. Retain the source version used.",
+        "If a prohibition might apply, investigate that full test before proceeding. If the system enters a high-risk route, identify the consequent obligations separately. This workflow is our teaching method for applying Articles 2, 5 and 6, not a statutory safe-harbour form."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(3), 3(4), 3(12), 5, 6, 111, 113",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["prohibition-precheck"],
+      "teaches": ["screen-1"],
+      "prompt": "A vendor calls a potentially prohibited use 'high-risk compliant'. What should Northbridge do first?",
+      "options": [
+        {
+          "blocks": "Check the full relevant prohibition",
+          "correct": true,
+          "reason": "Classification cannot authorise an otherwise prohibited practice."
+        },
+        {
+          "blocks": "Accept the label as blanket permission",
+          "correct": false,
+          "reason": "The label does not answer Article 5."
+        },
+        {
+          "blocks": "Add a disclosure and skip the legal test",
+          "correct": false,
+          "reason": "A disclosure is not a cure for a prohibition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a high-risk certificate settle whether the proposed practice is forbidden?",
+          "options": [
+            {
+              "blocks": "Accept the label as blanket permission",
+              "correct": false,
+              "reason": "The label does not answer Article 5."
+            },
+            {
+              "blocks": "Add a disclosure and skip the legal test",
+              "correct": false,
+              "reason": "A disclosure is not a cure for a prohibition."
+            },
+            {
+              "blocks": "Check the full relevant prohibition",
+              "correct": true,
+              "reason": "Classification cannot authorise an otherwise prohibited practice."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["assessment-evidence-packet"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "Which packet best supports assessment of the recruitment assistant?",
+      "options": [
+        {
+          "blocks": "Only a general platform brochure",
+          "correct": false,
+          "reason": "A brochure alone hides the actual function and decisions."
+        },
+        {
+          "blocks": "Only the safest unrelated platform feature",
+          "correct": false,
+          "reason": "A different function cannot stand in for the recruitment use."
+        },
+        {
+          "blocks": "Purpose, actors, applicant inputs, outputs and decision use",
+          "correct": true,
+          "reason": "Those facts allow scope and classification tests to be applied."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should a reviewer receive for the fictional applicant-ranking use?",
+          "options": [
+            {
+              "blocks": "Only the safest unrelated platform feature",
+              "correct": false,
+              "reason": "A different function cannot stand in for the recruitment use."
+            },
+            {
+              "blocks": "Purpose, actors, applicant inputs, outputs and decision use",
+              "correct": true,
+              "reason": "Those facts allow scope and classification tests to be applied."
+            },
+            {
+              "blocks": "Only a general platform brochure",
+              "correct": false,
+              "reason": "A brochure alone hides the actual function and decisions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["prohibition-precheck", "assessment-evidence-packet"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "The vendor cannot explain whether ranking changes interview selection. What is the appropriate next step?",
+      "options": [
+        {
+          "blocks": "Declare the whole platform exempt",
+          "correct": false,
+          "reason": "Incomplete facts cannot justify a blanket exemption."
+        },
+        {
+          "blocks": "Record the gap and obtain evidence before concluding",
+          "correct": true,
+          "reason": "Unresolved facts should not be silently treated as safe."
+        },
+        {
+          "blocks": "Assume the ranking has no effect",
+          "correct": false,
+          "reason": "That turns an unknown into an unsupported conclusion."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A material decision-use fact is missing from a classification packet. How should it be handled?",
+          "options": [
+            {
+              "blocks": "Record the gap and obtain evidence before concluding",
+              "correct": true,
+              "reason": "Unresolved facts should not be silently treated as safe."
+            },
+            {
+              "blocks": "Assume the ranking has no effect",
+              "correct": false,
+              "reason": "That turns an unknown into an unsupported conclusion."
+            },
+            {
+              "blocks": "Declare the whole platform exempt",
+              "correct": false,
+              "reason": "Incomplete facts cannot justify a blanket exemption."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

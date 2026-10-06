@@ -1,0 +1,207 @@
+{
+  "module": "Article 6: people, education and work",
+  "lesson": {
+    "slug": "a01",
+    "title": "Biometric identity",
+    "summary": "Distinguish identity verification from remote identification using technical and interaction facts.",
+    "covers": [
+      "biometric-data",
+      "identity-comparison",
+      "remote-biometric-identification"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i02",
+        "reason": "The data definition is introduced in the context of identifying inputs used by the system."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Biometric data** result from specific technical processing of physical, physiological or behavioural characteristics. A facial image used for such processing can be relevant; do not treat every photograph as the same processing activity.",
+        "Northbridge's fictional access desk uses a face comparison. Record the processed characteristic, purpose and reference data before deciding which identity test is being used."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(34)–(36), 3(41); Annex III 1(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Biometric verification** is one-to-one confirmation of a person's claimed identity. Identification seeks to establish identity through comparison with stored individuals. Ask whether the question is 'Are you the person you claim to be?' or 'Who is this person?'",
+        "A person actively confirming their identity against their own enrolled record differs from searching an unknown visitor against many records. The purpose and comparison matter more than the word 'login'."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(34)–(36), 3(41); Annex III 1(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Remote biometric identification** identifies people without their active involvement, typically at a distance, by comparing biometric data with a reference database. Distance alone is not the complete definition.",
+        "An entrance camera identifying passers-by against a reference database illustrates facts relevant to the remote test. Record involvement, matching process and intended identity purpose."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(34)–(36), 3(41); Annex III 1(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Annex III 1(a) lists remote biometric identification, where use is otherwise permitted by law. It excludes verification whose sole purpose is confirming the specific person's claimed identity.",
+        "That point-specific exclusion does not make every verification use free of every AI Act or privacy duty. Article 5's separate real-time/public-space/law-enforcement rule will be taught later."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(34)–(36), 3(41); Annex III 1(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["biometric-data"],
+      "teaches": ["screen-1"],
+      "prompt": "What should Northbridge record about facial data before applying the biometric definitions?",
+      "options": [
+        {
+          "blocks": "The specific technical processing and characteristic",
+          "correct": true,
+          "reason": "The definition concerns data resulting from technical characteristic processing."
+        },
+        {
+          "blocks": "Only the camera's brand",
+          "correct": false,
+          "reason": "Brand does not establish the relevant processing."
+        },
+        {
+          "blocks": "Only whether the image is colourful",
+          "correct": false,
+          "reason": "Colour alone does not establish biometric processing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What makes the facial-data processing relevant to the biometric definition?",
+          "options": [
+            {
+              "blocks": "Only the camera's brand",
+              "correct": false,
+              "reason": "Brand does not establish the relevant processing."
+            },
+            {
+              "blocks": "Only whether the image is colourful",
+              "correct": false,
+              "reason": "Colour alone does not establish biometric processing."
+            },
+            {
+              "blocks": "The specific technical processing and characteristic",
+              "correct": true,
+              "reason": "The definition concerns data resulting from technical characteristic processing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["identity-comparison"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A user claims one identity and actively confirms it against their own enrolled record only. Which distinction fits?",
+      "options": [
+        {
+          "blocks": "Finding an unknown person among many records",
+          "correct": false,
+          "reason": "That describes identification rather than the stated sole verification purpose."
+        },
+        {
+          "blocks": "Inferring the person's emotion",
+          "correct": false,
+          "reason": "Emotion inference is a different purpose."
+        },
+        {
+          "blocks": "Confirming the person is who they claim to be",
+          "correct": true,
+          "reason": "That is the verification definition and the specific Annex III limit."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which identity question describes one-to-one claimed-identity verification?",
+          "options": [
+            {
+              "blocks": "Inferring the person's emotion",
+              "correct": false,
+              "reason": "Emotion inference is a different purpose."
+            },
+            {
+              "blocks": "Confirming the person is who they claim to be",
+              "correct": true,
+              "reason": "That is the verification definition and the specific Annex III limit."
+            },
+            {
+              "blocks": "Finding an unknown person among many records",
+              "correct": false,
+              "reason": "That describes identification rather than the stated sole verification purpose."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["remote-biometric-identification"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A camera identifies passers-by without involvement against a reference database. Which analysis is directly relevant?",
+      "options": [
+        {
+          "blocks": "No biometric analysis because a camera is distant",
+          "correct": false,
+          "reason": "Distance does not exclude; it can be part of the remote facts."
+        },
+        {
+          "blocks": "Remote biometric identification",
+          "correct": true,
+          "reason": "Those facts match the remote identity definition."
+        },
+        {
+          "blocks": "Only sole-purpose claimed-identity verification",
+          "correct": false,
+          "reason": "The passers-by are not actively confirming a claim."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which identity category concerns matching people without active involvement, typically at a distance?",
+          "options": [
+            {
+              "blocks": "Remote biometric identification",
+              "correct": true,
+              "reason": "Those facts match the remote identity definition."
+            },
+            {
+              "blocks": "Only sole-purpose claimed-identity verification",
+              "correct": false,
+              "reason": "The passers-by are not actively confirming a claim."
+            },
+            {
+              "blocks": "No biometric analysis because a camera is distant",
+              "correct": false,
+              "reason": "Distance does not exclude; it can be part of the remote facts."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

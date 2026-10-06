@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e04",
+    "title": "Decision patterns and human review",
+    "summary": "Distinguish pattern detection with proper review from unreviewed alteration of a completed assessment.",
+    "covers": ["pattern-review-condition"],
+    "prerequisites": [
+      {
+        "lesson": "e01",
+        "reason": "The pattern-review test explicitly limits replacement or influence of a prior human assessment."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **pattern-review condition** concerns detecting decision-making patterns or deviations. It is qualified by the requirement that the system is not meant to replace or influence a previously completed human assessment without proper human review.",
+        "Read the entire condition together. 'Pattern detector' alone is not sufficient, and 'human review' needs a real process rather than a ceremonial button."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(c), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Fictional Northbridge: a tool flags a deviation across completed assessments; a competent reviewer examines the underlying work before any revision. Record the flag, access to evidence and what the reviewer can actually change.",
+        "This illustrates facts relevant to the condition. It does not by itself establish the no-significant-risk gateway or eliminate the profiling check."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(c), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed case: each flag automatically replaces the prior assessment without proper review. That undermines the stated condition.",
+        "Changed case: the reviewer sees only the flag and routinely approves it without examining the earlier basis. Evidence of actual review is needed before calling it proper. A workflow diagram alone cannot establish how review functions."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(c), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Keep the completed assessment, pattern function, review arrangements and consequences in the record. Assess whether output materially influences decisions and whether the person can challenge errors.",
+        "The derogation is not a general authorisation for replacing decisions after a token human step. If facts do not establish the condition or gateway, do not claim the exception."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(c), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["pattern-review-condition"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Which facts are important for a pattern-detection tool claimed under paragraph 3(c)?",
+      "options": [
+        {
+          "blocks": "Completed assessment and substantive review before influence",
+          "correct": true,
+          "reason": "The condition connects pattern detection with completed work and proper review."
+        },
+        {
+          "blocks": "Only calling the function a pattern detector",
+          "correct": false,
+          "reason": "The label omits the qualifying review facts."
+        },
+        {
+          "blocks": "Only a vendor's favourite colour",
+          "correct": false,
+          "reason": "That is unrelated to the condition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What distinguishes properly reviewed pattern detection from unreviewed replacement of a human assessment?",
+          "options": [
+            {
+              "blocks": "Only calling the function a pattern detector",
+              "correct": false,
+              "reason": "The label omits the qualifying review facts."
+            },
+            {
+              "blocks": "Only a vendor's favourite colour",
+              "correct": false,
+              "reason": "That is unrelated to the condition."
+            },
+            {
+              "blocks": "Completed assessment and substantive review before influence",
+              "correct": true,
+              "reason": "The condition connects pattern detection with completed work and proper review."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["pattern-review-condition"],
+      "teaches": ["screen-3"],
+      "prompt": "A deviation flag automatically overwrites the completed human assessment. Which issue is raised?",
+      "options": [
+        {
+          "blocks": "It automatically satisfies the condition",
+          "correct": false,
+          "reason": "That ignores the completed-assessment/review language."
+        },
+        {
+          "blocks": "The prior assessment no longer matters",
+          "correct": false,
+          "reason": "Its replacement and review are central to the test."
+        },
+        {
+          "blocks": "The condition's review qualification is not established",
+          "correct": true,
+          "reason": "Unreviewed replacement is exactly what the qualification addresses."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does automatic replacement without proper review fit the stated pattern-review condition?",
+          "options": [
+            {
+              "blocks": "The prior assessment no longer matters",
+              "correct": false,
+              "reason": "Its replacement and review are central to the test."
+            },
+            {
+              "blocks": "The condition's review qualification is not established",
+              "correct": true,
+              "reason": "Unreviewed replacement is exactly what the qualification addresses."
+            },
+            {
+              "blocks": "It automatically satisfies the condition",
+              "correct": false,
+              "reason": "That ignores the completed-assessment/review language."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["pattern-review-condition"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A review diagram shows a human button, but actual reviewers cannot inspect earlier evidence. What should be done?",
+      "options": [
+        {
+          "blocks": "Skip the gateway once a diagram exists",
+          "correct": false,
+          "reason": "The gateway remains independently necessary."
+        },
+        {
+          "blocks": "Examine actual access, actions and decision effects",
+          "correct": true,
+          "reason": "Review needs factual support beyond the diagram."
+        },
+        {
+          "blocks": "Accept the button as sufficient in every case",
+          "correct": false,
+          "reason": "A nominal human step does not prove proper review."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an assessor evaluate a claim of proper human review?",
+          "options": [
+            {
+              "blocks": "Examine actual access, actions and decision effects",
+              "correct": true,
+              "reason": "Review needs factual support beyond the diagram."
+            },
+            {
+              "blocks": "Accept the button as sufficient in every case",
+              "correct": false,
+              "reason": "A nominal human step does not prove proper review."
+            },
+            {
+              "blocks": "Skip the gateway once a diagram exists",
+              "correct": false,
+              "reason": "The gateway remains independently necessary."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

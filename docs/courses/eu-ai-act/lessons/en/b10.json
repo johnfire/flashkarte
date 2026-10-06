@@ -1,0 +1,206 @@
+{
+  "module": "Article 5: biometrics and synthetic media",
+  "lesson": {
+    "slug": "b10",
+    "title": "Non-consensual intimate synthetic media",
+    "summary": "Assess identifiable intimate synthetic material, exact consent and the limited manipulation boundary without graphic examples.",
+    "covers": ["intimate-media-consent-test", "intimate-manipulation-boundary"],
+    "prerequisites": [
+      {
+        "lesson": "b01",
+        "reason": "The consent condition is examined within the elements of the added prohibition."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The new **intimate-media provision** concerns AI generating/manipulating realistic intimate or sexually explicit material of an identifiable natural person without that person's freely given, specific, informed, unambiguous and explicit consent for that generation/manipulation.",
+        "This lesson uses legal descriptions only. It needs no real material, demonstrations or identifiable person's images. Each stated subject, realism, identification and consent element must be checked."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(ba), 5(1b), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "An **intimate-media consent test** concerns consent for the particular generation or manipulation, not merely a prior agreement to take an ordinary photograph. Silence, an unrelated form or public availability does not establish the specified consent.",
+        "Fictional Northbridge safeguarding case: ordinary-image permission exists but no consent for intimate synthesis. The prior permission does not by itself establish the new provision's consent element."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(ba), 5(1b), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Article 5(1b) gives a limited **manipulation boundary**: altering material without increasing exposure of depicted intimate parts or changing the nature of depicted sexually explicit activities does not constitute manipulation for point (ba).",
+        "Do not turn this exact boundary into a general exemption for all editing. Record what actually changes. The separate generation branch and other legal rules still need examination."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(ba), 5(1b), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "These new provisions apply from **2 December 2026** in the working baseline. Paragraph 1a further distinguishes supply and use, taught next in B12. The present lesson establishes content/consent and manipulation elements.",
+        "A full conclusion must apply that actor-specific qualification and date. Other laws may already forbid conduct; this future application date is not permission to exploit people before it."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(ba), 5(1b), 5(1a); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["intimate-media-consent-test"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A person permitted an ordinary photograph, but did not consent to intimate synthetic generation. What follows for this element?",
+      "options": [
+        {
+          "blocks": "The specified generation consent is not established",
+          "correct": true,
+          "reason": "Consent must concern the particular generation/manipulation with the stated qualities."
+        },
+        {
+          "blocks": "All later synthetic uses are automatically permitted",
+          "correct": false,
+          "reason": "Unrelated prior permission is not the specified consent."
+        },
+        {
+          "blocks": "Public availability supplies every consent quality",
+          "correct": false,
+          "reason": "Availability does not establish freely given specific explicit consent."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does ordinary image permission itself establish explicit consent to intimate generation?",
+          "options": [
+            {
+              "blocks": "All later synthetic uses are automatically permitted",
+              "correct": false,
+              "reason": "Unrelated prior permission is not the specified consent."
+            },
+            {
+              "blocks": "Public availability supplies every consent quality",
+              "correct": false,
+              "reason": "Availability does not establish freely given specific explicit consent."
+            },
+            {
+              "blocks": "The specified generation consent is not established",
+              "correct": true,
+              "reason": "Consent must concern the particular generation/manipulation with the stated qualities."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["intimate-manipulation-boundary"],
+      "teaches": ["screen-3"],
+      "prompt": "An edit neither increases intimate exposure nor alters the depicted activity's nature. What does paragraph 1b say about this manipulation branch?",
+      "options": [
+        {
+          "blocks": "Every form of editing is now exempt",
+          "correct": false,
+          "reason": "The boundary has exact effects-based conditions."
+        },
+        {
+          "blocks": "Every new generation is automatically exempt too",
+          "correct": false,
+          "reason": "Generation is a separate branch."
+        },
+        {
+          "blocks": "That edit is outside manipulation for point (ba)",
+          "correct": true,
+          "reason": "The stated boundary is specific to manipulation under that point."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the limited Article 5(1b) editing boundary be applied?",
+          "options": [
+            {
+              "blocks": "Every new generation is automatically exempt too",
+              "correct": false,
+              "reason": "Generation is a separate branch."
+            },
+            {
+              "blocks": "That edit is outside manipulation for point (ba)",
+              "correct": true,
+              "reason": "The stated boundary is specific to manipulation under that point."
+            },
+            {
+              "blocks": "Every form of editing is now exempt",
+              "correct": false,
+              "reason": "The boundary has exact effects-based conditions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "intimate-media-consent-test",
+        "intimate-manipulation-boundary"
+      ],
+      "teaches": ["screen-4"],
+      "prompt": "Which application date must be retained for the new point (ba) in this baseline?",
+      "options": [
+        {
+          "blocks": "Any date the vendor chooses",
+          "correct": false,
+          "reason": "Vendor preference cannot set statutory application."
+        },
+        {
+          "blocks": "2 December 2026, with other law checked separately",
+          "correct": true,
+          "reason": "Article 113 specifically dates the new provisions; other law is not waived."
+        },
+        {
+          "blocks": "2 February 2025 for this new point",
+          "correct": false,
+          "reason": "The new point has a stated exception to that chapter date."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does point (ba) use the original Chapter II date without exception?",
+          "options": [
+            {
+              "blocks": "2 December 2026, with other law checked separately",
+              "correct": true,
+              "reason": "Article 113 specifically dates the new provisions; other law is not waived."
+            },
+            {
+              "blocks": "2 February 2025 for this new point",
+              "correct": false,
+              "reason": "The new point has a stated exception to that chapter date."
+            },
+            {
+              "blocks": "Any date the vendor chooses",
+              "correct": false,
+              "reason": "Vendor preference cannot set statutory application."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

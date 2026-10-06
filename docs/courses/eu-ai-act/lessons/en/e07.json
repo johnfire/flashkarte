@@ -1,0 +1,211 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e07",
+    "title": "Record and support the assessment",
+    "summary": "Separate assessment documentation, registration and responding to competent-authority requests.",
+    "covers": [
+      "document-assessment",
+      "classification-registration",
+      "authority-document-request"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i04",
+        "reason": "The documentation duty belongs to the provider making the paragraph 3 conclusion."
+      },
+      {
+        "lesson": "e06",
+        "reason": "A non-high-risk conclusion must not silently ignore the Annex III profiling override."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A provider concluding an Annex III system is not high-risk under paragraph 3 must **document the assessment before market placement or service**. The record should show the facts and each legal test supporting that conclusion.",
+        "A bare claim 'low risk' is not a documented analysis. This course's practical packet distinguishes scope, use, gateway, condition, profiling and the source version used."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(4); Article 49(2), 49(4); Annex VIII Section B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Classification registration** is a separate obligation under Article 49(2). The provider, or relevant authorised representative, registers itself and the system before market placement or service.",
+        "Documentation and registration are not interchangeable. A report kept internally does not by itself prove registration. Nor does a registration entry establish that the underlying legal reasoning is correct."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(4); Article 49(2), 49(4); Annex VIII Section B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "On request, the provider must give competent national authorities the documentation of its assessment. Plan to locate the actual record and supporting evidence.",
+        "A person asking informally on the internet is not automatically a competent-authority request. Verify the request and authority; do not confuse this obligation with general public disclosure of every internal document."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(4); Article 49(2), 49(4); Annex VIII Section B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Check the applicable registration fields and access restrictions. Annex VIII Section B points 7 and 9 are deleted in our baseline. Article 49(4) specifies secure non-public registration for stated enforcement/migration contexts and still contains a cross-reference to point 9.",
+        "Record that textual cross-reference issue; do not invent a deleted field. The documentation duty remains. Application dates and the exact secure-section context require their own check before making a real filing."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(4); Article 49(2), 49(4); Annex VIII Section B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["document-assessment"],
+      "teaches": ["screen-1"],
+      "prompt": "When must a provider document its paragraph 3 not-high-risk assessment?",
+      "options": [
+        {
+          "blocks": "Before market placement or putting into service",
+          "correct": true,
+          "reason": "Article 6(4) supplies the timing requirement."
+        },
+        {
+          "blocks": "Only after an error is reported",
+          "correct": false,
+          "reason": "The record is a prior requirement, not only incident response."
+        },
+        {
+          "blocks": "Never if the provider calls it low risk",
+          "correct": false,
+          "reason": "The conclusion triggers a documentation obligation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the assessment record first be created after the system enters service?",
+          "options": [
+            {
+              "blocks": "Only after an error is reported",
+              "correct": false,
+              "reason": "The record is a prior requirement, not only incident response."
+            },
+            {
+              "blocks": "Never if the provider calls it low risk",
+              "correct": false,
+              "reason": "The conclusion triggers a documentation obligation."
+            },
+            {
+              "blocks": "Before market placement or putting into service",
+              "correct": true,
+              "reason": "Article 6(4) supplies the timing requirement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["classification-registration"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A provider has an internal report but no registration evidence. What remains distinct?",
+      "options": [
+        {
+          "blocks": "The report automatically is a registration entry",
+          "correct": false,
+          "reason": "An internal file does not prove database registration."
+        },
+        {
+          "blocks": "A deleted field must be invented to register",
+          "correct": false,
+          "reason": "Use operative fields; do not reconstruct deleted requirements."
+        },
+        {
+          "blocks": "Article 49(2) registration must be separately established",
+          "correct": true,
+          "reason": "Documentation and registration are different tasks."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does keeping a paragraph 3 assessment report itself satisfy the registration requirement?",
+          "options": [
+            {
+              "blocks": "A deleted field must be invented to register",
+              "correct": false,
+              "reason": "Use operative fields; do not reconstruct deleted requirements."
+            },
+            {
+              "blocks": "Article 49(2) registration must be separately established",
+              "correct": true,
+              "reason": "Documentation and registration are different tasks."
+            },
+            {
+              "blocks": "The report automatically is a registration entry",
+              "correct": false,
+              "reason": "An internal file does not prove database registration."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["authority-document-request"],
+      "teaches": ["screen-3"],
+      "prompt": "A verified competent national authority requests the assessment. What must the provider be able to supply?",
+      "options": [
+        {
+          "blocks": "The same material publicly to every online stranger",
+          "correct": false,
+          "reason": "The stated duty concerns competent national authorities."
+        },
+        {
+          "blocks": "The documented assessment",
+          "correct": true,
+          "reason": "The provider must provide that assessment documentation on request."
+        },
+        {
+          "blocks": "Only a marketing brochure",
+          "correct": false,
+          "reason": "A brochure is not the actual documented assessment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 6(4) require on a competent-authority documentation request?",
+          "options": [
+            {
+              "blocks": "The documented assessment",
+              "correct": true,
+              "reason": "The provider must provide that assessment documentation on request."
+            },
+            {
+              "blocks": "Only a marketing brochure",
+              "correct": false,
+              "reason": "A brochure is not the actual documented assessment."
+            },
+            {
+              "blocks": "The same material publicly to every online stranger",
+              "correct": false,
+              "reason": "The stated duty concerns competent national authorities."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

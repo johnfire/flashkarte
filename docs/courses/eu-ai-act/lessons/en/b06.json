@@ -1,0 +1,215 @@
+{
+  "module": "Article 5: harmful decisions and behaviour",
+  "lesson": {
+    "slug": "b06",
+    "title": "Case clinic: persuasion, eligibility and prediction",
+    "summary": "Compare manipulation, exploitation, social scoring and criminal prediction using changed facts.",
+    "covers": ["harmful-decision-case"],
+    "prerequisites": [
+      {
+        "lesson": "b02",
+        "reason": "The case clinic includes the manipulation causal chain."
+      },
+      {
+        "lesson": "b03",
+        "reason": "The case clinic includes vulnerability exploitation and harm."
+      },
+      {
+        "lesson": "b04",
+        "reason": "The case clinic includes the social-scoring consequence conditions."
+      },
+      {
+        "lesson": "b05",
+        "reason": "The case clinic contrasts unsupported prediction with fact-based human assessment."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **harmful-decision case** follows fictional Northbridge across three proposals: a persuasive sales assistant, a service eligibility score and an individual offending predictor.",
+        "The same AI model can appear in all three, but the legal tests differ. Record techniques, vulnerabilities, evaluation over time, treatment, prediction basis and people affected."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)–(d), Article 6; Annex III 5(b), 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "For sales persuasion, check whether the relevant technique appreciably impairs informed choice, materially changes behaviour/decision and causes or is reasonably likely to cause significant harm. Vulnerability exploitation has its own stated basis and chain.",
+        "A helpful, accessible explanation and a deceptive harmful pressure technique have different stipulated facts. Do not classify them identically just because both influence decisions."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)–(d), Article 6; Annex III 5(b), 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "For eligibility scoring, test evaluation over time and the unrelated-context or unjustified/disproportionate-treatment branch. For offending prediction, test sole profiling/personality basis and the linked-facts human-support boundary.",
+        "A creditworthiness function is not automatically prohibited social scoring. A final human approver is not automatically sufficient for the criminal-risk support boundary."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)–(d), Article 6; Annex III 5(b), 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The case result should cite the exact point, elements, evidence and unresolved facts. If this particular prohibition is not established, continue high-risk, scope, date and other-law analysis.",
+        "If a prohibition is established, a warning label or high-risk checklist does not cure it. The exercise teaches traceable legal reasoning rather than a permanent label for a model or vendor."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(a)–(d), Article 6; Annex III 5(b), 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["harmful-decision-case"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A clear explanation and deceptive pressure both influence customers. What determines the manipulation analysis?",
+      "options": [
+        {
+          "blocks": "The exact technique and causal harm elements",
+          "correct": true,
+          "reason": "Influence alone does not establish the full manipulation test."
+        },
+        {
+          "blocks": "Only the fact that AI is used",
+          "correct": false,
+          "reason": "The statutory elements need separate facts."
+        },
+        {
+          "blocks": "Only whether the same model powers them",
+          "correct": false,
+          "reason": "A shared model does not make conduct identical."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Should all AI persuasion receive the same prohibition result?",
+          "options": [
+            {
+              "blocks": "Only the fact that AI is used",
+              "correct": false,
+              "reason": "The statutory elements need separate facts."
+            },
+            {
+              "blocks": "Only whether the same model powers them",
+              "correct": false,
+              "reason": "A shared model does not make conduct identical."
+            },
+            {
+              "blocks": "The exact technique and causal harm elements",
+              "correct": true,
+              "reason": "Influence alone does not establish the full manipulation test."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["harmful-decision-case"],
+      "teaches": ["screen-3"],
+      "prompt": "A score causes disproportionate treatment in a related context. Which reasoning is sound?",
+      "options": [
+        {
+          "blocks": "Stop because unrelated context is always required",
+          "correct": false,
+          "reason": "That omits the alternative branch."
+        },
+        {
+          "blocks": "Assume every credit score is prohibited",
+          "correct": false,
+          "reason": "The full social-scoring elements still need evidence."
+        },
+        {
+          "blocks": "Test the alternative disproportionate-treatment branch",
+          "correct": true,
+          "reason": "Either treatment branch can matter."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a related data context always rule out the social-scoring prohibition?",
+          "options": [
+            {
+              "blocks": "Assume every credit score is prohibited",
+              "correct": false,
+              "reason": "The full social-scoring elements still need evidence."
+            },
+            {
+              "blocks": "Test the alternative disproportionate-treatment branch",
+              "correct": true,
+              "reason": "Either treatment branch can matter."
+            },
+            {
+              "blocks": "Stop because unrelated context is always required",
+              "correct": false,
+              "reason": "That omits the alternative branch."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["harmful-decision-case"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A human approves offending predictions solely from traits, without linked prior facts. What should the clinic record?",
+      "options": [
+        {
+          "blocks": "The model can never have any lawful use",
+          "correct": false,
+          "reason": "This case concerns specified conduct, not every possible model use."
+        },
+        {
+          "blocks": "The factual-human-support boundary is unproven",
+          "correct": true,
+          "reason": "A final signature does not establish the required earlier factual assessment."
+        },
+        {
+          "blocks": "All prohibition concerns are cured",
+          "correct": false,
+          "reason": "Human involvement is not a universal cure."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which conclusion cannot be justified by a final human signature alone?",
+          "options": [
+            {
+              "blocks": "The factual-human-support boundary is unproven",
+              "correct": true,
+              "reason": "A final signature does not establish the required earlier factual assessment."
+            },
+            {
+              "blocks": "All prohibition concerns are cured",
+              "correct": false,
+              "reason": "Human involvement is not a universal cure."
+            },
+            {
+              "blocks": "The model can never have any lawful use",
+              "correct": false,
+              "reason": "This case concerns specified conduct, not every possible model use."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

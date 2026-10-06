@@ -1,0 +1,227 @@
+{
+  "module": "Article 5: remote identification and synthesis",
+  "lesson": {
+    "slug": "r05",
+    "title": "Other law and the limits of an exception",
+    "summary": "Keep other Union prohibitions and independent evidence checks after a biometric exception assessment.",
+    "covers": ["other-law-ban-check", "no-sole-output-adverse-decision"],
+    "prerequisites": [
+      {
+        "lesson": "i05",
+        "reason": "The check applies the principle that other applicable law continues to govern the practice."
+      },
+      {
+        "lesson": "b01",
+        "reason": "An Article 5 conclusion leaves a separate test under other applicable Union prohibitions."
+      },
+      {
+        "lesson": "r01",
+        "reason": "The output-based decision restriction concerns the real-time identification system already defined."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An Article 5 exception result is not complete legal permission. Paragraph 8 preserves **prohibitions under other Union law**. The non-law-enforcement biometric-processing clause expressly leaves GDPR Article 9 unaffected.",
+        "For a non-police biometric use, check applicable privacy rules, including the special-category prohibition and available legal conditions. Being outside the public-space law-enforcement test does not itself provide a data-processing basis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), second subparagraph; 5(3), final sentence; 5(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR: biometric special-category processing, Article 9",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The separate **no adverse legal decision solely on output** rule applies to real-time remote identification. A decision producing an adverse legal effect cannot be based solely on its output.",
+        "A match signal is not a substitute for independent evidence and proper procedure. This is a substantive decision limit even after the system's use has satisfied the exception safeguards."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), second subparagraph; 5(3), final sentence; 5(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR: biometric special-category processing, Article 9",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional Northbridge search returns a match, and officials propose an adverse legal decision using only that output. The final-sentence limit remains relevant despite an authorised operation.",
+        "Changed case: the use is a private non-law-enforcement verification. The specific public-space law-enforcement ban may differ; applicable privacy, biometric, accuracy and other legal obligations remain to be checked."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), second subparagraph; 5(3), final sentence; 5(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR: biometric special-category processing, Article 9",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Separate conclusions: the specific Article 5 test; Annex III/Article 6 classification; rules governing processing; and any adverse decision's evidence/procedure. Each result answers a different question.",
+        "Record unresolved facts plainly. Do not write 'fully compliant' from a single exception finding, a technical accuracy claim or the absence of a particular prohibition."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1), second subparagraph; 5(3), final sentence; 5(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR: biometric special-category processing, Article 9",
+          "url": "https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["other-law-ban-check"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "A private biometric use falls outside this particular law-enforcement prohibition. What happens to applicable privacy prohibitions?",
+      "options": [
+        {
+          "blocks": "They remain independently applicable",
+          "correct": true,
+          "reason": "Paragraph 8 preserves other Union prohibitions; the biometric clause preserves GDPR Article 9."
+        },
+        {
+          "blocks": "They disappear after one favourable AI Act finding",
+          "correct": false,
+          "reason": "A point-specific result is not a universal exemption."
+        },
+        {
+          "blocks": "They apply only if a vendor volunteers",
+          "correct": false,
+          "reason": "Statutory obligations do not depend on vendor preference."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an Article 5 exception waive prohibitions under other Union law?",
+          "options": [
+            {
+              "blocks": "They disappear after one favourable AI Act finding",
+              "correct": false,
+              "reason": "A point-specific result is not a universal exemption."
+            },
+            {
+              "blocks": "They apply only if a vendor volunteers",
+              "correct": false,
+              "reason": "Statutory obligations do not depend on vendor preference."
+            },
+            {
+              "blocks": "They remain independently applicable",
+              "correct": true,
+              "reason": "Paragraph 8 preserves other Union prohibitions; the biometric clause preserves GDPR Article 9."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["no-sole-output-adverse-decision"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "An authorised scan produces a match; an adverse legal decision is proposed solely from it. What limit applies?",
+      "options": [
+        {
+          "blocks": "Authorisation makes the output conclusive for every decision",
+          "correct": false,
+          "reason": "The decision rule remains after authorisation."
+        },
+        {
+          "blocks": "Technical confidence alone removes the limit",
+          "correct": false,
+          "reason": "A confidence score cannot waive the statutory requirement."
+        },
+        {
+          "blocks": "No adverse legal decision solely on that output",
+          "correct": true,
+          "reason": "Article 5(3)'s final sentence supplies this independent limit."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does authorisation allow adverse legal effects based only on identification output?",
+          "options": [
+            {
+              "blocks": "Technical confidence alone removes the limit",
+              "correct": false,
+              "reason": "A confidence score cannot waive the statutory requirement."
+            },
+            {
+              "blocks": "No adverse legal decision solely on that output",
+              "correct": true,
+              "reason": "Article 5(3)'s final sentence supplies this independent limit."
+            },
+            {
+              "blocks": "Authorisation makes the output conclusive for every decision",
+              "correct": false,
+              "reason": "The decision rule remains after authorisation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["other-law-ban-check", "no-sole-output-adverse-decision"],
+      "teaches": ["screen-4"],
+      "prompt": "One exception is established, but privacy and decision evidence have not been checked. How should the result be described?",
+      "options": [
+        {
+          "blocks": "Permission to rely solely on every biometric match",
+          "correct": false,
+          "reason": "The separate adverse-decision limit remains."
+        },
+        {
+          "blocks": "Separate processing and decision-law checks",
+          "correct": true,
+          "reason": "Each legal question needs its own facts and test."
+        },
+        {
+          "blocks": "Complete compliance with every applicable law",
+          "correct": false,
+          "reason": "That broader claim is unsupported."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does a precise point-specific exception conclusion leave open?",
+          "options": [
+            {
+              "blocks": "Separate processing and decision-law checks",
+              "correct": true,
+              "reason": "Each legal question needs its own facts and test."
+            },
+            {
+              "blocks": "Complete compliance with every applicable law",
+              "correct": false,
+              "reason": "That broader claim is unsupported."
+            },
+            {
+              "blocks": "Permission to rely solely on every biometric match",
+              "correct": false,
+              "reason": "The separate adverse-decision limit remains."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

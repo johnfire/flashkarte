@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: biometrics and synthetic media",
+  "lesson": {
+    "slug": "b07",
+    "title": "Facial-recognition databases",
+    "summary": "Identify untargeted scraping used to create or expand facial-recognition databases.",
+    "covers": ["untargeted-scraping", "facial-database-ban"],
+    "prerequisites": [
+      {
+        "lesson": "a01",
+        "reason": "The database purpose concerns facial recognition for identity rather than any image archive."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The collection feature is introduced as one element of the database prohibition."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Untargeted scraping** in this point concerns collecting facial images from the internet or CCTV footage without a targeted selection as part of the stated database practice.",
+        "Identify the source, selection and purpose. Data being publicly visible does not itself remove the prohibition; the point specifically names internet and CCTV sources."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **facial-database ban** concerns AI systems creating or expanding facial-recognition databases through that untargeted scraping. Read creation/expansion, face images, source and untargeted collection together.",
+        "The point specifies placing on the market, putting into service for this purpose, or use. Do not turn it into an unsupported statement that every photo database or every face-related function is identical."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional Northbridge case: a supplier uses AI to gather facial images indiscriminately from internet pages to expand a recognition database. Those stipulated facts fit the conduct the point addresses.",
+        "Changed case: a consented identity-enrolment process supplies specific records without such scraping. The facts of this point differ; other biometric, privacy and lawful-basis questions still need assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Record collection sources, targeting, recognition-database role and regulated action. Do not accept 'public data' or a disclosure label as a universal exception.",
+        "A result that the untargeted-scraping elements are not established does not establish lawful collection under every other law. The legal conclusion should remain tied to this point."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["untargeted-scraping"],
+      "teaches": ["screen-1"],
+      "prompt": "A supplier collects facial images indiscriminately from the public internet. Does public visibility alone avoid this point?",
+      "options": [
+        {
+          "blocks": "It does not by itself remove the scraping test",
+          "correct": true,
+          "reason": "The point expressly addresses internet facial images."
+        },
+        {
+          "blocks": "It grants blanket permission to collect",
+          "correct": false,
+          "reason": "Public visibility is not a general exception."
+        },
+        {
+          "blocks": "It proves each person actively enrolled",
+          "correct": false,
+          "reason": "Visibility does not establish targeted active enrolment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should public availability be treated when the point names internet scraping?",
+          "options": [
+            {
+              "blocks": "It grants blanket permission to collect",
+              "correct": false,
+              "reason": "Public visibility is not a general exception."
+            },
+            {
+              "blocks": "It proves each person actively enrolled",
+              "correct": false,
+              "reason": "Visibility does not establish targeted active enrolment."
+            },
+            {
+              "blocks": "It does not by itself remove the scraping test",
+              "correct": true,
+              "reason": "The point expressly addresses internet facial images."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["facial-database-ban"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "AI uses untargeted CCTV facial scraping to expand a recognition database. Which combined facts matter?",
+      "options": [
+        {
+          "blocks": "Only owning a camera",
+          "correct": false,
+          "reason": "Camera ownership alone does not establish the conduct."
+        },
+        {
+          "blocks": "Only storing a single holiday photograph",
+          "correct": false,
+          "reason": "That does not establish the stated database practice."
+        },
+        {
+          "blocks": "Untargeted named-source scraping and database creation/expansion",
+          "correct": true,
+          "reason": "The point ties those collection and purpose elements together."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What must be connected for the facial-database prohibition?",
+          "options": [
+            {
+              "blocks": "Only storing a single holiday photograph",
+              "correct": false,
+              "reason": "That does not establish the stated database practice."
+            },
+            {
+              "blocks": "Untargeted named-source scraping and database creation/expansion",
+              "correct": true,
+              "reason": "The point ties those collection and purpose elements together."
+            },
+            {
+              "blocks": "Only owning a camera",
+              "correct": false,
+              "reason": "Camera ownership alone does not establish the conduct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["untargeted-scraping", "facial-database-ban"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A targeted enrolment case does not establish untargeted scraping. What conclusion is appropriate?",
+      "options": [
+        {
+          "blocks": "Every face record must be this prohibited practice",
+          "correct": false,
+          "reason": "The point has specific collection and purpose elements."
+        },
+        {
+          "blocks": "This test differs; other legal checks remain",
+          "correct": true,
+          "reason": "A point-specific conclusion is not blanket data-processing permission."
+        },
+        {
+          "blocks": "All privacy rules disappear",
+          "correct": false,
+          "reason": "Other law remains independently applicable."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does being outside this particular scraping test establish all biometric processing is lawful?",
+          "options": [
+            {
+              "blocks": "This test differs; other legal checks remain",
+              "correct": true,
+              "reason": "A point-specific conclusion is not blanket data-processing permission."
+            },
+            {
+              "blocks": "All privacy rules disappear",
+              "correct": false,
+              "reason": "Other law remains independently applicable."
+            },
+            {
+              "blocks": "Every face record must be this prohibited practice",
+              "correct": false,
+              "reason": "The point has specific collection and purpose elements."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

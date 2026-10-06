@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: people, education and work",
+  "lesson": {
+    "slug": "a03",
+    "title": "Educational access and assessment",
+    "summary": "Recognise educational admission and learning-outcome functions at every institutional level.",
+    "covers": ["educational-access-use", "learning-outcome-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "The learner must distinguish a listed-use match from the product route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **educational-access use** includes determining access or admission, or assigning people to educational and vocational-training institutions at all levels. It is not limited to universities.",
+        "Northbridge's fictional training college considers an admissions assistant recommending which applicants enter a programme. Identify that concrete purpose rather than classifying all learning software alike."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(a), 3(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **learning-outcome use** includes evaluating learning outcomes in those institutions, including when the outcomes steer a person's learning process.",
+        "An AI assessor evaluating a student's work and changing the next learning path needs comparison with point 3(b). A system's feedback being called 'helpful' does not eliminate the evaluation function."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(a), 3(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "These listed purposes differ from simply organising administrative documents or providing general information. The exact intended institutional use is decisive.",
+        "If a claimed administrative tool actually evaluates applications or work, record that. If it only formats a file, examine the actual narrow function; a later lesson applies the full paragraph 3 derogation rather than granting one from this description."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(a), 3(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Northbridge describes admissions and learning evaluation separately even when one platform performs both. Record the institutional context, input, output and how the result is used.",
+        "Annex III listing establishes the route needing analysis. Complete the prohibition, paragraph 3, profiling, scope and date checks before claiming a complete outcome."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 3(a), 3(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["educational-access-use"],
+      "teaches": ["screen-1"],
+      "prompt": "An AI recommends admissions to a vocational college. Which Annex III educational purpose is directly relevant?",
+      "options": [
+        {
+          "blocks": "Educational access/admission at institutional levels",
+          "correct": true,
+          "reason": "Point 3(a) includes vocational institutions at all levels."
+        },
+        {
+          "blocks": "Only university entrance is covered",
+          "correct": false,
+          "reason": "That improperly narrows the point's institutional scope."
+        },
+        {
+          "blocks": "Only document storage is being assessed",
+          "correct": false,
+          "reason": "The stated function recommends admission, not just storage."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does vocational-programme admission fall outside the educational-access point because it is not a university?",
+          "options": [
+            {
+              "blocks": "Only university entrance is covered",
+              "correct": false,
+              "reason": "That improperly narrows the point's institutional scope."
+            },
+            {
+              "blocks": "Only document storage is being assessed",
+              "correct": false,
+              "reason": "The stated function recommends admission, not just storage."
+            },
+            {
+              "blocks": "Educational access/admission at institutional levels",
+              "correct": true,
+              "reason": "Point 3(a) includes vocational institutions at all levels."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["learning-outcome-use"],
+      "teaches": ["screen-2"],
+      "prompt": "A college uses AI to evaluate work and steer each student's learning path. Which point should be compared?",
+      "options": [
+        {
+          "blocks": "Only building maintenance",
+          "correct": false,
+          "reason": "That does not describe educational outcome evaluation."
+        },
+        {
+          "blocks": "Only the price of the learning software",
+          "correct": false,
+          "reason": "Price does not decide the intended-purpose comparison."
+        },
+        {
+          "blocks": "Learning-outcome evaluation, Annex III 3(b)",
+          "correct": true,
+          "reason": "The point expressly includes that steering use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which educational use includes evaluation of outcomes used to direct learning?",
+          "options": [
+            {
+              "blocks": "Only the price of the learning software",
+              "correct": false,
+              "reason": "Price does not decide the intended-purpose comparison."
+            },
+            {
+              "blocks": "Learning-outcome evaluation, Annex III 3(b)",
+              "correct": true,
+              "reason": "The point expressly includes that steering use."
+            },
+            {
+              "blocks": "Only building maintenance",
+              "correct": false,
+              "reason": "That does not describe educational outcome evaluation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["educational-access-use", "learning-outcome-use"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "One platform handles admission recommendations and learning evaluation. What should the record preserve?",
+      "options": [
+        {
+          "blocks": "An automatic exemption because it is educational",
+          "correct": false,
+          "reason": "The list specifically contains educational purposes."
+        },
+        {
+          "blocks": "Separate relevant functions and legal tests",
+          "correct": true,
+          "reason": "Each purpose needs comparison with the appropriate listed point."
+        },
+        {
+          "blocks": "Only the least consequential feature",
+          "correct": false,
+          "reason": "That would hide relevant educational decisions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should a multi-function educational platform's intended uses be assessed?",
+          "options": [
+            {
+              "blocks": "Separate relevant functions and legal tests",
+              "correct": true,
+              "reason": "Each purpose needs comparison with the appropriate listed point."
+            },
+            {
+              "blocks": "Only the least consequential feature",
+              "correct": false,
+              "reason": "That would hide relevant educational decisions."
+            },
+            {
+              "blocks": "An automatic exemption because it is educational",
+              "correct": false,
+              "reason": "The list specifically contains educational purposes."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: harmful decisions and behaviour",
+  "lesson": {
+    "slug": "b05",
+    "title": "Individual criminal-risk assessment",
+    "summary": "Distinguish individual criminal-risk prediction from support of human assessment already based on linked facts.",
+    "covers": ["criminal-risk-ban", "factual-human-support-boundary"],
+    "prerequisites": [
+      {
+        "lesson": "i03",
+        "reason": "The ban expressly turns on prediction solely based on profiling or personality assessment."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The learner must distinguish the criminal-risk elements from a general law-enforcement label."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **criminal-risk ban** concerns AI risk assessment predicting whether a natural person will commit a criminal offence, based solely on personal profiling or assessment of personality traits and characteristics.",
+        "Identify the predicted event, person and basis. A tool's output being called 'risk intelligence' does not resolve those elements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(d); Annex III 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The point provides a boundary for AI supporting human assessment of involvement in criminal activity already based on objective, verifiable facts directly linked to criminal activity.",
+        "The **factual-human-support boundary** is not satisfied by adding a person after a purely trait-based prediction. The existing human assessment and linked facts must be shown."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(d); Annex III 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional Northbridge clinic: a system predicts offending solely from personality traits. A human signs the flag without a pre-existing linked factual assessment. Those facts do not establish the support boundary.",
+        "Changed case: a human assessment of involvement already rests on specified objective/verifiable facts directly linked to criminal activity, and the AI supports it. Examine that boundary and other law separately; it is not blanket permission for any later use."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(d); Annex III 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Keep Article 5 distinct from Annex III enforcement classification. A permitted support function may still require high-risk analysis. A prohibited trait-based function cannot be authorised by an Annex III listing.",
+        "Record the facts, their direct link, human assessment's timing and the actual support function. Do not invent criminal suspicion from a demographic or personality correlation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(d); Annex III 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["criminal-risk-ban"],
+      "teaches": ["screen-1"],
+      "prompt": "AI predicts an individual's offending risk solely from personality traits. Which issue is directly raised?",
+      "options": [
+        {
+          "blocks": "Sole profiling or personality assessment",
+          "correct": true,
+          "reason": "That basis is expressly covered by the point's test."
+        },
+        {
+          "blocks": "Only the product's short name",
+          "correct": false,
+          "reason": "A name does not establish the prediction basis."
+        },
+        {
+          "blocks": "Only the presence of a user interface",
+          "correct": false,
+          "reason": "Interface presence does not resolve the prohibition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What basis is central to the individual criminal-risk prohibition?",
+          "options": [
+            {
+              "blocks": "Only the product's short name",
+              "correct": false,
+              "reason": "A name does not establish the prediction basis."
+            },
+            {
+              "blocks": "Only the presence of a user interface",
+              "correct": false,
+              "reason": "Interface presence does not resolve the prohibition."
+            },
+            {
+              "blocks": "Sole profiling or personality assessment",
+              "correct": true,
+              "reason": "That basis is expressly covered by the point's test."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["factual-human-support-boundary"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "A person approves a trait-based prediction with no earlier linked factual assessment. Is that enough for the support boundary?",
+      "options": [
+        {
+          "blocks": "Yes; any human button is sufficient",
+          "correct": false,
+          "reason": "That omits the objective/verifiable directly linked facts."
+        },
+        {
+          "blocks": "Yes; personality correlation creates linked facts",
+          "correct": false,
+          "reason": "A trait correlation is not automatically the required direct factual link."
+        },
+        {
+          "blocks": "No; a prior linked factual assessment must be established",
+          "correct": true,
+          "reason": "The boundary requires more than a final signature."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can human approval alone establish the factual-support exception in Article 5(1)(d)?",
+          "options": [
+            {
+              "blocks": "Yes; personality correlation creates linked facts",
+              "correct": false,
+              "reason": "A trait correlation is not automatically the required direct factual link."
+            },
+            {
+              "blocks": "No; a prior linked factual assessment must be established",
+              "correct": true,
+              "reason": "The boundary requires more than a final signature."
+            },
+            {
+              "blocks": "Yes; any human button is sufficient",
+              "correct": false,
+              "reason": "That omits the objective/verifiable directly linked facts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["criminal-risk-ban", "factual-human-support-boundary"],
+      "teaches": ["screen-4"],
+      "prompt": "The factual-support boundary is established in a stipulated case. What remains?",
+      "options": [
+        {
+          "blocks": "Annex III now permits prohibited functions too",
+          "correct": false,
+          "reason": "Classification cannot authorise a separate prohibited practice."
+        },
+        {
+          "blocks": "Other law and high-risk classification still need checks",
+          "correct": true,
+          "reason": "The boundary is narrow, not complete compliance permission."
+        },
+        {
+          "blocks": "Every legal duty disappears",
+          "correct": false,
+          "reason": "One prohibition result does not erase the other rules."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does being outside this particular ban settle every enforcement AI duty?",
+          "options": [
+            {
+              "blocks": "Other law and high-risk classification still need checks",
+              "correct": true,
+              "reason": "The boundary is narrow, not complete compliance permission."
+            },
+            {
+              "blocks": "Every legal duty disappears",
+              "correct": false,
+              "reason": "One prohibition result does not erase the other rules."
+            },
+            {
+              "blocks": "Annex III now permits prohibited functions too",
+              "correct": false,
+              "reason": "Classification cannot authorise a separate prohibited practice."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

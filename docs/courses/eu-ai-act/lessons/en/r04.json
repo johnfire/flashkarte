@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: remote identification and synthesis",
+  "lesson": {
+    "slug": "r04",
+    "title": "National rules, notification and reporting",
+    "summary": "Locate national permission rules and trace each-use notifications through annual reporting.",
+    "covers": [
+      "national-authorisation-lookup",
+      "notification-rule",
+      "reporting-chain"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r03",
+        "reason": "The national-law enquiry concerns whether and how the authorisation procedure is available. Notification is a separate duty and must not be mistaken for the prior authorisation."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "This optional extension starts with **national authorisation rules**. A Member State may choose full or partial permission within the EU limits and must specify detailed request, issuance, exercise, supervision and reporting rules.",
+        "National law specifies permitted objectives and offences, and may be more restrictive consistently with Union law. Member States notify the adopted rules to the Commission within 30 days. The EU exception alone does not establish permission in an unspecified country."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(4)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Each-use notification** goes to the relevant market surveillance authority and the national data protection authority under the national rules. It includes at least the paragraph 6 information, without sensitive operational data.",
+        "Notification is distinct from prior authorisation and registration. Sending one email to one authority cannot be assumed to satisfy all three processes or the two-recipient notification requirement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(4)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The **annual reporting chain** begins with notified national market surveillance and data protection authorities reporting to the Commission. The Commission supplies a template including numbers and results of competent-authority authorisation decisions.",
+        "The Commission then publishes annual reports based on aggregated Member-State data. Those published reports must not include sensitive operational law-enforcement data."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(4)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Fictional Northbridge cross-border case: a team wants to reuse one country's permission elsewhere. Obtain each governing country's actual national rules and competent-authority procedure; do not invent a harmonised blanket permit.",
+        "Use a checklist with separate national-law, authorisation, registration, notification and annual-report fields. The core path does not depend on completing this extension; it offers a deeper administrative lookup method."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(4)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["national-authorisation-lookup"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "An assessor knows an EU exception objective but not the Member State's permission rules. What can they conclude?",
+      "options": [
+        {
+          "blocks": "National permission and detailed rules still need verification",
+          "correct": true,
+          "reason": "A Member State may decide whether and how to authorise within EU limits."
+        },
+        {
+          "blocks": "Every Member State must permit the full exception",
+          "correct": false,
+          "reason": "The national choice may be partial and stricter."
+        },
+        {
+          "blocks": "A vendor can select whichever country's rules it prefers",
+          "correct": false,
+          "reason": "The governing jurisdiction and competent process matter."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the EU exception itself prove the use is permitted in every Member State?",
+          "options": [
+            {
+              "blocks": "Every Member State must permit the full exception",
+              "correct": false,
+              "reason": "The national choice may be partial and stricter."
+            },
+            {
+              "blocks": "A vendor can select whichever country's rules it prefers",
+              "correct": false,
+              "reason": "The governing jurisdiction and competent process matter."
+            },
+            {
+              "blocks": "National permission and detailed rules still need verification",
+              "correct": true,
+              "reason": "A Member State may decide whether and how to authorise within EU limits."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["notification-rule"],
+      "teaches": ["screen-2"],
+      "prompt": "After a use, a notification is sent only to market surveillance. Which other recipient is specified?",
+      "options": [
+        {
+          "blocks": "Only the supplier's sales team",
+          "correct": false,
+          "reason": "Sales notification is not the second statutory recipient."
+        },
+        {
+          "blocks": "Only the newspaper editor",
+          "correct": false,
+          "reason": "Public reporting is distinct from each-use authority notification."
+        },
+        {
+          "blocks": "The national data protection authority",
+          "correct": true,
+          "reason": "Article 5(4) specifies both recipients."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Who joins the relevant market surveillance authority in each-use notification?",
+          "options": [
+            {
+              "blocks": "Only the newspaper editor",
+              "correct": false,
+              "reason": "Public reporting is distinct from each-use authority notification."
+            },
+            {
+              "blocks": "The national data protection authority",
+              "correct": true,
+              "reason": "Article 5(4) specifies both recipients."
+            },
+            {
+              "blocks": "Only the supplier's sales team",
+              "correct": false,
+              "reason": "Sales notification is not the second statutory recipient."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["reporting-chain"],
+      "teaches": ["screen-3"],
+      "prompt": "What does the Commission publish from the national annual reports?",
+      "options": [
+        {
+          "blocks": "Only a supplier's advertising summary",
+          "correct": false,
+          "reason": "The chain concerns official annual reporting."
+        },
+        {
+          "blocks": "Annual aggregated reports without sensitive operational data",
+          "correct": true,
+          "reason": "Article 5(7) specifies aggregation and excludes sensitive operational data."
+        },
+        {
+          "blocks": "Every person's operational identification record",
+          "correct": false,
+          "reason": "The publication excludes sensitive operational details."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Should annual public reports expose sensitive operational case data?",
+          "options": [
+            {
+              "blocks": "Annual aggregated reports without sensitive operational data",
+              "correct": true,
+              "reason": "Article 5(7) specifies aggregation and excludes sensitive operational data."
+            },
+            {
+              "blocks": "Every person's operational identification record",
+              "correct": false,
+              "reason": "The publication excludes sensitive operational details."
+            },
+            {
+              "blocks": "Only a supplier's advertising summary",
+              "correct": false,
+              "reason": "The chain concerns official annual reporting."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
