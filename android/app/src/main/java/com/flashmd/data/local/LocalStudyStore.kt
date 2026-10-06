@@ -40,6 +40,7 @@ data class CachedStudyStats(
     val medium: Int,
     val good: Int,
     val perfect: Int,
+    val learningBlock: LearningBlocks.BlockProgress? = null,
 )
 
 /**
@@ -126,7 +127,12 @@ class LocalStudyStore @Inject constructor(
      * cards back, never open extra ones — until the next online fetch.
      */
     private fun admissibleNewCardIds(deckId: String): Set<String>? = runCatching {
-        val blockCards = db.cardsQueries.selectCardsForDeck(deckId).executeAsList()
+        LearningBlocks.admissibleNewCardIds(blockCards(deckId))
+    }.getOrNull()
+
+    /** The deck's studiable cards in learning-block order, with this device's progress. */
+    private fun blockCards(deckId: String): List<LearningBlocks.BlockCard> =
+        db.cardsQueries.selectCardsForDeck(deckId).executeAsList()
             .filter { (it.type ?: "basic") == "basic" }
             // Same order as the server: position, then id.
             .sortedWith(compareBy({ it.position }, { it.id }))
@@ -138,8 +144,6 @@ class LocalStudyStore @Inject constructor(
                     lastRating = progress?.last_rating?.toInt(),
                 )
             }
-        LearningBlocks.admissibleNewCardIds(blockCards)
-    }.getOrNull()
 
     fun dueCards(deckId: String): List<DueCard> {
         val nowIso = Instant.now().toString()
@@ -197,6 +201,8 @@ class LocalStudyStore @Inject constructor(
             medium = progressByCardId.values.count { progress -> progress.last_rating == 3L },
             good = progressByCardId.values.count { progress -> progress.last_rating == 4L },
             perfect = progressByCardId.values.count { progress -> progress.last_rating == 5L },
+            // Display only: if it can't be worked out offline, the line is simply hidden.
+            learningBlock = runCatching { LearningBlocks.blockProgress(blockCards(deckId)) }.getOrNull(),
         )
     }
 

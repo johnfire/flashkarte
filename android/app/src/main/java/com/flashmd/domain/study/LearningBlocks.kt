@@ -19,6 +19,16 @@ object LearningBlocks {
     /** One studiable card, in deck order. [seen] means there is a progress row for it. */
     data class BlockCard(val id: String, val seen: Boolean, val lastRating: Int?)
 
+    /** For display ("Block 3 of 25 · 12/40 mastered"); same fields as the server's learning_block. */
+    data class BlockProgress(
+        val blockSize: Int,
+        val blocksTotal: Int,
+        /** 1-based; null once every card is mastered. */
+        val currentBlock: Int?,
+        val currentBlockCards: Int,
+        val currentBlockMastered: Int,
+    )
+
     private fun BlockCard.isMastered() = lastRating == MASTERED_RATING
 
     /** 0-based index of the first block with an unmastered card; null when there is none. */
@@ -40,4 +50,15 @@ object LearningBlocks {
     /** The new cards a study queue may introduce now: the unseen cards of the current block. */
     fun admissibleNewCardIds(cards: List<BlockCard>, blockSize: Int = BLOCK_SIZE): Set<String> =
         blockSlice(cards, blockSize).orEmpty().filter { !it.seen }.map { it.id }.toSet()
+
+    fun blockProgress(cards: List<BlockCard>, blockSize: Int = BLOCK_SIZE): BlockProgress {
+        val slice = blockSlice(cards, blockSize).orEmpty()
+        return BlockProgress(
+            blockSize = blockSize,
+            blocksTotal = (cards.size + blockSize - 1) / blockSize,
+            currentBlock = currentBlock(cards, blockSize)?.plus(1),
+            currentBlockCards = slice.size,
+            currentBlockMastered = slice.count { it.isMastered() },
+        )
+    }
 }

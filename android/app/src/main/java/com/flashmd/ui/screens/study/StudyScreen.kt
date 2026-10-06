@@ -143,6 +143,27 @@ fun StudyScreen(
                 modifier = Modifier.padding(top = 4.dp, bottom = 8.dp),
             )
 
+            // Learning blocks: only for decks bigger than one block.
+            state.learningBlock?.takeIf { it.blocksTotal > 1 }?.let { block ->
+                val current = block.currentBlock
+                Text(
+                    if (current == null) {
+                        stringResource(R.string.study_blocks_complete, block.blocksTotal)
+                    } else {
+                        stringResource(
+                            R.string.study_block_progress,
+                            current,
+                            block.blocksTotal,
+                            block.currentBlockMastered,
+                            block.currentBlockCards,
+                        )
+                    },
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                )
+            }
+
             // Flip/Choice describe how a question is answered; a lesson has none.
             if (!onLesson) SingleChoiceSegmentedButtonRow(Modifier.padding(bottom = 8.dp)) {
                 SegmentedButton(

@@ -97,4 +97,25 @@ class LearningBlocksTest {
         assertEquals(1, LearningBlocks.currentBlock(cards, 3))
         assertEquals(3, LearningBlocks.admissibleNewCardIds(cards, 3).size)
     }
+
+    @Test fun `blockProgress reports a 1-based block number for display`() {
+        val cards = deck(1000) { id, i -> if (i < 90) mastered(id) else unseen(id) }
+        assertEquals(
+            LearningBlocks.BlockProgress(
+                blockSize = 40,
+                blocksTotal = 25,
+                currentBlock = 3,
+                currentBlockCards = 40,
+                currentBlockMastered = 10,
+            ),
+            LearningBlocks.blockProgress(cards),
+        )
+    }
+
+    @Test fun `blockProgress of a finished deck has no current block`() {
+        assertEquals(
+            LearningBlocks.BlockProgress(40, 1, null, 0, 0),
+            LearningBlocks.blockProgress(deck(40) { id, _ -> mastered(id) }),
+        )
+    }
 }
