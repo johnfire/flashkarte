@@ -15,6 +15,15 @@ export type {
 export { selectOptions, resolveChoice } from "./study/diagnostic";
 export { STABLE_REPS, wordPhase, promptFor } from "./study/senses";
 export type { WordPhase, SenseProgress, PromptCard } from "./study/senses";
+export {
+  LEARNING_BLOCK_SIZE,
+  MASTERED_RATING,
+  admissibleNewCardIds,
+  blockProgress,
+  currentBlock,
+  currentBlockCardIds,
+} from "./study/learning-blocks";
+export type { BlockCard, BlockProgress } from "./study/learning-blocks";
 export type { StudyOption, ChoiceResolution } from "./study/diagnostic";
 export {
   resolveSpeech,
