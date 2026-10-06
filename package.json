@@ -5,7 +5,8 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "npm run test --workspaces --if-present",
+    "test": "npm run test:dependency-security && npm run test --workspaces --if-present",
+    "test:dependency-security": "node --test scripts/security/dependency-remediation.test.cjs",
     "build": "npm run build --workspaces --if-present",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "eslint \"packages/**/*.{ts,tsx}\"",
@@ -15,7 +16,13 @@
   },
   "overrides": {
     "hono": "^4.13.5",
-    "qs": "^6.16.0"
+    "qs": "^6.16.0",
+    "proxy-addr": "^2.0.8",
+    "source-map-js": "^1.2.2",
+    "postcss-selector-parser": "^7.1.6",
+    "@istanbuljs/load-nyc-config": {
+      "js-yaml": "^4.3.2"
+    }
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.12.1",
