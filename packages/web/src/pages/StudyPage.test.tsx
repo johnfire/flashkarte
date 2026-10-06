@@ -9,7 +9,12 @@ import "../i18n";
 
 vi.mock("../api/client", () => ({
   api: {
-    study: { batch: vi.fn(), review: vi.fn(), markRead: vi.fn() },
+    study: {
+      batch: vi.fn(),
+      review: vi.fn(),
+      markRead: vi.fn(),
+      stats: vi.fn(),
+    },
     decks: { settings: vi.fn(), get: vi.fn() },
   },
   ApiError: class ApiError extends Error {},
@@ -27,6 +32,7 @@ const mockApi = api as unknown as {
     batch: ReturnType<typeof vi.fn>;
     review: ReturnType<typeof vi.fn>;
     markRead: ReturnType<typeof vi.fn>;
+    stats: ReturnType<typeof vi.fn>;
   };
   decks: { settings: ReturnType<typeof vi.fn>; get: ReturnType<typeof vi.fn> };
 };
@@ -92,6 +98,13 @@ describe("StudyPage", () => {
     mockUser = null;
     mockApi.decks.settings.mockResolvedValue(DECK_SILENT);
     mockApi.decks.get.mockResolvedValue({ cards: [] });
+    // A small deck: no learning-block line unless a test says otherwise.
+    mockApi.study.stats.mockResolvedValue({
+      total: 1,
+      new: 0,
+      due: 1,
+      learned: 0,
+    });
     installSpeech(["de-DE", "en-GB"]);
   });
 
@@ -142,6 +155,37 @@ describe("StudyPage", () => {
     await waitFor(() =>
       expect(screen.getByText(/Session complete/)).toBeInTheDocument(),
     );
+  });
+
+  test("a large deck shows its learning block under the header", async () => {
+    mockApi.study.batch.mockResolvedValue([
+      {
+        id: "c1",
+        content: { front: "Front?", back: "Back!" },
+        category: null,
+        position: 0,
+      },
+    ]);
+    mockApi.study.stats.mockResolvedValue({
+      total: 1000,
+      new: 960,
+      due: 40,
+      learned: 0,
+      learning_block: {
+        block_size: 40,
+        blocks_total: 25,
+        current_block: 1,
+        current_block_cards: 40,
+        current_block_mastered: 0,
+      },
+    });
+
+    renderStudy();
+
+    expect(
+      await screen.findByText("Block 1 of 25 · 0/40 mastered"),
+    ).toBeInTheDocument();
+    expect(mockApi.study.stats).toHaveBeenCalledWith("d1");
   });
 
   test("Hard schedules twelve hours later without re-queueing the card", async () => {

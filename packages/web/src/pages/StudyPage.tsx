@@ -4,6 +4,7 @@ import { useStudySession } from "../study/useStudySession";
 import { StudyNotice } from "./StudyNotice";
 import { StudyControls } from "./StudyControls";
 import { StudyHeader } from "./StudyHeader";
+import { LearningBlockProgress } from "./LearningBlockProgress";
 import { FlipStudyCard } from "./FlipStudyCard";
 import { ChoicePanel } from "./ChoicePanel";
 import { RemediationInterlude } from "./RemediationInterlude";
@@ -55,18 +56,21 @@ export function StudyPage() {
   const card = s.current!;
   const cards = s.cards!;
   const header = (
-    <StudyHeader
-      mode={s.mode}
-      onModeChange={s.setMode}
-      showMute={s.mode === "flip" && s.canSpeak}
-      muted={s.muted}
-      onToggleMute={() => {
-        if (!s.muted) s.cancel();
-        s.setMuted(!s.muted);
-      }}
-      current={s.idx + 1}
-      total={cards.length}
-    />
+    <>
+      <StudyHeader
+        mode={s.mode}
+        onModeChange={s.setMode}
+        showMute={s.mode === "flip" && s.canSpeak}
+        muted={s.muted}
+        onToggleMute={() => {
+          if (!s.muted) s.cancel();
+          s.setMuted(!s.muted);
+        }}
+        current={s.idx + 1}
+        total={cards.length}
+      />
+      {id && <LearningBlockProgress deckId={id} refreshKey={s.reviewedCount} />}
+    </>
   );
 
   if (s.remediation) {
