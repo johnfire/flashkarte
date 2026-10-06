@@ -8,6 +8,7 @@ import com.flashmd.domain.model.Deck
 import com.flashmd.domain.model.DueCard
 import com.flashmd.domain.sm2.Sm2Algorithm
 import com.flashmd.domain.sm2.Sm2Progress
+import com.flashmd.domain.study.LearningBlocks
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -115,10 +116,39 @@ class LocalStudyStore @Inject constructor(
         )
     }
 
+    /**
+     * The new cards the offline queue may introduce, per learning blocks (40 at a time,
+     * mirroring the server's online batch). null means "no gate": blocks are a pacing
+     * aid, so if they cannot be worked out offline study carries on ungated.
+     *
+     * Only progress rated on this device is known locally, so a card studied elsewhere
+     * can look unseen here. That makes the offline gate conservative — it may hold new
+     * cards back, never open extra ones — until the next online fetch.
+     */
+    private fun admissibleNewCardIds(deckId: String): Set<String>? = runCatching {
+        val blockCards = db.cardsQueries.selectCardsForDeck(deckId).executeAsList()
+            .filter { (it.type ?: "basic") == "basic" }
+            // Same order as the server: position, then id.
+            .sortedWith(compareBy({ it.position }, { it.id }))
+            .map { card ->
+                val progress = db.cardProgressQueries.selectProgress(card.id).executeAsOneOrNull()
+                LearningBlocks.BlockCard(
+                    id = card.id,
+                    seen = progress != null,
+                    lastRating = progress?.last_rating?.toInt(),
+                )
+            }
+        LearningBlocks.admissibleNewCardIds(blockCards)
+    }.getOrNull()
+
     fun dueCards(deckId: String): List<DueCard> {
         val nowIso = Instant.now().toString()
-        return db.cardProgressQueries.selectDueCards(deckId, nowIso).executeAsList().map { c ->
+        val admissible = admissibleNewCardIds(deckId)
+        return db.cardProgressQueries.selectDueCards(deckId, nowIso).executeAsList().mapNotNull { c ->
             val p = db.cardProgressQueries.selectProgress(c.id).executeAsOneOrNull()
+            // A never-seen basic card outside the current learning block waits its turn.
+            val isNewBasic = p == null && (c.type ?: "basic") == "basic"
+            if (admissible != null && isNewBasic && c.id !in admissible) return@mapNotNull null
             DueCard(
                 card = Card(
                     c.id, c.deck_id, c.front, c.back, c.label,
