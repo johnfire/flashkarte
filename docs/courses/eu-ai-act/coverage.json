@@ -1,0 +1,1133 @@
+{
+  "baseline": "02024R1689-20260727",
+  "coverage": [
+    {
+      "locator": "Article 6(1), opening",
+      "lesson": "P01",
+      "topic": "Independent marketing; BOTH conditions",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(1)(a)",
+      "lesson": "P02",
+      "topic": "Safety component OR product covered by Annex I",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(1)(b)",
+      "lesson": "P04",
+      "topic": "Mandatory third-party conformity assessment",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(1a)",
+      "lesson": "P02",
+      "topic": "Exclusively non-safety functions",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(1b)",
+      "lesson": "P02",
+      "topic": "Failure/malfunction endangering health and safety",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(1c)",
+      "lesson": "P04",
+      "topic": "Assessment required solely for other risks",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(2)",
+      "lesson": "P01",
+      "topic": "Annex III route",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(3), first subparagraph",
+      "lesson": "E01",
+      "topic": "Significance of harm; decision influence",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(3), second subparagraph, opening",
+      "lesson": "E01",
+      "topic": "At least one listed condition; gateway still applies",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(3)(a)",
+      "lesson": "E02",
+      "topic": "Narrow procedural task",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(3)(b)",
+      "lesson": "E03",
+      "topic": "Improve previously completed human activity",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(3)(c)",
+      "lesson": "E04",
+      "topic": "Patterns/deviations; no replacement/influence without proper review",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(3)(d)",
+      "lesson": "E05",
+      "topic": "Preparatory task",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(3), final subparagraph",
+      "lesson": "E06",
+      "topic": "Profiling override confined to Annex III listed systems",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(4), sentence 1",
+      "lesson": "E07",
+      "topic": "Provider documentation before market/service",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(4), sentence 2",
+      "lesson": "E07",
+      "topic": "Registration under Article 49(2)",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(4), sentence 3",
+      "lesson": "E07",
+      "topic": "Assessment supplied to authority on request",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(5)",
+      "lesson": "P06",
+      "topic": "Guidance mandate and statutory deadline",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(6)",
+      "lesson": "P06",
+      "topic": "Add/amend conditions on concrete reliable evidence",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(7)",
+      "lesson": "P06",
+      "topic": "Delete condition to preserve protection",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 6(8)",
+      "lesson": "P06",
+      "topic": "No lower protection; Article 7 coherence; developments",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1), opening",
+      "lesson": "B01",
+      "topic": "Read precise triggers, elements and boundaries",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(a)",
+      "lesson": "B02",
+      "topic": "Technique, impairment, altered decision, significant harm causal chain",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(b)",
+      "lesson": "B03",
+      "topic": "Specified vulnerability, exploitation, distortion and harm",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(ba)",
+      "lesson": "B10",
+      "topic": "Identifiable person; specified material; consent elements",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(bb)",
+      "lesson": "B11",
+      "topic": "Incorporated material/performance; national-law defence",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(c), opening",
+      "lesson": "B04",
+      "topic": "Scoring over time on stated personal/social basis",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(c)(i)",
+      "lesson": "B04",
+      "topic": "Detrimental treatment in unrelated social contexts",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(c)(ii)",
+      "lesson": "B04",
+      "topic": "Unjustified/disproportionate detrimental treatment",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(d)",
+      "lesson": "B05",
+      "topic": "Sole profiling/personality basis; fact-supported human assessment boundary",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(e)",
+      "lesson": "B07",
+      "topic": "Create/expand facial database by untargeted internet/CCTV scraping",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(f)",
+      "lesson": "B08",
+      "topic": "Emotion inference in work/education; medical/safety boundary",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(g)",
+      "lesson": "B09",
+      "topic": "Listed inferred attributes; exact dataset/law-enforcement boundary",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(h), opening",
+      "lesson": "R01",
+      "topic": "Real-time; public space; law enforcement; strict necessity",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(h)(i)",
+      "lesson": "R01",
+      "topic": "Targeted victims and missing persons",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(h)(ii)",
+      "lesson": "R01",
+      "topic": "Specified life/safety or terrorist threats",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1)(h)(iii)",
+      "lesson": "R01",
+      "topic": "Suspect localisation; Annex II; national maximum-sentence threshold",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1), second subparagraph",
+      "lesson": "R05",
+      "topic": "GDPR Article 9 non-law-enforcement processing unaffected",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1a)(a), opening",
+      "lesson": "B12",
+      "topic": "Market/service trigger for added prohibitions only",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1a)(a)(i)",
+      "lesson": "B12",
+      "topic": "Intended-purpose branch",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1a)(a)(ii)",
+      "lesson": "B12",
+      "topic": "Foreseeable/reproducible; no significant modification; inadequate safeguards",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1a)(b)",
+      "lesson": "B12",
+      "topic": "Deployer use-purpose condition",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(1b)",
+      "lesson": "B10",
+      "topic": "No increased exposure AND no changed nature of depicted activity",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(2), first subparagraph, opening",
+      "lesson": "R02",
+      "topic": "Only confirm specifically targeted identity",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(2)(a)",
+      "lesson": "R02",
+      "topic": "Nature of situation and no-use harm",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(2)(b)",
+      "lesson": "R02",
+      "topic": "Effects on rights/freedoms of all concerned",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(2), second subparagraph",
+      "lesson": "R02",
+      "topic": "National safeguards; time/geography/person; completed FRIA; registration urgency",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(3), first subparagraph",
+      "lesson": "R03",
+      "topic": "Prior binding authorisation; urgent request latest 24h; refusal stop/delete",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(3), second subparagraph, authorisation test",
+      "lesson": "R03",
+      "topic": "Objective evidence/clear indications; necessary/proportionate; strictly limited",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(3), second subparagraph, final sentence",
+      "lesson": "R05",
+      "topic": "No adverse legal decision solely on identification output",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(4)",
+      "lesson": "R04",
+      "topic": "Each-use notification; two authorities; no sensitive operational data",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(5)",
+      "lesson": "R04",
+      "topic": "National choice and detailed rules; objectives/offences; notify within 30 days; stricter law",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(6)",
+      "lesson": "R04",
+      "topic": "Authority annual reports and Commission template",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(7)",
+      "lesson": "R04",
+      "topic": "Commission aggregated annual publication",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 5(8)",
+      "lesson": "R05",
+      "topic": "Other Union prohibitions unaffected",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(1(a))",
+      "lesson": "A01",
+      "topic": "Remote identification; sole claimed-identity verification exclusion",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(1(b))",
+      "lesson": "A02",
+      "topic": "Sensitive/protected-attribute categorisation",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(1(c))",
+      "lesson": "A02",
+      "topic": "Emotion recognition",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(2)",
+      "lesson": "S01",
+      "topic": "Safety components; critical digital/road/water/gas/heating/electricity",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(3(a))",
+      "lesson": "A03",
+      "topic": "Education access/admission/assignment",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(3(b))",
+      "lesson": "A03",
+      "topic": "Learning evaluation and steering",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(3(c))",
+      "lesson": "A04",
+      "topic": "Appropriate education-level assessment",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(3(d))",
+      "lesson": "A04",
+      "topic": "Test-behaviour monitoring",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(4(a))",
+      "lesson": "A05",
+      "topic": "Recruitment/selection/targeted ads/application filtering/candidate evaluation",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(4(b))",
+      "lesson": "A05",
+      "topic": "Terms/promotion/termination/tasks/performance/behaviour",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(5(a))",
+      "lesson": "S03",
+      "topic": "Public authority assistance eligibility/grant/reduce/revoke/reclaim",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(5(b))",
+      "lesson": "S02",
+      "topic": "Natural-person creditworthiness/scoring; financial-fraud exception",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(5(c))",
+      "lesson": "S02",
+      "topic": "Natural-person life/health insurance risk/pricing",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(5(d))",
+      "lesson": "S03",
+      "topic": "Calls, dispatch and dispatch priority; emergency healthcare triage",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(6(a))",
+      "lesson": "S04",
+      "topic": "Victim risk assessment",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(6(b))",
+      "lesson": "S04",
+      "topic": "Polygraphs and similar tools",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(6(c))",
+      "lesson": "S04",
+      "topic": "Reliability of criminal evidence",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(6(d))",
+      "lesson": "S04",
+      "topic": "Offending/reoffending not solely profiling; personality or past behaviour",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(6(e))",
+      "lesson": "S04",
+      "topic": "Profiling during detection/investigation/prosecution",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(7(a))",
+      "lesson": "S05",
+      "topic": "Polygraphs and similar tools",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(7(b))",
+      "lesson": "S05",
+      "topic": "Security/irregular migration/health risk",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(7(c))",
+      "lesson": "S05",
+      "topic": "Asylum/visa/residence applications and complaints; evidence reliability",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(7(d))",
+      "lesson": "S05",
+      "topic": "Detect/recognise/identify; travel-document verification exclusion",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(8(a))",
+      "lesson": "S06",
+      "topic": "Judicial concrete-case support and similar alternative dispute resolution",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(8(b))",
+      "lesson": "S06",
+      "topic": "Voting/election/referendum influence; non-exposed admin/logistics boundary",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(1), heading qualification",
+      "lesson": "A01",
+      "topic": "Only in so far as use is permitted under relevant Union or national law",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(6), heading qualification",
+      "lesson": "S04",
+      "topic": "Only in so far as use is permitted under relevant Union or national law",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex III(7), heading qualification",
+      "lesson": "S05",
+      "topic": "Only in so far as use is permitted under relevant Union or national law",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(1), deleted",
+      "lesson": "P03",
+      "topic": "Deleted machinery directive entry; do not reuse old list",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(2)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(3)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(4)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(5)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(6)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(7)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(8)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(9)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(10)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(11)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section A(12)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(13)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(14)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(15)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(16)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(17)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(18)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(19)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(20)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex I Section B(21)",
+      "lesson": "P03",
+      "topic": "Instrument lookup; sector-law case reading still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(1)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(2)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(3)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(4)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(5)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(6)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(7)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(8)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(9)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(10)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(11)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(12)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(13)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(14)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(15)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex II(16)",
+      "lesson": "R01",
+      "topic": "Offence-list lookup; national sentence evidence still required",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 1",
+      "lesson": "I01",
+      "topic": "Purpose and layers",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 4",
+      "lesson": "I01",
+      "topic": "Amended literacy-support duty",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 2(1)-(13)",
+      "lesson": "I05",
+      "topic": "Scope/exclusions and relationship with other law",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 3, selected definitions",
+      "lesson": "I02",
+      "topic": "Definition register covers additional introductory lessons",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 111(1)",
+      "lesson": "I07",
+      "topic": "Large-scale IT systems transition",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 111(2)",
+      "lesson": "I07",
+      "topic": "Existing high-risk systems; design changes; public-authority deadline",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 111(3)",
+      "lesson": "I07",
+      "topic": "Existing GPAI models",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 111(4)",
+      "lesson": "I07",
+      "topic": "Existing synthetic-content systems and Article 50(2)",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113, entry into force",
+      "lesson": "I07",
+      "topic": "20th day after original publication",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113, default date",
+      "lesson": "I07",
+      "topic": "Default subject to express exceptions",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113(a)",
+      "lesson": "I07",
+      "topic": "Original chapter I/II start and separate new Article 5 start",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113(b)",
+      "lesson": "I07",
+      "topic": "Specified chapters/section/Article 78; Article 101 exception",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113(c)(i)",
+      "lesson": "I07",
+      "topic": "Annex III Chapter III sections 1-3; Article 6(5) exception",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113(c)(ii)",
+      "lesson": "I07",
+      "topic": "Annex I Chapter III sections 1-3; Article 6(5) exception",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113(d)",
+      "lesson": "I07",
+      "topic": "Articles 102-110 separate date",
+      "extent": "orientation",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 49(2), (4)",
+      "lesson": "E07",
+      "topic": "Paragraph 3 registration and restricted sections",
+      "extent": "context",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 80",
+      "lesson": "E07",
+      "topic": "Authority review orientation; full enforcement coverage later",
+      "extent": "context",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Annex VIII Section B",
+      "lesson": "E07",
+      "topic": "Registration fields; deleted points 7 and 9",
+      "extent": "context",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Articles 27, 49",
+      "lesson": "R02",
+      "topic": "Cross-reference for FRIA/registration; full obligations later",
+      "extent": "context",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Articles 7, 96, 97",
+      "lesson": "P06",
+      "topic": "Changes/guidance/delegation orientation; full coverage later",
+      "extent": "context",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 60a",
+      "lesson": "P03",
+      "topic": "Section B cross-reference orientation; full testing framework later",
+      "extent": "context",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    }
+  ]
+}

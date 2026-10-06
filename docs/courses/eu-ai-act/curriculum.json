@@ -1,0 +1,2995 @@
+{
+  "schema_version": 1,
+  "status": "graph-review-draft",
+  "checked_on": "2026-10-06",
+  "title": "EU AI Act: Foundations, High-Risk Classification and Prohibited Practices",
+  "canonical_language": "en",
+  "initial_languages": ["en", "de", "cs"],
+  "modules": [
+    {
+      "id": "M0",
+      "title": "Read the Act and frame an AI use case"
+    },
+    {
+      "id": "M1",
+      "title": "Article 6: product and safety classification"
+    },
+    {
+      "id": "M2",
+      "title": "Article 6: people, education and work"
+    },
+    {
+      "id": "M3",
+      "title": "Article 6: services and public decisions"
+    },
+    {
+      "id": "M4",
+      "title": "Article 6: derogations and defensible decisions"
+    },
+    {
+      "id": "M5",
+      "title": "Article 5: harmful decisions and behaviour"
+    },
+    {
+      "id": "M6",
+      "title": "Article 5: biometrics and synthetic media"
+    },
+    {
+      "id": "M7",
+      "title": "Article 5: remote identification and synthesis"
+    }
+  ],
+  "concepts": [
+    {
+      "slug": "ai-act-map",
+      "kind": "map",
+      "tier": "core",
+      "name": "Navigate the regulatory layers",
+      "assessment": "Locate the layer that answers a stated regulatory question.",
+      "source_locator": "Article 1",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "risk",
+      "kind": "term",
+      "tier": "core",
+      "name": "Risk",
+      "assessment": "Distinguish probability of harm from severity of harm.",
+      "source_locator": "Article 3(2)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "ai-literacy-support",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Support for AI literacy",
+      "assessment": "Identify a measure supporting staff literacy in a stated context.",
+      "source_locator": "Articles 3(56), 4",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "ai-system",
+      "kind": "term",
+      "tier": "core",
+      "name": "AI system",
+      "assessment": "Identify which element of the statutory definition needs evidence.",
+      "source_locator": "Article 3(1)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "gpai-model",
+      "kind": "term",
+      "tier": "core",
+      "name": "General-purpose AI model",
+      "assessment": "Distinguish a model from a system in a supplied architecture description.",
+      "source_locator": "Article 3(63), (66)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "intended-purpose",
+      "kind": "term",
+      "tier": "core",
+      "name": "Intended purpose",
+      "assessment": "Identify the provider-stated purpose in a document excerpt.",
+      "source_locator": "Article 3(12)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "use-case-description",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Describe a use case",
+      "assessment": "Select the missing fact in a system-purpose-decision description.",
+      "source_locator": "Articles 2, 3(12)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "profiling",
+      "kind": "term",
+      "tier": "core",
+      "name": "Profiling",
+      "assessment": "Identify automated evaluation of personal aspects against the incorporated definition.",
+      "source_locator": "Article 3(52); GDPR Article 4(4); Directive 2016/680 Article 3(4)",
+      "source_ids": ["AI-C-EN", "GDPR", "LED"]
+    },
+    {
+      "slug": "provider",
+      "kind": "term",
+      "tier": "core",
+      "name": "Provider",
+      "assessment": "Identify the provider from development and market/service facts.",
+      "source_locator": "Article 3(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "deployer",
+      "kind": "term",
+      "tier": "core",
+      "name": "Deployer",
+      "assessment": "Identify who uses a system under its authority.",
+      "source_locator": "Article 3(4)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "actor-lookup",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Look up another actor",
+      "assessment": "Select the applicable actor definition for a supply-chain fact.",
+      "source_locator": "Article 3(5)-(11)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "eu-scope-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Territorial scope",
+      "assessment": "Identify the connecting fact in a described cross-border arrangement.",
+      "source_locator": "Article 2(1)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "scope-exclusion-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Scope exclusions",
+      "assessment": "Locate the relevant exclusion and its limiting conditions.",
+      "source_locator": "Article 2(2)-(13)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "other-law-relationship",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Other law continues to apply",
+      "assessment": "Explain why an AI Act classification alone does not settle a data-law question.",
+      "source_locator": "Article 2(7), (9); Article 5(8)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "legal-source-authority",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Authentic acts and consolidated documents",
+      "assessment": "Choose the source that establishes an enacted amendment.",
+      "source_locator": "Official Journal; consolidation documentation notice",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "provision-lookup",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Follow a legal locator",
+      "assessment": "Locate an article, point or annex using its reference.",
+      "source_locator": "Articles 5, 6; Annex III",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "guidance-status",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Status of guidance",
+      "assessment": "Distinguish adopted non-binding guidance from a consultation draft.",
+      "source_locator": "Commission definition guidance publication; Article 6 draft guidance publication",
+      "source_ids": ["AI-C-EN", "A6-DRAFT", "DEF-GUIDE"]
+    },
+    {
+      "slug": "entry-into-force",
+      "kind": "term",
+      "tier": "core",
+      "name": "Entry into force",
+      "assessment": "Distinguish entry into force from a provision-specific application date.",
+      "source_locator": "Article 113; Regulation 2026/1744 Article 4",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "provision-application-date",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Find an application date",
+      "assessment": "Select the applicable date for a specified provision and classification route.",
+      "source_locator": "Article 113",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "transition-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Check transitional treatment",
+      "assessment": "Identify the facts needed to apply a specified existing-system transition.",
+      "source_locator": "Article 111",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "prohibition-precheck",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Classification does not establish permission",
+      "assessment": "Flag a possible prohibition for later examination without declaring it proven.",
+      "source_locator": "Articles 5, 6",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "assessment-evidence-packet",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Initial assessment evidence",
+      "assessment": "Select the missing source, scope, purpose or actor fact in an initial assessment.",
+      "source_locator": "Articles 2, 3, 5, 6",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "high-risk-classification",
+      "kind": "term",
+      "tier": "core",
+      "name": "High-risk classification",
+      "assessment": "Distinguish a classification result from a compliance certificate.",
+      "source_locator": "Article 6",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "classification-routes",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Two independent classification routes",
+      "assessment": "Select the product or listed-use route to investigate from supplied facts.",
+      "source_locator": "Article 6(1)-(2)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "safety-component",
+      "kind": "term",
+      "tier": "core",
+      "name": "Safety component",
+      "assessment": "Identify the intended safety function of a described component.",
+      "source_locator": "Article 3(14); Article 6(1)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "ancillary-function-limit",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Exclusively non-safety functions",
+      "assessment": "Explain why a supplied exclusively non-safety function is not a safety component.",
+      "source_locator": "Article 6(1a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "safety-failure-rule",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Health and safety consequences of failure",
+      "assessment": "Identify the fact that activates the failure or malfunction rule.",
+      "source_locator": "Article 6(1b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "annex-i-lookup",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Trace an Annex I instrument",
+      "assessment": "Locate the instrument and section for a supplied product.",
+      "source_locator": "Annex I, Sections A and B",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "sector-scope-limits",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Sector-specific scope limits",
+      "assessment": "Identify which AI Act provisions apply to a supplied Section B product.",
+      "source_locator": "Article 2(2), (13); Article 60a",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "third-party-assessment",
+      "kind": "term",
+      "tier": "core",
+      "name": "Third-party conformity assessment",
+      "assessment": "Distinguish a required third-party route from voluntary certification.",
+      "source_locator": "Article 6(1)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "product-assessment-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Test the conformity-assessment condition",
+      "assessment": "Identify the sector-law evidence needed to establish a mandatory assessment route.",
+      "source_locator": "Article 6(1)(b); Annex I",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "solely-other-risks-limit",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Assessment solely for other risks",
+      "assessment": "Identify when the added non-health/safety-risk limit applies.",
+      "source_locator": "Article 6(1c)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "product-route-assessment",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Complete a product-route assessment",
+      "assessment": "Apply both product-route conditions to an embedded or independently marketed system.",
+      "source_locator": "Article 6(1), (1a)-(1c); Annex I",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "classification-guidance",
+      "kind": "idea",
+      "tier": "extension",
+      "name": "Classification guidance",
+      "assessment": "Distinguish the guidance mandate from a change to the legal test.",
+      "source_locator": "Article 6(5); Article 96",
+      "source_ids": ["AI-C-EN", "A6-DRAFT", "DEF-GUIDE"]
+    },
+    {
+      "slug": "delegated-classification-change",
+      "kind": "idea",
+      "tier": "extension",
+      "name": "Delegated changes to classification",
+      "assessment": "Identify the legal mechanism for a proposed change to a condition or listed use.",
+      "source_locator": "Article 6(6)-(7); Articles 7, 97",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "protection-constraint",
+      "kind": "idea",
+      "tier": "extension",
+      "name": "Protection constraint on changes",
+      "assessment": "Identify why a proposed delegated change needs evidence about protection.",
+      "source_locator": "Article 6(8)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "biometric-data",
+      "kind": "term",
+      "tier": "core",
+      "name": "Biometric data",
+      "assessment": "Identify the technical processing and personal-characteristic facts relevant to the definition.",
+      "source_locator": "Article 3(34)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "identity-comparison",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Identification and verification",
+      "assessment": "Distinguish identity discovery from confirmation of a claimed identity.",
+      "source_locator": "Article 3(35)-(36); Annex III(1)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "remote-biometric-identification",
+      "kind": "term",
+      "tier": "core",
+      "name": "Remote biometric identification",
+      "assessment": "Identify the absence of active involvement in an identification scenario.",
+      "source_locator": "Article 3(41); Annex III(1)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "emotion-recognition",
+      "kind": "term",
+      "tier": "core",
+      "name": "Emotion recognition system",
+      "assessment": "Identify inference of emotion or intention from biometric data.",
+      "source_locator": "Article 3(39); Annex III(1)(c)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "biometric-categorisation",
+      "kind": "term",
+      "tier": "core",
+      "name": "Biometric categorisation system",
+      "assessment": "Identify categorisation from biometric data and the ancillary-service definition boundary.",
+      "source_locator": "Article 3(40); Annex III(1)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "educational-access-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Education access use",
+      "assessment": "Match access, admission or assignment facts to Annex III(3)(a).",
+      "source_locator": "Annex III(3)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "learning-outcome-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Learning-outcome assessment use",
+      "assessment": "Match an evaluation or learning-steering function to Annex III(3)(b).",
+      "source_locator": "Annex III(3)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "educational-level-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Education-level assessment use",
+      "assessment": "Match a level-assessment function to Annex III(3)(c).",
+      "source_locator": "Annex III(3)(c)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "examination-monitoring-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Examination monitoring use",
+      "assessment": "Match prohibited-behaviour monitoring during tests to Annex III(3)(d).",
+      "source_locator": "Annex III(3)(d)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "recruitment-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Recruitment and selection use",
+      "assessment": "Match a hiring function to Annex III(4)(a), including targeted advertising.",
+      "source_locator": "Annex III(4)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "worker-management-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Worker-management use",
+      "assessment": "Match a work-related decision, task allocation or performance-monitoring function to Annex III(4)(b).",
+      "source_locator": "Annex III(4)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "platform-function-assessment",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Separate platform functions",
+      "assessment": "Assign separate source locators to distinct functions within one platform.",
+      "source_locator": "Annex III(1), (3), (4)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "infrastructure-safety-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Infrastructure safety use",
+      "assessment": "Match a safety function and infrastructure category to Annex III(2).",
+      "source_locator": "Annex III(2); Article 3(62)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "credit-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Creditworthiness use",
+      "assessment": "Distinguish creditworthiness assessment from the stated financial-fraud exception.",
+      "source_locator": "Annex III(5)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "life-health-insurance-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Life and health insurance use",
+      "assessment": "Match a risk-assessment or pricing function for natural persons to Annex III(5)(c).",
+      "source_locator": "Annex III(5)(c)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "public-benefits-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Public assistance use",
+      "assessment": "Match an eligibility, grant, reduction, revocation or reclaiming decision to Annex III(5)(a).",
+      "source_locator": "Annex III(5)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "emergency-triage-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Emergency-services use",
+      "assessment": "Match a call classification, dispatch priority or patient-triage function to Annex III(5)(d).",
+      "source_locator": "Annex III(5)(d)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "law-enforcement",
+      "kind": "term",
+      "tier": "core",
+      "name": "Law enforcement",
+      "assessment": "Identify the authority and purpose facts relevant to the law-enforcement definitions.",
+      "source_locator": "Article 3(45)-(46)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "law-enforcement-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Look up a law-enforcement use",
+      "assessment": "Locate the exact Annex III(6) point matching a supplied function.",
+      "source_locator": "Annex III(6)(a)-(e)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "migration-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Look up a migration or border use",
+      "assessment": "Locate the exact Annex III(7) point and the travel-document verification boundary.",
+      "source_locator": "Annex III(7)(a)-(d)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "justice-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Justice and dispute-resolution use",
+      "assessment": "Match a concrete adjudication-support function to Annex III(8)(a).",
+      "source_locator": "Annex III(8)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "election-influence-use",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Election-influence use",
+      "assessment": "Distinguish direct voting influence from the stated administrative/logistical boundary.",
+      "source_locator": "Annex III(8)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "harm-significance-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Significance-of-harm gateway",
+      "assessment": "Identify missing evidence about risk of harm under Article 6(3).",
+      "source_locator": "Article 6(3), first subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "decision-influence",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Influence on the decision",
+      "assessment": "Identify how a supplied system materially affects a decision outcome.",
+      "source_locator": "Article 6(3), first subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "procedural-task-condition",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Narrow procedural task",
+      "assessment": "Test whether the facts support Article 6(3)(a) without bypassing the gateway.",
+      "source_locator": "Article 6(3)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "completed-human-work-condition",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Previously completed human activity",
+      "assessment": "Test the prior-completion condition in Article 6(3)(b).",
+      "source_locator": "Article 6(3)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "pattern-review-condition",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Patterns with proper human review",
+      "assessment": "Identify the fact that defeats a proposed Article 6(3)(c) justification.",
+      "source_locator": "Article 6(3)(c)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "preparatory-task-condition",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Preparatory task",
+      "assessment": "Test a preparatory-task justification against the gateway.",
+      "source_locator": "Article 6(3)(d)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "profiling-override",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Profiling override within Annex III",
+      "assessment": "Explain why profiling prevents the paragraph 3 derogation for a listed system.",
+      "source_locator": "Article 6(3), final subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "document-assessment",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Document a non-high-risk assessment",
+      "assessment": "Select the missing reason or evidence in an Article 6(4) assessment.",
+      "source_locator": "Article 6(4); Article 80",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "classification-registration",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Registration after a paragraph 3 conclusion",
+      "assessment": "Identify who registers and when under Article 49(2).",
+      "source_locator": "Article 6(4); Article 49(2), (4); Annex VIII Section B",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "authority-document-request",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Documentation requested by an authority",
+      "assessment": "Identify the duty to supply the assessment documentation on request.",
+      "source_locator": "Article 6(4); Article 80",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "classification-capstone",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Explain a classification conclusion",
+      "assessment": "Choose a reasoned classification conclusion or request for missing evidence in contrasting cases.",
+      "source_locator": "Article 6; Annexes I, III; Article 113",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "regulated-action",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Market, service and use triggers",
+      "assessment": "Identify the action regulated by a supplied prohibition.",
+      "source_locator": "Article 3(9)-(11); Article 5(1)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "prohibition-elements",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Read a prohibition as a test",
+      "assessment": "Identify the missing element rather than infer a ban from a technology label.",
+      "source_locator": "Article 5(1)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "prohibited-versus-high-risk",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Prohibition and classification",
+      "assessment": "Explain why high-risk duties cannot cure a prohibited practice.",
+      "source_locator": "Articles 5, 6",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "manipulation-technique",
+      "kind": "term",
+      "tier": "core",
+      "name": "Subliminal, manipulative or deceptive technique",
+      "assessment": "Identify the relevant technique in a non-graphic fictional case.",
+      "source_locator": "Article 5(1)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "manipulation-causal-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Manipulation causal chain",
+      "assessment": "Identify a missing link between technique, impaired choice, changed decision and significant harm.",
+      "source_locator": "Article 5(1)(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "protected-vulnerability",
+      "kind": "term",
+      "tier": "core",
+      "name": "Specified vulnerability",
+      "assessment": "Identify the specified age, disability or social/economic vulnerability.",
+      "source_locator": "Article 5(1)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "exploitation-harm-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Exploitation and significant harm",
+      "assessment": "Test whether the stated vulnerability is exploited to distort behaviour with the required harm.",
+      "source_locator": "Article 5(1)(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "social-scoring-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Social scoring and its consequences",
+      "assessment": "Identify which consequence condition is or is not supported by a scoring case.",
+      "source_locator": "Article 5(1)(c)(i)-(ii)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "criminal-risk-ban",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Individual offending-risk ban",
+      "assessment": "Identify a solely profiling/personality-based prediction of offending.",
+      "source_locator": "Article 5(1)(d)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "factual-human-support-boundary",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Fact-based human assessment boundary",
+      "assessment": "Identify the objective, verifiable, directly linked facts required by the stated boundary.",
+      "source_locator": "Article 5(1)(d)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "harmful-decision-case",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Assess a harmful-decision practice",
+      "assessment": "Identify the decisive prohibition element or missing fact in a persuasion, scoring or prediction case.",
+      "source_locator": "Article 5(1)(a)-(d)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "untargeted-scraping",
+      "kind": "term",
+      "tier": "core",
+      "name": "Untargeted scraping",
+      "assessment": "Identify the indiscriminate collection feature in a supplied case.",
+      "source_locator": "Article 5(1)(e)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "facial-database-ban",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Facial database creation or expansion",
+      "assessment": "Test the database purpose, image source and untargeted-scraping facts.",
+      "source_locator": "Article 5(1)(e)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "emotion-setting-ban",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Workplace and education emotion ban",
+      "assessment": "Identify whether the emotion-inference purpose and setting match the prohibition.",
+      "source_locator": "Article 5(1)(f)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "medical-safety-boundary",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Medical or safety reasons",
+      "assessment": "Identify the purpose evidence needed for the stated exception.",
+      "source_locator": "Article 5(1)(f)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "sensitive-categorisation-ban",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Listed sensitive-attribute inference",
+      "assessment": "Identify a listed attribute inferred by individual biometric categorisation.",
+      "source_locator": "Article 5(1)(g)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "lawful-dataset-boundary",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Labelling, filtering and law-enforcement boundary",
+      "assessment": "Identify why the precise stated boundary must be checked rather than assumed.",
+      "source_locator": "Article 5(1)(g)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "intimate-media-consent-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Consent to intimate generation or manipulation",
+      "assessment": "Identify the missing consent element in a neutral fictional case.",
+      "source_locator": "Article 5(1)(ba)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "intimate-manipulation-boundary",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Limited manipulation boundary",
+      "assessment": "Identify whether increased exposure or changed activity defeats the added boundary.",
+      "source_locator": "Article 5(1b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "child-abuse-material-lookup",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Locate incorporated definitions",
+      "assessment": "Locate the incorporated material/performance definition without graphic examples.",
+      "source_locator": "Article 5(1)(bb); Directive 2011/93/EU Article 2(c), (e)",
+      "source_ids": ["AI-C-EN", "CSA"]
+    },
+    {
+      "slug": "child-abuse-generation-ban",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Generation or manipulation prohibition",
+      "assessment": "Identify the covered generation/manipulation purpose and a national-law question.",
+      "source_locator": "Article 5(1)(bb)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "foreseeable-misuse",
+      "kind": "term",
+      "tier": "core",
+      "name": "Reasonably foreseeable misuse",
+      "assessment": "Distinguish intended purpose from reasonably foreseeable contrary use.",
+      "source_locator": "Article 3(13); Article 5(1a)(a)(ii)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "supplier-safeguards-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Market/service test for the new prohibitions",
+      "assessment": "Identify the intended-purpose branch or the reproducibility-and-safeguards branch.",
+      "source_locator": "Article 5(1a)(a)(i)-(ii)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "deployer-purpose-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Use test for the new prohibitions",
+      "assessment": "Identify the deployer purpose that triggers the new use prohibition.",
+      "source_locator": "Article 5(1a)(b); Article 113(a)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "real-time-biometric-identification",
+      "kind": "term",
+      "tier": "core",
+      "name": "Real-time remote biometric identification",
+      "assessment": "Distinguish real-time identification, including limited short delays, from post-identification.",
+      "source_locator": "Article 3(42)-(43)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "publicly-accessible-space",
+      "kind": "term",
+      "tier": "core",
+      "name": "Publicly accessible space",
+      "assessment": "Identify access by an undetermined number of persons regardless of ownership.",
+      "source_locator": "Article 3(44)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "identification-objectives",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Limited law-enforcement objectives",
+      "assessment": "Match a stated objective to Article 5(1)(h), checking Annex II and the sentence threshold where relevant.",
+      "source_locator": "Article 5(1)(h)(i)-(iii); Annex II",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "necessity-proportionality-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Necessity and proportionality",
+      "assessment": "Identify the evidence needed about no-use harm and effects on affected persons.",
+      "source_locator": "Article 5(2)(a)-(b)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "targeted-use-safeguards",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Target and limits of use",
+      "assessment": "Identify a temporal, geographic or personal limit missing from a proposed use.",
+      "source_locator": "Article 5(2)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "identification-impact-registration",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Impact assessment and registration",
+      "assessment": "Distinguish the completed impact assessment from the urgency rule for registration.",
+      "source_locator": "Article 5(2); Articles 27, 49",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "prior-authorisation",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Prior binding authorisation",
+      "assessment": "Identify the authorising body and evidential requirement in a supplied procedure.",
+      "source_locator": "Article 5(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "urgent-authorisation-rule",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Urgent authorisation request",
+      "assessment": "Apply the without-undue-delay and latest-24-hour request conditions to a supplied timeline.",
+      "source_locator": "Article 5(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "refusal-consequences",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Consequences of refusal",
+      "assessment": "Identify the required immediate stop and deletion response to refusal.",
+      "source_locator": "Article 5(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "national-authorisation-lookup",
+      "kind": "skill",
+      "tier": "extension",
+      "name": "Locate national authorisation rules",
+      "assessment": "Identify the Member State rule needed to know whether an objective can be authorised.",
+      "source_locator": "Article 5(5)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "notification-rule",
+      "kind": "idea",
+      "tier": "extension",
+      "name": "Notification after each use",
+      "assessment": "Identify the two authorities to notify without sensitive operational data.",
+      "source_locator": "Article 5(4)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "reporting-chain",
+      "kind": "idea",
+      "tier": "extension",
+      "name": "Annual reporting chain",
+      "assessment": "Distinguish authority reporting from Commission aggregate publication.",
+      "source_locator": "Article 5(6)-(7)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "other-law-ban-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Check another applicable prohibition",
+      "assessment": "Identify why an Article 5 boundary does not settle compliance with another EU law.",
+      "source_locator": "Article 5(8); Article 5(1), second subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "no-sole-output-adverse-decision",
+      "kind": "idea",
+      "tier": "core",
+      "name": "No adverse legal decision solely on identification output",
+      "assessment": "Identify a decision made solely on a real-time identification output that produces an adverse legal effect.",
+      "source_locator": "Article 5(3), second subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "biometric-prohibition-assessment",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Biometric-practice synthesis",
+      "assessment": "Choose a reasoned conclusion for a scraping, emotion, categorisation or remote-identification case.",
+      "source_locator": "Article 5(1)(e)-(h), (2)-(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "final-assessment",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Final prohibition and classification assessment",
+      "assessment": "Choose a defensible, dated conclusion combining prohibition screening with classification.",
+      "source_locator": "Articles 5, 6, 111, 113",
+      "source_ids": ["AI-C-EN"]
+    }
+  ],
+  "edges": [
+    {
+      "parent": "ai-system",
+      "child": "gpai-model",
+      "kind": "requires",
+      "reason": "The model/system distinction needs a prior definition of the system being contrasted."
+    },
+    {
+      "parent": "ai-system",
+      "child": "intended-purpose",
+      "kind": "requires",
+      "reason": "The intended purpose attaches to a defined AI system."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "use-case-description",
+      "kind": "requires",
+      "reason": "The factual description must distinguish the provider-stated purpose from other observed uses."
+    },
+    {
+      "parent": "ai-system",
+      "child": "profiling",
+      "kind": "requires",
+      "reason": "The learner needs to identify the system before evaluating whether it performs automated personal evaluation."
+    },
+    {
+      "parent": "ai-system",
+      "child": "provider",
+      "kind": "requires",
+      "reason": "The provider definition depends on development and supply of a defined system."
+    },
+    {
+      "parent": "ai-system",
+      "child": "deployer",
+      "kind": "requires",
+      "reason": "The deployer definition depends on use of a defined system under an actor's authority."
+    },
+    {
+      "parent": "provider",
+      "child": "actor-lookup",
+      "kind": "requires",
+      "reason": "Other supply-chain definitions distinguish the actor from the provider."
+    },
+    {
+      "parent": "deployer",
+      "child": "actor-lookup",
+      "kind": "requires",
+      "reason": "The operator definition includes the deployer and must not be confused with it."
+    },
+    {
+      "parent": "provider",
+      "child": "eu-scope-test",
+      "kind": "requires",
+      "reason": "Territorial scope requires identifying which provider is connected to the Union."
+    },
+    {
+      "parent": "deployer",
+      "child": "eu-scope-test",
+      "kind": "requires",
+      "reason": "The territorial test separately considers where the deployer is located."
+    },
+    {
+      "parent": "eu-scope-test",
+      "child": "scope-exclusion-check",
+      "kind": "requires",
+      "reason": "An exclusion narrows a scope result rather than replacing the territorial enquiry."
+    },
+    {
+      "parent": "legal-source-authority",
+      "child": "guidance-status",
+      "kind": "requires",
+      "reason": "The guidance distinction needs a prior distinction between legal authority and a working document."
+    },
+    {
+      "parent": "provision-lookup",
+      "child": "provision-application-date",
+      "kind": "requires",
+      "reason": "The learner must locate the specified provision before choosing its application date."
+    },
+    {
+      "parent": "entry-into-force",
+      "child": "provision-application-date",
+      "kind": "requires",
+      "reason": "The application-date procedure must not substitute the regulation's entry-into-force date."
+    },
+    {
+      "parent": "provision-application-date",
+      "child": "transition-check",
+      "kind": "requires",
+      "reason": "A transition must be evaluated against the application date of the relevant rule."
+    },
+    {
+      "parent": "use-case-description",
+      "child": "assessment-evidence-packet",
+      "kind": "requires",
+      "reason": "The opening case needs a complete factual description before any legal route can be selected."
+    },
+    {
+      "parent": "actor-lookup",
+      "child": "assessment-evidence-packet",
+      "kind": "requires",
+      "reason": "The evidence packet must assign the actions in the case to the relevant actors."
+    },
+    {
+      "parent": "scope-exclusion-check",
+      "child": "assessment-evidence-packet",
+      "kind": "requires",
+      "reason": "The opening case must establish scope and identify any unresolved exclusion."
+    },
+    {
+      "parent": "prohibition-precheck",
+      "child": "assessment-evidence-packet",
+      "kind": "requires",
+      "reason": "The assessment must preserve a separate unresolved prohibition question."
+    },
+    {
+      "parent": "ai-system",
+      "child": "high-risk-classification",
+      "kind": "requires",
+      "reason": "The learner must identify what is being classified before learning the classification result."
+    },
+    {
+      "parent": "high-risk-classification",
+      "child": "classification-routes",
+      "kind": "requires",
+      "reason": "The two routes are alternative paths to the defined high-risk classification."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "classification-routes",
+      "kind": "requires",
+      "reason": "Both routes depend on the function intended for the system."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "safety-component",
+      "kind": "requires",
+      "reason": "A safety function must be linked to the system's intended purpose."
+    },
+    {
+      "parent": "safety-component",
+      "child": "ancillary-function-limit",
+      "kind": "requires",
+      "reason": "The non-safety limit is meaningful only after defining a safety component."
+    },
+    {
+      "parent": "safety-component",
+      "child": "safety-failure-rule",
+      "kind": "requires",
+      "reason": "The failure rule determines whether a system meets the safety-component category."
+    },
+    {
+      "parent": "ancillary-function-limit",
+      "child": "safety-failure-rule",
+      "kind": "requires",
+      "reason": "The learner must understand the non-safety rule before applying the express without-prejudice qualification."
+    },
+    {
+      "parent": "provision-lookup",
+      "child": "annex-i-lookup",
+      "kind": "requires",
+      "reason": "Tracing the product legislation requires navigating an annex locator."
+    },
+    {
+      "parent": "annex-i-lookup",
+      "child": "sector-scope-limits",
+      "kind": "requires",
+      "reason": "The sector limit depends on which Annex I section contains the product legislation."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "third-party-assessment",
+      "kind": "requires",
+      "reason": "The term is introduced as the second condition of the product classification route."
+    },
+    {
+      "parent": "third-party-assessment",
+      "child": "product-assessment-test",
+      "kind": "requires",
+      "reason": "The evidence procedure must distinguish mandatory third-party assessment from other assessment."
+    },
+    {
+      "parent": "annex-i-lookup",
+      "child": "product-assessment-test",
+      "kind": "requires",
+      "reason": "The required assessment route must be traced to the correct sector instrument."
+    },
+    {
+      "parent": "third-party-assessment",
+      "child": "solely-other-risks-limit",
+      "kind": "requires",
+      "reason": "The exception qualifies the requirement for third-party assessment."
+    },
+    {
+      "parent": "safety-failure-rule",
+      "child": "product-route-assessment",
+      "kind": "requires",
+      "reason": "The product case requires the final safety-component rule including its failure qualification."
+    },
+    {
+      "parent": "product-assessment-test",
+      "child": "product-route-assessment",
+      "kind": "requires",
+      "reason": "The product case must establish the mandatory third-party condition with evidence."
+    },
+    {
+      "parent": "solely-other-risks-limit",
+      "child": "product-route-assessment",
+      "kind": "requires",
+      "reason": "The case includes a route required solely because of a non-health/safety risk."
+    },
+    {
+      "parent": "sector-scope-limits",
+      "child": "product-route-assessment",
+      "kind": "requires",
+      "reason": "The case must distinguish classification from the provisions that apply to the sector."
+    },
+    {
+      "parent": "guidance-status",
+      "child": "classification-guidance",
+      "kind": "requires",
+      "reason": "The learner must distinguish guidance status before reading the classification guidance mandate."
+    },
+    {
+      "parent": "provision-lookup",
+      "child": "delegated-classification-change",
+      "kind": "requires",
+      "reason": "The learner must identify the legal provision that a delegated act would change."
+    },
+    {
+      "parent": "delegated-classification-change",
+      "child": "protection-constraint",
+      "kind": "requires",
+      "reason": "The protection constraint limits the delegated changes just introduced."
+    },
+    {
+      "parent": "ai-system",
+      "child": "biometric-data",
+      "kind": "requires",
+      "reason": "The data definition is introduced in the context of identifying inputs used by the system."
+    },
+    {
+      "parent": "biometric-data",
+      "child": "identity-comparison",
+      "kind": "requires",
+      "reason": "Identification and verification compare biometric data."
+    },
+    {
+      "parent": "identity-comparison",
+      "child": "remote-biometric-identification",
+      "kind": "requires",
+      "reason": "Remote identification is a specified form of the identity comparison already defined."
+    },
+    {
+      "parent": "biometric-data",
+      "child": "emotion-recognition",
+      "kind": "requires",
+      "reason": "The emotion-recognition definition depends on biometric data as its basis."
+    },
+    {
+      "parent": "biometric-data",
+      "child": "biometric-categorisation",
+      "kind": "requires",
+      "reason": "The categorisation definition depends on biometric data as its basis."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "educational-access-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish a listed-use match from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "learning-outcome-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish a listed-use match from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "educational-level-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish a listed-use match from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "examination-monitoring-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish a listed-use match from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "recruitment-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish a listed-use match from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "worker-management-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish a listed-use match from the product route."
+    },
+    {
+      "parent": "identity-comparison",
+      "child": "platform-function-assessment",
+      "kind": "requires",
+      "reason": "The platform case contrasts identity confirmation with identity discovery."
+    },
+    {
+      "parent": "learning-outcome-use",
+      "child": "platform-function-assessment",
+      "kind": "requires",
+      "reason": "The platform case includes evaluation of learning outcomes."
+    },
+    {
+      "parent": "recruitment-use",
+      "child": "platform-function-assessment",
+      "kind": "requires",
+      "reason": "The platform case includes candidate filtering."
+    },
+    {
+      "parent": "worker-management-use",
+      "child": "platform-function-assessment",
+      "kind": "requires",
+      "reason": "The platform case includes task allocation based on individual behaviour."
+    },
+    {
+      "parent": "safety-component",
+      "child": "infrastructure-safety-use",
+      "kind": "requires",
+      "reason": "The listed infrastructure use requires a safety-component function."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "infrastructure-safety-use",
+      "kind": "requires",
+      "reason": "Infrastructure in Annex III must not be confused with the Annex I product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "credit-use",
+      "kind": "requires",
+      "reason": "Creditworthiness is examined as a listed-use match rather than a product classification."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "life-health-insurance-use",
+      "kind": "requires",
+      "reason": "Insurance is examined as a listed-use match rather than a product classification."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "public-benefits-use",
+      "kind": "requires",
+      "reason": "Public assistance is examined as a listed-use match rather than a product classification."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "emergency-triage-use",
+      "kind": "requires",
+      "reason": "Emergency-service functions are examined as listed-use matches rather than product classifications."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "law-enforcement-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish the listed-use enquiry from the product route."
+    },
+    {
+      "parent": "law-enforcement",
+      "child": "law-enforcement-use",
+      "kind": "requires",
+      "reason": "Matching the use requires understanding the specified actor and law-enforcement purpose."
+    },
+    {
+      "parent": "profiling",
+      "child": "law-enforcement-use",
+      "kind": "requires",
+      "reason": "Two listed law-enforcement points expressly depend on the incorporated profiling definition."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "migration-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish the listed-use enquiry from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "justice-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish the listed-use enquiry from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "election-influence-use",
+      "kind": "requires",
+      "reason": "The learner must distinguish the listed-use enquiry from the product route."
+    },
+    {
+      "parent": "classification-routes",
+      "child": "harm-significance-test",
+      "kind": "requires",
+      "reason": "The derogation applies to the Annex III route and cannot be extended to the product route."
+    },
+    {
+      "parent": "risk",
+      "child": "harm-significance-test",
+      "kind": "requires",
+      "reason": "The gateway evaluates a risk of harm, which combines likelihood and severity."
+    },
+    {
+      "parent": "harm-significance-test",
+      "child": "decision-influence",
+      "kind": "requires",
+      "reason": "Decision influence is examined within the significance-of-harm gateway."
+    },
+    {
+      "parent": "decision-influence",
+      "child": "procedural-task-condition",
+      "kind": "requires",
+      "reason": "A procedural task does not bypass the gateway or its decision-influence analysis."
+    },
+    {
+      "parent": "decision-influence",
+      "child": "completed-human-work-condition",
+      "kind": "requires",
+      "reason": "Completed human work does not bypass the gateway or its decision-influence analysis."
+    },
+    {
+      "parent": "decision-influence",
+      "child": "pattern-review-condition",
+      "kind": "requires",
+      "reason": "The pattern-review test explicitly limits replacement or influence of a prior human assessment."
+    },
+    {
+      "parent": "decision-influence",
+      "child": "preparatory-task-condition",
+      "kind": "requires",
+      "reason": "A preparatory-task label does not bypass the gateway or its decision-influence analysis."
+    },
+    {
+      "parent": "profiling",
+      "child": "profiling-override",
+      "kind": "requires",
+      "reason": "The override depends on whether the system performs profiling as defined by the incorporated law."
+    },
+    {
+      "parent": "harm-significance-test",
+      "child": "profiling-override",
+      "kind": "requires",
+      "reason": "The learner must know which paragraph 3 gateway is displaced by the profiling rule."
+    },
+    {
+      "parent": "profiling-override",
+      "child": "document-assessment",
+      "kind": "requires",
+      "reason": "A non-high-risk conclusion must not silently ignore the Annex III profiling override."
+    },
+    {
+      "parent": "provider",
+      "child": "document-assessment",
+      "kind": "requires",
+      "reason": "The documentation duty belongs to the provider making the paragraph 3 conclusion."
+    },
+    {
+      "parent": "document-assessment",
+      "child": "classification-registration",
+      "kind": "requires",
+      "reason": "Registration follows the provider's documented paragraph 3 conclusion."
+    },
+    {
+      "parent": "document-assessment",
+      "child": "authority-document-request",
+      "kind": "requires",
+      "reason": "The authority request concerns the assessment documentation just identified."
+    },
+    {
+      "parent": "product-route-assessment",
+      "child": "classification-capstone",
+      "kind": "requires",
+      "reason": "One closing case needs a complete product-route assessment."
+    },
+    {
+      "parent": "platform-function-assessment",
+      "child": "classification-capstone",
+      "kind": "requires",
+      "reason": "One closing case needs separation of learning and recruitment functions."
+    },
+    {
+      "parent": "document-assessment",
+      "child": "classification-capstone",
+      "kind": "requires",
+      "reason": "The closing cases require a reasoned paragraph 3 conclusion and supporting evidence."
+    },
+    {
+      "parent": "credit-use",
+      "child": "classification-capstone",
+      "kind": "requires",
+      "reason": "A contrasting closing case uses the creditworthiness listed-use boundary."
+    },
+    {
+      "parent": "actor-lookup",
+      "child": "regulated-action",
+      "kind": "requires",
+      "reason": "Market and service triggers depend on the supply actions and actors defined earlier."
+    },
+    {
+      "parent": "regulated-action",
+      "child": "prohibition-elements",
+      "kind": "requires",
+      "reason": "A prohibition test must first identify the regulated market, service or use action."
+    },
+    {
+      "parent": "high-risk-classification",
+      "child": "prohibited-versus-high-risk",
+      "kind": "requires",
+      "reason": "The distinction needs a prior definition of high-risk classification."
+    },
+    {
+      "parent": "prohibition-precheck",
+      "child": "prohibited-versus-high-risk",
+      "kind": "requires",
+      "reason": "The detailed distinction develops the initial separation between classification and permission."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "manipulation-technique",
+      "kind": "requires",
+      "reason": "The technique is one element of a prohibition rather than proof of the whole prohibition."
+    },
+    {
+      "parent": "manipulation-technique",
+      "child": "manipulation-causal-test",
+      "kind": "requires",
+      "reason": "The causal chain starts with the specified technique."
+    },
+    {
+      "parent": "risk",
+      "child": "manipulation-causal-test",
+      "kind": "requires",
+      "reason": "The harm link includes reasonably likely harm and cannot be reduced to an already observed injury."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "protected-vulnerability",
+      "kind": "requires",
+      "reason": "The vulnerability is a specified element of a prohibition rather than a generic disadvantage."
+    },
+    {
+      "parent": "protected-vulnerability",
+      "child": "exploitation-harm-test",
+      "kind": "requires",
+      "reason": "The exploitation test requires one of the specified vulnerabilities."
+    },
+    {
+      "parent": "risk",
+      "child": "exploitation-harm-test",
+      "kind": "requires",
+      "reason": "The harm link includes reasonably likely harm and cannot be reduced to an already observed injury."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "social-scoring-test",
+      "kind": "requires",
+      "reason": "The scoring case must be read as a set of elements and consequence conditions."
+    },
+    {
+      "parent": "profiling",
+      "child": "criminal-risk-ban",
+      "kind": "requires",
+      "reason": "The ban expressly turns on prediction solely based on profiling or personality assessment."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "criminal-risk-ban",
+      "kind": "requires",
+      "reason": "The learner must distinguish the criminal-risk elements from a general law-enforcement label."
+    },
+    {
+      "parent": "criminal-risk-ban",
+      "child": "factual-human-support-boundary",
+      "kind": "requires",
+      "reason": "The stated factual-human-assessment boundary qualifies the criminal-risk ban."
+    },
+    {
+      "parent": "manipulation-causal-test",
+      "child": "harmful-decision-case",
+      "kind": "requires",
+      "reason": "The case clinic includes the manipulation causal chain."
+    },
+    {
+      "parent": "exploitation-harm-test",
+      "child": "harmful-decision-case",
+      "kind": "requires",
+      "reason": "The case clinic includes vulnerability exploitation and harm."
+    },
+    {
+      "parent": "social-scoring-test",
+      "child": "harmful-decision-case",
+      "kind": "requires",
+      "reason": "The case clinic includes the social-scoring consequence conditions."
+    },
+    {
+      "parent": "factual-human-support-boundary",
+      "child": "harmful-decision-case",
+      "kind": "requires",
+      "reason": "The case clinic contrasts unsupported prediction with fact-based human assessment."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "untargeted-scraping",
+      "kind": "requires",
+      "reason": "The collection feature is introduced as one element of the database prohibition."
+    },
+    {
+      "parent": "untargeted-scraping",
+      "child": "facial-database-ban",
+      "kind": "requires",
+      "reason": "The database test requires understanding the untargeted nature of the scraping."
+    },
+    {
+      "parent": "identity-comparison",
+      "child": "facial-database-ban",
+      "kind": "requires",
+      "reason": "The database purpose concerns facial recognition for identity rather than any image archive."
+    },
+    {
+      "parent": "emotion-recognition",
+      "child": "emotion-setting-ban",
+      "kind": "requires",
+      "reason": "The prohibition concerns emotion inference from the biometric basis already defined."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "emotion-setting-ban",
+      "kind": "requires",
+      "reason": "The setting and intended purpose must be checked as elements of the ban."
+    },
+    {
+      "parent": "emotion-setting-ban",
+      "child": "medical-safety-boundary",
+      "kind": "requires",
+      "reason": "The medical/safety boundary qualifies the setting-specific emotion prohibition."
+    },
+    {
+      "parent": "biometric-categorisation",
+      "child": "sensitive-categorisation-ban",
+      "kind": "requires",
+      "reason": "The sensitive-attribute test applies to individual biometric categorisation."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "sensitive-categorisation-ban",
+      "kind": "requires",
+      "reason": "The learner must check the listed inference purpose rather than infer a ban from the category name."
+    },
+    {
+      "parent": "sensitive-categorisation-ban",
+      "child": "lawful-dataset-boundary",
+      "kind": "requires",
+      "reason": "The stated labelling/filtering boundary qualifies the categorisation prohibition."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "intimate-media-consent-test",
+      "kind": "requires",
+      "reason": "The consent condition is examined within the elements of the added prohibition."
+    },
+    {
+      "parent": "intimate-media-consent-test",
+      "child": "intimate-manipulation-boundary",
+      "kind": "requires",
+      "reason": "The limited manipulation rule qualifies the intimate-media provision."
+    },
+    {
+      "parent": "provision-lookup",
+      "child": "child-abuse-material-lookup",
+      "kind": "requires",
+      "reason": "The incorporated material/performance definitions require following exact legal locators."
+    },
+    {
+      "parent": "child-abuse-material-lookup",
+      "child": "child-abuse-generation-ban",
+      "kind": "requires",
+      "reason": "The added ban depends on the incorporated definitions, not an invented graphic example."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "child-abuse-generation-ban",
+      "kind": "requires",
+      "reason": "The learner must distinguish the action and purpose elements from the material definition."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "foreseeable-misuse",
+      "kind": "requires",
+      "reason": "Misuse is defined by departure from the system's intended purpose."
+    },
+    {
+      "parent": "foreseeable-misuse",
+      "child": "supplier-safeguards-test",
+      "kind": "requires",
+      "reason": "The safeguards branch must account for reasonably foreseeable misuse."
+    },
+    {
+      "parent": "intimate-manipulation-boundary",
+      "child": "supplier-safeguards-test",
+      "kind": "requires",
+      "reason": "The market/service test needs the intimate-media scope and its manipulation boundary."
+    },
+    {
+      "parent": "child-abuse-generation-ban",
+      "child": "supplier-safeguards-test",
+      "kind": "requires",
+      "reason": "The market/service test also applies to the incorporated child-abuse material/performance scope."
+    },
+    {
+      "parent": "regulated-action",
+      "child": "supplier-safeguards-test",
+      "kind": "requires",
+      "reason": "The market/service test differs from the prohibition on a deployer's use."
+    },
+    {
+      "parent": "supplier-safeguards-test",
+      "child": "deployer-purpose-test",
+      "kind": "requires",
+      "reason": "The learner must contrast the supplier-side conditions with the separate use-purpose test."
+    },
+    {
+      "parent": "deployer",
+      "child": "deployer-purpose-test",
+      "kind": "requires",
+      "reason": "The use test depends on the purpose of the deployer."
+    },
+    {
+      "parent": "provision-application-date",
+      "child": "deployer-purpose-test",
+      "kind": "requires",
+      "reason": "The learner must apply the separate start date of the new prohibitions."
+    },
+    {
+      "parent": "remote-biometric-identification",
+      "child": "real-time-biometric-identification",
+      "kind": "requires",
+      "reason": "Real-time is a timing qualification of remote biometric identification."
+    },
+    {
+      "parent": "real-time-biometric-identification",
+      "child": "identification-objectives",
+      "kind": "requires",
+      "reason": "The objectives qualify the ban on real-time remote identification."
+    },
+    {
+      "parent": "publicly-accessible-space",
+      "child": "identification-objectives",
+      "kind": "requires",
+      "reason": "The prohibition and its objectives concern use in publicly accessible spaces."
+    },
+    {
+      "parent": "law-enforcement",
+      "child": "identification-objectives",
+      "kind": "requires",
+      "reason": "The objectives apply to use for the defined law-enforcement purpose."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "identification-objectives",
+      "kind": "requires",
+      "reason": "A permitted objective is one part of the statutory test rather than automatic permission."
+    },
+    {
+      "parent": "identification-objectives",
+      "child": "necessity-proportionality-test",
+      "kind": "requires",
+      "reason": "Necessity and proportionality must be assessed against one of the limited objectives."
+    },
+    {
+      "parent": "risk",
+      "child": "necessity-proportionality-test",
+      "kind": "requires",
+      "reason": "The assessment compares likelihood and severity of harm and rights effects."
+    },
+    {
+      "parent": "necessity-proportionality-test",
+      "child": "targeted-use-safeguards",
+      "kind": "requires",
+      "reason": "The use limits operationalise the necessity and proportionality assessment."
+    },
+    {
+      "parent": "targeted-use-safeguards",
+      "child": "identification-impact-registration",
+      "kind": "requires",
+      "reason": "Impact assessment and registration are additional safeguards for the targeted use."
+    },
+    {
+      "parent": "targeted-use-safeguards",
+      "child": "prior-authorisation",
+      "kind": "requires",
+      "reason": "The authority evaluates necessity and strict temporal, geographic and personal limits."
+    },
+    {
+      "parent": "prior-authorisation",
+      "child": "urgent-authorisation-rule",
+      "kind": "requires",
+      "reason": "The urgent procedure is an exception to obtaining authorisation before use."
+    },
+    {
+      "parent": "prior-authorisation",
+      "child": "refusal-consequences",
+      "kind": "requires",
+      "reason": "The learner must understand what authorisation was sought before interpreting a refusal."
+    },
+    {
+      "parent": "urgent-authorisation-rule",
+      "child": "refusal-consequences",
+      "kind": "requires",
+      "reason": "The refusal case includes a system already used under urgency."
+    },
+    {
+      "parent": "prior-authorisation",
+      "child": "national-authorisation-lookup",
+      "kind": "requires",
+      "reason": "The national-law enquiry concerns whether and how the authorisation procedure is available."
+    },
+    {
+      "parent": "prior-authorisation",
+      "child": "notification-rule",
+      "kind": "requires",
+      "reason": "Notification is a separate duty and must not be mistaken for the prior authorisation."
+    },
+    {
+      "parent": "notification-rule",
+      "child": "reporting-chain",
+      "kind": "requires",
+      "reason": "The annual reports aggregate the uses notified to the national authorities."
+    },
+    {
+      "parent": "other-law-relationship",
+      "child": "other-law-ban-check",
+      "kind": "requires",
+      "reason": "The check applies the principle that other applicable law continues to govern the practice."
+    },
+    {
+      "parent": "prohibition-elements",
+      "child": "other-law-ban-check",
+      "kind": "requires",
+      "reason": "An Article 5 conclusion leaves a separate test under other applicable Union prohibitions."
+    },
+    {
+      "parent": "real-time-biometric-identification",
+      "child": "no-sole-output-adverse-decision",
+      "kind": "requires",
+      "reason": "The output-based decision restriction concerns the real-time identification system already defined."
+    },
+    {
+      "parent": "facial-database-ban",
+      "child": "biometric-prohibition-assessment",
+      "kind": "requires",
+      "reason": "The synthesis includes untargeted scraping for a facial-recognition database."
+    },
+    {
+      "parent": "medical-safety-boundary",
+      "child": "biometric-prohibition-assessment",
+      "kind": "requires",
+      "reason": "The synthesis includes the medical/safety boundary of the emotion prohibition."
+    },
+    {
+      "parent": "lawful-dataset-boundary",
+      "child": "biometric-prohibition-assessment",
+      "kind": "requires",
+      "reason": "The synthesis includes the categorisation prohibition and its stated boundary."
+    },
+    {
+      "parent": "refusal-consequences",
+      "child": "biometric-prohibition-assessment",
+      "kind": "requires",
+      "reason": "The synthesis includes a remote-identification authorisation refusal."
+    },
+    {
+      "parent": "biometric-prohibition-assessment",
+      "child": "final-assessment",
+      "kind": "requires",
+      "reason": "The final case includes a biometric-practice screening conclusion."
+    },
+    {
+      "parent": "harmful-decision-case",
+      "child": "final-assessment",
+      "kind": "requires",
+      "reason": "The final case includes the harmful-decision prohibition tests."
+    },
+    {
+      "parent": "deployer-purpose-test",
+      "child": "final-assessment",
+      "kind": "requires",
+      "reason": "The final case includes the distinct tests and date for the added synthetic-media prohibitions."
+    },
+    {
+      "parent": "classification-capstone",
+      "child": "final-assessment",
+      "kind": "requires",
+      "reason": "The final case requires a classification conclusion after prohibition screening."
+    },
+    {
+      "parent": "ai-act-map",
+      "child": "ai-system",
+      "kind": "suggests",
+      "reason": "The orientation helps the learner place the definition in the programme."
+    },
+    {
+      "parent": "ai-act-map",
+      "child": "prohibition-precheck",
+      "kind": "suggests",
+      "reason": "The orientation introduces the separate regulatory layers."
+    },
+    {
+      "parent": "ai-literacy-support",
+      "child": "provider",
+      "kind": "suggests",
+      "reason": "A literacy example helps motivate the provider role but does not define it."
+    },
+    {
+      "parent": "scope-exclusion-check",
+      "child": "other-law-relationship",
+      "kind": "suggests",
+      "reason": "Scope practice gives useful context for the relationship with other law."
+    },
+    {
+      "parent": "transition-check",
+      "child": "assessment-evidence-packet",
+      "kind": "suggests",
+      "reason": "An explicit date improves the opening case but the case does not yet test transitions."
+    },
+    {
+      "parent": "assessment-evidence-packet",
+      "child": "classification-routes",
+      "kind": "suggests",
+      "reason": "The opening case provides a running example for classification."
+    },
+    {
+      "parent": "guidance-status",
+      "child": "harm-significance-test",
+      "kind": "suggests",
+      "reason": "Guidance examples may help but the statutory gateway can be explained directly."
+    },
+    {
+      "parent": "classification-guidance",
+      "child": "classification-capstone",
+      "kind": "suggests",
+      "reason": "Optional guidance depth may help evaluate evidence but must not gate the core capstone."
+    },
+    {
+      "parent": "emotion-recognition",
+      "child": "platform-function-assessment",
+      "kind": "suggests",
+      "reason": "Emotion functionality is an optional contrast in the platform case."
+    },
+    {
+      "parent": "educational-access-use",
+      "child": "platform-function-assessment",
+      "kind": "suggests",
+      "reason": "Admission is an optional alternative to the learning-outcomes case."
+    },
+    {
+      "parent": "educational-level-use",
+      "child": "platform-function-assessment",
+      "kind": "suggests",
+      "reason": "Education-level assessment is an optional contrast."
+    },
+    {
+      "parent": "examination-monitoring-use",
+      "child": "platform-function-assessment",
+      "kind": "suggests",
+      "reason": "Test monitoring is an optional contrast."
+    },
+    {
+      "parent": "biometric-categorisation",
+      "child": "platform-function-assessment",
+      "kind": "suggests",
+      "reason": "Categorisation is an optional biometric contrast."
+    },
+    {
+      "parent": "law-enforcement-use",
+      "child": "criminal-risk-ban",
+      "kind": "suggests",
+      "reason": "The Annex III examples help contrast classification with prohibition but do not define the ban."
+    },
+    {
+      "parent": "procedural-task-condition",
+      "child": "document-assessment",
+      "kind": "suggests",
+      "reason": "The procedural-task example illustrates a possible justification to document."
+    },
+    {
+      "parent": "completed-human-work-condition",
+      "child": "document-assessment",
+      "kind": "suggests",
+      "reason": "The completed-work example illustrates a possible justification to document."
+    },
+    {
+      "parent": "pattern-review-condition",
+      "child": "document-assessment",
+      "kind": "suggests",
+      "reason": "The human-review example illustrates a possible justification to document."
+    },
+    {
+      "parent": "preparatory-task-condition",
+      "child": "document-assessment",
+      "kind": "suggests",
+      "reason": "The preparatory-task example illustrates a possible justification to document."
+    },
+    {
+      "parent": "classification-registration",
+      "child": "classification-capstone",
+      "kind": "suggests",
+      "reason": "Registration is a follow-up consequence and does not determine the classification itself."
+    },
+    {
+      "parent": "authority-document-request",
+      "child": "classification-capstone",
+      "kind": "suggests",
+      "reason": "Authority-facing practice helps explain evidence handling after the classification."
+    },
+    {
+      "parent": "provision-application-date",
+      "child": "classification-capstone",
+      "kind": "suggests",
+      "reason": "The timing exercise is an optional follow-up within this capstone, not a new prerequisite."
+    },
+    {
+      "parent": "national-authorisation-lookup",
+      "child": "other-law-ban-check",
+      "kind": "suggests",
+      "reason": "Optional national-law practice reinforces that an EU exception is not blanket permission."
+    },
+    {
+      "parent": "identification-impact-registration",
+      "child": "biometric-prohibition-assessment",
+      "kind": "suggests",
+      "reason": "The impact/registration exercise is a useful additional safeguard check."
+    },
+    {
+      "parent": "notification-rule",
+      "child": "biometric-prohibition-assessment",
+      "kind": "suggests",
+      "reason": "Optional notification practice helps describe the post-use procedure."
+    },
+    {
+      "parent": "reporting-chain",
+      "child": "final-assessment",
+      "kind": "suggests",
+      "reason": "Optional reporting depth informs governance follow-up without gating the core conclusion."
+    },
+    {
+      "parent": "other-law-ban-check",
+      "child": "final-assessment",
+      "kind": "suggests",
+      "reason": "The separate other-law check is a recommended follow-up to the AI Act conclusion."
+    },
+    {
+      "parent": "no-sole-output-adverse-decision",
+      "child": "biometric-prohibition-assessment",
+      "kind": "suggests",
+      "reason": "An optional follow-up case contrasts authorisation with a solely output-based adverse legal decision."
+    },
+    {
+      "parent": "transition-check",
+      "child": "final-assessment",
+      "kind": "suggests",
+      "reason": "Existing-system transitions are a recommended follow-up where the case facts make them relevant."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "I01",
+      "module": "M0",
+      "title": "What the Act regulates",
+      "tier": "core",
+      "covers": ["ai-act-map", "risk", "ai-literacy-support"],
+      "prerequisites": []
+    },
+    {
+      "id": "I02",
+      "module": "M0",
+      "title": "What counts as an AI system",
+      "tier": "core",
+      "covers": ["ai-system", "gpai-model"],
+      "prerequisites": []
+    },
+    {
+      "id": "I03",
+      "module": "M0",
+      "title": "Intended purpose and the actual use case",
+      "tier": "core",
+      "covers": ["intended-purpose", "use-case-description", "profiling"],
+      "prerequisites": [
+        {
+          "lesson_id": "I02",
+          "reason": "The intended purpose attaches to a defined AI system. The learner needs to identify the system before evaluating whether it performs automated personal evaluation."
+        }
+      ]
+    },
+    {
+      "id": "I04",
+      "module": "M0",
+      "title": "Who does what",
+      "tier": "core",
+      "covers": ["provider", "deployer", "actor-lookup"],
+      "prerequisites": [
+        {
+          "lesson_id": "I02",
+          "reason": "The provider definition depends on development and supply of a defined system. The deployer definition depends on use of a defined system under an actor's authority."
+        }
+      ]
+    },
+    {
+      "id": "I05",
+      "module": "M0",
+      "title": "When the Act applies",
+      "tier": "core",
+      "covers": [
+        "eu-scope-test",
+        "scope-exclusion-check",
+        "other-law-relationship"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I04",
+          "reason": "Territorial scope requires identifying which provider is connected to the Union. The territorial test separately considers where the deployer is located."
+        }
+      ]
+    },
+    {
+      "id": "I06",
+      "module": "M0",
+      "title": "Read a provision accurately",
+      "tier": "core",
+      "covers": [
+        "legal-source-authority",
+        "provision-lookup",
+        "guidance-status"
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "I07",
+      "module": "M0",
+      "title": "Dates and transition",
+      "tier": "core",
+      "covers": [
+        "entry-into-force",
+        "provision-application-date",
+        "transition-check"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I06",
+          "reason": "The learner must locate the specified provision before choosing its application date."
+        }
+      ]
+    },
+    {
+      "id": "I08",
+      "module": "M0",
+      "title": "Start a classification assessment",
+      "tier": "core",
+      "covers": ["prohibition-precheck", "assessment-evidence-packet"],
+      "prerequisites": [
+        {
+          "lesson_id": "I03",
+          "reason": "The opening case needs a complete factual description before any legal route can be selected."
+        },
+        {
+          "lesson_id": "I04",
+          "reason": "The evidence packet must assign the actions in the case to the relevant actors."
+        },
+        {
+          "lesson_id": "I05",
+          "reason": "The opening case must establish scope and identify any unresolved exclusion."
+        }
+      ]
+    },
+    {
+      "id": "P01",
+      "module": "M1",
+      "title": "Two routes to high-risk classification",
+      "tier": "core",
+      "covers": ["high-risk-classification", "classification-routes"],
+      "prerequisites": [
+        {
+          "lesson_id": "I02",
+          "reason": "The learner must identify what is being classified before learning the classification result."
+        },
+        {
+          "lesson_id": "I03",
+          "reason": "Both routes depend on the function intended for the system."
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "module": "M1",
+      "title": "Safety functions and non-safety functions",
+      "tier": "core",
+      "covers": [
+        "safety-component",
+        "ancillary-function-limit",
+        "safety-failure-rule"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I03",
+          "reason": "A safety function must be linked to the system's intended purpose."
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "module": "M1",
+      "title": "Find the relevant product legislation",
+      "tier": "core",
+      "covers": ["annex-i-lookup", "sector-scope-limits"],
+      "prerequisites": [
+        {
+          "lesson_id": "I06",
+          "reason": "Tracing the product legislation requires navigating an annex locator."
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "module": "M1",
+      "title": "Third-party conformity assessment",
+      "tier": "core",
+      "covers": [
+        "third-party-assessment",
+        "product-assessment-test",
+        "solely-other-risks-limit"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "The term is introduced as the second condition of the product classification route."
+        },
+        {
+          "lesson_id": "P03",
+          "reason": "The required assessment route must be traced to the correct sector instrument."
+        }
+      ]
+    },
+    {
+      "id": "P05",
+      "module": "M1",
+      "title": "Product classification case",
+      "tier": "core",
+      "covers": ["product-route-assessment"],
+      "prerequisites": [
+        {
+          "lesson_id": "P02",
+          "reason": "The product case requires the final safety-component rule including its failure qualification."
+        },
+        {
+          "lesson_id": "P03",
+          "reason": "The case must distinguish classification from the provisions that apply to the sector."
+        },
+        {
+          "lesson_id": "P04",
+          "reason": "The product case must establish the mandatory third-party condition with evidence. The case includes a route required solely because of a non-health/safety risk."
+        }
+      ]
+    },
+    {
+      "id": "P06",
+      "module": "M1",
+      "title": "How classification rules can change",
+      "tier": "extension",
+      "covers": [
+        "classification-guidance",
+        "delegated-classification-change",
+        "protection-constraint"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I06",
+          "reason": "The learner must distinguish guidance status before reading the classification guidance mandate. The learner must identify the legal provision that a delegated act would change."
+        }
+      ]
+    },
+    {
+      "id": "A01",
+      "module": "M2",
+      "title": "Biometric identity",
+      "tier": "core",
+      "covers": [
+        "biometric-data",
+        "identity-comparison",
+        "remote-biometric-identification"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I02",
+          "reason": "The data definition is introduced in the context of identifying inputs used by the system."
+        }
+      ]
+    },
+    {
+      "id": "A02",
+      "module": "M2",
+      "title": "Biometric categorisation and emotion recognition",
+      "tier": "core",
+      "covers": ["emotion-recognition", "biometric-categorisation"],
+      "prerequisites": [
+        {
+          "lesson_id": "A01",
+          "reason": "The emotion-recognition definition depends on biometric data as its basis. The categorisation definition depends on biometric data as its basis."
+        }
+      ]
+    },
+    {
+      "id": "A03",
+      "module": "M2",
+      "title": "Educational access and assessment",
+      "tier": "core",
+      "covers": ["educational-access-use", "learning-outcome-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "The learner must distinguish a listed-use match from the product route."
+        }
+      ]
+    },
+    {
+      "id": "A04",
+      "module": "M2",
+      "title": "Educational level and examination monitoring",
+      "tier": "core",
+      "covers": ["educational-level-use", "examination-monitoring-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "The learner must distinguish a listed-use match from the product route."
+        }
+      ]
+    },
+    {
+      "id": "A05",
+      "module": "M2",
+      "title": "Recruitment and worker management",
+      "tier": "core",
+      "covers": ["recruitment-use", "worker-management-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "The learner must distinguish a listed-use match from the product route."
+        }
+      ]
+    },
+    {
+      "id": "A06",
+      "module": "M2",
+      "title": "Case clinic: a learning and employment platform",
+      "tier": "core",
+      "covers": ["platform-function-assessment"],
+      "prerequisites": [
+        {
+          "lesson_id": "A01",
+          "reason": "The platform case contrasts identity confirmation with identity discovery."
+        },
+        {
+          "lesson_id": "A03",
+          "reason": "The platform case includes evaluation of learning outcomes."
+        },
+        {
+          "lesson_id": "A05",
+          "reason": "The platform case includes candidate filtering. The platform case includes task allocation based on individual behaviour."
+        }
+      ]
+    },
+    {
+      "id": "S01",
+      "module": "M3",
+      "title": "Critical infrastructure",
+      "tier": "core",
+      "covers": ["infrastructure-safety-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "Infrastructure in Annex III must not be confused with the Annex I product route."
+        },
+        {
+          "lesson_id": "P02",
+          "reason": "The listed infrastructure use requires a safety-component function."
+        }
+      ]
+    },
+    {
+      "id": "S02",
+      "module": "M3",
+      "title": "Credit and insurance",
+      "tier": "core",
+      "covers": ["credit-use", "life-health-insurance-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "Creditworthiness is examined as a listed-use match rather than a product classification. Insurance is examined as a listed-use match rather than a product classification."
+        }
+      ]
+    },
+    {
+      "id": "S03",
+      "module": "M3",
+      "title": "Public benefits and emergency services",
+      "tier": "core",
+      "covers": ["public-benefits-use", "emergency-triage-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "Public assistance is examined as a listed-use match rather than a product classification. Emergency-service functions are examined as listed-use matches rather than product classifications."
+        }
+      ]
+    },
+    {
+      "id": "S04",
+      "module": "M3",
+      "title": "Law enforcement",
+      "tier": "core",
+      "covers": ["law-enforcement", "law-enforcement-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "I03",
+          "reason": "Two listed law-enforcement points expressly depend on the incorporated profiling definition."
+        },
+        {
+          "lesson_id": "P01",
+          "reason": "The learner must distinguish the listed-use enquiry from the product route."
+        }
+      ]
+    },
+    {
+      "id": "S05",
+      "module": "M3",
+      "title": "Migration, asylum and borders",
+      "tier": "core",
+      "covers": ["migration-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "The learner must distinguish the listed-use enquiry from the product route."
+        }
+      ]
+    },
+    {
+      "id": "S06",
+      "module": "M3",
+      "title": "Justice and democratic processes",
+      "tier": "core",
+      "covers": ["justice-use", "election-influence-use"],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "The learner must distinguish the listed-use enquiry from the product route."
+        }
+      ]
+    },
+    {
+      "id": "E01",
+      "module": "M4",
+      "title": "The paragraph 3 gateway",
+      "tier": "core",
+      "covers": ["harm-significance-test", "decision-influence"],
+      "prerequisites": [
+        {
+          "lesson_id": "I01",
+          "reason": "The gateway evaluates a risk of harm, which combines likelihood and severity."
+        },
+        {
+          "lesson_id": "P01",
+          "reason": "The derogation applies to the Annex III route and cannot be extended to the product route."
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "module": "M4",
+      "title": "Narrow procedural tasks",
+      "tier": "core",
+      "covers": ["procedural-task-condition"],
+      "prerequisites": [
+        {
+          "lesson_id": "E01",
+          "reason": "A procedural task does not bypass the gateway or its decision-influence analysis."
+        }
+      ]
+    },
+    {
+      "id": "E03",
+      "module": "M4",
+      "title": "Improving completed human work",
+      "tier": "core",
+      "covers": ["completed-human-work-condition"],
+      "prerequisites": [
+        {
+          "lesson_id": "E01",
+          "reason": "Completed human work does not bypass the gateway or its decision-influence analysis."
+        }
+      ]
+    },
+    {
+      "id": "E04",
+      "module": "M4",
+      "title": "Decision patterns and human review",
+      "tier": "core",
+      "covers": ["pattern-review-condition"],
+      "prerequisites": [
+        {
+          "lesson_id": "E01",
+          "reason": "The pattern-review test explicitly limits replacement or influence of a prior human assessment."
+        }
+      ]
+    },
+    {
+      "id": "E05",
+      "module": "M4",
+      "title": "Preparatory tasks",
+      "tier": "core",
+      "covers": ["preparatory-task-condition"],
+      "prerequisites": [
+        {
+          "lesson_id": "E01",
+          "reason": "A preparatory-task label does not bypass the gateway or its decision-influence analysis."
+        }
+      ]
+    },
+    {
+      "id": "E06",
+      "module": "M4",
+      "title": "The profiling rule",
+      "tier": "core",
+      "covers": ["profiling-override"],
+      "prerequisites": [
+        {
+          "lesson_id": "I03",
+          "reason": "The override depends on whether the system performs profiling as defined by the incorporated law."
+        },
+        {
+          "lesson_id": "E01",
+          "reason": "The learner must know which paragraph 3 gateway is displaced by the profiling rule."
+        }
+      ]
+    },
+    {
+      "id": "E07",
+      "module": "M4",
+      "title": "Record and support the assessment",
+      "tier": "core",
+      "covers": [
+        "document-assessment",
+        "classification-registration",
+        "authority-document-request"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I04",
+          "reason": "The documentation duty belongs to the provider making the paragraph 3 conclusion."
+        },
+        {
+          "lesson_id": "E06",
+          "reason": "A non-high-risk conclusion must not silently ignore the Annex III profiling override."
+        }
+      ]
+    },
+    {
+      "id": "E08",
+      "module": "M4",
+      "title": "Classification capstone",
+      "tier": "core",
+      "covers": ["classification-capstone"],
+      "prerequisites": [
+        {
+          "lesson_id": "P05",
+          "reason": "One closing case needs a complete product-route assessment."
+        },
+        {
+          "lesson_id": "A06",
+          "reason": "One closing case needs separation of learning and recruitment functions."
+        },
+        {
+          "lesson_id": "S02",
+          "reason": "A contrasting closing case uses the creditworthiness listed-use boundary."
+        },
+        {
+          "lesson_id": "E07",
+          "reason": "The closing cases require a reasoned paragraph 3 conclusion and supporting evidence."
+        }
+      ]
+    },
+    {
+      "id": "B01",
+      "module": "M5",
+      "title": "A method for reading prohibitions",
+      "tier": "core",
+      "covers": [
+        "regulated-action",
+        "prohibition-elements",
+        "prohibited-versus-high-risk"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I04",
+          "reason": "Market and service triggers depend on the supply actions and actors defined earlier."
+        },
+        {
+          "lesson_id": "I08",
+          "reason": "The detailed distinction develops the initial separation between classification and permission."
+        },
+        {
+          "lesson_id": "P01",
+          "reason": "The distinction needs a prior definition of high-risk classification."
+        }
+      ]
+    },
+    {
+      "id": "B02",
+      "module": "M5",
+      "title": "Manipulation, deception and significant harm",
+      "tier": "core",
+      "covers": ["manipulation-technique", "manipulation-causal-test"],
+      "prerequisites": [
+        {
+          "lesson_id": "I01",
+          "reason": "The harm link includes reasonably likely harm and cannot be reduced to an already observed injury."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The technique is one element of a prohibition rather than proof of the whole prohibition."
+        }
+      ]
+    },
+    {
+      "id": "B03",
+      "module": "M5",
+      "title": "Exploiting vulnerability",
+      "tier": "core",
+      "covers": ["protected-vulnerability", "exploitation-harm-test"],
+      "prerequisites": [
+        {
+          "lesson_id": "I01",
+          "reason": "The harm link includes reasonably likely harm and cannot be reduced to an already observed injury."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The vulnerability is a specified element of a prohibition rather than a generic disadvantage."
+        }
+      ]
+    },
+    {
+      "id": "B04",
+      "module": "M5",
+      "title": "Social scoring",
+      "tier": "core",
+      "covers": ["social-scoring-test"],
+      "prerequisites": [
+        {
+          "lesson_id": "B01",
+          "reason": "The scoring case must be read as a set of elements and consequence conditions."
+        }
+      ]
+    },
+    {
+      "id": "B05",
+      "module": "M5",
+      "title": "Individual criminal-risk assessment",
+      "tier": "core",
+      "covers": ["criminal-risk-ban", "factual-human-support-boundary"],
+      "prerequisites": [
+        {
+          "lesson_id": "I03",
+          "reason": "The ban expressly turns on prediction solely based on profiling or personality assessment."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The learner must distinguish the criminal-risk elements from a general law-enforcement label."
+        }
+      ]
+    },
+    {
+      "id": "B06",
+      "module": "M5",
+      "title": "Case clinic: persuasion, eligibility and prediction",
+      "tier": "core",
+      "covers": ["harmful-decision-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "B02",
+          "reason": "The case clinic includes the manipulation causal chain."
+        },
+        {
+          "lesson_id": "B03",
+          "reason": "The case clinic includes vulnerability exploitation and harm."
+        },
+        {
+          "lesson_id": "B04",
+          "reason": "The case clinic includes the social-scoring consequence conditions."
+        },
+        {
+          "lesson_id": "B05",
+          "reason": "The case clinic contrasts unsupported prediction with fact-based human assessment."
+        }
+      ]
+    },
+    {
+      "id": "B07",
+      "module": "M6",
+      "title": "Facial-recognition databases",
+      "tier": "core",
+      "covers": ["untargeted-scraping", "facial-database-ban"],
+      "prerequisites": [
+        {
+          "lesson_id": "A01",
+          "reason": "The database purpose concerns facial recognition for identity rather than any image archive."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The collection feature is introduced as one element of the database prohibition."
+        }
+      ]
+    },
+    {
+      "id": "B08",
+      "module": "M6",
+      "title": "Emotion inference at work and in education",
+      "tier": "core",
+      "covers": ["emotion-setting-ban", "medical-safety-boundary"],
+      "prerequisites": [
+        {
+          "lesson_id": "A02",
+          "reason": "The prohibition concerns emotion inference from the biometric basis already defined."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The setting and intended purpose must be checked as elements of the ban."
+        }
+      ]
+    },
+    {
+      "id": "B09",
+      "module": "M6",
+      "title": "Sensitive biometric categorisation",
+      "tier": "core",
+      "covers": ["sensitive-categorisation-ban", "lawful-dataset-boundary"],
+      "prerequisites": [
+        {
+          "lesson_id": "A02",
+          "reason": "The sensitive-attribute test applies to individual biometric categorisation."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The learner must check the listed inference purpose rather than infer a ban from the category name."
+        }
+      ]
+    },
+    {
+      "id": "B10",
+      "module": "M6",
+      "title": "Non-consensual intimate synthetic media",
+      "tier": "core",
+      "covers": [
+        "intimate-media-consent-test",
+        "intimate-manipulation-boundary"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "B01",
+          "reason": "The consent condition is examined within the elements of the added prohibition."
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "module": "M6",
+      "title": "Child sexual abuse material",
+      "tier": "core",
+      "covers": ["child-abuse-material-lookup", "child-abuse-generation-ban"],
+      "prerequisites": [
+        {
+          "lesson_id": "I06",
+          "reason": "The incorporated material/performance definitions require following exact legal locators."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The learner must distinguish the action and purpose elements from the material definition."
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "module": "M6",
+      "title": "Provider and deployer tests for the new prohibitions",
+      "tier": "core",
+      "covers": [
+        "foreseeable-misuse",
+        "supplier-safeguards-test",
+        "deployer-purpose-test"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I03",
+          "reason": "Misuse is defined by departure from the system's intended purpose."
+        },
+        {
+          "lesson_id": "I04",
+          "reason": "The use test depends on the purpose of the deployer."
+        },
+        {
+          "lesson_id": "I07",
+          "reason": "The learner must apply the separate start date of the new prohibitions."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "The market/service test differs from the prohibition on a deployer's use."
+        },
+        {
+          "lesson_id": "B10",
+          "reason": "The market/service test needs the intimate-media scope and its manipulation boundary."
+        },
+        {
+          "lesson_id": "B11",
+          "reason": "The market/service test also applies to the incorporated child-abuse material/performance scope."
+        }
+      ]
+    },
+    {
+      "id": "R01",
+      "module": "M7",
+      "title": "Real-time remote biometric identification",
+      "tier": "core",
+      "covers": [
+        "real-time-biometric-identification",
+        "publicly-accessible-space",
+        "identification-objectives"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "A01",
+          "reason": "Real-time is a timing qualification of remote biometric identification."
+        },
+        {
+          "lesson_id": "S04",
+          "reason": "The objectives apply to use for the defined law-enforcement purpose."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "A permitted objective is one part of the statutory test rather than automatic permission."
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "module": "M7",
+      "title": "Necessity, proportionality and safeguards",
+      "tier": "core",
+      "covers": [
+        "necessity-proportionality-test",
+        "targeted-use-safeguards",
+        "identification-impact-registration"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "I01",
+          "reason": "The assessment compares likelihood and severity of harm and rights effects."
+        },
+        {
+          "lesson_id": "R01",
+          "reason": "Necessity and proportionality must be assessed against one of the limited objectives."
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "module": "M7",
+      "title": "Authorisation and urgency",
+      "tier": "core",
+      "covers": [
+        "prior-authorisation",
+        "urgent-authorisation-rule",
+        "refusal-consequences"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "R02",
+          "reason": "The authority evaluates necessity and strict temporal, geographic and personal limits."
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "module": "M7",
+      "title": "National rules, notification and reporting",
+      "tier": "extension",
+      "covers": [
+        "national-authorisation-lookup",
+        "notification-rule",
+        "reporting-chain"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "R03",
+          "reason": "The national-law enquiry concerns whether and how the authorisation procedure is available. Notification is a separate duty and must not be mistaken for the prior authorisation."
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "module": "M7",
+      "title": "Other law and the limits of an exception",
+      "tier": "core",
+      "covers": ["other-law-ban-check", "no-sole-output-adverse-decision"],
+      "prerequisites": [
+        {
+          "lesson_id": "I05",
+          "reason": "The check applies the principle that other applicable law continues to govern the practice."
+        },
+        {
+          "lesson_id": "B01",
+          "reason": "An Article 5 conclusion leaves a separate test under other applicable Union prohibitions."
+        },
+        {
+          "lesson_id": "R01",
+          "reason": "The output-based decision restriction concerns the real-time identification system already defined."
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "module": "M7",
+      "title": "Prohibition and classification capstone",
+      "tier": "core",
+      "covers": ["biometric-prohibition-assessment", "final-assessment"],
+      "prerequisites": [
+        {
+          "lesson_id": "E08",
+          "reason": "The final case requires a classification conclusion after prohibition screening."
+        },
+        {
+          "lesson_id": "B06",
+          "reason": "The final case includes the harmful-decision prohibition tests."
+        },
+        {
+          "lesson_id": "B07",
+          "reason": "The synthesis includes untargeted scraping for a facial-recognition database."
+        },
+        {
+          "lesson_id": "B08",
+          "reason": "The synthesis includes the medical/safety boundary of the emotion prohibition."
+        },
+        {
+          "lesson_id": "B09",
+          "reason": "The synthesis includes the categorisation prohibition and its stated boundary."
+        },
+        {
+          "lesson_id": "B12",
+          "reason": "The final case includes the distinct tests and date for the added synthetic-media prohibitions."
+        },
+        {
+          "lesson_id": "R03",
+          "reason": "The synthesis includes a remote-identification authorisation refusal."
+        }
+      ]
+    }
+  ],
+  "source_baseline": "02024R1689-20260727",
+  "next_block": "Article 50: interaction and content transparency (approved 2026-10-06)"
+}

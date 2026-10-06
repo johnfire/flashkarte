@@ -1,6 +1,6 @@
 # EU AI Act: course programme and first-release plan
 
-Date: 6 October 2026. Status: proposed for Chris's review; lesson authoring has not started.
+Date: 6 October 2026. Status: scope approved; Stage 1 source and concept-graph package prepared for review. Lesson authoring has not started.
 
 ## Decisions and intended result
 
@@ -25,7 +25,7 @@ Six assessable outcomes:
 
 The initial research read the Commission's current Article 5 and Article 6 text through its AI Act Service Desk. That text identifies its baseline as the EUR-Lex consolidation of **27 July 2026**. The Commission identifies the amending act as the Digital Omnibus on AI, Regulation (EU) 2026/1744. We must account for the changes when designing coverage. [Commission overview](https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai), [Article 6](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-6), [Article 5](https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-5).
 
-**Remaining verification:** EUR-Lex returned an automated-access verification page during this planning session. The English, German and Czech consolidated legal texts and the amending instrument still need to be retrieved and compared directly before lesson authoring. The Service Desk supports this proposed syllabus; it does not replace that source verification step.
+**Stage 1 verification:** the English, German and Czech consolidated texts and amending instrument have now been retrieved directly from EUR-Lex and retained. Article 6, Article 5 additions and their dates received targeted language comparison; this is not a full multilingual audit. The [source register](../courses/eu-ai-act/source-register.md) records actual reading limits, and the [legal baseline](../courses/eu-ai-act/legal-baseline.md) identifies the amended rules, application dates, corrigenda and lesson-specific reading still required.
 
 The Article 6 guidance located in this session is still labelled **draft** on the Commission's publication page, last updated 23 July 2026. Do not assume that the consultation's end made it final. Check for a subsequent adopted version, and record its status and date. [Draft classification guidance](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems).
 
@@ -245,7 +245,7 @@ Maintain a programme coverage matrix: provision → concepts → teaching lesson
 
 Import one module at a time and let Chris review by learning. Retain lesson sources, import payloads, source revision, platform IDs and review decisions in the repository once building is authorised. Keep newly imported lessons in **testing**. Do not call `finish_lesson` or publish editions without Chris's instruction.
 
-The immediate next deliverable after approval is Stage 1, followed by the English introduction. Do not silently start with dozens of Article 6 lessons before the source baseline and graph are reviewed.
+Stage 1 is available in the [course review package](../courses/eu-ai-act/README.md): 52 lessons, 109 concepts, 178 reasoned edges and 141 planned coverage rows. Chris's webinar screenshots have informed the [presentation review and case bank](../courses/eu-ai-act/presentation-review.md). Chris approved **Article 50 as the next dedicated block after Article 5** on 6 October; the [remaining programme outline](../courses/eu-ai-act/programme-roadmap.md) proposes 12 transparency lessons and tracks the other major areas of the Act. The next authoring step, after graph review, is the eight English introductory lessons in testing.
 
 ## Quality and ongoing maintenance
 
@@ -279,4 +279,4 @@ To continue, open Codex/Remote in the Android ChatGPT app, select philips3 and o
 - [Draft Article 6 classification guidelines — Commission publication and downloads](https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems)
 - [Article 5 guidelines — Commission-hosted PDF](https://ai-act-service-desk.ec.europa.eu/sites/default/files/2025-08/guidelines_on_prohibited_artificial_intelligence_practices_established_by_regulation_eu_20241689_ai_act_english_ied3r5nwo50xggpcfmwckm3nuc_112367-1.PDF)
 
-Research for this document establishes a planning basis. It does not claim that all guideline PDFs, incorporated sector instruments or all three official-language texts have already received the full reading required for lesson authoring.
+Research establishes a source-grounded graph proposal. All guideline PDFs, incorporated sector instruments and translated lesson provisions still need the full, lesson-specific reading recorded in the review package before authoring. No Flashkarte content has yet been imported.

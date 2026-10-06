@@ -61,6 +61,11 @@ jobs:
         run: npm run typecheck
       - name: Test all workspaces
         run: npm test
+      - name: Validate EU AI Act course review package
+        run: |
+          python3 docs/courses/eu-ai-act/curriculum_validation.py
+          python3 -m unittest discover -s docs/courses/eu-ai-act -p 'test_*.py'
+          python3 docs/courses/eu-ai-act/render_review.py --check
       - name: Build server
         run: npm run build --workspace=packages/server
       - name: Migration smoke test (all migrations against real Postgres)
