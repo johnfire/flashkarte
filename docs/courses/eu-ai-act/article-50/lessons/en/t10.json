@@ -1,0 +1,268 @@
+{
+  "module": "Mark synthetic outputs and verify detection",
+  "lesson": {
+    "slug": "t10",
+    "title": "Upstream suppliers, downstream systems and dates",
+    "summary": "Verify the downstream provider's own route and apply the targeted marking transition.",
+    "covers": ["downstream-marking-responsibility", "marking-transition-check"],
+    "prerequisites": [
+      {
+        "lesson": "t02",
+        "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+      },
+      {
+        "lesson": "t03",
+        "reason": "The learner must allocate the relevant duty before choosing an implementation."
+      },
+      {
+        "lesson": "t07",
+        "reason": "The learner must distinguish machine marking from human-facing labels. The learner must connect each marker to its verification mechanism."
+      },
+      {
+        "lesson": "t09",
+        "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **downstream system provider** integrates an upstream model or service into its own AI system. Upstream marking may support its compliance, but it remains responsible for the system it provides.",
+        "Ask what is marked, how detection works, whether Harbour preserves the markers and whether the actual delivery path is covered. Self-hosting does not automatically make an organisation a model provider; assess the actions and objects supplied."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 50(2), 111(4), 113; Guidelines paragraphs 71-74, 153-154",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Procurement should seek implementation evidence, access to detection, limitations and responsibilities for correction. A supplier logo or Code signature is not a test report for Harbour's integration.",
+        "The Code addresses non-removal in a provider's own processing pipeline and reasonable value-chain cooperation. Verify transformations within Harbour's control rather than asserting it can police every later copy everywhere."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 50(2), 111(4), 113; Guidelines paragraphs 71-74, 153-154",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Application date** means when obligations apply, which differs from entry into force. Article 50's default application is 2 August 2026 under Article 113.",
+        "Article 111(4) gives providers of systems placed on the market or put into service **before 2 August 2026** until **2 December 2026** to comply with Article 50(2). It is a targeted marking/detection transition, not a postponement of every transparency duty."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 50(2), 111(4), 113; Guidelines paragraphs 71-74, 153-154",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A qualifying older assistant may receive that paragraph 2 transition while still needing its applicable interaction disclosure from 2 August. A new system first placed on the market on 3 August does not qualify for the earlier-system transition.",
+        "Check the system's placement or service date, not just the date its model was trained or the supplier company was founded."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 50(2), 111(4), 113; Guidelines paragraphs 71-74, 153-154",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Commission guidance separately addresses old outputs. It does not require retroactive marking/labelling of qualifying pre-2 August generated media; for public-interest text, both generation/manipulation and publication before that date matter.",
+        "Text generated in July but first published to inform the public after 2 August needs the later publication analysis. This is interpretation about content dates, distinct from Article 111(4)'s system transition. Use the later publication lessons for its precise disclosure conditions."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 50(2), 111(4), 113; Guidelines paragraphs 71-74, 153-154",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["downstream-marking-responsibility"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Harbour wraps a supplier's marked generation service but its export removes the marker. May it rely solely on the supplier's claim?",
+      "options": [
+        {
+          "blocks": "No; verify and repair the actual downstream route",
+          "correct": true,
+          "reason": "Harbour's own product path must support its provider obligations."
+        },
+        {
+          "blocks": "Yes; the upstream company carries every later duty",
+          "correct": false,
+          "reason": "Downstream provider responsibility remains."
+        },
+        {
+          "blocks": "Yes; self-hosting automatically removes Article 50",
+          "correct": false,
+          "reason": "Hosting architecture is not a general exemption."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does upstream marking settle Harbour's provider duty when its integration strips that marking?",
+          "options": [
+            {
+              "blocks": "Yes; the upstream company carries every later duty",
+              "correct": false,
+              "reason": "Downstream provider responsibility remains."
+            },
+            {
+              "blocks": "Yes; self-hosting automatically removes Article 50",
+              "correct": false,
+              "reason": "Hosting architecture is not a general exemption."
+            },
+            {
+              "blocks": "No; verify and repair the actual downstream route",
+              "correct": true,
+              "reason": "Harbour's own product path must support its provider obligations."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["marking-transition-check"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "An assistant was put into service on 1 July 2026. Which duty receives the Article 111(4) transition to 2 December?",
+      "options": [
+        {
+          "blocks": "Every paragraph of Article 50",
+          "correct": false,
+          "reason": "Interaction and other disclosure duties are not generally postponed by this rule."
+        },
+        {
+          "blocks": "All applicable data-protection duties",
+          "correct": false,
+          "reason": "The AI Act transition does not defer those separate laws."
+        },
+        {
+          "blocks": "Article 50(2)'s marking and detection compliance",
+          "correct": true,
+          "reason": "The transition expressly concerns paragraph 2."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is postponed by the targeted transition for a qualifying pre-2 August system?",
+          "options": [
+            {
+              "blocks": "All applicable data-protection duties",
+              "correct": false,
+              "reason": "The AI Act transition does not defer those separate laws."
+            },
+            {
+              "blocks": "Article 50(2)'s marking and detection compliance",
+              "correct": true,
+              "reason": "The transition expressly concerns paragraph 2."
+            },
+            {
+              "blocks": "Every paragraph of Article 50",
+              "correct": false,
+              "reason": "Interaction and other disclosure duties are not generally postponed by this rule."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["marking-transition-check"],
+      "teaches": ["screen-3", "screen-4", "screen-5"],
+      "prompt": "A provider first puts a generator into service on 3 August 2026. May it use the earlier-system transition solely because training occurred in July?",
+      "options": [
+        {
+          "blocks": "Yes; every new generator receives four extra months",
+          "correct": false,
+          "reason": "The transition is confined to qualifying existing systems."
+        },
+        {
+          "blocks": "No; the relevant earlier placement or service condition is unmet",
+          "correct": true,
+          "reason": "The rule concerns the system's placement/service, not its training date."
+        },
+        {
+          "blocks": "Yes; training date always controls the transition",
+          "correct": false,
+          "reason": "That substitutes the wrong event."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a July model-training date qualify an AI system first launched after 2 August for Article 111(4)?",
+          "options": [
+            {
+              "blocks": "No; the relevant earlier placement or service condition is unmet",
+              "correct": true,
+              "reason": "The rule concerns the system's placement/service, not its training date."
+            },
+            {
+              "blocks": "Yes; training date always controls the transition",
+              "correct": false,
+              "reason": "That substitutes the wrong event."
+            },
+            {
+              "blocks": "Yes; every new generator receives four extra months",
+              "correct": false,
+              "reason": "The transition is confined to qualifying existing systems."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

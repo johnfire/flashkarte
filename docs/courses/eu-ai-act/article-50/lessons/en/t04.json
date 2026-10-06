@@ -1,0 +1,244 @@
+{
+  "module": "Identify actors and design interaction disclosure",
+  "lesson": {
+    "slug": "t04",
+    "title": "Direct interaction and its narrow exceptions",
+    "summary": "Test direct interaction, contextual obviousness and the authorised-law-enforcement exception.",
+    "covers": [
+      "direct-ai-interaction",
+      "obviousness-assessment",
+      "interaction-law-enforcement-check"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "t01",
+        "reason": "The learner must recognise the regulated system before applying this rule. The learner must establish whether the Act reaches the scenario."
+      },
+      {
+        "lesson": "t02",
+        "reason": "The learner must identify the actor responsible for design and output marking."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Direct AI interaction** involves an intended exchange between an AI system and a natural person. Commission guidance describes a conversational or responsive character: input and contextual response, including voice, text or physical actions.",
+        "A single exchange can qualify. A passive filter or a backend machine-to-machine call without intended human contact is different. Assess the actual interaction rather than classifying every interface as conversational."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Harbour's customer writes a question and receives the assistant's contextual reply: direct interaction. If a human employee uses AI privately, reviews the draft and sends their own message as the main interlocutor, the person may instead be interacting with that employee.",
+        "A merely available human override does not automatically turn an AI-led conversation into human-mediated communication. The Commission examples are interpretation; trace who actually communicates with the person."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The provider must design the system so people know they are interacting with AI unless that is **obvious** to a reasonably well-informed, observant and circumspect person, considering context and circumstances.",
+        "Human names, realistic voices and employee-style portraits may obscure the nature of a service. Do not assume users know because an AI reference appears somewhere else on the website. The standard is contextual, not a provider's private belief."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The law-enforcement exception requires a system authorised by law to detect, prevent, investigate or prosecute criminal offences, with appropriate safeguards for third-party rights and freedoms.",
+        "An organisation calling a tool 'fraud prevention' does not establish that authorisation. Record the legal basis and safeguards; the exception cannot be established solely by the tool's purpose label."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The exception has a **public-reporting carve-back**: if the system is available for the public to report a criminal offence, the interaction disclosure obligation remains.",
+        "In our stipulated case, Harbour supplies an AI reporting hotline with the required legal authorisation and safeguards. Because the public uses it to report offences, the provider must still ensure interaction disclosure."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["direct-ai-interaction"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A customer asks Harbour's AI assistant a question and gets a contextual answer. A staff member could intervene but does not. Which assessment fits?",
+      "options": [
+        {
+          "blocks": "Direct AI interaction remains the relevant test",
+          "correct": true,
+          "reason": "The actual exchange is AI-led; a possible override is insufficient."
+        },
+        {
+          "blocks": "Every possible override makes it human-only",
+          "correct": false,
+          "reason": "Possibility is not the same as actual human mediation."
+        },
+        {
+          "blocks": "Only repeated conversations count as interaction",
+          "correct": false,
+          "reason": "A single responsive exchange can fall in scope."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a possible human override remove direct interaction when AI actually answers the customer?",
+          "options": [
+            {
+              "blocks": "Every possible override makes it human-only",
+              "correct": false,
+              "reason": "Possibility is not the same as actual human mediation."
+            },
+            {
+              "blocks": "Only repeated conversations count as interaction",
+              "correct": false,
+              "reason": "A single responsive exchange can fall in scope."
+            },
+            {
+              "blocks": "Direct AI interaction remains the relevant test",
+              "correct": true,
+              "reason": "The actual exchange is AI-led; a possible override is insufficient."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["obviousness-assessment"],
+      "teaches": ["screen-3"],
+      "prompt": "Harbour gives an assistant a staff portrait and human name and relies on an AI statement hidden on another page. What must it check?",
+      "options": [
+        {
+          "blocks": "Whether the developers know it is artificial",
+          "correct": false,
+          "reason": "Their knowledge does not establish obviousness to the person concerned."
+        },
+        {
+          "blocks": "Whether an AI statement exists anywhere online",
+          "correct": false,
+          "reason": "A remote statement does not necessarily make this interaction obvious."
+        },
+        {
+          "blocks": "Whether AI interaction is obvious in the actual context",
+          "correct": true,
+          "reason": "Article 50(1) uses a contextual person standard."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What matters when a realistic assistant's AI identity is unclear in the conversation?",
+          "options": [
+            {
+              "blocks": "Whether an AI statement exists anywhere online",
+              "correct": false,
+              "reason": "A remote statement does not necessarily make this interaction obvious."
+            },
+            {
+              "blocks": "Whether AI interaction is obvious in the actual context",
+              "correct": true,
+              "reason": "Article 50(1) uses a contextual person standard."
+            },
+            {
+              "blocks": "Whether the developers know it is artificial",
+              "correct": false,
+              "reason": "Their knowledge does not establish obviousness to the person concerned."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["interaction-law-enforcement-check"],
+      "teaches": ["screen-4", "screen-5"],
+      "prompt": "A legally authorised and safeguarded AI hotline lets the public report offences. Is its interaction disclosure removed?",
+      "options": [
+        {
+          "blocks": "Yes; reporting crime is always outside scope",
+          "correct": false,
+          "reason": "That contradicts the provision's express condition."
+        },
+        {
+          "blocks": "No; public reporting restores the duty",
+          "correct": true,
+          "reason": "Article 50(1) expressly retains disclosure in this situation."
+        },
+        {
+          "blocks": "Yes; authorisation alone removes disclosure",
+          "correct": false,
+          "reason": "The public-reporting carve-back still applies."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the authorised-law-enforcement exception remove disclosure for a public offence-reporting AI service?",
+          "options": [
+            {
+              "blocks": "No; public reporting restores the duty",
+              "correct": true,
+              "reason": "Article 50(1) expressly retains disclosure in this situation."
+            },
+            {
+              "blocks": "Yes; authorisation alone removes disclosure",
+              "correct": false,
+              "reason": "The public-reporting carve-back still applies."
+            },
+            {
+              "blocks": "Yes; reporting crime is always outside scope",
+              "correct": false,
+              "reason": "That contradicts the provision's express condition."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

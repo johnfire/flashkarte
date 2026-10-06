@@ -1,0 +1,223 @@
+{
+  "module": "Mark synthetic outputs and verify detection",
+  "lesson": {
+    "slug": "t08",
+    "title": "Editing assistance and the marking exceptions",
+    "summary": "Apply the editing and authorised-law-enforcement exceptions without blanket claims.",
+    "covers": ["assistive-editing-check", "marking-law-enforcement-check"],
+    "prerequisites": [
+      {
+        "lesson": "t01",
+        "reason": "The learner must establish whether the Act reaches the scenario."
+      },
+      {
+        "lesson": "t07",
+        "reason": "The learner must recognise generated or manipulated output and its modality. The learner must distinguish machine marking from human-facing labels."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The marking duty does not apply to the extent a system performs an **assistive function for standard editing**, or does not substantially alter provided input data or its semantics. Semantics means meaning.",
+        "These are alternatives in the provision. Record the actual function and degree of alteration; 'has an editing button' does not exempt every output from a wider generation system."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 3; Guidelines paragraphs 89-93",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A routine correction that leaves supplied content and meaning substantially unchanged differs from generating new arguments or materially replacing a scene. The Commission gives examples to help distinguish the cases.",
+        "Harbour compares correction of a spelling error with rewriting a statement to assert the opposite conclusion. The second is a substantive semantic change; it cannot claim the no-substantial-alteration alternative on these facts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 3; Guidelines paragraphs 89-93",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Apply the exception **to the extent** the qualifying function is performed. A mixed product may offer standard assistance and substantive content generation.",
+        "Do not turn uncertainty about one output into a system-wide exemption. Keep evidence of what the feature actually changes. Technical feasibility affects the separate quality assessment; it is not this editing test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 3; Guidelines paragraphs 89-93",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "There is a distinct exception where authorised by law to detect, prevent, investigate or prosecute criminal offences. Merely intending to investigate wrongdoing is insufficient to establish legal authorisation.",
+        "In a stipulated case with that authorisation, use the exact paragraph 2 exception. Do not copy its wording to every other paragraph: the conditions differ. Other applicable duties and law still need analysis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 3; Guidelines paragraphs 89-93",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["assistive-editing-check"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "An AI feature corrects a spelling error without substantially changing the supplied content or meaning. Which exception should Harbour examine?",
+      "options": [
+        {
+          "blocks": "The standard-editing or no-substantial-alteration alternatives",
+          "correct": true,
+          "reason": "Those alternatives concern qualifying assistance and alteration."
+        },
+        {
+          "blocks": "A universal exception for all AI-written text",
+          "correct": false,
+          "reason": "The provision does not exempt all generated text."
+        },
+        {
+          "blocks": "An exemption based only on the feature's name",
+          "correct": false,
+          "reason": "Actual function and output changes matter."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What provision should Harbour check for a routine correction that preserves supplied content and meaning?",
+          "options": [
+            {
+              "blocks": "A universal exception for all AI-written text",
+              "correct": false,
+              "reason": "The provision does not exempt all generated text."
+            },
+            {
+              "blocks": "An exemption based only on the feature's name",
+              "correct": false,
+              "reason": "Actual function and output changes matter."
+            },
+            {
+              "blocks": "The standard-editing or no-substantial-alteration alternatives",
+              "correct": true,
+              "reason": "Those alternatives concern qualifying assistance and alteration."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["assistive-editing-check"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "One feature corrects spelling; another generates a new claim contradicting the input. Can Harbour exempt both solely because the product is an editor?",
+      "options": [
+        {
+          "blocks": "Yes; an editing interface exempts the whole system",
+          "correct": false,
+          "reason": "That ignores 'to the extent' and substantial changes."
+        },
+        {
+          "blocks": "Yes; altered meaning never matters",
+          "correct": false,
+          "reason": "The semantics of the input are expressly relevant."
+        },
+        {
+          "blocks": "No; apply the exception to qualifying functions and outputs",
+          "correct": true,
+          "reason": "The scope is limited by what the system actually performs or alters."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a mixed editing product's label exempt its substantively generated outputs?",
+          "options": [
+            {
+              "blocks": "Yes; altered meaning never matters",
+              "correct": false,
+              "reason": "The semantics of the input are expressly relevant."
+            },
+            {
+              "blocks": "No; apply the exception to qualifying functions and outputs",
+              "correct": true,
+              "reason": "The scope is limited by what the system actually performs or alters."
+            },
+            {
+              "blocks": "Yes; an editing interface exempts the whole system",
+              "correct": false,
+              "reason": "That ignores 'to the extent' and substantial changes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["marking-law-enforcement-check"],
+      "teaches": ["screen-4"],
+      "prompt": "Harbour calls a generator an investigation tool but identifies no authorising law. Is that enough for the criminal-offence exception?",
+      "options": [
+        {
+          "blocks": "Yes; the exception follows from using an editor",
+          "correct": false,
+          "reason": "Editing and authorised law enforcement are distinct alternatives."
+        },
+        {
+          "blocks": "No; establish the relevant legal authorisation",
+          "correct": true,
+          "reason": "Purpose alone is not the statutory authorisation condition."
+        },
+        {
+          "blocks": "Yes; any investigative business use qualifies",
+          "correct": false,
+          "reason": "That would remove the express authorisation requirement."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an investigative purpose label establish paragraph 2's legal-authorisation exception?",
+          "options": [
+            {
+              "blocks": "No; establish the relevant legal authorisation",
+              "correct": true,
+              "reason": "Purpose alone is not the statutory authorisation condition."
+            },
+            {
+              "blocks": "Yes; any investigative business use qualifies",
+              "correct": false,
+              "reason": "That would remove the express authorisation requirement."
+            },
+            {
+              "blocks": "Yes; the exception follows from using an editor",
+              "correct": false,
+              "reason": "Editing and authorised law enforcement are distinct alternatives."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

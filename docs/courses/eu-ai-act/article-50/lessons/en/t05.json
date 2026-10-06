@@ -1,0 +1,223 @@
+{
+  "module": "Identify actors and design interaction disclosure",
+  "lesson": {
+    "slug": "t05",
+    "title": "Agents, principals and human supervisors",
+    "summary": "Distinguish statutory AI disclosure from guidance about represented principals and supervisory steps.",
+    "covers": ["agent-principal-disclosure", "agent-supervisor-disclosure"],
+    "prerequisites": [
+      {
+        "lesson": "t03",
+        "reason": "The learner must allocate the relevant duty before choosing an implementation."
+      },
+      {
+        "lesson": "t04",
+        "reason": "The learner must identify a direct human interaction before testing this disclosure rule."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An **AI agent** is an AI system that can carry out tasks, for example managing correspondence or making bookings. When it can interact with people, the Article 50(1) analysis applies.",
+        "Paragraph 31 of the Commission Guidelines explains how the interaction rule applies to agents. It is interpretative guidance, not three new numbered statutory duties."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1); Commission Guidelines paragraph 31",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **principal** is the person or organisation on whose behalf the agent acts. The guidance says agents should disclose their artificial nature and that represented person, addressing origin, delegated authority and accountability.",
+        "A suitable Harbour message is: 'I am Harbour Services' AI booking assistant, acting for Harbour Services.' Saying only 'I am an assistant' can leave both artificial nature and representation unclear."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1); Commission Guidelines paragraph 31",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A provider may not know every later context where an agent reaches a person. The guidance advises architecture-level design and instructions to disclose wherever human interaction is reasonably likely.",
+        "Passing a task through another agent does not remove the need to consider the final human contact. Use a disclosure route that survives the actual handoff rather than assuming all later exchanges are machine-only."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1); Commission Guidelines paragraph 31",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The guidance also addresses the **instructing or supervising person**. The agent should disclose itself at authorisation, reporting and validation steps, and at every new interaction.",
+        "This includes processing outputs from other AI systems. A report to a supervisor should not silently imply that an AI-generated result came directly from a person."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1); Commission Guidelines paragraph 31",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["agent-principal-disclosure"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Harbour's booking agent contacts a hotel. Which introduction follows the agent-specific Commission guidance?",
+      "options": [
+        {
+          "blocks": "That it is AI and acts for Harbour Services",
+          "correct": true,
+          "reason": "The guidance addresses artificial nature and represented principal."
+        },
+        {
+          "blocks": "Only that it is called Alex",
+          "correct": false,
+          "reason": "A name does not explain AI nature or representation."
+        },
+        {
+          "blocks": "Only that the booking concerns a hotel",
+          "correct": false,
+          "reason": "Task subject does not explain origin and authority."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should the hotel be told when Harbour's AI agent acts for Harbour?",
+          "options": [
+            {
+              "blocks": "Only that it is called Alex",
+              "correct": false,
+              "reason": "A name does not explain AI nature or representation."
+            },
+            {
+              "blocks": "Only that the booking concerns a hotel",
+              "correct": false,
+              "reason": "Task subject does not explain origin and authority."
+            },
+            {
+              "blocks": "That it is AI and acts for Harbour Services",
+              "correct": true,
+              "reason": "The guidance addresses artificial nature and represented principal."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["agent-supervisor-disclosure"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "An agent sends its supervisor an AI-generated result obtained from another agent. What should its design account for?",
+      "options": [
+        {
+          "blocks": "Silence because only direct human input matters",
+          "correct": false,
+          "reason": "The guidance explicitly includes reliance on other AI outputs."
+        },
+        {
+          "blocks": "Disclosure only when the booking is completed",
+          "correct": false,
+          "reason": "Relevant authorisation and validation steps can occur earlier."
+        },
+        {
+          "blocks": "Disclosure to the instructing person at that key step",
+          "correct": true,
+          "reason": "Guideline paragraph 31 includes reporting and validation, including AI-sourced inputs."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What matters at a supervisory validation step involving another agent's output?",
+          "options": [
+            {
+              "blocks": "Disclosure only when the booking is completed",
+              "correct": false,
+              "reason": "Relevant authorisation and validation steps can occur earlier."
+            },
+            {
+              "blocks": "Disclosure to the instructing person at that key step",
+              "correct": true,
+              "reason": "Guideline paragraph 31 includes reporting and validation, including AI-sourced inputs."
+            },
+            {
+              "blocks": "Silence because only direct human input matters",
+              "correct": false,
+              "reason": "The guidance explicitly includes reliance on other AI outputs."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["agent-principal-disclosure", "agent-supervisor-disclosure"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "The provider cannot reliably predict whether a deployed agent will contact people. Which approach follows the guidance?",
+      "options": [
+        {
+          "blocks": "Treat the guidance as three new statutory paragraphs",
+          "correct": false,
+          "reason": "These are interpretations of Article 50(1), not separate enacted clauses."
+        },
+        {
+          "blocks": "Design disclosure into likely human-contact situations",
+          "correct": true,
+          "reason": "The guidance advises architecture-level design for that uncertainty."
+        },
+        {
+          "blocks": "Omit disclosure until every recipient is known",
+          "correct": false,
+          "reason": "That would leave reasonably likely human interactions uncovered."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should disclosure be designed when later human contact is reasonably likely but unpredictable?",
+          "options": [
+            {
+              "blocks": "Design disclosure into likely human-contact situations",
+              "correct": true,
+              "reason": "The guidance advises architecture-level design for that uncertainty."
+            },
+            {
+              "blocks": "Omit disclosure until every recipient is known",
+              "correct": false,
+              "reason": "That would leave reasonably likely human interactions uncovered."
+            },
+            {
+              "blocks": "Treat the guidance as three new statutory paragraphs",
+              "correct": false,
+              "reason": "These are interpretations of Article 50(1), not separate enacted clauses."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

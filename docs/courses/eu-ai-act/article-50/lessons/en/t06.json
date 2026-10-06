@@ -1,0 +1,264 @@
+{
+  "module": "Identify actors and design interaction disclosure",
+  "lesson": {
+    "slug": "t06",
+    "title": "Make the interaction disclosure work: case exercise",
+    "summary": "Make disclosure clear, timely and accessible in an agent-hotline case.",
+    "covers": [
+      "disclosure-timing-clarity",
+      "accessible-disclosure-design",
+      "interaction-disclosure-capstone"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "t04",
+        "reason": "The learner must identify a direct human interaction before testing this disclosure rule. The case requires a contextual decision on whether AI interaction is already obvious. The case requires the public-reporting carve-back and authorisation safeguards."
+      },
+      {
+        "lesson": "t05",
+        "reason": "The case includes authorisation and reporting to the instructing person."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Clear and distinguishable disclosure** enables the person to recognise the relevant AI involvement. Article 50(5) sets a latest point: first interaction or exposure.",
+        "A notice hidden in terms that appears after a conversation does not reliably inform the person at the required moment. Use plain wording near the relevant interaction."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1), 50(5); Guidelines paragraphs 31, 137-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Accessible disclosure** conforms to the accessibility requirements applicable to the product, service or content. The Commission explains that Article 50 does not invent a separate universal accessibility regime.",
+        "Check which accessibility rules apply, then design information the audience can perceive and understand. A visual badge alone is unsuitable as the only notification in an audio-only interaction."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1), 50(5); Guidelines paragraphs 31, 137-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Account for intended or reasonably likely vulnerable audiences, such as children and people with disabilities. Guidance recommends understandable, age-appropriate information where children may interact.",
+        "The Code supplies practical approaches such as audible notices, screen-reader-compatible labels and sufficient contrast. These examples do not make one icon or technology a universal statutory requirement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1), 50(5); Guidelines paragraphs 31, 137-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Case: Harbour provides a public offence-reporting AI hotline. Assume legal authorisation and safeguards are established. The service sounds like a human staff member and starts recording the report before giving an AI notice.",
+        "Public reporting retains the interaction duty. The human-like context does not establish obviousness. Move a clear notification to the start of interaction rather than relying on the end-of-call notice."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1), 50(5); Guidelines paragraphs 31, 137-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The hotline's agent acts for Harbour and later seeks approval from a supervising person. Use the principal and supervisory disclosures described by paragraph 31 of the Guidelines.",
+        "Provide a perceivable disclosure in the actual channel and the applicable accessible format. A logo in a web page is insufficient for a caller who only hears audio; another format may also be needed for people unable to hear it."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1), 50(5); Guidelines paragraphs 31, 137-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["disclosure-timing-clarity"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "Harbour gives its AI notice only after collecting a caller's offence report. What correction addresses Article 50(5)?",
+      "options": [
+        {
+          "blocks": "At the latest when interaction first begins",
+          "correct": true,
+          "reason": "The statutory latest point is first interaction or exposure."
+        },
+        {
+          "blocks": "Only after the caller's report is validated",
+          "correct": false,
+          "reason": "That is too late for the initial interaction."
+        },
+        {
+          "blocks": "Only when the caller opens a terms page",
+          "correct": false,
+          "reason": "Required information cannot depend on a delayed separate action."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When should the hotline provide clear AI information rather than waiting until the call ends?",
+          "options": [
+            {
+              "blocks": "Only after the caller's report is validated",
+              "correct": false,
+              "reason": "That is too late for the initial interaction."
+            },
+            {
+              "blocks": "Only when the caller opens a terms page",
+              "correct": false,
+              "reason": "Required information cannot depend on a delayed separate action."
+            },
+            {
+              "blocks": "At the latest when interaction first begins",
+              "correct": true,
+              "reason": "The statutory latest point is first interaction or exposure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["accessible-disclosure-design"],
+      "teaches": ["screen-2", "screen-3", "screen-5"],
+      "prompt": "The hotline uses a visual AI badge, but callers interact only through audio. What must Harbour consider?",
+      "options": [
+        {
+          "blocks": "A larger badge on an unrelated page",
+          "correct": false,
+          "reason": "It remains unavailable in the actual audio interaction."
+        },
+        {
+          "blocks": "One mandatory icon that overrides accessibility law",
+          "correct": false,
+          "reason": "The Act requires applicable accessibility; it does not prescribe that universal icon."
+        },
+        {
+          "blocks": "A perceivable notice in the channel and applicable accessible formats",
+          "correct": true,
+          "reason": "Disclosure must work for the people and channel concerned."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a website badge alone adequately disclose an audio-only AI call?",
+          "options": [
+            {
+              "blocks": "One mandatory icon that overrides accessibility law",
+              "correct": false,
+              "reason": "The Act requires applicable accessibility; it does not prescribe that universal icon."
+            },
+            {
+              "blocks": "A perceivable notice in the channel and applicable accessible formats",
+              "correct": true,
+              "reason": "Disclosure must work for the people and channel concerned."
+            },
+            {
+              "blocks": "A larger badge on an unrelated page",
+              "correct": false,
+              "reason": "It remains unavailable in the actual audio interaction."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["interaction-disclosure-capstone"],
+      "teaches": ["screen-4", "screen-5"],
+      "prompt": "The authorised hotline is public-facing, sounds human and uses an agent representing Harbour. Which design is supported?",
+      "options": [
+        {
+          "blocks": "An end-of-call notice with no represented principal",
+          "correct": false,
+          "reason": "The timing is late and the agent guidance remains relevant."
+        },
+        {
+          "blocks": "A clear opening AI notice, represented-principal information and supervisor-step disclosure",
+          "correct": true,
+          "reason": "The carve-back, timing and agent guidance operate together."
+        },
+        {
+          "blocks": "No notice because legal authorisation overrides public reporting",
+          "correct": false,
+          "reason": "Public offence reporting retains the interaction duty."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which correction fits the complete hotline scenario?",
+          "options": [
+            {
+              "blocks": "A clear opening AI notice, represented-principal information and supervisor-step disclosure",
+              "correct": true,
+              "reason": "The carve-back, timing and agent guidance operate together."
+            },
+            {
+              "blocks": "No notice because legal authorisation overrides public reporting",
+              "correct": false,
+              "reason": "Public offence reporting retains the interaction duty."
+            },
+            {
+              "blocks": "An end-of-call notice with no represented principal",
+              "correct": false,
+              "reason": "The timing is late and the agent guidance remains relevant."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

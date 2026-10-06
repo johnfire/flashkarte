@@ -1,0 +1,289 @@
+{
+  "module": "Disclose biometric exposure and published content",
+  "lesson": {
+    "slug": "t18",
+    "title": "Make and defend a publication decision: case exercise",
+    "summary": "Combine output provenance, biometric exposure and publication decisions in one reviewable case.",
+    "covers": ["publication-decision-capstone"],
+    "prerequisites": [
+      {
+        "lesson": "t12",
+        "reason": "The final case requires tracing marks and detection through export and publication."
+      },
+      {
+        "lesson": "t13",
+        "reason": "The final case includes exposed persons and applicable biometric-use restrictions."
+      },
+      {
+        "lesson": "t15",
+        "reason": "The final case requires appropriate creative-work disclosure rather than a blanket exemption."
+      },
+      {
+        "lesson": "t17",
+        "reason": "The final case requires both editorial limbs and a check after AI rewriting."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Final case: Harbour operates a public exhibition. It provides an image generator and deploys a biometric visitor-analysis system. It publishes a prerecorded realistic avatar film and an AI-drafted environmental report.",
+        "Treat each activity separately. The avatar is prerecorded, with no interactive conversation in this case. Assess the stated facts instead of assigning one course-wide exemption to every use."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2)-(7), Articles 5, 26(11), 85, 99, 100; Guidelines paragraphs 99-155; Code Sections 1 and 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The generator's preview verifies marking, but final export strips metadata and changes image size. Harbour needs delivered-file evidence for its marking/detection route and the four technical qualities.",
+        "Biometric visitor analysis requires function-specific disclosure to exposed people where paragraph 3 applies. The notice does not decide whether the use is permitted under prohibitions, high-risk rules or data-protection law."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2)-(7), Articles 5, 26(11), 85, 99, 100; Guidelines paragraphs 99-155; Code Sections 1 and 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The film is stipulated to contain a qualifying deepfake and to be an evidently fictional work. Harbour must reveal the artificial content appropriately without hampering enjoyment, with the applicable presentation requirements.",
+        "The environmental report informs the public on a public-interest matter. It has substantive human review of the final version and the organisation holds editorial responsibility. On those stipulated facts, the text editorial exception can apply."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2)-(7), Articles 5, 26(11), 85, 99, 100; Guidelines paragraphs 99-155; Code Sections 1 and 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A defensible decision package identifies the actor and activity, content or exposure, applicable provision, required action or substantiated exception, implementation evidence and person responsible for corrections.",
+        "Code adherence can help demonstrate implementation but does not conclusively prove it. Keep other legal obligations in view. An exception for the report is not an exception for the film, generator or biometric system."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2)-(7), Articles 5, 26(11), 85, 99, 100; Guidelines paragraphs 99-155; Code Sections 1 and 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Before release, Harbour checks the actual outputs, notices, final report and evidence route. Missing export tests remain a gap even where a separate text exception is substantiated.",
+        "This capstone deliberately combines independent duties. It assesses the supplied facts; it does not certify Harbour's complete legal compliance or decide facts left unstated."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2)-(7), Articles 5, 26(11), 85, 99, 100; Guidelines paragraphs 99-155; Code Sections 1 and 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Boundary lookup: Article 5 governs prohibited practices; Article 26(11) concerns a separate notification for specified high-risk decision systems. Article 85 provides a complaint route to the relevant market-surveillance authority.",
+        "For enforcement, check Article 99 and the applicable national arrangements. Article 100 addresses fines on Union institutions, bodies, offices and agencies. These are pointers for further study, not a full complaints or penalties course."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2)-(7), Articles 5, 26(11), 85, 99, 100; Guidelines paragraphs 99-155; Code Sections 1 and 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["publication-decision-capstone"],
+      "teaches": ["screen-1", "screen-2", "screen-5"],
+      "prompt": "In the capstone, Harbour's image preview verifies marking but the final export is untested. Which conclusion is justified?",
+      "options": [
+        {
+          "blocks": "The delivered-output evidence remains incomplete",
+          "correct": true,
+          "reason": "Later transformations may affect preservation and detection."
+        },
+        {
+          "blocks": "The report's editorial exception covers image marking",
+          "correct": false,
+          "reason": "That exception concerns a separate published-text duty."
+        },
+        {
+          "blocks": "The supplier's Code signature conclusively proves the export",
+          "correct": false,
+          "reason": "Actual implementation still needs verification."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a successful preview alone settle the final delivered image's marking analysis?",
+          "options": [
+            {
+              "blocks": "The report's editorial exception covers image marking",
+              "correct": false,
+              "reason": "That exception concerns a separate published-text duty."
+            },
+            {
+              "blocks": "The supplier's Code signature conclusively proves the export",
+              "correct": false,
+              "reason": "Actual implementation still needs verification."
+            },
+            {
+              "blocks": "The delivered-output evidence remains incomplete",
+              "correct": true,
+              "reason": "Later transformations may affect preservation and detection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["publication-decision-capstone"],
+      "teaches": ["screen-2", "screen-3", "screen-4"],
+      "prompt": "The report meets the stipulated editorial exception. Does that remove the visitor disclosure and fictional deepfake disclosure?",
+      "options": [
+        {
+          "blocks": "Yes; one exception covers the whole exhibition",
+          "correct": false,
+          "reason": "The exception does not extend to unrelated activities."
+        },
+        {
+          "blocks": "Yes; a fictional film can never require disclosure",
+          "correct": false,
+          "reason": "The creative accommodation changes the manner of disclosure."
+        },
+        {
+          "blocks": "No; assess biometric exposure and the film separately",
+          "correct": true,
+          "reason": "Each duty has its own actor, trigger and conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a substantiated text editorial exception exempt Harbour's other activities?",
+          "options": [
+            {
+              "blocks": "Yes; a fictional film can never require disclosure",
+              "correct": false,
+              "reason": "The creative accommodation changes the manner of disclosure."
+            },
+            {
+              "blocks": "No; assess biometric exposure and the film separately",
+              "correct": true,
+              "reason": "Each duty has its own actor, trigger and conditions."
+            },
+            {
+              "blocks": "Yes; one exception covers the whole exhibition",
+              "correct": false,
+              "reason": "The exception does not extend to unrelated activities."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["publication-decision-capstone"],
+      "teaches": ["screen-3", "screen-4", "screen-5"],
+      "prompt": "Which final review package makes Harbour's combined decisions reviewable?",
+      "options": [
+        {
+          "blocks": "Only a supplier certificate and the first draft",
+          "correct": false,
+          "reason": "Those omit actual notices, delivered files and the reviewed final publication."
+        },
+        {
+          "blocks": "Activity-specific decisions, actual implementation evidence and correction owners",
+          "correct": true,
+          "reason": "This connects legal conditions to the actual outputs, exposure and publication."
+        },
+        {
+          "blocks": "Only an organisation-wide statement that all AI is compliant",
+          "correct": false,
+          "reason": "That hides differing triggers and untested stages."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which evidence package supports checking the capstone's distinct duties and exception?",
+          "options": [
+            {
+              "blocks": "Activity-specific decisions, actual implementation evidence and correction owners",
+              "correct": true,
+              "reason": "This connects legal conditions to the actual outputs, exposure and publication."
+            },
+            {
+              "blocks": "Only an organisation-wide statement that all AI is compliant",
+              "correct": false,
+              "reason": "That hides differing triggers and untested stages."
+            },
+            {
+              "blocks": "Only a supplier certificate and the first draft",
+              "correct": false,
+              "reason": "Those omit actual notices, delivered files and the reviewed final publication."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "module": "Mark synthetic outputs and verify detection",
+  "lesson": {
+    "slug": "t09",
+    "title": "Evaluate marking quality and technical limits",
+    "summary": "Evaluate four technical qualities and content-specific limitations rather than trusting a badge or benchmark alone.",
+    "covers": [
+      "technical-quality-assessment",
+      "marking-method-tradeoff",
+      "modality-feasibility-check"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "t07",
+        "reason": "The learner must connect each marker to its verification mechanism. The learner must distinguish machine marking from human-facing labels. The learner must recognise generated or manipulated output and its modality."
+      },
+      {
+        "lesson": "t08",
+        "reason": "The learner must separate qualifying editing assistance from substantive generated alteration."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The legal technical-quality test requires solutions to be **effective, interoperable, robust and reliable**, as far as technically feasible. Consider content characteristics and limitations, implementation costs and the generally acknowledged state of the art.",
+        "The Act does not prescribe one universal percentage or demand an impossible guarantee. Equally, an unexplained claim of difficulty does not establish that feasible measures can be omitted."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 2; Guidelines paragraphs 64-68, 78-88",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Effectiveness** concerns achieving marking and detection. **Reliability** concerns dependable operation, including error rates across content and conditions.",
+        "Test unmarked real content as well as marked generated content. A detector that labels everything AI may find all marked samples yet fail reliability through false positives: authentic content wrongly labelled artificial."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 2; Guidelines paragraphs 64-68, 78-88",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Robustness** concerns preservation or recovery through relevant alterations and attempts to remove marks. **Interoperability** concerns working across tools and actors, rather than requiring an isolated incompatible workflow.",
+        "Harbour tests resizing, cropping, export and re-encoding where relevant. A mark verified only in the supplier's preview does not establish that its published file will still be detectable."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 2; Guidelines paragraphs 64-68, 78-88",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Signed metadata records can describe origin and integrity but may be stripped by export. Watermarks are embedded in the content and have different alteration and detection limits. The Code generally takes a layered approach, while permitting specified alternative routes demonstrating equivalent compliance.",
+        "A fingerprint is a compact descriptor for matching content; logging records content for later lookup. They have privacy and alteration constraints. Do not treat a database of outputs as an automatic substitute for the required marking route."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 2; Guidelines paragraphs 64-68, 78-88",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Containerised text** lives inside a structured format such as a document file. **Free-form text** is a raw character sequence without such a container. Available marking routes and their limits can differ.",
+        "The Code's glossary describes very short text using a contemporary 200-token feasibility benchmark. A token is a unit of model-processed text. This benchmark is not a statutory numerical exemption for every shorter reply; assess current feasibility and the actual output."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 2; Guidelines paragraphs 64-68, 78-88",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Commission guidance gives scope and technical-limit examples, including limited or predetermined text outputs. Do not turn an illustrative example into a universal exemption for every system carrying the same product label.",
+        "The Code stages watermark-detection interoperability with a 2 February 2027 milestone in Measure 3.4. That Code milestone is different from the Act's application and targeted transition dates. Preserve the exact basis of each timetable."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), sentence 2; Guidelines paragraphs 64-68, 78-88",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["technical-quality-assessment"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A detector identifies all marked samples but also labels every authentic sample AI. Which finding must Harbour retain?",
+      "options": [
+        {
+          "blocks": "Its false positives undermine reliability",
+          "correct": true,
+          "reason": "All four qualities matter; detection success alone omits error behaviour."
+        },
+        {
+          "blocks": "It is reliable because all marked samples were found",
+          "correct": false,
+          "reason": "That ignores incorrect detections on authentic content."
+        },
+        {
+          "blocks": "The Act forbids every detector with any error",
+          "correct": false,
+          "reason": "The statutory test is feasibility-sensitive, not an absolute perfection requirement."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does perfect detection of marked samples alone establish a reliable solution when authentic samples are misclassified?",
+          "options": [
+            {
+              "blocks": "It is reliable because all marked samples were found",
+              "correct": false,
+              "reason": "That ignores incorrect detections on authentic content."
+            },
+            {
+              "blocks": "The Act forbids every detector with any error",
+              "correct": false,
+              "reason": "The statutory test is feasibility-sensitive, not an absolute perfection requirement."
+            },
+            {
+              "blocks": "Its false positives undermine reliability",
+              "correct": true,
+              "reason": "All four qualities matter; detection success alone omits error behaviour."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["marking-method-tradeoff"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "An export removes signed metadata, and Harbour has tested no other layer. What should it conclude?",
+      "options": [
+        {
+          "blocks": "The export proves equivalent compliance automatically",
+          "correct": false,
+          "reason": "Losing the tested marker does not demonstrate an equivalent route."
+        },
+        {
+          "blocks": "Any output log automatically replaces a marker",
+          "correct": false,
+          "reason": "Logging alone does not establish the required technical marking route."
+        },
+        {
+          "blocks": "The downstream preservation and detection route remains unverified",
+          "correct": true,
+          "reason": "The route must be evaluated through relevant transformations."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does a preview-only success establish when the exported file loses its metadata marker?",
+          "options": [
+            {
+              "blocks": "Any output log automatically replaces a marker",
+              "correct": false,
+              "reason": "Logging alone does not establish the required technical marking route."
+            },
+            {
+              "blocks": "The downstream preservation and detection route remains unverified",
+              "correct": true,
+              "reason": "The route must be evaluated through relevant transformations."
+            },
+            {
+              "blocks": "The export proves equivalent compliance automatically",
+              "correct": false,
+              "reason": "Losing the tested marker does not demonstrate an equivalent route."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["modality-feasibility-check"],
+      "teaches": ["screen-5", "screen-6"],
+      "prompt": "A supplier claims every reply below 200 tokens is legally exempt from Article 50(2). What correction is needed?",
+      "options": [
+        {
+          "blocks": "As proof that all text marking is impossible",
+          "correct": false,
+          "reason": "One limitation does not establish impossibility for every text output."
+        },
+        {
+          "blocks": "As a feasibility description, not a statutory blanket exemption",
+          "correct": true,
+          "reason": "The legal test considers feasibility and output specifics; it has no universal 200-token exemption."
+        },
+        {
+          "blocks": "As a permanent statutory cutoff",
+          "correct": false,
+          "reason": "That numerical threshold is not in the operative provision."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should Harbour treat the Code's very-short-text technical benchmark?",
+          "options": [
+            {
+              "blocks": "As a feasibility description, not a statutory blanket exemption",
+              "correct": true,
+              "reason": "The legal test considers feasibility and output specifics; it has no universal 200-token exemption."
+            },
+            {
+              "blocks": "As a permanent statutory cutoff",
+              "correct": false,
+              "reason": "That numerical threshold is not in the operative provision."
+            },
+            {
+              "blocks": "As proof that all text marking is impossible",
+              "correct": false,
+              "reason": "One limitation does not establish impossibility for every text output."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["technical-quality-assessment", "marking-method-tradeoff"],
+      "teaches": ["screen-1", "screen-3", "screen-6"],
+      "prompt": "Harbour cannot use another supplier's detector and has no compatible routing solution. Which quality needs examination?",
+      "options": [
+        {
+          "blocks": "Interoperability",
+          "correct": true,
+          "reason": "Cross-actor compatibility and detection access are part of interoperability."
+        },
+        {
+          "blocks": "Only the visual size of the AI badge",
+          "correct": false,
+          "reason": "A human badge does not resolve detector compatibility."
+        },
+        {
+          "blocks": "Only the provider's marketing popularity",
+          "correct": false,
+          "reason": "Popularity is not evidence of technical interoperability."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which statutory quality addresses verification across different tools and actors?",
+          "options": [
+            {
+              "blocks": "Only the visual size of the AI badge",
+              "correct": false,
+              "reason": "A human badge does not resolve detector compatibility."
+            },
+            {
+              "blocks": "Only the provider's marketing popularity",
+              "correct": false,
+              "reason": "Popularity is not evidence of technical interoperability."
+            },
+            {
+              "blocks": "Interoperability",
+              "correct": true,
+              "reason": "Cross-actor compatibility and detection access are part of interoperability."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

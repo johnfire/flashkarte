@@ -1,6 +1,6 @@
 # Article 50 coverage targets
 
-All targets are planned, not yet taught. Baseline: 02024R1689-20260727.
+Coverage targets for the English testing draft. Baseline: 02024R1689-20260727. The target ledger is preserved separately from verified lesson fixtures; it is not a certification of comprehensive legal coverage.
 
 Primary targets receive teaching and assessment. Lookup targets identify a boundary and where to check it; they do not teach entire incorporated laws. Source reading limits remain in the parent source register.
 
@@ -24,14 +24,14 @@ Primary targets receive teaching and assessment. Lookup targets identify a bound
 | Article 50(4), subparagraph 1, sentence 2                      | T15    | primary | Authorised detection, prevention, investigation or prosecution exception                                                                                      | AI-C-EN     |
 | Article 50(4), subparagraph 1, sentence 3                      | T15    | primary | Evidently artistic, creative, satirical, fictional or analogous works: appropriate disclosure without hampering enjoyment                                     | AI-C-EN     |
 | Article 50(4), subparagraph 2, sentence 1                      | T16    | primary | Generated or manipulated text published to inform the public on matters of public interest                                                                    | AI-C-EN     |
-| Article 50(4), subparagraph 2, sentence 2, law enforcement     | T16    | primary | Authorised detection, prevention, investigation or prosecution exception                                                                                      | AI-C-EN     |
+| Article 50(4), subparagraph 2, sentence 2, law enforcement     | T17    | primary | Authorised detection, prevention, investigation or prosecution exception                                                                                      | AI-C-EN     |
 | Article 50(4), subparagraph 2, sentence 2, editorial exception | T17    | primary | (Human review OR editorial control) AND natural/legal person editorial responsibility                                                                         | AI-C-EN     |
 | Article 50(5), sentence 1, presentation                        | T06    | primary | Clear and distinguishable information                                                                                                                         | AI-C-EN     |
 | Article 50(5), sentence 1, timing                              | T06    | primary | At the latest at first interaction or exposure; reapplied in T18 publication case                                                                             | AI-C-EN     |
 | Article 50(5), sentence 2                                      | T06    | primary | Applicable accessibility requirements; no invented universal technology mandate                                                                               | AI-C-EN     |
 | Article 50(6), sentence 1                                      | T03    | primary | Chapter III duties apply independently where the system is high-risk                                                                                          | AI-C-EN     |
 | Article 50(6), sentence 2                                      | T03    | primary | Other Union or national transparency obligations remain applicable                                                                                            | AI-C-EN     |
-| Article 50(7), sentence 1                                      | T11    | primary | AI Office encourages/facilitates Union-level Codes for detection and marking                                                                                  | AI-C-EN     |
+| Article 50(7), sentence 1                                      | T11    | primary | Commission encourages/facilitates Union-level Codes for detection, marking and labelling                                                                      | AI-C-EN     |
 | Article 50(7), sentence 2                                      | T11    | primary | Commission takes utmost account of Board opinion in adequacy assessment under amended Article 56(6)                                                           | AI-C-EN     |
 | Article 50(7), sentence 3                                      | T11    | primary | Commission may adopt common implementation rules by implementing act if Code inadequate; Article 98(2)                                                        | AI-C-EN     |
 | Article 3(39)                                                  | T13    | primary | Emotion recognition definition                                                                                                                                | AI-C-EN     |

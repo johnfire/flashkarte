@@ -6,9 +6,9 @@ Chris approved Article 50 as the next dedicated block on 6 October 2026. The fir
 
 The [dedicated English review package](article-50/README.md) now proposes **18 lessons in three modules**, with 42 atomic concepts and 48 coverage targets. Chris selected English Article 50 lessons as the current priority. The earlier 12-lesson boundary sketch has been expanded to keep exceptions, accessibility, editorial conditions and self-contained foundations explicit.
 
-The canonical syllabus, concept edges, assessments and provision mapping are maintained in that package. They await owner graph and syllabus review before lesson authoring. German and Czech editions remain subsequent work. Cross-course prior knowledge is retaught; enrolment in the first part is not assumed.
+The canonical syllabus, concept edges, assessments and provision mapping are maintained in that package. The owner approved them on 6 October 2026; all 18 English lessons are now imported in editable testing, with a complete learning-path test and live readback. German and Czech editions remain subsequent work. Cross-course prior knowledge is retaught; enrolment in the first part is not assumed.
 
-The course will teach what marking and detection methods demonstrate and where they fail. A watermark, visible icon or supplier statement alone does not establish compliance. Visible disclosure and machine-readable marking serve distinct duties; a label cannot legitimise a prohibited use.
+The course teaches what marking and detection methods demonstrate and where they fail. A watermark, visible icon or supplier statement alone does not establish compliance. Visible disclosure and machine-readable marking serve distinct duties; a label cannot legitimise a prohibited use.
 
 ## Remaining coverage inventory
 

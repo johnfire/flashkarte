@@ -1,0 +1,264 @@
+{
+  "module": "Mark synthetic outputs and verify detection",
+  "lesson": {
+    "slug": "t12",
+    "title": "Trace provenance through a product: case exercise",
+    "summary": "Trace marking and detection through generation, editing, export and delivery.",
+    "covers": ["provenance-workflow-capstone"],
+    "prerequisites": [
+      {
+        "lesson": "t09",
+        "reason": "The case requires a reasoned choice of marking methods and preservation tests. The case includes modality-specific constraints and free-form text."
+      },
+      {
+        "lesson": "t10",
+        "reason": "The learner must retain the product provider’s responsibility through upstream handoffs."
+      },
+      {
+        "lesson": "t11",
+        "reason": "The case requires implementation evidence beyond a supplier claim."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Case: Harbour provides a generator using an external model. It delivers images and free-form text to customers. Assume its current outputs are in scope and do not qualify for an editing exception.",
+        "The supplier marks the original image using signed metadata and a watermark. Harbour's preview verifies it. That preview is one stage of the delivery path, not evidence for every later stage."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(5)-(7); Code Section 1 Commitments 1-4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Harbour's publishing export removes metadata. Its resizing step changes the image. The watermark detector still works on some outputs, but no representative final-file tests were retained.",
+        "Test the actual transformations and final files. A layered approach can improve resilience, but the loss of one layer requires checking whether the remaining route still satisfies the relevant qualities and Code commitments."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(5)-(7); Code Section 1 Commitments 1-4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Its detector sometimes mislabels authentic images. Harbour needs positive and negative test samples, relevant transformations and clear statements of the detection result's limitations.",
+        "Document effectiveness, reliability, robustness and interoperability separately. A successful detection does not prove the image's statements or depiction are true."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(5)-(7); Code Section 1 Commitments 1-4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "For free-form text, Harbour must evaluate the route suited to that format and current technical limits. It cannot copy a document-file metadata result to raw text without explaining how the delivered marking is detectable.",
+        "Retain the verified detection route and proportionate privacy/security arrangements. Preserve the distinctions between mandatory Code commitments, optional methods and the law's feasibility-sensitive test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(5)-(7); Code Section 1 Commitments 1-4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "A defensible workflow record identifies who provides the system, which outputs are marked, the preservation path, compatible detection, actual tests and the correction owner.",
+        "Do not declare 'compliant' solely from a supplier signature or a visible badge. This exercise checks the current ordinary commercial workflow; it does not decide criminal-law authorisation or grandfathering dates."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(5)-(7); Code Section 1 Commitments 1-4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["provenance-workflow-capstone"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Harbour's preview verifies a mark but export strips metadata and resizes content. What evidence is still needed?",
+      "options": [
+        {
+          "blocks": "Tests of the actual delivered outputs and remaining route",
+          "correct": true,
+          "reason": "The final pipeline can change preservation and detectability."
+        },
+        {
+          "blocks": "Only a screenshot of the successful preview",
+          "correct": false,
+          "reason": "That omits later transformations."
+        },
+        {
+          "blocks": "Only the supplier's Code signature",
+          "correct": false,
+          "reason": "A signature is not final-file verification."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does preview detection establish the final transformed file's marking route?",
+          "options": [
+            {
+              "blocks": "Only a screenshot of the successful preview",
+              "correct": false,
+              "reason": "That omits later transformations."
+            },
+            {
+              "blocks": "Only the supplier's Code signature",
+              "correct": false,
+              "reason": "A signature is not final-file verification."
+            },
+            {
+              "blocks": "Tests of the actual delivered outputs and remaining route",
+              "correct": true,
+              "reason": "The final pipeline can change preservation and detectability."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provenance-workflow-capstone"],
+      "teaches": ["screen-3"],
+      "prompt": "Harbour's detector finds marked images but wrongly calls authentic images artificial. What should the review include?",
+      "options": [
+        {
+          "blocks": "Only successful detections of marked examples",
+          "correct": false,
+          "reason": "That hides an important part of detector behaviour."
+        },
+        {
+          "blocks": "A claim that detection guarantees truth",
+          "correct": false,
+          "reason": "Detection of artificial origin does not certify factual truth."
+        },
+        {
+          "blocks": "Negative-sample results and reliability limitations",
+          "correct": true,
+          "reason": "Reliability must account for misclassification, not only successful positive detection."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which evidence should Harbour retain when authentic inputs produce false detections?",
+          "options": [
+            {
+              "blocks": "A claim that detection guarantees truth",
+              "correct": false,
+              "reason": "Detection of artificial origin does not certify factual truth."
+            },
+            {
+              "blocks": "Negative-sample results and reliability limitations",
+              "correct": true,
+              "reason": "Reliability must account for misclassification, not only successful positive detection."
+            },
+            {
+              "blocks": "Only successful detections of marked examples",
+              "correct": false,
+              "reason": "That hides an important part of detector behaviour."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provenance-workflow-capstone"],
+      "teaches": ["screen-4", "screen-5"],
+      "prompt": "The image workflow works, but raw text delivery has no demonstrated detectable marking. Which handoff is justified?",
+      "options": [
+        {
+          "blocks": "Replace all technical checks with a visible label",
+          "correct": false,
+          "reason": "A visible label alone does not establish paragraph 2 compliance."
+        },
+        {
+          "blocks": "Evaluate its own format-specific route and document the gaps",
+          "correct": true,
+          "reason": "Different delivery formats can require different feasible methods."
+        },
+        {
+          "blocks": "Reuse the image conclusion without checking text",
+          "correct": false,
+          "reason": "The image test does not establish raw-text detectability."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should Harbour assess a different output format without carrying over an unsupported conclusion?",
+          "options": [
+            {
+              "blocks": "Evaluate its own format-specific route and document the gaps",
+              "correct": true,
+              "reason": "Different delivery formats can require different feasible methods."
+            },
+            {
+              "blocks": "Reuse the image conclusion without checking text",
+              "correct": false,
+              "reason": "The image test does not establish raw-text detectability."
+            },
+            {
+              "blocks": "Replace all technical checks with a visible label",
+              "correct": false,
+              "reason": "A visible label alone does not establish paragraph 2 compliance."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

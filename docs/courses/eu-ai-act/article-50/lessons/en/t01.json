@@ -1,0 +1,231 @@
+{
+  "module": "Identify actors and design interaction disclosure",
+  "lesson": {
+    "slug": "t01",
+    "title": "AI systems, models and the EU connection",
+    "summary": "Recognise the system, separate its model and establish the EU connection.",
+    "covers": ["ai-system", "gpai-model", "eu-scope-test"],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "We follow **Harbour Services**, a fictional organisation building a customer assistant and a media workflow. Its people, suppliers and scenarios are invented. This course teaches Article 50 transparency; each conclusion still needs the actual facts of a real use.",
+        "An **AI system** is machine-based, operates with some autonomy and infers from inputs how to produce predictions, content, recommendations or decisions for explicit or implicit objectives. Its outputs can influence physical or digital environments; it may adapt after deployment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(63), 3(66)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Inference matters. A learned assistant deriving an answer from inputs differs from a fixed rule that sorts a list by date. Automation or an 'AI' product label alone does not settle the definition.",
+        "Human review does not itself remove AI status. Continuing retraining is optional, not a condition every deployed system must satisfy."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(63), 3(66)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **general-purpose AI model** has significant generality and can perform many distinct tasks. A model can be integrated into systems. A **general-purpose AI system** is based on such a model and can serve varied purposes directly or through integration.",
+        "Harbour adds an interface, documents and actions around an external model. Assess the operated assistant as a system. Article 50 addresses specified systems; a model provider's separate model obligations require their own analysis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(63), 3(66)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The **EU scope check** asks how supply or use connects to the Union. Article 2 includes providers placing systems or models on the EU market, deployers established or located in the EU, and certain third-country actors where system output is used in the EU.",
+        "An overseas server does not automatically exclude Harbour's EU-facing assistant. Record the relevant actor, supply and use facts; check the exact paragraph rather than deciding solely from server location."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(63), 3(66)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Article 2(10) excludes obligations of deployers who use systems in purely personal, non-professional activity. That is not a universal exemption for suppliers serving private people.",
+        "Article 2(12)'s free/open-source system exclusion is conditional: high-risk, Article 5 and Article 50 systems remain outside that exclusion. Harbour cannot dismiss transparency simply because it uses open weights. Other exclusions need their own exact tests."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(63), 3(66)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["ai-system"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Harbour's script only sorts names by a fixed date rule. What is the sound starting point?",
+      "options": [
+        {
+          "blocks": "Check inference and the other definition elements",
+          "correct": true,
+          "reason": "Automation alone is insufficient; actual functionality matters."
+        },
+        {
+          "blocks": "Classify it from the AI marketing label",
+          "correct": false,
+          "reason": "Branding cannot replace the statutory definition."
+        },
+        {
+          "blocks": "Require the script to retrain every day",
+          "correct": false,
+          "reason": "Adaptation after deployment is optional."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does ordinary fixed-rule sorting establish AI-system status by itself?",
+          "options": [
+            {
+              "blocks": "Classify it from the AI marketing label",
+              "correct": false,
+              "reason": "Branding cannot replace the statutory definition."
+            },
+            {
+              "blocks": "Require the script to retrain every day",
+              "correct": false,
+              "reason": "Adaptation after deployment is optional."
+            },
+            {
+              "blocks": "Check inference and the other definition elements",
+              "correct": true,
+              "reason": "Automation alone is insufficient; actual functionality matters."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["gpai-model"],
+      "teaches": ["screen-3"],
+      "prompt": "Harbour wraps an external general-purpose model in a customer assistant. What must its assessment distinguish?",
+      "options": [
+        {
+          "blocks": "Only the supplier's server brand",
+          "correct": false,
+          "reason": "Branding does not identify the actual system use."
+        },
+        {
+          "blocks": "Only the assistant's interface colour",
+          "correct": false,
+          "reason": "Appearance does not replace model/system analysis."
+        },
+        {
+          "blocks": "The model and the operated system",
+          "correct": true,
+          "reason": "They are related but distinct regulatory objects."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What distinction matters when a reusable model powers Harbour's assistant?",
+          "options": [
+            {
+              "blocks": "Only the assistant's interface colour",
+              "correct": false,
+              "reason": "Appearance does not replace model/system analysis."
+            },
+            {
+              "blocks": "The model and the operated system",
+              "correct": true,
+              "reason": "They are related but distinct regulatory objects."
+            },
+            {
+              "blocks": "Only the supplier's server brand",
+              "correct": false,
+              "reason": "Branding does not identify the actual system use."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["eu-scope-test"],
+      "teaches": ["screen-4", "screen-5"],
+      "prompt": "An overseas supplier offers Harbour an open-source AI assistant for EU customers. May Harbour exclude Article 50 solely on those facts?",
+      "options": [
+        {
+          "blocks": "Yes; every open-source system is exempt",
+          "correct": false,
+          "reason": "The exclusion expressly preserves Article 50 cases."
+        },
+        {
+          "blocks": "No; check EU connections and the conditional exclusion",
+          "correct": true,
+          "reason": "Article 2 reaches relevant EU connections and preserves Article 50 cases."
+        },
+        {
+          "blocks": "Yes; all overseas systems are outside scope",
+          "correct": false,
+          "reason": "Supply and output use in the EU can establish a connection."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Do foreign hosting and an open-source licence alone remove transparency duties for an EU-facing system?",
+          "options": [
+            {
+              "blocks": "No; check EU connections and the conditional exclusion",
+              "correct": true,
+              "reason": "Article 2 reaches relevant EU connections and preserves Article 50 cases."
+            },
+            {
+              "blocks": "Yes; all overseas systems are outside scope",
+              "correct": false,
+              "reason": "Supply and output use in the EU can establish a connection."
+            },
+            {
+              "blocks": "Yes; every open-source system is exempt",
+              "correct": false,
+              "reason": "The exclusion expressly preserves Article 50 cases."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

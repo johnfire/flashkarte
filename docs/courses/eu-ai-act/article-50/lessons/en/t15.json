@@ -1,0 +1,243 @@
+{
+  "module": "Disclose biometric exposure and published content",
+  "lesson": {
+    "slug": "t15",
+    "title": "Creative works and the deepfake exceptions",
+    "summary": "Apply the creative-work accommodation and authorised-law-enforcement exception precisely.",
+    "covers": ["creative-work-disclosure", "deepfake-law-enforcement-check"],
+    "prerequisites": [
+      {
+        "lesson": "t01",
+        "reason": "The learner must establish whether the Act reaches the scenario."
+      },
+      {
+        "lesson": "t03",
+        "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+      },
+      {
+        "lesson": "t14",
+        "reason": "The learner must assess context and false authenticity before choosing creative-work treatment. The learner must apply the defined image, audio or video category before considering its duty."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "For content forming part of an **evidently artistic, creative, satirical, fictional or analogous work or programme**, disclosure is limited to revealing the existence of artificially generated or manipulated content in an appropriate manner that does not hamper display or enjoyment.",
+        "This is an accommodation in the manner of disclosure, not a blanket removal of the disclosure duty. Establish that the work is evidently of the qualifying kind."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 1, sentences 2-3; Guidelines paragraphs 119-125, 141-144; Code Section 2 Commitments 1 and 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Harbour produces a clearly fictional short film containing realistic synthetic scenes. It chooses an appropriate notice revealing the AI-generated or manipulated content while preserving the film's presentation.",
+        "Article 50(5) still addresses clarity, distinguishability, accessibility and first exposure. The Code provides implementation approaches, including an optional EU icon or an equivalent compliant icon or label; the Act does not mandate one universal icon. Do not assume a hidden notice or a notice delivered only after exposure always suffices."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 1, sentences 2-3; Guidelines paragraphs 119-125, 141-144; Code Section 2 Commitments 1 and 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A realistic advertisement presented as a factual testimonial does not become an evidently fictional work simply because the creative team made it. Evaluate the audience-facing work and context.",
+        "An ordinary deepfake disclosure and the creative-work accommodation are different decisions. Retain the evidence supporting the selected approach and review it if the presentation changes."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 1, sentences 2-3; Guidelines paragraphs 119-125, 141-144; Code Section 2 Commitments 1 and 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The separate deepfake exception applies where use is authorised by law to detect, prevent, investigate or prosecute criminal offences. A commercial claim of fraud prevention alone does not establish authorisation.",
+        "Do not combine exceptions casually: a creative-work accommodation concerns how disclosure is made; authorised criminal-law use concerns whether the paragraph's duty applies on the stated legal basis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 1, sentences 2-3; Guidelines paragraphs 119-125, 141-144; Code Section 2 Commitments 1 and 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["creative-work-disclosure"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Harbour's evidently fictional film includes qualifying synthetic scenes. What does the creative-work rule permit?",
+      "options": [
+        {
+          "blocks": "Reveal the artificial content appropriately without hampering enjoyment",
+          "correct": true,
+          "reason": "Disclosure remains, with an accommodated manner of presentation."
+        },
+        {
+          "blocks": "Remove all disclosure because the work is creative",
+          "correct": false,
+          "reason": "The provision limits the manner rather than universally removing the duty."
+        },
+        {
+          "blocks": "Hide the notice where no viewer can perceive it",
+          "correct": false,
+          "reason": "Appropriate disclosure must still reveal the existence of the content."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does the accommodation affect disclosure within an evidently fictional work?",
+          "options": [
+            {
+              "blocks": "Remove all disclosure because the work is creative",
+              "correct": false,
+              "reason": "The provision limits the manner rather than universally removing the duty."
+            },
+            {
+              "blocks": "Hide the notice where no viewer can perceive it",
+              "correct": false,
+              "reason": "Appropriate disclosure must still reveal the existence of the content."
+            },
+            {
+              "blocks": "Reveal the artificial content appropriately without hampering enjoyment",
+              "correct": true,
+              "reason": "Disclosure remains, with an accommodated manner of presentation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["creative-work-disclosure"],
+      "teaches": ["screen-3"],
+      "prompt": "A realistic AI testimonial is presented as a factual customer account. Its agency calls all advertising creative. Is that sufficient for the accommodation?",
+      "options": [
+        {
+          "blocks": "Yes; every advertisement qualifies automatically",
+          "correct": false,
+          "reason": "There is no blanket advertising accommodation."
+        },
+        {
+          "blocks": "Yes; context never matters",
+          "correct": false,
+          "reason": "The evident character and presentation are relevant."
+        },
+        {
+          "blocks": "No; assess the work's evident character and presentation",
+          "correct": true,
+          "reason": "The statutory category is not established by the producer's job description."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a creative team's involvement alone make a factual-looking testimonial evidently fictional?",
+          "options": [
+            {
+              "blocks": "Yes; context never matters",
+              "correct": false,
+              "reason": "The evident character and presentation are relevant."
+            },
+            {
+              "blocks": "No; assess the work's evident character and presentation",
+              "correct": true,
+              "reason": "The statutory category is not established by the producer's job description."
+            },
+            {
+              "blocks": "Yes; every advertisement qualifies automatically",
+              "correct": false,
+              "reason": "There is no blanket advertising accommodation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deepfake-law-enforcement-check"],
+      "teaches": ["screen-4"],
+      "prompt": "Harbour invokes fraud prevention but identifies no law authorising this use. Can it claim the deepfake criminal-offence exception on that basis alone?",
+      "options": [
+        {
+          "blocks": "Yes; any creative work creates that authorisation",
+          "correct": false,
+          "reason": "The creative-work accommodation is a different provision."
+        },
+        {
+          "blocks": "No; establish the specified legal authorisation",
+          "correct": true,
+          "reason": "The provision expressly requires authorisation by law."
+        },
+        {
+          "blocks": "Yes; a commercial purpose replaces authorisation",
+          "correct": false,
+          "reason": "Purpose and authorisation are distinct."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is a commercial fraud-prevention purpose alone sufficient for the deepfake exception?",
+          "options": [
+            {
+              "blocks": "No; establish the specified legal authorisation",
+              "correct": true,
+              "reason": "The provision expressly requires authorisation by law."
+            },
+            {
+              "blocks": "Yes; a commercial purpose replaces authorisation",
+              "correct": false,
+              "reason": "Purpose and authorisation are distinct."
+            },
+            {
+              "blocks": "Yes; any creative work creates that authorisation",
+              "correct": false,
+              "reason": "The creative-work accommodation is a different provision."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

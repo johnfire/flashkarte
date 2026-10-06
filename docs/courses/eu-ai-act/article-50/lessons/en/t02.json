@@ -1,0 +1,235 @@
+{
+  "module": "Identify actors and design interaction disclosure",
+  "lesson": {
+    "slug": "t02",
+    "title": "Who provides, who deploys, and which source governs",
+    "summary": "Identify providers and deployers, and distinguish law from guidance and voluntary methods.",
+    "covers": ["provider", "deployer", "legal-source-authority"],
+    "prerequisites": [
+      {
+        "lesson": "t01",
+        "reason": "The learner must recognise the regulated system before applying this rule."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **provider** develops an AI system or has it developed and places it on the market or puts it into service under its name or trademark. Payment is not essential to the definition.",
+        "Harbour commissions an assistant and puts it into service under its own name. Outsourcing development does not by itself transfer Harbour's provider role. Own professional use can involve putting a system into service."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(4), 50(7), 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **deployer** uses an AI system under its authority, except for personal non-professional activity. Harbour using a vendor's complete assistant in its professional work is a deployer.",
+        "One organisation can hold both roles for a system it develops and uses. Determine actions and responsibility rather than relying on a contract's informal label, such as 'technology partner'."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(4), 50(7), 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Source authority** means which instrument creates a legal duty. The AI Act and its adopted amendments are binding law. Official Journal acts carry legal authority; a consolidated text helps read amendments together but is a documentation tool.",
+        "Commission Guidelines explain interpretation and examples. They are not binding law; authoritative interpretation ultimately belongs to the courts. Compare older guidance with later amendments before copying wording."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(4), 50(7), 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **Code of Practice** offers implementation commitments and methods. Signing the Transparency Code is voluntary; a signatory must implement the commitments on which it relies, while encouraged measures remain optional.",
+        "A supplier's Code signature is evidence to examine, not conclusive proof of compliance. A claimed technical standard or visible icon does not replace the actual legal test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(4), 50(7), 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["provider"],
+      "teaches": ["screen-1"],
+      "prompt": "Harbour pays a contractor to develop an assistant and puts it into service under Harbour's name. Which role is indicated?",
+      "options": [
+        {
+          "blocks": "Harbour is a provider",
+          "correct": true,
+          "reason": "Having a system developed and putting it into service under one's name meets the relevant provider conduct."
+        },
+        {
+          "blocks": "Harbour is excluded because it hired a contractor",
+          "correct": false,
+          "reason": "Commissioning development does not remove the role."
+        },
+        {
+          "blocks": "Only a company selling models can be a provider",
+          "correct": false,
+          "reason": "The definition also covers AI-system providers."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Who has the provider role when Harbour commissions and launches its own branded system?",
+          "options": [
+            {
+              "blocks": "Harbour is excluded because it hired a contractor",
+              "correct": false,
+              "reason": "Commissioning development does not remove the role."
+            },
+            {
+              "blocks": "Only a company selling models can be a provider",
+              "correct": false,
+              "reason": "The definition also covers AI-system providers."
+            },
+            {
+              "blocks": "Harbour is a provider",
+              "correct": true,
+              "reason": "Having a system developed and putting it into service under one's name meets the relevant provider conduct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployer"],
+      "teaches": ["screen-2"],
+      "prompt": "Harbour uses a vendor's complete assistant for professional customer support. Which role is directly indicated?",
+      "options": [
+        {
+          "blocks": "Personal non-professional user",
+          "correct": false,
+          "reason": "The scenario is organisational professional activity."
+        },
+        {
+          "blocks": "No role because another company built it",
+          "correct": false,
+          "reason": "Using a vendor system can establish the deployer role."
+        },
+        {
+          "blocks": "Deployer",
+          "correct": true,
+          "reason": "Professional use under its authority meets the deployer definition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which role describes Harbour operating a purchased assistant under its authority at work?",
+          "options": [
+            {
+              "blocks": "No role because another company built it",
+              "correct": false,
+              "reason": "Using a vendor system can establish the deployer role."
+            },
+            {
+              "blocks": "Deployer",
+              "correct": true,
+              "reason": "Professional use under its authority meets the deployer definition."
+            },
+            {
+              "blocks": "Personal non-professional user",
+              "correct": false,
+              "reason": "The scenario is organisational professional activity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["legal-source-authority"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A slide says a Code signature guarantees compliance, but the official assessment says it is not conclusive. What should Harbour do?",
+      "options": [
+        {
+          "blocks": "Treat every encouraged Code measure as statutory",
+          "correct": false,
+          "reason": "Optional recommendations are not standalone legal duties."
+        },
+        {
+          "blocks": "Check implemented measures against the operative duties",
+          "correct": true,
+          "reason": "Law governs and signature alone is not conclusive evidence."
+        },
+        {
+          "blocks": "Treat the slide as overriding the statute",
+          "correct": false,
+          "reason": "A presentation cannot replace operative law."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should Harbour treat a supplier's voluntary-Code claim?",
+          "options": [
+            {
+              "blocks": "Check implemented measures against the operative duties",
+              "correct": true,
+              "reason": "Law governs and signature alone is not conclusive evidence."
+            },
+            {
+              "blocks": "Treat the slide as overriding the statute",
+              "correct": false,
+              "reason": "A presentation cannot replace operative law."
+            },
+            {
+              "blocks": "Treat every encouraged Code measure as statutory",
+              "correct": false,
+              "reason": "Optional recommendations are not standalone legal duties."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

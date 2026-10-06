@@ -1,0 +1,223 @@
+{
+  "module": "Disclose biometric exposure and published content",
+  "lesson": {
+    "slug": "t16",
+    "title": "Published text on matters of public interest",
+    "summary": "Identify publication intended to inform the public on matters of public interest.",
+    "covers": ["public-interest-matter", "text-publication-scope"],
+    "prerequisites": [
+      {
+        "lesson": "t02",
+        "reason": "The learner must identify the actor using the system under its authority."
+      },
+      {
+        "lesson": "t07",
+        "reason": "The learner must recognise generated or manipulated output and its modality."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "For AI-generated or manipulated **text**, the paragraph 4 disclosure rule concerns text published with the purpose of informing the public on matters of public interest. These conditions must be examined together.",
+        "A **matter of public interest** concerns issues relevant to public life and collective interests. The guidance discusses fields such as politics, health, security, environmental matters and financial or economic issues. A topic label alone does not establish the whole publication test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 1; Guidelines paragraphs 130-132",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A private customer-service answer or internal email is not automatically a publication to inform the public. A public safety article assembled from those answers can have a different purpose and audience.",
+        "Harbour uses AI to draft an internal operational email and a website article informing residents about a pollution incident. The public-facing environmental article needs the specified published-text analysis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 1; Guidelines paragraphs 130-132",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A cookbook or ordinary promotional text is not automatically within this specific duty merely because it is public. Health claims, safety advice or reporting on collective interests can change the analysis.",
+        "Use the actual content, audience, purpose and publication context. Record uncertainty where facts are missing, rather than declaring all public AI text either covered or exempt."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 1; Guidelines paragraphs 130-132",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "This lesson identifies the publication trigger; the following lesson examines the human-review/editorial exception. The provider's paragraph 2 machine-readable marking duty is separate and may still apply to generated text outside this particular paragraph 4 trigger.",
+        "Harbour's publication worksheet asks: is it generated or manipulated text, is it published, is its purpose to inform the public, and does the matter involve public interest? A private-to-public reuse requires a new assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 1; Guidelines paragraphs 130-132",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["public-interest-matter"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "Harbour publishes an AI-drafted article informing residents about a pollution incident. Which characteristic is relevant to the public-interest assessment?",
+      "options": [
+        {
+          "blocks": "The environmental issue affecting the community",
+          "correct": true,
+          "reason": "Environmental and collective interests are relevant, alongside purpose and publication."
+        },
+        {
+          "blocks": "Only the number of characters",
+          "correct": false,
+          "reason": "Length does not decide the public-interest condition."
+        },
+        {
+          "blocks": "Only the software's brand",
+          "correct": false,
+          "reason": "The topic and purpose are not established by branding."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which matter in Harbour's public information article supports a public-interest analysis?",
+          "options": [
+            {
+              "blocks": "Only the number of characters",
+              "correct": false,
+              "reason": "Length does not decide the public-interest condition."
+            },
+            {
+              "blocks": "Only the software's brand",
+              "correct": false,
+              "reason": "The topic and purpose are not established by branding."
+            },
+            {
+              "blocks": "The environmental issue affecting the community",
+              "correct": true,
+              "reason": "Environmental and collective interests are relevant, alongside purpose and publication."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["text-publication-scope"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "Harbour reuses an internal AI draft as a website safety article for the public. Can it keep the private-email conclusion unchanged?",
+      "options": [
+        {
+          "blocks": "Keep the conclusion because the first draft was private",
+          "correct": false,
+          "reason": "Initial use does not decide the later publication context."
+        },
+        {
+          "blocks": "Ignore publication because text is always excluded",
+          "correct": false,
+          "reason": "The provision expressly covers specified published text."
+        },
+        {
+          "blocks": "Reassess publication, purpose and public interest",
+          "correct": true,
+          "reason": "The changed context can engage the public-facing text duty."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should happen when an internal draft becomes a public information article?",
+          "options": [
+            {
+              "blocks": "Ignore publication because text is always excluded",
+              "correct": false,
+              "reason": "The provision expressly covers specified published text."
+            },
+            {
+              "blocks": "Reassess publication, purpose and public interest",
+              "correct": true,
+              "reason": "The changed context can engage the public-facing text duty."
+            },
+            {
+              "blocks": "Keep the conclusion because the first draft was private",
+              "correct": false,
+              "reason": "Initial use does not decide the later publication context."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["public-interest-matter", "text-publication-scope"],
+      "teaches": ["screen-1", "screen-3", "screen-4"],
+      "prompt": "Harbour publicly posts ordinary promotional copy with no established public-interest information purpose. Does public availability alone settle this specific text rule?",
+      "options": [
+        {
+          "blocks": "No; and that automatically removes provider marking duties",
+          "correct": false,
+          "reason": "Paragraph 2 has a separate scope and actor."
+        },
+        {
+          "blocks": "No; establish the purpose and matter-of-public-interest conditions",
+          "correct": true,
+          "reason": "The conditions operate together; public availability is not the entire test."
+        },
+        {
+          "blocks": "Yes; every public AI sentence meets the trigger",
+          "correct": false,
+          "reason": "That ignores the specified information purpose and subject matter."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is making AI text publicly available enough by itself to establish every paragraph 4 text condition?",
+          "options": [
+            {
+              "blocks": "No; establish the purpose and matter-of-public-interest conditions",
+              "correct": true,
+              "reason": "The conditions operate together; public availability is not the entire test."
+            },
+            {
+              "blocks": "Yes; every public AI sentence meets the trigger",
+              "correct": false,
+              "reason": "That ignores the specified information purpose and subject matter."
+            },
+            {
+              "blocks": "No; and that automatically removes provider marking duties",
+              "correct": false,
+              "reason": "Paragraph 2 has a separate scope and actor."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

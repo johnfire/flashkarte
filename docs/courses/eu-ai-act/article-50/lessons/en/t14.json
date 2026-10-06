@@ -1,0 +1,219 @@
+{
+  "module": "Disclose biometric exposure and published content",
+  "lesson": {
+    "slug": "t14",
+    "title": "Deepfakes and false authenticity",
+    "summary": "Evaluate a realistic synthetic depiction in its context rather than relying on intention or an invented harm threshold.",
+    "covers": ["deepfake", "false-authenticity-assessment"],
+    "prerequisites": [
+      {
+        "lesson": "t07",
+        "reason": "The learner must recognise generated or manipulated output and its modality."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **deepfake** is AI-generated or manipulated image, audio or video content that resembles existing persons, objects, places, entities or events and would falsely appear to a person to be authentic or truthful.",
+        "The Commission's interpretation considers resemblance, an existing or potentially existing subject, the specified kinds of subject and false apparent authenticity or truthfulness. These interpretation aids do not replace the legal definition."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(60), 50(4), subparagraph 1; Guidelines paragraphs 113-119",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The decisive **false-authenticity assessment** examines how the content appears in context. A realistic depiction is not classified solely by whether its creator intended to deceive, or whether a separately invented harm threshold is met.",
+        "Harbour publishes a generated photograph of smiling staff on its recruitment page. Presentation as a photograph of its actual staff may falsely suggest an authentic depiction. Calling it harmless or well-intentioned does not settle that question."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(60), 50(4), subparagraph 1; Guidelines paragraphs 113-119",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Audio can also qualify. A generated clip presented as a recording of an actual person saying something they did not say creates a different context from an unmistakably fictional performance.",
+        "Do not exempt a realistic synthetic person solely because no specific real individual was copied. The guidance includes potentially existing subjects; examine both resemblance and the audience-facing context."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(60), 50(4), subparagraph 1; Guidelines paragraphs 113-119",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "For qualifying deepfake content, Article 50(4) requires the deployer to disclose that it has been artificially generated or manipulated. A generator's technical marking duty is a separate analysis.",
+        "A useful decision record preserves the content, presentation, audience context and reason for the conclusion. Where the conclusion is uncertain, identify the missing facts rather than certifying the content from realism alone."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(60), 50(4), subparagraph 1; Guidelines paragraphs 113-119",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["deepfake"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "Harbour publishes AI-generated audio presented as an authentic recording of an actual person making a statement they never made. Which content rule needs assessment?",
+      "options": [
+        {
+          "blocks": "The deepfake definition and deployer disclosure duty",
+          "correct": true,
+          "reason": "The medium and false appearance of authenticity engage the analysis."
+        },
+        {
+          "blocks": "Only the rule for published public-interest text",
+          "correct": false,
+          "reason": "The supplied content is audio, not that text category."
+        },
+        {
+          "blocks": "No rule because audio is excluded",
+          "correct": false,
+          "reason": "Audio is expressly included in the deepfake definition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which rule is relevant to a synthetic voice clip falsely presented as an authentic person's recording?",
+          "options": [
+            {
+              "blocks": "Only the rule for published public-interest text",
+              "correct": false,
+              "reason": "The supplied content is audio, not that text category."
+            },
+            {
+              "blocks": "No rule because audio is excluded",
+              "correct": false,
+              "reason": "Audio is expressly included in the deepfake definition."
+            },
+            {
+              "blocks": "The deepfake definition and deployer disclosure duty",
+              "correct": true,
+              "reason": "The medium and false appearance of authenticity engage the analysis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["false-authenticity-assessment"],
+      "teaches": ["screen-2"],
+      "prompt": "A realistic generated staff photo is presented as Harbour's actual team. The creator says there was no intent to deceive. Is that enough to rule out a deepfake?",
+      "options": [
+        {
+          "blocks": "Yes; only malicious creators can make deepfakes",
+          "correct": false,
+          "reason": "That adds a condition absent from the definition."
+        },
+        {
+          "blocks": "Yes; all recruitment photographs are exempt",
+          "correct": false,
+          "reason": "There is no blanket recruitment exemption."
+        },
+        {
+          "blocks": "No; assess its appearance and context against the definition",
+          "correct": true,
+          "reason": "The definition does not depend solely on the creator's intention."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a benevolent intention settle false authenticity in a realistic recruitment photo?",
+          "options": [
+            {
+              "blocks": "Yes; all recruitment photographs are exempt",
+              "correct": false,
+              "reason": "There is no blanket recruitment exemption."
+            },
+            {
+              "blocks": "No; assess its appearance and context against the definition",
+              "correct": true,
+              "reason": "The definition does not depend solely on the creator's intention."
+            },
+            {
+              "blocks": "Yes; only malicious creators can make deepfakes",
+              "correct": false,
+              "reason": "That adds a condition absent from the definition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deepfake", "false-authenticity-assessment"],
+      "teaches": ["screen-1", "screen-3", "screen-4"],
+      "prompt": "Harbour creates a realistic synthetic person without copying a named individual. Which review is appropriate?",
+      "options": [
+        {
+          "blocks": "Automatically classify every drawing as a deepfake",
+          "correct": false,
+          "reason": "The definition still requires the relevant resemblance and false appearance."
+        },
+        {
+          "blocks": "Examine resemblance and false apparent authenticity in context",
+          "correct": true,
+          "reason": "The guidance includes potentially existing subjects; absence of a named original is not decisive alone."
+        },
+        {
+          "blocks": "Automatically exempt it because the face is newly generated",
+          "correct": false,
+          "reason": "That skips the broader subject and authenticity analysis."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the absence of a copied named person by itself settle a realistic synthetic depiction's classification?",
+          "options": [
+            {
+              "blocks": "Examine resemblance and false apparent authenticity in context",
+              "correct": true,
+              "reason": "The guidance includes potentially existing subjects; absence of a named original is not decisive alone."
+            },
+            {
+              "blocks": "Automatically exempt it because the face is newly generated",
+              "correct": false,
+              "reason": "That skips the broader subject and authenticity analysis."
+            },
+            {
+              "blocks": "Automatically classify every drawing as a deepfake",
+              "correct": false,
+              "reason": "The definition still requires the relevant resemblance and false appearance."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

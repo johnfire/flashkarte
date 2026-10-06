@@ -1,6 +1,6 @@
 # Article 50 concept graph
 
-Proposed graph for owner review; no lessons imported.
+Owner-approved graph; English fixtures authored for testing. Live import evidence is recorded separately.
 
 Every concept is taught once. Required edges gate understanding; suggested edges provide optional context. Within each lesson, concepts are taught in their listed order. Each module ends in a case exercise.
 
@@ -19,7 +19,7 @@ Every concept is taught once. Required edges gate understanding; suggested edges
 
 **Recognise an AI system** (`ai-system`, term): Distinguish an inference-based system from a simple fixed rule in a supplied case.
 
-Source: Article 3(1); Guidelines paragraphs 11-24 — AI-C-EN, A50-GUIDE.
+Source: Article 3(1); Guidelines paragraph 30 — AI-C-EN, A50-GUIDE.
 
 No prerequisites.
 
@@ -59,7 +59,7 @@ Source: Article 3(4); Article 2(10) — AI-C-EN.
 
 **Law, guidance and voluntary methods** (`legal-source-authority`, idea): Rank an operative provision, interpretative guidance and a voluntary Code in a conflict.
 
-Source: Articles 50(7), 96; Guidelines paragraph 10 — AI-C-EN, A50-GUIDE.
+Source: Articles 50(7), 96; Guidelines paragraph 5 — AI-C-EN, A50-GUIDE.
 
 No prerequisites.
 
@@ -78,7 +78,7 @@ Source: Article 50(1)-(4) — AI-C-EN.
 
 **Duties can apply together** (`cumulative-transparency-duties`, idea): Identify concurrent duties and explain why disclosure does not cure a prohibited use or replace other law.
 
-Source: Article 50(6); Guidelines paragraphs 15-16, 25 — AI-C-EN, A50-GUIDE.
+Source: Article 50(6); Guidelines paragraphs 8, 15, 25 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent                        | Reason                                                                         |
 | -------- | ----------------------------- | ------------------------------------------------------------------------------ |
@@ -88,7 +88,7 @@ Source: Article 50(6); Guidelines paragraphs 15-16, 25 — AI-C-EN, A50-GUIDE.
 
 **Direct AI interaction** (`direct-ai-interaction`, idea): Distinguish conversational exchange from passive processing and genuinely human-mediated communication.
 
-Source: Article 50(1); Guidelines paragraphs 28-30, 32-42 — AI-C-EN, A50-GUIDE.
+Source: Article 50(1); Guidelines paragraphs 28-30, 32-40 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent    | Reason                                                                         |
 | -------- | --------- | ------------------------------------------------------------------------------ |
@@ -97,7 +97,7 @@ Source: Article 50(1); Guidelines paragraphs 28-30, 32-42 — AI-C-EN, A50-GUIDE
 
 **Assess obviousness** (`obviousness-assessment`, skill): Evaluate the informed, observant and circumspect person standard in context rather than assuming every chatbot is obvious.
 
-Source: Article 50(1); Guidelines paragraphs 43-52 — AI-C-EN, A50-GUIDE.
+Source: Article 50(1); Guidelines paragraphs 42-45 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent                | Reason                                                                                    |
 | -------- | --------------------- | ----------------------------------------------------------------------------------------- |
@@ -105,7 +105,7 @@ Source: Article 50(1); Guidelines paragraphs 43-52 — AI-C-EN, A50-GUIDE.
 
 **Check the interaction law-enforcement exception** (`interaction-law-enforcement-check`, skill): Require legal authorisation and safeguards and restore disclosure for a public offence-reporting service.
 
-Source: Article 50(1); Guidelines paragraphs 53-54 — AI-C-EN, A50-GUIDE.
+Source: Article 50(1); Guidelines paragraphs 46-49 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent                | Reason                                                                                    |
 | -------- | --------------------- | ----------------------------------------------------------------------------------------- |
@@ -135,7 +135,7 @@ Source: Guidelines paragraph 31 — AI-C-EN, A50-GUIDE.
 
 **Clear disclosure at first interaction or exposure** (`disclosure-timing-clarity`, idea): Reject hidden, delayed or ambiguous notifications in a supplied interface.
 
-Source: Article 50(5); Guidelines paragraphs 137-143 — AI-C-EN, A50-GUIDE.
+Source: Article 50(5); Guidelines paragraphs 141-143 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent                | Reason                                                                                    |
 | -------- | --------------------- | ----------------------------------------------------------------------------------------- |
@@ -321,7 +321,7 @@ Source: Article 50(2), (5)-(7); Code Section 1 Commitments 1-4 — AI-C-EN, A50-
 
 **Emotion recognition system** (`emotion-recognition-system`, term): Identify inference of emotion or intention from biometric data, distinguishing fatigue and ordinary text sentiment.
 
-Source: Article 3(39); Recital 18; Guidelines paragraphs 99-103 — AI-C-EN, A50-GUIDE.
+Source: Article 3(39); Recital 18; Guidelines paragraphs 99-102 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent    | Reason                                                                     |
 | -------- | --------- | -------------------------------------------------------------------------- |
@@ -329,7 +329,7 @@ Source: Article 3(39); Recital 18; Guidelines paragraphs 99-103 — AI-C-EN, A50
 
 **Biometric categorisation system** (`biometric-categorisation-system`, term): Identify category assignment based on biometric data and the ancillary-service carve-out in the definition.
 
-Source: Article 3(40); Guidelines paragraphs 104-106 — AI-C-EN, A50-GUIDE.
+Source: Article 3(40); Guidelines paragraphs 103-104 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent    | Reason                                                                     |
 | -------- | --------- | -------------------------------------------------------------------------- |
@@ -337,7 +337,7 @@ Source: Article 3(40); Guidelines paragraphs 104-106 — AI-C-EN, A50-GUIDE.
 
 **Disclose biometric exposure lawfully** (`biometric-exposure-disclosure`, skill): Inform exposed people, check applicable data law and the narrow authorised law-enforcement allowance without treating disclosure as permission.
 
-Source: Article 50(3), (6); Article 5; Guidelines paragraphs 94-110 — AI-C-EN, A50-GUIDE.
+Source: Article 50(3), (6); Article 5; Guidelines paragraphs 105-110 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent                          | Reason                                                                                  |
 | -------- | ------------------------------- | --------------------------------------------------------------------------------------- |
@@ -358,7 +358,7 @@ Source: Article 3(60); Article 50(4), first subparagraph — AI-C-EN.
 
 **Assess false authenticity in context** (`false-authenticity-assessment`, skill): Distinguish resemblance, possible subjects and a false appearance of authenticity using the dissemination context.
 
-Source: Guidelines paragraphs 111-119 — AI-C-EN, A50-GUIDE, OMN-EN.
+Source: Guidelines paragraphs 113-116 — AI-C-EN, A50-GUIDE, OMN-EN.
 
 | Edge     | Parent   | Reason                                                                                         |
 | -------- | -------- | ---------------------------------------------------------------------------------------------- |
@@ -368,7 +368,7 @@ Source: Guidelines paragraphs 111-119 — AI-C-EN, A50-GUIDE, OMN-EN.
 
 **Disclose creative and similar works** (`creative-work-disclosure`, skill): Choose appropriate disclosure that preserves enjoyment; do not treat art, satire or fiction as a total exemption.
 
-Source: Article 50(4), first subparagraph; Guidelines paragraphs 120-126; Code Section 2 Commitment 3 — AI-C-EN, A50-GUIDE, A50-CODE.
+Source: Article 50(4), first subparagraph; Guidelines paragraphs 119-124; Code Section 2 Commitment 3 — AI-C-EN, A50-GUIDE, A50-CODE.
 
 | Edge     | Parent                         | Reason                                                                                          |
 | -------- | ------------------------------ | ----------------------------------------------------------------------------------------------- |
@@ -377,7 +377,7 @@ Source: Article 50(4), first subparagraph; Guidelines paragraphs 120-126; Code S
 
 **Check the deepfake law-enforcement exception** (`deepfake-law-enforcement-check`, skill): Require authorised detection, prevention, investigation or prosecution; distinguish this from the different paragraph 3 wording.
 
-Source: Article 50(4), first subparagraph; Guidelines paragraph 127 — AI-C-EN, A50-GUIDE.
+Source: Article 50(4), first subparagraph; Guidelines paragraph 125 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent        | Reason                                                                                         |
 | -------- | ------------- | ---------------------------------------------------------------------------------------------- |
@@ -388,13 +388,13 @@ Source: Article 50(4), first subparagraph; Guidelines paragraph 127 — AI-C-EN,
 
 **Matter of public interest** (`public-interest-matter`, term): Assess a societal-information context rather than assuming all recipes or all company communication qualify.
 
-Source: Guidelines paragraphs 128-132 — AI-C-EN, A50-GUIDE.
+Source: Guidelines paragraphs 130-131 — AI-C-EN, A50-GUIDE.
 
 No prerequisites.
 
 **Assess the public-interest text duty** (`text-publication-scope`, skill): Combine AI generation or manipulation, publication and the informing purpose; distinguish internal correspondence and the authorised law-enforcement exception.
 
-Source: Article 50(4), second subparagraph; Guidelines paragraphs 128-133 — AI-C-EN, A50-GUIDE.
+Source: Article 50(4), second subparagraph; Guidelines paragraphs 130-132 — AI-C-EN, A50-GUIDE.
 
 | Edge     | Parent                 | Reason                                                                       |
 | -------- | ---------------------- | ---------------------------------------------------------------------------- |
@@ -414,7 +414,7 @@ Source: Article 50(4), second subparagraph; Guidelines paragraphs 134-136 — AI
 
 **Editorial responsibility** (`editorial-responsibility`, idea): Identify the natural or legal person accountable for publication without substituting AI review for human accountability.
 
-Source: Article 50(4), second subparagraph; Code Section 2 Commitment 4 — AI-C-EN, A50-CODE.
+Source: Article 50(4), second subparagraph; Guidelines paragraph 138; Code Section 2 Commitment 4 — AI-C-EN, A50-CODE.
 
 | Edge     | Parent                 | Reason                                                                                     |
 | -------- | ---------------------- | ------------------------------------------------------------------------------------------ |
@@ -434,7 +434,7 @@ Source: Guidelines paragraphs 134-136; Code Section 2 Commitment 4 — AI-C-EN, 
 
 **Publication decision case exercise** (`publication-decision-capstone`, capstone): Resolve a campaign with an avatar, synthetic interview and public-interest report; allocate duties, check lawful use and evidence proportionate disclosures.
 
-Source: Article 50(1)-(7); Code Sections 1-2 — AI-C-EN, A50-CODE.
+Source: Article 50(2)-(7); Code Sections 1-2 — AI-C-EN, A50-CODE.
 
 | Edge     | Parent                         | Reason                                                                                         |
 | -------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |

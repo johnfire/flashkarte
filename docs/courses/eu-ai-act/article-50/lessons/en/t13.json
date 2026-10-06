@@ -1,0 +1,231 @@
+{
+  "module": "Disclose biometric exposure and published content",
+  "lesson": {
+    "slug": "t13",
+    "title": "Emotion recognition and biometric categorisation",
+    "summary": "Identify biometric exposure, disclose it to affected people and preserve the separate legality assessment.",
+    "covers": [
+      "emotion-recognition-system",
+      "biometric-categorisation-system",
+      "biometric-exposure-disclosure"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "t01",
+        "reason": "The learner must recognise the regulated system before applying this rule."
+      },
+      {
+        "lesson": "t02",
+        "reason": "The learner must identify the actor using the system under its authority."
+      },
+      {
+        "lesson": "t03",
+        "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An **emotion recognition system** identifies or infers emotions or intentions of natural persons on the basis of their biometric data. Biometric data are personal data arising from specific technical processing relating to physical, physiological or behavioural characteristics.",
+        "Reading the sentiment of an ordinary written comment is not automatically biometric emotion recognition. Physical states such as pain or fatigue are distinguished from emotions in Recital 18. Check the actual inputs, inference and purpose."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(34), 3(39)-(40), 50(3), 50(5)-(6); Recital 18; Guidelines paragraphs 99-110, 141-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **biometric categorisation system** assigns natural persons to specific categories on the basis of their biometric data, subject to the definition's exclusion for ancillary features intrinsically linked to another commercial service and strictly necessary for objective technical reasons.",
+        "Harbour uses a camera-based system to infer visitors' emotional responses. Another system assigns categories from biometric characteristics. Identify each function before deciding which duties and restrictions apply."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(34), 3(39)-(40), 50(3), 50(5)-(6); Recital 18; Guidelines paragraphs 99-110, 141-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Article 50(3) places the disclosure duty on the **deployer**: inform natural persons exposed to the operation of emotion recognition or biometric categorisation. Paragraph 5 requires clear, distinguishable, accessible information at the latest at first interaction or exposure.",
+        "Disclosure does not make a prohibited use lawful. Separate Article 5 restrictions and, where applicable, Chapter III high-risk requirements still matter. Paragraph 3 also expressly requires processing personal data in accordance with the applicable EU data-protection framework."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(34), 3(39)-(40), 50(3), 50(5)-(6); Recital 18; Guidelines paragraphs 99-110, 141-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The paragraph 3 exception concerns systems permitted by law to detect, prevent or investigate criminal offences, subject to appropriate safeguards for third parties' rights and freedoms in accordance with Union law. Its list does not include prosecution; do not import that word from another paragraph.",
+        "In an ordinary commercial visitor study, an investigation label is insufficient. Harbour must identify the relevant function, inform exposed people where required, and separately establish lawful use and personal-data processing."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(34), 3(39)-(40), 50(3), 50(5)-(6); Recital 18; Guidelines paragraphs 99-110, 141-144",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["emotion-recognition-system"],
+      "teaches": ["screen-1"],
+      "prompt": "Harbour reads the sentiment of ordinary written customer comments without processing biometric data. Is that alone biometric emotion recognition?",
+      "options": [
+        {
+          "blocks": "No; the definition requires inference based on biometric data",
+          "correct": true,
+          "reason": "The input basis is an express part of the definition."
+        },
+        {
+          "blocks": "Yes; every sentiment analysis is biometric",
+          "correct": false,
+          "reason": "A sentiment output does not establish biometric input processing."
+        },
+        {
+          "blocks": "Yes; any analysis about a person qualifies",
+          "correct": false,
+          "reason": "That ignores the specific definition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does inferring sentiment from non-biometric written comments alone meet this emotion-recognition definition?",
+          "options": [
+            {
+              "blocks": "Yes; every sentiment analysis is biometric",
+              "correct": false,
+              "reason": "A sentiment output does not establish biometric input processing."
+            },
+            {
+              "blocks": "Yes; any analysis about a person qualifies",
+              "correct": false,
+              "reason": "That ignores the specific definition."
+            },
+            {
+              "blocks": "No; the definition requires inference based on biometric data",
+              "correct": true,
+              "reason": "The input basis is an express part of the definition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["biometric-categorisation-system"],
+      "teaches": ["screen-2"],
+      "prompt": "A system assigns people to categories based on biometric characteristics. Which definition must Harbour examine, including its specific exclusion?",
+      "options": [
+        {
+          "blocks": "Every ordinary text editor",
+          "correct": false,
+          "reason": "Text editing does not establish biometric categorisation."
+        },
+        {
+          "blocks": "Only a system inferring emotions",
+          "correct": false,
+          "reason": "Categorisation and emotion inference are distinct functions."
+        },
+        {
+          "blocks": "Biometric categorisation system",
+          "correct": true,
+          "reason": "Check both the categorisation function and the precise exclusion."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which definition addresses assigning natural persons to categories using biometric data?",
+          "options": [
+            {
+              "blocks": "Only a system inferring emotions",
+              "correct": false,
+              "reason": "Categorisation and emotion inference are distinct functions."
+            },
+            {
+              "blocks": "Biometric categorisation system",
+              "correct": true,
+              "reason": "Check both the categorisation function and the precise exclusion."
+            },
+            {
+              "blocks": "Every ordinary text editor",
+              "correct": false,
+              "reason": "Text editing does not establish biometric categorisation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["biometric-exposure-disclosure"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "Harbour deploys a camera-based emotion inference system for visitors. It adds a notice. What does that establish about legality?",
+      "options": [
+        {
+          "blocks": "The notice removes every high-risk obligation",
+          "correct": false,
+          "reason": "Paragraph 6 preserves Chapter III obligations."
+        },
+        {
+          "blocks": "Disclosure addresses one duty; legality and data protection remain separate",
+          "correct": true,
+          "reason": "Article 50 does not displace prohibitions or applicable data-protection law."
+        },
+        {
+          "blocks": "The notice authorises every biometric purpose",
+          "correct": false,
+          "reason": "Transparency does not supply a universal legal authorisation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does informing exposed visitors automatically authorise the biometric use and data processing?",
+          "options": [
+            {
+              "blocks": "Disclosure addresses one duty; legality and data protection remain separate",
+              "correct": true,
+              "reason": "Article 50 does not displace prohibitions or applicable data-protection law."
+            },
+            {
+              "blocks": "The notice authorises every biometric purpose",
+              "correct": false,
+              "reason": "Transparency does not supply a universal legal authorisation."
+            },
+            {
+              "blocks": "The notice removes every high-risk obligation",
+              "correct": false,
+              "reason": "Paragraph 6 preserves Chapter III obligations."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # EU AI Act course — English first release
 
-Checked 6 October 2026. Chris approved building and deploying **all 52 English lessons** from the saved graph and syllabus. The English content is an editable educational draft; owner learning review and specialist legal review remain separate. German, Czech and the dedicated Article 50 block are follow-on work.
+Checked 6 October 2026. Chris approved building and deploying **all 52 English lessons** from the saved graph and syllabus. The English content is an editable educational draft; owner learning review and specialist legal review remain separate. German and Czech are follow-on work; the dedicated English Article 50 course is also available in testing.
 
 The first instalment contains **52 lessons in eight modules**, teaching **109 concepts** through **150 required links and 28 supporting links**. The source coverage register contains **141 planned rows**. English is canonical; German and Czech follow first. All three editions will share stable concept identities and matching assessments.
 
@@ -8,7 +8,7 @@ Start with the [lesson outline](lesson-outline.md), then review the [concept gra
 
 Chris's presentation informed the [slide review and case bank](presentation-review.md). The next dedicated block is **Article 50**, approved in chat on 6 October; its [follow-on outline](programme-roadmap.md) preserves the agreed introduction → Article 6 → Article 5 sequence. The [programme inventory](programme-inventory.json) assigns all 119 article identifiers and 14 annexes in this baseline to future teaching blocks; paragraph-level work for those blocks remains to be done.
 
-The [dedicated English Article 50 review package](article-50/README.md) now proposes 18 lessons, 42 concepts and 48 coverage targets. Its graph and syllabus await owner review before lesson authoring.
+The [dedicated English Article 50 course](article-50/README.md) now contains 18 testing lessons, 42 concepts, 85 screens and 55 questions with retests. Its owner-approved graph and 48 coverage targets are retained with live verification evidence.
 
 ## Review points
 

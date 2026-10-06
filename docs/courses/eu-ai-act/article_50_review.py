@@ -9,7 +9,7 @@ from render_review import markdown_table, render_lesson_table, write_documents
 
 def render_article_50_graph(curriculum):
     concepts = {concept["slug"]: concept for concept in curriculum["concepts"]}
-    lines = ["# Article 50 concept graph", "", "Proposed graph for owner review; no lessons imported.", "",
+    lines = ["# Article 50 concept graph", "", "Owner-approved graph; English fixtures authored for testing. Live import evidence is recorded separately.", "",
              "Every concept is taught once. Required edges gate understanding; suggested edges provide optional context. "
              "Within each lesson, concepts are taught in their listed order. Each module ends in a case exercise.", ""]
     for module in curriculum["modules"]:
@@ -30,7 +30,7 @@ def render_article_50_graph(curriculum):
 
 def render_article_50_coverage(coverage):
     return "\n".join([
-        "# Article 50 coverage targets", "", "All targets are planned, not yet taught. Baseline: 02024R1689-20260727.", "",
+        "# Article 50 coverage targets", "", "Coverage targets for the English testing draft. Baseline: 02024R1689-20260727. The target ledger is preserved separately from verified lesson fixtures; it is not a certification of comprehensive legal coverage.", "",
         "Primary targets receive teaching and assessment. Lookup targets identify a boundary and where to check it; "
         "they do not teach entire incorporated laws. Source reading limits remain in the parent source register.", "",
         markdown_table(["Provision", "Lesson", "Extent", "Teaching target", "Source"],

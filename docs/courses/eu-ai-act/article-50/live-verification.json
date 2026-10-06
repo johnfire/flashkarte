@@ -1,0 +1,21 @@
+{
+  "checked_on": "2026-10-06",
+  "subject_id": "21641dae-9fed-4be5-bda7-7123967c4067",
+  "reference_number": 62,
+  "title": "EU AI Act: Article 50 Transparency in Practice",
+  "locale": "en",
+  "is_public": false,
+  "is_official": false,
+  "modules": 3,
+  "lessons": 18,
+  "concepts": 42,
+  "edges": 80,
+  "screens": 85,
+  "questions": 55,
+  "retests": 55,
+  "all_stages_testing": true,
+  "graph_matches": true,
+  "content_mismatches": [],
+  "prerequisite_mismatches": [],
+  "graph_lint_issues": []
+}

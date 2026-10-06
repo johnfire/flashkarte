@@ -1,0 +1,264 @@
+{
+  "module": "Disclose biometric exposure and published content",
+  "lesson": {
+    "slug": "t17",
+    "title": "Human review and editorial responsibility",
+    "summary": "Apply the two-part editorial exception and retain proportionate evidence of actual review and responsibility.",
+    "covers": [
+      "human-review-editorial-control",
+      "editorial-responsibility",
+      "editorial-exception-record"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "t02",
+        "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+      },
+      {
+        "lesson": "t16",
+        "reason": "The learner must establish an in-scope publication before applying an editorial exception."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The specified text disclosure duty does not apply where the generated content has undergone a process of **human review or editorial control**, and a natural or legal person holds **editorial responsibility** for publication.",
+        "Read the logic precisely: (human review OR editorial control) AND editorial responsibility. Review/control and responsibility are distinct parts of the exception. Naming someone alone does not establish that the process occurred."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 2; Guidelines paragraphs 133-139; Code Section 2 Commitment 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Review or control must be meaningful for the content and publication. Consider checking factual claims, sources, context and suitability, with the ability to correct content and decide what is published.",
+        "Harbour's editor examines an AI-drafted environmental report, corrects unsupported claims and approves the final text. A perfunctory click or an unread approval does not demonstrate the same process."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 2; Guidelines paragraphs 133-139; Code Section 2 Commitment 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Editorial responsibility identifies the natural or legal person accountable for the publication. A reviewer can perform checks while the organisation holds responsibility, if the actual arrangements support that allocation.",
+        "The Code addresses documented policies and processes, assigned roles and resources, and an editorial contact where needed. It does not impose a universal requirement to create a separate record for every publication. Proportionate evidence can make the claimed exception reviewable."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 2; Guidelines paragraphs 133-139; Code Section 2 Commitment 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "An **editorial exception record**, used here as a practical worksheet, connects the final version, actual review/control, responsible person or organisation and decision. It is an evidence aid, not a statutory form.",
+        "If AI substantially rewrites the report after review and nobody reviews or controls the final publication, the previous approval cannot simply be assumed to cover it. Assess the final workflow; provider marking remains a separate question."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 2; Guidelines paragraphs 133-139; Code Section 2 Commitment 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The same text subparagraph contains an authorised-law exception for detecting, preventing, investigating or prosecuting criminal offences. Establish that legal basis separately when relevant.",
+        "For Harbour's ordinary environmental report, choose between disclosure and a substantiated editorial exception. Do not treat the exception as permission to publish inaccurate or otherwise unlawful content."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(4), subparagraph 2, sentence 2; Guidelines paragraphs 133-139; Code Section 2 Commitment 4",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["human-review-editorial-control"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Harbour names a publication owner but nobody reads or controls the AI-generated text. Is the editorial exception established?",
+      "options": [
+        {
+          "blocks": "No; actual human review or editorial control is also required",
+          "correct": true,
+          "reason": "The review/control condition and responsibility condition operate together."
+        },
+        {
+          "blocks": "Yes; a name replaces every review process",
+          "correct": false,
+          "reason": "That omits an express condition."
+        },
+        {
+          "blocks": "Yes; any AI draft is automatically reviewed",
+          "correct": false,
+          "reason": "Generation does not establish human review or editorial control."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a named publication owner alone establish both parts of the exception?",
+          "options": [
+            {
+              "blocks": "Yes; a name replaces every review process",
+              "correct": false,
+              "reason": "That omits an express condition."
+            },
+            {
+              "blocks": "Yes; any AI draft is automatically reviewed",
+              "correct": false,
+              "reason": "Generation does not establish human review or editorial control."
+            },
+            {
+              "blocks": "No; actual human review or editorial control is also required",
+              "correct": true,
+              "reason": "The review/control condition and responsibility condition operate together."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["editorial-responsibility"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "A human reviews the report but no natural or legal person holds editorial responsibility for publication. Which condition remains missing?",
+      "options": [
+        {
+          "blocks": "A mandatory AI label on every internal email",
+          "correct": false,
+          "reason": "That is not the missing condition of this exception."
+        },
+        {
+          "blocks": "A requirement that the reviewer trained the model",
+          "correct": false,
+          "reason": "Model training is not the editorial-responsibility test."
+        },
+        {
+          "blocks": "Editorial responsibility for publication",
+          "correct": true,
+          "reason": "Review alone does not meet the second part."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is missing when review occurred but nobody holds editorial responsibility?",
+          "options": [
+            {
+              "blocks": "A requirement that the reviewer trained the model",
+              "correct": false,
+              "reason": "Model training is not the editorial-responsibility test."
+            },
+            {
+              "blocks": "Editorial responsibility for publication",
+              "correct": true,
+              "reason": "Review alone does not meet the second part."
+            },
+            {
+              "blocks": "A mandatory AI label on every internal email",
+              "correct": false,
+              "reason": "That is not the missing condition of this exception."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["editorial-exception-record"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "After approval, AI substantially rewrites the report and Harbour publishes it without further review or control. What should its worksheet flag?",
+      "options": [
+        {
+          "blocks": "Claim the Act requires a fixed statutory worksheet template",
+          "correct": false,
+          "reason": "This worksheet is an optional evidence aid, not a prescribed legal form."
+        },
+        {
+          "blocks": "Reassess whether the final content underwent the qualifying process",
+          "correct": true,
+          "reason": "The evidence must support the actual published content and workflow."
+        },
+        {
+          "blocks": "Treat any earlier approval as permanent coverage",
+          "correct": false,
+          "reason": "That disconnects the process from the final publication."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can an earlier review be assumed to cover a substantially rewritten final publication?",
+          "options": [
+            {
+              "blocks": "Reassess whether the final content underwent the qualifying process",
+              "correct": true,
+              "reason": "The evidence must support the actual published content and workflow."
+            },
+            {
+              "blocks": "Treat any earlier approval as permanent coverage",
+              "correct": false,
+              "reason": "That disconnects the process from the final publication."
+            },
+            {
+              "blocks": "Claim the Act requires a fixed statutory worksheet template",
+              "correct": false,
+              "reason": "This worksheet is an optional evidence aid, not a prescribed legal form."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

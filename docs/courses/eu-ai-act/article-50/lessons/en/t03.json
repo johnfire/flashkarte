@@ -1,0 +1,243 @@
+{
+  "module": "Identify actors and design interaction disclosure",
+  "lesson": {
+    "slug": "t03",
+    "title": "Allocate duties without losing other obligations",
+    "summary": "Assign the four transparency duties and preserve other applicable obligations.",
+    "covers": [
+      "transparency-actor-allocation",
+      "cumulative-transparency-duties"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "t01",
+        "reason": "The learner must establish whether the Act reaches the scenario."
+      },
+      {
+        "lesson": "t02",
+        "reason": "The learner must identify the actor responsible for design and output marking. The learner must identify the actor using the system under its authority. The learner must distinguish operative law from interpretation and voluntary methods."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Duty allocation** starts with the actor and activity. Article 50(1) addresses providers of systems intended to interact directly with people. Article 50(2) addresses providers of systems producing synthetic content, meaning artificially generated or manipulated content.",
+        "A customer's use of the system does not erase the provider's design responsibility. A provider and deployer may be different companies or the same organisation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)-(6), Article 5, Article 26(11)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 50(3) addresses deployers using emotion recognition or biometric categorisation: people exposed to those systems must be informed, subject to the provision's conditions. Those technical categories are taught later in this course.",
+        "Article 50(4) addresses deployers of specified generated or manipulated media and public-interest text. Later lessons define the exact content tests and exceptions; do not assume every piece of text receives the same treatment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)-(6), Article 5, Article 26(11)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Cumulative duties** can operate together. An interactive content-generating assistant may trigger both provider paragraphs. Certain uses of its outputs may also trigger a deployer's duty.",
+        "Record each duty separately. Showing someone that the assistant is AI does not automatically settle how its outputs must be marked or how published content must be disclosed."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)-(6), Article 5, Article 26(11)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Article 50(6) preserves Chapter III duties for high-risk systems and other applicable Union or national transparency duties. **High-risk** means a system classified under Article 6; it can have additional requirements. This lesson identifies that boundary rather than teaching the whole classification route.",
+        "A **prohibited practice** is a use forbidden under Article 5. Disclosure cannot legalise it. For example, telling employees that a system infers emotions does not cure a prohibited workplace use. Check the prohibition before proceeding."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)-(6), Article 5, Article 26(11)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Harbour's review table records the system, actor, activity, relevant paragraph and other legal questions. A single product can occupy several rows.",
+        "For a high-risk system helping make decisions about people, Article 26(11) may require a separate deployer notification. Look up its conditions. A supplier's 'low risk' description is not permission to ignore data protection, sector rules or transparency."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(1)-(6), Article 5, Article 26(11)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["transparency-actor-allocation"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A vendor provides a generative assistant and Harbour uses its output in a campaign. How should responsibilities be analysed?",
+      "options": [
+        {
+          "blocks": "Assign each paragraph by actor and activity",
+          "correct": true,
+          "reason": "Provider and deployer duties attach to different conduct."
+        },
+        {
+          "blocks": "Assign every duty only to the customer",
+          "correct": false,
+          "reason": "Provider duties do not disappear when a customer uses the system."
+        },
+        {
+          "blocks": "Assign every duty only to the model supplier",
+          "correct": false,
+          "reason": "Downstream systems and deployers need their own analysis."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should Harbour analyse a workflow spanning the system supplier and output publisher?",
+          "options": [
+            {
+              "blocks": "Assign every duty only to the customer",
+              "correct": false,
+              "reason": "Provider duties do not disappear when a customer uses the system."
+            },
+            {
+              "blocks": "Assign every duty only to the model supplier",
+              "correct": false,
+              "reason": "Downstream systems and deployers need their own analysis."
+            },
+            {
+              "blocks": "Assign each paragraph by actor and activity",
+              "correct": true,
+              "reason": "Provider and deployer duties attach to different conduct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["cumulative-transparency-duties"],
+      "teaches": ["screen-3"],
+      "prompt": "Harbour's assistant both converses with customers and generates content. Does interaction disclosure settle all transparency duties?",
+      "options": [
+        {
+          "blocks": "Yes; one AI notice discharges every paragraph",
+          "correct": false,
+          "reason": "A notice is not automatically the required output treatment."
+        },
+        {
+          "blocks": "Yes; only one paragraph can apply per product",
+          "correct": false,
+          "reason": "The Act does not impose that exclusivity."
+        },
+        {
+          "blocks": "No; applicable duties can operate together",
+          "correct": true,
+          "reason": "The paragraphs address different activities and can be cumulative."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can one interaction notice replace the separate synthetic-output assessment?",
+          "options": [
+            {
+              "blocks": "Yes; only one paragraph can apply per product",
+              "correct": false,
+              "reason": "The Act does not impose that exclusivity."
+            },
+            {
+              "blocks": "No; applicable duties can operate together",
+              "correct": true,
+              "reason": "The paragraphs address different activities and can be cumulative."
+            },
+            {
+              "blocks": "Yes; one AI notice discharges every paragraph",
+              "correct": false,
+              "reason": "A notice is not automatically the required output treatment."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["cumulative-transparency-duties"],
+      "teaches": ["screen-4", "screen-5"],
+      "prompt": "A proposed use is prohibited under Article 5. Harbour offers to add a prominent AI notice. What follows?",
+      "options": [
+        {
+          "blocks": "High-risk classification cancels the prohibition",
+          "correct": false,
+          "reason": "Classification does not legitimise a forbidden use."
+        },
+        {
+          "blocks": "The prohibition still prevents the use",
+          "correct": true,
+          "reason": "Transparency does not remove a prohibition."
+        },
+        {
+          "blocks": "The notice authorises the prohibited activity",
+          "correct": false,
+          "reason": "Disclosure is not a legal permission."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does disclosure make an otherwise prohibited AI use lawful?",
+          "options": [
+            {
+              "blocks": "The prohibition still prevents the use",
+              "correct": true,
+              "reason": "Transparency does not remove a prohibition."
+            },
+            {
+              "blocks": "The notice authorises the prohibited activity",
+              "correct": false,
+              "reason": "Disclosure is not a legal permission."
+            },
+            {
+              "blocks": "High-risk classification cancels the prohibition",
+              "correct": false,
+              "reason": "Classification does not legitimise a forbidden use."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

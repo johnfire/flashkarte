@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "awaiting-owner-graph-review",
+  "status": "owner-approved-authored-testing",
   "checked_on": "2026-10-06",
   "title": "EU AI Act: Article 50 Transparency in Practice",
   "canonical_language": "en",
@@ -27,7 +27,7 @@
       "tier": "core",
       "name": "Recognise an AI system",
       "assessment": "Distinguish an inference-based system from a simple fixed rule in a supplied case.",
-      "source_locator": "Article 3(1); Guidelines paragraphs 11-24",
+      "source_locator": "Article 3(1); Guidelines paragraph 30",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -62,7 +62,7 @@
       "kind": "term",
       "tier": "core",
       "name": "Deployer",
-      "assessment": "Identify use under an actor\u2019s authority and the personal non-professional exclusion.",
+      "assessment": "Identify use under an actor’s authority and the personal non-professional exclusion.",
       "source_locator": "Article 3(4); Article 2(10)",
       "source_ids": ["AI-C-EN"]
     },
@@ -72,7 +72,7 @@
       "tier": "core",
       "name": "Law, guidance and voluntary methods",
       "assessment": "Rank an operative provision, interpretative guidance and a voluntary Code in a conflict.",
-      "source_locator": "Articles 50(7), 96; Guidelines paragraph 10",
+      "source_locator": "Articles 50(7), 96; Guidelines paragraph 5",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -90,7 +90,7 @@
       "tier": "core",
       "name": "Duties can apply together",
       "assessment": "Identify concurrent duties and explain why disclosure does not cure a prohibited use or replace other law.",
-      "source_locator": "Article 50(6); Guidelines paragraphs 15-16, 25",
+      "source_locator": "Article 50(6); Guidelines paragraphs 8, 15, 25",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -99,7 +99,7 @@
       "tier": "core",
       "name": "Direct AI interaction",
       "assessment": "Distinguish conversational exchange from passive processing and genuinely human-mediated communication.",
-      "source_locator": "Article 50(1); Guidelines paragraphs 28-30, 32-42",
+      "source_locator": "Article 50(1); Guidelines paragraphs 28-30, 32-40",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -108,7 +108,7 @@
       "tier": "core",
       "name": "Assess obviousness",
       "assessment": "Evaluate the informed, observant and circumspect person standard in context rather than assuming every chatbot is obvious.",
-      "source_locator": "Article 50(1); Guidelines paragraphs 43-52",
+      "source_locator": "Article 50(1); Guidelines paragraphs 42-45",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -117,14 +117,14 @@
       "tier": "core",
       "name": "Check the interaction law-enforcement exception",
       "assessment": "Require legal authorisation and safeguards and restore disclosure for a public offence-reporting service.",
-      "source_locator": "Article 50(1); Guidelines paragraphs 53-54",
+      "source_locator": "Article 50(1); Guidelines paragraphs 46-49",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
       "slug": "agent-principal-disclosure",
       "kind": "idea",
       "tier": "core",
-      "name": "Identify an agent\u2019s principal",
+      "name": "Identify an agent’s principal",
       "assessment": "Choose disclosure of AI nature and the person represented, identifying the latter as Commission guidance.",
       "source_locator": "Guidelines paragraph 31",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
@@ -144,7 +144,7 @@
       "tier": "core",
       "name": "Clear disclosure at first interaction or exposure",
       "assessment": "Reject hidden, delayed or ambiguous notifications in a supplied interface.",
-      "source_locator": "Article 50(5); Guidelines paragraphs 137-143",
+      "source_locator": "Article 50(5); Guidelines paragraphs 141-143",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -242,7 +242,7 @@
       "kind": "skill",
       "tier": "core",
       "name": "Verify downstream marking responsibility",
-      "assessment": "Check whether an upstream route survives the product pipeline and meets the downstream provider\u2019s own duty.",
+      "assessment": "Check whether an upstream route survives the product pipeline and meets the downstream provider’s own duty.",
       "source_locator": "Guidelines paragraphs 71-74; Code Section 1 Measures 1.2, 2.1, 3.4",
       "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
     },
@@ -288,7 +288,7 @@
       "tier": "core",
       "name": "Emotion recognition system",
       "assessment": "Identify inference of emotion or intention from biometric data, distinguishing fatigue and ordinary text sentiment.",
-      "source_locator": "Article 3(39); Recital 18; Guidelines paragraphs 99-103",
+      "source_locator": "Article 3(39); Recital 18; Guidelines paragraphs 99-102",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -297,7 +297,7 @@
       "tier": "core",
       "name": "Biometric categorisation system",
       "assessment": "Identify category assignment based on biometric data and the ancillary-service carve-out in the definition.",
-      "source_locator": "Article 3(40); Guidelines paragraphs 104-106",
+      "source_locator": "Article 3(40); Guidelines paragraphs 103-104",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -306,7 +306,7 @@
       "tier": "core",
       "name": "Disclose biometric exposure lawfully",
       "assessment": "Inform exposed people, check applicable data law and the narrow authorised law-enforcement allowance without treating disclosure as permission.",
-      "source_locator": "Article 50(3), (6); Article 5; Guidelines paragraphs 94-110",
+      "source_locator": "Article 50(3), (6); Article 5; Guidelines paragraphs 105-110",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -324,7 +324,7 @@
       "tier": "core",
       "name": "Assess false authenticity in context",
       "assessment": "Distinguish resemblance, possible subjects and a false appearance of authenticity using the dissemination context.",
-      "source_locator": "Guidelines paragraphs 111-119",
+      "source_locator": "Guidelines paragraphs 113-116",
       "source_ids": ["AI-C-EN", "A50-GUIDE", "OMN-EN"]
     },
     {
@@ -333,7 +333,7 @@
       "tier": "core",
       "name": "Disclose creative and similar works",
       "assessment": "Choose appropriate disclosure that preserves enjoyment; do not treat art, satire or fiction as a total exemption.",
-      "source_locator": "Article 50(4), first subparagraph; Guidelines paragraphs 120-126; Code Section 2 Commitment 3",
+      "source_locator": "Article 50(4), first subparagraph; Guidelines paragraphs 119-124; Code Section 2 Commitment 3",
       "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
     },
     {
@@ -342,7 +342,7 @@
       "tier": "core",
       "name": "Check the deepfake law-enforcement exception",
       "assessment": "Require authorised detection, prevention, investigation or prosecution; distinguish this from the different paragraph 3 wording.",
-      "source_locator": "Article 50(4), first subparagraph; Guidelines paragraph 127",
+      "source_locator": "Article 50(4), first subparagraph; Guidelines paragraph 125",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -351,7 +351,7 @@
       "tier": "core",
       "name": "Matter of public interest",
       "assessment": "Assess a societal-information context rather than assuming all recipes or all company communication qualify.",
-      "source_locator": "Guidelines paragraphs 128-132",
+      "source_locator": "Guidelines paragraphs 130-131",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -360,7 +360,7 @@
       "tier": "core",
       "name": "Assess the public-interest text duty",
       "assessment": "Combine AI generation or manipulation, publication and the informing purpose; distinguish internal correspondence and the authorised law-enforcement exception.",
-      "source_locator": "Article 50(4), second subparagraph; Guidelines paragraphs 128-133",
+      "source_locator": "Article 50(4), second subparagraph; Guidelines paragraphs 130-132",
       "source_ids": ["AI-C-EN", "A50-GUIDE"]
     },
     {
@@ -378,7 +378,7 @@
       "tier": "core",
       "name": "Editorial responsibility",
       "assessment": "Identify the natural or legal person accountable for publication without substituting AI review for human accountability.",
-      "source_locator": "Article 50(4), second subparagraph; Code Section 2 Commitment 4",
+      "source_locator": "Article 50(4), second subparagraph; Guidelines paragraph 138; Code Section 2 Commitment 4",
       "source_ids": ["AI-C-EN", "A50-CODE"]
     },
     {
@@ -396,7 +396,7 @@
       "tier": "core",
       "name": "Publication decision case exercise",
       "assessment": "Resolve a campaign with an avatar, synthetic interview and public-interest report; allocate duties, check lawful use and evidence proportionate disclosures.",
-      "source_locator": "Article 50(1)-(7); Code Sections 1-2",
+      "source_locator": "Article 50(2)-(7); Code Sections 1-2",
       "source_ids": ["AI-C-EN", "A50-CODE"]
     }
   ],
@@ -687,7 +687,7 @@
       "parent": "downstream-marking-responsibility",
       "child": "transparency-compliance-evidence",
       "kind": "requires",
-      "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+      "reason": "The learner must retain the product provider’s responsibility through upstream handoffs."
     },
     {
       "parent": "marking-method-tradeoff",
@@ -705,7 +705,7 @@
       "parent": "downstream-marking-responsibility",
       "child": "provenance-workflow-capstone",
       "kind": "requires",
-      "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+      "reason": "The learner must retain the product provider’s responsibility through upstream handoffs."
     },
     {
       "parent": "transparency-compliance-evidence",
@@ -1098,7 +1098,7 @@
         },
         {
           "lesson_id": "T10",
-          "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+          "reason": "The learner must retain the product provider’s responsibility through upstream handoffs."
         }
       ]
     },
@@ -1115,7 +1115,7 @@
         },
         {
           "lesson_id": "T10",
-          "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+          "reason": "The learner must retain the product provider’s responsibility through upstream handoffs."
         },
         {
           "lesson_id": "T11",
@@ -1245,5 +1245,6 @@
         }
       ]
     }
-  ]
+  ],
+  "owner_approved_on": "2026-10-06"
 }

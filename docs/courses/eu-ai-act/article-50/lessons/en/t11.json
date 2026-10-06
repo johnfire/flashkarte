@@ -1,0 +1,288 @@
+{
+  "module": "Mark synthetic outputs and verify detection",
+  "lesson": {
+    "slug": "t11",
+    "title": "Use the Code and build proportionate evidence",
+    "summary": "Understand Code adequacy and maintain evidence of implemented marking and disclosure measures.",
+    "covers": ["transparency-code-status", "transparency-compliance-evidence"],
+    "prerequisites": [
+      {
+        "lesson": "t02",
+        "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+      },
+      {
+        "lesson": "t03",
+        "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+      },
+      {
+        "lesson": "t09",
+        "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+      },
+      {
+        "lesson": "t10",
+        "reason": "The learner must retain the product provider’s responsibility through upstream handoffs."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Article 50(7) says the **Commission** encourages and facilitates Union-level Codes for detection, marking and labelling. Under the amended provision it assesses adequacy taking utmost account of the Board's opinion, through Article 56(6)'s procedure.",
+        "If a Code is inadequate, the Commission may adopt an implementing act specifying common implementation rules through Article 98(2). Older documents describe the previous assessment procedure; do not replace amended law with that earlier account."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(7), Article 56(6); Guidelines paragraphs 146-150",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        },
+        {
+          "title": "Commission Opinion C(2026) 4839 final, conclusion 52: adequacy assessment",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The final Transparency Code has a provider section for marking/detection and a deployer section for deepfakes and specified published text. It is not a complete implementation manual for every Article 50 activity.",
+        "The Commission's July adequacy assessment concludes it supports effective implementation of paragraphs 2, 4 and 5. Adherence is not conclusive evidence of compliance. Authorities can still examine whether the measures were actually implemented."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(7), Article 56(6); Guidelines paragraphs 146-150",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        },
+        {
+          "title": "Commission Opinion C(2026) 4839 final, conclusion 52: adequacy assessment",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Signing is voluntary. Within the Code, **will** identifies mandatory commitments for the route a signatory relies on; **encouraged** identifies optional recommended measures; **may** permits optional measures or implementation flexibility.",
+        "For example, richer provenance information and additional forensic detection are encouraged or optional in the provider section. Do not convert those recommendations into standalone statutory requirements for everyone."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(7), Article 56(6); Guidelines paragraphs 146-150",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        },
+        {
+          "title": "Commission Opinion C(2026) 4839 final, conclusion 52: adequacy assessment",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Compliance evidence** shows how the implementation meets the duty: a high-level process description, tests, limitations, preservation and detection arrangements, responsible people and maintenance.",
+        "The Code's provider section requires ongoing testing and verification proportionate to circumstances. Its deployer section addresses internal processes, awareness, feedback, correction of substantiated mislabelling and cooperation with authorities."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(7), Article 56(6); Guidelines paragraphs 146-150",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        },
+        {
+          "title": "Commission Opinion C(2026) 4839 final, conclusion 52: adequacy assessment",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Harbour's supplier has signed, but its detector is unavailable and no export test exists. A signature cannot fill those evidential gaps. Keep a documented correction process and retest when the implementation changes.",
+        "Non-signatories can demonstrate compliance by adequate alternative means. Commission guidance suggests comparing those measures with the Code to identify gaps; a voluntary route does not remove the underlying legal duty."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(7), Article 56(6); Guidelines paragraphs 146-150",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        },
+        {
+          "title": "Commission Opinion C(2026) 4839 final, conclusion 52: adequacy assessment",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["transparency-code-status"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "An older slide describes the Code assessment procedure differently from amended Article 50(7). Which basis should Harbour use?",
+      "options": [
+        {
+          "blocks": "The operative amended provision",
+          "correct": true,
+          "reason": "The Commission assesses with utmost account of the Board opinion under the current procedure."
+        },
+        {
+          "blocks": "The slide because it is easier to read",
+          "correct": false,
+          "reason": "Presentation convenience does not confer legal authority."
+        },
+        {
+          "blocks": "The supplier's preferred description",
+          "correct": false,
+          "reason": "A commercial claim does not amend the procedure."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which source governs the current Code adequacy procedure when an older presentation conflicts with amended law?",
+          "options": [
+            {
+              "blocks": "The slide because it is easier to read",
+              "correct": false,
+              "reason": "Presentation convenience does not confer legal authority."
+            },
+            {
+              "blocks": "The supplier's preferred description",
+              "correct": false,
+              "reason": "A commercial claim does not amend the procedure."
+            },
+            {
+              "blocks": "The operative amended provision",
+              "correct": true,
+              "reason": "The Commission assesses with utmost account of the Board opinion under the current procedure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["transparency-code-status"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "Harbour's supplier has signed the Code. Does that conclusively establish compliance?",
+      "options": [
+        {
+          "blocks": "An exemption from every authority investigation",
+          "correct": false,
+          "reason": "Authorities retain verification and enforcement powers."
+        },
+        {
+          "blocks": "A requirement to implement every encouraged measure",
+          "correct": false,
+          "reason": "The Code distinguishes commitments from optional recommendations."
+        },
+        {
+          "blocks": "A recognised demonstration route, still subject to verification",
+          "correct": true,
+          "reason": "The assessment expressly does not make adherence conclusive evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Code adherence establish about actual implementation?",
+          "options": [
+            {
+              "blocks": "A requirement to implement every encouraged measure",
+              "correct": false,
+              "reason": "The Code distinguishes commitments from optional recommendations."
+            },
+            {
+              "blocks": "A recognised demonstration route, still subject to verification",
+              "correct": true,
+              "reason": "The assessment expressly does not make adherence conclusive evidence."
+            },
+            {
+              "blocks": "An exemption from every authority investigation",
+              "correct": false,
+              "reason": "Authorities retain verification and enforcement powers."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["transparency-compliance-evidence"],
+      "teaches": ["screen-4", "screen-5"],
+      "prompt": "The supplier's detector is unavailable and Harbour has no export test, but it has a signature certificate. Which response fits?",
+      "options": [
+        {
+          "blocks": "Abandon assessment because adherence is voluntary",
+          "correct": false,
+          "reason": "Voluntary adherence does not make the statutory duty optional."
+        },
+        {
+          "blocks": "Document and repair the detection and workflow gaps",
+          "correct": true,
+          "reason": "Actual implementation and correction evidence matter."
+        },
+        {
+          "blocks": "Treat the certificate as replacing technical evidence",
+          "correct": false,
+          "reason": "Signing does not prove measures function in this workflow."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should Harbour do when the evidence route has gaps despite Code adherence?",
+          "options": [
+            {
+              "blocks": "Document and repair the detection and workflow gaps",
+              "correct": true,
+              "reason": "Actual implementation and correction evidence matter."
+            },
+            {
+              "blocks": "Treat the certificate as replacing technical evidence",
+              "correct": false,
+              "reason": "Signing does not prove measures function in this workflow."
+            },
+            {
+              "blocks": "Abandon assessment because adherence is voluntary",
+              "correct": false,
+              "reason": "Voluntary adherence does not make the statutory duty optional."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

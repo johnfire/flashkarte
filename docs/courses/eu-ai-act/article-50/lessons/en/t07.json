@@ -1,0 +1,268 @@
+{
+  "module": "Mark synthetic outputs and verify detection",
+  "lesson": {
+    "slug": "t07",
+    "title": "Synthetic outputs: marks, labels and detection",
+    "summary": "Recognise synthetic content and distinguish machine-readable marks, human labels and detection.",
+    "covers": [
+      "synthetic-content",
+      "marking-label-distinction",
+      "marking-detection-pair"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "t01",
+        "reason": "The learner must recognise the regulated system before applying this rule."
+      },
+      {
+        "lesson": "t02",
+        "reason": "The learner must identify the actor responsible for design and output marking."
+      },
+      {
+        "lesson": "t03",
+        "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Synthetic content** is content artificially generated or manipulated by an AI system. Article 50(2) addresses audio, images, video and text, including outputs of general-purpose AI systems.",
+        "Harbour's system generates a voice clip and a text answer. Both need the paragraph 2 analysis. Realism, public publication or a deceptive purpose is not a universal condition of this provider duty."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(4)-(5); Guidelines paragraphs 55-77",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Machine-readable marking** embeds or attaches information that a machine can use to recognise artificial generation or manipulation. A **visible disclosure** tells people about AI involvement in a way they can perceive.",
+        "These serve different duties. A visible 'AI' badge alone does not necessarily provide a machine-readable marker and a detection route. A hidden machine-readable marker alone does not necessarily give the person the required disclosure."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(4)-(5); Guidelines paragraphs 55-77",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **detection mechanism** reads or verifies the relevant marking. Pair the marker with a route capable of identifying it. A signed metadata record can have a verifier; a watermark needs a compatible detector.",
+        "Metadata is information attached to a file. A digital signature helps verify its origin and integrity. A watermark places a marker within the content itself. Later lessons examine their different limits."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(4)-(5); Guidelines paragraphs 55-77",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The Code's provider section addresses access to detection, readable results and privacy/security protections. For example, detection of metadata and public detection of non-free-form-text watermarks are generally offered free; specific exceptions and access conditions must be checked in Measure 2.1.",
+        "For upload-based detection, Code Sub-measure 2.1.3 addresses confidentiality, minimisation and deletion of uploaded content immediately after detection; limited minimal security/abuse logs have distinct conditions. A verbatim copy is not retained. An AI-detection website guessing from style is not automatically a detector for the provider's marker. Such forensic detection examines characteristics without requiring a prior mark; it can err and is not the same evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(4)-(5); Guidelines paragraphs 55-77",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "A detection result should explain what was detected clearly and accessibly. It does not certify that the content is accurate, lawful or harmless.",
+        "In Harbour's review, first identify the paragraph 2 output, then its marker, its detection route and what the result actually establishes. Preserve the separate deployer disclosure analysis for later use."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 50(2), 50(4)-(5); Guidelines paragraphs 55-77",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission Article 50 Guidelines C(2026) 5054 final; non-binding interpretation",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems"
+        },
+        {
+          "title": "Final Transparency Code, 10 June 2026; voluntary implementation framework",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["synthetic-content"],
+      "teaches": ["screen-1"],
+      "prompt": "Harbour's system generates a text answer that is not publicly published. Does the absence of publication alone remove the paragraph 2 analysis?",
+      "options": [
+        {
+          "blocks": "No; assess synthetic output under paragraph 2",
+          "correct": true,
+          "reason": "This provider duty is distinct from the public-interest publication rule."
+        },
+        {
+          "blocks": "Yes; every marking duty begins at publication",
+          "correct": false,
+          "reason": "That imports a condition from a different duty."
+        },
+        {
+          "blocks": "Yes; only realistic images are covered",
+          "correct": false,
+          "reason": "Paragraph 2 also covers audio, video and text."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is public publication a universal prerequisite for provider marking of synthetic text?",
+          "options": [
+            {
+              "blocks": "Yes; every marking duty begins at publication",
+              "correct": false,
+              "reason": "That imports a condition from a different duty."
+            },
+            {
+              "blocks": "Yes; only realistic images are covered",
+              "correct": false,
+              "reason": "Paragraph 2 also covers audio, video and text."
+            },
+            {
+              "blocks": "No; assess synthetic output under paragraph 2",
+              "correct": true,
+              "reason": "This provider duty is distinct from the public-interest publication rule."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["marking-label-distinction"],
+      "teaches": ["screen-2"],
+      "prompt": "Harbour adds an AI badge to an image but cannot identify any machine-readable marker. What remains unresolved?",
+      "options": [
+        {
+          "blocks": "Only the badge's decorative style",
+          "correct": false,
+          "reason": "The missing technical treatment is substantive."
+        },
+        {
+          "blocks": "Nothing; a badge automatically meets every duty",
+          "correct": false,
+          "reason": "Visibility does not establish machine-readable detectability."
+        },
+        {
+          "blocks": "The provider's machine-marking and detection duties",
+          "correct": true,
+          "reason": "Human disclosure and machine-readable marking are distinct."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a human-visible AI badge alone establish machine-readable marking and detection?",
+          "options": [
+            {
+              "blocks": "Nothing; a badge automatically meets every duty",
+              "correct": false,
+              "reason": "Visibility does not establish machine-readable detectability."
+            },
+            {
+              "blocks": "The provider's machine-marking and detection duties",
+              "correct": true,
+              "reason": "Human disclosure and machine-readable marking are distinct."
+            },
+            {
+              "blocks": "Only the badge's decorative style",
+              "correct": false,
+              "reason": "The missing technical treatment is substantive."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["marking-detection-pair"],
+      "teaches": ["screen-3", "screen-4", "screen-5"],
+      "prompt": "A website guesses Harbour's answer is AI-written, but cannot verify the supplier's marker. What does that establish?",
+      "options": [
+        {
+          "blocks": "Proof that every factual statement is correct",
+          "correct": false,
+          "reason": "AI-origin detection says nothing decisive about truth."
+        },
+        {
+          "blocks": "A forensic estimate, not verification of that marker",
+          "correct": true,
+          "reason": "Forensic inference and mark detection are different mechanisms."
+        },
+        {
+          "blocks": "Proof that the answer is legally compliant",
+          "correct": false,
+          "reason": "The result does not establish all legal conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a style-based detector verify the actual provider marking by itself?",
+          "options": [
+            {
+              "blocks": "A forensic estimate, not verification of that marker",
+              "correct": true,
+              "reason": "Forensic inference and mark detection are different mechanisms."
+            },
+            {
+              "blocks": "Proof that the answer is legally compliant",
+              "correct": false,
+              "reason": "The result does not establish all legal conditions."
+            },
+            {
+              "blocks": "Proof that every factual statement is correct",
+              "correct": false,
+              "reason": "AI-origin detection says nothing decisive about truth."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
