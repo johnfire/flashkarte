@@ -196,11 +196,11 @@ Lesson targets: P03, P04, P05.
 
 [Official source](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems). Status: **adopted-non-binding-guidance**.
 
-Reading: Publication page checked; retained PDF identity and selected paragraphs 11-14, 25-31, 111-116 read. Full reading pending; predates the 27 July 2026 amendment.
+Reading: English Guidelines paragraphs 1-155 read for this Article 50 graph; used as non-binding interpretation. Operative law checked against the later 27 July consolidation; earlier statements about Article 4 and assessment procedure are not copied as current law.
 
 Version: C(2026) 5054 final. Publication: 2026-07-20. Checked: 2026-10-06.
 
-Lesson targets: I06, Article 50 follow-on.
+Lesson targets: I06, Article 50 follow-on, T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18.
 
 Retained: [sources/article-50-guidelines-en.pdf](sources/article-50-guidelines-en.pdf). SHA-256: `30861fc5de31205846f023068069c92fabc7271ebeac6af7bef68b97f0a33f66`.
 
@@ -208,11 +208,13 @@ Retained: [sources/article-50-guidelines-en.pdf](sources/article-50-guidelines-e
 
 [Official source](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content). Status: **final-voluntary-code**.
 
-Reading: Official publication and policy pages read; final publication date, two-section structure and adequacy confirmation checked. Full Code and adequacy assessment not yet read.
+Reading: Both sections and glossary read in English. Commitments, optional measures, technical limitations and editorial policies reviewed. Not a technology conformance audit.
 
-Version: Final version. Publication: 2026-06-10. Checked: 2026-10-06.
+Version: Final Code, 10 June 2026. Publication: 2026-06-10. Checked: 2026-10-06.
 
-Lesson targets: Article 50 follow-on.
+Lesson targets: T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18.
+
+Retained: [sources/article-50-code-en.pdf](sources/article-50-code-en.pdf). SHA-256: `7bd22c5a3c56eaefda27a5bf7a6118198ef2a9c9255241bd97abf7cdedf9bc28`.
 
 ## MDR — Medical Devices Regulation (EU) 2017/745 (en)
 
@@ -269,3 +271,27 @@ Version: See publication page. Publication: 2026-05-19. Checked: 2026-10-06.
 Lesson targets: P06, E01, E02, E03, E04, E05.
 
 Retained: [sources/classification-annex-iii-draft-en.pdf](sources/classification-annex-iii-draft-en.pdf). SHA-256: `b1df0ffb30310e126c7e060e03c9b5aab97c0a2ab61a2f3e3e00ede3655e2792`.
+
+## A50-OPINION — Commission Opinion C(2026) 4839 final (en)
+
+[Official source](https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content). Status: **official-non-binding-adequacy-assessment**.
+
+Reading: Legal basis paragraphs 1-9 and conclusion 52 read; remaining detailed assessment not fully read. Confirms adequacy without conclusive evidence of compliance.
+
+Version: Commission Opinion C(2026) 4839 final. Publication: 2026-07-08. Checked: 2026-10-06.
+
+Lesson targets: T11.
+
+Retained: [sources/article-50-commission-opinion-en.pdf](sources/article-50-commission-opinion-en.pdf). SHA-256: `e9b85373cde28a6081fab307fa17fa4c90c2560a1c9a145fb461f696bca424ce`.
+
+## A50-BOARD — AI Board assessment of the Transparency Code (en)
+
+[Official source](https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content). Status: **official-non-binding-adequacy-assessment**.
+
+Reading: Introduction, role, scope of adequacy assessment and conclusion read; not a complete line-by-line reading of the assessment.
+
+Version: AI Board assessment of the Transparency Code. Publication: 2026-07-09. Checked: 2026-10-06.
+
+Lesson targets: T11.
+
+Retained: [sources/article-50-board-assessment-en.pdf](sources/article-50-board-assessment-en.pdf). SHA-256: `a01d832e0d4b10ebb66d27d0e8cf621aabb18aa56e5c24d39d6b4000a9adfcd2`.

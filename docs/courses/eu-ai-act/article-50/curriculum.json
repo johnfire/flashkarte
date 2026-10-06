@@ -1,0 +1,1249 @@
+{
+  "schema_version": 1,
+  "status": "awaiting-owner-graph-review",
+  "checked_on": "2026-10-06",
+  "title": "EU AI Act: Article 50 Transparency in Practice",
+  "canonical_language": "en",
+  "initial_languages": ["en"],
+  "source_baseline": "02024R1689-20260727",
+  "modules": [
+    {
+      "id": "N0",
+      "title": "Identify actors and design interaction disclosure"
+    },
+    {
+      "id": "N1",
+      "title": "Mark synthetic outputs and verify detection"
+    },
+    {
+      "id": "N2",
+      "title": "Disclose biometric exposure and published content"
+    }
+  ],
+  "concepts": [
+    {
+      "slug": "ai-system",
+      "kind": "term",
+      "tier": "core",
+      "name": "Recognise an AI system",
+      "assessment": "Distinguish an inference-based system from a simple fixed rule in a supplied case.",
+      "source_locator": "Article 3(1); Guidelines paragraphs 11-24",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "gpai-model",
+      "kind": "term",
+      "tier": "core",
+      "name": "Distinguish a model from a system",
+      "assessment": "Identify whether a supplier provides a model or an operated system.",
+      "source_locator": "Article 3(63), (66); Guidelines paragraphs 26-27",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "eu-scope-test",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Check the EU connection",
+      "assessment": "Apply EU placement, establishment or output-use connections without treating private use or open source as universal exemptions.",
+      "source_locator": "Article 2(1), (10), (12)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "provider",
+      "kind": "term",
+      "tier": "core",
+      "name": "Provider",
+      "assessment": "Identify development and market/service placement under a name or trademark, including own-use service.",
+      "source_locator": "Article 3(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "deployer",
+      "kind": "term",
+      "tier": "core",
+      "name": "Deployer",
+      "assessment": "Identify use under an actor\u2019s authority and the personal non-professional exclusion.",
+      "source_locator": "Article 3(4); Article 2(10)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "legal-source-authority",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Law, guidance and voluntary methods",
+      "assessment": "Rank an operative provision, interpretative guidance and a voluntary Code in a conflict.",
+      "source_locator": "Articles 50(7), 96; Guidelines paragraph 10",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "transparency-actor-allocation",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Allocate the transparency duties",
+      "assessment": "Assign paragraphs 1-2 to providers and 3-4 to deployers in a two-company workflow.",
+      "source_locator": "Article 50(1)-(4)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "cumulative-transparency-duties",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Duties can apply together",
+      "assessment": "Identify concurrent duties and explain why disclosure does not cure a prohibited use or replace other law.",
+      "source_locator": "Article 50(6); Guidelines paragraphs 15-16, 25",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "direct-ai-interaction",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Direct AI interaction",
+      "assessment": "Distinguish conversational exchange from passive processing and genuinely human-mediated communication.",
+      "source_locator": "Article 50(1); Guidelines paragraphs 28-30, 32-42",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "obviousness-assessment",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Assess obviousness",
+      "assessment": "Evaluate the informed, observant and circumspect person standard in context rather than assuming every chatbot is obvious.",
+      "source_locator": "Article 50(1); Guidelines paragraphs 43-52",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "interaction-law-enforcement-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Check the interaction law-enforcement exception",
+      "assessment": "Require legal authorisation and safeguards and restore disclosure for a public offence-reporting service.",
+      "source_locator": "Article 50(1); Guidelines paragraphs 53-54",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "agent-principal-disclosure",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Identify an agent\u2019s principal",
+      "assessment": "Choose disclosure of AI nature and the person represented, identifying the latter as Commission guidance.",
+      "source_locator": "Guidelines paragraph 31",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "agent-supervisor-disclosure",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Disclose at supervisory steps",
+      "assessment": "Plan disclosures at authorisation, reporting, validation and new interactions, including uncertain downstream human contact.",
+      "source_locator": "Guidelines paragraph 31",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "disclosure-timing-clarity",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Clear disclosure at first interaction or exposure",
+      "assessment": "Reject hidden, delayed or ambiguous notifications in a supplied interface.",
+      "source_locator": "Article 50(5); Guidelines paragraphs 137-143",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "accessible-disclosure-design",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Accessible disclosure",
+      "assessment": "Identify applicable accessibility requirements and select perceivable disclosure across visual and audio contexts.",
+      "source_locator": "Article 50(5); Guidelines paragraph 144; Code Section 2 Measure 1.1",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
+    },
+    {
+      "slug": "interaction-disclosure-capstone",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Interaction disclosure case exercise",
+      "assessment": "Resolve an agent hotline scenario using actor, obviousness, exception, supervisor and accessibility checks.",
+      "source_locator": "Article 50(1), (5); Guidelines paragraph 31",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "synthetic-content",
+      "kind": "term",
+      "tier": "core",
+      "name": "Synthetic content",
+      "assessment": "Classify generated or manipulated audio, images, video and text without equating all outputs with deepfakes.",
+      "source_locator": "Article 50(2); Guidelines paragraphs 55-68",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "marking-label-distinction",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Machine-readable marking versus visible disclosure",
+      "assessment": "Explain why a human-visible AI badge does not itself supply machine-readable marking and detection.",
+      "source_locator": "Article 50(2), (4); Guidelines paragraphs 69-77",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "marking-detection-pair",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Marking and its detection mechanism",
+      "assessment": "Pair a marker with a usable verification route; do not treat a generic forensic guess as proof of provider marking.",
+      "source_locator": "Article 50(2); Code Section 1 Commitments 1-2",
+      "source_ids": ["AI-C-EN", "A50-CODE"]
+    },
+    {
+      "slug": "assistive-editing-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Assess editing and alteration exceptions",
+      "assessment": "Distinguish standard assistance and no substantial alteration of input or semantics from substantive generated changes.",
+      "source_locator": "Article 50(2), sentence 3; Guidelines paragraphs 89-92",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "marking-law-enforcement-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Check the marking law-enforcement exception",
+      "assessment": "Require legal authorisation to detect, prevent, investigate or prosecute rather than accepting a claimed purpose alone.",
+      "source_locator": "Article 50(2), sentence 3; Guidelines paragraph 93",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "technical-quality-assessment",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Assess technical quality",
+      "assessment": "Evaluate effectiveness, interoperability, robustness and reliability with feasibility, costs and state of the art.",
+      "source_locator": "Article 50(2), sentence 2; Guidelines paragraphs 78-88",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "marking-method-tradeoff",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Compare marking methods",
+      "assessment": "Compare signed metadata and watermarking through preservation and detection tests; separate Code commitments from optional methods.",
+      "source_locator": "Code Section 1 Measures 1.1-1.3, 2.1-2.3, 3.1-3.4",
+      "source_ids": ["AI-C-EN", "A50-CODE"]
+    },
+    {
+      "slug": "modality-feasibility-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Assess modality-specific feasibility",
+      "assessment": "Distinguish free-form versus containerised text and short-text feasibility without inventing a statutory 200-token exemption.",
+      "source_locator": "Guidelines paragraphs 64-68, 87-88; Code Section 1 glossary",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
+    },
+    {
+      "slug": "downstream-marking-responsibility",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Verify downstream marking responsibility",
+      "assessment": "Check whether an upstream route survives the product pipeline and meets the downstream provider\u2019s own duty.",
+      "source_locator": "Guidelines paragraphs 71-74; Code Section 1 Measures 1.2, 2.1, 3.4",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
+    },
+    {
+      "slug": "marking-transition-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Apply the targeted transition",
+      "assessment": "Apply 2 December 2026 only to paragraph 2 for systems placed on the market or in service before 2 August; keep other duties on their own dates.",
+      "source_locator": "Articles 111(4), 113; Guidelines paragraphs 153-154",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "OMN-EN"]
+    },
+    {
+      "slug": "transparency-code-status",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Status and scope of the Transparency Code",
+      "assessment": "Explain voluntary adherence, mandatory versus encouraged measures within the Code, adequacy assessment and non-conclusive compliance evidence.",
+      "source_locator": "Article 50(7); Code Sections 1-2; Commission Opinion conclusion 52",
+      "source_ids": ["AI-C-EN", "A50-CODE", "A50-OPINION"]
+    },
+    {
+      "slug": "transparency-compliance-evidence",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Keep proportionate compliance evidence",
+      "assessment": "Select implementation records, detection tests and incident corrections rather than relying on a signature or marketing statement alone.",
+      "source_locator": "Guidelines paragraphs 146-149; Code Section 1 Commitment 4, Section 2 Commitment 2",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
+    },
+    {
+      "slug": "provenance-workflow-capstone",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Provenance workflow case exercise",
+      "assessment": "Trace generated output through edits, exports and publication; identify failed marks, detectors and responsibility handoffs.",
+      "source_locator": "Article 50(2), (5)-(7); Code Section 1 Commitments 1-4",
+      "source_ids": ["AI-C-EN", "A50-CODE"]
+    },
+    {
+      "slug": "emotion-recognition-system",
+      "kind": "term",
+      "tier": "core",
+      "name": "Emotion recognition system",
+      "assessment": "Identify inference of emotion or intention from biometric data, distinguishing fatigue and ordinary text sentiment.",
+      "source_locator": "Article 3(39); Recital 18; Guidelines paragraphs 99-103",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "biometric-categorisation-system",
+      "kind": "term",
+      "tier": "core",
+      "name": "Biometric categorisation system",
+      "assessment": "Identify category assignment based on biometric data and the ancillary-service carve-out in the definition.",
+      "source_locator": "Article 3(40); Guidelines paragraphs 104-106",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "biometric-exposure-disclosure",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Disclose biometric exposure lawfully",
+      "assessment": "Inform exposed people, check applicable data law and the narrow authorised law-enforcement allowance without treating disclosure as permission.",
+      "source_locator": "Article 50(3), (6); Article 5; Guidelines paragraphs 94-110",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "deepfake",
+      "kind": "term",
+      "tier": "core",
+      "name": "Deepfake",
+      "assessment": "Apply the image/audio/video definition rather than assuming every realistic synthetic output or text is a deepfake.",
+      "source_locator": "Article 3(60); Article 50(4), first subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "slug": "false-authenticity-assessment",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Assess false authenticity in context",
+      "assessment": "Distinguish resemblance, possible subjects and a false appearance of authenticity using the dissemination context.",
+      "source_locator": "Guidelines paragraphs 111-119",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "OMN-EN"]
+    },
+    {
+      "slug": "creative-work-disclosure",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Disclose creative and similar works",
+      "assessment": "Choose appropriate disclosure that preserves enjoyment; do not treat art, satire or fiction as a total exemption.",
+      "source_locator": "Article 50(4), first subparagraph; Guidelines paragraphs 120-126; Code Section 2 Commitment 3",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
+    },
+    {
+      "slug": "deepfake-law-enforcement-check",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Check the deepfake law-enforcement exception",
+      "assessment": "Require authorised detection, prevention, investigation or prosecution; distinguish this from the different paragraph 3 wording.",
+      "source_locator": "Article 50(4), first subparagraph; Guidelines paragraph 127",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "public-interest-matter",
+      "kind": "term",
+      "tier": "core",
+      "name": "Matter of public interest",
+      "assessment": "Assess a societal-information context rather than assuming all recipes or all company communication qualify.",
+      "source_locator": "Guidelines paragraphs 128-132",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "text-publication-scope",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Assess the public-interest text duty",
+      "assessment": "Combine AI generation or manipulation, publication and the informing purpose; distinguish internal correspondence and the authorised law-enforcement exception.",
+      "source_locator": "Article 50(4), second subparagraph; Guidelines paragraphs 128-133",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "human-review-editorial-control",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Human review or editorial control",
+      "assessment": "Distinguish a real review/control process from an AI self-check or merely clicking publish.",
+      "source_locator": "Article 50(4), second subparagraph; Guidelines paragraphs 134-136",
+      "source_ids": ["AI-C-EN", "A50-GUIDE"]
+    },
+    {
+      "slug": "editorial-responsibility",
+      "kind": "idea",
+      "tier": "core",
+      "name": "Editorial responsibility",
+      "assessment": "Identify the natural or legal person accountable for publication without substituting AI review for human accountability.",
+      "source_locator": "Article 50(4), second subparagraph; Code Section 2 Commitment 4",
+      "source_ids": ["AI-C-EN", "A50-CODE"]
+    },
+    {
+      "slug": "editorial-exception-record",
+      "kind": "skill",
+      "tier": "core",
+      "name": "Assess and evidence the editorial exception",
+      "assessment": "Apply (human review OR editorial control) AND editorial responsibility; reconsider after substantive AI rewrites and avoid inventing a mandatory per-publication log.",
+      "source_locator": "Guidelines paragraphs 134-136; Code Section 2 Commitment 4",
+      "source_ids": ["AI-C-EN", "A50-GUIDE", "A50-CODE"]
+    },
+    {
+      "slug": "publication-decision-capstone",
+      "kind": "capstone",
+      "tier": "core",
+      "name": "Publication decision case exercise",
+      "assessment": "Resolve a campaign with an avatar, synthetic interview and public-interest report; allocate duties, check lawful use and evidence proportionate disclosures.",
+      "source_locator": "Article 50(1)-(7); Code Sections 1-2",
+      "source_ids": ["AI-C-EN", "A50-CODE"]
+    }
+  ],
+  "edges": [
+    {
+      "parent": "ai-system",
+      "child": "gpai-model",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "ai-system",
+      "child": "eu-scope-test",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "ai-system",
+      "child": "provider",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "ai-system",
+      "child": "deployer",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "provider",
+      "child": "transparency-actor-allocation",
+      "kind": "requires",
+      "reason": "The learner must identify the actor responsible for design and output marking."
+    },
+    {
+      "parent": "deployer",
+      "child": "transparency-actor-allocation",
+      "kind": "requires",
+      "reason": "The learner must identify the actor using the system under its authority."
+    },
+    {
+      "parent": "eu-scope-test",
+      "child": "transparency-actor-allocation",
+      "kind": "requires",
+      "reason": "The learner must establish whether the Act reaches the scenario."
+    },
+    {
+      "parent": "legal-source-authority",
+      "child": "transparency-actor-allocation",
+      "kind": "requires",
+      "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+    },
+    {
+      "parent": "transparency-actor-allocation",
+      "child": "cumulative-transparency-duties",
+      "kind": "requires",
+      "reason": "The learner must allocate the relevant duty before choosing an implementation."
+    },
+    {
+      "parent": "ai-system",
+      "child": "direct-ai-interaction",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "provider",
+      "child": "direct-ai-interaction",
+      "kind": "requires",
+      "reason": "The learner must identify the actor responsible for design and output marking."
+    },
+    {
+      "parent": "direct-ai-interaction",
+      "child": "obviousness-assessment",
+      "kind": "requires",
+      "reason": "The learner must identify a direct human interaction before testing this disclosure rule."
+    },
+    {
+      "parent": "direct-ai-interaction",
+      "child": "interaction-law-enforcement-check",
+      "kind": "requires",
+      "reason": "The learner must identify a direct human interaction before testing this disclosure rule."
+    },
+    {
+      "parent": "eu-scope-test",
+      "child": "interaction-law-enforcement-check",
+      "kind": "requires",
+      "reason": "The learner must establish whether the Act reaches the scenario."
+    },
+    {
+      "parent": "direct-ai-interaction",
+      "child": "agent-principal-disclosure",
+      "kind": "requires",
+      "reason": "The learner must identify a direct human interaction before testing this disclosure rule."
+    },
+    {
+      "parent": "transparency-actor-allocation",
+      "child": "agent-principal-disclosure",
+      "kind": "requires",
+      "reason": "The learner must allocate the relevant duty before choosing an implementation."
+    },
+    {
+      "parent": "agent-principal-disclosure",
+      "child": "agent-supervisor-disclosure",
+      "kind": "requires",
+      "reason": "The learner must distinguish the represented principal from the AI agent."
+    },
+    {
+      "parent": "direct-ai-interaction",
+      "child": "disclosure-timing-clarity",
+      "kind": "requires",
+      "reason": "The learner must identify a direct human interaction before testing this disclosure rule."
+    },
+    {
+      "parent": "disclosure-timing-clarity",
+      "child": "accessible-disclosure-design",
+      "kind": "requires",
+      "reason": "The learner must know when and how information must be perceivable."
+    },
+    {
+      "parent": "obviousness-assessment",
+      "child": "interaction-disclosure-capstone",
+      "kind": "requires",
+      "reason": "The case requires a contextual decision on whether AI interaction is already obvious."
+    },
+    {
+      "parent": "agent-supervisor-disclosure",
+      "child": "interaction-disclosure-capstone",
+      "kind": "requires",
+      "reason": "The case includes authorisation and reporting to the instructing person."
+    },
+    {
+      "parent": "accessible-disclosure-design",
+      "child": "interaction-disclosure-capstone",
+      "kind": "requires",
+      "reason": "The case requires a notification that the intended audience can perceive."
+    },
+    {
+      "parent": "interaction-law-enforcement-check",
+      "child": "interaction-disclosure-capstone",
+      "kind": "requires",
+      "reason": "The case requires the public-reporting carve-back and authorisation safeguards."
+    },
+    {
+      "parent": "ai-system",
+      "child": "synthetic-content",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "synthetic-content",
+      "child": "marking-label-distinction",
+      "kind": "requires",
+      "reason": "The learner must recognise generated or manipulated output and its modality."
+    },
+    {
+      "parent": "cumulative-transparency-duties",
+      "child": "marking-label-distinction",
+      "kind": "requires",
+      "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+    },
+    {
+      "parent": "provider",
+      "child": "marking-label-distinction",
+      "kind": "requires",
+      "reason": "The learner must identify the actor responsible for design and output marking."
+    },
+    {
+      "parent": "marking-label-distinction",
+      "child": "marking-detection-pair",
+      "kind": "requires",
+      "reason": "The learner must distinguish machine marking from human-facing labels."
+    },
+    {
+      "parent": "synthetic-content",
+      "child": "assistive-editing-check",
+      "kind": "requires",
+      "reason": "The learner must recognise generated or manipulated output and its modality."
+    },
+    {
+      "parent": "marking-label-distinction",
+      "child": "marking-law-enforcement-check",
+      "kind": "requires",
+      "reason": "The learner must distinguish machine marking from human-facing labels."
+    },
+    {
+      "parent": "eu-scope-test",
+      "child": "marking-law-enforcement-check",
+      "kind": "requires",
+      "reason": "The learner must establish whether the Act reaches the scenario."
+    },
+    {
+      "parent": "marking-detection-pair",
+      "child": "technical-quality-assessment",
+      "kind": "requires",
+      "reason": "The learner must connect each marker to its verification mechanism."
+    },
+    {
+      "parent": "marking-label-distinction",
+      "child": "technical-quality-assessment",
+      "kind": "requires",
+      "reason": "The learner must distinguish machine marking from human-facing labels."
+    },
+    {
+      "parent": "technical-quality-assessment",
+      "child": "marking-method-tradeoff",
+      "kind": "requires",
+      "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+    },
+    {
+      "parent": "technical-quality-assessment",
+      "child": "modality-feasibility-check",
+      "kind": "requires",
+      "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+    },
+    {
+      "parent": "synthetic-content",
+      "child": "modality-feasibility-check",
+      "kind": "requires",
+      "reason": "The learner must recognise generated or manipulated output and its modality."
+    },
+    {
+      "parent": "assistive-editing-check",
+      "child": "modality-feasibility-check",
+      "kind": "requires",
+      "reason": "The learner must separate qualifying editing assistance from substantive generated alteration."
+    },
+    {
+      "parent": "transparency-actor-allocation",
+      "child": "downstream-marking-responsibility",
+      "kind": "requires",
+      "reason": "The learner must allocate the relevant duty before choosing an implementation."
+    },
+    {
+      "parent": "marking-label-distinction",
+      "child": "downstream-marking-responsibility",
+      "kind": "requires",
+      "reason": "The learner must distinguish machine marking from human-facing labels."
+    },
+    {
+      "parent": "marking-detection-pair",
+      "child": "downstream-marking-responsibility",
+      "kind": "requires",
+      "reason": "The learner must connect each marker to its verification mechanism."
+    },
+    {
+      "parent": "technical-quality-assessment",
+      "child": "downstream-marking-responsibility",
+      "kind": "requires",
+      "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+    },
+    {
+      "parent": "legal-source-authority",
+      "child": "marking-transition-check",
+      "kind": "requires",
+      "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+    },
+    {
+      "parent": "marking-label-distinction",
+      "child": "marking-transition-check",
+      "kind": "requires",
+      "reason": "The learner must distinguish machine marking from human-facing labels."
+    },
+    {
+      "parent": "legal-source-authority",
+      "child": "transparency-code-status",
+      "kind": "requires",
+      "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+    },
+    {
+      "parent": "technical-quality-assessment",
+      "child": "transparency-code-status",
+      "kind": "requires",
+      "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+    },
+    {
+      "parent": "cumulative-transparency-duties",
+      "child": "transparency-code-status",
+      "kind": "requires",
+      "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+    },
+    {
+      "parent": "transparency-code-status",
+      "child": "transparency-compliance-evidence",
+      "kind": "requires",
+      "reason": "The learner must understand what Code adherence does and does not establish."
+    },
+    {
+      "parent": "downstream-marking-responsibility",
+      "child": "transparency-compliance-evidence",
+      "kind": "requires",
+      "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+    },
+    {
+      "parent": "marking-method-tradeoff",
+      "child": "provenance-workflow-capstone",
+      "kind": "requires",
+      "reason": "The case requires a reasoned choice of marking methods and preservation tests."
+    },
+    {
+      "parent": "modality-feasibility-check",
+      "child": "provenance-workflow-capstone",
+      "kind": "requires",
+      "reason": "The case includes modality-specific constraints and free-form text."
+    },
+    {
+      "parent": "downstream-marking-responsibility",
+      "child": "provenance-workflow-capstone",
+      "kind": "requires",
+      "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+    },
+    {
+      "parent": "transparency-compliance-evidence",
+      "child": "provenance-workflow-capstone",
+      "kind": "requires",
+      "reason": "The case requires implementation evidence beyond a supplier claim."
+    },
+    {
+      "parent": "ai-system",
+      "child": "emotion-recognition-system",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "ai-system",
+      "child": "biometric-categorisation-system",
+      "kind": "requires",
+      "reason": "The learner must recognise the regulated system before applying this rule."
+    },
+    {
+      "parent": "emotion-recognition-system",
+      "child": "biometric-exposure-disclosure",
+      "kind": "requires",
+      "reason": "The learner must identify emotion inference from biometric data."
+    },
+    {
+      "parent": "biometric-categorisation-system",
+      "child": "biometric-exposure-disclosure",
+      "kind": "requires",
+      "reason": "The learner must identify category assignment based on biometric data."
+    },
+    {
+      "parent": "deployer",
+      "child": "biometric-exposure-disclosure",
+      "kind": "requires",
+      "reason": "The learner must identify the actor using the system under its authority."
+    },
+    {
+      "parent": "cumulative-transparency-duties",
+      "child": "biometric-exposure-disclosure",
+      "kind": "requires",
+      "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+    },
+    {
+      "parent": "synthetic-content",
+      "child": "deepfake",
+      "kind": "requires",
+      "reason": "The learner must recognise generated or manipulated output and its modality."
+    },
+    {
+      "parent": "deepfake",
+      "child": "false-authenticity-assessment",
+      "kind": "requires",
+      "reason": "The learner must apply the defined image, audio or video category before considering its duty."
+    },
+    {
+      "parent": "false-authenticity-assessment",
+      "child": "creative-work-disclosure",
+      "kind": "requires",
+      "reason": "The learner must assess context and false authenticity before choosing creative-work treatment."
+    },
+    {
+      "parent": "cumulative-transparency-duties",
+      "child": "creative-work-disclosure",
+      "kind": "requires",
+      "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+    },
+    {
+      "parent": "deepfake",
+      "child": "deepfake-law-enforcement-check",
+      "kind": "requires",
+      "reason": "The learner must apply the defined image, audio or video category before considering its duty."
+    },
+    {
+      "parent": "eu-scope-test",
+      "child": "deepfake-law-enforcement-check",
+      "kind": "requires",
+      "reason": "The learner must establish whether the Act reaches the scenario."
+    },
+    {
+      "parent": "public-interest-matter",
+      "child": "text-publication-scope",
+      "kind": "requires",
+      "reason": "The learner must identify the informing-public-interest purpose."
+    },
+    {
+      "parent": "synthetic-content",
+      "child": "text-publication-scope",
+      "kind": "requires",
+      "reason": "The learner must recognise generated or manipulated output and its modality."
+    },
+    {
+      "parent": "deployer",
+      "child": "text-publication-scope",
+      "kind": "requires",
+      "reason": "The learner must identify the actor using the system under its authority."
+    },
+    {
+      "parent": "text-publication-scope",
+      "child": "human-review-editorial-control",
+      "kind": "requires",
+      "reason": "The learner must establish an in-scope publication before applying an editorial exception."
+    },
+    {
+      "parent": "text-publication-scope",
+      "child": "editorial-responsibility",
+      "kind": "requires",
+      "reason": "The learner must establish an in-scope publication before applying an editorial exception."
+    },
+    {
+      "parent": "human-review-editorial-control",
+      "child": "editorial-exception-record",
+      "kind": "requires",
+      "reason": "The learner must establish the review or control limb of the exception."
+    },
+    {
+      "parent": "editorial-responsibility",
+      "child": "editorial-exception-record",
+      "kind": "requires",
+      "reason": "The learner must establish the separate accountable-publisher limb."
+    },
+    {
+      "parent": "legal-source-authority",
+      "child": "editorial-exception-record",
+      "kind": "requires",
+      "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+    },
+    {
+      "parent": "provenance-workflow-capstone",
+      "child": "publication-decision-capstone",
+      "kind": "requires",
+      "reason": "The final case requires tracing marks and detection through export and publication."
+    },
+    {
+      "parent": "biometric-exposure-disclosure",
+      "child": "publication-decision-capstone",
+      "kind": "requires",
+      "reason": "The final case includes exposed persons and applicable biometric-use restrictions."
+    },
+    {
+      "parent": "creative-work-disclosure",
+      "child": "publication-decision-capstone",
+      "kind": "requires",
+      "reason": "The final case requires appropriate creative-work disclosure rather than a blanket exemption."
+    },
+    {
+      "parent": "editorial-exception-record",
+      "child": "publication-decision-capstone",
+      "kind": "requires",
+      "reason": "The final case requires both editorial limbs and a check after AI rewriting."
+    },
+    {
+      "parent": "interaction-disclosure-capstone",
+      "child": "synthetic-content",
+      "kind": "suggests",
+      "reason": "Completing the interaction case provides useful workflow context but is not necessary to identify synthetic content."
+    },
+    {
+      "parent": "marking-transition-check",
+      "child": "provenance-workflow-capstone",
+      "kind": "suggests",
+      "reason": "The dates lesson is useful context; this exercise tests the current marking workflow, not grandfathering."
+    },
+    {
+      "parent": "marking-law-enforcement-check",
+      "child": "provenance-workflow-capstone",
+      "kind": "suggests",
+      "reason": "The exception is useful context; this ordinary commercial workflow does not assess criminal-law authorisation."
+    },
+    {
+      "parent": "deepfake-law-enforcement-check",
+      "child": "publication-decision-capstone",
+      "kind": "suggests",
+      "reason": "The exception is useful context; the campaign case does not claim authorised criminal-law use."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "T01",
+      "module": "N0",
+      "title": "AI systems, models and the EU connection",
+      "tier": "core",
+      "covers": ["ai-system", "gpai-model", "eu-scope-test"],
+      "prerequisites": []
+    },
+    {
+      "id": "T02",
+      "module": "N0",
+      "title": "Who provides, who deploys, and which source governs",
+      "tier": "core",
+      "covers": ["provider", "deployer", "legal-source-authority"],
+      "prerequisites": [
+        {
+          "lesson_id": "T01",
+          "reason": "The learner must recognise the regulated system before applying this rule."
+        }
+      ]
+    },
+    {
+      "id": "T03",
+      "module": "N0",
+      "title": "Allocate duties without losing other obligations",
+      "tier": "core",
+      "covers": [
+        "transparency-actor-allocation",
+        "cumulative-transparency-duties"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T01",
+          "reason": "The learner must establish whether the Act reaches the scenario."
+        },
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must identify the actor responsible for design and output marking. The learner must identify the actor using the system under its authority. The learner must distinguish operative law from interpretation and voluntary methods."
+        }
+      ]
+    },
+    {
+      "id": "T04",
+      "module": "N0",
+      "title": "Direct interaction and its narrow exceptions",
+      "tier": "core",
+      "covers": [
+        "direct-ai-interaction",
+        "obviousness-assessment",
+        "interaction-law-enforcement-check"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T01",
+          "reason": "The learner must recognise the regulated system before applying this rule. The learner must establish whether the Act reaches the scenario."
+        },
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must identify the actor responsible for design and output marking."
+        }
+      ]
+    },
+    {
+      "id": "T05",
+      "module": "N0",
+      "title": "Agents, principals and human supervisors",
+      "tier": "core",
+      "covers": ["agent-principal-disclosure", "agent-supervisor-disclosure"],
+      "prerequisites": [
+        {
+          "lesson_id": "T03",
+          "reason": "The learner must allocate the relevant duty before choosing an implementation."
+        },
+        {
+          "lesson_id": "T04",
+          "reason": "The learner must identify a direct human interaction before testing this disclosure rule."
+        }
+      ]
+    },
+    {
+      "id": "T06",
+      "module": "N0",
+      "title": "Make the interaction disclosure work: case exercise",
+      "tier": "core",
+      "covers": [
+        "disclosure-timing-clarity",
+        "accessible-disclosure-design",
+        "interaction-disclosure-capstone"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T04",
+          "reason": "The learner must identify a direct human interaction before testing this disclosure rule. The case requires a contextual decision on whether AI interaction is already obvious. The case requires the public-reporting carve-back and authorisation safeguards."
+        },
+        {
+          "lesson_id": "T05",
+          "reason": "The case includes authorisation and reporting to the instructing person."
+        }
+      ]
+    },
+    {
+      "id": "T07",
+      "module": "N1",
+      "title": "Synthetic outputs: marks, labels and detection",
+      "tier": "core",
+      "covers": [
+        "synthetic-content",
+        "marking-label-distinction",
+        "marking-detection-pair"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T01",
+          "reason": "The learner must recognise the regulated system before applying this rule."
+        },
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must identify the actor responsible for design and output marking."
+        },
+        {
+          "lesson_id": "T03",
+          "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+        }
+      ]
+    },
+    {
+      "id": "T08",
+      "module": "N1",
+      "title": "Editing assistance and the marking exceptions",
+      "tier": "core",
+      "covers": ["assistive-editing-check", "marking-law-enforcement-check"],
+      "prerequisites": [
+        {
+          "lesson_id": "T01",
+          "reason": "The learner must establish whether the Act reaches the scenario."
+        },
+        {
+          "lesson_id": "T07",
+          "reason": "The learner must recognise generated or manipulated output and its modality. The learner must distinguish machine marking from human-facing labels."
+        }
+      ]
+    },
+    {
+      "id": "T09",
+      "module": "N1",
+      "title": "Evaluate marking quality and technical limits",
+      "tier": "core",
+      "covers": [
+        "technical-quality-assessment",
+        "marking-method-tradeoff",
+        "modality-feasibility-check"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T07",
+          "reason": "The learner must connect each marker to its verification mechanism. The learner must distinguish machine marking from human-facing labels. The learner must recognise generated or manipulated output and its modality."
+        },
+        {
+          "lesson_id": "T08",
+          "reason": "The learner must separate qualifying editing assistance from substantive generated alteration."
+        }
+      ]
+    },
+    {
+      "id": "T10",
+      "module": "N1",
+      "title": "Upstream suppliers, downstream systems and dates",
+      "tier": "core",
+      "covers": [
+        "downstream-marking-responsibility",
+        "marking-transition-check"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+        },
+        {
+          "lesson_id": "T03",
+          "reason": "The learner must allocate the relevant duty before choosing an implementation."
+        },
+        {
+          "lesson_id": "T07",
+          "reason": "The learner must distinguish machine marking from human-facing labels. The learner must connect each marker to its verification mechanism."
+        },
+        {
+          "lesson_id": "T09",
+          "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+        }
+      ]
+    },
+    {
+      "id": "T11",
+      "module": "N1",
+      "title": "Use the Code and build proportionate evidence",
+      "tier": "core",
+      "covers": [
+        "transparency-code-status",
+        "transparency-compliance-evidence"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+        },
+        {
+          "lesson_id": "T03",
+          "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+        },
+        {
+          "lesson_id": "T09",
+          "reason": "The learner must evaluate the four legal qualities before judging a method or supplier."
+        },
+        {
+          "lesson_id": "T10",
+          "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+        }
+      ]
+    },
+    {
+      "id": "T12",
+      "module": "N1",
+      "title": "Trace provenance through a product: case exercise",
+      "tier": "core",
+      "covers": ["provenance-workflow-capstone"],
+      "prerequisites": [
+        {
+          "lesson_id": "T09",
+          "reason": "The case requires a reasoned choice of marking methods and preservation tests. The case includes modality-specific constraints and free-form text."
+        },
+        {
+          "lesson_id": "T10",
+          "reason": "The learner must retain the product provider\u2019s responsibility through upstream handoffs."
+        },
+        {
+          "lesson_id": "T11",
+          "reason": "The case requires implementation evidence beyond a supplier claim."
+        }
+      ]
+    },
+    {
+      "id": "T13",
+      "module": "N2",
+      "title": "Emotion recognition and biometric categorisation",
+      "tier": "core",
+      "covers": [
+        "emotion-recognition-system",
+        "biometric-categorisation-system",
+        "biometric-exposure-disclosure"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T01",
+          "reason": "The learner must recognise the regulated system before applying this rule."
+        },
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must identify the actor using the system under its authority."
+        },
+        {
+          "lesson_id": "T03",
+          "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+        }
+      ]
+    },
+    {
+      "id": "T14",
+      "module": "N2",
+      "title": "Deepfakes and false authenticity",
+      "tier": "core",
+      "covers": ["deepfake", "false-authenticity-assessment"],
+      "prerequisites": [
+        {
+          "lesson_id": "T07",
+          "reason": "The learner must recognise generated or manipulated output and its modality."
+        }
+      ]
+    },
+    {
+      "id": "T15",
+      "module": "N2",
+      "title": "Creative works and the deepfake exceptions",
+      "tier": "core",
+      "covers": ["creative-work-disclosure", "deepfake-law-enforcement-check"],
+      "prerequisites": [
+        {
+          "lesson_id": "T01",
+          "reason": "The learner must establish whether the Act reaches the scenario."
+        },
+        {
+          "lesson_id": "T03",
+          "reason": "The learner must preserve other applicable duties when applying this transparency rule."
+        },
+        {
+          "lesson_id": "T14",
+          "reason": "The learner must assess context and false authenticity before choosing creative-work treatment. The learner must apply the defined image, audio or video category before considering its duty."
+        }
+      ]
+    },
+    {
+      "id": "T16",
+      "module": "N2",
+      "title": "Published text on matters of public interest",
+      "tier": "core",
+      "covers": ["public-interest-matter", "text-publication-scope"],
+      "prerequisites": [
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must identify the actor using the system under its authority."
+        },
+        {
+          "lesson_id": "T07",
+          "reason": "The learner must recognise generated or manipulated output and its modality."
+        }
+      ]
+    },
+    {
+      "id": "T17",
+      "module": "N2",
+      "title": "Human review and editorial responsibility",
+      "tier": "core",
+      "covers": [
+        "human-review-editorial-control",
+        "editorial-responsibility",
+        "editorial-exception-record"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "T02",
+          "reason": "The learner must distinguish operative law from interpretation and voluntary methods."
+        },
+        {
+          "lesson_id": "T16",
+          "reason": "The learner must establish an in-scope publication before applying an editorial exception."
+        }
+      ]
+    },
+    {
+      "id": "T18",
+      "module": "N2",
+      "title": "Make and defend a publication decision: case exercise",
+      "tier": "core",
+      "covers": ["publication-decision-capstone"],
+      "prerequisites": [
+        {
+          "lesson_id": "T12",
+          "reason": "The final case requires tracing marks and detection through export and publication."
+        },
+        {
+          "lesson_id": "T13",
+          "reason": "The final case includes exposed persons and applicable biometric-use restrictions."
+        },
+        {
+          "lesson_id": "T15",
+          "reason": "The final case requires appropriate creative-work disclosure rather than a blanket exemption."
+        },
+        {
+          "lesson_id": "T17",
+          "reason": "The final case requires both editorial limbs and a check after AI rewriting."
+        }
+      ]
+    }
+  ]
+}

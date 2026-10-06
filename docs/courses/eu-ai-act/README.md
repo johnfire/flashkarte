@@ -8,6 +8,8 @@ Start with the [lesson outline](lesson-outline.md), then review the [concept gra
 
 Chris's presentation informed the [slide review and case bank](presentation-review.md). The next dedicated block is **Article 50**, approved in chat on 6 October; its [follow-on outline](programme-roadmap.md) preserves the agreed introduction → Article 6 → Article 5 sequence. The [programme inventory](programme-inventory.json) assigns all 119 article identifiers and 14 annexes in this baseline to future teaching blocks; paragraph-level work for those blocks remains to be done.
 
+The [dedicated English Article 50 review package](article-50/README.md) now proposes 18 lessons, 42 concepts and 48 coverage targets. Its graph and syllabus await owner review before lesson authoring.
+
 ## Review points
 
 - Are the `requires` links necessary to understand each concept, or merely helpful? Supporting context belongs under `suggests`.
@@ -25,9 +27,11 @@ Run from the repository root:
 
 ```bash
 python docs/courses/eu-ai-act/curriculum_validation.py
+python docs/courses/eu-ai-act/article_50_validation.py
 python docs/courses/eu-ai-act/lesson_validation.py
 python -m unittest discover -s docs/courses/eu-ai-act -p 'test_*.py'
 python docs/courses/eu-ai-act/render_review.py --check
+python docs/courses/eu-ai-act/article_50_review.py --check
 ```
 
 The JSON registers are canonical. Regenerate the four review tables with `render_review.py` after editing them. The supporting narrative documents require their own review. Retained official PDFs are identified and hashed in the source register; user screenshots and browser details are not copied into this package.

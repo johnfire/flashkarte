@@ -1,0 +1,389 @@
+{
+  "baseline": "02024R1689-20260727",
+  "coverage": [
+    {
+      "locator": "Article 50(1), sentence 1, duty",
+      "lesson": "T04",
+      "topic": "Intended direct interaction with natural persons; provider design responsibility",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(1), sentence 1, obviousness",
+      "lesson": "T04",
+      "topic": "Reasonably well-informed, observant and circumspect person standard",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(1), sentence 2, authorisation",
+      "lesson": "T04",
+      "topic": "Authorised detection, prevention, investigation or prosecution; safeguards for third-party rights",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(1), sentence 2, public reporting",
+      "lesson": "T04",
+      "topic": "Public offence reporting restores the interaction disclosure duty",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(2), sentence 1, systems and modalities",
+      "lesson": "T07",
+      "topic": "Providers including GPAI systems; synthetic audio, image, video and text",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(2), sentence 1, marking and detection",
+      "lesson": "T07",
+      "topic": "Both machine-readable marking and detection as generated or manipulated",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(2), sentence 2, four qualities",
+      "lesson": "T09",
+      "topic": "Effective, interoperable, robust and reliable solutions",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(2), sentence 2, feasibility",
+      "lesson": "T09",
+      "topic": "Technical feasibility, content limitations, implementation costs and generally acknowledged state of the art",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(2), sentence 3, standard editing",
+      "lesson": "T08",
+      "topic": "Assistive function for standard editing: extent and limits",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(2), sentence 3, alteration",
+      "lesson": "T08",
+      "topic": "No substantial alteration of provided input or its semantics: distinct alternative",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(2), sentence 3, law enforcement",
+      "lesson": "T08",
+      "topic": "Authorised detection, prevention, investigation or prosecution",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(3), sentence 1, disclosure",
+      "lesson": "T13",
+      "topic": "Deployers inform people exposed to emotion recognition or biometric categorisation",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(3), sentence 1, personal data",
+      "lesson": "T13",
+      "topic": "Applicable GDPR, LED or EU-institution data law must also be respected; lookup only",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(3), sentence 2",
+      "lesson": "T13",
+      "topic": "Permitted legally authorised biometric categorisation/emotion recognition for detection, prevention or investigation; safeguards; excludes blanket permission",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(4), subparagraph 1, sentence 1",
+      "lesson": "T14",
+      "topic": "Deepfake image, audio or video generated or manipulated: deployer disclosure",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(4), subparagraph 1, sentence 2",
+      "lesson": "T15",
+      "topic": "Authorised detection, prevention, investigation or prosecution exception",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(4), subparagraph 1, sentence 3",
+      "lesson": "T15",
+      "topic": "Evidently artistic, creative, satirical, fictional or analogous works: appropriate disclosure without hampering enjoyment",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(4), subparagraph 2, sentence 1",
+      "lesson": "T16",
+      "topic": "Generated or manipulated text published to inform the public on matters of public interest",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(4), subparagraph 2, sentence 2, law enforcement",
+      "lesson": "T16",
+      "topic": "Authorised detection, prevention, investigation or prosecution exception",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(4), subparagraph 2, sentence 2, editorial exception",
+      "lesson": "T17",
+      "topic": "(Human review OR editorial control) AND natural/legal person editorial responsibility",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(5), sentence 1, presentation",
+      "lesson": "T06",
+      "topic": "Clear and distinguishable information",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(5), sentence 1, timing",
+      "lesson": "T06",
+      "topic": "At the latest at first interaction or exposure; reapplied in T18 publication case",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(5), sentence 2",
+      "lesson": "T06",
+      "topic": "Applicable accessibility requirements; no invented universal technology mandate",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(6), sentence 1",
+      "lesson": "T03",
+      "topic": "Chapter III duties apply independently where the system is high-risk",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(6), sentence 2",
+      "lesson": "T03",
+      "topic": "Other Union or national transparency obligations remain applicable",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(7), sentence 1",
+      "lesson": "T11",
+      "topic": "AI Office encourages/facilitates Union-level Codes for detection and marking",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(7), sentence 2",
+      "lesson": "T11",
+      "topic": "Commission takes utmost account of Board opinion in adequacy assessment under amended Article 56(6)",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 50(7), sentence 3",
+      "lesson": "T11",
+      "topic": "Commission may adopt common implementation rules by implementing act if Code inadequate; Article 98(2)",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 3(39)",
+      "lesson": "T13",
+      "topic": "Emotion recognition definition",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 3(40)",
+      "lesson": "T13",
+      "topic": "Biometric categorisation definition and ancillary service exception",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 3(60)",
+      "lesson": "T14",
+      "topic": "Deepfake definition",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 2(10)",
+      "lesson": "T01",
+      "topic": "Personal non-professional deployer exclusion does not erase provider duties",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 2(12)",
+      "lesson": "T01",
+      "topic": "Open-source exclusion is conditional and does not exempt systems falling under Article 50",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 111(4)",
+      "lesson": "T10",
+      "topic": "Targeted 2 December 2026 transition only for Article 50(2), pre-2 August systems",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Article 113",
+      "lesson": "T10",
+      "topic": "Default 2 August 2026 application; distinguish entry into force",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    },
+    {
+      "locator": "Guidelines paragraph 31",
+      "lesson": "T05",
+      "topic": "Agent nature, represented principal and supervisory steps: interpretation, not three standalone statutory clauses",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-GUIDE"
+    },
+    {
+      "locator": "Guidelines paragraphs 64-68, 87-88",
+      "lesson": "T09",
+      "topic": "Illustrative synthetic scope and free-form text limitations; interpretation, not absolute categorical exemption",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-GUIDE"
+    },
+    {
+      "locator": "Guidelines paragraphs 134-136",
+      "lesson": "T17",
+      "topic": "Review, editorial control, accountable publication and substantive AI changes after review",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-GUIDE"
+    },
+    {
+      "locator": "Guidelines paragraph 154",
+      "lesson": "T10",
+      "topic": "Content generation/manipulation dates versus public-interest publication date; non-retroactivity interpretation",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-GUIDE"
+    },
+    {
+      "locator": "Code Section 1 Commitments 1-2",
+      "lesson": "T07",
+      "topic": "Marking and detection, signed metadata, watermarking, access and retention protections",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-CODE"
+    },
+    {
+      "locator": "Code Section 1 Commitment 3",
+      "lesson": "T09",
+      "topic": "Testing four qualities; staged 2 February 2027 interoperability milestone belongs to Code",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-CODE"
+    },
+    {
+      "locator": "Code Section 1 Commitment 4",
+      "lesson": "T11",
+      "topic": "Documentation, maintenance, personnel guidance and authority cooperation",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-CODE"
+    },
+    {
+      "locator": "Code Section 2 Commitment 1",
+      "lesson": "T15",
+      "topic": "Design/placement for images, video, audio and text; optional EU icon or equivalent label",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-CODE"
+    },
+    {
+      "locator": "Code Section 2 Commitment 2",
+      "lesson": "T11",
+      "topic": "Proportionate internal processes, awareness, feedback and correction",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-CODE"
+    },
+    {
+      "locator": "Code Section 2 Commitment 3",
+      "lesson": "T15",
+      "topic": "Practical appropriate disclosure for creative and similar works",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-CODE"
+    },
+    {
+      "locator": "Code Section 2 Commitment 4",
+      "lesson": "T17",
+      "topic": "Editorial policies and accountable contact; no obligation to log every individual publication",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-CODE"
+    },
+    {
+      "locator": "Commission Opinion paragraph 52; Board conclusion",
+      "lesson": "T11",
+      "topic": "Adequacy assessed; adherence is not conclusive evidence of compliance",
+      "extent": "primary",
+      "status": "planned-not-yet-taught",
+      "source_id": "A50-OPINION"
+    },
+    {
+      "locator": "Articles 5, 26(11), 85, 99, 100",
+      "lesson": "T18",
+      "topic": "Boundary pointers: prohibited-use check, separate high-risk notification, complaints, authority and penalty lookup; not a full enforcement course",
+      "extent": "lookup",
+      "status": "planned-not-yet-taught",
+      "source_id": "AI-C-EN"
+    }
+  ]
+}
