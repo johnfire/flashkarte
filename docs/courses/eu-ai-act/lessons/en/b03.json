@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: harmful decisions and behaviour",
+  "lesson": {
+    "slug": "b03",
+    "title": "Exploiting vulnerability",
+    "summary": "Identify protected vulnerability, exploitation and the material-distortion/significant-harm relationship.",
+    "covers": ["protected-vulnerability", "exploitation-harm-test"],
+    "prerequisites": [
+      {
+        "lesson": "i01",
+        "reason": "The harm link includes reasonably likely harm and cannot be reduced to an already observed injury."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The vulnerability is a specified element of a prohibition rather than a generic disadvantage."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **protected-vulnerability test** concerns vulnerabilities due to age, disability, or a specific social or economic situation. Identify the relevant person or group and the actual vulnerability.",
+        "A broad statement that 'everyone can be influenced' does not by itself show the stated basis. Nor does membership of a group automatically prove the system exploits a vulnerability."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 5(1)(b) concerns an AI system exploiting such vulnerability with the objective or effect of materially distorting behaviour in a way causing, or reasonably likely to cause, significant harm to that person or another person.",
+        "The **exploitation-harm test** keeps these elements linked. The point does not say every service offered to older people or disabled people is forbidden."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional Northbridge case: a system deliberately exploits a specified economic vulnerability to materially distort choices, with stipulated reasonably likely significant harm. Those facts support the prohibition-element exercise.",
+        "Changed case: a system offers accessible instructions that help a person make an informed choice without exploitation. The audience's vulnerability alone does not produce the same conclusion."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Record the vulnerability's stated basis, exploitative operation, objective/effect, material distortion and significant harm. Distinguish helpful adaptation from exploitation using evidence.",
+        "No completed injury is required where the reasonably-likely harm branch is established. Conversely, do not erase the harm test merely because the system targets a protected vulnerability."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["protected-vulnerability"],
+      "teaches": ["screen-1"],
+      "prompt": "Which basis is expressly named in the vulnerability prohibition?",
+      "options": [
+        {
+          "blocks": "Age, disability or specific social/economic situation",
+          "correct": true,
+          "reason": "Those are the point's specified vulnerability bases."
+        },
+        {
+          "blocks": "Only whether a person dislikes computers",
+          "correct": false,
+          "reason": "That does not establish one of the stated bases by itself."
+        },
+        {
+          "blocks": "Only a supplier's small company size",
+          "correct": false,
+          "reason": "The point concerns vulnerabilities of affected people or groups."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What vulnerability basis should be checked under Article 5(1)(b)?",
+          "options": [
+            {
+              "blocks": "Only whether a person dislikes computers",
+              "correct": false,
+              "reason": "That does not establish one of the stated bases by itself."
+            },
+            {
+              "blocks": "Only a supplier's small company size",
+              "correct": false,
+              "reason": "The point concerns vulnerabilities of affected people or groups."
+            },
+            {
+              "blocks": "Age, disability or specific social/economic situation",
+              "correct": true,
+              "reason": "Those are the point's specified vulnerability bases."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["exploitation-harm-test"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "Accessible instructions help a disabled user choose without exploitation or material distortion. Does the audience alone prove the prohibition?",
+      "options": [
+        {
+          "blocks": "Yes; every accessible service is forbidden",
+          "correct": false,
+          "reason": "That turns protection into an unsupported blanket ban."
+        },
+        {
+          "blocks": "Yes; significant harm never needs assessment",
+          "correct": false,
+          "reason": "The point includes significant harm or its reasonable likelihood."
+        },
+        {
+          "blocks": "No; exploitation and the remaining elements need evidence",
+          "correct": true,
+          "reason": "The group context does not replace the conduct/harm test."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does serving a vulnerable group automatically establish exploitative AI conduct?",
+          "options": [
+            {
+              "blocks": "Yes; significant harm never needs assessment",
+              "correct": false,
+              "reason": "The point includes significant harm or its reasonable likelihood."
+            },
+            {
+              "blocks": "No; exploitation and the remaining elements need evidence",
+              "correct": true,
+              "reason": "The group context does not replace the conduct/harm test."
+            },
+            {
+              "blocks": "Yes; every accessible service is forbidden",
+              "correct": false,
+              "reason": "That turns protection into an unsupported blanket ban."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["exploitation-harm-test"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A system exploits economic vulnerability and distorts behaviour, but the significant-harm facts are missing. What should the record say?",
+      "options": [
+        {
+          "blocks": "A warning automatically cures the exploitation",
+          "correct": false,
+          "reason": "No blanket warning exception is supplied."
+        },
+        {
+          "blocks": "The harm element remains unresolved",
+          "correct": true,
+          "reason": "The test requires evidence for causation or reasonable likelihood of significant harm."
+        },
+        {
+          "blocks": "The audience proves every missing element",
+          "correct": false,
+          "reason": "Vulnerability cannot substitute for harm evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an incomplete exploitation-harm chain be assessed?",
+          "options": [
+            {
+              "blocks": "The harm element remains unresolved",
+              "correct": true,
+              "reason": "The test requires evidence for causation or reasonable likelihood of significant harm."
+            },
+            {
+              "blocks": "The audience proves every missing element",
+              "correct": false,
+              "reason": "Vulnerability cannot substitute for harm evidence."
+            },
+            {
+              "blocks": "A warning automatically cures the exploitation",
+              "correct": false,
+              "reason": "No blanket warning exception is supplied."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

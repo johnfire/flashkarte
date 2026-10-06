@@ -1,0 +1,207 @@
+{
+  "module": "Article 6: product and safety classification",
+  "lesson": {
+    "slug": "p02",
+    "title": "Safety functions and non-safety functions",
+    "summary": "Distinguish genuine non-safety functions from functions whose failure endangers safety.",
+    "covers": [
+      "safety-component",
+      "ancillary-function-limit",
+      "safety-failure-rule"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i03",
+        "reason": "A safety function must be linked to the system's intended purpose."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **safety component** fulfils a product or system safety function, or its failure or malfunction endangers health and safety of people or property. A safety function aims to prevent or mitigate those risks.",
+        "Northbridge's fictional protective device uses AI to preserve warning sounds while limiting harmful noise. If protection depends on the AI's correct operation, that is a safety-function fact to investigate."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(14), Article 6(1a) and (1b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 6(1a) excludes systems solely used for non-safety aspects of assistance, optimisation, efficiency, automation, convenience or quality control from being safety components.",
+        "The word **solely** matters. A convenience interface that changes a safety-critical action is different from a convenience function isolated from all safety effects. The category name 'optimisation' cannot prove exclusivity."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(14), Article 6(1a) and (1b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Article 6(1b) qualifies that limit: if failure or malfunction would endanger health and safety, the system qualifies as a safety component notwithstanding paragraph 1a.",
+        "Compare an AI choosing a harmless display colour with an AI wrongly suppressing a safety warning. The failure consequence changes the analysis. Obtain design and failure evidence rather than trusting the feature's marketing category."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(14), Article 6(1a) and (1b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Record the function, affected safety mechanism, failure modes and consequences. In our invented device case, assume failure removes required hearing protection: the non-safety exclusion is not established.",
+        "This finds a safety-component fact only. Annex I coverage and the required third-party assessment still need separate evidence before the full Article 6(1) conclusion."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(14), Article 6(1a) and (1b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["safety-component"],
+      "teaches": ["screen-1"],
+      "prompt": "AI controls a protective function preventing harmful exposure. Which fact is most relevant?",
+      "options": [
+        {
+          "blocks": "Its purpose prevents or mitigates safety risks",
+          "correct": true,
+          "reason": "Article 3(14) connects the function to health and safety protection."
+        },
+        {
+          "blocks": "Its interface uses a green icon",
+          "correct": false,
+          "reason": "Interface colour does not establish a safety function."
+        },
+        {
+          "blocks": "Its subscription is inexpensive",
+          "correct": false,
+          "reason": "Price does not establish safety effects."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What makes an AI component's function safety-related?",
+          "options": [
+            {
+              "blocks": "Its interface uses a green icon",
+              "correct": false,
+              "reason": "Interface colour does not establish a safety function."
+            },
+            {
+              "blocks": "Its subscription is inexpensive",
+              "correct": false,
+              "reason": "Price does not establish safety effects."
+            },
+            {
+              "blocks": "Its purpose prevents or mitigates safety risks",
+              "correct": true,
+              "reason": "Article 3(14) connects the function to health and safety protection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["ancillary-function-limit"],
+      "teaches": ["screen-2"],
+      "prompt": "A vendor calls a safety-linked feature 'convenience automation'. What must be checked for paragraph 1a?",
+      "options": [
+        {
+          "blocks": "Whether the vendor chose that label",
+          "correct": false,
+          "reason": "A label is not evidence of the actual function."
+        },
+        {
+          "blocks": "Whether it is used by any employee",
+          "correct": false,
+          "reason": "The user's identity does not establish the exclusion."
+        },
+        {
+          "blocks": "Whether its use is exclusively non-safety-related",
+          "correct": true,
+          "reason": "The statute requires solely non-safety aspects."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When does the non-safety function limit apply to a purported convenience feature?",
+          "options": [
+            {
+              "blocks": "Whether it is used by any employee",
+              "correct": false,
+              "reason": "The user's identity does not establish the exclusion."
+            },
+            {
+              "blocks": "Whether its use is exclusively non-safety-related",
+              "correct": true,
+              "reason": "The statute requires solely non-safety aspects."
+            },
+            {
+              "blocks": "Whether the vendor chose that label",
+              "correct": false,
+              "reason": "A label is not evidence of the actual function."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["safety-failure-rule"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A supposedly non-safety optimisation feature can endanger health when it fails. What follows?",
+      "options": [
+        {
+          "blocks": "It automatically proves every product-route condition",
+          "correct": false,
+          "reason": "Product coverage and assessment requirements still need evidence."
+        },
+        {
+          "blocks": "Paragraph 1b makes it a safety component",
+          "correct": true,
+          "reason": "The failure rule overrides the non-safety-function limit."
+        },
+        {
+          "blocks": "Its optimisation label always excludes it",
+          "correct": false,
+          "reason": "Paragraph 1b expressly qualifies that limit."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does a safety-endangering malfunction affect the paragraph 1a limit?",
+          "options": [
+            {
+              "blocks": "Paragraph 1b makes it a safety component",
+              "correct": true,
+              "reason": "The failure rule overrides the non-safety-function limit."
+            },
+            {
+              "blocks": "Its optimisation label always excludes it",
+              "correct": false,
+              "reason": "Paragraph 1b expressly qualifies that limit."
+            },
+            {
+              "blocks": "It automatically proves every product-route condition",
+              "correct": false,
+              "reason": "Product coverage and assessment requirements still need evidence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: people, education and work",
+  "lesson": {
+    "slug": "a02",
+    "title": "Biometric categorisation and emotion recognition",
+    "summary": "Separate biometric emotion inference from sensitive categorisation and check prohibitions first.",
+    "covers": ["emotion-recognition", "biometric-categorisation"],
+    "prerequisites": [
+      {
+        "lesson": "a01",
+        "reason": "The emotion-recognition definition depends on biometric data as its basis. The categorisation definition depends on biometric data as its basis."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Emotion recognition** identifies or infers emotions or intentions from a person's biometric data. Inferring engagement from facial processing differs from reading an explicit questionnaire answer: the data and inference matter.",
+        "Northbridge must record what is inferred and from which processed signals. A product title such as 'wellbeing assistant' cannot establish or remove this definition."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), 3(40); Annex III 1(b), 1(c); Article 5(1)(f), 5(1)(g)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Biometric categorisation** assigns people to categories using biometric data, subject to the definition's ancillary-service and objective technical-necessity limit. Both parts of that narrow exclusion need evidence.",
+        "A commercial service label alone cannot justify the exclusion. Ask which category is inferred, from which biometric data, and why the ancillary function is technically necessary."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), 3(40); Annex III 1(b), 1(c); Article 5(1)(f), 5(1)(g)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Annex III 1(b) concerns categorisation by sensitive or protected attributes inferred from biometric data; point 1(c) concerns emotion recognition. They are listed only insofar as their use is otherwise legally permitted.",
+        "Article 5 can prohibit specific emotion settings or sensitive-category inference. High-risk treatment does not make those uses lawful. The later prohibition module examines each exact boundary."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), 3(40); Annex III 1(b), 1(c); Article 5(1)(f), 5(1)(g)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Fictional case: Northbridge considers two tools—one infers intentions from facial signals, another infers a sensitive category from those signals. Keep their purposes distinct and check each relevant rule.",
+        "An emotion system is not defined by categorising a person into any group; a categorisation system is not automatically emotion recognition. Do not collapse the definitions into 'all cameras'."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), 3(40); Annex III 1(b), 1(c); Article 5(1)(f), 5(1)(g)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["emotion-recognition"],
+      "teaches": ["screen-1"],
+      "prompt": "A tool infers intention from processed facial signals. Which definition needs examination?",
+      "options": [
+        {
+          "blocks": "Emotion recognition",
+          "correct": true,
+          "reason": "Article 3(39) includes emotion or intention inference from biometrics."
+        },
+        {
+          "blocks": "Every explicit survey response automatically",
+          "correct": false,
+          "reason": "A response alone does not establish biometric inference."
+        },
+        {
+          "blocks": "Only identity verification",
+          "correct": false,
+          "reason": "Confirming identity is a distinct purpose."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which concept connects inferred intentions with biometric inputs?",
+          "options": [
+            {
+              "blocks": "Every explicit survey response automatically",
+              "correct": false,
+              "reason": "A response alone does not establish biometric inference."
+            },
+            {
+              "blocks": "Only identity verification",
+              "correct": false,
+              "reason": "Confirming identity is a distinct purpose."
+            },
+            {
+              "blocks": "Emotion recognition",
+              "correct": true,
+              "reason": "Article 3(39) includes emotion or intention inference from biometrics."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["biometric-categorisation"],
+      "teaches": ["screen-2"],
+      "prompt": "A vendor calls categorisation 'ancillary to our commercial service'. What evidence is still needed for the definition's limit?",
+      "options": [
+        {
+          "blocks": "Only an attractive product name",
+          "correct": false,
+          "reason": "A name proves neither condition."
+        },
+        {
+          "blocks": "Only a profitable business model",
+          "correct": false,
+          "reason": "Profitability is not objective technical necessity."
+        },
+        {
+          "blocks": "Strict necessity for objective technical reasons",
+          "correct": true,
+          "reason": "The definition requires this as well as ancillary status."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does ancillary commercial use alone satisfy the categorisation exclusion?",
+          "options": [
+            {
+              "blocks": "Only a profitable business model",
+              "correct": false,
+              "reason": "Profitability is not objective technical necessity."
+            },
+            {
+              "blocks": "Strict necessity for objective technical reasons",
+              "correct": true,
+              "reason": "The definition requires this as well as ancillary status."
+            },
+            {
+              "blocks": "Only an attractive product name",
+              "correct": false,
+              "reason": "A name proves neither condition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["emotion-recognition", "biometric-categorisation"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A sensitive biometric function is listed in Annex III but may be prohibited. How should it be handled?",
+      "options": [
+        {
+          "blocks": "Ignore its specific inferred attribute",
+          "correct": false,
+          "reason": "The actual attribute determines the relevant categorisation test."
+        },
+        {
+          "blocks": "Check the applicable prohibition and other law",
+          "correct": true,
+          "reason": "The list is limited to legally permitted uses."
+        },
+        {
+          "blocks": "Treat high-risk status as an authorisation",
+          "correct": false,
+          "reason": "Classification cannot cure a prohibited practice."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does inclusion in the biometrics high-risk list establish permission?",
+          "options": [
+            {
+              "blocks": "Check the applicable prohibition and other law",
+              "correct": true,
+              "reason": "The list is limited to legally permitted uses."
+            },
+            {
+              "blocks": "Treat high-risk status as an authorisation",
+              "correct": false,
+              "reason": "Classification cannot cure a prohibited practice."
+            },
+            {
+              "blocks": "Ignore its specific inferred attribute",
+              "correct": false,
+              "reason": "The actual attribute determines the relevant categorisation test."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

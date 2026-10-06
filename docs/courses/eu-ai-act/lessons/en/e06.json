@@ -1,0 +1,207 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e06",
+    "title": "The profiling rule",
+    "summary": "Apply the profiling override within Annex III without extending it to every AI system.",
+    "covers": ["profiling-override"],
+    "prerequisites": [
+      {
+        "lesson": "i03",
+        "reason": "The override depends on whether the system performs profiling as defined by the incorporated law."
+      },
+      {
+        "lesson": "e01",
+        "reason": "The learner must know which paragraph 3 gateway is displaced by the profiling rule."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **profiling override** says an AI system referred to in Annex III is always high-risk where it performs profiling of natural persons, notwithstanding paragraph 3's gateway.",
+        "Its scope matters: it is not a rule that every AI system anywhere becomes high-risk merely because it profiles. First establish the relevant Annex III use."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), final subparagraph; Article 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Recall profiling: automated personal-data processing evaluating personal aspects, with context-specific cross-referenced definitions. The record must show what is evaluated rather than inferring profiling from every name in a file.",
+        "Northbridge's applicant reliability predictor performs a personal evaluation. A purely alphabetical list operation has different facts. Human final approval does not erase the earlier automated evaluation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), final subparagraph; Article 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional case: the system is stipulated to fall within Annex III recruitment and predicts personal suitability. A claimed narrow-task or preparatory condition cannot overcome the profiling override.",
+        "Do not rearrange the test to accept a convenient condition before checking profiling. Record the exact personal evaluation and the corresponding listed use."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), final subparagraph; Article 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Changed case: profiling is shown, but no Annex III purpose has been established. Investigate the listed-use route and any product route, along with other law. Do not use this override as a universal classification formula.",
+        "A result that the override does not apply is narrower than 'no obligations'. Other AI Act duties and personal-data rules can still matter."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3), final subparagraph; Article 3(52)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["profiling-override"],
+      "teaches": ["screen-1"],
+      "prompt": "What must be established before applying the paragraph 3 profiling override?",
+      "options": [
+        {
+          "blocks": "A relevant Annex III system and personal profiling",
+          "correct": true,
+          "reason": "The sentence is expressly scoped to Annex III systems."
+        },
+        {
+          "blocks": "Only that software handles a person's name",
+          "correct": false,
+          "reason": "A name alone proves neither profiling nor the listed purpose."
+        },
+        {
+          "blocks": "Nothing about the intended use",
+          "correct": false,
+          "reason": "The Annex III comparison is essential."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does Article 6(3)'s profiling sentence classify every profiling AI system in every context?",
+          "options": [
+            {
+              "blocks": "Only that software handles a person's name",
+              "correct": false,
+              "reason": "A name alone proves neither profiling nor the listed purpose."
+            },
+            {
+              "blocks": "Nothing about the intended use",
+              "correct": false,
+              "reason": "The Annex III comparison is essential."
+            },
+            {
+              "blocks": "A relevant Annex III system and personal profiling",
+              "correct": true,
+              "reason": "The sentence is expressly scoped to Annex III systems."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["profiling-override"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "An Annex III recruitment tool predicts applicant reliability but claims to be preparatory. What follows?",
+      "options": [
+        {
+          "blocks": "Preparation always overrides profiling",
+          "correct": false,
+          "reason": "That reverses the statutory priority."
+        },
+        {
+          "blocks": "Human final approval always erases profiling",
+          "correct": false,
+          "reason": "Profiling concerns the earlier automated personal evaluation."
+        },
+        {
+          "blocks": "The profiling override keeps it high-risk",
+          "correct": true,
+          "reason": "The final subparagraph overrides the paragraph 3 derogation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a preparatory-task condition remove the Annex III profiling override?",
+          "options": [
+            {
+              "blocks": "Human final approval always erases profiling",
+              "correct": false,
+              "reason": "Profiling concerns the earlier automated personal evaluation."
+            },
+            {
+              "blocks": "The profiling override keeps it high-risk",
+              "correct": true,
+              "reason": "The final subparagraph overrides the paragraph 3 derogation."
+            },
+            {
+              "blocks": "Preparation always overrides profiling",
+              "correct": false,
+              "reason": "That reverses the statutory priority."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["profiling-override"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "Profiling exists, but the listed use is unresolved. What conclusion is justified?",
+      "options": [
+        {
+          "blocks": "Automatically declare there are no legal duties",
+          "correct": false,
+          "reason": "An unresolved or inapplicable override does not erase other law."
+        },
+        {
+          "blocks": "Investigate classification routes and other applicable rules",
+          "correct": true,
+          "reason": "The override cannot substitute for the missing listed-use analysis."
+        },
+        {
+          "blocks": "Automatically classify every such system under this sentence",
+          "correct": false,
+          "reason": "That extends the sentence beyond its Annex III scope."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an assessor handle a profiling fact without an established Annex III purpose?",
+          "options": [
+            {
+              "blocks": "Investigate classification routes and other applicable rules",
+              "correct": true,
+              "reason": "The override cannot substitute for the missing listed-use analysis."
+            },
+            {
+              "blocks": "Automatically classify every such system under this sentence",
+              "correct": false,
+              "reason": "That extends the sentence beyond its Annex III scope."
+            },
+            {
+              "blocks": "Automatically declare there are no legal duties",
+              "correct": false,
+              "reason": "An unresolved or inapplicable override does not erase other law."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "module": "Article 6: people, education and work",
+  "lesson": {
+    "slug": "a06",
+    "title": "Case clinic: a learning and employment platform",
+    "summary": "Separate platform functions and trace changed decisions across learning and work.",
+    "covers": ["platform-function-assessment"],
+    "prerequisites": [
+      {
+        "lesson": "a01",
+        "reason": "The platform case contrasts identity confirmation with identity discovery."
+      },
+      {
+        "lesson": "a03",
+        "reason": "The platform case includes evaluation of learning outcomes."
+      },
+      {
+        "lesson": "a05",
+        "reason": "The platform case includes candidate filtering. The platform case includes task allocation based on individual behaviour."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Platform-function assessment** checks each concrete intended use within a platform. Northbridge's fictional platform offers document conversion, programme admission recommendations, applicant ranking and exam-behaviour detection.",
+        "A general 'learning and work assistant' title does not select one legal category for all functions. Map users, inputs, outputs, affected people and decisions for each."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 1–4; Articles 3(12), 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Admission recommendations need comparison with educational access; candidate ranking needs recruitment comparison; exam monitoring needs its own educational point. These are separate purposes even if one model powers all of them.",
+        "Document conversion has different facts. It does not prove that the platform's other functions are equally narrow. Assess whether each function is part of the same system or a genuinely separate system boundary."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 1–4; Articles 3(12), 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed fact: a supposedly neutral conversion tool extracts personal features and assigns applicant scores before the recruiter sees them. The assessment must use that actual evaluative function.",
+        "A component's internal name does not eliminate its contribution to decisions. Identify profiling and material influence questions, and collect evidence rather than asserting a derogation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 1–4; Articles 3(12), 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The case clinic ends with a record of each function's relevant point and open tests. Check prohibitions before permission is assumed, then paragraph 3, scope, dates and other law.",
+        "An unresolved boundary or feature should be explicit. A platform-wide 'safe' conclusion based on its least consequential feature is not supported by the case facts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 1–4; Articles 3(12), 5, 6",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["platform-function-assessment"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "The platform has admissions, recruitment and exam-monitoring functions. How should the first comparison be recorded?",
+      "options": [
+        {
+          "blocks": "By distinct functions and relevant listed purposes",
+          "correct": true,
+          "reason": "Shared technology does not erase different intended uses."
+        },
+        {
+          "blocks": "Only under the document-conversion feature",
+          "correct": false,
+          "reason": "That hides consequential functions."
+        },
+        {
+          "blocks": "Only from the general product title",
+          "correct": false,
+          "reason": "The title does not establish the legal facts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a shared model give every learning/work platform feature one automatic legal result?",
+          "options": [
+            {
+              "blocks": "Only under the document-conversion feature",
+              "correct": false,
+              "reason": "That hides consequential functions."
+            },
+            {
+              "blocks": "Only from the general product title",
+              "correct": false,
+              "reason": "The title does not establish the legal facts."
+            },
+            {
+              "blocks": "By distinct functions and relevant listed purposes",
+              "correct": true,
+              "reason": "Shared technology does not erase different intended uses."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["platform-function-assessment"],
+      "teaches": ["screen-3"],
+      "prompt": "The 'conversion' component secretly scores applicants. What fact should the assessment use?",
+      "options": [
+        {
+          "blocks": "Only its neutral internal name",
+          "correct": false,
+          "reason": "A name cannot negate the scoring facts."
+        },
+        {
+          "blocks": "Only the model's common vendor",
+          "correct": false,
+          "reason": "Vendor identity does not answer the function test."
+        },
+        {
+          "blocks": "The actual personal evaluation and decision use",
+          "correct": true,
+          "reason": "Labels do not replace the component's real operation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What matters when a supposedly neutral component performs suitability evaluation?",
+          "options": [
+            {
+              "blocks": "Only the model's common vendor",
+              "correct": false,
+              "reason": "Vendor identity does not answer the function test."
+            },
+            {
+              "blocks": "The actual personal evaluation and decision use",
+              "correct": true,
+              "reason": "Labels do not replace the component's real operation."
+            },
+            {
+              "blocks": "Only its neutral internal name",
+              "correct": false,
+              "reason": "A name cannot negate the scoring facts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["platform-function-assessment"],
+      "teaches": ["screen-4"],
+      "prompt": "Northbridge cannot establish whether two features share decision-relevant outputs. What should it do?",
+      "options": [
+        {
+          "blocks": "Use the cheapest feature's result for all uses",
+          "correct": false,
+          "reason": "Price and unrelated features do not determine classification."
+        },
+        {
+          "blocks": "Record the gap and investigate before concluding",
+          "correct": true,
+          "reason": "Unknown boundaries should remain visible until supported."
+        },
+        {
+          "blocks": "Assume separation and declare all uses safe",
+          "correct": false,
+          "reason": "That supplies unsupported facts and a blanket conclusion."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an unresolved platform boundary be treated in the case record?",
+          "options": [
+            {
+              "blocks": "Record the gap and investigate before concluding",
+              "correct": true,
+              "reason": "Unknown boundaries should remain visible until supported."
+            },
+            {
+              "blocks": "Assume separation and declare all uses safe",
+              "correct": false,
+              "reason": "That supplies unsupported facts and a blanket conclusion."
+            },
+            {
+              "blocks": "Use the cheapest feature's result for all uses",
+              "correct": false,
+              "reason": "Price and unrelated features do not determine classification."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

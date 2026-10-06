@@ -1,0 +1,203 @@
+{
+  "module": "Article 5: harmful decisions and behaviour",
+  "lesson": {
+    "slug": "b04",
+    "title": "Social scoring",
+    "summary": "Apply the social-scoring test and its alternative unrelated-context and disproportionate-treatment branches.",
+    "covers": ["social-scoring-test"],
+    "prerequisites": [
+      {
+        "lesson": "b01",
+        "reason": "The scoring case must be read as a set of elements and consequence conditions."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **social-scoring test** concerns AI evaluating or classifying people or groups over time from social behaviour or known, inferred or predicted personal/personality characteristics.",
+        "That evaluation must lead to specified detrimental or unfavourable treatment. A score existing alone does not establish the whole prohibition; examine what it does to people."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(c), 5(1)(c)(i), 5(1)(c)(ii)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The first treatment branch concerns social contexts unrelated to where the data were generated or collected. Trace the source context and the treatment context rather than assuming all data use crosses this boundary.",
+        "Fictional Northbridge case: a score drawn from unrelated social conduct is used to deny a service in another context. The stipulated unrelated contexts and detrimental effect let us test this branch."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(c), 5(1)(c)(i), 5(1)(c)(ii)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The second branch concerns treatment unjustified or disproportionate to the social behaviour or its gravity. It can matter even without an unrelated-context finding.",
+        "The branches are alternatives: either or both can satisfy this part of the test. Do not require both in every case. A relevant data context does not by itself cure disproportionate treatment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(c), 5(1)(c)(i), 5(1)(c)(ii)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Record evaluation over time, input characteristics, score, treatment and the applicable branch. This point is not a general prohibition on every numerical score or every credit assessment.",
+        "Other Article 5 points, high-risk classification and personal-data law can still apply when this particular social-scoring test is not established. Keep the conclusion exact."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1)(c), 5(1)(c)(i), 5(1)(c)(ii)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["social-scoring-test"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "A number is assigned to a person. Is that enough for the full social-scoring prohibition?",
+      "options": [
+        {
+          "blocks": "The specified evaluation and detrimental-treatment relationship",
+          "correct": true,
+          "reason": "The point contains both evaluation and treatment elements."
+        },
+        {
+          "blocks": "Every number is automatically prohibited",
+          "correct": false,
+          "reason": "A score alone does not establish the complete test."
+        },
+        {
+          "blocks": "Only a colourful chart",
+          "correct": false,
+          "reason": "Display form does not establish legal elements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which fact must a social-scoring assessment establish beyond a numerical output?",
+          "options": [
+            {
+              "blocks": "Every number is automatically prohibited",
+              "correct": false,
+              "reason": "A score alone does not establish the complete test."
+            },
+            {
+              "blocks": "Only a colourful chart",
+              "correct": false,
+              "reason": "Display form does not establish legal elements."
+            },
+            {
+              "blocks": "The specified evaluation and detrimental-treatment relationship",
+              "correct": true,
+              "reason": "The point contains both evaluation and treatment elements."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["social-scoring-test"],
+      "teaches": ["screen-2"],
+      "prompt": "A social score causes detrimental treatment in an unrelated context. Which branch is relevant?",
+      "options": [
+        {
+          "blocks": "Only the server's country",
+          "correct": false,
+          "reason": "That does not establish context relationship."
+        },
+        {
+          "blocks": "Only the software's price",
+          "correct": false,
+          "reason": "Price does not decide the treatment branch."
+        },
+        {
+          "blocks": "Data-generation context and resulting treatment context",
+          "correct": true,
+          "reason": "The branch compares those contexts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should be traced for the unrelated-context social-scoring branch?",
+          "options": [
+            {
+              "blocks": "Only the software's price",
+              "correct": false,
+              "reason": "Price does not decide the treatment branch."
+            },
+            {
+              "blocks": "Data-generation context and resulting treatment context",
+              "correct": true,
+              "reason": "The branch compares those contexts."
+            },
+            {
+              "blocks": "Only the server's country",
+              "correct": false,
+              "reason": "That does not establish context relationship."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["social-scoring-test"],
+      "teaches": ["screen-3"],
+      "prompt": "Treatment is stipulated disproportionate to the scored behaviour, but the context is related. Must both branches fit?",
+      "options": [
+        {
+          "blocks": "No treatment element is required at all",
+          "correct": false,
+          "reason": "At least a specified detrimental-treatment branch still matters."
+        },
+        {
+          "blocks": "Either treatment branch can suffice",
+          "correct": true,
+          "reason": "Article 5(1)(c) states either or both."
+        },
+        {
+          "blocks": "Both branches are always required",
+          "correct": false,
+          "reason": "That incorrectly makes alternative branches cumulative."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the disproportionate-treatment branch operate without the unrelated-context branch also being met?",
+          "options": [
+            {
+              "blocks": "Either treatment branch can suffice",
+              "correct": true,
+              "reason": "Article 5(1)(c) states either or both."
+            },
+            {
+              "blocks": "Both branches are always required",
+              "correct": false,
+              "reason": "That incorrectly makes alternative branches cumulative."
+            },
+            {
+              "blocks": "No treatment element is required at all",
+              "correct": false,
+              "reason": "At least a specified detrimental-treatment branch still matters."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

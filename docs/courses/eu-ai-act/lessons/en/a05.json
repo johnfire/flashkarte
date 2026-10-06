@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: people, education and work",
+  "lesson": {
+    "slug": "a05",
+    "title": "Recruitment and worker management",
+    "summary": "Identify recruitment and worker-management functions, including targeting, ranking and individual monitoring.",
+    "covers": ["recruitment-use", "worker-management-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "The learner must distinguish a listed-use match from the product route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Recruitment use** includes recruitment or selection of people, particularly targeted job advertisements, analysis/filtering of applications and candidate evaluation.",
+        "Northbridge's assistant predicts applicant suitability and ranks applications. Compare that function with point 4(a). A person still choosing interviews does not automatically make a ranking unrelated to selection."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 4(a), 4(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Worker-management use** includes decisions affecting work terms, promotion or termination, task allocation based on individual behaviour or traits, and monitoring/evaluation of work performance and behaviour.",
+        "An AI assigning work based on an individual's observed behaviour differs from a simple neutral calendar. Record the basis for allocation and how the output affects work, rather than treating all scheduling alike."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 4(a), 4(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The listed area includes access to self-employment as well as employment and workers' management. A contractor or platform-worker label should not end the intended-purpose comparison.",
+        "For each function, identify the affected person, personal inputs, output and decision context. Other employment and personal-data rules need their own checks."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 4(a), 4(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Fictional changed case: Northbridge first uses a tool only to convert application files. It later adds suitability predictions and shortlists. Reassess the actual new function.",
+        "A limited processing function and an evaluative selection function have different evidence. The later derogation module tests whether a listed use qualifies; it does not automatically exempt every tool called administrative."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex III 4(a), 4(b); Article 6(2), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["recruitment-use"],
+      "teaches": ["screen-1"],
+      "prompt": "AI filters applications into a shortlist for recruiters. Which Annex III purpose should be checked?",
+      "options": [
+        {
+          "blocks": "Recruitment or selection",
+          "correct": true,
+          "reason": "Point 4(a) expressly includes these recruitment functions."
+        },
+        {
+          "blocks": "Only unrelated inventory control",
+          "correct": false,
+          "reason": "That is not the system's stated intended purpose."
+        },
+        {
+          "blocks": "No listed purpose whenever a person decides",
+          "correct": false,
+          "reason": "Human involvement alone does not remove recruitment purpose."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which listed use includes analysing and filtering applications?",
+          "options": [
+            {
+              "blocks": "Only unrelated inventory control",
+              "correct": false,
+              "reason": "That is not the system's stated intended purpose."
+            },
+            {
+              "blocks": "No listed purpose whenever a person decides",
+              "correct": false,
+              "reason": "Human involvement alone does not remove recruitment purpose."
+            },
+            {
+              "blocks": "Recruitment or selection",
+              "correct": true,
+              "reason": "Point 4(a) expressly includes these recruitment functions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["worker-management-use"],
+      "teaches": ["screen-2"],
+      "prompt": "AI allocates tasks using individual behavioural records. Which function is directly relevant?",
+      "options": [
+        {
+          "blocks": "Only ordinary date sorting",
+          "correct": false,
+          "reason": "The case involves individual behaviour-based allocation."
+        },
+        {
+          "blocks": "Only applicant admission to a college",
+          "correct": false,
+          "reason": "That is a different institutional purpose."
+        },
+        {
+          "blocks": "Worker-management use under point 4(b)",
+          "correct": true,
+          "reason": "The basis for individual allocation matches that listed use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which employment point includes behaviour-based task allocation?",
+          "options": [
+            {
+              "blocks": "Only applicant admission to a college",
+              "correct": false,
+              "reason": "That is a different institutional purpose."
+            },
+            {
+              "blocks": "Worker-management use under point 4(b)",
+              "correct": true,
+              "reason": "The basis for individual allocation matches that listed use."
+            },
+            {
+              "blocks": "Only ordinary date sorting",
+              "correct": false,
+              "reason": "The case involves individual behaviour-based allocation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["recruitment-use", "worker-management-use"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A file-conversion assistant adds candidate suitability ranking. What should Northbridge do?",
+      "options": [
+        {
+          "blocks": "Treat every administrative label as an exemption",
+          "correct": false,
+          "reason": "The actual function, not the label, is assessed."
+        },
+        {
+          "blocks": "The intended function and decision effects changed",
+          "correct": true,
+          "reason": "The new function needs its own listed-use and risk analysis."
+        },
+        {
+          "blocks": "Keep the old result because the product name stayed",
+          "correct": false,
+          "reason": "A stable name does not preserve unchanged legal facts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why reassess an administrative hiring tool when evaluative selection is added?",
+          "options": [
+            {
+              "blocks": "The intended function and decision effects changed",
+              "correct": true,
+              "reason": "The new function needs its own listed-use and risk analysis."
+            },
+            {
+              "blocks": "Keep the old result because the product name stayed",
+              "correct": false,
+              "reason": "A stable name does not preserve unchanged legal facts."
+            },
+            {
+              "blocks": "Treat every administrative label as an exemption",
+              "correct": false,
+              "reason": "The actual function, not the label, is assessed."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "module": "Article 6: product and safety classification",
+  "lesson": {
+    "slug": "p01",
+    "title": "Two routes to high-risk classification",
+    "summary": "Select the product route or listed-use route without treating classification as permission.",
+    "covers": ["high-risk-classification", "classification-routes"],
+    "prerequisites": [
+      {
+        "lesson": "i02",
+        "reason": "The learner must identify what is being classified before learning the classification result."
+      },
+      {
+        "lesson": "i03",
+        "reason": "Both routes depend on the function intended for the system."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**High-risk classification** brings a system into a defined regulatory category. Article 6 contains two routes. Paragraph 1 concerns certain products or safety components under listed product legislation; paragraph 2 concerns the use cases in Annex III.",
+        "The routes are additional to each other. A system can require analysis under both. A result under one route does not erase the other route or an Article 5 prohibition."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1)–(4), Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "For the **product route**, identify the product legislation in Annex I, whether the AI is itself a covered product or a safety component, and whether the relevant product must undergo third-party conformity assessment. The paragraph 1 conditions are cumulative.",
+        "Northbridge considers an AI-enabled protective device. Calling it safety-related is a starting fact, not sufficient proof of the entire product-route test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1)–(4), Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "For the **listed-use route**, compare the intended purpose with each relevant Annex III point. These cover specified biometric, infrastructure, education, employment, services, enforcement, migration and justice/democratic uses.",
+        "Northbridge's applicant evaluation needs the employment points. 'It is office software' is too broad to decide this. Paragraph 3 then supplies a limited derogation and profiling rule, taught later."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1)–(4), Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Keep three conclusions separate: whether a practice is prohibited, whether a system is high-risk, and which obligations apply when. Transparency and other law need separate checks too.",
+        "Write the exact route and facts supporting it. 'Low-risk because a human is present' is not an Article 6 test. The date rules are also separate: a later high-risk application date does not postpone all other duties."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(1)–(4), Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["high-risk-classification"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "A use is classified high-risk. What does this establish?",
+      "options": [
+        {
+          "blocks": "Its regulatory category, with other checks remaining",
+          "correct": true,
+          "reason": "Classification is not a blanket permission or completed compliance assessment."
+        },
+        {
+          "blocks": "Permission to disregard every prohibition",
+          "correct": false,
+          "reason": "Article 5 remains a separate test."
+        },
+        {
+          "blocks": "That human review is never needed",
+          "correct": false,
+          "reason": "Classification does not remove applicable oversight duties."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does high-risk classification itself authorise an AI practice?",
+          "options": [
+            {
+              "blocks": "Permission to disregard every prohibition",
+              "correct": false,
+              "reason": "Article 5 remains a separate test."
+            },
+            {
+              "blocks": "That human review is never needed",
+              "correct": false,
+              "reason": "Classification does not remove applicable oversight duties."
+            },
+            {
+              "blocks": "Its regulatory category, with other checks remaining",
+              "correct": true,
+              "reason": "Classification is not a blanket permission or completed compliance assessment."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["classification-routes"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "Northbridge evaluates applicants with an AI tool. Which route directly needs comparison?",
+      "options": [
+        {
+          "blocks": "Only Annex I product legislation",
+          "correct": false,
+          "reason": "The listed-use route must still be examined."
+        },
+        {
+          "blocks": "Only the model's general capabilities",
+          "correct": false,
+          "reason": "The system's purpose is central to the use-case route."
+        },
+        {
+          "blocks": "Article 6(2) and Annex III",
+          "correct": true,
+          "reason": "Recruitment is among Annex III's specified purposes."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which Article 6 route addresses the listed recruitment purposes?",
+          "options": [
+            {
+              "blocks": "Only the model's general capabilities",
+              "correct": false,
+              "reason": "The system's purpose is central to the use-case route."
+            },
+            {
+              "blocks": "Article 6(2) and Annex III",
+              "correct": true,
+              "reason": "Recruitment is among Annex III's specified purposes."
+            },
+            {
+              "blocks": "Only Annex I product legislation",
+              "correct": false,
+              "reason": "The listed-use route must still be examined."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["classification-routes"],
+      "teaches": ["screen-1", "screen-2", "screen-4"],
+      "prompt": "A product-route condition is not met. Can Northbridge end the assessment of a hiring function?",
+      "options": [
+        {
+          "blocks": "Yes; an AI label decides both routes",
+          "correct": false,
+          "reason": "A label supplies neither statutory test."
+        },
+        {
+          "blocks": "No; the listed-use route remains separate",
+          "correct": true,
+          "reason": "Paragraph 2 adds a further route to classification."
+        },
+        {
+          "blocks": "Yes; there is only one route",
+          "correct": false,
+          "reason": "Article 6 expressly provides more than the product route."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does failing one Article 6(1) condition remove the need to check Annex III?",
+          "options": [
+            {
+              "blocks": "No; the listed-use route remains separate",
+              "correct": true,
+              "reason": "Paragraph 2 adds a further route to classification."
+            },
+            {
+              "blocks": "Yes; there is only one route",
+              "correct": false,
+              "reason": "Article 6 expressly provides more than the product route."
+            },
+            {
+              "blocks": "Yes; an AI label decides both routes",
+              "correct": false,
+              "reason": "A label supplies neither statutory test."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

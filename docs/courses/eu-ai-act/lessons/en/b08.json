@@ -1,0 +1,207 @@
+{
+  "module": "Article 5: biometrics and synthetic media",
+  "lesson": {
+    "slug": "b08",
+    "title": "Emotion inference at work and in education",
+    "summary": "Check biometric emotion inference in workplace/education settings and the exact medical/safety boundary.",
+    "covers": ["emotion-setting-ban", "medical-safety-boundary"],
+    "prerequisites": [
+      {
+        "lesson": "a02",
+        "reason": "The prohibition concerns emotion inference from the biometric basis already defined."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The setting and intended purpose must be checked as elements of the ban."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **emotion-setting ban** concerns AI used to infer a person's emotions in workplaces or education institutions, with a stated exception for systems intended for medical or safety reasons.",
+        "First establish biometric emotion/intent inference under the definition, the setting and the regulated action. A sentiment questionnaire and facial emotion inference are not interchangeable just because both concern feelings."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), Article 5(1)(f), recital 18; Annex III 1(c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **medical/safety boundary** requires examining the actual intended use. Calling performance monitoring 'wellbeing' or 'safety' does not establish the exception.",
+        "Fictional Northbridge employer infers emotions from facial signals to score motivation. A generic wellbeing claim is insufficient evidence of a medical or safety purpose. Assess precise facts rather than promises."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), Article 5(1)(f), recital 18; Annex III 1(c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Recital 18 distinguishes physical states such as pain or fatigue from emotions or intentions. A driver-fatigue detector for accident prevention is not automatically emotion recognition.",
+        "Do not reason that every bodily-state detector requires an emotion exception. Establish what the system infers. Other safety, product, personal-data or high-risk rules can remain relevant."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), Article 5(1)(f), recital 18; Annex III 1(c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "If a permitted medical/safety emotion use is established, that is a narrow prohibition result. Annex III emotion classification, transparency and other law still require checks.",
+        "Record the inferred state, biometric basis, workplace/education context and purpose evidence. A consent form is not supplied here as a blanket cure for prohibited workplace inference."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(39), Article 5(1)(f), recital 18; Annex III 1(c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["emotion-setting-ban"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "An employer infers motivation from biometric facial signals. What facts need the Article 5(1)(f) check?",
+      "options": [
+        {
+          "blocks": "Biometric emotion inference, workplace context and purpose",
+          "correct": true,
+          "reason": "The definition, setting and exception facts determine this test."
+        },
+        {
+          "blocks": "Only the wellbeing product name",
+          "correct": false,
+          "reason": "A label cannot establish a medical/safety boundary."
+        },
+        {
+          "blocks": "Only whether employees signed any form",
+          "correct": false,
+          "reason": "Consent is not a universal exception supplied by this point."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which combination is central to the workplace emotion rule?",
+          "options": [
+            {
+              "blocks": "Only the wellbeing product name",
+              "correct": false,
+              "reason": "A label cannot establish a medical/safety boundary."
+            },
+            {
+              "blocks": "Only whether employees signed any form",
+              "correct": false,
+              "reason": "Consent is not a universal exception supplied by this point."
+            },
+            {
+              "blocks": "Biometric emotion inference, workplace context and purpose",
+              "correct": true,
+              "reason": "The definition, setting and exception facts determine this test."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["medical-safety-boundary"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A vendor calls a motivation scorer 'safety AI' without supporting purpose evidence. What should be concluded?",
+      "options": [
+        {
+          "blocks": "The label automatically cures the prohibition",
+          "correct": false,
+          "reason": "Labels cannot substitute for the required facts."
+        },
+        {
+          "blocks": "Any workplace system is automatically medical",
+          "correct": false,
+          "reason": "The setting does not establish that purpose."
+        },
+        {
+          "blocks": "The exception remains unestablished pending evidence",
+          "correct": true,
+          "reason": "Actual intended medical/safety use needs examination."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a safety label establish the medical/safety exception?",
+          "options": [
+            {
+              "blocks": "Any workplace system is automatically medical",
+              "correct": false,
+              "reason": "The setting does not establish that purpose."
+            },
+            {
+              "blocks": "The exception remains unestablished pending evidence",
+              "correct": true,
+              "reason": "Actual intended medical/safety use needs examination."
+            },
+            {
+              "blocks": "The label automatically cures the prohibition",
+              "correct": false,
+              "reason": "Labels cannot substitute for the required facts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["emotion-setting-ban", "medical-safety-boundary"],
+      "teaches": ["screen-3"],
+      "prompt": "A tool detects physical driver fatigue to avoid accidents, without emotion inference. What should be distinguished?",
+      "options": [
+        {
+          "blocks": "No other rules can apply to fatigue detectors",
+          "correct": false,
+          "reason": "A definition result does not erase other legal duties."
+        },
+        {
+          "blocks": "Physical-state detection differs from inferred emotion",
+          "correct": true,
+          "reason": "Recital 18 expressly distinguishes physical states such as fatigue."
+        },
+        {
+          "blocks": "All fatigue is legally an emotion",
+          "correct": false,
+          "reason": "That contradicts the recital's distinction."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does physical fatigue detection automatically constitute emotion recognition?",
+          "options": [
+            {
+              "blocks": "Physical-state detection differs from inferred emotion",
+              "correct": true,
+              "reason": "Recital 18 expressly distinguishes physical states such as fatigue."
+            },
+            {
+              "blocks": "All fatigue is legally an emotion",
+              "correct": false,
+              "reason": "That contradicts the recital's distinction."
+            },
+            {
+              "blocks": "No other rules can apply to fatigue detectors",
+              "correct": false,
+              "reason": "A definition result does not erase other legal duties."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

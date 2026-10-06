@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e02",
+    "title": "Narrow procedural tasks",
+    "summary": "Distinguish a genuinely narrow procedural task from a substantive personal decision.",
+    "covers": ["procedural-task-condition"],
+    "prerequisites": [
+      {
+        "lesson": "e01",
+        "reason": "A procedural task does not bypass the gateway or its decision-influence analysis."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **narrow procedural-task condition** concerns intended performance of a limited process step. 'Procedural' is not a label that can be pasted onto applicant evaluation or another substantive assessment.",
+        "Northbridge describes the exact operation, what it selects or changes, and what consequences follow. This lets a reviewer test narrowness rather than rely on a job title."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(a), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Fictional case: a tool converts already supplied application files into a consistent format without choosing applicants or evaluating personal suitability. This illustrates a narrow-function hypothesis.",
+        "It is not an automatic legal conclusion. The system must meet the definition and relevant listed-use facts before a paragraph 3 derogation matters; the gateway and profiling rule still need evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(a), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed fact: conversion drops applicants based on predicted suitability. The operation now contains substantive evaluation and changes who reaches the reviewer.",
+        "A limited input or short output does not prove a narrow procedural task. Decision effects and actual evaluation matter. Reassess when features or integrations change."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(a), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "An assessment records the operation and the reason it satisfies a condition, the no-significant-risk analysis, and whether it performs personal profiling. Retain evidence of what happens on errors and downstream use.",
+        "If a supposedly narrow task's error removes an essential application from review, the gateway needs careful examination. Do not equate a small component with insignificant harm."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)(a), paragraph 3 gateway and profiling rule",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["procedural-task-condition"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A tool merely reformats supplied files without assessing applicants. What is the appropriate approach?",
+      "options": [
+        {
+          "blocks": "Examine the narrow-task hypothesis and remaining tests",
+          "correct": true,
+          "reason": "The function supports a condition analysis, not automatic exemption."
+        },
+        {
+          "blocks": "Declare every listed tool exempt",
+          "correct": false,
+          "reason": "Other functions and the gateway still matter."
+        },
+        {
+          "blocks": "Assume formatting necessarily predicts suitability",
+          "correct": false,
+          "reason": "The case expressly lacks that evaluative function."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should a strictly formatting-only function be considered under the procedural-task condition?",
+          "options": [
+            {
+              "blocks": "Declare every listed tool exempt",
+              "correct": false,
+              "reason": "Other functions and the gateway still matter."
+            },
+            {
+              "blocks": "Assume formatting necessarily predicts suitability",
+              "correct": false,
+              "reason": "The case expressly lacks that evaluative function."
+            },
+            {
+              "blocks": "Examine the narrow-task hypothesis and remaining tests",
+              "correct": true,
+              "reason": "The function supports a condition analysis, not automatic exemption."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["procedural-task-condition"],
+      "teaches": ["screen-3"],
+      "prompt": "A 'formatting' tool removes people based on suitability predictions. What changes?",
+      "options": [
+        {
+          "blocks": "Nothing; the old label decides",
+          "correct": false,
+          "reason": "Labels cannot override actual operation."
+        },
+        {
+          "blocks": "Only the output file extension",
+          "correct": false,
+          "reason": "The decision function matters beyond file type."
+        },
+        {
+          "blocks": "Substantive personal evaluation must be reassessed",
+          "correct": true,
+          "reason": "The new facts are not just file formatting."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does evaluative candidate exclusion stay a narrow task merely because a file conversion also happens?",
+          "options": [
+            {
+              "blocks": "Only the output file extension",
+              "correct": false,
+              "reason": "The decision function matters beyond file type."
+            },
+            {
+              "blocks": "Substantive personal evaluation must be reassessed",
+              "correct": true,
+              "reason": "The new facts are not just file formatting."
+            },
+            {
+              "blocks": "Nothing; the old label decides",
+              "correct": false,
+              "reason": "Labels cannot override actual operation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["procedural-task-condition"],
+      "teaches": ["screen-4"],
+      "prompt": "A small formatting component's error prevents an application being considered. What does component size prove?",
+      "options": [
+        {
+          "blocks": "Only the developer's effort matters",
+          "correct": false,
+          "reason": "Development effort does not establish risk to people."
+        },
+        {
+          "blocks": "Size alone does not settle the harm gateway",
+          "correct": true,
+          "reason": "Assess consequence and influence, not merely software size."
+        },
+        {
+          "blocks": "Small components can never cause significant harm",
+          "correct": false,
+          "reason": "That is not the statutory gateway test."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a short procedural step still create significant consequences?",
+          "options": [
+            {
+              "blocks": "Size alone does not settle the harm gateway",
+              "correct": true,
+              "reason": "Assess consequence and influence, not merely software size."
+            },
+            {
+              "blocks": "Small components can never cause significant harm",
+              "correct": false,
+              "reason": "That is not the statutory gateway test."
+            },
+            {
+              "blocks": "Only the developer's effort matters",
+              "correct": false,
+              "reason": "Development effort does not establish risk to people."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

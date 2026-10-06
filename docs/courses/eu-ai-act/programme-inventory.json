@@ -1,0 +1,675 @@
+{
+  "baseline": "02024R1689-20260727",
+  "checked_on": "2026-10-06",
+  "source_id": "AI-C-EN",
+  "reading_status": "Article identifiers and annex inventory checked; full paragraph-level reading remains block-specific.",
+  "articles": [
+    {
+      "locator": "Article 1",
+      "block": "Foundations",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 2",
+      "block": "Foundations",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 3",
+      "block": "Foundations",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 4",
+      "block": "Foundations",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 4a",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 5",
+      "block": "Prohibited practices",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 6",
+      "block": "High-risk classification",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 7",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 8",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 9",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 10",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 11",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 12",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 13",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 14",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 15",
+      "block": "High-risk requirements and data safeguards",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 16",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 17",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 18",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 19",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 20",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 21",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 22",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 23",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 24",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 25",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 26",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 27",
+      "block": "Actors and value-chain responsibilities",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 28",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 29",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 30",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 31",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 32",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 33",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 34",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 35",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 36",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 37",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 38",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 39",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 40",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 41",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 42",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 43",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 44",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 45",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 46",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 47",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 48",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 49",
+      "block": "Conformity and market access",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 50",
+      "block": "Interaction and content transparency",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 51",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 52",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 53",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 54",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 55",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 56",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 57",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 58",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 59",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 60",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 60a",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 61",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 62",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 63",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 64",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 65",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 66",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 67",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 68",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 69",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 70",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 71",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 72",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 73",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 74",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 75",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 75a",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 75b",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 75c",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 75d",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 76",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 77",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 78",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 79",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 80",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 81",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 82",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 83",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 84",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 85",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 86",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 87",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 88",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 89",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 90",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 91",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 92",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 93",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 94",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 95",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 96",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 97",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 98",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 99",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 100",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 101",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 102",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 103",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 104",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 105",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 106",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 107",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 108",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 109",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 110",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 111",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 112",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Article 113",
+      "block": "Codes, delegation, penalties and final rules",
+      "status": "scope-planned-not-taught"
+    }
+  ],
+  "annexes": [
+    {
+      "locator": "Annex I",
+      "block": "Product classification and sector-law lookup",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex II",
+      "block": "Remote-identification offence lookup",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex III",
+      "block": "High-risk classification",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex IV",
+      "block": "Conformity and documentation",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex V",
+      "block": "Conformity and declaration",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex VI",
+      "block": "Conformity assessment",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex VII",
+      "block": "Conformity assessment",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex VIII",
+      "block": "Registration",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex IX",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex X",
+      "block": "Governance and enforcement",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex XI",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex XII",
+      "block": "GPAI models and systems",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex XIII",
+      "block": "GPAI systemic risk",
+      "status": "scope-planned-not-taught"
+    },
+    {
+      "locator": "Annex XIV",
+      "block": "Innovation and testing",
+      "status": "scope-planned-not-taught"
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "module": "Article 5: remote identification and synthesis",
+  "lesson": {
+    "slug": "r01",
+    "title": "Real-time remote biometric identification",
+    "summary": "Identify the public-space law-enforcement ban and its three strictly limited objective branches.",
+    "covers": [
+      "real-time-biometric-identification",
+      "publicly-accessible-space",
+      "identification-objectives"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "a01",
+        "reason": "Real-time is a timing qualification of remote biometric identification."
+      },
+      {
+        "lesson": "s04",
+        "reason": "The objectives apply to use for the defined law-enforcement purpose."
+      },
+      {
+        "lesson": "b01",
+        "reason": "A permitted objective is one part of the statutory test rather than automatic permission."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Real-time remote biometric identification** identifies people without their active involvement, typically at a distance, by comparison with a reference database, with capture, comparison and identification occurring without significant delay. Limited short delays cannot be used to evade the real-time definition.",
+        "A **publicly accessible space** is a physical place accessible to an undetermined number of people, regardless of ownership or access conditions. A privately owned station can qualify. Establish real-time identification, public accessibility and law-enforcement purpose together."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(41)–(44), Article 5(1)(h); Annex II",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 5(1)(h) generally prohibits this use for law enforcement. An exception objective must be strictly necessary: targeted search for specific victims of abduction, human trafficking or sexual exploitation, or search for missing persons.",
+        "A second objective concerns preventing a specific, substantial and imminent threat to life or physical safety, or a genuine and present or genuine and foreseeable terrorist-attack threat. Generic crime prevention is not the wording of either objective."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(41)–(44), Article 5(1)(h); Annex II",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The third objective concerns locating/identifying a suspect for investigation, prosecution or execution of a criminal penalty. The offence must be in **Annex II** and punishable in the Member State by a maximum custodial sentence or detention order of at least four years.",
+        "Annex II lists terrorism; human trafficking; child sexual exploitation/pornography; drug trafficking; weapons trafficking; murder/grievous bodily injury; organ/tissue trafficking; nuclear/radioactive-material trafficking; kidnapping/unlawful restraint/hostage-taking; International Criminal Court crimes; aircraft/ship hijacking; rape; environmental crime; organised/armed robbery; sabotage; participation in a criminal organisation involved in a listed offence. Verify the exact entry and national maximum penalty separately."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(41)–(44), Article 5(1)(h); Annex II",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Fictional Northbridge station case: police seek a specified missing person. The objective can enter the exception assessment; it does not dispense with target limits, impact assessment, registration, authorisation and national law taught next.",
+        "Changed case: police scan everyone merely to discourage minor disorder. That general objective does not establish a listed exception. A post-event system or private-access system needs its own classification and other-law assessment; a different fact is not universal permission."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(41)–(44), Article 5(1)(h); Annex II",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["real-time-biometric-identification"],
+      "teaches": ["screen-1"],
+      "prompt": "A system compares faces to an identity database with only a short operational delay. What matters for the real-time definition?",
+      "options": [
+        {
+          "blocks": "The actual capture/comparison/identification timing",
+          "correct": true,
+          "reason": "The definition includes limited short delays to prevent circumvention."
+        },
+        {
+          "blocks": "Any delay makes identification entirely unregulated",
+          "correct": false,
+          "reason": "Limited short delays do not automatically avoid the definition."
+        },
+        {
+          "blocks": "Only whether a vendor says the product is retrospective",
+          "correct": false,
+          "reason": "The actual operation determines the definition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a limited short delay automatically avoid real-time remote identification?",
+          "options": [
+            {
+              "blocks": "Any delay makes identification entirely unregulated",
+              "correct": false,
+              "reason": "Limited short delays do not automatically avoid the definition."
+            },
+            {
+              "blocks": "Only whether a vendor says the product is retrospective",
+              "correct": false,
+              "reason": "The actual operation determines the definition."
+            },
+            {
+              "blocks": "The actual capture/comparison/identification timing",
+              "correct": true,
+              "reason": "The definition includes limited short delays to prevent circumvention."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["publicly-accessible-space"],
+      "teaches": ["screen-1"],
+      "prompt": "A privately owned station admits an undetermined number of ticket holders. What public-space fact matters?",
+      "options": [
+        {
+          "blocks": "Every private owner makes the space legally inaccessible",
+          "correct": false,
+          "reason": "Ownership alone does not determine public accessibility."
+        },
+        {
+          "blocks": "Only outdoor places can qualify",
+          "correct": false,
+          "reason": "The definition is not limited to outdoor places."
+        },
+        {
+          "blocks": "Public accessibility can exist despite ownership or conditions",
+          "correct": true,
+          "reason": "The definition concerns an undetermined number of persons, irrespective of those facts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does private ownership alone exclude a station open to an undetermined public?",
+          "options": [
+            {
+              "blocks": "Only outdoor places can qualify",
+              "correct": false,
+              "reason": "The definition is not limited to outdoor places."
+            },
+            {
+              "blocks": "Public accessibility can exist despite ownership or conditions",
+              "correct": true,
+              "reason": "The definition concerns an undetermined number of persons, irrespective of those facts."
+            },
+            {
+              "blocks": "Every private owner makes the space legally inaccessible",
+              "correct": false,
+              "reason": "Ownership alone does not determine public accessibility."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["identification-objectives"],
+      "teaches": ["screen-2", "screen-3", "screen-4"],
+      "prompt": "For the suspect branch, an Annex II entry is established but the national maximum penalty is unknown. What remains unresolved?",
+      "options": [
+        {
+          "blocks": "Only the sentence police would prefer",
+          "correct": false,
+          "reason": "The statutory national maximum is the relevant threshold."
+        },
+        {
+          "blocks": "The national maximum of at least four years and other conditions",
+          "correct": true,
+          "reason": "The offence list and national penalty threshold are cumulative, with further safeguards."
+        },
+        {
+          "blocks": "Nothing; any listed offence automatically permits every use",
+          "correct": false,
+          "reason": "The penalty threshold and safeguards cannot be omitted."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is an Annex II offence name alone enough for the suspect exception objective?",
+          "options": [
+            {
+              "blocks": "The national maximum of at least four years and other conditions",
+              "correct": true,
+              "reason": "The offence list and national penalty threshold are cumulative, with further safeguards."
+            },
+            {
+              "blocks": "Nothing; any listed offence automatically permits every use",
+              "correct": false,
+              "reason": "The penalty threshold and safeguards cannot be omitted."
+            },
+            {
+              "blocks": "Only the sentence police would prefer",
+              "correct": false,
+              "reason": "The statutory national maximum is the relevant threshold."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

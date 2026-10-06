@@ -1,0 +1,215 @@
+{
+  "module": "Article 6: derogations and defensible decisions",
+  "lesson": {
+    "slug": "e08",
+    "title": "Classification capstone",
+    "summary": "Produce a conditional classification conclusion that survives changed purpose, influence and profiling facts.",
+    "covers": ["classification-capstone"],
+    "prerequisites": [
+      {
+        "lesson": "p05",
+        "reason": "One closing case needs a complete product-route assessment."
+      },
+      {
+        "lesson": "a06",
+        "reason": "One closing case needs separation of learning and recruitment functions."
+      },
+      {
+        "lesson": "s02",
+        "reason": "A contrasting closing case uses the creditworthiness listed-use boundary."
+      },
+      {
+        "lesson": "e07",
+        "reason": "The closing cases require a reasoned paragraph 3 conclusion and supporting evidence."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Classification capstone**: Northbridge's applicant platform first converts files and later adds personal suitability predictions. Assume the evaluation function is an AI system within scope and matches Annex III recruitment.",
+        "Those stipulated facts isolate the remaining test. Record which facts are established and which are assumptions; in a real decision obtain their evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(12), 3(52), 5, 6, 49, 111, 113; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "For the evaluative function, inspect paragraph 3's gateway, candidate condition and personal profiling. Personal suitability predictions support a profiling fact, which keeps the Annex III system high-risk despite a preparatory label.",
+        "For a separate formatting-only function, do not copy that result blindly; inspect its own system boundary, listed-purpose facts, errors and influence. Equally, do not copy its narrower result to the evaluator."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(12), 3(52), 5, 6, 49, 111, 113; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Changed case: the evaluator also performs a potentially prohibited practice. Classification is not a cure; investigate Article 5's complete test. Changed case: a new safety-product function is added. Check Article 6(1) separately.",
+        "A maintainable conclusion says which route and purpose it addresses. It avoids one immutable platform-wide label."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(12), 3(52), 5, 6, 49, 111, 113; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The final packet records evidence, source baseline, actors, scope, prohibition findings, both classification routes, paragraph 3/profiling, records, relevant duties and their dates. Explain unresolved facts.",
+        "This completes the classification reasoning exercise, not every high-risk compliance obligation. The later course programme covers those requirements. A defensible assessment states its limits rather than pretending the whole Act has been satisfied."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3(12), 3(52), 5, 6, 49, 111, 113; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["classification-capstone"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "The case establishes Annex III recruitment and personal suitability profiling. What happens to a preparatory claim?",
+      "options": [
+        {
+          "blocks": "Profiling keeps that function high-risk",
+          "correct": true,
+          "reason": "The override applies to the established Annex III profiling system."
+        },
+        {
+          "blocks": "The preparation label exempts it automatically",
+          "correct": false,
+          "reason": "That ignores the final subparagraph."
+        },
+        {
+          "blocks": "The formatting feature exempts the evaluator",
+          "correct": false,
+          "reason": "A different function cannot determine this function's facts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the capstone classify the stipulated evaluative recruitment function under paragraph 3?",
+          "options": [
+            {
+              "blocks": "The preparation label exempts it automatically",
+              "correct": false,
+              "reason": "That ignores the final subparagraph."
+            },
+            {
+              "blocks": "The formatting feature exempts the evaluator",
+              "correct": false,
+              "reason": "A different function cannot determine this function's facts."
+            },
+            {
+              "blocks": "Profiling keeps that function high-risk",
+              "correct": true,
+              "reason": "The override applies to the established Annex III profiling system."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["classification-capstone"],
+      "teaches": ["screen-3"],
+      "prompt": "A safety-product function is added to the platform. What should the assessor do?",
+      "options": [
+        {
+          "blocks": "Reuse the old conclusion without checking",
+          "correct": false,
+          "reason": "The previous facts do not cover the added function."
+        },
+        {
+          "blocks": "Assume any classification cures prohibitions",
+          "correct": false,
+          "reason": "Article 5 remains independently relevant."
+        },
+        {
+          "blocks": "Check the separate product route and changed facts",
+          "correct": true,
+          "reason": "New purposes may engage a different classification route."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an old listed-use conclusion settle a newly added product safety function?",
+          "options": [
+            {
+              "blocks": "Assume any classification cures prohibitions",
+              "correct": false,
+              "reason": "Article 5 remains independently relevant."
+            },
+            {
+              "blocks": "Check the separate product route and changed facts",
+              "correct": true,
+              "reason": "New purposes may engage a different classification route."
+            },
+            {
+              "blocks": "Reuse the old conclusion without checking",
+              "correct": false,
+              "reason": "The previous facts do not cover the added function."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["classification-capstone"],
+      "teaches": ["screen-4"],
+      "prompt": "Which final conclusion is most defensible after this first classification exercise?",
+      "options": [
+        {
+          "blocks": "Hide every missing fact from the reader",
+          "correct": false,
+          "reason": "Unresolved facts must remain visible."
+        },
+        {
+          "blocks": "Specify route, facts, source version and remaining duties",
+          "correct": true,
+          "reason": "That makes the conclusion traceable and bounded."
+        },
+        {
+          "blocks": "State only 'everything compliant forever'",
+          "correct": false,
+          "reason": "A broad permanent claim is unsupported by this exercise."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an assessment state its outcome without claiming all legal duties are complete?",
+          "options": [
+            {
+              "blocks": "Specify route, facts, source version and remaining duties",
+              "correct": true,
+              "reason": "That makes the conclusion traceable and bounded."
+            },
+            {
+              "blocks": "State only 'everything compliant forever'",
+              "correct": false,
+              "reason": "A broad permanent claim is unsupported by this exercise."
+            },
+            {
+              "blocks": "Hide every missing fact from the reader",
+              "correct": false,
+              "reason": "Unresolved facts must remain visible."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

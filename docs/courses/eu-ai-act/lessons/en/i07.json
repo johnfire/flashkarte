@@ -1,0 +1,207 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i07",
+    "title": "Dates and transition",
+    "summary": "Separate entry into force, provision-specific application and conditional transition rules.",
+    "covers": [
+      "entry-into-force",
+      "provision-application-date",
+      "transition-check"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i06",
+        "reason": "The learner must locate the specified provision before choosing its application date."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Entry into force** is when a legal instrument becomes operative as law. **Application** is when particular provisions begin applying. These can be different dates. Publication is another distinct event.",
+        "The original AI Act was published on 12 July 2024 and entered into force twenty days later, on 1 August 2024. The 2026 amendment entered into force on 27 July 2026. Use the authentic instruments for these events."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 111, 113; Regulation (EU) 2026/1744 Article 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 113 supplies several application dates. Chapters I and II generally began on 2 February 2025. The newly inserted Article 5(1)(ba), (bb), (1a) and (1b) instead apply from **2 December 2026**. The default date is **2 August 2026**, with specified exceptions.",
+        "Chapter V's model rules and other listed chapters began on 2 August 2025, with Article 101 excepted. Articles 102–110 apply from 27 July 2026. Identify the provision before selecting a date."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 111, 113; Regulation (EU) 2026/1744 Article 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The amended high-risk timing separates the two routes. Chapter III Sections 1–3, except Article 6(5), apply to Annex III systems from **2 December 2027**, and Annex I systems from **2 August 2028**.",
+        "Those dates do not postpone every other rule for a system. An applicable prohibition or transparency duty needs its own date. Article 6(5), concerning guidance, is explicitly excepted from this postponement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 111, 113; Regulation (EU) 2026/1744 Article 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **transition check** examines Article 111 and the system's or model's market/service history. Relevant existing high-risk systems have conditional treatment tied to significant design changes, with a public-authority compliance date. It is not a universal grandfathering permission.",
+        "GPAI models placed before 2 August 2025 have a 2 August 2027 compliance date. Article 111(4) gives specified synthetic-content system providers with pre-2-August-2026 placement until 2 December 2026 for Article 50(2). Apply exact conditions; do not extend that date to all Article 50 duties."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 111, 113; Regulation (EU) 2026/1744 Article 2",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["entry-into-force"],
+      "teaches": ["screen-1"],
+      "prompt": "A regulation is in force before one of its duties applies. Is that contradictory?",
+      "options": [
+        {
+          "blocks": "Entry into force and application are different legal events",
+          "correct": true,
+          "reason": "The instrument can phase application after entry into force."
+        },
+        {
+          "blocks": "All duties must apply immediately",
+          "correct": false,
+          "reason": "The Act explicitly provides staged dates."
+        },
+        {
+          "blocks": "Publication and application are identical",
+          "correct": false,
+          "reason": "Publication is distinct from both events."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a law's entry into force precede a particular rule's application date?",
+          "options": [
+            {
+              "blocks": "All duties must apply immediately",
+              "correct": false,
+              "reason": "The Act explicitly provides staged dates."
+            },
+            {
+              "blocks": "Publication and application are identical",
+              "correct": false,
+              "reason": "Publication is distinct from both events."
+            },
+            {
+              "blocks": "Entry into force and application are different legal events",
+              "correct": true,
+              "reason": "The instrument can phase application after entry into force."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provision-application-date"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "Which date applies to the newly added intimate-media prohibition in this baseline?",
+      "options": [
+        {
+          "blocks": "2 February 2025",
+          "correct": false,
+          "reason": "That general chapter date has an express exception for this addition."
+        },
+        {
+          "blocks": "2 August 2028",
+          "correct": false,
+          "reason": "That date concerns the specified Annex I high-risk rules."
+        },
+        {
+          "blocks": "2 December 2026",
+          "correct": true,
+          "reason": "Article 113(a) specifically dates the new provisions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What date does Article 113 assign to Article 5(1)(ba), rather than the original Chapter II rules?",
+          "options": [
+            {
+              "blocks": "2 August 2028",
+              "correct": false,
+              "reason": "That date concerns the specified Annex I high-risk rules."
+            },
+            {
+              "blocks": "2 December 2026",
+              "correct": true,
+              "reason": "Article 113(a) specifically dates the new provisions."
+            },
+            {
+              "blocks": "2 February 2025",
+              "correct": false,
+              "reason": "That general chapter date has an express exception for this addition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["transition-check"],
+      "teaches": ["screen-4"],
+      "prompt": "A supplier says 'old systems are grandfathered'. What should Northbridge ask for?",
+      "options": [
+        {
+          "blocks": "A promise that every prohibition is postponed",
+          "correct": false,
+          "reason": "The high-risk transition preserves the prohibition analysis."
+        },
+        {
+          "blocks": "Exact transition, dates and design-change facts",
+          "correct": true,
+          "reason": "Article 111's conditions are specific to systems and provisions."
+        },
+        {
+          "blocks": "Only a statement that the product is old",
+          "correct": false,
+          "reason": "Age alone does not establish the applicable transition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What evidence is needed before accepting an existing-system transition claim?",
+          "options": [
+            {
+              "blocks": "Exact transition, dates and design-change facts",
+              "correct": true,
+              "reason": "Article 111's conditions are specific to systems and provisions."
+            },
+            {
+              "blocks": "Only a statement that the product is old",
+              "correct": false,
+              "reason": "Age alone does not establish the applicable transition."
+            },
+            {
+              "blocks": "A promise that every prohibition is postponed",
+              "correct": false,
+              "reason": "The high-risk transition preserves the prohibition analysis."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "module": "Article 6: product and safety classification",
+  "lesson": {
+    "slug": "p04",
+    "title": "Third-party conformity assessment",
+    "summary": "Distinguish a legally required third-party route from voluntary testing and the non-safety-risk limit.",
+    "covers": [
+      "third-party-assessment",
+      "product-assessment-test",
+      "solely-other-risks-limit"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "The term is introduced as the second condition of the product classification route."
+      },
+      {
+        "lesson": "p03",
+        "reason": "The required assessment route must be traced to the correct sector instrument."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Conformity assessment** demonstrates whether specified requirements are met. A third-party assessment involves an external assessment body. The product route asks whether the relevant product is legally required to undergo that route under listed product law.",
+        "A voluntary laboratory test or consultant review is not automatically the required statutory third-party assessment. Identify the instrument, product category and mandated route."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(20)–(22); Article 6(1)(a), 6(1)(b), 6(1c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 6(1) joins two conditions: covered AI product or safety component, and the relevant product's required third-party conformity assessment. The AI may be marketed independently of the product; separate supply does not remove the test.",
+        "If a fictional case explicitly establishes both conditions, the product-route conclusion follows subject to the statutory qualifications. If the assessment route is missing, the conclusion is conditional."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(20)–(22); Article 6(1)(a), 6(1)(b), 6(1c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Paragraph 1c says the assessment condition is not met when third-party assessment is required solely for risks other than health and safety, including specified spectrum/interference risks that do not affect health and safety.",
+        "The word **solely** again matters. Do not exclude a route involving both safety and non-safety risks merely because spectrum is one reason for assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(20)–(22); Article 6(1)(a), 6(1)(b), 6(1c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Northbridge asks for the product classification and exact assessment obligation rather than inferring them from 'medical AI' or 'certified'. A real medical-device example requires the medical-device scope and classification rules; a protective-device example requires the protective-equipment rules.",
+        "Our course cases stipulate those sector facts when they test Article 6 logic. They do not assign an actual device class from a short description. This keeps a useful legal reasoning exercise separate from an unsupported sector determination."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(20)–(22); Article 6(1)(a), 6(1)(b), 6(1c)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["third-party-assessment"],
+      "teaches": ["screen-1"],
+      "prompt": "A vendor voluntarily pays a testing laboratory. Is that alone proof of Article 6(1)(b)?",
+      "options": [
+        {
+          "blocks": "A legally required route under the listed sector law",
+          "correct": true,
+          "reason": "The condition concerns required assessment, not any external test."
+        },
+        {
+          "blocks": "Any optional laboratory invoice",
+          "correct": false,
+          "reason": "Voluntary testing does not establish the legal requirement."
+        },
+        {
+          "blocks": "Any internal quality review",
+          "correct": false,
+          "reason": "An internal review is not proof of a required third-party route."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What evidence is required for the product route's third-party assessment condition?",
+          "options": [
+            {
+              "blocks": "Any optional laboratory invoice",
+              "correct": false,
+              "reason": "Voluntary testing does not establish the legal requirement."
+            },
+            {
+              "blocks": "Any internal quality review",
+              "correct": false,
+              "reason": "An internal review is not proof of a required third-party route."
+            },
+            {
+              "blocks": "A legally required route under the listed sector law",
+              "correct": true,
+              "reason": "The condition concerns required assessment, not any external test."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["product-assessment-test"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "Covered product status is documented, but the mandatory assessment route is unknown. What is the sound conclusion?",
+      "options": [
+        {
+          "blocks": "The first condition automatically proves the second",
+          "correct": false,
+          "reason": "Product scope and assessment route are distinct."
+        },
+        {
+          "blocks": "Independent software supply automatically excludes it",
+          "correct": false,
+          "reason": "Paragraph 1 expressly addresses independent placement."
+        },
+        {
+          "blocks": "Keep the conclusion conditional and verify the route",
+          "correct": true,
+          "reason": "Both cumulative conditions need evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can one documented product-route condition replace the missing other condition?",
+          "options": [
+            {
+              "blocks": "Independent software supply automatically excludes it",
+              "correct": false,
+              "reason": "Paragraph 1 expressly addresses independent placement."
+            },
+            {
+              "blocks": "Keep the conclusion conditional and verify the route",
+              "correct": true,
+              "reason": "Both cumulative conditions need evidence."
+            },
+            {
+              "blocks": "The first condition automatically proves the second",
+              "correct": false,
+              "reason": "Product scope and assessment route are distinct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["solely-other-risks-limit"],
+      "teaches": ["screen-3"],
+      "prompt": "Third-party assessment is required solely for spectrum risks with no health or safety effect. What follows under paragraph 1c?",
+      "options": [
+        {
+          "blocks": "All radio equipment is exempt from every law",
+          "correct": false,
+          "reason": "The rule concerns this condition, not blanket legality."
+        },
+        {
+          "blocks": "That assessment does not fulfil the condition",
+          "correct": true,
+          "reason": "Paragraph 1c expressly excludes this solely non-safety-risk case."
+        },
+        {
+          "blocks": "Every third-party assessment fulfils the condition",
+          "correct": false,
+          "reason": "That ignores the paragraph 1c qualification."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an exclusively non-safety spectrum assessment fulfil Article 6(1)(b) in this baseline?",
+          "options": [
+            {
+              "blocks": "That assessment does not fulfil the condition",
+              "correct": true,
+              "reason": "Paragraph 1c expressly excludes this solely non-safety-risk case."
+            },
+            {
+              "blocks": "Every third-party assessment fulfils the condition",
+              "correct": false,
+              "reason": "That ignores the paragraph 1c qualification."
+            },
+            {
+              "blocks": "All radio equipment is exempt from every law",
+              "correct": false,
+              "reason": "The rule concerns this condition, not blanket legality."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

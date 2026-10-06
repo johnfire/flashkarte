@@ -1,0 +1,203 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i04",
+    "title": "Who does what",
+    "summary": "Assign provider and deployer roles from actions rather than informal job labels.",
+    "covers": ["provider", "deployer", "actor-lookup"],
+    "prerequisites": [
+      {
+        "lesson": "i02",
+        "reason": "The provider definition depends on development and supply of a defined system. The deployer definition depends on use of a defined system under an actor's authority."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **provider** develops a system or model, or has it developed, and places it on the market or puts the system into service under its own name or trademark. Payment is not required.",
+        "A company commissioning and supplying its own branded assistant may be a provider even if a contractor writes the software. An internal system for own use can also involve putting into service; 'we did not sell it' is not a complete test."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(3)–(8), 3(11), 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **deployer** uses an AI system under its authority, except personal non-professional use. Northbridge using a vendor's recruitment system for its hiring process is an illustrative deployer case.",
+        "The company is the relevant actor in this case, not automatically each employee who clicks a button. An organisation may occupy more than one role for different activities. Record the actor, action and system together."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(3)–(8), 3(11), 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Other defined roles matter in a supply chain. An **importer** in the Union first places a system bearing a third-country actor's name on the Union market. A **distributor** makes it available in the supply chain without being provider or importer. An **authorised representative** accepts a written mandate.",
+        "These definitions cannot be inferred just from an invoice saying 'partner'. Identify where the actor is established, whose name appears, what is supplied and what mandate exists."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(3)–(8), 3(11), 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Use an **actor lookup**: list each participant and action, apply the definitions, and retain supporting contracts and documentation. Buying, integrating and commissioning create different fact patterns.",
+        "Changes may require a fresh role analysis. Article 25 contains specific situations in which an actor becomes the provider of a high-risk system, including certain name, modification and purpose changes. This lesson flags the lookup; do not assume every minor edit transfers provider responsibility."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(3)–(8), 3(11), 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["provider"],
+      "teaches": ["screen-1"],
+      "prompt": "Northbridge has an assistant developed and puts it into service under its own name. Which role needs assessment?",
+      "options": [
+        {
+          "blocks": "Provider, even if it did not write the code",
+          "correct": true,
+          "reason": "Having the system developed and supplying it under its name is relevant."
+        },
+        {
+          "blocks": "Only deployer because it paid a contractor",
+          "correct": false,
+          "reason": "Outsourcing development does not rule out provider status."
+        },
+        {
+          "blocks": "No role because the assistant is free",
+          "correct": false,
+          "reason": "Payment is not required by the provider definition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A contractor codes a company's own branded assistant for first use. Can the company meet the provider definition?",
+          "options": [
+            {
+              "blocks": "Only deployer because it paid a contractor",
+              "correct": false,
+              "reason": "Outsourcing development does not rule out provider status."
+            },
+            {
+              "blocks": "No role because the assistant is free",
+              "correct": false,
+              "reason": "Payment is not required by the provider definition."
+            },
+            {
+              "blocks": "Provider, even if it did not write the code",
+              "correct": true,
+              "reason": "Having the system developed and supplying it under its name is relevant."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployer"],
+      "teaches": ["screen-2"],
+      "prompt": "Northbridge uses a vendor's system under its authority for recruitment. Which role is directly indicated?",
+      "options": [
+        {
+          "blocks": "Authorised representative",
+          "correct": false,
+          "reason": "That role needs an accepted written provider mandate."
+        },
+        {
+          "blocks": "Personal non-professional user",
+          "correct": false,
+          "reason": "Organisational recruitment is professional activity."
+        },
+        {
+          "blocks": "Deployer",
+          "correct": true,
+          "reason": "The definition concerns use under the actor's authority."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which role describes an organisation operating a vendor's AI system for its own professional process?",
+          "options": [
+            {
+              "blocks": "Personal non-professional user",
+              "correct": false,
+              "reason": "Organisational recruitment is professional activity."
+            },
+            {
+              "blocks": "Deployer",
+              "correct": true,
+              "reason": "The definition concerns use under the actor's authority."
+            },
+            {
+              "blocks": "Authorised representative",
+              "correct": false,
+              "reason": "That role needs an accepted written provider mandate."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["actor-lookup"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A contract calls a reseller a 'technology partner'. What should determine its legal role?",
+      "options": [
+        {
+          "blocks": "Only the number of staff it employs",
+          "correct": false,
+          "reason": "Headcount does not determine these actor definitions."
+        },
+        {
+          "blocks": "Its actions, establishment, branding and mandate",
+          "correct": true,
+          "reason": "Definitions attach to specific conduct and relationships."
+        },
+        {
+          "blocks": "Only the contract's informal partner label",
+          "correct": false,
+          "reason": "An informal label does not establish a statutory role."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should Northbridge check the role of a vaguely labelled supply-chain partner?",
+          "options": [
+            {
+              "blocks": "Its actions, establishment, branding and mandate",
+              "correct": true,
+              "reason": "Definitions attach to specific conduct and relationships."
+            },
+            {
+              "blocks": "Only the contract's informal partner label",
+              "correct": false,
+              "reason": "An informal label does not establish a statutory role."
+            },
+            {
+              "blocks": "Only the number of staff it employs",
+              "correct": false,
+              "reason": "Headcount does not determine these actor definitions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

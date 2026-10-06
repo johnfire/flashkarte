@@ -1,0 +1,214 @@
+{
+  "module": "Read the Act and frame an AI use case",
+  "lesson": {
+    "slug": "i06",
+    "title": "Read a provision accurately",
+    "summary": "Read an exact legal locator and distinguish binding law, consolidated text and guidance.",
+    "covers": ["legal-source-authority", "provision-lookup", "guidance-status"],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Legal source authority** asks what kind of text you are using. Authentic Official Journal regulations and amendments supply the binding instruments. A consolidated version combines changes for reading convenience; its documentation notice does not make it a new binding instrument.",
+        "Our working baseline is the 27 July 2026 consolidation. Record its version and consult the authentic instruments where needed. A presentation, checklist or this course helps learning but cannot replace the legal text."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)–(8), Article 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission publication: draft classification guidance, status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **provision locator** identifies an exact place. Article 6(3)(a) means Article 6, paragraph 3, point (a). An annex may have its own numbered points and letters. Read the opening words and connected paragraphs too.",
+        "A quotation of 'narrow procedural task' alone omits the paragraph's no-significant-risk gateway and the final profiling rule. To apply a condition, read the full test around it, not just the appealing phrase."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)–(8), Article 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission publication: draft classification guidance, status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Commission guidance** explains the Commission's interpretation and examples. Non-binding guidance does not amend a regulation. Draft guidance adds another status limit: its content may change and it is not an adopted legal rule.",
+        "The classification publication checked for this course still labels its three documents draft. Record publication and checking dates. Never elevate an example into an exhaustive legal list or import an older guideline's dates over amended law."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)–(8), Article 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission publication: draft classification guidance, status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A practical source note says: instrument and version, exact locator, whether the statement is law or interpretation, and facts to which it is being applied. Distinguish a proposed amendment from one that has actually entered into force.",
+        "Northbridge's reviewer reads the operative paragraph, checks amendments and exclusions, then explains how the evidence meets each condition. 'The slide says so' is not a source-backed assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 6(3)–(8), Article 96; consolidation notice",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission publication: draft classification guidance, status checked 6 October 2026",
+          "url": "https://digital-strategy.ec.europa.eu/en/library/draft-commission-guidelines-classification-high-risk-ai-systems"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["legal-source-authority"],
+      "teaches": ["screen-1"],
+      "prompt": "Which text supplies the authentic binding instrument when a slide and a regulation differ?",
+      "options": [
+        {
+          "blocks": "The authentic Official Journal instruments",
+          "correct": true,
+          "reason": "Training and consolidation tools do not replace the authentic law."
+        },
+        {
+          "blocks": "The slide because it is shorter",
+          "correct": false,
+          "reason": "Convenience does not confer legal authority."
+        },
+        {
+          "blocks": "The vendor checklist because it is branded",
+          "correct": false,
+          "reason": "Branding is not a source of binding EU law."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A training slide simplifies an amended legal rule. Which source should control the legal test?",
+          "options": [
+            {
+              "blocks": "The slide because it is shorter",
+              "correct": false,
+              "reason": "Convenience does not confer legal authority."
+            },
+            {
+              "blocks": "The vendor checklist because it is branded",
+              "correct": false,
+              "reason": "Branding is not a source of binding EU law."
+            },
+            {
+              "blocks": "The authentic Official Journal instruments",
+              "correct": true,
+              "reason": "Training and consolidation tools do not replace the authentic law."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provision-lookup"],
+      "teaches": ["screen-2"],
+      "prompt": "A reviewer quotes Article 6(3)(a) but ignores the paragraph opening and profiling rule. What is missing?",
+      "options": [
+        {
+          "blocks": "Only the article's title",
+          "correct": false,
+          "reason": "A title does not supply the omitted operative tests."
+        },
+        {
+          "blocks": "Only the tool's price",
+          "correct": false,
+          "reason": "Price does not repair an incomplete statutory test."
+        },
+        {
+          "blocks": "The surrounding gateway and qualification",
+          "correct": true,
+          "reason": "The point operates within the full paragraph's conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the 'narrow procedural task' condition be read?",
+          "options": [
+            {
+              "blocks": "Only the tool's price",
+              "correct": false,
+              "reason": "Price does not repair an incomplete statutory test."
+            },
+            {
+              "blocks": "The surrounding gateway and qualification",
+              "correct": true,
+              "reason": "The point operates within the full paragraph's conditions."
+            },
+            {
+              "blocks": "Only the article's title",
+              "correct": false,
+              "reason": "A title does not supply the omitted operative tests."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["guidance-status"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A draft guideline offers an example different from amended statutory wording. Which approach is sound?",
+      "options": [
+        {
+          "blocks": "Assume any newer webpage overrides law",
+          "correct": false,
+          "reason": "Publication recency alone does not establish authority."
+        },
+        {
+          "blocks": "Keep its draft status and apply binding law",
+          "correct": true,
+          "reason": "Guidance supports interpretation but does not amend the Act."
+        },
+        {
+          "blocks": "Treat the draft as a new binding exemption",
+          "correct": false,
+          "reason": "A draft example cannot create a statutory exemption."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a draft Commission example itself replace an amended regulation's requirements?",
+          "options": [
+            {
+              "blocks": "Keep its draft status and apply binding law",
+              "correct": true,
+              "reason": "Guidance supports interpretation but does not amend the Act."
+            },
+            {
+              "blocks": "Treat the draft as a new binding exemption",
+              "correct": false,
+              "reason": "A draft example cannot create a statutory exemption."
+            },
+            {
+              "blocks": "Assume any newer webpage overrides law",
+              "correct": false,
+              "reason": "Publication recency alone does not establish authority."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "module": "Article 6: services and public decisions",
+  "lesson": {
+    "slug": "s01",
+    "title": "Critical infrastructure",
+    "summary": "Identify the listed infrastructure sectors and their safety-component condition.",
+    "covers": ["infrastructure-safety-use"],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Infrastructure in Annex III must not be confused with the Annex I product route."
+      },
+      {
+        "lesson": "p02",
+        "reason": "The listed infrastructure use requires a safety-component function."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Critical infrastructure** includes assets, equipment, networks or systems necessary to provide an essential service. The AI Act refers to the definition in Directive (EU) 2022/2557, which links essential services to vital societal, economic, health, safety or environmental functions.",
+        "Importance to a business alone does not prove the listed AI use. Begin with the actual infrastructure and service."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(62); Annex III 2; Article 49(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Critical Entities Resilience Directive (EU) 2022/2557, Article 2(4), 2(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN-DE/ALL/?uri=CELEX:32022L2557"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Annex III point 2 lists AI intended as safety components in managing or operating critical digital infrastructure, road traffic, or the supply of water, gas, heating or electricity.",
+        "This is a sector-and-function test. Not every AI used by a utility is automatically in point 2. A billing helper and a safety-dependent control function have different intended purposes."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(62); Annex III 2; Article 49(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Critical Entities Resilience Directive (EU) 2022/2557, Article 2(4), 2(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN-DE/ALL/?uri=CELEX:32022L2557"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fictional Northbridge case: a water service uses AI in a safety function whose malfunction can endanger people. The record identifies the supply function and the safety dependency.",
+        "Change the facts to a purely clerical invoice sorter with no safety role. The same organisation's identity does not preserve the safety-component fact. Test actual operation and dependencies."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(62); Annex III 2; Article 49(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Critical Entities Resilience Directive (EU) 2022/2557, Article 2(4), 2(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN-DE/ALL/?uri=CELEX:32022L2557"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "If point 2 applies, continue the full Article 6 analysis. Registration also has a particular route: Article 49(5) assigns high-risk systems in point 2 to national-level registration.",
+        "Do not turn that registration distinction into an exclusion from high-risk classification. The classification, obligations, registration location and application dates answer different questions."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 3(62); Annex III 2; Article 49(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Critical Entities Resilience Directive (EU) 2022/2557, Article 2(4), 2(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN-DE/ALL/?uri=CELEX:32022L2557"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["infrastructure-safety-use"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A utility buys an AI invoice sorter with no safety role. What does the utility's identity alone establish?",
+      "options": [
+        {
+          "blocks": "Not the listed safety-component use by itself",
+          "correct": true,
+          "reason": "The point requires the specified infrastructure and safety function."
+        },
+        {
+          "blocks": "Automatic high-risk status for every tool",
+          "correct": false,
+          "reason": "That omits the function condition."
+        },
+        {
+          "blocks": "A universal exclusion for utility software",
+          "correct": false,
+          "reason": "A safety-dependent function may meet the listed use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does every AI tool used by a water supplier satisfy Annex III point 2?",
+          "options": [
+            {
+              "blocks": "Automatic high-risk status for every tool",
+              "correct": false,
+              "reason": "That omits the function condition."
+            },
+            {
+              "blocks": "A universal exclusion for utility software",
+              "correct": false,
+              "reason": "A safety-dependent function may meet the listed use."
+            },
+            {
+              "blocks": "Not the listed safety-component use by itself",
+              "correct": true,
+              "reason": "The point requires the specified infrastructure and safety function."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["infrastructure-safety-use"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "AI acts as a safety component in water-supply operation. Which listed point needs comparison?",
+      "options": [
+        {
+          "blocks": "Only the supplier's logo",
+          "correct": false,
+          "reason": "A logo does not establish the function."
+        },
+        {
+          "blocks": "Only whether invoices are digital",
+          "correct": false,
+          "reason": "Invoice format does not decide the safety use."
+        },
+        {
+          "blocks": "Point 2's sector and safety function",
+          "correct": true,
+          "reason": "Both the water-supply context and safety role are relevant."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which Annex III infrastructure facts are relevant for an AI-dependent water safety function?",
+          "options": [
+            {
+              "blocks": "Only whether invoices are digital",
+              "correct": false,
+              "reason": "Invoice format does not decide the safety use."
+            },
+            {
+              "blocks": "Point 2's sector and safety function",
+              "correct": true,
+              "reason": "Both the water-supply context and safety role are relevant."
+            },
+            {
+              "blocks": "Only the supplier's logo",
+              "correct": false,
+              "reason": "A logo does not establish the function."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["infrastructure-safety-use"],
+      "teaches": ["screen-4"],
+      "prompt": "Where does Article 49(5) place registration for high-risk Annex III point 2 systems?",
+      "options": [
+        {
+          "blocks": "Only in the vendor's private marketing list",
+          "correct": false,
+          "reason": "A marketing list is not the statutory registration route."
+        },
+        {
+          "blocks": "At national level, without removing classification",
+          "correct": true,
+          "reason": "The provision specifies registration location rather than an exemption."
+        },
+        {
+          "blocks": "Nowhere, because utilities are exempt",
+          "correct": false,
+          "reason": "That contradicts the registration provision."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the national registration route remove point 2 systems from classification?",
+          "options": [
+            {
+              "blocks": "At national level, without removing classification",
+              "correct": true,
+              "reason": "The provision specifies registration location rather than an exemption."
+            },
+            {
+              "blocks": "Nowhere, because utilities are exempt",
+              "correct": false,
+              "reason": "That contradicts the registration provision."
+            },
+            {
+              "blocks": "Only in the vendor's private marketing list",
+              "correct": false,
+              "reason": "A marketing list is not the statutory registration route."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

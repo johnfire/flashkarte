@@ -1,0 +1,203 @@
+{
+  "module": "Article 6: product and safety classification",
+  "lesson": {
+    "slug": "p03",
+    "title": "Find the relevant product legislation",
+    "summary": "Find the exact listed product instrument and avoid applying all obligations from classification alone.",
+    "covers": ["annex-i-lookup", "sector-scope-limits"],
+    "prerequisites": [
+      {
+        "lesson": "i06",
+        "reason": "Tracing the product legislation requires navigating an annex locator."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An **Annex I lookup** identifies the exact Union product instrument. The list includes toys, lifts, radio and pressure equipment, protective equipment, medical devices and other specified sectors.",
+        "Northbridge records the instrument, product scope and intended function. A product being generally regulated is not enough: the relevant legislation must be listed and actually cover this product."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex I Sections A and B; Article 2(2), 2(13); Article 6(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Read the current section and point, not an old diagram. In our July 2026 baseline, Section A point 1 is deleted and the Machinery Regulation (EU) 2023/1230 appears in Section B point 21.",
+        "This is a concrete reason to retain the source version. Do not continue citing the deleted machinery entry as operative. The sector legislation's own application and transition rules remain relevant."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex I Sections A and B; Article 2(2), 2(13); Article 6(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Sector scope limits** concern which AI Act provisions apply after classification. Under Article 2(2), high-risk Article 6(1) systems related to Section B products have specified limited AI Act application, with conditions for certain innovation provisions.",
+        "A Section B classification does not automatically import every Chapter III duty. The wording lists Article 6(1), Article 60a and Articles 102–112; Articles 57–59 have an integration condition. Look up the actual list."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex I Sections A and B; Article 2(2), 2(13); Article 6(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Article 2(13) permits specified limitations for equivalent-or-higher protection under Section A legislation without reducing overall protection, with delegated specification. It is a conditional mechanism, not a vendor-created exemption.",
+        "Northbridge's record links product scope, list entry, assessment route and obligation-scope questions. If the sector classification is unresolved, state the missing evidence instead of declaring an assumed product class."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex I Sections A and B; Article 2(2), 2(13); Article 6(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["annex-i-lookup"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A product is regulated somewhere in EU law. What else does an Annex I lookup need?",
+      "options": [
+        {
+          "blocks": "The exact listed instrument and its product scope",
+          "correct": true,
+          "reason": "Annex I coverage must be established for this product."
+        },
+        {
+          "blocks": "Only the statement 'regulated industry'",
+          "correct": false,
+          "reason": "That does not identify a listed covering instrument."
+        },
+        {
+          "blocks": "Only an old deleted annex entry",
+          "correct": false,
+          "reason": "The current operative list must be checked."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the existence of any product regulation establish the Article 6(1) coverage condition?",
+          "options": [
+            {
+              "blocks": "Only the statement 'regulated industry'",
+              "correct": false,
+              "reason": "That does not identify a listed covering instrument."
+            },
+            {
+              "blocks": "Only an old deleted annex entry",
+              "correct": false,
+              "reason": "The current operative list must be checked."
+            },
+            {
+              "blocks": "The exact listed instrument and its product scope",
+              "correct": true,
+              "reason": "Annex I coverage must be established for this product."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["sector-scope-limits"],
+      "teaches": ["screen-3"],
+      "prompt": "A system relates to a Section B product and meets Article 6(1). What should the obligations analysis do?",
+      "options": [
+        {
+          "blocks": "Apply every AI Act duty without a scope check",
+          "correct": false,
+          "reason": "That ignores the express sector limitation."
+        },
+        {
+          "blocks": "Declare the system wholly outside EU law",
+          "correct": false,
+          "reason": "A limited AI Act list is not a blanket legal exclusion."
+        },
+        {
+          "blocks": "Apply the specific Article 2(2) scope limits",
+          "correct": true,
+          "reason": "Section B has a specified AI Act application list."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a Section B product-route classification automatically apply every high-risk duty?",
+          "options": [
+            {
+              "blocks": "Declare the system wholly outside EU law",
+              "correct": false,
+              "reason": "A limited AI Act list is not a blanket legal exclusion."
+            },
+            {
+              "blocks": "Apply the specific Article 2(2) scope limits",
+              "correct": true,
+              "reason": "Section B has a specified AI Act application list."
+            },
+            {
+              "blocks": "Apply every AI Act duty without a scope check",
+              "correct": false,
+              "reason": "That ignores the express sector limitation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["annex-i-lookup", "sector-scope-limits"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "An assessment relies on the old Section A machinery entry. What is the best correction?",
+      "options": [
+        {
+          "blocks": "Treat the list change as no regulation at all",
+          "correct": false,
+          "reason": "The current list includes the new Section B entry."
+        },
+        {
+          "blocks": "Update the locator and recheck sector consequences",
+          "correct": true,
+          "reason": "List location and applicable rules must match the current baseline."
+        },
+        {
+          "blocks": "Retain it because the product name is familiar",
+          "correct": false,
+          "reason": "Familiarity does not restore a deleted entry."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should a reviewer handle an obsolete Annex I machinery locator?",
+          "options": [
+            {
+              "blocks": "Update the locator and recheck sector consequences",
+              "correct": true,
+              "reason": "List location and applicable rules must match the current baseline."
+            },
+            {
+              "blocks": "Retain it because the product name is familiar",
+              "correct": false,
+              "reason": "Familiarity does not restore a deleted entry."
+            },
+            {
+              "blocks": "Treat the list change as no regulation at all",
+              "correct": false,
+              "reason": "The current list includes the new Section B entry."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

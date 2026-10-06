@@ -1,0 +1,227 @@
+{
+  "module": "Article 5: biometrics and synthetic media",
+  "lesson": {
+    "slug": "b12",
+    "title": "Provider and deployer tests for the new prohibitions",
+    "summary": "Apply the distinct supply and use qualifications for the new synthetic-media prohibitions.",
+    "covers": [
+      "foreseeable-misuse",
+      "supplier-safeguards-test",
+      "deployer-purpose-test"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "i03",
+        "reason": "Misuse is defined by departure from the system's intended purpose."
+      },
+      {
+        "lesson": "i04",
+        "reason": "The use test depends on the purpose of the deployer."
+      },
+      {
+        "lesson": "i07",
+        "reason": "The learner must apply the separate start date of the new prohibitions."
+      },
+      {
+        "lesson": "b01",
+        "reason": "The market/service test differs from the prohibition on a deployer's use."
+      },
+      {
+        "lesson": "b10",
+        "reason": "The market/service test needs the intimate-media scope and its manipulation boundary."
+      },
+      {
+        "lesson": "b11",
+        "reason": "The market/service test also applies to the incorporated child-abuse material/performance scope."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "For new points (ba)/(bb), paragraph 1a qualifies the supply side. Placement or service is prohibited where generating/manipulating the specified material is the system's intended purpose, or under the alternative foreseeable/reproducible-outcome test.",
+        "An imagined theoretical possibility alone is not the same as that second branch. Keep the material category, actor and regulated action in the record."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1a)(a), 5(1a)(b), 5(1b); Article 3(13); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The alternative supply branch examines design, training, architecture, capabilities or user-facing features: the generation must be reasonably foreseeable and reproducible without significant technical modification, and reasonable/adequate safeguards to reliably prevent and correct observed/reported misuse must be absent.",
+        "The **supplier-safeguards test** is substantive. A policy statement alone does not establish technical protection; equally, do not assume any conceivable misuse proves the entire branch."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1a)(a), 5(1a)(b), 5(1b); Article 3(13); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "On the use side, paragraph 1a(b) prohibits the specified generation/manipulation only where the **deployer uses the system for that purpose**. The supply and use tests are different.",
+        "Fictional Northbridge case: a general tool's supplier has adequate safeguards, but a deployer intentionally uses it for the specified prohibited material. A favourable supply-side finding cannot automatically cure the separate use-side purpose."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1a)(a), 5(1a)(b), 5(1b); Article 3(13); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Record intended purpose; foreseeable, reproducible output; technical modification needed; safeguard adequacy; and deployer purpose separately. Keep point (ba)'s manipulation boundary and the 2 December 2026 date in the full test.",
+        "These statutory qualifications concern the new points, not a universal rewriting of every Article 5 prohibition. The case uses non-graphic descriptions and does not demonstrate harmful generation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 5(1a)(a), 5(1a)(b), 5(1b); Article 3(13); Article 113(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["foreseeable-misuse"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A supplier case shows only a theoretical misuse requiring significant technical modification. What is missing from the alternative branch?",
+      "options": [
+        {
+          "blocks": "Its full foreseeable, reproducible and modification facts",
+          "correct": true,
+          "reason": "The branch has specific conditions rather than mere possibility."
+        },
+        {
+          "blocks": "Nothing; theoretical possibility always suffices",
+          "correct": false,
+          "reason": "That ignores reproducibility and significant-modification qualifications."
+        },
+        {
+          "blocks": "Only whether the vendor dislikes the misuse",
+          "correct": false,
+          "reason": "Attitude does not establish the branch's technical facts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does any imagined possibility establish the foreseeable/reproducible supply-side test?",
+          "options": [
+            {
+              "blocks": "Nothing; theoretical possibility always suffices",
+              "correct": false,
+              "reason": "That ignores reproducibility and significant-modification qualifications."
+            },
+            {
+              "blocks": "Only whether the vendor dislikes the misuse",
+              "correct": false,
+              "reason": "Attitude does not establish the branch's technical facts."
+            },
+            {
+              "blocks": "Its full foreseeable, reproducible and modification facts",
+              "correct": true,
+              "reason": "The branch has specific conditions rather than mere possibility."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["supplier-safeguards-test"],
+      "teaches": ["screen-2"],
+      "prompt": "A supplier presents a policy but no evidence of prevention or correction safeguards. What should the assessor examine?",
+      "options": [
+        {
+          "blocks": "Only the policy's attractive formatting",
+          "correct": false,
+          "reason": "Formatting does not establish reliable safeguards."
+        },
+        {
+          "blocks": "Only a general claim that misuse is forbidden",
+          "correct": false,
+          "reason": "A rule alone does not prove the specified technical safeguards."
+        },
+        {
+          "blocks": "Reasonable/adequate prevention and misuse correction measures",
+          "correct": true,
+          "reason": "The statute requires safeguards with the stated preventive/corrective function."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What makes the new supplier safeguards claim substantively assessable?",
+          "options": [
+            {
+              "blocks": "Only a general claim that misuse is forbidden",
+              "correct": false,
+              "reason": "A rule alone does not prove the specified technical safeguards."
+            },
+            {
+              "blocks": "Reasonable/adequate prevention and misuse correction measures",
+              "correct": true,
+              "reason": "The statute requires safeguards with the stated preventive/corrective function."
+            },
+            {
+              "blocks": "Only the policy's attractive formatting",
+              "correct": false,
+              "reason": "Formatting does not establish reliable safeguards."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployer-purpose-test"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A deployer intentionally generates the specified prohibited material, despite favourable supplier-safeguard facts. Which test matters for its use?",
+      "options": [
+        {
+          "blocks": "Every other prohibition is now replaced by this test",
+          "correct": false,
+          "reason": "Paragraph 1a's qualifications concern the specified new points."
+        },
+        {
+          "blocks": "The separate deployer-purpose test",
+          "correct": true,
+          "reason": "Paragraph 1a(b) examines what the deployer uses the system to do."
+        },
+        {
+          "blocks": "Only the supplier result, ignoring the use",
+          "correct": false,
+          "reason": "Supply and use qualifications are distinct."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can an adequate supplier-side safeguard finding automatically decide a deployer's intentional use purpose?",
+          "options": [
+            {
+              "blocks": "The separate deployer-purpose test",
+              "correct": true,
+              "reason": "Paragraph 1a(b) examines what the deployer uses the system to do."
+            },
+            {
+              "blocks": "Only the supplier result, ignoring the use",
+              "correct": false,
+              "reason": "Supply and use qualifications are distinct."
+            },
+            {
+              "blocks": "Every other prohibition is now replaced by this test",
+              "correct": false,
+              "reason": "Paragraph 1a's qualifications concern the specified new points."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
