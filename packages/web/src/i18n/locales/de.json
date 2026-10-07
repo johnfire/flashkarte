@@ -318,25 +318,25 @@
     "sharedWithYou": "Mit dir geteilt",
     "addError": "Dieses Deck konnte nicht hinzugefügt werden.",
     "sharedTitle": "Mit dir geteilt",
-    "sharedHint": "Deine Schule, deine Lehrkräfte oder deine Mitschüler haben diese Decks geteilt. Füge eines hinzu, um es zu lernen.",
+    "sharedHint": "Deine Schule, deine Kursleitung oder andere Teilnehmende deiner Gruppe haben diese Decks geteilt. Füge eines hinzu, um es zu lernen.",
     "sharedFrom": {
       "school": "von deiner Schule",
-      "teacher": "von deiner Lehrkraft",
-      "class": "mit deiner Klasse geteilt"
+      "teacher": "von deiner Kursleitung",
+      "class": "mit deiner Gruppe geteilt"
     },
     "sharing": {
-      "open": "Klassen & Schule",
-      "openTitle": "Dieses Deck mit deiner Schule oder deinen Klassen teilen",
+      "open": "Gruppen & Schule",
+      "openTitle": "Mit deiner Schule oder deinen Gruppen teilen",
       "title": "„{{title}}“ teilen",
-      "hint": "Wähle, wer in deiner Schule oder deinen Klassen dies nutzen kann. „Teilen“ bzw. „Veröffentlichen“ macht es weiterhin für alle öffentlich.",
+      "hint": "Wähle, wer in deiner Schule oder deinen Gruppen dies nutzen kann. „Teilen“ bzw. „Veröffentlichen“ macht es weiterhin für alle öffentlich.",
       "loadError": "Die Freigaben konnten nicht geladen werden.",
       "saveError": "Die Freigaben konnten nicht gespeichert werden.",
       "saving": "Wird gespeichert…",
-      "nothing": "Du bist noch in keiner Schule und keiner Klasse, daher gibt es hier niemanden zum Teilen.",
+      "nothing": "Du bist noch in keiner Schule und keiner Gruppe, daher gibt es hier niemanden zum Teilen.",
       "school": "Alle an der {{name}}",
-      "allStudents": "Alle meine Schüler",
-      "class": "Klasse: {{name}}",
-      "classmates": "Meine Mitschüler in {{name}}"
+      "allStudents": "Alle meine Teilnehmenden",
+      "class": "Gruppe: {{name}}",
+      "classmates": "Die anderen Teilnehmenden in {{name}}"
     }
   },
   "courses": {
@@ -378,8 +378,8 @@
     "cloning": "Wird kopiert…",
     "cloneError": "Der Kurs konnte nicht kopiert werden. Versuche es erneut.",
     "sharedTitle": "Mit dir geteilte Kurse",
-    "sharedHint": "Deine Schule, deine Lehrkräfte oder deine Mitschüler haben diese Kurse geteilt. Füge einen hinzu, um ihn zu beginnen.",
-    "sharedReadOnly": "Von deiner Schule, Lehrkraft oder deinen Mitschülern geteilt. Du kannst damit lernen, ihn aber nicht ändern.",
+    "sharedHint": "Deine Schule, deine Kursleitung oder andere Teilnehmende deiner Gruppe haben diese Kurse geteilt. Füge einen hinzu, um ihn zu beginnen.",
+    "sharedReadOnly": "Von deiner Schule, Kursleitung oder Gruppe geteilt. Du kannst damit lernen, ihn aber nicht ändern.",
     "sharedAddFirst": "Füge diesen Kurs hinzu, um mit seinen Decks zu lernen."
   },
   "libraryHub": {
@@ -1008,9 +1008,9 @@
     "retryCheckout": "Bezahlvorgang wiederholen"
   },
   "schools": {
-    "title": "Schulen, Lehrkräfte und Klassen",
-    "hint": "Trage ein, was Schulen und Lehrkräfte einsenden. Lehrkräfte müssen verifiziert sein (Schulliste oder Gespräch), bevor sie Lehrkraft werden.",
-    "loadError": "Schulen und Klassen konnten nicht geladen werden.",
+    "title": "Schulen, Kursleitungen und Gruppen",
+    "hint": "Trage ein, was Schulen und Kursleitungen einsenden. Kursleitungen müssen verifiziert sein (Liste der Schule oder Gespräch), bevor sie Kursleitung werden.",
+    "loadError": "Schulen und Gruppen konnten nicht geladen werden.",
     "saveError": "Konnte nicht gespeichert werden.",
     "saved": "Gespeichert.",
     "schools": "Schulen",
@@ -1025,11 +1025,11 @@
     "kind": "Kontoart",
     "kind_individual": "Einzelperson",
     "kind_school": "Schule",
-    "kind_teacher": "Lehrkraft",
-    "kind_student": "Schüler",
+    "kind_teacher": "Kursleitung",
+    "kind_student": "Teilnehmende",
     "kindAndSchool": "Kontoart und Schule",
-    "verifyTeacher": "Als Lehrkraft verifizieren",
-    "alreadyVerified": "Bereits als Lehrkraft verifiziert.",
+    "verifyTeacher": "Als Kursleitung verifizieren",
+    "alreadyVerified": "Bereits als Kursleitung verifiziert.",
     "method": "Nachweis",
     "method_interview": "Gespräch geführt",
     "method_school_roster": "Auf der Liste einer Schule",
@@ -1037,19 +1037,19 @@
     "verify": "Verifizieren",
     "school": "Schule",
     "noSchool": "Keine Schule (unabhängig)",
-    "classes": "Klassen",
-    "noClasses": "Noch keine Klassen.",
+    "classes": "Gruppen",
+    "noClasses": "Noch keine Gruppen.",
     "independent": "Unabhängig",
-    "studentCount_one": "{{count}} Schüler",
-    "studentCount_other": "{{count}} Schüler",
-    "editStudents": "Schüler",
+    "studentCount_one": "{{count}} Teilnehmende(r)",
+    "studentCount_other": "{{count}} Teilnehmende",
+    "editStudents": "Teilnehmende",
     "deleteClass": "Löschen",
-    "deleteClassConfirm": "Die Klasse „{{name}}“ löschen? Ihre Schüler verlieren die mit ihr geteilten Decks.",
-    "teacher": "Lehrkraft",
-    "chooseTeacher": "Lehrkraft wählen…",
-    "className": "Name der Klasse",
-    "addClass": "Klasse hinzufügen",
-    "studentsIn": "Schüler in {{name}}",
-    "noStudents": "Noch keine Schülerkonten können dieser Klasse beitreten."
+    "deleteClassConfirm": "Die Gruppe „{{name}}“ löschen? Ihre Teilnehmenden verlieren die mit ihr geteilten Inhalte.",
+    "teacher": "Kursleitung",
+    "chooseTeacher": "Kursleitung wählen…",
+    "className": "Name der Gruppe",
+    "addClass": "Gruppe hinzufügen",
+    "studentsIn": "Teilnehmende in {{name}}",
+    "noStudents": "Noch keine Teilnehmendenkonten können dieser Gruppe beitreten."
   }
 }
