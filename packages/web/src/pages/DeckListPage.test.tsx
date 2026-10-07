@@ -20,6 +20,7 @@ vi.mock("../api/client", async (importOriginal) => ({
       listOfficial: vi.fn().mockResolvedValue([]),
       subscribe: vi.fn(),
       unsubscribe: vi.fn(),
+      listShared: vi.fn().mockResolvedValue({ decks: [] }),
     },
   },
   reportClientError: vi.fn(),
@@ -29,6 +30,7 @@ vi.mock("../api/client", async (importOriginal) => ({
 const auth = vi.hoisted(() => ({
   user: {
     accountType: "free",
+    accountKind: "individual" as string,
     email: "learner@example.com",
     emailVerifiedAt: "2026-01-01T00:00:00Z" as string | null,
   },
@@ -45,6 +47,7 @@ const mockedDecksApi = api.decks as unknown as {
   listOfficial: ReturnType<typeof vi.fn>;
   subscribe: ReturnType<typeof vi.fn>;
   unsubscribe: ReturnType<typeof vi.fn>;
+  listShared: ReturnType<typeof vi.fn>;
 };
 
 const deck: DeckWithCounts = {
@@ -82,7 +85,11 @@ function renderPage() {
 describe("DeckListPage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    auth.user = { ...auth.user, emailVerifiedAt: "2026-01-01T00:00:00Z" };
+    auth.user = {
+      ...auth.user,
+      accountKind: "individual",
+      emailVerifiedAt: "2026-01-01T00:00:00Z",
+    };
   });
 
   test("renders loading and loaded states", async () => {
@@ -218,5 +225,46 @@ describe("DeckListPage", () => {
     await waitFor(() =>
       expect(screen.queryByText("Official Deck")).not.toBeInTheDocument(),
     );
+  });
+  test("a deck shared by a teacher is labelled and read-only, and can be removed", async () => {
+    mockedDecksApi.list.mockResolvedValue([
+      { ...deck, id: "shared-1", title: "Teacher Deck", is_shared: true },
+    ]);
+    mockedDecksApi.unsubscribe.mockResolvedValue(undefined);
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+    renderPage();
+    await screen.findByText("Teacher Deck");
+
+    expect(screen.getByText("Shared with you")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Share" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Delete" }),
+    ).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "Remove" }));
+    expect(mockedDecksApi.unsubscribe).toHaveBeenCalledWith("shared-1");
+  });
+
+  test("an individual gets no class sharing and never asks for shared decks", async () => {
+    mockedDecksApi.list.mockResolvedValue([deck]);
+    renderPage();
+    await screen.findByText("German nouns");
+    expect(
+      screen.queryByRole("button", { name: "Classes & school" }),
+    ).not.toBeInTheDocument();
+    expect(mockedDecksApi.listShared).not.toHaveBeenCalled();
+  });
+
+  test("a teacher can share their own deck with classes and sees decks shared with them", async () => {
+    auth.user.accountKind = "teacher";
+    mockedDecksApi.list.mockResolvedValue([deck]);
+    renderPage();
+    await screen.findByText("German nouns");
+    expect(
+      screen.getByRole("button", { name: "Classes & school" }),
+    ).toBeInTheDocument();
+    expect(mockedDecksApi.listShared).toHaveBeenCalled();
   });
 });

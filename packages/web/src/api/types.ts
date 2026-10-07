@@ -48,11 +48,15 @@ export interface DeckSpeech {
   speech_rate: number | null;
 }
 
+// One kind per login. Decides who the user can share their own content with.
+export type AccountKind = "individual" | "school" | "teacher" | "student";
+
 export interface User {
   id: string;
   email: string;
   role: string;
   accountType: AccountType;
+  accountKind?: AccountKind;
   emailVerifiedAt: string | null;
   displayName: string | null;
   language: string | null;
@@ -93,8 +97,66 @@ export interface AdminUser {
   email: string;
   role: string;
   accountType: AccountType;
+  accountKind?: AccountKind;
+  schoolId?: string | null;
+  teacherVerified?: boolean;
   emailVerifiedAt: string | null;
   createdAt: string;
+}
+
+export interface School {
+  id: string;
+  name: string;
+  memberCount: number;
+  createdAt: string;
+}
+
+export interface SchoolClass {
+  id: string;
+  name: string;
+  teacherId: string;
+  teacherEmail: string;
+  schoolId: string | null;
+  schoolName: string | null;
+  memberCount: number;
+  createdAt: string;
+}
+
+export interface SchoolClassDetail extends SchoolClass {
+  members: { id: string; email: string; displayName: string | null }[];
+}
+
+export type ShareScope = "school" | "class" | "teacher_students";
+
+export interface DeckShare {
+  scope: ShareScope;
+  schoolId: string | null;
+  classId: string | null;
+}
+
+export interface ShareOptions {
+  accountKind: AccountKind;
+  school: { id: string; name: string } | null;
+  classes: { id: string; name: string }[];
+  canShareWithSchool: boolean;
+  canShareWithAllStudents: boolean;
+}
+
+export interface DeckSharing {
+  shares: DeckShare[];
+  options: ShareOptions;
+}
+
+/** A deck someone shared with the caller through their school, teacher or class. */
+export interface SharedDeck {
+  id: string;
+  referenceNumber: number;
+  title: string;
+  contentLanguage: string | null;
+  cardCount: number;
+  author: string | null;
+  subscribed: boolean;
+  scopes: ShareScope[];
 }
 
 export interface EmailCampaignSummary {
@@ -170,6 +232,9 @@ export interface DeckWithCounts extends DeckSpeech {
   // Owner-only actions (rename/delete/share/speech) are hidden for these in
   // the UI since the mutation would silently no-op against the system owner.
   is_official: boolean;
+  // True for someone else's deck shared with the caller (school, teacher or
+  // classmates) that they added. Read-only, like an official deck.
+  is_shared?: boolean;
   viewed_count: number;
   new_count: number;
   again_count: number;

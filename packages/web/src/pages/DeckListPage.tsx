@@ -12,6 +12,7 @@ import { PersonalContentMenu } from "../components/PersonalContentMenu";
 import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { DeckListItem } from "./DeckListItem";
+import { SharedWithMeSection } from "./SharedWithMeSection";
 import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
 import { useContentLanguage } from "../hooks/use-content-language";
 import {
@@ -50,7 +51,14 @@ export function DeckListPage() {
     error: loadError,
     loading,
     setData: setDecks,
+    reload: reloadDecks,
   } = useAsync<DeckWithCounts[], []>(loadDecks, []);
+  // School, teacher and student accounts share with (and receive from)
+  // their school and classes.
+  const canShareWithGroups =
+    user?.accountKind === "teacher" ||
+    user?.accountKind === "student" ||
+    user?.accountKind === "school";
   const error =
     loadError instanceof ApiError
       ? loadError.message
@@ -147,6 +155,11 @@ export function DeckListPage() {
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
 
+      {/* Only school, teacher and student accounts can receive shared decks. */}
+      {verified && canShareWithGroups && (
+        <SharedWithMeSection onAdded={() => void reloadDecks()} />
+      )}
+
       {loading && !error && (
         <p className="text-gray-500 dark:text-gray-400">
           {t("common.loading")}
@@ -187,6 +200,7 @@ export function DeckListPage() {
             onLanguageChange={onLanguageChange}
             onDelete={onDelete}
             onUnsubscribe={onUnsubscribe}
+            canShareWithGroups={canShareWithGroups}
           />
         ))}
       </ul>

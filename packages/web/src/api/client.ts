@@ -1,6 +1,7 @@
 import {
   User,
   AdminUser,
+  AccountKind,
   AccountType,
   DeckWithCounts,
   DeckDetail,
@@ -29,6 +30,12 @@ import {
   BillingStatus,
   BillingUnit,
   BillingUnitType,
+  DeckSharing,
+  School,
+  SchoolClass,
+  SchoolClassDetail,
+  ShareScope,
+  SharedDeck,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 import type {
@@ -497,6 +504,16 @@ export const api = {
       request<void>(`/decks/${id}/subscribe`, { method: "POST" }),
     unsubscribe: (id: string) =>
       request<void>(`/decks/${id}/subscribe`, { method: "DELETE" }),
+    listShared: () => request<{ decks: SharedDeck[] }>("/decks/shared"),
+    getShares: (id: string) => request<DeckSharing>(`/decks/${id}/shares`),
+    setShares: (
+      id: string,
+      shares: { scope: ShareScope; classId?: string }[],
+    ) =>
+      request<DeckSharing>(`/decks/${id}/shares`, {
+        method: "PUT",
+        body: JSON.stringify({ shares }),
+      }),
   },
   categories: {
     tree: (language?: "en" | "de" | "ar") =>
@@ -714,6 +731,46 @@ export const api = {
         body: JSON.stringify({ active }),
       }),
     listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),
+    listSchools: () => request<{ schools: School[] }>("/admin/schools"),
+    createSchool: (name: string) =>
+      request<{ school: School }>("/admin/schools", {
+        method: "POST",
+        body: JSON.stringify({ name }),
+      }),
+    setOrganization: (
+      userId: string,
+      accountKind: AccountKind,
+      schoolId: string | null,
+    ) =>
+      request<void>(`/admin/users/${userId}/organization`, {
+        method: "PUT",
+        body: JSON.stringify({ accountKind, schoolId }),
+      }),
+    verifyTeacher: (
+      userId: string,
+      method: "school_roster" | "interview",
+      schoolId: string | null,
+      note: string,
+    ) =>
+      request<void>(`/admin/users/${userId}/verify-teacher`, {
+        method: "POST",
+        body: JSON.stringify({ method, schoolId, note }),
+      }),
+    listClasses: () => request<{ classes: SchoolClass[] }>("/admin/classes"),
+    getClass: (id: string) =>
+      request<{ class: SchoolClassDetail }>(`/admin/classes/${id}`),
+    createClass: (teacherId: string, name: string) =>
+      request<{ class: SchoolClass }>("/admin/classes", {
+        method: "POST",
+        body: JSON.stringify({ teacherId, name }),
+      }),
+    deleteClass: (id: string) =>
+      request<void>(`/admin/classes/${id}`, { method: "DELETE" }),
+    setClassMembers: (id: string, studentIds: string[]) =>
+      request<void>(`/admin/classes/${id}/members`, {
+        method: "PUT",
+        body: JSON.stringify({ studentIds }),
+      }),
     contactUsers: (subject: string, textBody: string, recipientIds: string[]) =>
       request<{ campaign: EmailCampaignSummary }>("/admin/email/contact", {
         method: "POST",

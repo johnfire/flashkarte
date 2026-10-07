@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { DeckWithCounts } from "../api/types";
 import { DeckSpeechDialog } from "./DeckSpeechDialog";
+import { DeckSharesDialog } from "./DeckSharesDialog";
 import {
   ContentLanguageField,
   contentLanguageLabel,
@@ -14,6 +15,9 @@ interface DeckListItemProps {
   onDelete: (id: string, title: string) => void;
   onUnsubscribe: (id: string, title: string) => void;
   onLanguageChange?: (id: string, language: "en" | "de" | "ar") => void;
+  // Teachers, students and school logins can also share with their school
+  // or classes; individuals only have the public Share button.
+  canShareWithGroups?: boolean;
 }
 
 export function DeckListItem({
@@ -22,9 +26,14 @@ export function DeckListItem({
   onDelete,
   onUnsubscribe,
   onLanguageChange,
+  canShareWithGroups = false,
 }: DeckListItemProps) {
   const { t } = useTranslation();
   const [speechOpen, setSpeechOpen] = useState(false);
+  const [sharesOpen, setSharesOpen] = useState(false);
+  // Someone else's deck (app deck, or shared by a teacher/school/classmate):
+  // the caller may study and remove it, never edit it.
+  const readOnly = d.is_official || Boolean(d.is_shared);
   return (
     <li className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 rounded-lg border p-4">
       <div className="min-w-0 flex-1 basis-56">
@@ -43,6 +52,11 @@ export function DeckListItem({
           {d.is_official && (
             <span className="ml-2 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-700 dark:bg-amber-900/50 dark:text-amber-300">
               {t("decks.official")}
+            </span>
+          )}
+          {d.is_shared && (
+            <span className="ml-2 rounded-full bg-sky-100 px-2 py-0.5 text-xs font-medium text-sky-700 dark:bg-sky-900/50 dark:text-sky-300">
+              {t("decks.sharedWithYou")}
             </span>
           )}
           {d.is_public && (
@@ -110,7 +124,7 @@ export function DeckListItem({
         <Link to={`/decks/${d.id}/cards`} className="text-sm text-indigo-600">
           {t("decks.manage")}
         </Link>
-        {d.is_official ? (
+        {readOnly ? (
           <button
             onClick={() => onUnsubscribe(d.id, d.title)}
             className="text-sm text-red-600"
@@ -134,6 +148,15 @@ export function DeckListItem({
             >
               {d.is_public ? t("decks.unshare") : t("decks.share")}
             </button>
+            {canShareWithGroups && (
+              <button
+                onClick={() => setSharesOpen(true)}
+                className="text-sm text-indigo-600"
+                title={t("decks.sharing.openTitle")}
+              >
+                {t("decks.sharing.open")}
+              </button>
+            )}
             <button
               onClick={() => setSpeechOpen(true)}
               className="text-sm text-indigo-600"
@@ -150,6 +173,13 @@ export function DeckListItem({
           </>
         )}
       </div>
+      {sharesOpen && (
+        <DeckSharesDialog
+          deckId={d.id}
+          deckTitle={d.title}
+          onClose={() => setSharesOpen(false)}
+        />
+      )}
       {speechOpen && (
         <DeckSpeechDialog
           deckId={d.id}
