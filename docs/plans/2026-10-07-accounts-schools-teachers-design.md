@@ -1,8 +1,7 @@
 # Accounts: schools, teachers, students
 
-Status: **draft — not approved.** Records what Chris decided in chat on
-2026-10-07 (two rounds). Sections marked **OPEN** need his answer before
-building.
+Status: **draft — all questions answered, awaiting approval to build.**
+Records what Chris decided in chat on 2026-10-07 (three rounds).
 
 ## Problem
 
@@ -54,8 +53,9 @@ Consequence: the free student exists only in an independent teacher's class.
 ### Nobody self-declares as teacher or student
 
 - **Teachers must prove they are teachers.** A school listing someone as its
-  teacher is proof. An independent teacher proves it some other way (see
-  OPEN 1).
+  teacher is proof. An independent teacher emails Chris and he interviews
+  them; the admin then marks them verified. No documents are uploaded or
+  stored.
 - **A student exists only because a school or teacher listed them.** There is
   no "sign up as a student" button.
 
@@ -67,9 +67,16 @@ higher. *(Arithmetic note: 100 students × €1 = €100, not €300; €300 wou
 need 30 students per teacher. Worth checking which figure the business case
 assumes.)*
 
+### The admin runs onboarding
+
+Schools and independent teachers do not configure themselves. Everything
+they send — rosters, class lists, term dates — goes to the admin, who
+organises it and enters it. The school login exists to create school decks,
+not to manage its roster.
+
 ### How students get on the list
 
-- **Schools:** CSV listing teachers, the classes each teaches, and the
+- **Schools:** CSV (imported by the admin) listing teachers, the classes each teaches, and the
   students in each class. One import creates the school, its teacher and
   student accounts, the classes and their memberships. Billing is computed
   from the head count. School pupils log in with a **username and a one-time
@@ -80,8 +87,9 @@ assumes.)*
 
 ### Terms (school periods)
 
-Classes run for a **term** with an end date: a semester, nine weeks, or any
-other length. Each class belongs to a term; the term is stored, not assumed.
+Classes run for a **term** with an end date. Each class belongs to a term;
+the term is stored, not assumed. The school picks a length from **2 to 6
+months**; the **admin** enters the dates and can change any of them.
 
 ### Leaving
 
@@ -96,6 +104,10 @@ other length. Each class belongs to a term; the term is stored, not assumed.
     months they are deleted.
   - A teacher can demand deletion at any time; that overrides the freeze.
 - Six months is the retention period, written into the privacy policy.
+- **A student leaving a school or class** (once the school or teacher tells
+  us): their decks stay for **3 months**, then are deleted — unless they buy a
+  subscription, in which case they stay as an individual subscriber. A pupil
+  with only a username must add an email address to buy one.
 
 ## Proposed design
 
@@ -131,7 +143,8 @@ only itself.
 - `users.school_id` — nullable; set for school logins, school teachers and
   school students.
 - `terms` — id, owner (school or independent teacher), name (e.g.
-  "Winter semester 2026/27", "Q1"), starts_on, ends_on. Any length.
+  "Winter semester 2026/27", "Q1"), starts_on, ends_on. Admin-entered;
+  2–6 months for schools.
 - `classes` — id, teacher_id, school_id (nullable for independent
   teachers), term_id, name (e.g. "Biologie 7B").
 - `class_invitations` — class_id, email. An independent teacher's list;
@@ -139,8 +152,10 @@ only itself.
 - `users.username` — nullable; required for school pupils without email.
   `users.email` becomes nullable for them only. Usernames are unique within a
   school, and pupils log in with school code + username.
-- `teacher_verifications` — user_id, method (`school_roster | manual`),
-  verified_by, verified_at.
+- `teacher_verifications` — user_id, method (`school_roster | interview`),
+  verified_by (admin), verified_at, note.
+- `users.leaving_at` — set when a student is reported as leaving; drives
+  the 3-month deletion unless an own subscription exists by then.
 - `class_members` — class_id, student_id. A student may be in many classes,
   across one school and independent teachers.
 - `student_seats` — student_id, paid_by (`teacher | student`),
@@ -159,7 +174,8 @@ viewer's school/classes)`. The same pattern the official-decks change used.
 A daily job checks term end dates: a teacher who left mid-term has their
 school shares ended, and the subscription offer sent, when the term ends.
 `users.frozen_at` plus a daily purge job (same shape as the audit-retention
-job) that deletes accounts frozen for more than 6 months. Frozen content is
+job) that deletes teachers frozen for more than 6 months and departed
+students past 3 months without a subscription. Frozen content is
 excluded from every read path. If the purge job fails, nothing else is
 affected; it retries next day.
 
@@ -193,28 +209,30 @@ the safer choice here.
   before the first school signs. Bavarian school-software rules: later, not
   now.
 
-## OPEN — needs Chris
+## Resolved in round 3
 
-1. **How does an independent teacher prove they are a teacher?** Upload a
-   document (teacher ID, employment letter) and an admin approves by hand?
-   That means storing a sensitive document — or the admin views it and it is
-   deleted after the decision.
-2. **A student leaving a school or class.** Do they become a free individual
-   (10 units) with their own decks kept? Or is their account frozen like a
-   teacher's? School pupils with only a username have no email to log in with
-   afterwards.
-3. **Who sets term dates?** Proposal: schools give them in the CSV (or a
-   settings page); independent teachers set an end date when creating a
-   class.
-4. **The €300 figure** — see the arithmetic note above.
+- Independent teacher verification → email Chris, interview, admin marks
+  verified.
+- Student leaving → 3 months, then deleted unless they subscribe.
+- Term dates → admin sets them; schools choose 2–6 months.
+
+## Noted risk
+
+The admin does every onboarding step by hand. That is fine at a few schools;
+it becomes the bottleneck as the number grows. The admin tools (CSV import,
+term editor, verification) should be built so a second admin can use them
+without Chris.
 
 ## Build order (once approved)
 
-1. Account kinds + `content_shares` + read-path changes. No billing.
+1. Account kinds + `content_shares` + read-path changes + admin screens for
+   verification. No billing.
 2. Independent teachers: verification, terms, classes, email invitation
    lists, student seats, Stripe.
-3. Schools: CSV import, username logins, school decks, invoicing.
-4. Leaving and freezing: term-end handover, offer flow, freeze, purge job.
+3. Schools: admin CSV import, admin term editor, username logins, school
+   decks, invoicing.
+4. Leaving: term-end handover, teacher offer and 6-month freeze, student
+   3-month window, purge job.
 
 Each phase ships on its own and leaves the app working if the next one
 never comes.
