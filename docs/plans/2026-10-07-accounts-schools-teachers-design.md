@@ -272,6 +272,52 @@ it becomes the bottleneck as the number grows. The admin tools (CSV import,
 term editor, verification) should be built so a second admin can use them
 without Chris.
 
+## Stage 3 — school self-service screens (draft, round 5)
+
+**Goal (Chris):** make schools happy by giving them a system they can set
+up themselves, with a mobile app their participants download for
+flashcards and courses as a supplement to classroom learning — and earn
+from it. Self-service replaces "the admin enters everything" (round 3);
+the app admin keeps the power to override anything.
+
+**Decided:**
+- **School admins add participants.** Course leaders do not (each one adds
+  to the school's bill).
+- **Course leaders see each participant's progress** in their groups.
+- **Several school-admin logins per school, one per person** (e.g. two
+  office staff and the owner). Never a shared login: every action is
+  logged against the person who did it (GDPR accountability, security).
+  The data model already allows this: any number of `account_kind =
+  'school'` users with the same `school_id`; the audit log already records
+  the actor.
+- **Pay for what is used:** adding participants raises the bill, removing
+  them lowers it. No fixed seat cap.
+
+**Screens:**
+1. *App admin:* schools list and detail, verification queue for
+   independent course leaders, independent course leaders, people search,
+   override of anything a school did.
+2. *School admin:* overview (people, current term, billable count); course
+   leaders (add, remove → leaving rules); participants (add one or by CSV,
+   remove, move between groups, reset a username login's password); groups
+   (create, assign course leader, set term); school content; billing
+   (read-only).
+3. *Course leader:* my groups, their participants and each participant's
+   progress; independent course leaders also create groups, invite by email
+   and buy €1 places.
+
+**Open (round 5):**
+1. Who may add or remove *school admins* — only the app admin, or also a
+   school "owner" admin?
+2. How a month is billed when the count changes mid-month (pro rata per
+   day, highest count in the month, or count on billing day — the last can
+   be gamed by removing everyone the day before).
+3. Whether shared content should appear automatically for school members,
+   so the Android app works without changes (it has no "Shared with you"
+   screen today).
+4. What "progress" a course leader sees, and that participants are told
+   (privacy notice, AVV).
+
 ## Build order (once approved)
 
 1. Account kinds + sharing + read-path changes + admin screens for
