@@ -1,7 +1,7 @@
 # Accounts: schools, teachers, students
 
-Status: **draft — all questions answered, awaiting approval to build.**
-Records what Chris decided in chat on 2026-10-07 (three rounds).
+Status: **approved; stage 1 built for decks** (migration 046). Records what
+Chris decided in chat on 2026-10-07 (three rounds).
 
 ## Problem
 
@@ -160,14 +160,27 @@ only itself.
   across one school and independent teachers.
 - `student_seats` — student_id, paid_by (`teacher | student`),
   billing_subscription_id. Records who pays the €1.
-- `content_shares` — content_type, content_id, scope (`class | school |
-  teacher_students`), scope_id. `is_public` keeps meaning "everyone"; this
-  table adds the narrower audiences. Existing public/private behaviour is
-  untouched.
+- `deck_shares` — deck_id, scope (`school | class | teacher_students`),
+  school_id or class_id. `is_public` keeps meaning "everyone"; this table
+  adds the narrower audiences. One table per content type (not one generic
+  table) so foreign keys delete a share when its deck, class or school goes.
+  Courses and structured courses get their own share tables in a later
+  step.
 
-Every content read path today filters on `user_id = $1 OR is_public OR
-official`. Each gets one more `OR EXISTS (content_shares … matching the
-viewer's school/classes)`. The same pattern the official-decks change used.
+**As built (stage 1):** the SQL function `deck_shared_with(deck, user)` is
+the one definition of "shared with this user", checked live on every read
+(deck list, deck, cards, study, free-limit count). A shared deck works like
+an app deck: the viewer sees it under "Shared with you", adds it to their
+list (`deck_subscriptions`), studies it, and can never edit it. Leaving a
+class or school ends access at once, even for decks already added.
+
+- A class share reaches the class's students **and its teacher** (so a
+  teacher sees what students share with the class).
+- "My students" reaches every student in any class the owner teaches.
+- Sharing changes need a full-scope login or key; deck-scoped (AI/MCP) keys
+  cannot change who a deck reaches.
+- Adding a shared deck counts toward a free account's 10 units; app decks
+  still do not. School members (anyone with a `school_id`) are unlimited.
 
 ### Freezing
 
@@ -225,8 +238,9 @@ without Chris.
 
 ## Build order (once approved)
 
-1. Account kinds + `content_shares` + read-path changes + admin screens for
-   verification. No billing.
+1. Account kinds + sharing + read-path changes + admin screens for
+   schools, verification and classes. No billing. **Built for decks;
+   courses and structured courses still to do.**
 2. Independent teachers: verification, terms, classes, email invitation
    lists, student seats, Stripe.
 3. Schools: admin CSV import, admin term editor, username logins, school
