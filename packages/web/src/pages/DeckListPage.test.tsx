@@ -267,4 +267,21 @@ describe("DeckListPage", () => {
     ).toBeInTheDocument();
     expect(mockedDecksApi.listShared).toHaveBeenCalled();
   });
+  test("a deck a school member received automatically cannot be removed", async () => {
+    mockedDecksApi.list.mockResolvedValue([
+      {
+        ...deck,
+        id: "shared-2",
+        title: "School Deck",
+        is_shared: true,
+        auto_added: true,
+      },
+    ]);
+    renderPage();
+    await screen.findByText("School Deck");
+    expect(screen.getByText("Shared with you")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Remove" }),
+    ).not.toBeInTheDocument();
+  });
 });

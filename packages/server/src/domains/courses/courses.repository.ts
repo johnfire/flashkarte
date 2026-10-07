@@ -15,6 +15,8 @@ export interface CourseRow {
   is_shared?: boolean;
   // The caller added that shared course to their courses.
   subscribed?: boolean;
+  // Shown because the caller belongs to a school; cannot be removed.
+  auto_added?: boolean;
 }
 
 const COURSE_COLS =
@@ -39,15 +41,18 @@ export function createCourse(
 
 // An added course someone shared with the caller, still shared with them.
 // Checked live: leaving the class or school drops it at once.
-const ADDED_SHARED = `(EXISTS (
+// School members get it without adding it (migration 048).
+const ADDED_SHARED = `((receives_shares_automatically($1::uuid) OR EXISTS (
     SELECT 1 FROM course_subscriptions cs
     WHERE cs.course_id = courses.id AND cs.user_id = $1
-  ) AND course_shared_with(courses.id, $1::uuid))`;
+  )) AND course_shared_with(courses.id, $1::uuid))`;
 
 /** The caller's own courses plus shared courses they added. */
 export function listCourses(userId: string) {
   return query<CourseRow>(
-    `SELECT ${COURSE_COLS}, (user_id <> $1) AS is_shared FROM courses
+    `SELECT ${COURSE_COLS}, (user_id <> $1) AS is_shared,
+       (user_id <> $1 AND receives_shares_automatically($1::uuid)) AS auto_added
+     FROM courses
      WHERE user_id = $1 OR ${ADDED_SHARED}
      ORDER BY created_at DESC`,
     [userId],
@@ -61,10 +66,11 @@ export function listCourses(userId: string) {
 export function getCourse(userId: string, id: string) {
   return queryOne<CourseRow>(
     `SELECT ${COURSE_COLS}, (user_id <> $2) AS is_shared,
-       EXISTS (
+       (user_id <> $2 AND receives_shares_automatically($2::uuid)) AS auto_added,
+       (user_id <> $2 AND (receives_shares_automatically($2::uuid) OR EXISTS (
          SELECT 1 FROM course_subscriptions cs
          WHERE cs.course_id = courses.id AND cs.user_id = $2
-       ) AS subscribed
+       ))) AS subscribed
      FROM courses
      WHERE id = $1
        AND (user_id = $2 OR is_public OR course_shared_with(id, $2::uuid))`,
@@ -91,10 +97,10 @@ export function listSharedWithUser(userId: string) {
        (SELECT count(*) FROM course_decks cd WHERE cd.course_id = c.id)::int AS decks_total,
        -- Never the email: a pupil sees a display name or nothing.
        NULLIF(trim(u.display_name), '') AS author,
-       EXISTS (
+       (receives_shares_automatically($1::uuid) OR EXISTS (
          SELECT 1 FROM course_subscriptions cs
          WHERE cs.course_id = c.id AND cs.user_id = $1
-       ) AS subscribed,
+       )) AS subscribed,
        ARRAY(SELECT DISTINCT s.scope FROM course_shares s WHERE s.course_id = c.id) AS scopes
      FROM courses c JOIN users u ON u.id = c.user_id
      WHERE c.user_id <> $1 AND course_shared_with(c.id, $1::uuid)

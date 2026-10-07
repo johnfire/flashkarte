@@ -56,14 +56,14 @@ function officialOrOwned(
   deckAlias: string,
   userIdParam: number,
 ): string {
-  return `(${cardAlias}.user_id = $${userIdParam}
-     OR (EXISTS (
+  const added = `EXISTS (
        SELECT 1 FROM deck_subscriptions sub
        WHERE sub.deck_id = ${deckAlias}.id AND sub.user_id = $${userIdParam}
-     ) AND (
-       ${deckAlias}.is_official
-       OR deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid)
-     ))
+     )`;
+  return `(${cardAlias}.user_id = $${userIdParam}
+     OR (${added} AND ${deckAlias}.is_official)
+     OR ((${added} OR receives_shares_automatically($${userIdParam}::uuid))
+         AND deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid))
      OR deck_in_added_shared_course(${deckAlias}.id, $${userIdParam}::uuid))`;
 }
 

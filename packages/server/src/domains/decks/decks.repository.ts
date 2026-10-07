@@ -51,14 +51,15 @@ export function subscribedOrOwned(
     ? `
      OR deck_in_added_shared_course(${deckAlias}.id, $${userIdParam}::uuid)`
     : "";
-  return `(${deckAlias}.user_id = $${userIdParam}
-     OR (EXISTS (
+  const added = `EXISTS (
        SELECT 1 FROM deck_subscriptions sub
        WHERE sub.deck_id = ${deckAlias}.id AND sub.user_id = $${userIdParam}
-     ) AND (
-       ${deckAlias}.is_official
-       OR deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid)
-     ))${course})`;
+     )`;
+  // School members get shared decks without adding them (migration 048).
+  return `(${deckAlias}.user_id = $${userIdParam}
+     OR (${added} AND ${deckAlias}.is_official)
+     OR ((${added} OR receives_shares_automatically($${userIdParam}::uuid))
+         AND deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid))${course})`;
 }
 
 /**
@@ -288,6 +289,9 @@ export async function reorderSenseCards(
 export interface DeckListRow extends DeckRow {
   // Someone else's deck, shared with the caller (not an app deck).
   is_shared: boolean;
+  // Shared and shown because the caller belongs to a school: there is
+  // nothing to remove, it leaves with the share or the membership.
+  auto_added: boolean;
   card_count: string;
   due_count: string;
   lesson_count: string;
@@ -305,6 +309,8 @@ export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
     `SELECT d.id, d.reference_number, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered, d.content_language,
        (d.user_id <> $1 AND NOT d.is_official) AS is_shared,
+       (d.user_id <> $1 AND NOT d.is_official
+         AND receives_shares_automatically($1::uuid)) AS auto_added,
        d.speech_enabled, d.speech_front_lang, d.speech_back_lang, d.speech_autoplay, d.speech_rate,
        s.total AS card_count,
        s.due AS due_count,

@@ -42,18 +42,21 @@ export function SharedCourseView({
         <Link to="/courses" className="text-indigo-600">
           {t("courses.backToCourses")}
         </Link>
-        <button
-          type="button"
-          onClick={() => void toggle()}
-          disabled={busy}
-          className={
-            course.subscribed
-              ? "text-red-600 disabled:opacity-60"
-              : "rounded-lg bg-indigo-600 px-3 py-1.5 font-medium text-white disabled:opacity-60"
-          }
-        >
-          {course.subscribed ? t("decks.remove") : t("decks.add")}
-        </button>
+        {/* A school member's shared course comes and goes with the share. */}
+        {!course.auto_added && (
+          <button
+            type="button"
+            onClick={() => void toggle()}
+            disabled={busy}
+            className={
+              course.subscribed
+                ? "text-red-600 disabled:opacity-60"
+                : "rounded-lg bg-indigo-600 px-3 py-1.5 font-medium text-white disabled:opacity-60"
+            }
+          >
+            {course.subscribed ? t("decks.remove") : t("decks.add")}
+          </button>
+        )}
       </div>
       <h1 className="mb-1 text-2xl font-bold">
         {course.title}

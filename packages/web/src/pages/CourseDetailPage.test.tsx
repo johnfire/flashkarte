@@ -206,4 +206,21 @@ describe("CourseDetailPage", () => {
       await screen.findByRole("button", { name: "Remove" }),
     ).toBeInTheDocument();
   });
+  test("a course a school member received automatically has no Add or Remove", async () => {
+    mockedCourses.get.mockResolvedValue({
+      ...course,
+      is_shared: true,
+      subscribed: true,
+      auto_added: true,
+    });
+    mockedDecks.list.mockResolvedValue([]);
+    renderPage();
+    expect(await screen.findByText("Shared with you")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Remove" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Add" }),
+    ).not.toBeInTheDocument();
+  });
 });

@@ -121,12 +121,14 @@ export function DeckListItem({
           {t("decks.manage")}
         </Link>
         {readOnly ? (
-          <button
-            onClick={() => onUnsubscribe(d.id, d.title)}
-            className="text-sm text-red-600"
-          >
-            {t("decks.remove")}
-          </button>
+          !d.auto_added && (
+            <button
+              onClick={() => onUnsubscribe(d.id, d.title)}
+              className="text-sm text-red-600"
+            >
+              {t("decks.remove")}
+            </button>
+          )
         ) : (
           <>
             {onLanguageChange && (

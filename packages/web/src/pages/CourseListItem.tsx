@@ -46,7 +46,7 @@ export function CourseListItem({ course: c, onDelete }: CourseListItemProps) {
         <Link to={`/courses/${c.id}`} className="text-sm text-indigo-600">
           {t("courses.open")}
         </Link>
-        {onDelete && (
+        {onDelete && !c.auto_added && (
           <button
             onClick={() => onDelete(c.id, c.title)}
             className="text-sm text-red-600"

@@ -140,9 +140,7 @@ export function listSubjects(userId: string) {
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
      LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
-     WHERE s.user_id = $1
-        OR (EXISTS (SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $1)
-            AND ${LEARNABLE_BY("s", 1)})
+     WHERE s.user_id = $1 OR ${LEARNER_ACCESS("s", 1)}
      ORDER BY s.created_at DESC`,
     [userId],
   );
@@ -167,12 +165,20 @@ export function listCatalogSubjects(
 }
 
 /**
- * Someone else's course stays usable to an enrolled learner while it is
- * public or still shared with them (school, teacher, class — checked live, so
- * leaving the class ends access). `$N` is the learner's user_id position.
+ * When someone else's course is usable by this learner: enrolled while it is
+ * public or still shared with them, or — for a school member, who needs no
+ * enrolment step (migration 048) — whenever it is shared with them. Checked
+ * live, so leaving the group or school ends access. `$N` is the learner's
+ * user_id position.
  */
-function LEARNABLE_BY(alias: string, userIdParam: number): string {
-  return `(${alias}.is_public OR subject_shared_with(${alias}.id, $${userIdParam}::uuid))`;
+function LEARNER_ACCESS(alias: string, userIdParam: number): string {
+  const user = `$${userIdParam}::uuid`;
+  const shared = `subject_shared_with(${alias}.id, ${user})`;
+  return `((EXISTS (
+      SELECT 1 FROM subject_enrollments e
+      WHERE e.subject_id = ${alias}.id AND e.user_id = $${userIdParam}
+    ) AND (${alias}.is_public OR ${shared}))
+    OR (receives_shares_automatically(${user}) AND ${shared}))`;
 }
 
 /**
@@ -186,9 +192,7 @@ export async function findLearningSubject(
 ): Promise<SubjectRow | null> {
   const result = await db.query<SubjectRow>(
     `SELECT ${SUBJECT_COLS} FROM subjects s
-     WHERE s.id = $1 AND (s.user_id = $2 OR (${LEARNABLE_BY("s", 2)} AND EXISTS (
-       SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $2
-     )))`,
+     WHERE s.id = $1 AND (s.user_id = $2 OR ${LEARNER_ACCESS("s", 2)})`,
     [id, userId],
   );
   return result.rows[0] ?? null;
@@ -224,10 +228,10 @@ export function listSharedWithUser(userId: string) {
     `SELECT s.id, s.reference_number, s.title, s.description, s.locale,
        -- Never the email: a pupil sees a display name or nothing.
        NULLIF(trim(u.display_name), '') AS author,
-       EXISTS (
+       (receives_shares_automatically($1::uuid) OR EXISTS (
          SELECT 1 FROM subject_enrollments e
          WHERE e.subject_id = s.id AND e.user_id = $1
-       ) AS enrolled,
+       )) AS enrolled,
        ARRAY(SELECT DISTINCT sh.scope FROM subject_shares sh WHERE sh.subject_id = s.id) AS scopes
      FROM subjects s JOIN users u ON u.id = s.user_id
      WHERE s.user_id <> $1 AND NOT s.is_official

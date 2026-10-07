@@ -306,16 +306,22 @@ the app admin keeps the power to override anything.
    progress; independent course leaders also create groups, invite by email
    and buy €1 places.
 
-**Open (round 5):**
-1. Who may add or remove *school admins* — only the app admin, or also a
-   school "owner" admin?
-2. How a month is billed when the count changes mid-month (pro rata per
-   day, highest count in the month, or count on billing day — the last can
-   be gamed by removing everyone the day before).
-3. Whether shared content should appear automatically for school members,
-   so the Android app works without changes (it has no "Shared with you"
-   screen today).
-4. What "progress" a course leader sees, and that participants are told
+**Decided (round 5, "yes to all"):**
+1. School admins are added and removed by the app admin and by the school's
+   owner admin; office staff cannot add admins.
+2. Billing is pro rata per day: a participant counted for half a month costs
+   half. Fair both ways and cannot be gamed by removing people before the
+   billing date.
+3. **Built (migration 048):** school members receive shared content
+   automatically. `receives_shares_automatically(user)` (anyone with a
+   `school_id`) makes shared decks, deck-courses and structured courses
+   appear in their lists with no Add or enrol step, so the Android app shows
+   them unchanged (it already ignores unknown JSON fields). Rows carry
+   `auto_added`; the web hides Remove for those. Leaving the school ends it
+   at once. Free participants of independent course leaders still add
+   content themselves, because it counts toward their 10.
+4. Course leaders see, per participant: last active date, cards learned and
+   due per shared deck, lessons passed per course. Participants are told
    (privacy notice, AVV).
 
 ## Build order (once approved)

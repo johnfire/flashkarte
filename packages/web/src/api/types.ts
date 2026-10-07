@@ -260,6 +260,9 @@ export interface DeckWithCounts extends DeckSpeech {
   // True for someone else's deck shared with the caller (school, teacher or
   // classmates) that they added. Read-only, like an official deck.
   is_shared?: boolean;
+  // Shared and shown because the caller belongs to a school: it cannot be
+  // removed, it goes when the share or the membership ends.
+  auto_added?: boolean;
   viewed_count: number;
   new_count: number;
   again_count: number;
@@ -402,6 +405,8 @@ export interface Course {
   is_shared?: boolean;
   // The caller added that shared course to their courses.
   subscribed?: boolean;
+  // Shown because the caller belongs to a school; cannot be removed.
+  auto_added?: boolean;
 }
 
 /** A course as listed on "My Courses" -- a summary, not its full deck list. */

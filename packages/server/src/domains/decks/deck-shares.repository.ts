@@ -23,10 +23,10 @@ export function listSharedWithUser(userId: string) {
        (SELECT count(*) FROM cards c WHERE c.deck_id = d.id) AS card_count,
        -- Never the email: a pupil sees a display name or nothing.
        NULLIF(trim(u.display_name), '') AS author,
-       EXISTS (
+       (receives_shares_automatically($1::uuid) OR EXISTS (
          SELECT 1 FROM deck_subscriptions sub
          WHERE sub.deck_id = d.id AND sub.user_id = $1
-       ) AS subscribed,
+       )) AS subscribed,
        ARRAY(
          SELECT DISTINCT s.scope FROM deck_shares s WHERE s.deck_id = d.id
        ) AS scopes
