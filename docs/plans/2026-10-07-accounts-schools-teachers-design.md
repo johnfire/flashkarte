@@ -1,6 +1,7 @@
 # Accounts: schools, teachers, students
 
-Status: **approved; stage 1 built for decks** (migration 046). Records what
+Status: **approved; stage 1 built** for decks, deck-courses and structured
+courses (migrations 046, 047). Records what
 Chris decided in chat on 2026-10-07 (three rounds).
 
 ## Problem
@@ -164,8 +165,7 @@ only itself.
   school_id or class_id. `is_public` keeps meaning "everyone"; this table
   adds the narrower audiences. One table per content type (not one generic
   table) so foreign keys delete a share when its deck, class or school goes.
-  Courses and structured courses get their own share tables in a later
-  step.
+  `course_shares` and `subject_shares` (047) have the same shape.
 
 **As built (stage 1):** the SQL function `deck_shared_with(deck, user)` is
 the one definition of "shared with this user", checked live on every read
@@ -181,6 +181,20 @@ class or school ends access at once, even for decks already added.
   cannot change who a deck reaches.
 - Adding a shared deck counts toward a free account's 10 units; app decks
   still do not. School members (anyone with a `school_id`) are unlimited.
+
+**Courses (047):** `share_reaches()` is the single audience rule; the
+`deck_`, `course_` and `subject_shared_with()` functions all build on it.
+- A shared **deck-course** is added as a whole (`course_subscriptions`). Its
+  decks become studiable through the course
+  (`deck_in_added_shared_course`) without being added to My Decks, and the
+  course counts once toward the free 10.
+- A shared **structured course** is enrolled through the existing
+  `subject_enrollments`, like a public one; the enrolment counts toward the
+  free 10.
+- An enrolled structured course is usable, listed and counted only while it
+  is public or still shared with the learner. (Before 047, a course its
+  author un-published stayed listed and counted although it could not be
+  opened.)
 
 ### Freezing
 
@@ -239,8 +253,7 @@ without Chris.
 ## Build order (once approved)
 
 1. Account kinds + sharing + read-path changes + admin screens for
-   schools, verification and classes. No billing. **Built for decks;
-   courses and structured courses still to do.**
+   schools, verification and classes. No billing. **Built.**
 2. Independent teachers: verification, terms, classes, email invitation
    lists, student seats, Stripe.
 3. Schools: admin CSV import, admin term editor, username logins, school
