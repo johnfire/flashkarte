@@ -1,7 +1,8 @@
 # Accounts: schools, teachers, students
 
 Status: **draft — not approved.** Records what Chris decided in chat on
-2026-10-07. Sections marked **OPEN** need his answer before building.
+2026-10-07 (two rounds). Sections marked **OPEN** need his answer before
+building.
 
 ## Problem
 
@@ -50,21 +51,51 @@ students or it does not buy at all, so every school member is unlimited.
 
 Consequence: the free student exists only in an independent teacher's class.
 
-### Schools come in by CSV
+### Nobody self-declares as teacher or student
 
-The school sends a CSV listing teachers, the classes each teaches, and the
-students in each class. That one import creates the school, its teacher and
-student accounts, the classes and their memberships. Billing is computed from
-the head count.
+- **Teachers must prove they are teachers.** A school listing someone as its
+  teacher is proof. An independent teacher proves it some other way (see
+  OPEN 1).
+- **A student exists only because a school or teacher listed them.** There is
+  no "sign up as a student" button.
+
+This closes the price gap (€3 teacher vs €5 subscriber, €1 student): nobody
+can buy the cheaper plans by calling themselves a teacher or student. The
+cheaper rates are worth it because they bring volume — a school of 10
+teachers × 10 students is €30 + €100 per month; Chris's own estimate is
+higher. *(Arithmetic note: 100 students × €1 = €100, not €300; €300 would
+need 30 students per teacher. Worth checking which figure the business case
+assumes.)*
+
+### How students get on the list
+
+- **Schools:** CSV listing teachers, the classes each teaches, and the
+  students in each class. One import creates the school, its teacher and
+  student accounts, the classes and their memberships. Billing is computed
+  from the head count. School pupils log in with a **username and a one-time
+  password** the teacher hands out — no email needed.
+- **Independent teachers:** send a list of each student's email address.
+  The student signs up with exactly that address and is placed in the class.
+  An address not on a list cannot become a student.
+
+### Terms (school periods)
+
+Classes run for a **term** with an end date: a semester, nine weeks, or any
+other length. Each class belongs to a term; the term is stored, not assumed.
 
 ### Leaving
 
+- **A teacher leaving a school mid-term keeps their classes and decks until
+  the term ends.** Students lose nothing mid-term. Only at the term's end does
+  the rest of this list apply.
 - A teacher leaving a school is offered their own teacher subscription.
   - **Takes it:** all their decks stay; they control who sees them. Shares to
     the old school end, because they are no longer in it.
   - **Declines:** their decks are **frozen** — hidden from everyone, nothing
     deleted — for 6 months. Returning within 6 months unfreezes them. After 6
     months they are deleted.
+  - A teacher can demand deletion at any time; that overrides the freeze.
+- Six months is the retention period, written into the privacy policy.
 
 ## Proposed design
 
@@ -99,8 +130,17 @@ only itself.
   invoice cadence.
 - `users.school_id` — nullable; set for school logins, school teachers and
   school students.
+- `terms` — id, owner (school or independent teacher), name (e.g.
+  "Winter semester 2026/27", "Q1"), starts_on, ends_on. Any length.
 - `classes` — id, teacher_id, school_id (nullable for independent
-  teachers), name (e.g. "Biologie 7B").
+  teachers), term_id, name (e.g. "Biologie 7B").
+- `class_invitations` — class_id, email. An independent teacher's list;
+  matched at signup, then turned into a `class_members` row.
+- `users.username` — nullable; required for school pupils without email.
+  `users.email` becomes nullable for them only. Usernames are unique within a
+  school, and pupils log in with school code + username.
+- `teacher_verifications` — user_id, method (`school_roster | manual`),
+  verified_by, verified_at.
 - `class_members` — class_id, student_id. A student may be in many classes,
   across one school and independent teachers.
 - `student_seats` — student_id, paid_by (`teacher | student`),
@@ -116,6 +156,8 @@ viewer's school/classes)`. The same pattern the official-decks change used.
 
 ### Freezing
 
+A daily job checks term end dates: a teacher who left mid-term has their
+school shares ended, and the subscription offer sent, when the term ends.
 `users.frozen_at` plus a daily purge job (same shape as the audit-retention
 job) that deletes accounts frozen for more than 6 months. Frozen content is
 excluded from every read path. If the purge job fails, nothing else is
@@ -139,43 +181,40 @@ the safer choice here.
   buyer's own account; buying seats for other people through Play is not
   something it does well.
 
+## Resolved in round 2
+
+- Price gap → teachers are verified; students exist only via a list.
+- Pupils without email → username + one-time password.
+- Independent teachers' classes → teacher sends a list of student emails.
+- School losing a leaving teacher's decks → not mid-term; access runs to
+  term end.
+- Data protection → 6-month retention; deletion on demand honoured; a data
+  processing agreement (AVV) with every school; a data-protection review
+  before the first school signs. Bavarian school-software rules: later, not
+  now.
+
 ## OPEN — needs Chris
 
-1. **Price gap.** A subscriber pays €5. A teacher pays €3 and gets at least
-   as much, plus classroom features. A student in an independent teacher's
-   class pays €1 for unlimited. Anyone can call themselves a teacher and make
-   a class of one. Is that acceptable, or do teachers need verifying, or does
-   the €3 teacher plan *not* include unlimited personal use?
-2. **Students without email.** Many school students — especially minors —
-   have no email address. Should CSV-imported students log in with a username
-   and a one-time password the teacher hands out?
-3. **Independent teachers' classes.** No CSV for them. Proposal: the teacher
-   creates a class in the app and gets a join code to give students. Agree?
-4. **What the school keeps.** When a teacher leaves, the school's students
-   lose that teacher's decks mid-term. Is that intended, or should the school
-   keep a copy? (Who legally owns decks made by a teacher during employment
-   is a question for a lawyer, not for me.)
-5. **Leaving a school as a student.** Does the student drop to free (10
-   units) or individual, and what happens to their own decks?
-6. **Data protection.** Not legal advice, and outside my reliable domain;
-   flagging what I'm fairly confident of:
-   - GDPR does not prescribe 6 months. It requires a stated, justified
-     retention period (storage limitation, Art. 5(1)(e)) — 6 months is a
-     reasonable choice if it is written into the privacy policy.
-   - A teacher can demand deletion before the 6 months are up (Art. 17); the
-     freeze cannot override that.
-   - For school pupils, the school is very likely the controller and
-     flashkarte the processor, which means a data processing agreement
-     (AVV, Art. 28) with each school. German states may have their own rules
-     on software used in schools — I don't know Bavaria's specifics.
-   Recommend a data-protection review before the first school signs.
+1. **How does an independent teacher prove they are a teacher?** Upload a
+   document (teacher ID, employment letter) and an admin approves by hand?
+   That means storing a sensitive document — or the admin views it and it is
+   deleted after the decision.
+2. **A student leaving a school or class.** Do they become a free individual
+   (10 units) with their own decks kept? Or is their account frozen like a
+   teacher's? School pupils with only a username have no email to log in with
+   afterwards.
+3. **Who sets term dates?** Proposal: schools give them in the CSV (or a
+   settings page); independent teachers set an end date when creating a
+   class.
+4. **The €300 figure** — see the arithmetic note above.
 
 ## Build order (once approved)
 
 1. Account kinds + `content_shares` + read-path changes. No billing.
-2. Independent teachers: classes, join codes, student seats, Stripe.
-3. Schools: CSV import, school decks, invoicing.
-4. Leaving and freezing: offer flow, freeze, purge job.
+2. Independent teachers: verification, terms, classes, email invitation
+   lists, student seats, Stripe.
+3. Schools: CSV import, username logins, school decks, invoicing.
+4. Leaving and freezing: term-end handover, offer flow, freeze, purge job.
 
 Each phase ships on its own and leaves the app working if the next one
 never comes.
