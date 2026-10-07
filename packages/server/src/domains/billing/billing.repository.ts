@@ -80,13 +80,35 @@ const SHARED_DECK_UNITS = `
     AND deck_shared_with(d.id, $1::uuid)`;
 
 /**
+ * Deck-courses someone else shared with the user that they added. A course
+ * counts once; its decks are reached through it and do not count again.
+ * Columns: unit_type, unit_id, title. `$1` is the user id.
+ */
+const SHARED_COURSE_UNITS = `
+  SELECT 'course'::text AS unit_type, c.id AS unit_id, c.title
+  FROM course_subscriptions cs
+  JOIN courses c ON c.id = cs.course_id
+  WHERE cs.user_id = $1
+    AND c.user_id <> $1
+    AND course_shared_with(c.id, $1::uuid)`;
+
+/**
+ * An enrolled structured course counts only while the learner can still use
+ * it: it is public, or still shared with them. `s` is the subject, `$1` the
+ * user id.
+ */
+const STILL_LEARNABLE = `(s.is_public OR subject_shared_with(s.id, $1::uuid))`;
+
+/**
  * Unit definition for the free plan:
  * - a standalone owned deck counts once;
  * - an owned legacy course counts once, and its member decks do not count
  *   again;
  * - an owned or enrolled structured subject counts once unless it belongs to
  *   a course collection, in which case the collection counts once;
- * - a deck shared with the user (SHARED_DECK_UNITS) counts once.
+ * - a deck shared with the user (SHARED_DECK_UNITS) counts once;
+ * - a shared deck-course the user added (SHARED_COURSE_UNITS) counts once;
+ * - an enrolled structured course counts while still public or shared.
  */
 async function countActiveUnitsFrom(
   db: Queryable,
@@ -111,17 +133,19 @@ async function countActiveUnitsFrom(
        FROM courses c
        WHERE c.user_id = $1
        UNION ALL
+       SELECT unit_type, unit_id FROM (${SHARED_COURSE_UNITS}) shared_courses
+       UNION ALL
        SELECT DISTINCT
          CASE WHEN s.course_collection_id IS NULL
            THEN 'subject'::text ELSE 'course_collection'::text END,
          COALESCE(s.course_collection_id, s.id)
        FROM subjects s
        WHERE s.user_id = $1
-          OR EXISTS (
+          OR (EXISTS (
             SELECT 1
             FROM subject_enrollments e
             WHERE e.subject_id = s.id AND e.user_id = $1
-          )
+          ) AND ${STILL_LEARNABLE})
      ) units
      LEFT JOIN billing_unit_states state
        ON state.user_id = $1
@@ -242,6 +266,8 @@ export async function listUnits(userId: string): Promise<BillingUnitRow[]> {
        FROM courses c
        WHERE c.user_id = $1
        UNION ALL
+       ${SHARED_COURSE_UNITS}
+       UNION ALL
        SELECT
          CASE WHEN s.course_collection_id IS NULL
            THEN 'subject'::text ELSE 'course_collection'::text END,
@@ -250,10 +276,10 @@ export async function listUnits(userId: string): Promise<BillingUnitRow[]> {
        FROM subjects s
        LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
        WHERE s.user_id = $1
-          OR EXISTS (
+          OR (EXISTS (
             SELECT 1 FROM subject_enrollments e
             WHERE e.subject_id = s.id AND e.user_id = $1
-          )
+          ) AND ${STILL_LEARNABLE})
        GROUP BY
          CASE WHEN s.course_collection_id IS NULL
            THEN 'subject'::text ELSE 'course_collection'::text END,
@@ -297,6 +323,8 @@ export async function setUnitActive(
          SELECT 'course'::text, c.id, c.title
          FROM courses c WHERE c.user_id = $1
          UNION ALL
+         ${SHARED_COURSE_UNITS}
+         UNION ALL
          SELECT
            CASE WHEN s.course_collection_id IS NULL
              THEN 'subject'::text ELSE 'course_collection'::text END,
@@ -304,10 +332,10 @@ export async function setUnitActive(
            COALESCE(cc.title::text, s.title)
          FROM subjects s
          LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
-         WHERE (s.user_id = $1 OR EXISTS (
+         WHERE (s.user_id = $1 OR (EXISTS (
            SELECT 1 FROM subject_enrollments e
            WHERE e.subject_id = s.id AND e.user_id = $1
-         ))
+         ) AND ${STILL_LEARNABLE}))
            AND (CASE WHEN s.course_collection_id IS NULL
              THEN 'subject'::text ELSE 'course_collection'::text END) = $2
            AND COALESCE(s.course_collection_id, s.id) = $3

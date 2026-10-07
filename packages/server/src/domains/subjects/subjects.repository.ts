@@ -1,4 +1,4 @@
-import { getPool, query } from "../../db/client";
+import { getPool, query, queryOne } from "../../db/client";
 import type { Queryable } from "../../db/queryable";
 
 export interface SubjectRow {
@@ -141,7 +141,8 @@ export function listSubjects(userId: string) {
      FROM subjects s
      LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
      WHERE s.user_id = $1
-        OR EXISTS (SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $1)
+        OR (EXISTS (SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $1)
+            AND ${LEARNABLE_BY("s", 1)})
      ORDER BY s.created_at DESC`,
     [userId],
   );
@@ -165,7 +166,19 @@ export function listCatalogSubjects(
   );
 }
 
-/** A learner may use their own course or a public course they explicitly added. */
+/**
+ * Someone else's course stays usable to an enrolled learner while it is
+ * public or still shared with them (school, teacher, class — checked live, so
+ * leaving the class ends access). `$N` is the learner's user_id position.
+ */
+function LEARNABLE_BY(alias: string, userIdParam: number): string {
+  return `(${alias}.is_public OR subject_shared_with(${alias}.id, $${userIdParam}::uuid))`;
+}
+
+/**
+ * A learner may use their own course, or a public or shared course they
+ * explicitly added.
+ */
 export async function findLearningSubject(
   userId: string,
   id: string,
@@ -173,7 +186,7 @@ export async function findLearningSubject(
 ): Promise<SubjectRow | null> {
   const result = await db.query<SubjectRow>(
     `SELECT ${SUBJECT_COLS} FROM subjects s
-     WHERE s.id = $1 AND (s.user_id = $2 OR (s.is_public AND EXISTS (
+     WHERE s.id = $1 AND (s.user_id = $2 OR (${LEARNABLE_BY("s", 2)} AND EXISTS (
        SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $2
      )))`,
     [id, userId],
@@ -192,6 +205,56 @@ export async function enrollInPublicSubject(
     [userId, subjectId],
   );
   return (result.rowCount ?? 0) > 0;
+}
+
+export interface SharedSubjectRow {
+  id: string;
+  reference_number: number;
+  title: string;
+  description: string | null;
+  locale: string | null;
+  author: string | null;
+  enrolled: boolean;
+  scopes: ("school" | "class" | "teacher_students")[];
+}
+
+/** Structured courses others shared with the caller through a school, class or teacher. */
+export function listSharedWithUser(userId: string) {
+  return query<SharedSubjectRow>(
+    `SELECT s.id, s.reference_number, s.title, s.description, s.locale,
+       -- Never the email: a pupil sees a display name or nothing.
+       NULLIF(trim(u.display_name), '') AS author,
+       EXISTS (
+         SELECT 1 FROM subject_enrollments e
+         WHERE e.subject_id = s.id AND e.user_id = $1
+       ) AS enrolled,
+       ARRAY(SELECT DISTINCT sh.scope FROM subject_shares sh WHERE sh.subject_id = s.id) AS scopes
+     FROM subjects s JOIN users u ON u.id = s.user_id
+     WHERE s.user_id <> $1 AND NOT s.is_official
+       AND subject_shared_with(s.id, $1::uuid)
+     ORDER BY s.title COLLATE de_phonebook ASC`,
+    [userId],
+  );
+}
+
+export function isSharedWith(userId: string, subjectId: string) {
+  return queryOne<{ shared: boolean }>(
+    `SELECT subject_shared_with($1::uuid, $2::uuid) AS shared
+     FROM subjects WHERE id = $1 AND user_id <> $2`,
+    [subjectId, userId],
+  );
+}
+
+export async function enroll(
+  userId: string,
+  subjectId: string,
+  db: Queryable,
+): Promise<void> {
+  await db.query(
+    `INSERT INTO subject_enrollments (user_id, subject_id) VALUES ($1, $2)
+     ON CONFLICT DO NOTHING`,
+    [userId, subjectId],
+  );
 }
 
 /** Owner-only: every read and write of a subject goes through this. */

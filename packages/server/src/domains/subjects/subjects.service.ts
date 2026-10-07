@@ -14,6 +14,8 @@ import {
   contentLanguageFilterSchema,
 } from "../library/content-language";
 import * as repo from "./subjects.repository";
+import { withUnitCreation } from "../billing/billing.service";
+import * as sharing from "../sharing/sharing.service";
 import * as conceptsRepo from "./concepts.repository";
 import {
   loadConceptEvidence,
@@ -45,11 +47,41 @@ export async function requireLearningSubject(userId: string, id: string) {
   return subject;
 }
 
+/**
+ * Enrol in a public course, or in one a school, teacher or classmate shared
+ * with the caller. A shared course counts toward a free account's 10.
+ */
 export async function enrollInPublicSubject(userId: string, id: string) {
-  if (!(await repo.enrollInPublicSubject(userId, id))) {
-    const existing = await repo.findLearningSubject(userId, id);
-    if (!existing) throw new NotFoundError("Course not found");
-  }
+  if (await repo.enrollInPublicSubject(userId, id)) return;
+  if (await repo.findLearningSubject(userId, id)) return;
+  const shared = await repo.isSharedWith(userId, id);
+  if (!shared?.shared) throw new NotFoundError("Course not found");
+  await withUnitCreation(userId, (db) => repo.enroll(userId, id, db));
+}
+
+/** The course's current audiences plus the ones this owner may choose from. */
+export function getShares(userId: string, id: string) {
+  return sharing.getShares("subject", userId, id);
+}
+
+/** Replace the course's audiences (see sharing.service setShares). */
+export function setShares(userId: string, id: string, input: unknown) {
+  return sharing.setShares("subject", userId, id, input);
+}
+
+/** Structured courses a school, teacher or classmate shared with the caller. */
+export async function listSharedWithMe(userId: string) {
+  const rows = await repo.listSharedWithUser(userId);
+  return rows.map((row) => ({
+    id: row.id,
+    referenceNumber: row.reference_number,
+    title: row.title,
+    description: row.description,
+    locale: row.locale,
+    author: row.author,
+    enrolled: row.enrolled,
+    scopes: row.scopes,
+  }));
 }
 
 export async function createSubject(

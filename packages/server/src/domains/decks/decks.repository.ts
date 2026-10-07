@@ -37,12 +37,20 @@ const DECK_COLS = `id, reference_number, title, source_filename, created_at, upd
 // A caller may read a deck/card they don't own when they've added it to their
 // list (deck_subscriptions) and it is either an app (official) deck or one
 // shared with them by their school, teacher or classmates (deck_shared_with,
-// migration 046 — the single definition of that rule). Shared by every
-// read-path query below; `$N` is the caller's user_id parameter position.
+// migrations 046/047 — the single definition of that rule), or when it sits
+// in a shared deck-course they added (deck_in_added_shared_course). Shared by
+// every read-path query below; `$N` is the caller's user_id parameter
+// position. `viaCourses: false` keeps course-only decks out of "My Decks":
+// the learner reaches those through the course.
 export function subscribedOrOwned(
   deckAlias: string,
   userIdParam: number,
+  viaCourses = true,
 ): string {
+  const course = viaCourses
+    ? `
+     OR deck_in_added_shared_course(${deckAlias}.id, $${userIdParam}::uuid)`
+    : "";
   return `(${deckAlias}.user_id = $${userIdParam}
      OR (EXISTS (
        SELECT 1 FROM deck_subscriptions sub
@@ -50,7 +58,7 @@ export function subscribedOrOwned(
      ) AND (
        ${deckAlias}.is_official
        OR deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid)
-     )))`;
+     ))${course})`;
 }
 
 /**
@@ -330,7 +338,7 @@ export function listDecksWithCounts(userId: string) {
        LEFT JOIN card_reads r ON r.card_id = c.id AND r.user_id = $1
        WHERE c.deck_id = d.id
      ) s ON true
-     WHERE ${subscribedOrOwned("d", 1)}
+     WHERE ${subscribedOrOwned("d", 1, false)}
      ORDER BY d.is_official ASC, d.updated_at DESC`,
     [userId],
   );

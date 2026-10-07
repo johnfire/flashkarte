@@ -13,6 +13,7 @@ import {
   contentLanguageFilterSchema,
 } from "../library/content-language";
 import { withUnitCreation } from "../billing/billing.service";
+import * as sharing from "../sharing/sharing.service";
 
 const titleSchema = z
   .string({ error: "Title is required" })
@@ -268,4 +269,45 @@ export async function cloneCourse(userId: string, id: string) {
   });
 
   return { course: result, decks_cloned: members.length, source_id: id };
+}
+
+/** The course's current audiences plus the ones this owner may choose from. */
+export function getShares(userId: string, id: string) {
+  return sharing.getShares("course", userId, id);
+}
+
+/** Replace the course's audiences (see sharing.service setShares). */
+export function setShares(userId: string, id: string, input: unknown) {
+  return sharing.setShares("course", userId, id, input);
+}
+
+/** Courses a school, teacher or classmate shared with the caller. */
+export async function listSharedWithMe(userId: string) {
+  const rows = await repo.listSharedWithUser(userId);
+  return rows.map((row) => ({
+    id: row.id,
+    referenceNumber: row.reference_number,
+    title: row.title,
+    description: row.description,
+    contentLanguage: row.content_language,
+    decksTotal: Number(row.decks_total),
+    author: row.author,
+    subscribed: row.subscribed,
+    scopes: row.scopes,
+  }));
+}
+
+/**
+ * Add a course shared with the caller to their courses. Its decks become
+ * studiable through it; the course counts once toward a free account's 10.
+ */
+export async function subscribeShared(userId: string, id: string) {
+  const shared = await repo.isSharedWith(userId, id);
+  if (!shared?.shared) throw new NotFoundError("Course not found");
+  if (await repo.isSubscribed(userId, id)) return;
+  await withUnitCreation(userId, (db) => repo.subscribe(userId, id, db));
+}
+
+export async function unsubscribeShared(userId: string, id: string) {
+  await repo.unsubscribe(userId, id);
 }

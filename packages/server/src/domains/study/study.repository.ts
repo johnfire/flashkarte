@@ -47,7 +47,8 @@ export interface CardForStudy {
 
 // A caller may study/rate a card they don't own when they've added its deck
 // to their list and it is an app (official) deck or shared with them — the
-// same rule as subscribedOrOwned in decks.repository.ts. `$N` is the caller's
+// same rule as subscribedOrOwned in decks.repository.ts, including decks in an
+// added shared deck-course. `$N` is the caller's
 // user_id parameter position in that query; `cardAlias`/`deckAlias` must
 // already be joined (cards.deck_id = decks.id) in the surrounding query.
 function officialOrOwned(
@@ -62,7 +63,8 @@ function officialOrOwned(
      ) AND (
        ${deckAlias}.is_official
        OR deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid)
-     )))`;
+     ))
+     OR deck_in_added_shared_course(${deckAlias}.id, $${userIdParam}::uuid))`;
 }
 
 /**

@@ -1,12 +1,5 @@
-import { query, queryOne, withTransaction } from "../../db/client";
-
-export type ShareScope = "school" | "class" | "teacher_students";
-
-export interface DeckShareRow {
-  scope: ShareScope;
-  school_id: string | null;
-  class_id: string | null;
-}
+import { query, queryOne } from "../../db/client";
+import type { ShareScope } from "../sharing/sharing.repository";
 
 export interface SharedDeckRow {
   id: string;
@@ -17,36 +10,6 @@ export interface SharedDeckRow {
   author: string | null;
   subscribed: boolean;
   scopes: ShareScope[];
-}
-
-/** The owner's deck, if `userId` owns it and it is not an app deck. */
-export function findOwnedDeck(userId: string, deckId: string) {
-  return queryOne<{ id: string; is_official: boolean }>(
-    "SELECT id, is_official FROM decks WHERE id = $1 AND user_id = $2",
-    [deckId, userId],
-  );
-}
-
-export function listShares(deckId: string) {
-  return query<DeckShareRow>(
-    `SELECT scope, school_id, class_id FROM deck_shares
-     WHERE deck_id = $1 ORDER BY scope, created_at`,
-    [deckId],
-  );
-}
-
-export function replaceShares(deckId: string, shares: DeckShareRow[]) {
-  return withTransaction(async (db) => {
-    await db.query("SELECT id FROM decks WHERE id = $1 FOR UPDATE", [deckId]);
-    await db.query("DELETE FROM deck_shares WHERE deck_id = $1", [deckId]);
-    for (const share of shares) {
-      await db.query(
-        `INSERT INTO deck_shares (deck_id, scope, school_id, class_id)
-         VALUES ($1, $2, $3, $4)`,
-        [deckId, share.scope, share.school_id, share.class_id],
-      );
-    }
-  });
 }
 
 /**
