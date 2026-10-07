@@ -1,0 +1,224 @@
+{
+  "module": "Assign provider and supply-chain duties",
+  "lesson": {
+    "slug": "h20",
+    "title": "Put a proportionate quality system in place",
+    "summary": "Build a written quality system with proportionate implementation and preserved rigour.",
+    "covers": [
+      "quality-management-system",
+      "proportionate-quality-implementation",
+      "sector-governance-integration"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h05",
+        "reason": "Risk management is one of its processes."
+      },
+      {
+        "lesson": "h19",
+        "reason": "The provider must implement the system"
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **quality-management system** uses systematic written policies, procedures and instructions to ensure compliance. It includes a compliance strategy and change management, design/control/verification, development/quality assurance, and test/validation procedures with frequencies.",
+        "Name accountable people and how decisions produce records. A folder of policy titles without operating procedures does not establish implementation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 17(1)(a)–(m), (2)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "It also covers technical specifications and standards or alternative compliance means, data operations, risk management, post-market monitoring, serious-incident reporting and communications with authorities, assessment bodies, operators and customers.",
+        "Post-market monitoring gathers evidence after supply; serious-incident reporting has a specific statutory route. Detailed Articles 72–73 procedures are later-course work, but a quality system must include them rather than waiting for an incident."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 17(1)(a)–(m), (2)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Include relevant documentation/record procedures, resources and security of supply, and management/staff accountability. **Proportionate implementation** fits the organisation’s size, particularly SMEs, start-ups and SMCs.",
+        "SMEs and SMCs are defined enterprise size categories; verify eligibility under the applicable definitions. Proportionate processes still preserve the required rigour and level of protection. Small size is not a waiver of risk management or accountability."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 17(1)(a)–(m), (2)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Sector integration** allows the required aspects within an equivalent sector-law quality function. Specified financial institutions’ Union financial-law governance can fulfil much of the quality-system obligation.",
+        "The financial equivalence excludes Article 17(1)(g), (h), (i): risk management, post-market monitoring and serious-incident reporting. Preserve these aspects. Also take the relevant harmonised standards into account; do not assume a standard’s current publication status."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 17(1)(a)–(m), (2)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Case: a small Northbridge team proposes informal chat approval with no owner for incident reporting or record keeping. A simpler documented process can be proportionate, but the missing responsibilities still need to be supplied.",
+        "Evidence should show who acts, when, using what criteria, how records are retained and how the procedure is reviewed. This is a practical way to inspect the statutory system, not a mandatory template."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 17(1)(a)–(m), (2)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["quality-management-system"],
+      "teaches": ["screen-1", "screen-2", "screen-5"],
+      "prompt": "Northbridge has written policy names but no test frequency or incident-reporting owner. What is needed?",
+      "options": [
+        {
+          "blocks": "Documented procedures, frequencies and accountability",
+          "correct": true,
+          "reason": "The system must include the specified operational aspects."
+        },
+        {
+          "blocks": "Only a more attractive folder",
+          "correct": false,
+          "reason": "Presentation cannot establish operating procedures."
+        },
+        {
+          "blocks": "A rule to create incident processes only after harm",
+          "correct": false,
+          "reason": "The quality system includes them beforehand."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a list of documents establish the required operating quality system?",
+          "options": [
+            {
+              "blocks": "Only a more attractive folder",
+              "correct": false,
+              "reason": "Presentation cannot establish operating procedures."
+            },
+            {
+              "blocks": "A rule to create incident processes only after harm",
+              "correct": false,
+              "reason": "The quality system includes them beforehand."
+            },
+            {
+              "blocks": "Documented procedures, frequencies and accountability",
+              "correct": true,
+              "reason": "The system must include the specified operational aspects."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["proportionate-quality-implementation"],
+      "teaches": ["screen-3", "screen-5"],
+      "prompt": "A small supplier says it can omit risk-management rigour because of its size. What is the correct boundary?",
+      "options": [
+        {
+          "blocks": "Remove the high-risk system requirements",
+          "correct": false,
+          "reason": "Proportionality is not a waiver."
+        },
+        {
+          "blocks": "Require an identical organisation chart for every provider",
+          "correct": false,
+          "reason": "Implementation can be proportionate."
+        },
+        {
+          "blocks": "Fit implementation to size while preserving protection and rigour",
+          "correct": true,
+          "reason": "Article 17(2) retains the compliance standard."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does proportionality affect a start-up’s quality implementation?",
+          "options": [
+            {
+              "blocks": "Require an identical organisation chart for every provider",
+              "correct": false,
+              "reason": "Implementation can be proportionate."
+            },
+            {
+              "blocks": "Fit implementation to size while preserving protection and rigour",
+              "correct": true,
+              "reason": "Article 17(2) retains the compliance standard."
+            },
+            {
+              "blocks": "Remove the high-risk system requirements",
+              "correct": false,
+              "reason": "Proportionality is not a waiver."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["sector-governance-integration"],
+      "teaches": ["screen-4"],
+      "prompt": "A qualifying financial institution relies on sector governance. Which aspects remain outside the Article 17(4) equivalence?",
+      "options": [
+        {
+          "blocks": "None; financial governance replaces everything",
+          "correct": false,
+          "reason": "That omits the explicit exclusions."
+        },
+        {
+          "blocks": "Risk management, post-market monitoring and serious-incident reporting",
+          "correct": true,
+          "reason": "Points (g), (h), (i) are excluded."
+        },
+        {
+          "blocks": "Only marketing, sales and pricing",
+          "correct": false,
+          "reason": "Those are not the stated exceptions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which three aspects cannot be dismissed under the financial quality-system equivalence?",
+          "options": [
+            {
+              "blocks": "Risk management, post-market monitoring and serious-incident reporting",
+              "correct": true,
+              "reason": "Points (g), (h), (i) are excluded."
+            },
+            {
+              "blocks": "Only marketing, sales and pricing",
+              "correct": false,
+              "reason": "Those are not the stated exceptions."
+            },
+            {
+              "blocks": "None; financial governance replaces everything",
+              "correct": false,
+              "reason": "That omits the explicit exclusions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

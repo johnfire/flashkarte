@@ -1,0 +1,232 @@
+{
+  "module": "Make and maintain the deployment decision",
+  "lesson": {
+    "slug": "h29",
+    "title": "Special route: remote biometric identification",
+    "summary": "Optional specialist route: authorisation, human verification and biometric records.",
+    "covers": [
+      "post-remote-biometric-route",
+      "biometric-dual-verification",
+      "biometric-log-fields"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h02",
+        "reason": "Identify the deploying actor."
+      },
+      {
+        "lesson": "h03",
+        "reason": "Recognise the biometric high-risk route"
+      },
+      {
+        "lesson": "h14",
+        "reason": "Recognise system logging"
+      },
+      {
+        "lesson": "h16",
+        "reason": "This is a special human-oversight measure."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Remote biometric identification** identifies people without their active involvement, typically at a distance, by comparing biometric data with a reference database. Biometric data concerns physical/physiological/behavioural characteristics used for identification. Post-remote identification is delayed identification rather than the real-time form.",
+        "This optional lesson does not authorise a real biometric use. First check scope, Article 5, data law and the exact Annex III point; confirm national rules. The supplied exercise assumes a legally permitted targeted post-remote investigation route subject to the stated controls."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(41), 12(3), 14(5), 26(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "For the specified targeted search of a suspect or convicted person, Article 26(10) requests judicial or binding, judicially reviewable administrative authorisation in advance or without undue delay and no later than 48 hours. The narrow initial-identification exception uses objective/verifiable facts directly linked to the offence.",
+        "Limit use to what is strictly necessary for the specific criminal investigation. Rejected authorisation requires immediately stopping the linked use and deleting linked personal data. Untargeted law-enforcement use is barred; no adverse legal decision may rest solely on the output. Data-law and stricter national rules remain."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(41), 12(3), 14(5), 26(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Biometric dual verification** under 14(5) requires identification from Annex III 1(a) systems to be separately verified and confirmed by at least two competent, trained and authorised natural persons before the deployer acts on it.",
+        "The qualified exception concerns law enforcement, migration, border control or asylum where Union/national law considers dual verification disproportionate. Sector membership alone does not establish the exception."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(41), 12(3), 14(5), 26(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Biometric log fields** under 12(3) include each use’s start/end date and time, reference database, matched input data, and the identity of verifying natural persons. This system capability differs from custody periods and operational police records.",
+        "Article 26(10) also requires each use in the relevant police file regardless of purpose/deployer, authority availability on request, and annual reports to market-surveillance and data-protection authorities; sensitive law-enforcement operational-data qualifications apply. Reports may aggregate deployments."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(41), 12(3), 14(5), 26(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Case: a permitted targeted search has authorisation refused; the team proposes continuing because one person approved a match. Stop the linked use and delete linked data. Neither a match nor internal approval overrides refusal.",
+        "Record the national-law verification rather than inventing a universal approving office. This extension has no core-course lesson depending on it."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(41), 12(3), 14(5), 26(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["post-remote-biometric-route"],
+      "teaches": ["screen-2", "screen-5"],
+      "prompt": "Authorisation for the specified linked post-remote use is rejected. What follows?",
+      "options": [
+        {
+          "blocks": "Immediately stop linked use and delete linked personal data",
+          "correct": true,
+          "reason": "The refusal clause expressly requires these actions."
+        },
+        {
+          "blocks": "Continue until the annual report is due",
+          "correct": false,
+          "reason": "Reporting does not override refusal."
+        },
+        {
+          "blocks": "Continue if one staff member agrees",
+          "correct": false,
+          "reason": "Internal agreement is not the requested authorisation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the team continue the linked use because a match was found?",
+          "options": [
+            {
+              "blocks": "Continue until the annual report is due",
+              "correct": false,
+              "reason": "Reporting does not override refusal."
+            },
+            {
+              "blocks": "Continue if one staff member agrees",
+              "correct": false,
+              "reason": "Internal agreement is not the requested authorisation."
+            },
+            {
+              "blocks": "Immediately stop linked use and delete linked personal data",
+              "correct": true,
+              "reason": "The refusal clause expressly requires these actions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["biometric-dual-verification"],
+      "teaches": ["screen-3"],
+      "prompt": "A law-enforcement team claims sector membership alone removes dual verification. Is that enough?",
+      "options": [
+        {
+          "blocks": "Only that it is a law-enforcement team",
+          "correct": false,
+          "reason": "Sector membership alone is insufficient."
+        },
+        {
+          "blocks": "Only that its score is high",
+          "correct": false,
+          "reason": "Confidence does not establish the exception."
+        },
+        {
+          "blocks": "Union or national law considers the requirement disproportionate",
+          "correct": true,
+          "reason": "The exception is legally qualified."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What must be established for the stated dual-verification exception?",
+          "options": [
+            {
+              "blocks": "Only that its score is high",
+              "correct": false,
+              "reason": "Confidence does not establish the exception."
+            },
+            {
+              "blocks": "Union or national law considers the requirement disproportionate",
+              "correct": true,
+              "reason": "The exception is legally qualified."
+            },
+            {
+              "blocks": "Only that it is a law-enforcement team",
+              "correct": false,
+              "reason": "Sector membership alone is insufficient."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["biometric-log-fields"],
+      "teaches": ["screen-4"],
+      "prompt": "The system records match confidence but not use times, reference database, matched input or verifiers. What is missing?",
+      "options": [
+        {
+          "blocks": "Nothing because a police file exists",
+          "correct": false,
+          "reason": "Operational files do not replace system logging capability."
+        },
+        {
+          "blocks": "The specified minimum use/database/input/verifier fields",
+          "correct": true,
+          "reason": "Article 12(3) lists these fields."
+        },
+        {
+          "blocks": "Only the supplier’s annual revenue",
+          "correct": false,
+          "reason": "That is not a listed field."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a confidence score alone fulfil the special remote-identification log capability?",
+          "options": [
+            {
+              "blocks": "The specified minimum use/database/input/verifier fields",
+              "correct": true,
+              "reason": "Article 12(3) lists these fields."
+            },
+            {
+              "blocks": "Only the supplier’s annual revenue",
+              "correct": false,
+              "reason": "That is not a listed field."
+            },
+            {
+              "blocks": "Nothing because a police file exists",
+              "correct": false,
+              "reason": "Operational files do not replace system logging capability."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

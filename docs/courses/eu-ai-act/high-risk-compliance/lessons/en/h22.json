@@ -1,0 +1,207 @@
+{
+  "module": "Assign provider and supply-chain duties",
+  "lesson": {
+    "slug": "h22",
+    "title": "Correct non-compliance and communicate risk",
+    "summary": "Respond immediately to non-conformity and communicate qualifying risks.",
+    "covers": ["provider-corrective-action", "provider-risk-information"],
+    "prerequisites": [
+      {
+        "lesson": "h05",
+        "reason": "The identified risk/non-compliance informs the action."
+      },
+      {
+        "lesson": "h19",
+        "reason": "The provider owes the duty"
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Provider corrective action** begins when a provider considers or has reason to consider its supplied high-risk system is not in conformity. Immediately take necessary action to bring it into conformity, withdraw, disable or recall it as appropriate.",
+        "These are different available responses, not a command to recall every issue. Select effective action for the actual non-conformity and circumstances."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 20(1), (2); Article 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Inform affected distributors and, where applicable, deployers, authorised representative and importers accordingly. A quiet internal ticket does not establish these required communications.",
+        "Northbridge discovering that its supplied instructions omit a critical limitation must examine necessary correction and who needs the information. The action and communication should match the issue."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 20(1), (2); Article 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Provider risk information** is additional where the system presents Article 79 risk and the provider becomes aware. Immediately investigate causes, collaborating with the reporting deployer where applicable.",
+        "Inform competent market-surveillance authorities and, where applicable, the notified body that issued the certificate, particularly about non-conformity and relevant corrective action. Market-surveillance authorities oversee compliance in the relevant jurisdiction."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 20(1), (2); Article 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Case: an employer reports harmful ranking behaviour and the provider has evidence of a qualifying risk. Waiting for the next quarterly meeting does not fit the immediate investigation/information duties.",
+        "Record the finding, necessary action and communication. Specific Article 73 incident definitions and reporting deadlines require the later operations analysis; do not invent one universal deadline for every problem."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 20(1), (2); Article 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["provider-corrective-action"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A provider has reason to consider its supplied system non-conforming. May it wait for a quarterly review?",
+      "options": [
+        {
+          "blocks": "Immediate necessary corrective action",
+          "correct": true,
+          "reason": "The paragraph requires immediate appropriate action."
+        },
+        {
+          "blocks": "No action until a court judgment",
+          "correct": false,
+          "reason": "Reason to consider non-conformity is already the trigger."
+        },
+        {
+          "blocks": "Automatic recall for every minor issue regardless of context",
+          "correct": false,
+          "reason": "The action is chosen as appropriate."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What response timing belongs to the Article 20(1) trigger?",
+          "options": [
+            {
+              "blocks": "No action until a court judgment",
+              "correct": false,
+              "reason": "Reason to consider non-conformity is already the trigger."
+            },
+            {
+              "blocks": "Automatic recall for every minor issue regardless of context",
+              "correct": false,
+              "reason": "The action is chosen as appropriate."
+            },
+            {
+              "blocks": "Immediate necessary corrective action",
+              "correct": true,
+              "reason": "The paragraph requires immediate appropriate action."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provider-risk-information"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "The provider becomes aware of a qualifying Article 79 risk reported by a deployer. What follows?",
+      "options": [
+        {
+          "blocks": "Only a private note to the sales team",
+          "correct": false,
+          "reason": "That does not fulfil investigation and external information."
+        },
+        {
+          "blocks": "No investigation because the customer reported it",
+          "correct": false,
+          "reason": "Reporting-deployer collaboration may be required."
+        },
+        {
+          "blocks": "Immediate investigation and competent-authority information",
+          "correct": true,
+          "reason": "Article 20(2) adds these duties."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which response fits the supplied qualifying-risk case?",
+          "options": [
+            {
+              "blocks": "No investigation because the customer reported it",
+              "correct": false,
+              "reason": "Reporting-deployer collaboration may be required."
+            },
+            {
+              "blocks": "Immediate investigation and competent-authority information",
+              "correct": true,
+              "reason": "Article 20(2) adds these duties."
+            },
+            {
+              "blocks": "Only a private note to the sales team",
+              "correct": false,
+              "reason": "That does not fulfil investigation and external information."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provider-corrective-action", "provider-risk-information"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "A relevant certificate was issued by a notified body and a qualifying risk is found. Which communication is supported?",
+      "options": [
+        {
+          "blocks": "Send every internal ticket to every body worldwide",
+          "correct": false,
+          "reason": "Recipients depend on the system, risk and applicability."
+        },
+        {
+          "blocks": "Inform the relevant authorities and issuing body where applicable",
+          "correct": true,
+          "reason": "Prior certification does not remove risk information duties."
+        },
+        {
+          "blocks": "Keep the issuing body uninformed because it certified",
+          "correct": false,
+          "reason": "The paragraph explicitly includes it where applicable."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a certificate remove the duty to inform its issuing assessment body where applicable?",
+          "options": [
+            {
+              "blocks": "Inform the relevant authorities and issuing body where applicable",
+              "correct": true,
+              "reason": "Prior certification does not remove risk information duties."
+            },
+            {
+              "blocks": "Keep the issuing body uninformed because it certified",
+              "correct": false,
+              "reason": "The paragraph explicitly includes it where applicable."
+            },
+            {
+              "blocks": "Send every internal ticket to every body worldwide",
+              "correct": false,
+              "reason": "Recipients depend on the system, risk and applicability."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

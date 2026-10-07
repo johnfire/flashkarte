@@ -1,0 +1,264 @@
+{
+  "module": "Assign provider and supply-chain duties",
+  "lesson": {
+    "slug": "h19",
+    "title": "Map provider duties and release gates",
+    "summary": "Map provider duties and leave unproved market-entry gates visible.",
+    "covers": [
+      "provider-duty-map",
+      "provider-identity",
+      "provider-accessibility"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h02",
+        "reason": "Duties need the provider role"
+      },
+      {
+        "lesson": "h03",
+        "reason": "They require the relevant high-risk route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **provider duty map** allocates Article 16 tasks to an accountable actor. For the applicable full high-risk regime it includes system requirements, a quality-management system, documentation and controlled logs, correction and information, and conformity evidence for authorities.",
+        "A quality-management system is the documented organisational process for ensuring compliance. The next lesson develops it. Do not apply this full map automatically to the limited Annex I Section B route."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 16(a)–(l); Articles 2(2), 43, 47–49; Directives 2016/2102 and 2019/882",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: scope of the Web Accessibility Directive",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/web-accessibility"
+        },
+        {
+          "title": "Commission: European Accessibility Act covered products and services",
+          "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Market-entry gates include the relevant Article 43 conformity-assessment procedure before supply/service, an Article 47 EU declaration of conformity, Article 48 CE marking and applicable Article 49 registration.",
+        "A conformity assessment demonstrates specified compliance; the declaration states conformity and CE marking communicates it. This lesson identifies the gates. Selecting the actual procedure, assessment body, marking method and registration category needs the later market-entry course and the applicable product facts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 16(a)–(l); Articles 2(2), 43, 47–49; Directives 2016/2102 and 2019/882",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: scope of the Web Accessibility Directive",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/web-accessibility"
+        },
+        {
+          "title": "Commission: European Accessibility Act covered products and services",
+          "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Provider identity** must be indicated on the system or, where not possible, on packaging or accompanying documentation as applicable: name, registered trade name or trademark, and contact address.",
+        "A logo with no contact address does not establish this item. Record whose identity appears and where. The identified provider must still fulfil the other applicable obligations."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 16(a)–(l); Articles 2(2), 43, 47–49; Directives 2016/2102 and 2019/882",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: scope of the Web Accessibility Directive",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/web-accessibility"
+        },
+        {
+          "title": "Commission: European Accessibility Act covered products and services",
+          "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Provider accessibility** under Article 16(l) concerns compliance in accordance with Directives 2016/2102 and 2019/882. Establish their scope and relevant national implementing rules rather than inventing one universal AI certificate.",
+        "The Web Accessibility Directive concerns websites/apps of public-sector bodies. The European Accessibility Act covers specified products and services, including certain computers, banking and e-commerce. A commercial product needs its actual category tested; not every website has identical directive obligations."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 16(a)–(l); Articles 2(2), 43, 47–49; Directives 2016/2102 and 2019/882",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: scope of the Web Accessibility Directive",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/web-accessibility"
+        },
+        {
+          "title": "Commission: European Accessibility Act covered products and services",
+          "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Case: Northbridge has a name/address record but no conformity-route evidence and no accessibility-scope analysis. Identity alone does not close its provider map.",
+        "Keep the missing gates, relevant sources and responsible owners in the dossier. Do not treat a supplier’s general “compliant” declaration as proof that each applicable gate has been discharged."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 16(a)–(l); Articles 2(2), 43, 47–49; Directives 2016/2102 and 2019/882",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: scope of the Web Accessibility Directive",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/web-accessibility"
+        },
+        {
+          "title": "Commission: European Accessibility Act covered products and services",
+          "url": "https://commission.europa.eu/strategy-and-policy/policies/justice-and-fundamental-rights/disability/european-accessibility-act-eaa_en"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["provider-duty-map"],
+      "teaches": ["screen-1", "screen-2", "screen-5"],
+      "prompt": "Northbridge has passed technical checks but no relevant conformity-route evidence. What remains?",
+      "options": [
+        {
+          "blocks": "The applicable assessment, declaration, marking and registration gates",
+          "correct": true,
+          "reason": "System evidence and market-entry steps are distinct."
+        },
+        {
+          "blocks": "No further provider task",
+          "correct": false,
+          "reason": "Article 16 includes more than technical checks."
+        },
+        {
+          "blocks": "The same full map for every Section B system automatically",
+          "correct": false,
+          "reason": "That ignores limited applicability."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does technical testing alone close the Article 16 provider map?",
+          "options": [
+            {
+              "blocks": "No further provider task",
+              "correct": false,
+              "reason": "Article 16 includes more than technical checks."
+            },
+            {
+              "blocks": "The same full map for every Section B system automatically",
+              "correct": false,
+              "reason": "That ignores limited applicability."
+            },
+            {
+              "blocks": "The applicable assessment, declaration, marking and registration gates",
+              "correct": true,
+              "reason": "System evidence and market-entry steps are distinct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provider-identity"],
+      "teaches": ["screen-3"],
+      "prompt": "Only a logo appears on the system and no contact address appears in the relevant material. What is missing?",
+      "options": [
+        {
+          "blocks": "Only its advertising slogan",
+          "correct": false,
+          "reason": "A slogan does not supply contact identity."
+        },
+        {
+          "blocks": "Every customer’s private address",
+          "correct": false,
+          "reason": "This is the provider identity requirement."
+        },
+        {
+          "blocks": "The address at which the provider can be contacted",
+          "correct": true,
+          "reason": "Article 16(b) includes it."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which identity detail must the assessor check alongside the provider name or trademark?",
+          "options": [
+            {
+              "blocks": "Every customer’s private address",
+              "correct": false,
+              "reason": "This is the provider identity requirement."
+            },
+            {
+              "blocks": "The address at which the provider can be contacted",
+              "correct": true,
+              "reason": "Article 16(b) includes it."
+            },
+            {
+              "blocks": "Only its advertising slogan",
+              "correct": false,
+              "reason": "A slogan does not supply contact identity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provider-accessibility"],
+      "teaches": ["screen-4"],
+      "prompt": "A reviewer says every AI website needs the same certificate under both accessibility directives. What should happen?",
+      "options": [
+        {
+          "blocks": "Ignore accessibility because it is commercial",
+          "correct": false,
+          "reason": "The EAA includes specified private-sector products/services."
+        },
+        {
+          "blocks": "Check the covered product/service and applicable implementation rules",
+          "correct": true,
+          "reason": "The directives have defined scopes."
+        },
+        {
+          "blocks": "Accept a universal certificate claim without scope analysis",
+          "correct": false,
+          "reason": "That substitutes an invented rule."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should Northbridge establish its Article 16(l) accessibility duties?",
+          "options": [
+            {
+              "blocks": "Check the covered product/service and applicable implementation rules",
+              "correct": true,
+              "reason": "The directives have defined scopes."
+            },
+            {
+              "blocks": "Accept a universal certificate claim without scope analysis",
+              "correct": false,
+              "reason": "That substitutes an invented rule."
+            },
+            {
+              "blocks": "Ignore accessibility because it is commercial",
+              "correct": false,
+              "reason": "The EAA includes specified private-sector products/services."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

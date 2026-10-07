@@ -1,0 +1,207 @@
+{
+  "module": "Control risk and govern data",
+  "lesson": {
+    "slug": "h07",
+    "title": "Choose controls and define testing before release",
+    "summary": "Choose feasible controls and define appropriate tests before supply.",
+    "covers": [
+      "risk-control-hierarchy",
+      "prior-test-criteria",
+      "vulnerable-person-risk"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h05",
+        "reason": "Controls address analysed risks Selection must consider remaining risk. This is a required consideration within risk management."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **risk-control hierarchy** starts with eliminating or reducing identified risks as far as technically feasible through design and development. Where appropriate, add controls for risks that cannot be eliminated, then supply information and, where appropriate, deployer training.",
+        "For Northbridge, a feasible design limit preventing an unsupported automatic rejection deserves consideration before merely adding a disclaimer. These are illustrative measures, not a prescribed architecture."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 9(4)–(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Take account of combined measures and the expected deployer’s technical knowledge, experience, education, training and use context. A control that only a specialist can operate may fail in the actual recruitment team.",
+        "A warning or training can matter, but it does not substitute automatically for feasible design risk reduction."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 9(4)–(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Prior test criteria** are purpose-appropriate metrics and probabilistic thresholds defined before testing. Tests identify suitable targeted measures and check consistent intended performance and compliance.",
+        "Test as appropriate throughout development and always before market placement or service. Real-world testing has its own Article 60 conditions; calling an unreviewed rollout a test does not remove them. The Act supplies no single recruitment accuracy percentage."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 9(4)–(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Vulnerable-person risk** requires considering whether the intended use is likely to harm people under 18 and, as appropriate, other vulnerable groups. For a stipulated youth-apprenticeship use, include the relevant risks rather than relying only on adult-office results.",
+        "Record a risk, its measure, the prior test criterion, findings and residual-risk judgment. Where another Union-law process applies, integration can preserve this evidence without duplicating the whole procedure."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 9(4)–(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["risk-control-hierarchy"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A feasible design restriction reduces unsupported automatic rejection. May a disclaimer alone replace consideration of that restriction?",
+      "options": [
+        {
+          "blocks": "Consider design reduction, then remaining controls and information",
+          "correct": true,
+          "reason": "Article 9 gives the design-first sequence."
+        },
+        {
+          "blocks": "Choose the disclaimer without evaluating the design",
+          "correct": false,
+          "reason": "Information alone does not replace technically feasible reduction."
+        },
+        {
+          "blocks": "Ignore the actual reviewer’s capabilities",
+          "correct": false,
+          "reason": "Measures must consider expected users and context."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which control approach fits a feasible design reduction of a recruitment hazard?",
+          "options": [
+            {
+              "blocks": "Choose the disclaimer without evaluating the design",
+              "correct": false,
+              "reason": "Information alone does not replace technically feasible reduction."
+            },
+            {
+              "blocks": "Ignore the actual reviewer’s capabilities",
+              "correct": false,
+              "reason": "Measures must consider expected users and context."
+            },
+            {
+              "blocks": "Consider design reduction, then remaining controls and information",
+              "correct": true,
+              "reason": "Article 9 gives the design-first sequence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["prior-test-criteria"],
+      "teaches": ["screen-3"],
+      "prompt": "Northbridge chooses its pass threshold only after seeing favourable test results. What is missing?",
+      "options": [
+        {
+          "blocks": "The universal EU recruitment score",
+          "correct": false,
+          "reason": "No universal score is established here."
+        },
+        {
+          "blocks": "A rule that testing begins only after sale",
+          "correct": false,
+          "reason": "Pre-supply testing is required."
+        },
+        {
+          "blocks": "A purpose-appropriate criterion defined before testing",
+          "correct": true,
+          "reason": "Testing must use prior defined metrics and thresholds."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a threshold selected after the results serve as the prior criterion?",
+          "options": [
+            {
+              "blocks": "A rule that testing begins only after sale",
+              "correct": false,
+              "reason": "Pre-supply testing is required."
+            },
+            {
+              "blocks": "A purpose-appropriate criterion defined before testing",
+              "correct": true,
+              "reason": "Testing must use prior defined metrics and thresholds."
+            },
+            {
+              "blocks": "The universal EU recruitment score",
+              "correct": false,
+              "reason": "No universal score is established here."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["vulnerable-person-risk"],
+      "teaches": ["screen-4"],
+      "prompt": "A ranking system is intended for youth apprenticeships but tested only for adult-office risks. What needs review?",
+      "options": [
+        {
+          "blocks": "Whether every conceivable group uses it",
+          "correct": false,
+          "reason": "The requirement is related to intended purpose."
+        },
+        {
+          "blocks": "Likely adverse impacts on under-18 users and relevant vulnerable groups",
+          "correct": true,
+          "reason": "Article 9(9) requires this consideration."
+        },
+        {
+          "blocks": "Only whether an adult accepted the disclaimer",
+          "correct": false,
+          "reason": "That does not assess the intended youth risks."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which intended-audience issue is missing from the apprenticeship review?",
+          "options": [
+            {
+              "blocks": "Likely adverse impacts on under-18 users and relevant vulnerable groups",
+              "correct": true,
+              "reason": "Article 9(9) requires this consideration."
+            },
+            {
+              "blocks": "Only whether an adult accepted the disclaimer",
+              "correct": false,
+              "reason": "That does not assess the intended youth risks."
+            },
+            {
+              "blocks": "Whether every conceivable group uses it",
+              "correct": false,
+              "reason": "The requirement is related to intended purpose."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

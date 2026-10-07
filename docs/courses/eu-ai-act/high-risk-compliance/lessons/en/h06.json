@@ -1,0 +1,211 @@
+{
+  "module": "Define the system and its compliance boundary",
+  "lesson": {
+    "slug": "h06",
+    "title": "Build the scope record: case exercise",
+    "summary": "Produce a conditional scope record rather than a broad compliance claim.",
+    "covers": ["scope-record-case"],
+    "prerequisites": [
+      {
+        "lesson": "h02",
+        "reason": "Name the responsible actor"
+      },
+      {
+        "lesson": "h03",
+        "reason": "Apply the route"
+      },
+      {
+        "lesson": "h04",
+        "reason": "Date the duties Preserve parallel checks."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Case file: Northbridge supplies an inference-based candidate-ranking service to EU employers under its own name. Its specified purpose materially influences recruitment shortlisting. These are stipulated facts, not conclusions about a real supplier.",
+        "The employer operates it under its authority. Record Northbridge as provider and employer as deployer; distinguish upstream components and any additional supply-chain actors."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3, 6, 111, 113; Annex III 4(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The supplied purpose matches Annex III 4(a). No Article 6(3) exception is established. Do not substitute “a human decides” for the complete exception analysis.",
+        "Write the exact purpose, point, factual basis and unresolved evidence. If the facts change, reopen classification rather than copying the previous conclusion."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3, 6, 111, 113; Annex III 4(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The case uses the amended Annex III Chapter III Sections 1–3 date: 2 December 2027, subject to relevant exceptions and Article 111 evidence. First-supply dates and later design changes are not supplied in this case.",
+        "Keep transition status unresolved. Do not fabricate an invoice date or claim the legacy provision definitely applies."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3, 6, 111, 113; Annex III 4(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Suggested dossier entry: “High-risk Annex III recruitment purpose on stated facts; Northbridge provider; employer deployer; Chapter III date identified; legacy facts unresolved.”",
+        "Keep Article 5, Article 50, data-law and sector/national questions open for their own tests. This scope record starts the compliance work; it does not establish that every release gate has been met."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2, 3, 6, 111, 113; Annex III 4(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["scope-record-case"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Northbridge commissions and supplies ranking; its employer customer operates it. Which scope entry fits?",
+      "options": [
+        {
+          "blocks": "Northbridge provider; employer deployer",
+          "correct": true,
+          "reason": "The conduct establishes separate roles."
+        },
+        {
+          "blocks": "Employer is always the sole provider",
+          "correct": false,
+          "reason": "Use does not erase Northbridge’s branded supply."
+        },
+        {
+          "blocks": "No role until an incident occurs",
+          "correct": false,
+          "reason": "Roles arise from the specified conduct."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which actor allocation belongs in the supplied recruitment case record?",
+          "options": [
+            {
+              "blocks": "Employer is always the sole provider",
+              "correct": false,
+              "reason": "Use does not erase Northbridge’s branded supply."
+            },
+            {
+              "blocks": "No role until an incident occurs",
+              "correct": false,
+              "reason": "Roles arise from the specified conduct."
+            },
+            {
+              "blocks": "Northbridge provider; employer deployer",
+              "correct": true,
+              "reason": "The conduct establishes separate roles."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["scope-record-case"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "The legacy first-supply date is absent. Which conclusion is supported?",
+      "options": [
+        {
+          "blocks": "Assume exemption because development began earlier",
+          "correct": false,
+          "reason": "Development start does not prove the relevant supply/service facts."
+        },
+        {
+          "blocks": "Use the original timetable despite the amendment",
+          "correct": false,
+          "reason": "The exercise uses the amended baseline."
+        },
+        {
+          "blocks": "Keep transition status unresolved with evidence requested",
+          "correct": true,
+          "reason": "Unknown facts do not establish eligibility."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the record handle an unproved Article 111 transition?",
+          "options": [
+            {
+              "blocks": "Use the original timetable despite the amendment",
+              "correct": false,
+              "reason": "The exercise uses the amended baseline."
+            },
+            {
+              "blocks": "Keep transition status unresolved with evidence requested",
+              "correct": true,
+              "reason": "Unknown facts do not establish eligibility."
+            },
+            {
+              "blocks": "Assume exemption because development began earlier",
+              "correct": false,
+              "reason": "Development start does not prove the relevant supply/service facts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["scope-record-case"],
+      "teaches": ["screen-4"],
+      "prompt": "What does the completed scope record authorise the assessor to conclude?",
+      "options": [
+        {
+          "blocks": "No need for further factual evidence",
+          "correct": false,
+          "reason": "Unresolved facts remain material."
+        },
+        {
+          "blocks": "The stated classification and remaining review gates",
+          "correct": true,
+          "reason": "Classification identifies duties; it does not discharge them."
+        },
+        {
+          "blocks": "Full compliance with every applicable law",
+          "correct": false,
+          "reason": "The evidence does not cover all gates."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does identifying the recruitment route certify readiness to launch?",
+          "options": [
+            {
+              "blocks": "The stated classification and remaining review gates",
+              "correct": true,
+              "reason": "Classification identifies duties; it does not discharge them."
+            },
+            {
+              "blocks": "Full compliance with every applicable law",
+              "correct": false,
+              "reason": "The evidence does not cover all gates."
+            },
+            {
+              "blocks": "No need for further factual evidence",
+              "correct": false,
+              "reason": "Unresolved facts remain material."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

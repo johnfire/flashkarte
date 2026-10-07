@@ -1,0 +1,203 @@
+{
+  "module": "Define the system and its compliance boundary",
+  "lesson": {
+    "slug": "h02",
+    "title": "Identify provider, deployer and other actors",
+    "summary": "Allocate roles from conduct rather than contractual labels.",
+    "covers": ["system-provider", "system-deployer", "other-operators"],
+    "prerequisites": [
+      {
+        "lesson": "h01",
+        "reason": "The role attaches to a system Intended use distinguishes the supplied system from upstream components. Deployment is use of an identified system."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **provider** develops an AI system, or has it developed, and places it on the market or puts it into service under its own name or trademark. Supply can be paid or free.",
+        "Northbridge commissions development and supplies its branded ranking service. It is a system provider even though a contractor wrote the software. An upstream model supplier needs its own role analysis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **deployer** uses an AI system under its authority, except for purely personal non-professional activity. The employer operating Northbridge in recruitment is a deployer.",
+        "One organisation can have both roles when it builds and professionally uses its own system. Buying a complete vendor system normally indicates use, but examine any subsequent changes before assuming the role stays unchanged."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "An **authorised representative** is established in the Union and accepts a written mandate to carry out specified obligations on a provider’s behalf. An **importer** is an EU-established person placing on the market a system bearing a third-country person’s name or trademark.",
+        "A **distributor** is another person in the supply chain making the system available on the Union market. A customer merely using the service is not a distributor because it has a supplier relationship."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Build an actor table with legal entity, establishment, supplied system, name on it, and actual conduct. Contracts help evidence the facts, but “partner” or “reseller” does not decide the statutory role.",
+        "Northbridge is provider; its employer customer is deployer. A stipulated EU importer introducing a third-country branded product occupies an additional role. Do not merge all actors into “the AI company”."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["system-provider"],
+      "teaches": ["screen-1"],
+      "prompt": "A contractor develops Northbridge’s branded system. Who is indicated as system provider?",
+      "options": [
+        {
+          "blocks": "Northbridge",
+          "correct": true,
+          "reason": "Having it developed and supplying under its name is covered."
+        },
+        {
+          "blocks": "Only the coding contractor",
+          "correct": false,
+          "reason": "Commissioning can establish provider status."
+        },
+        {
+          "blocks": "Only the customer employer",
+          "correct": false,
+          "reason": "Professional use alone describes a deployer."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Who has the provider role when Northbridge commissions and supplies its own branded ranking system?",
+          "options": [
+            {
+              "blocks": "Only the coding contractor",
+              "correct": false,
+              "reason": "Commissioning can establish provider status."
+            },
+            {
+              "blocks": "Only the customer employer",
+              "correct": false,
+              "reason": "Professional use alone describes a deployer."
+            },
+            {
+              "blocks": "Northbridge",
+              "correct": true,
+              "reason": "Having it developed and supplying under its name is covered."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["system-deployer"],
+      "teaches": ["screen-2"],
+      "prompt": "An employer uses the complete purchased ranking service under its authority. Which role is directly indicated?",
+      "options": [
+        {
+          "blocks": "Authorised representative",
+          "correct": false,
+          "reason": "Use does not establish a written representative mandate."
+        },
+        {
+          "blocks": "Distributor merely because it is a customer",
+          "correct": false,
+          "reason": "A supply-chain making-available role needs its own facts."
+        },
+        {
+          "blocks": "Deployer",
+          "correct": true,
+          "reason": "It professionally uses the system under its authority."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which role describes professional operation of Northbridge by an employer?",
+          "options": [
+            {
+              "blocks": "Distributor merely because it is a customer",
+              "correct": false,
+              "reason": "A supply-chain making-available role needs its own facts."
+            },
+            {
+              "blocks": "Deployer",
+              "correct": true,
+              "reason": "It professionally uses the system under its authority."
+            },
+            {
+              "blocks": "Authorised representative",
+              "correct": false,
+              "reason": "Use does not establish a written representative mandate."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["other-operators"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "An EU company places a third-country branded AI system on the Union market. Which additional role fits?",
+      "options": [
+        {
+          "blocks": "Representative without a mandate",
+          "correct": false,
+          "reason": "A representative requires the written mandate."
+        },
+        {
+          "blocks": "Importer",
+          "correct": true,
+          "reason": "The establishment and placing-on-market facts match."
+        },
+        {
+          "blocks": "Private user",
+          "correct": false,
+          "reason": "This is commercial supply conduct."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What role fits an EU actor introducing a system bearing a third-country supplier’s trademark?",
+          "options": [
+            {
+              "blocks": "Importer",
+              "correct": true,
+              "reason": "The establishment and placing-on-market facts match."
+            },
+            {
+              "blocks": "Private user",
+              "correct": false,
+              "reason": "This is commercial supply conduct."
+            },
+            {
+              "blocks": "Representative without a mandate",
+              "correct": false,
+              "reason": "A representative requires the written mandate."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

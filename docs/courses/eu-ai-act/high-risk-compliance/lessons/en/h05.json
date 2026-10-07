@@ -1,0 +1,207 @@
+{
+  "module": "Define the system and its compliance boundary",
+  "lesson": {
+    "slug": "h05",
+    "title": "Follow risk through the system's lifecycle",
+    "summary": "Treat risk management as a continuing, purpose-specific cycle.",
+    "covers": [
+      "lifecycle-risk-management",
+      "foreseeable-misuse",
+      "residual-risk"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h01",
+        "reason": "Risks must be assessed against a defined intended purpose. Misuse is assessed relative to intended use."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Lifecycle risk management** is an established, implemented, documented and maintained process, planned across the system’s whole lifecycle. It repeatedly identifies, evaluates, controls and reviews known and reasonably foreseeable health, safety and fundamental-rights risks.",
+        "Northbridge’s risk record is not closed by its first launch review. New evidence from use can require revised controls. Fundamental rights include protected interests such as non-discrimination; the actual legal issues need the relevant law."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8(1), 9(1)–(5), 9(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Reasonably foreseeable misuse** differs from intended use but is reasonably predictable. An employer applying a shortlisting score as an automatic rejection might be foreseeable even if the instructions prohibit it.",
+        "Evaluate intended use and such misuse. Article 9 concerns risks reasonably mitigated or eliminated through design/development or adequate technical information. It does not promise to eliminate every imaginable societal risk."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8(1), 9(1)–(5), 9(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Residual risk** is what remains after measures. Judge the residual risk for each hazard and for the system overall to be acceptable. “A warning exists” is not the same as that judgment.",
+        "Consider interactions between requirements and controls: a change reducing one risk may increase another. Record reasons, evidence and limits. Acceptance is purpose-specific; no invented score is a universal statutory pass threshold."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8(1), 9(1)–(5), 9(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The cycle includes risks emerging from post-market monitoring: evidence gathered after supply and use. Where Union law already requires internal risk-management procedures, Article 9 aspects may be part of or combined with them.",
+        "Case: recruiters systematically skip manual checks. Treat this as evidence for the misuse analysis and review the measures. A signed launch record does not justify ignoring the observed pattern."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8(1), 9(1)–(5), 9(10)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["lifecycle-risk-management"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "Northbridge learns after launch that reviewers skip checks. Should its risk process stop at the signed launch record?",
+      "options": [
+        {
+          "blocks": "Review and update the lifecycle risk process",
+          "correct": true,
+          "reason": "The process is continuous and uses monitoring evidence."
+        },
+        {
+          "blocks": "Ignore it after the initial sign-off",
+          "correct": false,
+          "reason": "Launch does not end lifecycle duties."
+        },
+        {
+          "blocks": "Wait until the entire product is replaced",
+          "correct": false,
+          "reason": "Regular review is not limited to replacement."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does new evidence of routine reviewer behaviour require?",
+          "options": [
+            {
+              "blocks": "Ignore it after the initial sign-off",
+              "correct": false,
+              "reason": "Launch does not end lifecycle duties."
+            },
+            {
+              "blocks": "Wait until the entire product is replaced",
+              "correct": false,
+              "reason": "Regular review is not limited to replacement."
+            },
+            {
+              "blocks": "Review and update the lifecycle risk process",
+              "correct": true,
+              "reason": "The process is continuous and uses monitoring evidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["foreseeable-misuse"],
+      "teaches": ["screen-2"],
+      "prompt": "Recruiters predictably use an advisory score for automatic rejection contrary to instructions. What should the risk analysis consider?",
+      "options": [
+        {
+          "blocks": "Only the exact instructed use",
+          "correct": false,
+          "reason": "That omits an explicit part of Article 9."
+        },
+        {
+          "blocks": "Every imaginable use equally",
+          "correct": false,
+          "reason": "Foreseeability and mitigability constrain the analysis."
+        },
+        {
+          "blocks": "Reasonably foreseeable misuse",
+          "correct": true,
+          "reason": "The evaluation covers reasonably foreseeable misuse."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is a foreseeable departure from instructed ranking use irrelevant because it is prohibited in the manual?",
+          "options": [
+            {
+              "blocks": "Every imaginable use equally",
+              "correct": false,
+              "reason": "Foreseeability and mitigability constrain the analysis."
+            },
+            {
+              "blocks": "Reasonably foreseeable misuse",
+              "correct": true,
+              "reason": "The evaluation covers reasonably foreseeable misuse."
+            },
+            {
+              "blocks": "Only the exact instructed use",
+              "correct": false,
+              "reason": "That omits an explicit part of Article 9."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["residual-risk"],
+      "teaches": ["screen-3"],
+      "prompt": "A warning reduces a hazard but harm remains possible. What must Northbridge evaluate?",
+      "options": [
+        {
+          "blocks": "Only whether one risk decreased",
+          "correct": false,
+          "reason": "Other hazards and combined effects still matter."
+        },
+        {
+          "blocks": "Each hazard’s and overall residual-risk acceptability",
+          "correct": true,
+          "reason": "A control does not automatically establish acceptable remaining risk."
+        },
+        {
+          "blocks": "Only whether the warning was published",
+          "correct": false,
+          "reason": "Presence of a warning is not the required judgment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What judgment remains after a mitigation measure is added?",
+          "options": [
+            {
+              "blocks": "Each hazard’s and overall residual-risk acceptability",
+              "correct": true,
+              "reason": "A control does not automatically establish acceptable remaining risk."
+            },
+            {
+              "blocks": "Only whether the warning was published",
+              "correct": false,
+              "reason": "Presence of a warning is not the required judgment."
+            },
+            {
+              "blocks": "Only whether one risk decreased",
+              "correct": false,
+              "reason": "Other hazards and combined effects still matter."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

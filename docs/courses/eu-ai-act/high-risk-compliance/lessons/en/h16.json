@@ -1,0 +1,207 @@
+{
+  "module": "Make technical compliance inspectable",
+  "lesson": {
+    "slug": "h16",
+    "title": "Make human oversight effective",
+    "summary": "Design oversight that a person can effectively exercise.",
+    "covers": ["effective-oversight-controls", "automation-bias"],
+    "prerequisites": [
+      {
+        "lesson": "h05",
+        "reason": "Oversight addresses the system's risks"
+      },
+      {
+        "lesson": "h15",
+        "reason": "A supervisor needs to interpret the output."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Effective human oversight** is the ability of natural persons to oversee operation during use, to prevent or minimise relevant risks from intended use or foreseeable misuse. Measures must fit risk, autonomy and context.",
+        "The provider may build measures into the system where technically feasible, identify measures for the deployer to implement, or combine both. Adding a person’s name to a form is not evidence of effective oversight."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 14(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The system must enable the assigned person, as appropriate and proportionate, to understand capabilities/limitations, monitor operation and detect/address anomalies or unexpected performance.",
+        "It must support interpretation and decisions not to use it, to disregard, override or reverse outputs, and to intervene or interrupt it into a safe state. A pause button that leaves an unsafe process continuing is not the intended safeguard."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 14(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Automation bias** is the tendency to automatically rely or over-rely on system outputs. It matters especially when AI recommendations inform human decisions.",
+        "Northbridge’s reviewer should not approve every suggestion solely because it is scored. This is a capacity and workflow problem, not evidence that the human is absent only when there is no mouse click."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 14(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Case: the named reviewer cannot see limitations, cannot challenge rankings and is penalised for stopping use. The interface’s “human approved” badge does not establish the needed oversight capabilities.",
+        "Request demonstrable interpretation, challenge, intervention and safe-stop arrangements. The deployment lesson will address who is assigned and supported; this lesson concerns what the system enables."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 14(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["effective-oversight-controls"],
+      "teaches": ["screen-1", "screen-2", "screen-4"],
+      "prompt": "A reviewer is named but cannot interpret, override or safely interrupt the system. Is the oversight design established?",
+      "options": [
+        {
+          "blocks": "No; verify proportionate operational capabilities",
+          "correct": true,
+          "reason": "Oversight must be effective during use."
+        },
+        {
+          "blocks": "Yes; a name automatically fulfils it",
+          "correct": false,
+          "reason": "Naming alone does not provide the capabilities."
+        },
+        {
+          "blocks": "Yes; clicking approve replaces all controls",
+          "correct": false,
+          "reason": "Approval can coexist with ineffective oversight."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a named human satisfy Article 14 without effective controls?",
+          "options": [
+            {
+              "blocks": "Yes; a name automatically fulfils it",
+              "correct": false,
+              "reason": "Naming alone does not provide the capabilities."
+            },
+            {
+              "blocks": "Yes; clicking approve replaces all controls",
+              "correct": false,
+              "reason": "Approval can coexist with ineffective oversight."
+            },
+            {
+              "blocks": "No; verify proportionate operational capabilities",
+              "correct": true,
+              "reason": "Oversight must be effective during use."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["automation-bias"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A reviewer approves rankings because AI scores must be correct. What is the relevant risk?",
+      "options": [
+        {
+          "blocks": "Proof that the recommendation is valid",
+          "correct": false,
+          "reason": "Confidence is not evidence of validity."
+        },
+        {
+          "blocks": "Proof that no human participates",
+          "correct": false,
+          "reason": "The human can participate while over-relying."
+        },
+        {
+          "blocks": "Automation bias",
+          "correct": true,
+          "reason": "The tendency is over-reliance on system output."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which tendency is shown by automatic trust in scored recommendations?",
+          "options": [
+            {
+              "blocks": "Proof that no human participates",
+              "correct": false,
+              "reason": "The human can participate while over-relying."
+            },
+            {
+              "blocks": "Automation bias",
+              "correct": true,
+              "reason": "The tendency is over-reliance on system output."
+            },
+            {
+              "blocks": "Proof that the recommendation is valid",
+              "correct": false,
+              "reason": "Confidence is not evidence of validity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["effective-oversight-controls"],
+      "teaches": ["screen-2"],
+      "prompt": "A stop control freezes the screen but leaves a harmful process operating. What must be examined?",
+      "options": [
+        {
+          "blocks": "Only whether the score disappears",
+          "correct": false,
+          "reason": "Hiding output need not stop the harmful operation."
+        },
+        {
+          "blocks": "A procedure bringing operation to a safe state",
+          "correct": true,
+          "reason": "Safe halt is part of the specified capability."
+        },
+        {
+          "blocks": "Only whether the button is visible",
+          "correct": false,
+          "reason": "Visibility does not establish safe intervention."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What makes interruption useful for the oversight requirement?",
+          "options": [
+            {
+              "blocks": "A procedure bringing operation to a safe state",
+              "correct": true,
+              "reason": "Safe halt is part of the specified capability."
+            },
+            {
+              "blocks": "Only whether the button is visible",
+              "correct": false,
+              "reason": "Visibility does not establish safe intervention."
+            },
+            {
+              "blocks": "Only whether the score disappears",
+              "correct": false,
+              "reason": "Hiding output need not stop the harmful operation."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

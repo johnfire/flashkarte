@@ -1,0 +1,207 @@
+{
+  "module": "Control risk and govern data",
+  "lesson": {
+    "slug": "h10",
+    "title": "Detect bias and prevent harmful feedback",
+    "summary": "Detect harmful bias and address feedback that reinforces it.",
+    "covers": ["bias-feedback-loop", "bias-mitigation"],
+    "prerequisites": [
+      {
+        "lesson": "h08",
+        "reason": "Bias can arise from origins and selection"
+      },
+      {
+        "lesson": "h09",
+        "reason": "A representational shortfall can affect groups."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **bias feedback loop** occurs when outputs influence inputs for future operation. Northbridge recommends candidates; resulting hires become its next learning records. Prior mistakes may then be reinforced.",
+        "Article 10 examines possible biases likely to affect health/safety, harm fundamental rights or cause prohibited discrimination, especially with such feedback. A prediction’s repetition does not independently validate it."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(f), (g); Article 15(4), continuing-learning clause",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Bias mitigation** means appropriate measures to detect, prevent and mitigate the biases identified through that examination. Start by examining collection, labels, representation and operation against the intended purpose.",
+        "An equal-looking aggregate statistic is not conclusive evidence that every relevant group or decision context is protected. Do not infer prohibited discrimination from one unexplained difference either; investigate evidence and applicable law."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(f), (g); Article 15(4), continuing-learning clause",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "For systems continuing to learn after supply, Article 15(4) requires reducing or eliminating as far as possible the risk of biased outputs influencing future inputs, with appropriate mitigation measures.",
+        "Illustrative controls include separately reviewing labels or restricting automatic reuse pending validation. Select controls on evidence rather than declaring one method universally mandatory."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(f), (g); Article 15(4), continuing-learning clause",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Case: Northbridge retrains from its own accepted recommendations and reports growing agreement with past hires. That agreement can measure a self-reinforcing pattern rather than better recruitment performance.",
+        "Document the identified bias, its likely rights or safety consequence, the control and the evidence after correction. Sensitive personal data is not automatically authorised merely because the project concerns fairness."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(f), (g); Article 15(4), continuing-learning clause",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["bias-feedback-loop"],
+      "teaches": ["screen-1", "screen-3", "screen-4"],
+      "prompt": "Northbridge trains on hires produced by its earlier ranking and treats growing agreement as proof of fairness. What is the concern?",
+      "options": [
+        {
+          "blocks": "Outputs may reinforce biased future inputs",
+          "correct": true,
+          "reason": "The data can carry the system’s own prior selection pattern."
+        },
+        {
+          "blocks": "Agreement always independently proves fairness",
+          "correct": false,
+          "reason": "The supposed evidence is affected by earlier outputs."
+        },
+        {
+          "blocks": "Only independent random errors can create bias",
+          "correct": false,
+          "reason": "Selection and labels can contribute too."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why may agreement with past model-influenced hires fail to prove improved performance?",
+          "options": [
+            {
+              "blocks": "Agreement always independently proves fairness",
+              "correct": false,
+              "reason": "The supposed evidence is affected by earlier outputs."
+            },
+            {
+              "blocks": "Only independent random errors can create bias",
+              "correct": false,
+              "reason": "Selection and labels can contribute too."
+            },
+            {
+              "blocks": "Outputs may reinforce biased future inputs",
+              "correct": true,
+              "reason": "The data can carry the system’s own prior selection pattern."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["bias-mitigation"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "An overall score looks equal but relevant-group evidence is missing. What should the assessor do?",
+      "options": [
+        {
+          "blocks": "Declare compliance from that statistic alone",
+          "correct": false,
+          "reason": "Relevant groups and contexts remain unresolved."
+        },
+        {
+          "blocks": "Declare unlawful discrimination from any difference alone",
+          "correct": false,
+          "reason": "Evidence and the applicable discrimination law matter."
+        },
+        {
+          "blocks": "Examine the relevant bias and appropriate targeted measures",
+          "correct": true,
+          "reason": "Aggregate appearance is not conclusive purpose-specific evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can one aggregate equality statistic close the identified-bias review?",
+          "options": [
+            {
+              "blocks": "Declare unlawful discrimination from any difference alone",
+              "correct": false,
+              "reason": "Evidence and the applicable discrimination law matter."
+            },
+            {
+              "blocks": "Examine the relevant bias and appropriate targeted measures",
+              "correct": true,
+              "reason": "Aggregate appearance is not conclusive purpose-specific evidence."
+            },
+            {
+              "blocks": "Declare compliance from that statistic alone",
+              "correct": false,
+              "reason": "Relevant groups and contexts remain unresolved."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["bias-mitigation"],
+      "teaches": ["screen-3"],
+      "prompt": "A system keeps learning after supply. How should biased-output reuse be handled?",
+      "options": [
+        {
+          "blocks": "Treat every fixed method as legally required",
+          "correct": false,
+          "reason": "Controls must fit the circumstances and risks."
+        },
+        {
+          "blocks": "Reduce the feedback risk with appropriate mitigation",
+          "correct": true,
+          "reason": "Article 15 specifically addresses continuing-learning feedback."
+        },
+        {
+          "blocks": "Reuse outputs automatically without review",
+          "correct": false,
+          "reason": "That can propagate the identified risk."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does continuing learning justify uncontrolled reuse of prior recommendations?",
+          "options": [
+            {
+              "blocks": "Reduce the feedback risk with appropriate mitigation",
+              "correct": true,
+              "reason": "Article 15 specifically addresses continuing-learning feedback."
+            },
+            {
+              "blocks": "Reuse outputs automatically without review",
+              "correct": false,
+              "reason": "That can propagate the identified risk."
+            },
+            {
+              "blocks": "Treat every fixed method as legally required",
+              "correct": false,
+              "reason": "Controls must fit the circumstances and risks."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

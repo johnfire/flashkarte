@@ -1,0 +1,203 @@
+{
+  "module": "Control risk and govern data",
+  "lesson": {
+    "slug": "h08",
+    "title": "Identify datasets and document their origins",
+    "summary": "Identify dataset purposes, origins and preparation decisions.",
+    "covers": ["dataset-roles", "dataset-provenance", "data-preparation"],
+    "prerequisites": [
+      {
+        "lesson": "h01",
+        "reason": "Dataset use depends on what the system is intended to do."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **training dataset** is used to fit a model. A **validation dataset** helps evaluate and choose or tune development choices. A **testing dataset** assesses performance against the chosen criteria.",
+        "Where model training uses data, Article 10’s quality criteria apply whenever the relevant sets are used. For high-risk systems not using model-training techniques, paragraphs 2–4 and Article 4a(1) apply only to testing sets. Do not demand a fictional training set where no training occurs."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(1), (2)(a)–(e), (6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Dataset provenance** records collection processes and origin. For personal data, include the original collection purpose. Northbridge receiving old applicant records does not by itself establish permission for every new use.",
+        "Data governance also records design choices, assumptions about what the data measures or represents, and availability, quantity and suitability of needed sets. A purchase receipt is not a complete provenance record."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(1), (2)(a)–(e), (6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Data preparation** includes annotation, labelling, cleaning, updating, enrichment and aggregation. Annotation adds descriptive information; labelling assigns the target or category used for a task.",
+        "A label “successful applicant” may reflect past hiring preferences rather than future job competence. Record the assumption before treating it as a suitable target. Document relevant preparation operations so the result can be explained."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(1), (2)(a)–(e), (6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Case: Northbridge has applicant records, unknown original purpose, undocumented cleaning and labels based only on past selection. Ask for evidence of origins, permissions, preparation and what the target represents.",
+        "Keeping dataset roles distinct helps inspect which evidence supports which development choice. A large folder called “training” does not establish appropriate governance."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(1), (2)(a)–(e), (6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["dataset-roles"],
+      "teaches": ["screen-1"],
+      "prompt": "A high-risk system uses no model-training technique. Which data sets does Article 10(6) address?",
+      "options": [
+        {
+          "blocks": "Testing data sets for the specified criteria",
+          "correct": true,
+          "reason": "The paragraph confines those criteria to testing sets."
+        },
+        {
+          "blocks": "A compulsory new training set",
+          "correct": false,
+          "reason": "No such invention is required by that paragraph."
+        },
+        {
+          "blocks": "No data-quality review at all",
+          "correct": false,
+          "reason": "Testing sets remain covered."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does Article 10(6) require inventing training data for a system that does not train models?",
+          "options": [
+            {
+              "blocks": "A compulsory new training set",
+              "correct": false,
+              "reason": "No such invention is required by that paragraph."
+            },
+            {
+              "blocks": "No data-quality review at all",
+              "correct": false,
+              "reason": "Testing sets remain covered."
+            },
+            {
+              "blocks": "Testing data sets for the specified criteria",
+              "correct": true,
+              "reason": "The paragraph confines those criteria to testing sets."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["dataset-provenance"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A purchased applicant file has no evidence of its original collection purpose. What is missing?",
+      "options": [
+        {
+          "blocks": "Only a larger file size",
+          "correct": false,
+          "reason": "Quantity does not explain origin or purpose."
+        },
+        {
+          "blocks": "Only the customer’s trading name",
+          "correct": false,
+          "reason": "That does not establish collection history."
+        },
+        {
+          "blocks": "Collection origin and original-purpose evidence",
+          "correct": true,
+          "reason": "Article 10(2)(b) includes these facts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does proof of purchase fully establish personal-data provenance?",
+          "options": [
+            {
+              "blocks": "Only the customer’s trading name",
+              "correct": false,
+              "reason": "That does not establish collection history."
+            },
+            {
+              "blocks": "Collection origin and original-purpose evidence",
+              "correct": true,
+              "reason": "Article 10(2)(b) includes these facts."
+            },
+            {
+              "blocks": "Only a larger file size",
+              "correct": false,
+              "reason": "Quantity does not explain origin or purpose."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["data-preparation"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "Northbridge labels past selected applicants as competent without checking the assumption. What should it document and examine?",
+      "options": [
+        {
+          "blocks": "No preparation information once labels exist",
+          "correct": false,
+          "reason": "Preparation and assumptions require governance."
+        },
+        {
+          "blocks": "Preparation and what the labels actually represent",
+          "correct": true,
+          "reason": "Labels can reflect decisions rather than the claimed ability."
+        },
+        {
+          "blocks": "Only the name of the folder",
+          "correct": false,
+          "reason": "A label on storage does not establish suitable targets."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is the concern when old hiring decisions define the training target?",
+          "options": [
+            {
+              "blocks": "Preparation and what the labels actually represent",
+              "correct": true,
+              "reason": "Labels can reflect decisions rather than the claimed ability."
+            },
+            {
+              "blocks": "Only the name of the folder",
+              "correct": false,
+              "reason": "A label on storage does not establish suitable targets."
+            },
+            {
+              "blocks": "No preparation information once labels exist",
+              "correct": false,
+              "reason": "Preparation and assumptions require governance."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

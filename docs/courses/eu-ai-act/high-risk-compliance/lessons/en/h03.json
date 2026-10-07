@@ -1,0 +1,211 @@
+{
+  "module": "Define the system and its compliance boundary",
+  "lesson": {
+    "slug": "h03",
+    "title": "Confirm the high-risk route and record its limits",
+    "summary": "Confirm the exact high-risk route, exceptions and applicable regime.",
+    "covers": [
+      "high-risk-route",
+      "limited-sector-applicability",
+      "classification-record"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h01",
+        "reason": "Classification tests the intended purpose. Applicability must first have an EU connection"
+      },
+      {
+        "lesson": "h02",
+        "reason": "The provider's record duty needs an actor"
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**High-risk classification** has two routes. Article 6(1) requires both an Annex I covered product or safety component and mandatory third-party product conformity assessment. This is an assessment by a legally required independent body, not any voluntarily purchased audit.",
+        "Solely non-safety assistance, optimisation or quality control does not qualify as a safety component under 6(1a). Failure endangering health and safety overrides that under 6(1b). Assessment solely for non-health/safety risks does not meet 6(1)(b), under 6(1c)."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 6(1)–(4), 8(2); Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 6(2) covers the specific uses in **Annex III**. Read the point, not only a sector heading. Our case stipulates candidate ranking under point 4(a), materially influencing shortlisting, with no established exception.",
+        "Article 6(3) requires no significant risk of harm and a qualifying narrow procedural, improvement of completed human work, pattern-review, or preparatory task. The pattern condition preserves proper human review. Annex III profiling of people is always high-risk despite that exception. Profiling means automated personal-data processing evaluating personal aspects."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 6(1)–(4), 8(2); Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Limited sector applicability** is a distinct boundary. Article 2(2) limits the Act’s application to Annex I Section B systems to the specified provisions: 6(1), 60a and 102–112; Articles 57–59 apply only as integrated into sector law.",
+        "Do not automatically copy all Articles 8–27 to Section B. Section A systems instead retain applicable requirements: permitted integration of testing and documentation avoids duplication without waiving duties. Identify the exact Annex entry first."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 6(1)–(4), 8(2); Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **classification record** links functions and intended purpose to the exact route and evidence. Unknown exception facts do not establish an exemption.",
+        "A provider relying on 6(3) documents its assessment before market placement/service, registers under 49(2), and supplies it to authorities on request. Human review alone is not the complete exception test. Record route, Annex point, exception/profiling analysis, sources and owner."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 6(1)–(4), 8(2); Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["high-risk-route"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Northbridge materially influences shortlisting under the stipulated Annex III 4(a) use. Does a human final decision alone establish exemption?",
+      "options": [
+        {
+          "blocks": "No; the complete exception conditions matter",
+          "correct": true,
+          "reason": "Human involvement alone does not satisfy 6(3)."
+        },
+        {
+          "blocks": "Yes; human approval always removes high risk",
+          "correct": false,
+          "reason": "Material influence and the statutory tests remain relevant."
+        },
+        {
+          "blocks": "Yes; recruitment is absent from Annex III",
+          "correct": false,
+          "reason": "The supplied point is a listed recruitment use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a recruiter approving the final shortlist by itself remove the supplied high-risk classification?",
+          "options": [
+            {
+              "blocks": "Yes; human approval always removes high risk",
+              "correct": false,
+              "reason": "Material influence and the statutory tests remain relevant."
+            },
+            {
+              "blocks": "Yes; recruitment is absent from Annex III",
+              "correct": false,
+              "reason": "The supplied point is a listed recruitment use."
+            },
+            {
+              "blocks": "No; the complete exception conditions matter",
+              "correct": true,
+              "reason": "Human involvement alone does not satisfy 6(3)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["limited-sector-applicability"],
+      "teaches": ["screen-3"],
+      "prompt": "A supplied product is in Annex I Section B. May an assessor automatically require every Article 8–27 duty under this Act?",
+      "options": [
+        {
+          "blocks": "Apply every high-risk provision without checking",
+          "correct": false,
+          "reason": "That ignores the express applicability boundary."
+        },
+        {
+          "blocks": "Treat all Section A products as exempt too",
+          "correct": false,
+          "reason": "Section A integration is not a general waiver."
+        },
+        {
+          "blocks": "Check Article 2(2)’s limited application",
+          "correct": true,
+          "reason": "The specified provisions and sector integration govern."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the assessor handle the stated Section B route?",
+          "options": [
+            {
+              "blocks": "Treat all Section A products as exempt too",
+              "correct": false,
+              "reason": "Section A integration is not a general waiver."
+            },
+            {
+              "blocks": "Check Article 2(2)’s limited application",
+              "correct": true,
+              "reason": "The specified provisions and sector integration govern."
+            },
+            {
+              "blocks": "Apply every high-risk provision without checking",
+              "correct": false,
+              "reason": "That ignores the express applicability boundary."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["classification-record"],
+      "teaches": ["screen-4"],
+      "prompt": "A provider substantiates Article 6(3). What remains before supplying the system?",
+      "options": [
+        {
+          "blocks": "Replace the assessment with a sales statement",
+          "correct": false,
+          "reason": "A claim does not establish the tests."
+        },
+        {
+          "blocks": "Document the assessment and register under 49(2)",
+          "correct": true,
+          "reason": "Article 6(4) preserves these steps."
+        },
+        {
+          "blocks": "Discard the assessment because it is exempt",
+          "correct": false,
+          "reason": "The provider must retain the documented justification."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a justified Annex III exception remove the assessment record and registration duties?",
+          "options": [
+            {
+              "blocks": "Document the assessment and register under 49(2)",
+              "correct": true,
+              "reason": "Article 6(4) preserves these steps."
+            },
+            {
+              "blocks": "Discard the assessment because it is exempt",
+              "correct": false,
+              "reason": "The provider must retain the documented justification."
+            },
+            {
+              "blocks": "Replace the assessment with a sales statement",
+              "correct": false,
+              "reason": "A claim does not establish the tests."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

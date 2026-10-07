@@ -1,0 +1,207 @@
+{
+  "module": "Make technical compliance inspectable",
+  "lesson": {
+    "slug": "h14",
+    "title": "Specify logging and distinguish retention rules",
+    "summary": "Distinguish automatic logging capability from controlled-log custody.",
+    "covers": ["logging-capability", "controlled-log-retention"],
+    "prerequisites": [
+      {
+        "lesson": "h02",
+        "reason": "Provider custody is an actor-specific obligation."
+      },
+      {
+        "lesson": "h05",
+        "reason": "Relevant events support lifecycle risk management."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Logging capability** means the system technically allows automatic recording of events over its lifetime. Logs are event records that support appropriate traceability for its intended purpose.",
+        "Article 12 connects relevant events to identifying Article 79 risk situations or substantial modification, post-market monitoring and deployer operation monitoring. It does not require storing every event indefinitely."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 12(1), (2), 19; Articles 3(23), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "An **Article 79 risk** includes the specified health/safety or fundamental-rights concerns addressed by that provision. A **substantial modification** is a post-supply change not foreseen or planned in the initial assessment which affects system-requirement compliance or changes the assessed intended purpose.",
+        "These are triggers to inspect, not labels for every minor edit. Northbridge should be able to record events relevant to unexpected operation and meaningful changes."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 12(1), (2), 19; Articles 3(23), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Controlled-log retention** concerns automatically generated logs to the extent under the provider’s control. Article 19 requires a purpose-appropriate period of at least six months unless applicable Union/national law provides otherwise, especially personal-data law.",
+        "This is a qualified minimum, not a command to collect unlimited personal data. Separate which actor controls which records, the period and the other-law basis."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 12(1), (2), 19; Articles 3(23), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Financial institutions covered by the specified Union financial-law governance rules maintain these logs as part of the relevant financial documentation. Specialist remote-identification fields are taught in the optional biometric lesson.",
+        "Case: Northbridge’s feature can log events, but no one can identify where controlled logs are retained. Capability alone does not prove custody. Conversely, a stored launch report does not demonstrate lifetime automatic logging."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 12(1), (2), 19; Articles 3(23), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["logging-capability"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "Northbridge stores a launch report but its system cannot automatically log operational events. What is missing?",
+      "options": [
+        {
+          "blocks": "Automatic event recording across system lifetime",
+          "correct": true,
+          "reason": "Capability is separate from static documentation."
+        },
+        {
+          "blocks": "Only a longer brochure",
+          "correct": false,
+          "reason": "A brochure does not implement event recording."
+        },
+        {
+          "blocks": "A rule to retain all events forever",
+          "correct": false,
+          "reason": "Lifetime capability is not perpetual retention."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a one-time report establish Article 12’s system capability?",
+          "options": [
+            {
+              "blocks": "Only a longer brochure",
+              "correct": false,
+              "reason": "A brochure does not implement event recording."
+            },
+            {
+              "blocks": "A rule to retain all events forever",
+              "correct": false,
+              "reason": "Lifetime capability is not perpetual retention."
+            },
+            {
+              "blocks": "Automatic event recording across system lifetime",
+              "correct": true,
+              "reason": "Capability is separate from static documentation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["controlled-log-retention"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "Northbridge says the six-month rule applies only to logs another actor exclusively controls. What should the assessor check?",
+      "options": [
+        {
+          "blocks": "Only logs exclusively controlled by someone else",
+          "correct": false,
+          "reason": "That reverses the relevant boundary."
+        },
+        {
+          "blocks": "Every record globally regardless of control",
+          "correct": false,
+          "reason": "The statute qualifies the obligation."
+        },
+        {
+          "blocks": "Automatically generated logs to the extent under its control",
+          "correct": true,
+          "reason": "Control determines this actor’s custody boundary."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which logs does the provider custody duty concern?",
+          "options": [
+            {
+              "blocks": "Every record globally regardless of control",
+              "correct": false,
+              "reason": "The statute qualifies the obligation."
+            },
+            {
+              "blocks": "Automatically generated logs to the extent under its control",
+              "correct": true,
+              "reason": "Control determines this actor’s custody boundary."
+            },
+            {
+              "blocks": "Only logs exclusively controlled by someone else",
+              "correct": false,
+              "reason": "That reverses the relevant boundary."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["controlled-log-retention"],
+      "teaches": ["screen-3"],
+      "prompt": "A retention policy states “six months regardless of any applicable law.” Is that complete?",
+      "options": [
+        {
+          "blocks": "Indefinitely because logging works for life",
+          "correct": false,
+          "reason": "Capability and custody periods are distinct."
+        },
+        {
+          "blocks": "Appropriate period, normally at least six months, with other-law qualifications",
+          "correct": true,
+          "reason": "The statutory rule preserves applicable contrary law."
+        },
+        {
+          "blocks": "Exactly six months with no exceptions",
+          "correct": false,
+          "reason": "The minimum and qualifications are different."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the minimum retention period be recorded?",
+          "options": [
+            {
+              "blocks": "Appropriate period, normally at least six months, with other-law qualifications",
+              "correct": true,
+              "reason": "The statutory rule preserves applicable contrary law."
+            },
+            {
+              "blocks": "Exactly six months with no exceptions",
+              "correct": false,
+              "reason": "The minimum and qualifications are different."
+            },
+            {
+              "blocks": "Indefinitely because logging works for life",
+              "correct": false,
+              "reason": "Capability and custody periods are distinct."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

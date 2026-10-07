@@ -1,8 +1,10 @@
 # EU AI Act: High-risk compliance in practice
 
-**English review proposal for Chris — 7 October 2026.** This package proposes the next course. No subject or lessons have been imported, authored or finished for this part.
+**English learning draft for Chris — 7 October 2026.** Chris approved building all 30 lessons and requested being the first student. The complete course is now private and available in editable testing.
 
-The aim is to move from “this use is high-risk” to “these actors need these controls, these records and these decisions”. The proposed cap is **30 lessons in five modules**, covering **78 concepts**. Lessons will teach one to three concepts, with four to ten reading screens and three to five questions, equivalent retests and explanations. Work will proceed one module at a time after graph and syllabus review.
+The aim is to move from “this use is high-risk” to “these actors need these controls, these records and these decisions”. There are **30 lessons in five modules**, covering **78 concepts** through **131 sourced screens, 90 questions and 90 equivalent retests**. Every answer option has an explanation.
+
+[Start the private course — reference 63](https://learnwohl.app/learn/9bac2ab8-108d-4493-96f6-ac9184163981). Begin with H01. The five module case exercises build toward H30; H29 is optional biometric depth. Your learning progress is still not started.
 
 Start with the [real Flashkarte/LearnWohl walkthrough](../case-studies/flashkarte-ai-authoring.md), then review the [lesson outline](lesson-outline.md), [concepts and prerequisite reasons](concept-graph.md) and [provision coverage and source limits](coverage.md).
 
@@ -36,10 +38,10 @@ Each module advances its dossier: define scope; assess data; specify technical c
 
 The real Flashkarte case provides a useful comparison: external AI authoring, stored teaching material and rule-based quiz grading need separate boundaries. We will revisit it if institutional AI assessment, learner profiling or a hosted agent is added. It must not be silently converted into a high-risk example just because the course concerns education.
 
-## Review before authoring
+## First-student review
 
-The graph is a teaching hypothesis. Review the required edges and their reasons, the size and order, and whether the running cases answer the decisions you actually make. The plan remains editable. In subsequent authoring, every screen will cite its sources; every taught concept will have an assessment; owner learning feedback remains the test of clarity.
+The graph remains a teaching hypothesis. Review the required edges and their reasons, the size and order, and whether the running cases answer the decisions you actually make. Every screen cites sources and every concept is assessed. Your learning comments are the next test of clarity; lessons remain editable for revisions.
 
-This proposal does not establish real-product compliance, specialist legal approval or completion of the full programme. It records the next concrete teaching scope and the gaps that further sources or product facts must resolve.
+This draft does not establish real-product compliance, specialist legal approval or completion of the full programme. It records the teaching scope and gaps that further sources or product facts must resolve.
 
-Document checks passed: 78 unique concepts, exactly one teaching home each, 30 lessons with one to three concepts, no prerequisite cycles, at most four required parents per concept, exact lesson-prerequisite derivation, no core dependency on H29, valid local links and clean formatting. Application behaviour and live course content were unchanged; no runtime test or legal approval is implied by these document checks.
+The full learning path passed an isolated Postgres test, including unlocking, a wrong answer, remediation and a reworded retest. Live readback matched all authored screens, sources, questions, explanations, retests, concepts and prerequisites. See [deployment and verification](deployment.md) and [source checks and reading limits](source-checks.md).

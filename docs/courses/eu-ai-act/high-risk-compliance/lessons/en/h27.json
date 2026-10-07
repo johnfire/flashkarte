@@ -1,0 +1,215 @@
+{
+  "module": "Make and maintain the deployment decision",
+  "lesson": {
+    "slug": "h27",
+    "title": "Inform workers, affected people and public deployers",
+    "summary": "Distinguish workplace, public-registration and affected-person information gates.",
+    "covers": [
+      "workplace-information",
+      "public-deployer-registration",
+      "affected-person-information"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h02",
+        "reason": "The employer is a deployer The actor's deployer status matters."
+      },
+      {
+        "lesson": "h03",
+        "reason": "The Annex III route is required."
+      },
+      {
+        "lesson": "h25",
+        "reason": "The notice concerns a proposed deployment. It concerns the actual deployment"
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Workplace information** is required before an employer puts a high-risk system into service or uses it at work. Inform workers’ representatives and affected workers that they will be subject to its use.",
+        "Apply relevant Union/national worker-information rules and procedures where applicable. A notice after use begins does not meet the stated before-use timing. Specific national procedures need a separately sourced jurisdiction check."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(7), (8), (11), (12)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Public-deployer registration** applies to public authorities and Union institutions, bodies, offices or agencies through Article 49. If such a deployer finds its proposed high-risk system unregistered in the relevant EU database, it must not use it and must inform provider or distributor.",
+        "Determine the applicable registration route and any protected database arrangements rather than relying only on a public search page. Our public-authority case expressly stipulates that required registration is missing."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(7), (8), (11), (12)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Affected-person information** under 26(11) concerns Annex III high-risk systems making or assisting decisions about natural persons. Inform those persons that they are subject to use of the high-risk system.",
+        "It is separate from Article 50’s interaction and content notices. The law-enforcement qualification refers to Article 13 of the Law Enforcement Directive; do not copy an ordinary recruitment notice into that specialist context without checking it."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(7), (8), (11), (12)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Deployers also cooperate with competent authorities in actions implementing the Regulation. Put each information/cooperation task against its own actor, recipient, trigger and timing.",
+        "Case: informing workers does not automatically inform job applicants affected by an Annex III assisted decision. A private employer is not a public authority merely because its recruitment affects people. Keep the three gates distinct."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(7), (8), (11), (12)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["workplace-information"],
+      "teaches": ["screen-1"],
+      "prompt": "An employer informs affected workers and their representatives only after high-risk workplace use starts. What is wrong?",
+      "options": [
+        {
+          "blocks": "Inform before the specified workplace use begins",
+          "correct": true,
+          "reason": "The paragraph sets prior timing."
+        },
+        {
+          "blocks": "Inform only after a problem occurs",
+          "correct": false,
+          "reason": "This is not only an incident duty."
+        },
+        {
+          "blocks": "No information is needed if a vendor built it",
+          "correct": false,
+          "reason": "Employer use has its own obligation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What timing belongs to the Article 26(7) information step?",
+          "options": [
+            {
+              "blocks": "Inform only after a problem occurs",
+              "correct": false,
+              "reason": "This is not only an incident duty."
+            },
+            {
+              "blocks": "No information is needed if a vendor built it",
+              "correct": false,
+              "reason": "Employer use has its own obligation."
+            },
+            {
+              "blocks": "Inform before the specified workplace use begins",
+              "correct": true,
+              "reason": "The paragraph sets prior timing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["public-deployer-registration"],
+      "teaches": ["screen-2"],
+      "prompt": "A public authority finds the required registration missing for its proposed system. What follows?",
+      "options": [
+        {
+          "blocks": "Use it while making a private note",
+          "correct": false,
+          "reason": "That ignores the no-use instruction."
+        },
+        {
+          "blocks": "Assume every private employer has the identical trigger",
+          "correct": false,
+          "reason": "The public-deployer provision has specified actors."
+        },
+        {
+          "blocks": "Do not use it; inform provider or distributor",
+          "correct": true,
+          "reason": "Article 26(8) states this consequence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should the stipulated public deployer do when the required EU registration is absent?",
+          "options": [
+            {
+              "blocks": "Assume every private employer has the identical trigger",
+              "correct": false,
+              "reason": "The public-deployer provision has specified actors."
+            },
+            {
+              "blocks": "Do not use it; inform provider or distributor",
+              "correct": true,
+              "reason": "Article 26(8) states this consequence."
+            },
+            {
+              "blocks": "Use it while making a private note",
+              "correct": false,
+              "reason": "That ignores the no-use instruction."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["affected-person-information"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "Workers received a notice, but applicants subject to assisted Annex III decisions did not. Is the applicant-information gate closed?",
+      "options": [
+        {
+          "blocks": "Yes; Article 50 replaces all high-risk notices",
+          "correct": false,
+          "reason": "Article 26 preserves its own trigger."
+        },
+        {
+          "blocks": "No; check and provide the separate required person notice",
+          "correct": true,
+          "reason": "Different triggers and recipients apply."
+        },
+        {
+          "blocks": "Yes; any notice reaches every required person",
+          "correct": false,
+          "reason": "The recipient population differs."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a workplace notice automatically fulfil affected-person information for applicants?",
+          "options": [
+            {
+              "blocks": "No; check and provide the separate required person notice",
+              "correct": true,
+              "reason": "Different triggers and recipients apply."
+            },
+            {
+              "blocks": "Yes; any notice reaches every required person",
+              "correct": false,
+              "reason": "The recipient population differs."
+            },
+            {
+              "blocks": "Yes; Article 50 replaces all high-risk notices",
+              "correct": false,
+              "reason": "Article 26 preserves its own trigger."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

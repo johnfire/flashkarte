@@ -1,6 +1,6 @@
-# Proposed concept graph
+# Concept graph
 
-**78 concepts.** Each row defines an assessable concept, its permanent proposed slug, kind and required parents. Each parent has a reason. The edges are a review hypothesis, not evidence of learning effectiveness. Source locators are given by lesson in the [coverage register](coverage.md).
+**78 concepts, approved and imported 7 October 2026.** Each row defines an assessable concept, its permanent slug, kind and required parents. Each parent has a reason. The edges remain a teaching hypothesis, not evidence of learning effectiveness. Source locators are given by lesson in the [coverage register](coverage.md).
 
 All concepts are core except C73–C75, which are extensions. No core concept requires an extension. There are no cross-course prerequisites or assumed legal terms. Within a lesson, teach concepts in their listed order. An arrow means parent → child; a row with no parent is a valid starting point.
 

@@ -1,0 +1,211 @@
+{
+  "module": "Assign provider and supply-chain duties",
+  "lesson": {
+    "slug": "h21",
+    "title": "Preserve documentation and answer authorities",
+    "summary": "Preserve provider documentation and supply necessary authority evidence.",
+    "covers": [
+      "documentation-custody",
+      "authority-cooperation",
+      "documentation-continuity"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h13",
+        "reason": "Technical documentation is one retained record"
+      },
+      {
+        "lesson": "h20",
+        "reason": "Quality-system documentation is another."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Documentation custody** under Article 18 keeps specified provider records at authorities’ disposal for a period ending ten years after market placement or service. These include technical and quality-system documentation and the EU declaration.",
+        "Include approved changes and decisions/documents from notified bodies where applicable. A notified body is an authorised assessment body for the relevant procedure. Do not invent a certificate for a procedure that requires none."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 18(1)–(3), 21(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Ten-year documentation custody differs from controlled-log retention, whose separate qualified rule is taught elsewhere. Financial institutions within the specified financial-law governance rules keep technical documentation as part of the relevant financial documentation.",
+        "Record which evidence belongs to which rule, its relevant start event, retrieval location and responsible actor. A six-month document deletion policy would not meet the ten-year documentation rule."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 18(1)–(3), 21(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Authority cooperation** follows a reasoned competent-authority request. Supply all information and documentation needed to demonstrate system-requirement conformity in an easily understood Union official language indicated by the Member State.",
+        "Give applicable access to automatically generated logs to the extent under the provider’s control. Information received by authorities is subject to Article 78 confidentiality. A private trade-secret assertion does not itself cancel the cooperation duty."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 18(1)–(3), 21(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Documentation continuity** remains a concern if a provider or its representative becomes bankrupt or ceases activity before the period ends. Each Member State determines conditions for keeping the specified documentation available.",
+        "Case: Northbridge plans to close and delete its records. Check the relevant Member State arrangements and implement continuity. Do not assume the duty simply vanishes, or invent a national handover procedure without a source."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 18(1)–(3), 21(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["documentation-custody"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "Northbridge proposes deleting technical documentation after six months. Which rule is being confused?",
+      "options": [
+        {
+          "blocks": "Article 18’s ten-year documentation period is separate",
+          "correct": true,
+          "reason": "The documented record categories have their own rule."
+        },
+        {
+          "blocks": "All records share the log minimum",
+          "correct": false,
+          "reason": "That conflates distinct obligations."
+        },
+        {
+          "blocks": "Every system needs a notified-body certificate",
+          "correct": false,
+          "reason": "The document applies where the procedure involves one."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the controlled-log minimum define the provider technical-file custody period?",
+          "options": [
+            {
+              "blocks": "All records share the log minimum",
+              "correct": false,
+              "reason": "That conflates distinct obligations."
+            },
+            {
+              "blocks": "Every system needs a notified-body certificate",
+              "correct": false,
+              "reason": "The document applies where the procedure involves one."
+            },
+            {
+              "blocks": "Article 18’s ten-year documentation period is separate",
+              "correct": true,
+              "reason": "The documented record categories have their own rule."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["authority-cooperation"],
+      "teaches": ["screen-3"],
+      "prompt": "A competent authority makes a reasoned request for conformity evidence and controlled logs. How should the provider respond?",
+      "options": [
+        {
+          "blocks": "Refuse all information as secret",
+          "correct": false,
+          "reason": "Confidentiality does not erase the duty."
+        },
+        {
+          "blocks": "Supply only the advertising brochure",
+          "correct": false,
+          "reason": "The authority needs necessary conformity evidence."
+        },
+        {
+          "blocks": "Supply necessary evidence/access under the specified language and confidentiality framework",
+          "correct": true,
+          "reason": "Articles 21 and 78 govern cooperation and protection."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a private confidentiality claim automatically defeat the requested evidence access?",
+          "options": [
+            {
+              "blocks": "Supply only the advertising brochure",
+              "correct": false,
+              "reason": "The authority needs necessary conformity evidence."
+            },
+            {
+              "blocks": "Supply necessary evidence/access under the specified language and confidentiality framework",
+              "correct": true,
+              "reason": "Articles 21 and 78 govern cooperation and protection."
+            },
+            {
+              "blocks": "Refuse all information as secret",
+              "correct": false,
+              "reason": "Confidentiality does not erase the duty."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["documentation-continuity"],
+      "teaches": ["screen-4"],
+      "prompt": "The provider will cease activity before ten years end. What is the correct next step?",
+      "options": [
+        {
+          "blocks": "Use an invented universal handover office",
+          "correct": false,
+          "reason": "The Member State conditions require actual sourcing."
+        },
+        {
+          "blocks": "Check Member State continuity conditions and preserve availability",
+          "correct": true,
+          "reason": "Article 18(2) addresses cessation and bankruptcy."
+        },
+        {
+          "blocks": "Delete everything on the last trading day",
+          "correct": false,
+          "reason": "Closure does not establish permission to end availability."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "May the provider delete its required documentation simply because it closes?",
+          "options": [
+            {
+              "blocks": "Check Member State continuity conditions and preserve availability",
+              "correct": true,
+              "reason": "Article 18(2) addresses cessation and bankruptcy."
+            },
+            {
+              "blocks": "Delete everything on the last trading day",
+              "correct": false,
+              "reason": "Closure does not establish permission to end availability."
+            },
+            {
+              "blocks": "Use an invented universal handover office",
+              "correct": false,
+              "reason": "The Member State conditions require actual sourcing."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

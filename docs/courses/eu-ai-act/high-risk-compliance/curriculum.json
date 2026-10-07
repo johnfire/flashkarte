@@ -1,0 +1,2015 @@
+{
+  "schema_version": 1,
+  "title": "EU AI Act: High-risk compliance in practice",
+  "checked_on": "2026-10-07",
+  "status": "owner-approved-authored-testing",
+  "canonical_language": "en",
+  "source_baseline": "02024R1689-20260727",
+  "modules": [
+    {
+      "id": "H0",
+      "title": "Define the system and its compliance boundary"
+    },
+    {
+      "id": "H1",
+      "title": "Control risk and govern data"
+    },
+    {
+      "id": "H2",
+      "title": "Make technical compliance inspectable"
+    },
+    {
+      "id": "H3",
+      "title": "Assign provider and supply-chain duties"
+    },
+    {
+      "id": "H4",
+      "title": "Make and maintain the deployment decision"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "C01",
+      "slug": "ai-system-boundary",
+      "name": "Ai system boundary",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Distinguish an inference-based AI system from a fixed rule or stored output."
+    },
+    {
+      "id": "C02",
+      "slug": "intended-purpose",
+      "name": "Intended purpose",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Identify the purpose established by a system's supplied information and intended use."
+    },
+    {
+      "id": "C03",
+      "slug": "eu-connection",
+      "name": "Eu connection",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify an EU placement, deployment or output-use connection."
+    },
+    {
+      "id": "C04",
+      "slug": "system-provider",
+      "name": "System provider",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Identify a person developing or commissioning and supplying/servicing under their name."
+    },
+    {
+      "id": "C05",
+      "slug": "system-deployer",
+      "name": "System deployer",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Identify professional use under an actor's authority."
+    },
+    {
+      "id": "C06",
+      "slug": "other-operators",
+      "name": "Other operators",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Distinguish representative, importer and distributor from provider/deployer."
+    },
+    {
+      "id": "C07",
+      "slug": "high-risk-route",
+      "name": "High risk route",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Apply a supplied Annex I or Annex III route and the relevant exceptions."
+    },
+    {
+      "id": "C08",
+      "slug": "limited-sector-applicability",
+      "name": "Limited sector applicability",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify Section B's limited route and avoid an unsupported Section A duplication waiver."
+    },
+    {
+      "id": "C09",
+      "slug": "classification-record",
+      "name": "Classification record",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Record classification evidence or a justified Article 6(3) assessment."
+    },
+    {
+      "id": "C10",
+      "slug": "duty-application-date",
+      "name": "Duty application date",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Match a duty to its own application date."
+    },
+    {
+      "id": "C11",
+      "slug": "legacy-design-transition",
+      "name": "Legacy design transition",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish an existing-system transition from unlimited grandfathering."
+    },
+    {
+      "id": "C12",
+      "slug": "parallel-obligations",
+      "name": "Parallel obligations",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify remaining prohibition, transparency or data-law checks after classification."
+    },
+    {
+      "id": "C13",
+      "slug": "lifecycle-risk-management",
+      "name": "Lifecycle risk management",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Recognise the continuing risk-management cycle."
+    },
+    {
+      "id": "C14",
+      "slug": "foreseeable-misuse",
+      "name": "Foreseeable misuse",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish intended use from reasonably foreseeable misuse."
+    },
+    {
+      "id": "C15",
+      "slug": "residual-risk",
+      "name": "Residual risk",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify risk remaining after controls and the need to assess acceptability."
+    },
+    {
+      "id": "C16",
+      "slug": "scope-record-case",
+      "name": "Scope record case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Produce a conditional actor/classification/date record."
+    },
+    {
+      "id": "C17",
+      "slug": "risk-control-hierarchy",
+      "name": "Risk control hierarchy",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Choose feasible design reduction, then appropriate controls and information."
+    },
+    {
+      "id": "C18",
+      "slug": "prior-test-criteria",
+      "name": "Prior test criteria",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Define purpose-appropriate metrics and thresholds before testing."
+    },
+    {
+      "id": "C19",
+      "slug": "vulnerable-person-risk",
+      "name": "Vulnerable person risk",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify intended-purpose risks to children and other vulnerable groups."
+    },
+    {
+      "id": "C20",
+      "slug": "dataset-roles",
+      "name": "Dataset roles",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Distinguish training, validation and testing sets and the non-training route."
+    },
+    {
+      "id": "C21",
+      "slug": "dataset-provenance",
+      "name": "Dataset provenance",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify origins, collection processes and original personal-data purpose."
+    },
+    {
+      "id": "C22",
+      "slug": "data-preparation",
+      "name": "Data preparation",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify relevant preparation operations and measurement assumptions."
+    },
+    {
+      "id": "C23",
+      "slug": "dataset-representativeness",
+      "name": "Dataset representativeness",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Assess relevance, representation, errors and completeness for intended use."
+    },
+    {
+      "id": "C24",
+      "slug": "deployment-context-fit",
+      "name": "Deployment context fit",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify geographic, contextual, behavioural or functional mismatch."
+    },
+    {
+      "id": "C25",
+      "slug": "data-gap-remediation",
+      "name": "Data gap remediation",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify a material data gap and a proposed response."
+    },
+    {
+      "id": "C26",
+      "slug": "bias-feedback-loop",
+      "name": "Bias feedback loop",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Recognise harmful or discriminatory bias, including outputs reused as inputs."
+    },
+    {
+      "id": "C27",
+      "slug": "bias-mitigation",
+      "name": "Bias mitigation",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Select detection, prevention and mitigation measures for identified bias."
+    },
+    {
+      "id": "C28",
+      "slug": "sensitive-bias-necessity",
+      "name": "Sensitive bias necessity",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Test strict necessity and ineffective less intrusive alternatives."
+    },
+    {
+      "id": "C29",
+      "slug": "sensitive-bias-safeguards",
+      "name": "Sensitive bias safeguards",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Apply the full Article 4a(1) safeguard set to a proposed workflow."
+    },
+    {
+      "id": "C30",
+      "slug": "extended-bias-permission",
+      "name": "Extended bias permission",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish Article 4a(2)'s wider actors/risks and absence of a new bias-check duty."
+    },
+    {
+      "id": "C31",
+      "slug": "data-file-case",
+      "name": "Data file case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Decide whether a proposed data/bias workflow has sufficient evidence."
+    },
+    {
+      "id": "C32",
+      "slug": "technical-file",
+      "name": "Technical file",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify a pre-release, maintained technical compliance file."
+    },
+    {
+      "id": "C33",
+      "slug": "technical-evidence-index",
+      "name": "Technical evidence index",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Map an Annex IV element to clear, versioned evidence."
+    },
+    {
+      "id": "C34",
+      "slug": "integrated-product-file",
+      "name": "Integrated product file",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify the single documentation set required for a covered Section A product."
+    },
+    {
+      "id": "C35",
+      "slug": "logging-capability",
+      "name": "Logging capability",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify events enabling risk/modification traceability and operational monitoring."
+    },
+    {
+      "id": "C36",
+      "slug": "controlled-log-retention",
+      "name": "Controlled log retention",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Apply appropriate controlled-log retention without conflating it with document retention."
+    },
+    {
+      "id": "C37",
+      "slug": "deployer-instructions",
+      "name": "Deployer instructions",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify required, accessible instructions on capabilities, limitations and operation."
+    },
+    {
+      "id": "C38",
+      "slug": "output-interpretation",
+      "name": "Output interpretation",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify information enabling a deployer to interpret and use an output appropriately."
+    },
+    {
+      "id": "C39",
+      "slug": "effective-oversight-controls",
+      "name": "Effective oversight controls",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify proportionate monitoring, override and safe intervention capabilities."
+    },
+    {
+      "id": "C40",
+      "slug": "automation-bias",
+      "name": "Automation bias",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Recognise over-reliance on an output despite a nominal human reviewer."
+    },
+    {
+      "id": "C41",
+      "slug": "purpose-performance-metrics",
+      "name": "Purpose performance metrics",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Select suitable accuracy evidence and declare the relevant metrics."
+    },
+    {
+      "id": "C42",
+      "slug": "fault-resilience",
+      "name": "Fault resilience",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Select lifecycle resilience and, where appropriate, fail-safe or redundancy measures."
+    },
+    {
+      "id": "C43",
+      "slug": "ai-cybersecurity",
+      "name": "Ai cybersecurity",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Select proportionate defences against model, data, input or confidentiality attacks."
+    },
+    {
+      "id": "C44",
+      "slug": "technical-readiness-case",
+      "name": "Technical readiness case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Identify missing evidence in a technical readiness review."
+    },
+    {
+      "id": "C45",
+      "slug": "provider-duty-map",
+      "name": "Provider duty map",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Allocate Article 16 responsibilities, including release-gate handoffs."
+    },
+    {
+      "id": "C46",
+      "slug": "provider-identity",
+      "name": "Provider identity",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify required provider identity/contact information."
+    },
+    {
+      "id": "C47",
+      "slug": "provider-accessibility",
+      "name": "Provider accessibility",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify Article 16(l)'s accessibility-law requirement without inventing a universal certificate."
+    },
+    {
+      "id": "C48",
+      "slug": "quality-management-system",
+      "name": "Quality management system",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify the written processes and accountability required by Article 17."
+    },
+    {
+      "id": "C49",
+      "slug": "proportionate-quality-implementation",
+      "name": "Proportionate quality implementation",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish organisational proportionality from reduced protection."
+    },
+    {
+      "id": "C50",
+      "slug": "sector-governance-integration",
+      "name": "Sector governance integration",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify sector integration and the qualified financial-institution treatment."
+    },
+    {
+      "id": "C51",
+      "slug": "documentation-custody",
+      "name": "Documentation custody",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify which provider records must remain available for ten years."
+    },
+    {
+      "id": "C52",
+      "slug": "authority-cooperation",
+      "name": "Authority cooperation",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify information, controlled-log access and language requirements for a reasoned request."
+    },
+    {
+      "id": "C53",
+      "slug": "documentation-continuity",
+      "name": "Documentation continuity",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify the need to check Member State conditions after bankruptcy or cessation."
+    },
+    {
+      "id": "C54",
+      "slug": "provider-corrective-action",
+      "name": "Provider corrective action",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Choose appropriate immediate correction, withdrawal, disabling or recall."
+    },
+    {
+      "id": "C55",
+      "slug": "provider-risk-information",
+      "name": "Provider risk information",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify investigation and communication obligations when a system presents a risk."
+    },
+    {
+      "id": "C56",
+      "slug": "representative-mandate",
+      "name": "Representative mandate",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify the third-country provider's EU mandate, tasks and termination trigger."
+    },
+    {
+      "id": "C57",
+      "slug": "importer-verification",
+      "name": "Importer verification",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify verification, withholding, custody and cooperation duties before/after import."
+    },
+    {
+      "id": "C58",
+      "slug": "distributor-verification",
+      "name": "Distributor verification",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify distribution checks, withholding, correction and cooperation duties."
+    },
+    {
+      "id": "C59",
+      "slug": "changed-provider-role",
+      "name": "Changed provider role",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Apply rebranding, substantial modification or high-risk purpose-change rules."
+    },
+    {
+      "id": "C60",
+      "slug": "supplier-access-agreement",
+      "name": "Supplier access agreement",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify required supplier information/access and the limited open-source exception."
+    },
+    {
+      "id": "C61",
+      "slug": "value-chain-case",
+      "name": "Value chain case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Allocate responsibilities after a supplied change/supplier scenario."
+    },
+    {
+      "id": "C62",
+      "slug": "deployer-instructions-use",
+      "name": "Deployer instructions use",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify technical and organisational measures for use according to instructions."
+    },
+    {
+      "id": "C63",
+      "slug": "oversight-assignment",
+      "name": "Oversight assignment",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Assign a person with competence, training, authority and support."
+    },
+    {
+      "id": "C64",
+      "slug": "controlled-input-quality",
+      "name": "Controlled input quality",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Apply relevance/representation duties to inputs the deployer controls."
+    },
+    {
+      "id": "C65",
+      "slug": "deployer-monitoring-escalation",
+      "name": "Deployer monitoring escalation",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify monitoring, risk suspension and serious-incident communication duties."
+    },
+    {
+      "id": "C66",
+      "slug": "deployer-log-custody",
+      "name": "Deployer log custody",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify custody and retention for automatically generated logs under deployer control."
+    },
+    {
+      "id": "C67",
+      "slug": "workplace-information",
+      "name": "Workplace information",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify affected-worker/representative information before workplace deployment."
+    },
+    {
+      "id": "C68",
+      "slug": "public-deployer-registration",
+      "name": "Public deployer registration",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify public deployer registration checks and the no-use consequence of missing registration."
+    },
+    {
+      "id": "C69",
+      "slug": "affected-person-information",
+      "name": "Affected person information",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify notice when Annex III high-risk AI makes or assists person-related decisions."
+    },
+    {
+      "id": "C70",
+      "slug": "fria-trigger",
+      "name": "Fria trigger",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Apply Article 27's actor/use triggers and point 2 exclusion."
+    },
+    {
+      "id": "C71",
+      "slug": "fria-content-update",
+      "name": "Fria content update",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify assessment elements, first-use/update treatment and authority notification."
+    },
+    {
+      "id": "C72",
+      "slug": "fria-dpia-reuse",
+      "name": "Fria dpia reuse",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Reuse relevant DPIA material while addressing remaining fundamental-rights duties."
+    },
+    {
+      "id": "C73",
+      "slug": "post-remote-biometric-route",
+      "name": "Post remote biometric route",
+      "kind": "skill",
+      "tier": "extension",
+      "assessment": "Identify targeted-use authorisation, refusal consequences and reporting boundaries."
+    },
+    {
+      "id": "C74",
+      "slug": "biometric-dual-verification",
+      "name": "Biometric dual verification",
+      "kind": "skill",
+      "tier": "extension",
+      "assessment": "Identify the two-person verification rule and its qualified sector exceptions."
+    },
+    {
+      "id": "C75",
+      "slug": "biometric-log-fields",
+      "name": "Biometric log fields",
+      "kind": "skill",
+      "tier": "extension",
+      "assessment": "Specify the minimum remote-identification fields and distinguish operational records."
+    },
+    {
+      "id": "C76",
+      "slug": "dossier-evidence-gaps",
+      "name": "Dossier evidence gaps",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify unresolved technical and actor evidence in the dossier."
+    },
+    {
+      "id": "C77",
+      "slug": "deployment-gate-review",
+      "name": "Deployment gate review",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify date, operation, information and impact-assessment gates."
+    },
+    {
+      "id": "C78",
+      "slug": "compliance-decision-case",
+      "name": "Compliance decision case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Issue a conditional decision with owners, remaining gates and reassessment triggers."
+    }
+  ],
+  "edges": [
+    {
+      "parent": "ai-system-boundary",
+      "child": "intended-purpose",
+      "kind": "requires",
+      "reason": "Purpose attaches to the assessed system, not any AI in the surrounding product."
+    },
+    {
+      "parent": "ai-system-boundary",
+      "child": "eu-connection",
+      "kind": "requires",
+      "reason": "Scope is tested for the identified system activity."
+    },
+    {
+      "parent": "ai-system-boundary",
+      "child": "system-provider",
+      "kind": "requires",
+      "reason": "The role attaches to a system"
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "system-provider",
+      "kind": "requires",
+      "reason": "Intended use distinguishes the supplied system from upstream components."
+    },
+    {
+      "parent": "ai-system-boundary",
+      "child": "system-deployer",
+      "kind": "requires",
+      "reason": "Deployment is use of an identified system."
+    },
+    {
+      "parent": "system-provider",
+      "child": "other-operators",
+      "kind": "requires",
+      "reason": "The other roles are defined relative to the provider's supply"
+    },
+    {
+      "parent": "system-deployer",
+      "child": "other-operators",
+      "kind": "requires",
+      "reason": "Using a system differs from placing or distributing it."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "high-risk-route",
+      "kind": "requires",
+      "reason": "Classification tests the intended purpose."
+    },
+    {
+      "parent": "eu-connection",
+      "child": "limited-sector-applicability",
+      "kind": "requires",
+      "reason": "Applicability must first have an EU connection"
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "limited-sector-applicability",
+      "kind": "requires",
+      "reason": "The identified Annex route determines this boundary."
+    },
+    {
+      "parent": "system-provider",
+      "child": "classification-record",
+      "kind": "requires",
+      "reason": "The provider's record duty needs an actor"
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "classification-record",
+      "kind": "requires",
+      "reason": "The record must justify the exact classification test."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "duty-application-date",
+      "kind": "requires",
+      "reason": "Annex route affects the Sections 1–3 date."
+    },
+    {
+      "parent": "duty-application-date",
+      "child": "legacy-design-transition",
+      "kind": "requires",
+      "reason": "Transition depends on the relevant application date."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "parallel-obligations",
+      "kind": "requires",
+      "reason": "A classification conclusion must be separated from other duty triggers."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "lifecycle-risk-management",
+      "kind": "requires",
+      "reason": "Risks must be assessed against a defined intended purpose."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "foreseeable-misuse",
+      "kind": "requires",
+      "reason": "Misuse is assessed relative to intended use."
+    },
+    {
+      "parent": "lifecycle-risk-management",
+      "child": "residual-risk",
+      "kind": "requires",
+      "reason": "Residual risk is a result of the risk-management process."
+    },
+    {
+      "parent": "system-provider",
+      "child": "scope-record-case",
+      "kind": "requires",
+      "reason": "Name the responsible actor"
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "scope-record-case",
+      "kind": "requires",
+      "reason": "Apply the route"
+    },
+    {
+      "parent": "duty-application-date",
+      "child": "scope-record-case",
+      "kind": "requires",
+      "reason": "Date the duties"
+    },
+    {
+      "parent": "parallel-obligations",
+      "child": "scope-record-case",
+      "kind": "requires",
+      "reason": "Preserve parallel checks."
+    },
+    {
+      "parent": "lifecycle-risk-management",
+      "child": "risk-control-hierarchy",
+      "kind": "requires",
+      "reason": "Controls address analysed risks"
+    },
+    {
+      "parent": "residual-risk",
+      "child": "risk-control-hierarchy",
+      "kind": "requires",
+      "reason": "Selection must consider remaining risk."
+    },
+    {
+      "parent": "risk-control-hierarchy",
+      "child": "prior-test-criteria",
+      "kind": "requires",
+      "reason": "Testing evaluates the chosen system and controls."
+    },
+    {
+      "parent": "lifecycle-risk-management",
+      "child": "vulnerable-person-risk",
+      "kind": "requires",
+      "reason": "This is a required consideration within risk management."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "dataset-roles",
+      "kind": "requires",
+      "reason": "Dataset use depends on what the system is intended to do."
+    },
+    {
+      "parent": "dataset-roles",
+      "child": "dataset-provenance",
+      "kind": "requires",
+      "reason": "Provenance must be traced for the relevant sets."
+    },
+    {
+      "parent": "dataset-provenance",
+      "child": "data-preparation",
+      "kind": "requires",
+      "reason": "Preparation must be assessed against the data's origins."
+    },
+    {
+      "parent": "dataset-roles",
+      "child": "dataset-representativeness",
+      "kind": "requires",
+      "reason": "Quality applies to the appropriate datasets."
+    },
+    {
+      "parent": "dataset-representativeness",
+      "child": "deployment-context-fit",
+      "kind": "requires",
+      "reason": "Representation must be assessed in the deployment setting."
+    },
+    {
+      "parent": "dataset-representativeness",
+      "child": "data-gap-remediation",
+      "kind": "requires",
+      "reason": "A gap is defined by unmet purpose-specific quality needs."
+    },
+    {
+      "parent": "dataset-provenance",
+      "child": "bias-feedback-loop",
+      "kind": "requires",
+      "reason": "Bias can arise from origins and selection"
+    },
+    {
+      "parent": "dataset-representativeness",
+      "child": "bias-feedback-loop",
+      "kind": "requires",
+      "reason": "A representational shortfall can affect groups."
+    },
+    {
+      "parent": "bias-feedback-loop",
+      "child": "bias-mitigation",
+      "kind": "requires",
+      "reason": "Measures must respond to the particular possible bias."
+    },
+    {
+      "parent": "bias-feedback-loop",
+      "child": "sensitive-bias-necessity",
+      "kind": "requires",
+      "reason": "The exception must address a qualifying bias problem."
+    },
+    {
+      "parent": "sensitive-bias-necessity",
+      "child": "sensitive-bias-safeguards",
+      "kind": "requires",
+      "reason": "Safeguards accompany, and do not replace, necessity."
+    },
+    {
+      "parent": "sensitive-bias-necessity",
+      "child": "extended-bias-permission",
+      "kind": "requires",
+      "reason": "Strict necessity still applies"
+    },
+    {
+      "parent": "sensitive-bias-safeguards",
+      "child": "extended-bias-permission",
+      "kind": "requires",
+      "reason": "The wider permission inherits every safeguard."
+    },
+    {
+      "parent": "deployment-context-fit",
+      "child": "data-file-case",
+      "kind": "requires",
+      "reason": "Assess context"
+    },
+    {
+      "parent": "bias-mitigation",
+      "child": "data-file-case",
+      "kind": "requires",
+      "reason": "Check mitigation"
+    },
+    {
+      "parent": "sensitive-bias-necessity",
+      "child": "data-file-case",
+      "kind": "requires",
+      "reason": "Check necessity"
+    },
+    {
+      "parent": "sensitive-bias-safeguards",
+      "child": "data-file-case",
+      "kind": "requires",
+      "reason": "Check safeguards."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "technical-file",
+      "kind": "requires",
+      "reason": "Documentation describes the intended purpose"
+    },
+    {
+      "parent": "prior-test-criteria",
+      "child": "technical-file",
+      "kind": "requires",
+      "reason": "It must include meaningful test evidence."
+    },
+    {
+      "parent": "technical-file",
+      "child": "technical-evidence-index",
+      "kind": "requires",
+      "reason": "The index organises the technical file."
+    },
+    {
+      "parent": "technical-file",
+      "child": "integrated-product-file",
+      "kind": "requires",
+      "reason": "Integration concerns the technical file, not an exemption from evidence."
+    },
+    {
+      "parent": "lifecycle-risk-management",
+      "child": "logging-capability",
+      "kind": "requires",
+      "reason": "Relevant events support lifecycle risk management."
+    },
+    {
+      "parent": "logging-capability",
+      "child": "controlled-log-retention",
+      "kind": "requires",
+      "reason": "Retention concerns logs the system generates"
+    },
+    {
+      "parent": "system-provider",
+      "child": "controlled-log-retention",
+      "kind": "requires",
+      "reason": "Provider custody is an actor-specific obligation."
+    },
+    {
+      "parent": "intended-purpose",
+      "child": "deployer-instructions",
+      "kind": "requires",
+      "reason": "Instructions establish intended purpose"
+    },
+    {
+      "parent": "technical-file",
+      "child": "deployer-instructions",
+      "kind": "requires",
+      "reason": "They must be supported by system evidence."
+    },
+    {
+      "parent": "deployer-instructions",
+      "child": "output-interpretation",
+      "kind": "requires",
+      "reason": "Interpretation support belongs in the deployer information."
+    },
+    {
+      "parent": "lifecycle-risk-management",
+      "child": "effective-oversight-controls",
+      "kind": "requires",
+      "reason": "Oversight addresses the system's risks"
+    },
+    {
+      "parent": "output-interpretation",
+      "child": "effective-oversight-controls",
+      "kind": "requires",
+      "reason": "A supervisor needs to interpret the output."
+    },
+    {
+      "parent": "effective-oversight-controls",
+      "child": "automation-bias",
+      "kind": "requires",
+      "reason": "Oversight must enable an independent judgment."
+    },
+    {
+      "parent": "prior-test-criteria",
+      "child": "purpose-performance-metrics",
+      "kind": "requires",
+      "reason": "Metrics must be defined before meaningful tests."
+    },
+    {
+      "parent": "purpose-performance-metrics",
+      "child": "fault-resilience",
+      "kind": "requires",
+      "reason": "Resilience protects the expected purpose-specific performance."
+    },
+    {
+      "parent": "purpose-performance-metrics",
+      "child": "ai-cybersecurity",
+      "kind": "requires",
+      "reason": "Attack tests must relate to the system's expected performance."
+    },
+    {
+      "parent": "technical-evidence-index",
+      "child": "technical-readiness-case",
+      "kind": "requires",
+      "reason": "Locate proof"
+    },
+    {
+      "parent": "logging-capability",
+      "child": "technical-readiness-case",
+      "kind": "requires",
+      "reason": "Check traceability"
+    },
+    {
+      "parent": "effective-oversight-controls",
+      "child": "technical-readiness-case",
+      "kind": "requires",
+      "reason": "Check oversight"
+    },
+    {
+      "parent": "purpose-performance-metrics",
+      "child": "technical-readiness-case",
+      "kind": "requires",
+      "reason": "Check tested performance."
+    },
+    {
+      "parent": "system-provider",
+      "child": "provider-duty-map",
+      "kind": "requires",
+      "reason": "Duties need the provider role"
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "provider-duty-map",
+      "kind": "requires",
+      "reason": "They require the relevant high-risk route."
+    },
+    {
+      "parent": "provider-duty-map",
+      "child": "provider-identity",
+      "kind": "requires",
+      "reason": "Identity is one provider obligation in the duty map."
+    },
+    {
+      "parent": "provider-duty-map",
+      "child": "provider-accessibility",
+      "kind": "requires",
+      "reason": "Accessibility is part of the provider duty map."
+    },
+    {
+      "parent": "provider-duty-map",
+      "child": "quality-management-system",
+      "kind": "requires",
+      "reason": "The provider must implement the system"
+    },
+    {
+      "parent": "lifecycle-risk-management",
+      "child": "quality-management-system",
+      "kind": "requires",
+      "reason": "Risk management is one of its processes."
+    },
+    {
+      "parent": "quality-management-system",
+      "child": "proportionate-quality-implementation",
+      "kind": "requires",
+      "reason": "Proportionality modifies implementation of the quality system."
+    },
+    {
+      "parent": "quality-management-system",
+      "child": "sector-governance-integration",
+      "kind": "requires",
+      "reason": "Integration concerns the quality system's specified elements."
+    },
+    {
+      "parent": "technical-file",
+      "child": "documentation-custody",
+      "kind": "requires",
+      "reason": "Technical documentation is one retained record"
+    },
+    {
+      "parent": "quality-management-system",
+      "child": "documentation-custody",
+      "kind": "requires",
+      "reason": "Quality-system documentation is another."
+    },
+    {
+      "parent": "documentation-custody",
+      "child": "authority-cooperation",
+      "kind": "requires",
+      "reason": "Cooperation requires retrievable evidence."
+    },
+    {
+      "parent": "documentation-custody",
+      "child": "documentation-continuity",
+      "kind": "requires",
+      "reason": "Availability continues for the documentation period."
+    },
+    {
+      "parent": "provider-duty-map",
+      "child": "provider-corrective-action",
+      "kind": "requires",
+      "reason": "The provider owes the duty"
+    },
+    {
+      "parent": "lifecycle-risk-management",
+      "child": "provider-corrective-action",
+      "kind": "requires",
+      "reason": "The identified risk/non-compliance informs the action."
+    },
+    {
+      "parent": "provider-corrective-action",
+      "child": "provider-risk-information",
+      "kind": "requires",
+      "reason": "Investigation and information accompany corrective response."
+    },
+    {
+      "parent": "provider-duty-map",
+      "child": "representative-mandate",
+      "kind": "requires",
+      "reason": "The representative acts in relation to provider obligations."
+    },
+    {
+      "parent": "representative-mandate",
+      "child": "importer-verification",
+      "kind": "requires",
+      "reason": "Import verification includes the provider's representative."
+    },
+    {
+      "parent": "importer-verification",
+      "child": "distributor-verification",
+      "kind": "requires",
+      "reason": "Distributor checks include the importer's identity duty."
+    },
+    {
+      "parent": "provider-duty-map",
+      "child": "changed-provider-role",
+      "kind": "requires",
+      "reason": "The consequence is a new allocation of provider obligations."
+    },
+    {
+      "parent": "changed-provider-role",
+      "child": "supplier-access-agreement",
+      "kind": "requires",
+      "reason": "Responsibility must first be assigned to the high-risk provider."
+    },
+    {
+      "parent": "changed-provider-role",
+      "child": "value-chain-case",
+      "kind": "requires",
+      "reason": "Identify the new provider"
+    },
+    {
+      "parent": "supplier-access-agreement",
+      "child": "value-chain-case",
+      "kind": "requires",
+      "reason": "Check assistance"
+    },
+    {
+      "parent": "importer-verification",
+      "child": "value-chain-case",
+      "kind": "requires",
+      "reason": "Preserve import duties where relevant"
+    },
+    {
+      "parent": "provider-corrective-action",
+      "child": "value-chain-case",
+      "kind": "requires",
+      "reason": "Identify corrective responsibilities."
+    },
+    {
+      "parent": "system-deployer",
+      "child": "deployer-instructions-use",
+      "kind": "requires",
+      "reason": "Identify the deployer"
+    },
+    {
+      "parent": "deployer-instructions",
+      "child": "deployer-instructions-use",
+      "kind": "requires",
+      "reason": "Measures implement the provider's instructions."
+    },
+    {
+      "parent": "deployer-instructions-use",
+      "child": "oversight-assignment",
+      "kind": "requires",
+      "reason": "Assignment belongs to deployment arrangements"
+    },
+    {
+      "parent": "effective-oversight-controls",
+      "child": "oversight-assignment",
+      "kind": "requires",
+      "reason": "The person must be able to use effective oversight controls."
+    },
+    {
+      "parent": "deployer-instructions-use",
+      "child": "controlled-input-quality",
+      "kind": "requires",
+      "reason": "Input control is part of compliant use."
+    },
+    {
+      "parent": "deployer-instructions-use",
+      "child": "deployer-monitoring-escalation",
+      "kind": "requires",
+      "reason": "Monitor actual instructed use"
+    },
+    {
+      "parent": "provider-corrective-action",
+      "child": "deployer-monitoring-escalation",
+      "kind": "requires",
+      "reason": "Distinguish the deployer response from provider correction."
+    },
+    {
+      "parent": "controlled-log-retention",
+      "child": "deployer-log-custody",
+      "kind": "requires",
+      "reason": "Recognise the controlled-log retention rule"
+    },
+    {
+      "parent": "deployer-instructions-use",
+      "child": "deployer-log-custody",
+      "kind": "requires",
+      "reason": "Identify the deploying actor."
+    },
+    {
+      "parent": "system-deployer",
+      "child": "workplace-information",
+      "kind": "requires",
+      "reason": "The employer is a deployer"
+    },
+    {
+      "parent": "deployer-instructions-use",
+      "child": "workplace-information",
+      "kind": "requires",
+      "reason": "The notice concerns a proposed deployment."
+    },
+    {
+      "parent": "system-deployer",
+      "child": "public-deployer-registration",
+      "kind": "requires",
+      "reason": "The actor's deployer status matters."
+    },
+    {
+      "parent": "deployer-instructions-use",
+      "child": "affected-person-information",
+      "kind": "requires",
+      "reason": "It concerns the actual deployment"
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "affected-person-information",
+      "kind": "requires",
+      "reason": "The Annex III route is required."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "fria-trigger",
+      "kind": "requires",
+      "reason": "The Annex III route and point matter"
+    },
+    {
+      "parent": "system-deployer",
+      "child": "fria-trigger",
+      "kind": "requires",
+      "reason": "The obligation is imposed on specified deployers."
+    },
+    {
+      "parent": "fria-trigger",
+      "child": "fria-content-update",
+      "kind": "requires",
+      "reason": "First establish applicability"
+    },
+    {
+      "parent": "deployer-instructions-use",
+      "child": "fria-content-update",
+      "kind": "requires",
+      "reason": "Assess the actual deployment process."
+    },
+    {
+      "parent": "fria-content-update",
+      "child": "fria-dpia-reuse",
+      "kind": "requires",
+      "reason": "Reuse must satisfy the applicable assessment elements."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "post-remote-biometric-route",
+      "kind": "requires",
+      "reason": "Recognise the biometric high-risk route"
+    },
+    {
+      "parent": "system-deployer",
+      "child": "post-remote-biometric-route",
+      "kind": "requires",
+      "reason": "Identify the deploying actor."
+    },
+    {
+      "parent": "effective-oversight-controls",
+      "child": "biometric-dual-verification",
+      "kind": "requires",
+      "reason": "This is a special human-oversight measure."
+    },
+    {
+      "parent": "logging-capability",
+      "child": "biometric-log-fields",
+      "kind": "requires",
+      "reason": "Recognise system logging"
+    },
+    {
+      "parent": "post-remote-biometric-route",
+      "child": "biometric-log-fields",
+      "kind": "requires",
+      "reason": "Identify the special biometric context."
+    },
+    {
+      "parent": "technical-readiness-case",
+      "child": "dossier-evidence-gaps",
+      "kind": "requires",
+      "reason": "Assess technical readiness"
+    },
+    {
+      "parent": "value-chain-case",
+      "child": "dossier-evidence-gaps",
+      "kind": "requires",
+      "reason": "Assign value-chain responsibility."
+    },
+    {
+      "parent": "duty-application-date",
+      "child": "deployment-gate-review",
+      "kind": "requires",
+      "reason": "Establish dates"
+    },
+    {
+      "parent": "deployer-monitoring-escalation",
+      "child": "deployment-gate-review",
+      "kind": "requires",
+      "reason": "Check operational response"
+    },
+    {
+      "parent": "workplace-information",
+      "child": "deployment-gate-review",
+      "kind": "requires",
+      "reason": "Check workplace information"
+    },
+    {
+      "parent": "fria-trigger",
+      "child": "deployment-gate-review",
+      "kind": "requires",
+      "reason": "Check FRIA applicability."
+    },
+    {
+      "parent": "dossier-evidence-gaps",
+      "child": "compliance-decision-case",
+      "kind": "requires",
+      "reason": "Identify missing proof"
+    },
+    {
+      "parent": "deployment-gate-review",
+      "child": "compliance-decision-case",
+      "kind": "requires",
+      "reason": "Identify deployment gates."
+    },
+    {
+      "parent": "scope-record-case",
+      "child": "data-file-case",
+      "kind": "suggests",
+      "reason": "Keep the same case's scope record available for the data review."
+    },
+    {
+      "parent": "data-file-case",
+      "child": "technical-readiness-case",
+      "kind": "suggests",
+      "reason": "Carry the data findings into the technical dossier."
+    },
+    {
+      "parent": "integrated-product-file",
+      "child": "sector-governance-integration",
+      "kind": "suggests",
+      "reason": "Product documentation integration provides helpful context for sector quality processes."
+    },
+    {
+      "parent": "automation-bias",
+      "child": "deployer-monitoring-escalation",
+      "kind": "suggests",
+      "reason": "Automation bias is useful context for monitoring actual use."
+    },
+    {
+      "parent": "deployer-log-custody",
+      "child": "deployment-gate-review",
+      "kind": "suggests",
+      "reason": "Deployer log custody adds detail to the final operational review."
+    },
+    {
+      "parent": "public-deployer-registration",
+      "child": "deployment-gate-review",
+      "kind": "suggests",
+      "reason": "The public-deployer variant adds a registration gate."
+    },
+    {
+      "parent": "affected-person-information",
+      "child": "deployment-gate-review",
+      "kind": "suggests",
+      "reason": "Affected-person notice adds a separate information gate."
+    },
+    {
+      "parent": "fria-dpia-reuse",
+      "child": "deployment-gate-review",
+      "kind": "suggests",
+      "reason": "DPIA reuse adds detail once a FRIA trigger is established."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "H01",
+      "title": "Identify the system, purpose and EU connection",
+      "module": "H0",
+      "tier": "core",
+      "covers": ["ai-system-boundary", "intended-purpose", "eu-connection"],
+      "prerequisites": []
+    },
+    {
+      "id": "H02",
+      "title": "Identify provider, deployer and other actors",
+      "module": "H0",
+      "tier": "core",
+      "covers": ["system-provider", "system-deployer", "other-operators"],
+      "prerequisites": [
+        {
+          "lesson_id": "H01",
+          "reason": "The role attaches to a system Intended use distinguishes the supplied system from upstream components. Deployment is use of an identified system."
+        }
+      ]
+    },
+    {
+      "id": "H03",
+      "title": "Confirm the high-risk route and record its limits",
+      "module": "H0",
+      "tier": "core",
+      "covers": [
+        "high-risk-route",
+        "limited-sector-applicability",
+        "classification-record"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H01",
+          "reason": "Classification tests the intended purpose. Applicability must first have an EU connection"
+        },
+        {
+          "lesson_id": "H02",
+          "reason": "The provider's record duty needs an actor"
+        }
+      ]
+    },
+    {
+      "id": "H04",
+      "title": "Separate classification, dates and parallel duties",
+      "module": "H0",
+      "tier": "core",
+      "covers": [
+        "duty-application-date",
+        "legacy-design-transition",
+        "parallel-obligations"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H03",
+          "reason": "Annex route affects the Sections 1–3 date. A classification conclusion must be separated from other duty triggers."
+        }
+      ]
+    },
+    {
+      "id": "H05",
+      "title": "Follow risk through the system's lifecycle",
+      "module": "H0",
+      "tier": "core",
+      "covers": [
+        "lifecycle-risk-management",
+        "foreseeable-misuse",
+        "residual-risk"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H01",
+          "reason": "Risks must be assessed against a defined intended purpose. Misuse is assessed relative to intended use."
+        }
+      ]
+    },
+    {
+      "id": "H06",
+      "title": "Build the scope record: case exercise",
+      "module": "H0",
+      "tier": "core",
+      "covers": ["scope-record-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "H02",
+          "reason": "Name the responsible actor"
+        },
+        {
+          "lesson_id": "H03",
+          "reason": "Apply the route"
+        },
+        {
+          "lesson_id": "H04",
+          "reason": "Date the duties Preserve parallel checks."
+        }
+      ]
+    },
+    {
+      "id": "H07",
+      "title": "Choose controls and define testing before release",
+      "module": "H1",
+      "tier": "core",
+      "covers": [
+        "risk-control-hierarchy",
+        "prior-test-criteria",
+        "vulnerable-person-risk"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H05",
+          "reason": "Controls address analysed risks Selection must consider remaining risk. This is a required consideration within risk management."
+        }
+      ]
+    },
+    {
+      "id": "H08",
+      "title": "Identify datasets and document their origins",
+      "module": "H1",
+      "tier": "core",
+      "covers": ["dataset-roles", "dataset-provenance", "data-preparation"],
+      "prerequisites": [
+        {
+          "lesson_id": "H01",
+          "reason": "Dataset use depends on what the system is intended to do."
+        }
+      ]
+    },
+    {
+      "id": "H09",
+      "title": "Assess representation, context and missing data",
+      "module": "H1",
+      "tier": "core",
+      "covers": [
+        "dataset-representativeness",
+        "deployment-context-fit",
+        "data-gap-remediation"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H08",
+          "reason": "Quality applies to the appropriate datasets."
+        }
+      ]
+    },
+    {
+      "id": "H10",
+      "title": "Detect bias and prevent harmful feedback",
+      "module": "H1",
+      "tier": "core",
+      "covers": ["bias-feedback-loop", "bias-mitigation"],
+      "prerequisites": [
+        {
+          "lesson_id": "H08",
+          "reason": "Bias can arise from origins and selection"
+        },
+        {
+          "lesson_id": "H09",
+          "reason": "A representational shortfall can affect groups."
+        }
+      ]
+    },
+    {
+      "id": "H11",
+      "title": "Use the sensitive-data bias exception carefully",
+      "module": "H1",
+      "tier": "core",
+      "covers": [
+        "sensitive-bias-necessity",
+        "sensitive-bias-safeguards",
+        "extended-bias-permission"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H10",
+          "reason": "The exception must address a qualifying bias problem."
+        }
+      ]
+    },
+    {
+      "id": "H12",
+      "title": "Review the risk and data file: case exercise",
+      "module": "H1",
+      "tier": "core",
+      "covers": ["data-file-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "H09",
+          "reason": "Assess context"
+        },
+        {
+          "lesson_id": "H10",
+          "reason": "Check mitigation"
+        },
+        {
+          "lesson_id": "H11",
+          "reason": "Check necessity Check safeguards."
+        }
+      ]
+    },
+    {
+      "id": "H13",
+      "title": "Build a technical file that demonstrates compliance",
+      "module": "H2",
+      "tier": "core",
+      "covers": [
+        "technical-file",
+        "technical-evidence-index",
+        "integrated-product-file"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H01",
+          "reason": "Documentation describes the intended purpose"
+        },
+        {
+          "lesson_id": "H07",
+          "reason": "It must include meaningful test evidence."
+        }
+      ]
+    },
+    {
+      "id": "H14",
+      "title": "Specify logging and distinguish retention rules",
+      "module": "H2",
+      "tier": "core",
+      "covers": ["logging-capability", "controlled-log-retention"],
+      "prerequisites": [
+        {
+          "lesson_id": "H02",
+          "reason": "Provider custody is an actor-specific obligation."
+        },
+        {
+          "lesson_id": "H05",
+          "reason": "Relevant events support lifecycle risk management."
+        }
+      ]
+    },
+    {
+      "id": "H15",
+      "title": "Give deployers usable instructions and limitations",
+      "module": "H2",
+      "tier": "core",
+      "covers": ["deployer-instructions", "output-interpretation"],
+      "prerequisites": [
+        {
+          "lesson_id": "H01",
+          "reason": "Instructions establish intended purpose"
+        },
+        {
+          "lesson_id": "H13",
+          "reason": "They must be supported by system evidence."
+        }
+      ]
+    },
+    {
+      "id": "H16",
+      "title": "Make human oversight effective",
+      "module": "H2",
+      "tier": "core",
+      "covers": ["effective-oversight-controls", "automation-bias"],
+      "prerequisites": [
+        {
+          "lesson_id": "H05",
+          "reason": "Oversight addresses the system's risks"
+        },
+        {
+          "lesson_id": "H15",
+          "reason": "A supervisor needs to interpret the output."
+        }
+      ]
+    },
+    {
+      "id": "H17",
+      "title": "Demonstrate accuracy, resilience and cybersecurity",
+      "module": "H2",
+      "tier": "core",
+      "covers": [
+        "purpose-performance-metrics",
+        "fault-resilience",
+        "ai-cybersecurity"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H07",
+          "reason": "Metrics must be defined before meaningful tests."
+        }
+      ]
+    },
+    {
+      "id": "H18",
+      "title": "Review technical readiness: case exercise",
+      "module": "H2",
+      "tier": "core",
+      "covers": ["technical-readiness-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "H13",
+          "reason": "Locate proof"
+        },
+        {
+          "lesson_id": "H14",
+          "reason": "Check traceability"
+        },
+        {
+          "lesson_id": "H16",
+          "reason": "Check oversight"
+        },
+        {
+          "lesson_id": "H17",
+          "reason": "Check tested performance."
+        }
+      ]
+    },
+    {
+      "id": "H19",
+      "title": "Map provider duties and release gates",
+      "module": "H3",
+      "tier": "core",
+      "covers": [
+        "provider-duty-map",
+        "provider-identity",
+        "provider-accessibility"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H02",
+          "reason": "Duties need the provider role"
+        },
+        {
+          "lesson_id": "H03",
+          "reason": "They require the relevant high-risk route."
+        }
+      ]
+    },
+    {
+      "id": "H20",
+      "title": "Put a proportionate quality system in place",
+      "module": "H3",
+      "tier": "core",
+      "covers": [
+        "quality-management-system",
+        "proportionate-quality-implementation",
+        "sector-governance-integration"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H05",
+          "reason": "Risk management is one of its processes."
+        },
+        {
+          "lesson_id": "H19",
+          "reason": "The provider must implement the system"
+        }
+      ]
+    },
+    {
+      "id": "H21",
+      "title": "Preserve documentation and answer authorities",
+      "module": "H3",
+      "tier": "core",
+      "covers": [
+        "documentation-custody",
+        "authority-cooperation",
+        "documentation-continuity"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H13",
+          "reason": "Technical documentation is one retained record"
+        },
+        {
+          "lesson_id": "H20",
+          "reason": "Quality-system documentation is another."
+        }
+      ]
+    },
+    {
+      "id": "H22",
+      "title": "Correct non-compliance and communicate risk",
+      "module": "H3",
+      "tier": "core",
+      "covers": ["provider-corrective-action", "provider-risk-information"],
+      "prerequisites": [
+        {
+          "lesson_id": "H05",
+          "reason": "The identified risk/non-compliance informs the action."
+        },
+        {
+          "lesson_id": "H19",
+          "reason": "The provider owes the duty"
+        }
+      ]
+    },
+    {
+      "id": "H23",
+      "title": "Check representatives, importers and distributors",
+      "module": "H3",
+      "tier": "core",
+      "covers": [
+        "representative-mandate",
+        "importer-verification",
+        "distributor-verification"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H19",
+          "reason": "The representative acts in relation to provider obligations."
+        }
+      ]
+    },
+    {
+      "id": "H24",
+      "title": "Handle changed roles and supplier dependence: case exercise",
+      "module": "H3",
+      "tier": "core",
+      "covers": [
+        "changed-provider-role",
+        "supplier-access-agreement",
+        "value-chain-case"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H19",
+          "reason": "The consequence is a new allocation of provider obligations."
+        },
+        {
+          "lesson_id": "H22",
+          "reason": "Identify corrective responsibilities."
+        },
+        {
+          "lesson_id": "H23",
+          "reason": "Preserve import duties where relevant"
+        }
+      ]
+    },
+    {
+      "id": "H25",
+      "title": "Implement instructions, oversight and input controls",
+      "module": "H4",
+      "tier": "core",
+      "covers": [
+        "deployer-instructions-use",
+        "oversight-assignment",
+        "controlled-input-quality"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H02",
+          "reason": "Identify the deployer"
+        },
+        {
+          "lesson_id": "H15",
+          "reason": "Measures implement the provider's instructions."
+        },
+        {
+          "lesson_id": "H16",
+          "reason": "The person must be able to use effective oversight controls."
+        }
+      ]
+    },
+    {
+      "id": "H26",
+      "title": "Monitor use and preserve controlled logs",
+      "module": "H4",
+      "tier": "core",
+      "covers": ["deployer-monitoring-escalation", "deployer-log-custody"],
+      "prerequisites": [
+        {
+          "lesson_id": "H14",
+          "reason": "Recognise the controlled-log retention rule"
+        },
+        {
+          "lesson_id": "H22",
+          "reason": "Distinguish the deployer response from provider correction."
+        },
+        {
+          "lesson_id": "H25",
+          "reason": "Monitor actual instructed use Identify the deploying actor."
+        }
+      ]
+    },
+    {
+      "id": "H27",
+      "title": "Inform workers, affected people and public deployers",
+      "module": "H4",
+      "tier": "core",
+      "covers": [
+        "workplace-information",
+        "public-deployer-registration",
+        "affected-person-information"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H02",
+          "reason": "The employer is a deployer The actor's deployer status matters."
+        },
+        {
+          "lesson_id": "H03",
+          "reason": "The Annex III route is required."
+        },
+        {
+          "lesson_id": "H25",
+          "reason": "The notice concerns a proposed deployment. It concerns the actual deployment"
+        }
+      ]
+    },
+    {
+      "id": "H28",
+      "title": "Decide whether a fundamental-rights assessment is needed",
+      "module": "H4",
+      "tier": "core",
+      "covers": ["fria-trigger", "fria-content-update", "fria-dpia-reuse"],
+      "prerequisites": [
+        {
+          "lesson_id": "H02",
+          "reason": "The obligation is imposed on specified deployers."
+        },
+        {
+          "lesson_id": "H03",
+          "reason": "The Annex III route and point matter"
+        },
+        {
+          "lesson_id": "H25",
+          "reason": "Assess the actual deployment process."
+        }
+      ]
+    },
+    {
+      "id": "H29",
+      "title": "Special route: remote biometric identification",
+      "module": "H4",
+      "tier": "extension",
+      "covers": [
+        "post-remote-biometric-route",
+        "biometric-dual-verification",
+        "biometric-log-fields"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H02",
+          "reason": "Identify the deploying actor."
+        },
+        {
+          "lesson_id": "H03",
+          "reason": "Recognise the biometric high-risk route"
+        },
+        {
+          "lesson_id": "H14",
+          "reason": "Recognise system logging"
+        },
+        {
+          "lesson_id": "H16",
+          "reason": "This is a special human-oversight measure."
+        }
+      ]
+    },
+    {
+      "id": "H30",
+      "title": "Assemble the compliance decision dossier: final case",
+      "module": "H4",
+      "tier": "core",
+      "covers": [
+        "dossier-evidence-gaps",
+        "deployment-gate-review",
+        "compliance-decision-case"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "H04",
+          "reason": "Establish dates"
+        },
+        {
+          "lesson_id": "H18",
+          "reason": "Assess technical readiness"
+        },
+        {
+          "lesson_id": "H24",
+          "reason": "Assign value-chain responsibility."
+        },
+        {
+          "lesson_id": "H26",
+          "reason": "Check operational response"
+        },
+        {
+          "lesson_id": "H27",
+          "reason": "Check workplace information"
+        },
+        {
+          "lesson_id": "H28",
+          "reason": "Check FRIA applicability."
+        }
+      ]
+    }
+  ]
+}

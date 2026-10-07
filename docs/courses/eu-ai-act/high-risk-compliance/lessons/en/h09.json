@@ -1,0 +1,207 @@
+{
+  "module": "Control risk and govern data",
+  "lesson": {
+    "slug": "h09",
+    "title": "Assess representation, context and missing data",
+    "summary": "Assess data suitability for people and deployment context.",
+    "covers": [
+      "dataset-representativeness",
+      "deployment-context-fit",
+      "data-gap-remediation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h08",
+        "reason": "Quality applies to the appropriate datasets."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Representation** means the data adequately reflects relevant people or groups for the intended purpose. Sets must be relevant, sufficiently representative and, to the best extent possible, error-free and complete.",
+        "Appropriate statistical properties may be met within individual sets or their combination. Neither “perfect data always” nor “large data is enough” states the statutory standard."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(e), (h), (3), (4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Deployment-context fit** asks whether data reflects relevant geographical, contextual, behavioural and functional settings. Northbridge’s past office-role applicants do not automatically validate a new apprenticeship use in another labour market.",
+        "Record which differences matter to the intended purpose. Size does not answer whether language, application forms or job types have changed."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(e), (h), (3), (4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Data-gap remediation** identifies relevant missing or weak data that prevents compliance and how to address it. Include needed availability, quantity and suitability in the assessment.",
+        "For an unsupported group or context, possible responses include obtaining suitable data, changing the permitted scope or holding that use pending evidence. These are assessor choices; the statute does not prescribe one universal collection method."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(e), (h), (3), (4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Case: a very large set excludes a group relevant to the intended deployment. An overall performance claim cannot by itself establish suitability for that group.",
+        "The file should connect purpose, people, context, gaps, measures and resulting evidence. An unresolved gap stays a limitation or gate rather than disappearing into the average."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 10(2)(e), (h), (3), (4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["dataset-representativeness"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "Northbridge’s large dataset excludes a relevant applicant group. Does size establish sufficient representation?",
+      "options": [
+        {
+          "blocks": "No; assess relevant representation and statistical properties",
+          "correct": true,
+          "reason": "Purpose and relevant groups determine suitability."
+        },
+        {
+          "blocks": "Yes; volume replaces group analysis",
+          "correct": false,
+          "reason": "Large sets can still omit relevant groups."
+        },
+        {
+          "blocks": "Only absolutely perfect sets satisfy the law",
+          "correct": false,
+          "reason": "The text uses “to the best extent possible” for errors and completeness."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can volume alone cure missing evidence for an intended group?",
+          "options": [
+            {
+              "blocks": "Yes; volume replaces group analysis",
+              "correct": false,
+              "reason": "Large sets can still omit relevant groups."
+            },
+            {
+              "blocks": "Only absolutely perfect sets satisfy the law",
+              "correct": false,
+              "reason": "The text uses “to the best extent possible” for errors and completeness."
+            },
+            {
+              "blocks": "No; assess relevant representation and statistical properties",
+              "correct": true,
+              "reason": "Purpose and relevant groups determine suitability."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployment-context-fit"],
+      "teaches": ["screen-2"],
+      "prompt": "An office-role dataset is reused for apprenticeships in a different language setting. What matters?",
+      "options": [
+        {
+          "blocks": "Only keeping the old dataset name",
+          "correct": false,
+          "reason": "A name does not prove fit."
+        },
+        {
+          "blocks": "Only the supplier’s total customer count",
+          "correct": false,
+          "reason": "Customer count does not validate this use."
+        },
+        {
+          "blocks": "Fit to the relevant deployment context",
+          "correct": true,
+          "reason": "Geographical, behavioural and functional elements can matter."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which review is needed when job and language settings change?",
+          "options": [
+            {
+              "blocks": "Only the supplier’s total customer count",
+              "correct": false,
+              "reason": "Customer count does not validate this use."
+            },
+            {
+              "blocks": "Fit to the relevant deployment context",
+              "correct": true,
+              "reason": "Geographical, behavioural and functional elements can matter."
+            },
+            {
+              "blocks": "Only keeping the old dataset name",
+              "correct": false,
+              "reason": "A name does not prove fit."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["data-gap-remediation"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "The intended group has no supporting data and the gap prevents compliance. What is supported?",
+      "options": [
+        {
+          "blocks": "Treat it as resolved when the team signs",
+          "correct": false,
+          "reason": "Signatures cannot supply missing evidence."
+        },
+        {
+          "blocks": "Specify remediation or hold/restrict the unsupported use",
+          "correct": true,
+          "reason": "Identify gaps and how they can be addressed."
+        },
+        {
+          "blocks": "Hide it inside the overall average",
+          "correct": false,
+          "reason": "That removes material evidence from the review."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an unresolved material data gap affect the dossier?",
+          "options": [
+            {
+              "blocks": "Specify remediation or hold/restrict the unsupported use",
+              "correct": true,
+              "reason": "Identify gaps and how they can be addressed."
+            },
+            {
+              "blocks": "Hide it inside the overall average",
+              "correct": false,
+              "reason": "That removes material evidence from the review."
+            },
+            {
+              "blocks": "Treat it as resolved when the team signs",
+              "correct": false,
+              "reason": "Signatures cannot supply missing evidence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "module": "Make technical compliance inspectable",
+  "lesson": {
+    "slug": "h15",
+    "title": "Give deployers usable instructions and limitations",
+    "summary": "Give deployers usable instructions and enough information to interpret outputs.",
+    "covers": ["deployer-instructions", "output-interpretation"],
+    "prerequisites": [
+      {
+        "lesson": "h01",
+        "reason": "Instructions establish intended purpose"
+      },
+      {
+        "lesson": "h13",
+        "reason": "They must be supported by system evidence."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Deployer instructions** accompany the system in an appropriate digital or other format. They must be concise, complete, correct, clear, relevant, accessible and comprehensible.",
+        "Include provider and representative contact details where applicable. A technical file kept privately by the supplier does not by itself give the employer usable instructions."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 13(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Explain purpose, capabilities, limitations, tested/validated accuracy metrics, robustness and cybersecurity, and known or foreseeable circumstances affecting those levels. Include foreseeable risks under intended use and misuse.",
+        "Where appropriate or applicable, include relevant group performance, input specifications, dataset information, explanation capabilities and information for correct output use. A general “high accuracy” claim is insufficient for these needed details."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 13(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Output interpretation** means understanding what a result does and does not support. System operation must be sufficiently transparent for deployers to interpret outputs and use them appropriately.",
+        "Northbridge’s rank is advice for the specified recruitment task, not automatic proof of a person’s worth. Explain the basis and limitations needed for the actual intended decision, with relevant interpretation tools."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 13(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Instructions also include predetermined changes from the initial assessment, human-oversight measures, computing/hardware needs, expected lifetime, care/maintenance and its frequency, including updates. Where relevant, explain log collection, storage and interpretation mechanisms.",
+        "Case: the employer gets a score legend but no input limits or maintenance schedule. Request the missing relevant operational information rather than assuming the technical team will somehow supply it later."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 13(1)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["deployer-instructions"],
+      "teaches": ["screen-1", "screen-2", "screen-4"],
+      "prompt": "A supplier gives a score legend but omits relevant input limits and maintenance frequency. What needs correction?",
+      "options": [
+        {
+          "blocks": "Provide the relevant complete operational information",
+          "correct": true,
+          "reason": "Article 13 includes inputs, maintenance and other particulars."
+        },
+        {
+          "blocks": "Only change the legend’s colour",
+          "correct": false,
+          "reason": "Appearance does not supply missing information."
+        },
+        {
+          "blocks": "Keep all needed instructions inside a private supplier file",
+          "correct": false,
+          "reason": "The deployer needs usable accompanying instructions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a legend alone supply the specified deployer instructions?",
+          "options": [
+            {
+              "blocks": "Only change the legend’s colour",
+              "correct": false,
+              "reason": "Appearance does not supply missing information."
+            },
+            {
+              "blocks": "Keep all needed instructions inside a private supplier file",
+              "correct": false,
+              "reason": "The deployer needs usable accompanying instructions."
+            },
+            {
+              "blocks": "Provide the relevant complete operational information",
+              "correct": true,
+              "reason": "Article 13 includes inputs, maintenance and other particulars."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["output-interpretation"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "An employer treats a ranking as proof that the lowest-ranked person is unqualified. What should the instructions enable?",
+      "options": [
+        {
+          "blocks": "Unconditional reliance on every score",
+          "correct": false,
+          "reason": "That ignores the result’s limitations."
+        },
+        {
+          "blocks": "Only knowledge of the vendor’s revenue",
+          "correct": false,
+          "reason": "That does not explain the output."
+        },
+        {
+          "blocks": "Interpretation of the output within its purpose and limits",
+          "correct": true,
+          "reason": "Transparency enables appropriate use rather than overclaiming."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What information helps prevent an unjustified interpretation of a recruitment rank?",
+          "options": [
+            {
+              "blocks": "Only knowledge of the vendor’s revenue",
+              "correct": false,
+              "reason": "That does not explain the output."
+            },
+            {
+              "blocks": "Interpretation of the output within its purpose and limits",
+              "correct": true,
+              "reason": "Transparency enables appropriate use rather than overclaiming."
+            },
+            {
+              "blocks": "Unconditional reliance on every score",
+              "correct": false,
+              "reason": "That ignores the result’s limitations."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployer-instructions"],
+      "teaches": ["screen-4"],
+      "prompt": "A provider predetermined certain changes at initial assessment. May it omit them from the instructions?",
+      "options": [
+        {
+          "blocks": "Every hypothetical future edit as already approved",
+          "correct": false,
+          "reason": "Predetermined changes are not blanket approval of unknown changes."
+        },
+        {
+          "blocks": "The predetermined changes and performance changes, if any",
+          "correct": true,
+          "reason": "Article 13(3)(c) includes them."
+        },
+        {
+          "blocks": "Only changes the customer discovers independently",
+          "correct": false,
+          "reason": "Instructions must provide the specified information."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which change information belongs in the accompanying instructions?",
+          "options": [
+            {
+              "blocks": "The predetermined changes and performance changes, if any",
+              "correct": true,
+              "reason": "Article 13(3)(c) includes them."
+            },
+            {
+              "blocks": "Only changes the customer discovers independently",
+              "correct": false,
+              "reason": "Instructions must provide the specified information."
+            },
+            {
+              "blocks": "Every hypothetical future edit as already approved",
+              "correct": false,
+              "reason": "Predetermined changes are not blanket approval of unknown changes."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

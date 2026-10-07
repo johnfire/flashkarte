@@ -1,0 +1,228 @@
+{
+  "module": "Assign provider and supply-chain duties",
+  "lesson": {
+    "slug": "h24",
+    "title": "Handle changed roles and supplier dependence: case exercise",
+    "summary": "Reassign provider duties after changes and secure necessary supplier assistance.",
+    "covers": [
+      "changed-provider-role",
+      "supplier-access-agreement",
+      "value-chain-case"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h19",
+        "reason": "The consequence is a new allocation of provider obligations."
+      },
+      {
+        "lesson": "h22",
+        "reason": "Identify corrective responsibilities."
+      },
+      {
+        "lesson": "h23",
+        "reason": "Preserve import duties where relevant"
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Changed provider role** under Article 25 can arise for distributors, importers, deployers or others that rebrand an existing high-risk system, substantially modify one so it remains high-risk, or change a non-high-risk system’s intended purpose so it becomes high-risk.",
+        "Substantial modification is an unplanned post-assessment change affecting requirement compliance or changing assessed purpose. Rebranding has the stated contractual-allocation qualification. Section A safety-component product manufacturers also become providers in the specified own-name supply/service circumstances."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 25(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "For the specific changed system, the initial provider is no longer its provider under the paragraph. It must closely cooperate with the new provider, supply necessary information and reasonably expected assistance, including relevant documentation, limitations/failure modes and targeted testing access.",
+        "The cooperation paragraph does not apply where the initial provider clearly specified the system must not be changed into a high-risk system. Do not assume the new provider can compel support under this route regardless of that boundary."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 25(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **supplier-access agreement** specifies in writing necessary information, capabilities, technical access and other assistance from third-party systems/models/tools/services/components/processes for the high-risk provider to comply, based on the generally acknowledged state of the art.",
+        "The exception for publicly accessible free/open-source tools/services/processes/components excludes general-purpose AI models. A general-purpose model serves many distinct tasks: open licensing does not automatically remove it from this agreement rule. IP, confidential information and trade secrets remain protected."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 25(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The AI Office may develop voluntary model contract terms; verify availability before relying on a supposed standard contract. A signed generic purchase contract without needed information/access is not automatically a sufficient agreement.",
+        "Case: a customer converts a general writing assistant into materially influential recruitment ranking. Assume the exact Annex III route is established. Its changed purpose triggers a fresh provider-role analysis, not only an employer-use label."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 25(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The **value-chain case** asks who now supplies the changed high-risk system and what evidence/access it needs. Preserve applicable importer and corrective duties; a role change does not make all other activities irrelevant.",
+        "Record new-provider responsibilities, upstream cooperation conditions, written assistance scope and unresolved access. If the original supplier forbade high-risk conversion, keep the support gap explicit. Do not declare readiness without a route to necessary evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 25(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["changed-provider-role"],
+      "teaches": ["screen-1", "screen-4"],
+      "prompt": "A customer changes a non-high-risk writing assistant into the stipulated high-risk applicant-ranking use. Which analysis is needed?",
+      "options": [
+        {
+          "blocks": "Its new provider role under Article 25",
+          "correct": true,
+          "reason": "The specified purpose change is a trigger."
+        },
+        {
+          "blocks": "Only its original purchase label",
+          "correct": false,
+          "reason": "Actual changed conduct controls the role analysis."
+        },
+        {
+          "blocks": "No reassessment because the upstream model is unchanged",
+          "correct": false,
+          "reason": "Purpose can change classification and role."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the customer remain only a deployer after this established high-risk purpose change?",
+          "options": [
+            {
+              "blocks": "Only its original purchase label",
+              "correct": false,
+              "reason": "Actual changed conduct controls the role analysis."
+            },
+            {
+              "blocks": "No reassessment because the upstream model is unchanged",
+              "correct": false,
+              "reason": "Purpose can change classification and role."
+            },
+            {
+              "blocks": "Its new provider role under Article 25",
+              "correct": true,
+              "reason": "The specified purpose change is a trigger."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["supplier-access-agreement"],
+      "teaches": ["screen-2", "screen-3", "screen-4"],
+      "prompt": "An open-licensed general-purpose model is integrated into the high-risk system. Does that fact alone establish the agreement exception?",
+      "options": [
+        {
+          "blocks": "Yes; any open licence removes the agreement rule",
+          "correct": false,
+          "reason": "The exception is limited."
+        },
+        {
+          "blocks": "Yes; a generic invoice supplies technical access",
+          "correct": false,
+          "reason": "An invoice does not establish the needed assistance."
+        },
+        {
+          "blocks": "No; general-purpose models are excluded from that exception",
+          "correct": true,
+          "reason": "Article 25(4) expressly preserves them."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the open-source supplier exception automatically include general-purpose models?",
+          "options": [
+            {
+              "blocks": "Yes; a generic invoice supplies technical access",
+              "correct": false,
+              "reason": "An invoice does not establish the needed assistance."
+            },
+            {
+              "blocks": "No; general-purpose models are excluded from that exception",
+              "correct": true,
+              "reason": "Article 25(4) expressly preserves them."
+            },
+            {
+              "blocks": "Yes; any open licence removes the agreement rule",
+              "correct": false,
+              "reason": "The exception is limited."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["value-chain-case"],
+      "teaches": ["screen-2", "screen-5"],
+      "prompt": "The initial provider clearly forbade high-risk conversion and necessary testing access is absent. What is supported?",
+      "options": [
+        {
+          "blocks": "Certify readiness because someone else developed it",
+          "correct": false,
+          "reason": "The new provider still needs evidence for its duties."
+        },
+        {
+          "blocks": "Keep the support gap and cooperation boundary explicit",
+          "correct": true,
+          "reason": "The exception can limit the cooperation route; missing evidence remains."
+        },
+        {
+          "blocks": "Assume compelled support regardless of the stated limit",
+          "correct": false,
+          "reason": "That ignores Article 25(2)’s exception."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should the changed-system dossier say about the missing upstream support?",
+          "options": [
+            {
+              "blocks": "Keep the support gap and cooperation boundary explicit",
+              "correct": true,
+              "reason": "The exception can limit the cooperation route; missing evidence remains."
+            },
+            {
+              "blocks": "Assume compelled support regardless of the stated limit",
+              "correct": false,
+              "reason": "That ignores Article 25(2)’s exception."
+            },
+            {
+              "blocks": "Certify readiness because someone else developed it",
+              "correct": false,
+              "reason": "The new provider still needs evidence for its duties."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

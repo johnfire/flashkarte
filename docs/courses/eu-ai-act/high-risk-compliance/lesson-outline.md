@@ -1,4 +1,4 @@
-# Proposed lesson outline
+# Lesson outline
 
 **30 English lessons; five modules of six.** Concept IDs refer to the [graph](concept-graph.md). Required lesson prerequisites are derived from required concept edges, ignoring parents within the same lesson. The graph gives the reason for each dependency. H29 is an extension: no core lesson requires it.
 
@@ -63,4 +63,4 @@ H06, H12, H18, H24 and H30 are case exercises; H24 teaches its two component con
 
 H30 combines earlier case records with deployment controls. It is an educational readiness review, not a complete market-release authorisation. Its dossier explicitly hands conformity procedures to the later Articles 28–49 course, incident detail to the operations course, and sector/national and other-law decisions to separately sourced assessments.
 
-The first authoring batch, after review, is **H01–H06 only**. Later batches should incorporate the owner's learning comments before repeating the same wording or misconceptions across the course.
+Chris approved all **H01–H30** on 7 October 2026. All are authored and imported in editable testing. First-student feedback can now guide revisions across the complete course.

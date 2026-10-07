@@ -1,0 +1,207 @@
+{
+  "module": "Define the system and its compliance boundary",
+  "lesson": {
+    "slug": "h04",
+    "title": "Separate classification, dates and parallel duties",
+    "summary": "Separate classification, application dates, transition and parallel law.",
+    "covers": [
+      "duty-application-date",
+      "legacy-design-transition",
+      "parallel-obligations"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h03",
+        "reason": "Annex route affects the Sections 1–3 date. A classification conclusion must be separated from other duty triggers."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **duty application date** tells you when a particular provision becomes applicable. Classification and date are separate findings. In the 27 July 2026 amended baseline, Chapter III Sections 1–3 apply to Annex III systems from **2 December 2027**, and Annex I systems from **2 August 2028**, subject to the stated exceptions.",
+        "Use the current Article 113 and actual route. Do not use the original 2026/2027 high-risk timetable from an older slide. The Article 6(5) guidance duty has a separate exception."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4, 5, 50, 111(2), 113; amended 2026/1744 baseline",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **legacy transition** can affect high-risk systems placed on the market or put into service before the relevant date. Article 111(2) ties application to significant changes in design from that date; public-authority intended use has the specified 2030 compliance endpoint.",
+        "This is not unlimited permission for any old product. Record initial supply/service date, route, design changes and public-authority use; check the exact transition. A marketing claim of “existing system” does not establish these facts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4, 5, 50, 111(2), 113; amended 2026/1744 baseline",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Parallel obligations** use their own triggers. Most Article 5 prohibitions applied from 2 February 2025; inserted 5(1)(ba)/(bb) and 5(1a)/(1b) have the 2 December 2026 date. Article 50 generally applies from 2 August 2026, with a targeted 50(2) transition for systems placed on the market before that date until 2 December 2026.",
+        "Article 50 concerns interaction and specified synthetic content; a notice does not legalise an Article 5 forbidden practice. Data protection and sector or national rules also remain separate checks."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4, 5, 50, 111(2), 113; amended 2026/1744 baseline",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The amended Article 4 requires providers and deployers to support development of AI literacy among staff and others operating systems on their behalf. Literacy concerns knowledge for informed use; the Act does not create a universal training certificate.",
+        "Dossier method: keep one row per actor and duty, with trigger, date, transition evidence and current action. A future high-risk date is not a conclusion that no present obligations exist. All dates in exercises use the stated baseline."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4, 5, 50, 111(2), 113; amended 2026/1744 baseline",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["duty-application-date"],
+      "teaches": ["screen-1"],
+      "prompt": "Under this baseline, when do Chapter III Sections 1–3 apply to Northbridge’s Annex III route, subject to exceptions?",
+      "options": [
+        {
+          "blocks": "2 December 2027",
+          "correct": true,
+          "reason": "Article 113 assigns this route’s date."
+        },
+        {
+          "blocks": "2 August 2028",
+          "correct": false,
+          "reason": "That date belongs to the Annex I route."
+        },
+        {
+          "blocks": "2 August 2026 for every high-risk route",
+          "correct": false,
+          "reason": "That ignores the amended differentiated timetable."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which amended high-risk date belongs to the stipulated Annex III route?",
+          "options": [
+            {
+              "blocks": "2 August 2028",
+              "correct": false,
+              "reason": "That date belongs to the Annex I route."
+            },
+            {
+              "blocks": "2 August 2026 for every high-risk route",
+              "correct": false,
+              "reason": "That ignores the amended differentiated timetable."
+            },
+            {
+              "blocks": "2 December 2027",
+              "correct": true,
+              "reason": "Article 113 assigns this route’s date."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["legacy-design-transition"],
+      "teaches": ["screen-2"],
+      "prompt": "A supplier says its old system is exempt forever. What evidence is needed?",
+      "options": [
+        {
+          "blocks": "Only the word legacy in a brochure",
+          "correct": false,
+          "reason": "A label proves no transition facts."
+        },
+        {
+          "blocks": "No further check once an old invoice exists",
+          "correct": false,
+          "reason": "Later changes and the relevant conditions still matter."
+        },
+        {
+          "blocks": "Dates, relevant design changes and public-use facts",
+          "correct": true,
+          "reason": "Article 111(2) has conditions and a public-use endpoint."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can initial pre-deadline supply alone establish unlimited grandfathering?",
+          "options": [
+            {
+              "blocks": "No further check once an old invoice exists",
+              "correct": false,
+              "reason": "Later changes and the relevant conditions still matter."
+            },
+            {
+              "blocks": "Dates, relevant design changes and public-use facts",
+              "correct": true,
+              "reason": "Article 111(2) has conditions and a public-use endpoint."
+            },
+            {
+              "blocks": "Only the word legacy in a brochure",
+              "correct": false,
+              "reason": "A label proves no transition facts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["parallel-obligations"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "A product is not high-risk or has a later high-risk duty date. What follows?",
+      "options": [
+        {
+          "blocks": "Adding an AI label makes every use lawful",
+          "correct": false,
+          "reason": "Disclosure does not cure a prohibition."
+        },
+        {
+          "blocks": "Check separately triggered prohibitions, transparency and other law",
+          "correct": true,
+          "reason": "Those duties are not erased by classification or its date."
+        },
+        {
+          "blocks": "All AI Act duties disappear",
+          "correct": false,
+          "reason": "Other provisions have independent triggers."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a later Chapter III date close the assessor’s other-law review?",
+          "options": [
+            {
+              "blocks": "Check separately triggered prohibitions, transparency and other law",
+              "correct": true,
+              "reason": "Those duties are not erased by classification or its date."
+            },
+            {
+              "blocks": "All AI Act duties disappear",
+              "correct": false,
+              "reason": "Other provisions have independent triggers."
+            },
+            {
+              "blocks": "Adding an AI label makes every use lawful",
+              "correct": false,
+              "reason": "Disclosure does not cure a prohibition."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

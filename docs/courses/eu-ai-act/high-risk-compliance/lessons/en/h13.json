@@ -1,0 +1,224 @@
+{
+  "module": "Make technical compliance inspectable",
+  "lesson": {
+    "slug": "h13",
+    "title": "Build a technical file that demonstrates compliance",
+    "summary": "Build an inspectable, current technical file linked to requirements.",
+    "covers": [
+      "technical-file",
+      "technical-evidence-index",
+      "integrated-product-file"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h01",
+        "reason": "Documentation describes the intended purpose"
+      },
+      {
+        "lesson": "h07",
+        "reason": "It must include meaningful test evidence."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **technical file** is the documentation demonstrating compliance with the system requirements. Article 11 requires it before market placement or service and requires it to stay current. Give authorities and relevant assessment bodies clear, comprehensive information.",
+        "A brochure saying “tested and safe” is not equivalent evidence. Article 8 connects compliance to intended purpose, generally acknowledged state of the art and risk management."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8, 11; Annex IV points 1–9",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **technical evidence index** connects Annex IV elements to the actual version and records. Include purpose, provider, system/software versions, interactions, hardware, interface, product form and instructions.",
+        "Explain development methods and any pretrained components, design logic and choices, architecture and computing resources, dataset provenance/preparation, oversight, predetermined changes, signed/dated test reports and security measures. An index makes these retrievable; it does not replace them."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8, 11; Annex IV points 1–9",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Also include monitoring, group performance and limitations, foreseeable risks, relevant inputs and oversight, metric appropriateness, the risk-management system and lifecycle changes.",
+        "Annex IV further includes applied Official Journal standards or alternative solutions, the conformity declaration, and the post-market evaluation plan. Standards are technical specifications; a declaration states conformity. Their procedures are later-course handoffs, not assumed complete because this index lists them."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8, 11; Annex IV points 1–9",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "An **integrated product file** for Annex I Section A contains both Article 11 information and the sector-law information in one set. Article 8 also permits appropriate integration of testing, reporting and procedures to avoid duplication.",
+        "Small firms may provide Annex IV elements in a simplified manner using the Commission’s designated form if they choose that route. Verify the form’s availability and version before relying on it. Simplification does not mean omitting the required elements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8, 11; Annex IV points 1–9",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Northbridge’s file should identify the actual ranking version and locate evidence supporting its specified recruitment purpose. A change to labels, inputs or operation may require an update.",
+        "If a signed test report describes a different version, mark the evidence gap. A well-formatted index does not establish that the referenced evidence exists or applies."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8, 11; Annex IV points 1–9",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["technical-file"],
+      "teaches": ["screen-1", "screen-5"],
+      "prompt": "Northbridge has only a brochure and proposes creating the technical documentation after launch. What is wrong?",
+      "options": [
+        {
+          "blocks": "Before supply/service and maintained up to date",
+          "correct": true,
+          "reason": "Article 11 makes this a prior and continuing requirement."
+        },
+        {
+          "blocks": "Only after the first authority complaint",
+          "correct": false,
+          "reason": "The prior requirement is not complaint-triggered."
+        },
+        {
+          "blocks": "Only if the brochure is poorly designed",
+          "correct": false,
+          "reason": "Presentation quality does not replace technical evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When must the compliance-demonstrating technical file exist?",
+          "options": [
+            {
+              "blocks": "Only after the first authority complaint",
+              "correct": false,
+              "reason": "The prior requirement is not complaint-triggered."
+            },
+            {
+              "blocks": "Only if the brochure is poorly designed",
+              "correct": false,
+              "reason": "Presentation quality does not replace technical evidence."
+            },
+            {
+              "blocks": "Before supply/service and maintained up to date",
+              "correct": true,
+              "reason": "Article 11 makes this a prior and continuing requirement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["technical-evidence-index"],
+      "teaches": ["screen-2", "screen-3", "screen-5"],
+      "prompt": "The index cites a test report for a different version without explaining relevance. What should happen?",
+      "options": [
+        {
+          "blocks": "Accept any report with a signature",
+          "correct": false,
+          "reason": "A signature alone does not establish relevance."
+        },
+        {
+          "blocks": "Remove the version from the index",
+          "correct": false,
+          "reason": "Hiding the mismatch loses traceability."
+        },
+        {
+          "blocks": "Resolve the version/evidence gap",
+          "correct": true,
+          "reason": "The records must demonstrate this system’s compliance."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a reference to a mismatched-version report close the evidence requirement?",
+          "options": [
+            {
+              "blocks": "Remove the version from the index",
+              "correct": false,
+              "reason": "Hiding the mismatch loses traceability."
+            },
+            {
+              "blocks": "Resolve the version/evidence gap",
+              "correct": true,
+              "reason": "The records must demonstrate this system’s compliance."
+            },
+            {
+              "blocks": "Accept any report with a signature",
+              "correct": false,
+              "reason": "A signature alone does not establish relevance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["integrated-product-file"],
+      "teaches": ["screen-4"],
+      "prompt": "A Section A product has a sector technical file. What does integration permit?",
+      "options": [
+        {
+          "blocks": "Use any self-made simplified form as designated",
+          "correct": false,
+          "reason": "The opted simplified route requires the Commission form."
+        },
+        {
+          "blocks": "One file containing both required information sets",
+          "correct": true,
+          "reason": "Integration avoids duplication while preserving requirements."
+        },
+        {
+          "blocks": "Discard the AI information automatically",
+          "correct": false,
+          "reason": "Integration is not a waiver."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a provider reuse a Section A documentation process?",
+          "options": [
+            {
+              "blocks": "One file containing both required information sets",
+              "correct": true,
+              "reason": "Integration avoids duplication while preserving requirements."
+            },
+            {
+              "blocks": "Discard the AI information automatically",
+              "correct": false,
+              "reason": "Integration is not a waiver."
+            },
+            {
+              "blocks": "Use any self-made simplified form as designated",
+              "correct": false,
+              "reason": "The opted simplified route requires the Commission form."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

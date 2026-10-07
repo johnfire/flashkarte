@@ -1,0 +1,211 @@
+{
+  "module": "Define the system and its compliance boundary",
+  "lesson": {
+    "slug": "h01",
+    "title": "Identify the system, purpose and EU connection",
+    "summary": "Identify the assessed system and its intended use before assigning duties.",
+    "covers": ["ai-system-boundary", "intended-purpose", "eu-connection"],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "This course follows **Northbridge Hiring**, a fictional supplier of candidate-ranking AI used by employers. The case facts are stipulated teaching facts. You will build a decision dossier: the evidence and reasons supporting a decision, with unresolved facts kept visible.",
+        "An **AI system** is machine-based, operates with some autonomy and infers from inputs how to produce predictions, content, recommendations or decisions for explicit or implicit objectives. Its outputs can influence physical or digital environments. It may adapt after deployment; adaptation is not compulsory."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(12); recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**System boundary** means the functionality being assessed. A learned ranking service infers recommendations. A fixed rule that sorts dates, or a page displaying a stored article, does not establish AI status by itself.",
+        "Assess separate components and their combined operation. A conventional quiz displaying previously AI-written material is not automatically the same system as the AI authoring service. Human review does not remove the inference of that service."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(12); recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Intended purpose** is the use intended by the provider, including context and conditions, as specified in instructions, promotional or sales material, statements and technical documentation. A label such as “assistant” does not substitute for that evidence.",
+        "Northbridge advertises ranking job applicants to support shortlisting. Record the actual functions, users, inputs, outputs and decisions supported. Later changes to that purpose can change the applicable rules."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(12); recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The **EU connection** can arise from placing a system on the Union market, EU-based deployment, or certain third-country activities where outputs are used in the Union. Record the actor and exact Article 2 connection; foreign hosting alone is not an exclusion.",
+        "Check exclusions on their terms. Purely personal non-professional use excludes deployer obligations, not every supplier duty. The free/open-source exclusion does not remove high-risk, Article 5 or Article 50 cases."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(12); recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "First dossier entry: “Northbridge ranking service; intended to assist recruitment shortlisting; supplied to EU employers.” Keep the conventional document viewer separate.",
+        "For a real commercial product, unknown functionality or an unconfirmed EU connection remains a question to investigate. A confident product label is weaker evidence than the actual documented operation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(1), 2(10), 2(12), 3(1), 3(12); recital 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["ai-system-boundary"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "A page displays a fixed article previously written with AI. Does that fact alone make the page an AI inference system?",
+      "options": [
+        {
+          "blocks": "No; inspect the actual functionality",
+          "correct": true,
+          "reason": "Stored output does not itself establish inference."
+        },
+        {
+          "blocks": "Yes; every display of AI content is AI",
+          "correct": false,
+          "reason": "The assessment concerns the operating system."
+        },
+        {
+          "blocks": "No AI authoring service needs assessment",
+          "correct": false,
+          "reason": "The upstream inference service is a separate object."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does displaying stored AI-written text, without further inference, establish AI-system status?",
+          "options": [
+            {
+              "blocks": "Yes; every display of AI content is AI",
+              "correct": false,
+              "reason": "The assessment concerns the operating system."
+            },
+            {
+              "blocks": "No AI authoring service needs assessment",
+              "correct": false,
+              "reason": "The upstream inference service is a separate object."
+            },
+            {
+              "blocks": "No; inspect the actual functionality",
+              "correct": true,
+              "reason": "Stored output does not itself establish inference."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["intended-purpose"],
+      "teaches": ["screen-3"],
+      "prompt": "Northbridge calls its applicant-ranking tool a general assistant but advertises shortlisting. What establishes purpose?",
+      "options": [
+        {
+          "blocks": "Only its broad assistant label",
+          "correct": false,
+          "reason": "A label does not replace specified use."
+        },
+        {
+          "blocks": "Only the model supplier’s unrelated examples",
+          "correct": false,
+          "reason": "Assess this supplied system and intended use."
+        },
+        {
+          "blocks": "Its specified use, context and supplied information",
+          "correct": true,
+          "reason": "Purpose includes instructions, promotion and technical material."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What evidence matters when branding and the advertised recruitment use differ?",
+          "options": [
+            {
+              "blocks": "Only the model supplier’s unrelated examples",
+              "correct": false,
+              "reason": "Assess this supplied system and intended use."
+            },
+            {
+              "blocks": "Its specified use, context and supplied information",
+              "correct": true,
+              "reason": "Purpose includes instructions, promotion and technical material."
+            },
+            {
+              "blocks": "Only its broad assistant label",
+              "correct": false,
+              "reason": "A label does not replace specified use."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["eu-connection"],
+      "teaches": ["screen-4"],
+      "prompt": "Northbridge hosts abroad and supplies EU employers. What is the next scope step?",
+      "options": [
+        {
+          "blocks": "Exclude it if any component is open source",
+          "correct": false,
+          "reason": "The source exclusion has important conditions."
+        },
+        {
+          "blocks": "Record the relevant Union supply or use connection",
+          "correct": true,
+          "reason": "Article 2 reaches specified connections beyond hosting."
+        },
+        {
+          "blocks": "Exclude it because its server is abroad",
+          "correct": false,
+          "reason": "Server location alone does not settle scope."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does overseas hosting alone exclude an EU-facing ranking service?",
+          "options": [
+            {
+              "blocks": "Record the relevant Union supply or use connection",
+              "correct": true,
+              "reason": "Article 2 reaches specified connections beyond hosting."
+            },
+            {
+              "blocks": "Exclude it because its server is abroad",
+              "correct": false,
+              "reason": "Server location alone does not settle scope."
+            },
+            {
+              "blocks": "Exclude it if any component is open source",
+              "correct": false,
+              "reason": "The source exclusion has important conditions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

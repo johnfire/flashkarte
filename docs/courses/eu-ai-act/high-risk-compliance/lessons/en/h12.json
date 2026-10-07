@@ -1,0 +1,211 @@
+{
+  "module": "Control risk and govern data",
+  "lesson": {
+    "slug": "h12",
+    "title": "Review the risk and data file: case exercise",
+    "summary": "Review a concrete data and bias proposal with an evidence-based hold decision.",
+    "covers": ["data-file-case"],
+    "prerequisites": [
+      {
+        "lesson": "h09",
+        "reason": "Assess context"
+      },
+      {
+        "lesson": "h10",
+        "reason": "Check mitigation"
+      },
+      {
+        "lesson": "h11",
+        "reason": "Check necessity Check safeguards."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Case file: Northbridge’s recruitment data excludes a relevant group; historic selected applicants define the target label; its own recommendations feed the next training batch. These stipulated facts create questions about representation, assumptions and feedback.",
+        "Do not classify every statistical difference as unlawful. Identify the actual harm or discrimination concern, its supporting evidence and the intended use affected."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4a and 10; Article 15(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The proposed fix is to collect health information without checking alternatives and send it to an external analytics vendor. Neither convenience nor a vendor confidentiality promise meets Article 4a’s complete test.",
+        "Request evidence that bias correction is strictly necessary and cannot effectively use other data. The stated external-party access is incompatible with that exception’s safeguard."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4a and 10; Article 15(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A revised file needs purpose-fit and group evidence, explained labels, feedback measures and their validation. If exceptional sensitive processing is proposed, substantiate every condition, protected authorised access, processing records and deletion at the earlier event.",
+        "These are practical evidence requests derived from the requirements. The Act does not prescribe this course’s invented folder names or a single fairness score."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4a and 10; Article 15(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Supported decision: hold the unsupported use and the proposed exceptional processing route until the material gaps are resolved. Assign owners for data evidence, revised controls and applicable data-law checks.",
+        "A conditional hold is stronger reasoning than calling the entire company non-compliant on incomplete facts. State exactly what the file fails to establish, and what evidence could change the decision."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 4a and 10; Article 15(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["data-file-case"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "A huge dataset omits the intended group and uses unexamined historic selections as targets. What should the review request?",
+      "options": [
+        {
+          "blocks": "Group/context fit and an explanation of the target assumptions",
+          "correct": true,
+          "reason": "Quantity does not establish suitability or label validity."
+        },
+        {
+          "blocks": "Only a larger record count",
+          "correct": false,
+          "reason": "That can reproduce the same gap."
+        },
+        {
+          "blocks": "Only a new name for the target label",
+          "correct": false,
+          "reason": "Renaming does not examine what it measures."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which evidence is missing from Northbridge’s supplied data case?",
+          "options": [
+            {
+              "blocks": "Only a larger record count",
+              "correct": false,
+              "reason": "That can reproduce the same gap."
+            },
+            {
+              "blocks": "Only a new name for the target label",
+              "correct": false,
+              "reason": "Renaming does not examine what it measures."
+            },
+            {
+              "blocks": "Group/context fit and an explanation of the target assumptions",
+              "correct": true,
+              "reason": "Quantity does not establish suitability or label validity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["data-file-case"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "Can the proposed health-data transfer proceed under Article 4a on the stated facts?",
+      "options": [
+        {
+          "blocks": "Yes; the objective is labelled fairness",
+          "correct": false,
+          "reason": "An objective alone is insufficient."
+        },
+        {
+          "blocks": "Yes; the vendor signs a confidentiality promise",
+          "correct": false,
+          "reason": "The no-other-party-access condition still applies."
+        },
+        {
+          "blocks": "No; necessity is unproved and other-party access fails a safeguard",
+          "correct": true,
+          "reason": "Every condition must hold."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Do an untested necessity claim and external confidential analytics access establish the exception?",
+          "options": [
+            {
+              "blocks": "Yes; the vendor signs a confidentiality promise",
+              "correct": false,
+              "reason": "The no-other-party-access condition still applies."
+            },
+            {
+              "blocks": "No; necessity is unproved and other-party access fails a safeguard",
+              "correct": true,
+              "reason": "Every condition must hold."
+            },
+            {
+              "blocks": "Yes; the objective is labelled fairness",
+              "correct": false,
+              "reason": "An objective alone is insufficient."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["data-file-case"],
+      "teaches": ["screen-4"],
+      "prompt": "Which case decision is best supported by the evidence?",
+      "options": [
+        {
+          "blocks": "Declare every future use permanently forbidden",
+          "correct": false,
+          "reason": "The evidence does not support that blanket conclusion."
+        },
+        {
+          "blocks": "Hold the unsupported proposal, identify gaps and owners",
+          "correct": true,
+          "reason": "The conclusion is specific and conditional."
+        },
+        {
+          "blocks": "Certify the whole product immediately",
+          "correct": false,
+          "reason": "The material evidence is missing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the assessor state the outcome of these unresolved material gaps?",
+          "options": [
+            {
+              "blocks": "Hold the unsupported proposal, identify gaps and owners",
+              "correct": true,
+              "reason": "The conclusion is specific and conditional."
+            },
+            {
+              "blocks": "Certify the whole product immediately",
+              "correct": false,
+              "reason": "The material evidence is missing."
+            },
+            {
+              "blocks": "Declare every future use permanently forbidden",
+              "correct": false,
+              "reason": "The evidence does not support that blanket conclusion."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "module": "Make and maintain the deployment decision",
+  "lesson": {
+    "slug": "h26",
+    "title": "Monitor use and preserve controlled logs",
+    "summary": "Monitor operation, suspend qualifying risk use and preserve controlled logs.",
+    "covers": ["deployer-monitoring-escalation", "deployer-log-custody"],
+    "prerequisites": [
+      {
+        "lesson": "h14",
+        "reason": "Recognise the controlled-log retention rule"
+      },
+      {
+        "lesson": "h22",
+        "reason": "Distinguish the deployer response from provider correction."
+      },
+      {
+        "lesson": "h25",
+        "reason": "Monitor actual instructed use Identify the deploying actor."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Deployer monitoring** follows the instructions and, where relevant, informs providers under the post-market monitoring framework. Article 79 risk includes the relevant health/safety or fundamental-rights concerns.",
+        "If there is reason to consider instructed use may produce that risk, inform the provider or distributor and the relevant market-surveillance authority without undue delay, and suspend use. Monitoring is not just recording that the page loaded."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(49), 26(5), (6), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **serious incident** is an AI-system incident or malfunction that directly or indirectly leads to death or serious health harm, serious irreversible disruption of critical-infrastructure management or operation, infringement of Union-law obligations protecting fundamental rights, or serious property/environment harm. Establish the outcome and the causal connection.",
+        "When identified, the deployer also immediately informs first the provider, then importer or distributor and relevant market-surveillance authorities. If the provider cannot be reached, Article 73 applies with the necessary adaptations. Detailed incident categorisation and deadlines require the operations course."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(49), 26(5), (6), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The communication obligation does not cover sensitive operational data of law-enforcement deployers. Specified financial institutions’ Union financial-law governance arrangements can fulfil the stated monitoring obligation.",
+        "These are qualified boundaries, not permission for every organisation to ignore monitoring or withhold all incident information. Record which qualification is actually established."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(49), 26(5), (6), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Deployer log custody** concerns automatically generated logs to the extent under its control. Keep them for a purpose-appropriate period of at least six months unless applicable law provides otherwise, particularly data-protection law.",
+        "Specified financial institutions maintain them within their relevant financial documentation. Provider logging capability and provider custody do not automatically establish the employer’s separate controlled-log arrangements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(49), 26(5), (6), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Case: an employer has reason to consider instructed use creates qualifying rights risk, yet keeps ranking candidates while it waits for its vendor’s quarterly reply. Suspend and escalate under the stated trigger.",
+        "Identify actual controlled logs, preservation and access arrangements. Do not conceal relevant risk evidence by treating log minimisation as a universal permission to delete everything."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(49), 26(5), (6), 79(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["deployer-monitoring-escalation"],
+      "teaches": ["screen-1", "screen-5"],
+      "prompt": "The employer has the specified reason to consider instructed use may create Article 79 risk. What should happen?",
+      "options": [
+        {
+          "blocks": "Suspend use and notify the specified parties without undue delay",
+          "correct": true,
+          "reason": "Article 26(5) states this risk response."
+        },
+        {
+          "blocks": "Continue until the vendor grants permission to stop",
+          "correct": false,
+          "reason": "Suspension does not depend on that permission."
+        },
+        {
+          "blocks": "Only log that the page loaded",
+          "correct": false,
+          "reason": "That does not address the identified risk."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "May the employer keep using the system while waiting for the next vendor review?",
+          "options": [
+            {
+              "blocks": "Continue until the vendor grants permission to stop",
+              "correct": false,
+              "reason": "Suspension does not depend on that permission."
+            },
+            {
+              "blocks": "Only log that the page loaded",
+              "correct": false,
+              "reason": "That does not address the identified risk."
+            },
+            {
+              "blocks": "Suspend use and notify the specified parties without undue delay",
+              "correct": true,
+              "reason": "Article 26(5) states this risk response."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployer-monitoring-escalation"],
+      "teaches": ["screen-2"],
+      "prompt": "The employer identifies a serious incident. What sequence belongs in its immediate information response?",
+      "options": [
+        {
+          "blocks": "Only its marketing department",
+          "correct": false,
+          "reason": "That omits the statutory recipients."
+        },
+        {
+          "blocks": "No one if the provider cannot be reached",
+          "correct": false,
+          "reason": "The Article 73 adapted route remains."
+        },
+        {
+          "blocks": "First provider, then importer/distributor and relevant authorities",
+          "correct": true,
+          "reason": "The paragraph specifies this sequence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Who is informed first under the deployer serious-incident clause?",
+          "options": [
+            {
+              "blocks": "No one if the provider cannot be reached",
+              "correct": false,
+              "reason": "The Article 73 adapted route remains."
+            },
+            {
+              "blocks": "First provider, then importer/distributor and relevant authorities",
+              "correct": true,
+              "reason": "The paragraph specifies this sequence."
+            },
+            {
+              "blocks": "Only its marketing department",
+              "correct": false,
+              "reason": "That omits the statutory recipients."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployer-log-custody"],
+      "teaches": ["screen-4"],
+      "prompt": "The employer controls operational logs but says the provider’s custody policy removes its own duty. Is that sound?",
+      "options": [
+        {
+          "blocks": "Yes; every controlled record may be deleted immediately",
+          "correct": false,
+          "reason": "That ignores the qualified minimum period."
+        },
+        {
+          "blocks": "No; establish its own controlled-log arrangements and qualified period",
+          "correct": true,
+          "reason": "Article 26(6) allocates a separate duty."
+        },
+        {
+          "blocks": "Yes; only one actor can hold a log duty",
+          "correct": false,
+          "reason": "Provider and deployer obligations can both apply."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does vendor log custody alone settle the deployer’s controlled-log retention?",
+          "options": [
+            {
+              "blocks": "No; establish its own controlled-log arrangements and qualified period",
+              "correct": true,
+              "reason": "Article 26(6) allocates a separate duty."
+            },
+            {
+              "blocks": "Yes; only one actor can hold a log duty",
+              "correct": false,
+              "reason": "Provider and deployer obligations can both apply."
+            },
+            {
+              "blocks": "Yes; every controlled record may be deleted immediately",
+              "correct": false,
+              "reason": "That ignores the qualified minimum period."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

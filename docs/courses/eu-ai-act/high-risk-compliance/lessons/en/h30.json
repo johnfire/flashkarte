@@ -1,0 +1,240 @@
+{
+  "module": "Make and maintain the deployment decision",
+  "lesson": {
+    "slug": "h30",
+    "title": "Assemble the compliance decision dossier: final case",
+    "summary": "Issue a supported hold or conditional decision with evidence, owners and review triggers.",
+    "covers": [
+      "dossier-evidence-gaps",
+      "deployment-gate-review",
+      "compliance-decision-case"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h04",
+        "reason": "Establish dates"
+      },
+      {
+        "lesson": "h18",
+        "reason": "Assess technical readiness"
+      },
+      {
+        "lesson": "h24",
+        "reason": "Assign value-chain responsibility."
+      },
+      {
+        "lesson": "h26",
+        "reason": "Check operational response"
+      },
+      {
+        "lesson": "h27",
+        "reason": "Check workplace information"
+      },
+      {
+        "lesson": "h28",
+        "reason": "Check FRIA applicability."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Final case uses the stipulated Northbridge Annex III recruitment purpose and amended timetable. The dossier contains earlier scope, data, technical, actor and operating records. “Dossier” is this course’s practical evidence collection, not a statutory certificate.",
+        "A **dossier evidence gap** is a missing or unsubstantiated fact needed to support an applicable conclusion. A statement that a test passed is weaker than the version-relevant report and its purpose-appropriate criteria."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Core Articles 4a, 8–27; Articles 111, 113 and market-entry/operations handoffs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Case evidence: required technical-version testing is unresolved; supplier assistance for a changed high-risk purpose is unproved; sensitive-bias processing still proposes external-party access. These are supplied material gaps.",
+        "Specify what is missing, which duty it affects, whose responsibility it is and what evidence would resolve it. The sensitive-data proposal does not establish the exception while the access safeguard fails."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Core Articles 4a, 8–27; Articles 111, 113 and market-entry/operations handoffs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **deployment-gate review** separately checks applicable duty dates/transition facts, instructed operation, supported oversight, monitoring/escalation and workplace/person-information duties. It also tests the actual Article 27 actor/use trigger.",
+        "In the private-employer recruitment variant, Article 27 is not established solely from high-risk status. In the stipulated public-law deployment variant it is triggered, with relevant assessment elements and update/notification review. Do not turn either variant into a universal rule."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Core Articles 4a, 8–27; Articles 111, 113 and market-entry/operations handoffs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **compliance decision** states the supported outcome, conditions, responsible owners and reassessment triggers. For the supplied material technical and supplier gaps, hold the proposed readiness decision pending evidence. Describe the sensitive-data proposal’s incompatible access condition separately.",
+        "An internal reviewer’s signature or a passed course cannot supply missing compliance proof. Set review triggers for purpose, meaningful design changes, new risk evidence, changed operation and changed law; each can reopen relevant parts of the dossier."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Core Articles 4a, 8–27; Articles 111, 113 and market-entry/operations handoffs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "This course identifies Article 16 market-entry gates but does not complete conformity procedures, declaration/marking/registration implementation or all sector/national and other-law analysis. Likewise, detailed serious-incident deadlines need the operations course.",
+        "Final practical task: for your own product, write system/purpose, actor, provision/test, yes/no/unknown finding, evidence, duty date, action/owner and remaining gates. A conditional readiness statement is justified only for its stated scope after the material evidence is established."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Core Articles 4a, 8–27; Articles 111, 113 and market-entry/operations handoffs",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["dossier-evidence-gaps"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "The case has mismatched technical evidence and unproved necessary supplier access. What should the dossier do?",
+      "options": [
+        {
+          "blocks": "Identify affected duties, owners and evidence needed",
+          "correct": true,
+          "reason": "The finding remains conditional until evidence supports it."
+        },
+        {
+          "blocks": "Treat a signature as supplying the missing proof",
+          "correct": false,
+          "reason": "A signature does not replace applicable evidence."
+        },
+        {
+          "blocks": "Remove the unresolved fields before review",
+          "correct": false,
+          "reason": "Hiding gaps makes the conclusion unsupported."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the assessor handle the supplied material proof gaps?",
+          "options": [
+            {
+              "blocks": "Treat a signature as supplying the missing proof",
+              "correct": false,
+              "reason": "A signature does not replace applicable evidence."
+            },
+            {
+              "blocks": "Remove the unresolved fields before review",
+              "correct": false,
+              "reason": "Hiding gaps makes the conclusion unsupported."
+            },
+            {
+              "blocks": "Identify affected duties, owners and evidence needed",
+              "correct": true,
+              "reason": "The finding remains conditional until evidence supports it."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["deployment-gate-review"],
+      "teaches": ["screen-3"],
+      "prompt": "The private-employer recruitment case is changed to a public-law deployer. What needs reassessment?",
+      "options": [
+        {
+          "blocks": "Nothing because the software is unchanged",
+          "correct": false,
+          "reason": "Deployment obligations can depend on the actor and context."
+        },
+        {
+          "blocks": "Only the product’s colour scheme",
+          "correct": false,
+          "reason": "Appearance does not determine the actor trigger."
+        },
+        {
+          "blocks": "The Article 27 FRIA trigger and applicable assessment duties",
+          "correct": true,
+          "reason": "The actor facts change the specific trigger."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which deployment assessment gate changes with the stipulated public-law actor?",
+          "options": [
+            {
+              "blocks": "Only the product’s colour scheme",
+              "correct": false,
+              "reason": "Appearance does not determine the actor trigger."
+            },
+            {
+              "blocks": "The Article 27 FRIA trigger and applicable assessment duties",
+              "correct": true,
+              "reason": "The actor facts change the specific trigger."
+            },
+            {
+              "blocks": "Nothing because the software is unchanged",
+              "correct": false,
+              "reason": "Deployment obligations can depend on the actor and context."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["compliance-decision-case"],
+      "teaches": ["screen-2", "screen-4", "screen-5"],
+      "prompt": "Which conclusion fits the supplied final case and this course’s scope?",
+      "options": [
+        {
+          "blocks": "Permanent prohibition of every product using the model",
+          "correct": false,
+          "reason": "The supplied evidence concerns this proposed use and gaps."
+        },
+        {
+          "blocks": "Hold pending evidence, with owners and separate remaining release gates",
+          "correct": true,
+          "reason": "The decision must match what is actually established."
+        },
+        {
+          "blocks": "Unconditional certification of compliance with all law",
+          "correct": false,
+          "reason": "The dossier and teaching scope do not support that claim."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can completion of this course authorise release despite its stated material gaps?",
+          "options": [
+            {
+              "blocks": "Hold pending evidence, with owners and separate remaining release gates",
+              "correct": true,
+              "reason": "The decision must match what is actually established."
+            },
+            {
+              "blocks": "Unconditional certification of compliance with all law",
+              "correct": false,
+              "reason": "The dossier and teaching scope do not support that claim."
+            },
+            {
+              "blocks": "Permanent prohibition of every product using the model",
+              "correct": false,
+              "reason": "The supplied evidence concerns this proposed use and gaps."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

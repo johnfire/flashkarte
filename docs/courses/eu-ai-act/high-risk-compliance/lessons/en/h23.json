@@ -1,0 +1,220 @@
+{
+  "module": "Assign provider and supply-chain duties",
+  "lesson": {
+    "slug": "h23",
+    "title": "Check representatives, importers and distributors",
+    "summary": "Verify what representatives, importers and distributors must do.",
+    "covers": [
+      "representative-mandate",
+      "importer-verification",
+      "distributor-verification"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h19",
+        "reason": "The representative acts in relation to provider obligations."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A third-country high-risk provider appoints an EU **authorised representative** by written mandate before making the system available on the Union market. Enable the representative’s tasks and allow authorities to address it alongside or instead of the provider.",
+        "The mandate includes verifying technical documentation, declaration and appropriate assessment; ten-year custody of specified provider contact details, documentation, declaration and applicable certificate; authority evidence/controlled-log access and cooperation; and applicable registration checks."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 22–24",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The representative must terminate the mandate if it considers or has reason to consider the provider acts contrary to its obligations. Immediately inform the relevant market-surveillance authority and applicable notified body, with the reasons.",
+        "A nominal representative unable to perform its mandated tasks is not evidence that the appointment requirement is effectively implemented."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 22–24",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Importer verification** before market placement includes assessment, technical documentation, CE marking, declaration, accompanying instructions and the representative appointment. Suspected non-conformity or falsified documentation means no placement until corrected; qualifying risk also requires informing provider, representative and authorities.",
+        "Include importer identity/contact address, suitable storage/transport, ten-year custody of applicable certificate, instructions and declaration, necessary authority information including access to technical documentation, and cooperation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 22–24",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Distributor verification** before making available checks CE marking, declaration, instructions, provider identity and quality-system obligations, and importer identity obligations. Suspected non-conformity means withhold until corrected; qualifying risk requires relevant information.",
+        "Maintain suitable storage/transport; correct, withdraw or recall, or ensure the relevant operator acts when later non-conformity is suspected. For qualifying risk, immediately inform provider/importer and competent authorities. Supply action documentation on reasoned request and cooperate."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 22–24",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Case: the stipulated EU importer has reason to believe a third-country system’s assessment document is falsified. It cannot satisfy its verification merely by forwarding the product to a distributor.",
+        "These roles have their own checks. A supply-chain table should locate each record and communication owner; it is not enough that someone somewhere has a document."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 22–24",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["representative-mandate"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "The representative has reason to consider the provider acting contrary to its duties. What must it do?",
+      "options": [
+        {
+          "blocks": "Terminate and immediately inform the relevant authority and applicable body",
+          "correct": true,
+          "reason": "Article 22(4) specifies this response."
+        },
+        {
+          "blocks": "Keep the mandate and hide the concern",
+          "correct": false,
+          "reason": "That contradicts the required response."
+        },
+        {
+          "blocks": "Become the provider automatically by being appointed",
+          "correct": false,
+          "reason": "A mandate alone does not establish that role change."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a representative keep a nominal mandate despite the specified contrary conduct?",
+          "options": [
+            {
+              "blocks": "Keep the mandate and hide the concern",
+              "correct": false,
+              "reason": "That contradicts the required response."
+            },
+            {
+              "blocks": "Become the provider automatically by being appointed",
+              "correct": false,
+              "reason": "A mandate alone does not establish that role change."
+            },
+            {
+              "blocks": "Terminate and immediately inform the relevant authority and applicable body",
+              "correct": true,
+              "reason": "Article 22(4) specifies this response."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["importer-verification"],
+      "teaches": ["screen-3", "screen-5"],
+      "prompt": "An importer suspects falsified conformity documentation. Can it place the product while checking later?",
+      "options": [
+        {
+          "blocks": "Place it because another actor wrote the document",
+          "correct": false,
+          "reason": "The importer has its own verification duty."
+        },
+        {
+          "blocks": "Treat a disclaimer as verifying the document",
+          "correct": false,
+          "reason": "A disclaimer does not resolve falsification."
+        },
+        {
+          "blocks": "Withhold placement until conformity is established",
+          "correct": true,
+          "reason": "Article 23 does not allow supply despite that concern."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which supply decision fits the importer’s documented falsification concern?",
+          "options": [
+            {
+              "blocks": "Treat a disclaimer as verifying the document",
+              "correct": false,
+              "reason": "A disclaimer does not resolve falsification."
+            },
+            {
+              "blocks": "Withhold placement until conformity is established",
+              "correct": true,
+              "reason": "Article 23 does not allow supply despite that concern."
+            },
+            {
+              "blocks": "Place it because another actor wrote the document",
+              "correct": false,
+              "reason": "The importer has its own verification duty."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["distributor-verification"],
+      "teaches": ["screen-4"],
+      "prompt": "A distributor finds post-supply non-conformity. Does passing the issue to the provider discharge everything?",
+      "options": [
+        {
+          "blocks": "Apply the importer’s ten-year list as its own express rule",
+          "correct": false,
+          "reason": "The roles’ specified custody and checks differ."
+        },
+        {
+          "blocks": "Take necessary action or ensure the relevant operator acts",
+          "correct": true,
+          "reason": "The distributor must act or ensure action, with applicable information."
+        },
+        {
+          "blocks": "Only forward a note with no follow-up",
+          "correct": false,
+          "reason": "That does not establish the necessary response."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What responsibility remains for a distributor after identifying the supplied non-conformity?",
+          "options": [
+            {
+              "blocks": "Take necessary action or ensure the relevant operator acts",
+              "correct": true,
+              "reason": "The distributor must act or ensure action, with applicable information."
+            },
+            {
+              "blocks": "Only forward a note with no follow-up",
+              "correct": false,
+              "reason": "That does not establish the necessary response."
+            },
+            {
+              "blocks": "Apply the importer’s ten-year list as its own express rule",
+              "correct": false,
+              "reason": "The roles’ specified custody and checks differ."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

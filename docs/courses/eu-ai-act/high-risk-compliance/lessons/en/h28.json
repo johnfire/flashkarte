@@ -1,0 +1,244 @@
+{
+  "module": "Make and maintain the deployment decision",
+  "lesson": {
+    "slug": "h28",
+    "title": "Decide whether a fundamental-rights assessment is needed",
+    "summary": "Test the FRIA trigger and reuse applicable data-protection evidence without a waiver.",
+    "covers": ["fria-trigger", "fria-content-update", "fria-dpia-reuse"],
+    "prerequisites": [
+      {
+        "lesson": "h02",
+        "reason": "The obligation is imposed on specified deployers."
+      },
+      {
+        "lesson": "h03",
+        "reason": "The Annex III route and point matter"
+      },
+      {
+        "lesson": "h25",
+        "reason": "Assess the actual deployment process."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **fundamental-rights impact assessment**, or FRIA, examines the effects of a deployment on people’s fundamental rights before deploying the specified system. Article 27 concerns Article 6(2) Annex III systems, except Annex III point 2 critical infrastructure.",
+        "Within that route, the actor/use triggers are bodies governed by public law, private entities providing public services, and deployers of Annex III 5(b)/(c) systems: creditworthiness/credit scoring and life/health-insurance risk/pricing. A purely private recruitment employer is not automatically covered solely because recruitment is high-risk."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 26(9), 27(1)–(5); GDPR Article 35 / LED Article 27 as separate applicability lookups",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "EDPB: data protection impact assessment and its separate likely-high-risk trigger",
+          "url": "https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**FRIA content** includes the actual process and intended use, time/frequency, affected people/groups, specific likely harms informed by provider information, implementation of human oversight, and responses if risks materialise, including internal governance and complaint mechanisms.",
+        "A provider’s generic test report does not by itself assess a public-service deployer’s actual process, people or complaints arrangements. Link evidence to each assessment element."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 26(9), 27(1)–(5); GDPR Article 35 / LED Article 27 as separate applicability lookups",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "EDPB: data protection impact assessment and its separate likely-high-risk trigger",
+          "url": "https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The duty applies to first use. Similar cases may rely on previous assessments or provider assessments, but changed or outdated elements require updating. After assessment, notify the market-surveillance authority with the filled template; the Article 46(1) exceptional route may exempt notification.",
+        "Article 27 directs the AI Office to develop a questionnaire/template, including an automated tool. Verify the actual available version before treating a form as official. The course does not assert that a usable template has been published."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 26(9), 27(1)–(5); GDPR Article 35 / LED Article 27 as separate applicability lookups",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "EDPB: data protection impact assessment and its separate likely-high-risk trigger",
+          "url": "https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **data protection impact assessment**, or DPIA, is the separate assessment required under data-protection law when its conditions apply. GDPR Article 35’s general trigger is processing likely to cause high risk to individuals’ rights/freedoms. The Law Enforcement Directive has its own Article 27 route.",
+        "Article 26(9) requires using provider information for a DPIA where applicable. High-risk AI classification alone does not decide every DPIA condition. Check processing facts, the relevant data law and authority guidance/lists; specialist triggers are lookup gates here."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 26(9), 27(1)–(5); GDPR Article 35 / LED Article 27 as separate applicability lookups",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "EDPB: data protection impact assessment and its separate likely-high-risk trigger",
+          "url": "https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**FRIA/DPIA reuse** under 27(4) lets a deployer cross-reference relevant sections or include relevant material where the DPIA already fulfils FRIA obligations. It does not waive the remaining FRIA elements or notification.",
+        "Case variant: a public-law body uses the stipulated Annex III recruitment system. Its DPIA covers personal-data risks but lacks complaint/governance arrangements and deployment frequency. Reuse relevant content and complete the missing applicable FRIA elements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 26(9), 27(1)–(5); GDPR Article 35 / LED Article 27 as separate applicability lookups",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "EDPB: data protection impact assessment and its separate likely-high-risk trigger",
+          "url": "https://www.edpb.europa.eu/topics/accountability-and-compliance-tools/data-protection-impact-assessment_en"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["fria-trigger"],
+      "teaches": ["screen-1"],
+      "prompt": "A purely private recruitment employer, providing no public service, uses Annex III 4(a). Is Article 27 automatically triggered solely by high-risk status?",
+      "options": [
+        {
+          "blocks": "No; test the specified actor/use trigger",
+          "correct": true,
+          "reason": "High-risk status alone is insufficient for this provision."
+        },
+        {
+          "blocks": "Yes; every high-risk deployer has a FRIA duty",
+          "correct": false,
+          "reason": "The provision has limited triggers and a point 2 exclusion."
+        },
+        {
+          "blocks": "No public-law body can ever trigger it",
+          "correct": false,
+          "reason": "Public-law actors are expressly within the stated route."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the supplied private-employer recruitment fact alone establish the FRIA duty?",
+          "options": [
+            {
+              "blocks": "Yes; every high-risk deployer has a FRIA duty",
+              "correct": false,
+              "reason": "The provision has limited triggers and a point 2 exclusion."
+            },
+            {
+              "blocks": "No public-law body can ever trigger it",
+              "correct": false,
+              "reason": "Public-law actors are expressly within the stated route."
+            },
+            {
+              "blocks": "No; test the specified actor/use trigger",
+              "correct": true,
+              "reason": "High-risk status alone is insufficient for this provision."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["fria-content-update"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "A covered public body changes affected groups and deployment frequency after its first assessment. What should happen?",
+      "options": [
+        {
+          "blocks": "Keep the first document permanently unchanged",
+          "correct": false,
+          "reason": "First-use assessment does not remove update duties."
+        },
+        {
+          "blocks": "Replace all process evidence with a supplier logo",
+          "correct": false,
+          "reason": "That does not assess the actual deployment."
+        },
+        {
+          "blocks": "Update the changed/outdated elements",
+          "correct": true,
+          "reason": "Article 27(2) requires necessary updates."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "May a covered deployer rely unchanged on a now-outdated first-use assessment?",
+          "options": [
+            {
+              "blocks": "Replace all process evidence with a supplier logo",
+              "correct": false,
+              "reason": "That does not assess the actual deployment."
+            },
+            {
+              "blocks": "Update the changed/outdated elements",
+              "correct": true,
+              "reason": "Article 27(2) requires necessary updates."
+            },
+            {
+              "blocks": "Keep the first document permanently unchanged",
+              "correct": false,
+              "reason": "First-use assessment does not remove update duties."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["fria-dpia-reuse"],
+      "teaches": ["screen-4", "screen-5"],
+      "prompt": "A covered deployer has a DPIA but it omits required FRIA complaint and governance elements. What follows?",
+      "options": [
+        {
+          "blocks": "Discard all useful DPIA evidence and duplicate everything",
+          "correct": false,
+          "reason": "The amended paragraph explicitly allows relevant reuse."
+        },
+        {
+          "blocks": "Reuse relevant content and complete the remaining FRIA duties",
+          "correct": true,
+          "reason": "Cross-references are allowed where obligations are already met."
+        },
+        {
+          "blocks": "Omit the FRIA entirely because a DPIA exists",
+          "correct": false,
+          "reason": "Existence alone does not fulfil missing elements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a completed DPIA automatically waive the whole applicable FRIA?",
+          "options": [
+            {
+              "blocks": "Reuse relevant content and complete the remaining FRIA duties",
+              "correct": true,
+              "reason": "Cross-references are allowed where obligations are already met."
+            },
+            {
+              "blocks": "Omit the FRIA entirely because a DPIA exists",
+              "correct": false,
+              "reason": "Existence alone does not fulfil missing elements."
+            },
+            {
+              "blocks": "Discard all useful DPIA evidence and duplicate everything",
+              "correct": false,
+              "reason": "The amended paragraph explicitly allows relevant reuse."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

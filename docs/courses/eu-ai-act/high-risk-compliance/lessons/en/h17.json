@@ -1,0 +1,207 @@
+{
+  "module": "Make technical compliance inspectable",
+  "lesson": {
+    "slug": "h17",
+    "title": "Demonstrate accuracy, resilience and cybersecurity",
+    "summary": "Choose purpose-appropriate performance, fault and attack evidence.",
+    "covers": [
+      "purpose-performance-metrics",
+      "fault-resilience",
+      "ai-cybersecurity"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h07",
+        "reason": "Metrics must be defined before meaningful tests."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Purpose-performance metrics** measure what matters for the intended task. Article 15 requires appropriate accuracy, robustness and cybersecurity, with consistent performance through the lifecycle; accuracy levels and relevant metrics belong in the instructions.",
+        "No single percentage establishes all recruitment compliance. Explain metric choice and test context. The Commission encourages benchmarks and measurement methods; that does not create an invented universal pass number."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 9(6)–(8), 15(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Fault resilience** concerns errors, faults or inconsistencies within the system or operating environment, including interactions with people or other systems. Use technical and organisational measures; redundancy, backup or fail-safe plans can be suitable.",
+        "For Northbridge, test a broken document input or failed external service and whether the system produces a misleading rank. The examples illustrate evidence selection, not a mandatory architecture."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 9(6)–(8), 15(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**AI cybersecurity** addresses unauthorised attempts to change use, outputs or performance through vulnerabilities. Measures must fit relevant circumstances and risks.",
+        "Data poisoning manipulates training data; model poisoning targets pretrained components; adversarial inputs or evasion seek mistaken outputs. Confidentiality attacks target protected information. Where appropriate, measures must prevent, detect, respond, resolve and control these attacks or model flaws."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 9(6)–(8), 15(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Keep performance, fault and attack evidence distinct. A clean network scan does not prove resistance to misleading input or corrupted training labels. A good aggregate accuracy result does not establish safe fallback.",
+        "Case: Northbridge changes an external dependency. Review whether the previous test conditions and resilience/security evidence remain appropriate to the actual version and context."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 9(6)–(8), 15(1)–(5)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["purpose-performance-metrics"],
+      "teaches": ["screen-1"],
+      "prompt": "A supplier cites one high accuracy percentage as proof of every requirement. What is missing?",
+      "options": [
+        {
+          "blocks": "Appropriate metrics, context and separate requirement evidence",
+          "correct": true,
+          "reason": "Accuracy alone does not establish all required qualities."
+        },
+        {
+          "blocks": "A universal EU recruitment percentage",
+          "correct": false,
+          "reason": "No universal percentage is established here."
+        },
+        {
+          "blocks": "Only a marketing comparison with competitors",
+          "correct": false,
+          "reason": "A comparison alone is not complete compliance evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can one favourable number establish all purpose-specific performance and security duties?",
+          "options": [
+            {
+              "blocks": "A universal EU recruitment percentage",
+              "correct": false,
+              "reason": "No universal percentage is established here."
+            },
+            {
+              "blocks": "Only a marketing comparison with competitors",
+              "correct": false,
+              "reason": "A comparison alone is not complete compliance evidence."
+            },
+            {
+              "blocks": "Appropriate metrics, context and separate requirement evidence",
+              "correct": true,
+              "reason": "Accuracy alone does not establish all required qualities."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["fault-resilience"],
+      "teaches": ["screen-2", "screen-4"],
+      "prompt": "A failed external service causes a confident but unsupported applicant rank. Which evidence needs attention?",
+      "options": [
+        {
+          "blocks": "Only ordinary successful-input accuracy",
+          "correct": false,
+          "reason": "That omits the failure condition."
+        },
+        {
+          "blocks": "Only whether the screen still loads",
+          "correct": false,
+          "reason": "Loading does not establish a safe result."
+        },
+        {
+          "blocks": "Fault response and safe operation or fallback",
+          "correct": true,
+          "reason": "Interaction faults belong in resilience analysis."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should the assessor test about the failed-dependency scenario?",
+          "options": [
+            {
+              "blocks": "Only whether the screen still loads",
+              "correct": false,
+              "reason": "Loading does not establish a safe result."
+            },
+            {
+              "blocks": "Fault response and safe operation or fallback",
+              "correct": true,
+              "reason": "Interaction faults belong in resilience analysis."
+            },
+            {
+              "blocks": "Only ordinary successful-input accuracy",
+              "correct": false,
+              "reason": "That omits the failure condition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["ai-cybersecurity"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "An attacker alters training labels. Does a network scan alone establish protection against that attack?",
+      "options": [
+        {
+          "blocks": "A problem excluded because training is upstream",
+          "correct": false,
+          "reason": "Training and pretrained components are included."
+        },
+        {
+          "blocks": "Data poisoning requiring appropriate targeted controls",
+          "correct": true,
+          "reason": "Training-data manipulation is specifically identified."
+        },
+        {
+          "blocks": "Only a typography issue",
+          "correct": false,
+          "reason": "The attack can change model behaviour."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which AI-specific vulnerability is involved in manipulated training data?",
+          "options": [
+            {
+              "blocks": "Data poisoning requiring appropriate targeted controls",
+              "correct": true,
+              "reason": "Training-data manipulation is specifically identified."
+            },
+            {
+              "blocks": "Only a typography issue",
+              "correct": false,
+              "reason": "The attack can change model behaviour."
+            },
+            {
+              "blocks": "A problem excluded because training is upstream",
+              "correct": false,
+              "reason": "Training and pretrained components are included."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "module": "Make and maintain the deployment decision",
+  "lesson": {
+    "slug": "h25",
+    "title": "Implement instructions, oversight and input controls",
+    "summary": "Implement instructed use with capable oversight and controlled-input quality.",
+    "covers": [
+      "deployer-instructions-use",
+      "oversight-assignment",
+      "controlled-input-quality"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "h02",
+        "reason": "Identify the deployer"
+      },
+      {
+        "lesson": "h15",
+        "reason": "Measures implement the provider's instructions."
+      },
+      {
+        "lesson": "h16",
+        "reason": "The person must be able to use effective oversight controls."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Instructed use** requires appropriate technical and organisational measures to use a high-risk system according to its accompanying instructions. A supplier’s design obligations and an employer’s actual operating arrangements are different.",
+        "For Northbridge’s employer customer, map the permitted recruitment purpose, limits, maintenance and intervention arrangements to the actual workflow. Buying the service does not itself implement those measures."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Oversight assignment** is to natural persons with the necessary competence, training, authority and support. Competence concerns ability to perform the task; authority and support enable them to act on it.",
+        "A trained recruiter who is forbidden to override a result is not an adequately empowered overseer. A senior title without the needed understanding is also insufficient. The system must separately enable effective controls."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Other Union or national duties still apply. The deployer remains free to organise its own resources and activities to implement the provider’s indicated oversight measures.",
+        "This freedom does not permit removing effective oversight. Record responsibilities and demonstrate that the arrangement works in the intended operating context."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Controlled-input quality** under current Article 26(4) means ensuring inputs are relevant and sufficiently representative for the intended purpose to the extent the deployer controls them. It is distinct from provider dataset-development governance.",
+        "Case: the employer can change the candidate fields it submits. It must assess those controlled inputs; it cannot dismiss the duty because the supplier trained the model. Conversely, do not claim this paragraph makes it control unavailable upstream data."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 26(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["deployer-instructions-use"],
+      "teaches": ["screen-1", "screen-3"],
+      "prompt": "The employer buys Northbridge but has no workflow implementing its required limits. What is missing?",
+      "options": [
+        {
+          "blocks": "Appropriate operating measures implementing the instructions",
+          "correct": true,
+          "reason": "Article 26 concerns actual use arrangements."
+        },
+        {
+          "blocks": "Only evidence of payment",
+          "correct": false,
+          "reason": "Payment does not implement limits."
+        },
+        {
+          "blocks": "Only the provider’s private technical file",
+          "correct": false,
+          "reason": "The deployer must arrange its own instructed use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does purchase alone establish instructed use?",
+          "options": [
+            {
+              "blocks": "Only evidence of payment",
+              "correct": false,
+              "reason": "Payment does not implement limits."
+            },
+            {
+              "blocks": "Only the provider’s private technical file",
+              "correct": false,
+              "reason": "The deployer must arrange its own instructed use."
+            },
+            {
+              "blocks": "Appropriate operating measures implementing the instructions",
+              "correct": true,
+              "reason": "Article 26 concerns actual use arrangements."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["oversight-assignment"],
+      "teaches": ["screen-2", "screen-3"],
+      "prompt": "A trained reviewer lacks permission or support to stop use. Is oversight assignment established?",
+      "options": [
+        {
+          "blocks": "Yes; training replaces authority",
+          "correct": false,
+          "reason": "Authority is separately required."
+        },
+        {
+          "blocks": "Yes; a job title replaces demonstrated competence",
+          "correct": false,
+          "reason": "Title alone proves no capability."
+        },
+        {
+          "blocks": "No; competence, training, authority and support all matter",
+          "correct": true,
+          "reason": "The assigned person needs the stated capacities and backing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does training alone satisfy the assignment requirements?",
+          "options": [
+            {
+              "blocks": "Yes; a job title replaces demonstrated competence",
+              "correct": false,
+              "reason": "Title alone proves no capability."
+            },
+            {
+              "blocks": "No; competence, training, authority and support all matter",
+              "correct": true,
+              "reason": "The assigned person needs the stated capacities and backing."
+            },
+            {
+              "blocks": "Yes; training replaces authority",
+              "correct": false,
+              "reason": "Authority is separately required."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["controlled-input-quality"],
+      "teaches": ["screen-4"],
+      "prompt": "The employer controls the input fields but says only supplier training data matters. What should it check?",
+      "options": [
+        {
+          "blocks": "Every upstream datum it cannot control",
+          "correct": false,
+          "reason": "The paragraph qualifies the duty by control."
+        },
+        {
+          "blocks": "Relevance and sufficient representation for intended purpose",
+          "correct": true,
+          "reason": "Article 26(4) applies to its controlled inputs."
+        },
+        {
+          "blocks": "Only the upstream model’s original filename",
+          "correct": false,
+          "reason": "That does not assess these inputs."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which input obligation applies to data the deployer actually controls?",
+          "options": [
+            {
+              "blocks": "Relevance and sufficient representation for intended purpose",
+              "correct": true,
+              "reason": "Article 26(4) applies to its controlled inputs."
+            },
+            {
+              "blocks": "Only the upstream model’s original filename",
+              "correct": false,
+              "reason": "That does not assess these inputs."
+            },
+            {
+              "blocks": "Every upstream datum it cannot control",
+              "correct": false,
+              "reason": "The paragraph qualifies the duty by control."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

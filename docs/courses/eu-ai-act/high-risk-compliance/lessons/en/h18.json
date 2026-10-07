@@ -1,0 +1,215 @@
+{
+  "module": "Make technical compliance inspectable",
+  "lesson": {
+    "slug": "h18",
+    "title": "Review technical readiness: case exercise",
+    "summary": "Review a technical deployment package for actual evidence gaps.",
+    "covers": ["technical-readiness-case"],
+    "prerequisites": [
+      {
+        "lesson": "h13",
+        "reason": "Locate proof"
+      },
+      {
+        "lesson": "h14",
+        "reason": "Check traceability"
+      },
+      {
+        "lesson": "h16",
+        "reason": "Check oversight"
+      },
+      {
+        "lesson": "h17",
+        "reason": "Check tested performance."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Case package: Northbridge supplies a current-version brochure, a test report for an older version, an automatic logging feature with no proven controlled-log custody, and a reviewer who cannot challenge scores.",
+        "The exercise supplies gaps, not proof of all possible faults. Review what each document actually demonstrates for the assessed version and intended use."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 11–15; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A technical index needs the relevant records and explanations. Match purpose, design, datasets, oversight, test evidence and change history to the version. Listing a file does not establish its applicability.",
+        "If the old test still supports a claim, explain and evidence why. Otherwise request relevant testing rather than silently carrying the old result forward."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 11–15; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Logging capability and custody are separate findings. Verify relevant automatic event recording and a qualified retention arrangement for logs under the actor’s control.",
+        "Oversight needs interpretation, anomaly handling, challenge and safe intervention. The supplied inability to challenge scores leaves a material readiness gap."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 11–15; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Check purpose-appropriate accuracy and its declared metrics, fault resilience and appropriate AI-specific cybersecurity evidence. A good ordinary-input result does not answer every failure or attack case.",
+        "Supported decision: hold this evidence package pending resolved technical gaps and accountable actions. Conformity procedures, other law and actual deployment controls remain separate gates; this module does not grant market authorisation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 11–15; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["technical-readiness-case"],
+      "teaches": ["screen-1", "screen-2"],
+      "prompt": "The package cites older-version testing without a relevance explanation. Which decision follows?",
+      "options": [
+        {
+          "blocks": "Request version-relevant proof or a justified applicability explanation",
+          "correct": true,
+          "reason": "The file must demonstrate the assessed system’s compliance."
+        },
+        {
+          "blocks": "Accept the report solely because it exists",
+          "correct": false,
+          "reason": "Existence does not establish relevance."
+        },
+        {
+          "blocks": "Erase the version reference",
+          "correct": false,
+          "reason": "Hiding a gap does not close it."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the assessor handle Northbridge’s mismatched test evidence?",
+          "options": [
+            {
+              "blocks": "Accept the report solely because it exists",
+              "correct": false,
+              "reason": "Existence does not establish relevance."
+            },
+            {
+              "blocks": "Erase the version reference",
+              "correct": false,
+              "reason": "Hiding a gap does not close it."
+            },
+            {
+              "blocks": "Request version-relevant proof or a justified applicability explanation",
+              "correct": true,
+              "reason": "The file must demonstrate the assessed system’s compliance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["technical-readiness-case"],
+      "teaches": ["screen-3"],
+      "prompt": "The supplier shows logging capability but no custody policy. What remains unresolved?",
+      "options": [
+        {
+          "blocks": "Whether the logo is prominent enough",
+          "correct": false,
+          "reason": "The logo does not establish custody."
+        },
+        {
+          "blocks": "A statutory rule requiring all data forever",
+          "correct": false,
+          "reason": "The rule is qualified and purpose-related."
+        },
+        {
+          "blocks": "Which controlled logs are retained and under which qualified period",
+          "correct": true,
+          "reason": "Capability and custody are separate."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a working event logger alone establish the controlled-log obligation?",
+          "options": [
+            {
+              "blocks": "A statutory rule requiring all data forever",
+              "correct": false,
+              "reason": "The rule is qualified and purpose-related."
+            },
+            {
+              "blocks": "Which controlled logs are retained and under which qualified period",
+              "correct": true,
+              "reason": "Capability and custody are separate."
+            },
+            {
+              "blocks": "Whether the logo is prominent enough",
+              "correct": false,
+              "reason": "The logo does not establish custody."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["technical-readiness-case"],
+      "teaches": ["screen-3", "screen-4"],
+      "prompt": "The reviewer cannot challenge outputs and security testing addresses only ordinary inputs. Is unconditional readiness supported?",
+      "options": [
+        {
+          "blocks": "Declare this course’s completion a release certificate",
+          "correct": false,
+          "reason": "Course progress is not regulatory authorisation."
+        },
+        {
+          "blocks": "Hold pending the material controls and evidence",
+          "correct": true,
+          "reason": "The stated package lacks required support."
+        },
+        {
+          "blocks": "Certify because an accuracy claim exists",
+          "correct": false,
+          "reason": "Accuracy does not cure the other gaps."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What conclusion fits the supplied oversight and attack-evidence gaps?",
+          "options": [
+            {
+              "blocks": "Hold pending the material controls and evidence",
+              "correct": true,
+              "reason": "The stated package lacks required support."
+            },
+            {
+              "blocks": "Certify because an accuracy claim exists",
+              "correct": false,
+              "reason": "Accuracy does not cure the other gaps."
+            },
+            {
+              "blocks": "Declare this course’s completion a release certificate",
+              "correct": false,
+              "reason": "Course progress is not regulatory authorisation."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
