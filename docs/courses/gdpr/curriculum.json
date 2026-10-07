@@ -1,0 +1,2188 @@
+{
+  "title": "GDPR Basics for Business: Personal Data, Rights and Duties",
+  "description": "A plain-language course on the EU General Data Protection Regulation for business people who are not data experts. Educational draft: not legal advice, and not yet reviewed by a lawyer.",
+  "canonical_language": "en",
+  "modules": [
+    {
+      "id": "M0",
+      "title": "Start here: what the GDPR covers"
+    },
+    {
+      "id": "M1",
+      "title": "The rules for using personal data"
+    },
+    {
+      "id": "M2",
+      "title": "People's rights: what customers and staff can ask for"
+    },
+    {
+      "id": "M3",
+      "title": "What your organisation must do"
+    },
+    {
+      "id": "M4",
+      "title": "Borders, regulators and fines"
+    },
+    {
+      "id": "M5",
+      "title": "Beyond the basics"
+    }
+  ],
+  "concepts": [
+    {
+      "slug": "gdpr-map",
+      "name": "Orientation: what the GDPR regulates",
+      "kind": "map",
+      "tier": "core",
+      "lesson": "G01",
+      "source_locator": "Arts. 1, 99",
+      "assessment": "Name what the GDPR protects and since when it applies."
+    },
+    {
+      "slug": "supervisory-authority",
+      "name": "Supervisory authority",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G01",
+      "source_locator": "Arts. 4(21), 51",
+      "assessment": "Identify the independent public body that monitors the GDPR."
+    },
+    {
+      "slug": "personal-data",
+      "name": "Personal data and the data subject",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G02",
+      "source_locator": "Art. 4(1); recitals 14, 27",
+      "assessment": "Decide whether information relates to a living natural person."
+    },
+    {
+      "slug": "identifiability",
+      "name": "Identifiable, directly or indirectly",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "G02",
+      "source_locator": "Art. 4(1); recitals 26, 30",
+      "assessment": "Recognise indirect identification through identifiers or combined information."
+    },
+    {
+      "slug": "pseudonymisation",
+      "name": "Pseudonymisation",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G03",
+      "source_locator": "Art. 4(5); recital 26",
+      "assessment": "Recognise that pseudonymised data remains personal data."
+    },
+    {
+      "slug": "anonymous-data",
+      "name": "Anonymous data",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G03",
+      "source_locator": "Recital 26",
+      "assessment": "Distinguish anonymous data from pseudonymised data."
+    },
+    {
+      "slug": "processing",
+      "name": "Processing",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G04",
+      "source_locator": "Art. 4(2)",
+      "assessment": "Recognise that almost any operation on personal data is processing."
+    },
+    {
+      "slug": "filing-system",
+      "name": "Filing system (paper records)",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G04",
+      "source_locator": "Arts. 2(1), 4(6); recital 15",
+      "assessment": "Decide whether manual records are covered."
+    },
+    {
+      "slug": "controller",
+      "name": "Controller",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G05",
+      "source_locator": "Art. 4(7)",
+      "assessment": "Identify who determines the purposes and means."
+    },
+    {
+      "slug": "processor",
+      "name": "Processor",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G05",
+      "source_locator": "Arts. 4(8), 28(10), 29",
+      "assessment": "Identify who processes on another's behalf."
+    },
+    {
+      "slug": "joint-controllers",
+      "name": "Joint controllers",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "G05",
+      "source_locator": "Art. 26",
+      "assessment": "Recognise joint determination and its consequence for data subjects."
+    },
+    {
+      "slug": "material-scope",
+      "name": "Material scope and the household exemption",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "G06",
+      "source_locator": "Art. 2; recital 18",
+      "assessment": "Decide whether an activity falls outside the GDPR."
+    },
+    {
+      "slug": "territorial-scope",
+      "name": "Territorial scope",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "G06",
+      "source_locator": "Art. 3",
+      "assessment": "Apply the establishment and targeting tests."
+    },
+    {
+      "slug": "transparency-principle",
+      "name": "Lawfulness, fairness and transparency",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P01",
+      "source_locator": "Art. 5(1)(a); recital 39",
+      "assessment": "Spot processing that is hidden or unexpected."
+    },
+    {
+      "slug": "purpose-limitation",
+      "name": "Purpose limitation",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P01",
+      "source_locator": "Art. 5(1)(b)",
+      "assessment": "Check that purposes are specified, explicit and legitimate."
+    },
+    {
+      "slug": "data-minimisation",
+      "name": "Data minimisation",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P02",
+      "source_locator": "Art. 5(1)(c)",
+      "assessment": "Spot data that is not necessary for the purpose."
+    },
+    {
+      "slug": "accuracy-principle",
+      "name": "Accuracy",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P02",
+      "source_locator": "Art. 5(1)(d)",
+      "assessment": "Choose the right response to inaccurate data."
+    },
+    {
+      "slug": "storage-limitation",
+      "name": "Storage limitation",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P02",
+      "source_locator": "Art. 5(1)(e); recital 39",
+      "assessment": "Decide when identifiable data must no longer be kept."
+    },
+    {
+      "slug": "integrity-confidentiality",
+      "name": "Integrity and confidentiality",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P03",
+      "source_locator": "Art. 5(1)(f)",
+      "assessment": "Name what appropriate security protects against."
+    },
+    {
+      "slug": "accountability",
+      "name": "Accountability",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P03",
+      "source_locator": "Art. 5(2)",
+      "assessment": "Identify who must be able to demonstrate compliance."
+    },
+    {
+      "slug": "lawful-bases",
+      "name": "The six legal bases",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P04",
+      "source_locator": "Art. 6(1)",
+      "assessment": "Match a purpose to a legal basis."
+    },
+    {
+      "slug": "necessity-test",
+      "name": "What 'necessary' means",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P04",
+      "source_locator": "Art. 6(1)(b)-(f); recitals 39, 44",
+      "assessment": "Reject a basis when the processing is not necessary for it."
+    },
+    {
+      "slug": "valid-consent",
+      "name": "Valid consent",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P05",
+      "source_locator": "Arts. 4(11), 7(1)-(2), 7(4); recitals 32, 42, 43",
+      "assessment": "Test whether consent is freely given, specific, informed and unambiguous."
+    },
+    {
+      "slug": "consent-withdrawal",
+      "name": "Withdrawing consent",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P05",
+      "source_locator": "Art. 7(3)",
+      "assessment": "Apply the withdrawal rules."
+    },
+    {
+      "slug": "legitimate-interests",
+      "name": "Legitimate interests",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "P06",
+      "source_locator": "Art. 6(1)(f); recital 47",
+      "assessment": "Apply interest, necessity and balancing to a case."
+    },
+    {
+      "slug": "compatible-further-processing",
+      "name": "Compatible further processing",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "P07",
+      "source_locator": "Arts. 5(1)(b), 6(4); recital 50",
+      "assessment": "Weigh the Article 6(4) factors for a new purpose."
+    },
+    {
+      "slug": "special-categories",
+      "name": "Special categories of personal data",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "P08",
+      "source_locator": "Arts. 4(13)-(15), 9(1); recital 51",
+      "assessment": "Recognise Article 9 data."
+    },
+    {
+      "slug": "special-category-conditions",
+      "name": "Conditions for special-category data",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "P08",
+      "source_locator": "Art. 9(2); recital 51",
+      "assessment": "Recognise that Article 9 is a prohibition with listed exceptions."
+    },
+    {
+      "slug": "criminal-offence-data",
+      "name": "Criminal conviction and offence data",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "P08",
+      "source_locator": "Art. 10",
+      "assessment": "Recognise the extra condition for criminal data."
+    },
+    {
+      "slug": "information-at-collection",
+      "name": "Information when collecting from the person",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R01",
+      "source_locator": "Arts. 12(1), 13",
+      "assessment": "Check a privacy notice for its required items."
+    },
+    {
+      "slug": "information-indirect",
+      "name": "Information when data comes from elsewhere",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R01",
+      "source_locator": "Art. 14",
+      "assessment": "Apply the timing rules of Article 14."
+    },
+    {
+      "slug": "request-deadline",
+      "name": "Response deadline for rights requests",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R02",
+      "source_locator": "Art. 12(2)-(4)",
+      "assessment": "Calculate the response deadline and extension rules."
+    },
+    {
+      "slug": "request-fees-and-identity",
+      "name": "Fees, refusals and identity checks",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R02",
+      "source_locator": "Art. 12(5)-(6)",
+      "assessment": "Decide when a fee or refusal is allowed."
+    },
+    {
+      "slug": "right-of-access",
+      "name": "Right of access",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R03",
+      "source_locator": "Art. 15",
+      "assessment": "Say what an access response must contain."
+    },
+    {
+      "slug": "right-to-rectification",
+      "name": "Right to rectification",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R04",
+      "source_locator": "Art. 16",
+      "assessment": "Apply rectification and completion."
+    },
+    {
+      "slug": "right-to-erasure",
+      "name": "Right to erasure",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R04",
+      "source_locator": "Art. 17",
+      "assessment": "Find an erasure ground and the exceptions."
+    },
+    {
+      "slug": "right-to-restriction",
+      "name": "Right to restriction",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R05",
+      "source_locator": "Arts. 4(3), 18",
+      "assessment": "Choose restriction for the four listed situations."
+    },
+    {
+      "slug": "recipient-notification",
+      "name": "Telling recipients about corrections",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R05",
+      "source_locator": "Art. 19",
+      "assessment": "Apply the duty to inform recipients."
+    },
+    {
+      "slug": "data-portability",
+      "name": "Right to data portability",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R06",
+      "source_locator": "Art. 20; recital 68",
+      "assessment": "Decide whether portability applies."
+    },
+    {
+      "slug": "right-to-object",
+      "name": "Right to object",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R06",
+      "source_locator": "Art. 21; recital 70",
+      "assessment": "Distinguish the general objection from the marketing objection."
+    },
+    {
+      "slug": "profiling",
+      "name": "Profiling",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "R07",
+      "source_locator": "Art. 4(4)",
+      "assessment": "Recognise profiling."
+    },
+    {
+      "slug": "automated-decisions",
+      "name": "Solely automated decisions",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R07",
+      "source_locator": "Art. 22; recital 71",
+      "assessment": "Apply Article 22 and its safeguards."
+    },
+    {
+      "slug": "complaint-and-court",
+      "name": "Complaints and court action",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R08",
+      "source_locator": "Arts. 77, 79, 80",
+      "assessment": "Choose the route for a data subject."
+    },
+    {
+      "slug": "compensation",
+      "name": "Compensation and liability",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "R08",
+      "source_locator": "Art. 82; recital 146",
+      "assessment": "Apply the liability rules for controllers and processors."
+    },
+    {
+      "slug": "controller-measures",
+      "name": "Appropriate measures and policies",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "O01",
+      "source_locator": "Art. 24",
+      "assessment": "Scale measures to risk and demonstrate compliance."
+    },
+    {
+      "slug": "records-of-processing",
+      "name": "Record of processing activities",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "O01",
+      "source_locator": "Art. 30",
+      "assessment": "Draft record entries and test the under-250 exemption."
+    },
+    {
+      "slug": "privacy-by-design",
+      "name": "Data protection by design",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "O02",
+      "source_locator": "Art. 25(1)",
+      "assessment": "Choose a design measure that implements a principle."
+    },
+    {
+      "slug": "privacy-by-default",
+      "name": "Data protection by default",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "O02",
+      "source_locator": "Art. 25(2)",
+      "assessment": "Choose a compliant default setting."
+    },
+    {
+      "slug": "processor-contract",
+      "name": "The controller-processor contract",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "O03",
+      "source_locator": "Art. 28(1), (3), (9)",
+      "assessment": "Identify mandatory contract terms."
+    },
+    {
+      "slug": "sub-processors",
+      "name": "Sub-processors",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "O03",
+      "source_locator": "Art. 28(2), (4)",
+      "assessment": "Apply the authorisation rules for sub-processors."
+    },
+    {
+      "slug": "security-measures",
+      "name": "Security of processing",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "O04",
+      "source_locator": "Art. 32",
+      "assessment": "Select risk-appropriate security measures."
+    },
+    {
+      "slug": "personal-data-breach",
+      "name": "Personal data breach",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "O05",
+      "source_locator": "Art. 4(12)",
+      "assessment": "Recognise a breach, including loss of availability."
+    },
+    {
+      "slug": "breach-notification",
+      "name": "Notifying the supervisory authority",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "O05",
+      "source_locator": "Art. 33; recital 85",
+      "assessment": "Apply the 72-hour rule and its exception."
+    },
+    {
+      "slug": "breach-communication",
+      "name": "Telling affected people",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "O05",
+      "source_locator": "Art. 34",
+      "assessment": "Decide whether people must be told."
+    },
+    {
+      "slug": "dpia",
+      "name": "Data protection impact assessment",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "O06",
+      "source_locator": "Art. 35",
+      "assessment": "Decide whether a DPIA is required and what it contains."
+    },
+    {
+      "slug": "dpo",
+      "name": "Data protection officer",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "O07",
+      "source_locator": "Arts. 37-39",
+      "assessment": "Decide whether a DPO is mandatory and protect their position."
+    },
+    {
+      "slug": "compliance-review",
+      "name": "Integrated compliance review",
+      "kind": "capstone",
+      "tier": "core",
+      "lesson": "O08",
+      "source_locator": "Arts. 5, 6, 13, 28, 30, 33, 35",
+      "assessment": "Apply core duties to a fictional business."
+    },
+    {
+      "slug": "international-transfer",
+      "name": "International transfer",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "X01",
+      "source_locator": "Art. 44",
+      "assessment": "Recognise a transfer to a third country."
+    },
+    {
+      "slug": "transfer-tools",
+      "name": "Transfer tools",
+      "kind": "skill",
+      "tier": "core",
+      "lesson": "X01",
+      "source_locator": "Arts. 45, 46, 49",
+      "assessment": "Choose adequacy, safeguards or a derogation."
+    },
+    {
+      "slug": "lead-authority",
+      "name": "Lead supervisory authority",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "X02",
+      "source_locator": "Arts. 4(16), 55, 56",
+      "assessment": "Identify the lead authority for cross-border processing."
+    },
+    {
+      "slug": "edpb",
+      "name": "European Data Protection Board",
+      "kind": "term",
+      "tier": "core",
+      "lesson": "X02",
+      "source_locator": "Arts. 68, 70",
+      "assessment": "Describe what the Board does."
+    },
+    {
+      "slug": "corrective-powers",
+      "name": "Corrective powers",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "X03",
+      "source_locator": "Art. 58(2)",
+      "assessment": "Recognise measures other than fines."
+    },
+    {
+      "slug": "fine-tiers",
+      "name": "The two fine tiers",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "X03",
+      "source_locator": "Art. 83(4)-(6)",
+      "assessment": "Match an infringement to its maximum fine."
+    },
+    {
+      "slug": "fine-factors",
+      "name": "How a fine is set",
+      "kind": "idea",
+      "tier": "core",
+      "lesson": "X03",
+      "source_locator": "Art. 83(1)-(3)",
+      "assessment": "Name factors that raise or lower a fine."
+    },
+    {
+      "slug": "eu-representative",
+      "name": "EU representative",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "X04",
+      "source_locator": "Art. 27",
+      "assessment": "Decide whether a non-EU business needs a representative."
+    },
+    {
+      "slug": "essential-equivalence",
+      "name": "Essential equivalence after Schrems II",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "X05",
+      "source_locator": "C-311/18 operative part",
+      "assessment": "Explain why clauses alone may not suffice."
+    },
+    {
+      "slug": "eu-us-dpf",
+      "name": "EU-US Data Privacy Framework",
+      "kind": "term",
+      "tier": "extension",
+      "lesson": "X05",
+      "source_locator": "Decision (EU) 2023/1795; C-311/18 point 5",
+      "assessment": "Describe the US adequacy decision and its history."
+    },
+    {
+      "slug": "cookie-consent-rule",
+      "name": "The cookie consent rule",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "N01",
+      "source_locator": "Directive 2002/58/EC Art. 5(3); C-673/17",
+      "assessment": "Apply Article 5(3) consent and its exemptions."
+    },
+    {
+      "slug": "cookie-information",
+      "name": "Information about cookies",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "N01",
+      "source_locator": "C-673/17 point 3",
+      "assessment": "List what users must be told about cookies."
+    },
+    {
+      "slug": "joint-control-scope",
+      "name": "Scope of joint control",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "N02",
+      "source_locator": "C-40/17 points 2-3; Art. 26",
+      "assessment": "Limit joint control to the operations jointly determined."
+    },
+    {
+      "slug": "ai-act-relationship",
+      "name": "GDPR and AI Act together",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "N03",
+      "source_locator": "AI Act Art. 2(7); GDPR Art. 22",
+      "assessment": "Explain that AI Act compliance does not settle GDPR questions."
+    },
+    {
+      "slug": "child-consent",
+      "name": "Children's consent for online services",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "N04",
+      "source_locator": "Art. 8; recital 38",
+      "assessment": "Apply the age threshold and parental authorisation."
+    },
+    {
+      "slug": "pending-proposals",
+      "name": "Pending amendment proposals",
+      "kind": "idea",
+      "tier": "extension",
+      "lesson": "N05",
+      "source_locator": "COM(2025) 501; COM(2025) 837",
+      "assessment": "Distinguish law in force from proposals."
+    }
+  ],
+  "edges": [
+    {
+      "parent": "personal-data",
+      "child": "identifiability",
+      "kind": "requires",
+      "reason": "Identifiability is the test inside the personal-data definition."
+    },
+    {
+      "parent": "identifiability",
+      "child": "pseudonymisation",
+      "kind": "requires",
+      "reason": "Pseudonymised data stays personal data because extra information can still identify the person."
+    },
+    {
+      "parent": "identifiability",
+      "child": "anonymous-data",
+      "kind": "requires",
+      "reason": "Anonymous data is defined by the absence of identifiability."
+    },
+    {
+      "parent": "personal-data",
+      "child": "processing",
+      "kind": "requires",
+      "reason": "Processing is defined as operations performed on personal data."
+    },
+    {
+      "parent": "processing",
+      "child": "filing-system",
+      "kind": "requires",
+      "reason": "The filing-system rule decides which manual processing is covered."
+    },
+    {
+      "parent": "processing",
+      "child": "controller",
+      "kind": "requires",
+      "reason": "A controller is defined as whoever decides the purposes and means of processing."
+    },
+    {
+      "parent": "controller",
+      "child": "processor",
+      "kind": "requires",
+      "reason": "A processor is defined as acting on behalf of a controller."
+    },
+    {
+      "parent": "controller",
+      "child": "joint-controllers",
+      "kind": "requires",
+      "reason": "Joint controllers are two or more controllers deciding together."
+    },
+    {
+      "parent": "processing",
+      "child": "material-scope",
+      "kind": "requires",
+      "reason": "Material scope is stated in terms of automated processing."
+    },
+    {
+      "parent": "filing-system",
+      "child": "material-scope",
+      "kind": "requires",
+      "reason": "Manual processing is covered only through the filing-system rule."
+    },
+    {
+      "parent": "anonymous-data",
+      "child": "material-scope",
+      "kind": "suggests",
+      "reason": "Knowing anonymous data helps explain what falls outside the GDPR."
+    },
+    {
+      "parent": "controller",
+      "child": "territorial-scope",
+      "kind": "requires",
+      "reason": "Article 3 turns on where the controller or processor is established."
+    },
+    {
+      "parent": "processor",
+      "child": "territorial-scope",
+      "kind": "requires",
+      "reason": "Article 3 applies the same tests to processors."
+    },
+    {
+      "parent": "processing",
+      "child": "transparency-principle",
+      "kind": "requires",
+      "reason": "The principles are rules about how processing is carried out."
+    },
+    {
+      "parent": "processing",
+      "child": "purpose-limitation",
+      "kind": "requires",
+      "reason": "Purpose limitation governs further processing of collected data."
+    },
+    {
+      "parent": "controller",
+      "child": "purpose-limitation",
+      "kind": "suggests",
+      "reason": "The controller is the one who sets the purposes."
+    },
+    {
+      "parent": "purpose-limitation",
+      "child": "data-minimisation",
+      "kind": "requires",
+      "reason": "Necessity is measured against the stated purpose."
+    },
+    {
+      "parent": "purpose-limitation",
+      "child": "accuracy-principle",
+      "kind": "requires",
+      "reason": "Accuracy is judged having regard to the purposes."
+    },
+    {
+      "parent": "purpose-limitation",
+      "child": "storage-limitation",
+      "kind": "requires",
+      "reason": "The storage period is limited by what the purpose needs."
+    },
+    {
+      "parent": "anonymous-data",
+      "child": "storage-limitation",
+      "kind": "suggests",
+      "reason": "Anonymising is one way to stop keeping data in identifiable form."
+    },
+    {
+      "parent": "processing",
+      "child": "integrity-confidentiality",
+      "kind": "requires",
+      "reason": "Security protects processing against unauthorised operations and loss."
+    },
+    {
+      "parent": "controller",
+      "child": "accountability",
+      "kind": "requires",
+      "reason": "Accountability places the burden of proof on the controller."
+    },
+    {
+      "parent": "transparency-principle",
+      "child": "accountability",
+      "kind": "requires",
+      "reason": "The controller must demonstrate compliance with the principles, so the learner needs them."
+    },
+    {
+      "parent": "data-minimisation",
+      "child": "accountability",
+      "kind": "requires",
+      "reason": "Demonstrating compliance covers minimisation, accuracy and storage limits too."
+    },
+    {
+      "parent": "transparency-principle",
+      "child": "lawful-bases",
+      "kind": "requires",
+      "reason": "The legal bases are what makes processing lawful under the first principle."
+    },
+    {
+      "parent": "controller",
+      "child": "lawful-bases",
+      "kind": "requires",
+      "reason": "Several bases refer to the controller's obligations, interests or tasks."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "necessity-test",
+      "kind": "requires",
+      "reason": "Five of the six bases require the processing to be necessary for that basis."
+    },
+    {
+      "parent": "data-minimisation",
+      "child": "necessity-test",
+      "kind": "suggests",
+      "reason": "Minimisation uses the same idea of necessity."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "valid-consent",
+      "kind": "requires",
+      "reason": "Consent is one of the six bases and must be placed among them."
+    },
+    {
+      "parent": "valid-consent",
+      "child": "consent-withdrawal",
+      "kind": "requires",
+      "reason": "Withdrawal rules apply to consent that was validly given."
+    },
+    {
+      "parent": "necessity-test",
+      "child": "legitimate-interests",
+      "kind": "requires",
+      "reason": "The legitimate-interests test includes a necessity step."
+    },
+    {
+      "parent": "purpose-limitation",
+      "child": "compatible-further-processing",
+      "kind": "requires",
+      "reason": "Compatibility is the test inside purpose limitation."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "compatible-further-processing",
+      "kind": "requires",
+      "reason": "Article 6(4) applies when the new purpose is not covered by consent or law."
+    },
+    {
+      "parent": "personal-data",
+      "child": "special-categories",
+      "kind": "requires",
+      "reason": "Special categories are a subset of personal data."
+    },
+    {
+      "parent": "special-categories",
+      "child": "special-category-conditions",
+      "kind": "requires",
+      "reason": "The conditions lift the prohibition on those categories."
+    },
+    {
+      "parent": "valid-consent",
+      "child": "special-category-conditions",
+      "kind": "requires",
+      "reason": "Explicit consent builds on the general consent conditions."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "special-category-conditions",
+      "kind": "requires",
+      "reason": "Article 9 conditions apply in addition to a legal basis."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "criminal-offence-data",
+      "kind": "requires",
+      "reason": "Article 10 adds conditions to processing based on Article 6(1)."
+    },
+    {
+      "parent": "special-categories",
+      "child": "criminal-offence-data",
+      "kind": "suggests",
+      "reason": "Criminal data is handled in a similar but separate way."
+    },
+    {
+      "parent": "transparency-principle",
+      "child": "information-at-collection",
+      "kind": "requires",
+      "reason": "The notice duties put the transparency principle into practice."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "information-at-collection",
+      "kind": "requires",
+      "reason": "A notice must state the legal basis, so the learner needs the bases."
+    },
+    {
+      "parent": "controller",
+      "child": "information-at-collection",
+      "kind": "requires",
+      "reason": "The controller gives the notice and must identify itself."
+    },
+    {
+      "parent": "information-at-collection",
+      "child": "information-indirect",
+      "kind": "requires",
+      "reason": "Article 14 builds on the Article 13 list and adds items."
+    },
+    {
+      "parent": "controller",
+      "child": "request-deadline",
+      "kind": "requires",
+      "reason": "The deadlines are duties of the controller."
+    },
+    {
+      "parent": "information-at-collection",
+      "child": "request-deadline",
+      "kind": "suggests",
+      "reason": "A notice tells people which rights they can request."
+    },
+    {
+      "parent": "request-deadline",
+      "child": "request-fees-and-identity",
+      "kind": "requires",
+      "reason": "Fees and refusals are part of the same Article 12 procedure."
+    },
+    {
+      "parent": "request-deadline",
+      "child": "right-of-access",
+      "kind": "requires",
+      "reason": "An access request is answered within the Article 12 deadline."
+    },
+    {
+      "parent": "request-fees-and-identity",
+      "child": "right-of-access",
+      "kind": "requires",
+      "reason": "The free first copy and the fee for further copies build on the fee rule."
+    },
+    {
+      "parent": "accuracy-principle",
+      "child": "right-to-rectification",
+      "kind": "requires",
+      "reason": "Rectification is the individual's tool for the accuracy principle."
+    },
+    {
+      "parent": "request-deadline",
+      "child": "right-to-rectification",
+      "kind": "requires",
+      "reason": "Rectification requests follow the Article 12 procedure."
+    },
+    {
+      "parent": "consent-withdrawal",
+      "child": "right-to-erasure",
+      "kind": "requires",
+      "reason": "One erasure ground is withdrawn consent with no other basis."
+    },
+    {
+      "parent": "storage-limitation",
+      "child": "right-to-erasure",
+      "kind": "requires",
+      "reason": "One erasure ground is that data is no longer necessary."
+    },
+    {
+      "parent": "request-deadline",
+      "child": "right-to-erasure",
+      "kind": "requires",
+      "reason": "Erasure requests follow the Article 12 procedure."
+    },
+    {
+      "parent": "right-to-rectification",
+      "child": "right-to-restriction",
+      "kind": "requires",
+      "reason": "Restriction applies while accuracy is being verified."
+    },
+    {
+      "parent": "right-to-erasure",
+      "child": "right-to-restriction",
+      "kind": "requires",
+      "reason": "Restriction can be chosen instead of erasure of unlawful data."
+    },
+    {
+      "parent": "right-to-erasure",
+      "child": "recipient-notification",
+      "kind": "requires",
+      "reason": "Article 19 passes erasures on to recipients."
+    },
+    {
+      "parent": "right-to-restriction",
+      "child": "recipient-notification",
+      "kind": "requires",
+      "reason": "Article 19 also passes restrictions on to recipients."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "data-portability",
+      "kind": "requires",
+      "reason": "Portability depends on processing based on consent or contract."
+    },
+    {
+      "parent": "right-of-access",
+      "child": "data-portability",
+      "kind": "suggests",
+      "reason": "Portability is easier to place next to access."
+    },
+    {
+      "parent": "legitimate-interests",
+      "child": "right-to-object",
+      "kind": "requires",
+      "reason": "The general objection targets processing based on legitimate interests or public tasks."
+    },
+    {
+      "parent": "request-deadline",
+      "child": "right-to-object",
+      "kind": "requires",
+      "reason": "Objections follow the Article 12 procedure."
+    },
+    {
+      "parent": "processing",
+      "child": "profiling",
+      "kind": "requires",
+      "reason": "Profiling is a form of automated processing."
+    },
+    {
+      "parent": "profiling",
+      "child": "automated-decisions",
+      "kind": "requires",
+      "reason": "Article 22 covers decisions based on automated processing, including profiling."
+    },
+    {
+      "parent": "valid-consent",
+      "child": "automated-decisions",
+      "kind": "requires",
+      "reason": "One exception is explicit consent, which builds on consent."
+    },
+    {
+      "parent": "supervisory-authority",
+      "child": "complaint-and-court",
+      "kind": "requires",
+      "reason": "A complaint is lodged with a supervisory authority."
+    },
+    {
+      "parent": "controller",
+      "child": "complaint-and-court",
+      "kind": "requires",
+      "reason": "Court action is brought against a controller or processor."
+    },
+    {
+      "parent": "controller",
+      "child": "compensation",
+      "kind": "requires",
+      "reason": "Liability rules distinguish the controller's role."
+    },
+    {
+      "parent": "processor",
+      "child": "compensation",
+      "kind": "requires",
+      "reason": "Liability rules limit when a processor is liable."
+    },
+    {
+      "parent": "complaint-and-court",
+      "child": "compensation",
+      "kind": "suggests",
+      "reason": "Compensation claims go to the courts named in Article 79."
+    },
+    {
+      "parent": "accountability",
+      "child": "controller-measures",
+      "kind": "requires",
+      "reason": "Article 24 turns accountability into measures and policies."
+    },
+    {
+      "parent": "controller-measures",
+      "child": "records-of-processing",
+      "kind": "requires",
+      "reason": "The record is one of the measures that demonstrates compliance."
+    },
+    {
+      "parent": "purpose-limitation",
+      "child": "records-of-processing",
+      "kind": "requires",
+      "reason": "Every record entry states the purposes of processing."
+    },
+    {
+      "parent": "special-categories",
+      "child": "records-of-processing",
+      "kind": "requires",
+      "reason": "The under-250 exemption does not apply to special categories."
+    },
+    {
+      "parent": "data-minimisation",
+      "child": "privacy-by-design",
+      "kind": "requires",
+      "reason": "Design measures implement principles such as minimisation."
+    },
+    {
+      "parent": "pseudonymisation",
+      "child": "privacy-by-design",
+      "kind": "requires",
+      "reason": "Pseudonymisation is the example measure Article 25 names."
+    },
+    {
+      "parent": "privacy-by-design",
+      "child": "privacy-by-default",
+      "kind": "requires",
+      "reason": "Default settings are a specific design obligation."
+    },
+    {
+      "parent": "processor",
+      "child": "processor-contract",
+      "kind": "requires",
+      "reason": "The contract governs processing by a processor."
+    },
+    {
+      "parent": "controller-measures",
+      "child": "processor-contract",
+      "kind": "suggests",
+      "reason": "Choosing a processor with guarantees is part of the controller's measures."
+    },
+    {
+      "parent": "processor-contract",
+      "child": "sub-processors",
+      "kind": "requires",
+      "reason": "Sub-processor rules are terms of the processor contract."
+    },
+    {
+      "parent": "integrity-confidentiality",
+      "child": "security-measures",
+      "kind": "requires",
+      "reason": "Article 32 implements the integrity and confidentiality principle."
+    },
+    {
+      "parent": "pseudonymisation",
+      "child": "security-measures",
+      "kind": "requires",
+      "reason": "Pseudonymisation is one of the listed security measures."
+    },
+    {
+      "parent": "integrity-confidentiality",
+      "child": "personal-data-breach",
+      "kind": "requires",
+      "reason": "A breach is a failure of security."
+    },
+    {
+      "parent": "personal-data-breach",
+      "child": "breach-notification",
+      "kind": "requires",
+      "reason": "Notification applies to a personal data breach."
+    },
+    {
+      "parent": "supervisory-authority",
+      "child": "breach-notification",
+      "kind": "requires",
+      "reason": "The notification goes to the supervisory authority."
+    },
+    {
+      "parent": "processor",
+      "child": "breach-notification",
+      "kind": "requires",
+      "reason": "Processors must tell the controller about breaches."
+    },
+    {
+      "parent": "breach-notification",
+      "child": "breach-communication",
+      "kind": "requires",
+      "reason": "Communication to individuals reuses the notification content."
+    },
+    {
+      "parent": "security-measures",
+      "child": "breach-communication",
+      "kind": "requires",
+      "reason": "Encryption that was applied can remove the duty to tell people."
+    },
+    {
+      "parent": "automated-decisions",
+      "child": "dpia",
+      "kind": "requires",
+      "reason": "One listed DPIA case is systematic automated evaluation with significant effects."
+    },
+    {
+      "parent": "special-categories",
+      "child": "dpia",
+      "kind": "requires",
+      "reason": "One listed DPIA case is large-scale special-category data."
+    },
+    {
+      "parent": "controller-measures",
+      "child": "dpia",
+      "kind": "requires",
+      "reason": "A DPIA is a risk-based controller measure."
+    },
+    {
+      "parent": "special-categories",
+      "child": "dpo",
+      "kind": "requires",
+      "reason": "One mandatory-DPO case is large-scale special-category data."
+    },
+    {
+      "parent": "supervisory-authority",
+      "child": "dpo",
+      "kind": "requires",
+      "reason": "The DPO cooperates with and is the contact for the supervisory authority."
+    },
+    {
+      "parent": "dpia",
+      "child": "dpo",
+      "kind": "suggests",
+      "reason": "The DPO advises on DPIAs."
+    },
+    {
+      "parent": "records-of-processing",
+      "child": "compliance-review",
+      "kind": "requires",
+      "reason": "The review starts from the record of processing."
+    },
+    {
+      "parent": "processor-contract",
+      "child": "compliance-review",
+      "kind": "requires",
+      "reason": "The review checks the processor contracts."
+    },
+    {
+      "parent": "breach-notification",
+      "child": "compliance-review",
+      "kind": "requires",
+      "reason": "The review includes a breach scenario."
+    },
+    {
+      "parent": "dpia",
+      "child": "compliance-review",
+      "kind": "requires",
+      "reason": "The review decides whether a DPIA is needed."
+    },
+    {
+      "parent": "legitimate-interests",
+      "child": "compliance-review",
+      "kind": "suggests",
+      "reason": "The review revisits the legal bases."
+    },
+    {
+      "parent": "information-at-collection",
+      "child": "compliance-review",
+      "kind": "suggests",
+      "reason": "The review checks the privacy notice."
+    },
+    {
+      "parent": "processing",
+      "child": "international-transfer",
+      "kind": "requires",
+      "reason": "A transfer is a processing operation."
+    },
+    {
+      "parent": "territorial-scope",
+      "child": "international-transfer",
+      "kind": "suggests",
+      "reason": "Scope and transfers are different questions."
+    },
+    {
+      "parent": "international-transfer",
+      "child": "transfer-tools",
+      "kind": "requires",
+      "reason": "The tools are conditions for a transfer."
+    },
+    {
+      "parent": "valid-consent",
+      "child": "transfer-tools",
+      "kind": "requires",
+      "reason": "One derogation is explicit consent to the transfer."
+    },
+    {
+      "parent": "supervisory-authority",
+      "child": "lead-authority",
+      "kind": "requires",
+      "reason": "The lead authority is a supervisory authority with a special role."
+    },
+    {
+      "parent": "controller",
+      "child": "lead-authority",
+      "kind": "requires",
+      "reason": "The lead authority follows the controller's main establishment."
+    },
+    {
+      "parent": "supervisory-authority",
+      "child": "edpb",
+      "kind": "requires",
+      "reason": "The Board is made up of the supervisory authorities."
+    },
+    {
+      "parent": "supervisory-authority",
+      "child": "corrective-powers",
+      "kind": "requires",
+      "reason": "Corrective powers belong to supervisory authorities."
+    },
+    {
+      "parent": "corrective-powers",
+      "child": "fine-tiers",
+      "kind": "requires",
+      "reason": "A fine is one corrective power, imposed with or instead of the others."
+    },
+    {
+      "parent": "lawful-bases",
+      "child": "fine-tiers",
+      "kind": "suggests",
+      "reason": "The higher tier names the principles and bases."
+    },
+    {
+      "parent": "fine-tiers",
+      "child": "fine-factors",
+      "kind": "requires",
+      "reason": "The factors set the amount within the tier."
+    },
+    {
+      "parent": "security-measures",
+      "child": "fine-factors",
+      "kind": "suggests",
+      "reason": "Measures taken under Articles 25 and 32 are a listed factor."
+    },
+    {
+      "parent": "territorial-scope",
+      "child": "eu-representative",
+      "kind": "requires",
+      "reason": "A representative is needed only where Article 3(2) applies."
+    },
+    {
+      "parent": "transfer-tools",
+      "child": "essential-equivalence",
+      "kind": "requires",
+      "reason": "Schrems II interprets the standard-clauses tool."
+    },
+    {
+      "parent": "corrective-powers",
+      "child": "essential-equivalence",
+      "kind": "requires",
+      "reason": "Schrems II relies on the power to suspend transfers."
+    },
+    {
+      "parent": "transfer-tools",
+      "child": "eu-us-dpf",
+      "kind": "requires",
+      "reason": "The Framework is an adequacy decision."
+    },
+    {
+      "parent": "essential-equivalence",
+      "child": "eu-us-dpf",
+      "kind": "requires",
+      "reason": "The Framework followed the invalidation of Privacy Shield in Schrems II."
+    },
+    {
+      "parent": "valid-consent",
+      "child": "cookie-consent-rule",
+      "kind": "requires",
+      "reason": "Cookie consent uses the GDPR's consent standard."
+    },
+    {
+      "parent": "cookie-consent-rule",
+      "child": "cookie-information",
+      "kind": "requires",
+      "reason": "The information duty is part of the cookie consent rule."
+    },
+    {
+      "parent": "joint-controllers",
+      "child": "joint-control-scope",
+      "kind": "requires",
+      "reason": "The case refines when and how far joint control applies."
+    },
+    {
+      "parent": "legitimate-interests",
+      "child": "joint-control-scope",
+      "kind": "requires",
+      "reason": "The case requires each joint controller to have a legitimate interest."
+    },
+    {
+      "parent": "automated-decisions",
+      "child": "ai-act-relationship",
+      "kind": "requires",
+      "reason": "The lesson uses Article 22 as the example of a GDPR rule that still applies."
+    },
+    {
+      "parent": "material-scope",
+      "child": "ai-act-relationship",
+      "kind": "suggests",
+      "reason": "Scope helps place the two laws side by side."
+    },
+    {
+      "parent": "valid-consent",
+      "child": "child-consent",
+      "kind": "requires",
+      "reason": "Article 8 adds age conditions to consent."
+    },
+    {
+      "parent": "gdpr-map",
+      "child": "pending-proposals",
+      "kind": "suggests",
+      "reason": "The orientation lesson explains what law is in force."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "G01",
+      "module": "M0",
+      "title": "What the GDPR is and how this course works",
+      "tier": "core",
+      "covers": [
+        "gdpr-map",
+        "supervisory-authority"
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "G02",
+      "module": "M0",
+      "title": "Personal data",
+      "tier": "core",
+      "covers": [
+        "personal-data",
+        "identifiability"
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "G03",
+      "module": "M0",
+      "title": "Pseudonymised and anonymous data",
+      "tier": "core",
+      "covers": [
+        "pseudonymisation",
+        "anonymous-data"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G02",
+          "reason": "Pseudonymised data stays personal data because extra information can still identify the person."
+        }
+      ]
+    },
+    {
+      "id": "G04",
+      "module": "M0",
+      "title": "Processing",
+      "tier": "core",
+      "covers": [
+        "processing",
+        "filing-system"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G02",
+          "reason": "Processing is defined as operations performed on personal data."
+        }
+      ]
+    },
+    {
+      "id": "G05",
+      "module": "M0",
+      "title": "Who decides: controllers and processors",
+      "tier": "core",
+      "covers": [
+        "controller",
+        "processor",
+        "joint-controllers"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G04",
+          "reason": "A controller is defined as whoever decides the purposes and means of processing."
+        }
+      ]
+    },
+    {
+      "id": "G06",
+      "module": "M0",
+      "title": "When the GDPR applies",
+      "tier": "core",
+      "covers": [
+        "material-scope",
+        "territorial-scope"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G04",
+          "reason": "Material scope is stated in terms of automated processing."
+        },
+        {
+          "lesson_id": "G05",
+          "reason": "Article 3 turns on where the controller or processor is established."
+        }
+      ]
+    },
+    {
+      "id": "P01",
+      "module": "M1",
+      "title": "Lawful, fair, transparent, and for a stated purpose",
+      "tier": "core",
+      "covers": [
+        "transparency-principle",
+        "purpose-limitation"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G04",
+          "reason": "The principles are rules about how processing is carried out."
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "module": "M1",
+      "title": "Only what you need, accurate, and not kept too long",
+      "tier": "core",
+      "covers": [
+        "data-minimisation",
+        "accuracy-principle",
+        "storage-limitation"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "Necessity is measured against the stated purpose."
+        }
+      ]
+    },
+    {
+      "id": "P03",
+      "module": "M1",
+      "title": "Security and accountability",
+      "tier": "core",
+      "covers": [
+        "integrity-confidentiality",
+        "accountability"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G04",
+          "reason": "Security protects processing against unauthorised operations and loss."
+        },
+        {
+          "lesson_id": "G05",
+          "reason": "Accountability places the burden of proof on the controller."
+        },
+        {
+          "lesson_id": "P01",
+          "reason": "The controller must demonstrate compliance with the principles, so the learner needs them."
+        },
+        {
+          "lesson_id": "P02",
+          "reason": "Demonstrating compliance covers minimisation, accuracy and storage limits too."
+        }
+      ]
+    },
+    {
+      "id": "P04",
+      "module": "M1",
+      "title": "The six legal bases",
+      "tier": "core",
+      "covers": [
+        "lawful-bases",
+        "necessity-test"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G05",
+          "reason": "Several bases refer to the controller's obligations, interests or tasks."
+        },
+        {
+          "lesson_id": "P01",
+          "reason": "The legal bases are what makes processing lawful under the first principle."
+        }
+      ]
+    },
+    {
+      "id": "P05",
+      "module": "M1",
+      "title": "Consent that counts",
+      "tier": "core",
+      "covers": [
+        "valid-consent",
+        "consent-withdrawal"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P04",
+          "reason": "Consent is one of the six bases and must be placed among them."
+        }
+      ]
+    },
+    {
+      "id": "P06",
+      "module": "M1",
+      "title": "Legitimate interests",
+      "tier": "core",
+      "covers": [
+        "legitimate-interests"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P04",
+          "reason": "The legitimate-interests test includes a necessity step."
+        }
+      ]
+    },
+    {
+      "id": "P07",
+      "module": "M1",
+      "title": "Using data for a new purpose",
+      "tier": "core",
+      "covers": [
+        "compatible-further-processing"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "Compatibility is the test inside purpose limitation."
+        },
+        {
+          "lesson_id": "P04",
+          "reason": "Article 6(4) applies when the new purpose is not covered by consent or law."
+        }
+      ]
+    },
+    {
+      "id": "P08",
+      "module": "M1",
+      "title": "Sensitive data",
+      "tier": "core",
+      "covers": [
+        "special-categories",
+        "special-category-conditions",
+        "criminal-offence-data"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G02",
+          "reason": "Special categories are a subset of personal data."
+        },
+        {
+          "lesson_id": "P04",
+          "reason": "Article 9 conditions apply in addition to a legal basis."
+        },
+        {
+          "lesson_id": "P05",
+          "reason": "Explicit consent builds on the general consent conditions."
+        }
+      ]
+    },
+    {
+      "id": "R01",
+      "module": "M2",
+      "title": "What you must tell people",
+      "tier": "core",
+      "covers": [
+        "information-at-collection",
+        "information-indirect"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G05",
+          "reason": "The controller gives the notice and must identify itself."
+        },
+        {
+          "lesson_id": "P01",
+          "reason": "The notice duties put the transparency principle into practice."
+        },
+        {
+          "lesson_id": "P04",
+          "reason": "A notice must state the legal basis, so the learner needs the bases."
+        }
+      ]
+    },
+    {
+      "id": "R02",
+      "module": "M2",
+      "title": "Handling a rights request",
+      "tier": "core",
+      "covers": [
+        "request-deadline",
+        "request-fees-and-identity"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G05",
+          "reason": "The deadlines are duties of the controller."
+        }
+      ]
+    },
+    {
+      "id": "R03",
+      "module": "M2",
+      "title": "The right of access",
+      "tier": "core",
+      "covers": [
+        "right-of-access"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "R02",
+          "reason": "An access request is answered within the Article 12 deadline."
+        }
+      ]
+    },
+    {
+      "id": "R04",
+      "module": "M2",
+      "title": "Correction and erasure",
+      "tier": "core",
+      "covers": [
+        "right-to-rectification",
+        "right-to-erasure"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P02",
+          "reason": "Rectification is the individual's tool for the accuracy principle."
+        },
+        {
+          "lesson_id": "P05",
+          "reason": "One erasure ground is withdrawn consent with no other basis."
+        },
+        {
+          "lesson_id": "R02",
+          "reason": "Rectification requests follow the Article 12 procedure."
+        }
+      ]
+    },
+    {
+      "id": "R05",
+      "module": "M2",
+      "title": "Restriction, and telling recipients",
+      "tier": "core",
+      "covers": [
+        "right-to-restriction",
+        "recipient-notification"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "R04",
+          "reason": "Restriction applies while accuracy is being verified."
+        }
+      ]
+    },
+    {
+      "id": "R06",
+      "module": "M2",
+      "title": "Portability and the right to object",
+      "tier": "core",
+      "covers": [
+        "data-portability",
+        "right-to-object"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P04",
+          "reason": "Portability depends on processing based on consent or contract."
+        },
+        {
+          "lesson_id": "P06",
+          "reason": "The general objection targets processing based on legitimate interests or public tasks."
+        },
+        {
+          "lesson_id": "R02",
+          "reason": "Objections follow the Article 12 procedure."
+        }
+      ]
+    },
+    {
+      "id": "R07",
+      "module": "M2",
+      "title": "Profiling and automated decisions",
+      "tier": "core",
+      "covers": [
+        "profiling",
+        "automated-decisions"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G04",
+          "reason": "Profiling is a form of automated processing."
+        },
+        {
+          "lesson_id": "P05",
+          "reason": "One exception is explicit consent, which builds on consent."
+        }
+      ]
+    },
+    {
+      "id": "R08",
+      "module": "M2",
+      "title": "Complaints, courts and compensation",
+      "tier": "core",
+      "covers": [
+        "complaint-and-court",
+        "compensation"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G01",
+          "reason": "A complaint is lodged with a supervisory authority."
+        },
+        {
+          "lesson_id": "G05",
+          "reason": "Court action is brought against a controller or processor."
+        }
+      ]
+    },
+    {
+      "id": "O01",
+      "module": "M3",
+      "title": "Accountability in practice: the record of processing",
+      "tier": "core",
+      "covers": [
+        "controller-measures",
+        "records-of-processing"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P01",
+          "reason": "Every record entry states the purposes of processing."
+        },
+        {
+          "lesson_id": "P03",
+          "reason": "Article 24 turns accountability into measures and policies."
+        },
+        {
+          "lesson_id": "P08",
+          "reason": "The under-250 exemption does not apply to special categories."
+        }
+      ]
+    },
+    {
+      "id": "O02",
+      "module": "M3",
+      "title": "Data protection by design and by default",
+      "tier": "core",
+      "covers": [
+        "privacy-by-design",
+        "privacy-by-default"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G03",
+          "reason": "Pseudonymisation is the example measure Article 25 names."
+        },
+        {
+          "lesson_id": "P02",
+          "reason": "Design measures implement principles such as minimisation."
+        }
+      ]
+    },
+    {
+      "id": "O03",
+      "module": "M3",
+      "title": "Working with processors",
+      "tier": "core",
+      "covers": [
+        "processor-contract",
+        "sub-processors"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G05",
+          "reason": "The contract governs processing by a processor."
+        }
+      ]
+    },
+    {
+      "id": "O04",
+      "module": "M3",
+      "title": "Security of processing",
+      "tier": "core",
+      "covers": [
+        "security-measures"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G03",
+          "reason": "Pseudonymisation is one of the listed security measures."
+        },
+        {
+          "lesson_id": "P03",
+          "reason": "Article 32 implements the integrity and confidentiality principle."
+        }
+      ]
+    },
+    {
+      "id": "O05",
+      "module": "M3",
+      "title": "Personal data breaches",
+      "tier": "core",
+      "covers": [
+        "personal-data-breach",
+        "breach-notification",
+        "breach-communication"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G01",
+          "reason": "The notification goes to the supervisory authority."
+        },
+        {
+          "lesson_id": "G05",
+          "reason": "Processors must tell the controller about breaches."
+        },
+        {
+          "lesson_id": "P03",
+          "reason": "A breach is a failure of security."
+        },
+        {
+          "lesson_id": "O04",
+          "reason": "Encryption that was applied can remove the duty to tell people."
+        }
+      ]
+    },
+    {
+      "id": "O06",
+      "module": "M3",
+      "title": "Data protection impact assessments",
+      "tier": "core",
+      "covers": [
+        "dpia"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P08",
+          "reason": "One listed DPIA case is large-scale special-category data."
+        },
+        {
+          "lesson_id": "R07",
+          "reason": "One listed DPIA case is systematic automated evaluation with significant effects."
+        },
+        {
+          "lesson_id": "O01",
+          "reason": "A DPIA is a risk-based controller measure."
+        }
+      ]
+    },
+    {
+      "id": "O07",
+      "module": "M3",
+      "title": "The data protection officer",
+      "tier": "core",
+      "covers": [
+        "dpo"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G01",
+          "reason": "The DPO cooperates with and is the contact for the supervisory authority."
+        },
+        {
+          "lesson_id": "P08",
+          "reason": "One mandatory-DPO case is large-scale special-category data."
+        }
+      ]
+    },
+    {
+      "id": "O08",
+      "module": "M3",
+      "title": "Capstone: Sunfield Bakery's data protection review",
+      "tier": "core",
+      "covers": [
+        "compliance-review"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "O01",
+          "reason": "The review starts from the record of processing."
+        },
+        {
+          "lesson_id": "O03",
+          "reason": "The review checks the processor contracts."
+        },
+        {
+          "lesson_id": "O05",
+          "reason": "The review includes a breach scenario."
+        },
+        {
+          "lesson_id": "O06",
+          "reason": "The review decides whether a DPIA is needed."
+        }
+      ]
+    },
+    {
+      "id": "X01",
+      "module": "M4",
+      "title": "Sending personal data outside the EU",
+      "tier": "core",
+      "covers": [
+        "international-transfer",
+        "transfer-tools"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G04",
+          "reason": "A transfer is a processing operation."
+        },
+        {
+          "lesson_id": "P05",
+          "reason": "One derogation is explicit consent to the transfer."
+        }
+      ]
+    },
+    {
+      "id": "X02",
+      "module": "M4",
+      "title": "Regulators and the one-stop shop",
+      "tier": "core",
+      "covers": [
+        "lead-authority",
+        "edpb"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G01",
+          "reason": "The lead authority is a supervisory authority with a special role."
+        },
+        {
+          "lesson_id": "G05",
+          "reason": "The lead authority follows the controller's main establishment."
+        }
+      ]
+    },
+    {
+      "id": "X03",
+      "module": "M4",
+      "title": "Enforcement powers and fines",
+      "tier": "core",
+      "covers": [
+        "corrective-powers",
+        "fine-tiers",
+        "fine-factors"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G01",
+          "reason": "Corrective powers belong to supervisory authorities."
+        }
+      ]
+    },
+    {
+      "id": "X04",
+      "module": "M4",
+      "title": "Businesses outside the EU: the representative",
+      "tier": "extension",
+      "covers": [
+        "eu-representative"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G06",
+          "reason": "A representative is needed only where Article 3(2) applies."
+        }
+      ]
+    },
+    {
+      "id": "X05",
+      "module": "M4",
+      "title": "Schrems II and the EU-US Data Privacy Framework",
+      "tier": "extension",
+      "covers": [
+        "essential-equivalence",
+        "eu-us-dpf"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "X01",
+          "reason": "Schrems II interprets the standard-clauses tool."
+        },
+        {
+          "lesson_id": "X03",
+          "reason": "Schrems II relies on the power to suspend transfers."
+        }
+      ]
+    },
+    {
+      "id": "N01",
+      "module": "M5",
+      "title": "Cookies: a separate rule",
+      "tier": "extension",
+      "covers": [
+        "cookie-consent-rule",
+        "cookie-information"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P05",
+          "reason": "Cookie consent uses the GDPR's consent standard."
+        }
+      ]
+    },
+    {
+      "id": "N02",
+      "module": "M5",
+      "title": "Joint control in practice: website plug-ins",
+      "tier": "extension",
+      "covers": [
+        "joint-control-scope"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "G05",
+          "reason": "The case refines when and how far joint control applies."
+        },
+        {
+          "lesson_id": "P06",
+          "reason": "The case requires each joint controller to have a legitimate interest."
+        }
+      ]
+    },
+    {
+      "id": "N03",
+      "module": "M5",
+      "title": "The GDPR and the EU AI Act",
+      "tier": "extension",
+      "covers": [
+        "ai-act-relationship"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "R07",
+          "reason": "The lesson uses Article 22 as the example of a GDPR rule that still applies."
+        }
+      ]
+    },
+    {
+      "id": "N04",
+      "module": "M5",
+      "title": "Children's consent online",
+      "tier": "extension",
+      "covers": [
+        "child-consent"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "P05",
+          "reason": "Article 8 adds age conditions to consent."
+        }
+      ]
+    },
+    {
+      "id": "N05",
+      "module": "M5",
+      "title": "What may change: pending proposals",
+      "tier": "extension",
+      "covers": [
+        "pending-proposals"
+      ],
+      "prerequisites": []
+    }
+  ]
+}
