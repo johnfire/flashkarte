@@ -6,9 +6,11 @@ The first instalment contains **52 lessons in eight modules**, teaching **109 co
 
 Start with the [lesson outline](lesson-outline.md), then review the [concept graph and every edge reason](concept-graph.md). The [coverage table](coverage.md) shows which provision each lesson will address. The [legal baseline](legal-baseline.md), [source register](source-register.md) and [glossary seed](glossary.md) provide the evidence and translation constraints.
 
-Chris's presentation informed the [slide review and case bank](presentation-review.md). The next dedicated block is **Article 50**, approved in chat on 6 October; its [follow-on outline](programme-roadmap.md) preserves the agreed introduction → Article 6 → Article 5 sequence. The [programme inventory](programme-inventory.json) assigns all 119 article identifiers and 14 annexes in this baseline to future teaching blocks; paragraph-level work for those blocks remains to be done.
+Chris's presentation informed the [slide review and case bank](presentation-review.md). The [programme roadmap](programme-roadmap.md) preserves the agreed introduction → Article 6 → Article 5 sequence and tracks subsequent course parts. The [programme inventory](programme-inventory.json) assigns all 119 article identifiers and 14 annexes in this baseline to teaching blocks; paragraph-level coverage is developed in each course package.
 
 The [dedicated English Article 50 course](article-50/README.md) now contains 18 testing lessons, 42 concepts, 85 screens and 55 questions with retests. Its owner-approved graph and 48 coverage targets are retained with live verification evidence.
+
+The [high-risk compliance course](high-risk-compliance/README.md) adds 30 authored lessons across five modules. Together, the three English course parts contain 100 authored lessons. The next [conformity and market-access review package](conformity-market-access/README.md) proposes 30 English lessons, 64 concepts and 221 coverage targets. Its graph and syllabus await owner review before teaching content is authored.
 
 ## Review points
 
@@ -32,6 +34,7 @@ python docs/courses/eu-ai-act/lesson_validation.py
 python -m unittest discover -s docs/courses/eu-ai-act -p 'test_*.py'
 python docs/courses/eu-ai-act/render_review.py --check
 python docs/courses/eu-ai-act/article_50_review.py --check
+python docs/courses/eu-ai-act/conformity_review.py --check
 ```
 
 The JSON registers are canonical. Regenerate the four review tables with `render_review.py` after editing them. The supporting narrative documents require their own review. Retained official PDFs are identified and hashed in the source register; user screenshots and browser details are not copied into this package.

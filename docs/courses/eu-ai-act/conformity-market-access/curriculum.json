@@ -1,0 +1,1784 @@
+{
+  "schema_version": 1,
+  "title": "EU AI Act: Conformity and market access",
+  "checked_on": "2026-10-07",
+  "status": "owner-review-pending",
+  "canonical_language": "en",
+  "source_baseline": "02024R1689-20260727",
+  "modules": [
+    {
+      "id": "F0",
+      "title": "Define the release and assessment boundary"
+    },
+    {
+      "id": "F1",
+      "title": "Choose and document conformity evidence"
+    },
+    {
+      "id": "F2",
+      "title": "Verify the assessor and its scope"
+    },
+    {
+      "id": "F3",
+      "title": "Carry out and maintain the assessment"
+    },
+    {
+      "id": "F4",
+      "title": "Complete and defend the release record"
+    }
+  ],
+  "concepts": [
+    {
+      "id": "market-access-map",
+      "slug": "market-access-map",
+      "name": "Market access map",
+      "kind": "map",
+      "tier": "core",
+      "assessment": "Identify the distinct roles of assessment, declaration, marking and registration.",
+      "source_locator": "Articles 28–49",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessed-system-identity",
+      "slug": "assessed-system-identity",
+      "name": "Assessed system identity",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify intended purpose, version, boundaries, dependencies and release form for one system.",
+      "source_locator": "Article 3(12); Annex IV(1)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "provider-release-duty",
+      "slug": "provider-release-duty",
+      "name": "Provider release duty",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Identify the provider accountable for the proposed market release or own-use putting into service.",
+      "source_locator": "Article 3(3); Article 16",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "high-risk-route",
+      "slug": "high-risk-route",
+      "name": "High risk route",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Separate Annex III, Annex I Section A, Annex I Section B and a documented non-high-risk conclusion.",
+      "source_locator": "Article 6(1)–(4); Article 2(2)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "prohibited-use-precheck",
+      "slug": "prohibited-use-precheck",
+      "name": "Prohibited use precheck",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Reject the inference that an assessment or a certificate can authorise an Article 5 prohibition.",
+      "source_locator": "Article 5; Article 43",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "provision-specific-timeline",
+      "slug": "provision-specific-timeline",
+      "name": "Provision specific timeline",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Distinguish Section 4 and Section 5 application from the later Section 1–3 dates; flag a case needing temporal interpretation.",
+      "source_locator": "Article 113; Chapter III Sections 1–5",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "existing-system-transition",
+      "slug": "existing-system-transition",
+      "name": "Existing system transition",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Apply the existing-system transition conditions to dated case facts without inventing universal grandfathering.",
+      "source_locator": "Article 111(2)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "sector-assessment-boundary",
+      "slug": "sector-assessment-boundary",
+      "name": "Sector assessment boundary",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Choose the relevant sector procedure and identify its AI requirements, conditional third-party option and transitional assessor evidence.",
+      "source_locator": "Article 2(2); Article 43(3); Annex I",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "dual-route-priority",
+      "slug": "dual-route-priority",
+      "name": "Dual route priority",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Select the sector procedure where the same system falls under both Annex I Section A and Annex III.",
+      "source_locator": "Article 43(3), final subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "requirement-evidence-matrix",
+      "slug": "requirement-evidence-matrix",
+      "name": "Requirement evidence matrix",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Map an applicable requirement to evidence, an owner, a gap and a release decision.",
+      "source_locator": "Articles 8–18; Annex IV",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "technical-file-index",
+      "slug": "technical-file-index",
+      "name": "Technical file index",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Locate a missing system-specific record in the technical-file index; distinguish an index from proof of conformity.",
+      "source_locator": "Article 11; Annex IV",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "release-scope-case",
+      "slug": "release-scope-case",
+      "name": "Release scope case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Produce a dated scope record for fictional HR and medical-product releases with explicit unknowns and sources.",
+      "source_locator": "Articles 5, 6, 43, 111, 113; Annex IV",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "oj-citation-check",
+      "slug": "oj-citation-check",
+      "name": "Official Journal citation check",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Verify the exact standard, version, Official Journal citation, restrictions and relevant scope.",
+      "source_locator": "Article 40(1)",
+      "source_ids": ["AI-C-EN", "EC-STANDARDS"]
+    },
+    {
+      "id": "limited-presumption",
+      "slug": "limited-presumption",
+      "name": "Limited presumption",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Limit a presumption of conformity to the requirements actually covered by its legal basis.",
+      "source_locator": "Articles 40–42",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "standard-coverage-matrix",
+      "slug": "standard-coverage-matrix",
+      "name": "Standard coverage matrix",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Compare cited standard coverage with each applicable requirement and mark uncovered requirements.",
+      "source_locator": "Article 40(1); Annex IV(7)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "alternative-conformity-evidence",
+      "slug": "alternative-conformity-evidence",
+      "name": "Alternative conformity evidence",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify evidence for a requirement outside a presumption without treating voluntary standards as the only permissible solution.",
+      "source_locator": "Article 40; Annex IV(7)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "common-specification-trigger",
+      "slug": "common-specification-trigger",
+      "name": "Common specification trigger",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish a formally adopted common specification from a draft, guidance or an industry document.",
+      "source_locator": "Article 41(1)–(4), (6)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "equivalent-technical-solution",
+      "slug": "equivalent-technical-solution",
+      "name": "Equivalent technical solution",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify the justification and equivalent technical evidence needed when not complying with a common specification.",
+      "source_locator": "Article 41(5)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "contextual-data-presumption",
+      "slug": "contextual-data-presumption",
+      "name": "Contextual data presumption",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify the limited Article 10(4) presumption for data reflecting the intended geographical, contextual, behavioural or functional setting.",
+      "source_locator": "Article 42(1)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "cybersecurity-presumption",
+      "slug": "cybersecurity-presumption",
+      "name": "Cybersecurity presumption",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Check whether an Official Journal-referenced cybersecurity scheme covers the relevant Article 15 requirements.",
+      "source_locator": "Article 42(2)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "cra-interplay-lookup",
+      "slug": "cra-interplay-lookup",
+      "name": "CRA interplay lookup",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Locate the CRA scope, deemed-compliance conditions and assessment interplay before accepting a cybersecurity compliance claim.",
+      "source_locator": "Article 42(3); Regulation (EU) 2024/2847, Articles 2 and 12",
+      "source_ids": ["AI-C-EN", "CRA"]
+    },
+    {
+      "id": "standards-update-watch",
+      "slug": "standards-update-watch",
+      "name": "Standards update watch",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Record version, coverage, citation and procedure changes that require a fresh release review.",
+      "source_locator": "Articles 40(2)–(3), 41(4), 43(5)–(6)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "international-certificate-boundary",
+      "slug": "international-certificate-boundary",
+      "name": "International certificate boundary",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Explain why an ISO management-system certificate or a supplier assertion alone does not establish AI Act conformity.",
+      "source_locator": "Article 40; Commission standardisation FAQ",
+      "source_ids": ["AI-C-EN", "EC-FAQ"]
+    },
+    {
+      "id": "conformity-evidence-case",
+      "slug": "conformity-evidence-case",
+      "name": "Conformity evidence case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Find the coverage gap in a fictional certification pitch and request the evidence needed to resolve it.",
+      "source_locator": "Articles 40–42; Annex IV(7)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "notifying-authority",
+      "slug": "notifying-authority",
+      "name": "Notifying authority",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Distinguish the authority designating and monitoring assessors from the assessor reviewing the product.",
+      "source_locator": "Article 28(1)–(7)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "notified-body",
+      "slug": "notified-body",
+      "name": "Notified body",
+      "kind": "term",
+      "tier": "core",
+      "assessment": "Distinguish a designated conformity assessor from a consultant or ordinary certification provider.",
+      "source_locator": "Articles 29–31, 35",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "notified-scope-verification",
+      "slug": "notified-scope-verification",
+      "name": "Notified scope verification",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Check the body identification, notified task and system codes, status and any third-country agreement basis.",
+      "source_locator": "Articles 30(2), 35, 39; Annex XIV",
+      "source_ids": ["AI-C-EN", "EC-BODIES"]
+    },
+    {
+      "id": "designation-evidence",
+      "slug": "designation-evidence",
+      "name": "Designation evidence",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish accreditation, other designation evidence and the Article 32 presumption for a body from product compliance.",
+      "source_locator": "Articles 29, 30(1)–(3), 32",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "notification-objection-window",
+      "slug": "notification-objection-window",
+      "name": "Notification objection window",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish the two-week and two-month objection windows and their effect on notification.",
+      "source_locator": "Article 30(4)–(5)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "unified-sector-designation",
+      "slug": "unified-sector-designation",
+      "name": "Unified sector designation",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Recognise when a sector law permits unified designation and what evidence is needed for transitional assessment powers.",
+      "source_locator": "Articles 28(8)–(9), 29(4); Article 43(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessor-independence",
+      "slug": "assessor-independence",
+      "name": "Assessor independence",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify an assessor conflict or resource/process failure that undermines the required independent assessment.",
+      "source_locator": "Article 31(1)–(8)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessor-confidentiality",
+      "slug": "assessor-confidentiality",
+      "name": "Assessor confidentiality",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish confidentiality protection from refusal to provide lawfully required assessment evidence.",
+      "source_locator": "Article 31(7); Article 45(4); Article 78",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessor-competence",
+      "slug": "assessor-competence",
+      "name": "Assessor competence",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Match the assessment scope to staff competence, methods, records and conformity-assessment experience.",
+      "source_locator": "Article 31(10)–(12)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "subcontracting-accountability",
+      "slug": "subcontracting-accountability",
+      "name": "Subcontracting accountability",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify the consent, qualification, record and responsibility conditions for an assessor subcontractor.",
+      "source_locator": "Article 33",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "proportionate-assessment",
+      "slug": "proportionate-assessment",
+      "name": "Proportionate assessment",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish proportionate assessment effort from lowering protection or omitting an applicable requirement.",
+      "source_locator": "Article 34",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "designation-change-response",
+      "slug": "designation-change-response",
+      "name": "Designation change response",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify the certificate, file-transfer and continuity checks triggered by designation restriction, withdrawal or cessation.",
+      "source_locator": "Article 36",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "competence-challenge",
+      "slug": "competence-challenge",
+      "name": "Competence challenge",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Locate the Commission challenge and corrective procedure when assessor competence is disputed.",
+      "source_locator": "Article 37",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessor-coordination",
+      "slug": "assessor-coordination",
+      "name": "Assessor coordination",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify the purpose of information exchange and coordination without treating it as a new product authorisation.",
+      "source_locator": "Article 38",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessor-selection-case",
+      "slug": "assessor-selection-case",
+      "name": "Assessor selection case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Select or reject a fictional assessor using scope, independence, subcontracting and continuity evidence.",
+      "source_locator": "Articles 28–39; Annex XIV",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "internal-control-assessment",
+      "slug": "internal-control-assessment",
+      "name": "Internal control assessment",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Specify the provider checks for Annex III points 2–8 without adding an AI Act notified-body requirement.",
+      "source_locator": "Article 43(2); Annex VI(1)–(3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "design-file-consistency",
+      "slug": "design-file-consistency",
+      "name": "Design file consistency",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Check whether design, development and post-market monitoring agree with the assessed technical documentation.",
+      "source_locator": "Annex VI(4); Annex IV",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "biometric-assessment-route",
+      "slug": "biometric-assessment-route",
+      "name": "Biometric assessment route",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Distinguish the Annex VI/Annex VII choice from mandatory Annex VII when standards or common-specification conditions fail.",
+      "source_locator": "Article 43(1)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "special-authority-assessor",
+      "slug": "special-authority-assessor",
+      "name": "Special authority assessor",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify when the specified market surveillance authority acts as the notified body for the assessment.",
+      "source_locator": "Article 43(1), final subparagraph",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "qms-approval",
+      "slug": "qms-approval",
+      "name": "QMS approval",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Prepare the quality-management application and route a proposed QMS change for the required decision.",
+      "source_locator": "Annex VII(1)–(3.4); Article 17",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "technical-documentation-assessment",
+      "slug": "technical-documentation-assessment",
+      "name": "Technical documentation assessment",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify the application, necessary data/testing evidence, restricted model-access conditions and refusal/retraining consequences.",
+      "source_locator": "Annex VII(4.1)–(4.6)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "qms-surveillance",
+      "slug": "qms-surveillance",
+      "name": "QMS surveillance",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify the ongoing premises access, information and periodic-audit duties after QMS approval.",
+      "source_locator": "Annex VII(5.1)–(5.3)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "certificate-lifecycle",
+      "slug": "certificate-lifecycle",
+      "name": "Certificate lifecycle",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Check validity, reassessment, supplement dependency, corrective action, restriction, suspension, withdrawal and appeal.",
+      "source_locator": "Article 44; Annex VII(4.6)–(4.7)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessment-result-sharing",
+      "slug": "assessment-result-sharing",
+      "name": "Assessment result sharing",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish notifications to authorities from exchanges with other bodies and preserve confidentiality.",
+      "source_locator": "Article 45",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "substantial-modification-test",
+      "slug": "substantial-modification-test",
+      "name": "Substantial modification test",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Evaluate whether a change requires a new assessment, including continued use by the same deployer and changed provider duties.",
+      "source_locator": "Articles 3(23), 25, 43(4)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "predetermined-learning-change",
+      "slug": "predetermined-learning-change",
+      "name": "Predetermined learning change",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Distinguish initially documented predetermined learning changes from an unrestricted exemption for later model updates.",
+      "source_locator": "Article 43(4); Annex IV(2)(f)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "assessment-route-case",
+      "slug": "assessment-route-case",
+      "name": "Assessment route case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Defend the HR, biometric and stipulated medical-product procedures and resolve a proposed post-assessment change.",
+      "source_locator": "Article 43; Annexes VI–VII",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "conformity-derogation-authorisation",
+      "slug": "conformity-derogation-authorisation",
+      "name": "Conformity derogation authorisation",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify a justified, authority-granted, territorially and temporally limited derogation while Section 2 compliance remains required.",
+      "source_locator": "Article 46(1), (3)–(6)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "emergency-use-boundary",
+      "slug": "emergency-use-boundary",
+      "name": "Emergency use boundary",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify the narrowly specified urgent law-enforcement/civil-protection conditions, immediate request and refusal consequences.",
+      "source_locator": "Article 46(2)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "sector-derogation-boundary",
+      "slug": "sector-derogation-boundary",
+      "name": "Sector derogation boundary",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Use the relevant product-law derogation for an Annex I Section A product instead of treating Article 46 as a general shortcut.",
+      "source_locator": "Article 46(7)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "provider-declaration-responsibility",
+      "slug": "provider-declaration-responsibility",
+      "name": "Provider declaration responsibility",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify provider responsibility, machine-readable signed form, authority language, ten-year retention, updates and combined-law declaration.",
+      "source_locator": "Article 47",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "declaration-content-check",
+      "slug": "declaration-content-check",
+      "name": "Declaration content check",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Check the eight declaration fields and evidence for any applicable personal-data statement; a signature does not prove compliance.",
+      "source_locator": "Annex V",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "ce-marking-accessibility",
+      "slug": "ce-marking-accessibility",
+      "name": "CE marking accessibility",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Select digital access and visible, legible, indelible marking or the specified fallback, including other applicable CE laws.",
+      "source_locator": "Article 48(1)–(3), (5)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "ce-notified-body-number",
+      "slug": "ce-notified-body-number",
+      "name": "CE notified body number",
+      "kind": "idea",
+      "tier": "core",
+      "assessment": "Identify when the body identification number accompanies marking and promotional mentions, without inventing a body for internal control.",
+      "source_locator": "Article 48(4)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "registration-role-test",
+      "slug": "registration-role-test",
+      "name": "Registration role test",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Decide who registers before market/service, including a non-high-risk Article 6(3) conclusion; registration does not confer approval.",
+      "source_locator": "Article 49(1)–(2); Article 6(3)–(4)",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "high-risk-registration-record",
+      "slug": "high-risk-registration-record",
+      "name": "High risk registration record",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Prepare the provider fields, conditional certificate attachments, declaration and instructions with their specified exceptions.",
+      "source_locator": "Annex VIII Section A",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "exempt-system-registration-record",
+      "slug": "exempt-system-registration-record",
+      "name": "Exempt system registration record",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Prepare the non-high-risk record using the remaining fields and recognise that points 7 and 9 were deleted.",
+      "source_locator": "Annex VIII Section B",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "registration-destination-test",
+      "slug": "registration-destination-test",
+      "name": "Registration destination test",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Choose the EU public, secured non-public or national registration destination for the stated system and context.",
+      "source_locator": "Article 49(4)–(5); Article 71",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "public-deployer-registration",
+      "slug": "public-deployer-registration",
+      "name": "Public deployer registration",
+      "kind": "skill",
+      "tier": "core",
+      "assessment": "Identify the specified public/Union/acting-on-behalf deployer duty and its fields without extending it to every private deployer.",
+      "source_locator": "Article 49(3); Annex VIII Section C",
+      "source_ids": ["AI-C-EN"]
+    },
+    {
+      "id": "market-release-case",
+      "slug": "market-release-case",
+      "name": "Market release case",
+      "kind": "capstone",
+      "tier": "core",
+      "assessment": "Make a supported ready/not-ready/needs-specialist-review decision with a dated route record, remaining evidence gaps and change controls.",
+      "source_locator": "Articles 43–49; Annexes IV–VIII",
+      "source_ids": ["AI-C-EN"]
+    }
+  ],
+  "edges": [
+    {
+      "parent": "assessed-system-identity",
+      "child": "high-risk-route",
+      "kind": "requires",
+      "reason": "Classification attaches to the defined system and intended purpose."
+    },
+    {
+      "parent": "assessed-system-identity",
+      "child": "prohibited-use-precheck",
+      "kind": "requires",
+      "reason": "The prohibited-practice check needs the actual intended function and context."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "provision-specific-timeline",
+      "kind": "requires",
+      "reason": "The date lookup distinguishes the system route and applicable section."
+    },
+    {
+      "parent": "provision-specific-timeline",
+      "child": "existing-system-transition",
+      "kind": "requires",
+      "reason": "The transition test needs the relevant application dates and dated release facts."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "sector-assessment-boundary",
+      "kind": "requires",
+      "reason": "Sector assessment can only be selected after distinguishing the Annex I route and its scope limits."
+    },
+    {
+      "parent": "sector-assessment-boundary",
+      "child": "dual-route-priority",
+      "kind": "requires",
+      "reason": "The combined case needs an identified applicable sector procedure."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "requirement-evidence-matrix",
+      "kind": "requires",
+      "reason": "The evidence map must start from the requirements applicable to the chosen route."
+    },
+    {
+      "parent": "assessed-system-identity",
+      "child": "technical-file-index",
+      "kind": "requires",
+      "reason": "The dossier must identify which version and system its records describe."
+    },
+    {
+      "parent": "requirement-evidence-matrix",
+      "child": "technical-file-index",
+      "kind": "requires",
+      "reason": "The index must connect system records to the requirement evidence already identified."
+    },
+    {
+      "parent": "prohibited-use-precheck",
+      "child": "release-scope-case",
+      "kind": "requires",
+      "reason": "A release scope conclusion cannot ignore a prohibition."
+    },
+    {
+      "parent": "existing-system-transition",
+      "child": "release-scope-case",
+      "kind": "requires",
+      "reason": "The dated case must distinguish a new release from an existing-system transition."
+    },
+    {
+      "parent": "dual-route-priority",
+      "child": "release-scope-case",
+      "kind": "requires",
+      "reason": "The medical case needs the procedure priority when routes overlap."
+    },
+    {
+      "parent": "technical-file-index",
+      "child": "release-scope-case",
+      "kind": "requires",
+      "reason": "The case needs a defined evidence dossier before it can record unresolved release gaps."
+    },
+    {
+      "parent": "oj-citation-check",
+      "child": "limited-presumption",
+      "kind": "requires",
+      "reason": "The presumption depends on the legally cited version and restrictions."
+    },
+    {
+      "parent": "limited-presumption",
+      "child": "standard-coverage-matrix",
+      "kind": "requires",
+      "reason": "A gap analysis needs the boundary of the presumption being claimed."
+    },
+    {
+      "parent": "requirement-evidence-matrix",
+      "child": "standard-coverage-matrix",
+      "kind": "requires",
+      "reason": "A standard cannot be mapped to coverage without the applicable requirements."
+    },
+    {
+      "parent": "standard-coverage-matrix",
+      "child": "alternative-conformity-evidence",
+      "kind": "requires",
+      "reason": "Alternative evidence must address the identified uncovered requirement."
+    },
+    {
+      "parent": "common-specification-trigger",
+      "child": "equivalent-technical-solution",
+      "kind": "requires",
+      "reason": "The equivalence justification concerns an identified applicable common specification."
+    },
+    {
+      "parent": "standard-coverage-matrix",
+      "child": "equivalent-technical-solution",
+      "kind": "requires",
+      "reason": "The equivalent solution must cover the requirement left unresolved by the chosen conformity evidence."
+    },
+    {
+      "parent": "limited-presumption",
+      "child": "contextual-data-presumption",
+      "kind": "requires",
+      "reason": "The data presumption must be limited to its particular requirement."
+    },
+    {
+      "parent": "limited-presumption",
+      "child": "cybersecurity-presumption",
+      "kind": "requires",
+      "reason": "A cybersecurity certificate must be evaluated as a limited presumption."
+    },
+    {
+      "parent": "cybersecurity-presumption",
+      "child": "cra-interplay-lookup",
+      "kind": "requires",
+      "reason": "The CRA bridge is a distinct route to the cybersecurity requirement, not all AI Act duties."
+    },
+    {
+      "parent": "oj-citation-check",
+      "child": "standards-update-watch",
+      "kind": "requires",
+      "reason": "A version watch needs the precise citation and restrictions being monitored."
+    },
+    {
+      "parent": "limited-presumption",
+      "child": "international-certificate-boundary",
+      "kind": "requires",
+      "reason": "The certificate claim must be evaluated against the actual legal coverage boundary."
+    },
+    {
+      "parent": "alternative-conformity-evidence",
+      "child": "conformity-evidence-case",
+      "kind": "requires",
+      "reason": "The case must specify evidence for the identified gap."
+    },
+    {
+      "parent": "equivalent-technical-solution",
+      "child": "conformity-evidence-case",
+      "kind": "requires",
+      "reason": "The common-specification claim requires a reasoned equivalence check."
+    },
+    {
+      "parent": "cybersecurity-presumption",
+      "child": "conformity-evidence-case",
+      "kind": "requires",
+      "reason": "The case includes a cybersecurity certificate with limited coverage."
+    },
+    {
+      "parent": "notified-body",
+      "child": "notified-scope-verification",
+      "kind": "requires",
+      "reason": "The scope check concerns a formally designated assessor, not a consultant."
+    },
+    {
+      "parent": "notified-body",
+      "child": "designation-evidence",
+      "kind": "requires",
+      "reason": "Designation evidence establishes the qualification of the conformity assessor."
+    },
+    {
+      "parent": "designation-evidence",
+      "child": "notification-objection-window",
+      "kind": "requires",
+      "reason": "The effective notification window depends on the type of supporting designation evidence."
+    },
+    {
+      "parent": "sector-assessment-boundary",
+      "child": "unified-sector-designation",
+      "kind": "requires",
+      "reason": "Unified designation depends on the relevant sector law and assessment scope."
+    },
+    {
+      "parent": "designation-evidence",
+      "child": "unified-sector-designation",
+      "kind": "requires",
+      "reason": "Existing sector designation evidence must be distinguished from new AI Act designation."
+    },
+    {
+      "parent": "notified-body",
+      "child": "assessor-independence",
+      "kind": "requires",
+      "reason": "The independence requirement applies to the body carrying out conformity assessment."
+    },
+    {
+      "parent": "notified-scope-verification",
+      "child": "assessor-competence",
+      "kind": "requires",
+      "reason": "The competence review must match the tasks and system types in scope."
+    },
+    {
+      "parent": "assessor-independence",
+      "child": "subcontracting-accountability",
+      "kind": "requires",
+      "reason": "Subcontracting must preserve the required independence."
+    },
+    {
+      "parent": "assessor-competence",
+      "child": "subcontracting-accountability",
+      "kind": "requires",
+      "reason": "The body remains accountable for subcontractor qualifications."
+    },
+    {
+      "parent": "requirement-evidence-matrix",
+      "child": "proportionate-assessment",
+      "kind": "requires",
+      "reason": "Proportionate effort cannot remove a requirement from the evidence matrix."
+    },
+    {
+      "parent": "notified-body",
+      "child": "designation-change-response",
+      "kind": "requires",
+      "reason": "Continuity decisions depend on the formal assessor status that has changed."
+    },
+    {
+      "parent": "notified-scope-verification",
+      "child": "assessor-selection-case",
+      "kind": "requires",
+      "reason": "The selected assessor must be qualified for the actual task and system codes."
+    },
+    {
+      "parent": "assessor-independence",
+      "child": "assessor-selection-case",
+      "kind": "requires",
+      "reason": "An otherwise qualified assessor must still pass the conflict check."
+    },
+    {
+      "parent": "subcontracting-accountability",
+      "child": "assessor-selection-case",
+      "kind": "requires",
+      "reason": "The case includes a subcontractor whose responsibility and consent need checking."
+    },
+    {
+      "parent": "designation-change-response",
+      "child": "assessor-selection-case",
+      "kind": "requires",
+      "reason": "The case needs a response to a changed designation after selection."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "internal-control-assessment",
+      "kind": "requires",
+      "reason": "The internal-control duty depends on the relevant Annex III points and route."
+    },
+    {
+      "parent": "requirement-evidence-matrix",
+      "child": "internal-control-assessment",
+      "kind": "requires",
+      "reason": "Internal assessment needs the applicable requirements and supporting evidence."
+    },
+    {
+      "parent": "internal-control-assessment",
+      "child": "design-file-consistency",
+      "kind": "requires",
+      "reason": "Consistency is one of the provider checks within internal control."
+    },
+    {
+      "parent": "technical-file-index",
+      "child": "design-file-consistency",
+      "kind": "requires",
+      "reason": "Consistency must be checked against the identified technical records."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "biometric-assessment-route",
+      "kind": "requires",
+      "reason": "The special procedure is limited to the relevant Annex III point 1 systems."
+    },
+    {
+      "parent": "standard-coverage-matrix",
+      "child": "biometric-assessment-route",
+      "kind": "requires",
+      "reason": "The procedure choice depends on applied standards/common-specification coverage and restrictions."
+    },
+    {
+      "parent": "biometric-assessment-route",
+      "child": "special-authority-assessor",
+      "kind": "requires",
+      "reason": "The authority-as-assessor condition applies within this biometric Annex VII procedure."
+    },
+    {
+      "parent": "notified-body",
+      "child": "qms-approval",
+      "kind": "requires",
+      "reason": "The application is submitted to the legally qualified assessment body."
+    },
+    {
+      "parent": "requirement-evidence-matrix",
+      "child": "qms-approval",
+      "kind": "requires",
+      "reason": "QMS approval needs documented procedures and evidence of the applicable requirements."
+    },
+    {
+      "parent": "qms-approval",
+      "child": "technical-documentation-assessment",
+      "kind": "requires",
+      "reason": "The technical application must concern a system within the relevant quality-management approval."
+    },
+    {
+      "parent": "technical-file-index",
+      "child": "technical-documentation-assessment",
+      "kind": "requires",
+      "reason": "The assessor needs the system-specific technical file and its evidence."
+    },
+    {
+      "parent": "qms-approval",
+      "child": "qms-surveillance",
+      "kind": "requires",
+      "reason": "Surveillance checks continued compliance with the approved QMS."
+    },
+    {
+      "parent": "technical-documentation-assessment",
+      "child": "certificate-lifecycle",
+      "kind": "requires",
+      "reason": "Certificate management begins with the assessed system and reasoned decision."
+    },
+    {
+      "parent": "certificate-lifecycle",
+      "child": "assessment-result-sharing",
+      "kind": "requires",
+      "reason": "The notifications distinguish issued, refused, restricted and withdrawn assessment outcomes."
+    },
+    {
+      "parent": "assessor-confidentiality",
+      "child": "assessment-result-sharing",
+      "kind": "requires",
+      "reason": "The sharing duty must preserve the applicable confidentiality rules."
+    },
+    {
+      "parent": "assessed-system-identity",
+      "child": "substantial-modification-test",
+      "kind": "requires",
+      "reason": "The change test compares the current system and purpose with the initially assessed version."
+    },
+    {
+      "parent": "substantial-modification-test",
+      "child": "predetermined-learning-change",
+      "kind": "requires",
+      "reason": "The predetermined-change rule is a bounded exception within the modification test."
+    },
+    {
+      "parent": "technical-file-index",
+      "child": "predetermined-learning-change",
+      "kind": "requires",
+      "reason": "The exception needs changes recorded in the initial technical documentation."
+    },
+    {
+      "parent": "internal-control-assessment",
+      "child": "assessment-route-case",
+      "kind": "requires",
+      "reason": "The HR case requires the provider internal-control procedure."
+    },
+    {
+      "parent": "biometric-assessment-route",
+      "child": "assessment-route-case",
+      "kind": "requires",
+      "reason": "The biometric case requires the standards-dependent assessment branch."
+    },
+    {
+      "parent": "technical-documentation-assessment",
+      "child": "assessment-route-case",
+      "kind": "requires",
+      "reason": "The case requires evidence and access decisions under an external assessment."
+    },
+    {
+      "parent": "substantial-modification-test",
+      "child": "assessment-route-case",
+      "kind": "requires",
+      "reason": "The case includes a change after the initial assessment."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "conformity-derogation-authorisation",
+      "kind": "requires",
+      "reason": "The request is a derogation from the otherwise applicable high-risk assessment procedure."
+    },
+    {
+      "parent": "conformity-derogation-authorisation",
+      "child": "emergency-use-boundary",
+      "kind": "requires",
+      "reason": "The urgent-use rule is a narrow exception to obtaining assessment derogation authorisation first."
+    },
+    {
+      "parent": "conformity-derogation-authorisation",
+      "child": "sector-derogation-boundary",
+      "kind": "requires",
+      "reason": "The sector boundary distinguishes the applicable derogation authorisation route."
+    },
+    {
+      "parent": "sector-assessment-boundary",
+      "child": "sector-derogation-boundary",
+      "kind": "requires",
+      "reason": "Annex I Section A products use their relevant sector-law derogations."
+    },
+    {
+      "parent": "requirement-evidence-matrix",
+      "child": "provider-declaration-responsibility",
+      "kind": "requires",
+      "reason": "The provider needs conformity evidence before accepting responsibility for the declaration."
+    },
+    {
+      "parent": "provider-declaration-responsibility",
+      "child": "declaration-content-check",
+      "kind": "requires",
+      "reason": "The content check concerns the signed declaration for which the provider takes responsibility."
+    },
+    {
+      "parent": "assessed-system-identity",
+      "child": "declaration-content-check",
+      "kind": "requires",
+      "reason": "Declaration fields must trace to the specific system and version."
+    },
+    {
+      "parent": "provider-declaration-responsibility",
+      "child": "ce-marking-accessibility",
+      "kind": "requires",
+      "reason": "CE marking follows the conformity conclusion and provider declaration."
+    },
+    {
+      "parent": "ce-marking-accessibility",
+      "child": "ce-notified-body-number",
+      "kind": "requires",
+      "reason": "The number rule concerns how the required CE marking is presented."
+    },
+    {
+      "parent": "notified-scope-verification",
+      "child": "ce-notified-body-number",
+      "kind": "requires",
+      "reason": "A body number must identify the appropriate notified assessor where the route requires it."
+    },
+    {
+      "parent": "high-risk-route",
+      "child": "registration-role-test",
+      "kind": "requires",
+      "reason": "Registration distinguishes an Annex III system, an Article 6(3) conclusion and other routes."
+    },
+    {
+      "parent": "provider-release-duty",
+      "child": "registration-role-test",
+      "kind": "requires",
+      "reason": "The actor test needs the provider responsible for registration."
+    },
+    {
+      "parent": "registration-role-test",
+      "child": "high-risk-registration-record",
+      "kind": "requires",
+      "reason": "The fields depend on the applicable provider registration category."
+    },
+    {
+      "parent": "declaration-content-check",
+      "child": "high-risk-registration-record",
+      "kind": "requires",
+      "reason": "The high-risk record includes the relevant EU declaration of conformity."
+    },
+    {
+      "parent": "registration-role-test",
+      "child": "exempt-system-registration-record",
+      "kind": "requires",
+      "reason": "The non-high-risk registration fields depend on a documented Article 6(3) conclusion."
+    },
+    {
+      "parent": "registration-role-test",
+      "child": "registration-destination-test",
+      "kind": "requires",
+      "reason": "The destination lookup starts with the applicable actor/system registration duty."
+    },
+    {
+      "parent": "registration-role-test",
+      "child": "public-deployer-registration",
+      "kind": "requires",
+      "reason": "The deployer record is distinct from the provider registration duty."
+    },
+    {
+      "parent": "assessment-route-case",
+      "child": "market-release-case",
+      "kind": "requires",
+      "reason": "The final release decision needs a supported assessment-route conclusion."
+    },
+    {
+      "parent": "declaration-content-check",
+      "child": "market-release-case",
+      "kind": "requires",
+      "reason": "The final dossier needs the required declaration content and supporting evidence."
+    },
+    {
+      "parent": "ce-marking-accessibility",
+      "child": "market-release-case",
+      "kind": "requires",
+      "reason": "The final release needs a valid marking and access decision."
+    },
+    {
+      "parent": "registration-destination-test",
+      "child": "market-release-case",
+      "kind": "requires",
+      "reason": "The final release needs the applicable registration destination and recorded gaps."
+    },
+    {
+      "parent": "market-access-map",
+      "child": "assessed-system-identity",
+      "kind": "suggests",
+      "reason": "The overview helps locate the scope record without being needed to define a system."
+    },
+    {
+      "parent": "notifying-authority",
+      "child": "notified-body",
+      "kind": "suggests",
+      "reason": "The authority/body contrast is useful context; the body can still be defined on its own."
+    },
+    {
+      "parent": "oj-citation-check",
+      "child": "common-specification-trigger",
+      "kind": "suggests",
+      "reason": "The citation check helps contrast standards with implementing-act specifications."
+    },
+    {
+      "parent": "notified-body",
+      "child": "assessor-confidentiality",
+      "kind": "suggests",
+      "reason": "The assessor role supplies context for confidentiality but is not necessary to understand the evidence-sharing boundary."
+    },
+    {
+      "parent": "designation-change-response",
+      "child": "competence-challenge",
+      "kind": "suggests",
+      "reason": "Status-change consequences help explain why competence challenges matter."
+    },
+    {
+      "parent": "notified-body",
+      "child": "assessor-coordination",
+      "kind": "suggests",
+      "reason": "The body role helps situate coordination without making it a conceptual gate."
+    },
+    {
+      "parent": "standards-update-watch",
+      "child": "assessment-route-case",
+      "kind": "suggests",
+      "reason": "Check for changed procedures before relying on the case route in a real release."
+    },
+    {
+      "parent": "sector-derogation-boundary",
+      "child": "market-release-case",
+      "kind": "suggests",
+      "reason": "An exceptional-release proposal must use the correct sector route and specialist review."
+    },
+    {
+      "parent": "public-deployer-registration",
+      "child": "market-release-case",
+      "kind": "suggests",
+      "reason": "The public-authority case variation adds a deployer record beyond the provider release."
+    },
+    {
+      "parent": "cra-interplay-lookup",
+      "child": "assessment-route-case",
+      "kind": "suggests",
+      "reason": "A separate product cybersecurity law may require an additional procedure even where the AI Act route is internal control."
+    }
+  ],
+  "lessons": [
+    {
+      "id": "F01",
+      "title": "What exactly are we releasing?",
+      "module": "F0",
+      "tier": "core",
+      "covers": [
+        "market-access-map",
+        "assessed-system-identity",
+        "provider-release-duty"
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "F02",
+      "title": "Separate permission from high-risk classification",
+      "module": "F0",
+      "tier": "core",
+      "covers": ["high-risk-route", "prohibited-use-precheck"],
+      "prerequisites": [
+        {
+          "lesson_id": "F01",
+          "reason": "Classification attaches to the defined system and intended purpose. The prohibited-practice check needs the actual intended function and context."
+        }
+      ]
+    },
+    {
+      "id": "F03",
+      "title": "Find the applicable date",
+      "module": "F0",
+      "tier": "core",
+      "covers": ["provision-specific-timeline", "existing-system-transition"],
+      "prerequisites": [
+        {
+          "lesson_id": "F02",
+          "reason": "The date lookup distinguishes the system route and applicable section."
+        }
+      ]
+    },
+    {
+      "id": "F04",
+      "title": "Follow the product-law route",
+      "module": "F0",
+      "tier": "core",
+      "covers": ["sector-assessment-boundary", "dual-route-priority"],
+      "prerequisites": [
+        {
+          "lesson_id": "F02",
+          "reason": "Sector assessment can only be selected after distinguishing the Annex I route and its scope limits."
+        }
+      ]
+    },
+    {
+      "id": "F05",
+      "title": "Turn requirements into an evidence dossier",
+      "module": "F0",
+      "tier": "core",
+      "covers": ["requirement-evidence-matrix", "technical-file-index"],
+      "prerequisites": [
+        {
+          "lesson_id": "F01",
+          "reason": "The dossier must identify which version and system its records describe."
+        },
+        {
+          "lesson_id": "F02",
+          "reason": "The evidence map must start from the requirements applicable to the chosen route."
+        }
+      ]
+    },
+    {
+      "id": "F06",
+      "title": "Case: record the release boundary",
+      "module": "F0",
+      "tier": "core",
+      "covers": ["release-scope-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "F02",
+          "reason": "A release scope conclusion cannot ignore a prohibition."
+        },
+        {
+          "lesson_id": "F03",
+          "reason": "The dated case must distinguish a new release from an existing-system transition."
+        },
+        {
+          "lesson_id": "F04",
+          "reason": "The medical case needs the procedure priority when routes overlap."
+        },
+        {
+          "lesson_id": "F05",
+          "reason": "The case needs a defined evidence dossier before it can record unresolved release gaps."
+        }
+      ]
+    },
+    {
+      "id": "F07",
+      "title": "Check what a standard actually proves",
+      "module": "F1",
+      "tier": "core",
+      "covers": ["oj-citation-check", "limited-presumption"],
+      "prerequisites": []
+    },
+    {
+      "id": "F08",
+      "title": "Map covered requirements and remaining gaps",
+      "module": "F1",
+      "tier": "core",
+      "covers": ["standard-coverage-matrix", "alternative-conformity-evidence"],
+      "prerequisites": [
+        {
+          "lesson_id": "F05",
+          "reason": "A standard cannot be mapped to coverage without the applicable requirements."
+        },
+        {
+          "lesson_id": "F07",
+          "reason": "A gap analysis needs the boundary of the presumption being claimed."
+        }
+      ]
+    },
+    {
+      "id": "F09",
+      "title": "Use common specifications correctly",
+      "module": "F1",
+      "tier": "core",
+      "covers": [
+        "common-specification-trigger",
+        "equivalent-technical-solution"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F08",
+          "reason": "The equivalent solution must cover the requirement left unresolved by the chosen conformity evidence."
+        }
+      ]
+    },
+    {
+      "id": "F10",
+      "title": "Limit data and cybersecurity presumptions",
+      "module": "F1",
+      "tier": "core",
+      "covers": [
+        "contextual-data-presumption",
+        "cybersecurity-presumption",
+        "cra-interplay-lookup"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F07",
+          "reason": "The data presumption must be limited to its particular requirement. A cybersecurity certificate must be evaluated as a limited presumption."
+        }
+      ]
+    },
+    {
+      "id": "F11",
+      "title": "Keep standards and supplier claims current",
+      "module": "F1",
+      "tier": "core",
+      "covers": [
+        "standards-update-watch",
+        "international-certificate-boundary"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F07",
+          "reason": "A version watch needs the precise citation and restrictions being monitored. The certificate claim must be evaluated against the actual legal coverage boundary."
+        }
+      ]
+    },
+    {
+      "id": "F12",
+      "title": "Case: reject an unsupported compliance claim",
+      "module": "F1",
+      "tier": "core",
+      "covers": ["conformity-evidence-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "F08",
+          "reason": "The case must specify evidence for the identified gap."
+        },
+        {
+          "lesson_id": "F09",
+          "reason": "The common-specification claim requires a reasoned equivalence check."
+        },
+        {
+          "lesson_id": "F10",
+          "reason": "The case includes a cybersecurity certificate with limited coverage."
+        }
+      ]
+    },
+    {
+      "id": "F13",
+      "title": "Who may assess this system?",
+      "module": "F2",
+      "tier": "core",
+      "covers": [
+        "notifying-authority",
+        "notified-body",
+        "notified-scope-verification"
+      ],
+      "prerequisites": []
+    },
+    {
+      "id": "F14",
+      "title": "How designation becomes effective",
+      "module": "F2",
+      "tier": "core",
+      "covers": [
+        "designation-evidence",
+        "notification-objection-window",
+        "unified-sector-designation"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F04",
+          "reason": "Unified designation depends on the relevant sector law and assessment scope."
+        },
+        {
+          "lesson_id": "F13",
+          "reason": "Designation evidence establishes the qualification of the conformity assessor."
+        }
+      ]
+    },
+    {
+      "id": "F15",
+      "title": "Check independence and competence",
+      "module": "F2",
+      "tier": "core",
+      "covers": [
+        "assessor-independence",
+        "assessor-confidentiality",
+        "assessor-competence"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F13",
+          "reason": "The independence requirement applies to the body carrying out conformity assessment. The competence review must match the tasks and system types in scope."
+        }
+      ]
+    },
+    {
+      "id": "F16",
+      "title": "Control subcontracting and proportionality",
+      "module": "F2",
+      "tier": "core",
+      "covers": ["subcontracting-accountability", "proportionate-assessment"],
+      "prerequisites": [
+        {
+          "lesson_id": "F05",
+          "reason": "Proportionate effort cannot remove a requirement from the evidence matrix."
+        },
+        {
+          "lesson_id": "F15",
+          "reason": "Subcontracting must preserve the required independence. The body remains accountable for subcontractor qualifications."
+        }
+      ]
+    },
+    {
+      "id": "F17",
+      "title": "Respond when designation changes",
+      "module": "F2",
+      "tier": "core",
+      "covers": [
+        "designation-change-response",
+        "competence-challenge",
+        "assessor-coordination"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F13",
+          "reason": "Continuity decisions depend on the formal assessor status that has changed."
+        }
+      ]
+    },
+    {
+      "id": "F18",
+      "title": "Case: select and retain a qualified assessor",
+      "module": "F2",
+      "tier": "core",
+      "covers": ["assessor-selection-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "F13",
+          "reason": "The selected assessor must be qualified for the actual task and system codes."
+        },
+        {
+          "lesson_id": "F15",
+          "reason": "An otherwise qualified assessor must still pass the conflict check."
+        },
+        {
+          "lesson_id": "F16",
+          "reason": "The case includes a subcontractor whose responsibility and consent need checking."
+        },
+        {
+          "lesson_id": "F17",
+          "reason": "The case needs a response to a changed designation after selection."
+        }
+      ]
+    },
+    {
+      "id": "F19",
+      "title": "Perform internal control",
+      "module": "F3",
+      "tier": "core",
+      "covers": ["internal-control-assessment", "design-file-consistency"],
+      "prerequisites": [
+        {
+          "lesson_id": "F02",
+          "reason": "The internal-control duty depends on the relevant Annex III points and route."
+        },
+        {
+          "lesson_id": "F05",
+          "reason": "Internal assessment needs the applicable requirements and supporting evidence. Consistency must be checked against the identified technical records."
+        }
+      ]
+    },
+    {
+      "id": "F20",
+      "title": "Choose the biometric assessment procedure",
+      "module": "F3",
+      "tier": "core",
+      "covers": ["biometric-assessment-route", "special-authority-assessor"],
+      "prerequisites": [
+        {
+          "lesson_id": "F02",
+          "reason": "The special procedure is limited to the relevant Annex III point 1 systems."
+        },
+        {
+          "lesson_id": "F08",
+          "reason": "The procedure choice depends on applied standards/common-specification coverage and restrictions."
+        }
+      ]
+    },
+    {
+      "id": "F21",
+      "title": "Prepare for a notified-body assessment",
+      "module": "F3",
+      "tier": "core",
+      "covers": [
+        "qms-approval",
+        "technical-documentation-assessment",
+        "qms-surveillance"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F05",
+          "reason": "QMS approval needs documented procedures and evidence of the applicable requirements. The assessor needs the system-specific technical file and its evidence."
+        },
+        {
+          "lesson_id": "F13",
+          "reason": "The application is submitted to the legally qualified assessment body."
+        }
+      ]
+    },
+    {
+      "id": "F22",
+      "title": "Manage certificates and assessment decisions",
+      "module": "F3",
+      "tier": "core",
+      "covers": ["certificate-lifecycle", "assessment-result-sharing"],
+      "prerequisites": [
+        {
+          "lesson_id": "F15",
+          "reason": "The sharing duty must preserve the applicable confidentiality rules."
+        },
+        {
+          "lesson_id": "F21",
+          "reason": "Certificate management begins with the assessed system and reasoned decision."
+        }
+      ]
+    },
+    {
+      "id": "F23",
+      "title": "Reassess changes to the system",
+      "module": "F3",
+      "tier": "core",
+      "covers": [
+        "substantial-modification-test",
+        "predetermined-learning-change"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F01",
+          "reason": "The change test compares the current system and purpose with the initially assessed version."
+        },
+        {
+          "lesson_id": "F05",
+          "reason": "The exception needs changes recorded in the initial technical documentation."
+        }
+      ]
+    },
+    {
+      "id": "F24",
+      "title": "Case: choose and defend the assessment route",
+      "module": "F3",
+      "tier": "core",
+      "covers": ["assessment-route-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "F19",
+          "reason": "The HR case requires the provider internal-control procedure."
+        },
+        {
+          "lesson_id": "F20",
+          "reason": "The biometric case requires the standards-dependent assessment branch."
+        },
+        {
+          "lesson_id": "F21",
+          "reason": "The case requires evidence and access decisions under an external assessment."
+        },
+        {
+          "lesson_id": "F23",
+          "reason": "The case includes a change after the initial assessment."
+        }
+      ]
+    },
+    {
+      "id": "F25",
+      "title": "Recognise a genuine exceptional authorisation",
+      "module": "F4",
+      "tier": "core",
+      "covers": [
+        "conformity-derogation-authorisation",
+        "emergency-use-boundary",
+        "sector-derogation-boundary"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F02",
+          "reason": "The request is a derogation from the otherwise applicable high-risk assessment procedure."
+        },
+        {
+          "lesson_id": "F04",
+          "reason": "Annex I Section A products use their relevant sector-law derogations."
+        }
+      ]
+    },
+    {
+      "id": "F26",
+      "title": "Prepare the EU declaration",
+      "module": "F4",
+      "tier": "core",
+      "covers": [
+        "provider-declaration-responsibility",
+        "declaration-content-check"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F01",
+          "reason": "Declaration fields must trace to the specific system and version."
+        },
+        {
+          "lesson_id": "F05",
+          "reason": "The provider needs conformity evidence before accepting responsibility for the declaration."
+        }
+      ]
+    },
+    {
+      "id": "F27",
+      "title": "Apply the correct CE marking",
+      "module": "F4",
+      "tier": "core",
+      "covers": ["ce-marking-accessibility", "ce-notified-body-number"],
+      "prerequisites": [
+        {
+          "lesson_id": "F13",
+          "reason": "A body number must identify the appropriate notified assessor where the route requires it."
+        },
+        {
+          "lesson_id": "F26",
+          "reason": "CE marking follows the conformity conclusion and provider declaration."
+        }
+      ]
+    },
+    {
+      "id": "F28",
+      "title": "Register the right actor and system",
+      "module": "F4",
+      "tier": "core",
+      "covers": [
+        "registration-role-test",
+        "high-risk-registration-record",
+        "exempt-system-registration-record"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F01",
+          "reason": "The actor test needs the provider responsible for registration."
+        },
+        {
+          "lesson_id": "F02",
+          "reason": "Registration distinguishes an Annex III system, an Article 6(3) conclusion and other routes."
+        },
+        {
+          "lesson_id": "F26",
+          "reason": "The high-risk record includes the relevant EU declaration of conformity."
+        }
+      ]
+    },
+    {
+      "id": "F29",
+      "title": "Choose the public, restricted or national record",
+      "module": "F4",
+      "tier": "core",
+      "covers": [
+        "registration-destination-test",
+        "public-deployer-registration"
+      ],
+      "prerequisites": [
+        {
+          "lesson_id": "F28",
+          "reason": "The destination lookup starts with the applicable actor/system registration duty. The deployer record is distinct from the provider registration duty."
+        }
+      ]
+    },
+    {
+      "id": "F30",
+      "title": "Case: decide whether the release dossier is complete",
+      "module": "F4",
+      "tier": "core",
+      "covers": ["market-release-case"],
+      "prerequisites": [
+        {
+          "lesson_id": "F24",
+          "reason": "The final release decision needs a supported assessment-route conclusion."
+        },
+        {
+          "lesson_id": "F26",
+          "reason": "The final dossier needs the required declaration content and supporting evidence."
+        },
+        {
+          "lesson_id": "F27",
+          "reason": "The final release needs a valid marking and access decision."
+        },
+        {
+          "lesson_id": "F29",
+          "reason": "The final release needs the applicable registration destination and recorded gaps."
+        }
+      ]
+    }
+  ]
+}
