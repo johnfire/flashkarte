@@ -12,6 +12,10 @@ decks, legacy courses and subjects. Chris wants to sell to schools and
 teachers, which needs three new kinds of account, groups (schools and
 classes), sharing narrower than "everyone", and per-seat billing.
 
+**Market (clarified 2026-10-07):** "school" means a **private language
+school or a Weiterbildung (continuing-education) firm** — not state schools.
+Learners are mostly adults; a language school may also teach children.
+
 In this document "deck" means any content unit: deck, legacy course,
 structured course (subject). The rules apply to all of them.
 
@@ -233,8 +237,26 @@ the safer choice here.
   term end.
 - Data protection → 6-month retention; deletion on demand honoured; a data
   processing agreement (AVV) with every school; a data-protection review
-  before the first school signs. Bavarian school-software rules: later, not
-  now.
+  before the first school signs. Bavarian rules for software in state
+  schools do not apply: the customers are private language schools and
+  Weiterbildung firms.
+
+## Resolved in round 4
+
+- Lesson images → served to everyone allowed to study the course (owner,
+  and enrolled learners while it is public or shared), not just the owner.
+  Uploading and listing images stay owner-only.
+- Public structured courses → enrolling stays free of the 10-unit check;
+  only shared courses count when enrolled.
+- Customers are private language schools and Weiterbildung firms (see
+  Problem). Consequences to keep in mind, not decided yet:
+  - The firm is still the data controller for its learners, so the AVV
+    stays; with mostly adult learners, consent questions for minors matter
+    only where a language school teaches children.
+  - Username logins (no email) were meant for young pupils; they may matter
+    less for adult learners.
+  - Firms are invoiced as businesses; VAT treatment (including cross-border
+    EU customers) is a question for a tax adviser, not settled here.
 
 ## Resolved in round 3
 

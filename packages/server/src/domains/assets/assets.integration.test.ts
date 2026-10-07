@@ -141,7 +141,36 @@ describe("storing a diagram", () => {
 });
 
 describe("who can see an image", () => {
-  it("only its subject's owner, and only through that subject", async () => {
+  it("an enrolled learner sees it while the course is public, never after", async () => {
+    const made = await createAsset(OWNER, subjectId, { svg: SVG }, "human");
+    await getPool().query(
+      "UPDATE subjects SET is_public = true WHERE id = $1",
+      [subjectId],
+    );
+    // Public but not enrolled: still nothing.
+    await expect(getAssetSvg(OTHER, subjectId, made.id)).rejects.toBeInstanceOf(
+      NotFoundError,
+    );
+    await subjects.enrollInPublicSubject(OTHER, subjectId);
+    expect(await getAssetSvg(OTHER, subjectId, made.id)).toContain("<svg");
+    // Learners still cannot add or list images.
+    await expect(
+      createAsset(OTHER, subjectId, { svg: SVG }, "human"),
+    ).rejects.toBeInstanceOf(NotFoundError);
+    await expect(listAssets(OTHER, subjectId)).rejects.toBeInstanceOf(
+      NotFoundError,
+    );
+
+    await getPool().query(
+      "UPDATE subjects SET is_public = false WHERE id = $1",
+      [subjectId],
+    );
+    await expect(getAssetSvg(OTHER, subjectId, made.id)).rejects.toBeInstanceOf(
+      NotFoundError,
+    );
+  });
+
+  it("nobody else, and only through its own subject", async () => {
     const made = await createAsset(OWNER, subjectId, { svg: SVG }, "human");
     await expect(getAssetSvg(OTHER, subjectId, made.id)).rejects.toBeInstanceOf(
       NotFoundError,

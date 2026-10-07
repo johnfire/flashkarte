@@ -64,13 +64,19 @@ export async function listAssets(userId: string, subjectId: string) {
   return assets.map((asset) => ({ ...asset, src: assetSource(asset.id) }));
 }
 
-/** The cleaned SVG, for serving. Another subject's asset is not found. */
+/**
+ * The cleaned SVG, for serving. Anyone who may study the course sees its
+ * images: the owner, and learners enrolled in it while it is public or shared
+ * with them (findLearningSubject). Another subject's asset is not found.
+ */
 export async function getAssetSvg(
   userId: string,
   subjectId: string,
   assetId: string,
 ): Promise<string> {
-  await requireOwnedSubjectId(userId, subjectId);
+  if (!(await subjectsRepo.findLearningSubject(userId, subjectId, getPool()))) {
+    throw new NotFoundError("Subject not found");
+  }
   const id = idSchema.safeParse(assetId);
   // A diagram or a rendered formula: both are pictures of this subject.
   const svg = id.success

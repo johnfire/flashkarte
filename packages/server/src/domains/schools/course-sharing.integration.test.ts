@@ -7,6 +7,7 @@ import * as subjects from "../subjects/subjects.service";
 import * as subjectsRepo from "../subjects/subjects.repository";
 import * as billing from "../billing/billing.service";
 import * as schools from "./schools.service";
+import { createAsset, getAssetSvg } from "../assets/assets.service";
 
 const ADMIN_ID = "10000000-0000-4000-8000-00000000000a";
 const TEACHER_ID = "10000000-0000-4000-8000-0000000000a1";
@@ -199,6 +200,33 @@ describe("shared structured courses", () => {
     await expect(
       subjects.enrollInPublicSubject(OUTSIDER_ID, SUBJECT_ID),
     ).rejects.toThrow(/Course not found/);
+  });
+
+  test("class members see the course's images; they stop when the student leaves", async () => {
+    const classId = await independentClass();
+    const image = await createAsset(
+      TEACHER_ID,
+      SUBJECT_ID,
+      {
+        svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><rect width="10" height="10"/></svg>',
+      },
+      "human",
+    );
+    await subjects.setShares(TEACHER_ID, SUBJECT_ID, {
+      shares: [{ scope: "class", classId }],
+    });
+    await subjects.enrollInPublicSubject(STUDENT_ID, SUBJECT_ID);
+    expect(await getAssetSvg(STUDENT_ID, SUBJECT_ID, image.id)).toContain(
+      "<svg",
+    );
+    await expect(
+      getAssetSvg(OUTSIDER_ID, SUBJECT_ID, image.id),
+    ).rejects.toThrow(/not found/);
+
+    await schools.setClassMembers(classId, []);
+    await expect(getAssetSvg(STUDENT_ID, SUBJECT_ID, image.id)).rejects.toThrow(
+      /not found/,
+    );
   });
 
   test("leaving the class ends access and the course stops counting", async () => {
