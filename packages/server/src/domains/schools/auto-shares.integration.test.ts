@@ -110,9 +110,9 @@ test("a school member gets shared deck-courses and structured courses with no Ad
   const detail = await courses.getCourse(MEMBER_ID, COURSE_ID);
   expect(detail).toMatchObject({ subscribed: true, auto_added: true });
 
-  expect(
-    (await subjects.listSubjects(MEMBER_ID)).map((s) => s.id),
-  ).toEqual([SUBJECT_ID]);
+  expect((await subjects.listSubjects(MEMBER_ID)).map((s) => s.id)).toEqual([
+    SUBJECT_ID,
+  ]);
   expect(
     await subjectsRepo.findLearningSubject(MEMBER_ID, SUBJECT_ID),
   ).not.toBeNull();
