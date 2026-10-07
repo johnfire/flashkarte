@@ -264,11 +264,23 @@ export interface ReviewResult {
   due_at: string;
 }
 
+/** Learning blocks: a large deck is studied 40 cards at a time (server-computed). */
+export interface LearningBlock {
+  block_size: number;
+  blocks_total: number;
+  /** 1-based; null once every block is mastered. */
+  current_block: number | null;
+  current_block_cards: number;
+  current_block_mastered: number;
+}
+
 export interface DeckStats {
   total: number;
   new: number;
   due: number;
   learned: number;
+  /** Absent from servers that predate learning blocks; null if it couldn't be computed. */
+  learning_block?: LearningBlock | null;
 }
 
 /** "full" works like the owner's login. "deck" is limited to deck data and is recorded as AI-authored. */

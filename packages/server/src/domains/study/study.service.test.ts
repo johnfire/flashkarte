@@ -20,6 +20,7 @@ beforeEach(() => {
     async (_userId, _cardId, action) => action(mockClient),
   );
   mockRecordRequired.mockResolvedValue();
+  mockRepo.getBlockCards.mockResolvedValue([]);
 });
 
 describe("sync", () => {
@@ -211,7 +212,8 @@ describe("getStudyBatch — random practice fallback", () => {
 
     const batch = await getStudyBatch("u1", "d1");
 
-    expect(mockRepo.getRandomCards).toHaveBeenCalledWith("u1", "d1", 20);
+    // An empty block list means the deck has no mastery work left: draw from it all.
+    expect(mockRepo.getRandomCards).toHaveBeenCalledWith("u1", "d1", 20, null);
     expect(batch.map((c) => c.id)).toEqual(["r1", "r2"]);
   });
 
@@ -231,6 +233,44 @@ describe("getStudyBatch — random practice fallback", () => {
     const batch = await getStudyBatch("u1", "d1");
 
     expect(batch).toEqual([]);
+  });
+});
+
+describe("getStudyBatch — learning blocks", () => {
+  const blockRow = (id: string, lastRating: number | null) => ({
+    id,
+    seen: lastRating !== null,
+    last_rating: lastRating,
+  });
+
+  test("passes only the current block's unseen cards as admissible new cards", async () => {
+    mockRepo.getBlockCards.mockResolvedValue([
+      blockRow("seen", 3),
+      ...Array.from({ length: 50 }, (_, i) => blockRow(`n${i}`, null)),
+    ]);
+    mockRepo.getDueAndNewCards.mockResolvedValue([]);
+    mockRepo.getRandomCards.mockResolvedValue([]);
+
+    await getStudyBatch("u1", "d1");
+
+    const admissible = mockRepo.getDueAndNewCards.mock.calls[0][4];
+    expect(admissible).toEqual(Array.from({ length: 39 }, (_, i) => `n${i}`));
+    // Random practice drills the 40 cards of the open block.
+    const pool = mockRepo.getRandomCards.mock.calls[0][3];
+    expect(pool).toHaveLength(40);
+    expect(pool?.[0]).toBe("seen");
+  });
+
+  test("if the block lookup fails, study still works, ungated", async () => {
+    mockRepo.getBlockCards.mockRejectedValue(new Error("db hiccup"));
+    mockRepo.getDueAndNewCards.mockResolvedValue([
+      { id: "c1", content: { front: "f", back: "b" } } as never,
+    ]);
+
+    const batch = await getStudyBatch("u1", "d1");
+
+    expect(batch.map((c) => c.id)).toEqual(["c1"]);
+    expect(mockRepo.getDueAndNewCards.mock.calls[0][4]).toBeNull();
   });
 });
 

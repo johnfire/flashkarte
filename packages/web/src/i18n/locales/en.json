@@ -420,6 +420,8 @@
     "decks": "← Decks",
     "progress": "{{current}} / {{total}}",
     "cardNumber": "Card #{{number}}",
+    "blockProgress": "Block {{current}} of {{total}} · {{mastered}}/{{size}} mastered",
+    "blocksComplete": "All {{total}} blocks mastered",
     "showAnswer": "Show answer",
     "hard": "Hard",
     "medium": "Medium",

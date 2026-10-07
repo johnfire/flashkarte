@@ -420,6 +420,8 @@
     "decks": "← Stapel",
     "progress": "{{current}} / {{total}}",
     "cardNumber": "Karte Nr. {{number}}",
+    "blockProgress": "Block {{current}} von {{total}} · {{mastered}}/{{size}} gemeistert",
+    "blocksComplete": "Alle {{total}} Blöcke gemeistert",
     "showAnswer": "Antwort anzeigen",
     "hard": "Schwer",
     "medium": "Mittel",

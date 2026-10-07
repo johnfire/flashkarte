@@ -1,9 +1,16 @@
 import { z } from "zod";
 import crypto from "crypto";
 import type { PoolClient } from "pg";
-import { calculate, wordPhase } from "@flashkarte/shared";
-import type { WordPhase } from "@flashkarte/shared";
+import {
+  admissibleNewCardIds,
+  blockProgress,
+  calculate,
+  currentBlockCardIds,
+  wordPhase,
+} from "@flashkarte/shared";
+import type { BlockCard, WordPhase } from "@flashkarte/shared";
 import { NotFoundError } from "../../utils/errors";
+import { logger } from "../../utils/logger";
 import { parse } from "../../utils/validate";
 import { recordRequired } from "../audit/audit.service";
 import type { AuditActor } from "../audit/audit.types";
@@ -108,23 +115,62 @@ async function withChainedSenses(
 /** A study card plus, for sense cards, the phase the client renders it in. */
 export type StudyBatchCard = repo.CardForStudy & { phase?: WordPhase };
 
+/**
+ * The deck's studiable cards for learning blocks, or null if they could not be read.
+ * Blocks are a pacing aid, not a correctness requirement: if this lookup fails the
+ * queue falls back to its ungated behaviour rather than taking study down with it.
+ */
+async function loadBlockCards(
+  userId: string,
+  deckId: string,
+): Promise<BlockCard[] | null> {
+  try {
+    const rows = await repo.getBlockCards(userId, deckId);
+    return rows.map((row) => ({
+      id: row.id,
+      seen: row.seen,
+      lastRating: row.last_rating,
+    }));
+  } catch (err) {
+    logger.error(
+      "study.blocks",
+      "Learning-block lookup failed; queue ungated",
+      {
+        deckId,
+        error: err instanceof Error ? err.message : String(err),
+      },
+    );
+    return null;
+  }
+}
+
 export async function getStudyBatch(
   userId: string,
   deckId: string,
   limit = 20,
   includeLessons = false,
 ): Promise<StudyBatchCard[]> {
+  const blockCards = await loadBlockCards(userId, deckId);
+  // New cards come only from the current learning block (40 at a time); due
+  // reviews are never held back. See packages/shared learning-blocks.ts.
+  const admissible = blockCards ? [...admissibleNewCardIds(blockCards)] : null;
   const due = await repo.getDueAndNewCards(
     userId,
     deckId,
     limit,
     includeLessons,
+    admissible,
   );
   // Nothing due and nothing new: offer a random practice round instead of a
   // dead end. Ratings on these cards apply normally (same review path as any
   // other card) — studying early just advances their next due date sooner.
+  // While a block is open the round drills that block, the cards still to be
+  // brought to Perfect; once the deck is mastered it draws from the whole deck.
+  const practicePool = blockCards ? currentBlockCardIds(blockCards) : null;
   const batch =
-    due.length > 0 ? due : await repo.getRandomCards(userId, deckId, limit);
+    due.length > 0
+      ? due
+      : await repo.getRandomCards(userId, deckId, limit, practicePool);
   return withChainedSenses(userId, deckId, batch);
 }
 
@@ -396,7 +442,11 @@ export async function sync(
 
 export async function stats(userId: string, deckId: string) {
   const statsRow = await repo.getStats(userId, deckId);
+  const blockCards = await loadBlockCards(userId, deckId);
   return {
+    // Additive: clients that predate learning blocks ignore it. null when the
+    // block lookup failed, so the existing counters still come back.
+    learning_block: blockCards ? blockProgress(blockCards) : null,
     total: parseInt(statsRow?.total ?? "0", 10),
     new: parseInt(statsRow?.new ?? "0", 10),
     due: parseInt(statsRow?.due ?? "0", 10),

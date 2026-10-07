@@ -119,6 +119,8 @@
     <string name="study_reading">Lesen</string>
     <string name="study_reading_hint">Lies das, dann geht\'s weiter. Das wird nicht bewertet.</string>
     <string name="study_got_it">Verstanden</string>
+    <string name="study_block_progress">Block %1$d von %2$d · %3$d/%4$d gemeistert</string>
+    <string name="study_blocks_complete">Alle %1$d Blöcke gemeistert</string>
     <plurals name="study_lessons_read">
         <item quantity="one">Du hast %d Lektion gelesen.</item>
         <item quantity="other">Du hast %d Lektionen gelesen.</item>

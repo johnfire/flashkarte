@@ -12,6 +12,7 @@ import com.flashmd.domain.model.BranchOption
 import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.CardProgress
 import com.flashmd.domain.model.DueCard
+import com.flashmd.domain.study.LearningBlocks
 import com.flashmd.sync.SyncScheduler
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -112,6 +113,15 @@ class StudyRepository @Inject constructor(
                 medium = stats.hard,
                 good = stats.good,
                 perfect = stats.easy,
+                learningBlock = stats.learningBlock?.let {
+                    LearningBlocks.BlockProgress(
+                        blockSize = it.blockSize,
+                        blocksTotal = it.blocksTotal,
+                        currentBlock = it.currentBlock,
+                        currentBlockCards = it.currentBlockCards,
+                        currentBlockMastered = it.currentBlockMastered,
+                    )
+                },
             )
         } catch (exception: ApiException) {
             if (exception.status != 0) throw exception
@@ -130,6 +140,7 @@ private fun CachedStudyStats.toDeckStudyStats(): DeckStudyStats = DeckStudyStats
     medium = medium,
     good = good,
     perfect = perfect,
+    learningBlock = learningBlock,
 )
 
 /** Whole-deck card (from GET /api/decks/:id) to a domain Card. Branch cards use
@@ -155,4 +166,6 @@ data class DeckStudyStats(
     val medium: Int = 0,
     val good: Int = 0,
     val perfect: Int = 0,
+    /** "Block 3 of 25 · 12/40 mastered"; null if unknown (e.g. an older server). */
+    val learningBlock: LearningBlocks.BlockProgress? = null,
 )

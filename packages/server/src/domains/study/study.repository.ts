@@ -65,12 +65,17 @@ function officialOrOwned(
  * `includeLessons` opts a client in to reading cards. Clients that predate them never
  * ask, so they never receive a card they would show as a flip card and rate; a lesson
  * the learner has already read is never offered again.
+ *
+ * `admissibleNewIds` is the learning-block gate: when given, a never-seen `basic` card
+ * is only offered if its id is in the list. Seen cards (reviews), lessons and branch
+ * cards are never gated. null means no gate.
  */
 export function getDueAndNewCards(
   userId: string,
   deckId: string,
   limit: number,
   includeLessons = false,
+  admissibleNewIds: string[] | null = null,
 ) {
   return query<CardForStudy>(
     // Ordered decks (decks.is_ordered) study in strict global position order;
@@ -86,11 +91,13 @@ export function getDueAndNewCards(
        AND (c.type <> 'read' OR ($4::boolean AND NOT EXISTS (
          SELECT 1 FROM card_reads r WHERE r.card_id = c.id AND r.user_id = $1
        )))
+       AND ($5::uuid[] IS NULL OR p.id IS NOT NULL OR c.type <> 'basic'
+            OR c.id = ANY($5::uuid[]))
      ORDER BY
        CASE WHEN d.is_ordered THEN c.position END ASC NULLS LAST,
        (p.id IS NULL) ASC, p.due_at ASC NULLS LAST, c.position ASC
      LIMIT $3`,
-    [userId, deckId, limit, includeLessons],
+    [userId, deckId, limit, includeLessons, admissibleNewIds],
   );
 }
 
@@ -99,16 +106,42 @@ export function getDueAndNewCards(
  * doesn't dead-end into "nothing due" until the schedule catches up. Only
  * `basic` cards (ordinary + diagnostic) qualify — branch cards have no SR
  * state and would show up as blank/unstudiable if pulled in here.
+ * `onlyIds` narrows the draw (to the current learning block); null draws from
+ * the whole deck.
  */
-export function getRandomCards(userId: string, deckId: string, limit: number) {
+export function getRandomCards(
+  userId: string,
+  deckId: string,
+  limit: number,
+  onlyIds: string[] | null = null,
+) {
   return query<CardForStudy>(
     `SELECT c.id, c.type, c.content, c.category, c.position
      FROM cards c
      JOIN decks d ON d.id = c.deck_id
      WHERE c.deck_id = $2 AND c.type = 'basic' AND ${officialOrOwned("c", "d", 1)}
+       AND ($4::uuid[] IS NULL OR c.id = ANY($4::uuid[]))
      ORDER BY random()
      LIMIT $3`,
-    [userId, deckId, limit],
+    [userId, deckId, limit, onlyIds],
+  );
+}
+
+/**
+ * Every studiable (`basic`) card of a deck in deck order, with just what learning
+ * blocks need: whether the learner has seen it and its latest rating. The order
+ * must match the new-card order of getDueAndNewCards (position, then id as a
+ * tie-break) so blocks are the cards a learner actually meets in sequence.
+ */
+export function getBlockCards(userId: string, deckId: string) {
+  return query<{ id: string; seen: boolean; last_rating: number | null }>(
+    `SELECT c.id, (p.id IS NOT NULL) AS seen, p.last_rating
+     FROM cards c
+     JOIN decks d ON d.id = c.deck_id
+     LEFT JOIN card_progress p ON p.card_id = c.id AND p.user_id = $1
+     WHERE c.deck_id = $2 AND c.type = 'basic' AND ${officialOrOwned("c", "d", 1)}
+     ORDER BY c.position ASC, c.id ASC`,
+    [userId, deckId],
   );
 }
 

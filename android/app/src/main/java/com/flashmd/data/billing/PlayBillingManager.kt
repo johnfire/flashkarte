@@ -67,11 +67,14 @@ class PlayBillingManager @Inject constructor(
                     finish(Result.failure(IllegalStateException(billingResult.debugMessage)))
                     return@connect
                 }
-                client.queryProductDetailsAsync(query) { result, details: List<ProductDetails> ->
+                // Billing Library 8+ wraps the products in a QueryProductDetailsResult, which
+                // also lists any products Play could not return (ignored here: no offer shown).
+                client.queryProductDetailsAsync(query) { result, productsResult ->
                     if (result.responseCode != BillingClient.BillingResponseCode.OK) {
                         finish(Result.failure(IllegalStateException(result.debugMessage)))
                         return@queryProductDetailsAsync
                     }
+                    val details: List<ProductDetails> = productsResult.productDetailsList
                     val offers = details.flatMap { product ->
                         product.subscriptionOfferDetails.orEmpty().mapNotNull { offer ->
                             val basePlan = offer.basePlanId

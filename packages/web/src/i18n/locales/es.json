@@ -420,6 +420,8 @@
     "decks": "← Mazos",
     "progress": "{{current}} / {{total}}",
     "cardNumber": "Tarjeta n.º {{number}}",
+    "blockProgress": "Bloque {{current}} de {{total}} · {{mastered}}/{{size}} dominadas",
+    "blocksComplete": "Los {{total}} bloques dominados",
     "showAnswer": "Mostrar respuesta",
     "hard": "Difícil",
     "medium": "Medio",

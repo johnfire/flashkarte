@@ -15,8 +15,10 @@ import com.flashmd.domain.speech.SpeechResolver
 import com.flashmd.domain.model.Card
 import com.flashmd.domain.model.DueCard
 import com.flashmd.domain.study.DiagnosticStudy
+import com.flashmd.domain.study.LearningBlocks
 import com.flashmd.domain.study.StudyOption
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
@@ -48,6 +50,8 @@ data class StudyUiState(
     // "is there a language for this side?" — never how it was derived.
     val speech: SpeechResolver.Resolved = SILENT,
     val muted: Boolean = false,
+    // "Block 3 of 25 · 12/40 mastered" for decks studied in learning blocks; null hides it.
+    val learningBlock: LearningBlocks.BlockProgress? = null,
 )
 
 /** Speech off: both sides null, so no button is offered and nothing plays. */
@@ -88,6 +92,7 @@ class StudyViewModel @Inject constructor(
         DiagnosticStudy.selectOptions(card.card, pool, 4, random)
 
     init {
+        refreshLearningBlock()
         viewModelScope.launch {
             try {
                 val deck = deckRepo.getDeckById(deckId)
@@ -134,6 +139,23 @@ class StudyViewModel @Inject constructor(
                     error = "Couldn't load this study session.",
                 )
             }
+        }
+    }
+
+    /**
+     * Fetch the deck's learning-block progress for the line under the progress bar.
+     * Display only: any failure just leaves the line hidden and never touches study.
+     */
+    private fun refreshLearningBlock() {
+        viewModelScope.launch {
+            val block = try {
+                studyRepo.getStats(deckId).learningBlock
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                null
+            }
+            _uiState.value = _uiState.value.copy(learningBlock = block)
         }
     }
 
@@ -321,6 +343,8 @@ class StudyViewModel @Inject constructor(
         speechPlayer.stop()
         queue.poll()
         ratingCounts[rating] = (ratingCounts[rating] ?: 0) + 1
+        // A rating can change how much of the block is mastered.
+        refreshLearningBlock()
 
         if (requeueOnLapse && rating <= 2) {
             // Ordered decks: keep the same card up front until it's passed, so the

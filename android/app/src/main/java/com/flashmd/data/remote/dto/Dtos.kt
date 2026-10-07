@@ -224,6 +224,17 @@ data class StatsDto(
     val hard: Int = 0,
     val good: Int = 0,
     val easy: Int = 0,
+    // Learning blocks; absent from servers that predate them.
+    @SerialName("learning_block") val learningBlock: LearningBlockDto? = null,
+)
+
+@Serializable
+data class LearningBlockDto(
+    @SerialName("block_size") val blockSize: Int = 40,
+    @SerialName("blocks_total") val blocksTotal: Int = 0,
+    @SerialName("current_block") val currentBlock: Int? = null,
+    @SerialName("current_block_cards") val currentBlockCards: Int = 0,
+    @SerialName("current_block_mastered") val currentBlockMastered: Int = 0,
 )
 
 @Serializable

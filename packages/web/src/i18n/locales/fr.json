@@ -420,6 +420,8 @@
     "decks": "← Paquets",
     "progress": "{{current}} / {{total}}",
     "cardNumber": "Carte n° {{number}}",
+    "blockProgress": "Bloc {{current}} sur {{total}} · {{mastered}}/{{size}} maîtrisées",
+    "blocksComplete": "Les {{total}} blocs sont maîtrisés",
     "showAnswer": "Afficher la réponse",
     "hard": "Difficile",
     "medium": "Moyen",
