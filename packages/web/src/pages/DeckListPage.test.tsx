@@ -252,7 +252,7 @@ describe("DeckListPage", () => {
     renderPage();
     await screen.findByText("German nouns");
     expect(
-      screen.queryByRole("button", { name: "Classes & school" }),
+      screen.queryByRole("button", { name: "Groups & school" }),
     ).not.toBeInTheDocument();
     expect(mockedDecksApi.listShared).not.toHaveBeenCalled();
   });
@@ -263,7 +263,7 @@ describe("DeckListPage", () => {
     renderPage();
     await screen.findByText("German nouns");
     expect(
-      screen.getByRole("button", { name: "Classes & school" }),
+      screen.getByRole("button", { name: "Groups & school" }),
     ).toBeInTheDocument();
     expect(mockedDecksApi.listShared).toHaveBeenCalled();
   });

@@ -62,7 +62,7 @@ test("lists both kinds of shared course with where they came from", async () => 
   expect(screen.getByText("Biologie Decks")).toBeInTheDocument();
   expect(screen.getByText(/from your school/)).toBeInTheDocument();
   expect(
-    screen.getByText(/shared with your class · Frau Huber/),
+    screen.getByText(/shared with your group · Frau Huber/),
   ).toBeInTheDocument();
 });
 

@@ -39,7 +39,7 @@ test("lists decks waiting to be added, with where they came from", async () => {
   render(<SharedWithMeSection onAdded={vi.fn()} />);
   expect(await screen.findByText("Zellen")).toBeInTheDocument();
   expect(
-    screen.getByText("12 cards · from your teacher · Frau Huber"),
+    screen.getByText("12 cards · from your course leader · Frau Huber"),
   ).toBeInTheDocument();
 });
 

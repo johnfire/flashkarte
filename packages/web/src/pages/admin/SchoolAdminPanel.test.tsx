@@ -90,13 +90,13 @@ beforeEach(() => {
   vi.mocked(api.admin.setClassMembers).mockResolvedValue(undefined);
 });
 
-test("teacher is not offered as a kind until the person is verified", async () => {
+test("course leader is not offered as a kind until the person is verified", async () => {
   render(<SchoolAdminPanel />);
   await userEvent.selectOptions(await screen.findByLabelText("Person"), "t1");
   const kinds = within(screen.getByLabelText("Account kind"))
     .getAllByRole("option")
     .map((o) => o.textContent);
-  expect(kinds).toEqual(["Individual", "School", "Student"]);
+  expect(kinds).toEqual(["Individual", "School", "Participant"]);
 });
 
 test("verifying a teacher records how, with the school and note", async () => {
@@ -125,14 +125,14 @@ test("verifying a teacher records how, with the school and note", async () => {
 test("a school's class offers only that school's students", async () => {
   render(<SchoolAdminPanel />);
   await userEvent.click(
-    await screen.findByRole("button", { name: "Students" }),
+    await screen.findByRole("button", { name: "Participants" }),
   );
 
   expect(await screen.findByLabelText("pupil@example.com")).toBeInTheDocument();
   expect(screen.queryByLabelText("other@example.com")).not.toBeInTheDocument();
 
   await userEvent.click(screen.getByLabelText("pupil@example.com"));
-  const editor = screen.getByText("Students in Biologie 7B").parentElement!;
+  const editor = screen.getByText("Participants in Biologie 7B").parentElement!;
   await userEvent.click(within(editor).getByRole("button", { name: "Save" }));
   expect(api.admin.setClassMembers).toHaveBeenCalledWith("c1", ["p1"]);
 });

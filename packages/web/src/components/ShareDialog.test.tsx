@@ -45,9 +45,9 @@ test("a teacher sees their school, all students and each class, with current sha
   expect(
     await screen.findByLabelText("Everyone at Gymnasium Lechfeld"),
   ).not.toBeChecked();
-  expect(screen.getByLabelText("All my students")).not.toBeChecked();
-  expect(screen.getByLabelText("Class: Biologie 7B")).toBeChecked();
-  expect(screen.getByLabelText("Class: Biologie 8A")).not.toBeChecked();
+  expect(screen.getByLabelText("All my participants")).not.toBeChecked();
+  expect(screen.getByLabelText("Group: Biologie 7B")).toBeChecked();
+  expect(screen.getByLabelText("Group: Biologie 8A")).not.toBeChecked();
 });
 
 test("saving sends exactly the ticked audiences and closes", async () => {
@@ -58,8 +58,8 @@ test("saving sends exactly the ticked audiences and closes", async () => {
   await userEvent.click(
     await screen.findByLabelText("Everyone at Gymnasium Lechfeld"),
   );
-  await userEvent.click(screen.getByLabelText("Class: Biologie 7B"));
-  await userEvent.click(screen.getByLabelText("Class: Biologie 8A"));
+  await userEvent.click(screen.getByLabelText("Group: Biologie 7B"));
+  await userEvent.click(screen.getByLabelText("Group: Biologie 8A"));
   await userEvent.click(screen.getByRole("button", { name: "Save" }));
 
   expect(save).toHaveBeenCalledWith([
@@ -83,9 +83,11 @@ test("a student is offered only their classmates", async () => {
   renderDialog();
 
   expect(
-    await screen.findByLabelText("My classmates in Deutsch A1"),
+    await screen.findByLabelText("Others in my group Deutsch A1"),
   ).toBeInTheDocument();
-  expect(screen.queryByLabelText("All my students")).not.toBeInTheDocument();
+  expect(
+    screen.queryByLabelText("All my participants"),
+  ).not.toBeInTheDocument();
 });
 
 test("with no school or class there is nothing to save", async () => {
@@ -102,7 +104,7 @@ test("with no school or class there is nothing to save", async () => {
   renderDialog();
 
   expect(
-    await screen.findByText(/not in a school or class yet/),
+    await screen.findByText(/not in a school or group yet/),
   ).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Save" })).toBeDisabled();
 });

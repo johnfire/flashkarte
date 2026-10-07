@@ -318,25 +318,25 @@
     "sharedWithYou": "Shared with you",
     "addError": "Could not add this deck.",
     "sharedTitle": "Shared with you",
-    "sharedHint": "Your school, teachers or classmates shared these decks. Add one to study it.",
+    "sharedHint": "Your school, course leader or others in your group shared these decks. Add one to study it.",
     "sharedFrom": {
       "school": "from your school",
-      "teacher": "from your teacher",
-      "class": "shared with your class"
+      "teacher": "from your course leader",
+      "class": "shared with your group"
     },
     "sharing": {
-      "open": "Classes & school",
-      "openTitle": "Share this deck with your school or classes",
+      "open": "Groups & school",
+      "openTitle": "Share with your school or groups",
       "title": "Share \"{{title}}\"",
-      "hint": "Choose who in your school or classes can use this. \"Share\" or \"Publish\" still makes it public for everyone.",
+      "hint": "Choose who in your school or groups can use this. \"Share\" or \"Publish\" still makes it public for everyone.",
       "loadError": "Could not load sharing settings.",
       "saveError": "Could not save sharing settings.",
       "saving": "Saving…",
-      "nothing": "You are not in a school or class yet, so there is nobody to share with here.",
+      "nothing": "You are not in a school or group yet, so there is nobody to share with here.",
       "school": "Everyone at {{name}}",
-      "allStudents": "All my students",
-      "class": "Class: {{name}}",
-      "classmates": "My classmates in {{name}}"
+      "allStudents": "All my participants",
+      "class": "Group: {{name}}",
+      "classmates": "Others in my group {{name}}"
     }
   },
   "courses": {
@@ -378,8 +378,8 @@
     "cloning": "Cloning…",
     "cloneError": "Couldn't clone that deck collection. Try again.",
     "sharedTitle": "Courses shared with you",
-    "sharedHint": "Your school, teachers or classmates shared these courses. Add one to start it.",
-    "sharedReadOnly": "Shared by your school, teacher or classmates. You can study it but not change it.",
+    "sharedHint": "Your school, course leader or others in your group shared these courses. Add one to start it.",
+    "sharedReadOnly": "Shared by your school, course leader or group. You can study it but not change it.",
     "sharedAddFirst": "Add this course to study its decks."
   },
   "libraryHub": {
@@ -1008,9 +1008,9 @@
     "retryCheckout": "Retry checkout"
   },
   "schools": {
-    "title": "Schools, teachers and classes",
-    "hint": "Enter what schools and teachers send in. Teachers must be verified (school list or interview) before they can be teachers.",
-    "loadError": "Could not load schools and classes.",
+    "title": "Schools, course leaders and groups",
+    "hint": "Enter what schools and course leaders send in. Course leaders must be verified (school's list or interview) before they can be course leaders.",
+    "loadError": "Could not load schools and groups.",
     "saveError": "Could not save.",
     "saved": "Saved.",
     "schools": "Schools",
@@ -1025,11 +1025,11 @@
     "kind": "Account kind",
     "kind_individual": "Individual",
     "kind_school": "School",
-    "kind_teacher": "Teacher",
-    "kind_student": "Student",
+    "kind_teacher": "Course leader",
+    "kind_student": "Participant",
     "kindAndSchool": "Account kind and school",
-    "verifyTeacher": "Verify as teacher",
-    "alreadyVerified": "Already verified as a teacher.",
+    "verifyTeacher": "Verify as course leader",
+    "alreadyVerified": "Already verified as a course leader.",
     "method": "How they proved it",
     "method_interview": "Interviewed",
     "method_school_roster": "On a school's list",
@@ -1037,19 +1037,19 @@
     "verify": "Verify",
     "school": "School",
     "noSchool": "No school (independent)",
-    "classes": "Classes",
-    "noClasses": "No classes yet.",
+    "classes": "Groups",
+    "noClasses": "No groups yet.",
     "independent": "Independent",
-    "studentCount_one": "{{count}} student",
-    "studentCount_other": "{{count}} students",
-    "editStudents": "Students",
+    "studentCount_one": "{{count}} participant",
+    "studentCount_other": "{{count}} participants",
+    "editStudents": "Participants",
     "deleteClass": "Delete",
-    "deleteClassConfirm": "Delete the class \"{{name}}\"? Its students lose the decks shared with it.",
-    "teacher": "Teacher",
-    "chooseTeacher": "Choose a teacher…",
-    "className": "Class name",
-    "addClass": "Add class",
-    "studentsIn": "Students in {{name}}",
-    "noStudents": "No student accounts can join this class yet."
+    "deleteClassConfirm": "Delete the group \"{{name}}\"? Its participants lose what was shared with it.",
+    "teacher": "Course leader",
+    "chooseTeacher": "Choose a course leader…",
+    "className": "Group name",
+    "addClass": "Add group",
+    "studentsIn": "Participants in {{name}}",
+    "noStudents": "No participant accounts can join this group yet."
   }
 }
