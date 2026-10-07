@@ -59,7 +59,8 @@ def check_plan_coverage(curriculum, coverage, sources):
     for entry in entries:
         if entry["lesson"] not in lessons or entry["source_id"] not in source_ids:
             errors.append(f"Unknown coverage reference: {entry['locator']}")
-        if entry["status"] != "planned-not-yet-taught":
+        expected_status = "authored-testing" if curriculum["status"] == "owner-approved-authored-testing" else "planned-not-yet-taught"
+        if entry["status"] != expected_status:
             errors.append(f"Plan overstates teaching status: {entry['locator']}")
         if entry["extent"] not in {"primary", "context", "orientation", "lookup"} or not entry["topic"].strip():
             errors.append(f"Missing coverage boundary: {entry['locator']}")
@@ -72,7 +73,8 @@ def check_plan_coverage(curriculum, coverage, sources):
             errors.append(f"Unknown concept source: {concept['slug']}")
     if coverage["baseline"] != sources["baseline"] or curriculum["source_baseline"] != sources["baseline"]:
         errors.append("Plan/source baseline mismatch")
-    if curriculum["status"] != "owner-review-pending":
+    approved = curriculum["status"] == "owner-approved-authored-testing" and bool(curriculum.get("owner_approval", {}).get("instruction"))
+    if curriculum["status"] != "owner-review-pending" and not approved:
         errors.append("Plan status changed without review")
     return errors
 
@@ -84,11 +86,11 @@ def validate_plan(curriculum, coverage, sources):
 
 def render_outline(curriculum):
     concepts = {concept["slug"]: concept for concept in curriculum["concepts"]}
-    lines = ["# Conformity and market access — proposed lesson outline", "",
-             "**English · 30 lessons · 5 modules · 64 concepts. Owner review pending.**", "",
+    lines = ["# Conformity and market access — lesson outline", "",
+             "**English · 30 lessons · 5 modules · 64 concepts. Approved; authored lessons remain in testing.**", "",
              "Self-contained foundations are retaught. Cases compare fictional HR and medical-product releases, "
              "with biometric, critical-infrastructure and public-deployer variations. Each module ends with a practical decision.", "",
-             "This is a syllabus, not imported teaching content. See [review scope and cases](README.md), "
+             "This is the approved syllabus for the editable teaching package. See [review scope and cases](README.md), "
              "[every concept and prerequisite reason](concept-graph.md), [provision coverage](coverage.md) "
              "and [reading limits](source-checks.md).", ""]
     for module in curriculum["modules"]:
@@ -115,11 +117,11 @@ def render_concept(concept, edges):
 def render_graph(curriculum):
     concepts = {concept["slug"]: concept for concept in curriculum["concepts"]}
     lines = ["# Conformity and market access — concept graph for review", "",
-             "**Proposed; owner review pending. No lessons authored or imported for this part.**", "",
+             "**Owner-approved graph; 30 authored lessons remain editable in testing.**", "",
              "`requires` means the learner needs the parent idea to understand the child. `suggests` is useful context "
              "and does not gate learning. Sequence alone creates no gate. The overview is ungated. "
              "Each concept is taught once; intra-lesson dependencies follow the listed concept order. "
-             "Every incoming edge and its proposed reason appears below.", ""]
+             "Every incoming edge and its reviewable reason appears below.", ""]
     for lesson in curriculum["lessons"]:
         lines += [f"## {lesson['id']} — {lesson['title']}", ""]
         for slug in lesson["covers"]:
@@ -129,7 +131,7 @@ def render_graph(curriculum):
 
 def render_coverage(coverage):
     lines = ["# Conformity and market access — provision coverage plan", "",
-             f"Baseline: **{coverage['baseline']}**. All {len(coverage['coverage'])} targets are **planned, not yet taught**.", "",
+             f"Baseline: **{coverage['baseline']}**. All {len(coverage['coverage'])} targets are **authored in testing**, at the bounded extents below.", "",
              "Primary = decision to teach and assess. Context = explain the specified provision without a standalone assessment "
              "for every subpoint. Orientation = bounded summary of a larger topic covered elsewhere. Lookup = learn to find and "
              "verify the applicable source, not a claim of full sector-law instruction. Paragraph mapping is not a legal audit.", "",

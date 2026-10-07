@@ -1,10 +1,10 @@
-# Conformity and market access — proposed lesson outline
+# Conformity and market access — lesson outline
 
-**English · 30 lessons · 5 modules · 64 concepts. Owner review pending.**
+**English · 30 lessons · 5 modules · 64 concepts. Approved; authored lessons remain in testing.**
 
 Self-contained foundations are retaught. Cases compare fictional HR and medical-product releases, with biometric, critical-infrastructure and public-deployer variations. Each module ends with a practical decision.
 
-This is a syllabus, not imported teaching content. See [review scope and cases](README.md), [every concept and prerequisite reason](concept-graph.md), [provision coverage](coverage.md) and [reading limits](source-checks.md).
+This is the approved syllabus for the editable teaching package. See [review scope and cases](README.md), [every concept and prerequisite reason](concept-graph.md), [provision coverage](coverage.md) and [reading limits](source-checks.md).
 
 ## F0 — Define the release and assessment boundary
 

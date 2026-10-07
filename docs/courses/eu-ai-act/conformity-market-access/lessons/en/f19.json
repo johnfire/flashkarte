@@ -1,0 +1,221 @@
+{
+  "module": "Carry out and maintain the assessment",
+  "lesson": {
+    "slug": "f19",
+    "title": "Perform internal control",
+    "summary": "Perform the internal checks rather than substituting a certificate purchase.",
+    "covers": [
+      "internal-control-assessment",
+      "design-file-consistency"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f02",
+        "reason": "The internal-control duty depends on the relevant Annex III points and route."
+      },
+      {
+        "lesson": "f05",
+        "reason": "Internal assessment needs the applicable requirements and supporting evidence. Consistency must be checked against the identified technical records."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Internal control** under Article 43(2) is the AI Act conformity procedure for Annex III points 2–8. Annex VI does not provide for a notified body. Northbridge's stipulated employment route falls here. This does not exclude other legal requirements, voluntary advice or a separate applicable sector route."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(2); Annex VI(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The provider verifies its **quality management system**—the documented processes and responsibilities for achieving and maintaining compliance—against Article 17. It examines technical documentation to assess the relevant Chapter III Section 2 requirements. Calling the process internal does not make it optional or unrecorded."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(2); Annex VI(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Design-file consistency** means the actual design and development process and post-market monitoring agree with the technical documentation. If Northbridge's file promises a human override that the released interface lacks, the inconsistency needs correction and evidence, not merely a signature."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(2); Annex VI(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Record the checks, findings, gaps and corrective decisions. Verify the current legal version: Article 43(6) permits future delegated changes to procedures for Annex III points 2–8, and Article 43(5) permits updates to Annexes VI and VII. The retained baseline is not a promise that the route can never change."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(2); Annex VI(1)–(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "internal-control-assessment"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Does Northbridge's stipulated employment route require an AI Act notified body under Article 43(2)?",
+      "options": [
+        {
+          "blocks": "Annex VI internal control, without that notified-body involvement.",
+          "correct": true,
+          "reason": "Article 43(2) directs points 2–8 to internal control."
+        },
+        {
+          "blocks": "Annex VII solely because recruitment is high-risk.",
+          "correct": false,
+          "reason": "High-risk status does not make every procedure identical."
+        },
+        {
+          "blocks": "No conformity checks because the procedure is internal.",
+          "correct": false,
+          "reason": "Annex VI requires substantive provider checks."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which procedure applies to the stated Annex III employment case?",
+          "options": [
+            {
+              "blocks": "Annex VII solely because recruitment is high-risk.",
+              "correct": false,
+              "reason": "High-risk status does not make every procedure identical."
+            },
+            {
+              "blocks": "No conformity checks because the procedure is internal.",
+              "correct": false,
+              "reason": "Annex VI requires substantive provider checks."
+            },
+            {
+              "blocks": "Annex VI internal control, without that notified-body involvement.",
+              "correct": true,
+              "reason": "Article 43(2) directs points 2–8 to internal control."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "design-file-consistency"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "The file says users can override results, but the interface has no override. What should happen?",
+      "options": [
+        {
+          "blocks": "Ignore it after signing the declaration.",
+          "correct": false,
+          "reason": "A signature does not fix actual behaviour."
+        },
+        {
+          "blocks": "Purchase an unrelated certificate instead.",
+          "correct": false,
+          "reason": "A different certificate does not resolve the missing control."
+        },
+        {
+          "blocks": "Resolve and evidence the design-file inconsistency.",
+          "correct": true,
+          "reason": "Actual design and documented controls must be consistent."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does a mismatch between the assessed file and released behaviour indicate?",
+          "options": [
+            {
+              "blocks": "Purchase an unrelated certificate instead.",
+              "correct": false,
+              "reason": "A different certificate does not resolve the missing control."
+            },
+            {
+              "blocks": "Resolve and evidence the design-file inconsistency.",
+              "correct": true,
+              "reason": "Actual design and documented controls must be consistent."
+            },
+            {
+              "blocks": "Ignore it after signing the declaration.",
+              "correct": false,
+              "reason": "A signature does not fix actual behaviour."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "internal-control-assessment",
+        "design-file-consistency"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-4"
+      ],
+      "prompt": "What makes the internal-control record useful?",
+      "options": [
+        {
+          "blocks": "Only the model supplier's sales brochure.",
+          "correct": false,
+          "reason": "The provider must assess its own system evidence."
+        },
+        {
+          "blocks": "The required checks, evidence, findings and corrective decisions.",
+          "correct": true,
+          "reason": "The procedure evaluates compliance and actual consistency."
+        },
+        {
+          "blocks": "Only a note saying 'internal, therefore exempt'.",
+          "correct": false,
+          "reason": "Internal control is a procedure, not a compliance exemption."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should the provider retain about its internal assessment?",
+          "options": [
+            {
+              "blocks": "The required checks, evidence, findings and corrective decisions.",
+              "correct": true,
+              "reason": "The procedure evaluates compliance and actual consistency."
+            },
+            {
+              "blocks": "Only a note saying 'internal, therefore exempt'.",
+              "correct": false,
+              "reason": "Internal control is a procedure, not a compliance exemption."
+            },
+            {
+              "blocks": "Only the model supplier's sales brochure.",
+              "correct": false,
+              "reason": "The provider must assess its own system evidence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

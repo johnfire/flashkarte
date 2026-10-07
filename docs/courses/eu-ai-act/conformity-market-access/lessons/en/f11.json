@@ -1,0 +1,248 @@
+{
+  "module": "Choose and document conformity evidence",
+  "lesson": {
+    "slug": "f11",
+    "title": "Keep standards and supplier claims current",
+    "summary": "Refresh legal references and limit certificate claims.",
+    "covers": [
+      "standards-update-watch",
+      "international-certificate-boundary"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f07",
+        "reason": "A version watch needs the precise citation and restrictions being monitored. The certificate claim must be evaluated against the actual legal coverage boundary."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **standards update watch** is a practical record of exact versions, citation changes, restrictions, replacement instruments and new applicable procedure rules. It supports a fresh review when relevant evidence or law changes. A standard being developed is not a current cited presumption."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–41; Commission standardisation FAQ",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Under Article 41(4), citation of an overlapping harmonised standard triggers repeal of corresponding common-specification provisions. Recheck both instruments' scope and timing; do not simply replace the name in the dossier and assume the technical coverage is identical."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–41; Commission standardisation FAQ",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "An **international management-system certificate** can be useful evidence but is not automatically an AI Act assessment certificate. The Commission FAQ distinguishes ISO/IEC 42001 from the AI Act quality-management requirements. Check the claimed standard, system boundary and requirement coverage; a supplier assertion is not a completed system assessment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–41; Commission standardisation FAQ",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Northbridge receives an ISO certificate about its supplier's organisation. It should record what that evidence supports and still check its own system-specific requirements and procedure. Keep claim, scope, version, expiry and source separate in the evidence matrix."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–41; Commission standardisation FAQ",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "standards-update-watch"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A new citation replaces overlapping common-specification provisions. What should Northbridge do?",
+      "options": [
+        {
+          "blocks": "Recheck legal effect, coverage and implementation evidence.",
+          "correct": true,
+          "reason": "The replacement may change the evidence boundary."
+        },
+        {
+          "blocks": "Only rename the old supporting document.",
+          "correct": false,
+          "reason": "A renamed document does not establish current coverage."
+        },
+        {
+          "blocks": "Discard every technical record without reviewing it.",
+          "correct": false,
+          "reason": "Existing evidence should be evaluated, not blindly discarded."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does changing the reference name complete the standards update review?",
+          "options": [
+            {
+              "blocks": "Only rename the old supporting document.",
+              "correct": false,
+              "reason": "A renamed document does not establish current coverage."
+            },
+            {
+              "blocks": "Discard every technical record without reviewing it.",
+              "correct": false,
+              "reason": "Existing evidence should be evaluated, not blindly discarded."
+            },
+            {
+              "blocks": "Recheck legal effect, coverage and implementation evidence.",
+              "correct": true,
+              "reason": "The replacement may change the evidence boundary."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "international-certificate-boundary"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "A supplier's ISO/IEC 42001 certificate is offered as complete AI Act conformity. Is that sufficient?",
+      "options": [
+        {
+          "blocks": "Yes; every management certificate is an AI Act certificate.",
+          "correct": false,
+          "reason": "Certification types have different legal and technical scopes."
+        },
+        {
+          "blocks": "Yes; only the certificate's graphic design matters.",
+          "correct": false,
+          "reason": "Visual presentation does not determine conformity."
+        },
+        {
+          "blocks": "No; check its scope and the separate AI Act requirements.",
+          "correct": true,
+          "reason": "The frameworks and covered requirements are not automatically identical."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an international management-system certificate automatically settle the system's AI Act assessment?",
+          "options": [
+            {
+              "blocks": "Yes; only the certificate's graphic design matters.",
+              "correct": false,
+              "reason": "Visual presentation does not determine conformity."
+            },
+            {
+              "blocks": "No; check its scope and the separate AI Act requirements.",
+              "correct": true,
+              "reason": "The frameworks and covered requirements are not automatically identical."
+            },
+            {
+              "blocks": "Yes; every management certificate is an AI Act certificate.",
+              "correct": false,
+              "reason": "Certification types have different legal and technical scopes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "standards-update-watch",
+        "international-certificate-boundary"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "What belongs in Northbridge's supplier-evidence record?",
+      "options": [
+        {
+          "blocks": "Only a screenshot of the certificate logo.",
+          "correct": false,
+          "reason": "A logo cannot establish scope or continuing validity."
+        },
+        {
+          "blocks": "Claim, scope, version, expiry and supporting source.",
+          "correct": true,
+          "reason": "These let the reviewer evaluate the actual boundary."
+        },
+        {
+          "blocks": "A statement that the supplier accepts every obligation.",
+          "correct": false,
+          "reason": "A blanket assertion does not establish transferred system responsibility."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which record best limits the certificate claim?",
+          "options": [
+            {
+              "blocks": "Claim, scope, version, expiry and supporting source.",
+              "correct": true,
+              "reason": "These let the reviewer evaluate the actual boundary."
+            },
+            {
+              "blocks": "A statement that the supplier accepts every obligation.",
+              "correct": false,
+              "reason": "A blanket assertion does not establish transferred system responsibility."
+            },
+            {
+              "blocks": "Only a screenshot of the certificate logo.",
+              "correct": false,
+              "reason": "A logo cannot establish scope or continuing validity."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

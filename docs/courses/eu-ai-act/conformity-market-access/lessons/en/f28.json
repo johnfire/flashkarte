@@ -1,0 +1,257 @@
+{
+  "module": "Complete and defend the release record",
+  "lesson": {
+    "slug": "f28",
+    "title": "Register the right actor and system",
+    "summary": "Distinguish high-risk registration from the documented Article 6(3) exclusion.",
+    "covers": [
+      "registration-role-test",
+      "high-risk-registration-record",
+      "exempt-system-registration-record"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f01",
+        "reason": "The actor test needs the provider responsible for registration."
+      },
+      {
+        "lesson": "f02",
+        "reason": "Registration distinguishes an Annex III system, an Article 6(3) conclusion and other routes."
+      },
+      {
+        "lesson": "f26",
+        "reason": "The high-risk record includes the relevant EU declaration of conformity."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **registration role test** begins with the actor and system. Before placing on the market or putting into service an Annex III high-risk system other than point 2, the provider or, where applicable, representative registers itself and the system in the Article 71 EU database. A private customer is not automatically the provider merely because it buys the system."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(1)–(2); Annex VIII Sections A and B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **high-risk registration record** uses Annex VIII Section A: provider, submitting-person and applicable representative identities; traceable system name/reference; intended purpose; components/functions and information supporting use, including inputs and operating logic; and its market/service/withdrawal/recall status. Do not substitute a model name for the actual system identity."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(1)–(2); Annex VIII Sections A and B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The remaining Section A fields include applicable certificate type/number/expiry and body identity; a scanned certificate where applicable; Member States where the system is or has been placed/made available/put into service; declaration copy; electronic instructions (with the specified authority-use exceptions); and an optional additional-information URL. Some fields are conditional. A missing conditional certificate is not the same as an omitted required declaration."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(1)–(2); Annex VIII Sections A and B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The **exempt-system registration record** is different: a provider concluding that an Annex III-listed system is not high-risk under Article 6(3) must still register itself and the system before release. Section B requires actor/system identities, intended purpose, a short summary of why it meets the Article 6(3) exclusion conditions, and status. This is not a universal registration duty for every minimal-risk AI product."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(1)–(2); Annex VIII Sections A and B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "At this retained baseline, Annex VIII Section B points 7 and 9 are deleted; point 8 remains the status field. Do not copy obsolete templates to recreate deleted requirements. The exclusion still needs the Article 6(4) documented assessment and applicable registration. Profiling natural persons in an Annex III system prevents relying on Article 6(3)'s exclusion."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(1)–(2); Annex VIII Sections A and B",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "registration-role-test"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Who registers Northbridge's ordinary Annex III employment system before release?",
+      "options": [
+        {
+          "blocks": "The provider or applicable representative registers itself and the system.",
+          "correct": true,
+          "reason": "Article 49(1) assigns this pre-release duty to that actor."
+        },
+        {
+          "blocks": "Every private employee using it instead of the provider.",
+          "correct": false,
+          "reason": "That is not the actor allocation in paragraph 1."
+        },
+        {
+          "blocks": "Nobody because software has no physical packaging.",
+          "correct": false,
+          "reason": "The duty is not limited to physical systems."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an ordinary private employer purchase automatically transfer provider registration to the customer?",
+          "options": [
+            {
+              "blocks": "Every private employee using it instead of the provider.",
+              "correct": false,
+              "reason": "That is not the actor allocation in paragraph 1."
+            },
+            {
+              "blocks": "Nobody because software has no physical packaging.",
+              "correct": false,
+              "reason": "The duty is not limited to physical systems."
+            },
+            {
+              "blocks": "The provider or applicable representative registers itself and the system.",
+              "correct": true,
+              "reason": "Article 49(1) assigns this pre-release duty to that actor."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "high-risk-registration-record"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "A registration record identifies only the commercial model. What is missing?",
+      "options": [
+        {
+          "blocks": "Only the marketing team's preferred colour.",
+          "correct": false,
+          "reason": "Colour does not establish the required system record."
+        },
+        {
+          "blocks": "Nothing if the supplier is well known.",
+          "correct": false,
+          "reason": "Supplier fame does not replace required system information."
+        },
+        {
+          "blocks": "The actual AI system and its required purpose, status and evidence fields.",
+          "correct": true,
+          "reason": "Annex VIII Section A concerns the registered system, not only its model."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What identity must the high-risk registration record make traceable?",
+          "options": [
+            {
+              "blocks": "Nothing if the supplier is well known.",
+              "correct": false,
+              "reason": "Supplier fame does not replace required system information."
+            },
+            {
+              "blocks": "The actual AI system and its required purpose, status and evidence fields.",
+              "correct": true,
+              "reason": "Annex VIII Section A concerns the registered system, not only its model."
+            },
+            {
+              "blocks": "Only the marketing team's preferred colour.",
+              "correct": false,
+              "reason": "Colour does not establish the required system record."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "exempt-system-registration-record"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "A provider supports an Article 6(3) exclusion for an Annex III-listed system. Is registration automatically waived?",
+      "options": [
+        {
+          "blocks": "Restore deleted Section B fields from an old template.",
+          "correct": false,
+          "reason": "The current baseline's deletions must be respected."
+        },
+        {
+          "blocks": "Register the provider and system with the Section B record.",
+          "correct": true,
+          "reason": "Article 49(2) retains this duty; it is distinct from ordinary minimal risk."
+        },
+        {
+          "blocks": "No registration or documented assessment is ever needed.",
+          "correct": false,
+          "reason": "The exclusion retains documentation and registration duties."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which registration branch applies to a supported non-high-risk conclusion under Article 6(3)?",
+          "options": [
+            {
+              "blocks": "Register the provider and system with the Section B record.",
+              "correct": true,
+              "reason": "Article 49(2) retains this duty; it is distinct from ordinary minimal risk."
+            },
+            {
+              "blocks": "No registration or documented assessment is ever needed.",
+              "correct": false,
+              "reason": "The exclusion retains documentation and registration duties."
+            },
+            {
+              "blocks": "Restore deleted Section B fields from an old template.",
+              "correct": false,
+              "reason": "The current baseline's deletions must be respected."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

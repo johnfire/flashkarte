@@ -1,0 +1,244 @@
+{
+  "module": "Verify the assessor and its scope",
+  "lesson": {
+    "slug": "f13",
+    "title": "Who may assess this system?",
+    "summary": "Verify the assessor's legal role and exact notified scope.",
+    "covers": [
+      "notifying-authority",
+      "notified-body",
+      "notified-scope-verification"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **notifying authority** is the Member State authority responsible for procedures to assess, designate, notify and monitor conformity assessment bodies. States may use their national accreditation body for assessment and monitoring. The authority supervises assessors; it is not ordinarily the provider's product consultant."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28, 30, 35, 39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 28 requires impartial organisation, notification decisions by competent people different from those assessing the body, confidentiality and adequate expert staff. Authorities may not commercially offer the assessors' activities or competing consultancy. These safeguards support trust in designation; they do not themselves assess your product."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28, 30, 35, 39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **notified body** is a conformity assessor designated and notified for particular tasks and system types. A consultant or ordinary certification business is not automatically a notified body. Article 35 provides a single Commission identification number and an updated public list of bodies and their activities; verify the actual entry and current status."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28, 30, 35, 39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Notified scope** includes the activity, assessment module and system types. Annex XIV supplies product codes, biometric codes and technology-specific codes for applications and notification. A code for one category is not authorisation for every AI system. Match the proposed task to the current entry, not just the body's name."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28, 30, 35, 39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Annex XIV distinguishes Section A product categories, remote biometric identification, biometric categorisation and emotion recognition, plus symbolic, machine-learning, generative/GPAI-based and emerging technology codes. These are lookup categories, not a new high-risk classification test. Article 39 permits specified third-country bodies through a Union agreement and qualifying requirements or equivalent compliance; an overseas certificate alone establishes neither condition."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28, 30, 35, 39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "notifying-authority"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Who designates and monitors conformity assessors?",
+      "options": [
+        {
+          "blocks": "The designated notifying authority.",
+          "correct": true,
+          "reason": "It establishes and carries out the relevant procedures."
+        },
+        {
+          "blocks": "Any provider's commercial sales team.",
+          "correct": false,
+          "reason": "Sales authority does not create legal designation powers."
+        },
+        {
+          "blocks": "Any consultant advertising compliance services.",
+          "correct": false,
+          "reason": "Consultancy is not the notifying-authority role."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which role is responsible for the notification procedures?",
+          "options": [
+            {
+              "blocks": "Any provider's commercial sales team.",
+              "correct": false,
+              "reason": "Sales authority does not create legal designation powers."
+            },
+            {
+              "blocks": "Any consultant advertising compliance services.",
+              "correct": false,
+              "reason": "Consultancy is not the notifying-authority role."
+            },
+            {
+              "blocks": "The designated notifying authority.",
+              "correct": true,
+              "reason": "It establishes and carries out the relevant procedures."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "notified-body"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "A consultant has an impressive certificate logo. What establishes notified-body status?",
+      "options": [
+        {
+          "blocks": "Its popularity among suppliers.",
+          "correct": false,
+          "reason": "Popularity does not establish designation."
+        },
+        {
+          "blocks": "Its guarantee of a successful assessment.",
+          "correct": false,
+          "reason": "A guarantee is not proof of the notified role."
+        },
+        {
+          "blocks": "Its current designation and notified tasks.",
+          "correct": true,
+          "reason": "The legal role depends on notification, not appearance."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What evidence is needed beyond a commercial assessor's branding?",
+          "options": [
+            {
+              "blocks": "Its guarantee of a successful assessment.",
+              "correct": false,
+              "reason": "A guarantee is not proof of the notified role."
+            },
+            {
+              "blocks": "Its current designation and notified tasks.",
+              "correct": true,
+              "reason": "The legal role depends on notification, not appearance."
+            },
+            {
+              "blocks": "Its popularity among suppliers.",
+              "correct": false,
+              "reason": "Popularity does not establish designation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "notified-scope-verification"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "A body is notified for another system category. Can its number alone establish the needed scope?",
+      "options": [
+        {
+          "blocks": "Only its cheapest available price.",
+          "correct": false,
+          "reason": "Price does not define legal assessment scope."
+        },
+        {
+          "blocks": "Task, system codes, current scope and status.",
+          "correct": true,
+          "reason": "The number identifies the body; the entry defines its tasks."
+        },
+        {
+          "blocks": "Only its name and office address.",
+          "correct": false,
+          "reason": "Identity alone does not establish task eligibility."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What must be matched before appointing a numbered body?",
+          "options": [
+            {
+              "blocks": "Task, system codes, current scope and status.",
+              "correct": true,
+              "reason": "The number identifies the body; the entry defines its tasks."
+            },
+            {
+              "blocks": "Only its name and office address.",
+              "correct": false,
+              "reason": "Identity alone does not establish task eligibility."
+            },
+            {
+              "blocks": "Only its cheapest available price.",
+              "correct": false,
+              "reason": "Price does not define legal assessment scope."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

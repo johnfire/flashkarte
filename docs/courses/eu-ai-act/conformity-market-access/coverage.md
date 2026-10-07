@@ -1,6 +1,6 @@
 # Conformity and market access — provision coverage plan
 
-Baseline: **02024R1689-20260727**. All 221 targets are **planned, not yet taught**.
+Baseline: **02024R1689-20260727**. All 221 targets are **authored in testing**, at the bounded extents below.
 
 Primary = decision to teach and assess. Context = explain the specified provision without a standalone assessment for every subpoint. Orientation = bounded summary of a larger topic covered elsewhere. Lookup = learn to find and verify the applicable source, not a claim of full sector-law instruction. Paragraph mapping is not a legal audit.
 

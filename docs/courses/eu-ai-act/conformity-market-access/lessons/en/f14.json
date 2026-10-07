@@ -1,0 +1,233 @@
+{
+  "module": "Verify the assessor and its scope",
+  "lesson": {
+    "slug": "f14",
+    "title": "How designation becomes effective",
+    "summary": "Distinguish designation evidence, effective notification and sector arrangements.",
+    "covers": [
+      "designation-evidence",
+      "notification-objection-window",
+      "unified-sector-designation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f04",
+        "reason": "Unified designation depends on the relevant sector law and assessment scope."
+      },
+      {
+        "lesson": "f13",
+        "reason": "Designation evidence establishes the qualification of the conformity assessor."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An assessor's **designation evidence** includes its requested activities, modules and system types, and an accreditation certificate where available. Existing designation documents are added. Without accreditation, the body must supply documentary evidence for verification and continuing monitoring. Relevant changes require updated documentation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28(8)–(9), 29–30, 32, 43(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 32 gives a body a limited presumption of satisfying Article 31 where it conforms to the relevant cited harmonised standards, to the extent they cover those requirements. This is a presumption about the body, not conformity of a client's AI product."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28(8)–(9), 29–30, 32, 43(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Notification includes full scope and competence details. The **objection window** is two weeks where the notification includes the Article 29(2) accreditation certificate, or two months where it relies on Article 29(3) documentary evidence. The body may act only if no relevant objection is raised within that window. Objections lead to Commission consultation and a decision, not automatic authorisation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28(8)–(9), 29–30, 32, 43(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **unified designation procedure** combines AI Act and Section A sector applications where the relevant sector law provides for it. Authorities cooperate, use existing designation evidence and avoid duplication while checking both frameworks. The sector authority normally serves that procedure unless the State appoints another. A body with several qualifying sector designations applies once for the AI designation; its legal scope must still be checked."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28(8)–(9), 29–30, 32, 43(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "For transitional sector assessment powers, Article 43(3) requires evidenced assessment of Article 31(4), (5), (10) and (11) under the existing notification, plus application for Section 4 designation by 28 January 2028. 'Already notified elsewhere' is not enough. Harbour should retain the specific evidence and current authority record."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28(8)–(9), 29–30, 32, 43(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "designation-evidence"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A body qualifies for an Article 32 presumption. What does it concern?",
+      "options": [
+        {
+          "blocks": "The covered Article 31 requirements for the body.",
+          "correct": true,
+          "reason": "The body and the client's product are different assessment subjects."
+        },
+        {
+          "blocks": "All products the body will ever assess.",
+          "correct": false,
+          "reason": "Product conformity requires its own procedure and evidence."
+        },
+        {
+          "blocks": "Every client's registration automatically.",
+          "correct": false,
+          "reason": "Body qualification does not perform provider registration."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does assessor accreditation or its presumption itself certify a client's system?",
+          "options": [
+            {
+              "blocks": "All products the body will ever assess.",
+              "correct": false,
+              "reason": "Product conformity requires its own procedure and evidence."
+            },
+            {
+              "blocks": "Every client's registration automatically.",
+              "correct": false,
+              "reason": "Body qualification does not perform provider registration."
+            },
+            {
+              "blocks": "The covered Article 31 requirements for the body.",
+              "correct": true,
+              "reason": "The body and the client's product are different assessment subjects."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "notification-objection-window"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Notification relies on Article 29(3) documentary evidence. Which objection window applies?",
+      "options": [
+        {
+          "blocks": "Two weeks regardless of the evidence type.",
+          "correct": false,
+          "reason": "The paragraph distinguishes the evidence routes."
+        },
+        {
+          "blocks": "Immediate effect upon submitting an application.",
+          "correct": false,
+          "reason": "Application alone is not effective notification."
+        },
+        {
+          "blocks": "Two months, with no relevant objection.",
+          "correct": true,
+          "reason": "Article 30(4) specifies that documentary-evidence window."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which period differs from the accredited notification's two weeks?",
+          "options": [
+            {
+              "blocks": "Immediate effect upon submitting an application.",
+              "correct": false,
+              "reason": "Application alone is not effective notification."
+            },
+            {
+              "blocks": "Two months, with no relevant objection.",
+              "correct": true,
+              "reason": "Article 30(4) specifies that documentary-evidence window."
+            },
+            {
+              "blocks": "Two weeks regardless of the evidence type.",
+              "correct": false,
+              "reason": "The paragraph distinguishes the evidence routes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "unified-sector-designation"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Harbour's sector body seeks a combined designation. What should the reviewer check?",
+      "options": [
+        {
+          "blocks": "That any sector notification automatically gives unlimited AI scope.",
+          "correct": false,
+          "reason": "The specific scope and transitional conditions still matter."
+        },
+        {
+          "blocks": "Sector-law availability and evidence satisfying both frameworks.",
+          "correct": true,
+          "reason": "The combined procedure avoids duplication, not compliance checks."
+        },
+        {
+          "blocks": "That combining applications removes all competence checks.",
+          "correct": false,
+          "reason": "Both frameworks' requirements remain relevant."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When is a unified application available, and what remains necessary?",
+          "options": [
+            {
+              "blocks": "Sector-law availability and evidence satisfying both frameworks.",
+              "correct": true,
+              "reason": "The combined procedure avoids duplication, not compliance checks."
+            },
+            {
+              "blocks": "That combining applications removes all competence checks.",
+              "correct": false,
+              "reason": "Both frameworks' requirements remain relevant."
+            },
+            {
+              "blocks": "That any sector notification automatically gives unlimited AI scope.",
+              "correct": false,
+              "reason": "The specific scope and transitional conditions still matter."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

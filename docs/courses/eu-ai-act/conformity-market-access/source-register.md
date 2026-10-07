@@ -74,7 +74,7 @@ Reading: Official English OJ PDF: Article 2, definitions 3(1)–(2), and Article
 
 Version: 2024/2847. Publication: Not recorded. Checked: 2026-10-07.
 
-Lesson targets: F10.
+Lesson targets: F10, F24.
 
 ## MDR — Medical Devices Regulation (EU) 2017/745 (en)
 

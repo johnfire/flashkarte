@@ -13,8 +13,8 @@
       "publication_date": null,
       "file": "../sources/ai-act-2026-07-27-en.pdf",
       "sha256": "1ccd38d1c78482cf2053b70110115adcc5080700acc8bd7bead8cb3579143ccf",
-      "reading_status": "Articles 28\u201349, Annexes IV\u2013VIII and XIV read in full from the retained English consolidation. Targeted bridges reread: Article 2(2), Article 6(1)\u2013(5), Article 3 definitions (12), (19)\u2013(25), Articles 8\u201318, 25, 71, 111(2) and 113. Not a full-law or sector-law audit. Direct consolidation web open timed out; retained source used.",
-      "lessons": ["F01\u2013F30"]
+      "reading_status": "Articles 28–49, Annexes IV–VIII and XIV read in full from the retained English consolidation. Targeted bridges reread: Article 2(2), Article 6(1)–(5), Article 3 definitions (12), (19)–(25), Articles 8–18, 25, 71, 111(2) and 113. Not a full-law or sector-law audit. Direct consolidation web open timed out; retained source used.",
+      "lessons": ["F01–F30"]
     },
     {
       "id": "EC-FRAMEWORK",
@@ -82,9 +82,9 @@
       "language": "en",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847",
       "status": "targeted-incorporated-law-reading",
-      "reading_status": "Official English OJ PDF: Article 2, definitions 3(1)\u2013(2), and Article 12(1)\u2013(4) read. Scope excludes the specified medical-device products; deemed cybersecurity compliance requires product requirements, vulnerability-handling processes and declaration evidence. Paragraphs 2\u20133 preserve distinct assessment/important-critical-product rules. Remaining CRA, later changes and dates need a case-specific version check; no complete CRA conformity conclusion.",
+      "reading_status": "Official English OJ PDF: Article 2, definitions 3(1)–(2), and Article 12(1)–(4) read. Scope excludes the specified medical-device products; deemed cybersecurity compliance requires product requirements, vulnerability-handling processes and declaration evidence. Paragraphs 2–3 preserve distinct assessment/important-critical-product rules. Remaining CRA, later changes and dates need a case-specific version check; no complete CRA conformity conclusion.",
       "checked_on": "2026-10-07",
-      "lessons": ["F10"],
+      "lessons": ["F10", "F24"],
       "publication_date": null,
       "version": "2024/2847"
     },
@@ -106,7 +106,7 @@
       "language": "en",
       "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R0765-20210716",
       "status": "targeted-incorporated-law-reading",
-      "reading_status": "Article 30(1)\u2013(6) read in original and 16 July 2021 consolidated text; responsibility, eligible products, sole conformity marking, misleading-marking prohibition and national enforcement verified. Annex II text checked; no physical-marking artwork audit.",
+      "reading_status": "Article 30(1)–(6) read in original and 16 July 2021 consolidated text; responsibility, eligible products, sole conformity marking, misleading-marking prohibition and national enforcement verified. Annex II text checked; no physical-marking artwork audit.",
       "checked_on": "2026-10-07",
       "lessons": ["F27"],
       "publication_date": null,

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "title": "EU AI Act: Conformity and market access",
   "checked_on": "2026-10-07",
-  "status": "owner-review-pending",
+  "status": "owner-approved-authored-testing",
   "canonical_language": "en",
   "source_baseline": "02024R1689-20260727",
   "modules": [
@@ -1780,5 +1780,10 @@
         }
       ]
     }
-  ]
+  ],
+  "owner_approval": {
+    "approved_on": "2026-10-07",
+    "instruction": "oh and build it",
+    "scope": "All 30 English lessons; publish this conformity course to Community; keep editable for first-student review."
+  }
 }

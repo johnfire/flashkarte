@@ -1,8 +1,8 @@
 # Conformity and market access — concept graph for review
 
-**Proposed; owner review pending. No lessons authored or imported for this part.**
+**Owner-approved graph; 30 authored lessons remain editable in testing.**
 
-`requires` means the learner needs the parent idea to understand the child. `suggests` is useful context and does not gate learning. Sequence alone creates no gate. The overview is ungated. Each concept is taught once; intra-lesson dependencies follow the listed concept order. Every incoming edge and its proposed reason appears below.
+`requires` means the learner needs the parent idea to understand the child. `suggests` is useful context and does not gate learning. Sequence alone creates no gate. The overview is ungated. Each concept is taught once; intra-lesson dependencies follow the listed concept order. Every incoming edge and its reviewable reason appears below.
 
 ## F01 — What exactly are we releasing?
 

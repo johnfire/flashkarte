@@ -1,0 +1,220 @@
+{
+  "module": "Carry out and maintain the assessment",
+  "lesson": {
+    "slug": "f20",
+    "title": "Choose the biometric assessment procedure",
+    "summary": "Choose the lawful biometric procedure from its precise conditions.",
+    "covers": [
+      "biometric-assessment-route",
+      "special-authority-assessor"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f02",
+        "reason": "The special procedure is limited to the relevant Annex III point 1 systems."
+      },
+      {
+        "lesson": "f08",
+        "reason": "The procedure choice depends on applied standards/common-specification coverage and restrictions."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Biometric assessment route:** for Annex III point 1 systems, the provider can choose Annex VI internal control or Annex VII assessment with a notified body when the relevant Article 40 standards or applicable Article 41 common specifications have been applied to demonstrate Section 2 compliance. Always perform the separate Article 5 precheck first."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(1); Annexes VI and VII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Annex VII is required where no harmonised standards and no common specifications are available; where the provider has not applied, or has applied only part of, the harmonised standard; where available common specifications are not applied; or where the relevant standard citation has a restriction on the part concerned. The exercise must specify the evidence facts rather than assume standards exist."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(1); Annexes VI and VII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **special authority assessor** applies where the system is intended for service by law-enforcement, immigration or asylum authorities or Union institutions, bodies, offices or agencies. The Article 74(8) or (9) market surveillance authority, as applicable, acts as notified body for the Annex VII assessment. Outside this specified case, the provider chooses a qualified body within the relevant scope."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(1); Annexes VI and VII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Fictional **Beacon Biometrics** has a stipulated lawful Annex III point 1 use. In variant A, the relevant qualifying standards are fully applied with no relevant restriction; the choice may be available. In variant B, only part is applied; Annex VII is required. This is procedure analysis, not approval of an actual biometric deployment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 43(1); Annexes VI and VII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "biometric-assessment-route"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-4"
+      ],
+      "prompt": "Beacon applies only part of the relevant harmonised standard. Which procedure follows?",
+      "options": [
+        {
+          "blocks": "Annex VII with the applicable notified-body assessment.",
+          "correct": true,
+          "reason": "Partial application is a specified mandatory Annex VII trigger."
+        },
+        {
+          "blocks": "Annex VI automatically because some work was done.",
+          "correct": false,
+          "reason": "Partial application does not satisfy this route condition."
+        },
+        {
+          "blocks": "No assessment because standards are voluntary.",
+          "correct": false,
+          "reason": "Voluntary standards do not remove the procedure requirement."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does partial application preserve the point 1 internal-control choice?",
+          "options": [
+            {
+              "blocks": "Annex VI automatically because some work was done.",
+              "correct": false,
+              "reason": "Partial application does not satisfy this route condition."
+            },
+            {
+              "blocks": "No assessment because standards are voluntary.",
+              "correct": false,
+              "reason": "Voluntary standards do not remove the procedure requirement."
+            },
+            {
+              "blocks": "Annex VII with the applicable notified-body assessment.",
+              "correct": true,
+              "reason": "Partial application is a specified mandatory Annex VII trigger."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "special-authority-assessor"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Beacon is intended for an asylum authority's service under the stated Annex VII route. Who acts as assessor?",
+      "options": [
+        {
+          "blocks": "Any consultant chosen solely for its price.",
+          "correct": false,
+          "reason": "That does not satisfy the specified authority rule."
+        },
+        {
+          "blocks": "The provider's marketing team.",
+          "correct": false,
+          "reason": "The team is not the statutory special assessor."
+        },
+        {
+          "blocks": "The applicable Article 74 market surveillance authority.",
+          "correct": true,
+          "reason": "Article 43(1) specifies that authority acting as notified body."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which special assessor rule applies in the specified authority-use case?",
+          "options": [
+            {
+              "blocks": "The provider's marketing team.",
+              "correct": false,
+              "reason": "The team is not the statutory special assessor."
+            },
+            {
+              "blocks": "The applicable Article 74 market surveillance authority.",
+              "correct": true,
+              "reason": "Article 43(1) specifies that authority acting as notified body."
+            },
+            {
+              "blocks": "Any consultant chosen solely for its price.",
+              "correct": false,
+              "reason": "That does not satisfy the specified authority rule."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "biometric-assessment-route"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-4"
+      ],
+      "prompt": "Variant A fully meets the qualifying standards conditions with no relevant restriction. What may be available?",
+      "options": [
+        {
+          "blocks": "Permission to ignore Article 5.",
+          "correct": false,
+          "reason": "Conformity cannot authorise a prohibited practice."
+        },
+        {
+          "blocks": "A choice between Annex VI and Annex VII.",
+          "correct": true,
+          "reason": "Article 43(1) permits the choice when its conditions are satisfied."
+        },
+        {
+          "blocks": "An exemption from Section 2 requirements.",
+          "correct": false,
+          "reason": "The choice changes procedure, not the applicable requirements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which procedure choice is conditional on the stipulated complete application?",
+          "options": [
+            {
+              "blocks": "A choice between Annex VI and Annex VII.",
+              "correct": true,
+              "reason": "Article 43(1) permits the choice when its conditions are satisfied."
+            },
+            {
+              "blocks": "An exemption from Section 2 requirements.",
+              "correct": false,
+              "reason": "The choice changes procedure, not the applicable requirements."
+            },
+            {
+              "blocks": "Permission to ignore Article 5.",
+              "correct": false,
+              "reason": "Conformity cannot authorise a prohibited practice."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

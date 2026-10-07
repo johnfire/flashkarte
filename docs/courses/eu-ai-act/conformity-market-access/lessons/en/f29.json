@@ -1,0 +1,251 @@
+{
+  "module": "Complete and defend the release record",
+  "lesson": {
+    "slug": "f29",
+    "title": "Choose the public, restricted or national record",
+    "summary": "Select the correct database destination and the separate public-deployer duty.",
+    "covers": [
+      "registration-destination-test",
+      "public-deployer-registration"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f28",
+        "reason": "The destination lookup starts with the applicable actor/system registration duty. The deployer record is distinct from the provider registration duty."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **public-deployer registration** is separate from the provider entry. Public authorities, Union institutions/bodies/offices/agencies, and persons acting on their behalf register themselves, select the system and register its use before use or putting into service an Annex III high-risk system other than point 2. Ordinary private deployers are not all covered by this particular duty."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(3)–(5); Article 71; Annex VIII Section C",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Annex VIII Section C records deployer and submitter identities; the provider's database entry URL; a summary of the Article 27 fundamental-rights impact assessment; and, where applicable, the data-protection impact assessment summary. Check the applicability and actual assessment evidence. Registration does not replace either assessment or the provider's entry."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(3)–(5); Article 71; Annex VIII Section C",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The **registration destination test** distinguishes the ordinary EU record from a secure non-public section. For Annex III points 1, 6 and 7 in law-enforcement, migration, asylum or border-control contexts, the specified reduced fields go in the secure section, accessible only to the Commission and relevant Article 74(8) national authorities. Neither all biometric records nor all public-sector records are automatically restricted."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(3)–(5); Article 71; Annex VIII Section C",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Article 49(4) specifies Section A points 1–10 excluding 6, 8 and 9; Section B points 1–5 and 8–9; Section C points 1–3; and specified Annex IX real-world-test fields. The Annex IX reference is a lookup boundary, not a complete real-world-testing course. Its Section B9 reference persists despite B9's deletion in this baseline: flag interpretation and verify current instructions, rather than invent the deleted field."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(3)–(5); Article 71; Annex VIII Section C",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Annex III point 2 critical-infrastructure systems use registration at national level under Article 49(5). Verify the actual national authority, portal and required process for the country; this lesson has not checked individual national portals. For each release/use, record actor, system, context, destination, date and receipt. A provider's public entry cannot prove a public customer's separate use entry."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 49(3)–(5); Article 71; Annex VIII Section C",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "AI Act Service Desk: Article 49",
+          "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "registration-destination-test"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "A lawful point 1 system is used in the specified asylum context. Which destination rule needs checking?",
+      "options": [
+        {
+          "blocks": "The secure non-public section with its specified fields and access limits.",
+          "correct": true,
+          "reason": "Article 49(4) defines this restricted branch."
+        },
+        {
+          "blocks": "Always publish every confidential field on a marketing website.",
+          "correct": false,
+          "reason": "That ignores the secure-record and access conditions."
+        },
+        {
+          "blocks": "Skip every record because the use is sensitive.",
+          "correct": false,
+          "reason": "Restricted registration is not the absence of registration."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the specified authority-use context change the ordinary EU database destination?",
+          "options": [
+            {
+              "blocks": "Always publish every confidential field on a marketing website.",
+              "correct": false,
+              "reason": "That ignores the secure-record and access conditions."
+            },
+            {
+              "blocks": "Skip every record because the use is sensitive.",
+              "correct": false,
+              "reason": "Restricted registration is not the absence of registration."
+            },
+            {
+              "blocks": "The secure non-public section with its specified fields and access limits.",
+              "correct": true,
+              "reason": "Article 49(4) defines this restricted branch."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "public-deployer-registration"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A public authority buys Northbridge's registered system. What separate duty must it check?",
+      "options": [
+        {
+          "blocks": "None; a provider URL replaces every public-deployer obligation.",
+          "correct": false,
+          "reason": "The two actor records have distinct purposes."
+        },
+        {
+          "blocks": "Every private customer must submit identical public-authority records.",
+          "correct": false,
+          "reason": "The particular paragraph does not cover every ordinary private deployer."
+        },
+        {
+          "blocks": "Its own pre-use registration and applicable assessment summaries.",
+          "correct": true,
+          "reason": "Article 49(3) and Annex VIII Section C concern the deployer's use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the provider's entry necessarily complete the public deployer's record?",
+          "options": [
+            {
+              "blocks": "Every private customer must submit identical public-authority records.",
+              "correct": false,
+              "reason": "The particular paragraph does not cover every ordinary private deployer."
+            },
+            {
+              "blocks": "Its own pre-use registration and applicable assessment summaries.",
+              "correct": true,
+              "reason": "Article 49(3) and Annex VIII Section C concern the deployer's use."
+            },
+            {
+              "blocks": "None; a provider URL replaces every public-deployer obligation.",
+              "correct": false,
+              "reason": "The two actor records have distinct purposes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "registration-destination-test",
+        "public-deployer-registration"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "An Annex III point 2 system needs a registration destination. What follows?",
+      "options": [
+        {
+          "blocks": "An invented deleted B9 field on any website.",
+          "correct": false,
+          "reason": "A stale reference does not supply a destination or revive deleted content."
+        },
+        {
+          "blocks": "The national registration process, verified for the relevant country.",
+          "correct": true,
+          "reason": "Article 49(5) directs this branch to national level."
+        },
+        {
+          "blocks": "Automatically the ordinary public EU entry used by recruitment software.",
+          "correct": false,
+          "reason": "Point 2 has a different specified destination."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Where does the critical-infrastructure registration branch lead?",
+          "options": [
+            {
+              "blocks": "The national registration process, verified for the relevant country.",
+              "correct": true,
+              "reason": "Article 49(5) directs this branch to national level."
+            },
+            {
+              "blocks": "Automatically the ordinary public EU entry used by recruitment software.",
+              "correct": false,
+              "reason": "Point 2 has a different specified destination."
+            },
+            {
+              "blocks": "An invented deleted B9 field on any website.",
+              "correct": false,
+              "reason": "A stale reference does not supply a destination or revive deleted content."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

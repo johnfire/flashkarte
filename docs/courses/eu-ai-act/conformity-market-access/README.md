@@ -1,12 +1,12 @@
 # EU AI Act: Conformity and market access
 
-**Owner-review draft · English · 30 proposed lessons · five modules · 64 concepts.**
+**Community learning draft · English · 30 lessons · five modules · 64 concepts.**
 
-For Chris's general reviews of AI in commercial products. The course will teach how to identify the applicable assessment procedure, assemble the supporting evidence, and judge whether a release dossier is complete. It will use practical decisions and explain the legal terms as they appear. Prior enrolment in the other course parts is not required.
+For Chris's general reviews of AI in commercial products. The course teaches how to identify the applicable assessment procedure, assemble the supporting evidence, and judge whether a release dossier is complete. It uses practical decisions and explain the legal terms as they appear. Prior enrolment in the other course parts is not required.
 
-The review package is built. Lesson screens, questions, retests and platform imports have not been authored for this part. The existing three English course parts still contain 100 authored lessons.
+[Start course 64](https://learnwohl.app/learn/3b2e4726-6ce2-40e3-8c97-0b66b0b88082). All 30 lessons are now shared to Community and remain editable in testing. The course contains **137 sourced reading screens, 90 questions and 90 reworded retests**, with explanations for every choice. Chris's learning progress was still not started at publication. Across the four English parts, **130 lessons** are authored.
 
-Start with the [lesson outline](lesson-outline.md). The [concept graph](concept-graph.md) shows every proposed prerequisite and its reason. The [coverage plan](coverage.md) maps 221 targets to lessons and distinguishes assessed decisions from context and source lookups. The [source register](source-register.md) and [reading notes](source-checks.md) record what has actually been checked.
+Start with the [lesson outline](lesson-outline.md). The [concept graph](concept-graph.md) shows every reviewable prerequisite and its reason. The [coverage plan](coverage.md) maps 221 targets to lessons and distinguishes assessed decisions from context and source lookups. The [source register](source-register.md) and [reading notes](source-checks.md) record what has actually been checked.
 
 ## What you should be able to decide
 
@@ -19,15 +19,15 @@ Start with the [lesson outline](lesson-outline.md). The [concept graph](concept-
 
 ## Five modules
 
-| Module                                     | Decision practised                                                    | Proposed lessons |
-| ------------------------------------------ | --------------------------------------------------------------------- | ---------------- |
-| Define the release and assessment boundary | What is being released, by whom, under which route and date?          | F01–F06          |
-| Choose and document conformity evidence    | What does the evidence prove, and where are its gaps?                 | F07–F12          |
-| Verify the assessor and its scope          | Is this body qualified and independent for this task?                 | F13–F18          |
-| Carry out and maintain the assessment      | Which procedure applies, and what happens when the system changes?    | F19–F24          |
-| Complete and defend the release record     | Are the declaration, marking and registration supported and complete? | F25–F30          |
+| Module                                     | Decision practised                                                    | Lessons |
+| ------------------------------------------ | --------------------------------------------------------------------- | ------- |
+| Define the release and assessment boundary | What is being released, by whom, under which route and date?          | F01–F06 |
+| Choose and document conformity evidence    | What does the evidence prove, and where are its gaps?                 | F07–F12 |
+| Verify the assessor and its scope          | Is this body qualified and independent for this task?                 | F13–F18 |
+| Carry out and maintain the assessment      | Which procedure applies, and what happens when the system changes?    | F19–F24 |
+| Complete and defend the release record     | Are the declaration, marking and registration supported and complete? | F25–F30 |
 
-Each module ends in a worked decision. Lessons are planned for four to ten screens and three to five questions, each with explained distractors, a differently worded retest and references back to the relevant teaching. Final screen and question counts depend on approved lesson boundaries.
+Each module ends in a worked decision. Each lesson has four to ten screens and three questions, with explained distractors, a differently worded retest and references back to the relevant teaching. Wrong answers return the learner to the relevant screens before the retest.
 
 ## Worked cases
 
@@ -45,13 +45,15 @@ The primary scope is Articles 28–49 and Annexes IV–VIII and XIV. Foundations
 
 The source baseline is the retained English consolidation of **27 July 2026**, checked on **7 October 2026**. The course distinguishes the dates for Chapter III Sections 4 and 5 from the later Section 1–3 dates. Applying those interacting provisions to an actual release during a transition remains a dated interpretation question, not an automatic postponement of every duty.
 
-The registration plan flags deleted Annex VIII Section B points 7 and 9, including the remaining Article 49 reference to B9. It will teach recording that inconsistency and seeking interpretation rather than supplying a deleted field from an older version.
+The registration lessons flag deleted Annex VIII Section B points 7 and 9, including the remaining Article 49 reference to B9. They teach recording that inconsistency and seeking interpretation rather than supplying a deleted field from an older version.
 
-## Review checkpoint and next build
+## Approval and release evidence
 
-The [course authoring guide](../../../course-authoring-guide.md) requires the owner to review the concept graph and approve the lesson plan before teaching content is written: “Check the plan … Then show the owner.” Chris's review should focus on the lesson boundaries, the necessary prerequisites and whether the worked cases will be useful in general commercial-product reviews.
+Chris approved the reviewed concept graph and syllabus, then requested building all lessons and sharing this course to Community on 7 October 2026. Lessons were imported through the AI-attributed course tools; no lessons were finalised. The owner can review by learning and request corrections.
 
-After that checkpoint, build the English teaching content, validate sources and assessments, import through the attributed course tools in private editable testing, lint the graph, read back every import, and test the complete learning path against an isolated database. Chris will be the first student. Keep lessons in testing unless Chris explicitly requests finalisation.
+The [live verification record](live-verification.json) confirms all 30 lessons, 137 screens, 90 primary questions and 90 retests. Readback matched text, formatting, sources, answers, explanations, concepts, prerequisite reasons, modules and the 95-edge graph. Every screen is AI-attributed; graph and lesson lint reported no issues. After sharing, the course was public, non-official and all lessons remained in testing.
+
+An isolated PostgreSQL integration test imported every fixture, walked all 30 lessons, checked wrong-answer remediation and a reworded retest, then verified Community catalogue visibility and enrolment by a separate learner with independent progress. This did not change Chris's live learning progress. Browser/device learning was not exercised in this content release. Chris's first learning review and specialist legal review remain outstanding.
 
 ## Local checks
 
@@ -59,7 +61,8 @@ From the repository root:
 
 ```bash
 python3 docs/courses/eu-ai-act/conformity_review.py --check
+python3 docs/courses/eu-ai-act/conformity_lessons.py --check
 python3 -m unittest discover -s docs/courses/eu-ai-act -p 'test_*.py'
 ```
 
-The canonical JSON registers drive the readable outline, graph, coverage and source documents. CI checks missing provisions, graph errors, unsourced concepts, changed source files and stale generated documents. These checks establish package consistency; legal correctness and teaching effectiveness still require source review and learning through the course.
+The canonical JSON registers drive the readable outline, graph, coverage and source documents. CI checks missing provisions, graph errors, unsourced concepts, changed source files and stale generated documents. The lesson builder also checks exact fixtures, source attachment, assessment coverage, remediation and equivalent retests. These checks establish package consistency; legal correctness and teaching effectiveness still require source review and learning through the course.

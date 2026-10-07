@@ -71,6 +71,7 @@ jobs:
           python3 docs/courses/eu-ai-act/render_review.py --check
           python3 docs/courses/eu-ai-act/article_50_review.py --check
           python3 docs/courses/eu-ai-act/conformity_review.py --check
+          python3 docs/courses/eu-ai-act/conformity_lessons.py --check
       - name: Build server
         run: npm run build --workspace=packages/server
       - name: Migration smoke test (all migrations against real Postgres)

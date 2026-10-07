@@ -1,0 +1,236 @@
+{
+  "module": "Choose and document conformity evidence",
+  "lesson": {
+    "slug": "f08",
+    "title": "Map covered requirements and remaining gaps",
+    "summary": "Use standards where supported and explain other compliance solutions.",
+    "covers": [
+      "standard-coverage-matrix",
+      "alternative-conformity-evidence"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f05",
+        "reason": "A standard cannot be mapped to coverage without the applicable requirements."
+      },
+      {
+        "lesson": "f07",
+        "reason": "A gap analysis needs the boundary of the presumption being claimed."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **standard coverage matrix** compares each applicable requirement with the parts of a cited standard used and the evidence of actual conformity. Mark uncovered requirements explicitly. A citation alone does not show that your implementation conforms to the cited standard."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40(1); Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Alternative conformity evidence** can demonstrate an applicable requirement outside a standards presumption. Annex IV(7) asks for applied standards and, where they are not applied, detailed descriptions of the solutions adopted, including other relevant technical specifications. Avoid claiming that voluntary standards are the only possible evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40(1); Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Northbridge uses Standard S for logging but has no cited coverage for oversight. Its alternative record should explain the oversight mechanism, the responsible people, how intervention works, relevant tests and results. This is a practical example of evidence, not an exhaustive statutory test protocol."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40(1); Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Evidence adequacy and assessment-route choice are separate checks. Another procedure may impose standards-dependent route conditions. A documented alternative solution does not automatically preserve an internal-control option for a biometric system or product-law route; check that specific procedure."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40(1); Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "standard-coverage-matrix"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "A matrix says 'standard bought', with no implementation evidence. What is unresolved?",
+      "options": [
+        {
+          "blocks": "Actual application and covered-requirement evidence.",
+          "correct": true,
+          "reason": "Ownership of a document does not demonstrate implementation."
+        },
+        {
+          "blocks": "Only the purchase invoice's visual format.",
+          "correct": false,
+          "reason": "Invoice design cannot establish the technical result."
+        },
+        {
+          "blocks": "Nothing once the citation is known.",
+          "correct": false,
+          "reason": "Citation and actual conformity are distinct conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does purchasing the cited standard demonstrate conformity to it?",
+          "options": [
+            {
+              "blocks": "Only the purchase invoice's visual format.",
+              "correct": false,
+              "reason": "Invoice design cannot establish the technical result."
+            },
+            {
+              "blocks": "Nothing once the citation is known.",
+              "correct": false,
+              "reason": "Citation and actual conformity are distinct conditions."
+            },
+            {
+              "blocks": "Actual application and covered-requirement evidence.",
+              "correct": true,
+              "reason": "Ownership of a document does not demonstrate implementation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "alternative-conformity-evidence"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "No cited standard covers Northbridge's oversight requirement. What should it provide?",
+      "options": [
+        {
+          "blocks": "A claim that the requirement therefore disappears.",
+          "correct": false,
+          "reason": "The absence of a presumption does not remove the requirement."
+        },
+        {
+          "blocks": "A promise to buy any standard with 'AI' in its title.",
+          "correct": false,
+          "reason": "A title does not establish scope or conformity."
+        },
+        {
+          "blocks": "A detailed solution and evidence demonstrating the requirement.",
+          "correct": true,
+          "reason": "Annex IV allows explanations of other compliance solutions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How can a requirement outside a presumption be supported?",
+          "options": [
+            {
+              "blocks": "A promise to buy any standard with 'AI' in its title.",
+              "correct": false,
+              "reason": "A title does not establish scope or conformity."
+            },
+            {
+              "blocks": "A detailed solution and evidence demonstrating the requirement.",
+              "correct": true,
+              "reason": "Annex IV allows explanations of other compliance solutions."
+            },
+            {
+              "blocks": "A claim that the requirement therefore disappears.",
+              "correct": false,
+              "reason": "The absence of a presumption does not remove the requirement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "standard-coverage-matrix",
+        "alternative-conformity-evidence"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "A biometric provider has alternative evidence but no applied qualifying standards. What still needs checking?",
+      "options": [
+        {
+          "blocks": "Only whether the supplier calls it certified.",
+          "correct": false,
+          "reason": "A label does not resolve the statutory route conditions."
+        },
+        {
+          "blocks": "The specific assessment procedure's route conditions.",
+          "correct": true,
+          "reason": "Evidence and eligibility for a procedure are separate questions."
+        },
+        {
+          "blocks": "Nothing; alternatives always permit internal control.",
+          "correct": false,
+          "reason": "Biometric route conditions can require a notified-body procedure."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an alternative solution by itself preserve every procedure choice?",
+          "options": [
+            {
+              "blocks": "The specific assessment procedure's route conditions.",
+              "correct": true,
+              "reason": "Evidence and eligibility for a procedure are separate questions."
+            },
+            {
+              "blocks": "Nothing; alternatives always permit internal control.",
+              "correct": false,
+              "reason": "Biometric route conditions can require a notified-body procedure."
+            },
+            {
+              "blocks": "Only whether the supplier calls it certified.",
+              "correct": false,
+              "reason": "A label does not resolve the statutory route conditions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

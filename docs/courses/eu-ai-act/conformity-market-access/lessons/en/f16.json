@@ -1,0 +1,219 @@
+{
+  "module": "Verify the assessor and its scope",
+  "lesson": {
+    "slug": "f16",
+    "title": "Control subcontracting and proportionality",
+    "summary": "Control outsourced assessment without reducing required protection.",
+    "covers": [
+      "subcontracting-accountability",
+      "proportionate-assessment"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f05",
+        "reason": "Proportionate effort cannot remove a requirement from the evidence matrix."
+      },
+      {
+        "lesson": "f15",
+        "reason": "Subcontracting must preserve the required independence. The body remains accountable for subcontractor qualifications."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Subcontracting accountability** stays with the notified body. It must ensure a subsidiary or subcontractor meets Article 31 requirements and inform the notifying authority. It retains full responsibility for the tasks; outsourcing does not create a responsibility gap."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 31(8), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The provider must agree to subcontracted/subsidiary activities. The body makes its subsidiary list public and retains qualification and work documents for the notifying authority for five years after subcontracting ends. A provider should know who performs the assessment and under which controls."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 31(8), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Proportionate assessment** avoids unnecessary burdens and accounts for size, sector, structure and complexity, especially micro- and small-enterprise costs. Article 34 still requires the necessary rigour and protection. Proportionality is not an exemption from an applicable requirement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 31(8), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Harbour agrees to a qualified specialist examining a defined dataset under the body's responsibility. That differs from transferring the assessment to an unidentified firm without consent. A shorter evidence package can be appropriate only when it still establishes the required substance."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 31(8), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "subcontracting-accountability"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "A subcontractor performs an assessment task. Who retains full responsibility?",
+      "options": [
+        {
+          "blocks": "The notified body.",
+          "correct": true,
+          "reason": "Article 33 preserves its full task responsibility."
+        },
+        {
+          "blocks": "Only the provider's sales representative.",
+          "correct": false,
+          "reason": "Sales staff do not replace the body's statutory responsibility."
+        },
+        {
+          "blocks": "Nobody once the task is outsourced.",
+          "correct": false,
+          "reason": "Outsourcing cannot create that accountability gap."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does subcontracting transfer the notified body's accountability away?",
+          "options": [
+            {
+              "blocks": "Only the provider's sales representative.",
+              "correct": false,
+              "reason": "Sales staff do not replace the body's statutory responsibility."
+            },
+            {
+              "blocks": "Nobody once the task is outsourced.",
+              "correct": false,
+              "reason": "Outsourcing cannot create that accountability gap."
+            },
+            {
+              "blocks": "The notified body.",
+              "correct": true,
+              "reason": "Article 33 preserves its full task responsibility."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "subcontracting-accountability"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-4"
+      ],
+      "prompt": "Harbour discovers undisclosed outsourced assessment without its agreement. What is missing?",
+      "options": [
+        {
+          "blocks": "Only a change to the provider's logo.",
+          "correct": false,
+          "reason": "Branding does not establish consent or qualification."
+        },
+        {
+          "blocks": "A promise that the supplier will never use specialists.",
+          "correct": false,
+          "reason": "Qualified, agreed subcontracting can be permitted."
+        },
+        {
+          "blocks": "Provider agreement and the specified qualification controls.",
+          "correct": true,
+          "reason": "Article 33 requires these conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What condition is required for subcontracted activities?",
+          "options": [
+            {
+              "blocks": "A promise that the supplier will never use specialists.",
+              "correct": false,
+              "reason": "Qualified, agreed subcontracting can be permitted."
+            },
+            {
+              "blocks": "Provider agreement and the specified qualification controls.",
+              "correct": true,
+              "reason": "Article 33 requires these conditions."
+            },
+            {
+              "blocks": "Only a change to the provider's logo.",
+              "correct": false,
+              "reason": "Branding does not establish consent or qualification."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "proportionate-assessment"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "A small provider asks to omit a necessary safety test merely to save cost. What does proportionality allow?",
+      "options": [
+        {
+          "blocks": "Always require identical paperwork for every system.",
+          "correct": false,
+          "reason": "The provision requires attention to relevant size and complexity."
+        },
+        {
+          "blocks": "Adapt the effort while preserving required rigour and protection.",
+          "correct": true,
+          "reason": "Article 34 requires both proportionality and the protection level."
+        },
+        {
+          "blocks": "Omit any requirement that costs money.",
+          "correct": false,
+          "reason": "Cost alone does not remove applicable requirements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does reducing unnecessary burden mean lowering required protection?",
+          "options": [
+            {
+              "blocks": "Adapt the effort while preserving required rigour and protection.",
+              "correct": true,
+              "reason": "Article 34 requires both proportionality and the protection level."
+            },
+            {
+              "blocks": "Omit any requirement that costs money.",
+              "correct": false,
+              "reason": "Cost alone does not remove applicable requirements."
+            },
+            {
+              "blocks": "Always require identical paperwork for every system.",
+              "correct": false,
+              "reason": "The provision requires attention to relevant size and complexity."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

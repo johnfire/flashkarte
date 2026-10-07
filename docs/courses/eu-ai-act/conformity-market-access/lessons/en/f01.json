@@ -1,0 +1,210 @@
+{
+  "module": "Define the release and assessment boundary",
+  "lesson": {
+    "slug": "f01",
+    "title": "What exactly are we releasing?",
+    "summary": "Define the release before evaluating its paperwork.",
+    "covers": [
+      "market-access-map",
+      "assessed-system-identity",
+      "provider-release-duty"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An **assessment** checks whether a specified system meets applicable requirements. A **declaration** is the provider's signed statement of conformity. **CE marking** displays conformity under applicable Union legislation. **Registration** records the actor and system. These serve different purposes; one does not replace the others."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(12), 3(19)–(25), 16(f)–(i), 43–49",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **assessed system** needs an identity: intended purpose, version, operating boundaries, model and software dependencies, input/output interfaces and release form. Intended purpose means the use the provider specifies, including its supplied instructions and promotional statements. A certificate for a different version or purpose may not support this release."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(12), 3(19)–(25), 16(f)–(i), 43–49",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The **provider** develops a system, or has it developed, and places it on the market or puts it into service under its own name or trademark. Putting into service includes first use for the provider's own purposes in the Union. Buying a model does not transfer responsibility for your own branded system to its model supplier."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(12), 3(19)–(25), 16(f)–(i), 43–49",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Our fictional product **Northbridge Hiring** ranks applicants for an employer's shortlist. Its purpose materially influences recruitment decisions. **Harbour Diagnostics** is a fictional medical product whose case stipulates Medical Devices Regulation coverage and sector-required third-party assessment. Real medical-device classification is a separate question."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(12), 3(19)–(25), 16(f)–(i), 43–49",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Start a release record: system name and version; intended purpose; responsible provider; intended users; release date and countries; applicable laws; unresolved facts. This is a practical working record, not a prescribed statutory form. The case exercises will add evidence before making a release recommendation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(3), 3(12), 3(19)–(25), 16(f)–(i), 43–49",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": ["market-access-map"],
+      "teaches": ["screen-1"],
+      "prompt": "A supplier says its registration number proves conformity. What should you conclude?",
+      "options": [
+        {
+          "blocks": "Registration alone does not establish conformity.",
+          "correct": true,
+          "reason": "It records information; the other release steps have separate functions."
+        },
+        {
+          "blocks": "Registration replaces the conformity assessment.",
+          "correct": false,
+          "reason": "A database entry does not perform the assessment."
+        },
+        {
+          "blocks": "Registration transfers responsibility to the database operator.",
+          "correct": false,
+          "reason": "The provider remains responsible for the applicable obligations."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a database entry replace the assessment and declaration?",
+          "options": [
+            {
+              "blocks": "Registration replaces the conformity assessment.",
+              "correct": false,
+              "reason": "A database entry does not perform the assessment."
+            },
+            {
+              "blocks": "Registration transfers responsibility to the database operator.",
+              "correct": false,
+              "reason": "The provider remains responsible for the applicable obligations."
+            },
+            {
+              "blocks": "Registration alone does not establish conformity.",
+              "correct": true,
+              "reason": "It records information; the other release steps have separate functions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["assessed-system-identity"],
+      "teaches": ["screen-2"],
+      "prompt": "Northbridge changes the product's purpose but retains an old certificate. What is the first check?",
+      "options": [
+        {
+          "blocks": "Match only the product's marketing name.",
+          "correct": false,
+          "reason": "The same name can conceal a different purpose or version."
+        },
+        {
+          "blocks": "Match only the model supplier's name.",
+          "correct": false,
+          "reason": "The model is only one dependency of the assessed system."
+        },
+        {
+          "blocks": "Match purpose, version and boundaries to the assessed system.",
+          "correct": true,
+          "reason": "Evidence must concern the system being released."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which record must be matched before relying on earlier assessment evidence?",
+          "options": [
+            {
+              "blocks": "Match only the model supplier's name.",
+              "correct": false,
+              "reason": "The model is only one dependency of the assessed system."
+            },
+            {
+              "blocks": "Match purpose, version and boundaries to the assessed system.",
+              "correct": true,
+              "reason": "Evidence must concern the system being released."
+            },
+            {
+              "blocks": "Match only the product's marketing name.",
+              "correct": false,
+              "reason": "The same name can conceal a different purpose or version."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": ["provider-release-duty"],
+      "teaches": ["screen-3"],
+      "prompt": "A firm commissions a system and first uses it under its own name internally. Can it have provider duties?",
+      "options": [
+        {
+          "blocks": "No; commissioning always makes the model supplier the provider.",
+          "correct": false,
+          "reason": "Developing or having developed under one's own name can establish provider status."
+        },
+        {
+          "blocks": "Yes; own-use putting into service can engage provider duties.",
+          "correct": true,
+          "reason": "Provider status is not restricted to sales to another person."
+        },
+        {
+          "blocks": "No; only selling a system can create provider duties.",
+          "correct": false,
+          "reason": "The definition also includes putting into service."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can keeping a branded system for the firm's own first use engage provider duties?",
+          "options": [
+            {
+              "blocks": "Yes; own-use putting into service can engage provider duties.",
+              "correct": true,
+              "reason": "Provider status is not restricted to sales to another person."
+            },
+            {
+              "blocks": "No; only selling a system can create provider duties.",
+              "correct": false,
+              "reason": "The definition also includes putting into service."
+            },
+            {
+              "blocks": "No; commissioning always makes the model supplier the provider.",
+              "correct": false,
+              "reason": "Developing or having developed under one's own name can establish provider status."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

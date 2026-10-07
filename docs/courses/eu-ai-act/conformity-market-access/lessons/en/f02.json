@@ -1,0 +1,228 @@
+{
+  "module": "Define the release and assessment boundary",
+  "lesson": {
+    "slug": "f02",
+    "title": "Separate permission from high-risk classification",
+    "summary": "Separate classification, applicable scope and prohibited use.",
+    "covers": [
+      "high-risk-route",
+      "prohibited-use-precheck"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f01",
+        "reason": "Classification attaches to the defined system and intended purpose. The prohibited-practice check needs the actual intended function and context."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**High-risk classification** identifies a legal route; it is not permission to use the system. Check Article 5 prohibitions separately, including each prohibition's conditions and exceptions. A conformity procedure cannot make a prohibited practice lawful."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 5, 6(1)–(4), 43; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 6(1) concerns a product or safety component covered by an Annex I law and subject to the specified third-party assessment condition. For **Annex I Section A**, the relevant product-law assessment route matters. Section A is a defined list, not every law regulating products."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 5, 6(1)–(4), 43; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "For **Annex I Section B**, Article 2(2) limits which AI Act provisions apply; this course's ordinary Chapter III conformity pathway does not automatically apply. Record the particular sector regime rather than sending every Annex I product through the same checklist."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 5, 6(1)–(4), 43; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Article 6(2) covers the specified uses in **Annex III**. Article 6(3) can exclude certain listed systems when they pose no significant risk, including by not materially influencing decision-making, and meet a listed condition. Profiling natural persons remains high-risk. Providers relying on exclusion must document it and meet the relevant registration duty."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 5, 6(1)–(4), 43; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Northbridge's case stipulates material influence on applicant shortlisting, an Annex III employment use. Harbour's case stipulates a qualifying Section A medical-product route. Neither case determines the status of your actual product. Record unknown facts rather than treating an industry label as a completed classification."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 2(2), 5, 6(1)–(4), 43; Annexes I and III",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "high-risk-route"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "A product is listed in Annex I Section B. Which review is appropriate?",
+      "options": [
+        {
+          "blocks": "Check the limited AI Act scope and the sector regime.",
+          "correct": true,
+          "reason": "Article 2(2) gives Section B a distinct boundary."
+        },
+        {
+          "blocks": "Apply the Section A assessment route automatically.",
+          "correct": false,
+          "reason": "Section A and Section B have different scope rules."
+        },
+        {
+          "blocks": "Ignore its sector law because AI is included.",
+          "correct": false,
+          "reason": "AI does not displace the relevant sector framework."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Should every Annex I product automatically follow the Section A assessment route?",
+          "options": [
+            {
+              "blocks": "Apply the Section A assessment route automatically.",
+              "correct": false,
+              "reason": "Section A and Section B have different scope rules."
+            },
+            {
+              "blocks": "Ignore its sector law because AI is included.",
+              "correct": false,
+              "reason": "AI does not displace the relevant sector framework."
+            },
+            {
+              "blocks": "Check the limited AI Act scope and the sector regime.",
+              "correct": true,
+              "reason": "Article 2(2) gives Section B a distinct boundary."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "prohibited-use-precheck"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "An Article 5 practice is prohibited on the stated facts. Can a favourable assessment authorise it?",
+      "options": [
+        {
+          "blocks": "Yes, if the certificate is independently issued.",
+          "correct": false,
+          "reason": "Independence does not create an exception to Article 5."
+        },
+        {
+          "blocks": "Yes, once the system is registered.",
+          "correct": false,
+          "reason": "Registration cannot override the prohibition."
+        },
+        {
+          "blocks": "No; assessment does not override the prohibition.",
+          "correct": true,
+          "reason": "Classification and conformity do not supply permission to breach Article 5."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a certificate cure an otherwise prohibited use?",
+          "options": [
+            {
+              "blocks": "Yes, once the system is registered.",
+              "correct": false,
+              "reason": "Registration cannot override the prohibition."
+            },
+            {
+              "blocks": "No; assessment does not override the prohibition.",
+              "correct": true,
+              "reason": "Classification and conformity do not supply permission to breach Article 5."
+            },
+            {
+              "blocks": "Yes, if the certificate is independently issued.",
+              "correct": false,
+              "reason": "Independence does not create an exception to Article 5."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "high-risk-route"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "The Northbridge case materially influences applicant shortlists. What should the reviewer avoid?",
+      "options": [
+        {
+          "blocks": "Recording the degree of influence on decisions.",
+          "correct": false,
+          "reason": "That fact is needed for the Article 6(3) analysis."
+        },
+        {
+          "blocks": "Treating human sign-off alone as an Article 6(3) exclusion.",
+          "correct": true,
+          "reason": "The stipulated material influence requires a supported classification analysis."
+        },
+        {
+          "blocks": "Checking the specified recruitment use.",
+          "correct": false,
+          "reason": "Intended use is central to Annex III classification."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the case be excluded from high-risk status just because a human signs the final decision?",
+          "options": [
+            {
+              "blocks": "Treating human sign-off alone as an Article 6(3) exclusion.",
+              "correct": true,
+              "reason": "The stipulated material influence requires a supported classification analysis."
+            },
+            {
+              "blocks": "Checking the specified recruitment use.",
+              "correct": false,
+              "reason": "Intended use is central to Annex III classification."
+            },
+            {
+              "blocks": "Recording the degree of influence on decisions.",
+              "correct": false,
+              "reason": "That fact is needed for the Article 6(3) analysis."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

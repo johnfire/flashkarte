@@ -1,0 +1,233 @@
+{
+  "module": "Complete and defend the release record",
+  "lesson": {
+    "slug": "f25",
+    "title": "Recognise a genuine exceptional authorisation",
+    "summary": "Separate a lawful exceptional authorisation from a commercial deadline.",
+    "covers": [
+      "conformity-derogation-authorisation",
+      "emergency-use-boundary",
+      "sector-derogation-boundary"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f02",
+        "reason": "The request is a derogation from the otherwise applicable high-risk assessment procedure."
+      },
+      {
+        "lesson": "f04",
+        "reason": "Annex I Section A products use their relevant sector-law derogations."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **conformity derogation authorisation** is exceptional permission from the market surveillance authority following a duly justified request. It concerns public security, protection of life and health, environmental protection or protection of key industrial and infrastructural assets. It is limited to the Member State concerned and a limited period while the conformity procedure is completed without undue delay."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 46(1)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The authority must conclude that Chapter III Section 2 requirements are met. The derogation changes the ordinary prior procedure; it does not waive those substantive requirements or legalise an Article 5 prohibited practice. A provider's launch deadline or customer contract is not itself an authorisation."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 46(1)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The **emergency-use boundary** is narrower still: a duly justified urgency concerning exceptional public-security threats, or a specific substantial imminent threat to life or physical safety. Law-enforcement or civil-protection authorities may act before authorisation, but must request it during or after use without undue delay. Refusal requires immediate discontinuation and discarding all results and outputs of that use."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 46(1)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Authorities notify the Commission and other Member States of the relevant authorisation, excluding sensitive operational data about law-enforcement activities. If no objection is raised within fifteen calendar days after receipt, the authorisation is deemed justified. Following objections and consultation the Commission decides whether it is justified; an unjustified authorisation must be withdrawn. This is oversight, not an automatic provider self-approval after fifteen days."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 46(1)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The **sector derogation boundary** matters: for Annex I Section A products, Article 46(7) allows only the derogations from conformity assessment provided by the applicable sector law. Harbour cannot substitute this AI Act exceptional route for its sector-law conditions. Identify the actual law, authority, legal basis, territorial/time limits and decision in the evidence record."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 46(1)–(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "conformity-derogation-authorisation"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A startup needs to ship before a trade fair. Does that itself authorise a conformity derogation?",
+      "options": [
+        {
+          "blocks": "No; an exceptional legal basis and authority authorisation are needed.",
+          "correct": true,
+          "reason": "The specified purposes, conditions and authority decision control the route."
+        },
+        {
+          "blocks": "Yes; a deadline is enough if the provider promises later testing.",
+          "correct": false,
+          "reason": "A commercial promise does not establish this exceptional authorisation."
+        },
+        {
+          "blocks": "Yes; substantive safety requirements can then be ignored.",
+          "correct": false,
+          "reason": "Section 2 requirements remain necessary."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a commercial delivery deadline replace the Article 46 authority decision?",
+          "options": [
+            {
+              "blocks": "Yes; a deadline is enough if the provider promises later testing.",
+              "correct": false,
+              "reason": "A commercial promise does not establish this exceptional authorisation."
+            },
+            {
+              "blocks": "Yes; substantive safety requirements can then be ignored.",
+              "correct": false,
+              "reason": "Section 2 requirements remain necessary."
+            },
+            {
+              "blocks": "No; an exceptional legal basis and authority authorisation are needed.",
+              "correct": true,
+              "reason": "The specified purposes, conditions and authority decision control the route."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "emergency-use-boundary"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "A civil-protection authority's urgent use is refused authorisation. What follows?",
+      "options": [
+        {
+          "blocks": "Continue until the next scheduled release.",
+          "correct": false,
+          "reason": "Refusal requires immediate discontinuation."
+        },
+        {
+          "blocks": "Keep relying on the outputs because they were useful.",
+          "correct": false,
+          "reason": "The refusal rule also requires discarding the results and outputs."
+        },
+        {
+          "blocks": "Discontinue immediately and discard that use's results and outputs.",
+          "correct": true,
+          "reason": "Article 46(2) expressly requires both steps."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is required when the emergency-use authorisation request is refused?",
+          "options": [
+            {
+              "blocks": "Keep relying on the outputs because they were useful.",
+              "correct": false,
+              "reason": "The refusal rule also requires discarding the results and outputs."
+            },
+            {
+              "blocks": "Discontinue immediately and discard that use's results and outputs.",
+              "correct": true,
+              "reason": "Article 46(2) expressly requires both steps."
+            },
+            {
+              "blocks": "Continue until the next scheduled release.",
+              "correct": false,
+              "reason": "Refusal requires immediate discontinuation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "sector-derogation-boundary"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Harbour's system is an Annex I Section A medical product. Where must its derogation basis come from?",
+      "options": [
+        {
+          "blocks": "Article 46 automatically regardless of sector law.",
+          "correct": false,
+          "reason": "The Section A boundary must be applied."
+        },
+        {
+          "blocks": "The applicable sector legislation's derogation provisions.",
+          "correct": true,
+          "reason": "Article 46(7) reserves this route to the sector-law provisions."
+        },
+        {
+          "blocks": "Any provider-created emergency policy.",
+          "correct": false,
+          "reason": "An internal policy cannot supply the statutory derogation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which exceptional conformity route governs the stipulated sector product?",
+          "options": [
+            {
+              "blocks": "The applicable sector legislation's derogation provisions.",
+              "correct": true,
+              "reason": "Article 46(7) reserves this route to the sector-law provisions."
+            },
+            {
+              "blocks": "Any provider-created emergency policy.",
+              "correct": false,
+              "reason": "An internal policy cannot supply the statutory derogation."
+            },
+            {
+              "blocks": "Article 46 automatically regardless of sector law.",
+              "correct": false,
+              "reason": "The Section A boundary must be applied."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -101,9 +101,14 @@ class ConformityReviewTests(unittest.TestCase):
         for lesson in self.curriculum["lessons"]:
             self.assertIn(lesson["title"], outline)
         rendered_coverage = render_coverage(self.coverage)
-        self.assertIn("planned, not yet taught", rendered_coverage)
+        self.assertIn("authored in testing", rendered_coverage)
         self.assertIn("remaining reference to deleted B9", rendered_coverage)
         self.assertIn("221 targets", rendered_coverage)
+
+    def test_authored_status_requires_recorded_owner_approval(self):
+        self.curriculum.pop("owner_approval")
+        self.assertIn("Plan status changed without review",
+                      check_plan_coverage(self.curriculum, self.coverage, self.sources))
 
     def test_render_and_stale_check_delivery_flow(self):
         documents = build_documents(self.curriculum, self.coverage, self.sources)

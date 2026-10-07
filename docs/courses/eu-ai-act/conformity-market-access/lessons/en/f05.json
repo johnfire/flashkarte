@@ -1,0 +1,234 @@
+{
+  "module": "Define the release and assessment boundary",
+  "lesson": {
+    "slug": "f05",
+    "title": "Turn requirements into an evidence dossier",
+    "summary": "Make a usable evidence matrix and technical-file index.",
+    "covers": [
+      "requirement-evidence-matrix",
+      "technical-file-index"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f01",
+        "reason": "The dossier must identify which version and system its records describe."
+      },
+      {
+        "lesson": "f02",
+        "reason": "The evidence map must start from the requirements applicable to the chosen route."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An **evidence matrix** is a practical table linking each applicable requirement to a versioned record, responsible person, demonstrated result, gap and action. The law requires conformity evidence; this table is our review method. A document's existence is not proof that its contents establish conformity."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8–18; Annex IV(1)–(9)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Technical documentation** explains the system and demonstrates its requirements. Annex IV(1) covers intended purpose/provider/version, interaction with other software and hardware, versions, market form, hardware, applicable product illustrations, interface and instructions. An index helps a reviewer locate these records for this release."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8–18; Annex IV(1)–(9)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Annex IV(2) covers development and integration methods, design logic and key choices, architecture and resources, data requirements and governance, human oversight, predetermined changes, validation/testing and cybersecurity. Testing includes datasets, metrics, discriminatory-impact checks where relevant and dated signed reports. Naming a model is not a substitute for these records."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8–18; Annex IV(1)–(9)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Annex IV(3)–(9) adds detailed monitoring/function/control information; appropriateness of performance metrics; risk-management description; lifecycle changes; applied standards or detailed other compliance solutions; declaration copy; and post-market monitoring system and plan. Annex IV is an index of required substance, not a claim that every sector-law file requirement is taught here."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8–18; Annex IV(1)–(9)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Northbridge's matrix lists oversight controls, the tested interface version and dated human-review evidence. A blank test report remains a gap even if its index entry exists. Harbour must add the applicable sector-law records; a shared file can be useful, but every required element must still be traceable."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 8–18; Annex IV(1)–(9)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "requirement-evidence-matrix"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-5"
+      ],
+      "prompt": "A matrix links oversight to an empty test-report file. What is the appropriate status?",
+      "options": [
+        {
+          "blocks": "Evidence gap; obtain and evaluate the test result.",
+          "correct": true,
+          "reason": "The index entry does not establish the control's performance."
+        },
+        {
+          "blocks": "Complete because the file has a responsible owner.",
+          "correct": false,
+          "reason": "Responsibility does not replace the missing result."
+        },
+        {
+          "blocks": "Complete because oversight appears in the matrix.",
+          "correct": false,
+          "reason": "A listed requirement is not proof of conformity."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a filename establish that an applicable control has been demonstrated?",
+          "options": [
+            {
+              "blocks": "Complete because the file has a responsible owner.",
+              "correct": false,
+              "reason": "Responsibility does not replace the missing result."
+            },
+            {
+              "blocks": "Complete because oversight appears in the matrix.",
+              "correct": false,
+              "reason": "A listed requirement is not proof of conformity."
+            },
+            {
+              "blocks": "Evidence gap; obtain and evaluate the test result.",
+              "correct": true,
+              "reason": "The index entry does not establish the control's performance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "technical-file-index"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Northbridge's file identifies only its model supplier. What is missing?",
+      "options": [
+        {
+          "blocks": "Only a more prominent supplier logo.",
+          "correct": false,
+          "reason": "A logo adds no design or testing evidence."
+        },
+        {
+          "blocks": "Nothing if the supplier promises quality.",
+          "correct": false,
+          "reason": "An assurance alone does not fulfil the technical-file content."
+        },
+        {
+          "blocks": "System-specific design, data, oversight and testing records.",
+          "correct": true,
+          "reason": "Annex IV describes the system and its development, not just its supplier."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a model name stand in for system technical documentation?",
+          "options": [
+            {
+              "blocks": "Nothing if the supplier promises quality.",
+              "correct": false,
+              "reason": "An assurance alone does not fulfil the technical-file content."
+            },
+            {
+              "blocks": "System-specific design, data, oversight and testing records.",
+              "correct": true,
+              "reason": "Annex IV describes the system and its development, not just its supplier."
+            },
+            {
+              "blocks": "Only a more prominent supplier logo.",
+              "correct": false,
+              "reason": "A logo adds no design or testing evidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "requirement-evidence-matrix",
+        "technical-file-index"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Harbour combines AI and sector records in one dossier. What makes it reviewable?",
+      "options": [
+        {
+          "blocks": "Use the AI index to dismiss all sector requirements.",
+          "correct": false,
+          "reason": "The relevant sector obligations still need their own evidence."
+        },
+        {
+          "blocks": "Trace each applicable requirement to current supporting evidence.",
+          "correct": true,
+          "reason": "Combination is useful only if coverage and gaps remain visible."
+        },
+        {
+          "blocks": "Count documents without checking their scope.",
+          "correct": false,
+          "reason": "Volume alone does not establish coverage."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should a reviewer require from a combined evidence file?",
+          "options": [
+            {
+              "blocks": "Trace each applicable requirement to current supporting evidence.",
+              "correct": true,
+              "reason": "Combination is useful only if coverage and gaps remain visible."
+            },
+            {
+              "blocks": "Count documents without checking their scope.",
+              "correct": false,
+              "reason": "Volume alone does not establish coverage."
+            },
+            {
+              "blocks": "Use the AI index to dismiss all sector requirements.",
+              "correct": false,
+              "reason": "The relevant sector obligations still need their own evidence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

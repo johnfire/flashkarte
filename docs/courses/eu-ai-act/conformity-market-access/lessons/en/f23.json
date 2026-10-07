@@ -1,0 +1,220 @@
+{
+  "module": "Carry out and maintain the assessment",
+  "lesson": {
+    "slug": "f23",
+    "title": "Reassess changes to the system",
+    "summary": "Evaluate changes rather than assuming every update is covered.",
+    "covers": [
+      "substantial-modification-test",
+      "predetermined-learning-change"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f01",
+        "reason": "The change test compares the current system and purpose with the initially assessed version."
+      },
+      {
+        "lesson": "f05",
+        "reason": "The exception needs changes recorded in the initial technical documentation."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **substantial modification** is a post-market/service change not foreseen or planned in the initial conformity assessment that affects compliance with Chapter III Section 2, or modifies the assessed intended purpose. Article 43(4) requires a new assessment even if the same deployer continues using the modified system without onward distribution."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(23), 25, 43(4); Annex IV(2)(f); Annex VII(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 25 can make a distributor, importer, deployer or other third party the provider when the specified change conditions apply, including substantial modification of a system remaining high-risk or changing a previously non-high-risk system's purpose so it becomes high-risk. Record the actor and duties; do not assume the original provider is accountable for every later third-party change."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(23), 25, 43(4); Annex IV(2)(f); Annex VII(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **predetermined learning change** is a change and performance variation established by the provider at initial assessment and included in Annex IV(2)(f) documentation for a system continuing to learn. Article 43(4) says those specified changes are not substantial modifications. This is a bounded documented exception, not permission for any later model replacement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(23), 25, 43(4); Annex IV(2)(f); Annex VII(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "For an Annex VII certificate, notify intended or discovered changes that could affect compliance or purpose. The body decides whether a new assessment is required or an assessed supplement is sufficient. Northbridge changing from an advisory summary to materially ranking applicants is a purpose/compliance review; maintaining a product name does not settle it."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3(23), 25, 43(4); Annex IV(2)(f); Annex VII(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "substantial-modification-test"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "An unplanned compliance-affecting modification stays with the same deployer. Is distribution required for reassessment?",
+      "options": [
+        {
+          "blocks": "No; substantial modification can require a new assessment anyway.",
+          "correct": true,
+          "reason": "The paragraph explicitly includes continued use by the current deployer."
+        },
+        {
+          "blocks": "Yes; only a new sale triggers reassessment.",
+          "correct": false,
+          "reason": "The rule is not limited to onward distribution."
+        },
+        {
+          "blocks": "Yes; keeping the product name removes the change.",
+          "correct": false,
+          "reason": "A name does not determine purpose or compliance effects."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does continuing internal use avoid Article 43(4)?",
+          "options": [
+            {
+              "blocks": "Yes; only a new sale triggers reassessment.",
+              "correct": false,
+              "reason": "The rule is not limited to onward distribution."
+            },
+            {
+              "blocks": "Yes; keeping the product name removes the change.",
+              "correct": false,
+              "reason": "A name does not determine purpose or compliance effects."
+            },
+            {
+              "blocks": "No; substantial modification can require a new assessment anyway.",
+              "correct": true,
+              "reason": "The paragraph explicitly includes continued use by the current deployer."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "predetermined-learning-change"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "A provider claims all future model updates were covered by saying 'we may update'. Is that sufficient?",
+      "options": [
+        {
+          "blocks": "Any general promise of future improvement.",
+          "correct": false,
+          "reason": "An open-ended statement does not establish the specified boundary."
+        },
+        {
+          "blocks": "Only the model supplier's release announcement.",
+          "correct": false,
+          "reason": "The provider's initial assessment documentation controls this exception."
+        },
+        {
+          "blocks": "The specified changes/performance documented at initial assessment.",
+          "correct": true,
+          "reason": "The exception concerns predetermined documented changes."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What supports the continuing-learning exception?",
+          "options": [
+            {
+              "blocks": "Only the model supplier's release announcement.",
+              "correct": false,
+              "reason": "The provider's initial assessment documentation controls this exception."
+            },
+            {
+              "blocks": "The specified changes/performance documented at initial assessment.",
+              "correct": true,
+              "reason": "The exception concerns predetermined documented changes."
+            },
+            {
+              "blocks": "Any general promise of future improvement.",
+              "correct": false,
+              "reason": "An open-ended statement does not establish the specified boundary."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "substantial-modification-test",
+        "predetermined-learning-change"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-4"
+      ],
+      "prompt": "A third party changes a non-high-risk system's purpose so it becomes high-risk. What should be checked?",
+      "options": [
+        {
+          "blocks": "Nothing if no physical hardware changed.",
+          "correct": false,
+          "reason": "Purpose/software changes can affect legal obligations."
+        },
+        {
+          "blocks": "The new classification, provider role and required assessment.",
+          "correct": true,
+          "reason": "Article 25 can assign provider duties to the actor making the specified change."
+        },
+        {
+          "blocks": "Only whether the original provider's logo remains.",
+          "correct": false,
+          "reason": "A logo does not resolve the changed actor and duties."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why can the changer's role matter as well as the new purpose?",
+          "options": [
+            {
+              "blocks": "The new classification, provider role and required assessment.",
+              "correct": true,
+              "reason": "Article 25 can assign provider duties to the actor making the specified change."
+            },
+            {
+              "blocks": "Only whether the original provider's logo remains.",
+              "correct": false,
+              "reason": "A logo does not resolve the changed actor and duties."
+            },
+            {
+              "blocks": "Nothing if no physical hardware changed.",
+              "correct": false,
+              "reason": "Purpose/software changes can affect legal obligations."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

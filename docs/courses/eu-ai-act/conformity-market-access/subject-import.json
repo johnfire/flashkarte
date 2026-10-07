@@ -1,0 +1,963 @@
+{
+  "title": "EU AI Act: Conformity and market access",
+  "locale": "en",
+  "description": "30 English lessons on EU AI Act conformity and market access: assessment routes, standards, assessor scope, certificates, declarations, CE marking and registration. Community learning draft, editable for first-student review. Legal baseline checked 7 October 2026; bounded education, not product certification.",
+  "concepts": [
+    {
+      "slug": "market-access-map",
+      "name": "Market access map",
+      "kind": "map",
+      "tier": "core"
+    },
+    {
+      "slug": "assessed-system-identity",
+      "name": "Assessed system identity",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "provider-release-duty",
+      "name": "Provider release duty",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "high-risk-route",
+      "name": "High risk route",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "prohibited-use-precheck",
+      "name": "Prohibited use precheck",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "provision-specific-timeline",
+      "name": "Provision specific timeline",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "existing-system-transition",
+      "name": "Existing system transition",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "sector-assessment-boundary",
+      "name": "Sector assessment boundary",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "dual-route-priority",
+      "name": "Dual route priority",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "requirement-evidence-matrix",
+      "name": "Requirement evidence matrix",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "technical-file-index",
+      "name": "Technical file index",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "release-scope-case",
+      "name": "Release scope case",
+      "kind": "capstone",
+      "tier": "core"
+    },
+    {
+      "slug": "oj-citation-check",
+      "name": "Official Journal citation check",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "limited-presumption",
+      "name": "Limited presumption",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "standard-coverage-matrix",
+      "name": "Standard coverage matrix",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "alternative-conformity-evidence",
+      "name": "Alternative conformity evidence",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "common-specification-trigger",
+      "name": "Common specification trigger",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "equivalent-technical-solution",
+      "name": "Equivalent technical solution",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "contextual-data-presumption",
+      "name": "Contextual data presumption",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "cybersecurity-presumption",
+      "name": "Cybersecurity presumption",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "cra-interplay-lookup",
+      "name": "CRA interplay lookup",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "standards-update-watch",
+      "name": "Standards update watch",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "international-certificate-boundary",
+      "name": "International certificate boundary",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "conformity-evidence-case",
+      "name": "Conformity evidence case",
+      "kind": "capstone",
+      "tier": "core"
+    },
+    {
+      "slug": "notifying-authority",
+      "name": "Notifying authority",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "notified-body",
+      "name": "Notified body",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "notified-scope-verification",
+      "name": "Notified scope verification",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "designation-evidence",
+      "name": "Designation evidence",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "notification-objection-window",
+      "name": "Notification objection window",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "unified-sector-designation",
+      "name": "Unified sector designation",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "assessor-independence",
+      "name": "Assessor independence",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "assessor-confidentiality",
+      "name": "Assessor confidentiality",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "assessor-competence",
+      "name": "Assessor competence",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "subcontracting-accountability",
+      "name": "Subcontracting accountability",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "proportionate-assessment",
+      "name": "Proportionate assessment",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "designation-change-response",
+      "name": "Designation change response",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "competence-challenge",
+      "name": "Competence challenge",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "assessor-coordination",
+      "name": "Assessor coordination",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "assessor-selection-case",
+      "name": "Assessor selection case",
+      "kind": "capstone",
+      "tier": "core"
+    },
+    {
+      "slug": "internal-control-assessment",
+      "name": "Internal control assessment",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "design-file-consistency",
+      "name": "Design file consistency",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "biometric-assessment-route",
+      "name": "Biometric assessment route",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "special-authority-assessor",
+      "name": "Special authority assessor",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "qms-approval",
+      "name": "QMS approval",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "technical-documentation-assessment",
+      "name": "Technical documentation assessment",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "qms-surveillance",
+      "name": "QMS surveillance",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "certificate-lifecycle",
+      "name": "Certificate lifecycle",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "assessment-result-sharing",
+      "name": "Assessment result sharing",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "substantial-modification-test",
+      "name": "Substantial modification test",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "predetermined-learning-change",
+      "name": "Predetermined learning change",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "assessment-route-case",
+      "name": "Assessment route case",
+      "kind": "capstone",
+      "tier": "core"
+    },
+    {
+      "slug": "conformity-derogation-authorisation",
+      "name": "Conformity derogation authorisation",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "emergency-use-boundary",
+      "name": "Emergency use boundary",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "sector-derogation-boundary",
+      "name": "Sector derogation boundary",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "provider-declaration-responsibility",
+      "name": "Provider declaration responsibility",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "declaration-content-check",
+      "name": "Declaration content check",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "ce-marking-accessibility",
+      "name": "CE marking accessibility",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "ce-notified-body-number",
+      "name": "CE notified body number",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "registration-role-test",
+      "name": "Registration role test",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "high-risk-registration-record",
+      "name": "High risk registration record",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "exempt-system-registration-record",
+      "name": "Exempt system registration record",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "registration-destination-test",
+      "name": "Registration destination test",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "public-deployer-registration",
+      "name": "Public deployer registration",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "market-release-case",
+      "name": "Market release case",
+      "kind": "capstone",
+      "tier": "core"
+    }
+  ],
+  "edges": [
+    {
+      "from": "assessed-system-identity",
+      "to": "high-risk-route",
+      "strength": "requires",
+      "reason": "Classification attaches to the defined system and intended purpose."
+    },
+    {
+      "from": "assessed-system-identity",
+      "to": "prohibited-use-precheck",
+      "strength": "requires",
+      "reason": "The prohibited-practice check needs the actual intended function and context."
+    },
+    {
+      "from": "high-risk-route",
+      "to": "provision-specific-timeline",
+      "strength": "requires",
+      "reason": "The date lookup distinguishes the system route and applicable section."
+    },
+    {
+      "from": "provision-specific-timeline",
+      "to": "existing-system-transition",
+      "strength": "requires",
+      "reason": "The transition test needs the relevant application dates and dated release facts."
+    },
+    {
+      "from": "high-risk-route",
+      "to": "sector-assessment-boundary",
+      "strength": "requires",
+      "reason": "Sector assessment can only be selected after distinguishing the Annex I route and its scope limits."
+    },
+    {
+      "from": "sector-assessment-boundary",
+      "to": "dual-route-priority",
+      "strength": "requires",
+      "reason": "The combined case needs an identified applicable sector procedure."
+    },
+    {
+      "from": "high-risk-route",
+      "to": "requirement-evidence-matrix",
+      "strength": "requires",
+      "reason": "The evidence map must start from the requirements applicable to the chosen route."
+    },
+    {
+      "from": "assessed-system-identity",
+      "to": "technical-file-index",
+      "strength": "requires",
+      "reason": "The dossier must identify which version and system its records describe."
+    },
+    {
+      "from": "requirement-evidence-matrix",
+      "to": "technical-file-index",
+      "strength": "requires",
+      "reason": "The index must connect system records to the requirement evidence already identified."
+    },
+    {
+      "from": "prohibited-use-precheck",
+      "to": "release-scope-case",
+      "strength": "requires",
+      "reason": "A release scope conclusion cannot ignore a prohibition."
+    },
+    {
+      "from": "existing-system-transition",
+      "to": "release-scope-case",
+      "strength": "requires",
+      "reason": "The dated case must distinguish a new release from an existing-system transition."
+    },
+    {
+      "from": "dual-route-priority",
+      "to": "release-scope-case",
+      "strength": "requires",
+      "reason": "The medical case needs the procedure priority when routes overlap."
+    },
+    {
+      "from": "technical-file-index",
+      "to": "release-scope-case",
+      "strength": "requires",
+      "reason": "The case needs a defined evidence dossier before it can record unresolved release gaps."
+    },
+    {
+      "from": "oj-citation-check",
+      "to": "limited-presumption",
+      "strength": "requires",
+      "reason": "The presumption depends on the legally cited version and restrictions."
+    },
+    {
+      "from": "limited-presumption",
+      "to": "standard-coverage-matrix",
+      "strength": "requires",
+      "reason": "A gap analysis needs the boundary of the presumption being claimed."
+    },
+    {
+      "from": "requirement-evidence-matrix",
+      "to": "standard-coverage-matrix",
+      "strength": "requires",
+      "reason": "A standard cannot be mapped to coverage without the applicable requirements."
+    },
+    {
+      "from": "standard-coverage-matrix",
+      "to": "alternative-conformity-evidence",
+      "strength": "requires",
+      "reason": "Alternative evidence must address the identified uncovered requirement."
+    },
+    {
+      "from": "common-specification-trigger",
+      "to": "equivalent-technical-solution",
+      "strength": "requires",
+      "reason": "The equivalence justification concerns an identified applicable common specification."
+    },
+    {
+      "from": "standard-coverage-matrix",
+      "to": "equivalent-technical-solution",
+      "strength": "requires",
+      "reason": "The equivalent solution must cover the requirement left unresolved by the chosen conformity evidence."
+    },
+    {
+      "from": "limited-presumption",
+      "to": "contextual-data-presumption",
+      "strength": "requires",
+      "reason": "The data presumption must be limited to its particular requirement."
+    },
+    {
+      "from": "limited-presumption",
+      "to": "cybersecurity-presumption",
+      "strength": "requires",
+      "reason": "A cybersecurity certificate must be evaluated as a limited presumption."
+    },
+    {
+      "from": "cybersecurity-presumption",
+      "to": "cra-interplay-lookup",
+      "strength": "requires",
+      "reason": "The CRA bridge is a distinct route to the cybersecurity requirement, not all AI Act duties."
+    },
+    {
+      "from": "oj-citation-check",
+      "to": "standards-update-watch",
+      "strength": "requires",
+      "reason": "A version watch needs the precise citation and restrictions being monitored."
+    },
+    {
+      "from": "limited-presumption",
+      "to": "international-certificate-boundary",
+      "strength": "requires",
+      "reason": "The certificate claim must be evaluated against the actual legal coverage boundary."
+    },
+    {
+      "from": "alternative-conformity-evidence",
+      "to": "conformity-evidence-case",
+      "strength": "requires",
+      "reason": "The case must specify evidence for the identified gap."
+    },
+    {
+      "from": "equivalent-technical-solution",
+      "to": "conformity-evidence-case",
+      "strength": "requires",
+      "reason": "The common-specification claim requires a reasoned equivalence check."
+    },
+    {
+      "from": "cybersecurity-presumption",
+      "to": "conformity-evidence-case",
+      "strength": "requires",
+      "reason": "The case includes a cybersecurity certificate with limited coverage."
+    },
+    {
+      "from": "notified-body",
+      "to": "notified-scope-verification",
+      "strength": "requires",
+      "reason": "The scope check concerns a formally designated assessor, not a consultant."
+    },
+    {
+      "from": "notified-body",
+      "to": "designation-evidence",
+      "strength": "requires",
+      "reason": "Designation evidence establishes the qualification of the conformity assessor."
+    },
+    {
+      "from": "designation-evidence",
+      "to": "notification-objection-window",
+      "strength": "requires",
+      "reason": "The effective notification window depends on the type of supporting designation evidence."
+    },
+    {
+      "from": "sector-assessment-boundary",
+      "to": "unified-sector-designation",
+      "strength": "requires",
+      "reason": "Unified designation depends on the relevant sector law and assessment scope."
+    },
+    {
+      "from": "designation-evidence",
+      "to": "unified-sector-designation",
+      "strength": "requires",
+      "reason": "Existing sector designation evidence must be distinguished from new AI Act designation."
+    },
+    {
+      "from": "notified-body",
+      "to": "assessor-independence",
+      "strength": "requires",
+      "reason": "The independence requirement applies to the body carrying out conformity assessment."
+    },
+    {
+      "from": "notified-scope-verification",
+      "to": "assessor-competence",
+      "strength": "requires",
+      "reason": "The competence review must match the tasks and system types in scope."
+    },
+    {
+      "from": "assessor-independence",
+      "to": "subcontracting-accountability",
+      "strength": "requires",
+      "reason": "Subcontracting must preserve the required independence."
+    },
+    {
+      "from": "assessor-competence",
+      "to": "subcontracting-accountability",
+      "strength": "requires",
+      "reason": "The body remains accountable for subcontractor qualifications."
+    },
+    {
+      "from": "requirement-evidence-matrix",
+      "to": "proportionate-assessment",
+      "strength": "requires",
+      "reason": "Proportionate effort cannot remove a requirement from the evidence matrix."
+    },
+    {
+      "from": "notified-body",
+      "to": "designation-change-response",
+      "strength": "requires",
+      "reason": "Continuity decisions depend on the formal assessor status that has changed."
+    },
+    {
+      "from": "notified-scope-verification",
+      "to": "assessor-selection-case",
+      "strength": "requires",
+      "reason": "The selected assessor must be qualified for the actual task and system codes."
+    },
+    {
+      "from": "assessor-independence",
+      "to": "assessor-selection-case",
+      "strength": "requires",
+      "reason": "An otherwise qualified assessor must still pass the conflict check."
+    },
+    {
+      "from": "subcontracting-accountability",
+      "to": "assessor-selection-case",
+      "strength": "requires",
+      "reason": "The case includes a subcontractor whose responsibility and consent need checking."
+    },
+    {
+      "from": "designation-change-response",
+      "to": "assessor-selection-case",
+      "strength": "requires",
+      "reason": "The case needs a response to a changed designation after selection."
+    },
+    {
+      "from": "high-risk-route",
+      "to": "internal-control-assessment",
+      "strength": "requires",
+      "reason": "The internal-control duty depends on the relevant Annex III points and route."
+    },
+    {
+      "from": "requirement-evidence-matrix",
+      "to": "internal-control-assessment",
+      "strength": "requires",
+      "reason": "Internal assessment needs the applicable requirements and supporting evidence."
+    },
+    {
+      "from": "internal-control-assessment",
+      "to": "design-file-consistency",
+      "strength": "requires",
+      "reason": "Consistency is one of the provider checks within internal control."
+    },
+    {
+      "from": "technical-file-index",
+      "to": "design-file-consistency",
+      "strength": "requires",
+      "reason": "Consistency must be checked against the identified technical records."
+    },
+    {
+      "from": "high-risk-route",
+      "to": "biometric-assessment-route",
+      "strength": "requires",
+      "reason": "The special procedure is limited to the relevant Annex III point 1 systems."
+    },
+    {
+      "from": "standard-coverage-matrix",
+      "to": "biometric-assessment-route",
+      "strength": "requires",
+      "reason": "The procedure choice depends on applied standards/common-specification coverage and restrictions."
+    },
+    {
+      "from": "biometric-assessment-route",
+      "to": "special-authority-assessor",
+      "strength": "requires",
+      "reason": "The authority-as-assessor condition applies within this biometric Annex VII procedure."
+    },
+    {
+      "from": "notified-body",
+      "to": "qms-approval",
+      "strength": "requires",
+      "reason": "The application is submitted to the legally qualified assessment body."
+    },
+    {
+      "from": "requirement-evidence-matrix",
+      "to": "qms-approval",
+      "strength": "requires",
+      "reason": "QMS approval needs documented procedures and evidence of the applicable requirements."
+    },
+    {
+      "from": "qms-approval",
+      "to": "technical-documentation-assessment",
+      "strength": "requires",
+      "reason": "The technical application must concern a system within the relevant quality-management approval."
+    },
+    {
+      "from": "technical-file-index",
+      "to": "technical-documentation-assessment",
+      "strength": "requires",
+      "reason": "The assessor needs the system-specific technical file and its evidence."
+    },
+    {
+      "from": "qms-approval",
+      "to": "qms-surveillance",
+      "strength": "requires",
+      "reason": "Surveillance checks continued compliance with the approved QMS."
+    },
+    {
+      "from": "technical-documentation-assessment",
+      "to": "certificate-lifecycle",
+      "strength": "requires",
+      "reason": "Certificate management begins with the assessed system and reasoned decision."
+    },
+    {
+      "from": "certificate-lifecycle",
+      "to": "assessment-result-sharing",
+      "strength": "requires",
+      "reason": "The notifications distinguish issued, refused, restricted and withdrawn assessment outcomes."
+    },
+    {
+      "from": "assessor-confidentiality",
+      "to": "assessment-result-sharing",
+      "strength": "requires",
+      "reason": "The sharing duty must preserve the applicable confidentiality rules."
+    },
+    {
+      "from": "assessed-system-identity",
+      "to": "substantial-modification-test",
+      "strength": "requires",
+      "reason": "The change test compares the current system and purpose with the initially assessed version."
+    },
+    {
+      "from": "substantial-modification-test",
+      "to": "predetermined-learning-change",
+      "strength": "requires",
+      "reason": "The predetermined-change rule is a bounded exception within the modification test."
+    },
+    {
+      "from": "technical-file-index",
+      "to": "predetermined-learning-change",
+      "strength": "requires",
+      "reason": "The exception needs changes recorded in the initial technical documentation."
+    },
+    {
+      "from": "internal-control-assessment",
+      "to": "assessment-route-case",
+      "strength": "requires",
+      "reason": "The HR case requires the provider internal-control procedure."
+    },
+    {
+      "from": "biometric-assessment-route",
+      "to": "assessment-route-case",
+      "strength": "requires",
+      "reason": "The biometric case requires the standards-dependent assessment branch."
+    },
+    {
+      "from": "technical-documentation-assessment",
+      "to": "assessment-route-case",
+      "strength": "requires",
+      "reason": "The case requires evidence and access decisions under an external assessment."
+    },
+    {
+      "from": "substantial-modification-test",
+      "to": "assessment-route-case",
+      "strength": "requires",
+      "reason": "The case includes a change after the initial assessment."
+    },
+    {
+      "from": "high-risk-route",
+      "to": "conformity-derogation-authorisation",
+      "strength": "requires",
+      "reason": "The request is a derogation from the otherwise applicable high-risk assessment procedure."
+    },
+    {
+      "from": "conformity-derogation-authorisation",
+      "to": "emergency-use-boundary",
+      "strength": "requires",
+      "reason": "The urgent-use rule is a narrow exception to obtaining assessment derogation authorisation first."
+    },
+    {
+      "from": "conformity-derogation-authorisation",
+      "to": "sector-derogation-boundary",
+      "strength": "requires",
+      "reason": "The sector boundary distinguishes the applicable derogation authorisation route."
+    },
+    {
+      "from": "sector-assessment-boundary",
+      "to": "sector-derogation-boundary",
+      "strength": "requires",
+      "reason": "Annex I Section A products use their relevant sector-law derogations."
+    },
+    {
+      "from": "requirement-evidence-matrix",
+      "to": "provider-declaration-responsibility",
+      "strength": "requires",
+      "reason": "The provider needs conformity evidence before accepting responsibility for the declaration."
+    },
+    {
+      "from": "provider-declaration-responsibility",
+      "to": "declaration-content-check",
+      "strength": "requires",
+      "reason": "The content check concerns the signed declaration for which the provider takes responsibility."
+    },
+    {
+      "from": "assessed-system-identity",
+      "to": "declaration-content-check",
+      "strength": "requires",
+      "reason": "Declaration fields must trace to the specific system and version."
+    },
+    {
+      "from": "provider-declaration-responsibility",
+      "to": "ce-marking-accessibility",
+      "strength": "requires",
+      "reason": "CE marking follows the conformity conclusion and provider declaration."
+    },
+    {
+      "from": "ce-marking-accessibility",
+      "to": "ce-notified-body-number",
+      "strength": "requires",
+      "reason": "The number rule concerns how the required CE marking is presented."
+    },
+    {
+      "from": "notified-scope-verification",
+      "to": "ce-notified-body-number",
+      "strength": "requires",
+      "reason": "A body number must identify the appropriate notified assessor where the route requires it."
+    },
+    {
+      "from": "high-risk-route",
+      "to": "registration-role-test",
+      "strength": "requires",
+      "reason": "Registration distinguishes an Annex III system, an Article 6(3) conclusion and other routes."
+    },
+    {
+      "from": "provider-release-duty",
+      "to": "registration-role-test",
+      "strength": "requires",
+      "reason": "The actor test needs the provider responsible for registration."
+    },
+    {
+      "from": "registration-role-test",
+      "to": "high-risk-registration-record",
+      "strength": "requires",
+      "reason": "The fields depend on the applicable provider registration category."
+    },
+    {
+      "from": "declaration-content-check",
+      "to": "high-risk-registration-record",
+      "strength": "requires",
+      "reason": "The high-risk record includes the relevant EU declaration of conformity."
+    },
+    {
+      "from": "registration-role-test",
+      "to": "exempt-system-registration-record",
+      "strength": "requires",
+      "reason": "The non-high-risk registration fields depend on a documented Article 6(3) conclusion."
+    },
+    {
+      "from": "registration-role-test",
+      "to": "registration-destination-test",
+      "strength": "requires",
+      "reason": "The destination lookup starts with the applicable actor/system registration duty."
+    },
+    {
+      "from": "registration-role-test",
+      "to": "public-deployer-registration",
+      "strength": "requires",
+      "reason": "The deployer record is distinct from the provider registration duty."
+    },
+    {
+      "from": "assessment-route-case",
+      "to": "market-release-case",
+      "strength": "requires",
+      "reason": "The final release decision needs a supported assessment-route conclusion."
+    },
+    {
+      "from": "declaration-content-check",
+      "to": "market-release-case",
+      "strength": "requires",
+      "reason": "The final dossier needs the required declaration content and supporting evidence."
+    },
+    {
+      "from": "ce-marking-accessibility",
+      "to": "market-release-case",
+      "strength": "requires",
+      "reason": "The final release needs a valid marking and access decision."
+    },
+    {
+      "from": "registration-destination-test",
+      "to": "market-release-case",
+      "strength": "requires",
+      "reason": "The final release needs the applicable registration destination and recorded gaps."
+    },
+    {
+      "from": "market-access-map",
+      "to": "assessed-system-identity",
+      "strength": "suggests",
+      "reason": "The overview helps locate the scope record without being needed to define a system."
+    },
+    {
+      "from": "notifying-authority",
+      "to": "notified-body",
+      "strength": "suggests",
+      "reason": "The authority/body contrast is useful context; the body can still be defined on its own."
+    },
+    {
+      "from": "oj-citation-check",
+      "to": "common-specification-trigger",
+      "strength": "suggests",
+      "reason": "The citation check helps contrast standards with implementing-act specifications."
+    },
+    {
+      "from": "notified-body",
+      "to": "assessor-confidentiality",
+      "strength": "suggests",
+      "reason": "The assessor role supplies context for confidentiality but is not necessary to understand the evidence-sharing boundary."
+    },
+    {
+      "from": "designation-change-response",
+      "to": "competence-challenge",
+      "strength": "suggests",
+      "reason": "Status-change consequences help explain why competence challenges matter."
+    },
+    {
+      "from": "notified-body",
+      "to": "assessor-coordination",
+      "strength": "suggests",
+      "reason": "The body role helps situate coordination without making it a conceptual gate."
+    },
+    {
+      "from": "standards-update-watch",
+      "to": "assessment-route-case",
+      "strength": "suggests",
+      "reason": "Check for changed procedures before relying on the case route in a real release."
+    },
+    {
+      "from": "sector-derogation-boundary",
+      "to": "market-release-case",
+      "strength": "suggests",
+      "reason": "An exceptional-release proposal must use the correct sector route and specialist review."
+    },
+    {
+      "from": "public-deployer-registration",
+      "to": "market-release-case",
+      "strength": "suggests",
+      "reason": "The public-authority case variation adds a deployer record beyond the provider release."
+    },
+    {
+      "from": "cra-interplay-lookup",
+      "to": "assessment-route-case",
+      "strength": "suggests",
+      "reason": "A separate product cybersecurity law may require an additional procedure even where the AI Act route is internal control."
+    }
+  ]
+}

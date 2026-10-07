@@ -1,0 +1,242 @@
+{
+  "module": "Verify the assessor and its scope",
+  "lesson": {
+    "slug": "f18",
+    "title": "Case: select and retain a qualified assessor",
+    "summary": "Select a fictional assessor using concrete evidence.",
+    "covers": [
+      "assessor-selection-case"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f13",
+        "reason": "The selected assessor must be qualified for the actual task and system codes."
+      },
+      {
+        "lesson": "f15",
+        "reason": "An otherwise qualified assessor must still pass the conflict check."
+      },
+      {
+        "lesson": "f16",
+        "reason": "The case includes a subcontractor whose responsibility and consent need checking."
+      },
+      {
+        "lesson": "f17",
+        "reason": "The case needs a response to a changed designation after selection."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Fictional offers:** ClearScope has the stipulated current notified task and relevant system/technology scope, qualified staff and disclosed subcontracting controls. FastStamp has a number for another category and promises guaranteed approval. FamiliarDesign helped design Harbour and offers to assess its own work. These names do not describe actual notified bodies."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28–39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "ClearScope is the strongest candidate on the stated evidence, subject to the remaining required checks and actual procedure. FastStamp's number does not establish scope for this task. FamiliarDesign raises an independence conflict that experience with the product does not cure."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28–39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Ask ClearScope for provider-agreed subcontracting, qualification evidence, confidential handling and access arrangements. Retain the current notified entry and appointment evidence. A suitable appointment does not guarantee that the assessed system will conform."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28–39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Later, ClearScope's designation is restricted. Read the actual authority decision and applicable Article 36 continuity branch. Record certificate effects, monitoring responsibility, file preservation, replacement arrangements and deadlines. Do not assume its earlier suitability makes the restriction irrelevant."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 28–39; Annex XIV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission: Notified bodies and NANDO",
+          "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "assessor-selection-case"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which offer best matches the case's scope and qualification evidence?",
+      "options": [
+        {
+          "blocks": "ClearScope, subject to remaining required checks.",
+          "correct": true,
+          "reason": "Its stated evidence matches the task without promising automatic conformity."
+        },
+        {
+          "blocks": "FastStamp because any identification number is sufficient.",
+          "correct": false,
+          "reason": "Its notified category does not match the task."
+        },
+        {
+          "blocks": "FamiliarDesign because self-assessment guarantees familiarity.",
+          "correct": false,
+          "reason": "Its design involvement raises an independence conflict."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which fictional assessor is supported by the stipulated current task and competence?",
+          "options": [
+            {
+              "blocks": "FastStamp because any identification number is sufficient.",
+              "correct": false,
+              "reason": "Its notified category does not match the task."
+            },
+            {
+              "blocks": "FamiliarDesign because self-assessment guarantees familiarity.",
+              "correct": false,
+              "reason": "Its design involvement raises an independence conflict."
+            },
+            {
+              "blocks": "ClearScope, subject to remaining required checks.",
+              "correct": true,
+              "reason": "Its stated evidence matches the task without promising automatic conformity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessor-selection-case"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "ClearScope uses a specialist. What should Harbour require?",
+      "options": [
+        {
+          "blocks": "An assurance that the specialist needs no qualifications.",
+          "correct": false,
+          "reason": "Qualification controls apply to outsourced tasks."
+        },
+        {
+          "blocks": "A transfer of all body responsibility to Harbour.",
+          "correct": false,
+          "reason": "The notified body retains full responsibility for its outsourced work."
+        },
+        {
+          "blocks": "Agreement, qualification and responsibility controls.",
+          "correct": true,
+          "reason": "These preserve the Article 33 conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What supports lawful subcontracted assessment in the case?",
+          "options": [
+            {
+              "blocks": "A transfer of all body responsibility to Harbour.",
+              "correct": false,
+              "reason": "The notified body retains full responsibility for its outsourced work."
+            },
+            {
+              "blocks": "Agreement, qualification and responsibility controls.",
+              "correct": true,
+              "reason": "These preserve the Article 33 conditions."
+            },
+            {
+              "blocks": "An assurance that the specialist needs no qualifications.",
+              "correct": false,
+              "reason": "Qualification controls apply to outsourced tasks."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessor-selection-case"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "ClearScope's designation is later restricted. What should Harbour do?",
+      "options": [
+        {
+          "blocks": "Treat every Article 36 branch as the same automatic renewal.",
+          "correct": false,
+          "reason": "The branches have different conditions and deadlines."
+        },
+        {
+          "blocks": "Check the decision, certificate effect and continuity conditions.",
+          "correct": true,
+          "reason": "The later change requires its own supported response."
+        },
+        {
+          "blocks": "Ignore the restriction until its old certificate expires.",
+          "correct": false,
+          "reason": "Designation changes can affect monitoring and validity now."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the earlier appointment settle all later continuity questions?",
+          "options": [
+            {
+              "blocks": "Check the decision, certificate effect and continuity conditions.",
+              "correct": true,
+              "reason": "The later change requires its own supported response."
+            },
+            {
+              "blocks": "Ignore the restriction until its old certificate expires.",
+              "correct": false,
+              "reason": "Designation changes can affect monitoring and validity now."
+            },
+            {
+              "blocks": "Treat every Article 36 branch as the same automatic renewal.",
+              "correct": false,
+              "reason": "The branches have different conditions and deadlines."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

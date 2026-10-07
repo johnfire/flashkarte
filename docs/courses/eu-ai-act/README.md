@@ -10,7 +10,7 @@ Chris's presentation informed the [slide review and case bank](presentation-revi
 
 The [dedicated English Article 50 course](article-50/README.md) now contains 18 testing lessons, 42 concepts, 85 screens and 55 questions with retests. Its owner-approved graph and 48 coverage targets are retained with live verification evidence.
 
-The [high-risk compliance course](high-risk-compliance/README.md) adds 30 authored lessons across five modules. Together, the three English course parts contain 100 authored lessons. The next [conformity and market-access review package](conformity-market-access/README.md) proposes 30 English lessons, 64 concepts and 221 coverage targets. Its graph and syllabus await owner review before teaching content is authored.
+The [high-risk compliance course](high-risk-compliance/README.md) adds 30 authored lessons across five modules. The [conformity and market-access course](conformity-market-access/README.md) adds another **30 English lessons, 64 concepts, 137 screens and 90 questions with retests**. Course 64 is shared to Community and remains editable in testing. Together, the four English parts contain **130 authored lessons in 21 modules**; this is not yet a course covering every provision of the Act.
 
 ## Review points
 
@@ -35,6 +35,7 @@ python -m unittest discover -s docs/courses/eu-ai-act -p 'test_*.py'
 python docs/courses/eu-ai-act/render_review.py --check
 python docs/courses/eu-ai-act/article_50_review.py --check
 python docs/courses/eu-ai-act/conformity_review.py --check
+python docs/courses/eu-ai-act/conformity_lessons.py --check
 ```
 
 The JSON registers are canonical. Regenerate the four review tables with `render_review.py` after editing them. The supporting narrative documents require their own review. Retained official PDFs are identified and hashed in the source register; user screenshots and browser details are not copied into this package.
