@@ -941,6 +941,12 @@
       "reason": "The controller gives the notice and must identify itself."
     },
     {
+      "parent": "supervisory-authority",
+      "child": "information-at-collection",
+      "kind": "requires",
+      "reason": "A notice must tell people they can complain to the supervisory authority."
+    },
+    {
       "parent": "information-at-collection",
       "child": "information-indirect",
       "kind": "requires",
@@ -951,6 +957,12 @@
       "child": "request-deadline",
       "kind": "requires",
       "reason": "The deadlines are duties of the controller."
+    },
+    {
+      "parent": "supervisory-authority",
+      "child": "request-deadline",
+      "kind": "requires",
+      "reason": "A refusal must tell the person they can complain to the supervisory authority."
     },
     {
       "parent": "information-at-collection",
@@ -1692,6 +1704,10 @@
       ],
       "prerequisites": [
         {
+          "lesson_id": "G01",
+          "reason": "A notice must tell people they can complain to the supervisory authority."
+        },
+        {
           "lesson_id": "G05",
           "reason": "The controller gives the notice and must identify itself."
         },
@@ -1715,6 +1731,10 @@
         "request-fees-and-identity"
       ],
       "prerequisites": [
+        {
+          "lesson_id": "G01",
+          "reason": "A refusal must tell the person they can complain to the supervisory authority."
+        },
         {
           "lesson_id": "G05",
           "reason": "The deadlines are duties of the controller."

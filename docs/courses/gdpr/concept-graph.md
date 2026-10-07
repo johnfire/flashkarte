@@ -113,14 +113,14 @@ Requires lessons: G02, P04, P05.
 - `information-at-collection` (idea): Information when collecting from the person. Arts. 12(1), 13.
 - `information-indirect` (idea): Information when data comes from elsewhere. Art. 14.
 
-Requires lessons: G05, P01, P04.
+Requires lessons: G01, G05, P01, P04.
 
 ### R02 — Handling a rights request
 
 - `request-deadline` (idea): Response deadline for rights requests. Art. 12(2)-(4).
 - `request-fees-and-identity` (idea): Fees, refusals and identity checks. Art. 12(5)-(6).
 
-Requires lessons: G05.
+Requires lessons: G01, G05.
 
 ### R03 — The right of access
 
@@ -334,8 +334,10 @@ Requires lessons: none.
 | `transparency-principle` | `information-at-collection` | requires | The notice duties put the transparency principle into practice. |
 | `lawful-bases` | `information-at-collection` | requires | A notice must state the legal basis, so the learner needs the bases. |
 | `controller` | `information-at-collection` | requires | The controller gives the notice and must identify itself. |
+| `supervisory-authority` | `information-at-collection` | requires | A notice must tell people they can complain to the supervisory authority. |
 | `information-at-collection` | `information-indirect` | requires | Article 14 builds on the Article 13 list and adds items. |
 | `controller` | `request-deadline` | requires | The deadlines are duties of the controller. |
+| `supervisory-authority` | `request-deadline` | requires | A refusal must tell the person they can complain to the supervisory authority. |
 | `information-at-collection` | `request-deadline` | suggests | A notice tells people which rights they can request. |
 | `request-deadline` | `request-fees-and-identity` | requires | Fees and refusals are part of the same Article 12 procedure. |
 | `request-deadline` | `right-of-access` | requires | An access request is answered within the Article 12 deadline. |
