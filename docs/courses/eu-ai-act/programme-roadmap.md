@@ -10,6 +10,12 @@ The canonical syllabus, concept edges, assessments and provision mapping are mai
 
 The course teaches what marking and detection methods demonstrate and where they fail. A watermark, visible icon or supplier statement alone does not establish compliance. Visible disclosure and machine-readable marking serve distinct duties; a label cannot legitimise a prohibited use.
 
+## Current proposal: high-risk compliance in practice
+
+Chris approved preparing the next review package on 7 October 2026. [High-risk compliance in practice](high-risk-compliance/README.md) proposes **30 English lessons in five modules**, with **78 concepts**, combining Articles 4a and 8–27. It includes a concept graph with prerequisite reasons, syllabus, practical case exercises and provision/source coverage. No lessons for this part have been imported or finished; the package is ready for owner review before authoring the first module.
+
+The [Flashkarte/LearnWohl worked checklist](case-studies/flashkarte-ai-authoring.md) examines external AI authoring, rule-based delivery and the possible combined system separately. Its classification is conditional on the defined self-study use; institutional assessment, role allocation and public-content transparency remain explicit questions. It is not a whole-product compliance approval.
+
 ## Remaining coverage inventory
 
 The following blocks ensure broad coverage. Counts and module boundaries are deliberately uncommitted until their source and concept decomposition is complete. The [programme inventory](programme-inventory.json) assigns all **119 article identifiers and 14 annexes** in this amended baseline to a planned block, including inserted Articles 4a, 60a and 75a–75d. This is a scope ledger, not a claim that every provision has been read or taught. Each block still needs paragraph-level coverage and source review.
