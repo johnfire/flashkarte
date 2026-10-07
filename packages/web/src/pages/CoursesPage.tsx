@@ -52,10 +52,12 @@ export function CoursesPage() {
   }
 
   async function onDelete(id: string, courseTitle: string) {
-    if (!window.confirm(t("courses.deleteConfirm", { title: courseTitle })))
-      return;
+    const shared = courses?.find((c) => c.id === id)?.is_shared ?? false;
+    const confirmKey = shared ? "decks.removeConfirm" : "courses.deleteConfirm";
+    if (!window.confirm(t(confirmKey, { title: courseTitle }))) return;
     try {
-      await api.courses.remove(id);
+      if (shared) await api.courses.unsubscribe(id);
+      else await api.courses.remove(id);
       setCourses((c) => (c ? c.filter((x) => x.id !== id) : c));
     } catch (err) {
       reportClientError({

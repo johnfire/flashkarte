@@ -4,7 +4,8 @@ import { CourseDeckView } from "../api/types";
 
 interface CourseDeckRowProps {
   deck: CourseDeckView;
-  onRemove: (deckId: string, title: string) => void;
+  // Absent for a shared course: the learner cannot change it.
+  onRemove?: (deckId: string, title: string) => void;
 }
 
 export function CourseDeckRow({ deck: d, onRemove }: CourseDeckRowProps) {
@@ -50,12 +51,14 @@ export function CourseDeckRow({ deck: d, onRemove }: CourseDeckRowProps) {
             {t("decks.study")}
           </Link>
         )}
-        <button
-          onClick={() => onRemove(d.deck_id, d.title)}
-          className="text-sm text-red-600"
-        >
-          {t("courses.removeDeck")}
-        </button>
+        {onRemove && (
+          <button
+            onClick={() => onRemove(d.deck_id, d.title)}
+            className="text-sm text-red-600"
+          >
+            {t("courses.removeDeck")}
+          </button>
+        )}
       </div>
     </li>
   );

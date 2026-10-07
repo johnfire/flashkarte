@@ -328,7 +328,7 @@
       "open": "Klassen & Schule",
       "openTitle": "Dieses Deck mit deiner Schule oder deinen Klassen teilen",
       "title": "„{{title}}“ teilen",
-      "hint": "Wähle, wer in deiner Schule oder deinen Klassen dieses Deck hinzufügen kann. „Teilen“ macht es weiterhin für alle öffentlich.",
+      "hint": "Wähle, wer in deiner Schule oder deinen Klassen dies nutzen kann. „Teilen“ bzw. „Veröffentlichen“ macht es weiterhin für alle öffentlich.",
       "loadError": "Die Freigaben konnten nicht geladen werden.",
       "saveError": "Die Freigaben konnten nicht gespeichert werden.",
       "saving": "Wird gespeichert…",
@@ -376,7 +376,11 @@
     "noPublicCourses": "Noch keine öffentlichen Kurse.",
     "clone": "Kopieren",
     "cloning": "Wird kopiert…",
-    "cloneError": "Der Kurs konnte nicht kopiert werden. Versuche es erneut."
+    "cloneError": "Der Kurs konnte nicht kopiert werden. Versuche es erneut.",
+    "sharedTitle": "Mit dir geteilte Kurse",
+    "sharedHint": "Deine Schule, deine Lehrkräfte oder deine Mitschüler haben diese Kurse geteilt. Füge einen hinzu, um ihn zu beginnen.",
+    "sharedReadOnly": "Von deiner Schule, Lehrkraft oder deinen Mitschülern geteilt. Du kannst damit lernen, ihn aber nicht ändern.",
+    "sharedAddFirst": "Füge diesen Kurs hinzu, um mit seinen Decks zu lernen."
   },
   "libraryHub": {
     "title": "Bibliothek",

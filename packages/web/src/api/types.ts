@@ -147,6 +147,31 @@ export interface DeckSharing {
   options: ShareOptions;
 }
 
+/** A deck-course someone shared with the caller through their school, teacher or class. */
+export interface SharedCourse {
+  id: string;
+  referenceNumber: number;
+  title: string;
+  description: string | null;
+  contentLanguage: string | null;
+  decksTotal: number;
+  author: string | null;
+  subscribed: boolean;
+  scopes: ShareScope[];
+}
+
+/** A structured course someone shared with the caller. */
+export interface SharedSubject {
+  id: string;
+  referenceNumber: number;
+  title: string;
+  description: string | null;
+  locale: string | null;
+  author: string | null;
+  enrolled: boolean;
+  scopes: ShareScope[];
+}
+
 /** A deck someone shared with the caller through their school, teacher or class. */
 export interface SharedDeck {
   id: string;
@@ -372,6 +397,11 @@ export interface Course {
   is_public: boolean;
   created_at: string;
   updated_at: string;
+  // Someone else's course shared with the caller (school, teacher, class):
+  // read-only, and removed rather than deleted.
+  is_shared?: boolean;
+  // The caller added that shared course to their courses.
+  subscribed?: boolean;
 }
 
 /** A course as listed on "My Courses" -- a summary, not its full deck list. */

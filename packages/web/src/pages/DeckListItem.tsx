@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
+import { api } from "../api/client";
 import { DeckWithCounts } from "../api/types";
 import { DeckSpeechDialog } from "./DeckSpeechDialog";
-import { DeckSharesDialog } from "./DeckSharesDialog";
+import { GroupShareButton } from "../components/GroupShareButton";
 import {
   ContentLanguageField,
   contentLanguageLabel,
@@ -15,9 +16,6 @@ interface DeckListItemProps {
   onDelete: (id: string, title: string) => void;
   onUnsubscribe: (id: string, title: string) => void;
   onLanguageChange?: (id: string, language: "en" | "de" | "ar") => void;
-  // Teachers, students and school logins can also share with their school
-  // or classes; individuals only have the public Share button.
-  canShareWithGroups?: boolean;
 }
 
 export function DeckListItem({
@@ -26,11 +24,9 @@ export function DeckListItem({
   onDelete,
   onUnsubscribe,
   onLanguageChange,
-  canShareWithGroups = false,
 }: DeckListItemProps) {
   const { t } = useTranslation();
   const [speechOpen, setSpeechOpen] = useState(false);
-  const [sharesOpen, setSharesOpen] = useState(false);
   // Someone else's deck (app deck, or shared by a teacher/school/classmate):
   // the caller may study and remove it, never edit it.
   const readOnly = d.is_official || Boolean(d.is_shared);
@@ -148,15 +144,11 @@ export function DeckListItem({
             >
               {d.is_public ? t("decks.unshare") : t("decks.share")}
             </button>
-            {canShareWithGroups && (
-              <button
-                onClick={() => setSharesOpen(true)}
-                className="text-sm text-indigo-600"
-                title={t("decks.sharing.openTitle")}
-              >
-                {t("decks.sharing.open")}
-              </button>
-            )}
+            <GroupShareButton
+              itemTitle={d.title}
+              load={() => api.decks.getShares(d.id)}
+              save={(shares) => api.decks.setShares(d.id, shares)}
+            />
             <button
               onClick={() => setSpeechOpen(true)}
               className="text-sm text-indigo-600"
@@ -173,13 +165,6 @@ export function DeckListItem({
           </>
         )}
       </div>
-      {sharesOpen && (
-        <DeckSharesDialog
-          deckId={d.id}
-          deckTitle={d.title}
-          onClose={() => setSharesOpen(false)}
-        />
-      )}
       {speechOpen && (
         <DeckSpeechDialog
           deckId={d.id}

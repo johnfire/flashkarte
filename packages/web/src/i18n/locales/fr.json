@@ -328,7 +328,7 @@
       "open": "Classes et école",
       "openTitle": "Partager ce paquet avec votre école ou vos classes",
       "title": "Partager « {{title}} »",
-      "hint": "Choisissez qui, dans votre école ou vos classes, peut ajouter ce paquet. « Partager » le rend toujours public pour tous.",
+      "hint": "Choisissez qui, dans votre école ou vos classes, peut utiliser ceci. « Partager » ou « Publier » le rend toujours public pour tous.",
       "loadError": "Impossible de charger les paramètres de partage.",
       "saveError": "Impossible d’enregistrer les paramètres de partage.",
       "saving": "Enregistrement…",
@@ -376,7 +376,11 @@
     "noPublicCourses": "Pas encore de cours publics.",
     "clone": "Cloner",
     "cloning": "Clonage…",
-    "cloneError": "Impossible de cloner ce cours. Réessaie."
+    "cloneError": "Impossible de cloner ce cours. Réessaie.",
+    "sharedTitle": "Cours partagés avec vous",
+    "sharedHint": "Votre école, vos enseignants ou vos camarades ont partagé ces cours. Ajoutez-en un pour le commencer.",
+    "sharedReadOnly": "Partagé par votre école, votre enseignant ou vos camarades. Vous pouvez l’étudier, mais pas le modifier.",
+    "sharedAddFirst": "Ajoutez ce cours pour étudier ses paquets."
   },
   "libraryHub": {
     "title": "Bibliothèque",

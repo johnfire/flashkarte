@@ -13,6 +13,7 @@ import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { DeckListItem } from "./DeckListItem";
 import { SharedWithMeSection } from "./SharedWithMeSection";
+import { useGroupSharing } from "../hooks/use-group-sharing";
 import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
 import { useContentLanguage } from "../hooks/use-content-language";
 import {
@@ -53,12 +54,7 @@ export function DeckListPage() {
     setData: setDecks,
     reload: reloadDecks,
   } = useAsync<DeckWithCounts[], []>(loadDecks, []);
-  // School, teacher and student accounts share with (and receive from)
-  // their school and classes.
-  const canShareWithGroups =
-    user?.accountKind === "teacher" ||
-    user?.accountKind === "student" ||
-    user?.accountKind === "school";
+  const canShareWithGroups = useGroupSharing();
   const error =
     loadError instanceof ApiError
       ? loadError.message
@@ -200,7 +196,6 @@ export function DeckListPage() {
             onLanguageChange={onLanguageChange}
             onDelete={onDelete}
             onUnsubscribe={onUnsubscribe}
-            canShareWithGroups={canShareWithGroups}
           />
         ))}
       </ul>

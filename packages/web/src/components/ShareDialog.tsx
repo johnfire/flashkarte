@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { api, ApiError } from "../api/client";
-import type { ShareOptions, ShareScope } from "../api/types";
+import { ApiError } from "../api/client";
+import type { DeckSharing, ShareOptions, ShareScope } from "../api/types";
 
-interface DeckSharesDialogProps {
-  deckId: string;
-  deckTitle: string;
+export type ShareRequest = { scope: ShareScope; classId?: string }[];
+
+interface ShareDialogProps {
+  itemTitle: string;
+  // How to read and replace this item's audiences (deck, course or
+  // structured course — the server applies the same rules to all three).
+  load: () => Promise<DeckSharing>;
+  save: (shares: ShareRequest) => Promise<unknown>;
   onClose: () => void;
 }
 
@@ -16,16 +21,17 @@ type Selection = {
 };
 
 /**
- * Who in the owner's school or classes can see a deck. "Everyone" (public)
+ * Who in the owner's school or classes can use a deck or course. "Everyone" (public)
  * stays on its own Share button; this covers the narrower audiences, and
  * offers only the ones this account kind is allowed (the server enforces the
  * same rules).
  */
-export function DeckSharesDialog({
-  deckId,
-  deckTitle,
+export function ShareDialog({
+  itemTitle,
+  load,
+  save: saveShares,
   onClose,
-}: DeckSharesDialogProps) {
+}: ShareDialogProps) {
   const { t } = useTranslation();
   const [options, setOptions] = useState<ShareOptions | null>(null);
   const [selection, setSelection] = useState<Selection>({
@@ -38,8 +44,7 @@ export function DeckSharesDialog({
 
   useEffect(() => {
     let active = true;
-    api.decks
-      .getShares(deckId)
+    load()
       .then((result) => {
         if (!active) return;
         setOptions(result.options);
@@ -66,7 +71,9 @@ export function DeckSharesDialog({
     return () => {
       active = false;
     };
-  }, [deckId, t]);
+    // Load once per open dialog; `load` is a fresh closure on every render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function toggleClass(classId: string) {
     setSelection((current) => {
@@ -80,14 +87,14 @@ export function DeckSharesDialog({
   async function save() {
     setSaving(true);
     setError(null);
-    const shares: { scope: ShareScope; classId?: string }[] = [];
+    const shares: ShareRequest = [];
     if (selection.school) shares.push({ scope: "school" });
     if (selection.allStudents) shares.push({ scope: "teacher_students" });
     for (const classId of selection.classIds) {
       shares.push({ scope: "class", classId });
     }
     try {
-      await api.decks.setShares(deckId, shares);
+      await saveShares(shares);
       onClose();
     } catch (failure) {
       setError(
@@ -114,11 +121,11 @@ export function DeckSharesDialog({
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
       role="dialog"
       aria-modal="true"
-      aria-label={t("decks.sharing.title", { title: deckTitle })}
+      aria-label={t("decks.sharing.title", { title: itemTitle })}
     >
       <div className="max-h-full w-full max-w-md overflow-y-auto rounded-xl bg-white p-6 dark:bg-gray-800">
         <h2 className="mb-1 text-xl font-semibold">
-          {t("decks.sharing.title", { title: deckTitle })}
+          {t("decks.sharing.title", { title: itemTitle })}
         </h2>
         <p className="mb-4 text-sm text-gray-600 dark:text-gray-300">
           {t("decks.sharing.hint")}

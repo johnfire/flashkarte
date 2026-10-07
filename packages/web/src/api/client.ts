@@ -35,7 +35,9 @@ import {
   SchoolClass,
   SchoolClassDetail,
   ShareScope,
+  SharedCourse,
   SharedDeck,
+  SharedSubject,
 } from "./types";
 import type { SpeechAutoplay } from "@flashkarte/shared";
 import type {
@@ -537,6 +539,20 @@ export const api = {
   },
   courses: {
     list: () => request<CourseSummary[]>("/courses"),
+    listShared: () => request<{ courses: SharedCourse[] }>("/courses/shared"),
+    subscribe: (id: string) =>
+      request<void>(`/courses/${id}/subscribe`, { method: "POST" }),
+    unsubscribe: (id: string) =>
+      request<void>(`/courses/${id}/subscribe`, { method: "DELETE" }),
+    getShares: (id: string) => request<DeckSharing>(`/courses/${id}/shares`),
+    setShares: (
+      id: string,
+      shares: { scope: ShareScope; classId?: string }[],
+    ) =>
+      request<DeckSharing>(`/courses/${id}/shares`, {
+        method: "PUT",
+        body: JSON.stringify({ shares }),
+      }),
     get: (id: string) => request<CourseDetail>(`/courses/${id}`),
     create: (
       title: string,
@@ -630,6 +646,17 @@ export const api = {
   },
   learn: {
     subjects: () => request<LearnSubject[]>("/subjects"),
+    listShared: () => request<{ courses: SharedSubject[] }>("/subjects/shared"),
+    getShares: (subjectId: string) =>
+      request<DeckSharing>(`/subjects/${subjectId}/shares`),
+    setShares: (
+      subjectId: string,
+      shares: { scope: ShareScope; classId?: string }[],
+    ) =>
+      request<DeckSharing>(`/subjects/${subjectId}/shares`, {
+        method: "PUT",
+        body: JSON.stringify({ shares }),
+      }),
     catalog: (
       source: "official" | "community",
       language?: "en" | "de" | "ar",

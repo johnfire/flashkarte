@@ -1,22 +1,23 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, expect, test, vi } from "vitest";
-import { api } from "../api/client";
 import type { DeckSharing } from "../api/types";
 import "../i18n";
-import { DeckSharesDialog } from "./DeckSharesDialog";
+import { ShareDialog } from "./ShareDialog";
 
-vi.mock("../api/client", async () => {
-  const actual =
-    await vi.importActual<typeof import("../api/client")>("../api/client");
-  return {
-    ...actual,
-    api: {
-      ...actual.api,
-      decks: { ...actual.api.decks, getShares: vi.fn(), setShares: vi.fn() },
-    },
-  };
-});
+const load = vi.fn<() => Promise<DeckSharing>>();
+const save = vi.fn<(shares: unknown) => Promise<unknown>>();
+
+function renderDialog(onClose = vi.fn()) {
+  return render(
+    <ShareDialog
+      itemTitle="Zellen"
+      load={load}
+      save={save}
+      onClose={onClose}
+    />,
+  );
+}
 
 const TEACHER: DeckSharing = {
   shares: [{ scope: "class", schoolId: null, classId: "c1" }],
@@ -34,12 +35,12 @@ const TEACHER: DeckSharing = {
 
 beforeEach(() => {
   vi.clearAllMocks();
-  vi.mocked(api.decks.setShares).mockResolvedValue(TEACHER);
+  save.mockResolvedValue(TEACHER);
 });
 
 test("a teacher sees their school, all students and each class, with current shares ticked", async () => {
-  vi.mocked(api.decks.getShares).mockResolvedValue(TEACHER);
-  render(<DeckSharesDialog deckId="d1" deckTitle="Zellen" onClose={vi.fn()} />);
+  load.mockResolvedValue(TEACHER);
+  renderDialog();
 
   expect(
     await screen.findByLabelText("Everyone at Gymnasium Lechfeld"),
@@ -50,9 +51,9 @@ test("a teacher sees their school, all students and each class, with current sha
 });
 
 test("saving sends exactly the ticked audiences and closes", async () => {
-  vi.mocked(api.decks.getShares).mockResolvedValue(TEACHER);
+  load.mockResolvedValue(TEACHER);
   const onClose = vi.fn();
-  render(<DeckSharesDialog deckId="d1" deckTitle="Zellen" onClose={onClose} />);
+  renderDialog(onClose);
 
   await userEvent.click(
     await screen.findByLabelText("Everyone at Gymnasium Lechfeld"),
@@ -61,7 +62,7 @@ test("saving sends exactly the ticked audiences and closes", async () => {
   await userEvent.click(screen.getByLabelText("Class: Biologie 8A"));
   await userEvent.click(screen.getByRole("button", { name: "Save" }));
 
-  expect(api.decks.setShares).toHaveBeenCalledWith("d1", [
+  expect(save).toHaveBeenCalledWith([
     { scope: "school" },
     { scope: "class", classId: "c2" },
   ]);
@@ -69,7 +70,7 @@ test("saving sends exactly the ticked audiences and closes", async () => {
 });
 
 test("a student is offered only their classmates", async () => {
-  vi.mocked(api.decks.getShares).mockResolvedValue({
+  load.mockResolvedValue({
     shares: [],
     options: {
       accountKind: "student",
@@ -79,7 +80,7 @@ test("a student is offered only their classmates", async () => {
       canShareWithAllStudents: false,
     },
   });
-  render(<DeckSharesDialog deckId="d1" deckTitle="Notes" onClose={vi.fn()} />);
+  renderDialog();
 
   expect(
     await screen.findByLabelText("My classmates in Deutsch A1"),
@@ -88,7 +89,7 @@ test("a student is offered only their classmates", async () => {
 });
 
 test("with no school or class there is nothing to save", async () => {
-  vi.mocked(api.decks.getShares).mockResolvedValue({
+  load.mockResolvedValue({
     shares: [],
     options: {
       accountKind: "teacher",
@@ -98,7 +99,7 @@ test("with no school or class there is nothing to save", async () => {
       canShareWithAllStudents: false,
     },
   });
-  render(<DeckSharesDialog deckId="d1" deckTitle="Notes" onClose={vi.fn()} />);
+  renderDialog();
 
   expect(
     await screen.findByText(/not in a school or class yet/),

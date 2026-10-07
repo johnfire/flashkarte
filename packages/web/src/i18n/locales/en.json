@@ -328,7 +328,7 @@
       "open": "Classes & school",
       "openTitle": "Share this deck with your school or classes",
       "title": "Share \"{{title}}\"",
-      "hint": "Choose who in your school or classes can add this deck. \"Share\" still makes it public for everyone.",
+      "hint": "Choose who in your school or classes can use this. \"Share\" or \"Publish\" still makes it public for everyone.",
       "loadError": "Could not load sharing settings.",
       "saveError": "Could not save sharing settings.",
       "saving": "Saving…",
@@ -376,7 +376,11 @@
     "noPublicCourses": "No public deck collections yet.",
     "clone": "Clone",
     "cloning": "Cloning…",
-    "cloneError": "Couldn't clone that deck collection. Try again."
+    "cloneError": "Couldn't clone that deck collection. Try again.",
+    "sharedTitle": "Courses shared with you",
+    "sharedHint": "Your school, teachers or classmates shared these courses. Add one to start it.",
+    "sharedReadOnly": "Shared by your school, teacher or classmates. You can study it but not change it.",
+    "sharedAddFirst": "Add this course to study its decks."
   },
   "libraryHub": {
     "title": "Library",

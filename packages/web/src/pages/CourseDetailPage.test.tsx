@@ -7,6 +7,11 @@ import type { CourseDetail, DeckWithCounts } from "../api/types";
 import "../i18n";
 import { CourseDetailPage } from "./CourseDetailPage";
 
+// An individual account: no class/school sharing controls.
+vi.mock("../auth/AuthContext", () => ({
+  useAuth: () => ({ user: { id: "u1", accountKind: "individual" } }),
+}));
+
 vi.mock("../api/client", async (importOriginal) => ({
   ...(await importOriginal<typeof import("../api/client")>()),
   api: {
@@ -16,6 +21,8 @@ vi.mock("../api/client", async (importOriginal) => ({
       removeDeck: vi.fn(),
       setPublic: vi.fn(),
       remove: vi.fn(),
+      subscribe: vi.fn(),
+      unsubscribe: vi.fn(),
     },
     decks: { list: vi.fn() },
   },
@@ -28,6 +35,8 @@ const mockedCourses = api.courses as unknown as {
   removeDeck: ReturnType<typeof vi.fn>;
   setPublic: ReturnType<typeof vi.fn>;
   remove: ReturnType<typeof vi.fn>;
+  subscribe: ReturnType<typeof vi.fn>;
+  unsubscribe: ReturnType<typeof vi.fn>;
 };
 const mockedDecks = api.decks as unknown as { list: ReturnType<typeof vi.fn> };
 
@@ -171,5 +180,30 @@ describe("CourseDetailPage", () => {
       ).toBeInTheDocument(),
     );
     vi.unstubAllGlobals();
+  });
+  test("a course shared by a teacher is read-only and can be added", async () => {
+    mockedCourses.get
+      .mockResolvedValueOnce({ ...course, is_shared: true, subscribed: false })
+      .mockResolvedValue({ ...course, is_shared: true, subscribed: true });
+    mockedDecks.list.mockResolvedValue([]);
+    mockedCourses.subscribe.mockResolvedValue(undefined);
+    renderPage();
+
+    expect(await screen.findByText("Shared with you")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Delete" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: "Remove" }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText("Add this course to study its decks."),
+    ).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole("button", { name: "Add" }));
+    expect(mockedCourses.subscribe).toHaveBeenCalledWith("c1");
+    expect(
+      await screen.findByRole("button", { name: "Remove" }),
+    ).toBeInTheDocument();
   });
 });
