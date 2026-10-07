@@ -6,6 +6,7 @@ export interface UserRow {
   email: string;
   role: string;
   account_type: string;
+  account_kind?: string;
   email_verified_at: Date | null;
   display_name: string | null;
   language: string | null;
@@ -22,7 +23,7 @@ interface UserWithHash extends UserRow {
 }
 
 const USER_COLS =
-  "id, email, role, account_type, email_verified_at, display_name, language, two_factor_enabled, " +
+  "id, email, role, account_type, account_kind, email_verified_at, display_name, language, two_factor_enabled, " +
   "speech_enabled, speech_lang, speech_autoplay, speech_rate, is_deletion_protected";
 
 export function findByEmailWithHash(email: string) {

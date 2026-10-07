@@ -20,6 +20,9 @@ export interface AdminUser {
   email: string;
   role: string;
   accountType: string;
+  accountKind: string;
+  schoolId: string | null;
+  teacherVerified: boolean;
   emailVerifiedAt: string | null;
   createdAt: string;
 }
@@ -30,6 +33,9 @@ function toAdminUser(row: AdminUserRow): AdminUser {
     email: row.email,
     role: row.role,
     accountType: row.account_type,
+    accountKind: row.account_kind ?? "individual",
+    schoolId: row.school_id ?? null,
+    teacherVerified: Boolean(row.teacher_verified),
     emailVerifiedAt: row.email_verified_at
       ? new Date(row.email_verified_at).toISOString()
       : null,

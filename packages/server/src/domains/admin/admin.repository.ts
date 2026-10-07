@@ -5,11 +5,17 @@ export interface AdminUserRow {
   email: string;
   role: string;
   account_type: string;
+  account_kind?: string;
+  school_id?: string | null;
+  teacher_verified?: boolean;
   email_verified_at: Date | null;
   created_at: Date;
 }
 
-const COLS = "id, email, role, account_type, email_verified_at, created_at";
+const COLS =
+  "id, email, role, account_type, account_kind, school_id, " +
+  "EXISTS (SELECT 1 FROM teacher_verifications tv WHERE tv.user_id = users.id) AS teacher_verified, " +
+  "email_verified_at, created_at";
 
 export function listUsers() {
   return query<AdminUserRow>(

@@ -34,14 +34,22 @@ const SPEECH_COLS =
 
 const DECK_COLS = `id, reference_number, title, source_filename, created_at, updated_at, is_public, is_official, is_ordered, content_language, ${SPEECH_COLS}`;
 
-// A caller may read a deck/card they don't own when it's official and they've
-// opted in. Shared by every read-path query below; `$N` is the caller's
-// user_id parameter position in that query.
-function subscribedOrOwned(deckAlias: string, userIdParam: number): string {
+// A caller may read a deck/card they don't own when they've added it to their
+// list (deck_subscriptions) and it is either an app (official) deck or one
+// shared with them by their school, teacher or classmates (deck_shared_with,
+// migration 046 — the single definition of that rule). Shared by every
+// read-path query below; `$N` is the caller's user_id parameter position.
+export function subscribedOrOwned(
+  deckAlias: string,
+  userIdParam: number,
+): string {
   return `(${deckAlias}.user_id = $${userIdParam}
-     OR (${deckAlias}.is_official AND EXISTS (
+     OR (EXISTS (
        SELECT 1 FROM deck_subscriptions sub
        WHERE sub.deck_id = ${deckAlias}.id AND sub.user_id = $${userIdParam}
+     ) AND (
+       ${deckAlias}.is_official
+       OR deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid)
      )))`;
 }
 
@@ -270,6 +278,8 @@ export async function reorderSenseCards(
 }
 
 export interface DeckListRow extends DeckRow {
+  // Someone else's deck, shared with the caller (not an app deck).
+  is_shared: boolean;
   card_count: string;
   due_count: string;
   lesson_count: string;
@@ -286,6 +296,7 @@ export interface DeckListRow extends DeckRow {
 export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
     `SELECT d.id, d.reference_number, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered, d.content_language,
+       (d.user_id <> $1 AND NOT d.is_official) AS is_shared,
        d.speech_enabled, d.speech_front_lang, d.speech_back_lang, d.speech_autoplay, d.speech_rate,
        s.total AS card_count,
        s.due AS due_count,
@@ -602,6 +613,17 @@ export async function subscribeOfficial(
     [userId, deckId],
   );
   return already !== null;
+}
+
+export async function isSubscribed(
+  userId: string,
+  deckId: string,
+): Promise<boolean> {
+  const row = await queryOne<{ deck_id: string }>(
+    "SELECT deck_id FROM deck_subscriptions WHERE user_id = $1 AND deck_id = $2",
+    [userId, deckId],
+  );
+  return row !== null;
 }
 
 /** Remove an official deck from the caller's own deck list. Idempotent. */
