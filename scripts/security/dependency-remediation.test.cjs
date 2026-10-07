@@ -7,6 +7,29 @@ const { Worker } = require("node:worker_threads");
 const proxyAddress = require("proxy-addr");
 const { SourceMapConsumer, SourceNode } = require("source-map-js");
 const { loadNycConfig } = require("@istanbuljs/load-nyc-config");
+const sharp = require("sharp");
+const { gte } = require("semver");
+
+test("SVG rendering uses the patched librsvg and preserves PNG output", async () => {
+  // GHSA-wq5f-xc86-pv6w fixes the bundled renderer in sharp 0.35.5.
+  assert.ok(gte(sharp.versions.sharp, "0.35.5"));
+  assert.ok(gte(sharp.versions.rsvg, "2.63.2"));
+  const svg = Buffer.from(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630">' +
+      '<rect width="1200" height="630" fill="#ff0000"/></svg>',
+  );
+  const png = await sharp(svg).png().toBuffer();
+  const metadata = await sharp(png).metadata();
+  assert.equal(metadata.format, "png");
+  assert.equal(metadata.width, 1200);
+  assert.equal(metadata.height, 630);
+  const pixel = await sharp(png)
+    .extract({ left: 0, top: 0, width: 1, height: 1 })
+    .removeAlpha()
+    .raw()
+    .toBuffer();
+  assert.deepEqual([...pixel], [255, 0, 0]);
+});
 
 function runBoundedWorker(code) {
   return new Promise((resolve, reject) => {
