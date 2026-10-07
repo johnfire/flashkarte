@@ -5,6 +5,7 @@
     "packages/*"
   ],
   "scripts": {
+    "postinstall": "node scripts/security/apply-dependency-patches.cjs",
     "test": "npm run test:dependency-security && npm run test --workspaces --if-present",
     "test:dependency-security": "node --test scripts/security/dependency-remediation.test.cjs",
     "build": "npm run build --workspaces --if-present",
@@ -31,6 +32,7 @@
     "eslint": "^9.39.4",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.7.0",
+    "patch-package": "^8.0.1",
     "prettier": "^3.9.5",
     "typescript-eslint": "^8.64.0"
   }

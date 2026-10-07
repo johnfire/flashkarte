@@ -4,6 +4,8 @@ WORKDIR /app
 ARG VITE_MCP_URL
 ENV VITE_MCP_URL=${VITE_MCP_URL}
 COPY package.json package-lock.json ./
+COPY scripts/security/apply-dependency-patches.cjs scripts/security/
+COPY patches patches
 COPY packages/shared/package.json packages/shared/
 COPY packages/server/package.json packages/server/
 COPY packages/web/package.json packages/web/
@@ -23,6 +25,7 @@ RUN npm run build --workspace=packages/shared \
 FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS proddeps
 WORKDIR /app
 COPY package.json package-lock.json ./
+COPY scripts/security/apply-dependency-patches.cjs scripts/security/
 COPY packages/shared/package.json packages/shared/
 COPY packages/server/package.json packages/server/
 RUN npm ci --omit=dev --workspace=packages/server
@@ -47,6 +50,7 @@ CMD ["node", "dist/server.js"]
 FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS mcpdeps
 WORKDIR /app
 COPY package.json package-lock.json ./
+COPY scripts/security/apply-dependency-patches.cjs scripts/security/
 COPY packages/shared/package.json packages/shared/
 COPY packages/mcp/package.json packages/mcp/
 RUN npm ci --omit=dev --workspace=packages/mcp

@@ -1,0 +1,127 @@
+diff --git a/node_modules/braces/lib/compile.js b/node_modules/braces/lib/compile.js
+index dce69be..32a2e8c 100644
+--- a/node_modules/braces/lib/compile.js
++++ b/node_modules/braces/lib/compile.js
+@@ -1,10 +1,13 @@
+ 'use strict';
+ 
++const assertDepth = require('./depth-limit');
++
+ const fill = require('fill-range');
+ const utils = require('./utils');
+ 
+ const compile = (ast, options = {}) => {
+-  const walk = (node, parent = {}) => {
++  const walk = (node, parent = {}, depth = 0) => {
++    assertDepth(depth);
+     const invalidBlock = utils.isInvalidBrace(parent);
+     const invalidNode = node.invalid === true && options.escapeInvalid === true;
+     const invalid = invalidBlock === true || invalidNode === true;
+@@ -47,7 +50,7 @@ const compile = (ast, options = {}) => {
+ 
+     if (node.nodes) {
+       for (const child of node.nodes) {
+-        output += walk(child, node);
++        output += walk(child, node, depth + 1);
+       }
+     }
+ 
+diff --git a/node_modules/braces/lib/depth-limit.js b/node_modules/braces/lib/depth-limit.js
+new file mode 100644
+index 0000000..1d0b0f8
+--- /dev/null
++++ b/node_modules/braces/lib/depth-limit.js
+@@ -0,0 +1,7 @@
++'use strict';
++
++module.exports = depth => {
++  if (depth > 100) {
++    throw new SyntaxError('Brace nesting exceeds maximum depth (100)');
++  }
++};
+diff --git a/node_modules/braces/lib/expand.js b/node_modules/braces/lib/expand.js
+index 35b2c41..a9322cc 100644
+--- a/node_modules/braces/lib/expand.js
++++ b/node_modules/braces/lib/expand.js
+@@ -1,5 +1,7 @@
+ 'use strict';
+ 
++const assertDepth = require('./depth-limit');
++
+ const fill = require('fill-range');
+ const stringify = require('./stringify');
+ const utils = require('./utils');
+@@ -33,7 +35,8 @@ const append = (queue = '', stash = '', enclose = false) => {
+ const expand = (ast, options = {}) => {
+   const rangeLimit = options.rangeLimit === undefined ? 1000 : options.rangeLimit;
+ 
+-  const walk = (node, parent = {}) => {
++  const walk = (node, parent = {}, depth = 0) => {
++    assertDepth(depth);
+     node.queue = [];
+ 
+     let p = parent;
+@@ -100,7 +103,7 @@ const expand = (ast, options = {}) => {
+       }
+ 
+       if (child.nodes) {
+-        walk(child, node);
++        walk(child, node, depth + 1);
+       }
+     }
+ 
+diff --git a/node_modules/braces/lib/parse.js b/node_modules/braces/lib/parse.js
+index 3a6988e..843a14e 100644
+--- a/node_modules/braces/lib/parse.js
++++ b/node_modules/braces/lib/parse.js
+@@ -1,5 +1,7 @@
+ 'use strict';
+ 
++const assertDepth = require('./depth-limit');
++
+ const stringify = require('./stringify');
+ 
+ /**
+@@ -145,6 +147,7 @@ const parse = (input, options = {}) => {
+     if (value === CHAR_LEFT_PARENTHESES) {
+       block = push({ type: 'paren', nodes: [] });
+       stack.push(block);
++      assertDepth(stack.length);
+       push({ type: 'text', value });
+       continue;
+     }
+@@ -211,6 +214,7 @@ const parse = (input, options = {}) => {
+ 
+       block = push(brace);
+       stack.push(block);
++      assertDepth(stack.length);
+       push({ type: 'open', value });
+       continue;
+     }
+diff --git a/node_modules/braces/lib/stringify.js b/node_modules/braces/lib/stringify.js
+index 8bcf872..3561463 100644
+--- a/node_modules/braces/lib/stringify.js
++++ b/node_modules/braces/lib/stringify.js
+@@ -1,9 +1,12 @@
+ 'use strict';
+ 
++const assertDepth = require('./depth-limit');
++
+ const utils = require('./utils');
+ 
+ module.exports = (ast, options = {}) => {
+-  const stringify = (node, parent = {}) => {
++  const stringify = (node, parent = {}, depth = 0) => {
++    assertDepth(depth);
+     const invalidBlock = options.escapeInvalid && utils.isInvalidBrace(parent);
+     const invalidNode = node.invalid === true && options.escapeInvalid === true;
+     let output = '';
+@@ -21,7 +24,7 @@ module.exports = (ast, options = {}) => {
+ 
+     if (node.nodes) {
+       for (const child of node.nodes) {
+-        output += stringify(child);
++        output += stringify(child, {}, depth + 1);
+       }
+     }
+     return output;
