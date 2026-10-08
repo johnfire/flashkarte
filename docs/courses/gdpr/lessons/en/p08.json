@@ -231,7 +231,7 @@
       ],
       "variants": [
         {
-          "prompt": "When is a photograph of a person biometric data under the GDPR?",
+          "prompt": "Is every photograph of a person biometric data under the GDPR?",
           "options": [
             {
               "correct": false,
@@ -329,7 +329,7 @@
       ],
       "variants": [
         {
-          "prompt": "What does Article 10 require for processing criminal-conviction data?",
+          "prompt": "Is consent alone enough to process criminal-conviction data under Article 10?",
           "options": [
             {
               "correct": false,

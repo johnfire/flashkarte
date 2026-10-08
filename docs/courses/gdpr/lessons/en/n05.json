@@ -138,7 +138,7 @@
       ],
       "variants": [
         {
-          "prompt": "What was the legal status of COM(2025) 837 on 7 October 2026?",
+          "prompt": "Had COM(2025) 837 become law by 7 October 2026?",
           "options": [
             {
               "correct": false,

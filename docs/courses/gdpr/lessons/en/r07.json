@@ -211,7 +211,7 @@
       ],
       "variants": [
         {
-          "prompt": "Why does fully automatic applicant rejection engage Article 22?",
+          "prompt": "Does fully automatic applicant rejection engage Article 22?",
           "options": [
             {
               "correct": false,

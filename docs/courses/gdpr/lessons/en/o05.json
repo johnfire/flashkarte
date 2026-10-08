@@ -342,7 +342,7 @@
       ],
       "variants": [
         {
-          "prompt": "How does encryption affect the duty to tell affected people?",
+          "prompt": "Must affected people always be told about a breach of strongly encrypted data?",
           "options": [
             {
               "correct": false,

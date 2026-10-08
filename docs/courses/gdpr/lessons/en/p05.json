@@ -324,7 +324,7 @@
       ],
       "variants": [
         {
-          "prompt": "Under Article 7(3), how easy must withdrawing consent be?",
+          "prompt": "Under Article 7(3), may withdrawing consent be harder than giving it?",
           "options": [
             {
               "correct": false,

@@ -139,7 +139,7 @@
       ],
       "variants": [
         {
-          "prompt": "Under Fashion ID, what is the website operator's role for the plug-in's data flow?",
+          "prompt": "Under Fashion ID, can the website operator be a controller for the plug-in's data flow?",
           "options": [
             {
               "correct": false,

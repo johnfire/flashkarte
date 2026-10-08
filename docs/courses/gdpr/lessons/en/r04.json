@@ -238,7 +238,7 @@
       ],
       "variants": [
         {
-          "prompt": "Does the right to erasure override a legal duty to keep records?",
+          "prompt": "How does a legal duty to keep records affect the right to erasure?",
           "options": [
             {
               "correct": true,

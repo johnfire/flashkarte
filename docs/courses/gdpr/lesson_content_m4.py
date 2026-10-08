@@ -227,7 +227,7 @@ LESSONS = {
                        ("Anywhere in the world", "It must be in the EU."),
                        ("Only in Brussels", "Any EU country where the people concerned are."),
             ),
-            assessment([0], [4], "Does appointing a representative protect the non-EU business from legal action?", "What does Article 27(5) say about legal actions?",
+            assessment([0], [4], "Does appointing a representative protect the non-EU business from legal action?", "Under Article 27(5), can a non-EU business avoid legal action by appointing a representative?",
                        ("No, actions can still be brought against the business itself", "Article 27(5)."),
                        ("Yes, only the representative can be sued", "Article 27(5) preserves actions against the business."),
                        ("Yes, if the contract says so", "A contract cannot change Article 27(5).")),

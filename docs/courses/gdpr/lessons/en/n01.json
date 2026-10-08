@@ -238,7 +238,7 @@
       ],
       "variants": [
         {
-          "prompt": "What did Planet49 decide about pre-checked cookie boxes?",
+          "prompt": "Under Planet49, do pre-checked cookie boxes give valid consent?",
           "options": [
             {
               "correct": false,
@@ -335,7 +335,7 @@
       ],
       "variants": [
         {
-          "prompt": "Is a basket cookie for an order the user requested exempt?",
+          "prompt": "Does a basket cookie for an order the user requested need consent?",
           "options": [
             {
               "correct": false,

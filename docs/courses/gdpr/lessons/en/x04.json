@@ -216,7 +216,7 @@
       ],
       "variants": [
         {
-          "prompt": "What does Article 27(5) say about legal actions?",
+          "prompt": "Under Article 27(5), can a non-EU business avoid legal action by appointing a representative?",
           "options": [
             {
               "correct": true,

@@ -280,7 +280,7 @@
       ],
       "variants": [
         {
-          "prompt": "Who must implement Article 32 security measures?",
+          "prompt": "Must processors, as well as controllers, implement Article 32 security measures?",
           "options": [
             {
               "correct": false,

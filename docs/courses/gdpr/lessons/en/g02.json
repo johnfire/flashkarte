@@ -191,7 +191,7 @@
       ],
       "variants": [
         {
-          "prompt": "How does the GDPR treat the personal data of people who have died?",
+          "prompt": "Does the GDPR apply to the personal data of people who have died?",
           "options": [
             {
               "correct": false,

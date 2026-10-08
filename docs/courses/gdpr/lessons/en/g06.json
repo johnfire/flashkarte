@@ -151,7 +151,7 @@
       ],
       "variants": [
         {
-          "prompt": "Is a private address book of friends covered by the GDPR?",
+          "prompt": "Is the owner's private list of friends' numbers covered by the GDPR?",
           "options": [
             {
               "correct": false,
@@ -200,7 +200,7 @@
       ],
       "variants": [
         {
-          "prompt": "When does the household exemption stop applying to a private contact list?",
+          "prompt": "What changes once a private contact list is used to advertise a business?",
           "options": [
             {
               "correct": false,
@@ -248,7 +248,7 @@
       ],
       "variants": [
         {
-          "prompt": "Does an EU business escape the GDPR by processing data outside the EU?",
+          "prompt": "Does the GDPR still apply when an EU business processes its data outside the EU?",
           "options": [
             {
               "correct": true,
