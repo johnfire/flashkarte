@@ -35,7 +35,7 @@
         {
           "type": "list",
           "items": [
-            "processing that is **occasional**, does not include large-scale special-category or criminal-offence data, and is **unlikely to result in a risk**; or",
+            "processing that is **occasional**, does not include large-scale processing of the sensitive data covered by Articles 9 and 10, and is **unlikely to result in a risk**; or",
             "a public authority or body."
           ]
         }

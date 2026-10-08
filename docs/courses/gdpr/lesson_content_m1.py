@@ -72,7 +72,7 @@ LESSONS = {
                 "Longer storage is allowed only for public-interest archiving, research or statistics, with the Article 89(1) safeguards.",
             ],
             [
-                "Recital 39 says the controller should set **time limits for erasure or periodic review**, so that data is not kept longer than necessary.",
+                "Recital 39 says the organisation responsible should set **time limits for erasure or periodic review**, so that data is not kept longer than necessary.",
                 "Sunfield could decide, and write down, that loyalty accounts unused for a stated period are deleted.",
             ],
             [

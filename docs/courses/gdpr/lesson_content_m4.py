@@ -51,7 +51,7 @@ LESSONS = {
         ],
         "questions": [
             assessment([0], [1, 6], "Which of these is a transfer under Chapter V?", "Which situation engages the GDPR's rules on international transfers?",
-                       ("A processor sends salary data to its team in a non-EU country", "Data goes to a third country (Article 44)."),
+                       ("A payroll firm sends salary data to its team in a non-EU country", "Data goes to a third country (Article 44)."),
                        ("Sunfield sends data between two of its shops in Germany", "The data stays inside the EU."),
                        ("Sunfield deletes data on its EU server", "Deletion is processing, but nothing is transferred.")),
             assessment([1], [2], "The Commission has adopted an adequacy decision for a country. What does a transfer there need?", "How does an adequacy decision affect transfers to that country?",
@@ -201,7 +201,7 @@ LESSONS = {
             [
                 "The duty does not apply to (Article 27(2)):",
                 {"type": "list", "items": [
-                    "processing that is **occasional**, does not include large-scale special-category or criminal-offence data, and is **unlikely to result in a risk**; or",
+                    "processing that is **occasional**, does not include large-scale processing of the sensitive data covered by Articles 9 and 10, and is **unlikely to result in a risk**; or",
                     "a public authority or body.",
                 ]},
             ],

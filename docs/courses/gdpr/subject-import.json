@@ -894,6 +894,12 @@
       "reason": "The under-250 exemption does not apply to special categories."
     },
     {
+      "from": "controller",
+      "to": "privacy-by-design",
+      "strength": "requires",
+      "reason": "Article 25 is a duty of the controller, decided when it chooses the means."
+    },
+    {
       "from": "data-minimisation",
       "to": "privacy-by-design",
       "strength": "requires",
@@ -928,6 +934,18 @@
       "to": "sub-processors",
       "strength": "requires",
       "reason": "Sub-processor rules are terms of the processor contract."
+    },
+    {
+      "from": "controller",
+      "to": "security-measures",
+      "strength": "requires",
+      "reason": "Article 32 is a duty of the controller, so the learner needs that role."
+    },
+    {
+      "from": "processor",
+      "to": "security-measures",
+      "strength": "requires",
+      "reason": "Article 32 binds processors as well as controllers."
     },
     {
       "from": "integrity-confidentiality",
@@ -994,6 +1012,12 @@
       "to": "dpia",
       "strength": "requires",
       "reason": "A DPIA is a risk-based controller measure."
+    },
+    {
+      "from": "controller",
+      "to": "dpo",
+      "strength": "requires",
+      "reason": "The DPO is designated by, and advises, the controller or processor."
     },
     {
       "from": "special-categories",

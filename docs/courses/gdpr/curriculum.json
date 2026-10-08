@@ -1139,6 +1139,12 @@
       "reason": "The under-250 exemption does not apply to special categories."
     },
     {
+      "parent": "controller",
+      "child": "privacy-by-design",
+      "kind": "requires",
+      "reason": "Article 25 is a duty of the controller, decided when it chooses the means."
+    },
+    {
       "parent": "data-minimisation",
       "child": "privacy-by-design",
       "kind": "requires",
@@ -1173,6 +1179,18 @@
       "child": "sub-processors",
       "kind": "requires",
       "reason": "Sub-processor rules are terms of the processor contract."
+    },
+    {
+      "parent": "controller",
+      "child": "security-measures",
+      "kind": "requires",
+      "reason": "Article 32 is a duty of the controller, so the learner needs that role."
+    },
+    {
+      "parent": "processor",
+      "child": "security-measures",
+      "kind": "requires",
+      "reason": "Article 32 binds processors as well as controllers."
     },
     {
       "parent": "integrity-confidentiality",
@@ -1239,6 +1257,12 @@
       "child": "dpia",
       "kind": "requires",
       "reason": "A DPIA is a risk-based controller measure."
+    },
+    {
+      "parent": "controller",
+      "child": "dpo",
+      "kind": "requires",
+      "reason": "The DPO is designated by, and advises, the controller or processor."
     },
     {
       "parent": "special-categories",
@@ -1899,6 +1923,10 @@
           "reason": "Pseudonymisation is the example measure Article 25 names."
         },
         {
+          "lesson_id": "G05",
+          "reason": "Article 25 is a duty of the controller, decided when it chooses the means."
+        },
+        {
           "lesson_id": "P02",
           "reason": "Design measures implement principles such as minimisation."
         }
@@ -1932,6 +1960,10 @@
         {
           "lesson_id": "G03",
           "reason": "Pseudonymisation is one of the listed security measures."
+        },
+        {
+          "lesson_id": "G05",
+          "reason": "Article 32 is a duty of the controller, so the learner needs that role."
         },
         {
           "lesson_id": "P03",
@@ -2003,6 +2035,10 @@
         {
           "lesson_id": "G01",
           "reason": "The DPO cooperates with and is the contact for the supervisory authority."
+        },
+        {
+          "lesson_id": "G05",
+          "reason": "The DPO is designated by, and advises, the controller or processor."
         },
         {
           "lesson_id": "P08",

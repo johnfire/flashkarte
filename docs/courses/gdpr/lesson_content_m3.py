@@ -389,7 +389,7 @@ LESSONS = {
                 ]},
             ],
             [
-                "**Tasks** (Article 39(1)): to inform and advise the organisation and its staff; to **monitor compliance**, including training and audits; to advise on DPIAs; to **cooperate with the supervisory authority** and act as its contact point.",
+                "**Tasks** (Article 39(1)): to inform and advise the organisation and its staff; to **monitor compliance**, including training and audits; to advise on data protection impact assessments (DPIAs); to **cooperate with the supervisory authority** and act as its contact point.",
                 "People may contact the DPO about their data and rights (Article 38(4)).",
             ],
             [

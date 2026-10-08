@@ -13,6 +13,10 @@
         "reason": "Pseudonymisation is one of the listed security measures."
       },
       {
+        "lesson": "g05",
+        "reason": "Article 32 is a duty of the controller, so the learner needs that role."
+      },
+      {
         "lesson": "p03",
         "reason": "Article 32 implements the integrity and confidentiality principle."
       }
