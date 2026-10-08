@@ -295,7 +295,7 @@ LESSONS = {
                        ("An interest, necessity, and a balance that does not override it", "These three steps are in the wording of Article 6(1)(f)."),
                        ("Only that the business benefits", "Benefit alone skips necessity and the balance."),
                        ("The person's consent, plus an interest", "Consent is a separate basis. It is not part of this test.")),
-            assessment([0], [3, 5], "Sunfield considers a camera in the staff break room to prevent theft. How is the balance likely to fall?", "Why might filming the staff break room fail the legitimate-interests test?",
+            assessment([0], [3, 5], "Sunfield considers a camera in the staff break room to prevent theft. How is the balance likely to fall?", "Filming the staff break room: which way is the legitimate-interests balance likely to fall?",
                        ("Against Sunfield: staff do not expect it there", "Recital 47: interests override where processing is not reasonably expected."),
                        ("For Sunfield, because theft prevention is legitimate", "A legitimate interest still has to pass necessity and the balance."),
                        ("For Sunfield, because staff are employees", "An employment relationship does not remove the balance.")),
