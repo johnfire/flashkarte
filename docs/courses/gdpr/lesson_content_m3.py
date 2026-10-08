@@ -50,7 +50,7 @@ LESSONS = {
             ],
         ],
         "questions": [
-            assessment([0], [1, 2], "How should a controller choose its data protection measures under Article 24?", "What decides how strong a controller's Article 24 measures must be?",
+            assessment([0], [1, 2], "How should a controller choose its data protection measures under Article 24?", "Under Article 24, how are a controller's measures matched to its situation?",
                        ("By nature, scope, context, purposes and risk", "Article 24(1)."),
                        ("Identically for every business, whatever its size", "Article 24 requires appropriate measures, so they vary."),
                        ("Only once a regulator demands them", "Article 24 applies from the start.")),
