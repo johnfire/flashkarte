@@ -87,7 +87,7 @@
     {
       "ref": "screen-4",
       "blocks": [
-        "Im Urteil *Planet49* (Rechtssache C-673/17, 1. Oktober 2019) hat der Gerichtshof der Europäischen Union (EuGH) Art. 5 Abs. 3 zusammen mit der Definition der Einwilligung in der DSGVO ausgelegt, also mit Art. 4 Nr. 11 und Art. 6 Abs. 1 Buchst. a.",
+        "Im Urteil *Planet49* (Rechtssache C-673/17, 1. Oktober 2019) hat der Gerichtshof der Europäischen Union (EuGH) Art. 5 Abs. 3 zusammen mit der Definition der Einwilligung in der DSGVO ausgelegt, also mit Art. 4 Nr. 11 und Art. 6 Abs. 1 Buchst. a. Die Entscheidung selbst steht im **Tenor**, dem eigentlichen Urteilsspruch.",
         "**Nr. 1 des Tenors**: Eine Einwilligung ist **nicht wirksam**, wenn sie über ein **voreingestelltes Ankreuzkästchen** erteilt wird, das der Nutzer abwählen muss, um die Einwilligung zu verweigern.",
         "**Nr. 2 des Tenors**: Die Regel gilt unabhängig davon, ob es sich bei den gespeicherten Informationen um personenbezogene Daten handelt oder nicht."
       ],
@@ -133,7 +133,7 @@
         {
           "type": "list",
           "items": [
-            "Ein Warenkorb-Cookie, das sich merkt, welches Brot jemand gerade bestellt, ist für die gewünschte Bestellung wahrscheinlich unbedingt erforderlich und deshalb ausgenommen;",
+            "ein Warenkorb-Cookie, das sich merkt, welches Brot jemand gerade bestellt, ist für die gewünschte Bestellung wahrscheinlich unbedingt erforderlich und deshalb ausgenommen;",
             "ein Analyse-Cookie ist für die Bestellung nicht erforderlich. Es braucht deshalb vorher eine Einwilligung, mit klaren Informationen, auch zur Funktionsdauer und zum Zugriff Dritter."
           ]
         },

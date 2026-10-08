@@ -20,7 +20,7 @@
     {
       "ref": "screen-1",
       "blocks": [
-        "Aufsichtsbehörden haben **Untersuchungsbefugnisse** (Art. 58 Abs. 1): Sie können anweisen, Informationen bereitzustellen, Datenschutzüberprüfungen durchführen und Zugang zu personenbezogenen Daten und zu Räumlichkeiten erhalten."
+        "Aufsichtsbehörden haben **Untersuchungsbefugnisse** (Art. 58 Abs. 1): Sie können Verantwortliche und Auftragsverarbeiter anweisen, Informationen bereitzustellen, Datenschutzüberprüfungen durchführen und Zugang zu personenbezogenen Daten und zu Räumlichkeiten erhalten."
       ],
       "sources": [
         {
@@ -251,7 +251,7 @@
       ],
       "variants": [
         {
-          "prompt": "In welchen Bußgeldrahmen fällt ein Verstoß gegen Art. 28, die Vorschrift über Auftragsverarbeiter?",
+          "prompt": "Welcher Bußgeldrahmen gilt für einen Verstoß gegen Art. 28, die Vorschrift über Auftragsverarbeiter?",
           "options": [
             {
               "correct": true,

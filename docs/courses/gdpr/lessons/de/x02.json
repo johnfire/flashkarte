@@ -24,7 +24,7 @@
       "ref": "screen-1",
       "blocks": [
         "Jede Aufsichtsbehörde ist im Hoheitsgebiet ihres eigenen Mitgliedstaats zuständig (Art. 55 Abs. 1).",
-        "Verarbeiten Behörden oder private Stellen Daten zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe im öffentlichen Interesse, ist die Aufsichtsbehörde dieses Mitgliedstaats zuständig, und die Regeln über die federführende Aufsichtsbehörde gelten nicht (Art. 55 Abs. 2). Gerichte unterliegen bei ihrer justiziellen Tätigkeit nicht der Aufsicht dieser Behörden (Art. 55 Abs. 3)."
+        "Verarbeiten Behörden oder private Stellen Daten zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe im öffentlichen Interesse, ist die Aufsichtsbehörde des betroffenen Mitgliedstaats zuständig, und die Regeln über die federführende Aufsichtsbehörde gelten nicht (Art. 55 Abs. 2). Gerichte unterliegen bei ihrer justiziellen Tätigkeit nicht der Aufsicht dieser Behörden (Art. 55 Abs. 3)."
       ],
       "sources": [
         {
@@ -188,7 +188,7 @@
       ],
       "variants": [
         {
-          "prompt": "Mit wem hat ein Verantwortlicher nach Art. 56 Abs. 6 bei grenzüberschreitender Verarbeitung zu tun?",
+          "prompt": "Wer ist nach Art. 56 Abs. 6 bei grenzüberschreitender Verarbeitung der Ansprechpartner eines Verantwortlichen?",
           "options": [
             {
               "correct": false,

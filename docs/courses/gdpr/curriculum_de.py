@@ -90,7 +90,7 @@ CONCEPT_NAMES = {
     "joint-control-scope": "Reichweite der gemeinsamen Verantwortlichkeit",
     "ai-act-relationship": "DSGVO und KI-Verordnung",
     "child-consent": "Einwilligung von Kindern bei Online-Diensten",
-    "pending-proposals": "Anhängige Änderungsvorschläge",
+    "pending-proposals": "Noch nicht beschlossene Änderungsvorschläge",
 }
 
 # Short source names used in each screen's source list.

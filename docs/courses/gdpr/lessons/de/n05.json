@@ -2,8 +2,8 @@
   "module": "Über die Grundlagen hinaus",
   "lesson": {
     "slug": "n05",
-    "title": "Was sich ändern kann: anhängige Vorschläge",
-    "summary": "Das geltende Recht von anhängigen Vorschlägen unterscheiden und wissen, wie Sie Änderungen prüfen.",
+    "title": "Was sich ändern kann: noch nicht beschlossene Vorschläge",
+    "summary": "Das geltende Recht von noch nicht beschlossenen Vorschlägen unterscheiden und wissen, wie Sie Änderungen prüfen.",
     "covers": [
       "pending-proposals"
     ],
@@ -18,7 +18,7 @@
       ],
       "sources": [
         {
-          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, abgerufen am 7. Oktober 2026",
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
           "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
         },
         {
@@ -45,7 +45,7 @@
       ],
       "sources": [
         {
-          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, abgerufen am 7. Oktober 2026",
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
           "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
         },
         {
@@ -66,7 +66,7 @@
       ],
       "sources": [
         {
-          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, abgerufen am 7. Oktober 2026",
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
           "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
         },
         {
@@ -95,7 +95,7 @@
       ],
       "sources": [
         {
-          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, abgerufen am 7. Oktober 2026",
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
           "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
         },
         {

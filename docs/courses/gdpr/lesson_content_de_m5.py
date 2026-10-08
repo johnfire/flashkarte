@@ -26,7 +26,7 @@ LESSONS = {
                 ]},
             ],
             [
-                "Im Urteil *Planet49* (Rechtssache C-673/17, 1. Oktober 2019) hat der Gerichtshof der Europäischen Union (EuGH) Art. 5 Abs. 3 zusammen mit der Definition der Einwilligung in der DSGVO ausgelegt, also mit Art. 4 Nr. 11 und Art. 6 Abs. 1 Buchst. a.",
+                "Im Urteil *Planet49* (Rechtssache C-673/17, 1. Oktober 2019) hat der Gerichtshof der Europäischen Union (EuGH) Art. 5 Abs. 3 zusammen mit der Definition der Einwilligung in der DSGVO ausgelegt, also mit Art. 4 Nr. 11 und Art. 6 Abs. 1 Buchst. a. Die Entscheidung selbst steht im **Tenor**, dem eigentlichen Urteilsspruch.",
                 "**Nr. 1 des Tenors**: Eine Einwilligung ist **nicht wirksam**, wenn sie über ein **voreingestelltes Ankreuzkästchen** erteilt wird, das der Nutzer abwählen muss, um die Einwilligung zu verweigern.",
                 "**Nr. 2 des Tenors**: Die Regel gilt unabhängig davon, ob es sich bei den gespeicherten Informationen um personenbezogene Daten handelt oder nicht.",
             ],
@@ -36,7 +36,7 @@ LESSONS = {
             [
                 "Die Website der Bäckerei Sonnenfeld:",
                 {"type": "list", "items": [
-                    "Ein Warenkorb-Cookie, das sich merkt, welches Brot jemand gerade bestellt, ist für die gewünschte Bestellung wahrscheinlich unbedingt erforderlich und deshalb ausgenommen;",
+                    "ein Warenkorb-Cookie, das sich merkt, welches Brot jemand gerade bestellt, ist für die gewünschte Bestellung wahrscheinlich unbedingt erforderlich und deshalb ausgenommen;",
                     "ein Analyse-Cookie ist für die Bestellung nicht erforderlich. Es braucht deshalb vorher eine Einwilligung, mit klaren Informationen, auch zur Funktionsdauer und zum Zugriff Dritter.",
                 ]},
                 "Werden über Cookies personenbezogene Daten erhoben, muss ihre Verarbeitung außerdem der DSGVO entsprechen.",
@@ -72,14 +72,14 @@ LESSONS = {
         "sources": [("CJ-FASHIONID", "Tenor, Nr. 2 und 3, und Rn. 84"), ("GDPR", "Art. 4 Nr. 7, 6 Abs. 1 Buchst. f, 26")],
         "screens": [
             [
-                "Gemeinsam Verantwortliche legen die Zwecke der und die Mittel zur Verarbeitung gemeinsam fest (Art. 26). Doch **wie weit** reicht die gemeinsame Verantwortlichkeit? Das Urteil *Fashion ID* (Rechtssache C-40/17, 29. Juli 2019) gibt darauf eine praktische Antwort.",
+                "Gemeinsam Verantwortliche legen die Zwecke der und die Mittel zur Verarbeitung gemeinsam fest (Art. 26). Doch **wie weit** reicht die gemeinsame Verantwortlichkeit? Das Urteil *Fashion ID* (Rechtssache C-40/17, 29. Juli 2019) gibt darauf eine praktische Antwort. Die Entscheidung selbst steht im **Tenor**, dem eigentlichen Urteilsspruch.",
                 "Der Fall wurde noch nach der Vorgängerin der DSGVO entschieden, der Richtlinie 95/46/EG. Diese Richtlinie definierte den Verantwortlichen mit denselben Worten wie Art. 4 Nr. 7: als Stelle, die „über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet“.",
             ],
             [
                 "**Der Sachverhalt in Kürze**: Eine Website hatte ein Social Plugin eingebunden. Öffnete jemand die Seite, veranlasste das Plugin den Browser dieser Person, Inhalte vom Anbieter des Plugins anzufordern. Dabei wurden personenbezogene Daten der Person an diesen Anbieter übermittelt.",
             ],
             [
-                "**Nr. 2 des Tenors**: Der Betreiber der Website **kann Verantwortlicher sein**. In seiner Begründung (Rn. 84) sieht der Gerichtshof ihn als **gemeinsam mit dem Anbieter** verantwortlich an.",
+                "**Nr. 2 des Tenors**: Der Betreiber der Website **kann Verantwortlicher sein**. In seiner Begründung (Randnummer 84) sieht der Gerichtshof ihn als **gemeinsam mit dem Anbieter** verantwortlich an.",
                 "Diese Verantwortlichkeit ist aber **beschränkt** auf die Vorgänge, für die er tatsächlich über die Zwecke und Mittel entscheidet: das **Erheben der Daten und deren Weitergabe durch Übermittlung**. Sie erfasst nicht, was der Anbieter danach mit den Daten macht.",
             ],
             [
@@ -196,10 +196,10 @@ LESSONS = {
         ],
     },
     "N05": {
-        "title": "Was sich ändern kann: anhängige Vorschläge",
-        "summary": "Das geltende Recht von anhängigen Vorschlägen unterscheiden und wissen, wie Sie Änderungen prüfen.",
+        "title": "Was sich ändern kann: noch nicht beschlossene Vorschläge",
+        "summary": "Das geltende Recht von noch nicht beschlossenen Vorschlägen unterscheiden und wissen, wie Sie Änderungen prüfen.",
         "prerequisites": {},
-        "sources": [("GDPR", "EUR-Lex-Dokumentinformationen, abgerufen am 7. Oktober 2026"), ("PROP-501", "Titel und Datum"), ("PROP-837", "Titel und Datum")],
+        "sources": [("GDPR", "EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026"), ("PROP-501", "Titel und Datum"), ("PROP-837", "Titel und Datum")],
         "screens": [
             [
                 "Am **7. Oktober 2026** verzeichnete der EUR-Lex-Eintrag zur DSGVO **keinen ändernden Rechtsakt**. Die Tabelle im Abschnitt »Geändert durch« war leer. Verzeichnet waren drei Berichtigungen, also Korrekturen des veröffentlichten Textes.",

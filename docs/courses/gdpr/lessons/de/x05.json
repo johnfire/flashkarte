@@ -11,7 +11,7 @@
     "prerequisites": [
       {
         "lesson": "x01",
-        "reason": "Das Schrems-II-Urteil legt die Grundlage der Standarddatenschutzklauseln aus."
+        "reason": "Das Schrems-II-Urteil legt aus, was für Übermittlungen auf der Grundlage von Standarddatenschutzklauseln gilt."
       },
       {
         "lesson": "x03",
@@ -24,7 +24,7 @@
       "ref": "screen-1",
       "blocks": [
         "In der **Rechtssache C-311/18**, bekannt als *Schrems II*, hat der Gerichtshof der Europäischen Union (EuGH) am 16. Juli 2020 über zwei Grundlagen für Übermittlungen entschieden: die Standarddatenschutzklauseln der Kommission und den Angemessenheitsbeschluss zum **EU-US-Datenschutzschild** (»Privacy Shield«).",
-        "Das Urteil ist bis heute der Maßstab dafür, wie sorgfältig Übermittlungen geprüft werden müssen."
+        "Das Urteil ist bis heute der Maßstab dafür, wie sorgfältig Übermittlungen geprüft werden müssen. Die Entscheidung selbst steht im **Tenor**, dem eigentlichen Urteilsspruch; auf seine Nummern beziehen sich die nächsten Seiten."
       ],
       "sources": [
         {
@@ -44,7 +44,7 @@
     {
       "ref": "screen-2",
       "blocks": [
-        "**Nr. 1**: Die DSGVO gilt für eine Übermittlung zu gewerblichen Zwecken an ein Unternehmen in einem Drittland, auch wenn die Behörden dieses Landes die Daten für Zwecke der nationalen Sicherheit verarbeiten können (Nr. 1 des Tenors)."
+        "**Nr. 1 des Tenors**: Die DSGVO gilt für eine Übermittlung zu gewerblichen Zwecken an ein Unternehmen in einem Drittland, auch wenn die Behörden dieses Landes die Daten für Zwecke der nationalen Sicherheit verarbeiten können."
       ],
       "sources": [
         {
@@ -64,7 +64,7 @@
     {
       "ref": "screen-3",
       "blocks": [
-        "**Nr. 2**: Daten, die auf der Grundlage von Standarddatenschutzklauseln übermittelt werden, müssen ein Schutzniveau genießen, das dem in der EU garantierten Niveau **„der Sache nach gleichwertig“** ist.",
+        "**Nr. 2 des Tenors**: Daten, die auf der Grundlage von Standarddatenschutzklauseln übermittelt werden, müssen ein Schutzniveau genießen, das dem in der EU garantierten Niveau **„der Sache nach gleichwertig“** ist.",
         "Bei der Beurteilung sind **sowohl** die vertraglichen Regelungen **als auch**, was einen etwaigen Zugriff der Behörden betrifft, die maßgeblichen Elemente der **Rechtsordnung** des Drittlands zu berücksichtigen, insbesondere die in Art. 45 Abs. 2 genannten Elemente."
       ],
       "sources": [
@@ -85,7 +85,7 @@
     {
       "ref": "screen-4",
       "blocks": [
-        "**Nr. 3**: Liegt kein gültiger Angemessenheitsbeschluss vor, muss die Aufsichtsbehörde eine auf Standarddatenschutzklauseln gestützte Übermittlung **aussetzen oder verbieten**, wenn die Klauseln in dem Drittland nicht eingehalten werden oder nicht eingehalten werden können und der erforderliche Schutz nicht mit anderen Mitteln gewährleistet werden kann. Das gilt, sofern der Verantwortliche oder der Auftragsverarbeiter die Übermittlung nicht selbst ausgesetzt oder beendet hat. Die Behörde nutzt dafür ihre Befugnisse nach Art. 58 Abs. 2 Buchst. f und j."
+        "**Nr. 3 des Tenors**: Liegt kein gültiger Angemessenheitsbeschluss vor, muss die Aufsichtsbehörde eine auf Standarddatenschutzklauseln gestützte Übermittlung **aussetzen oder verbieten**, wenn die Klauseln in dem Drittland nicht eingehalten werden oder nicht eingehalten werden können und der erforderliche Schutz nicht mit anderen Mitteln gewährleistet werden kann. Das gilt, sofern der Verantwortliche oder der Auftragsverarbeiter die Übermittlung nicht selbst ausgesetzt oder beendet hat. Die Behörde nutzt dafür ihre Befugnisse nach Art. 58 Abs. 2 Buchst. f und j."
       ],
       "sources": [
         {
@@ -105,7 +105,7 @@
     {
       "ref": "screen-5",
       "blocks": [
-        "**Nr. 4 und 5**: Die Prüfung des Beschlusses über Standardvertragsklauseln von 2010 hat nichts ergeben, was seine Gültigkeit berühren könnte. Der Beschluss (EU) 2016/1250 zum **Datenschutzschild** wurde für **ungültig** erklärt."
+        "**Nr. 4 und 5 des Tenors**: Die Prüfung des Beschlusses von 2010 zu den Standarddatenschutzklauseln hat nichts ergeben, was seine Gültigkeit berühren könnte. Der Beschluss (EU) 2016/1250 zum **Datenschutzschild** wurde für **ungültig** erklärt."
       ],
       "sources": [
         {
@@ -177,7 +177,7 @@
       ],
       "variants": [
         {
-          "prompt": "Welchen Maßstab müssen übermittelte Daten nach dem Schrems-II-Urteil erfüllen?",
+          "prompt": "Was verlangt das Schrems-II-Urteil für den Schutz übermittelter Daten?",
           "options": [
             {
               "correct": false,

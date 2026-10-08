@@ -84,7 +84,7 @@ LESSONS = {
         "screens": [
             [
                 "Jede Aufsichtsbehörde ist im Hoheitsgebiet ihres eigenen Mitgliedstaats zuständig (Art. 55 Abs. 1).",
-                "Verarbeiten Behörden oder private Stellen Daten zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe im öffentlichen Interesse, ist die Aufsichtsbehörde dieses Mitgliedstaats zuständig, und die Regeln über die federführende Aufsichtsbehörde gelten nicht (Art. 55 Abs. 2). Gerichte unterliegen bei ihrer justiziellen Tätigkeit nicht der Aufsicht dieser Behörden (Art. 55 Abs. 3).",
+                "Verarbeiten Behörden oder private Stellen Daten zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe im öffentlichen Interesse, ist die Aufsichtsbehörde des betroffenen Mitgliedstaats zuständig, und die Regeln über die federführende Aufsichtsbehörde gelten nicht (Art. 55 Abs. 2). Gerichte unterliegen bei ihrer justiziellen Tätigkeit nicht der Aufsicht dieser Behörden (Art. 55 Abs. 3).",
             ],
             [
                 "**Grenzüberschreitende Verarbeitung** (Art. 4 Nr. 23) ist entweder:",
@@ -116,7 +116,7 @@ LESSONS = {
                        ("Die österreichische Aufsichtsbehörde", "Die Aufsichtsbehörde der Hauptniederlassung (Art. 56 Abs. 1)."),
                        ("Jede nationale Aufsichtsbehörde gesondert, für alles", "Für grenzüberschreitende Verarbeitung gilt die Regel der federführenden Aufsichtsbehörde."),
                        ("Der EDSA unmittelbar", "Der Ausschuss handelt nicht als federführende Aufsichtsbehörde.")),
-            assessment([0], [4], "Wer ist bei grenzüberschreitender Verarbeitung der einzige Ansprechpartner des Verantwortlichen?", "Mit wem hat ein Verantwortlicher nach Art. 56 Abs. 6 bei grenzüberschreitender Verarbeitung zu tun?",
+            assessment([0], [4], "Wer ist bei grenzüberschreitender Verarbeitung der einzige Ansprechpartner des Verantwortlichen?", "Wer ist nach Art. 56 Abs. 6 bei grenzüberschreitender Verarbeitung der Ansprechpartner eines Verantwortlichen?",
                        ("Die federführende Aufsichtsbehörde", "Art. 56 Abs. 6."),
                        ("Die Europäische Kommission", "Die Kommission ist keine Aufsichtsbehörde."),
                        ("Die Aufsichtsbehörde, bei der gerade eine Beschwerde eingegangen ist", "Beschwerden werden über die federführende Aufsichtsbehörde koordiniert.")),
@@ -133,7 +133,7 @@ LESSONS = {
         "sources": [("GDPR", "Art. 58 Abs. 1 und 2, 83, 84")],
         "screens": [
             [
-                "Aufsichtsbehörden haben **Untersuchungsbefugnisse** (Art. 58 Abs. 1): Sie können anweisen, Informationen bereitzustellen, Datenschutzüberprüfungen durchführen und Zugang zu personenbezogenen Daten und zu Räumlichkeiten erhalten.",
+                "Aufsichtsbehörden haben **Untersuchungsbefugnisse** (Art. 58 Abs. 1): Sie können Verantwortliche und Auftragsverarbeiter anweisen, Informationen bereitzustellen, Datenschutzüberprüfungen durchführen und Zugang zu personenbezogenen Daten und zu Räumlichkeiten erhalten.",
             ],
             [
                 "Zu ihren **Abhilfebefugnissen** (Art. 58 Abs. 2) gehören:",
@@ -188,7 +188,7 @@ LESSONS = {
                        ("Bis zu 20 Mio. EUR oder 4 %, je nachdem, welcher der Beträge höher ist", "Art. 83 Abs. 5 Buchst. b."),
                        ("Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist", "Verstöße gegen die Rechte fallen in den oberen Rahmen."),
                        ("Eine feste Geldbuße von 500 EUR", "Die DSGVO legt Höchstbeträge fest, keine festen Beträge.")),
-            assessment([1], [3], "Die Bäckerei Sonnenfeld hat mit einem Auftragsverarbeiter keinen schriftlichen Vertrag geschlossen. Welcher Bußgeldrahmen erfasst diesen Verstoß?", "In welchen Bußgeldrahmen fällt ein Verstoß gegen Art. 28, die Vorschrift über Auftragsverarbeiter?",
+            assessment([1], [3], "Die Bäckerei Sonnenfeld hat mit einem Auftragsverarbeiter keinen schriftlichen Vertrag geschlossen. Welcher Bußgeldrahmen erfasst diesen Verstoß?", "Welcher Bußgeldrahmen gilt für einen Verstoß gegen Art. 28, die Vorschrift über Auftragsverarbeiter?",
                        ("Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist", "Artikel 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."),
                        ("Bis zu 20 Mio. EUR oder 4 %, je nachdem, welcher der Beträge höher ist", "Artikel 28 gehört zum unteren Rahmen."),
                        ("Keiner, für fehlende Verträge gibt es keine Geldbuße", "Artikel 83 Abs. 4 erfasst Art. 28.")),
@@ -209,7 +209,7 @@ LESSONS = {
         "sources": [("GDPR", "Art. 3 Abs. 2, 27")],
         "screens": [
             [
-                "Ein Unternehmen, das **nicht in der Union niedergelassen** ist, fällt unter die DSGVO, wenn es Menschen in der EU Waren oder Dienstleistungen anbietet oder ihr Verhalten in der EU beobachtet (Art. 3 Abs. 2).",
+                "Ein Unternehmen, das **nicht in der EU niedergelassen** ist, fällt unter die DSGVO, wenn es Menschen in der EU Waren oder Dienstleistungen anbietet oder ihr Verhalten in der EU beobachtet (Art. 3 Abs. 2).",
                 "In diesem Fall muss es **schriftlich** einen **Vertreter in der Union** benennen (Art. 27 Abs. 1).",
             ],
             [
@@ -220,7 +220,7 @@ LESSONS = {
                 ]},
             ],
             [
-                "Der Vertreter muss in einem der Mitgliedstaaten niedergelassen sein, in denen sich die betroffenen Personen befinden (Art. 27 Abs. 3).",
+                "Der Vertreter muss in einem der EU-Staaten niedergelassen sein, in denen sich die betroffenen Personen befinden (Art. 27 Abs. 3).",
                 "Aufsichtsbehörden und betroffene Personen können sich bei allen Fragen der Verarbeitung an den Vertreter wenden, zusätzlich zum Unternehmen oder an seiner Stelle (Art. 27 Abs. 4).",
             ],
             [
@@ -236,7 +236,7 @@ LESSONS = {
                        ("Unternehmen außerhalb der EU, die unter Art. 3 Abs. 2 fallen, sofern keine Ausnahme greift", "Art. 27 Abs. 1 und 2."),
                        ("Jedes Unternehmen mit Kundschaft in der EU, auch Unternehmen mit Sitz in der EU", "Unternehmen, die in der EU niedergelassen sind, brauchen keinen Vertreter."),
                        ("Nur Behörden", "Behörden sind ausgenommen.")),
-            assessment([0], [3, 5], "Wo muss ein Vertreter in der Union niedergelassen sein?", "Wo befindet sich nach Art. 27 Abs. 3 der Vertreter eines Unternehmens außerhalb der EU?",
+            assessment([0], [3, 5], "Wo muss ein nach Art. 27 benannter Vertreter niedergelassen sein?", "Wo befindet sich nach Art. 27 Abs. 3 der Vertreter eines Unternehmens außerhalb der EU?",
                        ("In einem EU-Staat, in dem sich die betroffenen Personen befinden", "Art. 27 Abs. 3."),
                        ("Irgendwo auf der Welt", "Er muss in der EU niedergelassen sein."),
                        ("Nur in Brüssel", "Jeder EU-Staat, in dem sich die betroffenen Personen befinden, kommt infrage."),
@@ -251,27 +251,27 @@ LESSONS = {
         "title": "Schrems II und der Datenschutzrahmen EU-USA",
         "summary": "Erklären, was das Schrems-II-Urteil für Übermittlungen auf der Grundlage von Standarddatenschutzklauseln verlangt und was der Datenschutzrahmen EU-USA ist.",
         "prerequisites": {
-            "X01": "Das Schrems-II-Urteil legt die Grundlage der Standarddatenschutzklauseln aus.",
+            "X01": "Das Schrems-II-Urteil legt aus, was für Übermittlungen auf der Grundlage von Standarddatenschutzklauseln gilt.",
             "X03": "Das Schrems-II-Urteil stützt sich auf die Befugnis, Übermittlungen auszusetzen.",
         },
         "sources": [("CJ-SCHREMS2", "Tenor, Nr. 1 bis 5"), ("DPF", "Titel, Datum und Status auf EUR-Lex, geprüft am 7. Oktober 2026"), ("GDPR", "Art. 45 Abs. 2, 46 Abs. 1, 58 Abs. 2 Buchst. f und j")],
         "screens": [
             [
                 "In der **Rechtssache C-311/18**, bekannt als *Schrems II*, hat der Gerichtshof der Europäischen Union (EuGH) am 16. Juli 2020 über zwei Grundlagen für Übermittlungen entschieden: die Standarddatenschutzklauseln der Kommission und den Angemessenheitsbeschluss zum **EU-US-Datenschutzschild** (»Privacy Shield«).",
-                "Das Urteil ist bis heute der Maßstab dafür, wie sorgfältig Übermittlungen geprüft werden müssen.",
+                "Das Urteil ist bis heute der Maßstab dafür, wie sorgfältig Übermittlungen geprüft werden müssen. Die Entscheidung selbst steht im **Tenor**, dem eigentlichen Urteilsspruch; auf seine Nummern beziehen sich die nächsten Seiten.",
             ],
             [
-                "**Nr. 1**: Die DSGVO gilt für eine Übermittlung zu gewerblichen Zwecken an ein Unternehmen in einem Drittland, auch wenn die Behörden dieses Landes die Daten für Zwecke der nationalen Sicherheit verarbeiten können (Nr. 1 des Tenors).",
+                "**Nr. 1 des Tenors**: Die DSGVO gilt für eine Übermittlung zu gewerblichen Zwecken an ein Unternehmen in einem Drittland, auch wenn die Behörden dieses Landes die Daten für Zwecke der nationalen Sicherheit verarbeiten können.",
             ],
             [
-                "**Nr. 2**: Daten, die auf der Grundlage von Standarddatenschutzklauseln übermittelt werden, müssen ein Schutzniveau genießen, das dem in der EU garantierten Niveau **„der Sache nach gleichwertig“** ist.",
+                "**Nr. 2 des Tenors**: Daten, die auf der Grundlage von Standarddatenschutzklauseln übermittelt werden, müssen ein Schutzniveau genießen, das dem in der EU garantierten Niveau **„der Sache nach gleichwertig“** ist.",
                 "Bei der Beurteilung sind **sowohl** die vertraglichen Regelungen **als auch**, was einen etwaigen Zugriff der Behörden betrifft, die maßgeblichen Elemente der **Rechtsordnung** des Drittlands zu berücksichtigen, insbesondere die in Art. 45 Abs. 2 genannten Elemente.",
             ],
             [
-                "**Nr. 3**: Liegt kein gültiger Angemessenheitsbeschluss vor, muss die Aufsichtsbehörde eine auf Standarddatenschutzklauseln gestützte Übermittlung **aussetzen oder verbieten**, wenn die Klauseln in dem Drittland nicht eingehalten werden oder nicht eingehalten werden können und der erforderliche Schutz nicht mit anderen Mitteln gewährleistet werden kann. Das gilt, sofern der Verantwortliche oder der Auftragsverarbeiter die Übermittlung nicht selbst ausgesetzt oder beendet hat. Die Behörde nutzt dafür ihre Befugnisse nach Art. 58 Abs. 2 Buchst. f und j.",
+                "**Nr. 3 des Tenors**: Liegt kein gültiger Angemessenheitsbeschluss vor, muss die Aufsichtsbehörde eine auf Standarddatenschutzklauseln gestützte Übermittlung **aussetzen oder verbieten**, wenn die Klauseln in dem Drittland nicht eingehalten werden oder nicht eingehalten werden können und der erforderliche Schutz nicht mit anderen Mitteln gewährleistet werden kann. Das gilt, sofern der Verantwortliche oder der Auftragsverarbeiter die Übermittlung nicht selbst ausgesetzt oder beendet hat. Die Behörde nutzt dafür ihre Befugnisse nach Art. 58 Abs. 2 Buchst. f und j.",
             ],
             [
-                "**Nr. 4 und 5**: Die Prüfung des Beschlusses über Standardvertragsklauseln von 2010 hat nichts ergeben, was seine Gültigkeit berühren könnte. Der Beschluss (EU) 2016/1250 zum **Datenschutzschild** wurde für **ungültig** erklärt.",
+                "**Nr. 4 und 5 des Tenors**: Die Prüfung des Beschlusses von 2010 zu den Standarddatenschutzklauseln hat nichts ergeben, was seine Gültigkeit berühren könnte. Der Beschluss (EU) 2016/1250 zum **Datenschutzschild** wurde für **ungültig** erklärt.",
             ],
             [
                 "Am 10. Juli 2023 erließ die Kommission den Durchführungsbeschluss (EU) 2023/1795 „über die Angemessenheit des Schutzniveaus für personenbezogene Daten nach dem **Datenschutzrahmen EU-USA**“. Das ist ein Angemessenheitsbeschluss.",
@@ -280,7 +280,7 @@ LESSONS = {
             ],
         ],
         "questions": [
-            assessment([0], [3], "Welches Schutzniveau verlangt das Schrems-II-Urteil für Übermittlungen auf der Grundlage von Standarddatenschutzklauseln?", "Welchen Maßstab müssen übermittelte Daten nach dem Schrems-II-Urteil erfüllen?",
+            assessment([0], [3], "Welches Schutzniveau verlangt das Schrems-II-Urteil für Übermittlungen auf der Grundlage von Standarddatenschutzklauseln?", "Was verlangt das Schrems-II-Urteil für den Schutz übermittelter Daten?",
                        ("Ein Schutzniveau, das dem in der EU der Sache nach gleichwertig ist", "Nr. 2 des Tenors."),
                        ("Identische Gesetze im Empfängerland", "Maßstab ist die Gleichwertigkeit der Sache nach, nicht identische Gesetze."),
                        ("Jedes Niveau, sobald die Klauseln unterschrieben sind", "Die Unterschrift allein genügt nicht. Auch die Rechtsordnung muss berücksichtigt werden.")),
