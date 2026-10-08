@@ -1,4 +1,4 @@
-"""Check the learner-facing English GDPR fixtures before anything is imported."""
+"""Check the learner-facing GDPR fixtures (English, and the German edition's shared rules) before import."""
 
 import json
 import sys
@@ -74,10 +74,10 @@ def check_lesson(fixture):
     return failures
 
 
-def check_course(curriculum, fixtures):
+def check_course(curriculum, fixtures, locale="en"):
     failures = []
-    if fixtures != build_course(curriculum):
-        failures.append("English fixtures are stale: run python3 lesson_builder.py")
+    if fixtures != build_course(curriculum, locale):
+        failures.append(f"{locale} fixtures are stale: run python3 lesson_builder.py")
     taught = Counter(concept for fixture in fixtures for concept in fixture["lesson"]["covers"])
     concepts = {concept["slug"] for concept in curriculum["concepts"] if concept["kind"] != "assumption"}
     if set(taught) != concepts or any(count != 1 for count in taught.values()):
@@ -94,8 +94,8 @@ def check_course(curriculum, fixtures):
     return failures
 
 
-def read_fixtures(curriculum):
-    return [json.loads((ROOT / "lessons" / "en" / f"{lesson['id'].lower()}.json").read_text())
+def read_fixtures(curriculum, locale="en"):
+    return [json.loads((ROOT / "lessons" / locale / f"{lesson['id'].lower()}.json").read_text())
             for lesson in curriculum["lessons"]]
 
 

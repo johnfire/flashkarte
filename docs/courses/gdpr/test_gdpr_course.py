@@ -7,6 +7,7 @@ from pathlib import Path
 
 import curriculum_plan
 from curriculum_validation import check_curriculum
+from german_validation import check_language, check_parity, check_quotes
 from lesson_builder import build_course, subject_import
 from lesson_validation import check_course, check_lesson
 from sources import SOURCES, sha256
@@ -101,11 +102,75 @@ class LessonTests(unittest.TestCase):
         self.assertIn("not legal advice", text)
 
 
+class GermanTests(unittest.TestCase):
+    """G01 is the reference translation; damage it and check that the German checks reject the damage."""
+
+    @classmethod
+    def setUpClass(cls):
+        curriculum = curriculum_plan.build()
+        cls.english = build_course(curriculum, "en")[0]
+        cls.german = build_course(curriculum, "de", {"M0"}, partial=True)[0]
+
+    def lesson(self):
+        return copy.deepcopy(self.german)
+
+    def test_reference_lesson_passes(self):
+        self.assertEqual(check_lesson(self.german), [])
+        self.assertEqual(check_parity(self.english, self.german), [])
+        self.assertEqual(check_quotes(self.german), [])
+        self.assertEqual(check_language(self.german), [])
+
+    def test_invented_quotation_is_rejected(self):
+        fixture = self.lesson()
+        fixture["screens"][0]["blocks"][0] += " Die DSGVO sagt „Daten gehören immer dem Unternehmen“."
+        self.assertTrue(check_quotes(fixture))
+
+    def test_straight_quotes_are_rejected(self):
+        fixture = self.lesson()
+        fixture["questions"][0]["prompt"] = 'Was heißt "Verordnung"?'
+        self.assertTrue(check_quotes(fixture))
+
+    def test_english_leftover_is_rejected(self):
+        fixture = self.lesson()
+        fixture["questions"][0]["options"][0]["reason"] = "Article 1 protects the data subject."
+        self.assertTrue(check_language(fixture))
+
+    def test_informal_address_is_rejected(self):
+        fixture = self.lesson()
+        fixture["screens"][2]["blocks"][1] = "Du kannst jede Aussage prüfen."
+        self.assertTrue(check_language(fixture))
+
+    def test_english_source_link_is_rejected(self):
+        fixture = self.lesson()
+        fixture["screens"][0]["sources"][0]["url"] = self.english["screens"][0]["sources"][0]["url"]
+        self.assertTrue(check_language(fixture))
+
+    def test_missing_screen_is_rejected(self):
+        fixture = self.lesson()
+        fixture["screens"].pop()
+        self.assertTrue(check_parity(self.english, fixture))
+
+    def test_changed_block_structure_is_rejected(self):
+        fixture = self.lesson()
+        fixture["screens"][5]["blocks"][1]["items"].pop()
+        self.assertTrue(check_parity(self.english, fixture))
+
+    def test_moved_correct_answer_is_rejected(self):
+        fixture = self.lesson()
+        options = fixture["questions"][0]["options"]
+        options[0], options[1] = options[1], options[0]
+        self.assertTrue(check_parity(self.english, fixture))
+
+    def test_first_screen_states_it_is_not_legal_advice(self):
+        self.assertIn("keine Rechtsberatung", json.dumps(self.german["screens"], ensure_ascii=False))
+
+
 class SourceTests(unittest.TestCase):
     def test_every_retained_source_exists_and_is_hashed_in_the_register(self):
         register = (ROOT / "source-register.md").read_text()
         for source_id in SOURCES:
             self.assertIn(sha256(source_id), register, source_id)
+            self.assertIn(sha256(source_id, "de"), register, source_id)
 
 
 if __name__ == "__main__":

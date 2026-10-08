@@ -7,8 +7,24 @@ ROOT = Path(__file__).resolve().parent
 CHECKED_ON = "2026-10-07"
 
 
-def eurlex(celex):
-    return f"https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:{celex}"
+GERMAN_RETRIEVED_ON = "2026-10-08"
+
+
+def eurlex(celex, language="EN"):
+    return f"https://eur-lex.europa.eu/legal-content/{language}/TXT/?uri=CELEX:{celex}"
+
+
+def celex(source_id):
+    return SOURCES[source_id]["url"].rsplit("CELEX:", 1)[1]
+
+
+def url(source_id, locale="en"):
+    return eurlex(celex(source_id), locale.upper())
+
+
+def file_name(source_id, locale="en"):
+    name = SOURCES[source_id]["file"]
+    return name if locale == "en" else name.replace("-en.html", f"-{locale}.html")
 
 
 SOURCES = {
@@ -85,8 +101,8 @@ SOURCES = {
 }
 
 
-def sha256(source_id):
-    return hashlib.sha256((ROOT / "sources" / SOURCES[source_id]["file"]).read_bytes()).hexdigest()
+def sha256(source_id, locale="en"):
+    return hashlib.sha256((ROOT / "sources" / file_name(source_id, locale)).read_bytes()).hexdigest()
 
 
 def render_register():
@@ -99,6 +115,11 @@ def render_register():
         "documentation only. A hash confirms which file was used; it does not prove every page was reviewed. The",
         "reading limits below are the honest extent of what was read.",
         "",
+        f"German versions were retrieved on {GERMAN_RETRIEVED_ON} for the German edition. EUR-Lex refused automated",
+        "downloads that day, so they came from the EU Publications Office repository (`publications.europa.eu/resource/celex/`),",
+        "which serves the same documents. The German edition quotes only these German texts; the passages it teaches",
+        "were compared with the English ones.",
+        "",
     ]
     for source_id, source in SOURCES.items():
         lines += [
@@ -109,6 +130,9 @@ def render_register():
             f"Reading: {source['reading']}",
             "",
             f"Retained: [sources/{source['file']}](sources/{source['file']}). SHA-256: `{sha256(source_id)}`.",
+            "",
+            f"German: [sources/{file_name(source_id, 'de')}](sources/{file_name(source_id, 'de')}). "
+            f"SHA-256: `{sha256(source_id, 'de')}`.",
             "",
         ]
     return "\n".join(lines)

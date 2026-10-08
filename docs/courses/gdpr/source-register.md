@@ -6,6 +6,11 @@ Official Journal acts and judgments have legal authority. Consolidated texts are
 documentation only. A hash confirms which file was used; it does not prove every page was reviewed. The
 reading limits below are the honest extent of what was read.
 
+German versions were retrieved on 2026-10-08 for the German edition. EUR-Lex refused automated
+downloads that day, so they came from the EU Publications Office repository (`publications.europa.eu/resource/celex/`),
+which serves the same documents. The German edition quotes only these German texts; the passages it teaches
+were compared with the English ones.
+
 ## GDPR — GDPR, Regulation (EU) 2016/679, consolidated text (corrigenda incorporated)
 
 [Official source](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504). Status: **official consolidation (documentation only); the Official Journal text is authentic**.
@@ -13,6 +18,8 @@ reading limits below are the honest extent of what was read.
 Reading: Articles 1-10, 12-22, 24-35, 37-39, 44-46, 49, 51, 55, 56, 58, 68, 70, 77, 79, 80, 82-84 and 99 read in full in English.
 
 Retained: [sources/gdpr-consolidated-02016R0679-20160504-en.html](sources/gdpr-consolidated-02016R0679-20160504-en.html). SHA-256: `af7e74d3fe7a96ea5b30d94cbc45cd665adde6ef003c457cac7e7ceb5fd0516c`.
+
+German: [sources/gdpr-consolidated-02016R0679-20160504-de.html](sources/gdpr-consolidated-02016R0679-20160504-de.html). SHA-256: `ad895d90dc35be2f12371af880380af2282c68f370b3d207e5a7e8186cc094a1`.
 
 ## GDPR-REC — GDPR, Regulation (EU) 2016/679, Official Journal L 119, 4.5.2016 (recitals)
 
@@ -22,6 +29,8 @@ Reading: Recitals 14, 15, 18, 26, 27, 30, 32, 38, 39, 42-44, 46, 47, 50, 51, 68,
 
 Retained: [sources/gdpr-oj-32016R0679-en.html](sources/gdpr-oj-32016R0679-en.html). SHA-256: `fd3f4cffd90403bd84d09e5f6ecf91ccbf5ee6bc2b96e8a3fc263f354b4f4642`.
 
+German: [sources/gdpr-oj-32016R0679-de.html](sources/gdpr-oj-32016R0679-de.html). SHA-256: `219040a03cea829785c9f9752dcab9bfcee7b3c012092f5da8567640a816116d`.
+
 ## EPD — ePrivacy Directive 2002/58/EC, consolidated text of 19 December 2009
 
 [Official source](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219). Status: **official consolidation (documentation only); a directive applies through national law**.
@@ -29,6 +38,8 @@ Retained: [sources/gdpr-oj-32016R0679-en.html](sources/gdpr-oj-32016R0679-en.htm
 Reading: Article 5(3) read in English. National implementing laws are out of scope.
 
 Retained: [sources/eprivacy-02002L0058-20091219-en.html](sources/eprivacy-02002L0058-20091219-en.html). SHA-256: `4fd570aa75e9a8899f0dd5a9bdbd98fa3eea29a66cf375c285faa09ecd709d5c`.
+
+German: [sources/eprivacy-02002L0058-20091219-de.html](sources/eprivacy-02002L0058-20091219-de.html). SHA-256: `74cf20b2ead7818e8ccc179adf41d00af2bac9e3e6aef30ddf30e11163f1d780`.
 
 ## CJ-PLANET49 — CJEU, Case C-673/17 Planet49, judgment of 1 October 2019, operative part
 
@@ -38,6 +49,8 @@ Reading: Operative part, points 1-3, read in English.
 
 Retained: [sources/cjeu-C-673-17-planet49-en.html](sources/cjeu-C-673-17-planet49-en.html). SHA-256: `2cd46a6118424661cedc179bc74196a43a5cf2634d643455720af8e5a1872fe7`.
 
+German: [sources/cjeu-C-673-17-planet49-de.html](sources/cjeu-C-673-17-planet49-de.html). SHA-256: `c434516591d9d012c8a1f07961350a7165e86fa145cd841729b2b5d2a91c110e`.
+
 ## CJ-FASHIONID — CJEU, Case C-40/17 Fashion ID, judgment of 29 July 2019, operative part
 
 [Official source](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040). Status: **judgment of the Court of Justice, decided under Directive 95/46/EC**.
@@ -45,6 +58,8 @@ Retained: [sources/cjeu-C-673-17-planet49-en.html](sources/cjeu-C-673-17-planet4
 Reading: Operative part, points 1-3, and the quoted Directive 95/46/EC controller definition read in English.
 
 Retained: [sources/cjeu-C-40-17-fashion-id-en.html](sources/cjeu-C-40-17-fashion-id-en.html). SHA-256: `dcf2b3890de62b40ec5b00fd5bfb7157cbcff6515b35ede650eb23daa901f357`.
+
+German: [sources/cjeu-C-40-17-fashion-id-de.html](sources/cjeu-C-40-17-fashion-id-de.html). SHA-256: `25726be4d99b542c6027f9be85f3bfd47e8f759942bc962387812565730bbe5c`.
 
 ## CJ-SCHREMS2 — CJEU, Case C-311/18 Schrems II, judgment of 16 July 2020, operative part
 
@@ -54,6 +69,8 @@ Reading: Operative part, points 1-5, read in English.
 
 Retained: [sources/cjeu-C-311-18-schrems-ii-en.html](sources/cjeu-C-311-18-schrems-ii-en.html). SHA-256: `559167fa260df19ae8a06fc1fc19eb147ef2f29a5244310b869597d27501be6f`.
 
+German: [sources/cjeu-C-311-18-schrems-ii-de.html](sources/cjeu-C-311-18-schrems-ii-de.html). SHA-256: `79cd5ba5432871ffb9cb5c5e1629980aa2b10e276e4eaef64104fee5c2cc834d`.
+
 ## DPF — Commission Implementing Decision (EU) 2023/1795, EU-US Data Privacy Framework adequacy
 
 [Official source](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795). Status: **in force per EUR-Lex on 2026-10-07; confirmed by General Court T-553/23; referral C-804/25 listed**.
@@ -61,6 +78,8 @@ Retained: [sources/cjeu-C-311-18-schrems-ii-en.html](sources/cjeu-C-311-18-schre
 Reading: Title, date and EUR-Lex status metadata only. The decision's body was not studied.
 
 Retained: [sources/eu-us-dpf-decision-32023D1795-en.html](sources/eu-us-dpf-decision-32023D1795-en.html). SHA-256: `1d6bbca1c1555f89bd1b11cf94c57a9a1d26a4a68e8b558406578a58e56dd665`.
+
+German: [sources/eu-us-dpf-decision-32023D1795-de.html](sources/eu-us-dpf-decision-32023D1795-de.html). SHA-256: `3fa8f4489079af33ec1725d00ef1e73e34fcaf1f7ba60bf5dc1d7b8890ae8f52`.
 
 ## AIA — EU AI Act, Regulation (EU) 2024/1689, consolidated text of 27 July 2026
 
@@ -70,6 +89,8 @@ Reading: Article 2(7) read in English.
 
 Retained: [sources/ai-act-02024R1689-20260727-en.html](sources/ai-act-02024R1689-20260727-en.html). SHA-256: `1e72ede0c78e7a6a4c87f3089c739bb6c5388dafe55788afa18a02f4b5e98bb1`.
 
+German: [sources/ai-act-02024R1689-20260727-de.html](sources/ai-act-02024R1689-20260727-de.html). SHA-256: `2098a1c1656ca91f1ca95e5291d6e85b899c9d99f1ba60929312377807398211`.
+
 ## PROP-501 — Commission proposal COM(2025) 501 of 21 May 2025 (small mid-cap simplification; amends the GDPR)
 
 [Official source](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0501). Status: **proposal only; not adopted per EUR-Lex on 2026-10-07**.
@@ -78,6 +99,8 @@ Reading: Title and date read. Content not studied; taught only as 'proposed'.
 
 Retained: [sources/proposal-COM-2025-501-en.html](sources/proposal-COM-2025-501-en.html). SHA-256: `35986e432d50edc7183ddfa05eddf9049115adcd914de7c48dda5b27fd610893`.
 
+German: [sources/proposal-COM-2025-501-de.html](sources/proposal-COM-2025-501-de.html). SHA-256: `239223f9a5f671878a03e12ae6d7e32a781830bbb66ca242e3009c02bfeced55`.
+
 ## PROP-837 — Commission proposal COM(2025) 837 of 19 November 2025 (Digital Omnibus; amends the GDPR and Directive 2002/58/EC)
 
 [Official source](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0837). Status: **proposal only; not adopted per EUR-Lex on 2026-10-07**.
@@ -85,3 +108,5 @@ Retained: [sources/proposal-COM-2025-501-en.html](sources/proposal-COM-2025-501-
 Reading: Title and date read. Content not studied; taught only as 'proposed'.
 
 Retained: [sources/proposal-COM-2025-837-en.html](sources/proposal-COM-2025-837-en.html). SHA-256: `8bb83214db250b387d45c2b468ccbc84de9ad03c9b186e4227bfecda7452b08a`.
+
+German: [sources/proposal-COM-2025-837-de.html](sources/proposal-COM-2025-837-de.html). SHA-256: `75f2a381fef6789b5d4e91bf1b03c97bf8c81ac79a0bb6b69ad80d1f1df68c55`.
