@@ -1,7 +1,24 @@
 # GDPR Basics: community course plan
 
-Date: 7 October 2026. Status: **draft for discussion with Chris**. No course content has been created. The open
-questions in [§1](#1-open-questions-to-settle-before-building) must be answered before Stage 1 starts.
+Date: 7 October 2026. Status: **built and shared, 8 October 2026.** The English edition is live in the Community
+library as reference 65; see the [course README](../courses/gdpr/README.md) and the
+[deployment record](../courses/gdpr/deployment.md). The German edition is next.
+
+Chris's answers to the open questions in [§1](#1-open-questions-to-settle-before-building), 7 October 2026:
+
+- **Why:** he needs the course himself; it is also a public service and a way to get sign-ups.
+- **Success:** learners say it was good and thorough, covered the details, was not too difficult, and gave them
+  something useful.
+- **Learner:** business people who are not experts in computers or data management. This replaced the "rights
+  first, both audiences" recommendation in Q3.
+- **Size:** whatever it needs. The built course has 33 core and 7 extension lessons.
+- **Languages:** English first, then German.
+- **Visibility:** share to Community as soon as it is built.
+- **Review:** label it an educational draft until a legal reviewer is available.
+- **National law:** the BDSG and the TDDDG stay out of the core; they may become two small separate courses.
+
+The rest of this document is the plan as discussed. Where the built course differs, the course package is
+authoritative.
 
 ## Goal and intended result
 
