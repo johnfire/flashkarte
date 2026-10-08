@@ -94,7 +94,7 @@ LESSONS = {
                        ("Collection and disclosure by transmission only", "Point 2 limits it to these operations."),
                        ("All later processing by the provider", "Not determined by the operator."),
                        ("None, once visitors accept the site's terms", "Terms do not change the controller analysis.")),
-            assessment([0], [4], "According to Fashion ID, whose legitimate interest must exist for these operations?", "Whose legitimate interests did point 3 require?",
+            assessment([0], [4], "According to Fashion ID, whose legitimate interest must exist for these operations?", "In Fashion ID, whose legitimate interests had to exist for the plug-in's data flow?",
                        ("Both the operator's and the provider's", "Point 3: each must pursue a legitimate interest."),
                        ("Only the provider's", "Each must pursue one."),
                        ("Neither's, because they are joint controllers", "Joint control does not remove the need for a legal basis.")),
