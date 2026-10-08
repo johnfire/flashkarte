@@ -202,7 +202,7 @@
       ],
       "variants": [
         {
-          "prompt": "Phone numbers collected for order alerts are wanted for a partner's marketing. How does Article 6(4) point?",
+          "prompt": "Is giving order-alert phone numbers to a partner for its marketing likely to be compatible under Article 6(4)?",
           "options": [
             {
               "correct": false,

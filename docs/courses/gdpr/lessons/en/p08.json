@@ -323,8 +323,8 @@
         },
         {
           "correct": false,
-          "blocks": "Yes, a legitimate interest alone is enough",
-          "reason": "Article 10 still requires authorisation in law."
+          "blocks": "No, but a legitimate interest alone would be enough",
+          "reason": "Article 10 requires official control or authorisation in law, whatever the Article 6 basis."
         }
       ],
       "variants": [
@@ -338,8 +338,8 @@
             },
             {
               "correct": false,
-              "blocks": "Yes, a legitimate interest alone is enough",
-              "reason": "Article 10 still requires authorisation in law."
+              "blocks": "No, but a legitimate interest alone would be enough",
+              "reason": "Article 10 requires official control or authorisation in law, whatever the Article 6 basis."
             },
             {
               "correct": true,

@@ -344,7 +344,7 @@ LESSONS = {
                        ("The link between the old and the new purpose", "Article 6(4)(a)."),
                        ("The number of employees the business has", "Size is not one of the Article 6(4) factors."),
                        ("How costly it would be to collect fresh data", "Cost is not one of the Article 6(4) factors.")),
-            assessment([0], [2, 3, 5], "Sunfield wants to pass customers' phone numbers to a partner for its adverts. Is that likely compatible?", "Phone numbers collected for order alerts are wanted for a partner's marketing. How does Article 6(4) point?",
+            assessment([0], [2, 3, 5], "Sunfield wants to pass customers' phone numbers to a partner for its adverts. Is that likely compatible?", "Is giving order-alert phone numbers to a partner for its marketing likely to be compatible under Article 6(4)?",
                        ("Unlikely: weak link, unexpected, with consequences", "Factors (a), (b) and (d) point against it."),
                        ("Yes, because they were collected lawfully", "A lawful collection does not make every later use compatible."),
                        ("Yes, if the numbers are pseudonymised first", "Safeguards are one factor. They do not outweigh the others alone.")),
@@ -414,7 +414,7 @@ LESSONS = {
             assessment([2], [5, 6], "Sunfield wants to keep a list of applicants' criminal convictions, with their consent. Is consent enough?", "Is consent alone enough to process criminal-conviction data under Article 10?",
                        ("No, it needs official control or authorisation in law", "Article 10 applies on top of any Article 6(1) basis."),
                        ("Yes, consent is a basis under Article 6", "Article 10 adds conditions beyond the Article 6 basis."),
-                       ("Yes, a legitimate interest alone is enough", "Article 10 still requires authorisation in law.")),
+                       ("No, but a legitimate interest alone would be enough", "Article 10 requires official control or authorisation in law, whatever the Article 6 basis.")),
         ],
     },
 }
