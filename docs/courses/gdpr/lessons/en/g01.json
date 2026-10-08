@@ -1,0 +1,283 @@
+{
+  "module": "Start here: what the GDPR covers",
+  "lesson": {
+    "slug": "g01",
+    "title": "What the GDPR is and how this course works",
+    "summary": "What the GDPR protects, since when it applies, who supervises it, and how this course is organised.",
+    "covers": [
+      "gdpr-map",
+      "supervisory-authority"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **GDPR** is the General Data Protection Regulation, Regulation (EU) 2016/679. It sets rules for protecting **natural persons**, meaning human beings, when their personal data is used. It also sets rules for the free movement of that data inside the EU (Article 1(1)).",
+        "Its aim is to protect people's fundamental rights, in particular their right to the protection of personal data (Article 1(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 1, 4(21), 51(1), 99",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The GDPR is a **regulation**, not a directive. Article 99 says it is \"binding in its entirety and directly applicable in all Member States\". No national law is needed to switch it on.",
+        "It has applied since **25 May 2018** (Article 99(2)). It was published in 2016, but businesses had two years to prepare.",
+        "Some articles let EU countries add their own rules. This course teaches only the EU text. Country-specific rules, such as Germany's, are not covered here."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 1, 4(21), 51(1), 99",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        {
+          "type": "callout",
+          "tone": "warning",
+          "text": "**Educational draft, not legal advice.** This course explains the GDPR in plain language. A lawyer has not yet reviewed it. For a real decision, read the article cited on each screen, or ask a qualified adviser."
+        },
+        "Every screen lists the articles it was written from. You can open them on EUR-Lex, the EU's official law website, and check every claim."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 1, 4(21), 51(1), 99",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Throughout the course we follow **Sunfield Bakery**. It has three shops and about 40 staff. Customers pre-order bread in an app, collect points on a loyalty card and can subscribe to a newsletter. The shops have security cameras, and an outside firm runs the payroll.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Sunfield Bakery is invented** for this course. Any resemblance to a real business is accidental."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 1, 4(21), 51(1), 99",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Each EU country must have at least one independent public authority that monitors how the GDPR is applied (Article 51(1)). The GDPR calls it a **supervisory authority** (Article 4(21)). In everyday language it is the data protection regulator.",
+        "You will meet supervisory authorities again: people can complain to them, organisations report some incidents to them, and they can impose fines."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 1, 4(21), 51(1), 99",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "The course has six modules:",
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "What the GDPR covers: personal data, processing, roles and scope.",
+            "The rules: principles, legal bases and sensitive data.",
+            "People's rights, and how to handle a request.",
+            "Your organisation's duties: records, processors, security, breaches, assessments and the data protection officer.",
+            "Transfers outside the EU, regulators and fines.",
+            "Optional extras: cookies, joint control, AI, children and pending changes."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 1, 4(21), 51(1), 99",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "gdpr-map"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "What does the GDPR protect?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Natural persons, when their personal data is processed",
+          "reason": "Article 1 protects natural persons with regard to the processing of their personal data."
+        },
+        {
+          "correct": false,
+          "blocks": "Companies' confidential business information",
+          "reason": "Business secrets are not the GDPR's subject. It protects living people."
+        },
+        {
+          "correct": false,
+          "blocks": "Only data that public authorities hold",
+          "reason": "The GDPR applies to businesses too, as Sunfield's case shows."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Whose protection is the GDPR built around?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Companies' confidential business information",
+              "reason": "Business secrets are not the GDPR's subject. It protects living people."
+            },
+            {
+              "correct": false,
+              "blocks": "Only data that public authorities hold",
+              "reason": "The GDPR applies to businesses too, as Sunfield's case shows."
+            },
+            {
+              "correct": true,
+              "blocks": "Natural persons, when their personal data is processed",
+              "reason": "Article 1 protects natural persons with regard to the processing of their personal data."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "gdpr-map"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Since when has the GDPR applied?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only once each country passes its own GDPR law",
+          "reason": "A regulation is directly applicable. No national law is needed."
+        },
+        {
+          "correct": false,
+          "blocks": "From its publication in 2016",
+          "reason": "It was published in 2016 but applies from 25 May 2018."
+        },
+        {
+          "correct": true,
+          "blocks": "From 25 May 2018",
+          "reason": "Article 99(2) sets this date."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "From which date must businesses comply with the GDPR?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "From its publication in 2016",
+              "reason": "It was published in 2016 but applies from 25 May 2018."
+            },
+            {
+              "correct": true,
+              "blocks": "From 25 May 2018",
+              "reason": "Article 99(2) sets this date."
+            },
+            {
+              "correct": false,
+              "blocks": "Only once each country passes its own GDPR law",
+              "reason": "A regulation is directly applicable. No national law is needed."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "supervisory-authority"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Who monitors how the GDPR is applied in an EU country?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Each company's own internal auditor",
+          "reason": "Internal checks help, but they are not the supervisory authority."
+        },
+        {
+          "correct": true,
+          "blocks": "An independent public supervisory authority",
+          "reason": "Article 51(1) requires each country to have one or more."
+        },
+        {
+          "correct": false,
+          "blocks": "The European Commission alone",
+          "reason": "Article 51 gives monitoring to independent national authorities."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which body does Article 51 make responsible for monitoring the GDPR?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "An independent public supervisory authority",
+              "reason": "Article 51(1) requires each country to have one or more."
+            },
+            {
+              "correct": false,
+              "blocks": "The European Commission alone",
+              "reason": "Article 51 gives monitoring to independent national authorities."
+            },
+            {
+              "correct": false,
+              "blocks": "Each company's own internal auditor",
+              "reason": "Internal checks help, but they are not the supervisory authority."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

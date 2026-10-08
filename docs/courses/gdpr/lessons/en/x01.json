@@ -1,0 +1,327 @@
+{
+  "module": "Borders, regulators and fines",
+  "lesson": {
+    "slug": "x01",
+    "title": "Sending personal data outside the EU",
+    "summary": "Recognise a transfer outside the EU, and choose between an adequacy decision, appropriate safeguards and a derogation.",
+    "covers": [
+      "international-transfer",
+      "transfer-tools"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "A transfer is a processing operation."
+      },
+      {
+        "lesson": "p05",
+        "reason": "One derogation is explicit consent to the transfer."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Chapter V of the GDPR governs **transfers** of personal data to a **third country**, meaning a country outside the EU, or to an international organisation.",
+        "A transfer may take place only if the Chapter V conditions are met, including for **onward transfers** from that country to another (Article 44). The aim is that the protection the GDPR guarantees is not undermined."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 44, 45(1)-(3), 46(1)-(3), 49(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Tool 1, an adequacy decision** (Article 45): the European Commission may decide that a country, a territory, specified sectors, or an international organisation ensures an **adequate level of protection**.",
+        "Transfers there need **no specific authorisation** (Article 45(1)). The Commission must review each decision periodically, at least every four years (Article 45(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 44, 45(1)-(3), 46(1)-(3), 49(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Tool 2, appropriate safeguards** (Article 46), where there is no adequacy decision. They work only if people have **enforceable rights and effective legal remedies**. Safeguards that need no authorisation include (Article 46(2)):",
+        {
+          "type": "list",
+          "items": [
+            "**standard data protection clauses** adopted by the Commission;",
+            "binding corporate rules within a group (Article 47);",
+            "approved codes of conduct or certifications, with binding commitments by the recipient."
+          ]
+        },
+        "Individually negotiated contractual clauses need the supervisory authority's authorisation (Article 46(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 44, 45(1)-(3), 46(1)-(3), 49(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Tool 3, derogations** (Article 49(1)), only when neither an adequacy decision nor appropriate safeguards exist. They include:",
+        {
+          "type": "list",
+          "items": [
+            "the person's **explicit consent**, after being informed of the risks;",
+            "necessity for a contract with the person, or in their interest;",
+            "important reasons of public interest, legal claims, vital interests, or a public register."
+          ]
+        },
+        "A final fallback for compelling legitimate interests is very narrow: the transfer must not be repetitive, must concern a limited number of people, and the authority must be informed."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 44, 45(1)-(3), 46(1)-(3), 49(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Think of the three tools in order:",
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Is there an adequacy decision?",
+            "If not, are appropriate safeguards in place?",
+            "Only if neither: does a specific derogation genuinely fit?"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 44, 45(1)-(3), 46(1)-(3), 49(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield's payroll firm wants to send salary data to its own support team in a country outside the EU. That is a transfer.",
+        "Sunfield and the firm first check whether the Commission has adopted an adequacy decision for that country. If it has not, they use the Commission's standard clauses. Asking every employee for consent is not the routine answer.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These examples are **illustrations**. Sunfield Bakery and the other businesses are invented, and a real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 44, 45(1)-(3), 46(1)-(3), 49(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "international-transfer"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-6"
+      ],
+      "prompt": "Which of these is a transfer under Chapter V?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "A processor sends salary data to its team in a non-EU country",
+          "reason": "Data goes to a third country (Article 44)."
+        },
+        {
+          "correct": false,
+          "blocks": "Sunfield sends data between two of its shops in Germany",
+          "reason": "The data stays inside the EU."
+        },
+        {
+          "correct": false,
+          "blocks": "Sunfield deletes data on its EU server",
+          "reason": "Deletion is processing, but nothing is transferred."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which situation engages the GDPR's rules on international transfers?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Sunfield sends data between two of its shops in Germany",
+              "reason": "The data stays inside the EU."
+            },
+            {
+              "correct": false,
+              "blocks": "Sunfield deletes data on its EU server",
+              "reason": "Deletion is processing, but nothing is transferred."
+            },
+            {
+              "correct": true,
+              "blocks": "A processor sends salary data to its team in a non-EU country",
+              "reason": "Data goes to a third country (Article 44)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "transfer-tools"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "The Commission has adopted an adequacy decision for a country. What does a transfer there need?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The regulator's approval for each transfer",
+          "reason": "Article 45(1) says no specific authorisation is needed."
+        },
+        {
+          "correct": false,
+          "blocks": "Explicit consent from every person",
+          "reason": "Consent is a derogation, not needed under adequacy."
+        },
+        {
+          "correct": true,
+          "blocks": "No specific authorisation",
+          "reason": "Article 45(1)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does an adequacy decision affect transfers to that country?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Explicit consent from every person",
+              "reason": "Consent is a derogation, not needed under adequacy."
+            },
+            {
+              "correct": true,
+              "blocks": "No specific authorisation",
+              "reason": "Article 45(1)."
+            },
+            {
+              "correct": false,
+              "blocks": "The regulator's approval for each transfer",
+              "reason": "Article 45(1) says no specific authorisation is needed."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "transfer-tools"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "There is no adequacy decision for the destination country. What is the usual next tool?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "A derogation, as the default choice",
+          "reason": "Derogations apply only when no adequacy decision or safeguards exist."
+        },
+        {
+          "correct": true,
+          "blocks": "Appropriate safeguards, such as the Commission's standard clauses",
+          "reason": "Article 46(2)(c)."
+        },
+        {
+          "correct": false,
+          "blocks": "No transfer is ever possible",
+          "reason": "Articles 46 and 49 provide routes."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Without an adequacy decision, which tool comes before derogations?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Appropriate safeguards, such as the Commission's standard clauses",
+              "reason": "Article 46(2)(c)."
+            },
+            {
+              "correct": false,
+              "blocks": "No transfer is ever possible",
+              "reason": "Articles 46 and 49 provide routes."
+            },
+            {
+              "correct": false,
+              "blocks": "A derogation, as the default choice",
+              "reason": "Derogations apply only when no adequacy decision or safeguards exist."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "transfer-tools"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "When may a transfer rely on the person's explicit consent under Article 49(1)(a)?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Only without adequacy or safeguards, after the risks are explained",
+          "reason": "Article 49(1)(a)."
+        },
+        {
+          "correct": false,
+          "blocks": "Always, as the first choice",
+          "reason": "Derogations come last."
+        },
+        {
+          "correct": false,
+          "blocks": "Whenever the person ticked a general terms box",
+          "reason": "It must be explicit consent after being informed of the risks."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What conditions attach to the consent derogation for transfers?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Always, as the first choice",
+              "reason": "Derogations come last."
+            },
+            {
+              "correct": false,
+              "blocks": "Whenever the person ticked a general terms box",
+              "reason": "It must be explicit consent after being informed of the risks."
+            },
+            {
+              "correct": true,
+              "blocks": "Only without adequacy or safeguards, after the risks are explained",
+              "reason": "Article 49(1)(a)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

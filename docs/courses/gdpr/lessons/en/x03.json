@@ -1,0 +1,372 @@
+{
+  "module": "Borders, regulators and fines",
+  "lesson": {
+    "slug": "x03",
+    "title": "Enforcement powers and fines",
+    "summary": "Know the corrective powers, the two fine tiers and the factors that set the amount of a fine.",
+    "covers": [
+      "corrective-powers",
+      "fine-tiers",
+      "fine-factors"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Corrective powers belong to supervisory authorities."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Supervisory authorities have **investigative powers** (Article 58(1)): they can order information, carry out data protection audits, and obtain access to personal data and to premises."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 58(1)-(2), 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Their **corrective powers** (Article 58(2)) include:",
+        {
+          "type": "list",
+          "items": [
+            "warnings and reprimands;",
+            "orders to comply with a person's rights request, or to bring processing into compliance;",
+            "orders to tell people about a breach;",
+            "a temporary or definitive **limitation, including a ban**, on processing;",
+            "orders to correct or erase data;",
+            "**administrative fines**;",
+            "suspending data flows to a third country."
+          ]
+        },
+        "A fine may be imposed in addition to, or instead of, the other measures (Article 83(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 58(1)-(2), 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Fines must be **effective, proportionate and dissuasive** in each case (Article 83(1)).",
+        "**Lower tier** (Article 83(4)): up to **EUR 10 million or 2%** of total worldwide annual turnover of the preceding financial year, **whichever is higher**. It covers, among others, the controller's and processor's obligations in Articles 8, 11 and 25 to 39: design, processors, records, security, breaches, DPIAs and DPOs."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 58(1)-(2), 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Higher tier** (Article 83(5)-(6)): up to **EUR 20 million or 4%**, **whichever is higher**. It covers:",
+        {
+          "type": "list",
+          "items": [
+            "the basic principles and consent, Articles 5, 6, 7 and 9;",
+            "people's rights, Articles 12 to 22;",
+            "international transfers, Articles 44 to 49;",
+            "failure to comply with an authority's order."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 58(1)-(2), 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The amount depends on factors listed in Article 83(2), including:",
+        {
+          "type": "list",
+          "items": [
+            "the nature, gravity and duration, the number of people affected and the damage they suffered;",
+            "whether the infringement was **intentional or negligent**;",
+            "action taken to **mitigate** the damage;",
+            "the technical and organisational measures in place;",
+            "previous infringements, and the degree of **cooperation** with the authority;",
+            "the categories of data, and how the authority found out, including whether it was notified;",
+            "financial benefits gained or losses avoided."
+          ]
+        },
+        "For several infringements in the same or linked operations, the total may not exceed the amount for the gravest one (Article 83(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 58(1)-(2), 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "\"Whichever is higher\" matters for large companies. For a company with a turnover of EUR 1 billion, 4% is EUR 40 million, which is above EUR 20 million, so the higher-tier maximum is EUR 40 million.",
+        "EU countries set rules on other penalties (Article 84), and decide whether public authorities can be fined (Article 83(7))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 58(1)-(2), 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "corrective-powers"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Besides fines, which measure can a supervisory authority impose?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "A temporary or definitive ban on processing",
+          "reason": "Article 58(2)(f)."
+        },
+        {
+          "correct": false,
+          "blocks": "Imprisonment of the managing director",
+          "reason": "Not an Article 58(2) power."
+        },
+        {
+          "correct": false,
+          "blocks": "Closing the company's bank account",
+          "reason": "Not an Article 58(2) power."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which of these is a corrective power under Article 58(2)?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Imprisonment of the managing director",
+              "reason": "Not an Article 58(2) power."
+            },
+            {
+              "correct": false,
+              "blocks": "Closing the company's bank account",
+              "reason": "Not an Article 58(2) power."
+            },
+            {
+              "correct": true,
+              "blocks": "A temporary or definitive ban on processing",
+              "reason": "Article 58(2)(f)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-tiers"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Sunfield ignores a customer's access request. Which fine tier applies?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Up to EUR 10 million or 2%, whichever is higher",
+          "reason": "Rights infringements are in the higher tier."
+        },
+        {
+          "correct": false,
+          "blocks": "A fixed fine of EUR 500",
+          "reason": "The GDPR sets maximums, not fixed amounts."
+        },
+        {
+          "correct": true,
+          "blocks": "Up to EUR 20 million or 4%, whichever is higher",
+          "reason": "Article 83(5)(b)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "An infringement of the rights in Articles 12 to 22 falls in which tier?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "A fixed fine of EUR 500",
+              "reason": "The GDPR sets maximums, not fixed amounts."
+            },
+            {
+              "correct": true,
+              "blocks": "Up to EUR 20 million or 4%, whichever is higher",
+              "reason": "Article 83(5)(b)."
+            },
+            {
+              "correct": false,
+              "blocks": "Up to EUR 10 million or 2%, whichever is higher",
+              "reason": "Rights infringements are in the higher tier."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-tiers"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Sunfield has no written contract with a processor. Which tier covers that infringement?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "None; contracts cannot be fined",
+          "reason": "Article 83(4) covers Article 28."
+        },
+        {
+          "correct": true,
+          "blocks": "Up to EUR 10 million or 2%, whichever is higher",
+          "reason": "Article 83(4)(a) covers Articles 25 to 39."
+        },
+        {
+          "correct": false,
+          "blocks": "Up to EUR 20 million or 4%, whichever is higher",
+          "reason": "Article 28 sits in the lower tier."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A breach of Article 28 falls into which fine tier?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Up to EUR 10 million or 2%, whichever is higher",
+              "reason": "Article 83(4)(a) covers Articles 25 to 39."
+            },
+            {
+              "correct": false,
+              "blocks": "Up to EUR 20 million or 4%, whichever is higher",
+              "reason": "Article 28 sits in the lower tier."
+            },
+            {
+              "correct": false,
+              "blocks": "None; contracts cannot be fined",
+              "reason": "Article 83(4) covers Article 28."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-factors"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Which factor can count in a business's favour when a fine is set?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Action taken to mitigate the damage",
+          "reason": "Article 83(2)(c)."
+        },
+        {
+          "correct": false,
+          "blocks": "Being a well-known brand",
+          "reason": "Fame is not a listed factor."
+        },
+        {
+          "correct": false,
+          "blocks": "Having more than 250 staff",
+          "reason": "Size is not a mitigating factor in Article 83(2)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 83(2), what may reduce a fine?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Being a well-known brand",
+              "reason": "Fame is not a listed factor."
+            },
+            {
+              "correct": false,
+              "blocks": "Having more than 250 staff",
+              "reason": "Size is not a mitigating factor in Article 83(2)."
+            },
+            {
+              "correct": true,
+              "blocks": "Action taken to mitigate the damage",
+              "reason": "Article 83(2)(c)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-tiers"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "A company's worldwide annual turnover is EUR 1 billion. What is the higher-tier maximum fine?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "EUR 20 million",
+          "reason": "The higher of the two figures applies."
+        },
+        {
+          "correct": false,
+          "blocks": "EUR 10 million",
+          "reason": "That is the lower-tier fixed figure."
+        },
+        {
+          "correct": true,
+          "blocks": "EUR 40 million",
+          "reason": "4% of EUR 1 billion is EUR 40 million, which is higher than EUR 20 million."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "With EUR 1 billion turnover, what does \"4% or EUR 20 million, whichever is higher\" give?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "EUR 10 million",
+              "reason": "That is the lower-tier fixed figure."
+            },
+            {
+              "correct": true,
+              "blocks": "EUR 40 million",
+              "reason": "4% of EUR 1 billion is EUR 40 million, which is higher than EUR 20 million."
+            },
+            {
+              "correct": false,
+              "blocks": "EUR 20 million",
+              "reason": "The higher of the two figures applies."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,307 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o02",
+    "title": "Data protection by design and by default",
+    "summary": "Build the principles into systems from the start, and choose privacy-friendly default settings.",
+    "covers": [
+      "privacy-by-design",
+      "privacy-by-default"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g03",
+        "reason": "Pseudonymisation is the example measure Article 25 names."
+      },
+      {
+        "lesson": "p02",
+        "reason": "Design measures implement principles such as minimisation."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Data protection by design** (Article 25(1)): the controller must implement appropriate technical and organisational measures that are designed to implement the data protection principles effectively, and must integrate the necessary safeguards.",
+        "Article 25(1) names **pseudonymisation** as an example measure and **data minimisation** as an example principle."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "This applies **both** at the time the means of processing are decided **and** at the time of the processing itself (Article 25(1)).",
+        "It is about planning before you build or buy, not fixing things afterwards.",
+        "What is appropriate depends on the state of the art, the cost of implementation, the nature, scope, context and purposes of processing, and the risks."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Data protection by default** (Article 25(2)): by default, only the personal data **necessary for each specific purpose** may be processed. This covers four dimensions:",
+        {
+          "type": "list",
+          "items": [
+            "the amount of data collected;",
+            "the extent of processing;",
+            "the period of storage;",
+            "who can access it."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "In particular, by default personal data must not be made accessible to an **indefinite number of people** without the individual's own intervention (Article 25(2)).",
+        "An approved certification can be used as one element to demonstrate compliance with Article 25 (Article 25(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Sunfield's app redesign:",
+        {
+          "type": "list",
+          "items": [
+            "The date-of-birth field is removed. That is design, implementing minimisation.",
+            "Optional fields start empty, and marketing is unticked. These are defaults.",
+            "Order data is deleted automatically after a set period, which handles storage by default.",
+            "A new \"top customers\" leaderboard is **off** unless a customer switches it on, which limits accessibility by default.",
+            "Shop staff see only the orders for their own shop, which limits access."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 25",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "privacy-by-design"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "When must a controller think about data protection by design?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "When deciding the means, and during processing",
+          "reason": "Article 25(1) names both times."
+        },
+        {
+          "correct": false,
+          "blocks": "Only after the system is launched",
+          "reason": "Design measures start when the means are decided."
+        },
+        {
+          "correct": false,
+          "blocks": "Only after a data breach",
+          "reason": "Article 25 is preventive."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "At which stages does Article 25(1) apply?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only after the system is launched",
+              "reason": "Design measures start when the means are decided."
+            },
+            {
+              "correct": false,
+              "blocks": "Only after a data breach",
+              "reason": "Article 25 is preventive."
+            },
+            {
+              "correct": true,
+              "blocks": "When deciding the means, and during processing",
+              "reason": "Article 25(1) names both times."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "privacy-by-design"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Which measure does Article 25(1) name as an example?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "A larger marketing budget",
+          "reason": "Not a data protection measure."
+        },
+        {
+          "correct": false,
+          "blocks": "Keeping data for longer",
+          "reason": "That works against the principles."
+        },
+        {
+          "correct": true,
+          "blocks": "Pseudonymisation",
+          "reason": "Named in Article 25(1)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which example measure appears in the text of Article 25(1)?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Keeping data for longer",
+              "reason": "That works against the principles."
+            },
+            {
+              "correct": true,
+              "blocks": "Pseudonymisation",
+              "reason": "Named in Article 25(1)."
+            },
+            {
+              "correct": false,
+              "blocks": "A larger marketing budget",
+              "reason": "Not a data protection measure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "privacy-by-default"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Sunfield adds a public leaderboard of top customers by name. What must the default be?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "On, as long as the notice mentions it",
+          "reason": "A notice does not replace a privacy-friendly default."
+        },
+        {
+          "correct": true,
+          "blocks": "Off, until a customer chooses to join",
+          "reason": "Article 25(2): not accessible to an indefinite number without the person's intervention."
+        },
+        {
+          "correct": false,
+          "blocks": "On, with an option to opt out",
+          "reason": "Opt-out exposes people without their intervention."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should a feature that would publish customers' names be set by default?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Off, until a customer chooses to join",
+              "reason": "Article 25(2): not accessible to an indefinite number without the person's intervention."
+            },
+            {
+              "correct": false,
+              "blocks": "On, with an option to opt out",
+              "reason": "Opt-out exposes people without their intervention."
+            },
+            {
+              "correct": false,
+              "blocks": "On, as long as the notice mentions it",
+              "reason": "A notice does not replace a privacy-friendly default."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "privacy-by-default"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Which dimensions does the by-default rule in Article 25(2) cover?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Amount, extent of processing, storage period and accessibility",
+          "reason": "Article 25(2) lists all four."
+        },
+        {
+          "correct": false,
+          "blocks": "Only the amount of data collected",
+          "reason": "Article 25(2) covers four dimensions."
+        },
+        {
+          "correct": false,
+          "blocks": "Only the security of the data",
+          "reason": "Security is Article 32. Article 25(2) concerns necessity."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Article 25(2) limits defaults in which respects?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only the amount of data collected",
+              "reason": "Article 25(2) covers four dimensions."
+            },
+            {
+              "correct": false,
+              "blocks": "Only the security of the data",
+              "reason": "Security is Article 32. Article 25(2) concerns necessity."
+            },
+            {
+              "correct": true,
+              "blocks": "Amount, extent of processing, storage period and accessibility",
+              "reason": "Article 25(2) lists all four."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

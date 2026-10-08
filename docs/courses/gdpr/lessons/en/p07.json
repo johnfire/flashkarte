@@ -1,0 +1,276 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p07",
+    "title": "Using data for a new purpose",
+    "summary": "Decide whether data collected for one purpose may be used for a new one.",
+    "covers": [
+      "compatible-further-processing"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Compatibility is the test inside purpose limitation."
+      },
+      {
+        "lesson": "p04",
+        "reason": "Article 6(4) applies when the new purpose is not covered by consent or law."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Businesses often want to reuse data for a new purpose. Purpose limitation forbids further processing that is **incompatible** with the original purpose (Article 5(1)(b)).",
+        "If the new purpose is **compatible**, recital 50 says no legal basis separate from the original one is required."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(b), 6(4), 13(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 50",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Where the new purpose is based neither on consent nor on an EU or national law of the kind Article 6(4) describes, the controller must assess compatibility. It considers, among other things (Article 6(4)):",
+        {
+          "type": "list",
+          "items": [
+            "(a) the **link** between the original and the new purpose;",
+            "(b) the **context** of collection, especially the relationship with the person;",
+            "(c) the **nature** of the data, especially sensitive types covered in the next lesson;",
+            "(d) the possible **consequences** for the person;",
+            "(e) **safeguards**, such as encryption or pseudonymisation (replacing names with codes kept separately)."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(b), 6(4), 13(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 50",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Recital 50 adds that the context includes people's **reasonable expectations** about further use, based on their relationship with the controller.",
+        "If the person consents to the new purpose, the controller may process for it whatever the compatibility (recital 50)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(b), 6(4), 13(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 50",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Even a compatible use has duties attached. Before further processing for a new purpose, the controller must inform the person about that purpose (Article 13(3)). Recital 50 also stresses the right to object."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(b), 6(4), 13(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 50",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Sunfield collected phone numbers to text \"your order is ready\".",
+        {
+          "type": "list",
+          "items": [
+            "**Idea A**: text customers when an item they ordered is out of stock. The link is close and expected, so it is likely compatible.",
+            "**Idea B**: give the numbers to a partner for its adverts. The link is weak, it is unexpected and it has consequences, so it is likely incompatible. It would need consent."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(b), 6(4), 13(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 50",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "compatible-further-processing"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Which of these is a factor in the Article 6(4) compatibility assessment?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "The link between the old and the new purpose",
+          "reason": "Article 6(4)(a)."
+        },
+        {
+          "correct": false,
+          "blocks": "The number of employees the business has",
+          "reason": "Size is not one of the Article 6(4) factors."
+        },
+        {
+          "correct": false,
+          "blocks": "How costly it would be to collect fresh data",
+          "reason": "Cost is not one of the Article 6(4) factors."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When judging a new purpose under Article 6(4), what must the controller consider?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The number of employees the business has",
+              "reason": "Size is not one of the Article 6(4) factors."
+            },
+            {
+              "correct": false,
+              "blocks": "How costly it would be to collect fresh data",
+              "reason": "Cost is not one of the Article 6(4) factors."
+            },
+            {
+              "correct": true,
+              "blocks": "The link between the old and the new purpose",
+              "reason": "Article 6(4)(a)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compatible-further-processing"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Sunfield wants to pass customers' phone numbers to a partner for its adverts. Is that likely compatible?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, because they were collected lawfully",
+          "reason": "A lawful collection does not make every later use compatible."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if the numbers are pseudonymised first",
+          "reason": "Safeguards are one factor. They do not outweigh the others alone."
+        },
+        {
+          "correct": true,
+          "blocks": "Unlikely: weak link, unexpected, with consequences",
+          "reason": "Factors (a), (b) and (d) point against it."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Phone numbers collected for order alerts are wanted for a partner's marketing. How does Article 6(4) point?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, if the numbers are pseudonymised first",
+              "reason": "Safeguards are one factor. They do not outweigh the others alone."
+            },
+            {
+              "correct": true,
+              "blocks": "Unlikely: weak link, unexpected, with consequences",
+              "reason": "Factors (a), (b) and (d) point against it."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, because they were collected lawfully",
+              "reason": "A lawful collection does not make every later use compatible."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compatible-further-processing"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-4"
+      ],
+      "prompt": "Sunfield's new purpose is compatible. What does it still have to do?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nothing at all, because it is compatible",
+          "reason": "Article 13(3) still requires information."
+        },
+        {
+          "correct": true,
+          "blocks": "Inform customers about the new purpose first",
+          "reason": "Article 13(3) requires information before further processing."
+        },
+        {
+          "correct": false,
+          "blocks": "Obtain fresh consent from every customer",
+          "reason": "Recital 50: no separate basis is required if compatible."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "If a further use is compatible, which duty still applies?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Inform customers about the new purpose first",
+              "reason": "Article 13(3) requires information before further processing."
+            },
+            {
+              "correct": false,
+              "blocks": "Obtain fresh consent from every customer",
+              "reason": "Recital 50: no separate basis is required if compatible."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing at all, because it is compatible",
+              "reason": "Article 13(3) still requires information."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

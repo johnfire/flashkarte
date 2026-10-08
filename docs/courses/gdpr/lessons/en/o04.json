@@ -1,0 +1,305 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o04",
+    "title": "Security of processing",
+    "summary": "Choose security measures appropriate to the risk, and test that they work.",
+    "covers": [
+      "security-measures"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g03",
+        "reason": "Pseudonymisation is one of the listed security measures."
+      },
+      {
+        "lesson": "p03",
+        "reason": "Article 32 implements the integrity and confidentiality principle."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Article 32(1): taking into account the state of the art, the costs, the nature, scope, context and purposes of processing, and the risks, the **controller and the processor** must implement measures to ensure a level of security **appropriate to the risk**.",
+        "So security is neither \"maximum regardless of cost\" nor \"cheapest possible\". It is matched to the risk."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 32",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 32(1) lists measures to use as appropriate:",
+        {
+          "type": "list",
+          "items": [
+            "(a) **pseudonymisation and encryption**;",
+            "(b) ensuring ongoing **confidentiality, integrity, availability and resilience** of systems;",
+            "(c) the ability to **restore** availability and access in a timely manner after an incident;",
+            "(d) a process for **regularly testing, assessing and evaluating** the measures."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 32",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "When assessing the risk, consider in particular accidental or unlawful **destruction, loss, alteration, unauthorised disclosure of, or access to** personal data (Article 32(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 32",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Organisations must take steps so that anyone acting under their authority with access to personal data processes it **only on instructions** (Article 32(4)).",
+        "Following an approved code of conduct or certification can help demonstrate compliance (Article 32(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 32",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Sunfield's measures, scaled to its risks:",
+        {
+          "type": "list",
+          "items": [
+            "encrypted laptops and phones;",
+            "access to staff files only for the manager and payroll;",
+            "daily backups of the order system, with a restore that is actually tested;",
+            "written staff instructions;",
+            "a yearly review of whether the measures still work."
+          ]
+        },
+        "Buying a firewall once and never checking it does not meet point (d).",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 32",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "What level of security does Article 32 require?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "A level appropriate to the risk",
+          "reason": "Article 32(1)."
+        },
+        {
+          "correct": false,
+          "blocks": "The maximum possible, whatever the cost",
+          "reason": "Cost and state of the art are factors."
+        },
+        {
+          "correct": false,
+          "blocks": "Whatever is cheapest",
+          "reason": "The level must be appropriate to the risk."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does Article 32 set the required security level?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The maximum possible, whatever the cost",
+              "reason": "Cost and state of the art are factors."
+            },
+            {
+              "correct": false,
+              "blocks": "Whatever is cheapest",
+              "reason": "The level must be appropriate to the risk."
+            },
+            {
+              "correct": true,
+              "blocks": "A level appropriate to the risk",
+              "reason": "Article 32(1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Which of these is listed in Article 32(1)?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Publishing annual turnover",
+          "reason": "Not a security measure."
+        },
+        {
+          "correct": false,
+          "blocks": "Appointing a data protection officer",
+          "reason": "That is Article 37, not an Article 32 measure."
+        },
+        {
+          "correct": true,
+          "blocks": "Restoring access to data in a timely manner after an incident",
+          "reason": "Article 32(1)(c)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which capability does Article 32(1) name?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Appointing a data protection officer",
+              "reason": "That is Article 37, not an Article 32 measure."
+            },
+            {
+              "correct": true,
+              "blocks": "Restoring access to data in a timely manner after an incident",
+              "reason": "Article 32(1)(c)."
+            },
+            {
+              "correct": false,
+              "blocks": "Publishing annual turnover",
+              "reason": "Not a security measure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "Sunfield installed security software three years ago and has never checked it. Which point is it missing?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Testing only after a breach",
+          "reason": "Point (d) says regularly, not after the event."
+        },
+        {
+          "correct": true,
+          "blocks": "Regularly testing and evaluating the measures",
+          "reason": "Article 32(1)(d)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing; installing once is enough",
+          "reason": "Point (d) requires regular testing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 32(1)(d) add beyond installing measures?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Regularly testing and evaluating the measures",
+              "reason": "Article 32(1)(d)."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing; installing once is enough",
+              "reason": "Point (d) requires regular testing."
+            },
+            {
+              "correct": false,
+              "blocks": "Testing only after a breach",
+              "reason": "Point (d) says regularly, not after the event."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Does Article 32 apply to Sunfield's payroll processor?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Yes, controllers and processors alike",
+          "reason": "Article 32(1) names both."
+        },
+        {
+          "correct": false,
+          "blocks": "No, only the controller",
+          "reason": "Processors are named too."
+        },
+        {
+          "correct": false,
+          "blocks": "No, only if the contract says so",
+          "reason": "Article 32 applies directly."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Who must implement Article 32 security measures?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, only the controller",
+              "reason": "Processors are named too."
+            },
+            {
+              "correct": false,
+              "blocks": "No, only if the contract says so",
+              "reason": "Article 32 applies directly."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, controllers and processors alike",
+              "reason": "Article 32(1) names both."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

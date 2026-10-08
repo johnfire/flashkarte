@@ -35,10 +35,10 @@ The **GDPR, Regulation (EU) 2016/679, as in force on 7 October 2026**.
 
 The court cases are used for well-settled points only, and each is quoted from its operative part:
 
-- C-673/17 *Planet49*: pre-ticked cookie boxes.
-- C-40/17 *Fashion ID*: joint control through a website plug-in. It was decided under Directive 95/46/EC, and the
+- C-673/17 _Planet49_: pre-ticked cookie boxes.
+- C-40/17 _Fashion ID_: joint control through a website plug-in. It was decided under Directive 95/46/EC, and the
   lesson says so.
-- C-311/18 *Schrems II*: transfers under standard clauses; Privacy Shield invalid.
+- C-311/18 _Schrems II_: transfers under standard clauses; Privacy Shield invalid.
 
 ## Out of scope by decision (7 October 2026)
 

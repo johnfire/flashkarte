@@ -1,0 +1,258 @@
+{
+  "module": "Start here: what the GDPR covers",
+  "lesson": {
+    "slug": "g04",
+    "title": "Processing",
+    "summary": "Recognise processing, and decide when paper records are covered.",
+    "covers": [
+      "processing",
+      "filing-system"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g02",
+        "reason": "Processing is defined as operations performed on personal data."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Processing** means any operation performed on personal data, whether automated or not (Article 4(2)).",
+        "Article 4(2) gives examples: collection, recording, organisation, structuring, storage, adaptation or alteration, retrieval, consultation, use, disclosure, dissemination, combination, restriction, erasure and destruction."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2(1), 4(2), 4(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The list is so wide that almost anything you do with personal data counts. Storing it is processing, looking at it on screen is processing, and deleting it is processing too.",
+        "When a Sunfield assistant looks up a pre-order on the till screen, that is consultation and use."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2(1), 4(2), 4(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The GDPR applies to processing that is wholly or partly **automated**. It also applies to non-automated processing, if the data is part of a filing system or is meant to become part of one (Article 2(1))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2(1), 4(2), 4(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **filing system** is any structured set of personal data that can be accessed according to specific criteria. It can be centralised or spread across several places (Article 4(6)).",
+        "Recital 15 says the protection is technology-neutral. Files that are not structured according to specific criteria are not covered."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2(1), 4(2), 4(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Sunfield keeps paper personnel files in a cabinet, sorted by surname. You can find a person's file using a criterion, so this is a filing system and the GDPR applies.",
+        "A box of unsorted handwritten notes is not structured by criteria. It falls outside the GDPR, unless the notes are meant to be filed in a structured way.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Sunfield Bakery is invented** for this course. Any resemblance to a real business is accidental."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2(1), 4(2), 4(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "processing"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "An assistant looks up a customer's pre-order on the till screen. Is that processing?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Yes, consultation and use are listed operations",
+          "reason": "Article 4(2) lists consultation and use."
+        },
+        {
+          "correct": false,
+          "blocks": "No, nothing was changed",
+          "reason": "Processing does not require any change."
+        },
+        {
+          "correct": false,
+          "blocks": "Only if the order is printed out",
+          "reason": "Printing is not required. Viewing is already processing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is it processing to read a customer's record on a screen without changing anything?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, nothing was changed",
+              "reason": "Processing does not require any change."
+            },
+            {
+              "correct": false,
+              "blocks": "Only if the order is printed out",
+              "reason": "Printing is not required. Viewing is already processing."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, consultation and use are listed operations",
+              "reason": "Article 4(2) lists consultation and use."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processing"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Sunfield deletes old customer accounts. Is the deletion itself processing?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "No, deleted data is no longer covered",
+          "reason": "The act of deleting is itself listed as processing."
+        },
+        {
+          "correct": false,
+          "blocks": "Only if the deletion is automated",
+          "reason": "Article 4(2) covers operations whether automated or not."
+        },
+        {
+          "correct": true,
+          "blocks": "Yes, erasure and destruction are processing",
+          "reason": "Article 4(2) lists both."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does destroying personal data count as processing?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only if the deletion is automated",
+              "reason": "Article 4(2) covers operations whether automated or not."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, erasure and destruction are processing",
+              "reason": "Article 4(2) lists both."
+            },
+            {
+              "correct": false,
+              "blocks": "No, deleted data is no longer covered",
+              "reason": "The act of deleting is itself listed as processing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "filing-system"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Sunfield's paper personnel files are sorted by surname in a cabinet. Does the GDPR apply?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only after the files are scanned",
+          "reason": "Structured paper files are already covered."
+        },
+        {
+          "correct": true,
+          "blocks": "Yes, they form a filing system",
+          "reason": "They are structured and accessible by a criterion (Articles 2(1) and 4(6))."
+        },
+        {
+          "correct": false,
+          "blocks": "No, the GDPR only covers computers",
+          "reason": "Article 2(1) also covers manual filing systems."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Are paper records sorted alphabetically by name covered?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Yes, they form a filing system",
+              "reason": "They are structured and accessible by a criterion (Articles 2(1) and 4(6))."
+            },
+            {
+              "correct": false,
+              "blocks": "No, the GDPR only covers computers",
+              "reason": "Article 2(1) also covers manual filing systems."
+            },
+            {
+              "correct": false,
+              "blocks": "Only after the files are scanned",
+              "reason": "Structured paper files are already covered."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

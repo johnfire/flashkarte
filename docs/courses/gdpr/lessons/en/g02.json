@@ -1,0 +1,266 @@
+{
+  "module": "Start here: what the GDPR covers",
+  "lesson": {
+    "slug": "g02",
+    "title": "Personal data",
+    "summary": "Decide whether information is personal data, including when a person can be identified only indirectly.",
+    "covers": [
+      "personal-data",
+      "identifiability"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Personal data** is any information relating to an identified or identifiable natural person (Article 4(1)).",
+        "The person the data is about is called the **data subject**. For Sunfield, data subjects include customers, staff and job applicants."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 4(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The GDPR protects natural persons, not companies. Recital 14 says it does not cover data about legal persons, such as a company's name, legal form and contact details.",
+        "Information about a named person who works at a company is different. A name is one of the identifiers listed in Article 4(1), so it relates to a natural person."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 4(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The GDPR does not apply to the personal data of people who have died (recital 27). EU countries may make their own rules about such data."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 4(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A person can be identified **directly**, for example by name. They can also be identified **indirectly** (Article 4(1)).",
+        "Article 4(1) lists identifiers such as an identification number, location data and an online identifier. It also lists factors specific to a person's physical, physiological, genetic, mental, economic, cultural or social identity."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 4(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "To decide whether someone is identifiable, consider **all the means reasonably likely to be used**, by the holder of the data or by anyone else. This includes \"singling out\" one person from a group (recital 26).",
+        "Recital 26 tells you to weigh objective factors, such as the cost and time needed to identify someone and the technology available.",
+        "Recital 30 adds that online identifiers, such as IP addresses and cookie identifiers, can leave traces. Combined with other information, these traces can be used to profile and identify people."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 4(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield's loyalty card number is an identification number. Sunfield can link it to a customer's purchases and account, so the card number and purchase history are personal data, even on a list with no names.",
+        "A figure such as \"1,200 rolls sold on Monday\", with nothing linking it to anyone, is not information about an identifiable person."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 4(1)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "personal-data"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which of these is personal data for Sunfield?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "A customer's name with her pre-order history",
+          "reason": "A name directly identifies a natural person, and the history relates to her."
+        },
+        {
+          "correct": false,
+          "blocks": "The registration number of a supplier company",
+          "reason": "Recital 14: data about a legal person is not covered."
+        },
+        {
+          "correct": false,
+          "blocks": "The total number of rolls sold last Monday",
+          "reason": "A total with no link to any person does not relate to an identifiable person."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which item relates to an identified or identifiable natural person?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The registration number of a supplier company",
+              "reason": "Recital 14: data about a legal person is not covered."
+            },
+            {
+              "correct": false,
+              "blocks": "The total number of rolls sold last Monday",
+              "reason": "A total with no link to any person does not relate to an identifiable person."
+            },
+            {
+              "correct": true,
+              "blocks": "A customer's name with her pre-order history",
+              "reason": "A name directly identifies a natural person, and the history relates to her."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "personal-data"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Sunfield still holds records about a customer who has died. Does the GDPR apply to them?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, exactly as for a living customer",
+          "reason": "Recital 27 excludes the data of deceased persons."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, for ten years after death",
+          "reason": "The GDPR sets no such period. The ten years is invented."
+        },
+        {
+          "correct": true,
+          "blocks": "No, though national rules may apply",
+          "reason": "Recital 27: the GDPR does not apply, and EU countries may make rules."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does the GDPR treat the personal data of people who have died?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, for ten years after death",
+              "reason": "The GDPR sets no such period. The ten years is invented."
+            },
+            {
+              "correct": true,
+              "blocks": "No, though national rules may apply",
+              "reason": "Recital 27: the GDPR does not apply, and EU countries may make rules."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, exactly as for a living customer",
+              "reason": "Recital 27 excludes the data of deceased persons."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "identifiability"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "A list shows loyalty card numbers and purchases, but no names. Is it personal data?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only if customers agreed to the loyalty scheme",
+          "reason": "Consent does not change whether information is personal data."
+        },
+        {
+          "correct": true,
+          "blocks": "Yes, if the numbers can reasonably be linked to customers",
+          "reason": "An identification number allows indirect identification (Article 4(1), recital 26)."
+        },
+        {
+          "correct": false,
+          "blocks": "No, because no names appear",
+          "reason": "Indirect identification through a number is enough."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can data be personal data if it contains no names at all?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Yes, if the numbers can reasonably be linked to customers",
+              "reason": "An identification number allows indirect identification (Article 4(1), recital 26)."
+            },
+            {
+              "correct": false,
+              "blocks": "No, because no names appear",
+              "reason": "Indirect identification through a number is enough."
+            },
+            {
+              "correct": false,
+              "blocks": "Only if customers agreed to the loyalty scheme",
+              "reason": "Consent does not change whether information is personal data."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

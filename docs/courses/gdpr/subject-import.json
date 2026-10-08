@@ -1,0 +1,1203 @@
+{
+  "title": "GDPR Basics for Business: Personal Data, Rights and Duties",
+  "description": "A plain-language course on the EU General Data Protection Regulation for business people who are not data experts. Educational draft: not legal advice, and not yet reviewed by a lawyer.",
+  "locale": "en",
+  "concepts": [
+    {
+      "slug": "gdpr-map",
+      "name": "Orientation: what the GDPR regulates",
+      "kind": "map",
+      "tier": "core"
+    },
+    {
+      "slug": "supervisory-authority",
+      "name": "Supervisory authority",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "personal-data",
+      "name": "Personal data and the data subject",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "identifiability",
+      "name": "Identifiable, directly or indirectly",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "pseudonymisation",
+      "name": "Pseudonymisation",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "anonymous-data",
+      "name": "Anonymous data",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "processing",
+      "name": "Processing",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "filing-system",
+      "name": "Filing system (paper records)",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "controller",
+      "name": "Controller",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "processor",
+      "name": "Processor",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "joint-controllers",
+      "name": "Joint controllers",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "material-scope",
+      "name": "Material scope and the household exemption",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "territorial-scope",
+      "name": "Territorial scope",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "transparency-principle",
+      "name": "Lawfulness, fairness and transparency",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "purpose-limitation",
+      "name": "Purpose limitation",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "data-minimisation",
+      "name": "Data minimisation",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "accuracy-principle",
+      "name": "Accuracy",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "storage-limitation",
+      "name": "Storage limitation",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "integrity-confidentiality",
+      "name": "Integrity and confidentiality",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "accountability",
+      "name": "Accountability",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "lawful-bases",
+      "name": "The six legal bases",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "necessity-test",
+      "name": "What 'necessary' means",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "valid-consent",
+      "name": "Valid consent",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "consent-withdrawal",
+      "name": "Withdrawing consent",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "legitimate-interests",
+      "name": "Legitimate interests",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "compatible-further-processing",
+      "name": "Compatible further processing",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "special-categories",
+      "name": "Special categories of personal data",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "special-category-conditions",
+      "name": "Conditions for special-category data",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "criminal-offence-data",
+      "name": "Criminal conviction and offence data",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "information-at-collection",
+      "name": "Information when collecting from the person",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "information-indirect",
+      "name": "Information when data comes from elsewhere",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "request-deadline",
+      "name": "Response deadline for rights requests",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "request-fees-and-identity",
+      "name": "Fees, refusals and identity checks",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "right-of-access",
+      "name": "Right of access",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "right-to-rectification",
+      "name": "Right to rectification",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "right-to-erasure",
+      "name": "Right to erasure",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "right-to-restriction",
+      "name": "Right to restriction",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "recipient-notification",
+      "name": "Telling recipients about corrections",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "data-portability",
+      "name": "Right to data portability",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "right-to-object",
+      "name": "Right to object",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "profiling",
+      "name": "Profiling",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "automated-decisions",
+      "name": "Solely automated decisions",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "complaint-and-court",
+      "name": "Complaints and court action",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "compensation",
+      "name": "Compensation and liability",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "controller-measures",
+      "name": "Appropriate measures and policies",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "records-of-processing",
+      "name": "Record of processing activities",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "privacy-by-design",
+      "name": "Data protection by design",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "privacy-by-default",
+      "name": "Data protection by default",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "processor-contract",
+      "name": "The controller-processor contract",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "sub-processors",
+      "name": "Sub-processors",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "security-measures",
+      "name": "Security of processing",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "personal-data-breach",
+      "name": "Personal data breach",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "breach-notification",
+      "name": "Notifying the supervisory authority",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "breach-communication",
+      "name": "Telling affected people",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "dpia",
+      "name": "Data protection impact assessment",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "dpo",
+      "name": "Data protection officer",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "compliance-review",
+      "name": "Integrated compliance review",
+      "kind": "capstone",
+      "tier": "core"
+    },
+    {
+      "slug": "international-transfer",
+      "name": "International transfer",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "transfer-tools",
+      "name": "Transfer tools",
+      "kind": "skill",
+      "tier": "core"
+    },
+    {
+      "slug": "lead-authority",
+      "name": "Lead supervisory authority",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "edpb",
+      "name": "European Data Protection Board",
+      "kind": "term",
+      "tier": "core"
+    },
+    {
+      "slug": "corrective-powers",
+      "name": "Corrective powers",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "fine-tiers",
+      "name": "The two fine tiers",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "fine-factors",
+      "name": "How a fine is set",
+      "kind": "idea",
+      "tier": "core"
+    },
+    {
+      "slug": "eu-representative",
+      "name": "EU representative",
+      "kind": "idea",
+      "tier": "extension"
+    },
+    {
+      "slug": "essential-equivalence",
+      "name": "Essential equivalence after Schrems II",
+      "kind": "idea",
+      "tier": "extension"
+    },
+    {
+      "slug": "eu-us-dpf",
+      "name": "EU-US Data Privacy Framework",
+      "kind": "term",
+      "tier": "extension"
+    },
+    {
+      "slug": "cookie-consent-rule",
+      "name": "The cookie consent rule",
+      "kind": "idea",
+      "tier": "extension"
+    },
+    {
+      "slug": "cookie-information",
+      "name": "Information about cookies",
+      "kind": "idea",
+      "tier": "extension"
+    },
+    {
+      "slug": "joint-control-scope",
+      "name": "Scope of joint control",
+      "kind": "idea",
+      "tier": "extension"
+    },
+    {
+      "slug": "ai-act-relationship",
+      "name": "GDPR and AI Act together",
+      "kind": "idea",
+      "tier": "extension"
+    },
+    {
+      "slug": "child-consent",
+      "name": "Children's consent for online services",
+      "kind": "idea",
+      "tier": "extension"
+    },
+    {
+      "slug": "pending-proposals",
+      "name": "Pending amendment proposals",
+      "kind": "idea",
+      "tier": "extension"
+    }
+  ],
+  "edges": [
+    {
+      "from": "personal-data",
+      "to": "identifiability",
+      "strength": "requires",
+      "reason": "Identifiability is the test inside the personal-data definition."
+    },
+    {
+      "from": "identifiability",
+      "to": "pseudonymisation",
+      "strength": "requires",
+      "reason": "Pseudonymised data stays personal data because extra information can still identify the person."
+    },
+    {
+      "from": "identifiability",
+      "to": "anonymous-data",
+      "strength": "requires",
+      "reason": "Anonymous data is defined by the absence of identifiability."
+    },
+    {
+      "from": "personal-data",
+      "to": "processing",
+      "strength": "requires",
+      "reason": "Processing is defined as operations performed on personal data."
+    },
+    {
+      "from": "processing",
+      "to": "filing-system",
+      "strength": "requires",
+      "reason": "The filing-system rule decides which manual processing is covered."
+    },
+    {
+      "from": "processing",
+      "to": "controller",
+      "strength": "requires",
+      "reason": "A controller is defined as whoever decides the purposes and means of processing."
+    },
+    {
+      "from": "controller",
+      "to": "processor",
+      "strength": "requires",
+      "reason": "A processor is defined as acting on behalf of a controller."
+    },
+    {
+      "from": "controller",
+      "to": "joint-controllers",
+      "strength": "requires",
+      "reason": "Joint controllers are two or more controllers deciding together."
+    },
+    {
+      "from": "processing",
+      "to": "material-scope",
+      "strength": "requires",
+      "reason": "Material scope is stated in terms of automated processing."
+    },
+    {
+      "from": "filing-system",
+      "to": "material-scope",
+      "strength": "requires",
+      "reason": "Manual processing is covered only through the filing-system rule."
+    },
+    {
+      "from": "anonymous-data",
+      "to": "material-scope",
+      "strength": "suggests",
+      "reason": "Knowing anonymous data helps explain what falls outside the GDPR."
+    },
+    {
+      "from": "controller",
+      "to": "territorial-scope",
+      "strength": "requires",
+      "reason": "Article 3 turns on where the controller or processor is established."
+    },
+    {
+      "from": "processor",
+      "to": "territorial-scope",
+      "strength": "requires",
+      "reason": "Article 3 applies the same tests to processors."
+    },
+    {
+      "from": "processing",
+      "to": "transparency-principle",
+      "strength": "requires",
+      "reason": "The principles are rules about how processing is carried out."
+    },
+    {
+      "from": "processing",
+      "to": "purpose-limitation",
+      "strength": "requires",
+      "reason": "Purpose limitation governs further processing of collected data."
+    },
+    {
+      "from": "controller",
+      "to": "purpose-limitation",
+      "strength": "suggests",
+      "reason": "The controller is the one who sets the purposes."
+    },
+    {
+      "from": "purpose-limitation",
+      "to": "data-minimisation",
+      "strength": "requires",
+      "reason": "Necessity is measured against the stated purpose."
+    },
+    {
+      "from": "purpose-limitation",
+      "to": "accuracy-principle",
+      "strength": "requires",
+      "reason": "Accuracy is judged having regard to the purposes."
+    },
+    {
+      "from": "purpose-limitation",
+      "to": "storage-limitation",
+      "strength": "requires",
+      "reason": "The storage period is limited by what the purpose needs."
+    },
+    {
+      "from": "anonymous-data",
+      "to": "storage-limitation",
+      "strength": "suggests",
+      "reason": "Anonymising is one way to stop keeping data in identifiable form."
+    },
+    {
+      "from": "processing",
+      "to": "integrity-confidentiality",
+      "strength": "requires",
+      "reason": "Security protects processing against unauthorised operations and loss."
+    },
+    {
+      "from": "controller",
+      "to": "accountability",
+      "strength": "requires",
+      "reason": "Accountability places the burden of proof on the controller."
+    },
+    {
+      "from": "transparency-principle",
+      "to": "accountability",
+      "strength": "requires",
+      "reason": "The controller must demonstrate compliance with the principles, so the learner needs them."
+    },
+    {
+      "from": "data-minimisation",
+      "to": "accountability",
+      "strength": "requires",
+      "reason": "Demonstrating compliance covers minimisation, accuracy and storage limits too."
+    },
+    {
+      "from": "transparency-principle",
+      "to": "lawful-bases",
+      "strength": "requires",
+      "reason": "The legal bases are what makes processing lawful under the first principle."
+    },
+    {
+      "from": "controller",
+      "to": "lawful-bases",
+      "strength": "requires",
+      "reason": "Several bases refer to the controller's obligations, interests or tasks."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "necessity-test",
+      "strength": "requires",
+      "reason": "Five of the six bases require the processing to be necessary for that basis."
+    },
+    {
+      "from": "data-minimisation",
+      "to": "necessity-test",
+      "strength": "suggests",
+      "reason": "Minimisation uses the same idea of necessity."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "valid-consent",
+      "strength": "requires",
+      "reason": "Consent is one of the six bases and must be placed among them."
+    },
+    {
+      "from": "valid-consent",
+      "to": "consent-withdrawal",
+      "strength": "requires",
+      "reason": "Withdrawal rules apply to consent that was validly given."
+    },
+    {
+      "from": "necessity-test",
+      "to": "legitimate-interests",
+      "strength": "requires",
+      "reason": "The legitimate-interests test includes a necessity step."
+    },
+    {
+      "from": "purpose-limitation",
+      "to": "compatible-further-processing",
+      "strength": "requires",
+      "reason": "Compatibility is the test inside purpose limitation."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "compatible-further-processing",
+      "strength": "requires",
+      "reason": "Article 6(4) applies when the new purpose is not covered by consent or law."
+    },
+    {
+      "from": "personal-data",
+      "to": "special-categories",
+      "strength": "requires",
+      "reason": "Special categories are a subset of personal data."
+    },
+    {
+      "from": "special-categories",
+      "to": "special-category-conditions",
+      "strength": "requires",
+      "reason": "The conditions lift the prohibition on those categories."
+    },
+    {
+      "from": "valid-consent",
+      "to": "special-category-conditions",
+      "strength": "requires",
+      "reason": "Explicit consent builds on the general consent conditions."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "special-category-conditions",
+      "strength": "requires",
+      "reason": "Article 9 conditions apply in addition to a legal basis."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "criminal-offence-data",
+      "strength": "requires",
+      "reason": "Article 10 adds conditions to processing based on Article 6(1)."
+    },
+    {
+      "from": "special-categories",
+      "to": "criminal-offence-data",
+      "strength": "suggests",
+      "reason": "Criminal data is handled in a similar but separate way."
+    },
+    {
+      "from": "transparency-principle",
+      "to": "information-at-collection",
+      "strength": "requires",
+      "reason": "The notice duties put the transparency principle into practice."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "information-at-collection",
+      "strength": "requires",
+      "reason": "A notice must state the legal basis, so the learner needs the bases."
+    },
+    {
+      "from": "controller",
+      "to": "information-at-collection",
+      "strength": "requires",
+      "reason": "The controller gives the notice and must identify itself."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "information-at-collection",
+      "strength": "requires",
+      "reason": "A notice must tell people they can complain to the supervisory authority."
+    },
+    {
+      "from": "information-at-collection",
+      "to": "information-indirect",
+      "strength": "requires",
+      "reason": "Article 14 builds on the Article 13 list and adds items."
+    },
+    {
+      "from": "controller",
+      "to": "request-deadline",
+      "strength": "requires",
+      "reason": "The deadlines are duties of the controller."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "request-deadline",
+      "strength": "requires",
+      "reason": "A refusal must tell the person they can complain to the supervisory authority."
+    },
+    {
+      "from": "information-at-collection",
+      "to": "request-deadline",
+      "strength": "suggests",
+      "reason": "A notice tells people which rights they can request."
+    },
+    {
+      "from": "request-deadline",
+      "to": "request-fees-and-identity",
+      "strength": "requires",
+      "reason": "Fees and refusals are part of the same Article 12 procedure."
+    },
+    {
+      "from": "request-deadline",
+      "to": "right-of-access",
+      "strength": "requires",
+      "reason": "An access request is answered within the Article 12 deadline."
+    },
+    {
+      "from": "request-fees-and-identity",
+      "to": "right-of-access",
+      "strength": "requires",
+      "reason": "The free first copy and the fee for further copies build on the fee rule."
+    },
+    {
+      "from": "accuracy-principle",
+      "to": "right-to-rectification",
+      "strength": "requires",
+      "reason": "Rectification is the individual's tool for the accuracy principle."
+    },
+    {
+      "from": "request-deadline",
+      "to": "right-to-rectification",
+      "strength": "requires",
+      "reason": "Rectification requests follow the Article 12 procedure."
+    },
+    {
+      "from": "consent-withdrawal",
+      "to": "right-to-erasure",
+      "strength": "requires",
+      "reason": "One erasure ground is withdrawn consent with no other basis."
+    },
+    {
+      "from": "storage-limitation",
+      "to": "right-to-erasure",
+      "strength": "requires",
+      "reason": "One erasure ground is that data is no longer necessary."
+    },
+    {
+      "from": "request-deadline",
+      "to": "right-to-erasure",
+      "strength": "requires",
+      "reason": "Erasure requests follow the Article 12 procedure."
+    },
+    {
+      "from": "right-to-rectification",
+      "to": "right-to-restriction",
+      "strength": "requires",
+      "reason": "Restriction applies while accuracy is being verified."
+    },
+    {
+      "from": "right-to-erasure",
+      "to": "right-to-restriction",
+      "strength": "requires",
+      "reason": "Restriction can be chosen instead of erasure of unlawful data."
+    },
+    {
+      "from": "right-to-erasure",
+      "to": "recipient-notification",
+      "strength": "requires",
+      "reason": "Article 19 passes erasures on to recipients."
+    },
+    {
+      "from": "right-to-restriction",
+      "to": "recipient-notification",
+      "strength": "requires",
+      "reason": "Article 19 also passes restrictions on to recipients."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "data-portability",
+      "strength": "requires",
+      "reason": "Portability depends on processing based on consent or contract."
+    },
+    {
+      "from": "right-of-access",
+      "to": "data-portability",
+      "strength": "suggests",
+      "reason": "Portability is easier to place next to access."
+    },
+    {
+      "from": "legitimate-interests",
+      "to": "right-to-object",
+      "strength": "requires",
+      "reason": "The general objection targets processing based on legitimate interests or public tasks."
+    },
+    {
+      "from": "request-deadline",
+      "to": "right-to-object",
+      "strength": "requires",
+      "reason": "Objections follow the Article 12 procedure."
+    },
+    {
+      "from": "processing",
+      "to": "profiling",
+      "strength": "requires",
+      "reason": "Profiling is a form of automated processing."
+    },
+    {
+      "from": "profiling",
+      "to": "automated-decisions",
+      "strength": "requires",
+      "reason": "Article 22 covers decisions based on automated processing, including profiling."
+    },
+    {
+      "from": "valid-consent",
+      "to": "automated-decisions",
+      "strength": "requires",
+      "reason": "One exception is explicit consent, which builds on consent."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "complaint-and-court",
+      "strength": "requires",
+      "reason": "A complaint is lodged with a supervisory authority."
+    },
+    {
+      "from": "controller",
+      "to": "complaint-and-court",
+      "strength": "requires",
+      "reason": "Court action is brought against a controller or processor."
+    },
+    {
+      "from": "controller",
+      "to": "compensation",
+      "strength": "requires",
+      "reason": "Liability rules distinguish the controller's role."
+    },
+    {
+      "from": "processor",
+      "to": "compensation",
+      "strength": "requires",
+      "reason": "Liability rules limit when a processor is liable."
+    },
+    {
+      "from": "complaint-and-court",
+      "to": "compensation",
+      "strength": "suggests",
+      "reason": "Compensation claims go to the courts named in Article 79."
+    },
+    {
+      "from": "accountability",
+      "to": "controller-measures",
+      "strength": "requires",
+      "reason": "Article 24 turns accountability into measures and policies."
+    },
+    {
+      "from": "controller-measures",
+      "to": "records-of-processing",
+      "strength": "requires",
+      "reason": "The record is one of the measures that demonstrates compliance."
+    },
+    {
+      "from": "purpose-limitation",
+      "to": "records-of-processing",
+      "strength": "requires",
+      "reason": "Every record entry states the purposes of processing."
+    },
+    {
+      "from": "special-categories",
+      "to": "records-of-processing",
+      "strength": "requires",
+      "reason": "The under-250 exemption does not apply to special categories."
+    },
+    {
+      "from": "data-minimisation",
+      "to": "privacy-by-design",
+      "strength": "requires",
+      "reason": "Design measures implement principles such as minimisation."
+    },
+    {
+      "from": "pseudonymisation",
+      "to": "privacy-by-design",
+      "strength": "requires",
+      "reason": "Pseudonymisation is the example measure Article 25 names."
+    },
+    {
+      "from": "privacy-by-design",
+      "to": "privacy-by-default",
+      "strength": "requires",
+      "reason": "Default settings are a specific design obligation."
+    },
+    {
+      "from": "processor",
+      "to": "processor-contract",
+      "strength": "requires",
+      "reason": "The contract governs processing by a processor."
+    },
+    {
+      "from": "controller-measures",
+      "to": "processor-contract",
+      "strength": "suggests",
+      "reason": "Choosing a processor with guarantees is part of the controller's measures."
+    },
+    {
+      "from": "processor-contract",
+      "to": "sub-processors",
+      "strength": "requires",
+      "reason": "Sub-processor rules are terms of the processor contract."
+    },
+    {
+      "from": "integrity-confidentiality",
+      "to": "security-measures",
+      "strength": "requires",
+      "reason": "Article 32 implements the integrity and confidentiality principle."
+    },
+    {
+      "from": "pseudonymisation",
+      "to": "security-measures",
+      "strength": "requires",
+      "reason": "Pseudonymisation is one of the listed security measures."
+    },
+    {
+      "from": "integrity-confidentiality",
+      "to": "personal-data-breach",
+      "strength": "requires",
+      "reason": "A breach is a failure of security."
+    },
+    {
+      "from": "personal-data-breach",
+      "to": "breach-notification",
+      "strength": "requires",
+      "reason": "Notification applies to a personal data breach."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "breach-notification",
+      "strength": "requires",
+      "reason": "The notification goes to the supervisory authority."
+    },
+    {
+      "from": "processor",
+      "to": "breach-notification",
+      "strength": "requires",
+      "reason": "Processors must tell the controller about breaches."
+    },
+    {
+      "from": "breach-notification",
+      "to": "breach-communication",
+      "strength": "requires",
+      "reason": "Communication to individuals reuses the notification content."
+    },
+    {
+      "from": "security-measures",
+      "to": "breach-communication",
+      "strength": "requires",
+      "reason": "Encryption that was applied can remove the duty to tell people."
+    },
+    {
+      "from": "automated-decisions",
+      "to": "dpia",
+      "strength": "requires",
+      "reason": "One listed DPIA case is systematic automated evaluation with significant effects."
+    },
+    {
+      "from": "special-categories",
+      "to": "dpia",
+      "strength": "requires",
+      "reason": "One listed DPIA case is large-scale special-category data."
+    },
+    {
+      "from": "controller-measures",
+      "to": "dpia",
+      "strength": "requires",
+      "reason": "A DPIA is a risk-based controller measure."
+    },
+    {
+      "from": "special-categories",
+      "to": "dpo",
+      "strength": "requires",
+      "reason": "One mandatory-DPO case is large-scale special-category data."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "dpo",
+      "strength": "requires",
+      "reason": "The DPO cooperates with and is the contact for the supervisory authority."
+    },
+    {
+      "from": "dpia",
+      "to": "dpo",
+      "strength": "suggests",
+      "reason": "The DPO advises on DPIAs."
+    },
+    {
+      "from": "records-of-processing",
+      "to": "compliance-review",
+      "strength": "requires",
+      "reason": "The review starts from the record of processing."
+    },
+    {
+      "from": "processor-contract",
+      "to": "compliance-review",
+      "strength": "requires",
+      "reason": "The review checks the processor contracts."
+    },
+    {
+      "from": "breach-notification",
+      "to": "compliance-review",
+      "strength": "requires",
+      "reason": "The review includes a breach scenario."
+    },
+    {
+      "from": "dpia",
+      "to": "compliance-review",
+      "strength": "requires",
+      "reason": "The review decides whether a DPIA is needed."
+    },
+    {
+      "from": "legitimate-interests",
+      "to": "compliance-review",
+      "strength": "suggests",
+      "reason": "The review revisits the legal bases."
+    },
+    {
+      "from": "information-at-collection",
+      "to": "compliance-review",
+      "strength": "suggests",
+      "reason": "The review checks the privacy notice."
+    },
+    {
+      "from": "processing",
+      "to": "international-transfer",
+      "strength": "requires",
+      "reason": "A transfer is a processing operation."
+    },
+    {
+      "from": "territorial-scope",
+      "to": "international-transfer",
+      "strength": "suggests",
+      "reason": "Scope and transfers are different questions."
+    },
+    {
+      "from": "international-transfer",
+      "to": "transfer-tools",
+      "strength": "requires",
+      "reason": "The tools are conditions for a transfer."
+    },
+    {
+      "from": "valid-consent",
+      "to": "transfer-tools",
+      "strength": "requires",
+      "reason": "One derogation is explicit consent to the transfer."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "lead-authority",
+      "strength": "requires",
+      "reason": "The lead authority is a supervisory authority with a special role."
+    },
+    {
+      "from": "controller",
+      "to": "lead-authority",
+      "strength": "requires",
+      "reason": "The lead authority follows the controller's main establishment."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "edpb",
+      "strength": "requires",
+      "reason": "The Board is made up of the supervisory authorities."
+    },
+    {
+      "from": "supervisory-authority",
+      "to": "corrective-powers",
+      "strength": "requires",
+      "reason": "Corrective powers belong to supervisory authorities."
+    },
+    {
+      "from": "corrective-powers",
+      "to": "fine-tiers",
+      "strength": "requires",
+      "reason": "A fine is one corrective power, imposed with or instead of the others."
+    },
+    {
+      "from": "lawful-bases",
+      "to": "fine-tiers",
+      "strength": "suggests",
+      "reason": "The higher tier names the principles and bases."
+    },
+    {
+      "from": "fine-tiers",
+      "to": "fine-factors",
+      "strength": "requires",
+      "reason": "The factors set the amount within the tier."
+    },
+    {
+      "from": "security-measures",
+      "to": "fine-factors",
+      "strength": "suggests",
+      "reason": "Measures taken under Articles 25 and 32 are a listed factor."
+    },
+    {
+      "from": "territorial-scope",
+      "to": "eu-representative",
+      "strength": "requires",
+      "reason": "A representative is needed only where Article 3(2) applies."
+    },
+    {
+      "from": "transfer-tools",
+      "to": "essential-equivalence",
+      "strength": "requires",
+      "reason": "Schrems II interprets the standard-clauses tool."
+    },
+    {
+      "from": "corrective-powers",
+      "to": "essential-equivalence",
+      "strength": "requires",
+      "reason": "Schrems II relies on the power to suspend transfers."
+    },
+    {
+      "from": "transfer-tools",
+      "to": "eu-us-dpf",
+      "strength": "requires",
+      "reason": "The Framework is an adequacy decision."
+    },
+    {
+      "from": "essential-equivalence",
+      "to": "eu-us-dpf",
+      "strength": "requires",
+      "reason": "The Framework followed the invalidation of Privacy Shield in Schrems II."
+    },
+    {
+      "from": "valid-consent",
+      "to": "cookie-consent-rule",
+      "strength": "requires",
+      "reason": "Cookie consent uses the GDPR's consent standard."
+    },
+    {
+      "from": "cookie-consent-rule",
+      "to": "cookie-information",
+      "strength": "requires",
+      "reason": "The information duty is part of the cookie consent rule."
+    },
+    {
+      "from": "joint-controllers",
+      "to": "joint-control-scope",
+      "strength": "requires",
+      "reason": "The case refines when and how far joint control applies."
+    },
+    {
+      "from": "legitimate-interests",
+      "to": "joint-control-scope",
+      "strength": "requires",
+      "reason": "The case requires each joint controller to have a legitimate interest."
+    },
+    {
+      "from": "automated-decisions",
+      "to": "ai-act-relationship",
+      "strength": "requires",
+      "reason": "The lesson uses Article 22 as the example of a GDPR rule that still applies."
+    },
+    {
+      "from": "material-scope",
+      "to": "ai-act-relationship",
+      "strength": "suggests",
+      "reason": "Scope helps place the two laws side by side."
+    },
+    {
+      "from": "valid-consent",
+      "to": "child-consent",
+      "strength": "requires",
+      "reason": "Article 8 adds age conditions to consent."
+    },
+    {
+      "from": "gdpr-map",
+      "to": "pending-proposals",
+      "strength": "suggests",
+      "reason": "The orientation lesson explains what law is in force."
+    }
+  ]
+}

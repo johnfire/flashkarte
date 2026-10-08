@@ -1,0 +1,349 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p05",
+    "title": "Consent that counts",
+    "summary": "Test whether consent is valid, and apply the rules for withdrawing it.",
+    "covers": [
+      "valid-consent",
+      "consent-withdrawal"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p04",
+        "reason": "Consent is one of the six bases and must be placed among them."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Consent** is any freely given, specific, informed and unambiguous indication of a person's wishes. It is given by a statement or by a **clear affirmative action** (Article 4(11)).",
+        "All four qualities must be present."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 7",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Recital 32 gives examples of a clear affirmative act: ticking a box on a website, choosing technical settings, or a written or oral statement.",
+        "**Silence, pre-ticked boxes and inactivity are not consent** (recital 32). If processing has several purposes, consent should be given for all of them."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 7",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Freely given**: the person must have a genuine choice and be able to refuse or withdraw without detriment (recital 42).",
+        "Consent is presumed not freely given where a service is made conditional on consent that the service does not need. It is also presumed not free where separate consent for different operations is not allowed, although it would be appropriate (recital 43, Article 7(4)).",
+        "Recital 43 also warns about a clear imbalance of power between the person and the controller, for example with a public authority."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 7",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Informed**: the person should know at least who the controller is and what the purposes are (recital 42).",
+        "If consent is asked for in a document that also covers other matters, the request must be clearly distinguishable from them, intelligible and in clear, plain language (Article 7(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 7",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Proof**: where processing is based on consent, the controller must be able to demonstrate that the person consented (Article 7(1)).",
+        "Keep a record of who consented, when, how, and to what."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 7",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "**Withdrawal** (Article 7(3)):",
+        {
+          "type": "list",
+          "items": [
+            "People can withdraw consent **at any time**.",
+            "Withdrawal does not make earlier processing unlawful.",
+            "People must be told about the right to withdraw before they consent.",
+            "Withdrawing must be **as easy as** giving consent."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 7",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-7",
+      "blocks": [
+        "Sunfield's newsletter sign-up is an unticked box saying \"Send me Sunfield's weekly newsletter\". Every email has an unsubscribe link, and Sunfield records when and how each person signed up.",
+        "If the app refused pre-orders unless customers also accepted the newsletter, that consent would likely not be freely given.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 7",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "valid-consent"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "The newsletter box on Sunfield's form is ticked in advance. A customer leaves it ticked. Has she consented?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, a pre-ticked box is not consent",
+          "reason": "Recital 32 excludes pre-ticked boxes."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, because she could have unticked it",
+          "reason": "Inaction is not a clear affirmative act."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if the terms mention the newsletter",
+          "reason": "Terms do not turn inactivity into consent."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does leaving a pre-ticked consent box unchanged count as consent?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, because she could have unticked it",
+              "reason": "Inaction is not a clear affirmative act."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the terms mention the newsletter",
+              "reason": "Terms do not turn inactivity into consent."
+            },
+            {
+              "correct": true,
+              "blocks": "No, a pre-ticked box is not consent",
+              "reason": "Recital 32 excludes pre-ticked boxes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "valid-consent"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-7"
+      ],
+      "prompt": "The app accepts pre-orders only if customers also agree to the newsletter. Is that consent freely given?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, because the customer clicked agree",
+          "reason": "A click under pressure may still not be free."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, because the newsletter costs nothing",
+          "reason": "Price is not the test. Freedom of choice is."
+        },
+        {
+          "correct": true,
+          "blocks": "Likely not, the service is made conditional",
+          "reason": "Article 7(4) and recital 43."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is consent free when a service is withheld unless people agree to unrelated processing?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, because the newsletter costs nothing",
+              "reason": "Price is not the test. Freedom of choice is."
+            },
+            {
+              "correct": true,
+              "blocks": "Likely not, the service is made conditional",
+              "reason": "Article 7(4) and recital 43."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, because the customer clicked agree",
+              "reason": "A click under pressure may still not be free."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "consent-withdrawal"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "A customer withdraws newsletter consent. What about the newsletters Sunfield sent before?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Sunfield may keep sending until year end",
+          "reason": "Withdrawal is possible at any time."
+        },
+        {
+          "correct": true,
+          "blocks": "They stay lawful; Sunfield must stop now",
+          "reason": "Article 7(3): withdrawal does not affect earlier processing."
+        },
+        {
+          "correct": false,
+          "blocks": "They become unlawful retrospectively",
+          "reason": "Article 7(3) says the opposite."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What happens to past consent-based processing when someone withdraws consent?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "They stay lawful; Sunfield must stop now",
+              "reason": "Article 7(3): withdrawal does not affect earlier processing."
+            },
+            {
+              "correct": false,
+              "blocks": "They become unlawful retrospectively",
+              "reason": "Article 7(3) says the opposite."
+            },
+            {
+              "correct": false,
+              "blocks": "Sunfield may keep sending until year end",
+              "reason": "Withdrawal is possible at any time."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "consent-withdrawal"
+      ],
+      "teaches": [
+        "screen-6",
+        "screen-7"
+      ],
+      "prompt": "Signing up takes one click, but unsubscribing requires phoning the shop. Is that acceptable?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, withdrawing must be as easy as consenting",
+          "reason": "Article 7(3) requires equal ease."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, as long as withdrawal is possible",
+          "reason": "Possible is not enough. It must be as easy."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if customers were told at sign-up",
+          "reason": "Telling them does not remove the ease requirement."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 7(3), how easy must withdrawing consent be?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, as long as withdrawal is possible",
+              "reason": "Possible is not enough. It must be as easy."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if customers were told at sign-up",
+              "reason": "Telling them does not remove the ease requirement."
+            },
+            {
+              "correct": true,
+              "blocks": "No, withdrawing must be as easy as consenting",
+              "reason": "Article 7(3) requires equal ease."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o08",
+    "title": "Capstone: Sunfield Bakery's data protection review",
+    "summary": "Apply the core duties together to Sunfield Bakery, and find what is missing.",
+    "covers": [
+      "compliance-review"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "o01",
+        "reason": "The review starts from the record of processing."
+      },
+      {
+        "lesson": "o03",
+        "reason": "The review checks the processor contracts."
+      },
+      {
+        "lesson": "o05",
+        "reason": "The review includes a breach scenario."
+      },
+      {
+        "lesson": "o06",
+        "reason": "The review decides whether a DPIA is needed."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "This capstone applies Modules 0 to 3 to one fictional business. Read each step and check it against what you have learned.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Sunfield Bakery is invented** for this course. The scenario is an illustration, not a template for a real review."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Step 1, the record** (Article 30): Sunfield's processing is regular and includes health data, so it keeps a record. It lists six activities: pre-orders, loyalty, newsletter, cameras, payroll and recruitment, each with purposes, data categories, recipients, erasure limits and security."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Step 2, legal bases and notices** (Articles 6 and 13):",
+        {
+          "type": "list",
+          "items": [
+            "pre-orders: contract;",
+            "newsletter: consent;",
+            "cameras on the sales floor: legitimate interests, after the balancing test;",
+            "payroll: legal obligation, with the contract for the rest."
+          ]
+        },
+        "Each activity appears in a privacy notice given at collection."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Step 3, processors** (Article 28): the app host, the newsletter service and the payroll firm each process data for Sunfield.",
+        "The review finds that the newsletter service has no written processor terms on file. That is a gap: a contract with the Article 28(3) content is required."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Step 4, a breach drill** (Articles 33 and 34): the payroll firm reports ransomware that has destroyed salary files. Sunfield becomes aware on **Friday at 18:00**.",
+        "Unless the breach is unlikely to result in a risk, Sunfield notifies the authority where feasible by **Monday at 18:00**, which is 72 hours later. Details may follow in phases. Sunfield documents the breach either way and considers whether staff face a high risk."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "**Step 5, a new project** (Articles 22 and 35): Sunfield wants software that automatically rejects low-scoring job applicants.",
+        "That is a DPIA case under Article 35(3)(a), and a solely automated decision under Article 22. Sunfield must complete the DPIA first. It must also either keep meaningful human review, or meet an Article 22(2) exception with the Article 22(3) safeguards."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Sunfield becomes aware of the payroll breach on Friday at 18:00. If notification is required, by when should the authority be notified, where feasible?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Monday at 18:00",
+          "reason": "72 hours after becoming aware (Article 33(1))."
+        },
+        {
+          "correct": false,
+          "blocks": "One month later",
+          "reason": "One month is the rights-request deadline."
+        },
+        {
+          "correct": false,
+          "blocks": "Only once every detail is known",
+          "reason": "Information may be given in phases (Article 33(4))."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Awareness came on Friday at 18:00. When does the 72-hour window close?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "One month later",
+              "reason": "One month is the rights-request deadline."
+            },
+            {
+              "correct": false,
+              "blocks": "Only once every detail is known",
+              "reason": "Information may be given in phases (Article 33(4))."
+            },
+            {
+              "correct": true,
+              "blocks": "Monday at 18:00",
+              "reason": "72 hours after becoming aware (Article 33(1))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "The newsletter service has no written processor terms on file. What is missing?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nothing, because the provider is well known",
+          "reason": "Reputation does not replace a contract."
+        },
+        {
+          "correct": false,
+          "blocks": "A DPIA for the newsletter",
+          "reason": "The gap found is the contract, not a DPIA."
+        },
+        {
+          "correct": true,
+          "blocks": "A contract with the Article 28(3) content",
+          "reason": "Required for every processor."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which document does the review find absent for the newsletter service?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "A DPIA for the newsletter",
+              "reason": "The gap found is the contract, not a DPIA."
+            },
+            {
+              "correct": true,
+              "blocks": "A contract with the Article 28(3) content",
+              "reason": "Required for every processor."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing, because the provider is well known",
+              "reason": "Reputation does not replace a contract."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Which fact defeats Sunfield's under-250 exemption from keeping a record?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "It has three shops",
+          "reason": "The number of shops is not a condition."
+        },
+        {
+          "correct": true,
+          "blocks": "Its processing is not occasional and includes health data",
+          "reason": "Article 30(5)."
+        },
+        {
+          "correct": false,
+          "blocks": "It uses a mobile app",
+          "reason": "Using an app is not an Article 30(5) condition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why must 40-staff Sunfield still keep an Article 30 record?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Its processing is not occasional and includes health data",
+              "reason": "Article 30(5)."
+            },
+            {
+              "correct": false,
+              "blocks": "It uses a mobile app",
+              "reason": "Using an app is not an Article 30(5) condition."
+            },
+            {
+              "correct": false,
+              "blocks": "It has three shops",
+              "reason": "The number of shops is not a condition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "Before automatically rejecting applicants by software, what must Sunfield do?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Carry out a DPIA, and meet Article 22",
+          "reason": "Articles 35(3)(a) and 22."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing, because hiring is an internal matter",
+          "reason": "Applicants are data subjects with rights."
+        },
+        {
+          "correct": false,
+          "blocks": "Only update the privacy notice",
+          "reason": "A notice alone does not meet Articles 22 and 35."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does the review require before the automatic-rejection project starts?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nothing, because hiring is an internal matter",
+              "reason": "Applicants are data subjects with rights."
+            },
+            {
+              "correct": false,
+              "blocks": "Only update the privacy notice",
+              "reason": "A notice alone does not meet Articles 22 and 35."
+            },
+            {
+              "correct": true,
+              "blocks": "Carry out a DPIA, and meet Article 22",
+              "reason": "Articles 35(3)(a) and 22."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

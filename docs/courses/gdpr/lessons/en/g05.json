@@ -1,0 +1,300 @@
+{
+  "module": "Start here: what the GDPR covers",
+  "lesson": {
+    "slug": "g05",
+    "title": "Who decides: controllers and processors",
+    "summary": "Identify the controller, the processor and joint controllers, and see why the roles matter.",
+    "covers": [
+      "controller",
+      "processor",
+      "joint-controllers"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "A controller is defined as whoever decides the purposes and means of processing."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **controller** is the person or body that, alone or jointly with others, determines the **purposes and means** of processing (Article 4(7)).",
+        "Purposes are *why* data is processed. Means are *how* it is processed. The controller carries most of the GDPR's duties."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 4(8), 4(10), 26, 28(10), 29",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Sunfield decides to collect pre-order data, why it does so and which app it uses. **Sunfield is the controller.**",
+        "Its employees act under its authority. The GDPR treats people under the controller's direct authority as part of the controller's side, not as third parties (Article 4(10)). They may process the data only on the controller's instructions (Article 29)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 4(8), 4(10), 26, 28(10), 29",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **processor** processes personal data **on behalf of** the controller (Article 4(8)).",
+        "Sunfield's outside payroll firm calculates salaries on Sunfield's instructions. On those facts, the firm is a processor. The role depends on what the firm actually does, not on what it is called.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Sunfield Bakery is invented** for this course. Any resemblance to a real business is accidental."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 4(8), 4(10), 26, 28(10), 29",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A processor must not decide its own purposes. If a processor determines the purposes and means of processing itself, it is treated as a **controller** for that processing (Article 28(10)).",
+        "For example, if the payroll firm used Sunfield's staff data to advertise its own loans, it would be a controller for that advertising."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 4(8), 4(10), 26, 28(10), 29",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Joint controllers** are two or more controllers who determine the purposes and means together (Article 26(1)).",
+        "They must agree transparently who does what, especially for handling people's rights and giving information. The essence of that arrangement must be made available to the people concerned (Article 26(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 4(8), 4(10), 26, 28(10), 29",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Whatever the arrangement says, a person may exercise their rights against **each** joint controller (Article 26(3)).",
+        "Suppose Sunfield and a neighbouring café run a shared loyalty programme and decide together what data to collect and why. They would be joint controllers, and a customer could contact either of them."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 4(8), 4(10), 26, 28(10), 29",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "controller"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Sunfield decides why pre-order data is collected and which app is used. The app is hosted by a cloud company. Who is the controller?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Sunfield",
+          "reason": "Sunfield determines why and how (Article 4(7))."
+        },
+        {
+          "correct": false,
+          "blocks": "The cloud company, because it stores the data",
+          "reason": "Storing data for someone else does not determine its purposes."
+        },
+        {
+          "correct": false,
+          "blocks": "The assistant who takes each order",
+          "reason": "Staff act under the controller's authority (Articles 4(10) and 29)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Who determines the purposes and means of Sunfield's pre-order processing?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The cloud company, because it stores the data",
+              "reason": "Storing data for someone else does not determine its purposes."
+            },
+            {
+              "correct": false,
+              "blocks": "The assistant who takes each order",
+              "reason": "Staff act under the controller's authority (Articles 4(10) and 29)."
+            },
+            {
+              "correct": true,
+              "blocks": "Sunfield",
+              "reason": "Sunfield determines why and how (Article 4(7))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processor"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "A payroll firm processes Sunfield's salary data only on Sunfield's instructions. What is its role?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Joint controller",
+          "reason": "It does not decide the purposes together with Sunfield."
+        },
+        {
+          "correct": false,
+          "blocks": "No role, because it is a separate company",
+          "reason": "Separate companies can still be processors."
+        },
+        {
+          "correct": true,
+          "blocks": "Processor",
+          "reason": "It processes on behalf of the controller (Article 4(8))."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which role fits a firm that calculates salaries on a client's instructions?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No role, because it is a separate company",
+              "reason": "Separate companies can still be processors."
+            },
+            {
+              "correct": true,
+              "blocks": "Processor",
+              "reason": "It processes on behalf of the controller (Article 4(8))."
+            },
+            {
+              "correct": false,
+              "blocks": "Joint controller",
+              "reason": "It does not decide the purposes together with Sunfield."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processor"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "The payroll firm starts using Sunfield's staff data to advertise its own loans. What follows?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Sunfield becomes the payroll firm's processor",
+          "reason": "Nothing makes Sunfield act on the firm's behalf."
+        },
+        {
+          "correct": true,
+          "blocks": "It is treated as a controller for that processing",
+          "reason": "Article 28(10) makes it a controller for that processing."
+        },
+        {
+          "correct": false,
+          "blocks": "It stays a processor, because the contract says so",
+          "reason": "The facts decide the role, not the label."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What happens when a processor sets its own purposes for the data?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "It is treated as a controller for that processing",
+              "reason": "Article 28(10) makes it a controller for that processing."
+            },
+            {
+              "correct": false,
+              "blocks": "It stays a processor, because the contract says so",
+              "reason": "The facts decide the role, not the label."
+            },
+            {
+              "correct": false,
+              "blocks": "Sunfield becomes the payroll firm's processor",
+              "reason": "Nothing makes Sunfield act on the firm's behalf."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "joint-controllers"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Sunfield and a café jointly run a loyalty scheme. A customer wants her data. Whom can she ask?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Either of them",
+          "reason": "Article 26(3) allows rights to be exercised against each controller."
+        },
+        {
+          "correct": false,
+          "blocks": "Only the one named in their arrangement",
+          "reason": "The arrangement cannot limit Article 26(3)."
+        },
+        {
+          "correct": false,
+          "blocks": "Both together, in one joint letter",
+          "reason": "Nothing requires a joint request."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 26, against whom can a person exercise rights in a joint scheme?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only the one named in their arrangement",
+              "reason": "The arrangement cannot limit Article 26(3)."
+            },
+            {
+              "correct": false,
+              "blocks": "Both together, in one joint letter",
+              "reason": "Nothing requires a joint request."
+            },
+            {
+              "correct": true,
+              "blocks": "Either of them",
+              "reason": "Article 26(3) allows rights to be exercised against each controller."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

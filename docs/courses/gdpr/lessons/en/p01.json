@@ -1,0 +1,275 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p01",
+    "title": "Lawful, fair, transparent, and for a stated purpose",
+    "summary": "Apply the first two principles: lawful, fair and transparent processing, for specified purposes.",
+    "covers": [
+      "transparency-principle",
+      "purpose-limitation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "The principles are rules about how processing is carried out."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Article 5(1) lists the **principles** that every use of personal data must respect. They are the backbone of the GDPR, and the rest of the regulation builds on them.",
+        "The first principle: personal data must be processed **lawfully, fairly and in a transparent manner** (Article 5(1)(a))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(a)-(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Lawfully** means there must be a legal basis for the processing. The next lessons cover the six legal bases.",
+        "**Transparently** means people must be able to know that their data is being collected and used, and to what extent. Information about the processing must be easily accessible, easy to understand and in clear, plain language (recital 39)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(a)-(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Recital 39 says transparency concerns, in particular, telling people who is processing their data and why. People should also be made aware of the risks, rules, safeguards and rights involved.",
+        "Processing that people cannot see or would not understand works against this principle."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(a)-(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The second principle is **purpose limitation**. Personal data must be collected for **specified, explicit and legitimate** purposes. It must not be further processed in a way that is incompatible with those purposes (Article 5(1)(b)).",
+        "Recital 39 says the purposes should be determined **at the time of collection**, not invented later."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(a)-(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Article 5(1)(b) treats one kind of further use specially. Further processing for archiving in the public interest, for scientific or historical research, or for statistics is not considered incompatible, provided the safeguards in Article 89(1) are met."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(a)-(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield's app asks for a phone number \"to text you when your order is ready\". That purpose is specified and explicit.",
+        "A purpose such as \"for business purposes\" is not specified. It tells customers nothing.",
+        "If Sunfield later wants the numbers for something new, it must check whether the new use is compatible. A later lesson covers that test.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(a)-(b)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "transparency-principle"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Sunfield records video in its shops but tells no one. Which principle is most directly at stake?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Transparency",
+          "reason": "People cannot know their data is being collected (Article 5(1)(a), recital 39)."
+        },
+        {
+          "correct": false,
+          "blocks": "Accuracy",
+          "reason": "Nothing suggests the recordings are wrong. The problem is that they are hidden."
+        },
+        {
+          "correct": false,
+          "blocks": "None, because cameras serve security",
+          "reason": "A good purpose does not remove the duty to be transparent."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Cameras run in the shops with no sign or notice. Which principle does this undermine?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Accuracy",
+              "reason": "Nothing suggests the recordings are wrong. The problem is that they are hidden."
+            },
+            {
+              "correct": false,
+              "blocks": "None, because cameras serve security",
+              "reason": "A good purpose does not remove the duty to be transparent."
+            },
+            {
+              "correct": true,
+              "blocks": "Transparency",
+              "reason": "People cannot know their data is being collected (Article 5(1)(a), recital 39)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "purpose-limitation"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-6"
+      ],
+      "prompt": "A form says the data is collected \"for business purposes\". Is that a sufficient purpose?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, if the business is legitimate",
+          "reason": "Being legitimate is only one of the three requirements."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, the details can be decided later",
+          "reason": "Recital 39: purposes are set at the time of collection."
+        },
+        {
+          "correct": true,
+          "blocks": "No, purposes must be specified and explicit",
+          "reason": "Article 5(1)(b) requires specified, explicit purposes."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does \"for business purposes\" meet the purpose-limitation principle?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, the details can be decided later",
+              "reason": "Recital 39: purposes are set at the time of collection."
+            },
+            {
+              "correct": true,
+              "blocks": "No, purposes must be specified and explicit",
+              "reason": "Article 5(1)(b) requires specified, explicit purposes."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the business is legitimate",
+              "reason": "Being legitimate is only one of the three requirements."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "purpose-limitation"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Which further use does Article 5(1)(b) say is not incompatible, given the Article 89(1) safeguards?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Any use that makes more profit",
+          "reason": "Profit is not one of the named purposes."
+        },
+        {
+          "correct": true,
+          "blocks": "Statistical purposes",
+          "reason": "Article 5(1)(b) names statistics, research and public-interest archiving."
+        },
+        {
+          "correct": false,
+          "blocks": "Selling the data to advertisers",
+          "reason": "Article 5(1)(b) gives no such special treatment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which kind of further processing is treated as compatible with the original purposes, subject to safeguards?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Statistical purposes",
+              "reason": "Article 5(1)(b) names statistics, research and public-interest archiving."
+            },
+            {
+              "correct": false,
+              "blocks": "Selling the data to advertisers",
+              "reason": "Article 5(1)(b) gives no such special treatment."
+            },
+            {
+              "correct": false,
+              "blocks": "Any use that makes more profit",
+              "reason": "Profit is not one of the named purposes."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -329,7 +329,7 @@ def render_graph(curriculum):
     for module in curriculum["modules"]:
         lines += [f"## {module['id']} — {titles[module['id']]}", ""]
         for lesson in (lesson for lesson in curriculum["lessons"] if lesson["module"] == module["id"]):
-            tier = " *(extension)*" if lesson["tier"] == "extension" else ""
+            tier = " _(extension)_" if lesson["tier"] == "extension" else ""
             lines += [f"### {lesson['id']} — {lesson['title']}{tier}", ""]
             for slug in lesson["covers"]:
                 concept = concepts[slug]

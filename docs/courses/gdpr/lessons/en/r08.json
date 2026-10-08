@@ -1,0 +1,334 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r08",
+    "title": "Complaints, courts and compensation",
+    "summary": "Choose between a complaint, a court action and a compensation claim, and see how liability is shared.",
+    "covers": [
+      "complaint-and-court",
+      "compensation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "A complaint is lodged with a supervisory authority."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Court action is brought against a controller or processor."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Complaint** (Article 77): every data subject may complain to a **supervisory authority**, in particular in the EU country where they live, where they work or where the infringement allegedly took place.",
+        "The authority must inform the complainant of the progress and outcome."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 146",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Court** (Article 79): a person may also go to court against a controller or processor. This is **without prejudice** to a complaint: one route does not have to come before the other.",
+        "Proceedings may be brought where the controller or processor has an establishment, or where the person habitually resides, unless the defendant is a public authority exercising public powers."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 146",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Representation** (Article 80): a person may mandate a properly constituted not-for-profit organisation, active in data protection, to complain or go to court on their behalf.",
+        "EU countries may also allow such bodies to act without a mandate."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 146",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Compensation** (Article 82(1)): **any person** who has suffered **material or non-material damage** from an infringement has a right to compensation from the controller or processor.",
+        "Recital 146 says damage should be interpreted broadly, and compensation should be full and effective."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 146",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Who pays** (Article 82(2)-(5)):",
+        {
+          "type": "list",
+          "items": [
+            "A controller involved in the processing is liable for damage caused by infringing processing.",
+            "A processor is liable only if it breached its own processor obligations or acted outside or contrary to the controller's lawful instructions.",
+            "Either is exempt only if it proves it is **not in any way** responsible.",
+            "Where several are responsible, **each is liable for the entire damage**. Whoever pays may claim back the others' shares."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 146",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Suppose Sunfield's payroll firm, breaking its own security duties, leaks salary data. Affected staff could claim against Sunfield and against the firm.",
+        "If both are responsible, either can be made to pay the full amount and then recover the other's share.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 146",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "complaint-and-court"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "A customer living in Austria believes Sunfield, based in Germany, misused her data. Where may she complain?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "With the Austrian authority, among other options",
+          "reason": "Article 77(1) names the country of habitual residence."
+        },
+        {
+          "correct": false,
+          "blocks": "Only in Germany, where Sunfield is",
+          "reason": "Article 77 offers several countries."
+        },
+        {
+          "correct": false,
+          "blocks": "Only at the European Commission",
+          "reason": "Complaints go to a supervisory authority."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 77, where can a data subject lodge a complaint?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only in Germany, where Sunfield is",
+              "reason": "Article 77 offers several countries."
+            },
+            {
+              "correct": false,
+              "blocks": "Only at the European Commission",
+              "reason": "Complaints go to a supervisory authority."
+            },
+            {
+              "correct": true,
+              "blocks": "With the Austrian authority, among other options",
+              "reason": "Article 77(1) names the country of habitual residence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "complaint-and-court"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Must she complain to a regulator before going to court?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, a complaint must always come first",
+          "reason": "Neither route is a precondition for the other."
+        },
+        {
+          "correct": false,
+          "blocks": "Only the regulator can go to court",
+          "reason": "Article 79 gives the right to the data subject."
+        },
+        {
+          "correct": true,
+          "blocks": "No, court action is available as well",
+          "reason": "Article 79 is without prejudice to Article 77."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is a complaint a precondition for a court action under Article 79?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only the regulator can go to court",
+              "reason": "Article 79 gives the right to the data subject."
+            },
+            {
+              "correct": true,
+              "blocks": "No, court action is available as well",
+              "reason": "Article 79 is without prejudice to Article 77."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, a complaint must always come first",
+              "reason": "Neither route is a precondition for the other."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compensation"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "A customer suffered distress, but no financial loss, from an infringement. Can she claim compensation?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only if the regulator fines Sunfield first",
+          "reason": "Article 82 has no such condition."
+        },
+        {
+          "correct": true,
+          "blocks": "Yes, non-material damage is covered",
+          "reason": "Article 82(1)."
+        },
+        {
+          "correct": false,
+          "blocks": "No, only financial loss counts",
+          "reason": "Article 82(1) covers non-material damage."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does Article 82 cover damage that is not financial?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Yes, non-material damage is covered",
+              "reason": "Article 82(1)."
+            },
+            {
+              "correct": false,
+              "blocks": "No, only financial loss counts",
+              "reason": "Article 82(1) covers non-material damage."
+            },
+            {
+              "correct": false,
+              "blocks": "Only if the regulator fines Sunfield first",
+              "reason": "Article 82 has no such condition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compensation"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "The payroll processor broke its own duties, causing a leak. Who can be liable to the staff?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Each can be liable for the entire damage",
+          "reason": "Article 82(4), with recourse under 82(5)."
+        },
+        {
+          "correct": false,
+          "blocks": "Only the processor",
+          "reason": "The controller involved may also be liable."
+        },
+        {
+          "correct": false,
+          "blocks": "Only Sunfield, because processors are never liable",
+          "reason": "Processors are liable when they breach their own duties."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How is liability shared when a controller and a processor are both responsible?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only the processor",
+              "reason": "The controller involved may also be liable."
+            },
+            {
+              "correct": false,
+              "blocks": "Only Sunfield, because processors are never liable",
+              "reason": "Processors are liable when they breach their own duties."
+            },
+            {
+              "correct": true,
+              "blocks": "Each can be liable for the entire damage",
+              "reason": "Article 82(4), with recourse under 82(5)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

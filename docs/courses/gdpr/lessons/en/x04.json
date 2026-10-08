@@ -1,0 +1,241 @@
+{
+  "module": "Borders, regulators and fines",
+  "lesson": {
+    "slug": "x04",
+    "title": "Businesses outside the EU: the representative",
+    "summary": "Decide whether a business outside the EU must appoint a representative in the EU.",
+    "covers": [
+      "eu-representative"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g06",
+        "reason": "A representative is needed only where Article 3(2) applies."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A business **not established in the EU** is covered by the GDPR when it offers goods or services to people in the EU or monitors their behaviour there (Article 3(2)).",
+        "In that case it must designate **in writing** a **representative in the EU** (Article 27(1))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 3(2), 27",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The duty does not apply to (Article 27(2)):",
+        {
+          "type": "list",
+          "items": [
+            "processing that is **occasional**, does not include large-scale special-category or criminal-offence data, and is **unlikely to result in a risk**; or",
+            "a public authority or body."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 3(2), 27",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The representative must be established in one of the EU countries where the people concerned are (Article 27(3)).",
+        "Supervisory authorities and data subjects may address the representative, in addition to or instead of the business, on all processing issues (Article 27(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 3(2), 27",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Appointing a representative **does not shield** the business: legal actions can still be brought against the controller or processor itself (Article 27(5))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 3(2), 27",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "An online shop with no EU office regularly sells baking tools to customers in Austria. Article 3(2)(a) applies, and the sales are not occasional, so it needs a representative, established in Austria or another EU country where its customers are.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These examples are **illustrations**. Sunfield Bakery and the other businesses are invented, and a real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 3(2), 27",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "eu-representative"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "When must a business appoint an EU representative?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Non-EU businesses covered by Article 3(2), unless an exception applies",
+          "reason": "Article 27(1)-(2)."
+        },
+        {
+          "correct": false,
+          "blocks": "Every business with EU customers, including EU-based ones",
+          "reason": "EU-established businesses do not need one."
+        },
+        {
+          "correct": false,
+          "blocks": "Only public authorities",
+          "reason": "Public authorities are exempt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which businesses fall under the Article 27 duty?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Every business with EU customers, including EU-based ones",
+              "reason": "EU-established businesses do not need one."
+            },
+            {
+              "correct": false,
+              "blocks": "Only public authorities",
+              "reason": "Public authorities are exempt."
+            },
+            {
+              "correct": true,
+              "blocks": "Non-EU businesses covered by Article 3(2), unless an exception applies",
+              "reason": "Article 27(1)-(2)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-representative"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Where must the representative be established?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Anywhere in the world",
+          "reason": "It must be in the EU."
+        },
+        {
+          "correct": false,
+          "blocks": "Only in Brussels",
+          "reason": "Any EU country where the people concerned are."
+        },
+        {
+          "correct": true,
+          "blocks": "In an EU country where the people concerned are",
+          "reason": "Article 27(3)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 27(3), where is the representative located?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only in Brussels",
+              "reason": "Any EU country where the people concerned are."
+            },
+            {
+              "correct": true,
+              "blocks": "In an EU country where the people concerned are",
+              "reason": "Article 27(3)."
+            },
+            {
+              "correct": false,
+              "blocks": "Anywhere in the world",
+              "reason": "It must be in the EU."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-representative"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Does appointing a representative protect the non-EU business from legal action?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, if the contract says so",
+          "reason": "A contract cannot change Article 27(5)."
+        },
+        {
+          "correct": true,
+          "blocks": "No, actions can still be brought against the business itself",
+          "reason": "Article 27(5)."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, only the representative can be sued",
+          "reason": "Article 27(5) preserves actions against the business."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 27(5) say about legal actions?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "No, actions can still be brought against the business itself",
+              "reason": "Article 27(5)."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, only the representative can be sued",
+              "reason": "Article 27(5) preserves actions against the business."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the contract says so",
+              "reason": "A contract cannot change Article 27(5)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

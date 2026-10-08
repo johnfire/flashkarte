@@ -1,0 +1,294 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r05",
+    "title": "Restriction, and telling recipients",
+    "summary": "Use restriction in the four listed situations, and tell recipients about corrections, erasures and restrictions.",
+    "covers": [
+      "right-to-restriction",
+      "recipient-notification"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r04",
+        "reason": "Restriction applies while accuracy is being verified."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Restriction of processing** means marking stored personal data so as to limit its processing in future (Article 4(3)).",
+        "Think of it as a pause: the data is kept, but not used."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(3), 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A person may obtain restriction in four situations (Article 18(1)):",
+        {
+          "type": "list",
+          "items": [
+            "(a) they **contest the accuracy** of the data, for the time needed to check it;",
+            "(b) the processing is unlawful, and they ask for restriction **instead of erasure**;",
+            "(c) the controller no longer needs the data, but the person needs it for **legal claims**;",
+            "(d) they have **objected**, while it is checked whether the controller's grounds override theirs."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(3), 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "While data is restricted, the controller may **store** it. Any other processing needs the person's consent, or must be for legal claims, to protect another person's rights, or for important public interest (Article 18(2)).",
+        "The person must be told before the restriction is lifted (Article 18(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(3), 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Telling recipients** (Article 19): the controller must communicate any rectification, erasure or restriction to **each recipient** to whom the data was disclosed, unless this proves impossible or involves disproportionate effort.",
+        "If the person asks, the controller must tell them who those recipients are."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(3), 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "A customer disputes Sunfield's record that she redeemed her loyalty points. While Sunfield checks, it marks the record as restricted and does not use it for promotions.",
+        "Earlier, Sunfield shared her details with a partner café for the joint loyalty scheme. When it corrects the record, it tells the café.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(3), 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "right-to-restriction"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "A customer disputes the accuracy of her record. What can she ask for while Sunfield checks?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Restriction for the time needed to check",
+          "reason": "Article 18(1)(a)."
+        },
+        {
+          "correct": false,
+          "blocks": "Immediate erasure of everything",
+          "reason": "Contesting accuracy is a ground for restriction, not erasure."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing, until the check is finished",
+          "reason": "She can obtain restriction during the check."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 18(1)(a) allow when accuracy is contested?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Immediate erasure of everything",
+              "reason": "Contesting accuracy is a ground for restriction, not erasure."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing, until the check is finished",
+              "reason": "She can obtain restriction during the check."
+            },
+            {
+              "correct": true,
+              "blocks": "Restriction for the time needed to check",
+              "reason": "Article 18(1)(a)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-restriction"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Data is restricted. Without the person's consent, what may Sunfield still do with it?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Continue using it as before",
+          "reason": "Restriction limits processing beyond storage."
+        },
+        {
+          "correct": false,
+          "blocks": "Must delete it immediately",
+          "reason": "Restriction keeps the data. It does not delete it."
+        },
+        {
+          "correct": true,
+          "blocks": "Store it",
+          "reason": "Storage is allowed; other uses need consent or a listed reason."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 18(2), what processing remains allowed by default?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Must delete it immediately",
+              "reason": "Restriction keeps the data. It does not delete it."
+            },
+            {
+              "correct": true,
+              "blocks": "Store it",
+              "reason": "Storage is allowed; other uses need consent or a listed reason."
+            },
+            {
+              "correct": false,
+              "blocks": "Continue using it as before",
+              "reason": "Restriction limits processing beyond storage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "recipient-notification"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Sunfield corrects data it had shared with a partner café. What must it do?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Tell every customer about the change",
+          "reason": "Article 19 concerns the recipients of that person's data."
+        },
+        {
+          "correct": true,
+          "blocks": "Tell the café, unless impossible or disproportionate",
+          "reason": "Article 19."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing, because the café is a separate business",
+          "reason": "Article 19 covers each recipient."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "After correcting shared data, what does Article 19 require?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Tell the café, unless impossible or disproportionate",
+              "reason": "Article 19."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing, because the café is a separate business",
+              "reason": "Article 19 covers each recipient."
+            },
+            {
+              "correct": false,
+              "blocks": "Tell every customer about the change",
+              "reason": "Article 19 concerns the recipients of that person's data."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "recipient-notification"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "The customer asks which recipients were told about her correction. Must Sunfield answer?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Yes, on request it must inform her",
+          "reason": "Article 19, final sentence."
+        },
+        {
+          "correct": false,
+          "blocks": "No, recipients are confidential",
+          "reason": "Article 19 requires this information on request."
+        },
+        {
+          "correct": false,
+          "blocks": "Only if she pays a fee",
+          "reason": "Article 19 sets no fee."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a person learn who received notice of their correction under Article 19?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, recipients are confidential",
+              "reason": "Article 19 requires this information on request."
+            },
+            {
+              "correct": false,
+              "blocks": "Only if she pays a fee",
+              "reason": "Article 19 sets no fee."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, on request it must inform her",
+              "reason": "Article 19, final sentence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

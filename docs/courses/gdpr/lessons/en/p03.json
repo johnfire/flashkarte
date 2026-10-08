@@ -1,0 +1,246 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p03",
+    "title": "Security and accountability",
+    "summary": "Protect data against loss and misuse, and be able to prove that you follow the principles.",
+    "covers": [
+      "integrity-confidentiality",
+      "accountability"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Security protects processing against unauthorised operations and loss."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Accountability places the burden of proof on the controller."
+      },
+      {
+        "lesson": "p01",
+        "reason": "The controller must demonstrate compliance with the principles, so the learner needs them."
+      },
+      {
+        "lesson": "p02",
+        "reason": "Demonstrating compliance covers minimisation, accuracy and storage limits too."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Integrity and confidentiality**: personal data must be processed with appropriate security. That includes protection against **unauthorised or unlawful processing** and against **accidental loss, destruction or damage** (Article 5(1)(f)).",
+        "Security therefore covers mistakes and accidents as well as attacks."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(f), 5(2), 32(1)(a), 32(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The principle requires **appropriate technical or organisational measures** (Article 5(1)(f)).",
+        "Technical measures include encryption, which Article 32(1)(a) names. Organisational measures include rules for staff: Article 32(4) requires steps so that people with access process data only on instructions."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(f), 5(2), 32(1)(a), 32(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "At Sunfield, a laptop with the customer list left unlocked on the shop counter is a confidentiality problem. A single copy of the order database with no backup risks accidental loss.",
+        "Both fall under Article 5(1)(f)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(f), 5(2), 32(1)(a), 32(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Accountability**: the controller is responsible for complying with all the principles in Article 5(1) **and must be able to demonstrate** that it does (Article 5(2)).",
+        "Following the rules is not enough. You must be able to show that you follow them."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(f), 5(2), 32(1)(a), 32(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "In practice, demonstrating means having evidence. If Sunfield says it deletes inactive loyalty accounts after a stated period, it should be able to show the written rule and that the rule is applied.",
+        "Module 3 shows the tools the GDPR provides for this, such as records and policies."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 5(1)(f), 5(2), 32(1)(a), 32(4)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "integrity-confidentiality"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-3"
+      ],
+      "prompt": "A laptop with the customer list is left unlocked on the shop counter. Which principle is at stake?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Integrity and confidentiality",
+          "reason": "Article 5(1)(f) requires protection against unauthorised access."
+        },
+        {
+          "correct": false,
+          "blocks": "Purpose limitation",
+          "reason": "The purpose has not changed. Security has failed."
+        },
+        {
+          "correct": false,
+          "blocks": "Accuracy",
+          "reason": "The data may be correct. The problem is unprotected access."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Unattended, unlocked access to customer data endangers which principle?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Purpose limitation",
+              "reason": "The purpose has not changed. Security has failed."
+            },
+            {
+              "correct": false,
+              "blocks": "Accuracy",
+              "reason": "The data may be correct. The problem is unprotected access."
+            },
+            {
+              "correct": true,
+              "blocks": "Integrity and confidentiality",
+              "reason": "Article 5(1)(f) requires protection against unauthorised access."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "integrity-confidentiality"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Against what must security protect personal data under Article 5(1)(f)?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only attacks by outside hackers",
+          "reason": "Accidental loss and internal misuse are covered too."
+        },
+        {
+          "correct": false,
+          "blocks": "Only deliberate leaks by staff",
+          "reason": "Accidents and outside attacks are covered too."
+        },
+        {
+          "correct": true,
+          "blocks": "Unauthorised processing, and accidental loss or damage",
+          "reason": "Article 5(1)(f) names both."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which threats does the integrity and confidentiality principle cover?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only deliberate leaks by staff",
+              "reason": "Accidents and outside attacks are covered too."
+            },
+            {
+              "correct": true,
+              "blocks": "Unauthorised processing, and accidental loss or damage",
+              "reason": "Article 5(1)(f) names both."
+            },
+            {
+              "correct": false,
+              "blocks": "Only attacks by outside hackers",
+              "reason": "Accidental loss and internal misuse are covered too."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "accountability"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "A regulator asks how Sunfield complies with the principles. Who must be able to show it?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The company that built the app",
+          "reason": "Sunfield remains responsible for its own processing."
+        },
+        {
+          "correct": true,
+          "blocks": "Sunfield, as the controller",
+          "reason": "Article 5(2) makes the controller responsible and able to demonstrate."
+        },
+        {
+          "correct": false,
+          "blocks": "The regulator, before asking anything",
+          "reason": "Article 5(2) places the burden on the controller."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 5(2), who carries the burden of demonstrating compliance?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Sunfield, as the controller",
+              "reason": "Article 5(2) makes the controller responsible and able to demonstrate."
+            },
+            {
+              "correct": false,
+              "blocks": "The regulator, before asking anything",
+              "reason": "Article 5(2) places the burden on the controller."
+            },
+            {
+              "correct": false,
+              "blocks": "The company that built the app",
+              "reason": "Sunfield remains responsible for its own processing."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

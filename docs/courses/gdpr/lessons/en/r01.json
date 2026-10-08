@@ -1,0 +1,350 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r01",
+    "title": "What you must tell people",
+    "summary": "Check a privacy notice for the items Articles 13 and 14 require, and give it at the right time.",
+    "covers": [
+      "information-at-collection",
+      "information-indirect"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "A notice must tell people they can complain to the supervisory authority."
+      },
+      {
+        "lesson": "g05",
+        "reason": "The controller gives the notice and must identify itself."
+      },
+      {
+        "lesson": "p01",
+        "reason": "The notice duties put the transparency principle into practice."
+      },
+      {
+        "lesson": "p04",
+        "reason": "A notice must state the legal basis, so the learner needs the bases."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "When you collect personal data **from the person**, you must give them certain information **at the time the data is obtained** (Article 13(1)). This is usually called a privacy notice.",
+        "Core items (Article 13(1)):",
+        {
+          "type": "list",
+          "items": [
+            "your identity and contact details, and the contact details of your data protection officer if you have one;",
+            "the **purposes** and the **legal basis**, and the legitimate interests if you rely on them;",
+            "the recipients or categories of recipients;",
+            "whether data will go to a country outside the EU, and on what terms."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(1), 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Further items (Article 13(2)):",
+        {
+          "type": "list",
+          "items": [
+            "how long the data is kept, or the criteria used to decide;",
+            "the person's rights: access, correction, erasure, restriction, objection and portability;",
+            "the right to withdraw consent, where consent is the basis;",
+            "the right to **complain to a supervisory authority**;",
+            "whether providing the data is required by law or contract, and what happens if the person does not provide it;",
+            "any automated decision-making of the kind covered later in this module, with meaningful information about the logic involved."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(1), 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**How** to inform: concisely, transparently, intelligibly and in an easily accessible form, using clear and plain language, especially for children (Article 12(1)).",
+        "It can be in writing or by other means, including electronically. A long legal text that no one can understand does not meet Article 12(1)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(1), 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "When the data comes **from somewhere else**, Article 14 applies. The list is similar, with two additions: the **categories** of personal data concerned (Article 14(1)(d)) and the **source** of the data, including whether it came from public sources (Article 14(2)(f))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(1), 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Timing** under Article 14(3), whichever comes first:",
+        {
+          "type": "list",
+          "items": [
+            "within a reasonable period, and **at the latest within one month** of obtaining the data;",
+            "at the latest at the **first communication** with the person, if the data is used to contact them;",
+            "at the latest when the data is **first disclosed** to another recipient."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(1), 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "**Exceptions**: no notice is needed where the person already has the information (Articles 13(4) and 14(5)(a)).",
+        "For data from elsewhere, there are narrow further exceptions: where informing is impossible or would involve disproportionate effort (with protective measures, such as making the information public), where EU or national law expressly provides for obtaining or disclosing the data, or where professional secrecy applies (Article 14(5))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(1), 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-7",
+      "blocks": [
+        "Sunfield shows a short notice on the app's sign-up screen and links to the full version. That is Article 13.",
+        "Sunfield also receives applicants' CVs from a recruitment agency. That is Article 14: it must inform each applicant within a month, or earlier if it contacts them first.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(1), 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "information-at-collection"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which item must a notice include when Sunfield collects data from a customer?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "The purposes and the legal basis",
+          "reason": "Article 13(1)(c)."
+        },
+        {
+          "correct": false,
+          "blocks": "The names of all Sunfield's staff",
+          "reason": "Article 13 does not require this."
+        },
+        {
+          "correct": false,
+          "blocks": "Sunfield's annual turnover",
+          "reason": "Article 13 does not require this."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which of these belongs in an Article 13 privacy notice?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The names of all Sunfield's staff",
+              "reason": "Article 13 does not require this."
+            },
+            {
+              "correct": false,
+              "blocks": "Sunfield's annual turnover",
+              "reason": "Article 13 does not require this."
+            },
+            {
+              "correct": true,
+              "blocks": "The purposes and the legal basis",
+              "reason": "Article 13(1)(c)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "information-at-collection"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-3"
+      ],
+      "prompt": "When must the Article 13 information be given?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Within one month of collection",
+          "reason": "That is the Article 14 rule for data from elsewhere."
+        },
+        {
+          "correct": false,
+          "blocks": "Only if the customer asks for it",
+          "reason": "Article 13 requires the information to be given without a request."
+        },
+        {
+          "correct": true,
+          "blocks": "When the data is obtained",
+          "reason": "Article 13(1): at the time the data is obtained."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "At what moment does Article 13 require the information?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only if the customer asks for it",
+              "reason": "Article 13 requires the information to be given without a request."
+            },
+            {
+              "correct": true,
+              "blocks": "When the data is obtained",
+              "reason": "Article 13(1): at the time the data is obtained."
+            },
+            {
+              "correct": false,
+              "blocks": "Within one month of collection",
+              "reason": "That is the Article 14 rule for data from elsewhere."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "information-indirect"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-7"
+      ],
+      "prompt": "Sunfield receives a CV from an agency and first emails the applicant two weeks later. When must it inform her under Article 14?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "When she starts working there",
+          "reason": "Article 14(3) sets earlier deadlines."
+        },
+        {
+          "correct": true,
+          "blocks": "By the first email, within one month at most",
+          "reason": "Article 14(3): the first communication, and at the latest one month."
+        },
+        {
+          "correct": false,
+          "blocks": "Only if she asks what Sunfield holds",
+          "reason": "Article 14 requires the information without a request."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "For data received from a third party, what is the latest time to inform the person?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "By the first email, within one month at most",
+              "reason": "Article 14(3): the first communication, and at the latest one month."
+            },
+            {
+              "correct": false,
+              "blocks": "Only if she asks what Sunfield holds",
+              "reason": "Article 14 requires the information without a request."
+            },
+            {
+              "correct": false,
+              "blocks": "When she starts working there",
+              "reason": "Article 14(3) sets earlier deadlines."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "information-indirect"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Which item does Article 14 add to the Article 13 list?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Where the data came from",
+          "reason": "Article 14(2)(f) requires the source."
+        },
+        {
+          "correct": false,
+          "blocks": "The recruiter's personal phone number",
+          "reason": "Article 14 does not require this."
+        },
+        {
+          "correct": false,
+          "blocks": "Sunfield's tax number",
+          "reason": "Article 14 does not require this."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What must a notice for data obtained from elsewhere also say?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The recruiter's personal phone number",
+              "reason": "Article 14 does not require this."
+            },
+            {
+              "correct": false,
+              "blocks": "Sunfield's tax number",
+              "reason": "Article 14 does not require this."
+            },
+            {
+              "correct": true,
+              "blocks": "Where the data came from",
+              "reason": "Article 14(2)(f) requires the source."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

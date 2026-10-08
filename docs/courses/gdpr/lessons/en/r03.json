@@ -1,0 +1,303 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r03",
+    "title": "The right of access",
+    "summary": "Say what a complete answer to an access request contains, including the copy and the limits that protect others.",
+    "covers": [
+      "right-of-access"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r02",
+        "reason": "An access request is answered within the Article 12 deadline."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **right of access** (Article 15(1)) has two parts. A person may obtain:",
+        {
+          "type": "list",
+          "items": [
+            "**confirmation** of whether their personal data is being processed; and",
+            "if it is, **access** to that data, together with certain information."
+          ]
+        },
+        "The GDPR does not require the person to give a reason."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(5), 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The information to provide (Article 15(1)(a)-(h)):",
+        {
+          "type": "list",
+          "items": [
+            "the purposes, the categories of data and the recipients, especially those outside the EU;",
+            "how long the data will be kept, or the criteria used to decide;",
+            "the rights to ask for correction, erasure or restriction, or to object;",
+            "the right to complain to a supervisory authority;",
+            "the source of the data, if it was not collected from the person;",
+            "any automated decision-making covered in a later lesson, with meaningful information about the logic involved."
+          ]
+        },
+        "If data was transferred outside the EU, the person may also ask about the safeguards (Article 15(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(5), 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**The copy**: the controller must provide a copy of the personal data it processes (Article 15(3)). The first copy is free (Article 12(5)).",
+        "For **further copies**, a reasonable fee based on administrative costs may be charged. If the request was electronic, the copy is provided in a commonly used electronic form, unless the person asks otherwise."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(5), 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Protecting others**: the right to a copy must not adversely affect the rights and freedoms of others (Article 15(4)).",
+        "This is not a reason to refuse everything. It is a reason to protect other people's data within the copy."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(5), 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "A customer asks Sunfield, \"What do you have about me?\" Sunfield confirms that it holds data, and sends her account details, order history, loyalty points and the record of her newsletter sign-up, together with the Article 15 information.",
+        "She also asks for camera footage of her visit. Other customers appear in it, so Sunfield protects them, for example by masking them.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 12(5), 15",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A customer asks Sunfield whether it holds any data about her. What does Article 15 require first?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Confirm whether her data is processed, then give access and information",
+          "reason": "Article 15(1)."
+        },
+        {
+          "correct": false,
+          "blocks": "A short summary, without any copy",
+          "reason": "Article 15(3) requires a copy of the data."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing, until she explains her reason",
+          "reason": "Article 15 does not require a reason."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is the first part of the right of access?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "A short summary, without any copy",
+              "reason": "Article 15(3) requires a copy of the data."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing, until she explains her reason",
+              "reason": "Article 15 does not require a reason."
+            },
+            {
+              "correct": true,
+              "blocks": "Confirm whether her data is processed, then give access and information",
+              "reason": "Article 15(1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "After a free first copy, the customer asks for a second copy. What may Sunfield do?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Charge for the first copy too",
+          "reason": "The first copy is free (Article 12(5))."
+        },
+        {
+          "correct": false,
+          "blocks": "Provide every copy free, without exception",
+          "reason": "Article 15(3) allows a fee for further copies."
+        },
+        {
+          "correct": true,
+          "blocks": "Charge a reasonable fee based on administrative costs",
+          "reason": "Article 15(3) allows this for further copies."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What are the fee rules for copies under Article 15(3)?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Provide every copy free, without exception",
+              "reason": "Article 15(3) allows a fee for further copies."
+            },
+            {
+              "correct": true,
+              "blocks": "Charge a reasonable fee based on administrative costs",
+              "reason": "Article 15(3) allows this for further copies."
+            },
+            {
+              "correct": false,
+              "blocks": "Charge for the first copy too",
+              "reason": "The first copy is free (Article 12(5))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Camera footage requested by a customer also shows other people. What should Sunfield do?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Hand over the footage unedited",
+          "reason": "That could adversely affect other people's rights."
+        },
+        {
+          "correct": true,
+          "blocks": "Provide it, while protecting the others, for example by masking",
+          "reason": "Article 15(4) protects others without cancelling the right."
+        },
+        {
+          "correct": false,
+          "blocks": "Refuse the whole request automatically",
+          "reason": "Article 15(4) is not a blanket ground for refusal."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does Article 15(4) affect a copy that includes other people's data?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Provide it, while protecting the others, for example by masking",
+              "reason": "Article 15(4) protects others without cancelling the right."
+            },
+            {
+              "correct": false,
+              "blocks": "Refuse the whole request automatically",
+              "reason": "Article 15(4) is not a blanket ground for refusal."
+            },
+            {
+              "correct": false,
+              "blocks": "Hand over the footage unedited",
+              "reason": "That could adversely affect other people's rights."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Which item must an access response include?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "The purposes of the processing",
+          "reason": "Article 15(1)(a)."
+        },
+        {
+          "correct": false,
+          "blocks": "Sunfield's internal IT passwords",
+          "reason": "These are not access information and must stay secure."
+        },
+        {
+          "correct": false,
+          "blocks": "A list of all Sunfield's customers",
+          "reason": "That would disclose other people's data."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Besides the data itself, what does Article 15(1) require Sunfield to tell the requester?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Sunfield's internal IT passwords",
+              "reason": "These are not access information and must stay secure."
+            },
+            {
+              "correct": false,
+              "blocks": "A list of all Sunfield's customers",
+              "reason": "That would disclose other people's data."
+            },
+            {
+              "correct": true,
+              "blocks": "The purposes of the processing",
+              "reason": "Article 15(1)(a)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

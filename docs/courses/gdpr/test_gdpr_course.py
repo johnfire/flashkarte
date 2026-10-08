@@ -1,0 +1,112 @@
+"""Damage the GDPR course on purpose and check that the validators reject it."""
+
+import copy
+import json
+import unittest
+from pathlib import Path
+
+import curriculum_plan
+from curriculum_validation import check_curriculum
+from lesson_builder import build_course, subject_import
+from lesson_validation import check_course, check_lesson
+from sources import SOURCES, sha256
+
+ROOT = Path(__file__).resolve().parent
+
+
+class CurriculumTests(unittest.TestCase):
+    def setUp(self):
+        self.plan = curriculum_plan.build()
+
+    def test_saved_plan_is_current_and_valid(self):
+        self.assertEqual(json.loads((ROOT / "curriculum.json").read_text()), self.plan)
+        self.assertEqual(check_curriculum(self.plan), [])
+
+    def test_generated_review_files_are_current(self):
+        self.assertEqual((ROOT / "concept-graph.md").read_text(), curriculum_plan.render_graph(self.plan))
+        self.assertEqual(json.loads((ROOT / "subject-import.json").read_text()), subject_import(self.plan))
+
+    def test_cycle_is_rejected(self):
+        self.plan["edges"].append({"parent": "accountability", "child": "processing", "kind": "requires", "reason": "loop"})
+        self.assertTrue(any("cycle" in failure for failure in check_curriculum(self.plan)))
+
+    def test_requires_edge_needs_a_reason(self):
+        self.plan["edges"][0]["reason"] = " "
+        self.assertTrue(check_curriculum(self.plan))
+
+    def test_core_concept_cannot_require_an_extension(self):
+        self.plan["edges"].append({"parent": "cookie-consent-rule", "child": "lawful-bases", "kind": "requires", "reason": "x"})
+        self.assertTrue(any("requires extension" in failure for failure in check_curriculum(self.plan)))
+
+    def test_no_core_lesson_depends_on_an_extension_lesson(self):
+        tiers = {lesson["id"]: lesson["tier"] for lesson in self.plan["lessons"]}
+        for lesson in self.plan["lessons"]:
+            if lesson["tier"] == "core":
+                for prerequisite in lesson["prerequisites"]:
+                    self.assertEqual(tiers[prerequisite["lesson_id"]], "core", lesson["id"])
+
+
+class LessonTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.curriculum = curriculum_plan.build()
+        cls.fixtures = build_course(cls.curriculum)
+
+    def lesson(self):
+        return copy.deepcopy(self.fixtures[1])
+
+    def test_saved_fixtures_are_current_and_valid(self):
+        saved = [json.loads((ROOT / "lessons" / "en" / f"{lesson['id'].lower()}.json").read_text())
+                 for lesson in self.curriculum["lessons"]]
+        self.assertEqual(check_course(self.curriculum, saved), [])
+
+    def test_missing_retest_is_rejected(self):
+        fixture = self.lesson()
+        fixture["questions"][0]["variants"] = []
+        self.assertTrue(check_lesson(fixture))
+
+    def test_retest_must_be_reworded(self):
+        fixture = self.lesson()
+        fixture["questions"][0]["variants"][0]["prompt"] = fixture["questions"][0]["prompt"]
+        self.assertTrue(check_lesson(fixture))
+
+    def test_unknown_teaching_screen_is_rejected(self):
+        fixture = self.lesson()
+        fixture["questions"][0]["teaches"] = ["screen-99"]
+        self.assertTrue(check_lesson(fixture))
+
+    def test_two_correct_options_are_rejected(self):
+        fixture = self.lesson()
+        for option in fixture["questions"][0]["options"]:
+            option["correct"] = True
+        self.assertTrue(check_lesson(fixture))
+
+    def test_unassessed_concept_is_rejected(self):
+        fixture = self.lesson()
+        fixture["questions"] = [q for q in fixture["questions"] if fixture["lesson"]["covers"][0] not in q["covers"]]
+        self.assertTrue(check_lesson(fixture))
+
+    def test_screen_without_source_is_rejected(self):
+        fixture = self.lesson()
+        fixture["screens"][0]["sources"] = []
+        self.assertTrue(check_lesson(fixture))
+
+    def test_prerequisite_must_be_imported_first(self):
+        fixtures = copy.deepcopy(self.fixtures)
+        fixtures[0], fixtures[2] = fixtures[2], fixtures[0]
+        self.assertTrue(check_course(self.curriculum, fixtures))
+
+    def test_first_screen_of_course_states_it_is_not_legal_advice(self):
+        text = json.dumps(self.fixtures[0]["screens"])
+        self.assertIn("not legal advice", text)
+
+
+class SourceTests(unittest.TestCase):
+    def test_every_retained_source_exists_and_is_hashed_in_the_register(self):
+        register = (ROOT / "source-register.md").read_text()
+        for source_id in SOURCES:
+            self.assertIn(sha256(source_id), register, source_id)
+
+
+if __name__ == "__main__":
+    unittest.main()

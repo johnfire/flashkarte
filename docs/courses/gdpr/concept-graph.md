@@ -242,13 +242,13 @@ Requires lessons: G01, G05.
 
 Requires lessons: G01.
 
-### X04 — Businesses outside the EU: the representative *(extension)*
+### X04 — Businesses outside the EU: the representative _(extension)_
 
 - `eu-representative` (idea): EU representative. Art. 27.
 
 Requires lessons: G06.
 
-### X05 — Schrems II and the EU-US Data Privacy Framework *(extension)*
+### X05 — Schrems II and the EU-US Data Privacy Framework _(extension)_
 
 - `essential-equivalence` (idea): Essential equivalence after Schrems II. C-311/18 operative part.
 - `eu-us-dpf` (term): EU-US Data Privacy Framework. Decision (EU) 2023/1795; C-311/18 point 5.
@@ -257,32 +257,32 @@ Requires lessons: X01, X03.
 
 ## M5 — Beyond the basics
 
-### N01 — Cookies: a separate rule *(extension)*
+### N01 — Cookies: a separate rule _(extension)_
 
 - `cookie-consent-rule` (idea): The cookie consent rule. Directive 2002/58/EC Art. 5(3); C-673/17.
 - `cookie-information` (idea): Information about cookies. C-673/17 point 3.
 
 Requires lessons: P05.
 
-### N02 — Joint control in practice: website plug-ins *(extension)*
+### N02 — Joint control in practice: website plug-ins _(extension)_
 
 - `joint-control-scope` (idea): Scope of joint control. C-40/17 points 2-3; Art. 26.
 
 Requires lessons: G05, P06.
 
-### N03 — The GDPR and the EU AI Act *(extension)*
+### N03 — The GDPR and the EU AI Act _(extension)_
 
 - `ai-act-relationship` (idea): GDPR and AI Act together. AI Act Art. 2(7); GDPR Art. 22.
 
 Requires lessons: R07.
 
-### N04 — Children's consent online *(extension)*
+### N04 — Children's consent online _(extension)_
 
 - `child-consent` (idea): Children's consent for online services. Art. 8; recital 38.
 
 Requires lessons: P05.
 
-### N05 — What may change: pending proposals *(extension)*
+### N05 — What may change: pending proposals _(extension)_
 
 - `pending-proposals` (idea): Pending amendment proposals. COM(2025) 501; COM(2025) 837.
 

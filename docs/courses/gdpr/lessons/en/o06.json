@@ -1,0 +1,320 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o06",
+    "title": "Data protection impact assessments",
+    "summary": "Decide when a data protection impact assessment is required, and what it must contain.",
+    "covers": [
+      "dpia"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p08",
+        "reason": "One listed DPIA case is large-scale special-category data."
+      },
+      {
+        "lesson": "r07",
+        "reason": "One listed DPIA case is systematic automated evaluation with significant effects."
+      },
+      {
+        "lesson": "o01",
+        "reason": "A DPIA is a risk-based controller measure."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Where processing, especially using new technologies, is **likely to result in a high risk** to people's rights and freedoms, the controller must carry out a **data protection impact assessment** (DPIA) **before** the processing starts (Article 35(1)).",
+        "One assessment may cover a set of similar operations with similar high risks."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 35(3) lists cases where a DPIA is required in particular:",
+        {
+          "type": "list",
+          "items": [
+            "(a) systematic and extensive **evaluation** of personal aspects based on automated processing, including profiling, with decisions that have legal or similarly significant effects;",
+            "(b) **large-scale** processing of special-category data or criminal-offence data;",
+            "(c) systematic **monitoring of a publicly accessible area** on a large scale."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Each supervisory authority publishes a **list** of processing types that require a DPIA (Article 35(4)). It may also publish a list of types that do not (Article 35(5)).",
+        "Check your authority's list. It is the practical way to find cases beyond Article 35(3)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A DPIA must contain at least (Article 35(7)):",
+        {
+          "type": "list",
+          "items": [
+            "(a) a systematic description of the processing and its purposes;",
+            "(b) an assessment of **necessity and proportionality**;",
+            "(c) an assessment of the **risks** to people's rights and freedoms;",
+            "(d) the **measures** to address those risks."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Seek the advice of the data protection officer, if there is one (Article 35(2)). Where appropriate, seek the views of the people affected or their representatives (Article 35(9)).",
+        "Review the DPIA at least when the risk changes (Article 35(11))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield plans software that scores job applicants and automatically rejects low scores. That is systematic, automated evaluation with significant effects, matching Article 35(3)(a), so a DPIA is needed first.",
+        "Whether its shop cameras need one depends on scale and on the authority's list. Sunfield checks that list rather than guessing.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 35",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "When must a DPIA be carried out?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Before processing that is likely to be high risk",
+          "reason": "Article 35(1)."
+        },
+        {
+          "correct": false,
+          "blocks": "After a breach occurs",
+          "reason": "A DPIA is done prior to processing."
+        },
+        {
+          "correct": false,
+          "blocks": "Every year for all processing",
+          "reason": "Article 35 targets likely high-risk processing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "At what point does Article 35(1) require an impact assessment?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "After a breach occurs",
+              "reason": "A DPIA is done prior to processing."
+            },
+            {
+              "correct": false,
+              "blocks": "Every year for all processing",
+              "reason": "Article 35 targets likely high-risk processing."
+            },
+            {
+              "correct": true,
+              "blocks": "Before processing that is likely to be high risk",
+              "reason": "Article 35(1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Which case does Article 35(3) list as requiring a DPIA?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Sending a monthly newsletter",
+          "reason": "Not a listed case, and not normally high risk."
+        },
+        {
+          "correct": false,
+          "blocks": "Keeping a customer contact list",
+          "reason": "Not a listed case."
+        },
+        {
+          "correct": true,
+          "blocks": "Large-scale processing of special-category data",
+          "reason": "Article 35(3)(b)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which processing is named in Article 35(3)?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Keeping a customer contact list",
+              "reason": "Not a listed case."
+            },
+            {
+              "correct": true,
+              "blocks": "Large-scale processing of special-category data",
+              "reason": "Article 35(3)(b)."
+            },
+            {
+              "correct": false,
+              "blocks": "Sending a monthly newsletter",
+              "reason": "Not a listed case, and not normally high risk."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Which element must every DPIA include?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Prior approval from the regulator",
+          "reason": "Article 35 does not require approval."
+        },
+        {
+          "correct": true,
+          "blocks": "An assessment of necessity and proportionality",
+          "reason": "Article 35(7)(b)."
+        },
+        {
+          "correct": false,
+          "blocks": "The company's marketing plan",
+          "reason": "Not required by Article 35(7)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 35(7) require a DPIA to contain?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "An assessment of necessity and proportionality",
+              "reason": "Article 35(7)(b)."
+            },
+            {
+              "correct": false,
+              "blocks": "The company's marketing plan",
+              "reason": "Not required by Article 35(7)."
+            },
+            {
+              "correct": false,
+              "blocks": "Prior approval from the regulator",
+              "reason": "Article 35 does not require approval."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Where can Sunfield find further processing types that need a DPIA?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Its supervisory authority's published list",
+          "reason": "Article 35(4)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nowhere; Article 35(3) is the complete list",
+          "reason": "Article 35(3) says \"in particular\". It is not exhaustive."
+        },
+        {
+          "correct": false,
+          "blocks": "The Commission's annual report",
+          "reason": "Article 35(4) gives the lists to supervisory authorities."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What practical list supplements Article 35(3)?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nowhere; Article 35(3) is the complete list",
+              "reason": "Article 35(3) says \"in particular\". It is not exhaustive."
+            },
+            {
+              "correct": false,
+              "blocks": "The Commission's annual report",
+              "reason": "Article 35(4) gives the lists to supervisory authorities."
+            },
+            {
+              "correct": true,
+              "blocks": "Its supervisory authority's published list",
+              "reason": "Article 35(4)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

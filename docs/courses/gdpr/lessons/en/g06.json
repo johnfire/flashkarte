@@ -1,0 +1,321 @@
+{
+  "module": "Start here: what the GDPR covers",
+  "lesson": {
+    "slug": "g06",
+    "title": "When the GDPR applies",
+    "summary": "Decide whether an activity falls outside the GDPR, and whether a business outside the EU is covered.",
+    "covers": [
+      "material-scope",
+      "territorial-scope"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Material scope is stated in terms of automated processing."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Article 3 turns on where the controller or processor is established."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The GDPR covers automated processing and filing systems (Article 2(1)). Article 2(2) then lists four exclusions. The GDPR does not apply to processing:",
+        {
+          "type": "list",
+          "items": [
+            "in an activity outside the scope of EU law;",
+            "by EU countries in the common foreign and security policy;",
+            "by a natural person in a **purely personal or household activity**;",
+            "by competent authorities for criminal-law purposes, which have their own rules."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The **household exemption** covers activity with no connection to a professional or commercial activity. Examples include personal correspondence, keeping addresses, and social networking done in that private context (recital 18).",
+        "The GDPR still applies to companies that provide the tools for such private activity (recital 18)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "There is **no size exemption** in Article 2. A one-person business processing customer data is covered.",
+        "The owner of Sunfield keeps a private list of friends' birthdays. That is household activity. If she uses the same list to advertise the bakery, the activity is commercial and the GDPR applies."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Territorial scope**, first test: the GDPR applies to processing in the context of the activities of a controller's or processor's **establishment in the EU**. It does not matter where the processing physically takes place (Article 3(1)).",
+        "So if Sunfield stores its data on a server outside the EU, the GDPR still applies."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Second test: a controller or processor **not established** in the EU is covered when it processes data of people who are in the EU and either:",
+        {
+          "type": "list",
+          "items": [
+            "offers them goods or services, whether or not payment is required (Article 3(2)(a)); or",
+            "monitors their behaviour in the EU (Article 3(2)(b))."
+          ]
+        },
+        "The protection applies whatever a person's nationality or place of residence (recital 14). Being in the EU is what counts, not citizenship."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "material-scope"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Sunfield's owner keeps her friends' phone numbers for birthday wishes. Does the GDPR apply?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, it is a purely personal activity",
+          "reason": "Article 2(2)(c) and recital 18 exclude household activity."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, because she runs a business",
+          "reason": "Running a business does not turn her private list into a business activity."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, because the list is on a smartphone",
+          "reason": "Automation does not remove the household exemption."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is a private address book of friends covered by the GDPR?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, because she runs a business",
+              "reason": "Running a business does not turn her private list into a business activity."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, because the list is on a smartphone",
+              "reason": "Automation does not remove the household exemption."
+            },
+            {
+              "correct": true,
+              "blocks": "No, it is a purely personal activity",
+              "reason": "Article 2(2)(c) and recital 18 exclude household activity."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "material-scope"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "She now uses the same list to advertise the bakery. What changes?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nothing, because it is still her own phone",
+          "reason": "Using it for business is a commercial connection."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing, because small businesses are exempt",
+          "reason": "Article 2 contains no size exemption."
+        },
+        {
+          "correct": true,
+          "blocks": "The activity is commercial, so the GDPR applies",
+          "reason": "Recital 18 requires no connection to commercial activity."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When does the household exemption stop applying to a private contact list?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nothing, because small businesses are exempt",
+              "reason": "Article 2 contains no size exemption."
+            },
+            {
+              "correct": true,
+              "blocks": "The activity is commercial, so the GDPR applies",
+              "reason": "Recital 18 requires no connection to commercial activity."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing, because it is still her own phone",
+              "reason": "Using it for business is a commercial connection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "territorial-scope"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Sunfield, established in Germany, stores its customer data on a server in Canada. Does the GDPR apply?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only once the data comes back to the EU",
+          "reason": "Article 3(1) has no such condition."
+        },
+        {
+          "correct": true,
+          "blocks": "Yes, because of its EU establishment",
+          "reason": "Article 3(1) applies wherever the processing takes place."
+        },
+        {
+          "correct": false,
+          "blocks": "No, only Canadian law applies",
+          "reason": "The GDPR follows the establishment, not the server."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does an EU business escape the GDPR by processing data outside the EU?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Yes, because of its EU establishment",
+              "reason": "Article 3(1) applies wherever the processing takes place."
+            },
+            {
+              "correct": false,
+              "blocks": "No, only Canadian law applies",
+              "reason": "The GDPR follows the establishment, not the server."
+            },
+            {
+              "correct": false,
+              "blocks": "Only once the data comes back to the EU",
+              "reason": "Article 3(1) has no such condition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "territorial-scope"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "A shop with no EU office sells baking tools online to customers in Austria. Is it covered?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Yes, it offers goods to people in the EU",
+          "reason": "Article 3(2)(a) applies."
+        },
+        {
+          "correct": false,
+          "blocks": "No, it has no EU establishment",
+          "reason": "Article 3(2) covers some businesses without one."
+        },
+        {
+          "correct": false,
+          "blocks": "Only for customers who are EU citizens",
+          "reason": "Being in the EU counts, not nationality (recital 14)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the GDPR apply to a business established outside the EU?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, it has no EU establishment",
+              "reason": "Article 3(2) covers some businesses without one."
+            },
+            {
+              "correct": false,
+              "blocks": "Only for customers who are EU citizens",
+              "reason": "Being in the EU counts, not nationality (recital 14)."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, it offers goods to people in the EU",
+              "reason": "Article 3(2)(a) applies."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

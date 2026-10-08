@@ -1,0 +1,351 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p04",
+    "title": "The six legal bases",
+    "summary": "Match each purpose to one of the six legal bases, and test whether the processing is really necessary.",
+    "covers": [
+      "lawful-bases",
+      "necessity-test"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g05",
+        "reason": "Several bases refer to the controller's obligations, interests or tasks."
+      },
+      {
+        "lesson": "p01",
+        "reason": "The legal bases are what makes processing lawful under the first principle."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Processing is lawful **only if and to the extent that** at least one of six legal bases applies (Article 6(1)).",
+        "Without a basis, the processing is unlawful, however good the intention."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The first three bases:",
+        {
+          "type": "list",
+          "items": [
+            "**(a) Consent**: the person has agreed to processing for one or more specific purposes.",
+            "**(b) Contract**: processing is necessary to perform a contract with the person, or to take steps at their request before entering one.",
+            "**(c) Legal obligation**: processing is necessary to comply with a legal obligation of the controller."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The other three:",
+        {
+          "type": "list",
+          "items": [
+            "**(d) Vital interests**: processing is necessary to protect someone's life. Recital 46 says relying on *another* person's vital interests should, in principle, be used only where no other basis clearly applies.",
+            "**(e) Public task**: processing is necessary for a task in the public interest or for official authority vested in the controller.",
+            "**(f) Legitimate interests**: processing is necessary for legitimate interests that the person's interests or rights do not override. Public authorities cannot use it for their tasks."
+          ]
+        },
+        "The bases in (c) and (e) must be laid down in EU or national law (Article 6(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Five of the six bases use the word **necessary**. Being useful or convenient is not enough.",
+        "Recital 39 says personal data should be processed only if the purpose cannot reasonably be achieved by other means. If the purpose can be met with less data, or with none, the extra processing is not necessary."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Article 6(1) lists the six bases **without ranking** them. Consent is not the default, and the other bases do not need anyone's approval.",
+        "Choose the basis that genuinely fits **each purpose**, before you start processing."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Illustrations from Sunfield:",
+        {
+          "type": "list",
+          "items": [
+            "Name and pickup time to fulfil a pre-order: **contract**, because it is necessary to perform the order.",
+            "Salary data sent to the tax office because the law requires it: **legal obligation**.",
+            "The weekly newsletter: typically **consent**.",
+            "Cameras to prevent theft: **legitimate interests**, if the balance in the next lesson tips Sunfield's way."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1), 6(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "lawful-bases"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Sunfield needs a customer's name and pickup time to fulfil her pre-order. Which basis fits best?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Contract, Article 6(1)(b)",
+          "reason": "The processing is necessary to perform the contract."
+        },
+        {
+          "correct": false,
+          "blocks": "Vital interests, Article 6(1)(d)",
+          "reason": "No one's life is at stake in a bread order."
+        },
+        {
+          "correct": false,
+          "blocks": "Public task, Article 6(1)(e)",
+          "reason": "Selling bread is not a public task laid down in law."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which legal basis covers data that is needed to deliver what the customer ordered?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Vital interests, Article 6(1)(d)",
+              "reason": "No one's life is at stake in a bread order."
+            },
+            {
+              "correct": false,
+              "blocks": "Public task, Article 6(1)(e)",
+              "reason": "Selling bread is not a public task laid down in law."
+            },
+            {
+              "correct": true,
+              "blocks": "Contract, Article 6(1)(b)",
+              "reason": "The processing is necessary to perform the contract."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "lawful-bases"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "A law requires Sunfield to send salary data to the tax office. Which basis applies?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Consent, Article 6(1)(a)",
+          "reason": "Staff cannot meaningfully refuse a legal duty, and the law is the basis."
+        },
+        {
+          "correct": false,
+          "blocks": "Vital interests, Article 6(1)(d)",
+          "reason": "No one's life is at stake."
+        },
+        {
+          "correct": true,
+          "blocks": "Legal obligation, Article 6(1)(c)",
+          "reason": "The processing is necessary to comply with a legal obligation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which basis covers processing that the law obliges the business to carry out?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Vital interests, Article 6(1)(d)",
+              "reason": "No one's life is at stake."
+            },
+            {
+              "correct": true,
+              "blocks": "Legal obligation, Article 6(1)(c)",
+              "reason": "The processing is necessary to comply with a legal obligation."
+            },
+            {
+              "correct": false,
+              "blocks": "Consent, Article 6(1)(a)",
+              "reason": "Staff cannot meaningfully refuse a legal duty, and the law is the basis."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "necessity-test"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Sunfield claims the contract basis covers collecting customers' dates of birth for pre-orders. Is that right?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, unless the customer objects",
+          "reason": "The basis depends on necessity, not on silence."
+        },
+        {
+          "correct": true,
+          "blocks": "No, it is not necessary to perform the order",
+          "reason": "Basis (b) covers only what is necessary for the contract."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, anything collected during a contract is covered",
+          "reason": "Basis (b) is limited by necessity."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a business rely on the contract basis for data the contract does not need?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "No, it is not necessary to perform the order",
+              "reason": "Basis (b) covers only what is necessary for the contract."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, anything collected during a contract is covered",
+              "reason": "Basis (b) is limited by necessity."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, unless the customer objects",
+              "reason": "The basis depends on necessity, not on silence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "lawful-bases"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Must a business try consent first, before any other basis?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, the six bases are not ranked",
+          "reason": "Article 6(1) lists them without any order of preference."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, consent must always be tried first",
+          "reason": "Article 6(1) contains no such rule."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, other bases need a regulator's approval",
+          "reason": "Article 6 requires no approval for any basis."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is consent the preferred or default legal basis under Article 6?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, consent must always be tried first",
+              "reason": "Article 6(1) contains no such rule."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, other bases need a regulator's approval",
+              "reason": "Article 6 requires no approval for any basis."
+            },
+            {
+              "correct": true,
+              "blocks": "No, the six bases are not ranked",
+              "reason": "Article 6(1) lists them without any order of preference."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

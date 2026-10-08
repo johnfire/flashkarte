@@ -1,0 +1,274 @@
+{
+  "module": "Start here: what the GDPR covers",
+  "lesson": {
+    "slug": "g03",
+    "title": "Pseudonymised and anonymous data",
+    "summary": "Tell pseudonymised data, which is still personal data, from anonymous data, which is outside the GDPR.",
+    "covers": [
+      "pseudonymisation",
+      "anonymous-data"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g02",
+        "reason": "Pseudonymised data stays personal data because extra information can still identify the person."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Pseudonymisation** means processing personal data so that it can no longer be linked to a specific person without additional information. That additional information must be kept separately and protected (Article 4(5)).",
+        "A typical example is replacing names with codes and storing the list of codes somewhere else."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(5), 25(1), 32(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Pseudonymised data is **still personal data**. Recital 26 says that data which could be linked back to a person using additional information should be treated as information about an identifiable person.",
+        "So the GDPR still applies in full."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(5), 25(1), 32(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Anonymous information** does not relate to an identified or identifiable person. Personal data can also be made anonymous so that the person is no longer identifiable (recital 26).",
+        "The GDPR does not concern anonymous information. That includes anonymous information used for statistics or research (recital 26)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(5), 25(1), 32(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Whether data is truly anonymous is a test, not a label. Recital 26 says to consider all the means reasonably likely to be used to identify someone, including the cost, the time and the technology available.",
+        "It also mentions \"technological developments\". Data that is anonymous today might become identifiable later, so the assessment needs to be reviewed."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(5), 25(1), 32(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Sunfield sends its order data to an analyst. It replaces customer names with codes, and the manager keeps the code list in a locked file. That data is **pseudonymised**, so the GDPR still applies.",
+        "Sunfield also publishes \"pre-orders per shop per month\". If no customer can be singled out from those totals, they are anonymous.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Sunfield Bakery is invented** for this course. Any resemblance to a real business is accidental."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(5), 25(1), 32(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "If pseudonymised data is still covered, why bother? Because the GDPR itself names pseudonymisation as a protective measure, in Article 25(1) and Article 32(1)(a). Later lessons explain both articles."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(5), 25(1), 32(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "pseudonymisation"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "Sunfield replaces customer names with codes and keeps the code list separately. Is the result personal data?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Yes, it is pseudonymised and can be linked back",
+          "reason": "Recital 26 treats it as information about an identifiable person."
+        },
+        {
+          "correct": false,
+          "blocks": "No, the codes make it anonymous",
+          "reason": "The key still allows the data to be linked back, so it is not anonymous."
+        },
+        {
+          "correct": false,
+          "blocks": "Only if the code list is ever lost",
+          "reason": "The data is personal data regardless of what happens to the key."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "After names are swapped for codes, with the key kept elsewhere, does the GDPR still apply?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, the codes make it anonymous",
+              "reason": "The key still allows the data to be linked back, so it is not anonymous."
+            },
+            {
+              "correct": false,
+              "blocks": "Only if the code list is ever lost",
+              "reason": "The data is personal data regardless of what happens to the key."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, it is pseudonymised and can be linked back",
+              "reason": "Recital 26 treats it as information about an identifiable person."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "anonymous-data"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Which description fits anonymous data?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The names have been deleted from the file",
+          "reason": "Other details may still single someone out."
+        },
+        {
+          "correct": false,
+          "blocks": "The file is encrypted with a password",
+          "reason": "Whoever holds the password can still read the data."
+        },
+        {
+          "correct": true,
+          "blocks": "No one can identify the person by any means reasonably likely to be used",
+          "reason": "That is the recital 26 test for anonymity."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When is information outside the GDPR because it is anonymous?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The file is encrypted with a password",
+              "reason": "Whoever holds the password can still read the data."
+            },
+            {
+              "correct": true,
+              "blocks": "No one can identify the person by any means reasonably likely to be used",
+              "reason": "That is the recital 26 test for anonymity."
+            },
+            {
+              "correct": false,
+              "blocks": "The names have been deleted from the file",
+              "reason": "Other details may still single someone out."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "anonymous-data"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Why should a business review an earlier decision that some data is anonymous?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The GDPR requires consent before anonymising",
+          "reason": "Recital 26 sets an identifiability test. It says nothing about consent."
+        },
+        {
+          "correct": true,
+          "blocks": "Technology develops, and identification may become reasonably likely",
+          "reason": "Recital 26 says to consider technological developments."
+        },
+        {
+          "correct": false,
+          "blocks": "Anonymous data automatically expires after one year",
+          "reason": "The GDPR sets no such expiry. It is invented."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What can turn data that was anonymous into identifiable data over time?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Technology develops, and identification may become reasonably likely",
+              "reason": "Recital 26 says to consider technological developments."
+            },
+            {
+              "correct": false,
+              "blocks": "Anonymous data automatically expires after one year",
+              "reason": "The GDPR sets no such expiry. It is invented."
+            },
+            {
+              "correct": false,
+              "blocks": "The GDPR requires consent before anonymising",
+              "reason": "Recital 26 sets an identifiability test. It says nothing about consent."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
