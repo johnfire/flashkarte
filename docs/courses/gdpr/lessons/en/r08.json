@@ -164,7 +164,7 @@
       ],
       "variants": [
         {
-          "prompt": "Under Article 77, where can a data subject lodge a complaint?",
+          "prompt": "A customer living in Austria wants to complain about a business in Germany. Under Article 77, where may she complain?",
           "options": [
             {
               "correct": false,

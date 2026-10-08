@@ -167,7 +167,7 @@ LESSONS = {
                        ("In writing, which may be electronic", "Article 28(9)."),
                        ("An oral agreement is enough", "Article 28(9) requires writing."),
                        ("It must be notarised", "Article 28 has no notary requirement.")),
-            assessment([1], [4], "Under a general authorisation, Sunfield's newsletter service wants to add a new sub-processor. What must happen?", "What does a general written authorisation require when sub-processors change?",
+            assessment([1], [4], "Under a general authorisation, Sunfield's newsletter service wants to add a new sub-processor. What must happen?", "Sunfield gave its newsletter service a general written authorisation. What must happen when the service changes sub-processors?",
                        ("It informs Sunfield, which may object", "Article 28(2)."),
                        ("It may add sub-processors freely", "Changes must be notified so the controller can object."),
                        ("A supervisory authority must approve it", "Article 28(2) involves the controller, not the authority.")),

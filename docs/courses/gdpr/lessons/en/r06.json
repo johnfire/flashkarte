@@ -270,7 +270,7 @@
       ],
       "variants": [
         {
-          "prompt": "After an objection to direct marketing, is any balancing allowed?",
+          "prompt": "After a customer objects to direct marketing, may Sunfield weigh its interests against hers?",
           "options": [
             {
               "correct": true,
@@ -319,7 +319,7 @@
       ],
       "variants": [
         {
-          "prompt": "How must a controller respond to a general objection under Article 21(1)?",
+          "prompt": "An employee makes a general objection under Article 21(1) to a camera relying on legitimate interests. How must Sunfield respond?",
           "options": [
             {
               "correct": false,

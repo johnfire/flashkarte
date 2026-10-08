@@ -189,7 +189,7 @@
       ],
       "variants": [
         {
-          "prompt": "Consent is withdrawn and no other legal ground exists. What happens to the data?",
+          "prompt": "A customer withdraws consent, and no other legal ground exists for her data. What happens to it?",
           "options": [
             {
               "correct": false,

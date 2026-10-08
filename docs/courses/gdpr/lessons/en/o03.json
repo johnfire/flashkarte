@@ -235,7 +235,7 @@
       ],
       "variants": [
         {
-          "prompt": "What does a general written authorisation require when sub-processors change?",
+          "prompt": "Sunfield gave its newsletter service a general written authorisation. What must happen when the service changes sub-processors?",
           "options": [
             {
               "correct": true,

@@ -221,7 +221,7 @@
       ],
       "variants": [
         {
-          "prompt": "After correcting shared data, what does Article 19 require?",
+          "prompt": "Sunfield corrects a customer's data that it had shared with a partner café. What does Article 19 require?",
           "options": [
             {
               "correct": true,
@@ -269,7 +269,7 @@
       ],
       "variants": [
         {
-          "prompt": "Can a person learn who received notice of their correction under Article 19?",
+          "prompt": "A customer asks which recipients were told about her correction. Must Sunfield tell her under Article 19?",
           "options": [
             {
               "correct": false,
