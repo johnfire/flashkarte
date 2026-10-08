@@ -283,7 +283,7 @@
       ],
       "variants": [
         {
-          "prompt": "Under Article 28(4), who answers to the controller for a sub-processor's failure?",
+          "prompt": "A sub-processor engaged by Sunfield's processor fails its duties. Under Article 28(4), who answers to Sunfield?",
           "options": [
             {
               "correct": false,

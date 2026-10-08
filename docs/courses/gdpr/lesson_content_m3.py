@@ -171,7 +171,7 @@ LESSONS = {
                        ("It informs Sunfield, which may object", "Article 28(2)."),
                        ("It may add sub-processors freely", "Changes must be notified so the controller can object."),
                        ("A supervisory authority must approve it", "Article 28(2) involves the controller, not the authority.")),
-            assessment([1], [5], "A sub-processor fails its data protection duties. Who is liable to Sunfield for that failure?", "Under Article 28(4), who answers to the controller for a sub-processor's failure?",
+            assessment([1], [5], "A sub-processor fails its data protection duties. Who is liable to Sunfield for that failure?", "A sub-processor engaged by Sunfield's processor fails its duties. Under Article 28(4), who answers to Sunfield?",
                        ("The initial processor, fully", "Article 28(4)."),
                        ("No one, because Sunfield never signed with it", "The initial processor remains liable."),
                        ("Only the sub-processor", "Article 28(4) keeps the initial processor fully liable.")),
