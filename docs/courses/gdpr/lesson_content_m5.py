@@ -178,7 +178,7 @@ LESSONS = {
                        ("13", "Article 8(1): not below 13 years."),
                        ("10", "Article 8(1) does not allow below 13."),
                        ("None; 16 is fixed everywhere", "Countries may lower it to 13.")),
-            assessment([0], [3], "What must Sunfield do about parental consent?", "Which effort does Article 8(2) require of the controller?",
+            assessment([0], [3], "What must Sunfield do about parental consent?", "What does Article 8(2) require the controller to do about parental consent?",
                        ("Make reasonable efforts to verify it, given available technology", "Article 8(2)."),
                        ("Nothing; trusting the tick box is enough", "Article 8(2) requires reasonable efforts."),
                        ("Demand a notarised paper form", "Article 8(2) requires reasonable efforts, not a specific form.")),

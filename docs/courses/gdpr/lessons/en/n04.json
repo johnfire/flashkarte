@@ -232,7 +232,7 @@
       ],
       "variants": [
         {
-          "prompt": "Which effort does Article 8(2) require of the controller?",
+          "prompt": "What does Article 8(2) require the controller to do about parental consent?",
           "options": [
             {
               "correct": true,
