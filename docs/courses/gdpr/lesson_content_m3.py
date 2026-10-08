@@ -351,7 +351,7 @@ LESSONS = {
                        ("An assessment of necessity and proportionality", "Article 35(7)(b)."),
                        ("The company's marketing plan", "Not required by Article 35(7)."),
                        ("Prior approval from the regulator", "Article 35 does not require approval.")),
-            assessment([0], [3], "Where can Sunfield find further processing types that need a DPIA?", "What practical list supplements Article 35(3)?",
+            assessment([0], [3], "Where can Sunfield find further processing types that need a DPIA?", "Where should Sunfield look for DPIA cases beyond those named in Article 35(3)?",
                        ("Its supervisory authority's published list", "Article 35(4)."),
                        ("Nowhere; Article 35(3) is the complete list", "Article 35(3) says \"in particular\". It is not exhaustive."),
                        ("The Commission's annual report", "Article 35(4) gives the lists to supervisory authorities.")),
