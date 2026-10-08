@@ -452,7 +452,7 @@ LESSONS = {
             ],
         ],
         "questions": [
-            assessment([0], [5], "Sunfield becomes aware of the payroll breach on Friday at 18:00. If notification is required, by when should the authority be notified, where feasible?", "Awareness came on Friday at 18:00. When does the 72-hour window close?",
+            assessment([0], [5], "Sunfield becomes aware of the payroll breach on Friday at 18:00. If notification is required, by when should the authority be notified, where feasible?", "Sunfield learned of a notifiable breach on Friday at 18:00. By when should it notify the authority, where feasible?",
                        ("Monday at 18:00", "72 hours after becoming aware (Article 33(1))."),
                        ("One month later", "One month is the rights-request deadline."),
                        ("Only once every detail is known", "Information may be given in phases (Article 33(4)).")),

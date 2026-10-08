@@ -146,7 +146,7 @@
       ],
       "variants": [
         {
-          "prompt": "Awareness came on Friday at 18:00. When does the 72-hour window close?",
+          "prompt": "Sunfield learned of a notifiable breach on Friday at 18:00. By when should it notify the authority, where feasible?",
           "options": [
             {
               "correct": false,
