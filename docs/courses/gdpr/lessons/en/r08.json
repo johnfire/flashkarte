@@ -164,7 +164,7 @@
       ],
       "variants": [
         {
-          "prompt": "A customer living in Austria wants to complain about a business in Germany. Under Article 77, where may she complain?",
+          "prompt": "Sunfield is based in Germany. A customer living in Austria wants to complain about it. Under Article 77, where may she do so?",
           "options": [
             {
               "correct": false,
@@ -192,7 +192,7 @@
       "teaches": [
         "screen-2"
       ],
-      "prompt": "Must she complain to a regulator before going to court?",
+      "prompt": "A customer wants to take Sunfield to court over her data. Must she complain to a regulator first?",
       "options": [
         {
           "correct": false,
@@ -289,7 +289,7 @@
         "screen-5",
         "screen-6"
       ],
-      "prompt": "The payroll processor broke its own duties, causing a leak. Who can be liable to the staff?",
+      "prompt": "Sunfield's payroll processor broke its own duties, causing a leak. Who can be liable to the staff?",
       "options": [
         {
           "correct": true,
@@ -309,7 +309,7 @@
       ],
       "variants": [
         {
-          "prompt": "How is liability shared when a controller and a processor are both responsible?",
+          "prompt": "A processor's breach of its own duties leaks Sunfield's staff data. How is liability to the staff shared?",
           "options": [
             {
               "correct": false,

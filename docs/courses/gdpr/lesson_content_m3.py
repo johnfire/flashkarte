@@ -456,7 +456,7 @@ LESSONS = {
                        ("Monday at 18:00", "72 hours after becoming aware (Article 33(1))."),
                        ("One month later", "One month is the rights-request deadline."),
                        ("Only once every detail is known", "Information may be given in phases (Article 33(4)).")),
-            assessment([0], [4], "The newsletter service has no written processor terms on file. What is missing?", "Which document does the review find absent for the newsletter service?",
+            assessment([0], [4], "Sunfield's review finds no written processor terms on file for its newsletter service. What is missing?", "Which document does the review find absent for the newsletter service?",
                        ("A contract with the Article 28(3) content", "Required for every processor."),
                        ("Nothing, because the provider is well known", "Reputation does not replace a contract."),
                        ("A DPIA for the newsletter", "The gap found is the contract, not a DPIA.")),

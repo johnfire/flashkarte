@@ -249,7 +249,7 @@
       "teaches": [
         "screen-4"
       ],
-      "prompt": "The customer asks which recipients were told about her correction. Must Sunfield answer?",
+      "prompt": "After a correction, a customer asks Sunfield which recipients were told about it. Must Sunfield answer?",
       "options": [
         {
           "correct": true,

@@ -174,7 +174,7 @@
       "teaches": [
         "screen-4"
       ],
-      "prompt": "The newsletter service has no written processor terms on file. What is missing?",
+      "prompt": "Sunfield's review finds no written processor terms on file for its newsletter service. What is missing?",
       "options": [
         {
           "correct": false,

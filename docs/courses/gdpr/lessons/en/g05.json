@@ -206,7 +206,7 @@
       "teaches": [
         "screen-4"
       ],
-      "prompt": "The payroll firm starts using Sunfield's staff data to advertise its own loans. What follows?",
+      "prompt": "Sunfield's payroll firm starts using Sunfield's staff data to advertise its own loans. What follows?",
       "options": [
         {
           "correct": false,
