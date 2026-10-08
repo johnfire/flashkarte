@@ -149,12 +149,12 @@
         {
           "correct": true,
           "blocks": "Unter anderem bei der österreichischen Aufsichtsbehörde",
-          "reason": "Art. 77 Abs. 1 nennt den Mitgliedstaat ihres gewöhnlichen Aufenthaltsorts."
+          "reason": "Artikel 77 Abs. 1 nennt den Mitgliedstaat ihres gewöhnlichen Aufenthaltsorts."
         },
         {
           "correct": false,
           "blocks": "Nur in Deutschland, wo die Bäckerei ihren Sitz hat",
-          "reason": "Art. 77 lässt eine Beschwerde in mehreren Ländern zu."
+          "reason": "Artikel 77 lässt eine Beschwerde in mehreren Ländern zu."
         },
         {
           "correct": false,
@@ -169,7 +169,7 @@
             {
               "correct": false,
               "blocks": "Nur in Deutschland, wo die Bäckerei ihren Sitz hat",
-              "reason": "Art. 77 lässt eine Beschwerde in mehreren Ländern zu."
+              "reason": "Artikel 77 lässt eine Beschwerde in mehreren Ländern zu."
             },
             {
               "correct": false,
@@ -179,7 +179,7 @@
             {
               "correct": true,
               "blocks": "Unter anderem bei der österreichischen Aufsichtsbehörde",
-              "reason": "Art. 77 Abs. 1 nennt den Mitgliedstaat ihres gewöhnlichen Aufenthaltsorts."
+              "reason": "Artikel 77 Abs. 1 nennt den Mitgliedstaat ihres gewöhnlichen Aufenthaltsorts."
             }
           ]
         }
@@ -202,12 +202,12 @@
         {
           "correct": false,
           "blocks": "Nur die Aufsichtsbehörde kann vor Gericht gehen",
-          "reason": "Art. 79 gibt dieses Recht der betroffenen Person."
+          "reason": "Artikel 79 gibt dieses Recht der betroffenen Person."
         },
         {
           "correct": true,
           "blocks": "Nein, der Weg zum Gericht steht ebenfalls offen",
-          "reason": "Art. 79 gilt unbeschadet des Art. 77."
+          "reason": "Artikel 79 gilt unbeschadet des Art. 77."
         }
       ],
       "variants": [
@@ -217,12 +217,12 @@
             {
               "correct": false,
               "blocks": "Nur die Aufsichtsbehörde kann vor Gericht gehen",
-              "reason": "Art. 79 gibt dieses Recht der betroffenen Person."
+              "reason": "Artikel 79 gibt dieses Recht der betroffenen Person."
             },
             {
               "correct": true,
               "blocks": "Nein, der Weg zum Gericht steht ebenfalls offen",
-              "reason": "Art. 79 gilt unbeschadet des Art. 77."
+              "reason": "Artikel 79 gilt unbeschadet des Art. 77."
             },
             {
               "correct": false,
@@ -245,7 +245,7 @@
         {
           "correct": false,
           "blocks": "Nur, wenn die Aufsichtsbehörde zuerst eine Geldbuße gegen die Bäckerei Sonnenfeld verhängt",
-          "reason": "Art. 82 kennt keine solche Bedingung."
+          "reason": "Artikel 82 kennt keine solche Bedingung."
         },
         {
           "correct": true,
@@ -255,7 +255,7 @@
         {
           "correct": false,
           "blocks": "Nein, nur finanzielle Verluste zählen",
-          "reason": "Art. 82 Abs. 1 erfasst auch immaterielle Schäden."
+          "reason": "Artikel 82 Abs. 1 erfasst auch immaterielle Schäden."
         }
       ],
       "variants": [
@@ -270,12 +270,12 @@
             {
               "correct": false,
               "blocks": "Nein, nur finanzielle Verluste zählen",
-              "reason": "Art. 82 Abs. 1 erfasst auch immaterielle Schäden."
+              "reason": "Artikel 82 Abs. 1 erfasst auch immaterielle Schäden."
             },
             {
               "correct": false,
               "blocks": "Nur, wenn die Aufsichtsbehörde zuerst eine Geldbuße gegen die Bäckerei Sonnenfeld verhängt",
-              "reason": "Art. 82 kennt keine solche Bedingung."
+              "reason": "Artikel 82 kennt keine solche Bedingung."
             }
           ]
         }
@@ -294,7 +294,7 @@
         {
           "correct": true,
           "blocks": "Jeder von beiden kann für den gesamten Schaden haften",
-          "reason": "Art. 82 Abs. 4, mit Rückgriff nach Art. 82 Abs. 5."
+          "reason": "Artikel 82 Abs. 4, mit Rückgriff nach Art. 82 Abs. 5."
         },
         {
           "correct": false,
@@ -324,7 +324,7 @@
             {
               "correct": true,
               "blocks": "Jeder von beiden kann für den gesamten Schaden haften",
-              "reason": "Art. 82 Abs. 4, mit Rückgriff nach Art. 82 Abs. 5."
+              "reason": "Artikel 82 Abs. 4, mit Rückgriff nach Art. 82 Abs. 5."
             }
           ]
         }

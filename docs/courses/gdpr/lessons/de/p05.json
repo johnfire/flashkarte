@@ -265,12 +265,12 @@
         {
           "correct": true,
           "blocks": "Die bisherige Verarbeitung bleibt rechtmäßig; ab jetzt muss sie enden",
-          "reason": "Art. 7 Abs. 3: Der Widerruf berührt die Rechtmäßigkeit der früheren Verarbeitung nicht."
+          "reason": "Artikel 7 Abs. 3: Der Widerruf berührt die Rechtmäßigkeit der früheren Verarbeitung nicht."
         },
         {
           "correct": false,
           "blocks": "Die bisherige Verarbeitung wird rückwirkend unrechtmäßig",
-          "reason": "Art. 7 Abs. 3 sagt das Gegenteil."
+          "reason": "Artikel 7 Abs. 3 sagt das Gegenteil."
         }
       ],
       "variants": [
@@ -280,12 +280,12 @@
             {
               "correct": true,
               "blocks": "Die bisherige Verarbeitung bleibt rechtmäßig; ab jetzt muss sie enden",
-              "reason": "Art. 7 Abs. 3: Der Widerruf berührt die Rechtmäßigkeit der früheren Verarbeitung nicht."
+              "reason": "Artikel 7 Abs. 3: Der Widerruf berührt die Rechtmäßigkeit der früheren Verarbeitung nicht."
             },
             {
               "correct": false,
               "blocks": "Die bisherige Verarbeitung wird rückwirkend unrechtmäßig",
-              "reason": "Art. 7 Abs. 3 sagt das Gegenteil."
+              "reason": "Artikel 7 Abs. 3 sagt das Gegenteil."
             },
             {
               "correct": false,
@@ -309,7 +309,7 @@
         {
           "correct": true,
           "blocks": "Nein, der Widerruf muss so einfach sein wie die Einwilligung",
-          "reason": "Art. 7 Abs. 3 verlangt, dass beides gleich einfach ist."
+          "reason": "Artikel 7 Abs. 3 verlangt, dass beides gleich einfach ist."
         },
         {
           "correct": false,
@@ -339,7 +339,7 @@
             {
               "correct": true,
               "blocks": "Nein, der Widerruf muss so einfach sein wie die Einwilligung",
-              "reason": "Art. 7 Abs. 3 verlangt, dass beides gleich einfach ist."
+              "reason": "Artikel 7 Abs. 3 verlangt, dass beides gleich einfach ist."
             }
           ]
         }

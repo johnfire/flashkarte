@@ -260,7 +260,7 @@
         {
           "correct": true,
           "blocks": "Nein, sie muss die Werbung an die Kundin einstellen",
-          "reason": "Art. 21 Abs. 3: keine weitere Verarbeitung für Zwecke der Direktwerbung."
+          "reason": "Artikel 21 Abs. 3: keine weitere Verarbeitung für Zwecke der Direktwerbung."
         },
         {
           "correct": false,
@@ -275,7 +275,7 @@
             {
               "correct": true,
               "blocks": "Nein, sie muss die Werbung an die Kundin einstellen",
-              "reason": "Art. 21 Abs. 3: keine weitere Verarbeitung für Zwecke der Direktwerbung."
+              "reason": "Artikel 21 Abs. 3: keine weitere Verarbeitung für Zwecke der Direktwerbung."
             },
             {
               "correct": false,
@@ -309,12 +309,12 @@
         {
           "correct": false,
           "blocks": "Nichts; der Widerspruch gilt nur für Verarbeitungen auf Grundlage einer Einwilligung",
-          "reason": "Art. 21 Abs. 1 betrifft Verarbeitungen auf Grundlage einer öffentlichen Aufgabe oder berechtigter Interessen."
+          "reason": "Artikel 21 Abs. 1 betrifft Verarbeitungen auf Grundlage einer öffentlichen Aufgabe oder berechtigter Interessen."
         },
         {
           "correct": false,
           "blocks": "Die Verarbeitung sofort beenden, ohne jede mögliche Ausnahme",
-          "reason": "Art. 21 Abs. 1 lässt zwingende Gründe und Rechtsansprüche zu."
+          "reason": "Artikel 21 Abs. 1 lässt zwingende Gründe und Rechtsansprüche zu."
         }
       ],
       "variants": [
@@ -324,12 +324,12 @@
             {
               "correct": false,
               "blocks": "Nichts; der Widerspruch gilt nur für Verarbeitungen auf Grundlage einer Einwilligung",
-              "reason": "Art. 21 Abs. 1 betrifft Verarbeitungen auf Grundlage einer öffentlichen Aufgabe oder berechtigter Interessen."
+              "reason": "Artikel 21 Abs. 1 betrifft Verarbeitungen auf Grundlage einer öffentlichen Aufgabe oder berechtigter Interessen."
             },
             {
               "correct": false,
               "blocks": "Die Verarbeitung sofort beenden, ohne jede mögliche Ausnahme",
-              "reason": "Art. 21 Abs. 1 lässt zwingende Gründe und Rechtsansprüche zu."
+              "reason": "Artikel 21 Abs. 1 lässt zwingende Gründe und Rechtsansprüche zu."
             },
             {
               "correct": true,

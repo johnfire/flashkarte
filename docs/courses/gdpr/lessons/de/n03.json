@@ -112,12 +112,12 @@
         {
           "correct": true,
           "blocks": "Nein, die KI-Verordnung berührt die DSGVO nicht",
-          "reason": "Art. 2 Abs. 7 der KI-Verordnung."
+          "reason": "Artikel 2 Abs. 7 der KI-Verordnung."
         },
         {
           "correct": false,
           "blocks": "Ja, für KI ersetzt die KI-Verordnung die DSGVO",
-          "reason": "Art. 2 Abs. 7 sagt das Gegenteil."
+          "reason": "Artikel 2 Abs. 7 sagt das Gegenteil."
         },
         {
           "correct": false,
@@ -132,7 +132,7 @@
             {
               "correct": false,
               "blocks": "Ja, für KI ersetzt die KI-Verordnung die DSGVO",
-              "reason": "Art. 2 Abs. 7 sagt das Gegenteil."
+              "reason": "Artikel 2 Abs. 7 sagt das Gegenteil."
             },
             {
               "correct": false,
@@ -142,7 +142,7 @@
             {
               "correct": true,
               "blocks": "Nein, die KI-Verordnung berührt die DSGVO nicht",
-              "reason": "Art. 2 Abs. 7 der KI-Verordnung."
+              "reason": "Artikel 2 Abs. 7 der KI-Verordnung."
             }
           ]
         }
@@ -213,7 +213,7 @@
         {
           "correct": true,
           "blocks": "Die KI-Verordnung berührt sie nicht, abgesehen von zwei genannten Ausnahmen",
-          "reason": "Art. 2 Abs. 7, unbeschadet der Art. 4a und 59."
+          "reason": "Artikel 2 Abs. 7, unbeschadet der Art. 4a und 59."
         },
         {
           "correct": false,
@@ -228,7 +228,7 @@
             {
               "correct": true,
               "blocks": "Die KI-Verordnung berührt sie nicht, abgesehen von zwei genannten Ausnahmen",
-              "reason": "Art. 2 Abs. 7, unbeschadet der Art. 4a und 59."
+              "reason": "Artikel 2 Abs. 7, unbeschadet der Art. 4a und 59."
             },
             {
               "correct": false,

@@ -23,7 +23,7 @@
     {
       "ref": "screen-1",
       "blocks": [
-        "Eine Verarbeitung ist **nur rechtmäßig, wenn** mindestens eine von sechs Rechtsgrundlagen erfüllt ist (Art. 6 Abs. 1).",
+        "Eine Verarbeitung ist **nur rechtmäßig, wenn** mindestens eine von sechs Rechtsgrundlagen vorliegt (Art. 6 Abs. 1).",
         "Ohne Rechtsgrundlage ist die Verarbeitung unrechtmäßig, wie gut die Absicht auch sein mag."
       ],
       "sources": [
@@ -306,22 +306,22 @@
       "teaches": [
         "screen-5"
       ],
-      "prompt": "Muss ein Unternehmen zuerst eine Einwilligung versuchen, bevor es eine andere Rechtsgrundlage nutzt?",
+      "prompt": "Muss ein Unternehmen zuerst versuchen, eine Einwilligung einzuholen, bevor es eine andere Rechtsgrundlage nutzt?",
       "options": [
         {
           "correct": true,
           "blocks": "Nein, die sechs Rechtsgrundlagen haben keine Rangfolge",
-          "reason": "Art. 6 Abs. 1 nennt sie ohne Rangfolge."
+          "reason": "Artikel 6 Abs. 1 nennt sie ohne Rangfolge."
         },
         {
           "correct": false,
-          "blocks": "Ja, die Einwilligung muss immer zuerst versucht werden",
-          "reason": "Art. 6 Abs. 1 enthält keine solche Regel."
+          "blocks": "Ja, es muss immer zuerst eine Einwilligung eingeholt werden",
+          "reason": "Artikel 6 Abs. 1 enthält keine solche Regel."
         },
         {
           "correct": false,
           "blocks": "Ja, andere Rechtsgrundlagen brauchen die Genehmigung einer Aufsichtsbehörde",
-          "reason": "Art. 6 verlangt für keine Rechtsgrundlage eine Genehmigung."
+          "reason": "Artikel 6 verlangt für keine Rechtsgrundlage eine Genehmigung."
         }
       ],
       "variants": [
@@ -330,18 +330,18 @@
           "options": [
             {
               "correct": false,
-              "blocks": "Ja, die Einwilligung muss immer zuerst versucht werden",
-              "reason": "Art. 6 Abs. 1 enthält keine solche Regel."
+              "blocks": "Ja, es muss immer zuerst eine Einwilligung eingeholt werden",
+              "reason": "Artikel 6 Abs. 1 enthält keine solche Regel."
             },
             {
               "correct": false,
               "blocks": "Ja, andere Rechtsgrundlagen brauchen die Genehmigung einer Aufsichtsbehörde",
-              "reason": "Art. 6 verlangt für keine Rechtsgrundlage eine Genehmigung."
+              "reason": "Artikel 6 verlangt für keine Rechtsgrundlage eine Genehmigung."
             },
             {
               "correct": true,
               "blocks": "Nein, die sechs Rechtsgrundlagen haben keine Rangfolge",
-              "reason": "Art. 6 Abs. 1 nennt sie ohne Rangfolge."
+              "reason": "Artikel 6 Abs. 1 nennt sie ohne Rangfolge."
             }
           ]
         }

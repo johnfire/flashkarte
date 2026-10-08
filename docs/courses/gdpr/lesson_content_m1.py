@@ -117,7 +117,7 @@ LESSONS = {
             ],
             [
                 "In practice, demonstrating means having evidence. If Sunfield says it deletes inactive loyalty accounts after a stated period, it should be able to show the written rule and that the rule is applied.",
-                "Module 3 shows the tools the GDPR provides for this, such as records and policies.",
+                "The module \"What your organisation must do\" shows the tools the GDPR provides for this, such as records and policies.",
             ],
         ],
         "questions": [
@@ -174,7 +174,7 @@ LESSONS = {
                     "Name and pickup time to fulfil a pre-order: **contract**, because it is necessary to perform the order.",
                     "Salary data sent to the tax office because the law requires it: **legal obligation**.",
                     "The weekly newsletter: typically **consent**.",
-                    "Cameras to prevent theft: **legitimate interests**, if the balance in the next lesson tips Sunfield's way.",
+                    "Cameras to prevent theft: **legitimate interests**, if the balance test in a later lesson tips Sunfield's way.",
                 ]},
                 ILLUSTRATION,
             ],

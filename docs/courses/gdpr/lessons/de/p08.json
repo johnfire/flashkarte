@@ -275,7 +275,7 @@
         {
           "correct": false,
           "blocks": "Nur ein berechtigtes Interesse nach Art. 6",
-          "reason": "Art. 9 Abs. 1 untersagt die Verarbeitung ohne eine Ausnahme nach Art. 9 Abs. 2."
+          "reason": "Artikel 9 Abs. 1 untersagt die Verarbeitung ohne eine Ausnahme nach Art. 9 Abs. 2."
         }
       ],
       "variants": [
@@ -290,7 +290,7 @@
             {
               "correct": false,
               "blocks": "Nur ein berechtigtes Interesse nach Art. 6",
-              "reason": "Art. 9 Abs. 1 untersagt die Verarbeitung ohne eine Ausnahme nach Art. 9 Abs. 2."
+              "reason": "Artikel 9 Abs. 1 untersagt die Verarbeitung ohne eine Ausnahme nach Art. 9 Abs. 2."
             },
             {
               "correct": false,
@@ -314,17 +314,17 @@
         {
           "correct": true,
           "blocks": "Nein, nötig sind behördliche Aufsicht oder eine gesetzliche Erlaubnis",
-          "reason": "Art. 10 gilt zusätzlich zu jeder Rechtsgrundlage nach Art. 6 Abs. 1."
+          "reason": "Artikel 10 gilt zusätzlich zu jeder Rechtsgrundlage nach Art. 6 Abs. 1."
         },
         {
           "correct": false,
           "blocks": "Ja, die Einwilligung ist eine Rechtsgrundlage nach Art. 6",
-          "reason": "Art. 10 stellt über die Rechtsgrundlage nach Art. 6 hinaus zusätzliche Bedingungen."
+          "reason": "Artikel 10 stellt über die Rechtsgrundlage nach Art. 6 hinaus zusätzliche Bedingungen."
         },
         {
           "correct": false,
           "blocks": "Nein, aber ein berechtigtes Interesse allein würde genügen",
-          "reason": "Art. 10 verlangt behördliche Aufsicht oder eine gesetzliche Erlaubnis, gleich welche Rechtsgrundlage nach Art. 6 vorliegt."
+          "reason": "Artikel 10 verlangt behördliche Aufsicht oder eine gesetzliche Erlaubnis, gleich welche Rechtsgrundlage nach Art. 6 vorliegt."
         }
       ],
       "variants": [
@@ -334,17 +334,17 @@
             {
               "correct": false,
               "blocks": "Ja, die Einwilligung ist eine Rechtsgrundlage nach Art. 6",
-              "reason": "Art. 10 stellt über die Rechtsgrundlage nach Art. 6 hinaus zusätzliche Bedingungen."
+              "reason": "Artikel 10 stellt über die Rechtsgrundlage nach Art. 6 hinaus zusätzliche Bedingungen."
             },
             {
               "correct": false,
               "blocks": "Nein, aber ein berechtigtes Interesse allein würde genügen",
-              "reason": "Art. 10 verlangt behördliche Aufsicht oder eine gesetzliche Erlaubnis, gleich welche Rechtsgrundlage nach Art. 6 vorliegt."
+              "reason": "Artikel 10 verlangt behördliche Aufsicht oder eine gesetzliche Erlaubnis, gleich welche Rechtsgrundlage nach Art. 6 vorliegt."
             },
             {
               "correct": true,
               "blocks": "Nein, nötig sind behördliche Aufsicht oder eine gesetzliche Erlaubnis",
-              "reason": "Art. 10 gilt zusätzlich zu jeder Rechtsgrundlage nach Art. 6 Abs. 1."
+              "reason": "Artikel 10 gilt zusätzlich zu jeder Rechtsgrundlage nach Art. 6 Abs. 1."
             }
           ]
         }

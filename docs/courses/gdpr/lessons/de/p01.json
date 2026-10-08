@@ -3,7 +3,7 @@
   "lesson": {
     "slug": "p01",
     "title": "Rechtmäßig, nach Treu und Glauben, transparent und für einen festgelegten Zweck",
-    "summary": "Die ersten beiden Grundsätze anwenden: rechtmäßige, faire und transparente Verarbeitung für festgelegte Zwecke.",
+    "summary": "Die ersten beiden Grundsätze anwenden: rechtmäßige und transparente Verarbeitung nach Treu und Glauben für festgelegte Zwecke.",
     "covers": [
       "transparency-principle",
       "purpose-limitation"
@@ -153,7 +153,7 @@
       ],
       "variants": [
         {
-          "prompt": "In den Filialen einer Bäckerei laufen Kameras, ohne Schild oder Hinweis. Welchen Grundsatz untergräbt das?",
+          "prompt": "In den Filialen einer Bäckerei laufen Kameras, ohne Schild oder Hinweis. Welcher Grundsatz wird dadurch untergraben?",
           "options": [
             {
               "correct": false,
@@ -197,7 +197,7 @@
         {
           "correct": true,
           "blocks": "Nein, Zwecke müssen festgelegt und eindeutig sein",
-          "reason": "Art. 5 Abs. 1 Buchst. b verlangt festgelegte, eindeutige Zwecke."
+          "reason": "Artikel 5 Abs. 1 Buchst. b verlangt festgelegte, eindeutige Zwecke."
         }
       ],
       "variants": [
@@ -212,7 +212,7 @@
             {
               "correct": true,
               "blocks": "Nein, Zwecke müssen festgelegt und eindeutig sein",
-              "reason": "Art. 5 Abs. 1 Buchst. b verlangt festgelegte, eindeutige Zwecke."
+              "reason": "Artikel 5 Abs. 1 Buchst. b verlangt festgelegte, eindeutige Zwecke."
             },
             {
               "correct": false,
@@ -240,7 +240,7 @@
         {
           "correct": true,
           "blocks": "Statistische Zwecke",
-          "reason": "Art. 5 Abs. 1 Buchst. b nennt Statistik, Forschung und im öffentlichen Interesse liegende Archivzwecke."
+          "reason": "Artikel 5 Abs. 1 Buchst. b nennt Statistik, Forschung und im öffentlichen Interesse liegende Archivzwecke."
         },
         {
           "correct": false,
@@ -255,7 +255,7 @@
             {
               "correct": true,
               "blocks": "Statistische Zwecke",
-              "reason": "Art. 5 Abs. 1 Buchst. b nennt Statistik, Forschung und im öffentlichen Interesse liegende Archivzwecke."
+              "reason": "Artikel 5 Abs. 1 Buchst. b nennt Statistik, Forschung und im öffentlichen Interesse liegende Archivzwecke."
             },
             {
               "correct": false,

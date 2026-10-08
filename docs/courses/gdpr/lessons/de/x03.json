@@ -241,7 +241,7 @@
         {
           "correct": true,
           "blocks": "Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist",
-          "reason": "Art. 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."
+          "reason": "Artikel 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."
         },
         {
           "correct": false,
@@ -256,7 +256,7 @@
             {
               "correct": true,
               "blocks": "Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist",
-              "reason": "Art. 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."
+              "reason": "Artikel 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."
             },
             {
               "correct": false,

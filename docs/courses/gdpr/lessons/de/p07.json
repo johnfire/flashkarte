@@ -14,7 +14,7 @@
       },
       {
         "lesson": "p04",
-        "reason": "Art. 6 Abs. 4 greift, wenn der neue Zweck weder auf einer Einwilligung noch auf einer Rechtsvorschrift beruht."
+        "reason": "Artikel 6 Abs. 4 greift, wenn der neue Zweck weder auf einer Einwilligung noch auf einer Rechtsvorschrift beruht."
       }
     ]
   },
@@ -47,7 +47,7 @@
             "b) den **Zusammenhang**, in dem die Daten erhoben wurden, insbesondere das Verhältnis zur Person;",
             "c) die **Art** der Daten, insbesondere sensible Datenarten, um die es in der nächsten Lektion geht;",
             "d) die möglichen **Folgen** für die Person;",
-            "e) geeignete **Garantien**, etwa Verschlüsselung oder Pseudonymisierung (Namen werden durch Codes ersetzt, die getrennt aufbewahrt werden)."
+            "e) geeignete **Garantien**, etwa Verschlüsselung oder Pseudonymisierung (Namen werden durch Codes ersetzt, die Codeliste wird getrennt aufbewahrt)."
           ]
         }
       ],
@@ -236,12 +236,12 @@
         {
           "correct": false,
           "blocks": "Gar nichts, weil der Zweck vereinbar ist",
-          "reason": "Art. 13 Abs. 3 verlangt trotzdem eine Information."
+          "reason": "Artikel 13 Abs. 3 verlangt trotzdem eine Information."
         },
         {
           "correct": true,
           "blocks": "Die betroffenen Personen vorher über den neuen Zweck informieren",
-          "reason": "Art. 13 Abs. 3 verlangt die Information vor der Weiterverarbeitung."
+          "reason": "Artikel 13 Abs. 3 verlangt die Information vor der Weiterverarbeitung."
         },
         {
           "correct": false,
@@ -256,7 +256,7 @@
             {
               "correct": true,
               "blocks": "Die betroffenen Personen vorher über den neuen Zweck informieren",
-              "reason": "Art. 13 Abs. 3 verlangt die Information vor der Weiterverarbeitung."
+              "reason": "Artikel 13 Abs. 3 verlangt die Information vor der Weiterverarbeitung."
             },
             {
               "correct": false,
@@ -266,7 +266,7 @@
             {
               "correct": false,
               "blocks": "Gar nichts, weil der Zweck vereinbar ist",
-              "reason": "Art. 13 Abs. 3 verlangt trotzdem eine Information."
+              "reason": "Artikel 13 Abs. 3 verlangt trotzdem eine Information."
             }
           ]
         }

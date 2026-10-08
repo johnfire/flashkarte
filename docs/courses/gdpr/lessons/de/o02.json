@@ -228,7 +228,7 @@
         {
           "correct": true,
           "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet",
-          "reason": "Art. 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
+          "reason": "Artikel 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
         },
         {
           "correct": false,
@@ -243,7 +243,7 @@
             {
               "correct": true,
               "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet",
-              "reason": "Art. 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
+              "reason": "Artikel 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
             },
             {
               "correct": false,

@@ -244,7 +244,7 @@
         {
           "correct": true,
           "blocks": "Nein, die Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten",
-          "reason": "Art. 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."
+          "reason": "Artikel 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."
         },
         {
           "correct": false,
@@ -259,7 +259,7 @@
             {
               "correct": true,
               "blocks": "Nein, die Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten",
-              "reason": "Art. 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."
+              "reason": "Artikel 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."
             },
             {
               "correct": false,

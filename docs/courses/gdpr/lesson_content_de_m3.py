@@ -65,7 +65,7 @@ LESSONS = {
                        ("Den Namen jeder einzelnen Kundin und jedes einzelnen Kunden", "Das Verzeichnis nennt Kategorien, nicht jede einzelne Person."),
                        ("Die Administratorpasswörter", "Passwörter gehören nicht in das Verzeichnis. Sie müssen geheim bleiben.")),
             assessment([1], [5, 6], "Die Bäckerei Sonnenfeld hat 40 Beschäftigte, bearbeitet jede Woche Bestellungen und verarbeitet Krankmeldungen ihrer Beschäftigten. Darf sie auf das Verzeichnis verzichten?", "Hilft die Ausnahme für weniger als 250 Beschäftigte einem kleinen Unternehmen, das regelmäßig Daten verarbeitet, darunter Gesundheitsdaten?",
-                       ("Nein, die Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten", "Art. 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."),
+                       ("Nein, die Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten", "Artikel 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."),
                        ("Ja, mit weniger als 250 Beschäftigten gilt die Ausnahme immer", "Die Ausnahme hat selbst drei Ausnahmen."),
                        ("Ja, wenn es noch nie eine Datenpanne gab", "Eine Vorgeschichte ohne Vorfälle ist keine Bedingung in Art. 30 Abs. 5.")),
             assessment([1], [4], "Wer kann von der Bäckerei Sonnenfeld verlangen, ihr Verzeichnis von Verarbeitungstätigkeiten vorzulegen?", "Wer kann nach Art. 30 verlangen, dass ihm das Verzeichnis von Verarbeitungstätigkeiten zur Verfügung gestellt wird?",
@@ -123,7 +123,7 @@ LESSONS = {
                        ("Ein höheres Marketingbudget", "Keine Datenschutzmaßnahme."),
                        ("Daten länger speichern", "Das läuft den Grundsätzen zuwider.")),
             assessment([1], [4, 5], "Die Bäckerei Sonnenfeld führt eine öffentliche Bestenliste ihrer besten Kundinnen und Kunden mit Namen ein. Wie muss die Voreinstellung sein?", "Wie sollte eine Funktion voreingestellt sein, die die Namen von Kundinnen und Kunden veröffentlichen würde?",
-                       ("Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet", "Art. 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."),
+                       ("Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet", "Artikel 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."),
                        ("Eingeschaltet, mit der Möglichkeit, sich abzumelden", "Wer sich erst abmelden muss, wird ohne eigenes Eingreifen sichtbar."),
                        ("Eingeschaltet, solange die Datenschutzhinweise es erwähnen", "Ein Hinweis ersetzt keine datenschutzfreundliche Voreinstellung.")),
             assessment([1], [3], "Welche Dimensionen erfasst die Regel zu Voreinstellungen in Art. 25 Abs. 2?", "In welcher Hinsicht begrenzt Art. 25 Abs. 2 die Voreinstellungen?",
@@ -186,7 +186,7 @@ LESSONS = {
                        ("Er darf beliebig weitere Auftragsverarbeiter hinzuziehen", "Änderungen sind mitzuteilen, damit der Verantwortliche Einspruch erheben kann."),
                        ("Eine Aufsichtsbehörde muss zustimmen", "Artikel 28 Abs. 2 bezieht den Verantwortlichen ein, nicht die Behörde.")),
             assessment([1], [5], "Ein weiterer Auftragsverarbeiter kommt seinen Datenschutzpflichten nicht nach. Wer haftet gegenüber der Bäckerei Sonnenfeld für dieses Versäumnis?", "Ein weiterer Auftragsverarbeiter, den der Auftragsverarbeiter der Bäckerei Sonnenfeld hinzugezogen hat, verletzt seine Pflichten. Wer haftet nach Art. 28 Abs. 4 gegenüber der Bäckerei dafür?",
-                       ("Der erste Auftragsverarbeiter", "Art. 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."),
+                       ("Der erste Auftragsverarbeiter", "Artikel 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."),
                        ("Niemand, weil die Bäckerei keinen Vertrag mit ihm geschlossen hat", "Der erste Auftragsverarbeiter haftet weiterhin."),
                        ("Nur der weitere Auftragsverarbeiter", "Nach Art. 28 Abs. 4 haftet der erste Auftragsverarbeiter gegenüber dem Verantwortlichen.")),
         ],
@@ -468,7 +468,7 @@ LESSONS = {
         "sources": [("GDPR", "Art. 5, 6, 13, 22, 28, 30, 33, 34, 35")],
         "screens": [
             [
-                "Diese Abschlusslektion wendet die Module 0 bis 3 auf ein einziges erfundenes Unternehmen an. Lesen Sie jeden Schritt, und prüfen Sie ihn anhand dessen, was Sie gelernt haben.",
+                "Diese Abschlusslektion wendet die ersten vier Module auf ein einziges erfundenes Unternehmen an. Lesen Sie jeden Schritt, und prüfen Sie ihn anhand dessen, was Sie gelernt haben.",
                 {"type": "callout", "tone": "note", "text": "**Die Bäckerei Sonnenfeld ist für diesen Kurs erfunden.** Das Szenario ist eine Veranschaulichung und keine Vorlage für eine echte Prüfung."},
             ],
             [

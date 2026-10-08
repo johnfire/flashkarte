@@ -218,12 +218,12 @@
         {
           "correct": false,
           "blocks": "Nur wenn die Kundin oder der Kunde danach fragt",
-          "reason": "Art. 13 verlangt die Information, ohne dass jemand danach fragen muss."
+          "reason": "Artikel 13 verlangt die Information, ohne dass jemand danach fragen muss."
         },
         {
           "correct": true,
           "blocks": "Zum Zeitpunkt der Erhebung der Daten",
-          "reason": "Art. 13 Abs. 1: zum Zeitpunkt der Erhebung."
+          "reason": "Artikel 13 Abs. 1: zum Zeitpunkt der Erhebung."
         }
       ],
       "variants": [
@@ -233,12 +233,12 @@
             {
               "correct": false,
               "blocks": "Nur wenn die Kundin oder der Kunde danach fragt",
-              "reason": "Art. 13 verlangt die Information, ohne dass jemand danach fragen muss."
+              "reason": "Artikel 13 verlangt die Information, ohne dass jemand danach fragen muss."
             },
             {
               "correct": true,
               "blocks": "Zum Zeitpunkt der Erhebung der Daten",
-              "reason": "Art. 13 Abs. 1: zum Zeitpunkt der Erhebung."
+              "reason": "Artikel 13 Abs. 1: zum Zeitpunkt der Erhebung."
             },
             {
               "correct": false,
@@ -262,17 +262,17 @@
         {
           "correct": false,
           "blocks": "Wenn sie bei der Bäckerei zu arbeiten beginnt",
-          "reason": "Art. 14 Abs. 3 setzt frühere Fristen."
+          "reason": "Artikel 14 Abs. 3 setzt frühere Fristen."
         },
         {
           "correct": true,
           "blocks": "Spätestens mit der ersten E-Mail, längstens innerhalb eines Monats",
-          "reason": "Art. 14 Abs. 3: bei der ersten Mitteilung, längstens jedoch innerhalb eines Monats."
+          "reason": "Artikel 14 Abs. 3: bei der ersten Mitteilung, längstens jedoch innerhalb eines Monats."
         },
         {
           "correct": false,
           "blocks": "Nur wenn sie fragt, welche Daten die Bäckerei über sie hat",
-          "reason": "Art. 14 verlangt die Information, ohne dass jemand danach fragen muss."
+          "reason": "Artikel 14 verlangt die Information, ohne dass jemand danach fragen muss."
         }
       ],
       "variants": [
@@ -282,17 +282,17 @@
             {
               "correct": true,
               "blocks": "Spätestens mit der ersten E-Mail, längstens innerhalb eines Monats",
-              "reason": "Art. 14 Abs. 3: bei der ersten Mitteilung, längstens jedoch innerhalb eines Monats."
+              "reason": "Artikel 14 Abs. 3: bei der ersten Mitteilung, längstens jedoch innerhalb eines Monats."
             },
             {
               "correct": false,
               "blocks": "Nur wenn sie fragt, welche Daten die Bäckerei über sie hat",
-              "reason": "Art. 14 verlangt die Information, ohne dass jemand danach fragen muss."
+              "reason": "Artikel 14 verlangt die Information, ohne dass jemand danach fragen muss."
             },
             {
               "correct": false,
               "blocks": "Wenn sie bei der Bäckerei zu arbeiten beginnt",
-              "reason": "Art. 14 Abs. 3 setzt frühere Fristen."
+              "reason": "Artikel 14 Abs. 3 setzt frühere Fristen."
             }
           ]
         }
@@ -310,7 +310,7 @@
         {
           "correct": true,
           "blocks": "Woher die Daten stammen",
-          "reason": "Art. 14 Abs. 2 Buchst. f verlangt die Quelle."
+          "reason": "Artikel 14 Abs. 2 Buchst. f verlangt die Quelle."
         },
         {
           "correct": false,
@@ -340,7 +340,7 @@
             {
               "correct": true,
               "blocks": "Woher die Daten stammen",
-              "reason": "Art. 14 Abs. 2 Buchst. f verlangt die Quelle."
+              "reason": "Artikel 14 Abs. 2 Buchst. f verlangt die Quelle."
             }
           ]
         }

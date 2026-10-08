@@ -206,7 +206,7 @@
         {
           "correct": false,
           "blocks": "Alle Kundinnen und Kunden über die Änderung informieren",
-          "reason": "Art. 19 betrifft die Empfänger der Daten dieser Person."
+          "reason": "Artikel 19 betrifft die Empfänger der Daten dieser Person."
         },
         {
           "correct": true,
@@ -216,7 +216,7 @@
         {
           "correct": false,
           "blocks": "Nichts, weil das Café ein eigenes Unternehmen ist",
-          "reason": "Art. 19 erfasst alle Empfänger."
+          "reason": "Artikel 19 erfasst alle Empfänger."
         }
       ],
       "variants": [
@@ -231,12 +231,12 @@
             {
               "correct": false,
               "blocks": "Nichts, weil das Café ein eigenes Unternehmen ist",
-              "reason": "Art. 19 erfasst alle Empfänger."
+              "reason": "Artikel 19 erfasst alle Empfänger."
             },
             {
               "correct": false,
               "blocks": "Alle Kundinnen und Kunden über die Änderung informieren",
-              "reason": "Art. 19 betrifft die Empfänger der Daten dieser Person."
+              "reason": "Artikel 19 betrifft die Empfänger der Daten dieser Person."
             }
           ]
         }
@@ -259,12 +259,12 @@
         {
           "correct": false,
           "blocks": "Nein, Empfänger sind vertraulich",
-          "reason": "Art. 19 verlangt diese Information, wenn die Person sie verlangt."
+          "reason": "Artikel 19 verlangt diese Information, wenn die Person sie verlangt."
         },
         {
           "correct": false,
           "blocks": "Nur, wenn die Kundin ein Entgelt zahlt",
-          "reason": "Art. 19 sieht kein Entgelt vor."
+          "reason": "Artikel 19 sieht kein Entgelt vor."
         }
       ],
       "variants": [
@@ -274,12 +274,12 @@
             {
               "correct": false,
               "blocks": "Nein, Empfänger sind vertraulich",
-              "reason": "Art. 19 verlangt diese Information, wenn die Person sie verlangt."
+              "reason": "Artikel 19 verlangt diese Information, wenn die Person sie verlangt."
             },
             {
               "correct": false,
               "blocks": "Nur, wenn die Kundin ein Entgelt zahlt",
-              "reason": "Art. 19 sieht kein Entgelt vor."
+              "reason": "Artikel 19 sieht kein Entgelt vor."
             },
             {
               "correct": true,

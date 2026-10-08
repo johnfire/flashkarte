@@ -30,7 +30,7 @@
     {
       "ref": "screen-1",
       "blocks": [
-        "This capstone applies Modules 0 to 3 to one fictional business. Read each step and check it against what you have learned.",
+        "This capstone applies the first four modules to one fictional business. Read each step and check it against what you have learned.",
         {
           "type": "callout",
           "tone": "note",

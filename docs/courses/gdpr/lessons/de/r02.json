@@ -126,7 +126,7 @@
         {
           "correct": true,
           "blocks": "10. April",
-          "reason": "Art. 12 Abs. 3: innerhalb eines Monats nach Eingang des Antrags."
+          "reason": "Artikel 12 Abs. 3: innerhalb eines Monats nach Eingang des Antrags."
         },
         {
           "correct": false,
@@ -156,7 +156,7 @@
             {
               "correct": true,
               "blocks": "10. April",
-              "reason": "Art. 12 Abs. 3: innerhalb eines Monats nach Eingang des Antrags."
+              "reason": "Artikel 12 Abs. 3: innerhalb eines Monats nach Eingang des Antrags."
             }
           ]
         }
@@ -227,7 +227,7 @@
         {
           "correct": true,
           "blocks": "Nein, die Bearbeitung muss unentgeltlich sein",
-          "reason": "Art. 12 Abs. 5: unentgeltlich, außer bei offenkundig unbegründeten oder exzessiven Anträgen."
+          "reason": "Artikel 12 Abs. 5: unentgeltlich, außer bei offenkundig unbegründeten oder exzessiven Anträgen."
         },
         {
           "correct": false,
@@ -242,7 +242,7 @@
             {
               "correct": true,
               "blocks": "Nein, die Bearbeitung muss unentgeltlich sein",
-              "reason": "Art. 12 Abs. 5: unentgeltlich, außer bei offenkundig unbegründeten oder exzessiven Anträgen."
+              "reason": "Artikel 12 Abs. 5: unentgeltlich, außer bei offenkundig unbegründeten oder exzessiven Anträgen."
             },
             {
               "correct": false,

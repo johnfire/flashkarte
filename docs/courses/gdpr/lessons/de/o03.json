@@ -268,7 +268,7 @@
         {
           "correct": true,
           "blocks": "Der erste Auftragsverarbeiter",
-          "reason": "Art. 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."
+          "reason": "Artikel 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."
         },
         {
           "correct": false,
@@ -298,7 +298,7 @@
             {
               "correct": true,
               "blocks": "Der erste Auftragsverarbeiter",
-              "reason": "Art. 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."
+              "reason": "Artikel 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."
             }
           ]
         }

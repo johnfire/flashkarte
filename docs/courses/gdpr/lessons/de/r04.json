@@ -136,7 +136,7 @@
         {
           "correct": false,
           "blocks": "Nur berichtigen, wenn der Fehler einen Schaden verursacht hat",
-          "reason": "Art. 16 knüpft die Berichtigung nicht an einen Schaden."
+          "reason": "Artikel 16 knüpft die Berichtigung nicht an einen Schaden."
         }
       ],
       "variants": [
@@ -151,7 +151,7 @@
             {
               "correct": false,
               "blocks": "Nur berichtigen, wenn der Fehler einen Schaden verursacht hat",
-              "reason": "Art. 16 knüpft die Berichtigung nicht an einen Schaden."
+              "reason": "Artikel 16 knüpft die Berichtigung nicht an einen Schaden."
             },
             {
               "correct": true,
@@ -233,7 +233,7 @@
         {
           "correct": false,
           "blocks": "Trotzdem muss alles gelöscht werden",
-          "reason": "Art. 17 Abs. 3 Buchst. b ist eine Ausnahme."
+          "reason": "Artikel 17 Abs. 3 Buchst. b ist eine Ausnahme."
         }
       ],
       "variants": [
@@ -248,7 +248,7 @@
             {
               "correct": false,
               "blocks": "Trotzdem muss alles gelöscht werden",
-              "reason": "Art. 17 Abs. 3 Buchst. b ist eine Ausnahme."
+              "reason": "Artikel 17 Abs. 3 Buchst. b ist eine Ausnahme."
             },
             {
               "correct": false,

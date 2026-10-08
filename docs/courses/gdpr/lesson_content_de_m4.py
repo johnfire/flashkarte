@@ -189,7 +189,7 @@ LESSONS = {
                        ("Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist", "Verstöße gegen die Rechte fallen in den oberen Rahmen."),
                        ("Eine feste Geldbuße von 500 EUR", "Die DSGVO legt Höchstbeträge fest, keine festen Beträge.")),
             assessment([1], [3], "Die Bäckerei Sonnenfeld hat mit einem Auftragsverarbeiter keinen schriftlichen Vertrag geschlossen. Welcher Bußgeldrahmen erfasst diesen Verstoß?", "In welchen Bußgeldrahmen fällt ein Verstoß gegen Art. 28, die Vorschrift über Auftragsverarbeiter?",
-                       ("Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist", "Art. 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."),
+                       ("Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist", "Artikel 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."),
                        ("Bis zu 20 Mio. EUR oder 4 %, je nachdem, welcher der Beträge höher ist", "Artikel 28 gehört zum unteren Rahmen."),
                        ("Keiner, für fehlende Verträge gibt es keine Geldbuße", "Artikel 83 Abs. 4 erfasst Art. 28.")),
             assessment([2], [5], "Welcher Umstand kann bei der Bemessung einer Geldbuße zugunsten eines Unternehmens zählen?", "Was kann nach Art. 83 Abs. 2 eine Geldbuße mindern?",

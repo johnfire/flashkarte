@@ -169,7 +169,7 @@
         {
           "correct": false,
           "blocks": "10 Jahre",
-          "reason": "Art. 8 Abs. 1 erlaubt keine Grenze unter 13 Jahren."
+          "reason": "Artikel 8 Abs. 1 erlaubt keine Grenze unter 13 Jahren."
         },
         {
           "correct": false,
@@ -179,7 +179,7 @@
         {
           "correct": true,
           "blocks": "13 Jahre",
-          "reason": "Art. 8 Abs. 1: nicht unter dem vollendeten dreizehnten Lebensjahr."
+          "reason": "Artikel 8 Abs. 1: nicht unter dem vollendeten dreizehnten Lebensjahr."
         }
       ],
       "variants": [
@@ -194,12 +194,12 @@
             {
               "correct": true,
               "blocks": "13 Jahre",
-              "reason": "Art. 8 Abs. 1: nicht unter dem vollendeten dreizehnten Lebensjahr."
+              "reason": "Artikel 8 Abs. 1: nicht unter dem vollendeten dreizehnten Lebensjahr."
             },
             {
               "correct": false,
               "blocks": "10 Jahre",
-              "reason": "Art. 8 Abs. 1 erlaubt keine Grenze unter 13 Jahren."
+              "reason": "Artikel 8 Abs. 1 erlaubt keine Grenze unter 13 Jahren."
             }
           ]
         }
@@ -217,7 +217,7 @@
         {
           "correct": false,
           "blocks": "Ein notariell beglaubigtes Papierformular verlangen",
-          "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen, keine bestimmte Form."
+          "reason": "Artikel 8 Abs. 2 verlangt angemessene Anstrengungen, keine bestimmte Form."
         },
         {
           "correct": true,
@@ -227,7 +227,7 @@
         {
           "correct": false,
           "blocks": "Nichts; dem Häkchen zu vertrauen genügt",
-          "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen."
+          "reason": "Artikel 8 Abs. 2 verlangt angemessene Anstrengungen."
         }
       ],
       "variants": [
@@ -242,12 +242,12 @@
             {
               "correct": false,
               "blocks": "Nichts; dem Häkchen zu vertrauen genügt",
-              "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen."
+              "reason": "Artikel 8 Abs. 2 verlangt angemessene Anstrengungen."
             },
             {
               "correct": false,
               "blocks": "Ein notariell beglaubigtes Papierformular verlangen",
-              "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen, keine bestimmte Form."
+              "reason": "Artikel 8 Abs. 2 verlangt angemessene Anstrengungen, keine bestimmte Form."
             }
           ]
         }

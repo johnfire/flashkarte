@@ -422,7 +422,7 @@ LESSONS = {
         "sources": [("GDPR", "Articles 5, 6, 13, 22, 28, 30, 33, 34, 35")],
         "screens": [
             [
-                "This capstone applies Modules 0 to 3 to one fictional business. Read each step and check it against what you have learned.",
+                "This capstone applies the first four modules to one fictional business. Read each step and check it against what you have learned.",
                 {"type": "callout", "tone": "note", "text": "**Sunfield Bakery is invented** for this course. The scenario is an illustration, not a template for a real review."},
             ],
             [

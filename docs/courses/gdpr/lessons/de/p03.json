@@ -84,7 +84,7 @@
       "ref": "screen-5",
       "blocks": [
         "In der Praxis heißt Nachweisen: Belege haben. Sagt die Bäckerei Sonnenfeld, sie lösche inaktive Kundenkartenkonten nach einer bestimmten Zeit, sollte sie die schriftliche Regel vorlegen und zeigen können, dass die Regel angewendet wird.",
-        "Modul 3 zeigt die Werkzeuge, die die DSGVO dafür vorsieht, etwa Verzeichnisse und Datenschutzvorkehrungen."
+        "Das Modul »Was Ihr Unternehmen tun muss« zeigt die Werkzeuge, die die DSGVO dafür vorsieht, etwa Verzeichnisse und Datenschutzvorkehrungen."
       ],
       "sources": [
         {
@@ -108,7 +108,7 @@
         {
           "correct": true,
           "blocks": "Integrität und Vertraulichkeit",
-          "reason": "Art. 5 Abs. 1 Buchst. f verlangt Schutz vor unbefugter Verarbeitung, also auch vor unbefugtem Zugriff."
+          "reason": "Artikel 5 Abs. 1 Buchst. f verlangt Schutz vor unbefugter Verarbeitung, also auch vor unbefugtem Zugriff."
         },
         {
           "correct": false,
@@ -123,7 +123,7 @@
       ],
       "variants": [
         {
-          "prompt": "Welchen Grundsatz gefährdet ein unbeaufsichtigter, entsperrter Zugang zu Kundendaten?",
+          "prompt": "Welchen Grundsatz gefährdet ein unbeaufsichtigtes, entsperrtes Gerät mit Kundendaten?",
           "options": [
             {
               "correct": false,
@@ -138,7 +138,7 @@
             {
               "correct": true,
               "blocks": "Integrität und Vertraulichkeit",
-              "reason": "Art. 5 Abs. 1 Buchst. f verlangt Schutz vor unbefugter Verarbeitung, also auch vor unbefugtem Zugriff."
+              "reason": "Artikel 5 Abs. 1 Buchst. f verlangt Schutz vor unbefugter Verarbeitung, also auch vor unbefugtem Zugriff."
             }
           ]
         }
@@ -152,7 +152,7 @@
         "screen-1",
         "screen-2"
       ],
-      "prompt": "Wovor muss die Sicherheit personenbezogene Daten nach Art. 5 Abs. 1 Buchst. f schützen?",
+      "prompt": "Wogegen muss die Sicherheit personenbezogene Daten nach Art. 5 Abs. 1 Buchst. f schützen?",
       "options": [
         {
           "correct": false,
@@ -166,8 +166,8 @@
         },
         {
           "correct": true,
-          "blocks": "Unbefugte Verarbeitung sowie unbeabsichtigter Verlust oder unbeabsichtigte Schädigung",
-          "reason": "Art. 5 Abs. 1 Buchst. f nennt beides."
+          "blocks": "Unbefugte Verarbeitung sowie unbeabsichtigten Verlust oder unbeabsichtigte Schädigung",
+          "reason": "Artikel 5 Abs. 1 Buchst. f nennt beides."
         }
       ],
       "variants": [
@@ -181,8 +181,8 @@
             },
             {
               "correct": true,
-              "blocks": "Unbefugte Verarbeitung sowie unbeabsichtigter Verlust oder unbeabsichtigte Schädigung",
-              "reason": "Art. 5 Abs. 1 Buchst. f nennt beides."
+              "blocks": "Unbefugte Verarbeitung sowie unbeabsichtigten Verlust oder unbeabsichtigte Schädigung",
+              "reason": "Artikel 5 Abs. 1 Buchst. f nennt beides."
             },
             {
               "correct": false,
@@ -211,12 +211,12 @@
         {
           "correct": true,
           "blocks": "Die Bäckerei Sonnenfeld als Verantwortlicher",
-          "reason": "Art. 5 Abs. 2 macht den Verantwortlichen verantwortlich und verpflichtet ihn zum Nachweis."
+          "reason": "Artikel 5 Abs. 2 macht den Verantwortlichen verantwortlich und verpflichtet ihn zum Nachweis."
         },
         {
           "correct": false,
           "blocks": "Die Aufsichtsbehörde, bevor sie etwas fragt",
-          "reason": "Art. 5 Abs. 2 legt die Nachweislast auf den Verantwortlichen."
+          "reason": "Artikel 5 Abs. 2 legt die Nachweislast auf den Verantwortlichen."
         }
       ],
       "variants": [
@@ -226,12 +226,12 @@
             {
               "correct": true,
               "blocks": "Die Bäckerei Sonnenfeld als Verantwortlicher",
-              "reason": "Art. 5 Abs. 2 macht den Verantwortlichen verantwortlich und verpflichtet ihn zum Nachweis."
+              "reason": "Artikel 5 Abs. 2 macht den Verantwortlichen verantwortlich und verpflichtet ihn zum Nachweis."
             },
             {
               "correct": false,
               "blocks": "Die Aufsichtsbehörde, bevor sie etwas fragt",
-              "reason": "Art. 5 Abs. 2 legt die Nachweislast auf den Verantwortlichen."
+              "reason": "Artikel 5 Abs. 2 legt die Nachweislast auf den Verantwortlichen."
             },
             {
               "correct": false,

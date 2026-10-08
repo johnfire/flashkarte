@@ -250,7 +250,7 @@
         {
           "correct": true,
           "blocks": "Nein, Art. 6 Abs. 1 schließt das aus",
-          "reason": "Art. 6 Abs. 1 UAbs. 2 schließt die Verarbeitung durch Behörden in Erfüllung ihrer Aufgaben aus."
+          "reason": "Artikel 6 Abs. 1 UAbs. 2 schließt die Verarbeitung durch Behörden in Erfüllung ihrer Aufgaben aus."
         },
         {
           "correct": false,
@@ -265,7 +265,7 @@
             {
               "correct": true,
               "blocks": "Nein, Art. 6 Abs. 1 schließt das aus",
-              "reason": "Art. 6 Abs. 1 UAbs. 2 schließt die Verarbeitung durch Behörden in Erfüllung ihrer Aufgaben aus."
+              "reason": "Artikel 6 Abs. 1 UAbs. 2 schließt die Verarbeitung durch Behörden in Erfüllung ihrer Aufgaben aus."
             },
             {
               "correct": false,

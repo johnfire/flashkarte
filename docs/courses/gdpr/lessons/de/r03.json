@@ -123,12 +123,12 @@
         {
           "correct": false,
           "blocks": "Eine kurze Zusammenfassung schicken, ohne jede Kopie",
-          "reason": "Art. 15 Abs. 3 verlangt eine Kopie der Daten."
+          "reason": "Artikel 15 Abs. 3 verlangt eine Kopie der Daten."
         },
         {
           "correct": false,
           "blocks": "Nichts, bis sie ihren Grund erklärt",
-          "reason": "Art. 15 verlangt keinen Grund."
+          "reason": "Artikel 15 verlangt keinen Grund."
         }
       ],
       "variants": [
@@ -138,12 +138,12 @@
             {
               "correct": false,
               "blocks": "Eine kurze Zusammenfassung schicken, ohne jede Kopie",
-              "reason": "Art. 15 Abs. 3 verlangt eine Kopie der Daten."
+              "reason": "Artikel 15 Abs. 3 verlangt eine Kopie der Daten."
             },
             {
               "correct": false,
               "blocks": "Nichts, bis sie ihren Grund erklärt",
-              "reason": "Art. 15 verlangt keinen Grund."
+              "reason": "Artikel 15 verlangt keinen Grund."
             },
             {
               "correct": true,
@@ -171,12 +171,12 @@
         {
           "correct": false,
           "blocks": "Jede Kopie ausnahmslos unentgeltlich zur Verfügung stellen",
-          "reason": "Art. 15 Abs. 3 erlaubt ein Entgelt für weitere Kopien."
+          "reason": "Artikel 15 Abs. 3 erlaubt ein Entgelt für weitere Kopien."
         },
         {
           "correct": true,
           "blocks": "Ein angemessenes Entgelt auf der Grundlage der Verwaltungskosten verlangen",
-          "reason": "Art. 15 Abs. 3 erlaubt das für weitere Kopien."
+          "reason": "Artikel 15 Abs. 3 erlaubt das für weitere Kopien."
         }
       ],
       "variants": [
@@ -186,12 +186,12 @@
             {
               "correct": false,
               "blocks": "Jede Kopie ausnahmslos unentgeltlich zur Verfügung stellen",
-              "reason": "Art. 15 Abs. 3 erlaubt ein Entgelt für weitere Kopien."
+              "reason": "Artikel 15 Abs. 3 erlaubt ein Entgelt für weitere Kopien."
             },
             {
               "correct": true,
               "blocks": "Ein angemessenes Entgelt auf der Grundlage der Verwaltungskosten verlangen",
-              "reason": "Art. 15 Abs. 3 erlaubt das für weitere Kopien."
+              "reason": "Artikel 15 Abs. 3 erlaubt das für weitere Kopien."
             },
             {
               "correct": false,
@@ -220,12 +220,12 @@
         {
           "correct": true,
           "blocks": "Die Kopie herausgeben und dabei die anderen Menschen schützen, etwa durch Unkenntlichmachen",
-          "reason": "Art. 15 Abs. 4 schützt andere Menschen, ohne das Recht aufzuheben."
+          "reason": "Artikel 15 Abs. 4 schützt andere Menschen, ohne das Recht aufzuheben."
         },
         {
           "correct": false,
           "blocks": "Den ganzen Antrag automatisch ablehnen",
-          "reason": "Art. 15 Abs. 4 ist kein pauschaler Ablehnungsgrund."
+          "reason": "Artikel 15 Abs. 4 ist kein pauschaler Ablehnungsgrund."
         }
       ],
       "variants": [
@@ -235,12 +235,12 @@
             {
               "correct": true,
               "blocks": "Die Kopie herausgeben und dabei die anderen Menschen schützen, etwa durch Unkenntlichmachen",
-              "reason": "Art. 15 Abs. 4 schützt andere Menschen, ohne das Recht aufzuheben."
+              "reason": "Artikel 15 Abs. 4 schützt andere Menschen, ohne das Recht aufzuheben."
             },
             {
               "correct": false,
               "blocks": "Den ganzen Antrag automatisch ablehnen",
-              "reason": "Art. 15 Abs. 4 ist kein pauschaler Ablehnungsgrund."
+              "reason": "Artikel 15 Abs. 4 ist kein pauschaler Ablehnungsgrund."
             },
             {
               "correct": false,

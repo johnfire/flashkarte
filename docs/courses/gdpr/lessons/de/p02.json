@@ -3,7 +3,7 @@
   "lesson": {
     "slug": "p02",
     "title": "Nur was nötig ist, richtig und nicht zu lange gespeichert",
-    "summary": "Nur erheben, was Sie brauchen, Daten richtig halten und identifizierende Daten nicht länger als nötig speichern.",
+    "summary": "Nur erheben, was Sie brauchen, Daten richtig und aktuell halten und identifizierende Daten nicht länger als nötig speichern.",
     "covers": [
       "data-minimisation",
       "accuracy-principle",
@@ -93,7 +93,7 @@
     {
       "ref": "screen-5",
       "blocks": [
-        "Nach Erwägungsgrund 39 sollte die zuständige Organisation **Fristen für die Löschung oder regelmäßige Überprüfung** vorsehen, damit Daten nicht länger als nötig gespeichert werden.",
+        "Nach Erwägungsgrund 39 sollte die zuständige Stelle **Fristen für die Löschung oder regelmäßige Überprüfung** vorsehen, damit Daten nicht länger als nötig gespeichert werden.",
         "Die Bäckerei Sonnenfeld könnte festlegen und schriftlich festhalten, dass Kundenkartenkonten gelöscht werden, die eine bestimmte Zeit lang nicht genutzt wurden."
       ],
       "sources": [
@@ -197,7 +197,7 @@
         {
           "correct": true,
           "blocks": "Unverzüglich berichtigen",
-          "reason": "Art. 5 Abs. 1 Buchst. d verlangt angemessene Maßnahmen, damit unverzüglich berichtigt wird."
+          "reason": "Artikel 5 Abs. 1 Buchst. d verlangt angemessene Maßnahmen, damit unverzüglich berichtigt wird."
         }
       ],
       "variants": [
@@ -212,7 +212,7 @@
             {
               "correct": true,
               "blocks": "Unverzüglich berichtigen",
-              "reason": "Art. 5 Abs. 1 Buchst. d verlangt angemessene Maßnahmen, damit unverzüglich berichtigt wird."
+              "reason": "Artikel 5 Abs. 1 Buchst. d verlangt angemessene Maßnahmen, damit unverzüglich berichtigt wird."
             },
             {
               "correct": false,
@@ -242,7 +242,7 @@
         {
           "correct": true,
           "blocks": "Nach einer festgelegten Frist löschen oder anonymisieren",
-          "reason": "Art. 5 Abs. 1 Buchst. e und Erwägungsgrund 39: Fristen; Erwägungsgrund 26: Anonyme Daten fallen nicht unter die DSGVO."
+          "reason": "Artikel 5 Abs. 1 Buchst. e und Erwägungsgrund 39: Fristen; Erwägungsgrund 26: Anonyme Daten fallen nicht unter die DSGVO."
         },
         {
           "correct": false,
@@ -257,7 +257,7 @@
             {
               "correct": true,
               "blocks": "Nach einer festgelegten Frist löschen oder anonymisieren",
-              "reason": "Art. 5 Abs. 1 Buchst. e und Erwägungsgrund 39: Fristen; Erwägungsgrund 26: Anonyme Daten fallen nicht unter die DSGVO."
+              "reason": "Artikel 5 Abs. 1 Buchst. e und Erwägungsgrund 39: Fristen; Erwägungsgrund 26: Anonyme Daten fallen nicht unter die DSGVO."
             },
             {
               "correct": false,

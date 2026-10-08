@@ -146,7 +146,7 @@
         {
           "correct": false,
           "blocks": "Ja, weil die Liste auf einem Smartphone gespeichert ist",
-          "reason": "Die Automatisierung hebt die Ausnahme für persönliche oder familiäre Tätigkeiten nicht auf."
+          "reason": "Die Automatisierung hebt die Ausnahme für ausschließlich persönliche oder familiäre Tätigkeiten nicht auf."
         }
       ],
       "variants": [
@@ -161,7 +161,7 @@
             {
               "correct": false,
               "blocks": "Ja, weil die Liste auf einem Smartphone gespeichert ist",
-              "reason": "Die Automatisierung hebt die Ausnahme für persönliche oder familiäre Tätigkeiten nicht auf."
+              "reason": "Die Automatisierung hebt die Ausnahme für ausschließlich persönliche oder familiäre Tätigkeiten nicht auf."
             },
             {
               "correct": true,

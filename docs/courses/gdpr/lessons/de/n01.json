@@ -175,7 +175,7 @@
         {
           "correct": true,
           "blocks": "Ja, weil keine Ausnahme greift",
-          "reason": "Art. 5 Abs. 3: Einwilligung, außer eine Ausnahme greift."
+          "reason": "Artikel 5 Abs. 3: Einwilligung, außer eine Ausnahme greift."
         },
         {
           "correct": false,
@@ -185,7 +185,7 @@
         {
           "correct": false,
           "blocks": "Nein, ein berechtigtes Interesse deckt es ab",
-          "reason": "Art. 5 Abs. 3 verlangt eine Einwilligung, außer eine Ausnahme greift."
+          "reason": "Artikel 5 Abs. 3 verlangt eine Einwilligung, außer eine Ausnahme greift."
         }
       ],
       "variants": [
@@ -200,12 +200,12 @@
             {
               "correct": false,
               "blocks": "Nein, ein berechtigtes Interesse deckt es ab",
-              "reason": "Art. 5 Abs. 3 verlangt eine Einwilligung, außer eine Ausnahme greift."
+              "reason": "Artikel 5 Abs. 3 verlangt eine Einwilligung, außer eine Ausnahme greift."
             },
             {
               "correct": true,
               "blocks": "Ja, weil keine Ausnahme greift",
-              "reason": "Art. 5 Abs. 3: Einwilligung, außer eine Ausnahme greift."
+              "reason": "Artikel 5 Abs. 3: Einwilligung, außer eine Ausnahme greift."
             }
           ]
         }
@@ -325,7 +325,7 @@
         {
           "correct": false,
           "blocks": "Ja, jedes Cookie braucht immer eine Einwilligung",
-          "reason": "Art. 5 Abs. 3 kennt zwei Ausnahmen."
+          "reason": "Artikel 5 Abs. 3 kennt zwei Ausnahmen."
         },
         {
           "correct": false,
@@ -340,7 +340,7 @@
             {
               "correct": false,
               "blocks": "Ja, jedes Cookie braucht immer eine Einwilligung",
-              "reason": "Art. 5 Abs. 3 kennt zwei Ausnahmen."
+              "reason": "Artikel 5 Abs. 3 kennt zwei Ausnahmen."
             },
             {
               "correct": false,
