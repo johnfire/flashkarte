@@ -161,7 +161,7 @@
         },
         {
           "correct": false,
-          "blocks": "Must delete it immediately",
+          "blocks": "Delete it immediately",
           "reason": "Restriction keeps the data. It does not delete it."
         },
         {
@@ -176,7 +176,7 @@
           "options": [
             {
               "correct": false,
-              "blocks": "Must delete it immediately",
+              "blocks": "Delete it immediately",
               "reason": "Restriction keeps the data. It does not delete it."
             },
             {

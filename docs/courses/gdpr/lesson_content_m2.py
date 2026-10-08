@@ -270,7 +270,7 @@ LESSONS = {
             assessment([0], [3], "Data is restricted. Without the person's consent, what may Sunfield still do with it?", "Under Article 18(2), what processing remains allowed by default?",
                        ("Store it", "Storage is allowed; other uses need consent or a listed reason."),
                        ("Continue using it as before", "Restriction limits processing beyond storage."),
-                       ("Must delete it immediately", "Restriction keeps the data. It does not delete it.")),
+                       ("Delete it immediately", "Restriction keeps the data. It does not delete it.")),
             assessment([1], [4, 5], "Sunfield corrects data it had shared with a partner café. What must it do?", "Sunfield corrects a customer's data that it had shared with a partner café. What does Article 19 require?",
                        ("Tell the café, unless impossible or disproportionate", "Article 19."),
                        ("Nothing, because the café is a separate business", "Article 19 covers each recipient."),
