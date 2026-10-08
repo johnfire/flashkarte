@@ -277,7 +277,7 @@
       ],
       "variants": [
         {
-          "prompt": "For data received from a third party, what is the latest time to inform the person?",
+          "prompt": "An agency sends Sunfield a CV, and Sunfield first emails the applicant two weeks later. What is the latest time to inform her?",
           "options": [
             {
               "correct": true,

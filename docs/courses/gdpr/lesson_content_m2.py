@@ -64,7 +64,7 @@ LESSONS = {
                        ("When the data is obtained", "Article 13(1): at the time the data is obtained."),
                        ("Within one month of collection", "That is the Article 14 rule for data from elsewhere."),
                        ("Only if the customer asks for it", "Article 13 requires the information to be given without a request.")),
-            assessment([1], [5, 7], "Sunfield receives a CV from an agency and first emails the applicant two weeks later. When must it inform her under Article 14?", "For data received from a third party, what is the latest time to inform the person?",
+            assessment([1], [5, 7], "Sunfield receives a CV from an agency and first emails the applicant two weeks later. When must it inform her under Article 14?", "An agency sends Sunfield a CV, and Sunfield first emails the applicant two weeks later. What is the latest time to inform her?",
                        ("By the first email, within one month at most", "Article 14(3): the first communication, and at the latest one month."),
                        ("Only if she asks what Sunfield holds", "Article 14 requires the information without a request."),
                        ("When she starts working there", "Article 14(3) sets earlier deadlines.")),
