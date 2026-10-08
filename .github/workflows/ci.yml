@@ -74,6 +74,7 @@ jobs:
         run: |
           python3 docs/courses/gdpr/curriculum_validation.py
           python3 docs/courses/gdpr/lesson_validation.py
+          python3 docs/courses/gdpr/german_validation.py
           python3 -m unittest discover -s docs/courses/gdpr -p 'test_*.py'
       - name: Build server
         run: npm run build --workspace=packages/server
