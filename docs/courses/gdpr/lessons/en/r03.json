@@ -181,7 +181,7 @@
       ],
       "variants": [
         {
-          "prompt": "What are the fee rules for copies under Article 15(3)?",
+          "prompt": "A person already has their first copy. What does Article 15(3) allow when they ask for more copies?",
           "options": [
             {
               "correct": false,
@@ -214,12 +214,12 @@
       "options": [
         {
           "correct": false,
-          "blocks": "Hand over the footage unedited",
+          "blocks": "Hand over the copy unedited",
           "reason": "That could adversely affect other people's rights."
         },
         {
           "correct": true,
-          "blocks": "Provide it, while protecting the others, for example by masking",
+          "blocks": "Provide the copy, while protecting the others, for example by masking",
           "reason": "Article 15(4) protects others without cancelling the right."
         },
         {
@@ -230,11 +230,11 @@
       ],
       "variants": [
         {
-          "prompt": "How does Article 15(4) affect a copy that includes other people's data?",
+          "prompt": "A copy a customer asks for also contains other people's data. What follows under Article 15(4)?",
           "options": [
             {
               "correct": true,
-              "blocks": "Provide it, while protecting the others, for example by masking",
+              "blocks": "Provide the copy, while protecting the others, for example by masking",
               "reason": "Article 15(4) protects others without cancelling the right."
             },
             {
@@ -244,7 +244,7 @@
             },
             {
               "correct": false,
-              "blocks": "Hand over the footage unedited",
+              "blocks": "Hand over the copy unedited",
               "reason": "That could adversely affect other people's rights."
             }
           ]

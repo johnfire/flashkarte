@@ -259,7 +259,7 @@
       ],
       "variants": [
         {
-          "prompt": "Which safeguards does Article 22(3) require at a minimum?",
+          "prompt": "Which safeguards does Article 22(3) require at a minimum when a solely automated decision rests on a contract or explicit consent?",
           "options": [
             {
               "correct": true,
