@@ -130,7 +130,7 @@
       ],
       "variants": [
         {
-          "prompt": "Who determines the purposes and means of Sunfield's pre-order processing?",
+          "prompt": "Sunfield's pre-order app runs on a cloud provider's servers. Who determines the purposes and means of the pre-order processing?",
           "options": [
             {
               "correct": false,
@@ -226,7 +226,7 @@
       ],
       "variants": [
         {
-          "prompt": "What happens when a processor sets its own purposes for the data?",
+          "prompt": "What happens if Sunfield's payroll firm, acting as its processor, sets its own purposes for the data?",
           "options": [
             {
               "correct": true,
@@ -275,7 +275,7 @@
       ],
       "variants": [
         {
-          "prompt": "Under Article 26, against whom can a person exercise rights in a joint scheme?",
+          "prompt": "Two controllers jointly run a loyalty scheme. Under Article 26, whom can a person approach to exercise their rights?",
           "options": [
             {
               "correct": false,

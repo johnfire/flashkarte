@@ -10,7 +10,7 @@ from curriculum_validation import check_curriculum
 from german_validation import check_language, check_parity, check_quotes
 from lesson_builder import build_course, subject_import
 from lesson_validation import check_course, check_lesson
-from sources import SOURCES, sha256
+from sources import SOURCES, file_name, sha256
 
 ROOT = Path(__file__).resolve().parent
 
@@ -171,6 +171,14 @@ class SourceTests(unittest.TestCase):
         for source_id in SOURCES:
             self.assertIn(sha256(source_id), register, source_id)
             self.assertIn(sha256(source_id, "de"), register, source_id)
+
+    def test_no_retained_source_is_an_empty_eur_lex_page(self):
+        for source_id in SOURCES:
+            for locale in ("en", "de"):
+                path = ROOT / "sources" / file_name(source_id, locale)
+                if path.suffix == ".html":
+                    self.assertNotIn("The requested document does not exist", path.read_text(errors="replace"), path.name)
+                    self.assertGreater(path.stat().st_size, 50_000, path.name)
 
 
 if __name__ == "__main__":

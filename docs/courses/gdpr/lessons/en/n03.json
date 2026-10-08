@@ -53,7 +53,7 @@
     {
       "ref": "screen-3",
       "blocks": [
-        "So there are **two separate sets of questions**. An AI tool can satisfy the AI Act and still be processed unlawfully under the GDPR, or the other way round.",
+        "So there are **two separate sets of questions**. An AI tool can satisfy the AI Act while the processing done with it is still unlawful under the GDPR, or the other way round.",
         "A vendor's statement that \"our tool complies with the AI Act\" does not answer the GDPR questions about your own processing."
       ],
       "sources": [

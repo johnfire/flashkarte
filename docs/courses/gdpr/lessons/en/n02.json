@@ -27,7 +27,7 @@
       ],
       "sources": [
         {
-          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3",
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
         },
         {
@@ -43,7 +43,7 @@
       ],
       "sources": [
         {
-          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3",
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
         },
         {
@@ -55,12 +55,12 @@
     {
       "ref": "screen-3",
       "blocks": [
-        "**Point 2**: the website operator **can be a controller**, jointly with the provider.",
+        "**Point 2**: the website operator **can be a controller**. In its reasoning (paragraph 84), the Court treats it as a controller **jointly with the provider**.",
         "But that responsibility is **limited** to the operations for which it actually determines the purposes and means: the **collection and disclosure by transmission** of the data. It does not cover what the provider does with the data afterwards."
       ],
       "sources": [
         {
-          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3",
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
         },
         {
@@ -77,7 +77,7 @@
       ],
       "sources": [
         {
-          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3",
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
         },
         {
@@ -99,7 +99,7 @@
       ],
       "sources": [
         {
-          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3",
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
           "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
         },
         {
@@ -124,7 +124,7 @@
         {
           "correct": true,
           "blocks": "Yes, jointly, for the collection and transmission",
-          "reason": "Fashion ID, point 2."
+          "reason": "Fashion ID, point 2 and paragraph 84."
         },
         {
           "correct": false,
@@ -154,7 +154,7 @@
             {
               "correct": true,
               "blocks": "Yes, jointly, for the collection and transmission",
-              "reason": "Fashion ID, point 2."
+              "reason": "Fashion ID, point 2 and paragraph 84."
             }
           ]
         }

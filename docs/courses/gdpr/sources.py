@@ -23,8 +23,10 @@ def url(source_id, locale="en"):
 
 
 def file_name(source_id, locale="en"):
-    name = SOURCES[source_id]["file"]
-    return name if locale == "en" else name.replace("-en.html", f"-{locale}.html")
+    source = SOURCES[source_id]
+    if locale == "en":
+        return source["file"]
+    return source.get(f"file_{locale}", source["file"].replace("-en.html", f"-{locale}.html"))
 
 
 SOURCES = {
@@ -87,9 +89,11 @@ SOURCES = {
     "PROP-501": {
         "title": "Commission proposal COM(2025) 501 of 21 May 2025 (small mid-cap simplification; amends the GDPR)",
         "url": eurlex("52025PC0501"),
-        "file": "proposal-COM-2025-501-en.html",
+        "file": "proposal-COM-2025-501-en.pdf",
+        "file_de": "proposal-COM-2025-501-de.html",
         "status": "proposal only; not adopted per EUR-Lex on 2026-10-07",
-        "reading": "Title and date read. Content not studied; taught only as 'proposed'.",
+        "reading": "Title and date read. Content not studied; taught only as 'proposed'. The English text is retained as "
+                   "the Publications Office PDF, fetched 2026-10-08: the HTML first retained was an empty EUR-Lex page.",
     },
     "PROP-837": {
         "title": "Commission proposal COM(2025) 837 of 19 November 2025 (Digital Omnibus; amends the GDPR and Directive 2002/58/EC)",

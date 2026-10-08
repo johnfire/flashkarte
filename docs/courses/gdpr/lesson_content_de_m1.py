@@ -89,7 +89,7 @@ LESSONS = {
                        ("Die Angabe nicht mehr erheben", "Daten müssen auf das notwendige Maß beschränkt sein (Art. 5 Abs. 1 Buchst. c)."),
                        ("Die Angabe behalten, weil sie später nützlich sein könnte", "Eine mögliche spätere Verwendung ist kein angegebener Zweck."),
                        ("Die Angabe behalten, aber sicher speichern", "Gute Sicherheit macht unnötige Daten nicht notwendig.")),
-            assessment([1], [3], "Eine Kundin teilt der Bäckerei Sonnenfeld mit, dass sich ihre E-Mail-Adresse geändert hat. Was verlangt der Grundsatz der Richtigkeit?", "Wie schnell sollte die Bäckerei Sonnenfeld handeln, wenn ihr ein Fehler in ihren Kundendaten gemeldet wird?",
+            assessment([1], [3], "Eine Kundin teilt der Bäckerei Sonnenfeld mit, dass sich ihre E-Mail-Adresse geändert hat. Was verlangt der Grundsatz der Richtigkeit?", "Eine Kundin meldet einen Fehler in ihren Daten. Was sollte die Bäckerei Sonnenfeld tun, und wie schnell?",
                        ("Unverzüglich berichtigen", "Art. 5 Abs. 1 Buchst. d verlangt angemessene Maßnahmen, damit unverzüglich berichtigt wird."),
                        ("Die alten Angaben für die Historie behalten", "Unrichtige Kontaktdaten weiter zu verwenden widerspricht der Richtigkeit."),
                        ("Bei der jährlichen Datenprüfung korrigieren", "Ein Jahr zu warten ist nicht „unverzüglich“.")),

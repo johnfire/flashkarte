@@ -202,7 +202,7 @@
       ],
       "variants": [
         {
-          "prompt": "How quickly should Sunfield act on a reported error in its customer data?",
+          "prompt": "A customer reports an error in her data. What should Sunfield do, and how quickly?",
           "options": [
             {
               "correct": false,

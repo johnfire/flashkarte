@@ -95,9 +95,9 @@ German: [sources/ai-act-02024R1689-20260727-de.html](sources/ai-act-02024R1689-2
 
 [Official source](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0501). Status: **proposal only; not adopted per EUR-Lex on 2026-10-07**.
 
-Reading: Title and date read. Content not studied; taught only as 'proposed'.
+Reading: Title and date read. Content not studied; taught only as 'proposed'. The English text is retained as the Publications Office PDF, fetched 2026-10-08: the HTML first retained was an empty EUR-Lex page.
 
-Retained: [sources/proposal-COM-2025-501-en.html](sources/proposal-COM-2025-501-en.html). SHA-256: `35986e432d50edc7183ddfa05eddf9049115adcd914de7c48dda5b27fd610893`.
+Retained: [sources/proposal-COM-2025-501-en.pdf](sources/proposal-COM-2025-501-en.pdf). SHA-256: `56a52f5b404e83529e52c2b409fbd857ef47ff73e07e0e7a9cd55f2e38cbe091`.
 
 German: [sources/proposal-COM-2025-501-de.html](sources/proposal-COM-2025-501-de.html). SHA-256: `239223f9a5f671878a03e12ae6d7e32a781830bbb66ca242e3009c02bfeced55`.
 

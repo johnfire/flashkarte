@@ -62,7 +62,7 @@ LESSONS = {
     },
     "N02": {
         "summary": "Use Fashion ID to see how far joint control reaches when a website embeds a third-party plug-in.",
-        "sources": [("CJ-FASHIONID", "operative part, points 2-3"), ("GDPR", "Articles 4(7), 6(1)(f), 26")],
+        "sources": [("CJ-FASHIONID", "operative part, points 2-3, and paragraph 84"), ("GDPR", "Articles 4(7), 6(1)(f), 26")],
         "screens": [
             [
                 "Joint controllers decide purposes and means together (Article 26). But **how far** does joint control reach? *Fashion ID* (Case C-40/17, 29 July 2019) gives a practical answer.",
@@ -72,7 +72,7 @@ LESSONS = {
                 "**The facts in outline**: a website embedded a social plug-in. When a visitor opened the page, the plug-in made the visitor's browser request content from the plug-in provider, transmitting the visitor's personal data to that provider.",
             ],
             [
-                "**Point 2**: the website operator **can be a controller**, jointly with the provider.",
+                "**Point 2**: the website operator **can be a controller**. In its reasoning (paragraph 84), the Court treats it as a controller **jointly with the provider**.",
                 "But that responsibility is **limited** to the operations for which it actually determines the purposes and means: the **collection and disclosure by transmission** of the data. It does not cover what the provider does with the data afterwards.",
             ],
             [
@@ -87,7 +87,7 @@ LESSONS = {
         ],
         "questions": [
             assessment([0], [2, 3, 5], "A website embeds a plug-in that sends visitors' data to the plug-in provider. Can the website operator be a controller?", "Under Fashion ID, can the website operator be a controller for the plug-in's data flow?",
-                       ("Yes, jointly, for the collection and transmission", "Fashion ID, point 2."),
+                       ("Yes, jointly, for the collection and transmission", "Fashion ID, point 2 and paragraph 84."),
                        ("No, only the plug-in provider is a controller", "The Court held the operator can be a controller."),
                        ("Yes, for everything the provider does later", "Responsibility is limited to the operations it co-determines.")),
             assessment([0], [3], "How far does the website operator's responsibility reach?", "Which operations does the operator jointly control according to Fashion ID?",
@@ -114,7 +114,7 @@ LESSONS = {
                 "Those two articles are exceptions inside the AI Act. This course does not cover them.",
             ],
             [
-                "So there are **two separate sets of questions**. An AI tool can satisfy the AI Act and still be processed unlawfully under the GDPR, or the other way round.",
+                "So there are **two separate sets of questions**. An AI tool can satisfy the AI Act while the processing done with it is still unlawful under the GDPR, or the other way round.",
                 "A vendor's statement that \"our tool complies with the AI Act\" does not answer the GDPR questions about your own processing.",
             ],
             [
@@ -164,7 +164,7 @@ LESSONS = {
                 "Parental consent should not be necessary for preventive or counselling services offered directly to a child (recital 38).",
             ],
             [
-                "Related rules: information for children must be in particularly clear and plain language (Article 12(1)). Data collected under Article 8(1) is a ground for erasure (Article 17(1)(f)).",
+                "Related rules: information addressed specifically to a child must, in particular, be in clear and plain language (Article 12(1)). Data collected under Article 8(1) is a ground for erasure (Article 17(1)(f)).",
                 "Sunfield's online children's baking club relies on consent. In a country using the default age of 16, a 14-year-old needs a parent's consent or authorisation, and Sunfield makes reasonable efforts to check it.",
                 ILLUSTRATION,
             ],

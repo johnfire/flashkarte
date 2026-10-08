@@ -151,7 +151,7 @@
       ],
       "variants": [
         {
-          "prompt": "Is the owner's private list of friends' numbers covered by the GDPR?",
+          "prompt": "A business owner privately keeps a list of her friends' phone numbers. Does the GDPR apply to it?",
           "options": [
             {
               "correct": false,
@@ -248,7 +248,7 @@
       ],
       "variants": [
         {
-          "prompt": "Does the GDPR still apply when an EU business processes its data outside the EU?",
+          "prompt": "A business established in the EU processes its data on a server in Canada. Does the GDPR still apply?",
           "options": [
             {
               "correct": true,
@@ -296,7 +296,7 @@
       ],
       "variants": [
         {
-          "prompt": "Can the GDPR apply to a business established outside the EU?",
+          "prompt": "An online shop sells to customers in Austria. Can the GDPR apply to it even though it has no establishment in the EU?",
           "options": [
             {
               "correct": false,

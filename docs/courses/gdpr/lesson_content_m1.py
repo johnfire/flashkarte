@@ -85,7 +85,7 @@ LESSONS = {
                        ("Stop collecting it", "Data must be limited to what is necessary (Article 5(1)(c))."),
                        ("Keep it, because it may be useful later", "A possible future use is not a stated purpose."),
                        ("Keep it, but store it securely", "Good security does not make unnecessary data necessary.")),
-            assessment([1], [3], "A customer tells Sunfield her email address has changed. What does the accuracy principle require?", "How quickly should Sunfield act on a reported error in its customer data?",
+            assessment([1], [3], "A customer tells Sunfield her email address has changed. What does the accuracy principle require?", "A customer reports an error in her data. What should Sunfield do, and how quickly?",
                        ("Correct it without delay", "Article 5(1)(d) requires reasonable steps without delay."),
                        ("Keep the old one for the history", "Keeping inaccurate contact data for use conflicts with accuracy."),
                        ("Fix it at the yearly data review", "Waiting a year is not \"without delay\".")),
