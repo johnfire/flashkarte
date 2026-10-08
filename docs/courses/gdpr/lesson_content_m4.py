@@ -218,7 +218,7 @@ LESSONS = {
             ],
         ],
         "questions": [
-            assessment([0], [1, 2], "When must a business appoint an EU representative?", "Which businesses fall under the Article 27 duty?",
+            assessment([0], [1, 2], "Which businesses must appoint an EU representative?", "Who falls under the Article 27 duty to appoint a representative in the EU?",
                        ("Non-EU businesses covered by Article 3(2), unless an exception applies", "Article 27(1)-(2)."),
                        ("Every business with EU customers, including EU-based ones", "EU-established businesses do not need one."),
                        ("Only public authorities", "Public authorities are exempt.")),

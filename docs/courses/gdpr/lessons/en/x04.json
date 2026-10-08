@@ -99,7 +99,7 @@
         "screen-1",
         "screen-2"
       ],
-      "prompt": "When must a business appoint an EU representative?",
+      "prompt": "Which businesses must appoint an EU representative?",
       "options": [
         {
           "correct": true,
@@ -119,7 +119,7 @@
       ],
       "variants": [
         {
-          "prompt": "Which businesses fall under the Article 27 duty?",
+          "prompt": "Who falls under the Article 27 duty to appoint a representative in the EU?",
           "options": [
             {
               "correct": false,
