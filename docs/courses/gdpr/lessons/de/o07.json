@@ -1,0 +1,322 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o07",
+    "title": "Der Datenschutzbeauftragte",
+    "summary": "Entscheiden, ob ein Datenschutzbeauftragter vorgeschrieben ist, und die Unabhängigkeit der Rolle schützen.",
+    "covers": [
+      "dpo"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Der Datenschutzbeauftragte arbeitet mit der Aufsichtsbehörde zusammen und ist ihre Anlaufstelle."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Der Datenschutzbeauftragte wird vom Verantwortlichen oder Auftragsverarbeiter benannt und berät ihn."
+      },
+      {
+        "lesson": "p08",
+        "reason": "Ein Fall, in dem ein Datenschutzbeauftragter vorgeschrieben ist, ist die umfangreiche Verarbeitung besonderer Kategorien personenbezogener Daten."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Ein **Datenschutzbeauftragter** ist auf jeden Fall zu benennen, wenn (Art. 37 Abs. 1):",
+        {
+          "type": "list",
+          "items": [
+            "a) die Verarbeitung von einer **Behörde oder öffentlichen Stelle** durchgeführt wird, mit Ausnahme von Gerichten, soweit sie im Rahmen ihrer justiziellen Tätigkeit handeln;",
+            "b) die **Kerntätigkeit** in Verarbeitungsvorgängen besteht, die eine **umfangreiche regelmäßige und systematische Überwachung** von betroffenen Personen erforderlich machen; oder",
+            "c) die **Kerntätigkeit** in der **umfangreichen** Verarbeitung besonderer Kategorien von Daten oder von Daten über strafrechtliche Verurteilungen und Straftaten besteht."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "In anderen Fällen ist die Benennung eines Datenschutzbeauftragten freiwillig, **es sei denn, das Recht der Union oder der Mitgliedstaaten schreibt sie vor** (Art. 37 Abs. 4).",
+        "Einige Länder stellen eigene Anforderungen auf. Dieser Kurs behandelt kein nationales Recht, in Deutschland etwa das Bundesdatenschutzgesetz (BDSG). Prüfen Sie deshalb das Recht Ihres Landes."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Der Datenschutzbeauftragte muss **Fachwissen** auf dem Gebiet des Datenschutzrechts und der Datenschutzpraxis besitzen (Art. 37 Abs. 5). Er kann Beschäftigter des Unternehmens sein oder seine Aufgaben auf der Grundlage eines Dienstleistungsvertrags erfüllen (Art. 37 Abs. 6). Eine Unternehmensgruppe darf einen gemeinsamen Datenschutzbeauftragten ernennen, sofern er von jeder Niederlassung aus leicht erreicht werden kann (Art. 37 Abs. 2).",
+        "Die Kontaktdaten des Datenschutzbeauftragten sind zu veröffentlichen und der Aufsichtsbehörde mitzuteilen (Art. 37 Abs. 7)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Unabhängigkeit** (Art. 38). Der Datenschutzbeauftragte",
+        {
+          "type": "list",
+          "items": [
+            "wird ordnungsgemäß und frühzeitig in alle Fragen des Datenschutzes eingebunden;",
+            "erhält die erforderlichen Ressourcen;",
+            "erhält **keine Anweisungen** bezüglich der Ausübung seiner Aufgaben;",
+            "darf wegen der Erfüllung seiner Aufgaben **nicht abberufen oder benachteiligt** werden;",
+            "berichtet unmittelbar der **höchsten Managementebene**;",
+            "darf andere Aufgaben nur wahrnehmen, wenn sie nicht zu einem Interessenkonflikt führen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Aufgaben** (Art. 39 Abs. 1): das Unternehmen und seine Beschäftigten unterrichten und beraten; die **Einhaltung überwachen**, einschließlich Schulungen und Überprüfungen; zu Datenschutz-Folgenabschätzungen beraten; **mit der Aufsichtsbehörde zusammenarbeiten** und als ihre Anlaufstelle tätig sein.",
+        "Betroffene Personen können den Datenschutzbeauftragten zu allen Fragen rund um ihre Daten und ihre Rechte zu Rate ziehen (Art. 38 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die Kerntätigkeit der Bäckerei Sonnenfeld ist das Backen und Verkaufen von Brot. Die Verarbeitung von Daten der Beschäftigten und der Kundschaft unterstützt diese Tätigkeit. Sie ist aber nicht offensichtlich eine umfangreiche Überwachung oder eine umfangreiche Verarbeitung sensibler Daten.",
+        "Nach Art. 37 Abs. 1 ist ein Datenschutzbeauftragter daher möglicherweise nicht vorgeschrieben. Nationales Recht kann ihn nach Art. 37 Abs. 4 trotzdem verlangen, und die Bäckerei muss das prüfen.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Wer muss nach Art. 37 Abs. 1 einen Datenschutzbeauftragten benennen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Eine Behörde oder öffentliche Stelle",
+          "reason": "Art. 37 Abs. 1 Buchst. a."
+        },
+        {
+          "correct": false,
+          "blocks": "Jedes Unternehmen mit einer Website",
+          "reason": "Kein Fall nach Art. 37 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Jedes Unternehmen mit mehr als zehn Beschäftigten",
+          "reason": "Der Text der DSGVO nennt keine Beschäftigtenzahl. Nationales Recht kann Regeln ergänzen (Art. 37 Abs. 4)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wer muss schon nach dem Text der DSGVO selbst einen Datenschutzbeauftragten benennen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Jedes Unternehmen mit einer Website",
+              "reason": "Kein Fall nach Art. 37 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Jedes Unternehmen mit mehr als zehn Beschäftigten",
+              "reason": "Der Text der DSGVO nennt keine Beschäftigtenzahl. Nationales Recht kann Regeln ergänzen (Art. 37 Abs. 4)."
+            },
+            {
+              "correct": true,
+              "blocks": "Eine Behörde oder öffentliche Stelle",
+              "reason": "Art. 37 Abs. 1 Buchst. a."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Wem berichtet der Datenschutzbeauftragte?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Der IT-Abteilung",
+          "reason": "Artikel 38 Abs. 3 verlangt die höchste Managementebene."
+        },
+        {
+          "correct": false,
+          "blocks": "Der Aufsichtsbehörde",
+          "reason": "Der Datenschutzbeauftragte arbeitet mit der Behörde zusammen, berichtet intern aber der höchsten Managementebene."
+        },
+        {
+          "correct": true,
+          "blocks": "Der höchsten Managementebene",
+          "reason": "Art. 38 Abs. 3."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welcher Ebene berichtet der Datenschutzbeauftragte nach Art. 38 Abs. 3?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Der Aufsichtsbehörde",
+              "reason": "Der Datenschutzbeauftragte arbeitet mit der Behörde zusammen, berichtet intern aber der höchsten Managementebene."
+            },
+            {
+              "correct": true,
+              "blocks": "Der höchsten Managementebene",
+              "reason": "Art. 38 Abs. 3."
+            },
+            {
+              "correct": false,
+              "blocks": "Der IT-Abteilung",
+              "reason": "Artikel 38 Abs. 3 verlangt die höchste Managementebene."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Der Datenschutzbeauftragte der Bäckerei Sonnenfeld meldet ein Problem bei der Einhaltung des Datenschutzes. Darf die Bäckerei ihn deswegen abberufen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, wenn die Meldung Kosten verursacht hat",
+          "reason": "Kosten heben den Schutz nicht auf."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, Art. 38 Abs. 3 verbietet das",
+          "reason": "Ein Datenschutzbeauftragter darf wegen der Erfüllung seiner Aufgaben nicht abberufen oder benachteiligt werden."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn der Datenschutzbeauftragte ein Beschäftigter ist",
+          "reason": "Der Schutz gilt auch für Datenschutzbeauftragte, die bei dem Unternehmen beschäftigt sind."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Darf ein Datenschutzbeauftragter wegen der Erfüllung seiner Aufgaben benachteiligt werden?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nein, Art. 38 Abs. 3 verbietet das",
+              "reason": "Ein Datenschutzbeauftragter darf wegen der Erfüllung seiner Aufgaben nicht abberufen oder benachteiligt werden."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn der Datenschutzbeauftragte ein Beschäftigter ist",
+              "reason": "Der Schutz gilt auch für Datenschutzbeauftragte, die bei dem Unternehmen beschäftigt sind."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn die Meldung Kosten verursacht hat",
+              "reason": "Kosten heben den Schutz nicht auf."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Was gehört zu den Aufgaben des Datenschutzbeauftragten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Überwachung der Einhaltung der DSGVO",
+          "reason": "Art. 39 Abs. 1 Buchst. b."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Festlegung der Zwecke der Verarbeitung",
+          "reason": "Das ist die Rolle des Verantwortlichen."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Verhängung von Geldbußen gegen das Unternehmen",
+          "reason": "Geldbußen verhängen die Aufsichtsbehörden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Aufgabe weist Art. 39 Abs. 1 dem Datenschutzbeauftragten zu?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Festlegung der Zwecke der Verarbeitung",
+              "reason": "Das ist die Rolle des Verantwortlichen."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Verhängung von Geldbußen gegen das Unternehmen",
+              "reason": "Geldbußen verhängen die Aufsichtsbehörden."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Überwachung der Einhaltung der DSGVO",
+              "reason": "Art. 39 Abs. 1 Buchst. b."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

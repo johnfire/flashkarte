@@ -1,0 +1,315 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o08",
+    "title": "Abschluss: die Datenschutzprüfung der Bäckerei Sonnenfeld",
+    "summary": "Die zentralen Pflichten gemeinsam auf die Bäckerei Sonnenfeld anwenden und herausfinden, was fehlt.",
+    "covers": [
+      "compliance-review"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "o01",
+        "reason": "Die Prüfung beginnt mit dem Verzeichnis von Verarbeitungstätigkeiten."
+      },
+      {
+        "lesson": "o03",
+        "reason": "Die Prüfung kontrolliert die Verträge mit den Auftragsverarbeitern."
+      },
+      {
+        "lesson": "o05",
+        "reason": "Die Prüfung enthält ein Szenario mit einer Datenpanne."
+      },
+      {
+        "lesson": "o06",
+        "reason": "Die Prüfung entscheidet, ob eine Datenschutz-Folgenabschätzung nötig ist."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Diese Abschlusslektion wendet die Module 0 bis 3 auf ein einziges erfundenes Unternehmen an. Lesen Sie jeden Schritt, und prüfen Sie ihn anhand dessen, was Sie gelernt haben.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Die Bäckerei Sonnenfeld ist für diesen Kurs erfunden.** Das Szenario ist eine Veranschaulichung und keine Vorlage für eine echte Prüfung."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Schritt 1, das Verzeichnis** (Art. 30): Die Bäckerei Sonnenfeld verarbeitet regelmäßig Daten, darunter Gesundheitsdaten. Deshalb führt sie ein Verzeichnis. Es nennt sechs Tätigkeiten: Vorbestellungen, Kundenkarte, Newsletter, Kameras, Lohnabrechnung und Bewerbungsverfahren, jeweils mit Zwecken, Datenkategorien, Empfängern, Löschfristen und Sicherheitsmaßnahmen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Schritt 2, Rechtsgrundlagen und Datenschutzhinweise** (Art. 6 und 13):",
+        {
+          "type": "list",
+          "items": [
+            "Vorbestellungen: Vertrag;",
+            "Newsletter: Einwilligung;",
+            "Kameras im Verkaufsraum: berechtigte Interessen, nach der Abwägung;",
+            "Lohnabrechnung: rechtliche Verpflichtung, im Übrigen Vertrag."
+          ]
+        },
+        "Jede Tätigkeit ist in Datenschutzhinweisen beschrieben, die die Menschen zum Zeitpunkt der Erhebung erhalten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Schritt 3, Auftragsverarbeiter** (Art. 28): Der App-Hoster, der Newsletter-Dienst und der Lohnabrechnungsdienstleister verarbeiten jeweils Daten im Auftrag der Bäckerei Sonnenfeld.",
+        "Die Prüfung ergibt, dass für den Newsletter-Dienst keine schriftlichen Vertragsbedingungen zur Auftragsverarbeitung vorliegen. Das ist eine Lücke: Erforderlich ist ein Vertrag mit den Inhalten nach Art. 28 Abs. 3."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Schritt 4, eine Übung zu einer Datenpanne** (Art. 33 und 34): Der Lohnabrechnungsdienstleister meldet einen Ransomware-Angriff, der Gehaltsdateien zerstört hat. Der Bäckerei wird das am **Freitag um 18:00 Uhr** bekannt.",
+        "Die Bäckerei meldet die Verletzung der Aufsichtsbehörde möglichst bis **Montag um 18:00 Uhr**, also binnen 72 Stunden, es sei denn, sie führt voraussichtlich nicht zu einem Risiko. Einzelheiten können schrittweise folgen. In jedem Fall dokumentiert die Bäckerei die Verletzung und prüft, ob den Beschäftigten ein hohes Risiko droht."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "**Schritt 5, ein neues Projekt** (Art. 22 und 35): Die Bäckerei Sonnenfeld möchte eine Software einsetzen, die Bewerberinnen und Bewerber mit niedriger Punktzahl automatisch ablehnt.",
+        "Das ist ein Fall für eine Datenschutz-Folgenabschätzung nach Art. 35 Abs. 3 Buchst. a und eine ausschließlich auf einer automatisierten Verarbeitung beruhende Entscheidung nach Art. 22. Die Bäckerei muss zuerst die Folgenabschätzung abschließen. Außerdem muss sie entweder eine echte menschliche Prüfung beibehalten oder eine Ausnahme nach Art. 22 Abs. 2 erfüllen und die angemessenen Maßnahmen nach Art. 22 Abs. 3 treffen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5, 6, 13, 22, 28, 30, 33, 34, 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Der Bäckerei Sonnenfeld wird die Datenpanne bei ihrem Lohnabrechnungsdienstleister am Freitag um 18:00 Uhr bekannt. Bis wann sollte sie die Verletzung, falls eine Meldung erforderlich ist, der Aufsichtsbehörde möglichst melden?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Bis Montag um 18:00 Uhr",
+          "reason": "72 Stunden, nachdem ihr die Verletzung bekannt wurde (Art. 33 Abs. 1)."
+        },
+        {
+          "correct": false,
+          "blocks": "Innerhalb eines Monats",
+          "reason": "Ein Monat ist die Frist für die Antwort auf Anträge betroffener Personen."
+        },
+        {
+          "correct": false,
+          "blocks": "Erst wenn alle Einzelheiten bekannt sind",
+          "reason": "Die Informationen können schrittweise zur Verfügung gestellt werden (Art. 33 Abs. 4)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Bäckerei Sonnenfeld hat am Freitag um 18:00 Uhr von einer meldepflichtigen Verletzung erfahren. Bis wann sollte sie die Verletzung der Aufsichtsbehörde möglichst melden?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Innerhalb eines Monats",
+              "reason": "Ein Monat ist die Frist für die Antwort auf Anträge betroffener Personen."
+            },
+            {
+              "correct": false,
+              "blocks": "Erst wenn alle Einzelheiten bekannt sind",
+              "reason": "Die Informationen können schrittweise zur Verfügung gestellt werden (Art. 33 Abs. 4)."
+            },
+            {
+              "correct": true,
+              "blocks": "Bis Montag um 18:00 Uhr",
+              "reason": "72 Stunden, nachdem ihr die Verletzung bekannt wurde (Art. 33 Abs. 1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Die Prüfung der Bäckerei Sonnenfeld ergibt, dass für ihren Newsletter-Dienst keine schriftlichen Vertragsbedingungen zur Auftragsverarbeitung vorliegen. Was fehlt?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nichts, weil der Anbieter bekannt ist",
+          "reason": "Ein guter Ruf ersetzt keinen Vertrag."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine Datenschutz-Folgenabschätzung für den Newsletter",
+          "reason": "Die festgestellte Lücke ist der Vertrag, nicht eine Folgenabschätzung."
+        },
+        {
+          "correct": true,
+          "blocks": "Ein Vertrag mit den Inhalten nach Art. 28 Abs. 3",
+          "reason": "Für jeden Auftragsverarbeiter erforderlich."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welches Dokument fehlt laut der Datenschutzprüfung der Bäckerei Sonnenfeld für den Newsletter-Dienst, der für sie als Auftragsverarbeiter tätig ist?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Eine Datenschutz-Folgenabschätzung für den Newsletter",
+              "reason": "Die festgestellte Lücke ist der Vertrag, nicht eine Folgenabschätzung."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein Vertrag mit den Inhalten nach Art. 28 Abs. 3",
+              "reason": "Für jeden Auftragsverarbeiter erforderlich."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts, weil der Anbieter bekannt ist",
+              "reason": "Ein guter Ruf ersetzt keinen Vertrag."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Welcher Umstand führt dazu, dass die Ausnahme für weniger als 250 Beschäftigte bei der Bäckerei Sonnenfeld nicht greift?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Sie hat drei Filialen",
+          "reason": "Die Zahl der Filialen ist keine Bedingung."
+        },
+        {
+          "correct": true,
+          "blocks": "Ihre Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten",
+          "reason": "Art. 30 Abs. 5."
+        },
+        {
+          "correct": false,
+          "blocks": "Sie nutzt eine App",
+          "reason": "Eine App zu nutzen ist keine Bedingung nach Art. 30 Abs. 5."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Warum muss die Bäckerei Sonnenfeld mit ihren 40 Beschäftigten trotzdem ein Verzeichnis nach Art. 30 führen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ihre Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten",
+              "reason": "Art. 30 Abs. 5."
+            },
+            {
+              "correct": false,
+              "blocks": "Sie nutzt eine App",
+              "reason": "Eine App zu nutzen ist keine Bedingung nach Art. 30 Abs. 5."
+            },
+            {
+              "correct": false,
+              "blocks": "Sie hat drei Filialen",
+              "reason": "Die Zahl der Filialen ist keine Bedingung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compliance-review"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "Was muss die Bäckerei Sonnenfeld tun, bevor sie Bewerberinnen und Bewerber per Software automatisch ablehnt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Eine Datenschutz-Folgenabschätzung durchführen und Art. 22 einhalten",
+          "reason": "Art. 35 Abs. 3 Buchst. a und Art. 22."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts, weil die Personalauswahl eine interne Angelegenheit ist",
+          "reason": "Bewerberinnen und Bewerber sind betroffene Personen mit Rechten."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur die Datenschutzhinweise aktualisieren",
+          "reason": "Hinweise allein erfüllen Art. 22 und 35 nicht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was verlangt die Datenschutzprüfung der Bäckerei Sonnenfeld, bevor ihr Projekt zur automatischen Ablehnung von Bewerbungen beginnt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nichts, weil die Personalauswahl eine interne Angelegenheit ist",
+              "reason": "Bewerberinnen und Bewerber sind betroffene Personen mit Rechten."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur die Datenschutzhinweise aktualisieren",
+              "reason": "Hinweise allein erfüllen Art. 22 und 35 nicht."
+            },
+            {
+              "correct": true,
+              "blocks": "Eine Datenschutz-Folgenabschätzung durchführen und Art. 22 einhalten",
+              "reason": "Art. 35 Abs. 3 Buchst. a und Art. 22."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

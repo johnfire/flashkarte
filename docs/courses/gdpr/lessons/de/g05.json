@@ -1,0 +1,300 @@
+{
+  "module": "Einstieg: was die DSGVO erfasst",
+  "lesson": {
+    "slug": "g05",
+    "title": "Wer entscheidet: Verantwortliche und Auftragsverarbeiter",
+    "summary": "Den Verantwortlichen, den Auftragsverarbeiter und gemeinsam Verantwortliche erkennen und verstehen, warum die Rollen wichtig sind.",
+    "covers": [
+      "controller",
+      "processor",
+      "joint-controllers"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Der Verantwortliche ist definiert als die Stelle, die über die Zwecke und Mittel der Verarbeitung entscheidet."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Der **Verantwortliche** ist die Person oder Stelle, die allein oder gemeinsam mit anderen über die **Zwecke und Mittel** der Verarbeitung entscheidet (Art. 4 Nr. 7).",
+        "Die Zwecke sagen, *warum* Daten verarbeitet werden. Die Mittel sagen, *wie* sie verarbeitet werden. Der Verantwortliche trägt die meisten Pflichten der DSGVO."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 4 Nr. 8, 4 Nr. 10, 26, 28 Abs. 10, 29",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld entscheidet, dass sie Daten zu Vorbestellungen erhebt, warum sie das tut und welche App sie dafür nutzt. **Die Bäckerei Sonnenfeld ist der Verantwortliche.**",
+        "Ihre Beschäftigten sind ihr unterstellt. Die DSGVO rechnet Personen, die unter der unmittelbaren Verantwortung des Verantwortlichen stehen, dessen Seite zu. Sie sind keine Dritten (Art. 4 Nr. 10). Sie dürfen die Daten nur auf Weisung des Verantwortlichen verarbeiten (Art. 29)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 4 Nr. 8, 4 Nr. 10, 26, 28 Abs. 10, 29",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Ein **Auftragsverarbeiter** verarbeitet personenbezogene Daten **im Auftrag** des Verantwortlichen (Art. 4 Nr. 8).",
+        "Das externe Lohnbüro der Bäckerei Sonnenfeld berechnet die Gehälter nach den Weisungen der Bäckerei. Unter diesen Umständen ist das Lohnbüro ein Auftragsverarbeiter. Die Rolle hängt davon ab, was das Unternehmen tatsächlich tut, nicht davon, wie es bezeichnet wird.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Die Bäckerei Sonnenfeld ist erfunden.** Ähnlichkeiten mit einem echten Unternehmen sind zufällig."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 4 Nr. 8, 4 Nr. 10, 26, 28 Abs. 10, 29",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Ein Auftragsverarbeiter darf keine eigenen Zwecke festlegen. Bestimmt er selbst die Zwecke und Mittel der Verarbeitung, gilt er in Bezug auf diese Verarbeitung als **Verantwortlicher** (Art. 28 Abs. 10).",
+        "Würde das Lohnbüro zum Beispiel die Daten der Beschäftigten der Bäckerei Sonnenfeld nutzen, um für eigene Kredite zu werben, wäre es für diese Werbung Verantwortlicher."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 4 Nr. 8, 4 Nr. 10, 26, 28 Abs. 10, 29",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Gemeinsam Verantwortliche** sind zwei oder mehr Verantwortliche, die die Zwecke und Mittel gemeinsam festlegen (Art. 26 Abs. 1).",
+        "Sie müssen in transparenter Form vereinbaren, wer von ihnen welche Pflicht erfüllt, insbesondere bei der Wahrnehmung der Rechte der Menschen und bei den Informationspflichten. Das Wesentliche dieser Vereinbarung wird den betroffenen Personen zur Verfügung gestellt (Art. 26 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 4 Nr. 8, 4 Nr. 10, 26, 28 Abs. 10, 29",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Was auch immer die Vereinbarung regelt: Eine Person kann ihre Rechte gegenüber **jedem** der gemeinsam Verantwortlichen geltend machen (Art. 26 Abs. 3).",
+        "Angenommen, die Bäckerei Sonnenfeld und ein benachbartes Café betreiben ein gemeinsames Bonusprogramm und entscheiden zusammen, welche Daten sie erheben und wozu. Dann wären sie gemeinsam Verantwortliche, und Kundinnen und Kunden könnten sich an jedes der beiden Unternehmen wenden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 4 Nr. 8, 4 Nr. 10, 26, 28 Abs. 10, 29",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "controller"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld entscheidet, warum Daten zu Vorbestellungen erhoben werden und welche App dafür genutzt wird. Die App läuft bei einem Cloud-Anbieter. Wer ist der Verantwortliche?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Bäckerei Sonnenfeld",
+          "reason": "Die Bäckerei entscheidet über das Warum und das Wie (Art. 4 Nr. 7)."
+        },
+        {
+          "correct": false,
+          "blocks": "Der Cloud-Anbieter, weil er die Daten speichert",
+          "reason": "Wer Daten für andere speichert, legt damit nicht deren Zwecke fest."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Verkäuferin, die die jeweilige Bestellung aufnimmt",
+          "reason": "Beschäftigte sind dem Verantwortlichen unterstellt (Art. 4 Nr. 10 und Art. 29)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Vorbestell-App der Bäckerei Sonnenfeld läuft bei einem Cloud-Anbieter. Wer entscheidet über die Zwecke und Mittel der Verarbeitung der Vorbestellungen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Der Cloud-Anbieter, weil er die Daten speichert",
+              "reason": "Wer Daten für andere speichert, legt damit nicht deren Zwecke fest."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Verkäuferin, die die jeweilige Bestellung aufnimmt",
+              "reason": "Beschäftigte sind dem Verantwortlichen unterstellt (Art. 4 Nr. 10 und Art. 29)."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Bäckerei Sonnenfeld",
+              "reason": "Die Bäckerei entscheidet über das Warum und das Wie (Art. 4 Nr. 7)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processor"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Ein Lohnbüro verarbeitet die Gehaltsdaten der Bäckerei Sonnenfeld ausschließlich nach deren Weisungen. Welche Rolle hat es?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Gemeinsam Verantwortlicher",
+          "reason": "Es legt die Zwecke nicht gemeinsam mit der Bäckerei Sonnenfeld fest."
+        },
+        {
+          "correct": false,
+          "blocks": "Keine Rolle, weil es ein eigenständiges Unternehmen ist",
+          "reason": "Auch eigenständige Unternehmen können Auftragsverarbeiter sein."
+        },
+        {
+          "correct": true,
+          "blocks": "Auftragsverarbeiter",
+          "reason": "Es verarbeitet die Daten im Auftrag des Verantwortlichen (Art. 4 Nr. 8)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Rolle passt zu einem Unternehmen, das Gehälter nach den Weisungen seines Auftraggebers berechnet?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Keine Rolle, weil es ein eigenständiges Unternehmen ist",
+              "reason": "Auch eigenständige Unternehmen können Auftragsverarbeiter sein."
+            },
+            {
+              "correct": true,
+              "blocks": "Auftragsverarbeiter",
+              "reason": "Es verarbeitet die Daten im Auftrag des Verantwortlichen (Art. 4 Nr. 8)."
+            },
+            {
+              "correct": false,
+              "blocks": "Gemeinsam Verantwortlicher",
+              "reason": "Es legt die Zwecke nicht gemeinsam mit der Bäckerei Sonnenfeld fest."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processor"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Das Lohnbüro der Bäckerei Sonnenfeld nutzt die Daten der Beschäftigten der Bäckerei nun, um für eigene Kredite zu werben. Was folgt daraus?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Bäckerei Sonnenfeld wird Auftragsverarbeiter des Lohnbüros",
+          "reason": "Nichts deutet darauf hin, dass die Bäckerei im Auftrag des Lohnbüros handelt."
+        },
+        {
+          "correct": true,
+          "blocks": "Für diese Verarbeitung gilt das Unternehmen als Verantwortlicher",
+          "reason": "Nach Art. 28 Abs. 10 gilt es in Bezug auf diese Verarbeitung als Verantwortlicher."
+        },
+        {
+          "correct": false,
+          "blocks": "Das Unternehmen bleibt Auftragsverarbeiter, weil es so im Vertrag steht",
+          "reason": "Die Tatsachen bestimmen die Rolle, nicht die Bezeichnung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was gilt, wenn das Lohnbüro der Bäckerei Sonnenfeld als Auftragsverarbeiter eigene Zwecke für die Daten festlegt?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Für diese Verarbeitung gilt das Unternehmen als Verantwortlicher",
+              "reason": "Nach Art. 28 Abs. 10 gilt es in Bezug auf diese Verarbeitung als Verantwortlicher."
+            },
+            {
+              "correct": false,
+              "blocks": "Das Unternehmen bleibt Auftragsverarbeiter, weil es so im Vertrag steht",
+              "reason": "Die Tatsachen bestimmen die Rolle, nicht die Bezeichnung."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Bäckerei Sonnenfeld wird Auftragsverarbeiter des Lohnbüros",
+              "reason": "Nichts deutet darauf hin, dass die Bäckerei im Auftrag des Lohnbüros handelt."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "joint-controllers"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld und ein Café betreiben gemeinsam ein Bonusprogramm. Eine Kundin möchte ihre Daten erhalten. An wen kann sie sich wenden?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "An jeden von ihnen",
+          "reason": "Nach Art. 26 Abs. 3 können die Rechte gegenüber jedem einzelnen Verantwortlichen geltend gemacht werden."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur an den Verantwortlichen, der in der Vereinbarung genannt ist",
+          "reason": "Die Vereinbarung kann Art. 26 Abs. 3 nicht einschränken."
+        },
+        {
+          "correct": false,
+          "blocks": "An beide gemeinsam, in einem einzigen Schreiben",
+          "reason": "Ein gemeinsamer Antrag ist nicht vorgeschrieben."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Zwei Verantwortliche betreiben gemeinsam ein Bonusprogramm. An wen kann sich eine Person nach Art. 26 wenden, um ihre Rechte geltend zu machen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur an den Verantwortlichen, der in der Vereinbarung genannt ist",
+              "reason": "Die Vereinbarung kann Art. 26 Abs. 3 nicht einschränken."
+            },
+            {
+              "correct": false,
+              "blocks": "An beide gemeinsam, in einem einzigen Schreiben",
+              "reason": "Ein gemeinsamer Antrag ist nicht vorgeschrieben."
+            },
+            {
+              "correct": true,
+              "blocks": "An jeden von ihnen",
+              "reason": "Nach Art. 26 Abs. 3 können die Rechte gegenüber jedem einzelnen Verantwortlichen geltend gemacht werden."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,274 @@
+{
+  "module": "Einstieg: was die DSGVO erfasst",
+  "lesson": {
+    "slug": "g03",
+    "title": "Pseudonymisierte und anonyme Daten",
+    "summary": "Pseudonymisierte Daten, die weiterhin personenbezogene Daten sind, von anonymen Daten unterscheiden, die nicht unter die DSGVO fallen.",
+    "covers": [
+      "pseudonymisation",
+      "anonymous-data"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g02",
+        "reason": "Pseudonymisierte Daten bleiben personenbezogene Daten, weil die Person mit zusätzlichen Informationen weiterhin identifiziert werden kann."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Pseudonymisierung** heißt, personenbezogene Daten so zu verarbeiten, dass sie ohne Hinzuziehung zusätzlicher Informationen nicht mehr einer bestimmten Person zugeordnet werden können. Diese zusätzlichen Informationen müssen gesondert aufbewahrt und geschützt werden (Art. 4 Nr. 5).",
+        "Ein typisches Beispiel: Namen werden durch Codes ersetzt, und die Liste der Codes wird an einem anderen Ort gespeichert."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 5, 25 Abs. 1, 32 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Pseudonymisierte Daten sind **weiterhin personenbezogene Daten**. Nach Erwägungsgrund 26 sind Daten, die durch Heranziehung zusätzlicher Informationen einer Person zugeordnet werden könnten, als Informationen über eine identifizierbare Person zu betrachten.",
+        "Die DSGVO gilt also weiterhin vollständig."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 5, 25 Abs. 1, 32 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Anonyme Informationen** beziehen sich nicht auf eine identifizierte oder identifizierbare Person. Personenbezogene Daten können auch so anonymisiert werden, dass die Person nicht mehr identifiziert werden kann (Erwägungsgrund 26).",
+        "Die DSGVO betrifft anonyme Informationen nicht. Das gilt auch, wenn sie für statistische Zwecke oder für Forschungszwecke genutzt werden (Erwägungsgrund 26)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 5, 25 Abs. 1, 32 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Ob Daten wirklich anonym sind, entscheidet eine Prüfung, nicht ein Etikett. Nach Erwägungsgrund 26 sind alle Mittel zu berücksichtigen, die nach allgemeinem Ermessen wahrscheinlich genutzt werden, um jemanden zu identifizieren, darunter die Kosten, der Zeitaufwand und die verfügbare Technologie.",
+        "Der Erwägungsgrund nennt auch „technologische Entwicklungen“. Daten, die heute anonym sind, können später identifizierbar werden. Die Beurteilung muss deshalb überprüft werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 5, 25 Abs. 1, 32 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld gibt ihre Bestelldaten zur Auswertung an eine Analystin. Vorher ersetzt sie die Namen der Kundschaft durch Codes, und die Geschäftsführung bewahrt die Codeliste in einer zugriffsgeschützten Datei auf. Diese Daten sind **pseudonymisiert**, die DSGVO gilt also weiterhin.",
+        "Die Bäckerei veröffentlicht außerdem die Zahl der »Vorbestellungen pro Filiale und Monat«. Lässt sich aus diesen Summen keine einzelne Kundin und kein einzelner Kunde aussondern, sind sie anonym.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Die Bäckerei Sonnenfeld ist erfunden.** Ähnlichkeiten mit einem echten Unternehmen sind zufällig."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 5, 25 Abs. 1, 32 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Wenn pseudonymisierte Daten weiterhin erfasst sind, wozu dann der Aufwand? Weil die DSGVO die Pseudonymisierung selbst als Schutzmaßnahme nennt, in Art. 25 Abs. 1 und in Art. 32 Abs. 1 Buchst. a. Spätere Lektionen erklären beide Artikel."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 5, 25 Abs. 1, 32 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "pseudonymisation"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld ersetzt die Namen der Kundschaft durch Codes und bewahrt die Codeliste gesondert auf. Sind die so entstandenen Daten personenbezogene Daten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ja, sie sind pseudonymisiert und lassen sich wieder zuordnen",
+          "reason": "Erwägungsgrund 26 behandelt sie als Informationen über eine identifizierbare Person."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, die Codes machen sie anonym",
+          "reason": "Mit dem Schlüssel lassen sich die Daten weiterhin zuordnen. Sie sind also nicht anonym."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur wenn die Codeliste einmal verloren geht",
+          "reason": "Die Daten sind personenbezogen, unabhängig davon, was mit dem Schlüssel geschieht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Namen werden durch Codes ersetzt, und der Schlüssel liegt an einem anderen Ort. Gilt die DSGVO für diese Daten noch?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, die Codes machen sie anonym",
+              "reason": "Mit dem Schlüssel lassen sich die Daten weiterhin zuordnen. Sie sind also nicht anonym."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur wenn die Codeliste einmal verloren geht",
+              "reason": "Die Daten sind personenbezogen, unabhängig davon, was mit dem Schlüssel geschieht."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, sie sind pseudonymisiert und lassen sich wieder zuordnen",
+              "reason": "Erwägungsgrund 26 behandelt sie als Informationen über eine identifizierbare Person."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "anonymous-data"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Welche Beschreibung passt zu anonymen Daten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Namen wurden aus der Datei gelöscht",
+          "reason": "Über andere Angaben lässt sich womöglich noch eine einzelne Person aussondern."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Datei ist mit einem Passwort verschlüsselt",
+          "reason": "Wer das Passwort hat, kann die Daten weiterhin lesen."
+        },
+        {
+          "correct": true,
+          "blocks": "Niemand kann die Person mit Mitteln identifizieren, die nach allgemeinem Ermessen wahrscheinlich genutzt werden",
+          "reason": "Das ist der Maßstab für Anonymität nach Erwägungsgrund 26."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wann fällt eine Information nicht unter die DSGVO, weil sie anonym ist?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Datei ist mit einem Passwort verschlüsselt",
+              "reason": "Wer das Passwort hat, kann die Daten weiterhin lesen."
+            },
+            {
+              "correct": true,
+              "blocks": "Niemand kann die Person mit Mitteln identifizieren, die nach allgemeinem Ermessen wahrscheinlich genutzt werden",
+              "reason": "Das ist der Maßstab für Anonymität nach Erwägungsgrund 26."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Namen wurden aus der Datei gelöscht",
+              "reason": "Über andere Angaben lässt sich womöglich noch eine einzelne Person aussondern."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "anonymous-data"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Warum sollte ein Unternehmen eine frühere Entscheidung überprüfen, dass bestimmte Daten anonym sind?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die DSGVO verlangt vor der Anonymisierung eine Einwilligung",
+          "reason": "Erwägungsgrund 26 legt einen Maßstab für die Identifizierbarkeit fest. Von einer Einwilligung ist dort nicht die Rede."
+        },
+        {
+          "correct": true,
+          "blocks": "Die Technik entwickelt sich weiter, und eine Identifizierung kann nach allgemeinem Ermessen wahrscheinlich werden",
+          "reason": "Nach Erwägungsgrund 26 sind technologische Entwicklungen zu berücksichtigen."
+        },
+        {
+          "correct": false,
+          "blocks": "Anonyme Daten verfallen automatisch nach einem Jahr",
+          "reason": "Einen solchen Ablauf sieht die DSGVO nicht vor. Er ist erfunden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was kann mit der Zeit dazu führen, dass anonyme Daten identifizierbar werden?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die Technik entwickelt sich weiter, und eine Identifizierung kann nach allgemeinem Ermessen wahrscheinlich werden",
+              "reason": "Nach Erwägungsgrund 26 sind technologische Entwicklungen zu berücksichtigen."
+            },
+            {
+              "correct": false,
+              "blocks": "Anonyme Daten verfallen automatisch nach einem Jahr",
+              "reason": "Einen solchen Ablauf sieht die DSGVO nicht vor. Er ist erfunden."
+            },
+            {
+              "correct": false,
+              "blocks": "Die DSGVO verlangt vor der Anonymisierung eine Einwilligung",
+              "reason": "Erwägungsgrund 26 legt einen Maßstab für die Identifizierbarkeit fest. Von einer Einwilligung ist dort nicht die Rede."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

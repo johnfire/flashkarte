@@ -1,0 +1,246 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p03",
+    "title": "Sicherheit und Rechenschaftspflicht",
+    "summary": "Daten vor Verlust und Missbrauch schützen und nachweisen können, dass Sie die Grundsätze einhalten.",
+    "covers": [
+      "integrity-confidentiality",
+      "accountability"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Sicherheit schützt die Verarbeitung vor unbefugten Vorgängen und vor Verlust."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Die Rechenschaftspflicht legt die Beweislast auf den Verantwortlichen."
+      },
+      {
+        "lesson": "p01",
+        "reason": "Der Verantwortliche muss nachweisen, dass er die Grundsätze einhält, deshalb müssen Lernende sie kennen."
+      },
+      {
+        "lesson": "p02",
+        "reason": "Der Nachweis umfasst auch Datenminimierung, Richtigkeit und Speicherbegrenzung."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Integrität und Vertraulichkeit**: Personenbezogene Daten müssen so verarbeitet werden, dass eine angemessene Sicherheit gewährleistet ist. Dazu gehört der Schutz vor **unbefugter oder unrechtmäßiger Verarbeitung** und vor **unbeabsichtigtem Verlust, unbeabsichtigter Zerstörung oder unbeabsichtigter Schädigung** (Art. 5 Abs. 1 Buchst. f).",
+        "Sicherheit umfasst also Fehler und Versehen ebenso wie Angriffe."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. f, 5 Abs. 2, 32 Abs. 1 Buchst. a, 32 Abs. 4",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Der Grundsatz verlangt **geeignete technische und organisatorische Maßnahmen** (Art. 5 Abs. 1 Buchst. f).",
+        "Zu den technischen Maßnahmen gehört die Verschlüsselung, die Art. 32 Abs. 1 Buchst. a nennt. Zu den organisatorischen Maßnahmen gehören Regeln für Beschäftigte: Nach Art. 32 Abs. 4 sind Schritte zu unternehmen, damit Personen mit Zugang zu den Daten diese nur auf Anweisung verarbeiten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. f, 5 Abs. 2, 32 Abs. 1 Buchst. a, 32 Abs. 4",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Liegt bei der Bäckerei Sonnenfeld ein Laptop mit der Kundenliste entsperrt auf dem Ladentisch, ist das ein Problem der Vertraulichkeit. Gibt es von der Bestelldatenbank nur eine einzige Kopie ohne Sicherung, droht ein unbeabsichtigter Verlust.",
+        "Beides fällt unter Art. 5 Abs. 1 Buchst. f."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. f, 5 Abs. 2, 32 Abs. 1 Buchst. a, 32 Abs. 4",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Rechenschaftspflicht**: Der Verantwortliche ist für die Einhaltung aller Grundsätze in Art. 5 Abs. 1 verantwortlich **und muss ihre Einhaltung nachweisen können** (Art. 5 Abs. 2).",
+        "Die Regeln einzuhalten genügt nicht. Sie müssen auch zeigen können, dass Sie sie einhalten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. f, 5 Abs. 2, 32 Abs. 1 Buchst. a, 32 Abs. 4",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "In der Praxis heißt Nachweisen: Belege haben. Sagt die Bäckerei Sonnenfeld, sie lösche inaktive Kundenkartenkonten nach einer bestimmten Zeit, sollte sie die schriftliche Regel vorlegen und zeigen können, dass die Regel angewendet wird.",
+        "Modul 3 zeigt die Werkzeuge, die die DSGVO dafür vorsieht, etwa Verzeichnisse und Datenschutzvorkehrungen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. f, 5 Abs. 2, 32 Abs. 1 Buchst. a, 32 Abs. 4",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "integrity-confidentiality"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-3"
+      ],
+      "prompt": "Ein Laptop mit der Kundenliste liegt entsperrt auf dem Ladentisch. Welcher Grundsatz ist berührt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Integrität und Vertraulichkeit",
+          "reason": "Art. 5 Abs. 1 Buchst. f verlangt Schutz vor unbefugter Verarbeitung, also auch vor unbefugtem Zugriff."
+        },
+        {
+          "correct": false,
+          "blocks": "Zweckbindung",
+          "reason": "Der Zweck hat sich nicht geändert. Die Sicherheit hat versagt."
+        },
+        {
+          "correct": false,
+          "blocks": "Richtigkeit",
+          "reason": "Die Daten mögen richtig sein. Das Problem ist der ungeschützte Zugriff."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welchen Grundsatz gefährdet ein unbeaufsichtigter, entsperrter Zugang zu Kundendaten?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Zweckbindung",
+              "reason": "Der Zweck hat sich nicht geändert. Die Sicherheit hat versagt."
+            },
+            {
+              "correct": false,
+              "blocks": "Richtigkeit",
+              "reason": "Die Daten mögen richtig sein. Das Problem ist der ungeschützte Zugriff."
+            },
+            {
+              "correct": true,
+              "blocks": "Integrität und Vertraulichkeit",
+              "reason": "Art. 5 Abs. 1 Buchst. f verlangt Schutz vor unbefugter Verarbeitung, also auch vor unbefugtem Zugriff."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "integrity-confidentiality"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Wovor muss die Sicherheit personenbezogene Daten nach Art. 5 Abs. 1 Buchst. f schützen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nur Angriffe von außen",
+          "reason": "Unbeabsichtigter Verlust und Missbrauch im eigenen Haus sind ebenfalls erfasst."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur absichtliche Datenlecks durch Beschäftigte",
+          "reason": "Versehen und Angriffe von außen sind ebenfalls erfasst."
+        },
+        {
+          "correct": true,
+          "blocks": "Unbefugte Verarbeitung sowie unbeabsichtigter Verlust oder unbeabsichtigte Schädigung",
+          "reason": "Art. 5 Abs. 1 Buchst. f nennt beides."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Gefahren erfasst der Grundsatz der Integrität und Vertraulichkeit?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur absichtliche Datenlecks durch Beschäftigte",
+              "reason": "Versehen und Angriffe von außen sind ebenfalls erfasst."
+            },
+            {
+              "correct": true,
+              "blocks": "Unbefugte Verarbeitung sowie unbeabsichtigter Verlust oder unbeabsichtigte Schädigung",
+              "reason": "Art. 5 Abs. 1 Buchst. f nennt beides."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur Angriffe von außen",
+              "reason": "Unbeabsichtigter Verlust und Missbrauch im eigenen Haus sind ebenfalls erfasst."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "accountability"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Eine Aufsichtsbehörde fragt, wie die Bäckerei Sonnenfeld die Grundsätze einhält. Wer muss das nachweisen können?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Das Unternehmen, das die App entwickelt hat",
+          "reason": "Die Bäckerei Sonnenfeld bleibt für ihre eigene Verarbeitung verantwortlich."
+        },
+        {
+          "correct": true,
+          "blocks": "Die Bäckerei Sonnenfeld als Verantwortlicher",
+          "reason": "Art. 5 Abs. 2 macht den Verantwortlichen verantwortlich und verpflichtet ihn zum Nachweis."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Aufsichtsbehörde, bevor sie etwas fragt",
+          "reason": "Art. 5 Abs. 2 legt die Nachweislast auf den Verantwortlichen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wer trägt nach Art. 5 Abs. 2 die Last, die Einhaltung der Grundsätze nachzuweisen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die Bäckerei Sonnenfeld als Verantwortlicher",
+              "reason": "Art. 5 Abs. 2 macht den Verantwortlichen verantwortlich und verpflichtet ihn zum Nachweis."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Aufsichtsbehörde, bevor sie etwas fragt",
+              "reason": "Art. 5 Abs. 2 legt die Nachweislast auf den Verantwortlichen."
+            },
+            {
+              "correct": false,
+              "blocks": "Das Unternehmen, das die App entwickelt hat",
+              "reason": "Die Bäckerei Sonnenfeld bleibt für ihre eigene Verarbeitung verantwortlich."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

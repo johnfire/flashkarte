@@ -1,0 +1,248 @@
+{
+  "module": "Über die Grundlagen hinaus",
+  "lesson": {
+    "slug": "n03",
+    "title": "Die DSGVO und die KI-Verordnung der EU",
+    "summary": "Erklären, warum die Einhaltung der KI-Verordnung der EU keine Frage der DSGVO klärt.",
+    "covers": [
+      "ai-act-relationship"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r07",
+        "reason": "Die Lektion nutzt Art. 22 als Beispiel für eine Regel der DSGVO, die weiter gilt."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Die **Verordnung über künstliche Intelligenz** (KI-Verordnung), Verordnung (EU) 2024/1689, regelt KI-Systeme und KI-Modelle. In der Bibliothek finden Sie unter den Community-Kursen einen eigenen Kurs zur KI-Verordnung.",
+        "Diese Lektion behandelt nur einen Punkt: wie sich die KI-Verordnung zur DSGVO verhält."
+      ],
+      "sources": [
+        {
+          "title": "KI-Verordnung (Verordnung (EU) 2024/1689), Art. 2 Abs. 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 13 Abs. 2 Buchst. f, 22, 35 Abs. 3 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Artikel 2 Abs. 7** der KI-Verordnung: Die Rechtsvorschriften der Union zum Schutz personenbezogener Daten, der Privatsphäre und der Vertraulichkeit der Kommunikation **gelten** für die Verarbeitung personenbezogener Daten im Zusammenhang mit den Rechten und Pflichten, die die KI-Verordnung festlegt.",
+        "Unbeschadet ihrer eigenen Art. 4a und 59 **berührt** die KI-Verordnung **nicht** die DSGVO, die Verordnung (EU) 2018/1725, die Richtlinie 2002/58/EG oder die Richtlinie (EU) 2016/680.",
+        "Diese beiden Artikel sind Ausnahmen innerhalb der KI-Verordnung. Dieser Kurs behandelt sie nicht."
+      ],
+      "sources": [
+        {
+          "title": "KI-Verordnung (Verordnung (EU) 2024/1689), Art. 2 Abs. 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 13 Abs. 2 Buchst. f, 22, 35 Abs. 3 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Es gibt also **zwei getrennte Gruppen von Fragen**. Ein KI-Werkzeug kann die KI-Verordnung erfüllen, und die Verarbeitung damit kann trotzdem nach der DSGVO rechtswidrig sein, oder umgekehrt.",
+        "Sagt ein Anbieter »unser Werkzeug erfüllt die KI-Verordnung«, beantwortet das nicht die Fragen der DSGVO zu Ihrer eigenen Verarbeitung."
+      ],
+      "sources": [
+        {
+          "title": "KI-Verordnung (Verordnung (EU) 2024/1689), Art. 2 Abs. 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 13 Abs. 2 Buchst. f, 22, 35 Abs. 3 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Für ein KI-Werkzeug, das Bewerberinnen und Bewerber vorauswählt, fragt die DSGVO weiterhin:",
+        {
+          "type": "list",
+          "items": [
+            "Was ist die Rechtsgrundlage?",
+            "Geben die Datenschutzhinweise aussagekräftige Informationen über die involvierte Logik (Art. 13 Abs. 2 Buchst. f)?",
+            "Gibt es eine ausschließlich auf einer automatisierten Verarbeitung beruhende Entscheidung mit erheblichen Auswirkungen (Art. 22)?",
+            "Ist eine Datenschutz-Folgenabschätzung erforderlich (Art. 35 Abs. 3 Buchst. a)?"
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "KI-Verordnung (Verordnung (EU) 2024/1689), Art. 2 Abs. 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 13 Abs. 2 Buchst. f, 22, 35 Abs. 3 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "ai-act-relationship"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Ein KI-Anbieter sagt, sein Werkzeug zur Personalauswahl erfülle die KI-Verordnung. Sind damit die DSGVO-Fragen der Bäckerei Sonnenfeld geklärt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, die KI-Verordnung berührt die DSGVO nicht",
+          "reason": "Art. 2 Abs. 7 der KI-Verordnung."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, für KI ersetzt die KI-Verordnung die DSGVO",
+          "reason": "Art. 2 Abs. 7 sagt das Gegenteil."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn das Werkzeug ein geringes Risiko hat",
+          "reason": "Die Risikoeinstufung nach der KI-Verordnung beantwortet keine Fragen der DSGVO."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Genügt die Einhaltung der KI-Verordnung, damit eine Verarbeitung nach der DSGVO rechtmäßig ist?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, für KI ersetzt die KI-Verordnung die DSGVO",
+              "reason": "Art. 2 Abs. 7 sagt das Gegenteil."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn das Werkzeug ein geringes Risiko hat",
+              "reason": "Die Risikoeinstufung nach der KI-Verordnung beantwortet keine Fragen der DSGVO."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, die KI-Verordnung berührt die DSGVO nicht",
+              "reason": "Art. 2 Abs. 7 der KI-Verordnung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "ai-act-relationship"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Ein KI-Werkzeug lehnt Bewerbungen automatisch ab, ohne dass ein Mensch sie prüft. Welcher Artikel der DSGVO bleibt unmittelbar relevant?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Keiner, weil die KI-Verordnung das regelt",
+          "reason": "Die DSGVO gilt weiter (Art. 2 Abs. 7 der KI-Verordnung)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur Artikel 30",
+          "reason": "Auch das Verzeichnis von Verarbeitungstätigkeiten zählt, aber die unmittelbare Regel ist Art. 22."
+        },
+        {
+          "correct": true,
+          "blocks": "Artikel 22",
+          "reason": "Ausschließlich auf einer automatisierten Verarbeitung beruhende Entscheidungen mit erheblichen Auswirkungen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welcher Artikel der DSGVO gilt bei einer ausschließlich automatisierten Entscheidung durch ein KI-Werkzeug weiterhin?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur Artikel 30",
+              "reason": "Auch das Verzeichnis von Verarbeitungstätigkeiten zählt, aber die unmittelbare Regel ist Art. 22."
+            },
+            {
+              "correct": true,
+              "blocks": "Artikel 22",
+              "reason": "Ausschließlich auf einer automatisierten Verarbeitung beruhende Entscheidungen mit erheblichen Auswirkungen."
+            },
+            {
+              "correct": false,
+              "blocks": "Keiner, weil die KI-Verordnung das regelt",
+              "reason": "Die DSGVO gilt weiter (Art. 2 Abs. 7 der KI-Verordnung)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "ai-act-relationship"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Was sagt Art. 2 Abs. 7 der KI-Verordnung über die DSGVO?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die KI-Verordnung hebt Art. 22 der DSGVO auf",
+          "reason": "Nichts in Art. 2 Abs. 7 hebt Regeln der DSGVO auf."
+        },
+        {
+          "correct": true,
+          "blocks": "Die KI-Verordnung berührt sie nicht, abgesehen von zwei genannten Ausnahmen",
+          "reason": "Art. 2 Abs. 7, unbeschadet der Art. 4a und 59."
+        },
+        {
+          "correct": false,
+          "blocks": "Die DSGVO gilt nicht für KI-Systeme",
+          "reason": "Das Datenschutzrecht gilt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wie beschreibt die KI-Verordnung ihr Verhältnis zur DSGVO?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die KI-Verordnung berührt sie nicht, abgesehen von zwei genannten Ausnahmen",
+              "reason": "Art. 2 Abs. 7, unbeschadet der Art. 4a und 59."
+            },
+            {
+              "correct": false,
+              "blocks": "Die DSGVO gilt nicht für KI-Systeme",
+              "reason": "Das Datenschutzrecht gilt."
+            },
+            {
+              "correct": false,
+              "blocks": "Die KI-Verordnung hebt Art. 22 der DSGVO auf",
+              "reason": "Nichts in Art. 2 Abs. 7 hebt Regeln der DSGVO auf."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

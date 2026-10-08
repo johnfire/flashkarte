@@ -143,7 +143,7 @@ LESSONS = {
                     "**delete or return** all data at the end, at the controller's choice;",
                     "provide information and allow **audits**.",
                 ]},
-                "The processor must immediately tell the controller if an instruction infringes data protection law.",
+                "The processor must immediately tell the controller if, in its opinion, an instruction infringes data protection law.",
             ],
             [
                 "**Sub-processors** (Article 28(2)): a processor may not engage another processor without the controller's prior **specific or general written authorisation**.",

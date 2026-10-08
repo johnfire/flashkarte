@@ -1,0 +1,309 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o04",
+    "title": "Sicherheit der Verarbeitung",
+    "summary": "Dem Risiko angemessene Sicherheitsmaßnahmen wählen und prüfen, ob sie wirken.",
+    "covers": [
+      "security-measures"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g03",
+        "reason": "Die Pseudonymisierung ist eine der genannten Sicherheitsmaßnahmen."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Artikel 32 ist eine Pflicht des Verantwortlichen, deshalb müssen Lernende diese Rolle kennen."
+      },
+      {
+        "lesson": "p03",
+        "reason": "Artikel 32 setzt den Grundsatz der Integrität und Vertraulichkeit um."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Artikel 32 Abs. 1: Unter Berücksichtigung des Stands der Technik, der Implementierungskosten, der Art, des Umfangs, der Umstände und der Zwecke der Verarbeitung sowie der Risiken treffen **der Verantwortliche und der Auftragsverarbeiter** Maßnahmen, um ein **„dem Risiko angemessenes Schutzniveau“** zu gewährleisten.",
+        "Sicherheit heißt also weder »das Maximum, koste es, was es wolle« noch »so billig wie möglich«. Sie richtet sich nach dem Risiko."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 32",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Artikel 32 Abs. 1 nennt Maßnahmen, die gegebenenfalls einzusetzen sind:",
+        {
+          "type": "list",
+          "items": [
+            "a) die **Pseudonymisierung und Verschlüsselung**;",
+            "b) die Fähigkeit, die **Vertraulichkeit, Integrität, Verfügbarkeit und Belastbarkeit** der Systeme auf Dauer sicherzustellen;",
+            "c) die Fähigkeit, die Verfügbarkeit der Daten und den Zugang zu ihnen nach einem Zwischenfall rasch **wiederherzustellen**;",
+            "d) ein Verfahren zur **regelmäßigen Überprüfung, Bewertung und Evaluierung** der Maßnahmen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 32",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Bei der Beurteilung des Risikos sind insbesondere die Risiken zu berücksichtigen, die, ob unbeabsichtigt oder unrechtmäßig, durch **Vernichtung, Verlust, Veränderung oder unbefugte Offenlegung** personenbezogener Daten oder durch **unbefugten Zugang** zu ihnen entstehen (Art. 32 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 32",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Unternehmen müssen Schritte unternehmen, damit Personen, die ihnen unterstellt sind und Zugang zu personenbezogenen Daten haben, diese **nur auf Anweisung** verarbeiten (Art. 32 Abs. 4).",
+        "Die Einhaltung genehmigter Verhaltensregeln oder eines genehmigten Zertifizierungsverfahrens kann helfen, die Einhaltung nachzuweisen (Art. 32 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 32",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Maßnahmen der Bäckerei Sonnenfeld, abgestimmt auf ihre Risiken:",
+        {
+          "type": "list",
+          "items": [
+            "verschlüsselte Laptops und Mobiltelefone;",
+            "Zugriff auf Personalakten nur für die Geschäftsführung und die Lohnabrechnung;",
+            "tägliche Sicherungen des Bestellsystems, deren Wiederherstellung tatsächlich getestet wird;",
+            "schriftliche Anweisungen für die Beschäftigten;",
+            "eine jährliche Prüfung, ob die Maßnahmen noch wirken."
+          ]
+        },
+        "Einmal eine Firewall zu kaufen und sie nie zu überprüfen, erfüllt Buchst. d nicht.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 32",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Welches Schutzniveau verlangt Art. 32?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Es muss dem Risiko angemessen sein",
+          "reason": "Art. 32 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Es muss so hoch wie möglich sein, gleich, was es kostet",
+          "reason": "Kosten und Stand der Technik sind zu berücksichtigen."
+        },
+        {
+          "correct": false,
+          "blocks": "Das billigste genügt",
+          "reason": "Das Schutzniveau muss dem Risiko angemessen sein."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wie hoch muss das Schutzniveau der Verarbeitung nach Art. 32 sein?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Es muss so hoch wie möglich sein, gleich, was es kostet",
+              "reason": "Kosten und Stand der Technik sind zu berücksichtigen."
+            },
+            {
+              "correct": false,
+              "blocks": "Das billigste genügt",
+              "reason": "Das Schutzniveau muss dem Risiko angemessen sein."
+            },
+            {
+              "correct": true,
+              "blocks": "Es muss dem Risiko angemessen sein",
+              "reason": "Art. 32 Abs. 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Was davon nennt Art. 32 Abs. 1?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Veröffentlichung des Jahresumsatzes",
+          "reason": "Keine Sicherheitsmaßnahme."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Benennung eines Datenschutzbeauftragten",
+          "reason": "Das regelt Art. 37. Es ist keine Maßnahme nach Art. 32."
+        },
+        {
+          "correct": true,
+          "blocks": "Die Fähigkeit, den Zugang zu Daten nach einem Zwischenfall rasch wiederherzustellen",
+          "reason": "Art. 32 Abs. 1 Buchst. c."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was gehört zu den Maßnahmen, die Art. 32 Abs. 1 aufzählt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Benennung eines Datenschutzbeauftragten",
+              "reason": "Das regelt Art. 37. Es ist keine Maßnahme nach Art. 32."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Fähigkeit, den Zugang zu Daten nach einem Zwischenfall rasch wiederherzustellen",
+              "reason": "Art. 32 Abs. 1 Buchst. c."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Veröffentlichung des Jahresumsatzes",
+              "reason": "Keine Sicherheitsmaßnahme."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld hat vor drei Jahren Sicherheitssoftware installiert und sie nie überprüft. Was fehlt ihr nach Art. 32 Abs. 1?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Eine Prüfung, aber erst nach einer Datenpanne",
+          "reason": "Buchst. d sagt regelmäßig, nicht erst nach einem Vorfall."
+        },
+        {
+          "correct": true,
+          "blocks": "Die regelmäßige Überprüfung und Bewertung der Maßnahmen",
+          "reason": "Art. 32 Abs. 1 Buchst. d."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts, einmal installieren genügt",
+          "reason": "Buchst. d verlangt eine regelmäßige Überprüfung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was verlangt Art. 32 Abs. 1 Buchst. d über das Installieren von Sicherheitsmaßnahmen hinaus?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die regelmäßige Überprüfung und Bewertung der Maßnahmen",
+              "reason": "Art. 32 Abs. 1 Buchst. d."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts, einmal installieren genügt",
+              "reason": "Buchst. d verlangt eine regelmäßige Überprüfung."
+            },
+            {
+              "correct": false,
+              "blocks": "Eine Prüfung, aber erst nach einer Datenpanne",
+              "reason": "Buchst. d sagt regelmäßig, nicht erst nach einem Vorfall."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "security-measures"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Gilt Art. 32 für den Auftragsverarbeiter, der für die Bäckerei Sonnenfeld die Lohnabrechnung erledigt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ja, Verantwortliche und Auftragsverarbeiter gleichermaßen",
+          "reason": "Artikel 32 Abs. 1 nennt beide."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, nur der Verantwortliche",
+          "reason": "Auftragsverarbeiter werden ebenfalls genannt."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, nur wenn der Vertrag es vorsieht",
+          "reason": "Artikel 32 gilt unmittelbar."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Müssen neben Verantwortlichen auch Auftragsverarbeiter Sicherheitsmaßnahmen nach Art. 32 treffen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, nur der Verantwortliche",
+              "reason": "Auftragsverarbeiter werden ebenfalls genannt."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, nur wenn der Vertrag es vorsieht",
+              "reason": "Artikel 32 gilt unmittelbar."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, Verantwortliche und Auftragsverarbeiter gleichermaßen",
+              "reason": "Artikel 32 Abs. 1 nennt beide."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

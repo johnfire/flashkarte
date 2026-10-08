@@ -1,0 +1,346 @@
+{
+  "module": "Grenzen, Aufsichtsbehörden und Geldbußen",
+  "lesson": {
+    "slug": "x05",
+    "title": "Schrems II und der Datenschutzrahmen EU-USA",
+    "summary": "Erklären, was das Schrems-II-Urteil für Übermittlungen auf der Grundlage von Standarddatenschutzklauseln verlangt und was der Datenschutzrahmen EU-USA ist.",
+    "covers": [
+      "essential-equivalence",
+      "eu-us-dpf"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "x01",
+        "reason": "Das Schrems-II-Urteil legt die Grundlage der Standarddatenschutzklauseln aus."
+      },
+      {
+        "lesson": "x03",
+        "reason": "Das Schrems-II-Urteil stützt sich auf die Befugnis, Übermittlungen auszusetzen."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "In der **Rechtssache C-311/18**, bekannt als *Schrems II*, hat der Gerichtshof der Europäischen Union (EuGH) am 16. Juli 2020 über zwei Grundlagen für Übermittlungen entschieden: die Standarddatenschutzklauseln der Kommission und den Angemessenheitsbeschluss zum **EU-US-Datenschutzschild** (»Privacy Shield«).",
+        "Das Urteil ist bis heute der Maßstab dafür, wie sorgfältig Übermittlungen geprüft werden müssen."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-311/18 Schrems II, Tenor, Nr. 1 bis 5",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Durchführungsbeschluss (EU) 2023/1795 der Kommission, Titel, Datum und Status auf EUR-Lex, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 45 Abs. 2, 46 Abs. 1, 58 Abs. 2 Buchst. f und j",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Nr. 1**: Die DSGVO gilt für eine Übermittlung zu gewerblichen Zwecken an ein Unternehmen in einem Drittland, auch wenn die Behörden dieses Landes die Daten für Zwecke der nationalen Sicherheit verarbeiten können (Nr. 1 des Tenors)."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-311/18 Schrems II, Tenor, Nr. 1 bis 5",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Durchführungsbeschluss (EU) 2023/1795 der Kommission, Titel, Datum und Status auf EUR-Lex, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 45 Abs. 2, 46 Abs. 1, 58 Abs. 2 Buchst. f und j",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Nr. 2**: Daten, die auf der Grundlage von Standarddatenschutzklauseln übermittelt werden, müssen ein Schutzniveau genießen, das dem in der EU garantierten Niveau **„der Sache nach gleichwertig“** ist.",
+        "Bei der Beurteilung sind **sowohl** die vertraglichen Regelungen **als auch**, was einen etwaigen Zugriff der Behörden betrifft, die maßgeblichen Elemente der **Rechtsordnung** des Drittlands zu berücksichtigen, insbesondere die in Art. 45 Abs. 2 genannten Elemente."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-311/18 Schrems II, Tenor, Nr. 1 bis 5",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Durchführungsbeschluss (EU) 2023/1795 der Kommission, Titel, Datum und Status auf EUR-Lex, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 45 Abs. 2, 46 Abs. 1, 58 Abs. 2 Buchst. f und j",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Nr. 3**: Liegt kein gültiger Angemessenheitsbeschluss vor, muss die Aufsichtsbehörde eine auf Standarddatenschutzklauseln gestützte Übermittlung **aussetzen oder verbieten**, wenn die Klauseln in dem Drittland nicht eingehalten werden oder nicht eingehalten werden können und der erforderliche Schutz nicht mit anderen Mitteln gewährleistet werden kann. Das gilt, sofern der Verantwortliche oder der Auftragsverarbeiter die Übermittlung nicht selbst ausgesetzt oder beendet hat. Die Behörde nutzt dafür ihre Befugnisse nach Art. 58 Abs. 2 Buchst. f und j."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-311/18 Schrems II, Tenor, Nr. 1 bis 5",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Durchführungsbeschluss (EU) 2023/1795 der Kommission, Titel, Datum und Status auf EUR-Lex, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 45 Abs. 2, 46 Abs. 1, 58 Abs. 2 Buchst. f und j",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Nr. 4 und 5**: Die Prüfung des Beschlusses über Standardvertragsklauseln von 2010 hat nichts ergeben, was seine Gültigkeit berühren könnte. Der Beschluss (EU) 2016/1250 zum **Datenschutzschild** wurde für **ungültig** erklärt."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-311/18 Schrems II, Tenor, Nr. 1 bis 5",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Durchführungsbeschluss (EU) 2023/1795 der Kommission, Titel, Datum und Status auf EUR-Lex, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 45 Abs. 2, 46 Abs. 1, 58 Abs. 2 Buchst. f und j",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Am 10. Juli 2023 erließ die Kommission den Durchführungsbeschluss (EU) 2023/1795 „über die Angemessenheit des Schutzniveaus für personenbezogene Daten nach dem **Datenschutzrahmen EU-USA**“. Das ist ein Angemessenheitsbeschluss.",
+        "Am 7. Oktober 2026 wies EUR-Lex den Beschluss als **in Kraft** aus. EUR-Lex vermerkte außerdem eine Bestätigung durch das Gericht der Europäischen Union in der Rechtssache T-553/23 und eine weitere Befassung des Gerichtshofs in der Rechtssache C-804/25.",
+        {
+          "type": "callout",
+          "tone": "warning",
+          "text": "**Prüfen Sie den aktuellen Stand** des Datenschutzrahmens, bevor Sie sich darauf stützen. Gerichtsverfahren können ihn verändern, wie der Datenschutzschild gezeigt hat."
+        }
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-311/18 Schrems II, Tenor, Nr. 1 bis 5",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Durchführungsbeschluss (EU) 2023/1795 der Kommission, Titel, Datum und Status auf EUR-Lex, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 45 Abs. 2, 46 Abs. 1, 58 Abs. 2 Buchst. f und j",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "essential-equivalence"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Welches Schutzniveau verlangt das Schrems-II-Urteil für Übermittlungen auf der Grundlage von Standarddatenschutzklauseln?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ein Schutzniveau, das dem in der EU der Sache nach gleichwertig ist",
+          "reason": "Nr. 2 des Tenors."
+        },
+        {
+          "correct": false,
+          "blocks": "Identische Gesetze im Empfängerland",
+          "reason": "Maßstab ist die Gleichwertigkeit der Sache nach, nicht identische Gesetze."
+        },
+        {
+          "correct": false,
+          "blocks": "Jedes Niveau, sobald die Klauseln unterschrieben sind",
+          "reason": "Die Unterschrift allein genügt nicht. Auch die Rechtsordnung muss berücksichtigt werden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welchen Maßstab müssen übermittelte Daten nach dem Schrems-II-Urteil erfüllen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Identische Gesetze im Empfängerland",
+              "reason": "Maßstab ist die Gleichwertigkeit der Sache nach, nicht identische Gesetze."
+            },
+            {
+              "correct": false,
+              "blocks": "Jedes Niveau, sobald die Klauseln unterschrieben sind",
+              "reason": "Die Unterschrift allein genügt nicht. Auch die Rechtsordnung muss berücksichtigt werden."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein Schutzniveau, das dem in der EU der Sache nach gleichwertig ist",
+              "reason": "Nr. 2 des Tenors."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "essential-equivalence"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Was muss bei einer Übermittlung auf der Grundlage von Standarddatenschutzklauseln außer den Klauseln selbst geprüft werden?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Der Jahresumsatz des Empfängers",
+          "reason": "Er gehört nicht zur Beurteilung."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts, die Klauseln allein entscheiden",
+          "reason": "Der Gerichtshof verlangt, beides zu berücksichtigen."
+        },
+        {
+          "correct": true,
+          "blocks": "Der Zugriff der Behörden nach der Rechtsordnung des Empfängerlandes",
+          "reason": "Nr. 2 des Tenors, mit Verweis auf Art. 45 Abs. 2."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was zählt nach dem Schrems-II-Urteil außerdem, wenn eine Übermittlung auf der Grundlage von Standarddatenschutzklauseln beurteilt wird?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nichts, die Klauseln allein entscheiden",
+              "reason": "Der Gerichtshof verlangt, beides zu berücksichtigen."
+            },
+            {
+              "correct": true,
+              "blocks": "Der Zugriff der Behörden nach der Rechtsordnung des Empfängerlandes",
+              "reason": "Nr. 2 des Tenors, mit Verweis auf Art. 45 Abs. 2."
+            },
+            {
+              "correct": false,
+              "blocks": "Der Jahresumsatz des Empfängers",
+              "reason": "Er gehört nicht zur Beurteilung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-us-dpf"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Was hat der Gerichtshof im Schrems-II-Urteil über den EU-US-Datenschutzschild entschieden?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Er wurde in Standarddatenschutzklauseln umgewandelt",
+          "reason": "Das hat der Gerichtshof nicht getan."
+        },
+        {
+          "correct": true,
+          "blocks": "Er wurde für ungültig erklärt",
+          "reason": "Nr. 5 des Tenors."
+        },
+        {
+          "correct": false,
+          "blocks": "Er wurde als gültig bestätigt",
+          "reason": "Der Gerichtshof hat ihn für ungültig erklärt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was geschah in der Rechtssache C-311/18 mit dem Beschluss (EU) 2016/1250?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Er wurde für ungültig erklärt",
+              "reason": "Nr. 5 des Tenors."
+            },
+            {
+              "correct": false,
+              "blocks": "Er wurde als gültig bestätigt",
+              "reason": "Der Gerichtshof hat ihn für ungültig erklärt."
+            },
+            {
+              "correct": false,
+              "blocks": "Er wurde in Standarddatenschutzklauseln umgewandelt",
+              "reason": "Das hat der Gerichtshof nicht getan."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-us-dpf"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "Was ist der Durchführungsbeschluss (EU) 2023/1795 der Kommission?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ein Angemessenheitsbeschluss zum Datenschutzrahmen EU-USA",
+          "reason": "Erlassen am 10. Juli 2023; laut EUR-Lex am 7. Oktober 2026 in Kraft."
+        },
+        {
+          "correct": false,
+          "blocks": "Ein Urteil des Gerichtshofs",
+          "reason": "Es ist ein Beschluss der Kommission."
+        },
+        {
+          "correct": false,
+          "blocks": "Ein neuer Satz von Standarddatenschutzklauseln",
+          "reason": "Es ist ein Angemessenheitsbeschluss."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Art von Rechtsakt ist der Beschluss der Kommission zum Datenschutzrahmen EU-USA?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ein Urteil des Gerichtshofs",
+              "reason": "Es ist ein Beschluss der Kommission."
+            },
+            {
+              "correct": false,
+              "blocks": "Ein neuer Satz von Standarddatenschutzklauseln",
+              "reason": "Es ist ein Angemessenheitsbeschluss."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein Angemessenheitsbeschluss zum Datenschutzrahmen EU-USA",
+              "reason": "Erlassen am 10. Juli 2023; laut EUR-Lex am 7. Oktober 2026 in Kraft."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

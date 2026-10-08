@@ -1,0 +1,327 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o01",
+    "title": "Rechenschaftspflicht in der Praxis: das Verzeichnis von Verarbeitungstätigkeiten",
+    "summary": "Die Maßnahmen am Risiko ausrichten, ein Verzeichnis von Verarbeitungstätigkeiten führen und erkennen, wann auch kleine Unternehmen eines führen müssen.",
+    "covers": [
+      "controller-measures",
+      "records-of-processing"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Jeder Eintrag im Verzeichnis nennt die Zwecke der Verarbeitung."
+      },
+      {
+        "lesson": "p03",
+        "reason": "Artikel 24 setzt die Rechenschaftspflicht in Maßnahmen und Datenschutzvorkehrungen um."
+      },
+      {
+        "lesson": "p08",
+        "reason": "Die Ausnahme für weniger als 250 Beschäftigte gilt nicht für besondere Kategorien personenbezogener Daten."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Artikel 24 Abs. 1 macht aus der Rechenschaftspflicht konkretes Handeln. Unter Berücksichtigung der Art, des Umfangs, der Umstände und der Zwecke der Verarbeitung sowie der unterschiedlichen Eintrittswahrscheinlichkeit und Schwere der **Risiken** muss der Verantwortliche **geeignete technische und organisatorische Maßnahmen** umsetzen.",
+        "Diese Maßnahmen müssen sicherstellen, dass die Verarbeitung gemäß der DSGVO erfolgt, und es dem Verantwortlichen ermöglichen, das nachzuweisen. Sie werden erforderlichenfalls überprüft und aktualisiert."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Sofern dies in einem angemessenen Verhältnis zu den Verarbeitungstätigkeiten steht, umfassen die Maßnahmen geeignete **Datenschutzvorkehrungen** (Art. 24 Abs. 2).",
+        "Die Einhaltung genehmigter Verhaltensregeln oder eines genehmigten Zertifizierungsverfahrens kann als ein Gesichtspunkt herangezogen werden, um die Einhaltung nachzuweisen (Art. 24 Abs. 3).",
+        "Das entscheidende Wort ist **geeignet**: Ein Krankenhaus und eine Bäckerei brauchen nicht dieselben Maßnahmen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Das wichtigste Werkzeug für diesen Nachweis ist das **Verzeichnis von Verarbeitungstätigkeiten** (Art. 30 Abs. 1). Das Verzeichnis des Verantwortlichen enthält:",
+        {
+          "type": "list",
+          "items": [
+            "a) den Namen und die Kontaktdaten des Verantwortlichen und gegebenenfalls des gemeinsam mit ihm Verantwortlichen, des Vertreters sowie eines etwaigen Datenschutzbeauftragten;",
+            "b) die Zwecke der Verarbeitung;",
+            "c) die Kategorien betroffener Personen und die Kategorien personenbezogener Daten;",
+            "d) die Kategorien von Empfängern, auch Empfänger außerhalb der EU;",
+            "e) gegebenenfalls Übermittlungen in Länder außerhalb der EU;",
+            "f) wenn möglich, die vorgesehenen Fristen für die Löschung;",
+            "g) wenn möglich, eine allgemeine Beschreibung der technischen und organisatorischen Sicherheitsmaßnahmen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Auftragsverarbeiter führen ein eigenes Verzeichnis der Verarbeitungen, die sie im Auftrag jedes Verantwortlichen durchführen (Art. 30 Abs. 2).",
+        "Das Verzeichnis ist schriftlich zu führen, was auch in einem elektronischen Format erfolgen kann (Art. 30 Abs. 3). Es ist der **Aufsichtsbehörde auf Anfrage** zur Verfügung zu stellen (Art. 30 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Die Ausnahme für weniger als 250 Beschäftigte** (Art. 30 Abs. 5): Unternehmen oder Einrichtungen, die **„weniger als 250 Mitarbeiter beschäftigen“**, müssen kein Verzeichnis führen, **es sei denn**, ihre Verarbeitung",
+        {
+          "type": "list",
+          "items": [
+            "birgt ein Risiko für die Rechte und Freiheiten der betroffenen Personen,",
+            "erfolgt **„nicht nur gelegentlich“** oder",
+            "umfasst besondere Kategorien personenbezogener Daten oder Daten über strafrechtliche Verurteilungen und Straftaten."
+          ]
+        },
+        "Schon eine dieser Bedingungen lässt die Ausnahme entfallen. Deshalb ist sie enger, als sie zunächst aussieht."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld hat rund 40 Beschäftigte. Sie bearbeitet aber jede Woche Vorbestellungen und die Lohnabrechnung, und das geschieht nicht nur gelegentlich. Außerdem verarbeitet sie Krankmeldungen, also Gesundheitsdaten. Die Ausnahme greift daher nicht, und die Bäckerei führt ein Verzeichnis.",
+        "Ein Beispieleintrag: *Vorbestellungen. Zweck: Bestellungen abwickeln. Betroffene Personen: Kundinnen und Kunden. Daten: Name, Telefonnummer, Bestellung. Empfänger: Hosting-Anbieter der App. Löschung: eine festgelegte Frist nach der letzten Bestellung. Sicherheit: Zugriff nach Rollen, verschlüsselte Sicherungskopien.*",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "controller-measures"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Wie soll ein Verantwortlicher nach Art. 24 seine Datenschutzmaßnahmen auswählen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nach Art, Umfang, Umständen und Zwecken der Verarbeitung sowie nach dem Risiko",
+          "reason": "Art. 24 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Für jedes Unternehmen gleich, unabhängig von seiner Größe",
+          "reason": "Artikel 24 verlangt geeignete Maßnahmen, also fallen sie unterschiedlich aus."
+        },
+        {
+          "correct": false,
+          "blocks": "Erst wenn eine Behörde sie verlangt",
+          "reason": "Artikel 24 gilt von Anfang an."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wie werden die Maßnahmen eines Verantwortlichen nach Art. 24 auf seine Lage abgestimmt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Für jedes Unternehmen gleich, unabhängig von seiner Größe",
+              "reason": "Artikel 24 verlangt geeignete Maßnahmen, also fallen sie unterschiedlich aus."
+            },
+            {
+              "correct": false,
+              "blocks": "Erst wenn eine Behörde sie verlangt",
+              "reason": "Artikel 24 gilt von Anfang an."
+            },
+            {
+              "correct": true,
+              "blocks": "Nach Art, Umfang, Umständen und Zwecken der Verarbeitung sowie nach dem Risiko",
+              "reason": "Art. 24 Abs. 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "records-of-processing"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Was davon gehört in das Verzeichnis von Verarbeitungstätigkeiten eines Verantwortlichen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Den Namen jeder einzelnen Kundin und jedes einzelnen Kunden",
+          "reason": "Das Verzeichnis nennt Kategorien, nicht jede einzelne Person."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Administratorpasswörter",
+          "reason": "Passwörter gehören nicht in das Verzeichnis. Sie müssen geheim bleiben."
+        },
+        {
+          "correct": true,
+          "blocks": "Die Zwecke der Verarbeitung",
+          "reason": "Art. 30 Abs. 1 Buchst. b."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche dieser Angaben muss das Verzeichnis nach Art. 30 Abs. 1 enthalten?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Administratorpasswörter",
+              "reason": "Passwörter gehören nicht in das Verzeichnis. Sie müssen geheim bleiben."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Zwecke der Verarbeitung",
+              "reason": "Art. 30 Abs. 1 Buchst. b."
+            },
+            {
+              "correct": false,
+              "blocks": "Den Namen jeder einzelnen Kundin und jedes einzelnen Kunden",
+              "reason": "Das Verzeichnis nennt Kategorien, nicht jede einzelne Person."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "records-of-processing"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld hat 40 Beschäftigte, bearbeitet jede Woche Bestellungen und verarbeitet Krankmeldungen ihrer Beschäftigten. Darf sie auf das Verzeichnis verzichten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, wenn es noch nie eine Datenpanne gab",
+          "reason": "Eine Vorgeschichte ohne Vorfälle ist keine Bedingung in Art. 30 Abs. 5."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, die Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten",
+          "reason": "Art. 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, mit weniger als 250 Beschäftigten gilt die Ausnahme immer",
+          "reason": "Die Ausnahme hat selbst drei Ausnahmen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Hilft die Ausnahme für weniger als 250 Beschäftigte einem kleinen Unternehmen, das regelmäßig Daten verarbeitet, darunter Gesundheitsdaten?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nein, die Verarbeitung erfolgt nicht nur gelegentlich und umfasst Gesundheitsdaten",
+              "reason": "Art. 30 Abs. 5: Jede der beiden Bedingungen lässt die Ausnahme entfallen."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, mit weniger als 250 Beschäftigten gilt die Ausnahme immer",
+              "reason": "Die Ausnahme hat selbst drei Ausnahmen."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn es noch nie eine Datenpanne gab",
+              "reason": "Eine Vorgeschichte ohne Vorfälle ist keine Bedingung in Art. 30 Abs. 5."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "records-of-processing"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Wer kann von der Bäckerei Sonnenfeld verlangen, ihr Verzeichnis von Verarbeitungstätigkeiten vorzulegen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Aufsichtsbehörde",
+          "reason": "Art. 30 Abs. 4."
+        },
+        {
+          "correct": false,
+          "blocks": "Jede Kundin und jeder Kunde, die danach fragen",
+          "reason": "Kundinnen und Kunden haben ein Auskunftsrecht, aber Art. 30 Abs. 4 betrifft die Aufsichtsbehörde."
+        },
+        {
+          "correct": false,
+          "blocks": "Niemand, das Verzeichnis ist rein intern",
+          "reason": "Nach Art. 30 Abs. 4 ist es der Aufsichtsbehörde zur Verfügung zu stellen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wer kann nach Art. 30 verlangen, dass ihm das Verzeichnis von Verarbeitungstätigkeiten zur Verfügung gestellt wird?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Jede Kundin und jeder Kunde, die danach fragen",
+              "reason": "Kundinnen und Kunden haben ein Auskunftsrecht, aber Art. 30 Abs. 4 betrifft die Aufsichtsbehörde."
+            },
+            {
+              "correct": false,
+              "blocks": "Niemand, das Verzeichnis ist rein intern",
+              "reason": "Nach Art. 30 Abs. 4 ist es der Aufsichtsbehörde zur Verfügung zu stellen."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Aufsichtsbehörde",
+              "reason": "Art. 30 Abs. 4."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

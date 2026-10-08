@@ -7,7 +7,7 @@ from pathlib import Path
 
 import curriculum_plan
 from curriculum_validation import check_curriculum
-from german_validation import check_language, check_parity, check_quotes
+from german_validation import check_german, check_language, check_parity, check_quotes
 from lesson_builder import build_course, subject_import
 from lesson_validation import check_course, check_lesson
 from sources import SOURCES, file_name, sha256
@@ -113,6 +113,11 @@ class GermanTests(unittest.TestCase):
 
     def lesson(self):
         return copy.deepcopy(self.german)
+
+    def test_saved_german_edition_is_current_and_valid(self):
+        failures, german = check_german(curriculum_plan.build())
+        self.assertEqual(failures, [])
+        self.assertEqual(len(german), 40)
 
     def test_reference_lesson_passes(self):
         self.assertEqual(check_lesson(self.german), [])

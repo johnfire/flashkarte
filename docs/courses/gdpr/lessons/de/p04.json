@@ -1,0 +1,351 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p04",
+    "title": "Die sechs Rechtsgrundlagen",
+    "summary": "Jeden Zweck einer der sechs Rechtsgrundlagen zuordnen und prüfen, ob die Verarbeitung wirklich erforderlich ist.",
+    "covers": [
+      "lawful-bases",
+      "necessity-test"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g05",
+        "reason": "Mehrere Rechtsgrundlagen beziehen sich auf Pflichten, Interessen oder Aufgaben des Verantwortlichen."
+      },
+      {
+        "lesson": "p01",
+        "reason": "Die Rechtsgrundlagen sind das, was eine Verarbeitung im Sinne des ersten Grundsatzes rechtmäßig macht."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Eine Verarbeitung ist **nur rechtmäßig, wenn** mindestens eine von sechs Rechtsgrundlagen erfüllt ist (Art. 6 Abs. 1).",
+        "Ohne Rechtsgrundlage ist die Verarbeitung unrechtmäßig, wie gut die Absicht auch sein mag."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1, 6 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die ersten drei Rechtsgrundlagen:",
+        {
+          "type": "list",
+          "items": [
+            "**a) Einwilligung**: Die Person hat in die Verarbeitung für einen oder mehrere bestimmte Zwecke eingewilligt.",
+            "**b) Vertrag**: Die Verarbeitung ist für die Erfüllung eines Vertrags mit der Person erforderlich oder für vorvertragliche Maßnahmen, die auf ihre Anfrage erfolgen.",
+            "**c) Rechtliche Verpflichtung**: Die Verarbeitung ist zur Erfüllung einer rechtlichen Verpflichtung erforderlich, der der Verantwortliche unterliegt."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1, 6 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Die anderen drei:",
+        {
+          "type": "list",
+          "items": [
+            "**d) Lebenswichtige Interessen**: Die Verarbeitung ist erforderlich, um lebenswichtige Interessen eines Menschen zu schützen. Nach Erwägungsgrund 46 sollte man sich auf lebenswichtige Interessen einer *anderen* Person grundsätzlich nur stützen, wenn offensichtlich keine andere Rechtsgrundlage greift.",
+            "**e) Öffentliche Aufgabe**: Die Verarbeitung ist für eine Aufgabe erforderlich, die im öffentlichen Interesse liegt oder in Ausübung öffentlicher Gewalt erfolgt, die dem Verantwortlichen übertragen wurde.",
+            "**f) Berechtigte Interessen**: Die Verarbeitung ist zur Wahrung berechtigter Interessen erforderlich, sofern nicht die Interessen oder Rechte der Person überwiegen. Behörden können sich bei der Erfüllung ihrer Aufgaben nicht darauf stützen."
+          ]
+        },
+        "Die Rechtsgrundlagen nach Buchst. c und e müssen im Unionsrecht oder im Recht der Mitgliedstaaten festgelegt sein (Art. 6 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1, 6 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Fünf der sechs Rechtsgrundlagen verwenden das Wort **erforderlich**. Nützlich oder bequem zu sein genügt nicht.",
+        "Nach Erwägungsgrund 39 sollen personenbezogene Daten nur verarbeitet werden, wenn der Zweck nicht in zumutbarer Weise durch andere Mittel erreicht werden kann. Lässt sich der Zweck mit weniger Daten oder ganz ohne Daten erreichen, ist die zusätzliche Verarbeitung nicht erforderlich."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1, 6 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Artikel 6 Abs. 1 nennt die sechs Rechtsgrundlagen **ohne Rangfolge**. Die Einwilligung ist nicht der Normalfall, und die anderen Rechtsgrundlagen brauchen keine Genehmigung.",
+        "Wählen Sie für **jeden Zweck** die Rechtsgrundlage, die wirklich passt, und zwar bevor Sie mit der Verarbeitung beginnen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1, 6 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Beispiele aus der Bäckerei Sonnenfeld:",
+        {
+          "type": "list",
+          "items": [
+            "Name und Abholzeit, um eine Vorbestellung zu erfüllen: **Vertrag**, weil die Daten für die Erfüllung der Bestellung erforderlich sind.",
+            "Gehaltsdaten, die an das Finanzamt gehen, weil das Gesetz es verlangt: **rechtliche Verpflichtung**.",
+            "Der wöchentliche Newsletter: in der Regel **Einwilligung**.",
+            "Kameras gegen Diebstahl: **berechtigte Interessen**, wenn die Abwägung aus einer der nächsten Lektionen zugunsten der Bäckerei ausfällt."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1, 6 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 39, 44, 46",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "lawful-bases"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld braucht Name und Abholzeit einer Kundin, um ihre Vorbestellung zu erfüllen. Welche Rechtsgrundlage passt am besten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Vertrag, Art. 6 Abs. 1 Buchst. b",
+          "reason": "Die Verarbeitung ist für die Erfüllung des Vertrags erforderlich."
+        },
+        {
+          "correct": false,
+          "blocks": "Lebenswichtige Interessen, Art. 6 Abs. 1 Buchst. d",
+          "reason": "Bei einer Brotbestellung steht niemandes Leben auf dem Spiel."
+        },
+        {
+          "correct": false,
+          "blocks": "Öffentliche Aufgabe, Art. 6 Abs. 1 Buchst. e",
+          "reason": "Brot zu verkaufen ist keine gesetzlich festgelegte öffentliche Aufgabe."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Rechtsgrundlage erfasst Daten, die nötig sind, um zu liefern, was eine Kundin oder ein Kunde bestellt hat?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Lebenswichtige Interessen, Art. 6 Abs. 1 Buchst. d",
+              "reason": "Bei einer Brotbestellung steht niemandes Leben auf dem Spiel."
+            },
+            {
+              "correct": false,
+              "blocks": "Öffentliche Aufgabe, Art. 6 Abs. 1 Buchst. e",
+              "reason": "Brot zu verkaufen ist keine gesetzlich festgelegte öffentliche Aufgabe."
+            },
+            {
+              "correct": true,
+              "blocks": "Vertrag, Art. 6 Abs. 1 Buchst. b",
+              "reason": "Die Verarbeitung ist für die Erfüllung des Vertrags erforderlich."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "lawful-bases"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "Ein Gesetz verpflichtet die Bäckerei Sonnenfeld, Gehaltsdaten an das Finanzamt zu senden. Welche Rechtsgrundlage greift?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Einwilligung, Art. 6 Abs. 1 Buchst. a",
+          "reason": "Beschäftigte können eine gesetzliche Pflicht nicht wirklich ablehnen, und die Grundlage ist das Gesetz."
+        },
+        {
+          "correct": false,
+          "blocks": "Lebenswichtige Interessen, Art. 6 Abs. 1 Buchst. d",
+          "reason": "Es steht niemandes Leben auf dem Spiel."
+        },
+        {
+          "correct": true,
+          "blocks": "Rechtliche Verpflichtung, Art. 6 Abs. 1 Buchst. c",
+          "reason": "Die Verarbeitung ist zur Erfüllung einer rechtlichen Verpflichtung erforderlich."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Rechtsgrundlage erfasst eine Verarbeitung, zu der das Gesetz ein Unternehmen verpflichtet?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Lebenswichtige Interessen, Art. 6 Abs. 1 Buchst. d",
+              "reason": "Es steht niemandes Leben auf dem Spiel."
+            },
+            {
+              "correct": true,
+              "blocks": "Rechtliche Verpflichtung, Art. 6 Abs. 1 Buchst. c",
+              "reason": "Die Verarbeitung ist zur Erfüllung einer rechtlichen Verpflichtung erforderlich."
+            },
+            {
+              "correct": false,
+              "blocks": "Einwilligung, Art. 6 Abs. 1 Buchst. a",
+              "reason": "Beschäftigte können eine gesetzliche Pflicht nicht wirklich ablehnen, und die Grundlage ist das Gesetz."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "necessity-test"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld meint, die Rechtsgrundlage Vertrag decke auch das Erheben der Geburtsdaten ihrer Kundschaft bei Vorbestellungen. Stimmt das?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, solange die Kundschaft nicht widerspricht",
+          "reason": "Die Rechtsgrundlage hängt von der Erforderlichkeit ab, nicht vom Schweigen."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, diese Daten sind für die Erfüllung nicht erforderlich",
+          "reason": "Buchst. b erfasst nur, was für den Vertrag erforderlich ist."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, alles, was bei einem Vertrag erhoben wird, ist erfasst",
+          "reason": "Buchst. b ist durch die Erforderlichkeit begrenzt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Kann sich ein Unternehmen für Daten, die der Vertrag nicht braucht, auf die Rechtsgrundlage Vertrag stützen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nein, diese Daten sind für die Erfüllung nicht erforderlich",
+              "reason": "Buchst. b erfasst nur, was für den Vertrag erforderlich ist."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, alles, was bei einem Vertrag erhoben wird, ist erfasst",
+              "reason": "Buchst. b ist durch die Erforderlichkeit begrenzt."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, solange die Kundschaft nicht widerspricht",
+              "reason": "Die Rechtsgrundlage hängt von der Erforderlichkeit ab, nicht vom Schweigen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "lawful-bases"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Muss ein Unternehmen zuerst eine Einwilligung versuchen, bevor es eine andere Rechtsgrundlage nutzt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, die sechs Rechtsgrundlagen haben keine Rangfolge",
+          "reason": "Art. 6 Abs. 1 nennt sie ohne Rangfolge."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, die Einwilligung muss immer zuerst versucht werden",
+          "reason": "Art. 6 Abs. 1 enthält keine solche Regel."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, andere Rechtsgrundlagen brauchen die Genehmigung einer Aufsichtsbehörde",
+          "reason": "Art. 6 verlangt für keine Rechtsgrundlage eine Genehmigung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ist die Einwilligung nach Art. 6 die bevorzugte oder normale Rechtsgrundlage?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, die Einwilligung muss immer zuerst versucht werden",
+              "reason": "Art. 6 Abs. 1 enthält keine solche Regel."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, andere Rechtsgrundlagen brauchen die Genehmigung einer Aufsichtsbehörde",
+              "reason": "Art. 6 verlangt für keine Rechtsgrundlage eine Genehmigung."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, die sechs Rechtsgrundlagen haben keine Rangfolge",
+              "reason": "Art. 6 Abs. 1 nennt sie ohne Rangfolge."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

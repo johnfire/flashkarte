@@ -1,0 +1,415 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o05",
+    "title": "Verletzungen des Schutzes personenbezogener Daten",
+    "summary": "Eine Verletzung des Schutzes personenbezogener Daten erkennen, sie, wenn nötig, binnen 72 Stunden der Aufsichtsbehörde melden und bei hohem Risiko die betroffenen Personen benachrichtigen.",
+    "covers": [
+      "personal-data-breach",
+      "breach-notification",
+      "breach-communication"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Die Meldung geht an die Aufsichtsbehörde."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Auftragsverarbeiter müssen dem Verantwortlichen Verletzungen melden."
+      },
+      {
+        "lesson": "p03",
+        "reason": "Eine Verletzung ist ein Versagen der Sicherheit."
+      },
+      {
+        "lesson": "o04",
+        "reason": "Eine angewandte Verschlüsselung kann die Pflicht entfallen lassen, die betroffenen Personen zu benachrichtigen."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Eine **Verletzung des Schutzes personenbezogener Daten** ist eine Verletzung der Sicherheit, die, ob unbeabsichtigt oder unrechtmäßig, zur **Vernichtung, zum Verlust, zur Veränderung oder zur unbefugten Offenlegung von beziehungsweise zum unbefugten Zugang zu** personenbezogenen Daten führt (Art. 4 Nr. 12).",
+        "Gemeint ist nicht nur ein Hackerangriff. Eine E-Mail an die falsche Person, ein verlorener Laptop und Ransomware, die Dateien zerstört: All das sind Verletzungen des Schutzes personenbezogener Daten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 12, 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 85",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Meldung an die Aufsichtsbehörde**: Der Verantwortliche meldet der Aufsichtsbehörde eine Verletzung „unverzüglich und möglichst binnen 72 Stunden, nachdem ihm die Verletzung bekannt wurde“, **es sei denn**, sie führt „voraussichtlich nicht zu einem Risiko für die Rechte und Freiheiten natürlicher Personen“ (Art. 33 Abs. 1).",
+        "Erfolgt die Meldung nicht binnen 72 Stunden, ist eine Begründung für die Verzögerung beizufügen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 12, 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 85",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Wird einem **Auftragsverarbeiter** eine Verletzung bekannt, meldet er sie dem Verantwortlichen unverzüglich (Art. 33 Abs. 2).",
+        "Die Meldung beschreibt zumindest die Art der Verletzung und die ungefähre Zahl der betroffenen Personen und Datensätze. Sie nennt eine Anlaufstelle und beschreibt die wahrscheinlichen Folgen und die ergriffenen Maßnahmen (Art. 33 Abs. 3). Ist noch nicht alles bekannt, können die Informationen **schrittweise** zur Verfügung gestellt werden (Art. 33 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 12, 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 85",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Dokumentieren Sie jede Verletzung**, auch die, die Sie nicht melden: die Fakten, ihre Auswirkungen und die ergriffenen Abhilfemaßnahmen (Art. 33 Abs. 5).",
+        "Mit dieser Dokumentation kann die Aufsichtsbehörde Ihre Entscheidungen überprüfen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 12, 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 85",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Benachrichtigen Sie die betroffenen Personen** unverzüglich, wenn die Verletzung **voraussichtlich ein hohes Risiko** für ihre Rechte und Freiheiten zur Folge hat (Art. 34 Abs. 1).",
+        "Verwenden Sie klare und einfache Sprache, und nennen Sie die Anlaufstelle, die wahrscheinlichen Folgen und die ergriffenen Maßnahmen (Art. 34 Abs. 2).",
+        "Erwägungsgrund 85 nennt mögliche Schäden, etwa Identitätsdiebstahl oder -betrug, finanzielle Verluste, Diskriminierung und Rufschädigung."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 12, 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 85",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Eine Benachrichtigung der betroffenen Personen ist nicht erforderlich, wenn (Art. 34 Abs. 3):",
+        {
+          "type": "list",
+          "items": [
+            "a) auf die betroffenen Daten Schutzvorkehrungen angewandt wurden, die sie für alle Unbefugten unzugänglich machen, etwa eine **Verschlüsselung**;",
+            "b) nachfolgende Maßnahmen sicherstellen, dass das hohe Risiko aller Wahrscheinlichkeit nach nicht mehr besteht; oder",
+            "c) die Benachrichtigung mit einem unverhältnismäßigen Aufwand verbunden wäre. Dann erfolgt stattdessen eine öffentliche Bekanntmachung."
+          ]
+        },
+        "Die Aufsichtsbehörde kann trotzdem verlangen, dass Sie die Personen benachrichtigen (Art. 34 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 12, 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 85",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-7",
+      "blocks": [
+        "Fälle der Bäckerei Sonnenfeld:",
+        {
+          "type": "list",
+          "items": [
+            "Ein unverschlüsselter Laptop mit Krankmeldungen der Beschäftigten wird gestohlen. Gesundheitsdaten liegen offen. Die Bäckerei meldet die Verletzung deshalb binnen 72 Stunden der Aufsichtsbehörde und benachrichtigt die Beschäftigten.",
+            "Ein stark verschlüsselter Laptop wird gestohlen, und der Schlüssel ist sicher. Die Ausnahme für Verschlüsselung in Art. 34 Abs. 3 Buchst. a greift wahrscheinlich. Die Bäckerei dokumentiert die Verletzung trotzdem und prüft, ob sie sie der Aufsichtsbehörde melden muss."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 12, 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 85",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "personal-data-breach"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Was davon ist eine Verletzung des Schutzes personenbezogener Daten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ein Beschäftigter schickt die Kundenliste per E-Mail an den falschen Lieferanten",
+          "reason": "Unbefugte Offenlegung (Art. 4 Nr. 12)."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine Kundin ändert ihre E-Mail-Adresse",
+          "reason": "Eine normale, befugte Änderung."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Bäckerei Sonnenfeld löscht alte Daten nach ihrer Löschregel",
+          "reason": "Eine befugte Löschung ist keine Verletzung der Sicherheit."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welches Ereignis erfüllt die Definition in Art. 4 Nr. 12?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Eine Kundin ändert ihre E-Mail-Adresse",
+              "reason": "Eine normale, befugte Änderung."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Bäckerei Sonnenfeld löscht alte Daten nach ihrer Löschregel",
+              "reason": "Eine befugte Löschung ist keine Verletzung der Sicherheit."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein Beschäftigter schickt die Kundenliste per E-Mail an den falschen Lieferanten",
+              "reason": "Unbefugte Offenlegung (Art. 4 Nr. 12)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-notification"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Wann muss eine meldepflichtige Verletzung der Aufsichtsbehörde gemeldet werden?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Binnen 72 Stunden, nachdem die Verletzung geschehen ist",
+          "reason": "Die Frist läuft ab dem Zeitpunkt, zu dem die Verletzung bekannt wurde."
+        },
+        {
+          "correct": false,
+          "blocks": "Binnen eines Monats",
+          "reason": "Ein Monat ist die Frist für die Antwort auf Anträge betroffener Personen."
+        },
+        {
+          "correct": true,
+          "blocks": "Unverzüglich und möglichst binnen 72 Stunden, nachdem sie bekannt wurde",
+          "reason": "Art. 33 Abs. 1."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Frist setzt Art. 33 Abs. 1 für die Meldung einer Verletzung an die Aufsichtsbehörde?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Binnen eines Monats",
+              "reason": "Ein Monat ist die Frist für die Antwort auf Anträge betroffener Personen."
+            },
+            {
+              "correct": true,
+              "blocks": "Unverzüglich und möglichst binnen 72 Stunden, nachdem sie bekannt wurde",
+              "reason": "Art. 33 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Binnen 72 Stunden, nachdem die Verletzung geschehen ist",
+              "reason": "Die Frist läuft ab dem Zeitpunkt, zu dem die Verletzung bekannt wurde."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-notification"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld kommt zu dem Schluss, dass eine kleine Verletzung voraussichtlich zu keinem Risiko führt, und meldet sie nicht. Muss sie sie trotzdem dokumentieren?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nein, aber sie muss sie trotzdem melden",
+          "reason": "Führt die Verletzung voraussichtlich zu keinem Risiko, ist keine Meldung nötig. Die Dokumentation schon."
+        },
+        {
+          "correct": true,
+          "blocks": "Ja, alle Verletzungen sind zu dokumentieren",
+          "reason": "Art. 33 Abs. 5."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, nur gemeldete Verletzungen werden festgehalten",
+          "reason": "Artikel 33 Abs. 5 erfasst jede Verletzung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Müssen Verletzungen, die nicht gemeldet werden, trotzdem dokumentiert werden?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ja, alle Verletzungen sind zu dokumentieren",
+              "reason": "Art. 33 Abs. 5."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, nur gemeldete Verletzungen werden festgehalten",
+              "reason": "Artikel 33 Abs. 5 erfasst jede Verletzung."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, aber sie muss sie trotzdem melden",
+              "reason": "Führt die Verletzung voraussichtlich zu keinem Risiko, ist keine Meldung nötig. Die Dokumentation schon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-communication"
+      ],
+      "teaches": [
+        "screen-6",
+        "screen-7"
+      ],
+      "prompt": "Die Daten auf einem gestohlenen Laptop waren stark verschlüsselt, und der Schlüssel ist sicher. Müssen die Beschäftigten benachrichtigt werden?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nicht unbedingt: Art. 34 Abs. 3 Buchst. a ist eine Ausnahme",
+          "reason": "Eine Verschlüsselung, die die Daten für Unbefugte unzugänglich macht, ist eine genannte Ausnahme."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, immer, gleich, wie die Daten geschützt sind",
+          "reason": "Artikel 34 Abs. 3 nennt Ausnahmen."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur wenn die Aufsichtsbehörde eine Geldbuße gegen die Bäckerei verhängt",
+          "reason": "Auslöser ist nicht eine Geldbuße, sondern ein hohes Risiko."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Müssen betroffene Personen immer benachrichtigt werden, wenn stark verschlüsselte Daten von einer Verletzung betroffen sind?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, immer, gleich, wie die Daten geschützt sind",
+              "reason": "Artikel 34 Abs. 3 nennt Ausnahmen."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur wenn die Aufsichtsbehörde eine Geldbuße gegen die Bäckerei verhängt",
+              "reason": "Auslöser ist nicht eine Geldbuße, sondern ein hohes Risiko."
+            },
+            {
+              "correct": true,
+              "blocks": "Nicht unbedingt: Art. 34 Abs. 3 Buchst. a ist eine Ausnahme",
+              "reason": "Eine Verschlüsselung, die die Daten für Unbefugte unzugänglich macht, ist eine genannte Ausnahme."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-communication"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Wann müssen betroffene Personen über eine Verletzung benachrichtigt werden?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nach jeder Verletzung, wie klein sie auch ist",
+          "reason": "Auslöser ist ein voraussichtlich hohes Risiko."
+        },
+        {
+          "correct": false,
+          "blocks": "Nie, nur die Aufsichtsbehörde wird informiert",
+          "reason": "Artikel 34 verlangt bei hohem Risiko, die betroffenen Personen zu benachrichtigen."
+        },
+        {
+          "correct": true,
+          "blocks": "Wenn sie voraussichtlich ein hohes Risiko für sie zur Folge hat",
+          "reason": "Art. 34 Abs. 1."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wann löst eine Verletzung die Pflicht nach Art. 34 aus, die betroffenen Personen zu benachrichtigen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nie, nur die Aufsichtsbehörde wird informiert",
+              "reason": "Artikel 34 verlangt bei hohem Risiko, die betroffenen Personen zu benachrichtigen."
+            },
+            {
+              "correct": true,
+              "blocks": "Wenn sie voraussichtlich ein hohes Risiko für sie zur Folge hat",
+              "reason": "Art. 34 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Nach jeder Verletzung, wie klein sie auch ist",
+              "reason": "Auslöser ist ein voraussichtlich hohes Risiko."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

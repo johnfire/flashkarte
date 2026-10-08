@@ -1,0 +1,275 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p01",
+    "title": "Rechtmäßig, nach Treu und Glauben, transparent und für einen festgelegten Zweck",
+    "summary": "Die ersten beiden Grundsätze anwenden: rechtmäßige, faire und transparente Verarbeitung für festgelegte Zwecke.",
+    "covers": [
+      "transparency-principle",
+      "purpose-limitation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Die Grundsätze sind Regeln dafür, wie eine Verarbeitung durchgeführt wird."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Artikel 5 Abs. 1 nennt die **Grundsätze**, die jede Verwendung personenbezogener Daten einhalten muss. Sie sind das Rückgrat der DSGVO, und der Rest der Verordnung baut auf ihnen auf.",
+        "Der erste Grundsatz: Personenbezogene Daten müssen **auf rechtmäßige Weise, nach Treu und Glauben und in einer für die betroffene Person nachvollziehbaren Weise** verarbeitet werden. Das Gesetz nennt das kurz „Rechtmäßigkeit, Verarbeitung nach Treu und Glauben, Transparenz“ (Art. 5 Abs. 1 Buchst. a)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. a und b",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Rechtmäßig** heißt: Für die Verarbeitung muss es eine Rechtsgrundlage geben. Die nächsten Lektionen behandeln die sechs Rechtsgrundlagen.",
+        "**Transparent** heißt: Die Menschen müssen erfahren können, dass ihre Daten erhoben und verwendet werden und in welchem Umfang. Informationen zur Verarbeitung müssen leicht zugänglich und verständlich und in klarer und einfacher Sprache abgefasst sein (Erwägungsgrund 39)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. a und b",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Nach Erwägungsgrund 39 betrifft Transparenz insbesondere die Information darüber, wer die Daten verarbeitet und zu welchen Zwecken. Die Menschen sollen außerdem über die Risiken, Vorschriften, Garantien und Rechte im Zusammenhang mit der Verarbeitung informiert werden.",
+        "Eine Verarbeitung, die die Menschen nicht bemerken oder nicht verstehen würden, widerspricht diesem Grundsatz."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. a und b",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Der zweite Grundsatz ist die **Zweckbindung**. Personenbezogene Daten müssen für **festgelegte, eindeutige und legitime** Zwecke erhoben werden. Sie dürfen nicht in einer Weise weiterverarbeitet werden, die mit diesen Zwecken nicht zu vereinbaren ist (Art. 5 Abs. 1 Buchst. b).",
+        "Nach Erwägungsgrund 39 sollen die Zwecke **zum Zeitpunkt der Erhebung** feststehen und nicht erst später erfunden werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. a und b",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Artikel 5 Abs. 1 Buchst. b behandelt eine Art der Weiterverarbeitung besonders. Eine Weiterverarbeitung für im öffentlichen Interesse liegende Archivzwecke, für wissenschaftliche oder historische Forschungszwecke oder für statistische Zwecke gilt nicht als unvereinbar, sofern die Garantien nach Art. 89 Abs. 1 eingehalten werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. a und b",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die App der Bäckerei Sonnenfeld fragt nach einer Telefonnummer, »um Ihnen per SMS Bescheid zu geben, wenn Ihre Bestellung abholbereit ist«. Dieser Zweck ist festgelegt und eindeutig.",
+        "Eine Angabe wie »für geschäftliche Zwecke« legt keinen Zweck fest. Sie sagt der Kundschaft nichts.",
+        "Will die Bäckerei die Nummern später für etwas Neues nutzen, muss sie prüfen, ob die neue Verwendung vereinbar ist. Eine spätere Lektion behandelt diese Prüfung.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. a und b",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "transparency-principle"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld filmt in ihren Filialen, sagt es aber niemandem. Welcher Grundsatz ist am unmittelbarsten berührt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Transparenz",
+          "reason": "Die Menschen können nicht wissen, dass ihre Daten erhoben werden (Art. 5 Abs. 1 Buchst. a, Erwägungsgrund 39)."
+        },
+        {
+          "correct": false,
+          "blocks": "Richtigkeit",
+          "reason": "Nichts deutet darauf hin, dass die Aufnahmen falsch sind. Das Problem ist, dass sie verborgen sind."
+        },
+        {
+          "correct": false,
+          "blocks": "Keiner, weil die Kameras der Sicherheit dienen",
+          "reason": "Ein guter Zweck hebt die Pflicht zur Transparenz nicht auf."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In den Filialen einer Bäckerei laufen Kameras, ohne Schild oder Hinweis. Welchen Grundsatz untergräbt das?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Richtigkeit",
+              "reason": "Nichts deutet darauf hin, dass die Aufnahmen falsch sind. Das Problem ist, dass sie verborgen sind."
+            },
+            {
+              "correct": false,
+              "blocks": "Keiner, weil die Kameras der Sicherheit dienen",
+              "reason": "Ein guter Zweck hebt die Pflicht zur Transparenz nicht auf."
+            },
+            {
+              "correct": true,
+              "blocks": "Transparenz",
+              "reason": "Die Menschen können nicht wissen, dass ihre Daten erhoben werden (Art. 5 Abs. 1 Buchst. a, Erwägungsgrund 39)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "purpose-limitation"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-6"
+      ],
+      "prompt": "Ein Formular sagt, die Daten würden »für geschäftliche Zwecke« erhoben. Ist das ein ausreichender Zweck?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, wenn das Unternehmen legitim ist",
+          "reason": "Legitim ist nur eine der drei Anforderungen."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, die Einzelheiten können später festgelegt werden",
+          "reason": "Erwägungsgrund 39: Die Zwecke stehen zum Zeitpunkt der Erhebung fest."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, Zwecke müssen festgelegt und eindeutig sein",
+          "reason": "Art. 5 Abs. 1 Buchst. b verlangt festgelegte, eindeutige Zwecke."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Erfüllt die Zweckangabe »für geschäftliche Zwecke« den Grundsatz der Zweckbindung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, die Einzelheiten können später festgelegt werden",
+              "reason": "Erwägungsgrund 39: Die Zwecke stehen zum Zeitpunkt der Erhebung fest."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, Zwecke müssen festgelegt und eindeutig sein",
+              "reason": "Art. 5 Abs. 1 Buchst. b verlangt festgelegte, eindeutige Zwecke."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn das Unternehmen legitim ist",
+              "reason": "Legitim ist nur eine der drei Anforderungen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "purpose-limitation"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Welche Weiterverarbeitung gilt nach Art. 5 Abs. 1 Buchst. b nicht als unvereinbar, wenn die Garantien nach Art. 89 Abs. 1 eingehalten werden?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Jede Verwendung, die mehr Gewinn bringt",
+          "reason": "Gewinn gehört nicht zu den genannten Zwecken."
+        },
+        {
+          "correct": true,
+          "blocks": "Statistische Zwecke",
+          "reason": "Art. 5 Abs. 1 Buchst. b nennt Statistik, Forschung und im öffentlichen Interesse liegende Archivzwecke."
+        },
+        {
+          "correct": false,
+          "blocks": "Der Verkauf der Daten an Werbetreibende",
+          "reason": "Dafür sieht Art. 5 Abs. 1 Buchst. b keine Sonderregel vor."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Art der Weiterverarbeitung wird, vorbehaltlich geeigneter Garantien, als vereinbar mit den ursprünglichen Zwecken behandelt?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Statistische Zwecke",
+              "reason": "Art. 5 Abs. 1 Buchst. b nennt Statistik, Forschung und im öffentlichen Interesse liegende Archivzwecke."
+            },
+            {
+              "correct": false,
+              "blocks": "Der Verkauf der Daten an Werbetreibende",
+              "reason": "Dafür sieht Art. 5 Abs. 1 Buchst. b keine Sonderregel vor."
+            },
+            {
+              "correct": false,
+              "blocks": "Jede Verwendung, die mehr Gewinn bringt",
+              "reason": "Gewinn gehört nicht zu den genannten Zwecken."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,294 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r05",
+    "title": "Einschränkung der Verarbeitung und Mitteilung an Empfänger",
+    "summary": "Die Einschränkung der Verarbeitung in den vier genannten Fällen nutzen und Empfänger über Berichtigungen, Löschungen und Einschränkungen informieren.",
+    "covers": [
+      "right-to-restriction",
+      "recipient-notification"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r04",
+        "reason": "Die Einschränkung greift, während die Richtigkeit überprüft wird."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Einschränkung der Verarbeitung** ist „die Markierung gespeicherter personenbezogener Daten mit dem Ziel, ihre künftige Verarbeitung einzuschränken“ (Art. 4 Nr. 3).",
+        "Stellen Sie sich das als Pause vor: Die Daten bleiben gespeichert, werden aber nicht verwendet."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 3, 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Eine Person kann die Einschränkung in vier Fällen verlangen (Art. 18 Abs. 1):",
+        {
+          "type": "list",
+          "items": [
+            "a) sie **bestreitet die Richtigkeit** der Daten, und zwar für die Dauer, die die Überprüfung braucht;",
+            "b) die Verarbeitung ist unrechtmäßig, und sie verlangt die Einschränkung **statt der Löschung**;",
+            "c) der Verantwortliche braucht die Daten nicht mehr, die Person braucht sie aber für **Rechtsansprüche**;",
+            "d) sie hat **Widerspruch eingelegt**, und es steht noch nicht fest, ob die berechtigten Gründe des Verantwortlichen gegenüber ihren Gründen überwiegen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 3, 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Solange die Verarbeitung eingeschränkt ist, darf der Verantwortliche die Daten **speichern**. Jede andere Verarbeitung braucht die Einwilligung der Person oder muss der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen, dem Schutz der Rechte einer anderen Person oder einem wichtigen öffentlichen Interesse dienen (Art. 18 Abs. 2).",
+        "Die Person muss informiert werden, bevor die Einschränkung aufgehoben wird (Art. 18 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 3, 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Mitteilung an Empfänger** (Art. 19): Der Verantwortliche teilt jede Berichtigung, Löschung oder Einschränkung **allen Empfängern** mit, denen die Daten offengelegt wurden, es sei denn, dies erweist sich als unmöglich oder ist mit einem unverhältnismäßigen Aufwand verbunden.",
+        "Verlangt die Person es, muss der Verantwortliche ihr sagen, wer diese Empfänger sind."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 3, 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Eine Kundin bestreitet den Eintrag der Bäckerei Sonnenfeld, nach dem sie ihre Treuepunkte eingelöst hat. Während die Bäckerei das prüft, markiert sie den Eintrag als eingeschränkt und verwendet ihn nicht für Werbeaktionen.",
+        "Früher hat die Bäckerei die Daten der Kundin für das gemeinsame Treueprogramm an ein Partnercafé weitergegeben. Als sie den Eintrag berichtigt, informiert sie das Café.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 3, 18, 19",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "right-to-restriction"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "Eine Kundin bestreitet die Richtigkeit ihres Eintrags. Was kann sie verlangen, während die Bäckerei Sonnenfeld das prüft?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Einschränkung für die Dauer der Überprüfung",
+          "reason": "Art. 18 Abs. 1 Buchst. a."
+        },
+        {
+          "correct": false,
+          "blocks": "Die sofortige Löschung aller Daten",
+          "reason": "Wer die Richtigkeit bestreitet, kann die Einschränkung verlangen, nicht die Löschung."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts, bis die Prüfung abgeschlossen ist",
+          "reason": "Sie kann die Einschränkung schon während der Prüfung verlangen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was erlaubt Art. 18 Abs. 1 Buchst. a, wenn eine Person die Richtigkeit ihrer Daten bestreitet?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die sofortige Löschung aller Daten",
+              "reason": "Wer die Richtigkeit bestreitet, kann die Einschränkung verlangen, nicht die Löschung."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts, bis die Prüfung abgeschlossen ist",
+              "reason": "Sie kann die Einschränkung schon während der Prüfung verlangen."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Einschränkung für die Dauer der Überprüfung",
+              "reason": "Art. 18 Abs. 1 Buchst. a."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-restriction"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Die Verarbeitung bestimmter Daten ist eingeschränkt. Was darf die Bäckerei Sonnenfeld ohne Einwilligung der Person noch mit ihnen tun?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Daten weiter wie bisher verwenden",
+          "reason": "Die Einschränkung begrenzt jede Verarbeitung über die Speicherung hinaus."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Daten sofort löschen",
+          "reason": "Bei der Einschränkung bleiben die Daten erhalten. Sie werden nicht gelöscht."
+        },
+        {
+          "correct": true,
+          "blocks": "Die Daten speichern",
+          "reason": "Die Speicherung ist erlaubt; andere Verwendungen brauchen eine Einwilligung oder einen der genannten Gründe."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Verarbeitung bleibt nach Art. 18 Abs. 2 bei eingeschränkten Daten ohne Weiteres erlaubt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Daten sofort löschen",
+              "reason": "Bei der Einschränkung bleiben die Daten erhalten. Sie werden nicht gelöscht."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Daten speichern",
+              "reason": "Die Speicherung ist erlaubt; andere Verwendungen brauchen eine Einwilligung oder einen der genannten Gründe."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Daten weiter wie bisher verwenden",
+              "reason": "Die Einschränkung begrenzt jede Verarbeitung über die Speicherung hinaus."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "recipient-notification"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld berichtigt Daten, die sie an ein Partnercafé weitergegeben hatte. Was muss sie tun?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Alle Kundinnen und Kunden über die Änderung informieren",
+          "reason": "Art. 19 betrifft die Empfänger der Daten dieser Person."
+        },
+        {
+          "correct": true,
+          "blocks": "Das Café informieren, es sei denn, das ist unmöglich oder unverhältnismäßig aufwendig",
+          "reason": "Art. 19."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts, weil das Café ein eigenes Unternehmen ist",
+          "reason": "Art. 19 erfasst alle Empfänger."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Bäckerei Sonnenfeld berichtigt die Daten einer Kundin, die sie an ein Partnercafé weitergegeben hatte. Was verlangt Art. 19?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Das Café informieren, es sei denn, das ist unmöglich oder unverhältnismäßig aufwendig",
+              "reason": "Art. 19."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts, weil das Café ein eigenes Unternehmen ist",
+              "reason": "Art. 19 erfasst alle Empfänger."
+            },
+            {
+              "correct": false,
+              "blocks": "Alle Kundinnen und Kunden über die Änderung informieren",
+              "reason": "Art. 19 betrifft die Empfänger der Daten dieser Person."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "recipient-notification"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Nach einer Berichtigung fragt eine Kundin die Bäckerei Sonnenfeld, welche Empfänger darüber informiert wurden. Muss die Bäckerei antworten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ja, auf Verlangen muss sie die Kundin darüber unterrichten",
+          "reason": "Art. 19 Satz 2."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, Empfänger sind vertraulich",
+          "reason": "Art. 19 verlangt diese Information, wenn die Person sie verlangt."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur, wenn die Kundin ein Entgelt zahlt",
+          "reason": "Art. 19 sieht kein Entgelt vor."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Kundin fragt, welche Empfänger über die Berichtigung ihrer Daten informiert wurden. Muss die Bäckerei Sonnenfeld ihr das nach Art. 19 sagen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, Empfänger sind vertraulich",
+              "reason": "Art. 19 verlangt diese Information, wenn die Person sie verlangt."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur, wenn die Kundin ein Entgelt zahlt",
+              "reason": "Art. 19 sieht kein Entgelt vor."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, auf Verlangen muss sie die Kundin darüber unterrichten",
+              "reason": "Art. 19 Satz 2."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

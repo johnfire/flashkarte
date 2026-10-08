@@ -1,0 +1,350 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r01",
+    "title": "Was Sie den Menschen mitteilen müssen",
+    "summary": "Datenschutzhinweise auf die Angaben prüfen, die Art. 13 und 14 verlangen, und sie zum richtigen Zeitpunkt geben.",
+    "covers": [
+      "information-at-collection",
+      "information-indirect"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Die Datenschutzhinweise müssen den Menschen sagen, dass sie sich bei der Aufsichtsbehörde beschweren können."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Der Verantwortliche gibt die Datenschutzhinweise und muss darin angeben, wer er ist."
+      },
+      {
+        "lesson": "p01",
+        "reason": "Die Informationspflichten setzen den Grundsatz der Transparenz in die Praxis um."
+      },
+      {
+        "lesson": "p04",
+        "reason": "Die Datenschutzhinweise müssen die Rechtsgrundlage nennen, deshalb müssen Lernende die Rechtsgrundlagen kennen."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Wenn Sie personenbezogene Daten **bei der Person selbst** erheben, müssen Sie ihr bestimmte Informationen **zum Zeitpunkt der Erhebung** mitteilen (Art. 13 Abs. 1). Diese Informationen heißen meist Datenschutzhinweise.",
+        "Die Kernangaben (Art. 13 Abs. 1):",
+        {
+          "type": "list",
+          "items": [
+            "Ihr Name und Ihre Kontaktdaten sowie gegebenenfalls die Kontaktdaten Ihres Datenschutzbeauftragten;",
+            "die **Zwecke** und die **Rechtsgrundlage** der Verarbeitung sowie die berechtigten Interessen, wenn Sie sich auf diese stützen;",
+            "die Empfänger oder Kategorien von Empfängern;",
+            "ob Daten in ein Land außerhalb der EU gehen sollen und unter welchen Bedingungen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 1, 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Weitere Angaben (Art. 13 Abs. 2):",
+        {
+          "type": "list",
+          "items": [
+            "wie lange die Daten gespeichert werden oder nach welchen Kriterien sich diese Dauer richtet;",
+            "die Rechte der Person: Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit;",
+            "das Recht, die Einwilligung zu widerrufen, wenn die Verarbeitung auf einer Einwilligung beruht;",
+            "das Recht, **sich bei einer Aufsichtsbehörde zu beschweren**;",
+            "ob die Person gesetzlich oder vertraglich verpflichtet ist, die Daten bereitzustellen, und welche Folgen es hätte, wenn sie es nicht tut;",
+            "jede automatisierte Entscheidungsfindung der Art, die später in diesem Modul behandelt wird, mit aussagekräftigen Informationen über die involvierte Logik."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 1, 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Wie** Sie informieren: „in präziser, transparenter, verständlicher und leicht zugänglicher Form in einer klaren und einfachen Sprache“, insbesondere bei Informationen, die sich an Kinder richten (Art. 12 Abs. 1).",
+        "Das kann schriftlich oder in anderer Form geschehen, auch elektronisch. Ein langer juristischer Text, den niemand versteht, erfüllt Art. 12 Abs. 1 nicht."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 1, 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Stammen die Daten **aus einer anderen Quelle**, gilt Art. 14. Die Liste ist ähnlich, mit zwei Ergänzungen: die **Kategorien** personenbezogener Daten, die verarbeitet werden (Art. 14 Abs. 1 Buchst. d), und die **Quelle** der Daten, einschließlich der Angabe, ob sie aus öffentlich zugänglichen Quellen stammen (Art. 14 Abs. 2 Buchst. f)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 1, 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Der **Zeitpunkt** nach Art. 14 Abs. 3, je nachdem, was zuerst eintritt:",
+        {
+          "type": "list",
+          "items": [
+            "innerhalb einer angemessenen Frist nach Erlangung der Daten, **längstens jedoch innerhalb eines Monats**;",
+            "spätestens zum Zeitpunkt der **ersten Mitteilung** an die Person, wenn die Daten verwendet werden, um mit ihr Kontakt aufzunehmen;",
+            "spätestens zum Zeitpunkt der **ersten Offenlegung**, wenn die Daten einem anderen Empfänger offengelegt werden sollen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 1, 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "**Ausnahmen**: Eine Information ist nicht nötig, wenn und soweit die Person bereits über die Informationen verfügt (Art. 13 Abs. 4 und 14 Abs. 5 Buchst. a).",
+        "Für Daten aus einer anderen Quelle gibt es wenige, eng begrenzte weitere Ausnahmen: wenn die Information unmöglich ist oder einen unverhältnismäßigen Aufwand erfordern würde (dann mit Schutzmaßnahmen, etwa indem die Informationen öffentlich bereitgestellt werden), wenn Rechtsvorschriften der EU oder eines EU-Staats die Erlangung oder Offenlegung der Daten ausdrücklich regeln, oder wenn ein Berufsgeheimnis gilt (Art. 14 Abs. 5)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 1, 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-7",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld zeigt bei der Registrierung in ihrer App kurze Datenschutzhinweise und verlinkt auf die vollständige Fassung. Das ist ein Fall von Art. 13.",
+        "Die Bäckerei erhält außerdem Lebensläufe von Bewerberinnen und Bewerbern über eine Personalvermittlung. Das ist ein Fall von Art. 14: Sie muss jede Bewerberin und jeden Bewerber längstens innerhalb eines Monats informieren, oder früher, wenn sie vorher Kontakt mit ihnen aufnimmt.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 1, 13, 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "information-at-collection"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Welche Angabe müssen die Datenschutzhinweise enthalten, wenn die Bäckerei Sonnenfeld Daten bei einer Kundin erhebt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Zwecke und die Rechtsgrundlage",
+          "reason": "Art. 13 Abs. 1 Buchst. c."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Namen aller Beschäftigten der Bäckerei Sonnenfeld",
+          "reason": "Das verlangt Art. 13 nicht."
+        },
+        {
+          "correct": false,
+          "blocks": "Der Jahresumsatz der Bäckerei Sonnenfeld",
+          "reason": "Das verlangt Art. 13 nicht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche dieser Angaben gehört in Datenschutzhinweise nach Art. 13?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Namen aller Beschäftigten der Bäckerei Sonnenfeld",
+              "reason": "Das verlangt Art. 13 nicht."
+            },
+            {
+              "correct": false,
+              "blocks": "Der Jahresumsatz der Bäckerei Sonnenfeld",
+              "reason": "Das verlangt Art. 13 nicht."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Zwecke und die Rechtsgrundlage",
+              "reason": "Art. 13 Abs. 1 Buchst. c."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "information-at-collection"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-3"
+      ],
+      "prompt": "Wann müssen die Informationen nach Art. 13 erteilt werden?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Innerhalb eines Monats nach der Erhebung",
+          "reason": "Das ist die Regel des Art. 14 für Daten aus einer anderen Quelle."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur wenn die Kundin oder der Kunde danach fragt",
+          "reason": "Art. 13 verlangt die Information, ohne dass jemand danach fragen muss."
+        },
+        {
+          "correct": true,
+          "blocks": "Zum Zeitpunkt der Erhebung der Daten",
+          "reason": "Art. 13 Abs. 1: zum Zeitpunkt der Erhebung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Zu welchem Zeitpunkt verlangt Art. 13 die Information der Person?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur wenn die Kundin oder der Kunde danach fragt",
+              "reason": "Art. 13 verlangt die Information, ohne dass jemand danach fragen muss."
+            },
+            {
+              "correct": true,
+              "blocks": "Zum Zeitpunkt der Erhebung der Daten",
+              "reason": "Art. 13 Abs. 1: zum Zeitpunkt der Erhebung."
+            },
+            {
+              "correct": false,
+              "blocks": "Innerhalb eines Monats nach der Erhebung",
+              "reason": "Das ist die Regel des Art. 14 für Daten aus einer anderen Quelle."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "information-indirect"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-7"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld erhält über eine Personalvermittlung einen Lebenslauf und schreibt der Bewerberin zwei Wochen später zum ersten Mal eine E-Mail. Wann muss sie die Bewerberin nach Art. 14 informieren?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Wenn sie bei der Bäckerei zu arbeiten beginnt",
+          "reason": "Art. 14 Abs. 3 setzt frühere Fristen."
+        },
+        {
+          "correct": true,
+          "blocks": "Spätestens mit der ersten E-Mail, längstens innerhalb eines Monats",
+          "reason": "Art. 14 Abs. 3: bei der ersten Mitteilung, längstens jedoch innerhalb eines Monats."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur wenn sie fragt, welche Daten die Bäckerei über sie hat",
+          "reason": "Art. 14 verlangt die Information, ohne dass jemand danach fragen muss."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Personalvermittlung schickt der Bäckerei Sonnenfeld einen Lebenslauf. Zwei Wochen später schreibt die Bäckerei der Bewerberin zum ersten Mal eine E-Mail. Wann muss sie die Bewerberin spätestens informieren?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Spätestens mit der ersten E-Mail, längstens innerhalb eines Monats",
+              "reason": "Art. 14 Abs. 3: bei der ersten Mitteilung, längstens jedoch innerhalb eines Monats."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur wenn sie fragt, welche Daten die Bäckerei über sie hat",
+              "reason": "Art. 14 verlangt die Information, ohne dass jemand danach fragen muss."
+            },
+            {
+              "correct": false,
+              "blocks": "Wenn sie bei der Bäckerei zu arbeiten beginnt",
+              "reason": "Art. 14 Abs. 3 setzt frühere Fristen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "information-indirect"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Welche Angabe fügt Art. 14 der Liste des Art. 13 hinzu?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Woher die Daten stammen",
+          "reason": "Art. 14 Abs. 2 Buchst. f verlangt die Quelle."
+        },
+        {
+          "correct": false,
+          "blocks": "Die private Telefonnummer der Personalvermittlerin",
+          "reason": "Das verlangt Art. 14 nicht."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Steuernummer der Bäckerei Sonnenfeld",
+          "reason": "Das verlangt Art. 14 nicht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was müssen Datenschutzhinweise für Daten, die aus einer anderen Quelle stammen, zusätzlich angeben?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die private Telefonnummer der Personalvermittlerin",
+              "reason": "Das verlangt Art. 14 nicht."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Steuernummer der Bäckerei Sonnenfeld",
+              "reason": "Das verlangt Art. 14 nicht."
+            },
+            {
+              "correct": true,
+              "blocks": "Woher die Daten stammen",
+              "reason": "Art. 14 Abs. 2 Buchst. f verlangt die Quelle."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

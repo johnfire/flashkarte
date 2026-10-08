@@ -1,0 +1,277 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p02",
+    "title": "Nur was nötig ist, richtig und nicht zu lange gespeichert",
+    "summary": "Nur erheben, was Sie brauchen, Daten richtig halten und identifizierende Daten nicht länger als nötig speichern.",
+    "covers": [
+      "data-minimisation",
+      "accuracy-principle",
+      "storage-limitation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Was notwendig ist, bemisst sich am angegebenen Zweck."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Datenminimierung**: Personenbezogene Daten müssen dem Zweck angemessen und erheblich sowie auf das für die Zwecke der Verarbeitung notwendige Maß beschränkt sein (Art. 5 Abs. 1 Buchst. c).",
+        "Erwägungsgrund 39 ergänzt: Personenbezogene Daten sollen nur verarbeitet werden, wenn der Zweck nicht in zumutbarer Weise durch andere Mittel erreicht werden kann."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. c bis e",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Das Vorbestellformular der Bäckerei Sonnenfeld fragt nach Name, Telefonnummer, Wohnanschrift und Geburtsdatum. Um einer Kundin per SMS mitzuteilen, dass ihr Brot bereitliegt, genügen Name und Telefonnummer.",
+        "Anschrift und Geburtsdatum sind für diesen Zweck nicht notwendig. »Das könnte eines Tages nützlich sein« ist kein Zweck.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. c bis e",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Richtigkeit**: Personenbezogene Daten müssen sachlich richtig und erforderlichenfalls auf dem neuesten Stand sein. Es sind alle angemessenen Maßnahmen zu treffen, damit Daten, die im Hinblick auf die Zwecke unrichtig sind, **unverzüglich** gelöscht oder berichtigt werden (Art. 5 Abs. 1 Buchst. d).",
+        "Teilt eine Kundin eine neue E-Mail-Adresse mit, ändern Sie sie zügig. Warten Sie nicht auf eine jährliche Bereinigung."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. c bis e",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Speicherbegrenzung**: Daten müssen in einer Form gespeichert werden, die die Identifizierung der Menschen **nur so lange** ermöglicht, wie es für die Zwecke erforderlich ist (Art. 5 Abs. 1 Buchst. e).",
+        "Länger speichern ist nur für im öffentlichen Interesse liegende Archivzwecke, für Forschung oder für Statistik erlaubt, mit den Garantien nach Art. 89 Abs. 1."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. c bis e",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Nach Erwägungsgrund 39 sollte die zuständige Organisation **Fristen für die Löschung oder regelmäßige Überprüfung** vorsehen, damit Daten nicht länger als nötig gespeichert werden.",
+        "Die Bäckerei Sonnenfeld könnte festlegen und schriftlich festhalten, dass Kundenkartenkonten gelöscht werden, die eine bestimmte Zeit lang nicht genutzt wurden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. c bis e",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Bei der Speicherbegrenzung geht es um Daten in einer Form, die Menschen **identifiziert**. Sind Daten wirklich anonym, beziehen sie sich nicht mehr auf eine identifizierbare Person, und nach Erwägungsgrund 26 fallen sie nicht unter die DSGVO.",
+        "Löschen ist also nicht die einzige Möglichkeit. Auch wer alte Bestelldaten für Statistiken anonymisiert, beendet die Speicherung in identifizierbarer Form."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. c bis e",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "data-minimisation"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Das Vorbestellformular der Bäckerei Sonnenfeld fragt nach einem Geburtsdatum, das für die Bestellungen nicht gebraucht wird. Was sollte die Bäckerei tun?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Angabe nicht mehr erheben",
+          "reason": "Daten müssen auf das notwendige Maß beschränkt sein (Art. 5 Abs. 1 Buchst. c)."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Angabe behalten, weil sie später nützlich sein könnte",
+          "reason": "Eine mögliche spätere Verwendung ist kein angegebener Zweck."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Angabe behalten, aber sicher speichern",
+          "reason": "Gute Sicherheit macht unnötige Daten nicht notwendig."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Bäckerei Sonnenfeld erhebt eine Angabe, die ihr angegebener Zweck nicht braucht. Was verlangt die Datenminimierung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Angabe behalten, weil sie später nützlich sein könnte",
+              "reason": "Eine mögliche spätere Verwendung ist kein angegebener Zweck."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Angabe behalten, aber sicher speichern",
+              "reason": "Gute Sicherheit macht unnötige Daten nicht notwendig."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Angabe nicht mehr erheben",
+              "reason": "Daten müssen auf das notwendige Maß beschränkt sein (Art. 5 Abs. 1 Buchst. c)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "accuracy-principle"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Eine Kundin teilt der Bäckerei Sonnenfeld mit, dass sich ihre E-Mail-Adresse geändert hat. Was verlangt der Grundsatz der Richtigkeit?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die alten Angaben für die Historie behalten",
+          "reason": "Unrichtige Kontaktdaten weiter zu verwenden widerspricht der Richtigkeit."
+        },
+        {
+          "correct": false,
+          "blocks": "Bei der jährlichen Datenprüfung korrigieren",
+          "reason": "Ein Jahr zu warten ist nicht „unverzüglich“."
+        },
+        {
+          "correct": true,
+          "blocks": "Unverzüglich berichtigen",
+          "reason": "Art. 5 Abs. 1 Buchst. d verlangt angemessene Maßnahmen, damit unverzüglich berichtigt wird."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Kundin meldet einen Fehler in ihren Daten. Was sollte die Bäckerei Sonnenfeld tun, und wie schnell?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Bei der jährlichen Datenprüfung korrigieren",
+              "reason": "Ein Jahr zu warten ist nicht „unverzüglich“."
+            },
+            {
+              "correct": true,
+              "blocks": "Unverzüglich berichtigen",
+              "reason": "Art. 5 Abs. 1 Buchst. d verlangt angemessene Maßnahmen, damit unverzüglich berichtigt wird."
+            },
+            {
+              "correct": false,
+              "blocks": "Die alten Angaben für die Historie behalten",
+              "reason": "Unrichtige Kontaktdaten weiter zu verwenden widerspricht der Richtigkeit."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "storage-limitation"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Ein Kundenkartenkonto wurde seit Jahren nicht genutzt und wird nicht mehr gebraucht. Was entspricht dem Grundsatz der Speicherbegrenzung?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Drei Jahre behalten, die feste Frist der DSGVO",
+          "reason": "Die DSGVO legt keine allgemeine feste Frist fest. Die drei Jahre sind erfunden."
+        },
+        {
+          "correct": true,
+          "blocks": "Nach einer festgelegten Frist löschen oder anonymisieren",
+          "reason": "Art. 5 Abs. 1 Buchst. e und Erwägungsgrund 39: Fristen; Erwägungsgrund 26: Anonyme Daten fallen nicht unter die DSGVO."
+        },
+        {
+          "correct": false,
+          "blocks": "Behalten, weil Speicherplatz billig ist",
+          "reason": "Die Kosten sind nicht der Maßstab, sondern die Erforderlichkeit für den Zweck."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was sollte mit identifizierenden Daten geschehen, die für den Zweck nicht mehr gebraucht werden?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nach einer festgelegten Frist löschen oder anonymisieren",
+              "reason": "Art. 5 Abs. 1 Buchst. e und Erwägungsgrund 39: Fristen; Erwägungsgrund 26: Anonyme Daten fallen nicht unter die DSGVO."
+            },
+            {
+              "correct": false,
+              "blocks": "Behalten, weil Speicherplatz billig ist",
+              "reason": "Die Kosten sind nicht der Maßstab, sondern die Erforderlichkeit für den Zweck."
+            },
+            {
+              "correct": false,
+              "blocks": "Drei Jahre behalten, die feste Frist der DSGVO",
+              "reason": "Die DSGVO legt keine allgemeine feste Frist fest. Die drei Jahre sind erfunden."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

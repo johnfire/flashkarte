@@ -1,0 +1,320 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o06",
+    "title": "Datenschutz-Folgenabschätzungen",
+    "summary": "Entscheiden, wann eine Datenschutz-Folgenabschätzung erforderlich ist und was sie enthalten muss.",
+    "covers": [
+      "dpia"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p08",
+        "reason": "Ein genannter Fall für eine Datenschutz-Folgenabschätzung ist die umfangreiche Verarbeitung besonderer Kategorien personenbezogener Daten."
+      },
+      {
+        "lesson": "r07",
+        "reason": "Ein genannter Fall für eine Datenschutz-Folgenabschätzung ist die systematische automatisierte Bewertung mit erheblichen Auswirkungen."
+      },
+      {
+        "lesson": "o01",
+        "reason": "Eine Datenschutz-Folgenabschätzung ist eine risikobasierte Maßnahme des Verantwortlichen."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Hat eine Form der Verarbeitung, insbesondere bei Verwendung neuer Technologien, **voraussichtlich ein hohes Risiko** für die Rechte und Freiheiten von Menschen zur Folge, muss der Verantwortliche eine **Datenschutz-Folgenabschätzung** durchführen, und zwar **vorab**, also bevor die Verarbeitung beginnt (Art. 35 Abs. 1).",
+        "Für mehrere ähnliche Verarbeitungsvorgänge mit ähnlich hohen Risiken kann eine einzige Abschätzung vorgenommen werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Artikel 35 Abs. 3 nennt Fälle, in denen eine Datenschutz-Folgenabschätzung insbesondere erforderlich ist:",
+        {
+          "type": "list",
+          "items": [
+            "a) systematische und umfassende **Bewertung** persönlicher Aspekte, die sich auf automatisierte Verarbeitung einschließlich Profiling gründet und als Grundlage für Entscheidungen dient, die Rechtswirkung entfalten oder Menschen in ähnlich erheblicher Weise beeinträchtigen;",
+            "b) **umfangreiche** Verarbeitung besonderer Kategorien personenbezogener Daten oder von Daten über strafrechtliche Verurteilungen und Straftaten;",
+            "c) systematische umfangreiche **Überwachung öffentlich zugänglicher Bereiche**."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Jede Aufsichtsbehörde erstellt und veröffentlicht eine **Liste** der Verarbeitungsvorgänge, für die eine Datenschutz-Folgenabschätzung durchzuführen ist (Art. 35 Abs. 4). Sie kann außerdem eine Liste der Arten von Verarbeitungsvorgängen veröffentlichen, für die keine erforderlich ist (Art. 35 Abs. 5).",
+        "Prüfen Sie die Liste Ihrer Aufsichtsbehörde. Über sie finden Sie in der Praxis die Fälle, die über Art. 35 Abs. 3 hinausgehen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Eine Datenschutz-Folgenabschätzung enthält zumindest (Art. 35 Abs. 7):",
+        {
+          "type": "list",
+          "items": [
+            "a) eine systematische Beschreibung der geplanten Verarbeitungsvorgänge und der Zwecke der Verarbeitung;",
+            "b) eine Bewertung der **Notwendigkeit und Verhältnismäßigkeit**;",
+            "c) eine Bewertung der **Risiken** für die Rechte und Freiheiten der betroffenen Personen;",
+            "d) die zur Bewältigung der Risiken geplanten **Abhilfemaßnahmen**."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Holen Sie den Rat des Datenschutzbeauftragten ein, sofern einer benannt wurde (Art. 35 Abs. 2). Holen Sie gegebenenfalls den Standpunkt der betroffenen Personen oder ihrer Vertreter ein (Art. 35 Abs. 9).",
+        "Überprüfen Sie die Folgenabschätzung zumindest dann, wenn sich das Risiko ändert (Art. 35 Abs. 11)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld plant eine Software, die Bewerberinnen und Bewerber mit Punkten bewertet und bei niedriger Punktzahl automatisch ablehnt. Das ist eine systematische, automatisierte Bewertung mit erheblichen Auswirkungen, wie sie Art. 35 Abs. 3 Buchst. a beschreibt. Vorher ist also eine Datenschutz-Folgenabschätzung nötig.",
+        "Ob die Kameras in den Filialen eine brauchen, hängt vom Umfang und von der Liste der Aufsichtsbehörde ab. Die Bäckerei prüft diese Liste, statt zu raten.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 35",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Wann muss eine Datenschutz-Folgenabschätzung durchgeführt werden?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Vor einer Verarbeitung, die voraussichtlich ein hohes Risiko zur Folge hat",
+          "reason": "Art. 35 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Nachdem es zu einer Datenpanne gekommen ist",
+          "reason": "Die Folgenabschätzung erfolgt vor der Verarbeitung."
+        },
+        {
+          "correct": false,
+          "blocks": "Jedes Jahr für jede Verarbeitung",
+          "reason": "Artikel 35 zielt auf Verarbeitungen mit voraussichtlich hohem Risiko."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Zu welchem Zeitpunkt verlangt Art. 35 Abs. 1 eine Datenschutz-Folgenabschätzung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nachdem es zu einer Datenpanne gekommen ist",
+              "reason": "Die Folgenabschätzung erfolgt vor der Verarbeitung."
+            },
+            {
+              "correct": false,
+              "blocks": "Jedes Jahr für jede Verarbeitung",
+              "reason": "Artikel 35 zielt auf Verarbeitungen mit voraussichtlich hohem Risiko."
+            },
+            {
+              "correct": true,
+              "blocks": "Vor einer Verarbeitung, die voraussichtlich ein hohes Risiko zur Folge hat",
+              "reason": "Art. 35 Abs. 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Für welchen Fall verlangt Art. 35 Abs. 3 ausdrücklich eine Datenschutz-Folgenabschätzung?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Der Versand eines monatlichen Newsletters",
+          "reason": "Kein genannter Fall und normalerweise kein hohes Risiko."
+        },
+        {
+          "correct": false,
+          "blocks": "Das Führen einer Kontaktliste der Kundschaft",
+          "reason": "Kein genannter Fall."
+        },
+        {
+          "correct": true,
+          "blocks": "Die umfangreiche Verarbeitung besonderer Kategorien personenbezogener Daten",
+          "reason": "Art. 35 Abs. 3 Buchst. b."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Verarbeitung wird in Art. 35 Abs. 3 als Fall für eine Datenschutz-Folgenabschätzung genannt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Das Führen einer Kontaktliste der Kundschaft",
+              "reason": "Kein genannter Fall."
+            },
+            {
+              "correct": true,
+              "blocks": "Die umfangreiche Verarbeitung besonderer Kategorien personenbezogener Daten",
+              "reason": "Art. 35 Abs. 3 Buchst. b."
+            },
+            {
+              "correct": false,
+              "blocks": "Der Versand eines monatlichen Newsletters",
+              "reason": "Kein genannter Fall und normalerweise kein hohes Risiko."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Was muss jede Datenschutz-Folgenabschätzung enthalten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Eine vorherige Genehmigung der Aufsichtsbehörde",
+          "reason": "Artikel 35 verlangt keine Genehmigung."
+        },
+        {
+          "correct": true,
+          "blocks": "Eine Bewertung der Notwendigkeit und Verhältnismäßigkeit",
+          "reason": "Art. 35 Abs. 7 Buchst. b."
+        },
+        {
+          "correct": false,
+          "blocks": "Den Marketingplan des Unternehmens",
+          "reason": "Artikel 35 Abs. 7 verlangt ihn nicht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welchen Inhalt verlangt Art. 35 Abs. 7 für eine Datenschutz-Folgenabschätzung?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Eine Bewertung der Notwendigkeit und Verhältnismäßigkeit",
+              "reason": "Art. 35 Abs. 7 Buchst. b."
+            },
+            {
+              "correct": false,
+              "blocks": "Den Marketingplan des Unternehmens",
+              "reason": "Artikel 35 Abs. 7 verlangt ihn nicht."
+            },
+            {
+              "correct": false,
+              "blocks": "Eine vorherige Genehmigung der Aufsichtsbehörde",
+              "reason": "Artikel 35 verlangt keine Genehmigung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpia"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Wo findet die Bäckerei Sonnenfeld weitere Arten von Verarbeitungen, für die eine Datenschutz-Folgenabschätzung nötig ist?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "In der veröffentlichten Liste ihrer Aufsichtsbehörde",
+          "reason": "Art. 35 Abs. 4."
+        },
+        {
+          "correct": false,
+          "blocks": "Nirgends, Art. 35 Abs. 3 ist abschließend",
+          "reason": "Artikel 35 Abs. 3 sagt „insbesondere“. Die Aufzählung ist nicht abschließend."
+        },
+        {
+          "correct": false,
+          "blocks": "Im Jahresbericht der Kommission",
+          "reason": "Artikel 35 Abs. 4 weist die Listen den Aufsichtsbehörden zu."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wo sollte die Bäckerei Sonnenfeld nach Fällen suchen, die über die in Art. 35 Abs. 3 genannten hinaus eine Datenschutz-Folgenabschätzung erfordern?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nirgends, Art. 35 Abs. 3 ist abschließend",
+              "reason": "Artikel 35 Abs. 3 sagt „insbesondere“. Die Aufzählung ist nicht abschließend."
+            },
+            {
+              "correct": false,
+              "blocks": "Im Jahresbericht der Kommission",
+              "reason": "Artikel 35 Abs. 4 weist die Listen den Aufsichtsbehörden zu."
+            },
+            {
+              "correct": true,
+              "blocks": "In der veröffentlichten Liste ihrer Aufsichtsbehörde",
+              "reason": "Art. 35 Abs. 4."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

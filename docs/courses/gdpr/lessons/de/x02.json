@@ -1,0 +1,261 @@
+{
+  "module": "Grenzen, Aufsichtsbehörden und Geldbußen",
+  "lesson": {
+    "slug": "x02",
+    "title": "Aufsichtsbehörden und der One-Stop-Shop",
+    "summary": "Die zuständige Aufsichtsbehörde bestimmen, auch die federführende Aufsichtsbehörde bei grenzüberschreitender Verarbeitung, und verstehen, was der Europäische Datenschutzausschuss tut.",
+    "covers": [
+      "lead-authority",
+      "edpb"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Die federführende Aufsichtsbehörde ist eine Aufsichtsbehörde mit einer besonderen Rolle."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Welche Aufsichtsbehörde federführend ist, richtet sich nach der Hauptniederlassung des Verantwortlichen."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Jede Aufsichtsbehörde ist im Hoheitsgebiet ihres eigenen Mitgliedstaats zuständig (Art. 55 Abs. 1).",
+        "Verarbeiten Behörden oder private Stellen Daten zur Erfüllung einer rechtlichen Verpflichtung oder zur Wahrnehmung einer Aufgabe im öffentlichen Interesse, ist die Aufsichtsbehörde dieses Mitgliedstaats zuständig, und die Regeln über die federführende Aufsichtsbehörde gelten nicht (Art. 55 Abs. 2). Gerichte unterliegen bei ihrer justiziellen Tätigkeit nicht der Aufsicht dieser Behörden (Art. 55 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 16, 4 Nr. 23, 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Grenzüberschreitende Verarbeitung** (Art. 4 Nr. 23) ist entweder:",
+        {
+          "type": "list",
+          "items": [
+            "eine Verarbeitung im Rahmen der Tätigkeiten von Niederlassungen in **mehr als einem** Mitgliedstaat; oder",
+            "eine Verarbeitung durch eine einzelne Niederlassung, die erhebliche Auswirkungen auf betroffene Personen in **mehr als einem** Mitgliedstaat hat oder haben kann."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 16, 4 Nr. 23, 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Bei grenzüberschreitender Verarbeitung ist die Aufsichtsbehörde der **Hauptniederlassung** oder der einzigen Niederlassung des Verantwortlichen die **federführende Aufsichtsbehörde** (Art. 56 Abs. 1).",
+        "Die Hauptniederlassung ist in der Regel der Ort der Hauptverwaltung in der EU. Werden die Entscheidungen über Zwecke und Mittel der Verarbeitung in einer anderen Niederlassung in der EU getroffen und ist diese befugt, sie umsetzen zu lassen, gilt diese Niederlassung als Hauptniederlassung (Art. 4 Nr. 16 Buchst. a)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 16, 4 Nr. 23, 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Die federführende Aufsichtsbehörde ist der **einzige Ansprechpartner** des Verantwortlichen für dessen grenzüberschreitende Verarbeitung (Art. 56 Abs. 6). Diese Regelung wird oft »One-Stop-Shop« genannt.",
+        "Für örtliche Fälle gibt es eine Ausnahme. Jede Aufsichtsbehörde kann sich mit einer Beschwerde oder einem möglichen Verstoß befassen, wenn der Fall nur mit einer Niederlassung in ihrem Mitgliedstaat zusammenhängt oder nur betroffene Personen in ihrem Mitgliedstaat erheblich beeinträchtigt. Sie muss zuerst die federführende Aufsichtsbehörde unterrichten. Diese entscheidet innerhalb von drei Wochen, ob sie sich selbst mit dem Fall befasst (Art. 56 Abs. 2 und 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 16, 4 Nr. 23, 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Der **Europäische Datenschutzausschuss** (EDSA) ist eine Einrichtung der Union mit eigener Rechtspersönlichkeit (Art. 68 Abs. 1). Er besteht aus der Leitung je einer Aufsichtsbehörde aus jedem Mitgliedstaat und dem Europäischen Datenschutzbeauftragten (Art. 68 Abs. 3).",
+        "Seine Aufgabe ist es, die **einheitliche Anwendung** der DSGVO sicherzustellen (Art. 70 Abs. 1). Er stellt zum Beispiel Leitlinien, Empfehlungen und bewährte Verfahren bereit, berät die Kommission und erlässt bei Streitigkeiten zwischen Aufsichtsbehörden verbindliche Beschlüsse."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 16, 4 Nr. 23, 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld hat nur Filialen in Deutschland, und ihre Verarbeitung betrifft die Kundschaft dort. Sie hat es deshalb mit der zuständigen deutschen Aufsichtsbehörde zu tun.",
+        "Angenommen, eine Bäckereikette hat ihre EU-Zentrale in Österreich, wo sie ihre Entscheidungen über die Daten trifft, und Filialen in Deutschland. Für ihre grenzüberschreitende Verarbeitung wäre die österreichische Aufsichtsbehörde federführend.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele sind **Veranschaulichungen**. Die Bäckerei Sonnenfeld und die anderen Unternehmen sind erfunden, und eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 16, 4 Nr. 23, 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "lead-authority"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4",
+        "screen-6"
+      ],
+      "prompt": "Eine Kette trifft ihre Entscheidungen über die Daten in ihrer Zentrale in Österreich und hat Filialen in Deutschland. Welche Behörde ist für ihre grenzüberschreitende Verarbeitung federführend?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die österreichische Aufsichtsbehörde",
+          "reason": "Die Aufsichtsbehörde der Hauptniederlassung (Art. 56 Abs. 1)."
+        },
+        {
+          "correct": false,
+          "blocks": "Jede nationale Aufsichtsbehörde gesondert, für alles",
+          "reason": "Für grenzüberschreitende Verarbeitung gilt die Regel der federführenden Aufsichtsbehörde."
+        },
+        {
+          "correct": false,
+          "blocks": "Der EDSA unmittelbar",
+          "reason": "Der Ausschuss handelt nicht als federführende Aufsichtsbehörde."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Aufsichtsbehörde ist federführend für einen Verantwortlichen, dessen Hauptniederlassung in Österreich liegt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Jede nationale Aufsichtsbehörde gesondert, für alles",
+              "reason": "Für grenzüberschreitende Verarbeitung gilt die Regel der federführenden Aufsichtsbehörde."
+            },
+            {
+              "correct": false,
+              "blocks": "Der EDSA unmittelbar",
+              "reason": "Der Ausschuss handelt nicht als federführende Aufsichtsbehörde."
+            },
+            {
+              "correct": true,
+              "blocks": "Die österreichische Aufsichtsbehörde",
+              "reason": "Die Aufsichtsbehörde der Hauptniederlassung (Art. 56 Abs. 1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "lead-authority"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Wer ist bei grenzüberschreitender Verarbeitung der einzige Ansprechpartner des Verantwortlichen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Europäische Kommission",
+          "reason": "Die Kommission ist keine Aufsichtsbehörde."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Aufsichtsbehörde, bei der gerade eine Beschwerde eingegangen ist",
+          "reason": "Beschwerden werden über die federführende Aufsichtsbehörde koordiniert."
+        },
+        {
+          "correct": true,
+          "blocks": "Die federführende Aufsichtsbehörde",
+          "reason": "Art. 56 Abs. 6."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Mit wem hat ein Verantwortlicher nach Art. 56 Abs. 6 bei grenzüberschreitender Verarbeitung zu tun?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Aufsichtsbehörde, bei der gerade eine Beschwerde eingegangen ist",
+              "reason": "Beschwerden werden über die federführende Aufsichtsbehörde koordiniert."
+            },
+            {
+              "correct": true,
+              "blocks": "Die federführende Aufsichtsbehörde",
+              "reason": "Art. 56 Abs. 6."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Europäische Kommission",
+              "reason": "Die Kommission ist keine Aufsichtsbehörde."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "edpb"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Was ist die Hauptaufgabe des EDSA?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Neue EU-Gesetze schreiben",
+          "reason": "Er berät die Kommission. Gesetze erlässt er nicht."
+        },
+        {
+          "correct": true,
+          "blocks": "Die einheitliche Anwendung der DSGVO sicherstellen, zum Beispiel durch Leitlinien",
+          "reason": "Art. 70 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Unternehmen unmittelbar mit Geldbußen belegen",
+          "reason": "Geldbußen verhängen die Aufsichtsbehörden (Art. 83)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Beschreibung passt zum Europäischen Datenschutzausschuss?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die einheitliche Anwendung der DSGVO sicherstellen, zum Beispiel durch Leitlinien",
+              "reason": "Art. 70 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Unternehmen unmittelbar mit Geldbußen belegen",
+              "reason": "Geldbußen verhängen die Aufsichtsbehörden (Art. 83)."
+            },
+            {
+              "correct": false,
+              "blocks": "Neue EU-Gesetze schreiben",
+              "reason": "Er berät die Kommission. Gesetze erlässt er nicht."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

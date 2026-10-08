@@ -1,0 +1,372 @@
+{
+  "module": "Grenzen, Aufsichtsbehörden und Geldbußen",
+  "lesson": {
+    "slug": "x03",
+    "title": "Befugnisse der Aufsichtsbehörden und Geldbußen",
+    "summary": "Die Abhilfebefugnisse, die zwei Bußgeldrahmen und die Umstände kennen, nach denen sich die Höhe einer Geldbuße richtet.",
+    "covers": [
+      "corrective-powers",
+      "fine-tiers",
+      "fine-factors"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Die Abhilfebefugnisse stehen den Aufsichtsbehörden zu."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Aufsichtsbehörden haben **Untersuchungsbefugnisse** (Art. 58 Abs. 1): Sie können anweisen, Informationen bereitzustellen, Datenschutzüberprüfungen durchführen und Zugang zu personenbezogenen Daten und zu Räumlichkeiten erhalten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 58 Abs. 1 und 2, 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Zu ihren **Abhilfebefugnissen** (Art. 58 Abs. 2) gehören:",
+        {
+          "type": "list",
+          "items": [
+            "Warnungen und Verwarnungen;",
+            "die Anweisung, dem Antrag einer Person auf Ausübung ihrer Rechte zu entsprechen oder Verarbeitungsvorgänge mit der DSGVO in Einklang zu bringen;",
+            "die Anweisung, die betroffenen Personen über eine Datenpanne zu benachrichtigen;",
+            "eine vorübergehende oder endgültige **Beschränkung der Verarbeitung, einschließlich eines Verbots**;",
+            "die Anordnung, Daten zu berichtigen oder zu löschen;",
+            "**Geldbußen**;",
+            "die Aussetzung von Datenübermittlungen in ein Drittland."
+          ]
+        },
+        "Eine Geldbuße kann zusätzlich zu den anderen Maßnahmen oder an ihrer Stelle verhängt werden (Art. 83 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 58 Abs. 1 und 2, 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Geldbußen müssen in jedem Einzelfall **wirksam, verhältnismäßig und abschreckend** sein (Art. 83 Abs. 1).",
+        "**Unterer Bußgeldrahmen** (Art. 83 Abs. 4): bis zu **10 Mio. EUR oder 2 %** des gesamten weltweit erzielten Jahresumsatzes des vorangegangenen Geschäftsjahrs, **je nachdem, welcher der Beträge höher ist**. Er erfasst unter anderem die Pflichten der Verantwortlichen und der Auftragsverarbeiter nach Art. 8, 11 und 25 bis 39: Datenschutz durch Technikgestaltung, Auftragsverarbeiter, Verzeichnis, Sicherheit, Datenpannen, Datenschutz-Folgenabschätzungen und Datenschutzbeauftragte."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 58 Abs. 1 und 2, 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Oberer Bußgeldrahmen** (Art. 83 Abs. 5 und 6): bis zu **20 Mio. EUR oder 4 %**, **je nachdem, welcher der Beträge höher ist**. Er erfasst:",
+        {
+          "type": "list",
+          "items": [
+            "die Grundsätze für die Verarbeitung, einschließlich der Bedingungen für die Einwilligung, Art. 5, 6, 7 und 9;",
+            "die Rechte der betroffenen Personen, Art. 12 bis 22;",
+            "Übermittlungen in Drittländer, Art. 44 bis 49;",
+            "die Nichtbefolgung einer Anweisung der Aufsichtsbehörde."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 58 Abs. 1 und 2, 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Höhe hängt von den Umständen ab, die Art. 83 Abs. 2 nennt, darunter:",
+        {
+          "type": "list",
+          "items": [
+            "Art, Schwere und Dauer des Verstoßes, die Zahl der betroffenen Personen und das Ausmaß des von ihnen erlittenen Schadens;",
+            "ob der Verstoß **vorsätzlich oder fahrlässig** begangen wurde;",
+            "Maßnahmen zur **Minderung** des Schadens;",
+            "die getroffenen technischen und organisatorischen Maßnahmen;",
+            "frühere Verstöße und der Umfang der **Zusammenarbeit** mit der Aufsichtsbehörde;",
+            "die Kategorien der Daten und wie die Aufsichtsbehörde von dem Verstoß erfahren hat, auch ob er ihr gemeldet wurde;",
+            "erlangte finanzielle Vorteile oder vermiedene Verluste."
+          ]
+        },
+        "Verstößt ein Unternehmen bei gleichen oder miteinander verbundenen Verarbeitungsvorgängen gegen mehrere Bestimmungen, darf der Gesamtbetrag den Betrag für den schwerwiegendsten Verstoß nicht übersteigen (Art. 83 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 58 Abs. 1 und 2, 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die Regel „je nachdem, welcher der Beträge höher ist“ ist für große Unternehmen wichtig. Bei einem Jahresumsatz von 1 Mrd. EUR sind 4 % genau 40 Mio. EUR. Das ist mehr als 20 Mio. EUR, also liegt der Höchstbetrag im oberen Rahmen bei 40 Mio. EUR.",
+        "Die EU-Staaten legen Vorschriften über andere Sanktionen fest (Art. 84) und entscheiden, ob gegen Behörden Geldbußen verhängt werden können (Art. 83 Abs. 7)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 58 Abs. 1 und 2, 83, 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "corrective-powers"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Welche Maßnahme kann eine Aufsichtsbehörde außer einer Geldbuße verhängen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ein vorübergehendes oder endgültiges Verbot der Verarbeitung",
+          "reason": "Art. 58 Abs. 2 Buchst. f."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine Freiheitsstrafe für die Geschäftsführung",
+          "reason": "Das ist keine Befugnis nach Art. 58 Abs. 2."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Schließung des Bankkontos des Unternehmens",
+          "reason": "Das ist keine Befugnis nach Art. 58 Abs. 2."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche dieser Maßnahmen ist eine Abhilfebefugnis nach Art. 58 Abs. 2?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Eine Freiheitsstrafe für die Geschäftsführung",
+              "reason": "Das ist keine Befugnis nach Art. 58 Abs. 2."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Schließung des Bankkontos des Unternehmens",
+              "reason": "Das ist keine Befugnis nach Art. 58 Abs. 2."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein vorübergehendes oder endgültiges Verbot der Verarbeitung",
+              "reason": "Art. 58 Abs. 2 Buchst. f."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-tiers"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld ignoriert den Auskunftsantrag einer Kundin. Welcher Bußgeldrahmen gilt?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist",
+          "reason": "Verstöße gegen die Rechte fallen in den oberen Rahmen."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine feste Geldbuße von 500 EUR",
+          "reason": "Die DSGVO legt Höchstbeträge fest, keine festen Beträge."
+        },
+        {
+          "correct": true,
+          "blocks": "Bis zu 20 Mio. EUR oder 4 %, je nachdem, welcher der Beträge höher ist",
+          "reason": "Art. 83 Abs. 5 Buchst. b."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In welchen Bußgeldrahmen fällt ein Verstoß gegen die Rechte der betroffenen Person nach Art. 12 bis 22?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Eine feste Geldbuße von 500 EUR",
+              "reason": "Die DSGVO legt Höchstbeträge fest, keine festen Beträge."
+            },
+            {
+              "correct": true,
+              "blocks": "Bis zu 20 Mio. EUR oder 4 %, je nachdem, welcher der Beträge höher ist",
+              "reason": "Art. 83 Abs. 5 Buchst. b."
+            },
+            {
+              "correct": false,
+              "blocks": "Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist",
+              "reason": "Verstöße gegen die Rechte fallen in den oberen Rahmen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-tiers"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld hat mit einem Auftragsverarbeiter keinen schriftlichen Vertrag geschlossen. Welcher Bußgeldrahmen erfasst diesen Verstoß?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Keiner, für fehlende Verträge gibt es keine Geldbuße",
+          "reason": "Artikel 83 Abs. 4 erfasst Art. 28."
+        },
+        {
+          "correct": true,
+          "blocks": "Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist",
+          "reason": "Art. 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."
+        },
+        {
+          "correct": false,
+          "blocks": "Bis zu 20 Mio. EUR oder 4 %, je nachdem, welcher der Beträge höher ist",
+          "reason": "Artikel 28 gehört zum unteren Rahmen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In welchen Bußgeldrahmen fällt ein Verstoß gegen Art. 28, die Vorschrift über Auftragsverarbeiter?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Bis zu 10 Mio. EUR oder 2 %, je nachdem, welcher der Beträge höher ist",
+              "reason": "Art. 83 Abs. 4 Buchst. a erfasst Art. 25 bis 39."
+            },
+            {
+              "correct": false,
+              "blocks": "Bis zu 20 Mio. EUR oder 4 %, je nachdem, welcher der Beträge höher ist",
+              "reason": "Artikel 28 gehört zum unteren Rahmen."
+            },
+            {
+              "correct": false,
+              "blocks": "Keiner, für fehlende Verträge gibt es keine Geldbuße",
+              "reason": "Artikel 83 Abs. 4 erfasst Art. 28."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-factors"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Welcher Umstand kann bei der Bemessung einer Geldbuße zugunsten eines Unternehmens zählen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Maßnahmen, die getroffen wurden, um den Schaden zu mindern",
+          "reason": "Art. 83 Abs. 2 Buchst. c."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine bekannte Marke zu sein",
+          "reason": "Bekanntheit gehört nicht zu den genannten Umständen."
+        },
+        {
+          "correct": false,
+          "blocks": "Mehr als 250 Beschäftigte zu haben",
+          "reason": "Die Größe ist kein mildernder Umstand nach Art. 83 Abs. 2."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was kann nach Art. 83 Abs. 2 eine Geldbuße mindern?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Eine bekannte Marke zu sein",
+              "reason": "Bekanntheit gehört nicht zu den genannten Umständen."
+            },
+            {
+              "correct": false,
+              "blocks": "Mehr als 250 Beschäftigte zu haben",
+              "reason": "Die Größe ist kein mildernder Umstand nach Art. 83 Abs. 2."
+            },
+            {
+              "correct": true,
+              "blocks": "Maßnahmen, die getroffen wurden, um den Schaden zu mindern",
+              "reason": "Art. 83 Abs. 2 Buchst. c."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "fine-tiers"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "Ein Unternehmen hat einen weltweiten Jahresumsatz von 1 Mrd. EUR. Wie hoch ist die Geldbuße im oberen Rahmen höchstens?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "20 Mio. EUR",
+          "reason": "Es gilt der höhere der beiden Beträge."
+        },
+        {
+          "correct": false,
+          "blocks": "10 Mio. EUR",
+          "reason": "Das ist der feste Betrag des unteren Rahmens."
+        },
+        {
+          "correct": true,
+          "blocks": "40 Mio. EUR",
+          "reason": "4 % von 1 Mrd. EUR sind 40 Mio. EUR, also mehr als 20 Mio. EUR."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ein Unternehmen hat 1 Mrd. EUR weltweiten Jahresumsatz. Was ergibt »4 % oder 20 Mio. EUR, je nachdem, welcher der Beträge höher ist«?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "10 Mio. EUR",
+              "reason": "Das ist der feste Betrag des unteren Rahmens."
+            },
+            {
+              "correct": true,
+              "blocks": "40 Mio. EUR",
+              "reason": "4 % von 1 Mrd. EUR sind 40 Mio. EUR, also mehr als 20 Mio. EUR."
+            },
+            {
+              "correct": false,
+              "blocks": "20 Mio. EUR",
+              "reason": "Es gilt der höhere der beiden Beträge."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

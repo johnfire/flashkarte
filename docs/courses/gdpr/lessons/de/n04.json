@@ -1,0 +1,257 @@
+{
+  "module": "Über die Grundlagen hinaus",
+  "lesson": {
+    "slug": "n04",
+    "title": "Die Einwilligung von Kindern bei Online-Diensten",
+    "summary": "Die Altersregel für die Einwilligung von Kindern bei Online-Diensten anwenden, ebenso die Pflicht, die Einwilligung der Eltern zu überprüfen.",
+    "covers": [
+      "child-consent"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p05",
+        "reason": "Artikel 8 knüpft die Einwilligung an zusätzliche Bedingungen zum Alter."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Artikel 8 Abs. 1 gilt, wenn die **Einwilligung** die Rechtsgrundlage ist und es um **Online-Dienste geht, die einem Kind direkt angeboten werden**. Die DSGVO nennt sie „Dienste der Informationsgesellschaft“ (Art. 4 Nr. 25).",
+        "Die Verarbeitung ist rechtmäßig, wenn das Kind **mindestens 16 Jahre alt** ist. Ist es jünger, ist sie nur rechtmäßig, wenn die Einwilligung durch den **Träger der elterlichen Verantwortung** oder mit dessen Zustimmung erteilt wird."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 25, 8, 12 Abs. 1, 17 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 38",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die EU-Staaten können **durch Rechtsvorschriften eine niedrigere Altersgrenze vorsehen, aber nicht unter 13 Jahren** (Art. 8 Abs. 1).",
+        "Die Altersgrenze kann sich also von Land zu Land unterscheiden, zwischen 13 und 16 Jahren. Prüfen Sie das Recht jedes Landes, in dem Sie den Dienst anbieten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 25, 8, 12 Abs. 1, 17 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 38",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Der Verantwortliche muss unter Berücksichtigung der verfügbaren Technik **angemessene Anstrengungen unternehmen, um sich zu vergewissern**, dass die Einwilligung durch die Eltern oder mit deren Zustimmung erteilt wurde (Art. 8 Abs. 2).",
+        "Artikel 8 lässt das nationale Vertragsrecht unberührt, zum Beispiel die Frage, ob ein Kind wirksam einen Vertrag schließen kann (Art. 8 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 25, 8, 12 Abs. 1, 17 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 38",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Erwägungsgrund 38: Kinder verdienen **besonderen Schutz**, vor allem wenn ihre Daten für Werbezwecke oder für die Erstellung von Persönlichkeits- oder Nutzerprofilen verwendet werden.",
+        "Bei Präventions- oder Beratungsdiensten, die einem Kind unmittelbar angeboten werden, sollte die Einwilligung der Eltern nicht erforderlich sein (Erwägungsgrund 38)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 25, 8, 12 Abs. 1, 17 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 38",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Verwandte Regeln: Informationen, die sich speziell an Kinder richten, müssen insbesondere in klarer und einfacher Sprache abgefasst sein (Art. 12 Abs. 1). Wurden Daten nach Art. 8 Abs. 1 erhoben, ist das ein Grund für ihre Löschung (Art. 17 Abs. 1 Buchst. f).",
+        "Der Online-Backclub der Bäckerei Sonnenfeld für Kinder stützt sich auf die Einwilligung. In einem Land mit der Standardaltersgrenze von 16 Jahren braucht ein 14-jähriges Kind die Einwilligung eines Elternteils oder dessen Zustimmung, und die Bäckerei unternimmt angemessene Anstrengungen, um das zu überprüfen.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 25, 8, 12 Abs. 1, 17 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 38",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "child-consent"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "Der Online-Club der Bäckerei Sonnenfeld stützt sich auf die Einwilligung. In einem Land mit der Standardaltersgrenze meldet sich ein 14-jähriges Kind an. Was ist nötig?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Einwilligung durch einen Elternteil oder mit dessen Zustimmung",
+          "reason": "Unter 16 Jahren nach der Standardregel (Art. 8 Abs. 1)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts weiter; mit 14 ist man überall alt genug",
+          "reason": "Die Standardaltersgrenze liegt bei 16 Jahren."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts; unter 18-Jährige dürfen nie Online-Dienste nutzen",
+          "reason": "Ein solches Verbot enthält die DSGVO nicht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was ist nach der Standardregel des Art. 8 für die Einwilligung eines 14-jährigen Kindes in einen Online-Dienst nötig?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nichts weiter; mit 14 ist man überall alt genug",
+              "reason": "Die Standardaltersgrenze liegt bei 16 Jahren."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts; unter 18-Jährige dürfen nie Online-Dienste nutzen",
+              "reason": "Ein solches Verbot enthält die DSGVO nicht."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Einwilligung durch einen Elternteil oder mit dessen Zustimmung",
+              "reason": "Unter 16 Jahren nach der Standardregel (Art. 8 Abs. 1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "child-consent"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Welche niedrigste Altersgrenze darf ein EU-Staat nach Art. 8 Abs. 1 festlegen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "10 Jahre",
+          "reason": "Art. 8 Abs. 1 erlaubt keine Grenze unter 13 Jahren."
+        },
+        {
+          "correct": false,
+          "blocks": "Keine Senkung erlaubt; 16 Jahre gelten überall",
+          "reason": "Die EU-Staaten können sie bis auf 13 Jahre senken."
+        },
+        {
+          "correct": true,
+          "blocks": "13 Jahre",
+          "reason": "Art. 8 Abs. 1: nicht unter dem vollendeten dreizehnten Lebensjahr."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wie weit darf ein EU-Staat die Altersgrenze für die Einwilligung von Kindern in Online-Dienste senken?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Keine Senkung erlaubt; 16 Jahre gelten überall",
+              "reason": "Die EU-Staaten können sie bis auf 13 Jahre senken."
+            },
+            {
+              "correct": true,
+              "blocks": "13 Jahre",
+              "reason": "Art. 8 Abs. 1: nicht unter dem vollendeten dreizehnten Lebensjahr."
+            },
+            {
+              "correct": false,
+              "blocks": "10 Jahre",
+              "reason": "Art. 8 Abs. 1 erlaubt keine Grenze unter 13 Jahren."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "child-consent"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Was muss die Bäckerei Sonnenfeld wegen der Einwilligung der Eltern tun?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ein notariell beglaubigtes Papierformular verlangen",
+          "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen, keine bestimmte Form."
+        },
+        {
+          "correct": true,
+          "blocks": "Angemessene Anstrengungen unternehmen, um sie zu überprüfen, unter Berücksichtigung der verfügbaren Technik",
+          "reason": "Art. 8 Abs. 2."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts; dem Häkchen zu vertrauen genügt",
+          "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was verlangt Art. 8 Abs. 2 vom Verantwortlichen bei der Einwilligung der Eltern?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Angemessene Anstrengungen unternehmen, um sie zu überprüfen, unter Berücksichtigung der verfügbaren Technik",
+              "reason": "Art. 8 Abs. 2."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts; dem Häkchen zu vertrauen genügt",
+              "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen."
+            },
+            {
+              "correct": false,
+              "blocks": "Ein notariell beglaubigtes Papierformular verlangen",
+              "reason": "Art. 8 Abs. 2 verlangt angemessene Anstrengungen, keine bestimmte Form."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

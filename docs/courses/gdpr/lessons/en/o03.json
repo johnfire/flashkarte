@@ -58,7 +58,7 @@
             "provide information and allow **audits**."
           ]
         },
-        "The processor must immediately tell the controller if an instruction infringes data protection law."
+        "The processor must immediately tell the controller if, in its opinion, an instruction infringes data protection law."
       ],
       "sources": [
         {

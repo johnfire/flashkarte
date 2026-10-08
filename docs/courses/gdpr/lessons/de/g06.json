@@ -1,0 +1,321 @@
+{
+  "module": "Einstieg: was die DSGVO erfasst",
+  "lesson": {
+    "slug": "g06",
+    "title": "Wann die DSGVO gilt",
+    "summary": "Entscheiden, ob eine Tätigkeit nicht unter die DSGVO fällt und ob ein Unternehmen außerhalb der EU erfasst ist.",
+    "covers": [
+      "material-scope",
+      "territorial-scope"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Der sachliche Anwendungsbereich wird über die automatisierte Verarbeitung beschrieben."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Artikel 3 knüpft daran an, wo der Verantwortliche oder der Auftragsverarbeiter niedergelassen ist."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Die DSGVO erfasst die automatisierte Verarbeitung und Dateisysteme (Art. 2 Abs. 1). Artikel 2 Abs. 2 nennt dann vier Ausnahmen. Die DSGVO gilt nicht für die Verarbeitung:",
+        {
+          "type": "list",
+          "items": [
+            "im Rahmen einer Tätigkeit, die nicht in den Anwendungsbereich des Unionsrechts fällt;",
+            "durch die EU-Staaten im Rahmen der Gemeinsamen Außen- und Sicherheitspolitik;",
+            "durch eine natürliche Person zur Ausübung **ausschließlich persönlicher oder familiärer Tätigkeiten**;",
+            "durch die zuständigen Behörden für strafrechtliche Zwecke; dafür gelten eigene Vorschriften."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die **Ausnahme für ausschließlich persönliche oder familiäre Tätigkeiten** erfasst Tätigkeiten ohne Bezug zu einer beruflichen oder wirtschaftlichen Tätigkeit. Beispiele sind privater Schriftverkehr, das Führen von Anschriftenverzeichnissen und die Nutzung sozialer Netze in diesem privaten Rahmen (Erwägungsgrund 18).",
+        "Für Unternehmen, die die Instrumente für solche privaten Tätigkeiten bereitstellen, gilt die DSGVO aber weiterhin (Erwägungsgrund 18)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Artikel 2 kennt **keine Ausnahme nach Unternehmensgröße**. Auch ein Ein-Personen-Unternehmen, das Kundendaten verarbeitet, ist erfasst.",
+        "Die Inhaberin der Bäckerei Sonnenfeld führt eine private Liste mit den Geburtstagen ihrer Freundinnen und Freunde. Das ist eine ausschließlich persönliche Tätigkeit. Nutzt sie dieselbe Liste, um für die Bäckerei zu werben, ist die Tätigkeit wirtschaftlich, und die DSGVO gilt."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Räumlicher Anwendungsbereich**, erste Prüfung: Die DSGVO gilt für eine Verarbeitung, die im Rahmen der Tätigkeiten einer **Niederlassung** eines Verantwortlichen oder Auftragsverarbeiters **in der EU** erfolgt. Wo die Verarbeitung tatsächlich stattfindet, spielt keine Rolle (Art. 3 Abs. 1).",
+        "Speichert die Bäckerei Sonnenfeld ihre Daten also auf einem Server außerhalb der EU, gilt die DSGVO trotzdem."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Zweite Prüfung: Ein Verantwortlicher oder Auftragsverarbeiter, der **nicht in der EU niedergelassen** ist, ist erfasst, wenn er Daten von Personen verarbeitet, die sich in der EU befinden, und dabei entweder:",
+        {
+          "type": "list",
+          "items": [
+            "ihnen Waren oder Dienstleistungen anbietet, unabhängig davon, ob sie dafür bezahlen müssen (Art. 3 Abs. 2 Buchst. a), oder",
+            "ihr Verhalten beobachtet, soweit es in der EU erfolgt (Art. 3 Abs. 2 Buchst. b)."
+          ]
+        },
+        "Der Schutz gilt unabhängig von Staatsangehörigkeit oder Aufenthaltsort einer Person (Erwägungsgrund 14). Entscheidend ist, dass sie sich in der EU befindet, nicht ihre Staatsangehörigkeit."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2, 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 18",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "material-scope"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Die Inhaberin der Bäckerei Sonnenfeld speichert die Telefonnummern ihrer Freundinnen und Freunde, um ihnen zum Geburtstag zu gratulieren. Gilt die DSGVO?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, das ist eine ausschließlich persönliche Tätigkeit",
+          "reason": "Artikel 2 Abs. 2 Buchst. c und Erwägungsgrund 18 nehmen persönliche oder familiäre Tätigkeiten aus."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, weil sie ein Unternehmen führt",
+          "reason": "Dass sie ein Unternehmen führt, macht ihre private Liste nicht zu einer geschäftlichen Tätigkeit."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, weil die Liste auf einem Smartphone gespeichert ist",
+          "reason": "Die Automatisierung hebt die Ausnahme für persönliche oder familiäre Tätigkeiten nicht auf."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Inhaberin eines Unternehmens führt privat eine Liste mit den Telefonnummern ihrer Freundinnen und Freunde. Gilt dafür die DSGVO?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, weil sie ein Unternehmen führt",
+              "reason": "Dass sie ein Unternehmen führt, macht ihre private Liste nicht zu einer geschäftlichen Tätigkeit."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, weil die Liste auf einem Smartphone gespeichert ist",
+              "reason": "Die Automatisierung hebt die Ausnahme für persönliche oder familiäre Tätigkeiten nicht auf."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, das ist eine ausschließlich persönliche Tätigkeit",
+              "reason": "Artikel 2 Abs. 2 Buchst. c und Erwägungsgrund 18 nehmen persönliche oder familiäre Tätigkeiten aus."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "material-scope"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Die Inhaberin der Bäckerei Sonnenfeld nutzt ihre private Kontaktliste jetzt, um für die Bäckerei zu werben. Was ändert sich?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nichts, weil die Liste auf einem privaten Telefon liegt",
+          "reason": "Die geschäftliche Nutzung stellt einen Bezug zu einer wirtschaftlichen Tätigkeit her."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts, weil kleine Unternehmen ausgenommen sind",
+          "reason": "Artikel 2 enthält keine Ausnahme nach Unternehmensgröße."
+        },
+        {
+          "correct": true,
+          "blocks": "Die Tätigkeit ist wirtschaftlich, also gilt die DSGVO",
+          "reason": "Erwägungsgrund 18 setzt voraus, dass kein Bezug zu einer wirtschaftlichen Tätigkeit besteht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was ändert sich, wenn eine private Kontaktliste genutzt wird, um für ein Unternehmen zu werben?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nichts, weil kleine Unternehmen ausgenommen sind",
+              "reason": "Artikel 2 enthält keine Ausnahme nach Unternehmensgröße."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Tätigkeit ist wirtschaftlich, also gilt die DSGVO",
+              "reason": "Erwägungsgrund 18 setzt voraus, dass kein Bezug zu einer wirtschaftlichen Tätigkeit besteht."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts, weil die Liste auf einem privaten Telefon liegt",
+              "reason": "Die geschäftliche Nutzung stellt einen Bezug zu einer wirtschaftlichen Tätigkeit her."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "territorial-scope"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld ist in Deutschland niedergelassen und speichert ihre Kundendaten auf einem Server in Kanada. Gilt die DSGVO?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Erst wenn die Daten in die EU zurückkommen",
+          "reason": "Artikel 3 Abs. 1 kennt keine solche Bedingung."
+        },
+        {
+          "correct": true,
+          "blocks": "Ja, wegen der Niederlassung in der EU",
+          "reason": "Artikel 3 Abs. 1 gilt unabhängig davon, wo die Verarbeitung stattfindet."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, es gilt nur kanadisches Recht",
+          "reason": "Die DSGVO knüpft an die Niederlassung an, nicht an den Standort des Servers."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ein in der EU niedergelassenes Unternehmen verarbeitet seine Daten auf einem Server in Kanada. Gilt die DSGVO weiterhin?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ja, wegen der Niederlassung in der EU",
+              "reason": "Artikel 3 Abs. 1 gilt unabhängig davon, wo die Verarbeitung stattfindet."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, es gilt nur kanadisches Recht",
+              "reason": "Die DSGVO knüpft an die Niederlassung an, nicht an den Standort des Servers."
+            },
+            {
+              "correct": false,
+              "blocks": "Erst wenn die Daten in die EU zurückkommen",
+              "reason": "Artikel 3 Abs. 1 kennt keine solche Bedingung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "territorial-scope"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Ein Onlineshop ohne Büro in der EU verkauft Backzubehör an Kundinnen und Kunden in Österreich. Gilt die DSGVO für ihn?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ja, wegen des Angebots von Waren an Menschen in der EU",
+          "reason": "Artikel 3 Abs. 2 Buchst. a greift."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, ohne Niederlassung in der EU gilt sie nicht",
+          "reason": "Artikel 3 Abs. 2 erfasst auch manche Unternehmen ohne Niederlassung in der EU."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur für Kundinnen und Kunden mit EU-Staatsangehörigkeit",
+          "reason": "Entscheidend ist, dass sich die Person in der EU befindet, nicht ihre Staatsangehörigkeit (Erwägungsgrund 14)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ein Onlinehändler verkauft an Kundschaft in Österreich. Kann die DSGVO für ihn gelten, obwohl er nicht in der EU niedergelassen ist?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, ohne Niederlassung in der EU gilt sie nicht",
+              "reason": "Artikel 3 Abs. 2 erfasst auch manche Unternehmen ohne Niederlassung in der EU."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur für Kundinnen und Kunden mit EU-Staatsangehörigkeit",
+              "reason": "Entscheidend ist, dass sich die Person in der EU befindet, nicht ihre Staatsangehörigkeit (Erwägungsgrund 14)."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, wegen des Angebots von Waren an Menschen in der EU",
+              "reason": "Artikel 3 Abs. 2 Buchst. a greift."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

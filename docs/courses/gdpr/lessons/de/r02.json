@@ -1,0 +1,310 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r02",
+    "title": "Einen Antrag auf Wahrnehmung der Rechte bearbeiten",
+    "summary": "Einen Antrag zu den Rechten fristgerecht beantworten und die Regeln zu Entgelt, Weigerung und Identitätsprüfung richtig anwenden.",
+    "covers": [
+      "request-deadline",
+      "request-fees-and-identity"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Wer auf einen Antrag nicht tätig wird, muss die Person darauf hinweisen, dass sie sich bei der Aufsichtsbehörde beschweren kann."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Die Fristen sind Pflichten des Verantwortlichen."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Artikel 15 bis 22 geben den Menschen Rechte: Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch, dazu Schutz vor bestimmten automatisierten Entscheidungen. Die nächsten Lektionen behandeln jedes dieser Rechte.",
+        "Artikel 12 regelt das Verfahren für alle diese Rechte. Zunächst muss der Verantwortliche der Person die Ausübung ihrer Rechte **erleichtern** (Art. 12 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 2 bis 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Frist**: Reagieren Sie auf einen Antrag **unverzüglich**, in jedem Fall aber **innerhalb eines Monats** nach Eingang des Antrags (Art. 12 Abs. 3).",
+        "Die Frist kann „um weitere zwei Monate verlängert werden, wenn dies unter Berücksichtigung der Komplexität und der Anzahl von Anträgen erforderlich ist“. Die Person muss innerhalb eines Monats nach Eingang des Antrags über die Fristverlängerung informiert werden, zusammen mit den Gründen für die Verzögerung.",
+        "Wurde der Antrag elektronisch gestellt, antworten Sie nach Möglichkeit auf elektronischem Weg, sofern die Person nichts anderes angibt."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 2 bis 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Werden Sie auf einen Antrag hin **nicht tätig**, müssen Sie die Person ohne Verzögerung, spätestens aber innerhalb eines Monats nach Eingang des Antrags informieren (Art. 12 Abs. 4). Nennen Sie:",
+        {
+          "type": "list",
+          "items": [
+            "die Gründe dafür;",
+            "ihr Recht, sich bei einer Aufsichtsbehörde zu beschweren;",
+            "ihr Recht, einen gerichtlichen Rechtsbehelf einzulegen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 2 bis 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Unentgeltlich**: Die Bearbeitung von Anträgen kostet nichts (Art. 12 Abs. 5).",
+        "Nur bei **offenkundig unbegründeten oder exzessiven** Anträgen, insbesondere im Fall von häufiger Wiederholung, darf der Verantwortliche ein angemessenes Entgelt verlangen oder sich weigern, tätig zu werden. Er muss nachweisen können, dass der Antrag offenkundig unbegründet oder exzessiv ist."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 2 bis 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Identität**: Haben Sie **begründete Zweifel** daran, wer einen Antrag stellt, dürfen Sie die zusätzlichen Informationen anfordern, die zur Bestätigung der Identität erforderlich sind (Art. 12 Abs. 6).",
+        "Fragen Sie nur nach dem, was zur Bestätigung der Identität nötig ist, und nur, wenn Sie begründete Zweifel haben."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 2 bis 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Eine Kundin schreibt der Bäckerei Sonnenfeld am **10. März** eine E-Mail und fragt, welche Daten die Bäckerei über sie hat. Die Antwort ist bis zum **10. April** fällig.",
+        "Ist der Antrag tatsächlich komplex, darf die Bäckerei die Frist um bis zu zwei weitere Monate verlängern. Sie muss die Kundin aber bis zum 10. April darüber informieren und die Gründe nennen.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 2 bis 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "request-deadline"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Ein Antrag geht am 10. März ein. Bis wann muss die Antwort ohne Fristverlängerung spätestens erfolgen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "10. April",
+          "reason": "Art. 12 Abs. 3: innerhalb eines Monats nach Eingang des Antrags."
+        },
+        {
+          "correct": false,
+          "blocks": "10. Juni, weil die DSGVO drei Monate erlaubt",
+          "reason": "Drei Monate sind nur mit einer mitgeteilten Fristverlängerung möglich."
+        },
+        {
+          "correct": false,
+          "blocks": "Wann es passt, sobald der Eingang bestätigt ist",
+          "reason": "Eine Eingangsbestätigung hält die Frist nicht an."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Bäckerei Sonnenfeld erhält am 10. März den Antrag einer Kundin zu ihren Rechten. Wann endet die reguläre Frist von einem Monat?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "10. Juni, weil die DSGVO drei Monate erlaubt",
+              "reason": "Drei Monate sind nur mit einer mitgeteilten Fristverlängerung möglich."
+            },
+            {
+              "correct": false,
+              "blocks": "Wann es passt, sobald der Eingang bestätigt ist",
+              "reason": "Eine Eingangsbestätigung hält die Frist nicht an."
+            },
+            {
+              "correct": true,
+              "blocks": "10. April",
+              "reason": "Art. 12 Abs. 3: innerhalb eines Monats nach Eingang des Antrags."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "request-deadline"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Ein Antrag ist ungewöhnlich komplex. Wie kann die Bäckerei Sonnenfeld mehr Zeit bekommen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "So lange wie nötig, ohne jemanden zu informieren",
+          "reason": "Verlängerungen sind begrenzt und müssen mitgeteilt werden."
+        },
+        {
+          "correct": false,
+          "blocks": "Sechs weitere Monate, wenn das Unternehmen klein ist",
+          "reason": "Eine solche Regel kennt die DSGVO nicht."
+        },
+        {
+          "correct": true,
+          "blocks": "Bis zu zwei weitere Monate, wenn sie die Person innerhalb des ersten Monats mit Gründen informiert",
+          "reason": "Art. 12 Abs. 3."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was erlaubt Art. 12 Abs. 3, wenn die Bearbeitung eines Antrags mehr Zeit braucht?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Sechs weitere Monate, wenn das Unternehmen klein ist",
+              "reason": "Eine solche Regel kennt die DSGVO nicht."
+            },
+            {
+              "correct": true,
+              "blocks": "Bis zu zwei weitere Monate, wenn sie die Person innerhalb des ersten Monats mit Gründen informiert",
+              "reason": "Art. 12 Abs. 3."
+            },
+            {
+              "correct": false,
+              "blocks": "So lange wie nötig, ohne jemanden zu informieren",
+              "reason": "Verlängerungen sind begrenzt und müssen mitgeteilt werden."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "request-fees-and-identity"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Darf die Bäckerei Sonnenfeld 20 EUR dafür verlangen, den ersten, gewöhnlichen Auskunftsantrag einer Kundin zu bearbeiten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, wenn der Antrag per Post kommt",
+          "reason": "Der Übermittlungsweg begründet kein Recht auf ein Entgelt."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, die Bearbeitung muss unentgeltlich sein",
+          "reason": "Art. 12 Abs. 5: unentgeltlich, außer bei offenkundig unbegründeten oder exzessiven Anträgen."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, eine Bearbeitungsgebühr ist immer erlaubt",
+          "reason": "Ein Entgelt ist nur bei offenkundig unbegründeten oder exzessiven Anträgen möglich."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Darf ein Unternehmen für einen gewöhnlichen Antrag zu den Rechten einer Person ein Entgelt verlangen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nein, die Bearbeitung muss unentgeltlich sein",
+              "reason": "Art. 12 Abs. 5: unentgeltlich, außer bei offenkundig unbegründeten oder exzessiven Anträgen."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, eine Bearbeitungsgebühr ist immer erlaubt",
+              "reason": "Ein Entgelt ist nur bei offenkundig unbegründeten oder exzessiven Anträgen möglich."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn der Antrag per Post kommt",
+              "reason": "Der Übermittlungsweg begründet kein Recht auf ein Entgelt."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "request-fees-and-identity"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Ein Antrag kommt von einer unbekannten E-Mail-Adresse, und die Bäckerei Sonnenfeld zweifelt, ob er wirklich von der Kundin stammt. Was darf sie tun?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Informationen anfordern, die zur Bestätigung der Identität erforderlich sind",
+          "reason": "Art. 12 Abs. 6."
+        },
+        {
+          "correct": false,
+          "blocks": "Den Antrag einfach ignorieren",
+          "reason": "Der Verantwortliche muss tätig werden oder erklären, warum er es nicht tut."
+        },
+        {
+          "correct": false,
+          "blocks": "Von allen Antragstellenden eine Kopie des Reisepasses verlangen",
+          "reason": "Nur erforderliche Informationen, und nur bei begründeten Zweifeln."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was erlaubt Art. 12 Abs. 6, wenn begründete Zweifel an der Identität der antragstellenden Person bestehen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Den Antrag einfach ignorieren",
+              "reason": "Der Verantwortliche muss tätig werden oder erklären, warum er es nicht tut."
+            },
+            {
+              "correct": false,
+              "blocks": "Von allen Antragstellenden eine Kopie des Reisepasses verlangen",
+              "reason": "Nur erforderliche Informationen, und nur bei begründeten Zweifeln."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Informationen anfordern, die zur Bestätigung der Identität erforderlich sind",
+              "reason": "Art. 12 Abs. 6."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
