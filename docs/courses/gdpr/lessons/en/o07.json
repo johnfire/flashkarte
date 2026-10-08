@@ -249,7 +249,7 @@
       ],
       "variants": [
         {
-          "prompt": "Can a DPO be penalised for performing their tasks?",
+          "prompt": "Can a DPO be penalised for performing their tasks, such as reporting a problem?",
           "options": [
             {
               "correct": true,

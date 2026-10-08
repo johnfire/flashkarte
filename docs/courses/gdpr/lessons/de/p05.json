@@ -178,7 +178,7 @@
       ],
       "variants": [
         {
-          "prompt": "Gilt es als Einwilligung, wenn jemand ein bereits angekreuztes Einwilligungskästchen unverändert lässt?",
+          "prompt": "Eine Kundin lässt ein bereits angekreuztes Newsletter-Kästchen unverändert. Gilt das als ihre Einwilligung?",
           "options": [
             {
               "correct": false,
@@ -227,7 +227,7 @@
       ],
       "variants": [
         {
-          "prompt": "Ist eine Einwilligung freiwillig, wenn eine Leistung verweigert wird, solange die Menschen nicht einer Verarbeitung zustimmen, die mit der Leistung nichts zu tun hat?",
+          "prompt": "Ist die Einwilligung in einen Newsletter freiwillig, wenn die Kundschaft nur vorbestellen kann, nachdem sie dem Newsletter zugestimmt hat?",
           "options": [
             {
               "correct": false,
@@ -275,7 +275,7 @@
       ],
       "variants": [
         {
-          "prompt": "Was geschieht mit einer früheren, auf eine Einwilligung gestützten Verarbeitung, wenn jemand die Einwilligung widerruft?",
+          "prompt": "Welche Folgen hat der Widerruf einer Newsletter-Einwilligung für die Mails, die die Bäckerei Sonnenfeld bis dahin verschickt hat?",
           "options": [
             {
               "correct": true,

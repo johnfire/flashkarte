@@ -3,7 +3,7 @@
   "lesson": {
     "slug": "r02",
     "title": "Einen Antrag auf Wahrnehmung der Rechte bearbeiten",
-    "summary": "Einen Antrag zu den Rechten fristgerecht beantworten und die Regeln zu Entgelt, Weigerung und Identitätsprüfung richtig anwenden.",
+    "summary": "Einen Antrag auf Wahrnehmung der Rechte fristgerecht beantworten und die Regeln zu Entgelt, Weigerung und Identitätsprüfung richtig anwenden.",
     "covers": [
       "request-deadline",
       "request-fees-and-identity"
@@ -141,7 +141,7 @@
       ],
       "variants": [
         {
-          "prompt": "Die Bäckerei Sonnenfeld erhält am 10. März den Antrag einer Kundin zu ihren Rechten. Wann endet die reguläre Frist von einem Monat?",
+          "prompt": "Die Bäckerei Sonnenfeld erhält am 10. März den Antrag einer Kundin auf Wahrnehmung ihrer Rechte. Wann endet die reguläre Frist von einem Monat?",
           "options": [
             {
               "correct": false,
@@ -183,7 +183,7 @@
         },
         {
           "correct": true,
-          "blocks": "Bis zu zwei weitere Monate, wenn sie die Person innerhalb des ersten Monats mit Gründen informiert",
+          "blocks": "Bis zu zwei weitere Monate, wenn die Person innerhalb des ersten Monats mit Gründen informiert wird",
           "reason": "Art. 12 Abs. 3."
         }
       ],
@@ -198,7 +198,7 @@
             },
             {
               "correct": true,
-              "blocks": "Bis zu zwei weitere Monate, wenn sie die Person innerhalb des ersten Monats mit Gründen informiert",
+              "blocks": "Bis zu zwei weitere Monate, wenn die Person innerhalb des ersten Monats mit Gründen informiert wird",
               "reason": "Art. 12 Abs. 3."
             },
             {
@@ -237,7 +237,7 @@
       ],
       "variants": [
         {
-          "prompt": "Darf ein Unternehmen für einen gewöhnlichen Antrag zu den Rechten einer Person ein Entgelt verlangen?",
+          "prompt": "Darf ein Unternehmen für einen gewöhnlichen Antrag einer Person auf Wahrnehmung ihrer Rechte ein Entgelt verlangen?",
           "options": [
             {
               "correct": true,

@@ -3,7 +3,7 @@
   "lesson": {
     "slug": "r07",
     "title": "Profiling und automatisierte Entscheidungen",
-    "summary": "Profiling erkennen und die Regeln des Art. 22 für ausschließlich automatisierte Entscheidungen anwenden.",
+    "summary": "Profiling erkennen und die Regeln des Art. 22 für Entscheidungen anwenden, die ausschließlich auf einer automatisierten Verarbeitung beruhen.",
     "covers": [
       "profiling",
       "automated-decisions"
@@ -15,7 +15,7 @@
       },
       {
         "lesson": "p05",
-        "reason": "Eine Ausnahme ist die ausdrückliche Einwilligung, die auf der Einwilligung aufbaut."
+        "reason": "Eine Ausnahme ist die ausdrückliche Einwilligung, die auf den allgemeinen Bedingungen für die Einwilligung aufbaut."
       }
     ]
   },

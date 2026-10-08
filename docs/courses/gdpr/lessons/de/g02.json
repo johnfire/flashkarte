@@ -241,7 +241,7 @@
       ],
       "variants": [
         {
-          "prompt": "Können Daten personenbezogen sein, wenn sie überhaupt keine Namen enthalten?",
+          "prompt": "Kundenkartennummern und Einkäufe erscheinen ohne jeden Namen. Können solche Daten personenbezogen sein?",
           "options": [
             {
               "correct": true,

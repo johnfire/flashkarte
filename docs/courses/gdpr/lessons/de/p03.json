@@ -221,7 +221,7 @@
       ],
       "variants": [
         {
-          "prompt": "Wer trägt nach Art. 5 Abs. 2 die Last, die Einhaltung der Grundsätze nachzuweisen?",
+          "prompt": "Wer muss nach Art. 5 Abs. 2 nachweisen, dass die Verarbeitung der Bäckerei Sonnenfeld die Grundsätze einhält?",
           "options": [
             {
               "correct": true,

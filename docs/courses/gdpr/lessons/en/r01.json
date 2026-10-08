@@ -314,7 +314,7 @@
         },
         {
           "correct": false,
-          "blocks": "The recruiter's personal phone number",
+          "blocks": "The personal phone number of whoever supplied the data",
           "reason": "Article 14 does not require this."
         },
         {
@@ -329,7 +329,7 @@
           "options": [
             {
               "correct": false,
-              "blocks": "The recruiter's personal phone number",
+              "blocks": "The personal phone number of whoever supplied the data",
               "reason": "Article 14 does not require this."
             },
             {

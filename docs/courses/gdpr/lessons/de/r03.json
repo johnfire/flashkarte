@@ -181,7 +181,7 @@
       ],
       "variants": [
         {
-          "prompt": "Eine Person hat ihre erste Kopie bereits erhalten. Was erlaubt Art. 15 Abs. 3 beim Entgelt für Kopien?",
+          "prompt": "Eine Person hat ihre erste Kopie bereits erhalten. Was erlaubt Art. 15 Abs. 3, wenn sie weitere Kopien verlangt?",
           "options": [
             {
               "correct": false,

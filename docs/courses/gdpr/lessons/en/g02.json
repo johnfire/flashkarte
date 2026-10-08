@@ -241,7 +241,7 @@
       ],
       "variants": [
         {
-          "prompt": "Can data be personal data if it contains no names at all?",
+          "prompt": "Loyalty-card numbers and purchases appear without any names. Can such data be personal data?",
           "options": [
             {
               "correct": true,

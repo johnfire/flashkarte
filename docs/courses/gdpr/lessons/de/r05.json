@@ -80,7 +80,7 @@
       "ref": "screen-5",
       "blocks": [
         "Eine Kundin bestreitet den Eintrag der Bäckerei Sonnenfeld, nach dem sie ihre Treuepunkte eingelöst hat. Während die Bäckerei das prüft, markiert sie den Eintrag als eingeschränkt und verwendet ihn nicht für Werbeaktionen.",
-        "Früher hat die Bäckerei die Daten der Kundin für das gemeinsame Treueprogramm an ein Partnercafé weitergegeben. Als sie den Eintrag berichtigt, informiert sie das Café.",
+        "Früher hat die Bäckerei die Daten der Kundin für das gemeinsame Bonusprogramm an ein Partnercafé weitergegeben. Als sie den Eintrag berichtigt, informiert sie das Café.",
         {
           "type": "callout",
           "tone": "note",
@@ -152,7 +152,7 @@
       "teaches": [
         "screen-3"
       ],
-      "prompt": "Die Verarbeitung bestimmter Daten ist eingeschränkt. Was darf die Bäckerei Sonnenfeld ohne Einwilligung der Person noch mit ihnen tun?",
+      "prompt": "Die Verarbeitung bestimmter Daten ist eingeschränkt. Was darf die Bäckerei Sonnenfeld ohne Einwilligung der betroffenen Person noch mit ihnen tun?",
       "options": [
         {
           "correct": false,

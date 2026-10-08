@@ -70,7 +70,7 @@ LESSONS = {
                        ("When she starts working there", "Article 14(3) sets earlier deadlines.")),
             assessment([1], [4], "Which item does Article 14 add to the Article 13 list?", "What must a notice for data obtained from elsewhere also say?",
                        ("Where the data came from", "Article 14(2)(f) requires the source."),
-                       ("The recruiter's personal phone number", "Article 14 does not require this."),
+                       ("The personal phone number of whoever supplied the data", "Article 14 does not require this."),
                        ("Sunfield's tax number", "Article 14 does not require this.")),
         ],
     },

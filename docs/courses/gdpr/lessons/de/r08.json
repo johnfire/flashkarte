@@ -116,7 +116,7 @@
     {
       "ref": "screen-6",
       "blocks": [
-        "Angenommen, der Dienstleister, der für die Bäckerei Sonnenfeld die Lohnabrechnung macht, verletzt seine eigenen Sicherheitspflichten, und Gehaltsdaten gelangen nach außen. Die betroffenen Beschäftigten könnten Ansprüche gegen die Bäckerei und gegen den Dienstleister geltend machen.",
+        "Angenommen, das Lohnbüro der Bäckerei Sonnenfeld verletzt seine eigenen Sicherheitspflichten, und Gehaltsdaten gelangen nach außen. Die betroffenen Beschäftigten könnten Ansprüche gegen die Bäckerei und gegen das Lohnbüro geltend machen.",
         "Sind beide verantwortlich, kann jeder von beiden zur Zahlung des vollen Betrags verpflichtet werden und dann vom anderen dessen Anteil zurückfordern.",
         {
           "type": "callout",
@@ -154,7 +154,7 @@
         {
           "correct": false,
           "blocks": "Nur in Deutschland, wo die Bäckerei ihren Sitz hat",
-          "reason": "Art. 77 eröffnet mehrere Länder."
+          "reason": "Art. 77 lässt eine Beschwerde in mehreren Ländern zu."
         },
         {
           "correct": false,
@@ -169,7 +169,7 @@
             {
               "correct": false,
               "blocks": "Nur in Deutschland, wo die Bäckerei ihren Sitz hat",
-              "reason": "Art. 77 eröffnet mehrere Länder."
+              "reason": "Art. 77 lässt eine Beschwerde in mehreren Ländern zu."
             },
             {
               "correct": false,

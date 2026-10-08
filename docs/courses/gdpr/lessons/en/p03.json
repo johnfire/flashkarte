@@ -221,7 +221,7 @@
       ],
       "variants": [
         {
-          "prompt": "Under Article 5(2), who carries the burden of demonstrating compliance?",
+          "prompt": "Under Article 5(2), who must demonstrate that Sunfield's processing complies with the principles?",
           "options": [
             {
               "correct": true,

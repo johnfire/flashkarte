@@ -178,7 +178,7 @@
       ],
       "variants": [
         {
-          "prompt": "Does leaving a pre-ticked consent box unchanged count as consent?",
+          "prompt": "A customer leaves a pre-ticked newsletter box unchanged. Does that count as her consent?",
           "options": [
             {
               "correct": false,
@@ -227,7 +227,7 @@
       ],
       "variants": [
         {
-          "prompt": "Is consent free when a service is withheld unless people agree to unrelated processing?",
+          "prompt": "Can newsletter consent be freely given if customers can pre-order only after agreeing to the newsletter?",
           "options": [
             {
               "correct": false,
@@ -275,7 +275,7 @@
       ],
       "variants": [
         {
-          "prompt": "What happens to past consent-based processing when someone withdraws consent?",
+          "prompt": "What does withdrawing newsletter consent mean for the emails Sunfield had already sent?",
           "options": [
             {
               "correct": true,

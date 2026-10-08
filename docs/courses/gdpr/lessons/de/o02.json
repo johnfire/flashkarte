@@ -227,7 +227,7 @@
         },
         {
           "correct": true,
-          "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde selbst mitmachen will",
+          "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet",
           "reason": "Art. 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
         },
         {
@@ -242,7 +242,7 @@
           "options": [
             {
               "correct": true,
-              "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde selbst mitmachen will",
+              "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet",
               "reason": "Art. 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
             },
             {

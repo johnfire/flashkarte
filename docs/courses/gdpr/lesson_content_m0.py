@@ -95,7 +95,7 @@ LESSONS = {
                        ("No, though national rules may apply", "Recital 27: the GDPR does not apply, and EU countries may make rules."),
                        ("Yes, exactly as for a living customer", "Recital 27 excludes the data of deceased persons."),
                        ("Yes, for ten years after death", "The GDPR sets no such period. The ten years is invented.")),
-            assessment([1], [4, 5, 6], "A list shows loyalty card numbers and purchases, but no names. Is it personal data?", "Can data be personal data if it contains no names at all?",
+            assessment([1], [4, 5, 6], "A list shows loyalty card numbers and purchases, but no names. Is it personal data?", "Loyalty-card numbers and purchases appear without any names. Can such data be personal data?",
                        ("Yes, if the numbers can reasonably be linked to customers", "An identification number allows indirect identification (Article 4(1), recital 26)."),
                        ("No, because no names appear", "Indirect identification through a number is enough."),
                        ("Only if customers agreed to the loyalty scheme", "Consent does not change whether information is personal data.")),

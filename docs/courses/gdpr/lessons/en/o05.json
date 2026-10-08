@@ -390,7 +390,7 @@
       ],
       "variants": [
         {
-          "prompt": "What triggers the Article 34 duty to inform data subjects?",
+          "prompt": "When does a breach trigger the Article 34 duty to inform data subjects?",
           "options": [
             {
               "correct": false,

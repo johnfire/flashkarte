@@ -249,7 +249,7 @@
       ],
       "variants": [
         {
-          "prompt": "Darf ein Datenschutzbeauftragter wegen der Erfüllung seiner Aufgaben benachteiligt werden?",
+          "prompt": "Darf ein Datenschutzbeauftragter wegen der Erfüllung seiner Aufgaben benachteiligt werden, etwa weil er ein Problem meldet?",
           "options": [
             {
               "correct": true,

@@ -179,7 +179,7 @@
         {
           "correct": false,
           "blocks": "Sie bleiben gespeichert, bis sich die Kundin bei einer Aufsichtsbehörde beschwert",
-          "reason": "Die Pflicht zur Löschung besteht unverzüglich."
+          "reason": "Die Daten sind unverzüglich zu löschen."
         },
         {
           "correct": true,
@@ -194,7 +194,7 @@
             {
               "correct": false,
               "blocks": "Sie bleiben gespeichert, bis sich die Kundin bei einer Aufsichtsbehörde beschwert",
-              "reason": "Die Pflicht zur Löschung besteht unverzüglich."
+              "reason": "Die Daten sind unverzüglich zu löschen."
             },
             {
               "correct": true,

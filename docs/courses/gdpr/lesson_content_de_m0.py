@@ -99,7 +99,7 @@ LESSONS = {
                        ("Nein, aber nationale Vorschriften können gelten", "Erwägungsgrund 27: Die DSGVO gilt nicht, und die EU-Staaten können eigene Vorschriften vorsehen."),
                        ("Ja, genau wie bei einem lebenden Kunden", "Erwägungsgrund 27 nimmt die Daten Verstorbener aus."),
                        ("Ja, noch zehn Jahre nach dem Tod", "Eine solche Frist kennt die DSGVO nicht. Die zehn Jahre sind erfunden.")),
-            assessment([1], [4, 5, 6], "Eine Liste zeigt Kundenkartennummern und Einkäufe, aber keine Namen. Sind das personenbezogene Daten?", "Können Daten personenbezogen sein, wenn sie überhaupt keine Namen enthalten?",
+            assessment([1], [4, 5, 6], "Eine Liste zeigt Kundenkartennummern und Einkäufe, aber keine Namen. Sind das personenbezogene Daten?", "Kundenkartennummern und Einkäufe erscheinen ohne jeden Namen. Können solche Daten personenbezogen sein?",
                        ("Ja, wenn sich die Nummern nach allgemeinem Ermessen Kundinnen und Kunden zuordnen lassen", "Eine Kennnummer ermöglicht eine indirekte Identifizierung (Art. 4 Nr. 1, Erwägungsgrund 26)."),
                        ("Nein, weil keine Namen vorkommen", "Eine indirekte Identifizierung über eine Nummer genügt."),
                        ("Nur wenn die Kundschaft dem Bonusprogramm zugestimmt hat", "Eine Einwilligung ändert nichts daran, ob Informationen personenbezogene Daten sind.")),

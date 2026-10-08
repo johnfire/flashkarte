@@ -61,7 +61,7 @@
             "die Rechte der Person: Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit;",
             "das Recht, die Einwilligung zu widerrufen, wenn die Verarbeitung auf einer Einwilligung beruht;",
             "das Recht, **sich bei einer Aufsichtsbehörde zu beschweren**;",
-            "ob die Person gesetzlich oder vertraglich verpflichtet ist, die Daten bereitzustellen, und welche Folgen es hätte, wenn sie es nicht tut;",
+            "ob die Bereitstellung der Daten gesetzlich oder vertraglich vorgeschrieben ist und welche Folgen es hätte, wenn die Person sie nicht bereitstellt;",
             "jede automatisierte Entscheidungsfindung der Art, die später in diesem Modul behandelt wird, mit aussagekräftigen Informationen über die involvierte Logik."
           ]
         }
@@ -314,7 +314,7 @@
         },
         {
           "correct": false,
-          "blocks": "Die private Telefonnummer der Personalvermittlerin",
+          "blocks": "Die private Telefonnummer der Person, die die Daten geliefert hat",
           "reason": "Das verlangt Art. 14 nicht."
         },
         {
@@ -329,7 +329,7 @@
           "options": [
             {
               "correct": false,
-              "blocks": "Die private Telefonnummer der Personalvermittlerin",
+              "blocks": "Die private Telefonnummer der Person, die die Daten geliefert hat",
               "reason": "Das verlangt Art. 14 nicht."
             },
             {
