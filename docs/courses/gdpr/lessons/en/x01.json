@@ -205,7 +205,7 @@
       ],
       "variants": [
         {
-          "prompt": "How does an adequacy decision affect transfers to that country?",
+          "prompt": "What authorisation does a transfer to a country with an adequacy decision need?",
           "options": [
             {
               "correct": false,
@@ -302,7 +302,7 @@
       ],
       "variants": [
         {
-          "prompt": "What conditions attach to the consent derogation for transfers?",
+          "prompt": "A business wants to rely on people's explicit consent for a transfer. When is that allowed?",
           "options": [
             {
               "correct": false,
