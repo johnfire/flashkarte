@@ -1,6 +1,6 @@
 import { readFile } from "node:fs/promises";
 
-const MCP_ENDPOINT = "https://mcp.flashkarte.christopherrehm.de/mcp";
+const MCP_ENDPOINT = "https://learnwohl.app/mcp";
 const SUBJECT_PATH = "/tmp/ai-literacy-subject.json";
 const apiKey = process.env.FLASHKARTE_API_KEY;
 const GERMAN_CONCEPT_NAMES = {

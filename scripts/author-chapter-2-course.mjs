@@ -4,7 +4,7 @@
  */
 
 const subjectId = "b6cd1a8e-c196-4155-930a-f3812178d907";
-const endpoint = "https://mcp.flashkarte.christopherrehm.de/mcp";
+const endpoint = "https://learnwohl.app/mcp";
 const source = { title: "The Art of Electronics, 3rd ed. (2015), Chapter 2: Bipolar Transistors" };
 const module = "Bipolar Transistors: control, amplification, and output";
 

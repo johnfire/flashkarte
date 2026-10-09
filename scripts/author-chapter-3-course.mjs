@@ -1,7 +1,7 @@
 /* Import the reviewed Chapter 3 FET lesson drafts through Flashkarte MCP. */
 
 const SUBJECT_ID = "b6cd1a8e-c196-4155-930a-f3812178d907";
-const MCP_ENDPOINT = "https://mcp.flashkarte.christopherrehm.de/mcp";
+const MCP_ENDPOINT = "https://learnwohl.app/mcp";
 const MODULE_TITLE = "Field-Effect Transistors: voltage control and power switching";
 const SOURCE = { title: "The Art of Electronics, 3rd ed. (2015), Chapter 3: Field-Effect Transistors" };
 

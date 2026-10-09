@@ -40,7 +40,7 @@ and points at the deployed API via `BuildConfig.API_BASE_URL`.
 ## Deploy
 
 Docker Compose stack (app + MCP + Postgres + daily backups), served at
-`flashkarte.christopherrehm.de`. See [`docs/deployment.md`](docs/deployment.md).
+`learnwohl.app`. See [`docs/deployment.md`](docs/deployment.md).
 
 ## Docs
 

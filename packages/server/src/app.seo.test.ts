@@ -81,6 +81,12 @@ describe("production web + SEO wiring", () => {
       expect((await request(app()).get(p)).status).toBe(200);
     }
   });
+  it("keeps authenticated app screens out of search results", async () => {
+    const res = await request(app()).get("/learn/subject-1");
+    expect(res.status).toBe(200);
+    expect(res.text).toContain('name="robots" content="noindex"');
+    expect(res.text).not.toContain('rel="canonical"');
+  });
 });
 
 describe("production deck SEO wiring", () => {

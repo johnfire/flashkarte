@@ -26,5 +26,5 @@ cd "$(dirname "$0")/.."
 npm run build --silent
 
 exec with-secret run flashkarte-ai FLASHKARTE_API_KEY -- \
-  env FLASHKARTE_API_URL="${FLASHKARTE_API_URL:-https://flashkarte.christopherrehm.de}" \
+  env FLASHKARTE_API_URL="${FLASHKARTE_API_URL:-https://learnwohl.app}" \
   node dist/cli/import-lessons.js --subject "$subject" "${files[@]}"

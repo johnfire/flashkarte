@@ -137,6 +137,27 @@ export function notFoundMeta(
   };
 }
 
+/**
+ * The authenticated SPA has many useful application routes, but none are
+ * public landing pages. Keep a crawler from indexing a generic app shell at
+ * one of those URLs while leaving the client-side route available to users.
+ */
+export function appShellMeta(): PageMeta {
+  return {
+    title: "LearnWohl",
+    description: "LearnWohl learning application.",
+    canonical: "",
+    og: {
+      title: "LearnWohl",
+      description: "LearnWohl learning application.",
+      image: "",
+      url: "",
+      type: "website",
+    },
+    robots: "noindex",
+  };
+}
+
 export function metaToHeadHtml(meta: PageMeta): string {
   const tags = [
     `<title>${escapeHtml(meta.title)}</title>`,

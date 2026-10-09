@@ -152,8 +152,10 @@ Set these in the repo (Settings → Secrets and variables → Actions) so the
 
 The vhosts terminate TLS for `learnwohl.app` and `www.learnwohl.app`. Their
 specific MCP paths must appear before the catch-all app proxy. The same routing
-belongs in both HTTP and HTTPS vhosts; Certbot's HTTP redirect still sends
-clients to HTTPS.
+belongs in both HTTP and HTTPS vhosts. HTTP requests for either hostname must
+go directly to the bare HTTPS address, and HTTPS `www` requests must take the
+same single-hop redirect. This avoids letting the `www` address split canonical
+signals before the app can redirect it.
 On the current VPS, `sites-enabled/learnwohl-le-ssl.conf` is a regular file,
 not a symlink. Keep it and `sites-available/learnwohl-le-ssl.conf` synchronized;
 the enabled file also contains the existing analytics injection rule.
@@ -178,8 +180,18 @@ the enabled file also contains the existing analytics injection rule.
     ProxyPassReverse / http://localhost:8096/
     ErrorLog /var/log/apache2/learnwohl/web-error.log
     CustomLog /var/log/apache2/learnwohl/web-access.log combined
+
+    # One canonical public address; preserve the requested path and query.
+    RewriteEngine on
+    RewriteCond %{HTTP_HOST} ^(?:www\.)?learnwohl\.app(?::[0-9]+)?$ [NC]
+    RewriteRule ^ https://learnwohl.app%{REQUEST_URI} [END,NE,R=permanent]
 </VirtualHost>
 ```
+
+In the HTTPS vhost, keep the same `RewriteEngine` rule but use only the
+`www.learnwohl.app` condition. It must redirect `www` to the bare host before
+the request reaches the app, while the bare HTTPS host continues to proxy the
+app and MCP routes normally.
 
 The app image build sets `VITE_MCP_URL=https://learnwohl.app/mcp` for Settings.
 The server reads `MCP_PUBLIC_URL` at runtime for `/llms.txt`.

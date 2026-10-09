@@ -34,7 +34,12 @@ import { errorHandler } from "./middleware/errorHandler";
 import { requestId } from "./middleware/requestId";
 import { accessLog } from "./middleware/accessLog";
 import { mountSeo } from "./seo/mount";
-import { HELP_PATHS, metaToHeadHtml, notFoundMeta } from "./seo/meta";
+import {
+  appShellMeta,
+  HELP_PATHS,
+  metaToHeadHtml,
+  notFoundMeta,
+} from "./seo/meta";
 import { inject } from "./seo/inject";
 import { isKnownAppPath } from "./seo/routes";
 import { loadTemplate } from "./seo/template";
@@ -383,7 +388,16 @@ export function configureProductionWeb(
   app.get("*", (req, res) => {
     const indexHtml = path.join(webDist, "index.html");
     if (isKnownAppPath(req.path)) {
-      res.sendFile(indexHtml);
+      // Public landing pages and public decks were handled above. Every route
+      // reaching this fallback is an application screen, so do not let the
+      // generic SPA shell become a search result for a private URL.
+      if (template) {
+        res
+          .type("html")
+          .send(inject(template, { headHtml: metaToHeadHtml(appShellMeta()) }));
+      } else {
+        res.sendFile(indexHtml);
+      }
       return;
     }
     // Not a page (a mistyped link, a removed URL, a probe): answer 404 with
