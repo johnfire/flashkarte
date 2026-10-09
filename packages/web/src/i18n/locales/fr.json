@@ -204,6 +204,7 @@
   "landing": {
     "heroTitle": "LearnWohl",
     "heroBody": "Des paquets de cartes mémoire et des cours entièrement personnalisés pour tes besoins d'apprentissage.",
+    "localAiBody": "Apporte ton IA locale pour créer des cours pour toi, tes amis, tes collègues et toute personne qui en a besoin.",
     "signupCta": "Inscription gratuite",
     "signin": "Se connecter",
     "startStudying": "Commencer à apprendre →",

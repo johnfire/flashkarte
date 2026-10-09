@@ -4,6 +4,28 @@ test("the landing page leads to the school and teacher options", async ({
   page,
 }) => {
   await page.goto("/");
+  const schoolTeacherTitle = page.getByRole("heading", {
+    name: "Available for schools and teachers",
+    exact: true,
+  });
+  const productTitle = page.getByRole("heading", {
+    level: 1,
+    name: "LearnWohl",
+  });
+
+  await expect(schoolTeacherTitle).toBeVisible();
+  await expect(productTitle).toBeVisible();
+  await expect(
+    page.getByText(
+      "Bring your local AI to create courses for you, your friends, your coworkers, and anyone who needs them.",
+    ),
+  ).toBeVisible();
+  const schoolTeacherPosition = await schoolTeacherTitle.boundingBox();
+  const productTitlePosition = await productTitle.boundingBox();
+  expect(schoolTeacherPosition).not.toBeNull();
+  expect(productTitlePosition).not.toBeNull();
+  expect(schoolTeacherPosition!.y).toBeLessThan(productTitlePosition!.y);
+
   await page
     .getByRole("link", { name: "Explore options for schools & teachers" })
     .click();

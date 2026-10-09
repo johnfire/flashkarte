@@ -6,6 +6,7 @@ import { LandingVideo } from "./landing/LandingVideo";
 import { LandingAI } from "./landing/LandingAI";
 import { LandingFooter } from "./landing/LandingFooter";
 import { LandingSchoolTeacherCallout } from "./landing/LandingSchoolTeacherCallout";
+import { LandingCourseFloaters } from "./landing/LandingCourseFloaters";
 
 // Decorative cards that drift behind the hero — "learning is happening here".
 const FLOATERS = [
@@ -123,32 +124,37 @@ export function LandingPage() {
           }}
         />
         {/* Floating flashcards */}
-        {FLOATERS.map((f) => (
+        {FLOATERS.map((floater) => (
           <div
-            key={f.q}
-            className={`animate-fk-float absolute hidden rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm md:block ${f.pos}`}
+            key={floater.q}
+            className={`animate-fk-float absolute hidden rounded-xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur-sm md:block ${floater.pos}`}
             style={
               {
-                "--fk-rot": f.rot,
-                animationDelay: f.delay,
+                "--fk-rot": floater.rot,
+                animationDelay: floater.delay,
               } as React.CSSProperties
             }
           >
-            <div className="text-sm font-semibold text-slate-200">{f.q}</div>
-            <div className="text-xs text-indigo-300">{f.a}</div>
+            <div className="text-sm font-semibold text-slate-200">
+              {floater.q}
+            </div>
+            <div className="text-xs text-indigo-300">{floater.a}</div>
           </div>
         ))}
+        <LandingCourseFloaters />
       </div>
 
       {/* Content */}
-      <div className="relative mx-auto max-w-5xl px-6 py-20 sm:py-28">
+      <div className="relative mx-auto max-w-5xl px-6 py-10 sm:py-14">
         <div className="mb-4 flex justify-end">
           <LanguageSwitcher compact onDark />
         </div>
-        <LandingHero />
+        <LandingSchoolTeacherCallout />
+        <div className="mt-16 sm:mt-20">
+          <LandingHero />
+        </div>
         <LandingVideo />
         <LandingFeatures />
-        <LandingSchoolTeacherCallout />
         <LandingAI />
         <LandingFooter />
       </div>

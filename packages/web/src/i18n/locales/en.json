@@ -204,6 +204,7 @@
   "landing": {
     "heroTitle": "LearnWohl",
     "heroBody": "Flashcard decks and full custom courses for your study needs.",
+    "localAiBody": "Bring your local AI to create courses for you, your friends, your coworkers, and anyone who needs them.",
     "signupCta": "Sign up — it's free",
     "signin": "Sign in",
     "startStudying": "Start studying →",

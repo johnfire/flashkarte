@@ -5,14 +5,20 @@ export function LandingHero() {
   const { t } = useTranslation();
   return (
     <div className="text-center">
-      <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-2xl font-bold text-white shadow-lg shadow-indigo-900/50">
-        LW
-      </div>
-      <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+      <h1 className="flex items-center justify-center gap-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+        <span
+          aria-hidden="true"
+          className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-600 text-lg font-bold shadow-lg shadow-indigo-900/50 sm:h-12 sm:w-12"
+        >
+          LW
+        </span>
         {t("landing.heroTitle")}
       </h1>
       <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
         {t("landing.heroBody")}
+      </p>
+      <p className="mx-auto mt-2 max-w-2xl text-lg leading-relaxed text-slate-300">
+        {t("landing.localAiBody")}
       </p>
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Link
