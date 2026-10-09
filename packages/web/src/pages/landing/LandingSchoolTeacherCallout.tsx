@@ -7,7 +7,7 @@ export function LandingSchoolTeacherCallout() {
   return (
     <section
       aria-labelledby="schools-teachers-title"
-      className="rounded-2xl border border-indigo-300/30 bg-indigo-500/10 p-8 text-center shadow-lg shadow-indigo-950/20 backdrop-blur-sm sm:p-10"
+      className="mr-auto max-w-2xl rounded-2xl border border-indigo-300/30 bg-indigo-500/10 p-6 text-left shadow-lg shadow-indigo-950/20 backdrop-blur-sm sm:p-8"
     >
       <p className="text-sm font-semibold uppercase tracking-[0.16em] text-indigo-200">
         {t("landing.schoolTeacherCalloutEyebrow")}
@@ -18,7 +18,7 @@ export function LandingSchoolTeacherCallout() {
       >
         {t("landing.schoolTeacherCalloutTitle")}
       </h2>
-      <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-200">
+      <p className="mt-4 leading-relaxed text-slate-200">
         {t("landing.schoolTeacherCalloutBody")}
       </p>
       <Link

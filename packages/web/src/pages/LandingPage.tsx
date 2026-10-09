@@ -144,13 +144,14 @@ export function LandingPage() {
         <LandingCourseFloaters />
       </div>
 
+      <div className="fixed right-16 top-3 z-50">
+        <LanguageSwitcher compact onDark />
+      </div>
+
       {/* Content */}
-      <div className="relative mx-auto max-w-5xl px-6 py-10 sm:py-14">
-        <div className="mb-4 flex justify-end">
-          <LanguageSwitcher compact onDark />
-        </div>
+      <div className="relative mx-auto max-w-5xl px-6 py-6 sm:py-8">
         <LandingSchoolTeacherCallout />
-        <div className="mt-16 sm:mt-20">
+        <div className="mt-12 sm:mt-16">
           <LandingHero />
         </div>
         <LandingVideo />

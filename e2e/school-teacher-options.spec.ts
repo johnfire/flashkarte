@@ -12,9 +12,11 @@ test("the landing page leads to the school and teacher options", async ({
     level: 1,
     name: "LearnWohl",
   });
+  const languageSelector = page.getByLabel("Language");
 
   await expect(schoolTeacherTitle).toBeVisible();
   await expect(productTitle).toBeVisible();
+  await expect(languageSelector).toBeVisible();
   await expect(
     page.getByText(
       "Bring your local AI to create courses for you, your friends, your coworkers, and anyone who needs them.",
@@ -25,6 +27,9 @@ test("the landing page leads to the school and teacher options", async ({
   expect(schoolTeacherPosition).not.toBeNull();
   expect(productTitlePosition).not.toBeNull();
   expect(schoolTeacherPosition!.y).toBeLessThan(productTitlePosition!.y);
+  const languageSelectorPosition = await languageSelector.boundingBox();
+  expect(languageSelectorPosition).not.toBeNull();
+  expect(languageSelectorPosition!.y).toBeLessThan(schoolTeacherPosition!.y);
 
   await page
     .getByRole("link", { name: "Explore options for schools & teachers" })
