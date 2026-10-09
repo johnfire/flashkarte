@@ -1,4 +1,4 @@
-# GDPR Basics for Business — English first release
+# GDPR Basics for Business — English and German editions
 
 Built 7–8 October 2026 from the [course plan](../../plans/2026-10-07-gdpr-basics-course.md). The course is shared
 to the Community library as **reference 65**. It is an **educational draft**: it is not legal advice, and no lawyer
@@ -64,8 +64,11 @@ database and learns the whole course in prerequisite order.
 A change to the local files does **not** change the live course. Live lessons are corrected with the learnwohl MCP
 tools (`update_question`, `update_screen`), and the matching source file must be changed in the same step.
 
+## German edition
+
+The German edition (reference 66) has the same 40 lessons, concepts and questions. It was translated from the English edition against the official German legal texts, which are retained in `sources/`. See [translation-guide-de.md](translation-guide-de.md) for the rules and glossary, and the [deployment record](deployment.md) for how it was verified. `german_validation.py` checks it against the English structure and checks that every quotation in „…“ is verbatim from the German law.
+
 ## Next
 
-1. German edition.
-2. Legal review by a qualified person, after which the "educational draft" label can be reconsidered.
-3. Optional small courses on the BDSG and the TDDDG.
+1. Legal review and a native-speaker edit of the German by a qualified person, after which the "educational draft" label can be reconsidered.
+2. Optional small courses on the BDSG and the TDDDG.

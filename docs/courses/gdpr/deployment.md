@@ -67,7 +67,7 @@ risks.
 
 ## German edition (reference 66)
 
-Deployed 9 October 2026, at Chris's request ("English first, then German").
+Deployed 9 October 2026 and shared to the Community (`is_public: true`, `locale: de`), at Chris's request ("English first, then German").
 
 - Course: **DSGVO-Grundlagen für Unternehmen: personenbezogene Daten, Rechte und Pflichten**.
 - Reference: **66**. Subject UUID: `b4dbdb4e-f740-42bf-a514-1f7cad41286b`.
@@ -95,3 +95,7 @@ Not done:
 - No learner walk-through in a browser or on a device.
 - No review by a native German speaker or a lawyer.
 - The edition picker in the app was not exercised.
+
+### Known issue
+
+The German modules are listed in the order they were created, not teaching order. "Grenzen, Aufsichtsbehörden und Geldbußen" (Modul 4) appears before "Die Rechte der Menschen" and "Was Ihr Unternehmen tun muss", because the lessons had to be imported in prerequisite order and the module is created by its first lesson. Lessons stay prerequisite-gated, so nothing is reachable too early, but the list order is wrong. The server stores a module `position` and the HTTP API can set it (`PATCH /api/subjects/:id/modules/:moduleId`), but there is no MCP tool for it. When one exists, set the positions to: Einstieg, Die Regeln, Die Rechte, Was Ihr Unternehmen tun muss, Grenzen, Über die Grundlagen hinaus. Next time, create the modules first with `create_module`, in teaching order, then import the lessons.
