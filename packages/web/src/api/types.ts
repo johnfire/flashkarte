@@ -126,6 +126,24 @@ export interface SchoolClassDetail extends SchoolClass {
   members: { id: string; email: string; displayName: string | null }[];
 }
 
+export interface SchoolMember {
+  id: string;
+  email: string;
+  accountType: AccountType;
+  accountKind: AccountKind;
+  teacherVerified: boolean;
+  emailVerifiedAt: string | null;
+  classes: { id: string; name: string }[];
+}
+
+export interface SchoolDetail {
+  school: School;
+  administrators: SchoolMember[];
+  teachers: SchoolMember[];
+  students: SchoolMember[];
+  classes: SchoolClass[];
+}
+
 export type ShareScope = "school" | "class" | "teacher_students";
 
 export interface DeckShare {

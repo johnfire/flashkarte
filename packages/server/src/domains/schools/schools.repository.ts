@@ -36,6 +36,16 @@ export interface ClassMemberRow {
   display_name: string | null;
 }
 
+export interface SchoolMemberRow {
+  id: string;
+  email: string;
+  account_type: string;
+  account_kind: AccountKind;
+  teacher_verified: boolean;
+  email_verified_at: Date | null;
+  class_links: { id: string; name: string }[];
+}
+
 const CLASS_SELECT = `
   SELECT c.id, c.name, c.teacher_id, t.email AS teacher_email,
          c.school_id, s.name AS school_name, c.created_at,
@@ -57,6 +67,49 @@ export function findSchool(id: string) {
   return queryOne<{ id: string; name: string }>(
     "SELECT id, name FROM schools WHERE id = $1",
     [id],
+  );
+}
+
+export function findSchoolDetail(id: string) {
+  return queryOne<SchoolRow>(
+    `SELECT s.id, s.name, s.created_at,
+            (SELECT count(*)::int FROM users u WHERE u.school_id = s.id) AS member_count
+     FROM schools s
+     WHERE s.id = $1`,
+    [id],
+  );
+}
+
+/** List school members with the classes they teach or attend. */
+export function listSchoolMembers(schoolId: string) {
+  return query<SchoolMemberRow>(
+    `WITH class_links AS (
+       SELECT c.teacher_id AS user_id, c.id, c.name
+       FROM classes c
+       WHERE c.school_id = $1
+       UNION ALL
+       SELECT m.student_id AS user_id, c.id, c.name
+       FROM classes c
+       JOIN class_members m ON m.class_id = c.id
+       WHERE c.school_id = $1
+     )
+     SELECT u.id, u.email, u.account_type, u.account_kind,
+            EXISTS (
+              SELECT 1 FROM teacher_verifications tv WHERE tv.user_id = u.id
+            ) AS teacher_verified,
+            u.email_verified_at,
+            COALESCE(
+              json_agg(
+                json_build_object('id', cl.id, 'name', cl.name) ORDER BY cl.name
+              ) FILTER (WHERE cl.id IS NOT NULL),
+              '[]'::json
+            ) AS class_links
+     FROM users u
+     LEFT JOIN class_links cl ON cl.user_id = u.id
+     WHERE u.school_id = $1
+     GROUP BY u.id
+     ORDER BY u.email`,
+    [schoolId],
   );
 }
 
@@ -134,6 +187,13 @@ export async function isVerifiedTeacher(
 export function listClasses() {
   return query<ClassRow>(
     `${CLASS_SELECT} ORDER BY s.name NULLS FIRST, t.email, c.name`,
+  );
+}
+
+export function listSchoolClasses(schoolId: string) {
+  return query<ClassRow>(
+    `${CLASS_SELECT} WHERE c.school_id = $1 ORDER BY t.email, c.name`,
+    [schoolId],
   );
 }
 

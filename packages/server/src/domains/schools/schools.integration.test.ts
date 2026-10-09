@@ -98,6 +98,53 @@ afterAll(async () => {
 });
 
 describe("account kinds", () => {
+  test("a school roster groups only that school's accounts and class links", async () => {
+    const school = await schools.createSchool("Gymnasium");
+    await schools.setOrganization(SCHOOL_LOGIN_ID, {
+      accountKind: "school",
+      schoolId: school.id,
+    });
+    await schools.verifyTeacher(ADMIN_ID, TEACHER_ID, {
+      method: "school_roster",
+      schoolId: school.id,
+    });
+    await schools.setOrganization(STUDENT_ID, {
+      accountKind: "student",
+      schoolId: school.id,
+    });
+    const schoolClass = await schools.createClass({
+      teacherId: TEACHER_ID,
+      name: "Deutsch A1",
+    });
+    await schools.setClassMembers(schoolClass.id, [STUDENT_ID]);
+
+    const detail = await schools.getSchool(school.id);
+
+    expect(detail.school).toMatchObject({ id: school.id, name: "Gymnasium" });
+    expect(detail.administrators.map((member) => member.email)).toEqual([
+      "school@example.com",
+    ]);
+    expect(detail.teachers).toMatchObject([
+      {
+        email: "teacher@example.com",
+        teacherVerified: true,
+        classes: [{ id: schoolClass.id, name: "Deutsch A1" }],
+      },
+    ]);
+    expect(detail.students).toMatchObject([
+      {
+        email: "student@example.com",
+        classes: [{ id: schoolClass.id, name: "Deutsch A1" }],
+      },
+    ]);
+    expect(detail.classes).toMatchObject([
+      { id: schoolClass.id, name: "Deutsch A1", memberCount: 1 },
+    ]);
+    expect(detail.students.map((member) => member.email)).not.toContain(
+      "classmate@example.com",
+    );
+  });
+
   test("a teacher must be verified first, and a school roster names the school", async () => {
     await expect(
       schools.setOrganization(TEACHER_ID, { accountKind: "teacher" }),

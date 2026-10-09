@@ -32,6 +32,7 @@ import {
   BillingUnitType,
   DeckSharing,
   School,
+  SchoolDetail,
   SchoolClass,
   SchoolClassDetail,
   ShareScope,
@@ -759,6 +760,8 @@ export const api = {
       }),
     listUsers: () => request<{ users: AdminUser[] }>("/admin/users"),
     listSchools: () => request<{ schools: School[] }>("/admin/schools"),
+    getSchool: (id: string) =>
+      request<{ school: SchoolDetail }>(`/admin/schools/${id}`),
     createSchool: (name: string) =>
       request<{ school: School }>("/admin/schools", {
         method: "POST",

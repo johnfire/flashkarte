@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminRoute } from "./components/AdminRoute";
 import { AdminPage } from "./pages/AdminPage";
+import { SchoolDetailPage } from "./pages/SchoolDetailPage";
 import { AuthPage } from "./pages/AuthPage";
 import { CreateDeckPage } from "./pages/CreateDeckPage";
 import { StudyPage } from "./pages/StudyPage";
@@ -114,6 +115,7 @@ export default function App() {
         </Route>
         <Route element={<AdminRoute />}>
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/schools/:id" element={<SchoolDetailPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

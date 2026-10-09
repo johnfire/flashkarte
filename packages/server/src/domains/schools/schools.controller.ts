@@ -7,6 +7,10 @@ export const listSchools = wrapAsync(async (_req: Request, res: Response) => {
   res.json({ schools: await service.listSchools() });
 });
 
+export const getSchool = wrapAsync(async (req: Request, res: Response) => {
+  res.json({ school: await service.getSchool(req.params.id) });
+});
+
 export const createSchool = wrapAsync(async (req: Request, res: Response) => {
   const school = await service.createSchool(req.body?.name);
   await auditFromRequest(

@@ -1,10 +1,19 @@
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
 import { beforeEach, expect, test, vi } from "vitest";
 import { api } from "../../api/client";
 import type { AdminUser } from "../../api/types";
 import "../../i18n";
 import { SchoolAdminPanel } from "./SchoolAdminPanel";
+
+function renderPanel() {
+  return render(
+    <MemoryRouter>
+      <SchoolAdminPanel />
+    </MemoryRouter>,
+  );
+}
 
 vi.mock("../../api/client", async () => {
   const actual =
@@ -91,7 +100,7 @@ beforeEach(() => {
 });
 
 test("course leader is not offered as a kind until the person is verified", async () => {
-  render(<SchoolAdminPanel />);
+  renderPanel();
   await userEvent.selectOptions(await screen.findByLabelText("Person"), "t1");
   const kinds = within(screen.getByLabelText("Account kind"))
     .getAllByRole("option")
@@ -100,7 +109,7 @@ test("course leader is not offered as a kind until the person is verified", asyn
 });
 
 test("verifying a teacher records how, with the school and note", async () => {
-  render(<SchoolAdminPanel />);
+  renderPanel();
   await userEvent.selectOptions(await screen.findByLabelText("Person"), "t1");
   await userEvent.selectOptions(
     screen.getByLabelText("How they proved it"),
@@ -123,7 +132,7 @@ test("verifying a teacher records how, with the school and note", async () => {
 });
 
 test("a school's class offers only that school's students", async () => {
-  render(<SchoolAdminPanel />);
+  renderPanel();
   await userEvent.click(
     await screen.findByRole("button", { name: "Participants" }),
   );

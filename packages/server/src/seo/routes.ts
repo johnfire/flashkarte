@@ -49,6 +49,7 @@ export const APP_ROUTES = [
   "/learn/:subjectId/reviews",
   "/settings",
   "/admin",
+  "/admin/schools/:id",
 ] as const;
 
 function escapeRegExp(s: string): string {

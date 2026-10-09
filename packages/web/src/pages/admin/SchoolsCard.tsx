@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { api, ApiError } from "../../api/client";
 import type { School } from "../../api/types";
@@ -40,9 +41,17 @@ export function SchoolsCard({
       ) : (
         <ul className="text-sm">
           {schools.map((school) => (
-            <li key={school.id}>
-              {school.name} ·{" "}
-              {t("schools.memberCount", { count: school.memberCount })}
+            <li key={school.id} className="flex flex-wrap items-center gap-2">
+              <span>
+                {school.name} ·{" "}
+                {t("schools.memberCount", { count: school.memberCount })}
+              </span>
+              <Link
+                to={`/admin/schools/${school.id}`}
+                className="text-indigo-600"
+              >
+                {t("schools.viewSchool")}
+              </Link>
             </li>
           ))}
         </ul>

@@ -78,6 +78,24 @@ export interface SchoolClass {
   createdAt: string;
 }
 
+export interface SchoolMember {
+  id: string;
+  email: string;
+  accountType: string;
+  accountKind: AccountKind;
+  teacherVerified: boolean;
+  emailVerifiedAt: string | null;
+  classes: { id: string; name: string }[];
+}
+
+export interface SchoolDetail {
+  school: School;
+  administrators: SchoolMember[];
+  teachers: SchoolMember[];
+  students: SchoolMember[];
+  classes: SchoolClass[];
+}
+
 function toSchool(row: repo.SchoolRow): School {
   return {
     id: row.id,
@@ -102,6 +120,40 @@ function toClass(row: repo.ClassRow): SchoolClass {
 
 export async function listSchools(): Promise<School[]> {
   return (await repo.listSchools()).map(toSchool);
+}
+
+function toSchoolMember(row: repo.SchoolMemberRow): SchoolMember {
+  return {
+    id: row.id,
+    email: row.email,
+    accountType: row.account_type,
+    accountKind: row.account_kind,
+    teacherVerified: row.teacher_verified,
+    emailVerifiedAt: row.email_verified_at
+      ? new Date(row.email_verified_at).toISOString()
+      : null,
+    classes: row.class_links,
+  };
+}
+
+/** Return one school's roster, grouped by its school-login, teacher and student accounts. */
+export async function getSchool(idIn: string): Promise<SchoolDetail> {
+  const id = parse(idSchema, idIn);
+  const schoolRow = await repo.findSchoolDetail(id);
+  if (!schoolRow) throw new NotFoundError("School not found");
+
+  const [memberRows, classRows] = await Promise.all([
+    repo.listSchoolMembers(id),
+    repo.listSchoolClasses(id),
+  ]);
+  const members = memberRows.map(toSchoolMember);
+  return {
+    school: toSchool(schoolRow),
+    administrators: members.filter((member) => member.accountKind === "school"),
+    teachers: members.filter((member) => member.accountKind === "teacher"),
+    students: members.filter((member) => member.accountKind === "student"),
+    classes: classRows.map(toClass),
+  };
 }
 
 export async function createSchool(nameIn: unknown): Promise<School> {

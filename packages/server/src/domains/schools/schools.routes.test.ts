@@ -35,6 +35,26 @@ beforeEach(() => {
 });
 
 describe("admin school routes", () => {
+  test("an admin can read one school's roster", async () => {
+    authMock.getCurrentUser.mockResolvedValue(ADMIN as never);
+    const detail = {
+      school: { id: "s1", name: "Gymnasium" },
+      administrators: [],
+      teachers: [],
+      students: [],
+      classes: [],
+    } as never;
+    mock.getSchool.mockResolvedValue(detail);
+
+    const res = await request(app)
+      .get("/api/admin/schools/s1")
+      .set("Authorization", AUTH);
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual({ school: detail });
+    expect(mock.getSchool).toHaveBeenCalledWith("s1");
+  });
+
   test("a non-admin cannot create a school", async () => {
     authMock.getCurrentUser.mockResolvedValue(TEACHER as never);
     const res = await request(app)
