@@ -64,3 +64,34 @@ The live course is the published copy; the files here are its source. To correct
 If the GDPR is amended, or the status of the EU–US Data Privacy Framework changes, the affected lessons must be
 updated. See the [legal baseline](legal-baseline.md) for what was checked and when. Lessons N05 and X05 name these
 risks.
+
+## German edition (reference 66)
+
+Deployed 9 October 2026, at Chris's request ("English first, then German").
+
+- Course: **DSGVO-Grundlagen für Unternehmen: personenbezogene Daten, Rechte und Pflichten**.
+- Reference: **66**. Subject UUID: `b4dbdb4e-f740-42bf-a514-1f7cad41286b`.
+- [Open the course](https://learnwohl.app/learn/b4dbdb4e-f740-42bf-a514-1f7cad41286b).
+- It is the `de` edition of the course family `cfaa2f54-cd2c-4dfe-958b-20b9639b6976`. The English course (#65) is the canonical edition. The German edition has the same 73 concepts and 130 edges, with German names, and its own progress.
+- Same structure as English: 6 modules, 40 lessons, 227 screens, 146 questions with retests. Lessons stay in **testing**. No `finish_lesson` calls.
+- Educational draft, as in English. No lawyer and no native-speaker editor has reviewed it.
+
+### How it was made
+
+- **Sources.** The official German texts of every source were retained and hashed (see the [source register](source-register.md)). EUR-Lex refused automated downloads that day, so they came from the Publications Office repository. All 31 quotations in „…“ are verbatim from those German texts, which `german_validation.py` checks.
+- **Translation.** One translator per module followed [translation-guide-de.md](translation-guide-de.md), then an independent reviewer per pair of modules checked meaning, legal terms, retests and German. Dozens of review findings were fixed.
+- **Fixes that reached English.** The review found real defects in the English edition, now fixed in both the source and the live course: _Fashion ID_ "jointly" (paragraph 84, not point 2), an AI tool "processed" unlawfully (N03), Article 12(1) misstated (N04), Article 28(3) "in its opinion", references to "Module 3" and "the next lesson", and about 20 retests and answers that relied on context the prompt did not give.
+
+### Verification
+
+Done:
+
+- `german_validation.py` (structure identical to English, quotations verbatim, German source links, no English words, formal address), 28 Python tests, lint, format, typecheck.
+- The real-database test creates the `de` edition from the English graph exactly as the service does, imports all 40 German lessons with zero issues and learns them in prerequisite order.
+- **Every import call was compared with its fixture by script** (`issues: []` from the server cannot detect a wrong character). This caught one look-alike Cyrillic letter in a German word in G06, which was corrected and re-checked. Later imports sent non-ASCII characters as `\uXXXX` escapes, which rules this out.
+
+Not done:
+
+- No learner walk-through in a browser or on a device.
+- No review by a native German speaker or a lawyer.
+- The edition picker in the app was not exercised.
