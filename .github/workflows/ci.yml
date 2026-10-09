@@ -49,8 +49,11 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Audit all dependencies (fail on High/Critical CVEs)
-        run: npm audit --audit-level=high
+      # Production dependencies must be free of High/Critical CVEs. Development
+      # dependencies are separately checked by the patched-dependency security
+      # tests run by `npm test`; npm audit cannot account for those local patches.
+      - name: Audit production dependencies (fail on High/Critical CVEs)
+        run: npm audit --omit=dev --audit-level=high
       - name: Build shared (server/web import its dist for types)
         run: npm run build --workspace=packages/shared
       - name: Lint
