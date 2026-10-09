@@ -8,6 +8,8 @@ import { useAsync } from "../hooks/use-async";
 import { CourseListItem } from "./CourseListItem";
 import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
 import { useContentLanguage } from "../hooks/use-content-language";
+import { useGroupSharing } from "../hooks/use-group-sharing";
+import { SharedCoursesSection } from "./SharedCoursesSection";
 
 interface MyCourses {
   deckCourses: CourseSummary[];
@@ -29,7 +31,10 @@ export function MyCoursesPage() {
     data: myCourses,
     error,
     loading,
+    reload,
   } = useAsync<MyCourses, []>(loadMyCourses, []);
+  // Only school, teacher and student accounts can receive shared courses.
+  const receivesShares = useGroupSharing();
   const errorMessage =
     error instanceof ApiError
       ? error.message
@@ -55,6 +60,7 @@ export function MyCoursesPage() {
         </nav>
       </header>
       <ContentLanguageSwitcher value={language} onChange={choose} />
+      {receivesShares && <SharedCoursesSection onAdded={() => void reload()} />}
       {loading && <p>{t("common.loading")}</p>}
       {errorMessage && (
         <p role="alert" className="text-red-600">

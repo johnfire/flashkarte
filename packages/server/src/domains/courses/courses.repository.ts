@@ -11,6 +11,12 @@ export interface CourseRow {
   content_language: string | null;
   created_at: string;
   updated_at: string;
+  // Someone else's course, shared with the caller (school/teacher/class).
+  is_shared?: boolean;
+  // The caller added that shared course to their courses.
+  subscribed?: boolean;
+  // Shown because the caller belongs to a school; cannot be removed.
+  auto_added?: boolean;
 }
 
 const COURSE_COLS =
@@ -33,18 +39,108 @@ export function createCourse(
     .then((result) => result.rows[0] ?? null);
 }
 
+// An added course someone shared with the caller, still shared with them.
+// Checked live: leaving the class or school drops it at once.
+// School members get it without adding it (migration 048).
+const ADDED_SHARED = `((receives_shares_automatically($1::uuid) OR EXISTS (
+    SELECT 1 FROM course_subscriptions cs
+    WHERE cs.course_id = courses.id AND cs.user_id = $1
+  )) AND course_shared_with(courses.id, $1::uuid))`;
+
+/** The caller's own courses plus shared courses they added. */
 export function listCourses(userId: string) {
   return query<CourseRow>(
-    `SELECT ${COURSE_COLS} FROM courses WHERE user_id = $1 ORDER BY created_at DESC`,
+    `SELECT ${COURSE_COLS}, (user_id <> $1) AS is_shared,
+       (user_id <> $1 AND receives_shares_automatically($1::uuid)) AS auto_added
+     FROM courses
+     WHERE user_id = $1 OR ${ADDED_SHARED}
+     ORDER BY created_at DESC`,
     [userId],
   );
 }
 
-/** Readable by the owner or, for browsing before a clone, anyone if public. */
+/**
+ * Readable by the owner, by anyone it is shared with, or, for browsing
+ * before a clone, anyone if public.
+ */
 export function getCourse(userId: string, id: string) {
   return queryOne<CourseRow>(
-    `SELECT ${COURSE_COLS} FROM courses WHERE id = $1 AND (user_id = $2 OR is_public)`,
+    `SELECT ${COURSE_COLS}, (user_id <> $2) AS is_shared,
+       (user_id <> $2 AND receives_shares_automatically($2::uuid)) AS auto_added,
+       (user_id <> $2 AND (receives_shares_automatically($2::uuid) OR EXISTS (
+         SELECT 1 FROM course_subscriptions cs
+         WHERE cs.course_id = courses.id AND cs.user_id = $2
+       ))) AS subscribed
+     FROM courses
+     WHERE id = $1
+       AND (user_id = $2 OR is_public OR course_shared_with(id, $2::uuid))`,
     [id, userId],
+  );
+}
+
+export interface SharedCourseRow {
+  id: string;
+  reference_number: number;
+  title: string;
+  description: string | null;
+  content_language: string | null;
+  decks_total: number;
+  author: string | null;
+  subscribed: boolean;
+  scopes: ("school" | "class" | "teacher_students")[];
+}
+
+/** Courses others shared with the caller through a school, class or teacher. */
+export function listSharedWithUser(userId: string) {
+  return query<SharedCourseRow>(
+    `SELECT c.id, c.reference_number, c.title, c.description, c.content_language,
+       (SELECT count(*) FROM course_decks cd WHERE cd.course_id = c.id)::int AS decks_total,
+       -- Never the email: a pupil sees a display name or nothing.
+       NULLIF(trim(u.display_name), '') AS author,
+       (receives_shares_automatically($1::uuid) OR EXISTS (
+         SELECT 1 FROM course_subscriptions cs
+         WHERE cs.course_id = c.id AND cs.user_id = $1
+       )) AS subscribed,
+       ARRAY(SELECT DISTINCT s.scope FROM course_shares s WHERE s.course_id = c.id) AS scopes
+     FROM courses c JOIN users u ON u.id = c.user_id
+     WHERE c.user_id <> $1 AND course_shared_with(c.id, $1::uuid)
+     ORDER BY c.title COLLATE de_phonebook ASC`,
+    [userId],
+  );
+}
+
+export function isSharedWith(userId: string, courseId: string) {
+  return queryOne<{ shared: boolean }>(
+    `SELECT course_shared_with($1::uuid, $2::uuid) AS shared
+     FROM courses WHERE id = $1 AND user_id <> $2`,
+    [courseId, userId],
+  );
+}
+
+export async function isSubscribed(userId: string, courseId: string) {
+  const row = await queryOne<{ course_id: string }>(
+    "SELECT course_id FROM course_subscriptions WHERE user_id = $1 AND course_id = $2",
+    [userId, courseId],
+  );
+  return row !== null;
+}
+
+export async function subscribe(
+  userId: string,
+  courseId: string,
+  db: Queryable,
+) {
+  await db.query(
+    `INSERT INTO course_subscriptions (user_id, course_id) VALUES ($1, $2)
+     ON CONFLICT (user_id, course_id) DO NOTHING`,
+    [userId, courseId],
+  );
+}
+
+export async function unsubscribe(userId: string, courseId: string) {
+  await query(
+    "DELETE FROM course_subscriptions WHERE user_id = $1 AND course_id = $2",
+    [userId, courseId],
   );
 }
 

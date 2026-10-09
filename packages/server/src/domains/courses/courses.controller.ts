@@ -142,3 +142,49 @@ export const clone = wrapAsync(async (req: Request, res: Response) => {
   );
   res.status(201).json(result);
 });
+
+export const listShared = wrapAsync(async (req: Request, res: Response) => {
+  res.json({ courses: await service.listSharedWithMe(req.userId!) });
+});
+
+export const subscribe = wrapAsync(async (req: Request, res: Response) => {
+  await service.subscribeShared(req.userId!, req.params.id);
+  await auditFromRequest(
+    req,
+    "course.subscribed",
+    "course",
+    req.params.id,
+    "success",
+  );
+  res.status(204).end();
+});
+
+export const unsubscribe = wrapAsync(async (req: Request, res: Response) => {
+  await service.unsubscribeShared(req.userId!, req.params.id);
+  await auditFromRequest(
+    req,
+    "course.unsubscribed",
+    "course",
+    req.params.id,
+    "success",
+  );
+  res.status(204).end();
+});
+
+export const getShares = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.getShares(req.userId!, req.params.id));
+});
+
+export const setShares = wrapAsync(async (req: Request, res: Response) => {
+  const result = await service.setShares(req.userId!, req.params.id, req.body);
+  await auditFromRequest(
+    req,
+    "course.shares_changed",
+    "course",
+    req.params.id,
+    "success",
+    undefined,
+    { shares: result.shares },
+  );
+  res.json(result);
+});

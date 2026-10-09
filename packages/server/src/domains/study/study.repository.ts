@@ -45,20 +45,26 @@ export interface CardForStudy {
   position: number;
 }
 
-// A caller may study/rate a card they don't own when its deck is official
-// and they've opted in via deck_subscriptions. `$N` is the caller's user_id
-// parameter position in that query; `cardAlias`/`deckAlias` must already be
-// joined (cards.deck_id = decks.id) in the surrounding query.
+// A caller may study/rate a card they don't own when they've added its deck
+// to their list and it is an app (official) deck or shared with them — the
+// same rule as subscribedOrOwned in decks.repository.ts, including decks in an
+// added shared deck-course. `$N` is the caller's
+// user_id parameter position in that query; `cardAlias`/`deckAlias` must
+// already be joined (cards.deck_id = decks.id) in the surrounding query.
 function officialOrOwned(
   cardAlias: string,
   deckAlias: string,
   userIdParam: number,
 ): string {
-  return `(${cardAlias}.user_id = $${userIdParam}
-     OR (${deckAlias}.is_official AND EXISTS (
+  const added = `EXISTS (
        SELECT 1 FROM deck_subscriptions sub
        WHERE sub.deck_id = ${deckAlias}.id AND sub.user_id = $${userIdParam}
-     )))`;
+     )`;
+  return `(${cardAlias}.user_id = $${userIdParam}
+     OR (${added} AND ${deckAlias}.is_official)
+     OR ((${added} OR receives_shares_automatically($${userIdParam}::uuid))
+         AND deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid))
+     OR deck_in_added_shared_course(${deckAlias}.id, $${userIdParam}::uuid))`;
 }
 
 /**

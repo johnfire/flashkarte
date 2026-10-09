@@ -6,6 +6,8 @@ import { CourseDetail, DeckWithCounts } from "../api/types";
 import { useAsync } from "../hooks/use-async";
 import { CourseDeckRow } from "./CourseDeckRow";
 import { CourseContentLanguageField } from "./CourseContentLanguageField";
+import { SharedCourseView } from "./SharedCourseView";
+import { GroupShareButton } from "../components/GroupShareButton";
 
 export function CourseDetailPage() {
   const { t } = useTranslation();
@@ -21,6 +23,7 @@ export function CourseDetailPage() {
     error: loadError,
     loading,
     setData: setCourse,
+    reload,
   } = useAsync<CourseDetail, []>(loadCourse, []);
   const error =
     loadError instanceof ApiError
@@ -107,6 +110,10 @@ export function CourseDetailPage() {
     );
   }
 
+  if (course.is_shared) {
+    return <SharedCourseView course={course} onChanged={() => void reload()} />;
+  }
+
   const availableDecks = (ownDecks ?? []).filter(
     (d) => !course.decks.some((cd) => cd.deck_id === d.id),
   );
@@ -121,6 +128,11 @@ export function CourseDetailPage() {
           <button onClick={onTogglePublic} className="text-indigo-600">
             {course.is_public ? t("decks.unshare") : t("courses.publish")}
           </button>
+          <GroupShareButton
+            itemTitle={course.title}
+            load={() => api.courses.getShares(course.id)}
+            save={(shares) => api.courses.setShares(course.id, shares)}
+          />
           <button onClick={onDelete} className="text-red-600">
             {t("decks.delete")}
           </button>

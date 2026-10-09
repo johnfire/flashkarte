@@ -9,6 +9,11 @@ vi.mock("../hooks/use-content-language", () => ({
   useContentLanguage: () => ({ language: "all", choose: vi.fn() }),
 }));
 
+// An individual account: no class/school sharing controls.
+vi.mock("../auth/AuthContext", () => ({
+  useAuth: () => ({ user: { id: "u1", accountKind: "individual" } }),
+}));
+
 vi.mock("../api/client", async (importOriginal) => ({
   ...(await importOriginal<typeof import("../api/client")>()),
   api: {

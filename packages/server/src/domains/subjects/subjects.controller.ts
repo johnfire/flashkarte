@@ -68,6 +68,22 @@ export const enroll = wrapAsync(async (req: Request, res: Response) => {
   res.status(204).end();
 });
 
+export const listShared = wrapAsync(async (req: Request, res: Response) => {
+  res.json({ courses: await service.listSharedWithMe(req.userId!) });
+});
+
+export const getShares = wrapAsync(async (req: Request, res: Response) => {
+  res.json(await service.getShares(req.userId!, req.params.id));
+});
+
+export const setShares = wrapAsync(async (req: Request, res: Response) => {
+  const result = await service.setShares(req.userId!, req.params.id, req.body);
+  await auditSubject(req, "subject.shares_changed", req.params.id, {
+    shares: result.shares,
+  });
+  res.json(result);
+});
+
 export const get = wrapAsync(async (req: Request, res: Response) => {
   res.json(await service.getSubject(req.userId!, req.params.id));
 });

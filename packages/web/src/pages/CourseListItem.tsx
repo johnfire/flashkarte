@@ -19,6 +19,11 @@ export function CourseListItem({ course: c, onDelete }: CourseListItemProps) {
               #{c.reference_number}
             </span>
           )}
+          {c.is_shared && (
+            <span className="ml-2 rounded-full bg-sky-100 px-2 py-0.5 text-xs font-medium text-sky-700 dark:bg-sky-900/50 dark:text-sky-300">
+              {t("decks.sharedWithYou")}
+            </span>
+          )}
           {c.is_public && (
             <span className="ml-2 rounded-full bg-indigo-100 px-2 py-0.5 text-xs font-medium text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300">
               {t("decks.public")}
@@ -41,12 +46,13 @@ export function CourseListItem({ course: c, onDelete }: CourseListItemProps) {
         <Link to={`/courses/${c.id}`} className="text-sm text-indigo-600">
           {t("courses.open")}
         </Link>
-        {onDelete && (
+        {onDelete && !c.auto_added && (
           <button
             onClick={() => onDelete(c.id, c.title)}
             className="text-sm text-red-600"
           >
-            {t("decks.delete")}
+            {/* A shared course is removed from the list, never deleted. */}
+            {c.is_shared ? t("decks.remove") : t("decks.delete")}
           </button>
         )}
       </div>

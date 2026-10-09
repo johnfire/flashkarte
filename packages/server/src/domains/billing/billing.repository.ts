@@ -32,6 +32,9 @@ export interface BillingStatusRow {
   signup_discount?: Awaited<ReturnType<typeof findSignupDiscountBenefit>>;
   promo_access_ends_at?: string | null;
   account_type: string;
+  // Teachers, students and school logins belong to a school that pays for
+  // all of them, so they are never on the free plan.
+  school_member?: boolean;
   active_subscription: SubscriptionRow | null;
   active_unit_count: number;
 }
@@ -63,12 +66,49 @@ const SUBSCRIPTION_COLS = `
   current_period_start, current_period_end, cancel_at_period_end`;
 
 /**
+ * Decks someone else shared with the user that they added to their list.
+ * They count toward a free account's units (app decks do not). Columns:
+ * unit_type, unit_id, title. `$1` is the user id.
+ */
+const SHARED_DECK_UNITS = `
+  SELECT 'deck'::text AS unit_type, d.id AS unit_id, d.title
+  FROM deck_subscriptions sub
+  JOIN decks d ON d.id = sub.deck_id
+  WHERE sub.user_id = $1
+    AND d.user_id <> $1
+    AND NOT d.is_official
+    AND deck_shared_with(d.id, $1::uuid)`;
+
+/**
+ * Deck-courses someone else shared with the user that they added. A course
+ * counts once; its decks are reached through it and do not count again.
+ * Columns: unit_type, unit_id, title. `$1` is the user id.
+ */
+const SHARED_COURSE_UNITS = `
+  SELECT 'course'::text AS unit_type, c.id AS unit_id, c.title
+  FROM course_subscriptions cs
+  JOIN courses c ON c.id = cs.course_id
+  WHERE cs.user_id = $1
+    AND c.user_id <> $1
+    AND course_shared_with(c.id, $1::uuid)`;
+
+/**
+ * An enrolled structured course counts only while the learner can still use
+ * it: it is public, or still shared with them. `s` is the subject, `$1` the
+ * user id.
+ */
+const STILL_LEARNABLE = `(s.is_public OR subject_shared_with(s.id, $1::uuid))`;
+
+/**
  * Unit definition for the free plan:
  * - a standalone owned deck counts once;
  * - an owned legacy course counts once, and its member decks do not count
  *   again;
  * - an owned or enrolled structured subject counts once unless it belongs to
- *   a course collection, in which case the collection counts once.
+ *   a course collection, in which case the collection counts once;
+ * - a deck shared with the user (SHARED_DECK_UNITS) counts once;
+ * - a shared deck-course the user added (SHARED_COURSE_UNITS) counts once;
+ * - an enrolled structured course counts while still public or shared.
  */
 async function countActiveUnitsFrom(
   db: Queryable,
@@ -87,9 +127,13 @@ async function countActiveUnitsFrom(
            WHERE cd.deck_id = d.id AND c.user_id = $1
          )
        UNION ALL
+       SELECT unit_type, unit_id FROM (${SHARED_DECK_UNITS}) shared
+       UNION ALL
        SELECT 'course'::text, c.id
        FROM courses c
        WHERE c.user_id = $1
+       UNION ALL
+       SELECT unit_type, unit_id FROM (${SHARED_COURSE_UNITS}) shared_courses
        UNION ALL
        SELECT DISTINCT
          CASE WHEN s.course_collection_id IS NULL
@@ -97,11 +141,11 @@ async function countActiveUnitsFrom(
          COALESCE(s.course_collection_id, s.id)
        FROM subjects s
        WHERE s.user_id = $1
-          OR EXISTS (
+          OR (EXISTS (
             SELECT 1
             FROM subject_enrollments e
             WHERE e.subject_id = s.id AND e.user_id = $1
-          )
+          ) AND ${STILL_LEARNABLE})
      ) units
      LEFT JOIN billing_unit_states state
        ON state.user_id = $1
@@ -120,8 +164,8 @@ export async function countActiveUnits(userId: string): Promise<number> {
 export async function getBillingStatus(
   userId: string,
 ): Promise<BillingStatusRow> {
-  const user = await queryOne<{ account_type: string }>(
-    "SELECT account_type FROM users WHERE id = $1",
+  const user = await queryOne<{ account_type: string; school_member: boolean }>(
+    "SELECT account_type, school_id IS NOT NULL AS school_member FROM users WHERE id = $1",
     [userId],
   );
   if (!user) throw new Error("User not found while reading billing status");
@@ -140,6 +184,7 @@ export async function getBillingStatus(
   );
   return {
     account_type: user.account_type,
+    school_member: user.school_member,
     active_subscription: subscription,
     active_unit_count: await countActiveUnits(userId),
     promo_access_ends_at: await findPromoAccessEnd(getPool(), userId),
@@ -167,13 +212,14 @@ export async function assertCanCreateUnitInTransaction(
   db: Queryable,
   userId: string,
 ): Promise<void> {
-  const user = await db.query<{ account_type: string }>(
-    "SELECT account_type FROM users WHERE id = $1",
+  const user = await db.query<{ account_type: string; school_member: boolean }>(
+    "SELECT account_type, school_id IS NOT NULL AS school_member FROM users WHERE id = $1",
     [userId],
   );
   const accountType = user.rows[0]?.account_type;
   if (!accountType) throw new Error("User not found while checking billing");
   if (["paid", "admin-gifted", "admin"].includes(accountType)) return;
+  if (user.rows[0]?.school_member) return;
   if (await findPromoAccessEnd(db, userId)) return;
 
   const subscription = await db.query<{ id: string }>(
@@ -214,9 +260,13 @@ export async function listUnits(userId: string): Promise<BillingUnitRow[]> {
            WHERE cd.deck_id = d.id AND c.user_id = $1
          )
        UNION ALL
+       ${SHARED_DECK_UNITS}
+       UNION ALL
        SELECT 'course'::text, c.id, c.title
        FROM courses c
        WHERE c.user_id = $1
+       UNION ALL
+       ${SHARED_COURSE_UNITS}
        UNION ALL
        SELECT
          CASE WHEN s.course_collection_id IS NULL
@@ -226,10 +276,10 @@ export async function listUnits(userId: string): Promise<BillingUnitRow[]> {
        FROM subjects s
        LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
        WHERE s.user_id = $1
-          OR EXISTS (
+          OR (EXISTS (
             SELECT 1 FROM subject_enrollments e
             WHERE e.subject_id = s.id AND e.user_id = $1
-          )
+          ) AND ${STILL_LEARNABLE})
        GROUP BY
          CASE WHEN s.course_collection_id IS NULL
            THEN 'subject'::text ELSE 'course_collection'::text END,
@@ -268,8 +318,12 @@ export async function setUnitActive(
              WHERE cd.deck_id = d.id AND c.user_id = $1
            )
          UNION ALL
+         ${SHARED_DECK_UNITS}
+         UNION ALL
          SELECT 'course'::text, c.id, c.title
          FROM courses c WHERE c.user_id = $1
+         UNION ALL
+         ${SHARED_COURSE_UNITS}
          UNION ALL
          SELECT
            CASE WHEN s.course_collection_id IS NULL
@@ -278,10 +332,10 @@ export async function setUnitActive(
            COALESCE(cc.title::text, s.title)
          FROM subjects s
          LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
-         WHERE (s.user_id = $1 OR EXISTS (
+         WHERE (s.user_id = $1 OR (EXISTS (
            SELECT 1 FROM subject_enrollments e
            WHERE e.subject_id = s.id AND e.user_id = $1
-         ))
+         ) AND ${STILL_LEARNABLE}))
            AND (CASE WHEN s.course_collection_id IS NULL
              THEN 'subject'::text ELSE 'course_collection'::text END) = $2
            AND COALESCE(s.course_collection_id, s.id) = $3

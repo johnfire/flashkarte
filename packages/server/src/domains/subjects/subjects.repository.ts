@@ -1,4 +1,4 @@
-import { getPool, query } from "../../db/client";
+import { getPool, query, queryOne } from "../../db/client";
 import type { Queryable } from "../../db/queryable";
 
 export interface SubjectRow {
@@ -140,8 +140,7 @@ export function listSubjects(userId: string) {
             (SELECT count(*) FROM concepts c WHERE c.subject_id = s.id)::int AS concept_count
      FROM subjects s
      LEFT JOIN course_collections cc ON cc.id = s.course_collection_id
-     WHERE s.user_id = $1
-        OR EXISTS (SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $1)
+     WHERE s.user_id = $1 OR ${LEARNER_ACCESS("s", 1)}
      ORDER BY s.created_at DESC`,
     [userId],
   );
@@ -165,7 +164,27 @@ export function listCatalogSubjects(
   );
 }
 
-/** A learner may use their own course or a public course they explicitly added. */
+/**
+ * When someone else's course is usable by this learner: enrolled while it is
+ * public or still shared with them, or — for a school member, who needs no
+ * enrolment step (migration 048) — whenever it is shared with them. Checked
+ * live, so leaving the group or school ends access. `$N` is the learner's
+ * user_id position.
+ */
+function LEARNER_ACCESS(alias: string, userIdParam: number): string {
+  const user = `$${userIdParam}::uuid`;
+  const shared = `subject_shared_with(${alias}.id, ${user})`;
+  return `((EXISTS (
+      SELECT 1 FROM subject_enrollments e
+      WHERE e.subject_id = ${alias}.id AND e.user_id = $${userIdParam}
+    ) AND (${alias}.is_public OR ${shared}))
+    OR (receives_shares_automatically(${user}) AND ${shared}))`;
+}
+
+/**
+ * A learner may use their own course, or a public or shared course they
+ * explicitly added.
+ */
 export async function findLearningSubject(
   userId: string,
   id: string,
@@ -173,9 +192,7 @@ export async function findLearningSubject(
 ): Promise<SubjectRow | null> {
   const result = await db.query<SubjectRow>(
     `SELECT ${SUBJECT_COLS} FROM subjects s
-     WHERE s.id = $1 AND (s.user_id = $2 OR (s.is_public AND EXISTS (
-       SELECT 1 FROM subject_enrollments e WHERE e.subject_id = s.id AND e.user_id = $2
-     )))`,
+     WHERE s.id = $1 AND (s.user_id = $2 OR ${LEARNER_ACCESS("s", 2)})`,
     [id, userId],
   );
   return result.rows[0] ?? null;
@@ -192,6 +209,56 @@ export async function enrollInPublicSubject(
     [userId, subjectId],
   );
   return (result.rowCount ?? 0) > 0;
+}
+
+export interface SharedSubjectRow {
+  id: string;
+  reference_number: number;
+  title: string;
+  description: string | null;
+  locale: string | null;
+  author: string | null;
+  enrolled: boolean;
+  scopes: ("school" | "class" | "teacher_students")[];
+}
+
+/** Structured courses others shared with the caller through a school, class or teacher. */
+export function listSharedWithUser(userId: string) {
+  return query<SharedSubjectRow>(
+    `SELECT s.id, s.reference_number, s.title, s.description, s.locale,
+       -- Never the email: a pupil sees a display name or nothing.
+       NULLIF(trim(u.display_name), '') AS author,
+       (receives_shares_automatically($1::uuid) OR EXISTS (
+         SELECT 1 FROM subject_enrollments e
+         WHERE e.subject_id = s.id AND e.user_id = $1
+       )) AS enrolled,
+       ARRAY(SELECT DISTINCT sh.scope FROM subject_shares sh WHERE sh.subject_id = s.id) AS scopes
+     FROM subjects s JOIN users u ON u.id = s.user_id
+     WHERE s.user_id <> $1 AND NOT s.is_official
+       AND subject_shared_with(s.id, $1::uuid)
+     ORDER BY s.title COLLATE de_phonebook ASC`,
+    [userId],
+  );
+}
+
+export function isSharedWith(userId: string, subjectId: string) {
+  return queryOne<{ shared: boolean }>(
+    `SELECT subject_shared_with($1::uuid, $2::uuid) AS shared
+     FROM subjects WHERE id = $1 AND user_id <> $2`,
+    [subjectId, userId],
+  );
+}
+
+export async function enroll(
+  userId: string,
+  subjectId: string,
+  db: Queryable,
+): Promise<void> {
+  await db.query(
+    `INSERT INTO subject_enrollments (user_id, subject_id) VALUES ($1, $2)
+     ON CONFLICT DO NOTHING`,
+    [userId, subjectId],
+  );
 }
 
 /** Owner-only: every read and write of a subject goes through this. */

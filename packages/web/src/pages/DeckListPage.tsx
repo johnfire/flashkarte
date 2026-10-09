@@ -12,6 +12,8 @@ import { PersonalContentMenu } from "../components/PersonalContentMenu";
 import { PersonalContentTabs } from "../components/PersonalContentTabs";
 import { useAsync } from "../hooks/use-async";
 import { DeckListItem } from "./DeckListItem";
+import { SharedWithMeSection } from "./SharedWithMeSection";
+import { useGroupSharing } from "../hooks/use-group-sharing";
 import { ContentLanguageSwitcher } from "../components/ContentLanguageSwitcher";
 import { useContentLanguage } from "../hooks/use-content-language";
 import {
@@ -50,7 +52,9 @@ export function DeckListPage() {
     error: loadError,
     loading,
     setData: setDecks,
+    reload: reloadDecks,
   } = useAsync<DeckWithCounts[], []>(loadDecks, []);
+  const canShareWithGroups = useGroupSharing();
   const error =
     loadError instanceof ApiError
       ? loadError.message
@@ -146,6 +150,11 @@ export function DeckListPage() {
       <ContentLanguageSwitcher value={language} onChange={choose} />
 
       {error && <p className="mb-4 text-red-600">{error}</p>}
+
+      {/* Only school, teacher and student accounts can receive shared decks. */}
+      {verified && canShareWithGroups && (
+        <SharedWithMeSection onAdded={() => void reloadDecks()} />
+      )}
 
       {loading && !error && (
         <p className="text-gray-500 dark:text-gray-400">

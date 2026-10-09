@@ -2,6 +2,8 @@ import { Router } from "express";
 import multer from "multer";
 import * as ctrl from "./decks.controller";
 import * as study from "../study/study.controller";
+import * as shares from "./deck-shares.controller";
+import { requireFullScope } from "../../middleware/auth";
 
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -15,6 +17,7 @@ decksRouter.get("/official/collections", ctrl.listCollections);
 decksRouter.get("/official/collections/:id", ctrl.getCollection);
 decksRouter.post("/official/collections/:id/subscribe-all", ctrl.subscribeAll);
 decksRouter.get("/official", ctrl.listOfficial);
+decksRouter.get("/shared", shares.listSharedWithMe);
 decksRouter.post("/", upload.single("file"), ctrl.create);
 decksRouter.get("/:id", ctrl.get);
 decksRouter.get("/:id/settings", ctrl.getSettings);
@@ -25,6 +28,10 @@ decksRouter.patch("/:id/cards/:cardId", ctrl.updateCard);
 decksRouter.patch("/:id/senses/:word/reorder", ctrl.reorderSenses);
 decksRouter.post("/:id/subscribe", ctrl.subscribe);
 decksRouter.delete("/:id/subscribe", ctrl.unsubscribe);
+// Who a deck reaches is an account decision, not a deck edit: deck-scoped
+// (MCP) keys may not change it.
+decksRouter.get("/:id/shares", requireFullScope, shares.getShares);
+decksRouter.put("/:id/shares", requireFullScope, shares.setShares);
 
 // Deck-scoped study + stats
 decksRouter.get("/:id/study", study.studyBatch);

@@ -93,6 +93,8 @@ export interface PublicUser {
   email: string;
   role: string;
   accountType: string;
+  // individual | school | teacher | student — decides what the user can share.
+  accountKind: string;
   emailVerifiedAt: string | null;
   displayName: string | null;
   language: string | null;
@@ -109,6 +111,7 @@ function toUser(row: UserRow): PublicUser {
     email: row.email,
     role: row.role,
     accountType: row.account_type,
+    accountKind: row.account_kind ?? "individual",
     emailVerifiedAt: row.email_verified_at
       ? new Date(row.email_verified_at).toISOString()
       : null,

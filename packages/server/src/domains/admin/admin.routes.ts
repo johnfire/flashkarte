@@ -3,6 +3,7 @@ import * as ctrl from "./admin.controller";
 import { categoriesAdminRouter } from "../categories/categories.routes";
 import { emailAdminRouter } from "../email/email.routes";
 import { promoAdminRouter } from "../promos/promo.routes";
+import { schoolsAdminRouter } from "../schools/schools.routes";
 
 export const adminRouter = Router();
 adminRouter.get("/users", ctrl.list);
@@ -31,3 +32,4 @@ adminRouter.patch(
 adminRouter.use("/categories", categoriesAdminRouter);
 adminRouter.use("/email", emailAdminRouter);
 adminRouter.use("/promos", promoAdminRouter);
+adminRouter.use("/", schoolsAdminRouter);

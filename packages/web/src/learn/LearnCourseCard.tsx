@@ -5,6 +5,8 @@ import {
   ContentLanguageField,
   contentLanguageLabel,
 } from "../components/ContentLanguageSwitcher";
+import { api } from "../api/client";
+import { GroupShareButton } from "../components/GroupShareButton";
 
 export function courseProgressCardClass(
   progress?: LearnSubject["course_progress"],
@@ -102,6 +104,11 @@ export function LearnCourseCard({
           <ContentLanguageField
             value={course.locale}
             onChange={(locale) => onChangeLanguage(course, locale)}
+          />
+          <GroupShareButton
+            itemTitle={course.title}
+            load={() => api.learn.getShares(course.id)}
+            save={(shares) => api.learn.setShares(course.id, shares)}
           />
           <button
             onClick={() => onToggleCommunitySharing(course)}

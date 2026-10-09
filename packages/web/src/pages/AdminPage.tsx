@@ -9,6 +9,7 @@ import { useAsync } from "../hooks/use-async";
 import { CategoriesSection } from "./admin/CategoriesSection";
 import { CourseCollectionAssignmentsSection } from "./admin/CourseCollectionAssignmentsSection";
 import { PromosSection } from "./admin/PromosSection";
+import { SchoolAdminPanel } from "./admin/SchoolAdminPanel";
 
 const ACCOUNT_TYPES: AccountType[] = ["free", "paid", "admin-gifted", "admin"];
 
@@ -334,6 +335,7 @@ export function AdminPage() {
           </section>
         </div>
 
+        <SchoolAdminPanel />
         <CategoriesSection />
         <PromosSection />
 

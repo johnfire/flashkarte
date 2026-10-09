@@ -16,6 +16,7 @@ import {
   contentLanguageSchema,
   contentLanguageFilterSchema,
 } from "../library/content-language";
+import { subscribeShared } from "./deck-shares.service";
 
 // Cap cards per request: bounds the multi-row INSERT (well under Postgres'
 // 65535-parameter limit at 6 params/card) and prevents a huge upload from
@@ -363,9 +364,14 @@ export async function subscribeAll(userId: string, collectionId: string) {
   return repo.subscribeAllInCollection(userId, collectionId);
 }
 
+/**
+ * Add an app deck, or a deck shared with the caller by their school, teacher
+ * or classmates, to their own deck list.
+ */
 export async function subscribe(userId: string, deckId: string) {
-  const ok = await repo.subscribeOfficial(userId, deckId);
-  if (!ok) throw new NotFoundError("Official deck not found");
+  if (await repo.subscribeOfficial(userId, deckId)) return;
+  if (await subscribeShared(userId, deckId)) return;
+  throw new NotFoundError("Deck not found");
 }
 
 export async function unsubscribe(userId: string, deckId: string) {

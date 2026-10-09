@@ -19,16 +19,21 @@ const unitIdSchema = z.string().uuid("Billing unit id must be a UUID");
 function hasUnlimitedAccess(
   accountType: string,
   subscription: repository.SubscriptionRow | null,
+  schoolMember = false,
 ): boolean {
   if (["paid", "admin-gifted", "admin"].includes(accountType)) return true;
+  if (schoolMember) return true;
   return subscription !== null;
 }
 
 export async function getStatus(userId: string) {
   const status = await repository.getBillingStatus(userId);
   const unlimited =
-    hasUnlimitedAccess(status.account_type, status.active_subscription) ||
-    Boolean(status.promo_access_ends_at);
+    hasUnlimitedAccess(
+      status.account_type,
+      status.active_subscription,
+      status.school_member,
+    ) || Boolean(status.promo_access_ends_at);
   return {
     plan: unlimited ? "paid" : "free",
     accountType: status.account_type,

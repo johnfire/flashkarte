@@ -34,15 +34,32 @@ const SPEECH_COLS =
 
 const DECK_COLS = `id, reference_number, title, source_filename, created_at, updated_at, is_public, is_official, is_ordered, content_language, ${SPEECH_COLS}`;
 
-// A caller may read a deck/card they don't own when it's official and they've
-// opted in. Shared by every read-path query below; `$N` is the caller's
-// user_id parameter position in that query.
-function subscribedOrOwned(deckAlias: string, userIdParam: number): string {
-  return `(${deckAlias}.user_id = $${userIdParam}
-     OR (${deckAlias}.is_official AND EXISTS (
+// A caller may read a deck/card they don't own when they've added it to their
+// list (deck_subscriptions) and it is either an app (official) deck or one
+// shared with them by their school, teacher or classmates (deck_shared_with,
+// migrations 046/047 — the single definition of that rule), or when it sits
+// in a shared deck-course they added (deck_in_added_shared_course). Shared by
+// every read-path query below; `$N` is the caller's user_id parameter
+// position. `viaCourses: false` keeps course-only decks out of "My Decks":
+// the learner reaches those through the course.
+export function subscribedOrOwned(
+  deckAlias: string,
+  userIdParam: number,
+  viaCourses = true,
+): string {
+  const course = viaCourses
+    ? `
+     OR deck_in_added_shared_course(${deckAlias}.id, $${userIdParam}::uuid)`
+    : "";
+  const added = `EXISTS (
        SELECT 1 FROM deck_subscriptions sub
        WHERE sub.deck_id = ${deckAlias}.id AND sub.user_id = $${userIdParam}
-     )))`;
+     )`;
+  // School members get shared decks without adding them (migration 048).
+  return `(${deckAlias}.user_id = $${userIdParam}
+     OR (${added} AND ${deckAlias}.is_official)
+     OR ((${added} OR receives_shares_automatically($${userIdParam}::uuid))
+         AND deck_shared_with(${deckAlias}.id, $${userIdParam}::uuid))${course})`;
 }
 
 /**
@@ -270,6 +287,11 @@ export async function reorderSenseCards(
 }
 
 export interface DeckListRow extends DeckRow {
+  // Someone else's deck, shared with the caller (not an app deck).
+  is_shared: boolean;
+  // Shared and shown because the caller belongs to a school: there is
+  // nothing to remove, it leaves with the share or the membership.
+  auto_added: boolean;
   card_count: string;
   due_count: string;
   lesson_count: string;
@@ -286,6 +308,9 @@ export interface DeckListRow extends DeckRow {
 export function listDecksWithCounts(userId: string) {
   return query<DeckListRow>(
     `SELECT d.id, d.reference_number, d.title, d.source_filename, d.created_at, d.updated_at, d.is_public, d.is_official, d.is_ordered, d.content_language,
+       (d.user_id <> $1 AND NOT d.is_official) AS is_shared,
+       (d.user_id <> $1 AND NOT d.is_official
+         AND receives_shares_automatically($1::uuid)) AS auto_added,
        d.speech_enabled, d.speech_front_lang, d.speech_back_lang, d.speech_autoplay, d.speech_rate,
        s.total AS card_count,
        s.due AS due_count,
@@ -319,7 +344,7 @@ export function listDecksWithCounts(userId: string) {
        LEFT JOIN card_reads r ON r.card_id = c.id AND r.user_id = $1
        WHERE c.deck_id = d.id
      ) s ON true
-     WHERE ${subscribedOrOwned("d", 1)}
+     WHERE ${subscribedOrOwned("d", 1, false)}
      ORDER BY d.is_official ASC, d.updated_at DESC`,
     [userId],
   );
@@ -602,6 +627,17 @@ export async function subscribeOfficial(
     [userId, deckId],
   );
   return already !== null;
+}
+
+export async function isSubscribed(
+  userId: string,
+  deckId: string,
+): Promise<boolean> {
+  const row = await queryOne<{ deck_id: string }>(
+    "SELECT deck_id FROM deck_subscriptions WHERE user_id = $1 AND deck_id = $2",
+    [userId, deckId],
+  );
+  return row !== null;
 }
 
 /** Remove an official deck from the caller's own deck list. Idempotent. */

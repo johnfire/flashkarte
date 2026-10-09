@@ -24,6 +24,9 @@ const ADMIN = {
   email: "admin@b.com",
   role: "user",
   accountType: "admin",
+  accountKind: "individual",
+  schoolId: null,
+  teacherVerified: false,
   emailVerifiedAt: "2026-01-01T00:00:00.000Z",
 };
 const REGULAR = { ...ADMIN, id: "u2", accountType: "free" };
@@ -62,6 +65,9 @@ describe("admin routes", () => {
         email: "a@b.com",
         role: "user",
         accountType: "free",
+        accountKind: "individual",
+        schoolId: null,
+        teacherVerified: false,
         emailVerifiedAt: null,
         createdAt: "2026-01-01T00:00:00.000Z",
       },
@@ -81,6 +87,9 @@ describe("admin routes", () => {
       email: "new@b.com",
       role: "user",
       accountType: "paid",
+      accountKind: "individual",
+      schoolId: null,
+      teacherVerified: false,
       emailVerifiedAt: "2026-01-01T00:00:00.000Z",
       createdAt: "2026-01-01T00:00:00.000Z",
     });
@@ -158,6 +167,9 @@ describe("admin routes", () => {
       email: "a@b.com",
       role: "user",
       accountType: "admin-gifted",
+      accountKind: "individual",
+      schoolId: null,
+      teacherVerified: false,
       emailVerifiedAt: null,
       createdAt: "2026-01-01T00:00:00.000Z",
     });
