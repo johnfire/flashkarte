@@ -150,11 +150,14 @@ export function LandingPage() {
 
       {/* Content */}
       <div className="relative mx-auto max-w-5xl px-6 py-6 sm:py-8">
-        <LandingSchoolTeacherCallout />
-        <div className="mt-12 sm:mt-16">
-          <LandingHero />
-        </div>
-        <LandingVideo />
+        <LandingHero />
+        <section
+          aria-label="LearnWohl for schools and teachers"
+          className="mt-16 grid items-center gap-8 lg:grid-cols-[minmax(0,3fr)_minmax(18rem,2fr)]"
+        >
+          <LandingVideo className="w-full lg:mx-0" />
+          <LandingSchoolTeacherCallout />
+        </section>
         <LandingFeatures />
         <LandingAI />
         <LandingFooter />

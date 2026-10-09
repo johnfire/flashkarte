@@ -13,10 +13,14 @@ test("the landing page leads to the school and teacher options", async ({
     name: "LearnWohl",
   });
   const languageSelector = page.getByLabel("Language");
+  const landingVideo = page.getByLabel(
+    "LearnWohl in 30 seconds: an AI builds a course, then you study it",
+  );
 
   await expect(schoolTeacherTitle).toBeVisible();
   await expect(productTitle).toBeVisible();
   await expect(languageSelector).toBeVisible();
+  await expect(landingVideo).toBeVisible();
   await expect(
     page.getByText(
       "Bring your local AI to create courses for you, your friends, your coworkers, and anyone who needs them.",
@@ -26,10 +30,13 @@ test("the landing page leads to the school and teacher options", async ({
   const productTitlePosition = await productTitle.boundingBox();
   expect(schoolTeacherPosition).not.toBeNull();
   expect(productTitlePosition).not.toBeNull();
-  expect(schoolTeacherPosition!.y).toBeLessThan(productTitlePosition!.y);
+  expect(productTitlePosition!.y).toBeLessThan(schoolTeacherPosition!.y);
+  const landingVideoPosition = await landingVideo.boundingBox();
+  expect(landingVideoPosition).not.toBeNull();
+  expect(schoolTeacherPosition!.x).toBeGreaterThan(landingVideoPosition!.x);
   const languageSelectorPosition = await languageSelector.boundingBox();
   expect(languageSelectorPosition).not.toBeNull();
-  expect(languageSelectorPosition!.y).toBeLessThan(schoolTeacherPosition!.y);
+  expect(languageSelectorPosition!.y).toBeLessThan(productTitlePosition!.y);
 
   await page
     .getByRole("link", { name: "Explore options for schools & teachers" })

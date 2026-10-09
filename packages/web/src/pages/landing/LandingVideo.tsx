@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 // Self-hosted (packages/web/public/video) so the landing page loads no
 // third-party player or cookies. preload="none": nothing is downloaded until
 // the visitor presses play.
-export function LandingVideo() {
+export function LandingVideo({ className = "" }: { className?: string }) {
   const { t } = useTranslation();
   return (
-    <div className="mx-auto mt-16 max-w-3xl">
+    <div className={`mx-auto max-w-3xl ${className}`}>
       <h2 className="mb-4 text-center text-sm font-semibold uppercase tracking-wider text-indigo-300">
         {t("landing.videoTitle")}
       </h2>
