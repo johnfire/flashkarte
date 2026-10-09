@@ -1,0 +1,303 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r03",
+    "title": "Das Auskunftsrecht",
+    "summary": "Sagen können, was eine vollständige Antwort auf einen Auskunftsantrag enthält, einschließlich der Kopie und der Grenzen, die andere Menschen schützen.",
+    "covers": [
+      "right-of-access"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r02",
+        "reason": "Ein Auskunftsantrag wird innerhalb der Frist nach Art. 12 beantwortet."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Das **Auskunftsrecht** (Art. 15 Abs. 1) hat zwei Teile. Eine Person kann verlangen:",
+        {
+          "type": "list",
+          "items": [
+            "eine **Bestätigung** darüber, ob personenbezogene Daten über sie verarbeitet werden; und",
+            "wenn das der Fall ist, **Auskunft** über diese Daten sowie bestimmte Informationen."
+          ]
+        },
+        "Nach der DSGVO muss die Person dafür keinen Grund nennen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 5, 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die Informationen, die Sie geben müssen (Art. 15 Abs. 1 Buchst. a bis h):",
+        {
+          "type": "list",
+          "items": [
+            "die Verarbeitungszwecke, die Kategorien der Daten und die Empfänger, insbesondere Empfänger außerhalb der EU;",
+            "wie lange die Daten gespeichert werden oder nach welchen Kriterien sich diese Dauer richtet;",
+            "die Rechte auf Berichtigung, Löschung oder Einschränkung der Verarbeitung sowie das Widerspruchsrecht;",
+            "das Recht, sich bei einer Aufsichtsbehörde zu beschweren;",
+            "die Herkunft der Daten, wenn sie nicht bei der Person erhoben wurden;",
+            "jede automatisierte Entscheidungsfindung, die eine spätere Lektion behandelt, mit aussagekräftigen Informationen über die involvierte Logik."
+          ]
+        },
+        "Wurden Daten in ein Land außerhalb der EU übermittelt, hat die Person außerdem das Recht, über die geeigneten Garantien unterrichtet zu werden (Art. 15 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 5, 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Die Kopie**: Der Verantwortliche muss eine Kopie der personenbezogenen Daten zur Verfügung stellen, die er verarbeitet (Art. 15 Abs. 3). Die erste Kopie ist unentgeltlich (Art. 12 Abs. 5).",
+        "Für **alle weiteren Kopien** darf er ein angemessenes Entgelt auf der Grundlage der Verwaltungskosten verlangen. Wurde der Antrag elektronisch gestellt, wird die Kopie in einem gängigen elektronischen Format zur Verfügung gestellt, sofern die Person nichts anderes angibt."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 5, 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Schutz anderer Menschen**: Das Recht auf Erhalt einer Kopie „darf die Rechte und Freiheiten anderer Personen nicht beeinträchtigen“ (Art. 15 Abs. 4).",
+        "Das ist kein Grund, alles zu verweigern. Es ist ein Grund, die Daten anderer Menschen innerhalb der Kopie zu schützen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 5, 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Eine Kundin fragt die Bäckerei Sonnenfeld: »Was haben Sie über mich gespeichert?« Die Bäckerei bestätigt, dass sie Daten über sie verarbeitet. Sie schickt ihr ihre Kontodaten, ihren Bestellverlauf, ihre Treuepunkte und den Nachweis ihrer Newsletter-Anmeldung, zusammen mit den Informationen nach Art. 15.",
+        "Die Kundin verlangt auch die Kameraaufnahmen ihres Besuchs. Darauf sind andere Kundinnen und Kunden zu sehen. Die Bäckerei schützt diese Menschen, zum Beispiel indem sie sie in der Kopie unkenntlich macht.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 12 Abs. 5, 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Eine Kundin fragt die Bäckerei Sonnenfeld, ob die Bäckerei Daten über sie hat. Was verlangt Art. 15 zuerst?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Bestätigen, ob ihre Daten verarbeitet werden, und dann Auskunft und Informationen geben",
+          "reason": "Art. 15 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine kurze Zusammenfassung schicken, ohne jede Kopie",
+          "reason": "Artikel 15 Abs. 3 verlangt eine Kopie der Daten."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts, bis sie ihren Grund erklärt",
+          "reason": "Artikel 15 verlangt keinen Grund."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Kundin fragt die Bäckerei Sonnenfeld, welche Daten die Bäckerei über sie hat. Was muss die Bäckerei nach Art. 15 zuerst tun?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Eine kurze Zusammenfassung schicken, ohne jede Kopie",
+              "reason": "Artikel 15 Abs. 3 verlangt eine Kopie der Daten."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts, bis sie ihren Grund erklärt",
+              "reason": "Artikel 15 verlangt keinen Grund."
+            },
+            {
+              "correct": true,
+              "blocks": "Bestätigen, ob ihre Daten verarbeitet werden, und dann Auskunft und Informationen geben",
+              "reason": "Art. 15 Abs. 1."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Nach einer unentgeltlichen ersten Kopie verlangt die Kundin eine zweite Kopie. Was darf die Bäckerei Sonnenfeld tun?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Auch für die erste Kopie ein Entgelt verlangen",
+          "reason": "Die erste Kopie ist unentgeltlich (Art. 12 Abs. 5)."
+        },
+        {
+          "correct": false,
+          "blocks": "Jede Kopie ausnahmslos unentgeltlich zur Verfügung stellen",
+          "reason": "Artikel 15 Abs. 3 erlaubt ein Entgelt für weitere Kopien."
+        },
+        {
+          "correct": true,
+          "blocks": "Ein angemessenes Entgelt auf der Grundlage der Verwaltungskosten verlangen",
+          "reason": "Artikel 15 Abs. 3 erlaubt das für weitere Kopien."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Person hat ihre erste Kopie bereits erhalten. Was erlaubt Art. 15 Abs. 3, wenn sie weitere Kopien verlangt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Jede Kopie ausnahmslos unentgeltlich zur Verfügung stellen",
+              "reason": "Artikel 15 Abs. 3 erlaubt ein Entgelt für weitere Kopien."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein angemessenes Entgelt auf der Grundlage der Verwaltungskosten verlangen",
+              "reason": "Artikel 15 Abs. 3 erlaubt das für weitere Kopien."
+            },
+            {
+              "correct": false,
+              "blocks": "Auch für die erste Kopie ein Entgelt verlangen",
+              "reason": "Die erste Kopie ist unentgeltlich (Art. 12 Abs. 5)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Kameraaufnahmen, die eine Kundin verlangt, zeigen auch andere Menschen. Was sollte die Bäckerei Sonnenfeld tun?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Kopie unbearbeitet herausgeben",
+          "reason": "Das könnte die Rechte anderer Menschen beeinträchtigen."
+        },
+        {
+          "correct": true,
+          "blocks": "Die Kopie herausgeben und dabei die anderen Menschen schützen, etwa durch Unkenntlichmachen",
+          "reason": "Artikel 15 Abs. 4 schützt andere Menschen, ohne das Recht aufzuheben."
+        },
+        {
+          "correct": false,
+          "blocks": "Den ganzen Antrag automatisch ablehnen",
+          "reason": "Artikel 15 Abs. 4 ist kein pauschaler Ablehnungsgrund."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Kopie, die eine Kundin verlangt, enthält auch Daten anderer Menschen. Was folgt daraus nach Art. 15 Abs. 4?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die Kopie herausgeben und dabei die anderen Menschen schützen, etwa durch Unkenntlichmachen",
+              "reason": "Artikel 15 Abs. 4 schützt andere Menschen, ohne das Recht aufzuheben."
+            },
+            {
+              "correct": false,
+              "blocks": "Den ganzen Antrag automatisch ablehnen",
+              "reason": "Artikel 15 Abs. 4 ist kein pauschaler Ablehnungsgrund."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Kopie unbearbeitet herausgeben",
+              "reason": "Das könnte die Rechte anderer Menschen beeinträchtigen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-of-access"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Welche Angabe muss eine Antwort auf einen Auskunftsantrag enthalten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Verarbeitungszwecke",
+          "reason": "Art. 15 Abs. 1 Buchst. a."
+        },
+        {
+          "correct": false,
+          "blocks": "Die internen IT-Passwörter der Bäckerei Sonnenfeld",
+          "reason": "Sie gehören nicht zur Auskunft und müssen sicher bleiben."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine Liste aller Kundinnen und Kunden der Bäckerei Sonnenfeld",
+          "reason": "Damit würden Daten anderer Menschen offengelegt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was muss die Bäckerei Sonnenfeld einer Person, die Auskunft verlangt, nach Art. 15 Abs. 1 neben den Daten selbst mitteilen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die internen IT-Passwörter der Bäckerei Sonnenfeld",
+              "reason": "Sie gehören nicht zur Auskunft und müssen sicher bleiben."
+            },
+            {
+              "correct": false,
+              "blocks": "Eine Liste aller Kundinnen und Kunden der Bäckerei Sonnenfeld",
+              "reason": "Damit würden Daten anderer Menschen offengelegt."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Verarbeitungszwecke",
+              "reason": "Art. 15 Abs. 1 Buchst. a."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

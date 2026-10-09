@@ -1,0 +1,283 @@
+{
+  "module": "Einstieg: was die DSGVO erfasst",
+  "lesson": {
+    "slug": "g01",
+    "title": "Was die DSGVO ist und wie dieser Kurs funktioniert",
+    "summary": "Was die DSGVO schützt, seit wann sie gilt, wer sie überwacht und wie dieser Kurs aufgebaut ist.",
+    "covers": [
+      "gdpr-map",
+      "supervisory-authority"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Die **DSGVO** ist die Datenschutz-Grundverordnung, Verordnung (EU) 2016/679. Sie regelt den Schutz **natürlicher Personen**, also von Menschen, wenn ihre personenbezogenen Daten verwendet werden. Außerdem regelt sie den freien Verkehr dieser Daten innerhalb der EU (Art. 1 Abs. 1).",
+        "Ihr Ziel ist der Schutz der Grundrechte der Menschen, insbesondere ihres Rechts auf Schutz personenbezogener Daten (Art. 1 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 1, 4 Nr. 21, 51 Abs. 1, 99",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die DSGVO ist eine **Verordnung**, keine Richtlinie. Nach Art. 99 ist sie „in allen ihren Teilen verbindlich und gilt unmittelbar in jedem Mitgliedstaat“. Es braucht kein nationales Gesetz, damit sie gilt.",
+        "Sie gilt seit dem **25. Mai 2018** (Art. 99 Abs. 2). Veröffentlicht wurde sie 2016; die Unternehmen hatten zwei Jahre Zeit, sich vorzubereiten.",
+        "Einige Artikel erlauben den EU-Staaten, eigene Regeln zu ergänzen. Dieser Kurs behandelt nur den EU-Text. Nationale Regeln, etwa das deutsche Bundesdatenschutzgesetz (BDSG), sind hier nicht enthalten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 1, 4 Nr. 21, 51 Abs. 1, 99",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        {
+          "type": "callout",
+          "tone": "warning",
+          "text": "**Lernentwurf, keine Rechtsberatung.** Dieser Kurs erklärt die DSGVO in verständlicher Sprache. Eine Juristin oder ein Jurist hat ihn noch nicht geprüft. Lesen Sie für eine echte Entscheidung den Artikel, der auf jeder Seite genannt wird, oder lassen Sie sich fachkundig beraten."
+        },
+        "Jede Seite nennt die Artikel, auf denen sie beruht. Sie können sie auf EUR-Lex, der offiziellen Rechtsdatenbank der EU, aufrufen und jede Aussage selbst prüfen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 1, 4 Nr. 21, 51 Abs. 1, 99",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Durch den ganzen Kurs begleitet uns die **Bäckerei Sonnenfeld**. Sie hat drei Filialen und rund 40 Beschäftigte. Die Kundschaft bestellt Brot per App vor, sammelt Punkte mit einer Kundenkarte und kann einen Newsletter abonnieren. In den Filialen hängen Überwachungskameras, und ein externes Unternehmen erledigt die Lohnabrechnung.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Die Bäckerei Sonnenfeld ist erfunden.** Ähnlichkeiten mit einem echten Unternehmen sind zufällig."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 1, 4 Nr. 21, 51 Abs. 1, 99",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Jeder EU-Staat muss mindestens eine unabhängige Behörde haben, die die Anwendung der DSGVO überwacht (Art. 51 Abs. 1). Die DSGVO nennt sie **Aufsichtsbehörde** (Art. 4 Nr. 21). Umgangssprachlich ist das die Datenschutzbehörde.",
+        "Aufsichtsbehörden begegnen Ihnen wieder: Menschen können sich bei ihnen beschweren, Unternehmen melden ihnen bestimmte Vorfälle, und sie können Geldbußen verhängen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 1, 4 Nr. 21, 51 Abs. 1, 99",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Der Kurs hat sechs Module:",
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Was die DSGVO erfasst: personenbezogene Daten, Verarbeitung, Rollen und Anwendungsbereich.",
+            "Die Regeln: Grundsätze, Rechtsgrundlagen und sensible Daten.",
+            "Die Rechte der Menschen und wie Sie einen Antrag bearbeiten.",
+            "Die Pflichten Ihres Unternehmens: Verzeichnis, Auftragsverarbeiter, Sicherheit, Datenpannen, Folgenabschätzungen und Datenschutzbeauftragte.",
+            "Übermittlungen in Länder außerhalb der EU, Aufsichtsbehörden und Geldbußen.",
+            "Optionale Vertiefungen: Cookies, gemeinsame Verantwortlichkeit, KI, Kinder und anstehende Änderungen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 1, 4 Nr. 21, 51 Abs. 1, 99",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 14",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "gdpr-map"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Wen schützt die DSGVO?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Natürliche Personen, wenn ihre personenbezogenen Daten verarbeitet werden",
+          "reason": "Artikel 1 schützt natürliche Personen bei der Verarbeitung ihrer personenbezogenen Daten."
+        },
+        {
+          "correct": false,
+          "blocks": "Vertrauliche Geschäftsinformationen von Unternehmen",
+          "reason": "Geschäftsgeheimnisse sind nicht Gegenstand der DSGVO. Sie schützt lebende Menschen."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur Daten, die Behörden speichern",
+          "reason": "Die DSGVO gilt auch für Unternehmen, wie das Beispiel der Bäckerei Sonnenfeld zeigt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wen oder was soll die DSGVO im Kern schützen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Vertrauliche Geschäftsinformationen von Unternehmen",
+              "reason": "Geschäftsgeheimnisse sind nicht Gegenstand der DSGVO. Sie schützt lebende Menschen."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur Daten, die Behörden speichern",
+              "reason": "Die DSGVO gilt auch für Unternehmen, wie das Beispiel der Bäckerei Sonnenfeld zeigt."
+            },
+            {
+              "correct": true,
+              "blocks": "Natürliche Personen, wenn ihre personenbezogenen Daten verarbeitet werden",
+              "reason": "Artikel 1 schützt natürliche Personen bei der Verarbeitung ihrer personenbezogenen Daten."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "gdpr-map"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Seit wann gilt die DSGVO?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Erst wenn jedes Land ein eigenes DSGVO-Gesetz beschließt",
+          "reason": "Eine Verordnung gilt unmittelbar. Ein nationales Gesetz ist nicht nötig."
+        },
+        {
+          "correct": false,
+          "blocks": "Seit ihrer Veröffentlichung im Jahr 2016",
+          "reason": "Sie wurde 2016 veröffentlicht, gilt aber erst seit dem 25. Mai 2018."
+        },
+        {
+          "correct": true,
+          "blocks": "Seit dem 25. Mai 2018",
+          "reason": "Artikel 99 Abs. 2 legt dieses Datum fest."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Seit welchem Datum müssen Unternehmen die DSGVO einhalten?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Seit ihrer Veröffentlichung im Jahr 2016",
+              "reason": "Sie wurde 2016 veröffentlicht, gilt aber erst seit dem 25. Mai 2018."
+            },
+            {
+              "correct": true,
+              "blocks": "Seit dem 25. Mai 2018",
+              "reason": "Artikel 99 Abs. 2 legt dieses Datum fest."
+            },
+            {
+              "correct": false,
+              "blocks": "Erst wenn jedes Land ein eigenes DSGVO-Gesetz beschließt",
+              "reason": "Eine Verordnung gilt unmittelbar. Ein nationales Gesetz ist nicht nötig."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "supervisory-authority"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Wer überwacht in einem EU-Staat, wie die DSGVO angewendet wird?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die interne Revision jedes Unternehmens",
+          "reason": "Interne Kontrollen helfen, sind aber keine Aufsichtsbehörde."
+        },
+        {
+          "correct": true,
+          "blocks": "Eine unabhängige staatliche Aufsichtsbehörde",
+          "reason": "Artikel 51 Abs. 1 verlangt in jedem Land eine oder mehrere solcher Behörden."
+        },
+        {
+          "correct": false,
+          "blocks": "Allein die Europäische Kommission",
+          "reason": "Artikel 51 überträgt die Überwachung unabhängigen nationalen Behörden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Stelle macht Art. 51 für die Überwachung der DSGVO zuständig?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Eine unabhängige staatliche Aufsichtsbehörde",
+              "reason": "Artikel 51 Abs. 1 verlangt in jedem Land eine oder mehrere solcher Behörden."
+            },
+            {
+              "correct": false,
+              "blocks": "Allein die Europäische Kommission",
+              "reason": "Artikel 51 überträgt die Überwachung unabhängigen nationalen Behörden."
+            },
+            {
+              "correct": false,
+              "blocks": "Die interne Revision jedes Unternehmens",
+              "reason": "Interne Kontrollen helfen, sind aber keine Aufsichtsbehörde."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

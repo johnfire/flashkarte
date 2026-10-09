@@ -1,0 +1,415 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o05",
+    "title": "Personal data breaches",
+    "summary": "Recognise a personal data breach, notify the authority within 72 hours when required, and tell affected people when the risk is high.",
+    "covers": [
+      "personal-data-breach",
+      "breach-notification",
+      "breach-communication"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "The notification goes to the supervisory authority."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Processors must tell the controller about breaches."
+      },
+      {
+        "lesson": "p03",
+        "reason": "A breach is a failure of security."
+      },
+      {
+        "lesson": "o04",
+        "reason": "Encryption that was applied can remove the duty to tell people."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **personal data breach** is a breach of security leading to the accidental or unlawful **destruction, loss, alteration, unauthorised disclosure of, or access to** personal data (Article 4(12)).",
+        "It is not only hacking. An email sent to the wrong person, a lost laptop and ransomware that destroys files are all breaches."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(12), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 85",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Notify the supervisory authority** without undue delay and, where feasible, **within 72 hours of becoming aware** of the breach, **unless** it is unlikely to result in a risk to people's rights and freedoms (Article 33(1)).",
+        "If notification comes later than 72 hours, give the reasons for the delay."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(12), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 85",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A **processor** must notify the controller without undue delay after becoming aware of a breach (Article 33(2)).",
+        "The notification must at least describe the nature of the breach and the approximate numbers of people and records, give a contact point, and describe the likely consequences and the measures taken (Article 33(3)). If not everything is known, information may be given **in phases** (Article 33(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(12), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 85",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Document every breach**, including those you do not notify: the facts, the effects and the remedial action (Article 33(5)).",
+        "This record lets the authority check your decisions."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(12), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 85",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Tell the affected people** without undue delay when the breach is **likely to result in a high risk** to their rights and freedoms (Article 34(1)).",
+        "Use clear, plain language, and include the contact point, the likely consequences and the measures taken (Article 34(2)).",
+        "Recital 85 lists possible harms, such as identity theft, fraud, financial loss, discrimination and damage to reputation."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(12), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 85",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "You do not need to tell people if (Article 34(3)):",
+        {
+          "type": "list",
+          "items": [
+            "(a) protective measures, such as **encryption**, were applied to the affected data and make it unintelligible to anyone unauthorised;",
+            "(b) later measures mean the high risk is no longer likely to materialise; or",
+            "(c) it would involve disproportionate effort. A public communication is then used instead."
+          ]
+        },
+        "The authority can still require you to tell people (Article 34(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(12), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 85",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-7",
+      "blocks": [
+        "Sunfield's cases:",
+        {
+          "type": "list",
+          "items": [
+            "An unencrypted laptop holding staff sick notes is stolen. Health data is exposed, so Sunfield notifies the authority within 72 hours and tells the staff.",
+            "A strongly encrypted laptop is stolen, and the key is safe. The encryption exception in Article 34(3)(a) is likely to apply. Sunfield still documents the breach and assesses whether to notify the authority."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(12), 33, 34",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 85",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "personal-data-breach"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Which of these is a personal data breach?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "A staff member emails the customer list to the wrong supplier",
+          "reason": "Unauthorised disclosure (Article 4(12))."
+        },
+        {
+          "correct": false,
+          "blocks": "A customer updates her email address",
+          "reason": "A normal, authorised change."
+        },
+        {
+          "correct": false,
+          "blocks": "Sunfield deletes old data under its policy",
+          "reason": "Authorised erasure is not a security breach."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which event fits the Article 4(12) definition?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "A customer updates her email address",
+              "reason": "A normal, authorised change."
+            },
+            {
+              "correct": false,
+              "blocks": "Sunfield deletes old data under its policy",
+              "reason": "Authorised erasure is not a security breach."
+            },
+            {
+              "correct": true,
+              "blocks": "A staff member emails the customer list to the wrong supplier",
+              "reason": "Unauthorised disclosure (Article 4(12))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-notification"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "When must a notifiable breach be reported to the supervisory authority?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Within 72 hours of the breach happening",
+          "reason": "The clock runs from awareness."
+        },
+        {
+          "correct": false,
+          "blocks": "Within one month",
+          "reason": "One month is the rights-request deadline."
+        },
+        {
+          "correct": true,
+          "blocks": "Without undue delay and, where feasible, within 72 hours of becoming aware",
+          "reason": "Article 33(1)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is the Article 33(1) time limit?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Within one month",
+              "reason": "One month is the rights-request deadline."
+            },
+            {
+              "correct": true,
+              "blocks": "Without undue delay and, where feasible, within 72 hours of becoming aware",
+              "reason": "Article 33(1)."
+            },
+            {
+              "correct": false,
+              "blocks": "Within 72 hours of the breach happening",
+              "reason": "The clock runs from awareness."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-notification"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Sunfield decides a small breach is unlikely to result in any risk and does not notify. Must it still record it?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "No, but it must notify anyway",
+          "reason": "If risk is unlikely, notification is not required. Documentation is."
+        },
+        {
+          "correct": true,
+          "blocks": "Yes, all breaches must be documented",
+          "reason": "Article 33(5)."
+        },
+        {
+          "correct": false,
+          "blocks": "No, only notified breaches are recorded",
+          "reason": "Article 33(5) covers any breach."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Are breaches that are not notified still documented?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Yes, all breaches must be documented",
+              "reason": "Article 33(5)."
+            },
+            {
+              "correct": false,
+              "blocks": "No, only notified breaches are recorded",
+              "reason": "Article 33(5) covers any breach."
+            },
+            {
+              "correct": false,
+              "blocks": "No, but it must notify anyway",
+              "reason": "If risk is unlikely, notification is not required. Documentation is."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-communication"
+      ],
+      "teaches": [
+        "screen-6",
+        "screen-7"
+      ],
+      "prompt": "A stolen laptop's data was strongly encrypted, and the key is safe. Must the staff be told?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Not necessarily: Article 34(3)(a) is an exception",
+          "reason": "Encryption that makes the data unintelligible is a listed exception."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, always, whatever the protection",
+          "reason": "Article 34(3) lists exceptions."
+        },
+        {
+          "correct": false,
+          "blocks": "Only if the authority fines Sunfield",
+          "reason": "Fines are not the trigger. High risk is."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Must affected people always be told about a breach of strongly encrypted data?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, always, whatever the protection",
+              "reason": "Article 34(3) lists exceptions."
+            },
+            {
+              "correct": false,
+              "blocks": "Only if the authority fines Sunfield",
+              "reason": "Fines are not the trigger. High risk is."
+            },
+            {
+              "correct": true,
+              "blocks": "Not necessarily: Article 34(3)(a) is an exception",
+              "reason": "Encryption that makes the data unintelligible is a listed exception."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "breach-communication"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "When must affected people be told about a breach?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "After every breach, however small",
+          "reason": "The trigger is a likely high risk."
+        },
+        {
+          "correct": false,
+          "blocks": "Never; only the authority is told",
+          "reason": "Article 34 requires telling people in high-risk cases."
+        },
+        {
+          "correct": true,
+          "blocks": "When it is likely to result in a high risk to them",
+          "reason": "Article 34(1)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "When does a breach trigger the Article 34 duty to inform data subjects?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Never; only the authority is told",
+              "reason": "Article 34 requires telling people in high-risk cases."
+            },
+            {
+              "correct": true,
+              "blocks": "When it is likely to result in a high risk to them",
+              "reason": "Article 34(1)."
+            },
+            {
+              "correct": false,
+              "blocks": "After every breach, however small",
+              "reason": "The trigger is a likely high risk."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

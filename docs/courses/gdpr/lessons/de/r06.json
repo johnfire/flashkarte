@@ -1,0 +1,344 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r06",
+    "title": "Datenübertragbarkeit und Widerspruchsrecht",
+    "summary": "Entscheiden, wann das Recht auf Datenübertragbarkeit gilt, und mit allgemeinen Widersprüchen und Widersprüchen gegen Direktwerbung umgehen.",
+    "covers": [
+      "data-portability",
+      "right-to-object"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p04",
+        "reason": "Die Datenübertragbarkeit setzt eine Verarbeitung auf Grundlage einer Einwilligung oder eines Vertrags voraus."
+      },
+      {
+        "lesson": "p06",
+        "reason": "Der allgemeine Widerspruch richtet sich gegen eine Verarbeitung, die auf berechtigten Interessen oder einer öffentlichen Aufgabe beruht."
+      },
+      {
+        "lesson": "r02",
+        "reason": "Widersprüche folgen dem Verfahren nach Art. 12."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Datenübertragbarkeit** (Art. 20 Abs. 1): Eine Person kann die personenbezogenen Daten, **die sie bereitgestellt hat**, in einem „strukturierten, gängigen und maschinenlesbaren Format“ erhalten und sie einem anderen Verantwortlichen ohne Behinderung übermitteln. Das gilt nur, wenn:",
+        {
+          "type": "list",
+          "items": [
+            "die Verarbeitung auf einer **Einwilligung** oder einem **Vertrag** beruht; und",
+            "die Verarbeitung mithilfe **automatisierter Verfahren** erfolgt."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Soweit technisch machbar, kann die Person verlangen, dass die Daten **direkt** einem anderen Verantwortlichen übermittelt werden (Art. 20 Abs. 2).",
+        "Die Datenübertragbarkeit gilt nicht, wenn die Rechtsgrundlage eine öffentliche Aufgabe (Art. 20 Abs. 3) oder eine rechtliche Verpflichtung ist (Erwägungsgrund 68). Die Verantwortlichen müssen keine technisch kompatiblen Systeme übernehmen (Erwägungsgrund 68). Das Recht darf die Rechte und Freiheiten anderer Personen nicht beeinträchtigen (Art. 20 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Widerspruchsrecht** (Art. 21 Abs. 1): Eine Person kann aus Gründen, die sich aus ihrer **besonderen Situation** ergeben, Widerspruch gegen eine Verarbeitung einlegen, die auf einer **öffentlichen Aufgabe oder berechtigten Interessen** beruht.",
+        "Der Verantwortliche muss die Verarbeitung dann beenden, es sei denn, er kann **zwingende schutzwürdige Gründe** nachweisen, die die Interessen, Rechte und Freiheiten der Person überwiegen, oder er braucht die Daten für Rechtsansprüche."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Direktwerbung** (Art. 21 Abs. 2 und 3): Eine Person kann **jederzeit** Widerspruch einlegen. Dann werden ihre Daten **nicht mehr** für Zwecke der Direktwerbung verarbeitet.",
+        "Hier gibt es keine Abwägung, und nach Erwägungsgrund 70 ist der Widerspruch unentgeltlich."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Person muss spätestens zum Zeitpunkt der ersten Kommunikation mit ihr **ausdrücklich** auf das Widerspruchsrecht **hingewiesen** werden, und zwar „in einer verständlichen und von anderen Informationen getrennten Form“ (Art. 21 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Beispiele aus der Bäckerei Sonnenfeld:",
+        {
+          "type": "list",
+          "items": [
+            "Eine Kundin möchte ihren Vorbestellverlauf als Datei, die sie in eine andere App hochladen kann. Die Daten werden aufgrund eines Vertrags und mithilfe automatisierter Verfahren verarbeitet, also gilt das Recht auf Datenübertragbarkeit.",
+            "Eine Beschäftigte widerspricht einer Kamera, die ihren Arbeitsplatz erfasst und auf berechtigten Interessen beruht. Die Bäckerei muss die Verarbeitung beenden, es sei denn, sie kann zwingende Gründe nachweisen, die die Interessen der Beschäftigten überwiegen.",
+            "Eine Kundin widerspricht den Werbe-E-Mails. Die Bäckerei schickt ihr keine mehr, ohne jede Abwägung."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "data-portability"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Eine Beschäftigte verlangt ihre Lohnsteuerdaten nach dem Recht auf Datenübertragbarkeit. Rechtsgrundlage ist eine rechtliche Verpflichtung. Gilt das Recht auf Datenübertragbarkeit?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, es gilt nur bei Einwilligung oder Vertrag",
+          "reason": "Art. 20 Abs. 1 Buchst. a und Erwägungsgrund 68."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, es gilt für alle personenbezogenen Daten",
+          "reason": "Es ist auf Einwilligung oder Vertrag und auf automatisierte Verfahren beschränkt."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn die Daten auf Papier geführt werden",
+          "reason": "Die Datenübertragbarkeit setzt auch eine automatisierte Verarbeitung voraus."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Gilt das Recht auf Datenübertragbarkeit, wenn die Rechtsgrundlage der Verarbeitung eine rechtliche Verpflichtung ist?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, es gilt für alle personenbezogenen Daten",
+              "reason": "Es ist auf Einwilligung oder Vertrag und auf automatisierte Verfahren beschränkt."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn die Daten auf Papier geführt werden",
+              "reason": "Die Datenübertragbarkeit setzt auch eine automatisierte Verarbeitung voraus."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, es gilt nur bei Einwilligung oder Vertrag",
+              "reason": "Art. 20 Abs. 1 Buchst. a und Erwägungsgrund 68."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "data-portability"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "In welcher Form müssen Daten nach dem Recht auf Datenübertragbarkeit bereitgestellt werden?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Als Ausdruck per Post",
+          "reason": "Papier ist nicht maschinenlesbar."
+        },
+        {
+          "correct": false,
+          "blocks": "Als Bildschirmfotos der Kontoseiten",
+          "reason": "Bilder sind kein strukturiertes, maschinenlesbares Format."
+        },
+        {
+          "correct": true,
+          "blocks": "Strukturiert, gängig und maschinenlesbar",
+          "reason": "Art. 20 Abs. 1."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welches Format verlangt Art. 20 Abs. 1 für Daten, die eine Person nach dem Recht auf Datenübertragbarkeit erhält?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Als Bildschirmfotos der Kontoseiten",
+              "reason": "Bilder sind kein strukturiertes, maschinenlesbares Format."
+            },
+            {
+              "correct": true,
+              "blocks": "Strukturiert, gängig und maschinenlesbar",
+              "reason": "Art. 20 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Als Ausdruck per Post",
+              "reason": "Papier ist nicht maschinenlesbar."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-object"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-6"
+      ],
+      "prompt": "Eine Kundin widerspricht den Werbe-E-Mails der Bäckerei Sonnenfeld. Darf die Bäckerei sie weiter schicken, wenn ihr Interesse daran groß ist?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nur, nachdem die Kundin ihre Gründe erklärt hat",
+          "reason": "Ein Widerspruch gegen Werbung braucht keine Begründung."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, sie muss die Werbung an die Kundin einstellen",
+          "reason": "Artikel 21 Abs. 3: keine weitere Verarbeitung für Zwecke der Direktwerbung."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn ihr Interesse zwingend ist",
+          "reason": "Die Prüfung zwingender Gründe gilt für den allgemeinen Widerspruch, nicht für Werbung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Kundin hat der Direktwerbung der Bäckerei Sonnenfeld widersprochen. Darf die Bäckerei jetzt ihre eigenen Interessen gegen die der Kundin abwägen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nein, sie muss die Werbung an die Kundin einstellen",
+              "reason": "Artikel 21 Abs. 3: keine weitere Verarbeitung für Zwecke der Direktwerbung."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn ihr Interesse zwingend ist",
+              "reason": "Die Prüfung zwingender Gründe gilt für den allgemeinen Widerspruch, nicht für Werbung."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur, nachdem die Kundin ihre Gründe erklärt hat",
+              "reason": "Ein Widerspruch gegen Werbung braucht keine Begründung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-object"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "Eine Beschäftigte widerspricht einer Kamera an ihrem Arbeitsplatz, die auf berechtigten Interessen beruht. Was muss die Bäckerei Sonnenfeld tun?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Verarbeitung beenden, es sei denn, zwingende Gründe überwiegen die Interessen der Beschäftigten",
+          "reason": "Art. 21 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts; der Widerspruch gilt nur für Verarbeitungen auf Grundlage einer Einwilligung",
+          "reason": "Artikel 21 Abs. 1 betrifft Verarbeitungen auf Grundlage einer öffentlichen Aufgabe oder berechtigter Interessen."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Verarbeitung sofort beenden, ohne jede mögliche Ausnahme",
+          "reason": "Artikel 21 Abs. 1 lässt zwingende Gründe und Rechtsansprüche zu."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Beschäftigte legt nach Art. 21 Abs. 1 allgemein Widerspruch gegen eine Kamera ein, die auf berechtigten Interessen beruht. Wie muss die Bäckerei Sonnenfeld reagieren?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nichts; der Widerspruch gilt nur für Verarbeitungen auf Grundlage einer Einwilligung",
+              "reason": "Artikel 21 Abs. 1 betrifft Verarbeitungen auf Grundlage einer öffentlichen Aufgabe oder berechtigter Interessen."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Verarbeitung sofort beenden, ohne jede mögliche Ausnahme",
+              "reason": "Artikel 21 Abs. 1 lässt zwingende Gründe und Rechtsansprüche zu."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Verarbeitung beenden, es sei denn, zwingende Gründe überwiegen die Interessen der Beschäftigten",
+              "reason": "Art. 21 Abs. 1."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p05",
+    "title": "Eine wirksame Einwilligung",
+    "summary": "Prüfen, ob eine Einwilligung wirksam ist, und die Regeln für ihren Widerruf anwenden.",
+    "covers": [
+      "valid-consent",
+      "consent-withdrawal"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p04",
+        "reason": "Die Einwilligung ist eine der sechs Rechtsgrundlagen und muss unter ihnen eingeordnet werden."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Eine **Einwilligung** ist nach Art. 4 Nr. 11 „jede freiwillig für den bestimmten Fall, in informierter Weise und unmissverständlich abgegebene Willensbekundung“ der betroffenen Person. Sie erfolgt durch eine Erklärung oder eine sonstige **eindeutige bestätigende Handlung**.",
+        "Alle vier Eigenschaften müssen vorliegen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Erwägungsgrund 32 nennt Beispiele für eine eindeutige bestätigende Handlung: das Anklicken eines Kästchens auf einer Internetseite, die Auswahl technischer Einstellungen oder eine schriftliche oder mündliche Erklärung.",
+        "**Stillschweigen, bereits angekreuzte Kästchen oder Untätigkeit sind keine Einwilligung** (Erwägungsgrund 32). Dient die Verarbeitung mehreren Zwecken, sollte für alle diese Zwecke eine Einwilligung gegeben werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Freiwillig**: Die Person muss eine echte Wahl haben und die Einwilligung verweigern oder widerrufen können, ohne Nachteile zu erleiden (Erwägungsgrund 42).",
+        "Eine Einwilligung gilt nicht als freiwillig erteilt, wenn eine Leistung von einer Einwilligung abhängig gemacht wird, die für diese Leistung nicht erforderlich ist. Sie gilt auch dann nicht als freiwillig, wenn zu verschiedenen Verarbeitungsvorgängen nicht gesondert eingewilligt werden kann, obwohl das angebracht wäre (Erwägungsgrund 43, Art. 7 Abs. 4).",
+        "Erwägungsgrund 43 warnt außerdem vor einem klaren Ungleichgewicht zwischen der Person und dem Verantwortlichen, etwa wenn der Verantwortliche eine Behörde ist."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**In informierter Weise**: Die Person sollte mindestens wissen, wer der Verantwortliche ist und für welche Zwecke ihre Daten verarbeitet werden sollen (Erwägungsgrund 42).",
+        "Wird um die Einwilligung in einer schriftlichen Erklärung gebeten, die noch andere Sachverhalte betrifft, muss das Ersuchen von diesen klar zu unterscheiden, verständlich und in klarer und einfacher Sprache formuliert sein (Art. 7 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Nachweis**: Beruht die Verarbeitung auf einer Einwilligung, muss der Verantwortliche nachweisen können, dass die Person eingewilligt hat (Art. 7 Abs. 1).",
+        "Halten Sie fest, wer wann, wie und wozu eingewilligt hat."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "**Widerruf** (Art. 7 Abs. 3):",
+        {
+          "type": "list",
+          "items": [
+            "Menschen können ihre Einwilligung **jederzeit** widerrufen.",
+            "Der Widerruf macht die bis dahin erfolgte Verarbeitung nicht unrechtmäßig.",
+            "Die Menschen müssen vor ihrer Einwilligung über das Recht auf Widerruf informiert werden.",
+            "Der Widerruf muss **so einfach** sein **wie** die Erteilung der Einwilligung."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-7",
+      "blocks": [
+        "Die Newsletter-Anmeldung der Bäckerei Sonnenfeld ist ein nicht angekreuztes Kästchen mit dem Text »Schicken Sie mir den wöchentlichen Newsletter der Bäckerei Sonnenfeld«. Jede E-Mail enthält einen Abmeldelink, und die Bäckerei hält fest, wann und wie sich jede Person angemeldet hat.",
+        "Würde die App Vorbestellungen nur annehmen, wenn die Kundschaft auch dem Newsletter zustimmt, wäre diese Einwilligung wahrscheinlich nicht freiwillig.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 7",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 32, 42, 43",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "valid-consent"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Das Newsletter-Kästchen im Formular der Bäckerei Sonnenfeld ist bereits angekreuzt. Eine Kundin lässt es so. Hat sie eingewilligt?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, ein bereits angekreuztes Kästchen ist keine Einwilligung",
+          "reason": "Erwägungsgrund 32 schließt bereits angekreuzte Kästchen aus."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, weil das Häkchen hätte entfernt werden können",
+          "reason": "Untätigkeit ist keine eindeutige bestätigende Handlung."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn die Geschäftsbedingungen den Newsletter erwähnen",
+          "reason": "Geschäftsbedingungen machen Untätigkeit nicht zur Einwilligung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Kundin lässt ein bereits angekreuztes Newsletter-Kästchen unverändert. Gilt das als ihre Einwilligung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, weil das Häkchen hätte entfernt werden können",
+              "reason": "Untätigkeit ist keine eindeutige bestätigende Handlung."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn die Geschäftsbedingungen den Newsletter erwähnen",
+              "reason": "Geschäftsbedingungen machen Untätigkeit nicht zur Einwilligung."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, ein bereits angekreuztes Kästchen ist keine Einwilligung",
+              "reason": "Erwägungsgrund 32 schließt bereits angekreuzte Kästchen aus."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "valid-consent"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-7"
+      ],
+      "prompt": "Die App der Bäckerei Sonnenfeld nimmt Vorbestellungen nur an, wenn die Kundschaft auch dem Newsletter zustimmt. Ist diese Einwilligung freiwillig?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, weil auf »Zustimmen« geklickt wurde",
+          "reason": "Ein Klick unter Druck kann trotzdem unfreiwillig sein."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, weil der Newsletter nichts kostet",
+          "reason": "Nicht der Preis ist der Maßstab, sondern die Wahlfreiheit."
+        },
+        {
+          "correct": true,
+          "blocks": "Wahrscheinlich nicht, die Leistung wird davon abhängig gemacht",
+          "reason": "Art. 7 Abs. 4 und Erwägungsgrund 43."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ist die Einwilligung in einen Newsletter freiwillig, wenn die Kundschaft nur vorbestellen kann, nachdem sie dem Newsletter zugestimmt hat?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, weil der Newsletter nichts kostet",
+              "reason": "Nicht der Preis ist der Maßstab, sondern die Wahlfreiheit."
+            },
+            {
+              "correct": true,
+              "blocks": "Wahrscheinlich nicht, die Leistung wird davon abhängig gemacht",
+              "reason": "Art. 7 Abs. 4 und Erwägungsgrund 43."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, weil auf »Zustimmen« geklickt wurde",
+              "reason": "Ein Klick unter Druck kann trotzdem unfreiwillig sein."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "consent-withdrawal"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "Eine Kundin widerruft ihre Einwilligung in den Newsletter. Was gilt für die Newsletter, die die Bäckerei Sonnenfeld ihr vorher geschickt hat?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Verarbeitung darf bis Jahresende weiterlaufen",
+          "reason": "Der Widerruf ist jederzeit möglich."
+        },
+        {
+          "correct": true,
+          "blocks": "Die bisherige Verarbeitung bleibt rechtmäßig; ab jetzt muss sie enden",
+          "reason": "Artikel 7 Abs. 3: Der Widerruf berührt die Rechtmäßigkeit der früheren Verarbeitung nicht."
+        },
+        {
+          "correct": false,
+          "blocks": "Die bisherige Verarbeitung wird rückwirkend unrechtmäßig",
+          "reason": "Artikel 7 Abs. 3 sagt das Gegenteil."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Folgen hat der Widerruf einer Newsletter-Einwilligung für die Mails, die die Bäckerei Sonnenfeld bis dahin verschickt hat?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die bisherige Verarbeitung bleibt rechtmäßig; ab jetzt muss sie enden",
+              "reason": "Artikel 7 Abs. 3: Der Widerruf berührt die Rechtmäßigkeit der früheren Verarbeitung nicht."
+            },
+            {
+              "correct": false,
+              "blocks": "Die bisherige Verarbeitung wird rückwirkend unrechtmäßig",
+              "reason": "Artikel 7 Abs. 3 sagt das Gegenteil."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Verarbeitung darf bis Jahresende weiterlaufen",
+              "reason": "Der Widerruf ist jederzeit möglich."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "consent-withdrawal"
+      ],
+      "teaches": [
+        "screen-6",
+        "screen-7"
+      ],
+      "prompt": "Bei der Bäckerei Sonnenfeld genügt für die Newsletter-Anmeldung ein Klick, zum Abmelden muss man aber in der Filiale anrufen. Ist das zulässig?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, der Widerruf muss so einfach sein wie die Einwilligung",
+          "reason": "Artikel 7 Abs. 3 verlangt, dass beides gleich einfach ist."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, solange ein Widerruf möglich ist",
+          "reason": "Möglich reicht nicht. Er muss so einfach sein."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn die Kundschaft bei der Anmeldung darüber informiert wurde",
+          "reason": "Die Information hebt die Anforderung an die Einfachheit nicht auf."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Darf der Widerruf einer Einwilligung nach Art. 7 Abs. 3 schwieriger sein als ihre Erteilung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, solange ein Widerruf möglich ist",
+              "reason": "Möglich reicht nicht. Er muss so einfach sein."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn die Kundschaft bei der Anmeldung darüber informiert wurde",
+              "reason": "Die Information hebt die Anforderung an die Einfachheit nicht auf."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, der Widerruf muss so einfach sein wie die Einwilligung",
+              "reason": "Artikel 7 Abs. 3 verlangt, dass beides gleich einfach ist."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

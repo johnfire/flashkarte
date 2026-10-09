@@ -1,0 +1,259 @@
+{
+  "module": "Beyond the basics",
+  "lesson": {
+    "slug": "n05",
+    "title": "What may change: pending proposals",
+    "summary": "Tell the law in force apart from pending proposals, and know how to check for changes.",
+    "covers": [
+      "pending-proposals"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "On **7 October 2026**, the EUR-Lex record for the GDPR listed **no amending act**. Its \"Modified by\" table was empty. It listed three corrigenda, which are corrections of the published text.",
+        "This course teaches the GDPR as in force on that date."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), EUR-Lex document information, checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Commission proposal COM(2025) 501, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Commission proposal COM(2025) 837, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The same record listed **two Commission proposals** that would amend the GDPR:",
+        {
+          "type": "list",
+          "items": [
+            "**COM(2025) 501** of 21 May 2025: simplification measures for small mid-cap enterprises, amending several regulations including the GDPR;",
+            "**COM(2025) 837** of 19 November 2025: the \"Digital Omnibus\", amending the GDPR, the ePrivacy Directive and other acts."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), EUR-Lex document information, checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Commission proposal COM(2025) 501, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Commission proposal COM(2025) 837, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A proposal is **not law**. Each is a proposal for a regulation of the European Parliament and of the Council, so both must adopt a final text before anything changes.",
+        "The content can change during negotiation. This course therefore does not teach what the proposals say."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), EUR-Lex document information, checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Commission proposal COM(2025) 501, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Commission proposal COM(2025) 837, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**What to do**:",
+        {
+          "type": "list",
+          "items": [
+            "comply with the GDPR **as it is in force today**;",
+            "check the GDPR's EUR-Lex record, under \"Modified by\" and the consolidated versions, before relying on a rule;",
+            "treat news headlines as a prompt to check, not as the law."
+          ]
+        },
+        "If an amendment is adopted, the affected lessons of this course will need to be updated."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), EUR-Lex document information, checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Commission proposal COM(2025) 501, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Commission proposal COM(2025) 837, title and date",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "pending-proposals"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "On 7 October 2026, were the Digital Omnibus changes to the GDPR law?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, it was a proposal",
+          "reason": "EUR-Lex listed it as a proposed amendment only."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, since November 2025",
+          "reason": "That is the date of the proposal, not of adoption."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, because it is published on EUR-Lex",
+          "reason": "Proposals are published too. Publication is not adoption."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Had COM(2025) 837 become law by 7 October 2026?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, since November 2025",
+              "reason": "That is the date of the proposal, not of adoption."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, because it is published on EUR-Lex",
+              "reason": "Proposals are published too. Publication is not adoption."
+            },
+            {
+              "correct": true,
+              "blocks": "No, it was a proposal",
+              "reason": "EUR-Lex listed it as a proposed amendment only."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "pending-proposals"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Which rules should a business follow today?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The proposals, to get ahead",
+          "reason": "Proposals can change and are not binding."
+        },
+        {
+          "correct": false,
+          "blocks": "Whichever version is easier",
+          "reason": "Only the law in force binds."
+        },
+        {
+          "correct": true,
+          "blocks": "The GDPR as in force",
+          "reason": "Proposals do not change obligations."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "While amendments are only proposed, which text governs?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Whichever version is easier",
+              "reason": "Only the law in force binds."
+            },
+            {
+              "correct": true,
+              "blocks": "The GDPR as in force",
+              "reason": "Proposals do not change obligations."
+            },
+            {
+              "correct": false,
+              "blocks": "The proposals, to get ahead",
+              "reason": "Proposals can change and are not binding."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "pending-proposals"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "How can you check whether the GDPR has been amended?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Assume it changes every two years",
+          "reason": "There is no such cycle."
+        },
+        {
+          "correct": true,
+          "blocks": "The GDPR's EUR-Lex record and consolidated versions",
+          "reason": "The official record lists amending acts."
+        },
+        {
+          "correct": false,
+          "blocks": "News headlines",
+          "reason": "Headlines are a prompt to check, not the law."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Where is the reliable place to confirm an amendment to the GDPR?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "The GDPR's EUR-Lex record and consolidated versions",
+              "reason": "The official record lists amending acts."
+            },
+            {
+              "correct": false,
+              "blocks": "News headlines",
+              "reason": "Headlines are a prompt to check, not the law."
+            },
+            {
+              "correct": false,
+              "blocks": "Assume it changes every two years",
+              "reason": "There is no such cycle."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

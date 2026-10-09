@@ -45,6 +45,15 @@ export const updateModule = wrapAsync(async (req: Request, res: Response) => {
   await audit(req, "lesson.module_updated", { module: module.id });
   ok(res, module);
 });
+export const reorderModules = wrapAsync(async (req: Request, res: Response) => {
+  const modules = await lessons.reorderModules(
+    req.userId!,
+    req.params.id,
+    req.body,
+  );
+  await audit(req, "lesson.modules_reordered", { count: modules.length });
+  ok(res, { modules });
+});
 export const deleteModule = wrapAsync(async (req: Request, res: Response) => {
   await lessons.deleteModule(req.userId!, req.params.id, req.params.moduleId);
   await audit(req, "lesson.module_deleted", { module: req.params.moduleId });

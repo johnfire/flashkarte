@@ -1,0 +1,327 @@
+{
+  "module": "Grenzen, Aufsichtsbehörden und Geldbußen",
+  "lesson": {
+    "slug": "x01",
+    "title": "Personenbezogene Daten in Länder außerhalb der EU übermitteln",
+    "summary": "Eine Übermittlung außerhalb der EU erkennen und zwischen einem Angemessenheitsbeschluss, geeigneten Garantien und einer Ausnahme für bestimmte Fälle wählen.",
+    "covers": [
+      "international-transfer",
+      "transfer-tools"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Eine Übermittlung ist ein Verarbeitungsvorgang."
+      },
+      {
+        "lesson": "p05",
+        "reason": "Eine der Ausnahmen ist die ausdrückliche Einwilligung in die Übermittlung."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Kapitel V der DSGVO regelt die **Übermittlung** personenbezogener Daten an ein **Drittland**, also ein Land außerhalb der EU, oder an eine internationale Organisation.",
+        "Eine Übermittlung ist nur zulässig, wenn die Bedingungen von Kapitel V eingehalten werden. Das gilt auch für die **Weiterübermittlung** aus diesem Land in ein anderes (Art. 44). Ziel ist, dass das durch die DSGVO gewährleistete Schutzniveau nicht untergraben wird."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 44, 45 Abs. 1 bis 3, 46 Abs. 1 bis 3, 49 Abs. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Grundlage 1: ein Angemessenheitsbeschluss** (Art. 45). Die Europäische Kommission kann beschließen, dass ein Drittland, ein Gebiet, ein oder mehrere spezifische Sektoren oder eine internationale Organisation ein **angemessenes Schutzniveau** bietet.",
+        "Eine Übermittlung dorthin bedarf **keiner besonderen Genehmigung** (Art. 45 Abs. 1). Die Kommission muss jeden Beschluss regelmäßig überprüfen, mindestens alle vier Jahre (Art. 45 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 44, 45 Abs. 1 bis 3, 46 Abs. 1 bis 3, 49 Abs. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Grundlage 2: geeignete Garantien** (Art. 46), wenn kein Angemessenheitsbeschluss vorliegt. Sie genügen nur, wenn den betroffenen Personen **durchsetzbare Rechte und wirksame Rechtsbehelfe** zur Verfügung stehen. Ohne besondere Genehmigung einer Aufsichtsbehörde kommen unter anderem infrage (Art. 46 Abs. 2):",
+        {
+          "type": "list",
+          "items": [
+            "von der Kommission erlassene **Standarddatenschutzklauseln**;",
+            "verbindliche interne Datenschutzvorschriften innerhalb einer Unternehmensgruppe (Art. 47);",
+            "genehmigte Verhaltensregeln oder Zertifizierungen, zusammen mit verbindlichen Verpflichtungen des Empfängers."
+          ]
+        },
+        "Einzeln ausgehandelte Vertragsklauseln brauchen die Genehmigung der zuständigen Aufsichtsbehörde (Art. 46 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 44, 45 Abs. 1 bis 3, 46 Abs. 1 bis 3, 49 Abs. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Grundlage 3: Ausnahmen für bestimmte Fälle** (Art. 49 Abs. 1), nur wenn weder ein Angemessenheitsbeschluss noch geeignete Garantien vorliegen. Dazu gehören:",
+        {
+          "type": "list",
+          "items": [
+            "die **ausdrückliche Einwilligung** der Person, nachdem sie über die Risiken unterrichtet wurde;",
+            "die Erforderlichkeit für einen Vertrag mit der Person oder für einen Vertrag in ihrem Interesse;",
+            "wichtige Gründe des öffentlichen Interesses, Rechtsansprüche, lebenswichtige Interessen oder ein öffentliches Register."
+          ]
+        },
+        "Eine letzte Auffangregel für zwingende berechtigte Interessen ist sehr eng: Die Übermittlung darf nicht wiederholt erfolgen, darf nur eine begrenzte Zahl von Personen betreffen, und die Aufsichtsbehörde muss davon in Kenntnis gesetzt werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 44, 45 Abs. 1 bis 3, 46 Abs. 1 bis 3, 49 Abs. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Prüfen Sie die drei Grundlagen in dieser Reihenfolge:",
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Gibt es einen Angemessenheitsbeschluss?",
+            "Wenn nicht: Bestehen geeignete Garantien?",
+            "Nur wenn beides fehlt: Passt eine bestimmte Ausnahme wirklich?"
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 44, 45 Abs. 1 bis 3, 46 Abs. 1 bis 3, 49 Abs. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Das Lohnbüro der Bäckerei Sonnenfeld will Gehaltsdaten an sein eigenes Support-Team in einem Land außerhalb der EU schicken. Das ist eine Übermittlung.",
+        "Die Bäckerei und das Lohnbüro prüfen zuerst, ob die Kommission für dieses Land einen Angemessenheitsbeschluss erlassen hat. Wenn nicht, verwenden sie die Standarddatenschutzklauseln der Kommission. Alle Beschäftigten um ihre Einwilligung zu bitten, ist nicht der übliche Weg.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele sind **Veranschaulichungen**. Die Bäckerei Sonnenfeld und die anderen Unternehmen sind erfunden, und eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 44, 45 Abs. 1 bis 3, 46 Abs. 1 bis 3, 49 Abs. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "international-transfer"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-6"
+      ],
+      "prompt": "Welcher dieser Vorgänge ist eine Übermittlung im Sinne von Kapitel V?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ein Lohnbüro schickt Gehaltsdaten an sein Team in einem Land außerhalb der EU",
+          "reason": "Die Daten gehen in ein Drittland (Art. 44)."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Bäckerei Sonnenfeld schickt Daten zwischen zwei ihrer Filialen in Deutschland hin und her",
+          "reason": "Die Daten bleiben in der EU."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Bäckerei Sonnenfeld löscht Daten auf ihrem Server in der EU",
+          "reason": "Löschen ist eine Verarbeitung, aber es wird nichts übermittelt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In welcher Situation greifen die Regeln der DSGVO für Übermittlungen in Drittländer?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Bäckerei Sonnenfeld schickt Daten zwischen zwei ihrer Filialen in Deutschland hin und her",
+              "reason": "Die Daten bleiben in der EU."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Bäckerei Sonnenfeld löscht Daten auf ihrem Server in der EU",
+              "reason": "Löschen ist eine Verarbeitung, aber es wird nichts übermittelt."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein Lohnbüro schickt Gehaltsdaten an sein Team in einem Land außerhalb der EU",
+              "reason": "Die Daten gehen in ein Drittland (Art. 44)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "transfer-tools"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Die Kommission hat für ein Land einen Angemessenheitsbeschluss erlassen. Was braucht eine Übermittlung dorthin?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Genehmigung der Aufsichtsbehörde für jede einzelne Übermittlung",
+          "reason": "Nach Art. 45 Abs. 1 ist keine besondere Genehmigung nötig."
+        },
+        {
+          "correct": false,
+          "blocks": "Die ausdrückliche Einwilligung jeder einzelnen Person",
+          "reason": "Die Einwilligung ist eine Ausnahme für bestimmte Fälle. Bei einem Angemessenheitsbeschluss ist sie nicht nötig."
+        },
+        {
+          "correct": true,
+          "blocks": "Keine besondere Genehmigung",
+          "reason": "Art. 45 Abs. 1."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Genehmigung braucht eine Übermittlung in ein Land, für das ein Angemessenheitsbeschluss vorliegt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die ausdrückliche Einwilligung jeder einzelnen Person",
+              "reason": "Die Einwilligung ist eine Ausnahme für bestimmte Fälle. Bei einem Angemessenheitsbeschluss ist sie nicht nötig."
+            },
+            {
+              "correct": true,
+              "blocks": "Keine besondere Genehmigung",
+              "reason": "Art. 45 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Genehmigung der Aufsichtsbehörde für jede einzelne Übermittlung",
+              "reason": "Nach Art. 45 Abs. 1 ist keine besondere Genehmigung nötig."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "transfer-tools"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Für das Zielland gibt es keinen Angemessenheitsbeschluss. Welche Grundlage kommt in der Regel als Nächstes?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Eine Ausnahme für bestimmte Fälle, als Standardlösung",
+          "reason": "Ausnahmen greifen nur, wenn weder ein Angemessenheitsbeschluss noch geeignete Garantien vorliegen."
+        },
+        {
+          "correct": true,
+          "blocks": "Geeignete Garantien, etwa die Standarddatenschutzklauseln der Kommission",
+          "reason": "Art. 46 Abs. 2 Buchst. c."
+        },
+        {
+          "correct": false,
+          "blocks": "Keine, eine Übermittlung ist dann nie möglich",
+          "reason": "Artikel 46 und 49 eröffnen Wege."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Grundlage kommt ohne Angemessenheitsbeschluss vor den Ausnahmen für bestimmte Fälle?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Geeignete Garantien, etwa die Standarddatenschutzklauseln der Kommission",
+              "reason": "Art. 46 Abs. 2 Buchst. c."
+            },
+            {
+              "correct": false,
+              "blocks": "Keine, eine Übermittlung ist dann nie möglich",
+              "reason": "Artikel 46 und 49 eröffnen Wege."
+            },
+            {
+              "correct": false,
+              "blocks": "Eine Ausnahme für bestimmte Fälle, als Standardlösung",
+              "reason": "Ausnahmen greifen nur, wenn weder ein Angemessenheitsbeschluss noch geeignete Garantien vorliegen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "transfer-tools"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Wann darf sich eine Übermittlung auf die ausdrückliche Einwilligung der Person nach Art. 49 Abs. 1 Buchst. a stützen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nur ohne Angemessenheitsbeschluss und ohne geeignete Garantien, nachdem die Risiken erklärt wurden",
+          "reason": "Art. 49 Abs. 1 Buchst. a."
+        },
+        {
+          "correct": false,
+          "blocks": "Immer, als erste Wahl",
+          "reason": "Ausnahmen kommen zuletzt."
+        },
+        {
+          "correct": false,
+          "blocks": "Immer wenn die Person ein Kästchen zu den allgemeinen Geschäftsbedingungen angekreuzt hat",
+          "reason": "Es muss eine ausdrückliche Einwilligung sein, nachdem die Person über die Risiken unterrichtet wurde."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ein Unternehmen will eine Übermittlung in ein Drittland auf die ausdrückliche Einwilligung der betroffenen Personen stützen. Wann ist das erlaubt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Immer, als erste Wahl",
+              "reason": "Ausnahmen kommen zuletzt."
+            },
+            {
+              "correct": false,
+              "blocks": "Immer wenn die Person ein Kästchen zu den allgemeinen Geschäftsbedingungen angekreuzt hat",
+              "reason": "Es muss eine ausdrückliche Einwilligung sein, nachdem die Person über die Risiken unterrichtet wurde."
+            },
+            {
+              "correct": true,
+              "blocks": "Nur ohne Angemessenheitsbeschluss und ohne geeignete Garantien, nachdem die Risiken erklärt wurden",
+              "reason": "Art. 49 Abs. 1 Buchst. a."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

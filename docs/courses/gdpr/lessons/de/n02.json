@@ -1,0 +1,260 @@
+{
+  "module": "Über die Grundlagen hinaus",
+  "lesson": {
+    "slug": "n02",
+    "title": "Gemeinsame Verantwortlichkeit in der Praxis: Website-Plugins",
+    "summary": "Am Urteil Fashion ID erkennen, wie weit die gemeinsame Verantwortlichkeit reicht, wenn eine Website ein Plugin eines anderen Anbieters einbindet.",
+    "covers": [
+      "joint-control-scope"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g05",
+        "reason": "Das Urteil präzisiert, wann und wie weit eine gemeinsame Verantwortlichkeit besteht."
+      },
+      {
+        "lesson": "p06",
+        "reason": "Nach dem Urteil muss jeder der gemeinsam Verantwortlichen ein berechtigtes Interesse haben."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Gemeinsam Verantwortliche legen die Zwecke der und die Mittel zur Verarbeitung gemeinsam fest (Art. 26). Doch **wie weit** reicht die gemeinsame Verantwortlichkeit? Das Urteil *Fashion ID* (Rechtssache C-40/17, 29. Juli 2019) gibt darauf eine praktische Antwort. Die Entscheidung selbst steht im **Tenor**, dem eigentlichen Urteilsspruch.",
+        "Der Fall wurde noch nach der Vorgängerin der DSGVO entschieden, der Richtlinie 95/46/EG. Diese Richtlinie definierte den Verantwortlichen mit denselben Worten wie Art. 4 Nr. 7: als Stelle, die „über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet“."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-40/17 Fashion ID, Tenor, Nr. 2 und 3, und Rn. 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 6 Abs. 1 Buchst. f, 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Der Sachverhalt in Kürze**: Eine Website hatte ein Social Plugin eingebunden. Öffnete jemand die Seite, veranlasste das Plugin den Browser dieser Person, Inhalte vom Anbieter des Plugins anzufordern. Dabei wurden personenbezogene Daten der Person an diesen Anbieter übermittelt."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-40/17 Fashion ID, Tenor, Nr. 2 und 3, und Rn. 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 6 Abs. 1 Buchst. f, 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Nr. 2 des Tenors**: Der Betreiber der Website **kann Verantwortlicher sein**. In seiner Begründung (Randnummer 84) sieht der Gerichtshof ihn als **gemeinsam mit dem Anbieter** verantwortlich an.",
+        "Diese Verantwortlichkeit ist aber **beschränkt** auf die Vorgänge, für die er tatsächlich über die Zwecke und Mittel entscheidet: das **Erheben der Daten und deren Weitergabe durch Übermittlung**. Sie erfasst nicht, was der Anbieter danach mit den Daten macht."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-40/17 Fashion ID, Tenor, Nr. 2 und 3, und Rn. 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 6 Abs. 1 Buchst. f, 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Nr. 3 des Tenors**: Damit diese Vorgänge gerechtfertigt sind, müssen der Betreiber **und** der Anbieter **jeweils** ein berechtigtes Interesse wahrnehmen, im Sinne von Art. 7 Buchst. f der alten Richtlinie.",
+        "In der DSGVO steht die Rechtsgrundlage der berechtigten Interessen in Art. 6 Abs. 1 Buchst. f."
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-40/17 Fashion ID, Tenor, Nr. 2 und 3, und Rn. 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 6 Abs. 1 Buchst. f, 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Bindet die Bäckerei Sonnenfeld einen Social-Media-Button ein, der Daten der Besucherinnen und Besucher schon beim Laden der Seite an die Plattform sendet, kann die Bäckerei für dieses Erheben und Übermitteln eine der gemeinsam Verantwortlichen sein.",
+        "Dann bräuchte sie eine Vereinbarung nach Art. 26, transparente Informationen für die Besucherinnen und Besucher und eine Rechtsgrundlage. Für die spätere Verarbeitung durch die Plattform würde sie aber nicht verantwortlich werden.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "EuGH C-40/17 Fashion ID, Tenor, Nr. 2 und 3, und Rn. 84",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 7, 6 Abs. 1 Buchst. f, 26",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "joint-control-scope"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Eine Website bindet ein Plugin ein, das Daten der Besucherinnen und Besucher an den Anbieter des Plugins sendet. Kann der Betreiber der Website Verantwortlicher sein?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ja, gemeinsam, für das Erheben und die Übermittlung",
+          "reason": "Fashion ID, Nr. 2 des Tenors und Rn. 84."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, nur der Anbieter des Plugins ist Verantwortlicher",
+          "reason": "Der Gerichtshof hat entschieden, dass der Betreiber Verantwortlicher sein kann."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, für alles, was der Anbieter später tut",
+          "reason": "Die Verantwortlichkeit ist auf die Vorgänge beschränkt, über die er mitentscheidet."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Kann der Betreiber einer Website nach dem Urteil Fashion ID für den Datenfluss eines eingebundenen Plugins Verantwortlicher sein?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, nur der Anbieter des Plugins ist Verantwortlicher",
+              "reason": "Der Gerichtshof hat entschieden, dass der Betreiber Verantwortlicher sein kann."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, für alles, was der Anbieter später tut",
+              "reason": "Die Verantwortlichkeit ist auf die Vorgänge beschränkt, über die er mitentscheidet."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, gemeinsam, für das Erheben und die Übermittlung",
+              "reason": "Fashion ID, Nr. 2 des Tenors und Rn. 84."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "joint-control-scope"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Wie weit erstreckt sich die Verantwortlichkeit des Website-Betreibers?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Auch auf jede spätere Verarbeitung durch den Anbieter",
+          "reason": "Darüber entscheidet der Betreiber nicht."
+        },
+        {
+          "correct": false,
+          "blocks": "Auf keinen Vorgang, sobald die Besucherinnen und Besucher die Nutzungsbedingungen akzeptieren",
+          "reason": "Nutzungsbedingungen ändern nichts an der Frage, wer Verantwortlicher ist."
+        },
+        {
+          "correct": true,
+          "blocks": "Nur auf das Erheben und die Weitergabe durch Übermittlung",
+          "reason": "Nr. 2 des Tenors beschränkt sie auf diese Vorgänge."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Auf welche Vorgänge erstreckt sich nach dem Urteil Fashion ID die gemeinsame Verantwortlichkeit des Betreibers einer Website mit einem Social Plugin?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Auf keinen Vorgang, sobald die Besucherinnen und Besucher die Nutzungsbedingungen akzeptieren",
+              "reason": "Nutzungsbedingungen ändern nichts an der Frage, wer Verantwortlicher ist."
+            },
+            {
+              "correct": true,
+              "blocks": "Nur auf das Erheben und die Weitergabe durch Übermittlung",
+              "reason": "Nr. 2 des Tenors beschränkt sie auf diese Vorgänge."
+            },
+            {
+              "correct": false,
+              "blocks": "Auch auf jede spätere Verarbeitung durch den Anbieter",
+              "reason": "Darüber entscheidet der Betreiber nicht."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "joint-control-scope"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Wessen berechtigtes Interesse muss nach dem Urteil Fashion ID für diese Vorgänge bestehen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Keines, weil sie gemeinsam Verantwortliche sind",
+          "reason": "Die gemeinsame Verantwortlichkeit macht eine Rechtsgrundlage nicht entbehrlich."
+        },
+        {
+          "correct": true,
+          "blocks": "Das des Betreibers und das des Anbieters",
+          "reason": "Nr. 3 des Tenors: Jeder von beiden muss ein berechtigtes Interesse wahrnehmen."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur das des Anbieters",
+          "reason": "Jeder von beiden muss eines wahrnehmen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wessen berechtigtes Interesse musste im Fall Fashion ID für die Datenübermittlung durch das Plugin bestehen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Das des Betreibers und das des Anbieters",
+              "reason": "Nr. 3 des Tenors: Jeder von beiden muss ein berechtigtes Interesse wahrnehmen."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur das des Anbieters",
+              "reason": "Jeder von beiden muss eines wahrnehmen."
+            },
+            {
+              "correct": false,
+              "blocks": "Keines, weil sie gemeinsam Verantwortliche sind",
+              "reason": "Die gemeinsame Verantwortlichkeit macht eine Rechtsgrundlage nicht entbehrlich."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "module": "Beyond the basics",
+  "lesson": {
+    "slug": "n03",
+    "title": "The GDPR and the EU AI Act",
+    "summary": "Explain why complying with the EU AI Act does not settle any GDPR question.",
+    "covers": [
+      "ai-act-relationship"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "r07",
+        "reason": "The lesson uses Article 22 as the example of a GDPR rule that still applies."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **EU AI Act**, Regulation (EU) 2024/1689, regulates AI systems and models. A separate EU AI Act course is available in the Community library.",
+        "This lesson covers one point: how the AI Act relates to the GDPR."
+      ],
+      "sources": [
+        {
+          "title": "EU AI Act (Regulation (EU) 2024/1689), Article 2(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 13(2)(f), 22, 35(3)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "AI Act **Article 2(7)**: EU law on the protection of personal data, privacy and the confidentiality of communications **applies** to personal data processed in connection with the AI Act's rights and obligations.",
+        "Subject to the AI Act's own Articles 4a and 59, the AI Act **shall not affect** the GDPR, Regulation (EU) 2018/1725, Directive 2002/58/EC or Directive (EU) 2016/680.",
+        "Those two articles are exceptions inside the AI Act. This course does not cover them."
+      ],
+      "sources": [
+        {
+          "title": "EU AI Act (Regulation (EU) 2024/1689), Article 2(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 13(2)(f), 22, 35(3)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "So there are **two separate sets of questions**. An AI tool can satisfy the AI Act while the processing done with it is still unlawful under the GDPR, or the other way round.",
+        "A vendor's statement that \"our tool complies with the AI Act\" does not answer the GDPR questions about your own processing."
+      ],
+      "sources": [
+        {
+          "title": "EU AI Act (Regulation (EU) 2024/1689), Article 2(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 13(2)(f), 22, 35(3)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "For an AI tool that screens job applicants, the GDPR still asks:",
+        {
+          "type": "list",
+          "items": [
+            "what is the legal basis?",
+            "do the notices give meaningful information about the logic involved (Article 13(2)(f))?",
+            "is there a solely automated decision with significant effects (Article 22)?",
+            "is an impact assessment required (Article 35(3)(a))?"
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "EU AI Act (Regulation (EU) 2024/1689), Article 2(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 13(2)(f), 22, 35(3)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "ai-act-relationship"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "An AI vendor says its recruiting tool complies with the AI Act. Does that settle Sunfield's GDPR questions?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, the AI Act does not affect the GDPR",
+          "reason": "AI Act Article 2(7)."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, the AI Act replaces the GDPR for AI",
+          "reason": "Article 2(7) says the opposite."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if the tool is low risk",
+          "reason": "Risk classification under the AI Act does not answer GDPR questions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is AI Act compliance enough to make processing lawful under the GDPR?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, the AI Act replaces the GDPR for AI",
+              "reason": "Article 2(7) says the opposite."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the tool is low risk",
+              "reason": "Risk classification under the AI Act does not answer GDPR questions."
+            },
+            {
+              "correct": true,
+              "blocks": "No, the AI Act does not affect the GDPR",
+              "reason": "AI Act Article 2(7)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "ai-act-relationship"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "An AI tool rejects applicants automatically, without human review. Which GDPR article remains directly relevant?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "None, because the AI Act governs it",
+          "reason": "The GDPR continues to apply (AI Act Article 2(7))."
+        },
+        {
+          "correct": false,
+          "blocks": "Only Article 30",
+          "reason": "Records matter too, but Article 22 is the direct rule."
+        },
+        {
+          "correct": true,
+          "blocks": "Article 22",
+          "reason": "Solely automated decisions with significant effects."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "With a solely automated AI decision, which GDPR provision still applies?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only Article 30",
+              "reason": "Records matter too, but Article 22 is the direct rule."
+            },
+            {
+              "correct": true,
+              "blocks": "Article 22",
+              "reason": "Solely automated decisions with significant effects."
+            },
+            {
+              "correct": false,
+              "blocks": "None, because the AI Act governs it",
+              "reason": "The GDPR continues to apply (AI Act Article 2(7))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "ai-act-relationship"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "What does AI Act Article 2(7) say about the GDPR?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The AI Act repeals Article 22 of the GDPR",
+          "reason": "Nothing in Article 2(7) repeals GDPR rules."
+        },
+        {
+          "correct": true,
+          "blocks": "The AI Act does not affect it, apart from two stated exceptions",
+          "reason": "Article 2(7), subject to Articles 4a and 59."
+        },
+        {
+          "correct": false,
+          "blocks": "The GDPR does not apply to AI systems",
+          "reason": "Data protection law applies."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does the AI Act describe its relationship with the GDPR?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "The AI Act does not affect it, apart from two stated exceptions",
+              "reason": "Article 2(7), subject to Articles 4a and 59."
+            },
+            {
+              "correct": false,
+              "blocks": "The GDPR does not apply to AI systems",
+              "reason": "Data protection law applies."
+            },
+            {
+              "correct": false,
+              "blocks": "The AI Act repeals Article 22 of the GDPR",
+              "reason": "Nothing in Article 2(7) repeals GDPR rules."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

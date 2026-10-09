@@ -1,0 +1,308 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o03",
+    "title": "Working with processors",
+    "summary": "Choose processors with guarantees, put the mandatory terms in writing, and control sub-processors.",
+    "covers": [
+      "processor-contract",
+      "sub-processors"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g05",
+        "reason": "The contract governs processing by a processor."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A controller may use only processors that provide **sufficient guarantees** to implement appropriate measures, so that the processing meets the GDPR and protects people's rights (Article 28(1)).",
+        "Choosing a provider is therefore a data protection decision, not just a purchasing decision."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 28",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Processing by a processor must be governed by a **contract** or other binding legal act (Article 28(3)). It must set out the subject matter and duration, the nature and purpose, the type of personal data, the categories of data subjects, and the controller's obligations and rights.",
+        "It must be **in writing**, which includes electronic form (Article 28(9))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 28",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The contract must require the processor in particular to (Article 28(3)(a)-(h)):",
+        {
+          "type": "list",
+          "items": [
+            "process only on the controller's **documented instructions**, including on transfers outside the EU;",
+            "ensure its staff are bound by **confidentiality**;",
+            "take the **security** measures required by Article 32;",
+            "follow the rules on engaging **sub-processors**;",
+            "**assist** the controller with requests from people exercising their rights, and with security, breaches and impact assessments;",
+            "**delete or return** all data at the end, at the controller's choice;",
+            "provide information and allow **audits**."
+          ]
+        },
+        "The processor must immediately tell the controller if, in its opinion, an instruction infringes data protection law."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 28",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Sub-processors** (Article 28(2)): a processor may not engage another processor without the controller's prior **specific or general written authorisation**.",
+        "Under a general authorisation, the processor must inform the controller of intended changes, giving it the opportunity to **object**."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 28",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The same data protection obligations must be passed down to the sub-processor by contract. If the sub-processor fails, the **initial processor remains fully liable** to the controller (Article 28(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 28",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "The contract may be based on **standard contractual clauses** adopted by the Commission or by a supervisory authority (Article 28(6)-(8)).",
+        "Sunfield checks the terms of its newsletter service, app host and payroll firm. Each must contain the Article 28(3) items. Many providers publish such terms, and Sunfield keeps a copy of each.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 28",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "processor-contract"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Which term must a controller-processor contract contain?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Process only on the controller's documented instructions",
+          "reason": "Article 28(3)(a)."
+        },
+        {
+          "correct": false,
+          "blocks": "The processor may use the data for its own marketing",
+          "reason": "That would make it a controller for that use."
+        },
+        {
+          "correct": false,
+          "blocks": "The processor decides how long data is kept",
+          "reason": "Purposes and essential means belong to the controller."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which clause does Article 28(3) make mandatory?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The processor may use the data for its own marketing",
+              "reason": "That would make it a controller for that use."
+            },
+            {
+              "correct": false,
+              "blocks": "The processor decides how long data is kept",
+              "reason": "Purposes and essential means belong to the controller."
+            },
+            {
+              "correct": true,
+              "blocks": "Process only on the controller's documented instructions",
+              "reason": "Article 28(3)(a)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processor-contract"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "What form must the processor contract take?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "An oral agreement is enough",
+          "reason": "Article 28(9) requires writing."
+        },
+        {
+          "correct": false,
+          "blocks": "It must be notarised",
+          "reason": "Article 28 has no notary requirement."
+        },
+        {
+          "correct": true,
+          "blocks": "In writing, which may be electronic",
+          "reason": "Article 28(9)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In what form does Article 28(9) require the processor contract?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "It must be notarised",
+              "reason": "Article 28 has no notary requirement."
+            },
+            {
+              "correct": true,
+              "blocks": "In writing, which may be electronic",
+              "reason": "Article 28(9)."
+            },
+            {
+              "correct": false,
+              "blocks": "An oral agreement is enough",
+              "reason": "Article 28(9) requires writing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "sub-processors"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Under a general authorisation, Sunfield's newsletter service wants to add a new sub-processor. What must happen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "A supervisory authority must approve it",
+          "reason": "Article 28(2) involves the controller, not the authority."
+        },
+        {
+          "correct": true,
+          "blocks": "It informs Sunfield, which may object",
+          "reason": "Article 28(2)."
+        },
+        {
+          "correct": false,
+          "blocks": "It may add sub-processors freely",
+          "reason": "Changes must be notified so the controller can object."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Sunfield gave its newsletter service a general written authorisation. What must happen when the service changes sub-processors?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "It informs Sunfield, which may object",
+              "reason": "Article 28(2)."
+            },
+            {
+              "correct": false,
+              "blocks": "It may add sub-processors freely",
+              "reason": "Changes must be notified so the controller can object."
+            },
+            {
+              "correct": false,
+              "blocks": "A supervisory authority must approve it",
+              "reason": "Article 28(2) involves the controller, not the authority."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "sub-processors"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "A sub-processor fails its data protection duties. Who is liable to Sunfield for that failure?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "The initial processor, fully",
+          "reason": "Article 28(4)."
+        },
+        {
+          "correct": false,
+          "blocks": "No one, because Sunfield never signed with it",
+          "reason": "The initial processor remains liable."
+        },
+        {
+          "correct": false,
+          "blocks": "Only the sub-processor",
+          "reason": "Article 28(4) keeps the initial processor fully liable."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A sub-processor engaged by Sunfield's processor fails its duties. Under Article 28(4), who answers to Sunfield?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No one, because Sunfield never signed with it",
+              "reason": "The initial processor remains liable."
+            },
+            {
+              "correct": false,
+              "blocks": "Only the sub-processor",
+              "reason": "Article 28(4) keeps the initial processor fully liable."
+            },
+            {
+              "correct": true,
+              "blocks": "The initial processor, fully",
+              "reason": "Article 28(4)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,310 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r02",
+    "title": "Handling a rights request",
+    "summary": "Answer a rights request on time, with the correct rules on fees, refusals and identity checks.",
+    "covers": [
+      "request-deadline",
+      "request-fees-and-identity"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "A refusal must tell the person they can complain to the supervisory authority."
+      },
+      {
+        "lesson": "g05",
+        "reason": "The deadlines are duties of the controller."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Articles 15 to 22 give people rights: access, correction, erasure, restriction, portability and objection, plus protection against some automated decisions. The next lessons cover each one.",
+        "Article 12 sets the procedure for all of them. First, the controller must **facilitate** the exercise of these rights (Article 12(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 12(2)-(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Deadline**: act on a request **without undue delay**, and at the latest **within one month** of receiving it (Article 12(3)).",
+        "If necessary, the period may be extended by **two further months**, taking into account the complexity and number of requests. The person must be told about the extension, with reasons, within the first month.",
+        "If the request was made electronically, reply electronically where possible, unless the person asks otherwise."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 12(2)-(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "If you **do not act** on a request, you must tell the person without delay, and at the latest within one month (Article 12(4)). Give:",
+        {
+          "type": "list",
+          "items": [
+            "the reasons;",
+            "their right to complain to a supervisory authority;",
+            "their right to seek a judicial remedy."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 12(2)-(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Free of charge**: handling requests is free (Article 12(5)).",
+        "Only if a request is **manifestly unfounded or excessive**, in particular because it is repeated, may the controller charge a reasonable fee or refuse to act. The controller must be able to demonstrate that the request is manifestly unfounded or excessive."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 12(2)-(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Identity**: if you have **reasonable doubts** about who is making a request, you may ask for the additional information necessary to confirm their identity (Article 12(6)).",
+        "Ask only for what is needed to confirm identity, and only when you have reasonable doubts."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 12(2)-(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "A customer emails Sunfield on **10 March** asking what data it holds. The reply is due by **10 April**.",
+        "If the request is genuinely complex, Sunfield may extend by up to two more months, but it must tell her, with reasons, by 10 April.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 12(2)-(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "request-deadline"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "A request arrives on 10 March. Without any extension, what is the latest reply date?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "10 April",
+          "reason": "Article 12(3): within one month of receipt."
+        },
+        {
+          "correct": false,
+          "blocks": "10 June, because the GDPR allows three months",
+          "reason": "Three months is possible only with a notified extension."
+        },
+        {
+          "correct": false,
+          "blocks": "Whenever convenient, once receipt is confirmed",
+          "reason": "Confirming receipt does not stop the clock."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Sunfield receives a rights request on 10 March. When does the basic one-month period end?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "10 June, because the GDPR allows three months",
+              "reason": "Three months is possible only with a notified extension."
+            },
+            {
+              "correct": false,
+              "blocks": "Whenever convenient, once receipt is confirmed",
+              "reason": "Confirming receipt does not stop the clock."
+            },
+            {
+              "correct": true,
+              "blocks": "10 April",
+              "reason": "Article 12(3): within one month of receipt."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "request-deadline"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "A request is unusually complex. How may Sunfield get more time?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "As long as needed, without telling anyone",
+          "reason": "Extensions are limited and must be notified."
+        },
+        {
+          "correct": false,
+          "blocks": "Six more months, if the business is small",
+          "reason": "The GDPR has no such rule."
+        },
+        {
+          "correct": true,
+          "blocks": "Up to two more months, telling the person within the first month, with reasons",
+          "reason": "Article 12(3)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 12(3) allow when a request needs more time?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Six more months, if the business is small",
+              "reason": "The GDPR has no such rule."
+            },
+            {
+              "correct": true,
+              "blocks": "Up to two more months, telling the person within the first month, with reasons",
+              "reason": "Article 12(3)."
+            },
+            {
+              "correct": false,
+              "blocks": "As long as needed, without telling anyone",
+              "reason": "Extensions are limited and must be notified."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "request-fees-and-identity"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Can Sunfield charge 20 euros to handle a customer's first, ordinary access request?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, if the request arrives by post",
+          "reason": "The channel does not create a right to a fee."
+        },
+        {
+          "correct": true,
+          "blocks": "No, it must be free",
+          "reason": "Article 12(5): free unless manifestly unfounded or excessive."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, an administrative fee is always allowed",
+          "reason": "Fees are only for manifestly unfounded or excessive requests."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is a fee allowed for an ordinary rights request?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "No, it must be free",
+              "reason": "Article 12(5): free unless manifestly unfounded or excessive."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, an administrative fee is always allowed",
+              "reason": "Fees are only for manifestly unfounded or excessive requests."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the request arrives by post",
+              "reason": "The channel does not create a right to a fee."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "request-fees-and-identity"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "A request comes from an unknown email address, and Sunfield doubts the sender is the customer. What may it do?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ask for the information needed to confirm identity",
+          "reason": "Article 12(6)."
+        },
+        {
+          "correct": false,
+          "blocks": "Ignore the request entirely",
+          "reason": "The controller must act, or explain why it does not."
+        },
+        {
+          "correct": false,
+          "blocks": "Demand a passport copy from every requester",
+          "reason": "Only necessary information, and only when there are reasonable doubts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 12(6) allow when there are reasonable doubts about identity?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ignore the request entirely",
+              "reason": "The controller must act, or explain why it does not."
+            },
+            {
+              "correct": false,
+              "blocks": "Demand a passport copy from every requester",
+              "reason": "Only necessary information, and only when there are reasonable doubts."
+            },
+            {
+              "correct": true,
+              "blocks": "Ask for the information needed to confirm identity",
+              "reason": "Article 12(6)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

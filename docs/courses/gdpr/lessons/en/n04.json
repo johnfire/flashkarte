@@ -1,0 +1,257 @@
+{
+  "module": "Beyond the basics",
+  "lesson": {
+    "slug": "n04",
+    "title": "Children's consent online",
+    "summary": "Apply the age rule for children's consent to online services, and the duty to verify parental consent.",
+    "covers": [
+      "child-consent"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p05",
+        "reason": "Article 8 adds age conditions to consent."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Article 8(1) applies where **consent** is the legal basis for **online services offered directly to a child**. The GDPR calls these \"information society services\" (Article 4(25)).",
+        "Processing is lawful if the child is **at least 16**. Below 16, it is lawful only if consent is given or authorised by the **holder of parental responsibility**."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(25), 8, 12(1), 17(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "EU countries may set a **lower age by law, but not below 13** (Article 8(1)).",
+        "So the threshold may differ between countries, from 13 to 16. Check the law of each country where you offer the service."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(25), 8, 12(1), 17(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The controller must make **reasonable efforts to verify** that consent is given or authorised by the parent, taking into account available technology (Article 8(2)).",
+        "Article 8 does not change national contract law, for example on whether a child can validly enter a contract (Article 8(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(25), 8, 12(1), 17(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Recital 38: children merit **specific protection**, especially when their data is used for marketing or to create personality or user profiles.",
+        "Parental consent should not be necessary for preventive or counselling services offered directly to a child (recital 38)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(25), 8, 12(1), 17(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Related rules: information addressed specifically to a child must, in particular, be in clear and plain language (Article 12(1)). Data collected under Article 8(1) is a ground for erasure (Article 17(1)(f)).",
+        "Sunfield's online children's baking club relies on consent. In a country using the default age of 16, a 14-year-old needs a parent's consent or authorisation, and Sunfield makes reasonable efforts to check it.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(25), 8, 12(1), 17(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "child-consent"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "A 14-year-old signs up for Sunfield's online club, based on consent, in a country using the default age. What is needed?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Consent given or authorised by a parent",
+          "reason": "Below 16 by default (Article 8(1))."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing extra; 14 is old enough everywhere",
+          "reason": "The default threshold is 16."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing; under-18s can never use online services",
+          "reason": "The GDPR sets no such ban."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under the default Article 8 rule, how is a 14-year-old's consent handled?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nothing extra; 14 is old enough everywhere",
+              "reason": "The default threshold is 16."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing; under-18s can never use online services",
+              "reason": "The GDPR sets no such ban."
+            },
+            {
+              "correct": true,
+              "blocks": "Consent given or authorised by a parent",
+              "reason": "Below 16 by default (Article 8(1))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "child-consent"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "What is the lowest age an EU country may set under Article 8(1)?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "10",
+          "reason": "Article 8(1) does not allow below 13."
+        },
+        {
+          "correct": false,
+          "blocks": "None; 16 is fixed everywhere",
+          "reason": "Countries may lower it to 13."
+        },
+        {
+          "correct": true,
+          "blocks": "13",
+          "reason": "Article 8(1): not below 13 years."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How far may a country lower the age threshold for children's consent?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "None; 16 is fixed everywhere",
+              "reason": "Countries may lower it to 13."
+            },
+            {
+              "correct": true,
+              "blocks": "13",
+              "reason": "Article 8(1): not below 13 years."
+            },
+            {
+              "correct": false,
+              "blocks": "10",
+              "reason": "Article 8(1) does not allow below 13."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "child-consent"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "What must Sunfield do about parental consent?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Demand a notarised paper form",
+          "reason": "Article 8(2) requires reasonable efforts, not a specific form."
+        },
+        {
+          "correct": true,
+          "blocks": "Make reasonable efforts to verify it, given available technology",
+          "reason": "Article 8(2)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing; trusting the tick box is enough",
+          "reason": "Article 8(2) requires reasonable efforts."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 8(2) require the controller to do about parental consent?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Make reasonable efforts to verify it, given available technology",
+              "reason": "Article 8(2)."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing; trusting the tick box is enough",
+              "reason": "Article 8(2) requires reasonable efforts."
+            },
+            {
+              "correct": false,
+              "blocks": "Demand a notarised paper form",
+              "reason": "Article 8(2) requires reasonable efforts, not a specific form."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

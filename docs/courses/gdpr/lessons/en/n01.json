@@ -1,0 +1,360 @@
+{
+  "module": "Beyond the basics",
+  "lesson": {
+    "slug": "n01",
+    "title": "Cookies: a separate rule",
+    "summary": "Apply the separate cookie rule: consent to store or read information on a device, its exemptions, and what users must be told.",
+    "covers": [
+      "cookie-consent-rule",
+      "cookie-information"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p05",
+        "reason": "Cookie consent uses the GDPR's consent standard."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Cookies are governed first by a **different law**: Article 5(3) of the **ePrivacy Directive**, 2002/58/EC.",
+        "A directive works through each country's national law, so the exact national rules differ. This lesson covers only the EU text. National cookie laws are outside this course."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy Directive 2002/58/EC, Article 5(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "CJEU C-673/17 Planet49, operative part, points 1-3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 6(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**The rule** (Article 5(3)): storing information, or gaining access to information already stored, on a user's device is allowed only if the user has **given consent**, having received **clear and comprehensive information**, in particular about the purposes."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy Directive 2002/58/EC, Article 5(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "CJEU C-673/17 Planet49, operative part, points 1-3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 6(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Two exemptions** (Article 5(3)): no consent is needed for technical storage or access:",
+        {
+          "type": "list",
+          "items": [
+            "for the **sole purpose of transmitting** a communication over a network; or",
+            "**strictly necessary** to provide a service the user has **explicitly requested**."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy Directive 2002/58/EC, Article 5(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "CJEU C-673/17 Planet49, operative part, points 1-3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 6(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "In *Planet49* (Case C-673/17, 1 October 2019), the Court of Justice read Article 5(3) together with the GDPR's consent definition in Articles 4(11) and 6(1)(a).",
+        "**Point 1**: consent is **not valid** if given by a **pre-checked checkbox** that the user must deselect to refuse.",
+        "**Point 2**: the rule applies whether or not the stored information is personal data."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy Directive 2002/58/EC, Article 5(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "CJEU C-673/17 Planet49, operative part, points 1-3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 6(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Point 3**: the information given to the user must include **how long the cookies will operate** and **whether third parties may have access** to them."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy Directive 2002/58/EC, Article 5(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "CJEU C-673/17 Planet49, operative part, points 1-3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 6(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield's website:",
+        {
+          "type": "list",
+          "items": [
+            "a basket cookie that remembers the bread a visitor is ordering is likely strictly necessary for the order the visitor asked for, so it is exempt;",
+            "an analytics cookie is not necessary for the order, so it needs consent first, with clear information including duration and third-party access."
+          ]
+        },
+        "Any personal data collected through cookies must also comply with the GDPR.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy Directive 2002/58/EC, Article 5(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "CJEU C-673/17 Planet49, operative part, points 1-3",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(11), 6(1)(a)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "cookie-consent-rule"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "Sunfield's site sets an analytics cookie that the ordering service does not need. Is consent required?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Yes, because no exemption applies",
+          "reason": "Article 5(3): consent unless an exemption applies."
+        },
+        {
+          "correct": false,
+          "blocks": "No, cookies are not personal data",
+          "reason": "Planet49 point 2: the rule applies either way."
+        },
+        {
+          "correct": false,
+          "blocks": "No, a legitimate interest covers it",
+          "reason": "Article 5(3) requires consent unless an exemption applies."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a non-essential analytics cookie need the user's consent under Article 5(3)?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, cookies are not personal data",
+              "reason": "Planet49 point 2: the rule applies either way."
+            },
+            {
+              "correct": false,
+              "blocks": "No, a legitimate interest covers it",
+              "reason": "Article 5(3) requires consent unless an exemption applies."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, because no exemption applies",
+              "reason": "Article 5(3): consent unless an exemption applies."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cookie-consent-rule"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "A cookie banner shows boxes already ticked, which users must untick to refuse. Is that valid consent?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, users can untick them",
+          "reason": "Having to deselect is not valid consent."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if the cookies hold no personal data",
+          "reason": "Point 2: the rule applies either way."
+        },
+        {
+          "correct": true,
+          "blocks": "No, pre-checked boxes do not give valid consent",
+          "reason": "Planet49, point 1."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Planet49, do pre-checked cookie boxes give valid consent?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, if the cookies hold no personal data",
+              "reason": "Point 2: the rule applies either way."
+            },
+            {
+              "correct": true,
+              "blocks": "No, pre-checked boxes do not give valid consent",
+              "reason": "Planet49, point 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, users can untick them",
+              "reason": "Having to deselect is not valid consent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cookie-information"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Besides the purposes, what must users be told about cookies?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nothing more, once they have ticked a box",
+          "reason": "Information is a precondition of valid consent."
+        },
+        {
+          "correct": true,
+          "blocks": "How long they operate and whether third parties can access them",
+          "reason": "Planet49, point 3."
+        },
+        {
+          "correct": false,
+          "blocks": "The website's source code",
+          "reason": "Not required."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "According to Planet49 point 3, which information must users receive?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "How long they operate and whether third parties can access them",
+              "reason": "Planet49, point 3."
+            },
+            {
+              "correct": false,
+              "blocks": "The website's source code",
+              "reason": "Not required."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing more, once they have ticked a box",
+              "reason": "Information is a precondition of valid consent."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cookie-consent-rule"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "A cookie only remembers the items a visitor is ordering. Does it need consent?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Likely not: it is strictly necessary for the requested service",
+          "reason": "The second exemption in Article 5(3)."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, every cookie always needs consent",
+          "reason": "Article 5(3) has two exemptions."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, because it stores information",
+          "reason": "Storage is the starting point, but the exemption may apply."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a basket cookie for an order the user requested need consent?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, every cookie always needs consent",
+              "reason": "Article 5(3) has two exemptions."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, because it stores information",
+              "reason": "Storage is the starting point, but the exemption may apply."
+            },
+            {
+              "correct": true,
+              "blocks": "Likely not: it is strictly necessary for the requested service",
+              "reason": "The second exemption in Article 5(3)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

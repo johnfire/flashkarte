@@ -1,0 +1,147 @@
+"""Source register for the GDPR Basics course: one entry per retained official document."""
+
+import hashlib
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+CHECKED_ON = "2026-10-07"
+
+
+GERMAN_RETRIEVED_ON = "2026-10-08"
+
+
+def eurlex(celex, language="EN"):
+    return f"https://eur-lex.europa.eu/legal-content/{language}/TXT/?uri=CELEX:{celex}"
+
+
+def celex(source_id):
+    return SOURCES[source_id]["url"].rsplit("CELEX:", 1)[1]
+
+
+def url(source_id, locale="en"):
+    return eurlex(celex(source_id), locale.upper())
+
+
+def file_name(source_id, locale="en"):
+    source = SOURCES[source_id]
+    if locale == "en":
+        return source["file"]
+    return source.get(f"file_{locale}", source["file"].replace("-en.html", f"-{locale}.html"))
+
+
+SOURCES = {
+    "GDPR": {
+        "title": "GDPR, Regulation (EU) 2016/679, consolidated text (corrigenda incorporated)",
+        "url": eurlex("02016R0679-20160504"),
+        "file": "gdpr-consolidated-02016R0679-20160504-en.html",
+        "status": "official consolidation (documentation only); the Official Journal text is authentic",
+        "reading": "Articles 1-10, 12-22, 24-35, 37-39, 44-46, 49, 51, 55, 56, 58, 68, 70, 77, 79, 80, 82-84 and 99 read in full in English.",
+    },
+    "GDPR-REC": {
+        "title": "GDPR, Regulation (EU) 2016/679, Official Journal L 119, 4.5.2016 (recitals)",
+        "url": eurlex("32016R0679"),
+        "file": "gdpr-oj-32016R0679-en.html",
+        "status": "binding Official Journal act; recitals are interpretive, not operative",
+        "reading": "Recitals 14, 15, 18, 26, 27, 30, 32, 38, 39, 42-44, 46, 47, 50, 51, 68, 70, 71, 85 and 146 read in English.",
+    },
+    "EPD": {
+        "title": "ePrivacy Directive 2002/58/EC, consolidated text of 19 December 2009",
+        "url": eurlex("02002L0058-20091219"),
+        "file": "eprivacy-02002L0058-20091219-en.html",
+        "status": "official consolidation (documentation only); a directive applies through national law",
+        "reading": "Article 5(3) read in English. National implementing laws are out of scope.",
+    },
+    "CJ-PLANET49": {
+        "title": "CJEU, Case C-673/17 Planet49, judgment of 1 October 2019, operative part",
+        "url": eurlex("62017CJ0673"),
+        "file": "cjeu-C-673-17-planet49-en.html",
+        "status": "judgment of the Court of Justice (Grand Chamber)",
+        "reading": "Operative part, points 1-3, read in English.",
+    },
+    "CJ-FASHIONID": {
+        "title": "CJEU, Case C-40/17 Fashion ID, judgment of 29 July 2019, operative part",
+        "url": eurlex("62017CJ0040"),
+        "file": "cjeu-C-40-17-fashion-id-en.html",
+        "status": "judgment of the Court of Justice, decided under Directive 95/46/EC",
+        "reading": "Operative part, points 1-3, and the quoted Directive 95/46/EC controller definition read in English.",
+    },
+    "CJ-SCHREMS2": {
+        "title": "CJEU, Case C-311/18 Schrems II, judgment of 16 July 2020, operative part",
+        "url": eurlex("62018CJ0311"),
+        "file": "cjeu-C-311-18-schrems-ii-en.html",
+        "status": "judgment of the Court of Justice (Grand Chamber)",
+        "reading": "Operative part, points 1-5, read in English.",
+    },
+    "DPF": {
+        "title": "Commission Implementing Decision (EU) 2023/1795, EU-US Data Privacy Framework adequacy",
+        "url": eurlex("32023D1795"),
+        "file": "eu-us-dpf-decision-32023D1795-en.html",
+        "status": "in force per EUR-Lex on 2026-10-07; confirmed by General Court T-553/23; referral C-804/25 listed",
+        "reading": "Title, date and EUR-Lex status metadata only. The decision's body was not studied.",
+    },
+    "AIA": {
+        "title": "EU AI Act, Regulation (EU) 2024/1689, consolidated text of 27 July 2026",
+        "url": eurlex("02024R1689-20260727"),
+        "file": "ai-act-02024R1689-20260727-en.html",
+        "status": "official consolidation (documentation only)",
+        "reading": "Article 2(7) read in English.",
+    },
+    "PROP-501": {
+        "title": "Commission proposal COM(2025) 501 of 21 May 2025 (small mid-cap simplification; amends the GDPR)",
+        "url": eurlex("52025PC0501"),
+        "file": "proposal-COM-2025-501-en.pdf",
+        "file_de": "proposal-COM-2025-501-de.html",
+        "status": "proposal only; not adopted per EUR-Lex on 2026-10-07",
+        "reading": "Title and date read. Content not studied; taught only as 'proposed'. The English text is retained as "
+                   "the Publications Office PDF, fetched 2026-10-08: the HTML first retained was an empty EUR-Lex page.",
+    },
+    "PROP-837": {
+        "title": "Commission proposal COM(2025) 837 of 19 November 2025 (Digital Omnibus; amends the GDPR and Directive 2002/58/EC)",
+        "url": eurlex("52025PC0837"),
+        "file": "proposal-COM-2025-837-en.html",
+        "status": "proposal only; not adopted per EUR-Lex on 2026-10-07",
+        "reading": "Title and date read. Content not studied; taught only as 'proposed'.",
+    },
+}
+
+
+def sha256(source_id, locale="en"):
+    return hashlib.sha256((ROOT / "sources" / file_name(source_id, locale)).read_bytes()).hexdigest()
+
+
+def render_register():
+    lines = [
+        "# Source register",
+        "",
+        f"Checked: {CHECKED_ON}. Generated by `sources.py`; edit that file, not this one.",
+        "",
+        "Official Journal acts and judgments have legal authority. Consolidated texts are the working reference and are",
+        "documentation only. A hash confirms which file was used; it does not prove every page was reviewed. The",
+        "reading limits below are the honest extent of what was read.",
+        "",
+        f"German versions were retrieved on {GERMAN_RETRIEVED_ON} for the German edition. EUR-Lex refused automated",
+        "downloads that day, so they came from the EU Publications Office repository (`publications.europa.eu/resource/celex/`),",
+        "which serves the same documents. The German edition quotes only these German texts; the passages it teaches",
+        "were compared with the English ones.",
+        "",
+    ]
+    for source_id, source in SOURCES.items():
+        lines += [
+            f"## {source_id} — {source['title']}",
+            "",
+            f"[Official source]({source['url']}). Status: **{source['status']}**.",
+            "",
+            f"Reading: {source['reading']}",
+            "",
+            f"Retained: [sources/{source['file']}](sources/{source['file']}). SHA-256: `{sha256(source_id)}`.",
+            "",
+            f"German: [sources/{file_name(source_id, 'de')}](sources/{file_name(source_id, 'de')}). "
+            f"SHA-256: `{sha256(source_id, 'de')}`.",
+            "",
+        ]
+    return "\n".join(lines)
+
+
+if __name__ == "__main__":
+    (ROOT / "source-register.md").write_text(render_register())
+    print(f"Wrote source register with {len(SOURCES)} sources")

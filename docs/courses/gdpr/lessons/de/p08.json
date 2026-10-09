@@ -1,0 +1,354 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p08",
+    "title": "Sensible Daten",
+    "summary": "Besondere Kategorien und Daten über Straftaten erkennen und die zusätzlichen Voraussetzungen kennen, die für sie gelten.",
+    "covers": [
+      "special-categories",
+      "special-category-conditions",
+      "criminal-offence-data"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g02",
+        "reason": "Besondere Kategorien sind eine Teilmenge der personenbezogenen Daten."
+      },
+      {
+        "lesson": "p04",
+        "reason": "Die Voraussetzungen nach Art. 9 gelten zusätzlich zu einer Rechtsgrundlage."
+      },
+      {
+        "lesson": "p05",
+        "reason": "Die ausdrückliche Einwilligung baut auf den allgemeinen Bedingungen für die Einwilligung auf."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Artikel 9 Abs. 1 nennt **besondere Kategorien** personenbezogener Daten:",
+        {
+          "type": "list",
+          "items": [
+            "Daten, aus denen die rassische und ethnische Herkunft, politische Meinungen, religiöse oder weltanschauliche Überzeugungen oder die Gewerkschaftszugehörigkeit hervorgehen;",
+            "genetische Daten und biometrische Daten zur eindeutigen Identifizierung einer natürlichen Person;",
+            "Gesundheitsdaten und Daten zum Sexualleben oder zur sexuellen Orientierung."
+          ]
+        },
+        "Ihre Verarbeitung ist **untersagt** (Art. 9 Abs. 1), es sei denn, eine der Ausnahmen auf den nächsten Seiten greift."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 13 bis 15, 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 51",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Gesundheitsdaten** sind Daten, die sich auf die körperliche oder geistige Gesundheit beziehen, einschließlich der Erbringung von Gesundheitsdienstleistungen, und aus denen Informationen über den Gesundheitszustand hervorgehen (Art. 4 Nr. 15).",
+        "**Biometrische Daten** werden mit speziellen technischen Verfahren aus physischen, physiologischen oder verhaltenstypischen Merkmalen gewonnen und ermöglichen oder bestätigen die eindeutige Identifizierung, etwa Gesichtsbilder oder Fingerabdrücke (Art. 4 Nr. 14).",
+        "Nach Erwägungsgrund 51 gehören Fotos **nicht grundsätzlich** zu den besonderen Kategorien. Biometrische Daten sind sie nur, wenn sie mit speziellen technischen Mitteln verarbeitet werden, die die eindeutige Identifizierung oder Authentifizierung ermöglichen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 13 bis 15, 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 51",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Nach Art. 9 Abs. 2 gilt das Verbot in bestimmten Fällen nicht, unter anderem:",
+        {
+          "type": "list",
+          "items": [
+            "a) bei **ausdrücklicher Einwilligung** für festgelegte Zwecke, es sei denn, nach dem Recht kann das Verbot nicht durch eine Einwilligung aufgehoben werden;",
+            "b) für Rechte und Pflichten aus dem **Arbeitsrecht** und dem Recht der sozialen Sicherheit und des Sozialschutzes, soweit ein Gesetz oder eine Kollektivvereinbarung dies zulässt;",
+            "c) bei lebenswichtigen Interessen, wenn die Person nicht einwilligen kann; d) für bestimmte Organisationen ohne Gewinnerzielungsabsicht;",
+            "e) für Daten, die die Person **offensichtlich öffentlich gemacht** hat; f) für Rechtsansprüche;",
+            "g) bei erheblichem öffentlichem Interesse; h) im Gesundheits- und Sozialbereich; i) für die öffentliche Gesundheit; j) für Archiv-, Forschungs- und statistische Zwecke."
+          ]
+        },
+        "Die EU-Staaten können für genetische, biometrische und Gesundheitsdaten zusätzliche Bedingungen einführen (Art. 9 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 13 bis 15, 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 51",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Es gibt also **zwei Ebenen**. Nach Erwägungsgrund 51 gelten die allgemeinen Grundsätze und die Bedingungen für eine rechtmäßige Verarbeitung weiterhin.",
+        "Sie brauchen also **eine Rechtsgrundlage nach Art. 6** und zusätzlich **eine Ausnahme nach Art. 9 Abs. 2**."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 13 bis 15, 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 51",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Strafrechtliche Verurteilungen und Straftaten**: Eine Verarbeitung aufgrund von Art. 6 Abs. 1 darf nur unter **behördlicher Aufsicht** erfolgen oder wenn das Unionsrecht oder das Recht der Mitgliedstaaten sie mit geeigneten Garantien zulässt (Art. 10).",
+        "Ein umfassendes Register der strafrechtlichen Verurteilungen darf nur unter behördlicher Aufsicht geführt werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 13 bis 15, 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 51",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Bei der Bäckerei Sonnenfeld sind Krankmeldungen von Beschäftigten, auf denen eine Diagnose steht, Gesundheitsdaten. Für ihre Verarbeitung käme typischerweise die arbeitsrechtliche Ausnahme in Betracht (Art. 9 Abs. 2 Buchst. b), soweit das nationale Recht es zulässt.",
+        "Fotos der Beschäftigten auf der Website gehören nicht schon deshalb zu den besonderen Kategorien, weil sie Gesichter zeigen (Erwägungsgrund 51).",
+        "Eine Liste mit den Vorstrafen von Bewerberinnen und Bewerbern bräuchte eine gesetzliche Erlaubnis (Art. 10). Das eigene Interesse der Bäckerei genügt nicht.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 13 bis 15, 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 51",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "special-categories"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Was davon gehört zu den besonderen Kategorien personenbezogener Daten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Krankmeldung einer Beschäftigten mit Diagnose",
+          "reason": "Sie lässt den Gesundheitszustand erkennen (Art. 4 Nr. 15 und 9 Abs. 1)."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Kontonummer eines Beschäftigten",
+          "reason": "In der Praxis heikel, aber keine Kategorie nach Art. 9 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Wohnanschrift einer Kundin",
+          "reason": "Personenbezogene Daten, aber keine Kategorie nach Art. 9 Abs. 1."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche dieser Angaben fällt unter Art. 9 Abs. 1?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Kontonummer eines Beschäftigten",
+              "reason": "In der Praxis heikel, aber keine Kategorie nach Art. 9 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Wohnanschrift einer Kundin",
+              "reason": "Personenbezogene Daten, aber keine Kategorie nach Art. 9 Abs. 1."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Krankmeldung einer Beschäftigten mit Diagnose",
+              "reason": "Sie lässt den Gesundheitszustand erkennen (Art. 4 Nr. 15 und 9 Abs. 1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "special-categories"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld stellt Fotos ihrer Beschäftigten auf ihre Website. Gehören die Fotos zu den besonderen Kategorien?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, alle Fotos von Gesichtern sind biometrische Daten",
+          "reason": "Nach Erwägungsgrund 51 sind Fotos nicht grundsätzlich biometrische Daten."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, weil ein Gesicht zeigt, wer ein Mensch ist",
+          "reason": "Ein Gesicht zu zeigen ist nicht die erforderliche spezielle technische Verarbeitung."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, nur wenn sie mit speziellen technischen Mitteln zur eindeutigen Identifizierung verarbeitet werden",
+          "reason": "Erwägungsgrund 51 und Art. 4 Nr. 14."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Sind nach der DSGVO alle Fotos von Menschen biometrische Daten?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, weil ein Gesicht zeigt, wer ein Mensch ist",
+              "reason": "Ein Gesicht zu zeigen ist nicht die erforderliche spezielle technische Verarbeitung."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, nur wenn sie mit speziellen technischen Mitteln zur eindeutigen Identifizierung verarbeitet werden",
+              "reason": "Erwägungsgrund 51 und Art. 4 Nr. 14."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, alle Fotos von Gesichtern sind biometrische Daten",
+              "reason": "Nach Erwägungsgrund 51 sind Fotos nicht grundsätzlich biometrische Daten."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "special-category-conditions"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "Was braucht die Bäckerei Sonnenfeld, um Gesundheitsdaten rechtmäßig zu verarbeiten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nichts weiter, wenn die Daten verschlüsselt sind",
+          "reason": "Verschlüsselung ist Sicherheit. Sie hebt das Verbot nicht auf."
+        },
+        {
+          "correct": true,
+          "blocks": "Eine Rechtsgrundlage nach Art. 6 und eine Ausnahme nach Art. 9 Abs. 2",
+          "reason": "Erwägungsgrund 51: Beide Ebenen gelten."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur ein berechtigtes Interesse nach Art. 6",
+          "reason": "Artikel 9 Abs. 1 untersagt die Verarbeitung ohne eine Ausnahme nach Art. 9 Abs. 2."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Voraussetzungen gelten für die Verarbeitung besonderer Kategorien personenbezogener Daten?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Eine Rechtsgrundlage nach Art. 6 und eine Ausnahme nach Art. 9 Abs. 2",
+              "reason": "Erwägungsgrund 51: Beide Ebenen gelten."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur ein berechtigtes Interesse nach Art. 6",
+              "reason": "Artikel 9 Abs. 1 untersagt die Verarbeitung ohne eine Ausnahme nach Art. 9 Abs. 2."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts weiter, wenn die Daten verschlüsselt sind",
+              "reason": "Verschlüsselung ist Sicherheit. Sie hebt das Verbot nicht auf."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "criminal-offence-data"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld möchte mit Einwilligung der Bewerberinnen und Bewerber eine Liste ihrer strafrechtlichen Verurteilungen führen. Genügt die Einwilligung?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, nötig sind behördliche Aufsicht oder eine gesetzliche Erlaubnis",
+          "reason": "Artikel 10 gilt zusätzlich zu jeder Rechtsgrundlage nach Art. 6 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, die Einwilligung ist eine Rechtsgrundlage nach Art. 6",
+          "reason": "Artikel 10 stellt über die Rechtsgrundlage nach Art. 6 hinaus zusätzliche Bedingungen."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, aber ein berechtigtes Interesse allein würde genügen",
+          "reason": "Artikel 10 verlangt behördliche Aufsicht oder eine gesetzliche Erlaubnis, gleich welche Rechtsgrundlage nach Art. 6 vorliegt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Genügt eine Einwilligung allein, um Daten über strafrechtliche Verurteilungen nach Art. 10 zu verarbeiten?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, die Einwilligung ist eine Rechtsgrundlage nach Art. 6",
+              "reason": "Artikel 10 stellt über die Rechtsgrundlage nach Art. 6 hinaus zusätzliche Bedingungen."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, aber ein berechtigtes Interesse allein würde genügen",
+              "reason": "Artikel 10 verlangt behördliche Aufsicht oder eine gesetzliche Erlaubnis, gleich welche Rechtsgrundlage nach Art. 6 vorliegt."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, nötig sind behördliche Aufsicht oder eine gesetzliche Erlaubnis",
+              "reason": "Artikel 10 gilt zusätzlich zu jeder Rechtsgrundlage nach Art. 6 Abs. 1."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

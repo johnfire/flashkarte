@@ -1,0 +1,263 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r04",
+    "title": "Correction and erasure",
+    "summary": "Apply the rights to correction and erasure, including when erasure does not apply.",
+    "covers": [
+      "right-to-rectification",
+      "right-to-erasure"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p02",
+        "reason": "Rectification is the individual's tool for the accuracy principle."
+      },
+      {
+        "lesson": "p05",
+        "reason": "One erasure ground is withdrawn consent with no other basis."
+      },
+      {
+        "lesson": "r02",
+        "reason": "Rectification requests follow the Article 12 procedure."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Rectification** (Article 16): a person may have **inaccurate** personal data about them corrected **without undue delay**.",
+        "They may also have **incomplete** data completed, taking into account the purposes, including by providing a supplementary statement."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Erasure** (Article 17(1)), often called the \"right to be forgotten\": the controller must erase data without undue delay where one of these grounds applies:",
+        {
+          "type": "list",
+          "items": [
+            "(a) the data is no longer necessary for its purposes;",
+            "(b) the person withdraws consent, and there is no other legal ground;",
+            "(c) the person objects (a right covered in a later lesson), with no overriding grounds, or objects to direct marketing;",
+            "(d) the data has been processed unlawfully;",
+            "(e) a legal obligation requires erasure;",
+            "(f) the data was collected from a child for an online service under Article 8(1)."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Erasure **does not apply** to the extent that processing is necessary (Article 17(3)):",
+        {
+          "type": "list",
+          "items": [
+            "for freedom of expression and information;",
+            "to comply with a **legal obligation**, or for a public task;",
+            "for public health reasons;",
+            "for public-interest archiving, research or statistics, where erasure would seriously impair them;",
+            "to establish, exercise or defend **legal claims**."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "If the controller has made the data public and must erase it, it must take reasonable steps, considering technology and cost, to inform other controllers processing it that the person has asked for erasure of links and copies (Article 17(2))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "A former customer asks Sunfield to delete everything. Sunfield deletes her account and her newsletter data.",
+        "It keeps her invoices, if a legal obligation, such as national accounting law, requires them to be kept. That part falls under Article 17(3)(b). It tells her which data it kept and why.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "right-to-rectification"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "A customer's surname is misspelled in Sunfield's system. What does Article 16 require?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Correct it without undue delay",
+          "reason": "Article 16."
+        },
+        {
+          "correct": false,
+          "blocks": "Correct it at the next annual review",
+          "reason": "That is not without undue delay."
+        },
+        {
+          "correct": false,
+          "blocks": "Correct it only if the error caused damage",
+          "reason": "Article 16 has no damage condition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How quickly must inaccurate personal data be corrected on request?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Correct it at the next annual review",
+              "reason": "That is not without undue delay."
+            },
+            {
+              "correct": false,
+              "blocks": "Correct it only if the error caused damage",
+              "reason": "Article 16 has no damage condition."
+            },
+            {
+              "correct": true,
+              "blocks": "Correct it without undue delay",
+              "reason": "Article 16."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-erasure"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "A customer withdraws her newsletter consent and asks Sunfield to erase her newsletter data. Nothing else needs it. What applies?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Keep it, because the consent was valid when given",
+          "reason": "Withdrawal plus no other ground triggers erasure."
+        },
+        {
+          "correct": false,
+          "blocks": "Keep it until she complains to a regulator",
+          "reason": "The duty arises without undue delay."
+        },
+        {
+          "correct": true,
+          "blocks": "Erase it, under Article 17(1)(b)",
+          "reason": "Withdrawn consent with no other legal ground."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A customer withdraws consent, and no other legal ground exists for her data. What happens to it?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Keep it until she complains to a regulator",
+              "reason": "The duty arises without undue delay."
+            },
+            {
+              "correct": true,
+              "blocks": "Erase it, under Article 17(1)(b)",
+              "reason": "Withdrawn consent with no other legal ground."
+            },
+            {
+              "correct": false,
+              "blocks": "Keep it, because the consent was valid when given",
+              "reason": "Withdrawal plus no other ground triggers erasure."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-erasure"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "A customer wants all her invoices erased, but a law requires Sunfield to keep accounting records. What follows?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The whole request can be refused, marketing data included",
+          "reason": "The exception covers only what the obligation needs."
+        },
+        {
+          "correct": true,
+          "blocks": "Those records may be kept under Article 17(3)(b)",
+          "reason": "Erasure does not apply where processing is needed to meet a legal obligation."
+        },
+        {
+          "correct": false,
+          "blocks": "Everything must be erased anyway",
+          "reason": "Article 17(3)(b) is an exception."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How does a legal duty to keep records affect the right to erasure?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Those records may be kept under Article 17(3)(b)",
+              "reason": "Erasure does not apply where processing is needed to meet a legal obligation."
+            },
+            {
+              "correct": false,
+              "blocks": "Everything must be erased anyway",
+              "reason": "Article 17(3)(b) is an exception."
+            },
+            {
+              "correct": false,
+              "blocks": "The whole request can be refused, marketing data included",
+              "reason": "The exception covers only what the obligation needs."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

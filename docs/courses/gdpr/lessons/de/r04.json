@@ -1,0 +1,263 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r04",
+    "title": "Berichtigung und Löschung",
+    "summary": "Die Rechte auf Berichtigung und Löschung anwenden und erkennen, wann das Recht auf Löschung nicht gilt.",
+    "covers": [
+      "right-to-rectification",
+      "right-to-erasure"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p02",
+        "reason": "Mit der Berichtigung kann jede Person selbst den Grundsatz der Richtigkeit durchsetzen."
+      },
+      {
+        "lesson": "p05",
+        "reason": "Ein Löschungsgrund ist der Widerruf der Einwilligung, wenn es keine andere Rechtsgrundlage gibt."
+      },
+      {
+        "lesson": "r02",
+        "reason": "Anträge auf Berichtigung folgen dem Verfahren nach Art. 12."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Berichtigung** (Art. 16): Eine Person kann verlangen, dass **unrichtige** personenbezogene Daten über sie **unverzüglich** berichtigt werden.",
+        "Sie kann außerdem verlangen, dass **unvollständige** Daten unter Berücksichtigung der Zwecke der Verarbeitung vervollständigt werden, auch mittels einer ergänzenden Erklärung."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Löschung** (Art. 17 Abs. 1), oft „Recht auf Vergessenwerden“ genannt: Der Verantwortliche muss Daten unverzüglich löschen, wenn einer dieser Gründe zutrifft:",
+        {
+          "type": "list",
+          "items": [
+            "a) die Daten sind für ihre Zwecke nicht mehr notwendig;",
+            "b) die Person widerruft ihre Einwilligung, und es fehlt an einer anderweitigen Rechtsgrundlage;",
+            "c) die Person legt Widerspruch ein (ein Recht, das eine spätere Lektion behandelt), und es liegen keine vorrangigen berechtigten Gründe vor, oder sie widerspricht der Direktwerbung;",
+            "d) die Daten wurden unrechtmäßig verarbeitet;",
+            "e) eine rechtliche Verpflichtung verlangt die Löschung;",
+            "f) die Daten wurden bei einem Kind für einen Online-Dienst nach Art. 8 Abs. 1 erhoben."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Das Recht auf Löschung **gilt nicht**, soweit die Verarbeitung erforderlich ist (Art. 17 Abs. 3):",
+        {
+          "type": "list",
+          "items": [
+            "zur Ausübung des Rechts auf freie Meinungsäußerung und Information;",
+            "zur Erfüllung einer **rechtlichen Verpflichtung** oder zur Wahrnehmung einer öffentlichen Aufgabe;",
+            "aus Gründen der öffentlichen Gesundheit;",
+            "für im öffentlichen Interesse liegende Archivzwecke, für Forschung oder für Statistik, wenn die Löschung diese Zwecke ernsthaft beeinträchtigen würde;",
+            "zur Geltendmachung, Ausübung oder Verteidigung von **Rechtsansprüchen**."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Hat der Verantwortliche die Daten öffentlich gemacht und muss er sie löschen, trifft er unter Berücksichtigung der verfügbaren Technologie und der Implementierungskosten angemessene Maßnahmen. Damit informiert er andere Verantwortliche, die die Daten verarbeiten, dass die Person die Löschung aller Links zu den Daten und aller Kopien verlangt hat (Art. 17 Abs. 2)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Eine ehemalige Kundin bittet die Bäckerei Sonnenfeld, alles über sie zu löschen. Die Bäckerei löscht ihr Kundenkonto und ihre Newsletter-Daten.",
+        "Ihre Rechnungen behält die Bäckerei, wenn eine rechtliche Verpflichtung, etwa aus dem nationalen Buchführungsrecht, die Aufbewahrung verlangt. Dieser Teil fällt unter Art. 17 Abs. 3 Buchst. b. Die Bäckerei teilt der Kundin mit, welche Daten sie behalten hat und warum.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 16, 17",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "right-to-rectification"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Der Nachname einer Kundin ist im System der Bäckerei Sonnenfeld falsch geschrieben. Was verlangt Art. 16?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Unverzüglich berichtigen",
+          "reason": "Art. 16."
+        },
+        {
+          "correct": false,
+          "blocks": "Bei der nächsten jährlichen Prüfung berichtigen",
+          "reason": "Das ist nicht unverzüglich."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur berichtigen, wenn der Fehler einen Schaden verursacht hat",
+          "reason": "Artikel 16 knüpft die Berichtigung nicht an einen Schaden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wie schnell müssen unrichtige personenbezogene Daten berichtigt werden, wenn die Person das verlangt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Bei der nächsten jährlichen Prüfung berichtigen",
+              "reason": "Das ist nicht unverzüglich."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur berichtigen, wenn der Fehler einen Schaden verursacht hat",
+              "reason": "Artikel 16 knüpft die Berichtigung nicht an einen Schaden."
+            },
+            {
+              "correct": true,
+              "blocks": "Unverzüglich berichtigen",
+              "reason": "Art. 16."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-erasure"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Eine Kundin widerruft ihre Einwilligung in den Newsletter und verlangt, dass die Bäckerei Sonnenfeld ihre Newsletter-Daten löscht. Für nichts anderes werden die Daten gebraucht. Was gilt?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Sie bleiben gespeichert, weil die Einwilligung bei ihrer Erteilung wirksam war",
+          "reason": "Der Widerruf löst zusammen mit der fehlenden anderen Rechtsgrundlage die Löschung aus."
+        },
+        {
+          "correct": false,
+          "blocks": "Sie bleiben gespeichert, bis sich die Kundin bei einer Aufsichtsbehörde beschwert",
+          "reason": "Die Daten sind unverzüglich zu löschen."
+        },
+        {
+          "correct": true,
+          "blocks": "Sie werden gelöscht, nach Art. 17 Abs. 1 Buchst. b",
+          "reason": "Die Einwilligung ist widerrufen, und es fehlt an einer anderweitigen Rechtsgrundlage."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Eine Kundin widerruft ihre Einwilligung, und für ihre Daten gibt es keine andere Rechtsgrundlage. Was geschieht mit den Daten?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Sie bleiben gespeichert, bis sich die Kundin bei einer Aufsichtsbehörde beschwert",
+              "reason": "Die Daten sind unverzüglich zu löschen."
+            },
+            {
+              "correct": true,
+              "blocks": "Sie werden gelöscht, nach Art. 17 Abs. 1 Buchst. b",
+              "reason": "Die Einwilligung ist widerrufen, und es fehlt an einer anderweitigen Rechtsgrundlage."
+            },
+            {
+              "correct": false,
+              "blocks": "Sie bleiben gespeichert, weil die Einwilligung bei ihrer Erteilung wirksam war",
+              "reason": "Der Widerruf löst zusammen mit der fehlenden anderen Rechtsgrundlage die Löschung aus."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-erasure"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Eine Kundin verlangt, dass alle ihre Rechnungen gelöscht werden, aber ein Gesetz verpflichtet die Bäckerei Sonnenfeld, Buchführungsunterlagen aufzubewahren. Was folgt daraus?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Der ganze Antrag darf abgelehnt werden, auch für die Werbedaten",
+          "reason": "Die Ausnahme erfasst nur, was die Verpflichtung verlangt."
+        },
+        {
+          "correct": true,
+          "blocks": "Diese Unterlagen dürfen nach Art. 17 Abs. 3 Buchst. b aufbewahrt werden",
+          "reason": "Das Recht auf Löschung gilt nicht, soweit die Verarbeitung zur Erfüllung einer rechtlichen Verpflichtung erforderlich ist."
+        },
+        {
+          "correct": false,
+          "blocks": "Trotzdem muss alles gelöscht werden",
+          "reason": "Artikel 17 Abs. 3 Buchst. b ist eine Ausnahme."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wie wirkt sich eine gesetzliche Pflicht, Unterlagen aufzubewahren, auf das Recht auf Löschung aus?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Diese Unterlagen dürfen nach Art. 17 Abs. 3 Buchst. b aufbewahrt werden",
+              "reason": "Das Recht auf Löschung gilt nicht, soweit die Verarbeitung zur Erfüllung einer rechtlichen Verpflichtung erforderlich ist."
+            },
+            {
+              "correct": false,
+              "blocks": "Trotzdem muss alles gelöscht werden",
+              "reason": "Artikel 17 Abs. 3 Buchst. b ist eine Ausnahme."
+            },
+            {
+              "correct": false,
+              "blocks": "Der ganze Antrag darf abgelehnt werden, auch für die Werbedaten",
+              "reason": "Die Ausnahme erfasst nur, was die Verpflichtung verlangt."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

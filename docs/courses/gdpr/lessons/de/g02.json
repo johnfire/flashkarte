@@ -1,0 +1,266 @@
+{
+  "module": "Einstieg: was die DSGVO erfasst",
+  "lesson": {
+    "slug": "g02",
+    "title": "Personenbezogene Daten",
+    "summary": "Entscheiden, ob Informationen personenbezogene Daten sind, auch wenn eine Person nur indirekt identifiziert werden kann.",
+    "covers": [
+      "personal-data",
+      "identifiability"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Personenbezogene Daten** sind alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person beziehen (Art. 4 Nr. 1).",
+        "Die Person, um die es in den Daten geht, heißt **betroffene Person**. Bei der Bäckerei Sonnenfeld sind betroffene Personen zum Beispiel Kundinnen und Kunden, Beschäftigte sowie Bewerberinnen und Bewerber."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die DSGVO schützt natürliche Personen, nicht Unternehmen. Nach Erwägungsgrund 14 gilt sie nicht für Daten juristischer Personen, etwa für Name, Rechtsform und Kontaktdaten eines Unternehmens.",
+        "Anders ist es bei Informationen über eine namentlich genannte Person, die in einem Unternehmen arbeitet. Ein Name gehört zu den Kennungen, die Art. 4 Nr. 1 aufzählt. Die Information bezieht sich also auf eine natürliche Person."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Die DSGVO gilt nicht für die personenbezogenen Daten Verstorbener (Erwägungsgrund 27). Die EU-Staaten können für solche Daten eigene Vorschriften vorsehen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Eine Person kann **direkt** identifiziert werden, zum Beispiel über ihren Namen. Sie kann aber auch **indirekt** identifiziert werden (Art. 4 Nr. 1).",
+        "Artikel 4 Nr. 1 nennt Kennungen wie eine Kennnummer, Standortdaten und eine Online-Kennung. Außerdem nennt er besondere Merkmale, die Ausdruck der physischen, physiologischen, genetischen, psychischen, wirtschaftlichen, kulturellen oder sozialen Identität einer Person sind."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Ob jemand identifizierbar ist, entscheiden Sie anhand **aller Mittel, die nach allgemeinem Ermessen wahrscheinlich genutzt werden**, sei es von der Stelle, die die Daten hat, oder von jemand anderem. Dazu gehört auch das „Aussondern“, also das Herausgreifen einer einzelnen Person aus einer Gruppe (Erwägungsgrund 26).",
+        "Nach Erwägungsgrund 26 sind dabei objektive Faktoren abzuwägen, etwa die Kosten der Identifizierung, der dafür erforderliche Zeitaufwand und die verfügbare Technologie.",
+        "Erwägungsgrund 30 ergänzt: Online-Kennungen wie IP-Adressen und Cookie-Kennungen können Spuren hinterlassen. In Kombination mit anderen Informationen können diese Spuren benutzt werden, um Profile von Menschen zu erstellen und sie zu identifizieren."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die Nummer auf der Kundenkarte der Bäckerei Sonnenfeld ist eine Kennnummer. Die Bäckerei kann sie den Einkäufen und dem Konto einer Kundin oder eines Kunden zuordnen. Kartennummer und Einkaufsverlauf sind deshalb personenbezogene Daten, auch auf einer Liste ohne Namen.",
+        "Eine Zahl wie »1.200 verkaufte Brötchen am Montag«, die mit niemandem verknüpft ist, ist keine Information über eine identifizierbare Person."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 1",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgründe 14, 26, 27, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "personal-data"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Welche dieser Angaben gehört für die Bäckerei Sonnenfeld zu den personenbezogenen Daten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Der Name einer Kundin zusammen mit ihren bisherigen Vorbestellungen",
+          "reason": "Ein Name identifiziert eine natürliche Person direkt, und die Vorbestellungen beziehen sich auf sie."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Handelsregisternummer eines Lieferunternehmens",
+          "reason": "Erwägungsgrund 14: Daten über eine juristische Person sind nicht erfasst."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Gesamtzahl der am letzten Montag verkauften Brötchen",
+          "reason": "Eine Summe ohne Bezug zu einer Person bezieht sich auf keine identifizierbare Person."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Angabe bezieht sich auf eine identifizierte oder identifizierbare natürliche Person?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Handelsregisternummer eines Lieferunternehmens",
+              "reason": "Erwägungsgrund 14: Daten über eine juristische Person sind nicht erfasst."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Gesamtzahl der am letzten Montag verkauften Brötchen",
+              "reason": "Eine Summe ohne Bezug zu einer Person bezieht sich auf keine identifizierbare Person."
+            },
+            {
+              "correct": true,
+              "blocks": "Der Name einer Kundin zusammen mit ihren bisherigen Vorbestellungen",
+              "reason": "Ein Name identifiziert eine natürliche Person direkt, und die Vorbestellungen beziehen sich auf sie."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "personal-data"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld hat noch Unterlagen über einen verstorbenen Kunden. Gilt die DSGVO für diese Daten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, genau wie bei einem lebenden Kunden",
+          "reason": "Erwägungsgrund 27 nimmt die Daten Verstorbener aus."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, noch zehn Jahre nach dem Tod",
+          "reason": "Eine solche Frist kennt die DSGVO nicht. Die zehn Jahre sind erfunden."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, aber nationale Vorschriften können gelten",
+          "reason": "Erwägungsgrund 27: Die DSGVO gilt nicht, und die EU-Staaten können eigene Vorschriften vorsehen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Gilt die DSGVO für die personenbezogenen Daten verstorbener Menschen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, noch zehn Jahre nach dem Tod",
+              "reason": "Eine solche Frist kennt die DSGVO nicht. Die zehn Jahre sind erfunden."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, aber nationale Vorschriften können gelten",
+              "reason": "Erwägungsgrund 27: Die DSGVO gilt nicht, und die EU-Staaten können eigene Vorschriften vorsehen."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, genau wie bei einem lebenden Kunden",
+              "reason": "Erwägungsgrund 27 nimmt die Daten Verstorbener aus."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "identifiability"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Eine Liste zeigt Kundenkartennummern und Einkäufe, aber keine Namen. Sind das personenbezogene Daten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nur wenn die Kundschaft dem Bonusprogramm zugestimmt hat",
+          "reason": "Eine Einwilligung ändert nichts daran, ob Informationen personenbezogene Daten sind."
+        },
+        {
+          "correct": true,
+          "blocks": "Ja, wenn sich die Nummern nach allgemeinem Ermessen Kundinnen und Kunden zuordnen lassen",
+          "reason": "Eine Kennnummer ermöglicht eine indirekte Identifizierung (Art. 4 Nr. 1, Erwägungsgrund 26)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, weil keine Namen vorkommen",
+          "reason": "Eine indirekte Identifizierung über eine Nummer genügt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Kundenkartennummern und Einkäufe erscheinen ohne jeden Namen. Können solche Daten personenbezogen sein?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ja, wenn sich die Nummern nach allgemeinem Ermessen Kundinnen und Kunden zuordnen lassen",
+              "reason": "Eine Kennnummer ermöglicht eine indirekte Identifizierung (Art. 4 Nr. 1, Erwägungsgrund 26)."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, weil keine Namen vorkommen",
+              "reason": "Eine indirekte Identifizierung über eine Nummer genügt."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur wenn die Kundschaft dem Bonusprogramm zugestimmt hat",
+              "reason": "Eine Einwilligung ändert nichts daran, ob Informationen personenbezogene Daten sind."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

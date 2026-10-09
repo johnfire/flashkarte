@@ -1,0 +1,327 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o01",
+    "title": "Accountability in practice: the record of processing",
+    "summary": "Scale your measures to the risk, and keep a record of processing activities, including when small businesses must too.",
+    "covers": [
+      "controller-measures",
+      "records-of-processing"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Every record entry states the purposes of processing."
+      },
+      {
+        "lesson": "p03",
+        "reason": "Article 24 turns accountability into measures and policies."
+      },
+      {
+        "lesson": "p08",
+        "reason": "The under-250 exemption does not apply to special categories."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Article 24(1) turns accountability into action. Taking into account the nature, scope, context and purposes of processing, and the **risks** of varying likelihood and severity, the controller must implement **appropriate technical and organisational measures**.",
+        "Those measures must ensure, and enable it to demonstrate, that processing complies with the GDPR. They must be reviewed and updated where necessary."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Where proportionate, the measures include **data protection policies** (Article 24(2)).",
+        "Following an approved code of conduct or certification can be used as one element to demonstrate compliance (Article 24(3)).",
+        "The key word is **appropriate**: a hospital and a bakery do not need the same measures."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The main tool for demonstrating compliance is the **record of processing activities** (Article 30(1)). The controller's record contains:",
+        {
+          "type": "list",
+          "items": [
+            "(a) the name and contact details of the controller, and of any joint controller, representative or data protection officer;",
+            "(b) the purposes of the processing;",
+            "(c) the categories of data subjects and of personal data;",
+            "(d) the categories of recipients, including any outside the EU;",
+            "(e) transfers to countries outside the EU, where applicable;",
+            "(f) where possible, the time limits for erasure;",
+            "(g) where possible, a general description of the security measures."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Processors keep their own record of the processing they do for each controller (Article 30(2)).",
+        "Records must be in writing, which includes electronic form (Article 30(3)). They must be made available to the **supervisory authority on request** (Article 30(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**The under-250 exemption** (Article 30(5)): an organisation with **fewer than 250 employees** does not have to keep the record, **unless** its processing:",
+        {
+          "type": "list",
+          "items": [
+            "is likely to result in a risk to people's rights and freedoms; or",
+            "is **not occasional**; or",
+            "includes special-category data or criminal-offence data."
+          ]
+        },
+        "Because any one of these defeats the exemption, it is narrower than it first looks."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield has about 40 staff, but it processes pre-orders and payroll every week, which is not occasional. It also handles sick notes, which are health data. So the exemption does not apply, and Sunfield keeps a record.",
+        "A sample entry: *Pre-orders. Purpose: fulfil orders. Data subjects: customers. Data: name, phone, order. Recipients: app hosting provider. Erasure: a set period after the last order. Security: access by role, encrypted backups.*",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 24, 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "controller-measures"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "How should a controller choose its data protection measures under Article 24?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "By nature, scope, context, purposes and risk",
+          "reason": "Article 24(1)."
+        },
+        {
+          "correct": false,
+          "blocks": "Identically for every business, whatever its size",
+          "reason": "Article 24 requires appropriate measures, so they vary."
+        },
+        {
+          "correct": false,
+          "blocks": "Only once a regulator demands them",
+          "reason": "Article 24 applies from the start."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 24, how are a controller's measures matched to its situation?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Identically for every business, whatever its size",
+              "reason": "Article 24 requires appropriate measures, so they vary."
+            },
+            {
+              "correct": false,
+              "blocks": "Only once a regulator demands them",
+              "reason": "Article 24 applies from the start."
+            },
+            {
+              "correct": true,
+              "blocks": "By nature, scope, context, purposes and risk",
+              "reason": "Article 24(1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "records-of-processing"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Which of these belongs in a controller's record of processing activities?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The name of every individual customer",
+          "reason": "The record lists categories, not each person."
+        },
+        {
+          "correct": false,
+          "blocks": "The administrator passwords",
+          "reason": "Passwords are not record content. They must be kept secret."
+        },
+        {
+          "correct": true,
+          "blocks": "The purposes of the processing",
+          "reason": "Article 30(1)(b)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 30(1) require the record to contain?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The administrator passwords",
+              "reason": "Passwords are not record content. They must be kept secret."
+            },
+            {
+              "correct": true,
+              "blocks": "The purposes of the processing",
+              "reason": "Article 30(1)(b)."
+            },
+            {
+              "correct": false,
+              "blocks": "The name of every individual customer",
+              "reason": "The record lists categories, not each person."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "records-of-processing"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Sunfield has 40 staff, processes orders every week and handles staff sick notes. Can it skip the record?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, if it has never had a breach",
+          "reason": "A clean history is not a condition in Article 30(5)."
+        },
+        {
+          "correct": true,
+          "blocks": "No, the processing is not occasional and includes health data",
+          "reason": "Article 30(5): either condition defeats the exemption."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, fewer than 250 staff is always exempt",
+          "reason": "The exemption has three exceptions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does the under-250 exemption help a small business that processes regularly and handles health data?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "No, the processing is not occasional and includes health data",
+              "reason": "Article 30(5): either condition defeats the exemption."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, fewer than 250 staff is always exempt",
+              "reason": "The exemption has three exceptions."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if it has never had a breach",
+              "reason": "A clean history is not a condition in Article 30(5)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "records-of-processing"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Who can require Sunfield to show its record of processing?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "The supervisory authority",
+          "reason": "Article 30(4)."
+        },
+        {
+          "correct": false,
+          "blocks": "Any customer who asks",
+          "reason": "Customers have access rights, but Article 30(4) concerns the authority."
+        },
+        {
+          "correct": false,
+          "blocks": "No one; the record is purely internal",
+          "reason": "Article 30(4) requires availability to the authority."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "To whom must the Article 30 record be made available on request?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Any customer who asks",
+              "reason": "Customers have access rights, but Article 30(4) concerns the authority."
+            },
+            {
+              "correct": false,
+              "blocks": "No one; the record is purely internal",
+              "reason": "Article 30(4) requires availability to the authority."
+            },
+            {
+              "correct": true,
+              "blocks": "The supervisory authority",
+              "reason": "Article 30(4)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,285 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p06",
+    "title": "Berechtigte Interessen",
+    "summary": "Die dreistufige Prüfung der berechtigten Interessen anwenden: Interesse, Erforderlichkeit und Abwägung.",
+    "covers": [
+      "legitimate-interests"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p04",
+        "reason": "Zur Prüfung der berechtigten Interessen gehört ein Schritt zur Erforderlichkeit."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Eine Verarbeitung ist rechtmäßig, wenn sie **zur Wahrung der berechtigten Interessen** des Verantwortlichen oder eines Dritten **erforderlich** ist, **sofern nicht** die Interessen oder Grundrechte und Grundfreiheiten der Person überwiegen, insbesondere wenn die Person ein Kind ist (Art. 6 Abs. 1 Buchst. f)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 47",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Der Wortlaut enthält drei Schritte:",
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Gibt es ein **berechtigtes Interesse**?",
+            "Ist die Verarbeitung für dieses Interesse **erforderlich**?",
+            "**Überwiegen** die Interessen oder Rechte der Person?"
+          ]
+        },
+        "Alle drei Schritte müssen zugunsten des Verantwortlichen ausgehen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 47",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Nach Erwägungsgrund 47 hängt die Abwägung von den **vernünftigen Erwartungen** der Person ab, die auf ihrer Beziehung zum Verantwortlichen beruhen. Eine Kundenbeziehung kann ein berechtigtes Interesse stützen.",
+        "Die Interessen der Person können aber die des Verantwortlichen überwiegen, wenn sie vernünftigerweise **nicht mit der Verarbeitung rechnen** muss."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 47",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Erwägungsgrund 47 nennt Beispiele: Eine Verarbeitung im für die Verhinderung von Betrug unbedingt erforderlichen Umfang ist ein berechtigtes Interesse, und Direktwerbung **kann** als berechtigtes Interesse betrachtet werden. Auch dann müssen Erforderlichkeit und Abwägung noch geprüft werden.",
+        "Behörden können sich bei der Erfüllung ihrer Aufgaben nicht auf diese Rechtsgrundlage stützen (Art. 6 Abs. 1 und Erwägungsgrund 47)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 47",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld möchte Kameras gegen Diebstahl einsetzen. Diebstahl zu verhindern ist ein berechtigtes Interesse. Kameras über der Kasse und im Verkaufsraum können erforderlich sein.",
+        "Kameras im Pausenraum der Beschäftigten sind etwas anderes. Beschäftigte rechnen vernünftigerweise nicht damit, in ihrer Pause gefilmt zu werden. Ihre Interessen dürften daher die der Bäckerei überwiegen.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 47",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        {
+          "type": "callout",
+          "tone": "tip",
+          "text": "**Gute Praxis** (keine Regel, die aus der DSGVO zitiert wird): Schreiben Sie Ihre Antworten auf die drei Schritte auf, bevor Sie beginnen. Ist die Abwägung knapp, werden Sie froh sein, Ihre Überlegungen festgehalten zu haben."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 6 Abs. 1 Buchst. f",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 47",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "legitimate-interests"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Was verlangt Art. 6 Abs. 1 Buchst. f, bevor man sich auf berechtigte Interessen stützen kann?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ein Interesse, Erforderlichkeit und eine Abwägung, bei der die Interessen der Person nicht überwiegen",
+          "reason": "Diese drei Schritte stehen im Wortlaut von Art. 6 Abs. 1 Buchst. f."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur, dass das Unternehmen einen Vorteil hat",
+          "reason": "Wer nur auf den Vorteil schaut, überspringt Erforderlichkeit und Abwägung."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Einwilligung der Person und ein Interesse",
+          "reason": "Die Einwilligung ist eine eigene Rechtsgrundlage. Sie gehört nicht zu dieser Prüfung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Prüfung enthält die Rechtsgrundlage der berechtigten Interessen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur, dass das Unternehmen einen Vorteil hat",
+              "reason": "Wer nur auf den Vorteil schaut, überspringt Erforderlichkeit und Abwägung."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Einwilligung der Person und ein Interesse",
+              "reason": "Die Einwilligung ist eine eigene Rechtsgrundlage. Sie gehört nicht zu dieser Prüfung."
+            },
+            {
+              "correct": true,
+              "blocks": "Ein Interesse, Erforderlichkeit und eine Abwägung, bei der die Interessen der Person nicht überwiegen",
+              "reason": "Diese drei Schritte stehen im Wortlaut von Art. 6 Abs. 1 Buchst. f."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "legitimate-interests"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld erwägt eine Kamera im Pausenraum der Beschäftigten, um Diebstahl zu verhindern. Wie fällt die Abwägung wahrscheinlich aus?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Für die Bäckerei, weil Diebstahlschutz ein berechtigtes Interesse ist",
+          "reason": "Auch ein berechtigtes Interesse muss die Erforderlichkeit und die Abwägung bestehen."
+        },
+        {
+          "correct": false,
+          "blocks": "Für die Bäckerei, weil es ihre Beschäftigten sind",
+          "reason": "Ein Arbeitsverhältnis macht die Abwägung nicht überflüssig."
+        },
+        {
+          "correct": true,
+          "blocks": "Gegen die Bäckerei: Die Beschäftigten rechnen dort nicht damit",
+          "reason": "Erwägungsgrund 47: Die Interessen der Person können überwiegen, wenn sie vernünftigerweise nicht mit der Verarbeitung rechnen muss."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Bäckerei Sonnenfeld will den Pausenraum ihrer Beschäftigten filmen. Wie fällt die Abwägung der berechtigten Interessen wahrscheinlich aus?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Für die Bäckerei, weil es ihre Beschäftigten sind",
+              "reason": "Ein Arbeitsverhältnis macht die Abwägung nicht überflüssig."
+            },
+            {
+              "correct": true,
+              "blocks": "Gegen die Bäckerei: Die Beschäftigten rechnen dort nicht damit",
+              "reason": "Erwägungsgrund 47: Die Interessen der Person können überwiegen, wenn sie vernünftigerweise nicht mit der Verarbeitung rechnen muss."
+            },
+            {
+              "correct": false,
+              "blocks": "Für die Bäckerei, weil Diebstahlschutz ein berechtigtes Interesse ist",
+              "reason": "Auch ein berechtigtes Interesse muss die Erforderlichkeit und die Abwägung bestehen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "legitimate-interests"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Eine Stadtverwaltung möchte sich für ihre öffentlichen Aufgaben auf berechtigte Interessen stützen. Darf sie das?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, bei kleinen Datenmengen",
+          "reason": "Der Ausschluss kennt keine Mengengrenze."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, Art. 6 Abs. 1 schließt das aus",
+          "reason": "Artikel 6 Abs. 1 UAbs. 2 schließt die Verarbeitung durch Behörden in Erfüllung ihrer Aufgaben aus."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn die Interessen abgewogen werden",
+          "reason": "Der Ausschluss gilt unabhängig von jeder Abwägung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Steht die Rechtsgrundlage der berechtigten Interessen Behörden bei der Erfüllung ihrer Aufgaben offen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nein, Art. 6 Abs. 1 schließt das aus",
+              "reason": "Artikel 6 Abs. 1 UAbs. 2 schließt die Verarbeitung durch Behörden in Erfüllung ihrer Aufgaben aus."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn die Interessen abgewogen werden",
+              "reason": "Der Ausschluss gilt unabhängig von jeder Abwägung."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, bei kleinen Datenmengen",
+              "reason": "Der Ausschluss kennt keine Mengengrenze."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

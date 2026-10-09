@@ -79,6 +79,17 @@ describe("modules and lessons", () => {
     expect(action()).toBe("lesson.module_created");
   });
 
+  test("PUT modules/order reorders and is audited; it is not read as a module id", async () => {
+    lessonsMock.reorderModules.mockResolvedValue([] as never);
+    const res = await request(app)
+      .put(`${S}/modules/order`)
+      .send({ module_ids: ["m2", "m1"] });
+    expect(res.status).toBe(200);
+    expect(lessonsMock.reorderModules).toHaveBeenCalled();
+    expect(lessonsMock.updateModule).not.toHaveBeenCalled();
+    expect(action()).toBe("lesson.modules_reordered");
+  });
+
   test("POST lesson -> 201; a bad slug -> 422 and not audited", async () => {
     lessonsMock.createLesson.mockResolvedValueOnce({
       lesson: { slug: "tokens" },

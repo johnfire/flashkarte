@@ -1,0 +1,354 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p08",
+    "title": "Sensitive data",
+    "summary": "Recognise special-category and criminal data, and the extra conditions they need.",
+    "covers": [
+      "special-categories",
+      "special-category-conditions",
+      "criminal-offence-data"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g02",
+        "reason": "Special categories are a subset of personal data."
+      },
+      {
+        "lesson": "p04",
+        "reason": "Article 9 conditions apply in addition to a legal basis."
+      },
+      {
+        "lesson": "p05",
+        "reason": "Explicit consent builds on the general consent conditions."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Article 9(1) lists **special categories** of personal data:",
+        {
+          "type": "list",
+          "items": [
+            "racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership;",
+            "genetic data, and biometric data used to uniquely identify a person;",
+            "data concerning health, sex life or sexual orientation."
+          ]
+        },
+        "Processing these is **prohibited** (Article 9(1)), unless one of the exceptions on the next screens applies."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(13)-(15), 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 51",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Health data** includes data about physical or mental health, including health care services, that reveals a person's health status (Article 4(15)).",
+        "**Biometric data** results from specific technical processing of physical, physiological or behavioural characteristics that allows or confirms unique identification, for example facial images or fingerprints (Article 4(14)).",
+        "Recital 51 says photographs are **not automatically** special-category data. They are biometric data only when processed through specific technical means for unique identification or authentication."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(13)-(15), 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 51",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Article 9(2) lifts the prohibition in listed situations, including:",
+        {
+          "type": "list",
+          "items": [
+            "(a) **explicit consent** for specified purposes, unless law says the prohibition cannot be lifted that way;",
+            "(b) obligations and rights in **employment** and social security law, as authorised by law or a collective agreement;",
+            "(c) vital interests, where the person cannot consent; (d) certain not-for-profit bodies;",
+            "(e) data **manifestly made public** by the person; (f) legal claims;",
+            "(g) substantial public interest; (h) health and social care; (i) public health; (j) archiving, research and statistics."
+          ]
+        },
+        "EU countries may add conditions for genetic, biometric and health data (Article 9(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(13)-(15), 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 51",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "These are **two layers**. Recital 51 says the general principles and the conditions for lawful processing still apply.",
+        "So you need a **legal basis under Article 6** and **a condition under Article 9(2)**."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(13)-(15), 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 51",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Criminal convictions and offences**: processing based on Article 6(1) may be carried out only under the control of official authority, or where EU or national law authorises it with appropriate safeguards (Article 10).",
+        "A comprehensive register of criminal convictions may be kept only under the control of official authority."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(13)-(15), 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 51",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "At Sunfield, staff sick notes stating a diagnosis are health data. Handling them would typically rely on an employment-law condition (Article 9(2)(b)), as national law allows.",
+        "Staff photos on the website are not special-category data just because they show faces (recital 51).",
+        "A list of job applicants' criminal records would need authorisation in law (Article 10). Sunfield's own interest is not enough.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(13)-(15), 9, 10",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 51",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "special-categories"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which of these is special-category data?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "An employee's sick note stating a diagnosis",
+          "reason": "It reveals health status (Articles 4(15) and 9(1))."
+        },
+        {
+          "correct": false,
+          "blocks": "An employee's bank account number",
+          "reason": "Sensitive in practice, but not an Article 9(1) category."
+        },
+        {
+          "correct": false,
+          "blocks": "A customer's home address",
+          "reason": "Personal data, but not an Article 9(1) category."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which item falls under Article 9(1)?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "An employee's bank account number",
+              "reason": "Sensitive in practice, but not an Article 9(1) category."
+            },
+            {
+              "correct": false,
+              "blocks": "A customer's home address",
+              "reason": "Personal data, but not an Article 9(1) category."
+            },
+            {
+              "correct": true,
+              "blocks": "An employee's sick note stating a diagnosis",
+              "reason": "It reveals health status (Articles 4(15) and 9(1))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "special-categories"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Sunfield puts staff photos on its website. Are they special-category data?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, every photo of a face is biometric data",
+          "reason": "Recital 51 says photos are not automatically biometric."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, because a face shows someone's identity",
+          "reason": "Showing a face is not the specific technical processing required."
+        },
+        {
+          "correct": true,
+          "blocks": "No, unless processed technically for unique identification",
+          "reason": "Recital 51 and Article 4(14)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is every photograph of a person biometric data under the GDPR?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, because a face shows someone's identity",
+              "reason": "Showing a face is not the specific technical processing required."
+            },
+            {
+              "correct": true,
+              "blocks": "No, unless processed technically for unique identification",
+              "reason": "Recital 51 and Article 4(14)."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, every photo of a face is biometric data",
+              "reason": "Recital 51 says photos are not automatically biometric."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "special-category-conditions"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "What does Sunfield need in order to process health data lawfully?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nothing extra, if the data is encrypted",
+          "reason": "Encryption is security. It does not lift the prohibition."
+        },
+        {
+          "correct": true,
+          "blocks": "An Article 6 basis and an Article 9(2) condition",
+          "reason": "Recital 51: both layers apply."
+        },
+        {
+          "correct": false,
+          "blocks": "Only a legitimate interest under Article 6",
+          "reason": "Article 9(1) prohibits processing without a 9(2) condition."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which conditions apply to processing special-category data?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "An Article 6 basis and an Article 9(2) condition",
+              "reason": "Recital 51: both layers apply."
+            },
+            {
+              "correct": false,
+              "blocks": "Only a legitimate interest under Article 6",
+              "reason": "Article 9(1) prohibits processing without a 9(2) condition."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing extra, if the data is encrypted",
+              "reason": "Encryption is security. It does not lift the prohibition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "criminal-offence-data"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Sunfield wants to keep a list of applicants' criminal convictions, with their consent. Is consent enough?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, it needs official control or authorisation in law",
+          "reason": "Article 10 applies on top of any Article 6(1) basis."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, consent is a basis under Article 6",
+          "reason": "Article 10 adds conditions beyond the Article 6 basis."
+        },
+        {
+          "correct": false,
+          "blocks": "No, but a legitimate interest alone would be enough",
+          "reason": "Article 10 requires official control or authorisation in law, whatever the Article 6 basis."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is consent alone enough to process criminal-conviction data under Article 10?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, consent is a basis under Article 6",
+              "reason": "Article 10 adds conditions beyond the Article 6 basis."
+            },
+            {
+              "correct": false,
+              "blocks": "No, but a legitimate interest alone would be enough",
+              "reason": "Article 10 requires official control or authorisation in law, whatever the Article 6 basis."
+            },
+            {
+              "correct": true,
+              "blocks": "No, it needs official control or authorisation in law",
+              "reason": "Article 10 applies on top of any Article 6(1) basis."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

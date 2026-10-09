@@ -1,0 +1,334 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r08",
+    "title": "Beschwerde, Klage und Schadenersatz",
+    "summary": "Zwischen einer Beschwerde, einer Klage und einem Anspruch auf Schadenersatz wählen und verstehen, wie die Haftung verteilt ist.",
+    "covers": [
+      "complaint-and-court",
+      "compensation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "Eine Beschwerde wird bei einer Aufsichtsbehörde eingelegt."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Eine Klage richtet sich gegen einen Verantwortlichen oder einen Auftragsverarbeiter."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Beschwerde** (Art. 77): Jede betroffene Person hat das Recht auf Beschwerde bei einer **Aufsichtsbehörde**, insbesondere in dem EU-Staat, in dem sie ihren gewöhnlichen Aufenthaltsort oder ihren Arbeitsplatz hat oder in dem der mutmaßliche Verstoß stattfand.",
+        "Die Aufsichtsbehörde muss die Person, die sich beschwert hat, über den Stand und die Ergebnisse der Beschwerde unterrichten."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 146",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Gericht** (Art. 79): Eine Person kann auch gegen einen Verantwortlichen oder Auftragsverarbeiter vor Gericht gehen. Das gilt **unbeschadet** einer Beschwerde: Der eine Weg muss nicht vor dem anderen beschritten werden.",
+        "Zuständig sind die Gerichte des EU-Staats, in dem der Verantwortliche oder Auftragsverarbeiter eine Niederlassung hat. Wahlweise kann die Person auch dort klagen, wo sie ihren gewöhnlichen Aufenthaltsort hat, es sei denn, die beklagte Stelle ist eine Behörde, die in Ausübung ihrer hoheitlichen Befugnisse gehandelt hat."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 146",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Vertretung** (Art. 80): Eine Person kann eine ordnungsgemäß gegründete Einrichtung ohne Gewinnerzielungsabsicht, die im Datenschutz tätig ist, beauftragen, in ihrem Namen Beschwerde einzulegen oder vor Gericht zu gehen.",
+        "Die EU-Staaten können außerdem vorsehen, dass solche Einrichtungen auch ohne Auftrag einer Person handeln dürfen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 146",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Schadenersatz** (Art. 82 Abs. 1): **Jede Person**, der wegen eines Verstoßes ein **materieller oder immaterieller Schaden** entstanden ist, hat Anspruch auf Schadenersatz gegen den Verantwortlichen oder gegen den Auftragsverarbeiter.",
+        "Nach Erwägungsgrund 146 sollte der Begriff des Schadens weit ausgelegt werden, und der Schadenersatz sollte vollständig und wirksam sein."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 146",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Wer zahlt** (Art. 82 Abs. 2 bis 5):",
+        {
+          "type": "list",
+          "items": [
+            "Ein an der Verarbeitung beteiligter Verantwortlicher haftet für den Schaden, der durch eine Verarbeitung entsteht, die gegen die DSGVO verstößt.",
+            "Ein Auftragsverarbeiter haftet nur, wenn er seine speziell den Auftragsverarbeitern auferlegten Pflichten verletzt hat oder unter Nichtbeachtung der rechtmäßig erteilten Anweisungen des Verantwortlichen oder gegen diese Anweisungen gehandelt hat.",
+            "Beide sind nur dann von der Haftung befreit, wenn sie nachweisen, dass sie **in keinerlei Hinsicht** verantwortlich sind.",
+            "Sind mehrere verantwortlich, haftet **jeder für den gesamten Schaden**. Wer gezahlt hat, kann von den anderen deren Anteil zurückfordern."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 146",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Angenommen, das Lohnbüro der Bäckerei Sonnenfeld verletzt seine eigenen Sicherheitspflichten, und Gehaltsdaten gelangen nach außen. Die betroffenen Beschäftigten könnten Ansprüche gegen die Bäckerei und gegen das Lohnbüro geltend machen.",
+        "Sind beide verantwortlich, kann jeder von beiden zur Zahlung des vollen Betrags verpflichtet werden und dann vom anderen dessen Anteil zurückfordern.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 77, 79, 80, 82",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 146",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "complaint-and-court"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Eine Kundin, die in Österreich lebt, meint, die Bäckerei Sonnenfeld mit Sitz in Deutschland habe ihre Daten missbraucht. Wo kann sie sich beschweren?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Unter anderem bei der österreichischen Aufsichtsbehörde",
+          "reason": "Artikel 77 Abs. 1 nennt den Mitgliedstaat ihres gewöhnlichen Aufenthaltsorts."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur in Deutschland, wo die Bäckerei ihren Sitz hat",
+          "reason": "Artikel 77 lässt eine Beschwerde in mehreren Ländern zu."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur bei der Europäischen Kommission",
+          "reason": "Beschwerden gehen an eine Aufsichtsbehörde."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Bäckerei Sonnenfeld hat ihren Sitz in Deutschland. Eine Kundin, die in Österreich lebt, will sich über sie beschweren. Wo kann sie das nach Art. 77 tun?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur in Deutschland, wo die Bäckerei ihren Sitz hat",
+              "reason": "Artikel 77 lässt eine Beschwerde in mehreren Ländern zu."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur bei der Europäischen Kommission",
+              "reason": "Beschwerden gehen an eine Aufsichtsbehörde."
+            },
+            {
+              "correct": true,
+              "blocks": "Unter anderem bei der österreichischen Aufsichtsbehörde",
+              "reason": "Artikel 77 Abs. 1 nennt den Mitgliedstaat ihres gewöhnlichen Aufenthaltsorts."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "complaint-and-court"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Eine Kundin will die Bäckerei Sonnenfeld wegen ihrer Daten verklagen. Muss sie sich zuerst bei einer Aufsichtsbehörde beschweren?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, eine Beschwerde muss immer zuerst kommen",
+          "reason": "Keiner der beiden Wege ist Voraussetzung für den anderen."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur die Aufsichtsbehörde kann vor Gericht gehen",
+          "reason": "Artikel 79 gibt dieses Recht der betroffenen Person."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, der Weg zum Gericht steht ebenfalls offen",
+          "reason": "Artikel 79 gilt unbeschadet des Art. 77."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ist eine Beschwerde bei einer Aufsichtsbehörde Voraussetzung für eine Klage nach Art. 79?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur die Aufsichtsbehörde kann vor Gericht gehen",
+              "reason": "Artikel 79 gibt dieses Recht der betroffenen Person."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, der Weg zum Gericht steht ebenfalls offen",
+              "reason": "Artikel 79 gilt unbeschadet des Art. 77."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, eine Beschwerde muss immer zuerst kommen",
+              "reason": "Keiner der beiden Wege ist Voraussetzung für den anderen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compensation"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Eine Kundin hat durch einen Verstoß eine seelische Belastung erlitten, aber keinen finanziellen Verlust. Kann sie Schadenersatz verlangen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nur, wenn die Aufsichtsbehörde zuerst eine Geldbuße gegen die Bäckerei Sonnenfeld verhängt",
+          "reason": "Artikel 82 kennt keine solche Bedingung."
+        },
+        {
+          "correct": true,
+          "blocks": "Ja, auch immaterieller Schaden ist erfasst",
+          "reason": "Art. 82 Abs. 1."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, nur finanzielle Verluste zählen",
+          "reason": "Artikel 82 Abs. 1 erfasst auch immaterielle Schäden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Erfasst Art. 82 auch Schäden, die nicht finanzieller Art sind?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ja, auch immaterieller Schaden ist erfasst",
+              "reason": "Art. 82 Abs. 1."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, nur finanzielle Verluste zählen",
+              "reason": "Artikel 82 Abs. 1 erfasst auch immaterielle Schäden."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur, wenn die Aufsichtsbehörde zuerst eine Geldbuße gegen die Bäckerei Sonnenfeld verhängt",
+              "reason": "Artikel 82 kennt keine solche Bedingung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compensation"
+      ],
+      "teaches": [
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "Der Auftragsverarbeiter, der für die Bäckerei Sonnenfeld die Lohnabrechnung macht, hat seine eigenen Pflichten verletzt, und es kam zu einem Datenleck. Wer kann den Beschäftigten gegenüber haften?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Jeder von beiden kann für den gesamten Schaden haften",
+          "reason": "Artikel 82 Abs. 4, mit Rückgriff nach Art. 82 Abs. 5."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur der Auftragsverarbeiter",
+          "reason": "Auch der beteiligte Verantwortliche kann haften."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur die Bäckerei Sonnenfeld, weil Auftragsverarbeiter nie haften",
+          "reason": "Auftragsverarbeiter haften, wenn sie ihre eigenen Pflichten verletzen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ein Auftragsverarbeiter verletzt seine eigenen Pflichten, und dadurch gelangen Daten der Beschäftigten der Bäckerei Sonnenfeld nach außen. Wie ist die Haftung gegenüber den Beschäftigten verteilt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur der Auftragsverarbeiter",
+              "reason": "Auch der beteiligte Verantwortliche kann haften."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur die Bäckerei Sonnenfeld, weil Auftragsverarbeiter nie haften",
+              "reason": "Auftragsverarbeiter haften, wenn sie ihre eigenen Pflichten verletzen."
+            },
+            {
+              "correct": true,
+              "blocks": "Jeder von beiden kann für den gesamten Schaden haften",
+              "reason": "Artikel 82 Abs. 4, mit Rückgriff nach Art. 82 Abs. 5."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

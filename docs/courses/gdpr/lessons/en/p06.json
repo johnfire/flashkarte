@@ -1,0 +1,285 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p06",
+    "title": "Legitimate interests",
+    "summary": "Apply the three-step legitimate-interests test: interest, necessity and balance.",
+    "covers": [
+      "legitimate-interests"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p04",
+        "reason": "The legitimate-interests test includes a necessity step."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Processing is lawful if it is **necessary for the legitimate interests** pursued by the controller or a third party, **except where** those interests are overridden by the person's interests or fundamental rights, in particular where the person is a child (Article 6(1)(f))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 47",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The wording contains three steps:",
+        {
+          "type": "list",
+          "ordered": true,
+          "items": [
+            "Is there a **legitimate interest**?",
+            "Is the processing **necessary** for that interest?",
+            "Do the person's interests or rights **override** it?"
+          ]
+        },
+        "All three must come out in the controller's favour."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 47",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Recital 47 says the balance depends on people's **reasonable expectations**, based on their relationship with the controller. A client relationship can support a legitimate interest.",
+        "But people's interests may override the controller's where they **do not reasonably expect** the processing."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 47",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Recital 47 gives examples: processing strictly necessary to prevent fraud is a legitimate interest, and direct marketing **may** be regarded as one. Even then, necessity and the balance must still be checked.",
+        "Public authorities cannot rely on this basis for processing in performing their tasks (Article 6(1), and recital 47)."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 47",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Sunfield wants cameras to prevent theft. Preventing theft is a legitimate interest. Cameras over the till and sales floor may be necessary.",
+        "Cameras in the staff break room are different. Staff do not reasonably expect to be filmed while resting, so their interests are likely to override Sunfield's.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 47",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        {
+          "type": "callout",
+          "tone": "tip",
+          "text": "**Good practice** (not a rule quoted from the GDPR): write down your answers to the three steps before you start. If the balance is close, you will want a record of your reasoning."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 6(1)(f)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 47",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "legitimate-interests"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "What does Article 6(1)(f) require before relying on legitimate interests?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "An interest, necessity, and a balance that does not override it",
+          "reason": "These three steps are in the wording of Article 6(1)(f)."
+        },
+        {
+          "correct": false,
+          "blocks": "Only that the business benefits",
+          "reason": "Benefit alone skips necessity and the balance."
+        },
+        {
+          "correct": false,
+          "blocks": "The person's consent, plus an interest",
+          "reason": "Consent is a separate basis. It is not part of this test."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which test does the legitimate-interests basis contain?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Only that the business benefits",
+              "reason": "Benefit alone skips necessity and the balance."
+            },
+            {
+              "correct": false,
+              "blocks": "The person's consent, plus an interest",
+              "reason": "Consent is a separate basis. It is not part of this test."
+            },
+            {
+              "correct": true,
+              "blocks": "An interest, necessity, and a balance that does not override it",
+              "reason": "These three steps are in the wording of Article 6(1)(f)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "legitimate-interests"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Sunfield considers a camera in the staff break room to prevent theft. How is the balance likely to fall?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "For Sunfield, because theft prevention is legitimate",
+          "reason": "A legitimate interest still has to pass necessity and the balance."
+        },
+        {
+          "correct": false,
+          "blocks": "For Sunfield, because staff are employees",
+          "reason": "An employment relationship does not remove the balance."
+        },
+        {
+          "correct": true,
+          "blocks": "Against Sunfield: staff do not expect it there",
+          "reason": "Recital 47: interests override where processing is not reasonably expected."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Sunfield wants to film its staff break room. Which way is the legitimate-interests balance likely to fall?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "For Sunfield, because staff are employees",
+              "reason": "An employment relationship does not remove the balance."
+            },
+            {
+              "correct": true,
+              "blocks": "Against Sunfield: staff do not expect it there",
+              "reason": "Recital 47: interests override where processing is not reasonably expected."
+            },
+            {
+              "correct": false,
+              "blocks": "For Sunfield, because theft prevention is legitimate",
+              "reason": "A legitimate interest still has to pass necessity and the balance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "legitimate-interests"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "A town council wants to rely on legitimate interests for its public tasks. Can it?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, for small amounts of data",
+          "reason": "The exclusion has no size threshold."
+        },
+        {
+          "correct": true,
+          "blocks": "No, Article 6(1) excludes this",
+          "reason": "The second subparagraph of Article 6(1) excludes public authorities' tasks."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if it balances the interests",
+          "reason": "The exclusion applies regardless of any balance."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is the legitimate-interests basis available to public authorities performing their tasks?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "No, Article 6(1) excludes this",
+              "reason": "The second subparagraph of Article 6(1) excludes public authorities' tasks."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if it balances the interests",
+              "reason": "The exclusion applies regardless of any balance."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, for small amounts of data",
+              "reason": "The exclusion has no size threshold."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,346 @@
+{
+  "module": "Borders, regulators and fines",
+  "lesson": {
+    "slug": "x05",
+    "title": "Schrems II and the EU-US Data Privacy Framework",
+    "summary": "Explain what Schrems II requires for transfers under standard clauses, and what the EU-US Data Privacy Framework is.",
+    "covers": [
+      "essential-equivalence",
+      "eu-us-dpf"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "x01",
+        "reason": "Schrems II interprets the standard-clauses tool."
+      },
+      {
+        "lesson": "x03",
+        "reason": "Schrems II relies on the power to suspend transfers."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "In **Case C-311/18**, known as *Schrems II*, the Court of Justice of the EU ruled on 16 July 2020 on two transfer tools: the Commission's standard contractual clauses, and the EU-US **Privacy Shield** adequacy decision.",
+        "The judgment is still the reference point for how carefully transfers must be assessed."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-311/18 Schrems II, operative part, points 1-5",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Commission Implementing Decision (EU) 2023/1795, title, date and EUR-Lex status checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 45(2), 46(1), 58(2)(f), (j)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Point 1**: the GDPR applies to a commercial transfer to a company in a third country, even if that country's authorities may process the data for national security (operative part, point 1)."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-311/18 Schrems II, operative part, points 1-5",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Commission Implementing Decision (EU) 2023/1795, title, date and EUR-Lex status checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 45(2), 46(1), 58(2)(f), (j)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Point 2**: data transferred under standard clauses must receive a level of protection **essentially equivalent** to that guaranteed in the EU.",
+        "The assessment must consider **both** the clauses **and**, as regards access by public authorities, the relevant aspects of the third country's **legal system**, in particular the elements listed in Article 45(2)."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-311/18 Schrems II, operative part, points 1-5",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Commission Implementing Decision (EU) 2023/1795, title, date and EUR-Lex status checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 45(2), 46(1), 58(2)(f), (j)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Point 3**: unless there is a valid adequacy decision, the supervisory authority must **suspend or prohibit** a transfer under standard clauses if they are not, or cannot be, complied with in that country and protection cannot be ensured by other means, where the controller or processor has not stopped the transfer itself. This uses its powers in Article 58(2)(f) and (j)."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-311/18 Schrems II, operative part, points 1-5",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Commission Implementing Decision (EU) 2023/1795, title, date and EUR-Lex status checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 45(2), 46(1), 58(2)(f), (j)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Points 4 and 5**: the examination found nothing affecting the validity of the 2010 standard clauses decision. The **Privacy Shield** decision, (EU) 2016/1250, was declared **invalid**."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-311/18 Schrems II, operative part, points 1-5",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Commission Implementing Decision (EU) 2023/1795, title, date and EUR-Lex status checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 45(2), 46(1), 58(2)(f), (j)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "On 10 July 2023 the Commission adopted Implementing Decision (EU) 2023/1795, an adequacy decision on the **EU-US Data Privacy Framework**.",
+        "On 7 October 2026, EUR-Lex showed it **in force**. It also showed the decision \"confirmed by\" General Court case T-553/23, and a further referral to the Court of Justice, C-804/25.",
+        {
+          "type": "callout",
+          "tone": "warning",
+          "text": "**Check the current status** of the Framework before relying on it. Court cases can change it, as Privacy Shield showed."
+        }
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-311/18 Schrems II, operative part, points 1-5",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62018CJ0311"
+        },
+        {
+          "title": "Commission Implementing Decision (EU) 2023/1795, title, date and EUR-Lex status checked 7 October 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32023D1795"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 45(2), 46(1), 58(2)(f), (j)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "essential-equivalence"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "What level of protection did Schrems II require for transfers under standard clauses?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Essentially equivalent to the protection in the EU",
+          "reason": "Operative part, point 2."
+        },
+        {
+          "correct": false,
+          "blocks": "Identical laws in the recipient country",
+          "reason": "The test is essential equivalence, not identical laws."
+        },
+        {
+          "correct": false,
+          "blocks": "Any level, once the clauses are signed",
+          "reason": "Signing alone is not enough; the legal system must be considered."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which standard must transferred data meet according to Schrems II?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Identical laws in the recipient country",
+              "reason": "The test is essential equivalence, not identical laws."
+            },
+            {
+              "correct": false,
+              "blocks": "Any level, once the clauses are signed",
+              "reason": "Signing alone is not enough; the legal system must be considered."
+            },
+            {
+              "correct": true,
+              "blocks": "Essentially equivalent to the protection in the EU",
+              "reason": "Operative part, point 2."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "essential-equivalence"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Besides the clauses themselves, what must the assessment consider?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The recipient's annual turnover",
+          "reason": "Not part of the assessment."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing; the clauses alone decide",
+          "reason": "The Court required both aspects to be considered."
+        },
+        {
+          "correct": true,
+          "blocks": "Public authorities' access under the recipient country's legal system",
+          "reason": "Operative part, point 2, referring to Article 45(2)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In Schrems II, what else counts when judging a transfer under standard clauses?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nothing; the clauses alone decide",
+              "reason": "The Court required both aspects to be considered."
+            },
+            {
+              "correct": true,
+              "blocks": "Public authorities' access under the recipient country's legal system",
+              "reason": "Operative part, point 2, referring to Article 45(2)."
+            },
+            {
+              "correct": false,
+              "blocks": "The recipient's annual turnover",
+              "reason": "Not part of the assessment."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-us-dpf"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "What did Schrems II decide about the EU-US Privacy Shield?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "It was turned into standard clauses",
+          "reason": "The Court did no such thing."
+        },
+        {
+          "correct": true,
+          "blocks": "It was declared invalid",
+          "reason": "Operative part, point 5."
+        },
+        {
+          "correct": false,
+          "blocks": "It was confirmed as valid",
+          "reason": "The Court declared it invalid."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What happened to Decision (EU) 2016/1250 in C-311/18?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "It was declared invalid",
+              "reason": "Operative part, point 5."
+            },
+            {
+              "correct": false,
+              "blocks": "It was confirmed as valid",
+              "reason": "The Court declared it invalid."
+            },
+            {
+              "correct": false,
+              "blocks": "It was turned into standard clauses",
+              "reason": "The Court did no such thing."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-us-dpf"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "What is Commission Implementing Decision (EU) 2023/1795?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "An adequacy decision for the EU-US Data Privacy Framework",
+          "reason": "Adopted 10 July 2023; in force per EUR-Lex on 7 October 2026."
+        },
+        {
+          "correct": false,
+          "blocks": "A judgment of the Court of Justice",
+          "reason": "It is a Commission decision."
+        },
+        {
+          "correct": false,
+          "blocks": "A new set of standard contractual clauses",
+          "reason": "It is an adequacy decision."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which kind of instrument is the EU-US Data Privacy Framework decision?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "A judgment of the Court of Justice",
+              "reason": "It is a Commission decision."
+            },
+            {
+              "correct": false,
+              "blocks": "A new set of standard contractual clauses",
+              "reason": "It is an adequacy decision."
+            },
+            {
+              "correct": true,
+              "blocks": "An adequacy decision for the EU-US Data Privacy Framework",
+              "reason": "Adopted 10 July 2023; in force per EUR-Lex on 7 October 2026."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

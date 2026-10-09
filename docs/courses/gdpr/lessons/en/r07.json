@@ -1,0 +1,335 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r07",
+    "title": "Profiling and automated decisions",
+    "summary": "Recognise profiling, and apply the Article 22 rules on solely automated decisions.",
+    "covers": [
+      "profiling",
+      "automated-decisions"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Profiling is a form of automated processing."
+      },
+      {
+        "lesson": "p05",
+        "reason": "One exception is explicit consent, which builds on consent."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Profiling** is automated processing of personal data to **evaluate personal aspects** of a person (Article 4(4)).",
+        "In particular, it analyses or predicts their performance at work, economic situation, health, preferences, interests, reliability, behaviour, location or movements."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(4), 13(2)(f), 15(1)(h), 22",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 71",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 22(1): a person has the right **not to be subject to a decision based solely on automated processing**, including profiling, which produces **legal effects** concerning them or **similarly significantly affects** them.",
+        "Recital 71 gives examples: automatic refusal of an online credit application, and e-recruiting without any human intervention."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(4), 13(2)(f), 15(1)(h), 22",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 71",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Article 22(1) does not apply if the decision (Article 22(2)):",
+        {
+          "type": "list",
+          "items": [
+            "(a) is **necessary** for entering into or performing a contract with the person;",
+            "(b) is authorised by EU or national law with suitable safeguards; or",
+            "(c) is based on the person's **explicit consent**."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(4), 13(2)(f), 15(1)(h), 22",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 71",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "In cases (a) and (c), the controller must implement safeguards, **at least** the right to obtain **human intervention**, to express one's **point of view** and to **contest** the decision (Article 22(3)). Recital 71 also mentions obtaining an explanation of the decision.",
+        "Such decisions must not be based on special-category data (the sensitive categories listed in Article 9(1), such as health), unless explicit consent or substantial public interest applies with suitable safeguards (Article 22(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(4), 13(2)(f), 15(1)(h), 22",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 71",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Transparency follows. Privacy notices and access responses must mention such automated decision-making, with **meaningful information about the logic involved** and its significance and consequences (Articles 13(2)(f) and 15(1)(h))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(4), 13(2)(f), 15(1)(h), 22",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 71",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield's app suggests pastries based on what a customer bought before. That is profiling, but a suggestion usually has no legal or similarly significant effect.",
+        "If Sunfield used software that automatically rejected job applicants with no human review, that would fall under Article 22. Recital 71 names e-recruiting.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(4), 13(2)(f), 15(1)(h), 22",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recital 71",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "profiling"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Which of these is profiling?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "An app predicting a customer's tastes from her purchases",
+          "reason": "It predicts preferences (Article 4(4))."
+        },
+        {
+          "correct": false,
+          "blocks": "Storing a customer's delivery address",
+          "reason": "Storing is processing, but nothing is evaluated."
+        },
+        {
+          "correct": false,
+          "blocks": "Printing a till receipt",
+          "reason": "Nothing about the person is analysed or predicted."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which activity evaluates personal aspects through automated processing?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Storing a customer's delivery address",
+              "reason": "Storing is processing, but nothing is evaluated."
+            },
+            {
+              "correct": false,
+              "blocks": "Printing a till receipt",
+              "reason": "Nothing about the person is analysed or predicted."
+            },
+            {
+              "correct": true,
+              "blocks": "An app predicting a customer's tastes from her purchases",
+              "reason": "It predicts preferences (Article 4(4))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "automated-decisions"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Software automatically rejects job applicants, with no human involved. Is Article 22 relevant?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "No, because applicants can always reapply",
+          "reason": "Being able to reapply does not remove the effect."
+        },
+        {
+          "correct": false,
+          "blocks": "No, Article 22 only concerns credit decisions",
+          "reason": "Credit is just one example in recital 71."
+        },
+        {
+          "correct": true,
+          "blocks": "Yes, it is a solely automated decision with significant effect",
+          "reason": "Recital 71 names e-recruiting without human intervention."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does fully automatic applicant rejection engage Article 22?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, Article 22 only concerns credit decisions",
+              "reason": "Credit is just one example in recital 71."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, it is a solely automated decision with significant effect",
+              "reason": "Recital 71 names e-recruiting without human intervention."
+            },
+            {
+              "correct": false,
+              "blocks": "No, because applicants can always reapply",
+              "reason": "Being able to reapply does not remove the effect."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "automated-decisions"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "A solely automated decision relies on explicit consent. What must the controller offer at least?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only a refund of any fee paid",
+          "reason": "Article 22(3) requires the listed safeguards."
+        },
+        {
+          "correct": true,
+          "blocks": "Human intervention, a chance to give views, and to contest",
+          "reason": "Article 22(3)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing more, since the person consented",
+          "reason": "Article 22(3) applies in consent cases."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which safeguards does Article 22(3) require at a minimum when a solely automated decision rests on a contract or explicit consent?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Human intervention, a chance to give views, and to contest",
+              "reason": "Article 22(3)."
+            },
+            {
+              "correct": false,
+              "blocks": "Nothing more, since the person consented",
+              "reason": "Article 22(3) applies in consent cases."
+            },
+            {
+              "correct": false,
+              "blocks": "Only a refund of any fee paid",
+              "reason": "Article 22(3) requires the listed safeguards."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "profiling",
+        "automated-decisions"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Sunfield's app recommends pastries from past purchases. How does the GDPR classify that?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Profiling, but usually not an Article 22 decision",
+          "reason": "It evaluates preferences, but a suggestion rarely has legal or similarly significant effects."
+        },
+        {
+          "correct": false,
+          "blocks": "A decision banned by Article 22",
+          "reason": "Article 22 needs legal or similarly significant effects."
+        },
+        {
+          "correct": false,
+          "blocks": "Not processing personal data at all",
+          "reason": "Purchase history linked to a customer is personal data."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Product suggestions based on purchase history: profiling, an Article 22 decision, or neither?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "A decision banned by Article 22",
+              "reason": "Article 22 needs legal or similarly significant effects."
+            },
+            {
+              "correct": false,
+              "blocks": "Not processing personal data at all",
+              "reason": "Purchase history linked to a customer is personal data."
+            },
+            {
+              "correct": true,
+              "blocks": "Profiling, but usually not an Article 22 decision",
+              "reason": "It evaluates preferences, but a suggestion rarely has legal or similarly significant effects."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

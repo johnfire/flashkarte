@@ -1,0 +1,335 @@
+{
+  "module": "Die Rechte der Menschen: was Kundschaft und Beschäftigte verlangen können",
+  "lesson": {
+    "slug": "r07",
+    "title": "Profiling und automatisierte Entscheidungen",
+    "summary": "Profiling erkennen und die Regeln des Art. 22 für Entscheidungen anwenden, die ausschließlich auf einer automatisierten Verarbeitung beruhen.",
+    "covers": [
+      "profiling",
+      "automated-decisions"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g04",
+        "reason": "Profiling ist eine Form der automatisierten Verarbeitung."
+      },
+      {
+        "lesson": "p05",
+        "reason": "Eine Ausnahme ist die ausdrückliche Einwilligung, die auf den allgemeinen Bedingungen für die Einwilligung aufbaut."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Profiling** ist jede Art der automatisierten Verarbeitung personenbezogener Daten, mit der **bestimmte persönliche Aspekte** eines Menschen **bewertet** werden (Art. 4 Nr. 4).",
+        "Insbesondere geht es darum, Aspekte wie Arbeitsleistung, wirtschaftliche Lage, Gesundheit, persönliche Vorlieben, Interessen, Zuverlässigkeit, Verhalten, Aufenthaltsort oder Ortswechsel zu analysieren oder vorherzusagen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 4, 13 Abs. 2 Buchst. f, 15 Abs. 1 Buchst. h, 22",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 71",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Nach Art. 22 Abs. 1 hat eine Person das Recht, „**nicht einer ausschließlich auf einer automatisierten Verarbeitung — einschließlich Profiling — beruhenden Entscheidung unterworfen zu werden**, die ihr gegenüber **rechtliche Wirkung** entfaltet oder sie **in ähnlicher Weise erheblich beeinträchtigt**“.",
+        "Erwägungsgrund 71 nennt Beispiele: die automatische Ablehnung eines Online-Kreditantrags und „Online-Einstellungsverfahren ohne jegliches menschliche Eingreifen“."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 4, 13 Abs. 2 Buchst. f, 15 Abs. 1 Buchst. h, 22",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 71",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Artikel 22 Abs. 1 gilt nicht, wenn die Entscheidung (Art. 22 Abs. 2):",
+        {
+          "type": "list",
+          "items": [
+            "a) für den Abschluss oder die Erfüllung eines Vertrags mit der Person **erforderlich** ist;",
+            "b) nach Rechtsvorschriften der EU oder eines EU-Staats zulässig ist, die angemessene Maßnahmen zum Schutz der Person enthalten; oder",
+            "c) mit **ausdrücklicher Einwilligung** der Person erfolgt."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 4, 13 Abs. 2 Buchst. f, 15 Abs. 1 Buchst. h, 22",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 71",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "In den Fällen nach Buchst. a und c muss der Verantwortliche angemessene Maßnahmen treffen. Dazu gehört **mindestens** das Recht, das **Eingreifen einer Person**, also eines Menschen, seitens des Verantwortlichen zu erwirken, den eigenen **Standpunkt darzulegen** und die Entscheidung **anzufechten** (Art. 22 Abs. 3). Erwägungsgrund 71 nennt außerdem eine Erläuterung der Entscheidung.",
+        "Solche Entscheidungen dürfen nicht auf besonderen Kategorien personenbezogener Daten beruhen (den sensiblen Kategorien nach Art. 9 Abs. 1, etwa Gesundheitsdaten). Ausnahmen gelten nur bei ausdrücklicher Einwilligung oder erheblichem öffentlichem Interesse und nur mit angemessenen Maßnahmen zum Schutz der Person (Art. 22 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 4, 13 Abs. 2 Buchst. f, 15 Abs. 1 Buchst. h, 22",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 71",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Daraus folgen Pflichten zur Transparenz. Datenschutzhinweise und Antworten auf Auskunftsanträge müssen eine solche automatisierte Entscheidungsfindung erwähnen, mit **aussagekräftigen Informationen über die involvierte Logik** sowie über die Tragweite und die angestrebten Auswirkungen (Art. 13 Abs. 2 Buchst. f und 15 Abs. 1 Buchst. h)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 4, 13 Abs. 2 Buchst. f, 15 Abs. 1 Buchst. h, 22",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 71",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die App der Bäckerei Sonnenfeld schlägt Gebäck vor, je nachdem, was eine Kundin früher gekauft hat. Das ist Profiling. Ein Vorschlag hat aber in der Regel keine rechtliche Wirkung und beeinträchtigt die Kundin auch nicht in ähnlicher Weise erheblich.",
+        "Würde die Bäckerei eine Software einsetzen, die Bewerbungen automatisch und ohne menschliche Prüfung ablehnt, fiele das unter Art. 22. Erwägungsgrund 71 nennt Online-Einstellungsverfahren als Beispiel.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 4, 13 Abs. 2 Buchst. f, 15 Abs. 1 Buchst. h, 22",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 71",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "profiling"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Was davon ist Profiling?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Eine App, die aus den Käufen einer Kundin ihre Vorlieben vorhersagt",
+          "reason": "Sie sagt persönliche Vorlieben vorher (Art. 4 Nr. 4)."
+        },
+        {
+          "correct": false,
+          "blocks": "Das Speichern der Lieferanschrift einer Kundin",
+          "reason": "Speichern ist eine Verarbeitung, aber es wird nichts bewertet."
+        },
+        {
+          "correct": false,
+          "blocks": "Das Drucken eines Kassenbons",
+          "reason": "Über die Person wird nichts analysiert oder vorhergesagt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Tätigkeit bewertet persönliche Aspekte eines Menschen durch automatisierte Verarbeitung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Das Speichern der Lieferanschrift einer Kundin",
+              "reason": "Speichern ist eine Verarbeitung, aber es wird nichts bewertet."
+            },
+            {
+              "correct": false,
+              "blocks": "Das Drucken eines Kassenbons",
+              "reason": "Über die Person wird nichts analysiert oder vorhergesagt."
+            },
+            {
+              "correct": true,
+              "blocks": "Eine App, die aus den Käufen einer Kundin ihre Vorlieben vorhersagt",
+              "reason": "Sie sagt persönliche Vorlieben vorher (Art. 4 Nr. 4)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "automated-decisions"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Eine Software lehnt Bewerbungen automatisch ab, ohne dass ein Mensch beteiligt ist. Spielt Art. 22 hier eine Rolle?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nein, weil man sich jederzeit erneut bewerben kann",
+          "reason": "Die Möglichkeit, sich erneut zu bewerben, beseitigt die Wirkung nicht."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, Art. 22 betrifft nur Kreditentscheidungen",
+          "reason": "Kredite sind nur eines der Beispiele in Erwägungsgrund 71."
+        },
+        {
+          "correct": true,
+          "blocks": "Ja, es ist eine ausschließlich automatisierte Entscheidung mit erheblicher Wirkung",
+          "reason": "Erwägungsgrund 71 nennt Online-Einstellungsverfahren ohne jegliches menschliche Eingreifen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Fällt eine vollautomatische Ablehnung von Bewerbungen unter Art. 22?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, Art. 22 betrifft nur Kreditentscheidungen",
+              "reason": "Kredite sind nur eines der Beispiele in Erwägungsgrund 71."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, es ist eine ausschließlich automatisierte Entscheidung mit erheblicher Wirkung",
+              "reason": "Erwägungsgrund 71 nennt Online-Einstellungsverfahren ohne jegliches menschliche Eingreifen."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, weil man sich jederzeit erneut bewerben kann",
+              "reason": "Die Möglichkeit, sich erneut zu bewerben, beseitigt die Wirkung nicht."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "automated-decisions"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Eine ausschließlich automatisierte Entscheidung beruht auf einer ausdrücklichen Einwilligung. Was muss der Verantwortliche mindestens anbieten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nur die Erstattung eines gezahlten Entgelts",
+          "reason": "Artikel 22 Abs. 3 verlangt die dort genannten Maßnahmen."
+        },
+        {
+          "correct": true,
+          "blocks": "Das Recht auf Eingreifen einer Person, auf Darlegung des eigenen Standpunkts und auf Anfechtung der Entscheidung",
+          "reason": "Art. 22 Abs. 3."
+        },
+        {
+          "correct": false,
+          "blocks": "Nichts weiter, weil die Person eingewilligt hat",
+          "reason": "Artikel 22 Abs. 3 gilt auch bei einer Einwilligung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Maßnahmen verlangt Art. 22 Abs. 3 mindestens, wenn eine ausschließlich automatisierte Entscheidung auf einem Vertrag oder einer ausdrücklichen Einwilligung beruht?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Das Recht auf Eingreifen einer Person, auf Darlegung des eigenen Standpunkts und auf Anfechtung der Entscheidung",
+              "reason": "Art. 22 Abs. 3."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts weiter, weil die Person eingewilligt hat",
+              "reason": "Artikel 22 Abs. 3 gilt auch bei einer Einwilligung."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur die Erstattung eines gezahlten Entgelts",
+              "reason": "Artikel 22 Abs. 3 verlangt die dort genannten Maßnahmen."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "profiling",
+        "automated-decisions"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-6"
+      ],
+      "prompt": "Die App der Bäckerei Sonnenfeld empfiehlt Gebäck auf Grundlage früherer Käufe. Wie ordnet die DSGVO das ein?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Profiling, aber in der Regel keine Entscheidung nach Art. 22",
+          "reason": "Es bewertet Vorlieben, aber ein Vorschlag hat selten rechtliche Wirkung oder eine ähnlich erhebliche Beeinträchtigung zur Folge."
+        },
+        {
+          "correct": false,
+          "blocks": "Eine nach Art. 22 verbotene Entscheidung",
+          "reason": "Artikel 22 setzt eine rechtliche Wirkung oder eine ähnlich erhebliche Beeinträchtigung voraus."
+        },
+        {
+          "correct": false,
+          "blocks": "Überhaupt keine Verarbeitung personenbezogener Daten",
+          "reason": "Ein Kaufverlauf, der einer Kundin zugeordnet ist, besteht aus personenbezogenen Daten."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Produktvorschläge auf Grundlage des Kaufverlaufs: Ist das Profiling, eine Entscheidung nach Art. 22 oder keins von beiden?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Eine nach Art. 22 verbotene Entscheidung",
+              "reason": "Artikel 22 setzt eine rechtliche Wirkung oder eine ähnlich erhebliche Beeinträchtigung voraus."
+            },
+            {
+              "correct": false,
+              "blocks": "Überhaupt keine Verarbeitung personenbezogener Daten",
+              "reason": "Ein Kaufverlauf, der einer Kundin zugeordnet ist, besteht aus personenbezogenen Daten."
+            },
+            {
+              "correct": true,
+              "blocks": "Profiling, aber in der Regel keine Entscheidung nach Art. 22",
+              "reason": "Es bewertet Vorlieben, aber ein Vorschlag hat selten rechtliche Wirkung oder eine ähnlich erhebliche Beeinträchtigung zur Folge."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

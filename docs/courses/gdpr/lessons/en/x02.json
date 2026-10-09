@@ -1,0 +1,261 @@
+{
+  "module": "Borders, regulators and fines",
+  "lesson": {
+    "slug": "x02",
+    "title": "Regulators and the one-stop shop",
+    "summary": "Find the competent supervisory authority, including the lead authority for cross-border processing, and see what the EDPB does.",
+    "covers": [
+      "lead-authority",
+      "edpb"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "The lead authority is a supervisory authority with a special role."
+      },
+      {
+        "lesson": "g05",
+        "reason": "The lead authority follows the controller's main establishment."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Each supervisory authority is competent on the territory of its own country (Article 55(1)).",
+        "Where public authorities or private bodies process data on the basis of a legal obligation or a public task, the authority of that country is competent, and the lead-authority rules do not apply (Article 55(2)). Courts acting in their judicial capacity are not supervised by these authorities (Article 55(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(16), 4(23), 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Cross-border processing** (Article 4(23)) means either:",
+        {
+          "type": "list",
+          "items": [
+            "processing in the context of establishments in **more than one** EU country; or",
+            "processing by a single establishment that substantially affects, or is likely to affect, people in **more than one** EU country."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(16), 4(23), 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "For cross-border processing, the authority of the controller's **main establishment**, or single establishment, acts as the **lead supervisory authority** (Article 56(1)).",
+        "The main establishment is normally the place of central administration in the EU. If decisions on purposes and means are taken, and can be implemented, at another EU establishment, that establishment is the main one (Article 4(16)(a))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(16), 4(23), 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The lead authority is the **sole interlocutor** of the controller for its cross-border processing (Article 56(6)). This arrangement is often called the \"one-stop shop\".",
+        "There is a local exception. Any authority may handle a complaint or possible infringement that relates only to an establishment in its country, or substantially affects people only in its country. It must first inform the lead authority, which decides within three weeks whether to handle the case itself (Article 56(2)-(3))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(16), 4(23), 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The **European Data Protection Board** (EDPB) is an EU body with legal personality (Article 68(1)). It is made up of the head of one supervisory authority from each EU country and the European Data Protection Supervisor (Article 68(3)).",
+        "Its job is to ensure the **consistent application** of the GDPR (Article 70(1)). For example, it issues guidelines, recommendations and best practices, advises the Commission, and adopts binding decisions in disputes between authorities."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(16), 4(23), 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield has shops only in Germany and affects customers there, so it deals with its German authority.",
+        "Suppose a bakery chain has its EU head office in Austria, where it takes its data decisions, and shops in Germany. For its cross-border processing, the Austrian authority would lead.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These examples are **illustrations**. Sunfield Bakery and the other businesses are invented, and a real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(16), 4(23), 55, 56, 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "lead-authority"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4",
+        "screen-6"
+      ],
+      "prompt": "A chain takes its data decisions at its head office in Austria and has shops in Germany. Who leads on its cross-border processing?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "The Austrian authority",
+          "reason": "The authority of the main establishment (Article 56(1))."
+        },
+        {
+          "correct": false,
+          "blocks": "Each country's authority separately, for everything",
+          "reason": "The lead-authority rule applies to cross-border processing."
+        },
+        {
+          "correct": false,
+          "blocks": "The EDPB directly",
+          "reason": "The Board does not act as a lead authority."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which authority is lead for a controller whose main establishment is in Austria?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Each country's authority separately, for everything",
+              "reason": "The lead-authority rule applies to cross-border processing."
+            },
+            {
+              "correct": false,
+              "blocks": "The EDPB directly",
+              "reason": "The Board does not act as a lead authority."
+            },
+            {
+              "correct": true,
+              "blocks": "The Austrian authority",
+              "reason": "The authority of the main establishment (Article 56(1))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "lead-authority"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "For its cross-border processing, who is the controller's sole interlocutor?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The European Commission",
+          "reason": "The Commission is not a supervisory authority."
+        },
+        {
+          "correct": false,
+          "blocks": "Whichever authority received a complaint",
+          "reason": "Complaints are coordinated through the lead authority."
+        },
+        {
+          "correct": true,
+          "blocks": "The lead supervisory authority",
+          "reason": "Article 56(6)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 56(6), whom does a controller deal with for cross-border processing?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Whichever authority received a complaint",
+              "reason": "Complaints are coordinated through the lead authority."
+            },
+            {
+              "correct": true,
+              "blocks": "The lead supervisory authority",
+              "reason": "Article 56(6)."
+            },
+            {
+              "correct": false,
+              "blocks": "The European Commission",
+              "reason": "The Commission is not a supervisory authority."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "edpb"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "What is the EDPB's main role?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Writing new EU laws",
+          "reason": "It advises the Commission. It does not legislate."
+        },
+        {
+          "correct": true,
+          "blocks": "Ensuring consistent application, for example through guidelines",
+          "reason": "Article 70(1)."
+        },
+        {
+          "correct": false,
+          "blocks": "Fining companies directly",
+          "reason": "Fines are imposed by supervisory authorities (Article 83)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which description fits the European Data Protection Board?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ensuring consistent application, for example through guidelines",
+              "reason": "Article 70(1)."
+            },
+            {
+              "correct": false,
+              "blocks": "Fining companies directly",
+              "reason": "Fines are imposed by supervisory authorities (Article 83)."
+            },
+            {
+              "correct": false,
+              "blocks": "Writing new EU laws",
+              "reason": "It advises the Commission. It does not legislate."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

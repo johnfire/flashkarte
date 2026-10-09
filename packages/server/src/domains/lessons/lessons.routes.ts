@@ -7,6 +7,7 @@ export const lessonsRouter = Router();
 lessonsRouter.get("/:id/outline", ctrl.outline);
 
 lessonsRouter.post("/:id/modules", ctrl.createModule);
+lessonsRouter.put("/:id/modules/order", ctrl.reorderModules);
 lessonsRouter.patch("/:id/modules/:moduleId", ctrl.updateModule);
 lessonsRouter.delete("/:id/modules/:moduleId", ctrl.deleteModule);
 

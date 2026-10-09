@@ -1,0 +1,344 @@
+{
+  "module": "People's rights: what customers and staff can ask for",
+  "lesson": {
+    "slug": "r06",
+    "title": "Portability and the right to object",
+    "summary": "Decide when data portability applies, and handle general and direct-marketing objections.",
+    "covers": [
+      "data-portability",
+      "right-to-object"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p04",
+        "reason": "Portability depends on processing based on consent or contract."
+      },
+      {
+        "lesson": "p06",
+        "reason": "The general objection targets processing based on legitimate interests or public tasks."
+      },
+      {
+        "lesson": "r02",
+        "reason": "Objections follow the Article 12 procedure."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Data portability** (Article 20(1)): a person may receive the personal data **they provided** in a structured, commonly used and machine-readable format, and transmit it to another controller without hindrance. It applies only where:",
+        {
+          "type": "list",
+          "items": [
+            "processing is based on **consent** or a **contract**; and",
+            "processing is carried out by **automated means**."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Where technically feasible, the person may have the data sent **directly** to another controller (Article 20(2)).",
+        "Portability does not apply where the basis is a public task (Article 20(3)) or a legal obligation (recital 68). Controllers are not obliged to adopt technically compatible systems (recital 68). The right must not adversely affect others (Article 20(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**The right to object** (Article 21(1)): a person may object, on grounds relating to their **particular situation**, to processing based on a **public task or legitimate interests**.",
+        "The controller must then stop, unless it demonstrates **compelling legitimate grounds** that override the person's interests, rights and freedoms, or needs the data for legal claims."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Direct marketing** (Article 21(2)-(3)): a person may object **at any time**. Then the data **must no longer be processed** for marketing.",
+        "There is no balancing test here, and recital 70 says the objection is free of charge."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "The right to object must be **explicitly brought to the person's attention** at the latest at the first communication, presented clearly and separately from other information (Article 21(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Illustrations from Sunfield:",
+        {
+          "type": "list",
+          "items": [
+            "A customer wants her pre-order history in a file she can upload to another app. The data is processed under a contract, by automated means, so portability applies.",
+            "An employee objects to a camera covering her workstation, which relies on legitimate interests. Sunfield must stop, unless it can show compelling grounds that override hers.",
+            "A customer objects to marketing emails. Sunfield stops sending them, with no balancing."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 20, 21",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 68, 70",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "data-portability"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "An employee asks for her salary-tax data under the portability right. The basis is a legal obligation. Does portability apply?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "No, it applies only to consent or contract",
+          "reason": "Article 20(1)(a) and recital 68."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, portability applies to all personal data",
+          "reason": "It is limited to consent or contract, by automated means."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if the data is kept on paper",
+          "reason": "Portability also requires automated processing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is portability available when the legal basis is a legal obligation?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Yes, portability applies to all personal data",
+              "reason": "It is limited to consent or contract, by automated means."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the data is kept on paper",
+              "reason": "Portability also requires automated processing."
+            },
+            {
+              "correct": true,
+              "blocks": "No, it applies only to consent or contract",
+              "reason": "Article 20(1)(a) and recital 68."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "data-portability"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "In what form must ported data be provided?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "A printed copy sent by post",
+          "reason": "Paper is not machine-readable."
+        },
+        {
+          "correct": false,
+          "blocks": "Screenshots of the account pages",
+          "reason": "Images are not a structured, machine-readable format."
+        },
+        {
+          "correct": true,
+          "blocks": "Structured, commonly used and machine-readable",
+          "reason": "Article 20(1)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What format does Article 20(1) require?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Screenshots of the account pages",
+              "reason": "Images are not a structured, machine-readable format."
+            },
+            {
+              "correct": true,
+              "blocks": "Structured, commonly used and machine-readable",
+              "reason": "Article 20(1)."
+            },
+            {
+              "correct": false,
+              "blocks": "A printed copy sent by post",
+              "reason": "Paper is not machine-readable."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-object"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-6"
+      ],
+      "prompt": "A customer objects to Sunfield's marketing emails. May Sunfield keep sending them if its interest is strong?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Only after she explains her reasons",
+          "reason": "No reasons are needed for a marketing objection."
+        },
+        {
+          "correct": true,
+          "blocks": "No, it must stop marketing to her",
+          "reason": "Article 21(3): no further processing for marketing."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if its interest is compelling",
+          "reason": "The compelling-grounds test applies to general objections, not marketing."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "After a customer objects to direct marketing, may Sunfield weigh its interests against hers?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "No, it must stop marketing to her",
+              "reason": "Article 21(3): no further processing for marketing."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if its interest is compelling",
+              "reason": "The compelling-grounds test applies to general objections, not marketing."
+            },
+            {
+              "correct": false,
+              "blocks": "Only after she explains her reasons",
+              "reason": "No reasons are needed for a marketing objection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "right-to-object"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "An employee objects to a camera on her workstation, which relies on legitimate interests. What follows?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Stop, unless compelling grounds override hers",
+          "reason": "Article 21(1)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nothing; objection applies only to consent-based processing",
+          "reason": "Article 21(1) targets public-task and legitimate-interest processing."
+        },
+        {
+          "correct": false,
+          "blocks": "Stop at once, with no exception possible",
+          "reason": "Article 21(1) allows compelling grounds and legal claims."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "An employee makes a general objection under Article 21(1) to a camera relying on legitimate interests. How must Sunfield respond?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nothing; objection applies only to consent-based processing",
+              "reason": "Article 21(1) targets public-task and legitimate-interest processing."
+            },
+            {
+              "correct": false,
+              "blocks": "Stop at once, with no exception possible",
+              "reason": "Article 21(1) allows compelling grounds and legal claims."
+            },
+            {
+              "correct": true,
+              "blocks": "Stop, unless compelling grounds override hers",
+              "reason": "Article 21(1)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

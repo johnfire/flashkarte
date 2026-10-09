@@ -1,0 +1,258 @@
+{
+  "module": "Einstieg: was die DSGVO erfasst",
+  "lesson": {
+    "slug": "g04",
+    "title": "Verarbeitung",
+    "summary": "Eine Verarbeitung erkennen und entscheiden, wann Papierunterlagen erfasst sind.",
+    "covers": [
+      "processing",
+      "filing-system"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g02",
+        "reason": "Verarbeitung ist als Vorgang im Zusammenhang mit personenbezogenen Daten definiert."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Verarbeitung** ist jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang im Zusammenhang mit personenbezogenen Daten (Art. 4 Nr. 2).",
+        "Artikel 4 Nr. 2 nennt Beispiele: das Erheben, das Erfassen, die Organisation, das Ordnen, die Speicherung, die Anpassung oder Veränderung, das Auslesen, das Abfragen, die Verwendung, die Offenlegung, die Verbreitung, die Verknüpfung, die Einschränkung, das Löschen und die Vernichtung."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2 Abs. 1, 4 Nr. 2, 4 Nr. 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die Liste ist so weit gefasst, dass fast alles, was Sie mit personenbezogenen Daten tun, darunter fällt. Sie zu speichern ist eine Verarbeitung, sie am Bildschirm anzusehen ist eine Verarbeitung, und sie zu löschen ist ebenfalls eine Verarbeitung.",
+        "Ruft eine Verkäuferin der Bäckerei Sonnenfeld am Kassenbildschirm eine Vorbestellung auf, ist das ein Abfragen und eine Verwendung."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2 Abs. 1, 4 Nr. 2, 4 Nr. 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Die DSGVO gilt für die ganz oder teilweise **automatisierte** Verarbeitung. Sie gilt auch für die nichtautomatisierte Verarbeitung, wenn die Daten in einem Dateisystem gespeichert sind oder gespeichert werden sollen (Art. 2 Abs. 1)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2 Abs. 1, 4 Nr. 2, 4 Nr. 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Ein **Dateisystem** ist jede strukturierte Sammlung personenbezogener Daten, die nach bestimmten Kriterien zugänglich sind. Die Sammlung kann zentral oder auf mehrere Orte verteilt geführt werden (Art. 4 Nr. 6).",
+        "Nach Erwägungsgrund 15 ist der Schutz technologieneutral. Akten, die nicht nach bestimmten Kriterien geordnet sind, sind nicht erfasst."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2 Abs. 1, 4 Nr. 2, 4 Nr. 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld bewahrt Personalakten auf Papier in einem Schrank auf, sortiert nach Nachnamen. Die Akte einer Person lässt sich über ein Kriterium finden. Das ist also ein Dateisystem, und die DSGVO gilt.",
+        "Ein Karton mit unsortierten handschriftlichen Notizen ist nicht nach Kriterien geordnet. Solche Notizen fallen nicht unter die DSGVO, es sei denn, sie sollen geordnet abgelegt werden.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "**Die Bäckerei Sonnenfeld ist erfunden.** Ähnlichkeiten mit einem echten Unternehmen sind zufällig."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 2 Abs. 1, 4 Nr. 2, 4 Nr. 6",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 15",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "processing"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Eine Verkäuferin ruft am Kassenbildschirm die Vorbestellung einer Kundin auf. Ist das eine Verarbeitung?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ja, Abfragen und Verwendung sind ausdrücklich genannte Vorgänge",
+          "reason": "Artikel 4 Nr. 2 nennt das Abfragen und die Verwendung."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, es wurde nichts geändert",
+          "reason": "Eine Verarbeitung setzt keine Änderung voraus."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur wenn die Bestellung ausgedruckt wird",
+          "reason": "Ein Ausdruck ist nicht nötig. Schon das Ansehen ist eine Verarbeitung."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ist es eine Verarbeitung, einen Kundendatensatz am Bildschirm zu lesen, ohne etwas zu ändern?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, es wurde nichts geändert",
+              "reason": "Eine Verarbeitung setzt keine Änderung voraus."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur wenn die Bestellung ausgedruckt wird",
+              "reason": "Ein Ausdruck ist nicht nötig. Schon das Ansehen ist eine Verarbeitung."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, Abfragen und Verwendung sind ausdrücklich genannte Vorgänge",
+              "reason": "Artikel 4 Nr. 2 nennt das Abfragen und die Verwendung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processing"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld löscht alte Kundenkonten. Ist das Löschen selbst eine Verarbeitung?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nein, gelöschte Daten sind nicht mehr erfasst",
+          "reason": "Der Vorgang des Löschens ist selbst als Verarbeitung genannt."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur wenn automatisiert gelöscht wird",
+          "reason": "Artikel 4 Nr. 2 erfasst Vorgänge, die mit oder ohne Hilfe automatisierter Verfahren ausgeführt werden."
+        },
+        {
+          "correct": true,
+          "blocks": "Ja, Löschen und Vernichtung sind Verarbeitung",
+          "reason": "Artikel 4 Nr. 2 nennt beides."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ist das Vernichten personenbezogener Daten eine Verarbeitung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur wenn automatisiert gelöscht wird",
+              "reason": "Artikel 4 Nr. 2 erfasst Vorgänge, die mit oder ohne Hilfe automatisierter Verfahren ausgeführt werden."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, Löschen und Vernichtung sind Verarbeitung",
+              "reason": "Artikel 4 Nr. 2 nennt beides."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, gelöschte Daten sind nicht mehr erfasst",
+              "reason": "Der Vorgang des Löschens ist selbst als Verarbeitung genannt."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "filing-system"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Die Personalakten der Bäckerei Sonnenfeld liegen auf Papier, nach Nachnamen sortiert, in einem Schrank. Gilt die DSGVO?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Erst wenn die Akten eingescannt sind",
+          "reason": "Geordnete Papierakten sind bereits erfasst."
+        },
+        {
+          "correct": true,
+          "blocks": "Ja, sie bilden ein Dateisystem",
+          "reason": "Sie sind strukturiert und nach einem Kriterium zugänglich (Art. 2 Abs. 1 und Art. 4 Nr. 6)."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, die DSGVO erfasst nur Computer",
+          "reason": "Artikel 2 Abs. 1 erfasst auch Dateisysteme, die von Hand geführt werden."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Sind Papierunterlagen erfasst, die alphabetisch nach Namen sortiert sind?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ja, sie bilden ein Dateisystem",
+              "reason": "Sie sind strukturiert und nach einem Kriterium zugänglich (Art. 2 Abs. 1 und Art. 4 Nr. 6)."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, die DSGVO erfasst nur Computer",
+              "reason": "Artikel 2 Abs. 1 erfasst auch Dateisysteme, die von Hand geführt werden."
+            },
+            {
+              "correct": false,
+              "blocks": "Erst wenn die Akten eingescannt sind",
+              "reason": "Geordnete Papierakten sind bereits erfasst."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

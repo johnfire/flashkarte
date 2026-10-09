@@ -185,6 +185,74 @@ describe("modules and lessons", () => {
     ).rejects.toBeInstanceOf(ConflictError);
   });
 
+  describe("module order", () => {
+    const titles = async () =>
+      (await getOutline(OWNER, subjectId)).modules.map((m) => m.title);
+    const make = async () => {
+      const ids: string[] = [];
+      for (const title of ["A", "B", "C", "D"]) {
+        ids.push((await lessons.createModule(OWNER, subjectId, { title })).id);
+      }
+      return ids;
+    };
+
+    it("moves a module to a position and shifts the others, keeping positions unique", async () => {
+      const [, , c] = await make();
+      expect(await titles()).toEqual(["A", "B", "C", "D"]);
+      const moved = await lessons.updateModule(OWNER, subjectId, c, {
+        position: 0,
+      });
+      expect(moved.position).toBe(0);
+      expect(await titles()).toEqual(["C", "A", "B", "D"]);
+      const positions = (
+        await getPool().query(
+          "SELECT position FROM lesson_modules WHERE subject_id = $1 ORDER BY position",
+          [subjectId],
+        )
+      ).rows.map((r) => r.position);
+      expect(positions).toEqual([0, 1, 2, 3]);
+    });
+
+    it("clamps a position past the end to last, and renames without moving", async () => {
+      const [a] = await make();
+      await lessons.updateModule(OWNER, subjectId, a, { position: 99 });
+      expect(await titles()).toEqual(["B", "C", "D", "A"]);
+      await lessons.updateModule(OWNER, subjectId, a, { title: "A2" });
+      expect(await titles()).toEqual(["B", "C", "D", "A2"]);
+    });
+
+    it("reorders all modules at once", async () => {
+      const [a, b, c, d] = await make();
+      const result = await lessons.reorderModules(OWNER, subjectId, {
+        module_ids: [d, c, b, a],
+      });
+      expect(result.map((m) => m.title)).toEqual(["D", "C", "B", "A"]);
+      expect(await titles()).toEqual(["D", "C", "B", "A"]);
+    });
+
+    it("refuses an incomplete, duplicated or foreign list and changes nothing", async () => {
+      const [a, b, c, d] = await make();
+      const ghost = "00000000-0000-4000-8000-000000000000";
+      for (const module_ids of [
+        [a, b, c],
+        [a, b, c, d, d],
+        [a, b, c, ghost],
+      ]) {
+        await expect(
+          lessons.reorderModules(OWNER, subjectId, { module_ids }),
+        ).rejects.toBeInstanceOf(ValidationError);
+      }
+      expect(await titles()).toEqual(["A", "B", "C", "D"]);
+    });
+
+    it("hides the order from another user", async () => {
+      const [a] = await make();
+      await expect(
+        lessons.reorderModules(OUTSIDER, subjectId, { module_ids: [a] }),
+      ).rejects.toBeInstanceOf(NotFoundError);
+    });
+  });
+
   it("names every unknown concept, and rejects an unknown module", async () => {
     await expect(
       lessons.createLesson(OWNER, subjectId, {

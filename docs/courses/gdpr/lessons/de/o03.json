@@ -1,0 +1,308 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o03",
+    "title": "Zusammenarbeit mit Auftragsverarbeitern",
+    "summary": "Auftragsverarbeiter mit hinreichenden Garantien auswählen, die Pflichtinhalte schriftlich festhalten und weitere Auftragsverarbeiter kontrollieren.",
+    "covers": [
+      "processor-contract",
+      "sub-processors"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g05",
+        "reason": "Der Vertrag regelt die Verarbeitung durch einen Auftragsverarbeiter."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Ein Verantwortlicher darf nur mit Auftragsverarbeitern arbeiten, die **hinreichend Garantien** dafür bieten, dass geeignete Maßnahmen so durchgeführt werden, dass die Verarbeitung den Anforderungen der DSGVO entspricht und die Rechte der betroffenen Personen schützt (Art. 28 Abs. 1).",
+        "Die Wahl eines Dienstleisters ist deshalb eine Entscheidung über Datenschutz und nicht nur eine Einkaufsentscheidung."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 28",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die Verarbeitung durch einen Auftragsverarbeiter erfolgt auf der Grundlage eines **Vertrags** oder eines anderen Rechtsinstruments, das den Auftragsverarbeiter bindet (Art. 28 Abs. 3). Darin sind Gegenstand und Dauer der Verarbeitung, Art und Zweck der Verarbeitung, die Art der personenbezogenen Daten, die Kategorien betroffener Personen sowie die Pflichten und Rechte des Verantwortlichen festgelegt.",
+        "Der Vertrag ist **schriftlich** abzufassen, was auch in einem elektronischen Format erfolgen kann (Art. 28 Abs. 9)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 28",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Der Vertrag muss insbesondere vorsehen, dass der Auftragsverarbeiter (Art. 28 Abs. 3 Buchst. a bis h):",
+        {
+          "type": "list",
+          "items": [
+            "die Daten nur auf **dokumentierte Weisung** des Verantwortlichen verarbeitet, auch in Bezug auf Übermittlungen außerhalb der EU;",
+            "gewährleistet, dass die zur Verarbeitung befugten Personen zur **Vertraulichkeit** verpflichtet sind;",
+            "alle nach Art. 32 erforderlichen **Sicherheitsmaßnahmen** ergreift;",
+            "die Bedingungen für die Inanspruchnahme **weiterer Auftragsverarbeiter** einhält;",
+            "den Verantwortlichen **unterstützt**: bei Anträgen von Menschen, die ihre Rechte wahrnehmen, sowie bei Sicherheit, Datenpannen und Folgenabschätzungen;",
+            "nach Abschluss der Leistungen alle Daten nach Wahl des Verantwortlichen **löscht oder zurückgibt**;",
+            "alle erforderlichen Informationen zur Verfügung stellt und **Überprüfungen** einschließlich Inspektionen ermöglicht."
+          ]
+        },
+        "Der Auftragsverarbeiter muss den Verantwortlichen unverzüglich informieren, wenn er der Auffassung ist, dass eine Weisung gegen Datenschutzrecht verstößt."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 28",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Weitere Auftragsverarbeiter** (Art. 28 Abs. 2): Ein Auftragsverarbeiter darf keinen weiteren Auftragsverarbeiter ohne vorherige **gesonderte oder allgemeine schriftliche Genehmigung** des Verantwortlichen in Anspruch nehmen.",
+        "Bei einer allgemeinen Genehmigung muss der Auftragsverarbeiter den Verantwortlichen über jede beabsichtigte Änderung informieren. So erhält der Verantwortliche die Möglichkeit, **Einspruch** zu erheben."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 28",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Dem weiteren Auftragsverarbeiter müssen per Vertrag dieselben Datenschutzpflichten auferlegt werden. „Kommt der weitere Auftragsverarbeiter seinen Datenschutzpflichten nicht nach, so **haftet der erste Auftragsverarbeiter** gegenüber dem Verantwortlichen für die Einhaltung der Pflichten jenes anderen Auftragsverarbeiters.“ (Art. 28 Abs. 4)"
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 28",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Der Vertrag kann auf **Standardvertragsklauseln** beruhen, die die Kommission oder eine Aufsichtsbehörde festgelegt hat (Art. 28 Abs. 6 bis 8).",
+        "Die Bäckerei Sonnenfeld prüft die Bedingungen ihres Newsletter-Dienstes, ihres App-Hosters und ihres Lohnbüros. Jeder dieser Verträge muss die Punkte aus Art. 28 Abs. 3 enthalten. Viele Anbieter veröffentlichen solche Bedingungen, und die Bäckerei bewahrt von jedem eine Kopie auf.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 28",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "processor-contract"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Welche Regelung muss ein Vertrag zwischen einem Verantwortlichen und einem Auftragsverarbeiter enthalten?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Verarbeitung nur auf dokumentierte Weisung des Verantwortlichen",
+          "reason": "Art. 28 Abs. 3 Buchst. a."
+        },
+        {
+          "correct": false,
+          "blocks": "Der Auftragsverarbeiter darf die Daten für eigene Werbung nutzen",
+          "reason": "Damit würde er für diese Nutzung selbst zum Verantwortlichen."
+        },
+        {
+          "correct": false,
+          "blocks": "Der Auftragsverarbeiter entscheidet, wie lange Daten gespeichert werden",
+          "reason": "Über die Zwecke und die wesentlichen Mittel entscheidet der Verantwortliche."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Klausel schreibt Art. 28 Abs. 3 für den Vertrag mit einem Auftragsverarbeiter zwingend vor?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Der Auftragsverarbeiter darf die Daten für eigene Werbung nutzen",
+              "reason": "Damit würde er für diese Nutzung selbst zum Verantwortlichen."
+            },
+            {
+              "correct": false,
+              "blocks": "Der Auftragsverarbeiter entscheidet, wie lange Daten gespeichert werden",
+              "reason": "Über die Zwecke und die wesentlichen Mittel entscheidet der Verantwortliche."
+            },
+            {
+              "correct": true,
+              "blocks": "Verarbeitung nur auf dokumentierte Weisung des Verantwortlichen",
+              "reason": "Art. 28 Abs. 3 Buchst. a."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "processor-contract"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Welche Form muss der Vertrag mit einem Auftragsverarbeiter haben?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Eine mündliche Vereinbarung genügt",
+          "reason": "Artikel 28 Abs. 9 verlangt, dass der Vertrag schriftlich abgefasst wird."
+        },
+        {
+          "correct": false,
+          "blocks": "Er muss notariell beurkundet werden",
+          "reason": "Artikel 28 verlangt keine notarielle Beurkundung."
+        },
+        {
+          "correct": true,
+          "blocks": "Schriftlich, was auch elektronisch möglich ist",
+          "reason": "Art. 28 Abs. 9."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In welcher Form verlangt Art. 28 Abs. 9 den Vertrag mit einem Auftragsverarbeiter?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Er muss notariell beurkundet werden",
+              "reason": "Artikel 28 verlangt keine notarielle Beurkundung."
+            },
+            {
+              "correct": true,
+              "blocks": "Schriftlich, was auch elektronisch möglich ist",
+              "reason": "Art. 28 Abs. 9."
+            },
+            {
+              "correct": false,
+              "blocks": "Eine mündliche Vereinbarung genügt",
+              "reason": "Artikel 28 Abs. 9 verlangt, dass der Vertrag schriftlich abgefasst wird."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "sub-processors"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld hat eine allgemeine Genehmigung erteilt, und ihr Newsletter-Dienst will einen neuen weiteren Auftragsverarbeiter hinzuziehen. Was muss geschehen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Eine Aufsichtsbehörde muss zustimmen",
+          "reason": "Artikel 28 Abs. 2 bezieht den Verantwortlichen ein, nicht die Behörde."
+        },
+        {
+          "correct": true,
+          "blocks": "Er informiert die Bäckerei, die Einspruch erheben kann",
+          "reason": "Art. 28 Abs. 2."
+        },
+        {
+          "correct": false,
+          "blocks": "Er darf beliebig weitere Auftragsverarbeiter hinzuziehen",
+          "reason": "Änderungen sind mitzuteilen, damit der Verantwortliche Einspruch erheben kann."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Die Bäckerei Sonnenfeld hat ihrem Newsletter-Dienst eine allgemeine schriftliche Genehmigung erteilt. Was muss geschehen, wenn der Dienst seine weiteren Auftragsverarbeiter ändert?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Er informiert die Bäckerei, die Einspruch erheben kann",
+              "reason": "Art. 28 Abs. 2."
+            },
+            {
+              "correct": false,
+              "blocks": "Er darf beliebig weitere Auftragsverarbeiter hinzuziehen",
+              "reason": "Änderungen sind mitzuteilen, damit der Verantwortliche Einspruch erheben kann."
+            },
+            {
+              "correct": false,
+              "blocks": "Eine Aufsichtsbehörde muss zustimmen",
+              "reason": "Artikel 28 Abs. 2 bezieht den Verantwortlichen ein, nicht die Behörde."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "sub-processors"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Ein weiterer Auftragsverarbeiter kommt seinen Datenschutzpflichten nicht nach. Wer haftet gegenüber der Bäckerei Sonnenfeld für dieses Versäumnis?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Der erste Auftragsverarbeiter",
+          "reason": "Artikel 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."
+        },
+        {
+          "correct": false,
+          "blocks": "Niemand, weil die Bäckerei keinen Vertrag mit ihm geschlossen hat",
+          "reason": "Der erste Auftragsverarbeiter haftet weiterhin."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur der weitere Auftragsverarbeiter",
+          "reason": "Nach Art. 28 Abs. 4 haftet der erste Auftragsverarbeiter gegenüber dem Verantwortlichen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ein weiterer Auftragsverarbeiter, den der Auftragsverarbeiter der Bäckerei Sonnenfeld hinzugezogen hat, verletzt seine Pflichten. Wer haftet nach Art. 28 Abs. 4 gegenüber der Bäckerei dafür?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Niemand, weil die Bäckerei keinen Vertrag mit ihm geschlossen hat",
+              "reason": "Der erste Auftragsverarbeiter haftet weiterhin."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur der weitere Auftragsverarbeiter",
+              "reason": "Nach Art. 28 Abs. 4 haftet der erste Auftragsverarbeiter gegenüber dem Verantwortlichen."
+            },
+            {
+              "correct": true,
+              "blocks": "Der erste Auftragsverarbeiter",
+              "reason": "Artikel 28 Abs. 4: Er haftet für die Einhaltung der Pflichten des weiteren Auftragsverarbeiters."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

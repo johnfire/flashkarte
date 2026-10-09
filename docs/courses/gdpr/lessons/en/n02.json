@@ -1,0 +1,260 @@
+{
+  "module": "Beyond the basics",
+  "lesson": {
+    "slug": "n02",
+    "title": "Joint control in practice: website plug-ins",
+    "summary": "Use Fashion ID to see how far joint control reaches when a website embeds a third-party plug-in.",
+    "covers": [
+      "joint-control-scope"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g05",
+        "reason": "The case refines when and how far joint control applies."
+      },
+      {
+        "lesson": "p06",
+        "reason": "The case requires each joint controller to have a legitimate interest."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Joint controllers decide purposes and means together (Article 26). But **how far** does joint control reach? *Fashion ID* (Case C-40/17, 29 July 2019) gives a practical answer.",
+        "The case was decided under the GDPR's predecessor, Directive 95/46/EC. That directive defined a controller with the same words as Article 4(7): one who \"determines the purposes and means of the processing\"."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 6(1)(f), 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**The facts in outline**: a website embedded a social plug-in. When a visitor opened the page, the plug-in made the visitor's browser request content from the plug-in provider, transmitting the visitor's personal data to that provider."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 6(1)(f), 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Point 2**: the website operator **can be a controller**. In its reasoning (paragraph 84), the Court treats it as a controller **jointly with the provider**.",
+        "But that responsibility is **limited** to the operations for which it actually determines the purposes and means: the **collection and disclosure by transmission** of the data. It does not cover what the provider does with the data afterwards."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 6(1)(f), 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Point 3**: for those operations to be justified, the operator **and** the provider must **each** pursue a legitimate interest, under the old directive's Article 7(f).",
+        "Under the GDPR, the legitimate-interests basis is Article 6(1)(f)."
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 6(1)(f), 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "If Sunfield embeds a social-media button that sends visitor data to the platform as soon as the page loads, Sunfield may be a joint controller for that collection and transmission.",
+        "It would then need an Article 26 arrangement, transparency for visitors and a legal basis. It would not become responsible for the platform's later processing.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "CJEU C-40/17 Fashion ID, operative part, points 2-3, and paragraph 84",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:62017CJ0040"
+        },
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 4(7), 6(1)(f), 26",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "joint-control-scope"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "A website embeds a plug-in that sends visitors' data to the plug-in provider. Can the website operator be a controller?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Yes, jointly, for the collection and transmission",
+          "reason": "Fashion ID, point 2 and paragraph 84."
+        },
+        {
+          "correct": false,
+          "blocks": "No, only the plug-in provider is a controller",
+          "reason": "The Court held the operator can be a controller."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, for everything the provider does later",
+          "reason": "Responsibility is limited to the operations it co-determines."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Fashion ID, can the website operator be a controller for the plug-in's data flow?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "No, only the plug-in provider is a controller",
+              "reason": "The Court held the operator can be a controller."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, for everything the provider does later",
+              "reason": "Responsibility is limited to the operations it co-determines."
+            },
+            {
+              "correct": true,
+              "blocks": "Yes, jointly, for the collection and transmission",
+              "reason": "Fashion ID, point 2 and paragraph 84."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "joint-control-scope"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "How far does the website operator's responsibility reach?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "All later processing by the provider",
+          "reason": "Not determined by the operator."
+        },
+        {
+          "correct": false,
+          "blocks": "None, once visitors accept the site's terms",
+          "reason": "Terms do not change the controller analysis."
+        },
+        {
+          "correct": true,
+          "blocks": "Collection and disclosure by transmission only",
+          "reason": "Point 2 limits it to these operations."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which operations does the operator jointly control according to Fashion ID?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "None, once visitors accept the site's terms",
+              "reason": "Terms do not change the controller analysis."
+            },
+            {
+              "correct": true,
+              "blocks": "Collection and disclosure by transmission only",
+              "reason": "Point 2 limits it to these operations."
+            },
+            {
+              "correct": false,
+              "blocks": "All later processing by the provider",
+              "reason": "Not determined by the operator."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "joint-control-scope"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "According to Fashion ID, whose legitimate interest must exist for these operations?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Neither's, because they are joint controllers",
+          "reason": "Joint control does not remove the need for a legal basis."
+        },
+        {
+          "correct": true,
+          "blocks": "Both the operator's and the provider's",
+          "reason": "Point 3: each must pursue a legitimate interest."
+        },
+        {
+          "correct": false,
+          "blocks": "Only the provider's",
+          "reason": "Each must pursue one."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In Fashion ID, whose legitimate interests had to exist for the plug-in's data flow?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Both the operator's and the provider's",
+              "reason": "Point 3: each must pursue a legitimate interest."
+            },
+            {
+              "correct": false,
+              "blocks": "Only the provider's",
+              "reason": "Each must pursue one."
+            },
+            {
+              "correct": false,
+              "blocks": "Neither's, because they are joint controllers",
+              "reason": "Joint control does not remove the need for a legal basis."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

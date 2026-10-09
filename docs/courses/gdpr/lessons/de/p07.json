@@ -1,0 +1,276 @@
+{
+  "module": "Die Regeln für den Umgang mit personenbezogenen Daten",
+  "lesson": {
+    "slug": "p07",
+    "title": "Daten für einen neuen Zweck verwenden",
+    "summary": "Entscheiden, ob Daten, die für einen Zweck erhoben wurden, für einen neuen Zweck verwendet werden dürfen.",
+    "covers": [
+      "compatible-further-processing"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Die Vereinbarkeit ist der Prüfmaßstab innerhalb der Zweckbindung."
+      },
+      {
+        "lesson": "p04",
+        "reason": "Artikel 6 Abs. 4 greift, wenn der neue Zweck weder auf einer Einwilligung noch auf einer Rechtsvorschrift beruht."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Unternehmen möchten Daten oft für einen neuen Zweck wiederverwenden. Die Zweckbindung verbietet eine Weiterverarbeitung, die mit dem ursprünglichen Zweck **nicht zu vereinbaren** ist (Art. 5 Abs. 1 Buchst. b).",
+        "Ist der neue Zweck **vereinbar**, ist nach Erwägungsgrund 50 keine andere gesonderte Rechtsgrundlage erforderlich als die ursprüngliche."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. b, 6 Abs. 4, 13 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 50",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Beruht der neue Zweck weder auf einer Einwilligung noch auf einer Rechtsvorschrift der Union oder der Mitgliedstaaten der in Art. 6 Abs. 4 beschriebenen Art, muss der Verantwortliche die Vereinbarkeit prüfen. Er berücksichtigt unter anderem (Art. 6 Abs. 4):",
+        {
+          "type": "list",
+          "items": [
+            "a) jede **Verbindung** zwischen dem ursprünglichen und dem neuen Zweck;",
+            "b) den **Zusammenhang**, in dem die Daten erhoben wurden, insbesondere das Verhältnis zur Person;",
+            "c) die **Art** der Daten, insbesondere sensible Datenarten, um die es in der nächsten Lektion geht;",
+            "d) die möglichen **Folgen** für die Person;",
+            "e) geeignete **Garantien**, etwa Verschlüsselung oder Pseudonymisierung (Namen werden durch Codes ersetzt, die Codeliste wird getrennt aufbewahrt)."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. b, 6 Abs. 4, 13 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 50",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Nach Erwägungsgrund 50 gehören zum Zusammenhang auch die **vernünftigen Erwartungen** der Person an die weitere Verwendung, die auf ihrer Beziehung zum Verantwortlichen beruhen.",
+        "Willigt die Person in den neuen Zweck ein, darf der Verantwortliche die Daten dafür ungeachtet der Vereinbarkeit verarbeiten (Erwägungsgrund 50)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. b, 6 Abs. 4, 13 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 50",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Auch eine vereinbare Verwendung bringt Pflichten mit sich. Vor der Weiterverarbeitung für einen neuen Zweck muss der Verantwortliche die Person über diesen Zweck informieren (Art. 13 Abs. 3). Erwägungsgrund 50 betont außerdem das Widerspruchsrecht."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. b, 6 Abs. 4, 13 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 50",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld hat Telefonnummern erhoben, um per SMS »Ihre Bestellung ist abholbereit« zu schicken.",
+        {
+          "type": "list",
+          "items": [
+            "**Idee A**: Kundinnen und Kunden per SMS informieren, wenn ein bestellter Artikel ausverkauft ist. Die Verbindung ist eng, und die Kundschaft rechnet damit. Das ist daher wahrscheinlich vereinbar.",
+            "**Idee B**: die Nummern an einen Partner für dessen Werbung weitergeben. Die Verbindung ist schwach, niemand rechnet damit, und es hat Folgen für die Menschen. Das ist daher wahrscheinlich unvereinbar und bräuchte eine Einwilligung."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 5 Abs. 1 Buchst. b, 6 Abs. 4, 13 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "DSGVO, Erwägungsgründe, Erwägungsgrund 50",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "compatible-further-processing"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Was davon ist ein Kriterium der Vereinbarkeitsprüfung nach Art. 6 Abs. 4?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Die Verbindung zwischen dem alten und dem neuen Zweck",
+          "reason": "Art. 6 Abs. 4 Buchst. a."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Zahl der Beschäftigten des Unternehmens",
+          "reason": "Die Unternehmensgröße gehört nicht zu den Kriterien des Art. 6 Abs. 4."
+        },
+        {
+          "correct": false,
+          "blocks": "Wie teuer es wäre, die Daten neu zu erheben",
+          "reason": "Die Kosten gehören nicht zu den Kriterien des Art. 6 Abs. 4."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Was muss der Verantwortliche berücksichtigen, wenn er einen neuen Zweck nach Art. 6 Abs. 4 beurteilt?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Zahl der Beschäftigten des Unternehmens",
+              "reason": "Die Unternehmensgröße gehört nicht zu den Kriterien des Art. 6 Abs. 4."
+            },
+            {
+              "correct": false,
+              "blocks": "Wie teuer es wäre, die Daten neu zu erheben",
+              "reason": "Die Kosten gehören nicht zu den Kriterien des Art. 6 Abs. 4."
+            },
+            {
+              "correct": true,
+              "blocks": "Die Verbindung zwischen dem alten und dem neuen Zweck",
+              "reason": "Art. 6 Abs. 4 Buchst. a."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compatible-further-processing"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld möchte Telefonnummern ihrer Kundschaft an einen Partner für dessen Werbung weitergeben. Ist das wahrscheinlich vereinbar?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, weil die Nummern rechtmäßig erhoben wurden",
+          "reason": "Eine rechtmäßige Erhebung macht nicht jede spätere Verwendung vereinbar."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn die Nummern vorher pseudonymisiert werden",
+          "reason": "Garantien sind ein Kriterium. Allein wiegen sie die anderen nicht auf."
+        },
+        {
+          "correct": true,
+          "blocks": "Unwahrscheinlich: schwache Verbindung, unerwartet und mit Folgen",
+          "reason": "Die Kriterien in Buchst. a, b und d sprechen dagegen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ist es nach Art. 6 Abs. 4 wahrscheinlich vereinbar, Telefonnummern, die für Benachrichtigungen über Bestellungen erhoben wurden, an einen Partner für dessen Werbung weiterzugeben?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, wenn die Nummern vorher pseudonymisiert werden",
+              "reason": "Garantien sind ein Kriterium. Allein wiegen sie die anderen nicht auf."
+            },
+            {
+              "correct": true,
+              "blocks": "Unwahrscheinlich: schwache Verbindung, unerwartet und mit Folgen",
+              "reason": "Die Kriterien in Buchst. a, b und d sprechen dagegen."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, weil die Nummern rechtmäßig erhoben wurden",
+              "reason": "Eine rechtmäßige Erhebung macht nicht jede spätere Verwendung vereinbar."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "compatible-further-processing"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-4"
+      ],
+      "prompt": "Der neue Zweck der Bäckerei Sonnenfeld ist vereinbar. Was muss sie trotzdem tun?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Gar nichts, weil der Zweck vereinbar ist",
+          "reason": "Artikel 13 Abs. 3 verlangt trotzdem eine Information."
+        },
+        {
+          "correct": true,
+          "blocks": "Die betroffenen Personen vorher über den neuen Zweck informieren",
+          "reason": "Artikel 13 Abs. 3 verlangt die Information vor der Weiterverarbeitung."
+        },
+        {
+          "correct": false,
+          "blocks": "Von allen betroffenen Personen eine neue Einwilligung einholen",
+          "reason": "Erwägungsgrund 50: Bei Vereinbarkeit ist keine gesonderte Rechtsgrundlage erforderlich."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Pflicht gilt weiterhin, wenn eine Weiterverarbeitung vereinbar ist?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Die betroffenen Personen vorher über den neuen Zweck informieren",
+              "reason": "Artikel 13 Abs. 3 verlangt die Information vor der Weiterverarbeitung."
+            },
+            {
+              "correct": false,
+              "blocks": "Von allen betroffenen Personen eine neue Einwilligung einholen",
+              "reason": "Erwägungsgrund 50: Bei Vereinbarkeit ist keine gesonderte Rechtsgrundlage erforderlich."
+            },
+            {
+              "correct": false,
+              "blocks": "Gar nichts, weil der Zweck vereinbar ist",
+              "reason": "Artikel 13 Abs. 3 verlangt trotzdem eine Information."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -95,6 +95,10 @@ with no prerequisites is a valid starting point, and there can be several.
 
 **Group lessons into modules** by theme, 3 to 8 lessons each, with a title that says what the module is for.
 The module is found by title or created when you import its first lesson.
+Modules are listed in the order they were created, so a module created by a later import appears after earlier ones.
+Lessons must be imported in prerequisite order, which is not always module order. Either create the modules first with
+`create_module`, in teaching order, or fix the order afterwards with `reorder_modules` (all module ids, first to last,
+from `get_outline`) or `update_module` (one module's zero-based `position`; the others shift).
 
 **Check the plan** before writing: every concept covered once; no lesson listed as its own prerequisite; no
 cycle (the server rejects one); the order reads sensibly. Then show the owner.

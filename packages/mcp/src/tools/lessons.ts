@@ -357,6 +357,47 @@ export function registerLessonTools(server: McpServer) {
       ),
   );
 
+  const moduleId = z
+    .string()
+    .uuid()
+    .describe("The module's UUID, from get_outline or create_module.");
+
+  server.tool(
+    "update_module",
+    "Rename a module or move it to a place in the module list. position is zero-based (0 = first); the " +
+      "other modules move up or down to make room. To set the whole order at once, use reorder_modules.",
+    {
+      subject_id: subjectId,
+      module: moduleId,
+      title: z.string().optional(),
+      position: z.number().int().min(0).optional(),
+    },
+    async ({ subject_id, module, title, position }) =>
+      runTool("update_module", async () =>
+        asText(
+          await patch(
+            `${path(subject_id)}/modules/${encodeURIComponent(module)}`,
+            { title, position },
+          ),
+        ),
+      ),
+  );
+
+  server.tool(
+    "reorder_modules",
+    "Set the order of a course's modules. module_ids must list every module of the course exactly once, " +
+      "first to last (get the ids from get_outline). Learners and the outline show modules in this order. " +
+      "Import lessons in prerequisite order, which can create modules in the wrong order; fix it with this.",
+    {
+      subject_id: subjectId,
+      module_ids: z.array(z.string().uuid()).min(1),
+    },
+    async ({ subject_id, module_ids }) =>
+      runTool("reorder_modules", async () =>
+        asText(await put(`${path(subject_id)}/modules/order`, { module_ids })),
+      ),
+  );
+
   server.tool(
     "add_screen",
     "Add one screen to a lesson. " +

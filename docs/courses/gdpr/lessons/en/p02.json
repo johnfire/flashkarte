@@ -1,0 +1,277 @@
+{
+  "module": "The rules for using personal data",
+  "lesson": {
+    "slug": "p02",
+    "title": "Only what you need, accurate, and not kept too long",
+    "summary": "Collect only what you need, keep it accurate, and do not keep identifiable data longer than necessary.",
+    "covers": [
+      "data-minimisation",
+      "accuracy-principle",
+      "storage-limitation"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p01",
+        "reason": "Necessity is measured against the stated purpose."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Data minimisation**: personal data must be adequate, relevant and limited to what is necessary for the purposes (Article 5(1)(c)).",
+        "Recital 39 adds that personal data should be processed only if the purpose could not reasonably be achieved by other means."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(c)-(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Sunfield's pre-order form asks for name, phone number, home address and date of birth. To text a customer that bread is ready, a name and phone number are enough.",
+        "The address and the date of birth are not necessary for that purpose. \"It might be useful one day\" is not a purpose.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(c)-(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Accuracy**: personal data must be accurate and, where necessary, kept up to date. Every reasonable step must be taken to erase or correct inaccurate data **without delay**, having regard to the purposes (Article 5(1)(d)).",
+        "When a customer reports a new email address, update it promptly. Do not wait for an annual clean-up."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(c)-(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Storage limitation**: data must be kept in a form that identifies people for **no longer than necessary** for the purposes (Article 5(1)(e)).",
+        "Longer storage is allowed only for public-interest archiving, research or statistics, with the Article 89(1) safeguards."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(c)-(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Recital 39 says the organisation responsible should set **time limits for erasure or periodic review**, so that data is not kept longer than necessary.",
+        "Sunfield could decide, and write down, that loyalty accounts unused for a stated period are deleted."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(c)-(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Storage limitation is about data in a form that **identifies** people. If data is made truly anonymous, it is no longer about an identifiable person, and recital 26 takes it outside the GDPR.",
+        "So deletion is not the only option. Anonymising old order data for statistics can also end identifiable storage."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Article 5(1)(c)-(e)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "GDPR recitals, recitals 26, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "data-minimisation"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Sunfield's pre-order form asks for a date of birth that is not needed to fulfil orders. What should Sunfield do?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Stop collecting it",
+          "reason": "Data must be limited to what is necessary (Article 5(1)(c))."
+        },
+        {
+          "correct": false,
+          "blocks": "Keep it, because it may be useful later",
+          "reason": "A possible future use is not a stated purpose."
+        },
+        {
+          "correct": false,
+          "blocks": "Keep it, but store it securely",
+          "reason": "Good security does not make unnecessary data necessary."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Sunfield collects a detail that its stated purpose does not need. What does minimisation require?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Keep it, because it may be useful later",
+              "reason": "A possible future use is not a stated purpose."
+            },
+            {
+              "correct": false,
+              "blocks": "Keep it, but store it securely",
+              "reason": "Good security does not make unnecessary data necessary."
+            },
+            {
+              "correct": true,
+              "blocks": "Stop collecting it",
+              "reason": "Data must be limited to what is necessary (Article 5(1)(c))."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "accuracy-principle"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "A customer tells Sunfield her email address has changed. What does the accuracy principle require?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Keep the old one for the history",
+          "reason": "Keeping inaccurate contact data for use conflicts with accuracy."
+        },
+        {
+          "correct": false,
+          "blocks": "Fix it at the yearly data review",
+          "reason": "Waiting a year is not \"without delay\"."
+        },
+        {
+          "correct": true,
+          "blocks": "Correct it without delay",
+          "reason": "Article 5(1)(d) requires reasonable steps without delay."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "A customer reports an error in her data. What should Sunfield do, and how quickly?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Fix it at the yearly data review",
+              "reason": "Waiting a year is not \"without delay\"."
+            },
+            {
+              "correct": true,
+              "blocks": "Correct it without delay",
+              "reason": "Article 5(1)(d) requires reasonable steps without delay."
+            },
+            {
+              "correct": false,
+              "blocks": "Keep the old one for the history",
+              "reason": "Keeping inaccurate contact data for use conflicts with accuracy."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "storage-limitation"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5",
+        "screen-6"
+      ],
+      "prompt": "A loyalty account has not been used for years and is no longer needed. What fits the storage-limitation principle?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Keep it three years, the GDPR's fixed period",
+          "reason": "The GDPR sets no general fixed period. The three years is invented."
+        },
+        {
+          "correct": true,
+          "blocks": "Delete it or anonymise it under a set time limit",
+          "reason": "Article 5(1)(e) and recital 39: time limits; recital 26: anonymous data is outside."
+        },
+        {
+          "correct": false,
+          "blocks": "Keep it, because storage is cheap",
+          "reason": "Cost is not the test. Necessity for the purpose is."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should happen to identifiable data that the purpose no longer needs?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Delete it or anonymise it under a set time limit",
+              "reason": "Article 5(1)(e) and recital 39: time limits; recital 26: anonymous data is outside."
+            },
+            {
+              "correct": false,
+              "blocks": "Keep it, because storage is cheap",
+              "reason": "Cost is not the test. Necessity for the purpose is."
+            },
+            {
+              "correct": false,
+              "blocks": "Keep it three years, the GDPR's fixed period",
+              "reason": "The GDPR sets no general fixed period. The three years is invented."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

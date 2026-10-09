@@ -1,0 +1,322 @@
+{
+  "module": "What your organisation must do",
+  "lesson": {
+    "slug": "o07",
+    "title": "The data protection officer",
+    "summary": "Decide whether a data protection officer is mandatory, and protect the role's independence.",
+    "covers": [
+      "dpo"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g01",
+        "reason": "The DPO cooperates with and is the contact for the supervisory authority."
+      },
+      {
+        "lesson": "g05",
+        "reason": "The DPO is designated by, and advises, the controller or processor."
+      },
+      {
+        "lesson": "p08",
+        "reason": "One mandatory-DPO case is large-scale special-category data."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **data protection officer** (DPO) must be designated where (Article 37(1)):",
+        {
+          "type": "list",
+          "items": [
+            "(a) processing is carried out by a **public authority** or body, except courts acting in their judicial capacity;",
+            "(b) the **core activities** consist of processing that requires **regular and systematic monitoring** of people on a **large scale**; or",
+            "(c) the **core activities** consist of **large-scale** processing of special-category or criminal-offence data."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "In other cases, appointing a DPO is voluntary, **unless EU or national law requires it** (Article 37(4)).",
+        "Some countries add their own requirements. This course does not cover national law, so check yours."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The DPO must have **expert knowledge** of data protection law and practice (Article 37(5)). The DPO may be a staff member or work under a service contract (Article 37(6)). A group of companies may share one DPO if the DPO is easily accessible from each establishment (Article 37(2)).",
+        "The DPO's contact details must be published and given to the supervisory authority (Article 37(7))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Independence** (Article 38):",
+        {
+          "type": "list",
+          "items": [
+            "involved properly and in good time in all data protection issues;",
+            "given the necessary resources;",
+            "receives **no instructions** about how to perform their tasks;",
+            "**not dismissed or penalised** for performing them;",
+            "reports directly to the **highest management level**;",
+            "may hold other roles only if there is no conflict of interests."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Tasks** (Article 39(1)): to inform and advise the organisation and its staff; to **monitor compliance**, including training and audits; to advise on data protection impact assessments (DPIAs); to **cooperate with the supervisory authority** and act as its contact point.",
+        "People may contact the DPO about their data and rights (Article 38(4))."
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Sunfield's core activity is baking and selling bread. Its staff and customer processing supports that, but it is not obviously large-scale monitoring or large-scale sensitive-data processing.",
+        "So a DPO may not be mandatory under Article 37(1). National law may still require one under Article 37(4), and Sunfield must check.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "These Sunfield examples are **illustrations**. A real assessment depends on all the facts."
+        }
+      ],
+      "sources": [
+        {
+          "title": "GDPR (Regulation (EU) 2016/679), Articles 37, 38, 39",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which organisation must appoint a DPO under Article 37(1)?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "A public authority",
+          "reason": "Article 37(1)(a)."
+        },
+        {
+          "correct": false,
+          "blocks": "Any business with a website",
+          "reason": "Not an Article 37(1) case."
+        },
+        {
+          "correct": false,
+          "blocks": "Any business with over ten employees",
+          "reason": "The GDPR text sets no headcount. National law may add rules (Article 37(4))."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which case makes a DPO mandatory under the GDPR text itself?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Any business with a website",
+              "reason": "Not an Article 37(1) case."
+            },
+            {
+              "correct": false,
+              "blocks": "Any business with over ten employees",
+              "reason": "The GDPR text sets no headcount. National law may add rules (Article 37(4))."
+            },
+            {
+              "correct": true,
+              "blocks": "A public authority",
+              "reason": "Article 37(1)(a)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "To whom does the DPO report?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "The IT department",
+          "reason": "Article 38(3) requires the highest management level."
+        },
+        {
+          "correct": false,
+          "blocks": "The supervisory authority",
+          "reason": "The DPO cooperates with the authority but reports internally to top management."
+        },
+        {
+          "correct": true,
+          "blocks": "The highest management level",
+          "reason": "Article 38(3)."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Under Article 38(3), which level does the DPO report to?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "The supervisory authority",
+              "reason": "The DPO cooperates with the authority but reports internally to top management."
+            },
+            {
+              "correct": true,
+              "blocks": "The highest management level",
+              "reason": "Article 38(3)."
+            },
+            {
+              "correct": false,
+              "blocks": "The IT department",
+              "reason": "Article 38(3) requires the highest management level."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Sunfield's DPO reports a compliance problem. May Sunfield dismiss the DPO for that?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Yes, if the report caused costs",
+          "reason": "Costs do not lift the protection."
+        },
+        {
+          "correct": true,
+          "blocks": "No, Article 38(3) forbids it",
+          "reason": "A DPO must not be dismissed or penalised for performing their tasks."
+        },
+        {
+          "correct": false,
+          "blocks": "Yes, if the DPO is an employee",
+          "reason": "The protection applies to staff DPOs too."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a DPO be penalised for performing their tasks, such as reporting a problem?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "No, Article 38(3) forbids it",
+              "reason": "A DPO must not be dismissed or penalised for performing their tasks."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the DPO is an employee",
+              "reason": "The protection applies to staff DPOs too."
+            },
+            {
+              "correct": false,
+              "blocks": "Yes, if the report caused costs",
+              "reason": "Costs do not lift the protection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "dpo"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Which is a task of the DPO?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Monitoring compliance with the GDPR",
+          "reason": "Article 39(1)(b)."
+        },
+        {
+          "correct": false,
+          "blocks": "Deciding the purposes of processing",
+          "reason": "That is the controller's role."
+        },
+        {
+          "correct": false,
+          "blocks": "Imposing fines on the organisation",
+          "reason": "Fines are for supervisory authorities."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does Article 39(1) assign to the DPO?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Deciding the purposes of processing",
+              "reason": "That is the controller's role."
+            },
+            {
+              "correct": false,
+              "blocks": "Imposing fines on the organisation",
+              "reason": "Fines are for supervisory authorities."
+            },
+            {
+              "correct": true,
+              "blocks": "Monitoring compliance with the GDPR",
+              "reason": "Article 39(1)(b)."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

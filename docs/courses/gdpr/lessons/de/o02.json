@@ -1,0 +1,311 @@
+{
+  "module": "Was Ihr Unternehmen tun muss",
+  "lesson": {
+    "slug": "o02",
+    "title": "Datenschutz durch Technikgestaltung und durch datenschutzfreundliche Voreinstellungen",
+    "summary": "Die Grundsätze von Anfang an in Systeme einbauen und datenschutzfreundliche Voreinstellungen wählen.",
+    "covers": [
+      "privacy-by-design",
+      "privacy-by-default"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g03",
+        "reason": "Die Pseudonymisierung ist die Beispielmaßnahme, die Art. 25 nennt."
+      },
+      {
+        "lesson": "g05",
+        "reason": "Artikel 25 ist eine Pflicht des Verantwortlichen, die schon greift, wenn er die Mittel der Verarbeitung festlegt."
+      },
+      {
+        "lesson": "p02",
+        "reason": "Maßnahmen der Technikgestaltung setzen Grundsätze wie die Datenminimierung um."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Datenschutz durch Technikgestaltung** (Art. 25 Abs. 1): Der Verantwortliche muss geeignete technische und organisatorische Maßnahmen treffen, die dafür ausgelegt sind, die Datenschutzgrundsätze wirksam umzusetzen, und er muss die notwendigen Garantien in die Verarbeitung aufnehmen.",
+        "Artikel 25 Abs. 1 nennt die **Pseudonymisierung** als Beispiel für eine Maßnahme und die **Datenminimierung** als Beispiel für einen Grundsatz."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 25",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Das gilt **sowohl** zum Zeitpunkt der Festlegung der Mittel für die Verarbeitung **als auch** zum Zeitpunkt der eigentlichen Verarbeitung (Art. 25 Abs. 1).",
+        "Es geht darum, vorauszuplanen, bevor Sie ein System entwickeln oder kaufen, und nicht darum, hinterher nachzubessern.",
+        "Was geeignet ist, hängt vom Stand der Technik, von den Implementierungskosten, von Art, Umfang, Umständen und Zwecken der Verarbeitung sowie von den Risiken ab."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 25",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Datenschutzfreundliche Voreinstellungen** (Art. 25 Abs. 2): Durch Voreinstellung dürfen nur personenbezogene Daten verarbeitet werden, deren Verarbeitung **für den jeweiligen bestimmten Verarbeitungszweck erforderlich** ist. Diese Pflicht gilt für vier Dimensionen:",
+        {
+          "type": "list",
+          "items": [
+            "die Menge der erhobenen Daten;",
+            "den Umfang ihrer Verarbeitung;",
+            "ihre Speicherfrist;",
+            "ihre Zugänglichkeit, also wer auf sie zugreifen kann."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 25",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Insbesondere dürfen personenbezogene Daten durch Voreinstellungen „nicht ohne Eingreifen der Person einer **unbestimmten Zahl von natürlichen Personen** zugänglich gemacht werden“ (Art. 25 Abs. 2).",
+        "Ein genehmigtes Zertifizierungsverfahren kann als ein Faktor herangezogen werden, um die Einhaltung von Art. 25 nachzuweisen (Art. 25 Abs. 3)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 25",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Die Bäckerei Sonnenfeld gestaltet ihre App neu:",
+        {
+          "type": "list",
+          "items": [
+            "Das Feld für das Geburtsdatum entfällt. Das ist Technikgestaltung, die die Datenminimierung umsetzt.",
+            "Freiwillige Felder sind anfangs leer, und das Häkchen für Werbung ist nicht gesetzt. Das sind Voreinstellungen.",
+            "Bestelldaten werden nach einer festgelegten Frist automatisch gelöscht. Damit ist die Speicherfrist durch Voreinstellung geregelt.",
+            "Eine neue Bestenliste der »Top-Kundschaft« ist **ausgeschaltet**, solange eine Kundin oder ein Kunde sie nicht selbst einschaltet. Das begrenzt die Zugänglichkeit durch Voreinstellung.",
+            "Die Beschäftigten einer Filiale sehen nur die Bestellungen ihrer eigenen Filiale. Das begrenzt den Zugriff."
+          ]
+        },
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 25",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "privacy-by-design"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Wann muss ein Verantwortlicher an Datenschutz durch Technikgestaltung denken?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Bei der Festlegung der Mittel und während der Verarbeitung",
+          "reason": "Artikel 25 Abs. 1 nennt beide Zeitpunkte."
+        },
+        {
+          "correct": false,
+          "blocks": "Erst nachdem das System in Betrieb gegangen ist",
+          "reason": "Die Technikgestaltung beginnt, wenn die Mittel festgelegt werden."
+        },
+        {
+          "correct": false,
+          "blocks": "Erst nach einer Datenpanne",
+          "reason": "Artikel 25 wirkt vorbeugend."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Zu welchen Zeitpunkten gilt die Pflicht aus Art. 25 Abs. 1?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Erst nachdem das System in Betrieb gegangen ist",
+              "reason": "Die Technikgestaltung beginnt, wenn die Mittel festgelegt werden."
+            },
+            {
+              "correct": false,
+              "blocks": "Erst nach einer Datenpanne",
+              "reason": "Artikel 25 wirkt vorbeugend."
+            },
+            {
+              "correct": true,
+              "blocks": "Bei der Festlegung der Mittel und während der Verarbeitung",
+              "reason": "Artikel 25 Abs. 1 nennt beide Zeitpunkte."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "privacy-by-design"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Welche Maßnahme nennt Art. 25 Abs. 1 als Beispiel?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ein höheres Marketingbudget",
+          "reason": "Keine Datenschutzmaßnahme."
+        },
+        {
+          "correct": false,
+          "blocks": "Daten länger speichern",
+          "reason": "Das läuft den Grundsätzen zuwider."
+        },
+        {
+          "correct": true,
+          "blocks": "Pseudonymisierung",
+          "reason": "In Art. 25 Abs. 1 genannt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Beispielmaßnahme steht im Text von Art. 25 Abs. 1?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Daten länger speichern",
+              "reason": "Das läuft den Grundsätzen zuwider."
+            },
+            {
+              "correct": true,
+              "blocks": "Pseudonymisierung",
+              "reason": "In Art. 25 Abs. 1 genannt."
+            },
+            {
+              "correct": false,
+              "blocks": "Ein höheres Marketingbudget",
+              "reason": "Keine Datenschutzmaßnahme."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "privacy-by-default"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Die Bäckerei Sonnenfeld führt eine öffentliche Bestenliste ihrer besten Kundinnen und Kunden mit Namen ein. Wie muss die Voreinstellung sein?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Eingeschaltet, solange die Datenschutzhinweise es erwähnen",
+          "reason": "Ein Hinweis ersetzt keine datenschutzfreundliche Voreinstellung."
+        },
+        {
+          "correct": true,
+          "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet",
+          "reason": "Artikel 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
+        },
+        {
+          "correct": false,
+          "blocks": "Eingeschaltet, mit der Möglichkeit, sich abzumelden",
+          "reason": "Wer sich erst abmelden muss, wird ohne eigenes Eingreifen sichtbar."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wie sollte eine Funktion voreingestellt sein, die die Namen von Kundinnen und Kunden veröffentlichen würde?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Ausgeschaltet, bis eine Kundin oder ein Kunde sich selbst dafür entscheidet",
+              "reason": "Artikel 25 Abs. 2: nicht ohne Eingreifen der Person einer unbestimmten Zahl von Personen zugänglich."
+            },
+            {
+              "correct": false,
+              "blocks": "Eingeschaltet, mit der Möglichkeit, sich abzumelden",
+              "reason": "Wer sich erst abmelden muss, wird ohne eigenes Eingreifen sichtbar."
+            },
+            {
+              "correct": false,
+              "blocks": "Eingeschaltet, solange die Datenschutzhinweise es erwähnen",
+              "reason": "Ein Hinweis ersetzt keine datenschutzfreundliche Voreinstellung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "privacy-by-default"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Welche Dimensionen erfasst die Regel zu Voreinstellungen in Art. 25 Abs. 2?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Menge, Umfang der Verarbeitung, Speicherfrist und Zugänglichkeit",
+          "reason": "Artikel 25 Abs. 2 nennt alle vier."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur die Menge der erhobenen Daten",
+          "reason": "Artikel 25 Abs. 2 erfasst vier Dimensionen."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur die Sicherheit der Daten",
+          "reason": "Die Sicherheit regelt Art. 32. Bei Art. 25 Abs. 2 geht es um die Erforderlichkeit."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "In welcher Hinsicht begrenzt Art. 25 Abs. 2 die Voreinstellungen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur die Menge der erhobenen Daten",
+              "reason": "Artikel 25 Abs. 2 erfasst vier Dimensionen."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur die Sicherheit der Daten",
+              "reason": "Die Sicherheit regelt Art. 32. Bei Art. 25 Abs. 2 geht es um die Erforderlichkeit."
+            },
+            {
+              "correct": true,
+              "blocks": "Menge, Umfang der Verarbeitung, Speicherfrist und Zugänglichkeit",
+              "reason": "Artikel 25 Abs. 2 nennt alle vier."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

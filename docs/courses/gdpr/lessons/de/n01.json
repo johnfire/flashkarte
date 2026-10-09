@@ -1,0 +1,360 @@
+{
+  "module": "Über die Grundlagen hinaus",
+  "lesson": {
+    "slug": "n01",
+    "title": "Cookies: eine eigene Regel",
+    "summary": "Die eigene Regel für Cookies anwenden: Einwilligung, bevor Informationen im Endgerät gespeichert oder ausgelesen werden, die Ausnahmen und was Nutzer erfahren müssen.",
+    "covers": [
+      "cookie-consent-rule",
+      "cookie-information"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "p05",
+        "reason": "Die Einwilligung in Cookies folgt dem Maßstab der DSGVO für eine Einwilligung."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Für Cookies gilt in erster Linie eine **andere Vorschrift**: Art. 5 Abs. 3 der **Datenschutzrichtlinie für elektronische Kommunikation** (ePrivacy-Richtlinie), Richtlinie 2002/58/EG.",
+        "Eine Richtlinie wirkt über das nationale Recht jedes Landes, deshalb unterscheiden sich die genauen nationalen Regeln. Diese Lektion behandelt nur den EU-Text. Nationale Cookie-Gesetze, etwa das deutsche Telekommunikation-Digitale-Dienste-Datenschutz-Gesetz (TDDDG), sind nicht Teil dieses Kurses."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy-Richtlinie 2002/58/EG, Art. 5 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "EuGH C-673/17 Planet49, Tenor, Nr. 1 bis 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 6 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "**Die Regel** (Art. 5 Abs. 3): Informationen im Endgerät eines Nutzers zu speichern oder auf Informationen zuzugreifen, die dort bereits gespeichert sind, ist nur gestattet, wenn der Nutzer **seine Einwilligung gegeben hat**. Grundlage dafür müssen **klare und umfassende Informationen** sein, unter anderem über die Zwecke."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy-Richtlinie 2002/58/EG, Art. 5 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "EuGH C-673/17 Planet49, Tenor, Nr. 1 bis 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 6 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Zwei Ausnahmen** (Art. 5 Abs. 3): Für eine technische Speicherung oder einen technischen Zugriff ist keine Einwilligung nötig,",
+        {
+          "type": "list",
+          "items": [
+            "wenn der **alleinige Zweck** die Übertragung einer Nachricht über ein elektronisches Kommunikationsnetz ist; oder",
+            "wenn dies **unbedingt erforderlich** ist, damit der Anbieter einen Dienst zur Verfügung stellen kann, den der Nutzer **ausdrücklich gewünscht** hat."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy-Richtlinie 2002/58/EG, Art. 5 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "EuGH C-673/17 Planet49, Tenor, Nr. 1 bis 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 6 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Im Urteil *Planet49* (Rechtssache C-673/17, 1. Oktober 2019) hat der Gerichtshof der Europäischen Union (EuGH) Art. 5 Abs. 3 zusammen mit der Definition der Einwilligung in der DSGVO ausgelegt, also mit Art. 4 Nr. 11 und Art. 6 Abs. 1 Buchst. a. Die Entscheidung selbst steht im **Tenor**, dem eigentlichen Urteilsspruch.",
+        "**Nr. 1 des Tenors**: Eine Einwilligung ist **nicht wirksam**, wenn sie über ein **voreingestelltes Ankreuzkästchen** erteilt wird, das der Nutzer abwählen muss, um die Einwilligung zu verweigern.",
+        "**Nr. 2 des Tenors**: Die Regel gilt unabhängig davon, ob es sich bei den gespeicherten Informationen um personenbezogene Daten handelt oder nicht."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy-Richtlinie 2002/58/EG, Art. 5 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "EuGH C-673/17 Planet49, Tenor, Nr. 1 bis 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 6 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Nr. 3 des Tenors**: Zu den Informationen für den Nutzer gehören auch Angaben dazu, **wie lange die Cookies funktionieren**, und dazu, **ob Dritte Zugriff auf die Cookies erhalten können**."
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy-Richtlinie 2002/58/EG, Art. 5 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "EuGH C-673/17 Planet49, Tenor, Nr. 1 bis 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 6 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "Die Website der Bäckerei Sonnenfeld:",
+        {
+          "type": "list",
+          "items": [
+            "ein Warenkorb-Cookie, das sich merkt, welches Brot jemand gerade bestellt, ist für die gewünschte Bestellung wahrscheinlich unbedingt erforderlich und deshalb ausgenommen;",
+            "ein Analyse-Cookie ist für die Bestellung nicht erforderlich. Es braucht deshalb vorher eine Einwilligung, mit klaren Informationen, auch zur Funktionsdauer und zum Zugriff Dritter."
+          ]
+        },
+        "Werden über Cookies personenbezogene Daten erhoben, muss ihre Verarbeitung außerdem der DSGVO entsprechen.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele mit der Bäckerei Sonnenfeld sind **Veranschaulichungen**. Eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "ePrivacy-Richtlinie 2002/58/EG, Art. 5 Abs. 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02002L0058-20091219"
+        },
+        {
+          "title": "EuGH C-673/17 Planet49, Tenor, Nr. 1 bis 3",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:62017CJ0673"
+        },
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 4 Nr. 11, 6 Abs. 1 Buchst. a",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "cookie-consent-rule"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "Die Website der Bäckerei Sonnenfeld setzt ein Analyse-Cookie, das der Bestelldienst nicht braucht. Ist eine Einwilligung erforderlich?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Ja, weil keine Ausnahme greift",
+          "reason": "Artikel 5 Abs. 3: Einwilligung, außer eine Ausnahme greift."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, Cookies sind keine personenbezogenen Daten",
+          "reason": "Planet49, Nr. 2 des Tenors: Die Regel gilt in beiden Fällen."
+        },
+        {
+          "correct": false,
+          "blocks": "Nein, ein berechtigtes Interesse deckt es ab",
+          "reason": "Artikel 5 Abs. 3 verlangt eine Einwilligung, außer eine Ausnahme greift."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Braucht ein nicht notwendiges Analyse-Cookie nach Art. 5 Abs. 3 der ePrivacy-Richtlinie die Einwilligung des Nutzers?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nein, Cookies sind keine personenbezogenen Daten",
+              "reason": "Planet49, Nr. 2 des Tenors: Die Regel gilt in beiden Fällen."
+            },
+            {
+              "correct": false,
+              "blocks": "Nein, ein berechtigtes Interesse deckt es ab",
+              "reason": "Artikel 5 Abs. 3 verlangt eine Einwilligung, außer eine Ausnahme greift."
+            },
+            {
+              "correct": true,
+              "blocks": "Ja, weil keine Ausnahme greift",
+              "reason": "Artikel 5 Abs. 3: Einwilligung, außer eine Ausnahme greift."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cookie-consent-rule"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Ein Cookie-Banner zeigt bereits angekreuzte Kästchen, die Nutzer abwählen müssen, um abzulehnen. Ist das eine wirksame Einwilligung?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, die Nutzer können sie abwählen",
+          "reason": "Abwählen zu müssen ist keine wirksame Einwilligung."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, wenn die Cookies keine personenbezogenen Daten enthalten",
+          "reason": "Nr. 2 des Tenors: Die Regel gilt in beiden Fällen."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, voreingestellte Kästchen ergeben keine wirksame Einwilligung",
+          "reason": "Planet49, Nr. 1 des Tenors."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Ergeben voreingestellte Ankreuzkästchen für Cookies nach dem Planet49-Urteil eine wirksame Einwilligung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, wenn die Cookies keine personenbezogenen Daten enthalten",
+              "reason": "Nr. 2 des Tenors: Die Regel gilt in beiden Fällen."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, voreingestellte Kästchen ergeben keine wirksame Einwilligung",
+              "reason": "Planet49, Nr. 1 des Tenors."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, die Nutzer können sie abwählen",
+              "reason": "Abwählen zu müssen ist keine wirksame Einwilligung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cookie-information"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "Was müssen Nutzer außer den Zwecken über Cookies erfahren?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Nichts weiter, sobald sie ein Kästchen angekreuzt haben",
+          "reason": "Die Information ist eine Voraussetzung für eine wirksame Einwilligung."
+        },
+        {
+          "correct": true,
+          "blocks": "Wie lange sie funktionieren und ob Dritte Zugriff auf sie erhalten können",
+          "reason": "Planet49, Nr. 3 des Tenors."
+        },
+        {
+          "correct": false,
+          "blocks": "Den Quellcode der Website",
+          "reason": "Nicht erforderlich."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welche Informationen über Cookies müssen Nutzer nach dem Planet49-Urteil, Nr. 3 des Tenors, erhalten?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Wie lange sie funktionieren und ob Dritte Zugriff auf sie erhalten können",
+              "reason": "Planet49, Nr. 3 des Tenors."
+            },
+            {
+              "correct": false,
+              "blocks": "Den Quellcode der Website",
+              "reason": "Nicht erforderlich."
+            },
+            {
+              "correct": false,
+              "blocks": "Nichts weiter, sobald sie ein Kästchen angekreuzt haben",
+              "reason": "Die Information ist eine Voraussetzung für eine wirksame Einwilligung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cookie-consent-rule"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-6"
+      ],
+      "prompt": "Ein Cookie merkt sich nur die Waren, die jemand gerade bestellt. Braucht es eine Einwilligung?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Wahrscheinlich nicht: Es ist für den gewünschten Dienst unbedingt erforderlich",
+          "reason": "Die zweite Ausnahme in Art. 5 Abs. 3."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, jedes Cookie braucht immer eine Einwilligung",
+          "reason": "Artikel 5 Abs. 3 kennt zwei Ausnahmen."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, weil es Informationen speichert",
+          "reason": "Die Speicherung ist der Ausgangspunkt, aber die Ausnahme kann greifen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Braucht ein Warenkorb-Cookie für eine Bestellung, die der Nutzer selbst gewünscht hat, eine Einwilligung?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, jedes Cookie braucht immer eine Einwilligung",
+              "reason": "Artikel 5 Abs. 3 kennt zwei Ausnahmen."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, weil es Informationen speichert",
+              "reason": "Die Speicherung ist der Ausgangspunkt, aber die Ausnahme kann greifen."
+            },
+            {
+              "correct": true,
+              "blocks": "Wahrscheinlich nicht: Es ist für den gewünschten Dienst unbedingt erforderlich",
+              "reason": "Die zweite Ausnahme in Art. 5 Abs. 3."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

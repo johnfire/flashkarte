@@ -19,6 +19,7 @@ import * as questionsRepo from "./questions.repository";
 import * as screensRepo from "./screens.repository";
 import {
   lessonPatchSchema,
+  moduleOrderSchema,
   modulePatchSchema,
   newLessonSchema,
   newModuleSchema,
@@ -47,10 +48,46 @@ export async function updateModule(
   return withLockedSubject(userId, subjectId, async (db, subject) => {
     const current = await repo.findModule(db, subject.id, moduleId);
     if (!current) throw new NotFoundError("Module not found");
-    return repo.writeModule(db, current.id, {
+    const renamed = await repo.writeModule(db, current.id, {
       title: patch.title ?? current.title,
-      position: patch.position ?? current.position,
+      position: current.position,
     });
+    if (patch.position === undefined) return renamed;
+    // Move to the requested place and shift the others, so positions stay 0..n-1 and unique.
+    const others = (await repo.listModules(db, subject.id))
+      .filter((m) => m.id !== current.id)
+      .map((m) => m.id);
+    others.splice(Math.min(patch.position, others.length), 0, current.id);
+    const moved = await repo.renumberModules(db, subject.id, others);
+    return moved.find((m) => m.id === current.id)!;
+  });
+}
+
+/** Set the order of all modules at once. `module_ids` must name every module of the subject exactly once. */
+export async function reorderModules(
+  userId: string,
+  subjectId: string,
+  input: unknown,
+) {
+  const { module_ids } = parse(moduleOrderSchema, input);
+  return withLockedSubject(userId, subjectId, async (db, subject) => {
+    const existing = (await repo.listModules(db, subject.id)).map((m) => m.id);
+    const wanted = new Set(module_ids);
+    const missing = existing.filter((id) => !wanted.has(id));
+    const unknown = module_ids.filter((id) => !existing.includes(id));
+    if (
+      wanted.size !== module_ids.length ||
+      missing.length > 0 ||
+      unknown.length > 0
+    ) {
+      throw new ValidationError(
+        "module_ids must name every module of the course exactly once" +
+          (missing.length ? `; missing: ${missing.join(", ")}` : "") +
+          (unknown.length ? `; unknown: ${unknown.join(", ")}` : "") +
+          (wanted.size !== module_ids.length ? "; duplicates present" : ""),
+      );
+    }
+    return repo.renumberModules(db, subject.id, module_ids);
   });
 }
 

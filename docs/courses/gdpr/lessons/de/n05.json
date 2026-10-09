@@ -1,0 +1,259 @@
+{
+  "module": "Über die Grundlagen hinaus",
+  "lesson": {
+    "slug": "n05",
+    "title": "Was sich ändern kann: noch nicht beschlossene Vorschläge",
+    "summary": "Das geltende Recht von noch nicht beschlossenen Vorschlägen unterscheiden und wissen, wie Sie Änderungen prüfen.",
+    "covers": [
+      "pending-proposals"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Am **7. Oktober 2026** verzeichnete der EUR-Lex-Eintrag zur DSGVO **keinen ändernden Rechtsakt**. Die Tabelle im Abschnitt »Geändert durch« war leer. Verzeichnet waren drei Berichtigungen, also Korrekturen des veröffentlichten Textes.",
+        "Dieser Kurs behandelt die DSGVO in der Fassung, die an diesem Tag galt."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 501, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 837, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Derselbe Eintrag verzeichnete **zwei Vorschläge der Kommission**, die die DSGVO ändern würden:",
+        {
+          "type": "list",
+          "items": [
+            "**COM(2025) 501** vom 21. Mai 2025: Vereinfachungsmaßnahmen für kleine Midcap-Unternehmen; der Vorschlag würde mehrere Verordnungen ändern, darunter die DSGVO;",
+            "**COM(2025) 837** vom 19. November 2025: die „Digital-Omnibus-Verordnung“; der Vorschlag würde die DSGVO, die ePrivacy-Richtlinie und weitere Rechtsakte ändern."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 501, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 837, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Ein Vorschlag ist **kein geltendes Recht**. Beide sind Vorschläge für eine Verordnung des Europäischen Parlaments und des Rates. Parlament und Rat müssen also einen endgültigen Text annehmen, bevor sich etwas ändert.",
+        "Der Inhalt kann sich in den Verhandlungen noch ändern. Deshalb behandelt dieser Kurs nicht, was die Vorschläge vorsehen."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 501, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 837, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Was Sie tun sollten**:",
+        {
+          "type": "list",
+          "items": [
+            "die DSGVO **in ihrer heute geltenden Fassung** einhalten;",
+            "bevor Sie sich auf eine Regel stützen, den EUR-Lex-Eintrag zur DSGVO prüfen, im Abschnitt »Geändert durch« und bei den konsolidierten Fassungen;",
+            "Schlagzeilen als Anlass zum Nachprüfen nehmen, nicht als geltendes Recht."
+          ]
+        },
+        "Wird eine Änderung angenommen, müssen die betroffenen Lektionen dieses Kurses aktualisiert werden."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), EUR-Lex-Dokumentinformationen, geprüft am 7. Oktober 2026",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 501, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0501"
+        },
+        {
+          "title": "Kommissionsvorschlag COM(2025) 837, Titel und Datum",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:52025PC0837"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "pending-proposals"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Waren die Digital-Omnibus-Änderungen an der DSGVO am 7. Oktober 2026 geltendes Recht?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Nein, es handelte sich um einen Vorschlag",
+          "reason": "EUR-Lex verzeichnete COM(2025) 837 nur als vorgeschlagene Änderung."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, seit November 2025",
+          "reason": "Das ist das Datum des Vorschlags, nicht der Annahme."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, weil der Text auf EUR-Lex veröffentlicht ist",
+          "reason": "Auch Vorschläge werden veröffentlicht. Veröffentlichung ist keine Annahme."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "War COM(2025) 837 zur Änderung der DSGVO bis zum 7. Oktober 2026 geltendes Recht geworden?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Ja, seit November 2025",
+              "reason": "Das ist das Datum des Vorschlags, nicht der Annahme."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, weil der Text auf EUR-Lex veröffentlicht ist",
+              "reason": "Auch Vorschläge werden veröffentlicht. Veröffentlichung ist keine Annahme."
+            },
+            {
+              "correct": true,
+              "blocks": "Nein, es handelte sich um einen Vorschlag",
+              "reason": "EUR-Lex verzeichnete COM(2025) 837 nur als vorgeschlagene Änderung."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "pending-proposals"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Welche Regeln sollte ein Unternehmen heute befolgen?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Die Vorschläge, um der Entwicklung voraus zu sein",
+          "reason": "Vorschläge können sich ändern und sind nicht verbindlich."
+        },
+        {
+          "correct": false,
+          "blocks": "Die Fassung, die einfacher ist",
+          "reason": "Verbindlich ist nur das geltende Recht."
+        },
+        {
+          "correct": true,
+          "blocks": "Die DSGVO in der geltenden Fassung",
+          "reason": "Vorschläge ändern keine Pflichten."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Welcher Text ist maßgeblich, solange Änderungen der DSGVO nur vorgeschlagen sind?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Die Fassung, die einfacher ist",
+              "reason": "Verbindlich ist nur das geltende Recht."
+            },
+            {
+              "correct": true,
+              "blocks": "Die DSGVO in der geltenden Fassung",
+              "reason": "Vorschläge ändern keine Pflichten."
+            },
+            {
+              "correct": false,
+              "blocks": "Die Vorschläge, um der Entwicklung voraus zu sein",
+              "reason": "Vorschläge können sich ändern und sind nicht verbindlich."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "pending-proposals"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Wie können Sie prüfen, ob die DSGVO geändert wurde?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Mit der Annahme, dass sie sich alle zwei Jahre ändert",
+          "reason": "Einen solchen Rhythmus gibt es nicht."
+        },
+        {
+          "correct": true,
+          "blocks": "Mit dem EUR-Lex-Eintrag zur DSGVO und den konsolidierten Fassungen",
+          "reason": "Der offizielle Eintrag verzeichnet die ändernden Rechtsakte."
+        },
+        {
+          "correct": false,
+          "blocks": "Mit Schlagzeilen in den Nachrichten",
+          "reason": "Schlagzeilen sind ein Anlass zum Nachprüfen, kein geltendes Recht."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Womit lässt sich eine Änderung der DSGVO verlässlich bestätigen?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Mit dem EUR-Lex-Eintrag zur DSGVO und den konsolidierten Fassungen",
+              "reason": "Der offizielle Eintrag verzeichnet die ändernden Rechtsakte."
+            },
+            {
+              "correct": false,
+              "blocks": "Mit Schlagzeilen in den Nachrichten",
+              "reason": "Schlagzeilen sind ein Anlass zum Nachprüfen, kein geltendes Recht."
+            },
+            {
+              "correct": false,
+              "blocks": "Mit der Annahme, dass sie sich alle zwei Jahre ändert",
+              "reason": "Einen solchen Rhythmus gibt es nicht."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

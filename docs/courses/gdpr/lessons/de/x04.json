@@ -1,0 +1,241 @@
+{
+  "module": "Grenzen, Aufsichtsbehörden und Geldbußen",
+  "lesson": {
+    "slug": "x04",
+    "title": "Unternehmen außerhalb der EU: der Vertreter in der Union",
+    "summary": "Entscheiden, ob ein Unternehmen außerhalb der EU einen Vertreter in der Union benennen muss.",
+    "covers": [
+      "eu-representative"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "g06",
+        "reason": "Ein Vertreter ist nur nötig, wenn Art. 3 Abs. 2 anwendbar ist."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Ein Unternehmen, das **nicht in der EU niedergelassen** ist, fällt unter die DSGVO, wenn es Menschen in der EU Waren oder Dienstleistungen anbietet oder ihr Verhalten in der EU beobachtet (Art. 3 Abs. 2).",
+        "In diesem Fall muss es **schriftlich** einen **Vertreter in der Union** benennen (Art. 27 Abs. 1)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 3 Abs. 2, 27",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Die Pflicht gilt nicht für (Art. 27 Abs. 2):",
+        {
+          "type": "list",
+          "items": [
+            "eine Verarbeitung, die **gelegentlich** erfolgt, keine umfangreiche Verarbeitung der sensiblen Daten nach Art. 9 und 10 einschließt und **voraussichtlich nicht zu einem Risiko führt**; oder",
+            "Behörden oder öffentliche Stellen."
+          ]
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 3 Abs. 2, 27",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Der Vertreter muss in einem der EU-Staaten niedergelassen sein, in denen sich die betroffenen Personen befinden (Art. 27 Abs. 3).",
+        "Aufsichtsbehörden und betroffene Personen können sich bei allen Fragen der Verarbeitung an den Vertreter wenden, zusätzlich zum Unternehmen oder an seiner Stelle (Art. 27 Abs. 4)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 3 Abs. 2, 27",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Die Benennung eines Vertreters **schützt das Unternehmen nicht**: Rechtliche Schritte gegen den Verantwortlichen oder den Auftragsverarbeiter selbst bleiben möglich (Art. 27 Abs. 5)."
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 3 Abs. 2, 27",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Ein Onlineshop ohne Büro in der EU verkauft regelmäßig Backzubehör an Kundinnen und Kunden in Österreich. Artikel 3 Abs. 2 Buchst. a ist anwendbar, und die Verkäufe erfolgen nicht nur gelegentlich. Der Shop braucht deshalb einen Vertreter, der in Österreich oder in einem anderen EU-Staat niedergelassen ist, in dem sich seine Kundschaft befindet.",
+        {
+          "type": "callout",
+          "tone": "note",
+          "text": "Diese Beispiele sind **Veranschaulichungen**. Die Bäckerei Sonnenfeld und die anderen Unternehmen sind erfunden, und eine echte Beurteilung hängt von allen Umständen ab."
+        }
+      ],
+      "sources": [
+        {
+          "title": "DSGVO (Verordnung (EU) 2016/679), Art. 3 Abs. 2, 27",
+          "url": "https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:02016R0679-20160504"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "eu-representative"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Welche Unternehmen müssen einen Vertreter in der Union benennen?",
+      "options": [
+        {
+          "correct": true,
+          "blocks": "Unternehmen außerhalb der EU, die unter Art. 3 Abs. 2 fallen, sofern keine Ausnahme greift",
+          "reason": "Art. 27 Abs. 1 und 2."
+        },
+        {
+          "correct": false,
+          "blocks": "Jedes Unternehmen mit Kundschaft in der EU, auch Unternehmen mit Sitz in der EU",
+          "reason": "Unternehmen, die in der EU niedergelassen sind, brauchen keinen Vertreter."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur Behörden",
+          "reason": "Behörden sind ausgenommen."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wer fällt unter die Pflicht nach Art. 27, einen Vertreter in der Union zu benennen?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Jedes Unternehmen mit Kundschaft in der EU, auch Unternehmen mit Sitz in der EU",
+              "reason": "Unternehmen, die in der EU niedergelassen sind, brauchen keinen Vertreter."
+            },
+            {
+              "correct": false,
+              "blocks": "Nur Behörden",
+              "reason": "Behörden sind ausgenommen."
+            },
+            {
+              "correct": true,
+              "blocks": "Unternehmen außerhalb der EU, die unter Art. 3 Abs. 2 fallen, sofern keine Ausnahme greift",
+              "reason": "Art. 27 Abs. 1 und 2."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-representative"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Wo muss ein nach Art. 27 benannter Vertreter niedergelassen sein?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Irgendwo auf der Welt",
+          "reason": "Er muss in der EU niedergelassen sein."
+        },
+        {
+          "correct": false,
+          "blocks": "Nur in Brüssel",
+          "reason": "Jeder EU-Staat, in dem sich die betroffenen Personen befinden, kommt infrage."
+        },
+        {
+          "correct": true,
+          "blocks": "In einem EU-Staat, in dem sich die betroffenen Personen befinden",
+          "reason": "Art. 27 Abs. 3."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Wo befindet sich nach Art. 27 Abs. 3 der Vertreter eines Unternehmens außerhalb der EU?",
+          "options": [
+            {
+              "correct": false,
+              "blocks": "Nur in Brüssel",
+              "reason": "Jeder EU-Staat, in dem sich die betroffenen Personen befinden, kommt infrage."
+            },
+            {
+              "correct": true,
+              "blocks": "In einem EU-Staat, in dem sich die betroffenen Personen befinden",
+              "reason": "Art. 27 Abs. 3."
+            },
+            {
+              "correct": false,
+              "blocks": "Irgendwo auf der Welt",
+              "reason": "Er muss in der EU niedergelassen sein."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "eu-representative"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Schützt die Benennung eines Vertreters das Unternehmen außerhalb der EU vor rechtlichen Schritten?",
+      "options": [
+        {
+          "correct": false,
+          "blocks": "Ja, wenn der Vertrag das vorsieht",
+          "reason": "Ein Vertrag kann Art. 27 Abs. 5 nicht ändern."
+        },
+        {
+          "correct": true,
+          "blocks": "Nein, rechtliche Schritte gegen das Unternehmen selbst bleiben möglich",
+          "reason": "Art. 27 Abs. 5."
+        },
+        {
+          "correct": false,
+          "blocks": "Ja, verklagt werden kann nur der Vertreter",
+          "reason": "Artikel 27 Abs. 5 lässt rechtliche Schritte gegen das Unternehmen selbst unberührt."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Kann ein Unternehmen außerhalb der EU nach Art. 27 Abs. 5 rechtliche Schritte gegen sich verhindern, indem es einen Vertreter benennt?",
+          "options": [
+            {
+              "correct": true,
+              "blocks": "Nein, rechtliche Schritte gegen das Unternehmen selbst bleiben möglich",
+              "reason": "Art. 27 Abs. 5."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, verklagt werden kann nur der Vertreter",
+              "reason": "Artikel 27 Abs. 5 lässt rechtliche Schritte gegen das Unternehmen selbst unberührt."
+            },
+            {
+              "correct": false,
+              "blocks": "Ja, wenn der Vertrag das vorsieht",
+              "reason": "Ein Vertrag kann Art. 27 Abs. 5 nicht ändern."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
