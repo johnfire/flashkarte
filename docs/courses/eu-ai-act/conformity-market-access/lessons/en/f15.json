@@ -1,0 +1,228 @@
+{
+  "module": "Verify the assessor and its scope",
+  "lesson": {
+    "slug": "f15",
+    "title": "Check independence and competence",
+    "summary": "Check impartiality, protected information and competent resources.",
+    "covers": [
+      "assessor-independence",
+      "assessor-confidentiality",
+      "assessor-competence"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f13",
+        "reason": "The independence requirement applies to the body carrying out conformity assessment. The competence review must match the tasks and system types in scope."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "An assessor must have legal personality under Member State law and suitable organisation, quality management, resources, processes and cybersecurity. Its structure and reporting lines must support confidence in its results. **Independence** requires separation from the provider, economically interested operators and competitors, with documented impartiality safeguards."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 31(1)–(12); Article 34(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The body, management and assessment staff must avoid direct involvement and conflicts involving design, development, marketing, use or representation of the assessed systems. Conflicting consultancy is specifically relevant. Necessary operational or personal use permitted by Article 31(4) does not erase these conflict rules."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 31(1)–(12); Article 34(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Confidentiality** protects information received in assessment, including through staff, committees, associated bodies and subcontractors. Article 31(7) and Article 78 permit required legal disclosures. Article 34(3) requires relevant records, including provider documentation, for the notifying authority's work. 'Confidential' is not a reason to refuse every lawful authority request."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 31(1)–(12); Article 34(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Competence** means having the professional integrity, methods and experienced administrative, technical, legal and scientific staff needed for the notified tasks. The body needs internal ability to evaluate outsourced work, not just a list of external experts. Suitable liability insurance is required unless the stated State-liability exception applies."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 31(1)–(12); Article 34(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Procedures take account of provider size, sector, structure and system complexity. Bodies participate in coordination and remain aware of relevant standards. For fictional Harbour, ask for competent scope evidence and conflict controls. A low fee, familiar brand or promise of approval does not establish these safeguards."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 31(1)–(12); Article 34(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "assessor-independence"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "The assessment team also designed the product it will assess. What requires examination?",
+      "options": [
+        {
+          "blocks": "A conflict with independence and impartiality requirements.",
+          "correct": true,
+          "reason": "The assessment must meet the statutory separation safeguards."
+        },
+        {
+          "blocks": "Only whether the consultancy fee was small.",
+          "correct": false,
+          "reason": "Fee size does not remove the conflict question."
+        },
+        {
+          "blocks": "Nothing if the team knows the product well.",
+          "correct": false,
+          "reason": "Knowledge does not substitute for independence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why does selling design consultancy to the assessed provider matter?",
+          "options": [
+            {
+              "blocks": "Only whether the consultancy fee was small.",
+              "correct": false,
+              "reason": "Fee size does not remove the conflict question."
+            },
+            {
+              "blocks": "Nothing if the team knows the product well.",
+              "correct": false,
+              "reason": "Knowledge does not substitute for independence."
+            },
+            {
+              "blocks": "A conflict with independence and impartiality requirements.",
+              "correct": true,
+              "reason": "The assessment must meet the statutory separation safeguards."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessor-confidentiality"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "A body refuses all notifying-authority documents because they are confidential. Is that justified?",
+      "options": [
+        {
+          "blocks": "Yes; confidentiality prohibits every disclosure.",
+          "correct": false,
+          "reason": "That overlooks the stated legal exceptions and duties."
+        },
+        {
+          "blocks": "No; therefore every record must be published publicly.",
+          "correct": false,
+          "reason": "Required authority disclosure is not unrestricted publication."
+        },
+        {
+          "blocks": "No; protected handling and required disclosure must coexist.",
+          "correct": true,
+          "reason": "The law provides protected information and lawful authority access."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does confidentiality automatically block a lawful assessment-record request?",
+          "options": [
+            {
+              "blocks": "No; therefore every record must be published publicly.",
+              "correct": false,
+              "reason": "Required authority disclosure is not unrestricted publication."
+            },
+            {
+              "blocks": "No; protected handling and required disclosure must coexist.",
+              "correct": true,
+              "reason": "The law provides protected information and lawful authority access."
+            },
+            {
+              "blocks": "Yes; confidentiality prohibits every disclosure.",
+              "correct": false,
+              "reason": "That overlooks the stated legal exceptions and duties."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessor-competence"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "A body outsources all technical work but cannot evaluate it internally. What is missing?",
+      "options": [
+        {
+          "blocks": "Nothing because outsourcing transfers all responsibility.",
+          "correct": false,
+          "reason": "The body retains responsibility and competence duties."
+        },
+        {
+          "blocks": "Sufficient internal competence for the outsourced tasks.",
+          "correct": true,
+          "reason": "Article 31 requires the ability to evaluate work done on its behalf."
+        },
+        {
+          "blocks": "Only a more attractive expert directory.",
+          "correct": false,
+          "reason": "Listing names does not establish evaluation ability."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can external experts replace the body's own evaluation competence?",
+          "options": [
+            {
+              "blocks": "Sufficient internal competence for the outsourced tasks.",
+              "correct": true,
+              "reason": "Article 31 requires the ability to evaluate work done on its behalf."
+            },
+            {
+              "blocks": "Only a more attractive expert directory.",
+              "correct": false,
+              "reason": "Listing names does not establish evaluation ability."
+            },
+            {
+              "blocks": "Nothing because outsourcing transfers all responsibility.",
+              "correct": false,
+              "reason": "The body retains responsibility and competence duties."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

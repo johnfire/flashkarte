@@ -1,0 +1,242 @@
+{
+  "module": "Complete and defend the release record",
+  "lesson": {
+    "slug": "f30",
+    "title": "Case: decide whether the release dossier is complete",
+    "summary": "Make a bounded release decision and record its evidence and unresolved conditions.",
+    "covers": [
+      "market-release-case"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f24",
+        "reason": "The final release decision needs a supported assessment-route conclusion."
+      },
+      {
+        "lesson": "f26",
+        "reason": "The final dossier needs the required declaration content and supporting evidence."
+      },
+      {
+        "lesson": "f27",
+        "reason": "The final release needs a valid marking and access decision."
+      },
+      {
+        "lesson": "f29",
+        "reason": "The final release needs the applicable registration destination and recorded gaps."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "The **market-release case** joins the decisions without claiming an all-law legal clearance. In a dated decision record identify provider/deployer roles, intended purpose, system/version, territory and release action. Complete the Article 5 precheck and Article 6 classification, including any other applicable law. Record which provisions apply at that date; these exercises stipulate a supported temporal interpretation of their chosen procedures."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 5–6, 17, 40–49, 111 and 113; Annexes IV–VIII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Northbridge v1 is stipulated to materially rank recruitment candidates for an ordinary private employer. Its case dossier contains a supported non-prohibited-use analysis, Annex III classification, Section 2 evidence, Article 17 processes, Annex IV technical documentation, recorded Annex VI checks, a complete signed declaration, accessible digital CE marking and the appropriate provider registration. Within these stated checks, a supported readiness conclusion can be recorded, with ongoing obligations and named owners."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 5–6, 17, 40–49, 111 and 113; Annexes IV–VIII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Harbour v1 is stipulated to require sector third-party assessment. Its certificate refers to v0 and the assessor's relevant scope has not been verified. Mark the release **not ready on the stated evidence**: resolve competence/scope and version coverage, and obtain the applicable assessment evidence. A launch promise is not an Article 46 sector derogation. A separate sector-law review remains necessary."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 5–6, 17, 40–49, 111 and 113; Annexes IV–VIII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "If Northbridge later changes its intended purpose or makes an unplanned compliance-affecting modification, review classification, provider role and reassessment; do not recycle v1's conclusion automatically. A public-authority customer has its own applicable registration and impact-assessment duties. These are distinct from the private-employer case assumptions."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 5–6, 17, 40–49, 111 and 113; Annexes IV–VIII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Use three outcomes: **ready for the specified checked scope**, **not ready because a required condition is unmet**, or **needs further review because decisive facts or interpretation are unresolved**. Record each conclusion's facts, dated sources, evidence links, conditions, decision owner and next action. Unknowns should remain visible. Passing this lesson demonstrates reasoning practice, not certification of an actual product."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 5–6, 17, 40–49, 111 and 113; Annexes IV–VIII",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "market-release-case"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2",
+        "screen-5"
+      ],
+      "prompt": "Northbridge's complete stipulated dossier supports all the stated release checks. Which conclusion is proportionate?",
+      "options": [
+        {
+          "blocks": "Ready within the specified checked scope, with continuing duties and owners.",
+          "correct": true,
+          "reason": "The conclusion follows the stated evidence without claiming every possible legal clearance."
+        },
+        {
+          "blocks": "Permanently certified for every future purpose and jurisdiction.",
+          "correct": false,
+          "reason": "The evidence concerns a dated system/version and bounded scope."
+        },
+        {
+          "blocks": "Ready solely because it uses a popular model.",
+          "correct": false,
+          "reason": "Model popularity does not establish the dossier's legal conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should a supported readiness decision describe its scope?",
+          "options": [
+            {
+              "blocks": "Permanently certified for every future purpose and jurisdiction.",
+              "correct": false,
+              "reason": "The evidence concerns a dated system/version and bounded scope."
+            },
+            {
+              "blocks": "Ready solely because it uses a popular model.",
+              "correct": false,
+              "reason": "Model popularity does not establish the dossier's legal conditions."
+            },
+            {
+              "blocks": "Ready within the specified checked scope, with continuing duties and owners.",
+              "correct": true,
+              "reason": "The conclusion follows the stated evidence without claiming every possible legal clearance."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "market-release-case"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-5"
+      ],
+      "prompt": "Harbour has an unverified assessor scope and a v0 certificate for v1. Is its stated release ready?",
+      "options": [
+        {
+          "blocks": "Ready because a certificate exists, whatever its scope.",
+          "correct": false,
+          "reason": "Certificate existence does not establish relevant scope or version coverage."
+        },
+        {
+          "blocks": "Ready because a sales deadline creates a derogation.",
+          "correct": false,
+          "reason": "Commercial urgency does not supply an applicable statutory authorisation."
+        },
+        {
+          "blocks": "Not ready on these facts; resolve the identified assessment gaps.",
+          "correct": true,
+          "reason": "The stipulated required assessment is not supported for this release."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What outcome follows from missing relevant assessment/version evidence?",
+          "options": [
+            {
+              "blocks": "Ready because a sales deadline creates a derogation.",
+              "correct": false,
+              "reason": "Commercial urgency does not supply an applicable statutory authorisation."
+            },
+            {
+              "blocks": "Not ready on these facts; resolve the identified assessment gaps.",
+              "correct": true,
+              "reason": "The stipulated required assessment is not supported for this release."
+            },
+            {
+              "blocks": "Ready because a certificate exists, whatever its scope.",
+              "correct": false,
+              "reason": "Certificate existence does not establish relevant scope or version coverage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "market-release-case"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "The release date's applicability interpretation is unresolved. What is the honest outcome?",
+      "options": [
+        {
+          "blocks": "Assume every public customer's duty is completed by the provider entry.",
+          "correct": false,
+          "reason": "Public-deployer duties are distinct and need their own applicability check."
+        },
+        {
+          "blocks": "Needs further review, with the unknown, owner and next evidence action recorded.",
+          "correct": true,
+          "reason": "Unresolved decisive conditions cannot support a final readiness conclusion."
+        },
+        {
+          "blocks": "Mark ready and remove the uncertainty from the record.",
+          "correct": false,
+          "reason": "That hides a condition on which the decision depends."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should happen when a decisive legal-application fact is still unknown?",
+          "options": [
+            {
+              "blocks": "Needs further review, with the unknown, owner and next evidence action recorded.",
+              "correct": true,
+              "reason": "Unresolved decisive conditions cannot support a final readiness conclusion."
+            },
+            {
+              "blocks": "Mark ready and remove the uncertainty from the record.",
+              "correct": false,
+              "reason": "That hides a condition on which the decision depends."
+            },
+            {
+              "blocks": "Assume every public customer's duty is completed by the provider entry.",
+              "correct": false,
+              "reason": "Public-deployer duties are distinct and need their own applicability check."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

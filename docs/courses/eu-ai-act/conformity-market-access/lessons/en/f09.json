@@ -1,0 +1,216 @@
+{
+  "module": "Choose and document conformity evidence",
+  "lesson": {
+    "slug": "f09",
+    "title": "Use common specifications correctly",
+    "summary": "Recognise an adopted common specification and justify equivalent solutions.",
+    "covers": [
+      "common-specification-trigger",
+      "equivalent-technical-solution"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f08",
+        "reason": "The equivalent solution must cover the requirement left unresolved by the chosen conformity evidence."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **common specification** under Article 41 is established by a Commission implementing act. The trigger combines a standardisation request problem—refusal, delay, insufficient fundamental-rights treatment or non-compliance with the request—with the stated absence of a citation expected within a reasonable period. A provider cannot create such an act by renaming its checklist."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 41(1)–(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The Commission informs the relevant standardisation committee before preparing the draft, consults the advisory forum and follows the examination procedure. These are adoption safeguards, not additional steps for each provider to perform. Compliance gives a presumption only for requirements covered by the specification or its parts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 41(1)–(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "An **equivalent technical solution** is not a waiver. Providers not complying with an applicable common specification must duly justify that their solution meets the applicable requirements to at least an equivalent level. Record the comparison, technical evidence and remaining uncertainties."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 41(1)–(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "When an overlapping harmonised-standard reference is published, Article 41(4) provides for repeal of the corresponding implementing act or parts. A Member State can raise a supported inadequacy concern, which the Commission assesses and may address by amendment. Keep the legal version current."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 41(1)–(6)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "common-specification-trigger"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A vendor calls its unpublished checklist an 'EU common specification'. What should you verify?",
+      "options": [
+        {
+          "blocks": "The adopted Commission implementing act and its scope.",
+          "correct": true,
+          "reason": "The legal instrument establishes its authority and coverage."
+        },
+        {
+          "blocks": "The vendor's chosen name alone.",
+          "correct": false,
+          "reason": "Renaming a checklist does not create an implementing act."
+        },
+        {
+          "blocks": "Only how many suppliers signed the checklist.",
+          "correct": false,
+          "reason": "Industry support does not establish Article 41 adoption."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What establishes a common specification's Article 41 authority?",
+          "options": [
+            {
+              "blocks": "The vendor's chosen name alone.",
+              "correct": false,
+              "reason": "Renaming a checklist does not create an implementing act."
+            },
+            {
+              "blocks": "Only how many suppliers signed the checklist.",
+              "correct": false,
+              "reason": "Industry support does not establish Article 41 adoption."
+            },
+            {
+              "blocks": "The adopted Commission implementing act and its scope.",
+              "correct": true,
+              "reason": "The legal instrument establishes its authority and coverage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "equivalent-technical-solution"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Northbridge departs from an applicable common specification. What is required?",
+      "options": [
+        {
+          "blocks": "A statement that specifications are irrelevant.",
+          "correct": false,
+          "reason": "The paragraph requires justification, not dismissal."
+        },
+        {
+          "blocks": "A lower protection target chosen by the provider.",
+          "correct": false,
+          "reason": "At least equivalent compliance is required."
+        },
+        {
+          "blocks": "A justified solution achieving at least equivalent compliance.",
+          "correct": true,
+          "reason": "The departure needs a supported equivalence explanation."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What supports using a different technical solution under Article 41(5)?",
+          "options": [
+            {
+              "blocks": "A lower protection target chosen by the provider.",
+              "correct": false,
+              "reason": "At least equivalent compliance is required."
+            },
+            {
+              "blocks": "A justified solution achieving at least equivalent compliance.",
+              "correct": true,
+              "reason": "The departure needs a supported equivalence explanation."
+            },
+            {
+              "blocks": "A statement that specifications are irrelevant.",
+              "correct": false,
+              "reason": "The paragraph requires justification, not dismissal."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "common-specification-trigger",
+        "equivalent-technical-solution"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "An overlapping standard is newly cited. What should the reviewer check?",
+      "options": [
+        {
+          "blocks": "Whether every requirement has become optional.",
+          "correct": false,
+          "reason": "Changing the evidence instrument does not erase requirements."
+        },
+        {
+          "blocks": "Repeal or amendment and the remaining applicable coverage.",
+          "correct": true,
+          "reason": "Article 41 provides a mechanism for replacing overlapping specifications."
+        },
+        {
+          "blocks": "Whether the old PDF still opens.",
+          "correct": false,
+          "reason": "Availability of a file does not establish continuing legal effect."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why can an old common-specification reference need refreshing?",
+          "options": [
+            {
+              "blocks": "Repeal or amendment and the remaining applicable coverage.",
+              "correct": true,
+              "reason": "Article 41 provides a mechanism for replacing overlapping specifications."
+            },
+            {
+              "blocks": "Whether the old PDF still opens.",
+              "correct": false,
+              "reason": "Availability of a file does not establish continuing legal effect."
+            },
+            {
+              "blocks": "Whether every requirement has become optional.",
+              "correct": false,
+              "reason": "Changing the evidence instrument does not erase requirements."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

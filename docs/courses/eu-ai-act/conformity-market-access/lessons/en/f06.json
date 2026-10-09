@@ -1,0 +1,243 @@
+{
+  "module": "Define the release and assessment boundary",
+  "lesson": {
+    "slug": "f06",
+    "title": "Case: record the release boundary",
+    "summary": "Record the boundary of two fictional releases.",
+    "covers": [
+      "release-scope-case"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f02",
+        "reason": "A release scope conclusion cannot ignore a prohibition."
+      },
+      {
+        "lesson": "f03",
+        "reason": "The dated case must distinguish a new release from an existing-system transition."
+      },
+      {
+        "lesson": "f04",
+        "reason": "The medical case needs the procedure priority when routes overlap."
+      },
+      {
+        "lesson": "f05",
+        "reason": "The case needs a defined evidence dossier before it can record unresolved release gaps."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Case facts:** Northbridge v1 materially ranks recruitment applicants for a private employer. Harbour v1 analyses diagnostic images; this exercise stipulates an Annex I Section A medical product with a sector-required third party. Both providers ask whether their releases are ready. No real customer or device is being classified."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3, 5, 6, 43(3), 111(2), 113; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Start with intended purpose, version, named provider and release countries/date. Check prohibited practices independently. Northbridge's stipulated Annex III employment use supports its high-risk route. Harbour's stipulated sector facts support the relevant product-law route; its actual device class is outside this exercise."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3, 5, 6, 43(3), 111(2), 113; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The proposed Northbridge release is during an unresolved transitional period. Record the Section 5/Sections 1–3 interaction and refer it for dated interpretation. Harbour's body has not supplied the transitional competence evidence. Record that as an assessor evidence gap, not as an automatically valid appointment."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3, 5, 6, 43(3), 111(2), 113; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "The **scope record** should distinguish a supported conclusion, an explicit case assumption and an unknown needing evidence. Add the technical-file gaps from F05. A readiness verdict must be limited to the questions actually checked; it is not a comprehensive legal clearance."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 3, 5, 6, 43(3), 111(2), 113; Annex IV",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "release-scope-case"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which route fact is expressly stipulated for Harbour?",
+      "options": [
+        {
+          "blocks": "Its sector law requires third-party assessment.",
+          "correct": true,
+          "reason": "That is an explicit fictional case assumption."
+        },
+        {
+          "blocks": "Every medical AI device has exactly the same class.",
+          "correct": false,
+          "reason": "No universal device-class conclusion is stipulated or taught."
+        },
+        {
+          "blocks": "A medical purpose removes all AI Act requirements.",
+          "correct": false,
+          "reason": "The stipulated route incorporates applicable AI requirements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What sector fact may the exercise rely on without classifying a real device?",
+          "options": [
+            {
+              "blocks": "Every medical AI device has exactly the same class.",
+              "correct": false,
+              "reason": "No universal device-class conclusion is stipulated or taught."
+            },
+            {
+              "blocks": "A medical purpose removes all AI Act requirements.",
+              "correct": false,
+              "reason": "The stipulated route incorporates applicable AI requirements."
+            },
+            {
+              "blocks": "Its sector law requires third-party assessment.",
+              "correct": true,
+              "reason": "That is an explicit fictional case assumption."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "release-scope-case"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Northbridge's Section 5 timing is unresolved. Which conclusion is supported?",
+      "options": [
+        {
+          "blocks": "Ready because all obligations are certainly postponed.",
+          "correct": false,
+          "reason": "That blanket conclusion is not supported by the section-specific text."
+        },
+        {
+          "blocks": "Prohibited because any timing uncertainty is a ban.",
+          "correct": false,
+          "reason": "Unresolved timing is not itself an Article 5 prohibition."
+        },
+        {
+          "blocks": "Needs a dated interpretation before release advice.",
+          "correct": true,
+          "reason": "The record should preserve the specific uncertainty."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should the case report say when the applicable-date interaction is unsettled?",
+          "options": [
+            {
+              "blocks": "Prohibited because any timing uncertainty is a ban.",
+              "correct": false,
+              "reason": "Unresolved timing is not itself an Article 5 prohibition."
+            },
+            {
+              "blocks": "Needs a dated interpretation before release advice.",
+              "correct": true,
+              "reason": "The record should preserve the specific uncertainty."
+            },
+            {
+              "blocks": "Ready because all obligations are certainly postponed.",
+              "correct": false,
+              "reason": "That blanket conclusion is not supported by the section-specific text."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "release-scope-case"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "Harbour's appointed body supplies no additional competence evidence. What should be recorded?",
+      "options": [
+        {
+          "blocks": "A completed medical-law compliance conclusion.",
+          "correct": false,
+          "reason": "The exercise does not establish complete sector compliance."
+        },
+        {
+          "blocks": "An evidence gap with an owner and required follow-up.",
+          "correct": true,
+          "reason": "This makes the missing support visible and actionable."
+        },
+        {
+          "blocks": "An assumed qualification because the provider trusts it.",
+          "correct": false,
+          "reason": "Trust does not demonstrate the statutory conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should an unsupported assessor qualification be handled?",
+          "options": [
+            {
+              "blocks": "An evidence gap with an owner and required follow-up.",
+              "correct": true,
+              "reason": "This makes the missing support visible and actionable."
+            },
+            {
+              "blocks": "An assumed qualification because the provider trusts it.",
+              "correct": false,
+              "reason": "Trust does not demonstrate the statutory conditions."
+            },
+            {
+              "blocks": "A completed medical-law compliance conclusion.",
+              "correct": false,
+              "reason": "The exercise does not establish complete sector compliance."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

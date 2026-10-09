@@ -1,0 +1,228 @@
+{
+  "module": "Verify the assessor and its scope",
+  "lesson": {
+    "slug": "f17",
+    "title": "Respond when designation changes",
+    "summary": "Respond to designation changes without assuming certificate continuity.",
+    "covers": [
+      "designation-change-response",
+      "competence-challenge",
+      "assessor-coordination"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f13",
+        "reason": "Continuity decisions depend on the formal assessor status that has changed."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **designation change response** starts by identifying extension, restriction, suspension, withdrawal or cessation. Extensions follow Articles 29–30; other changes follow Article 36. Bodies notify affected providers within ten days of suspension, restriction or withdrawal. Authorities preserve records and assess affected certificates, including unduly issued ones."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 36–38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "For planned cessation, the body gives at least one year's notice. Certificates may remain valid for nine months after cessation only with another body's written assumption of responsibility and a full assessment completed by that period's end. This is a conditional continuity mechanism, not automatic renewal."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 36–38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Suspension/restriction has distinct authority-confirmation conditions under Article 36(8), including no-risk/remedy-timeline or monitoring-capability arrangements. Withdrawal has a different nine-month mechanism: no-risk confirmation, written immediate responsibility by another body and assessment within twelve months. Possible three-month extensions are bounded by the twelve-month total. Unduly issued certificates are excluded. Look up the actual branch and deadlines before relying on continuity."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 36–38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A **competence challenge** under Article 37 lets the Commission investigate doubts, obtain authority evidence confidentially and request corrective action. If the Member State fails to act, the Commission may suspend, restrict or withdraw designation through an implementing act. An allegation is not by itself proof that every certificate is invalid."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 36–38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "**Assessor coordination** under Article 38 supports sectoral cooperation, body participation and exchange of authority knowledge. It does not provide a new approval for your product. Retain the authority/body decisions and trace the actual effect on your certificate and monitoring arrangements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 36–38",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "designation-change-response"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A body plans to cease work. Is nine-month certificate continuity automatic?",
+      "options": [
+        {
+          "blocks": "Written replacement responsibility and the specified assessment conditions.",
+          "correct": true,
+          "reason": "Article 36(3) makes the continuity conditional."
+        },
+        {
+          "blocks": "Only the provider's wish to keep using the certificate.",
+          "correct": false,
+          "reason": "Provider preference does not establish continuity."
+        },
+        {
+          "blocks": "Only an old certificate image stored locally.",
+          "correct": false,
+          "reason": "An image does not resolve the body change or conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What must exist before relying on the cessation mechanism?",
+          "options": [
+            {
+              "blocks": "Only the provider's wish to keep using the certificate.",
+              "correct": false,
+              "reason": "Provider preference does not establish continuity."
+            },
+            {
+              "blocks": "Only an old certificate image stored locally.",
+              "correct": false,
+              "reason": "An image does not resolve the body change or conditions."
+            },
+            {
+              "blocks": "Written replacement responsibility and the specified assessment conditions.",
+              "correct": true,
+              "reason": "Article 36(3) makes the continuity conditional."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "competence-challenge"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "A body's competence is credibly questioned. Which process can address it?",
+      "options": [
+        {
+          "blocks": "Immediate acceptance because the body was once notified.",
+          "correct": false,
+          "reason": "Past notification does not resolve continuing competence."
+        },
+        {
+          "blocks": "Automatic invalidation of every unrelated certificate.",
+          "correct": false,
+          "reason": "An allegation alone does not establish that conclusion."
+        },
+        {
+          "blocks": "Commission investigation and the specified corrective process.",
+          "correct": true,
+          "reason": "The article defines investigation, evidence and corrective powers."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is the Article 37 response to doubts about continuing competence?",
+          "options": [
+            {
+              "blocks": "Automatic invalidation of every unrelated certificate.",
+              "correct": false,
+              "reason": "An allegation alone does not establish that conclusion."
+            },
+            {
+              "blocks": "Commission investigation and the specified corrective process.",
+              "correct": true,
+              "reason": "The article defines investigation, evidence and corrective powers."
+            },
+            {
+              "blocks": "Immediate acceptance because the body was once notified.",
+              "correct": false,
+              "reason": "Past notification does not resolve continuing competence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessor-coordination"
+      ],
+      "teaches": [
+        "screen-5"
+      ],
+      "prompt": "A body attends the sector coordination group. What does that establish for Harbour?",
+      "options": [
+        {
+          "blocks": "The product needs no current certificate checks.",
+          "correct": false,
+          "reason": "Coordination does not resolve certificate validity."
+        },
+        {
+          "blocks": "Participation supports coordination, not product approval.",
+          "correct": true,
+          "reason": "The product still needs the applicable assessment and evidence."
+        },
+        {
+          "blocks": "The product is automatically approved by the group.",
+          "correct": false,
+          "reason": "The group is not a substitute product assessment."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does coordination participation itself approve a client's system?",
+          "options": [
+            {
+              "blocks": "Participation supports coordination, not product approval.",
+              "correct": true,
+              "reason": "The product still needs the applicable assessment and evidence."
+            },
+            {
+              "blocks": "The product is automatically approved by the group.",
+              "correct": false,
+              "reason": "The group is not a substitute product assessment."
+            },
+            {
+              "blocks": "The product needs no current certificate checks.",
+              "correct": false,
+              "reason": "Coordination does not resolve certificate validity."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

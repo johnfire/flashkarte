@@ -1,0 +1,234 @@
+{
+  "module": "Complete and defend the release record",
+  "lesson": {
+    "slug": "f26",
+    "title": "Prepare the EU declaration",
+    "summary": "Prepare a scoped declaration supported by the assessed system evidence.",
+    "covers": [
+      "provider-declaration-responsibility",
+      "declaration-content-check"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f01",
+        "reason": "Declaration fields must trace to the specific system and version."
+      },
+      {
+        "lesson": "f05",
+        "reason": "The provider needs conformity evidence before accepting responsibility for the declaration."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Provider declaration responsibility:** the provider draws up an EU declaration of conformity for each high-risk system in written, machine-readable, physically or electronically signed form. It keeps it available to national competent authorities for ten years after placing the system on the market or putting it into service. This is the provider's responsibility statement, not a notified body's certificate."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 47(1)–(5); Annex V(1)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "The declaration states that Chapter III Section 2 requirements are met, remains up to date and is supplied on request. It is translated into a language easily understood by the national competent authorities of the Member States where the system is placed on the market or made available. A file accessible only to the provider's sales team is not the authority-access arrangement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 47(1)–(5); Annex V(1)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Declaration content check, fields 1–4:** Annex V requires the system name/type and an unambiguous identification/traceability reference; provider or, where applicable, representative names/addresses; a statement that the declaration is under the provider's sole responsibility; and a statement that the system conforms to the AI Act and, where applicable, other relevant Union legislation providing for a declaration."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 47(1)–(5); Annex V(1)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "**Fields 5–8:** references to relevant harmonised standards or common specifications; where applicable the notified body's name/number, procedure and certificate identification; place/date of issue, signatory name/function and an indication of for whom/on whose behalf it was signed; and, where personal data processing is involved, the Annex V personal-data-law statement. Verify the applicable data-protection framework and supporting evidence; do not invent a claim that every privacy regime applies to every product."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 47(1)–(5); Annex V(1)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Where other Union legislation also requires a declaration, one declaration covers all applicable legislation and identifies it. Signing transfers neither responsibility to the model supplier nor proof of every unrelated legal requirement. Keep the declared system/version, applicable laws, assessment evidence, signature and later changes linked in the release record."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 47(1)–(5); Annex V(1)–(8)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "provider-declaration-responsibility"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Who assumes responsibility by issuing the EU declaration?",
+      "options": [
+        {
+          "blocks": "The provider issuing the declaration remains responsible.",
+          "correct": true,
+          "reason": "Article 47 assigns the declaration and compliance responsibility to the provider."
+        },
+        {
+          "blocks": "Only the model supplier, irrespective of the system built.",
+          "correct": false,
+          "reason": "The provider's system duties are not transferred by buying a model."
+        },
+        {
+          "blocks": "Only the graphic designer who formats the document.",
+          "correct": false,
+          "reason": "Formatting does not determine the responsible declarant."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a supplier certificate replace the provider's Article 47 declaration?",
+          "options": [
+            {
+              "blocks": "Only the model supplier, irrespective of the system built.",
+              "correct": false,
+              "reason": "The provider's system duties are not transferred by buying a model."
+            },
+            {
+              "blocks": "Only the graphic designer who formats the document.",
+              "correct": false,
+              "reason": "Formatting does not determine the responsible declarant."
+            },
+            {
+              "blocks": "The provider issuing the declaration remains responsible.",
+              "correct": true,
+              "reason": "Article 47 assigns the declaration and compliance responsibility to the provider."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "declaration-content-check"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "A declaration says only 'AI compliant' and names no traceable system. What is missing?",
+      "options": [
+        {
+          "blocks": "Only a larger logo.",
+          "correct": false,
+          "reason": "A logo does not supply the required declaration fields."
+        },
+        {
+          "blocks": "Nothing if a certificate exists somewhere.",
+          "correct": false,
+          "reason": "A certificate is not a substitute for complete declaration content."
+        },
+        {
+          "blocks": "The required identification, statements, references and signatory details.",
+          "correct": true,
+          "reason": "Annex V specifies declaration content for an identifiable system."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Why is a generic conformity slogan insufficient for Annex V?",
+          "options": [
+            {
+              "blocks": "Nothing if a certificate exists somewhere.",
+              "correct": false,
+              "reason": "A certificate is not a substitute for complete declaration content."
+            },
+            {
+              "blocks": "The required identification, statements, references and signatory details.",
+              "correct": true,
+              "reason": "Annex V specifies declaration content for an identifiable system."
+            },
+            {
+              "blocks": "Only a larger logo.",
+              "correct": false,
+              "reason": "A logo does not supply the required declaration fields."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "provider-declaration-responsibility",
+        "declaration-content-check"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-5"
+      ],
+      "prompt": "A certificate expires after four years. May the provider discard the declaration then?",
+      "options": [
+        {
+          "blocks": "Yes; only the supplier needs a copy.",
+          "correct": false,
+          "reason": "Article 47 places retention on the provider."
+        },
+        {
+          "blocks": "No; retain it for the specified ten-year period and keep it up to date.",
+          "correct": true,
+          "reason": "The declaration's retention obligation is distinct from certificate validity."
+        },
+        {
+          "blocks": "Yes; all documents share the certificate's expiry.",
+          "correct": false,
+          "reason": "That incorrectly merges separate retention and validity rules."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does certificate expiry shorten Article 47's declaration retention period?",
+          "options": [
+            {
+              "blocks": "No; retain it for the specified ten-year period and keep it up to date.",
+              "correct": true,
+              "reason": "The declaration's retention obligation is distinct from certificate validity."
+            },
+            {
+              "blocks": "Yes; all documents share the certificate's expiry.",
+              "correct": false,
+              "reason": "That incorrectly merges separate retention and validity rules."
+            },
+            {
+              "blocks": "Yes; only the supplier needs a copy.",
+              "correct": false,
+              "reason": "Article 47 places retention on the provider."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

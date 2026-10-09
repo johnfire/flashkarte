@@ -1,0 +1,219 @@
+{
+  "module": "Carry out and maintain the assessment",
+  "lesson": {
+    "slug": "f22",
+    "title": "Manage certificates and assessment decisions",
+    "summary": "Manage certificate scope, validity and required exchanges.",
+    "covers": [
+      "certificate-lifecycle",
+      "assessment-result-sharing"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f15",
+        "reason": "The sharing duty must preserve the applicable confidentiality rules."
+      },
+      {
+        "lesson": "f21",
+        "reason": "Certificate management begins with the assessed system and reasoned decision."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **certificate lifecycle** includes its system scope, conditions, expiry, reassessment and possible changes. Article 44 certificates are in a language easily understood by the relevant authorities where the body is established. Their indicated validity cannot exceed five years for Annex I systems or four for Annex III. Extensions require reassessment and the same maximum periods."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 44–45; Annex VII(4.6)–(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A certificate supplement depends on the underlying certificate remaining valid. If Section 2 requirements cease to be met, the body restricts, suspends or withdraws, unless appropriate corrective action within its deadline ensures compliance. Decisions need reasons and an appeal procedure. Appealing is not itself proof of conformity."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 44–45; Annex VII(4.6)–(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Assessment-result sharing** has different recipients. The notifying authority receives issued certificates/supplements and approvals, adverse decisions, changed notification circumstances and relevant authority-information requests; on request it receives other assessment activity information, including cross-border work and subcontracting."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 44–45; Annex VII(4.6)–(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Other notified bodies receive specified refused, restricted, suspended or withdrawn certificates/approvals and positive ones on request. Similar bodies exchange relevant negative results and requested positive results. Confidentiality under Article 78 remains required. These exchanges are not instructions to publish all commercial records to the public."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 44–45; Annex VII(4.6)–(4.7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "certificate-lifecycle"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "An Annex III certificate indicates a six-year validity period. What should be checked?",
+      "options": [
+        {
+          "blocks": "The four-year maximum and the applicable assessment evidence.",
+          "correct": true,
+          "reason": "Article 44(2) sets that maximum for Annex III."
+        },
+        {
+          "blocks": "Only whether the certificate is printed in colour.",
+          "correct": false,
+          "reason": "Colour does not establish lawful validity."
+        },
+        {
+          "blocks": "Nothing; Annex III certificates have unlimited validity.",
+          "correct": false,
+          "reason": "The paragraph expressly limits the period."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which limit applies to the stated Annex III certificate?",
+          "options": [
+            {
+              "blocks": "Only whether the certificate is printed in colour.",
+              "correct": false,
+              "reason": "Colour does not establish lawful validity."
+            },
+            {
+              "blocks": "Nothing; Annex III certificates have unlimited validity.",
+              "correct": false,
+              "reason": "The paragraph expressly limits the period."
+            },
+            {
+              "blocks": "The four-year maximum and the applicable assessment evidence.",
+              "correct": true,
+              "reason": "Article 44(2) sets that maximum for Annex III."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "certificate-lifecycle"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "A supplement is retained after its underlying certificate ceases to be valid. Is it independently sufficient?",
+      "options": [
+        {
+          "blocks": "Yes; every supplement starts an unlimited new period.",
+          "correct": false,
+          "reason": "That ignores the underlying-certificate condition."
+        },
+        {
+          "blocks": "Yes; keeping a PDF copy prevents expiry.",
+          "correct": false,
+          "reason": "Possession does not establish continuing validity."
+        },
+        {
+          "blocks": "No; its validity depends on the underlying certificate.",
+          "correct": true,
+          "reason": "Article 44(2) makes this dependency explicit."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a supplement outlive the certificate it supplements?",
+          "options": [
+            {
+              "blocks": "Yes; keeping a PDF copy prevents expiry.",
+              "correct": false,
+              "reason": "Possession does not establish continuing validity."
+            },
+            {
+              "blocks": "No; its validity depends on the underlying certificate.",
+              "correct": true,
+              "reason": "Article 44(2) makes this dependency explicit."
+            },
+            {
+              "blocks": "Yes; every supplement starts an unlimited new period.",
+              "correct": false,
+              "reason": "That ignores the underlying-certificate condition."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessment-result-sharing"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "A certificate is refused. What does result sharing require?",
+      "options": [
+        {
+          "blocks": "Public disclosure of every confidential model parameter.",
+          "correct": false,
+          "reason": "Required exchanges are not unrestricted publication."
+        },
+        {
+          "blocks": "The specified authority/body exchanges with confidentiality safeguards.",
+          "correct": true,
+          "reason": "Article 45 combines required exchanges and protected handling."
+        },
+        {
+          "blocks": "No exchange because refusal is commercially embarrassing.",
+          "correct": false,
+          "reason": "The article expressly covers negative decisions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Must the adverse result be treated as entirely private and unreportable?",
+          "options": [
+            {
+              "blocks": "The specified authority/body exchanges with confidentiality safeguards.",
+              "correct": true,
+              "reason": "Article 45 combines required exchanges and protected handling."
+            },
+            {
+              "blocks": "No exchange because refusal is commercially embarrassing.",
+              "correct": false,
+              "reason": "The article expressly covers negative decisions."
+            },
+            {
+              "blocks": "Public disclosure of every confidential model parameter.",
+              "correct": false,
+              "reason": "Required exchanges are not unrestricted publication."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

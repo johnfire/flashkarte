@@ -1,0 +1,222 @@
+{
+  "module": "Choose and document conformity evidence",
+  "lesson": {
+    "slug": "f12",
+    "title": "Case: reject an unsupported compliance claim",
+    "summary": "Find the gaps in a fictional supplier pitch.",
+    "covers": [
+      "conformity-evidence-case"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f08",
+        "reason": "The case must specify evidence for the identified gap."
+      },
+      {
+        "lesson": "f09",
+        "reason": "The common-specification claim requires a reasoned equivalence check."
+      },
+      {
+        "lesson": "f10",
+        "reason": "The case includes a cybersecurity certificate with limited coverage."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Case pitch:** Northbridge's vendor says, 'Our ISO certificate, a cited logging standard and a cybersecurity certificate make your whole recruitment product compliant.' The exercise stipulates that the logging citation is genuine and the cybersecurity scheme qualifies, but both cover limited requirements."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–42; Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Separate the claims. The ISO certificate concerns its stated organisational scope. Logging evidence concerns its stated covered requirement. The cybersecurity evidence concerns only the specified cybersecurity coverage. None automatically settles Northbridge's data, oversight or complete procedure."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–42; Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Request a coverage matrix and implementation evidence. For uncovered requirements obtain detailed compliance solutions and results. If an applicable common specification is not followed, add the duly justified equivalent-level comparison. Do not treat a supplier's commercial warranty as the missing technical evidence."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–42; Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Case conclusion: **not ready on the evidence presented**. Record the gaps and follow-up owner. This conclusion concerns the incomplete pitch; it does not establish that the underlying product could never satisfy the law."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 40–42; Annex IV(7)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "conformity-evidence-case"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which claim exceeds the case's stipulated evidence?",
+      "options": [
+        {
+          "blocks": "Whole-system conformity for Northbridge.",
+          "correct": true,
+          "reason": "The documents have narrower stated scopes."
+        },
+        {
+          "blocks": "A limited logging presumption where its conditions are met.",
+          "correct": false,
+          "reason": "The case expressly stipulates that limited citation."
+        },
+        {
+          "blocks": "A limited cybersecurity presumption within its coverage.",
+          "correct": false,
+          "reason": "The case stipulates qualifying, limited cybersecurity evidence."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What is unsupported by the three limited documents?",
+          "options": [
+            {
+              "blocks": "A limited logging presumption where its conditions are met.",
+              "correct": false,
+              "reason": "The case expressly stipulates that limited citation."
+            },
+            {
+              "blocks": "A limited cybersecurity presumption within its coverage.",
+              "correct": false,
+              "reason": "The case stipulates qualifying, limited cybersecurity evidence."
+            },
+            {
+              "blocks": "Whole-system conformity for Northbridge.",
+              "correct": true,
+              "reason": "The documents have narrower stated scopes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "conformity-evidence-case"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "What evidence should Northbridge request next?",
+      "options": [
+        {
+          "blocks": "A larger certificate image for the website.",
+          "correct": false,
+          "reason": "Image size does not expand the evidence."
+        },
+        {
+          "blocks": "A broader unsupported sales assurance.",
+          "correct": false,
+          "reason": "More sweeping language does not demonstrate conformity."
+        },
+        {
+          "blocks": "A coverage matrix and system-specific compliance evidence.",
+          "correct": true,
+          "reason": "These expose and support the missing requirements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "How should the provider address the uncovered requirements?",
+          "options": [
+            {
+              "blocks": "A broader unsupported sales assurance.",
+              "correct": false,
+              "reason": "More sweeping language does not demonstrate conformity."
+            },
+            {
+              "blocks": "A coverage matrix and system-specific compliance evidence.",
+              "correct": true,
+              "reason": "These expose and support the missing requirements."
+            },
+            {
+              "blocks": "A larger certificate image for the website.",
+              "correct": false,
+              "reason": "Image size does not expand the evidence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "conformity-evidence-case"
+      ],
+      "teaches": [
+        "screen-4"
+      ],
+      "prompt": "Which verdict fits this incomplete pitch?",
+      "options": [
+        {
+          "blocks": "Permanently prohibited under Article 5.",
+          "correct": false,
+          "reason": "A missing conformity record is not itself a prohibited practice."
+        },
+        {
+          "blocks": "Not ready on the presented evidence; document the gaps.",
+          "correct": true,
+          "reason": "The evidence is incomplete, with actionable follow-up."
+        },
+        {
+          "blocks": "Fully ready for every law and every release.",
+          "correct": false,
+          "reason": "The evidence does not support that breadth."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What conclusion is supported without claiming permanent impossibility?",
+          "options": [
+            {
+              "blocks": "Not ready on the presented evidence; document the gaps.",
+              "correct": true,
+              "reason": "The evidence is incomplete, with actionable follow-up."
+            },
+            {
+              "blocks": "Fully ready for every law and every release.",
+              "correct": false,
+              "reason": "The evidence does not support that breadth."
+            },
+            {
+              "blocks": "Permanently prohibited under Article 5.",
+              "correct": false,
+              "reason": "A missing conformity record is not itself a prohibited practice."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

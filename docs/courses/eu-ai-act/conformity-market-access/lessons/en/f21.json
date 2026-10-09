@@ -1,0 +1,246 @@
+{
+  "module": "Carry out and maintain the assessment",
+  "lesson": {
+    "slug": "f21",
+    "title": "Prepare for a notified-body assessment",
+    "summary": "Prepare quality management, technical assessment and continuing surveillance.",
+    "covers": [
+      "qms-approval",
+      "technical-documentation-assessment",
+      "qms-surveillance"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f05",
+        "reason": "QMS approval needs documented procedures and evidence of the applicable requirements. The assessor needs the system-specific technical file and its evidence."
+      },
+      {
+        "lesson": "f13",
+        "reason": "The application is submitted to the legally qualified assessment body."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Quality-management approval** under Annex VII begins with the provider/representative identity, systems covered, each system's technical documentation, Article 17 process documentation, procedures keeping it effective and a declaration that the same application was not lodged elsewhere. The body assesses it and gives a reasoned decision. Approval must be implemented and maintained."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex VII(1)–(5); Article 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Notify intended changes to the approved quality-management system or covered-system list. The body examines them and decides whether the modified system still satisfies the requirements or needs reassessment. A provider cannot silently add a new covered product to an old approval."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex VII(1)–(5); Article 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "**Technical-documentation assessment** has a system-specific application: provider identity, declaration about no duplicate application and Annex IV documentation. The body examines the records and may require additional evidence/tests or conduct appropriate tests itself if dissatisfied with the provider's tests."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex VII(1)–(5); Article 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Relevant training, validation and testing dataset access is limited to what is necessary, with appropriate secure remote means where suitable. Access to training/trained models and parameters has stricter conditions: necessity, other reasonable means exhausted and insufficient, a reasoned request, and protection of intellectual property and trade secrets. It is neither automatic unrestricted access nor an absolute secrecy veto."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex VII(1)–(5); Article 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "A favourable technical decision produces a certificate identifying the system, provider, conclusions and validity conditions. Non-conformity leads to a reasoned refusal. If the training-data requirement is not met, retraining is needed before applying for a new assessment, with specific reasons about training-data quality."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex VII(1)–(5); Article 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    },
+    {
+      "ref": "screen-6",
+      "blocks": [
+        "**Quality-management surveillance** checks continuing compliance with the approval. The provider allows access to relevant design/development/testing premises and necessary information. Periodic audits produce reports and may include additional system tests. Approval is an ongoing responsibility, not a one-time purchase."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Annex VII(1)–(5); Article 17",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "qms-approval"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A provider wants to add a system to its approved quality-management list. What must it do?",
+      "options": [
+        {
+          "blocks": "Notify the body for examination and a reasoned decision.",
+          "correct": true,
+          "reason": "Annex VII(3.4) requires assessment of intended changes."
+        },
+        {
+          "blocks": "Add it silently because the provider name is unchanged.",
+          "correct": false,
+          "reason": "The covered-system list is part of the approved scope."
+        },
+        {
+          "blocks": "Ask only the sales department to approve the logo.",
+          "correct": false,
+          "reason": "Marketing approval does not satisfy the body-change procedure."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can a covered-system list be expanded without notifying the body?",
+          "options": [
+            {
+              "blocks": "Add it silently because the provider name is unchanged.",
+              "correct": false,
+              "reason": "The covered-system list is part of the approved scope."
+            },
+            {
+              "blocks": "Ask only the sales department to approve the logo.",
+              "correct": false,
+              "reason": "Marketing approval does not satisfy the body-change procedure."
+            },
+            {
+              "blocks": "Notify the body for examination and a reasoned decision.",
+              "correct": true,
+              "reason": "Annex VII(3.4) requires assessment of intended changes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "technical-documentation-assessment"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "The body requests model parameters. Which condition set is relevant?",
+      "options": [
+        {
+          "blocks": "No conditions; every model must always be publicly disclosed.",
+          "correct": false,
+          "reason": "Body access is conditional and protected, not unrestricted publication."
+        },
+        {
+          "blocks": "No access is ever possible because models are confidential.",
+          "correct": false,
+          "reason": "The paragraph permits access under its safeguards."
+        },
+        {
+          "blocks": "Necessity, exhausted alternatives, reasoned request and legal safeguards.",
+          "correct": true,
+          "reason": "Annex VII(4.5) specifies these additional access conditions."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is model access always automatic under the technical assessment?",
+          "options": [
+            {
+              "blocks": "No access is ever possible because models are confidential.",
+              "correct": false,
+              "reason": "The paragraph permits access under its safeguards."
+            },
+            {
+              "blocks": "Necessity, exhausted alternatives, reasoned request and legal safeguards.",
+              "correct": true,
+              "reason": "Annex VII(4.5) specifies these additional access conditions."
+            },
+            {
+              "blocks": "No conditions; every model must always be publicly disclosed.",
+              "correct": false,
+              "reason": "Body access is conditional and protected, not unrestricted publication."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "qms-surveillance"
+      ],
+      "teaches": [
+        "screen-6"
+      ],
+      "prompt": "An approved provider refuses every periodic audit. What is missing?",
+      "options": [
+        {
+          "blocks": "Nothing; approval permanently ends monitoring.",
+          "correct": false,
+          "reason": "The approved system remains subject to surveillance."
+        },
+        {
+          "blocks": "Continuing premises/information access and periodic surveillance.",
+          "correct": true,
+          "reason": "Annex VII(5) requires ongoing assessment arrangements."
+        },
+        {
+          "blocks": "Only a decorative certificate frame.",
+          "correct": false,
+          "reason": "Presentation does not maintain compliance."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does quality-management approval end the body's surveillance role?",
+          "options": [
+            {
+              "blocks": "Continuing premises/information access and periodic surveillance.",
+              "correct": true,
+              "reason": "Annex VII(5) requires ongoing assessment arrangements."
+            },
+            {
+              "blocks": "Only a decorative certificate frame.",
+              "correct": false,
+              "reason": "Presentation does not maintain compliance."
+            },
+            {
+              "blocks": "Nothing; approval permanently ends monitoring.",
+              "correct": false,
+              "reason": "The approved system remains subject to surveillance."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

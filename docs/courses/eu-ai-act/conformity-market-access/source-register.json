@@ -1,0 +1,116 @@
+{
+  "checked_on": "2026-10-07",
+  "baseline": "02024R1689-20260727",
+  "sources": [
+    {
+      "id": "AI-C-EN",
+      "title": "EU AI Act consolidated text",
+      "language": "en",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+      "status": "official-consolidation-documentation-only",
+      "checked_on": "2026-10-07",
+      "version": "02024R1689-20260727",
+      "publication_date": null,
+      "file": "../sources/ai-act-2026-07-27-en.pdf",
+      "sha256": "1ccd38d1c78482cf2053b70110115adcc5080700acc8bd7bead8cb3579143ccf",
+      "reading_status": "Articles 28–49, Annexes IV–VIII and XIV read in full from the retained English consolidation. Targeted bridges reread: Article 2(2), Article 6(1)–(5), Article 3 definitions (12), (19)–(25), Articles 8–18, 25, 71, 111(2) and 113. Not a full-law or sector-law audit. Direct consolidation web open timed out; retained source used.",
+      "lessons": ["F01–F30"]
+    },
+    {
+      "id": "EC-FRAMEWORK",
+      "title": "Commission AI Act regulatory framework",
+      "language": "en",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+      "status": "official-overview-not-law",
+      "reading_status": "Current overview checked for the July 2026 amendment identity and phased application dates. Article 113 retained text controls section-specific course claims.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F03"],
+      "publication_date": null,
+      "version": "Web page checked 7 October 2026"
+    },
+    {
+      "id": "EC-STANDARDS",
+      "title": "Commission AI Act standardisation",
+      "language": "en",
+      "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation",
+      "status": "official-overview-not-law",
+      "reading_status": "Full page read. Distinguishes voluntary standards, development and Official Journal citation. Does not establish a comprehensive current list of cited AI Act standards.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F07", "F08", "F11"],
+      "publication_date": null,
+      "version": "Web page checked 7 October 2026"
+    },
+    {
+      "id": "EC-FAQ",
+      "title": "Commission: Understanding standardisation in the AI Act",
+      "language": "en",
+      "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act",
+      "status": "official-faq-not-law",
+      "reading_status": "Full FAQ read, including differing ISO 42001 and AI Act QMS objectives, publication and citation process. No universal certification sufficiency inferred.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F07", "F11"],
+      "publication_date": null,
+      "version": "Page updated 10 March 2026"
+    },
+    {
+      "id": "EC-BODIES",
+      "title": "Commission: Notified bodies and NANDO",
+      "language": "en",
+      "url": "https://single-market-economy.ec.europa.eu/single-market/goods/building-blocks/notified-bodies_en",
+      "status": "official-overview-not-law",
+      "reading_status": "Full page read: qualification, notified tasks, identification numbers and NANDO lookup. Individual current AI Act body entries and scope codes not audited.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F13", "F18"],
+      "publication_date": null,
+      "version": "Web page checked 7 October 2026"
+    },
+    {
+      "id": "EC-REGISTRATION",
+      "title": "AI Act Service Desk: Article 49",
+      "language": "en",
+      "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act/article-49",
+      "status": "official-service-desk-statute-display",
+      "reading_status": "All displayed Article 49 paragraphs checked against the retained consolidation; no national registration portal operation was verified.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F28", "F29"],
+      "publication_date": null,
+      "version": "02024R1689-20260727"
+    },
+    {
+      "id": "CRA",
+      "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+      "language": "en",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847",
+      "status": "targeted-incorporated-law-reading",
+      "reading_status": "Official English OJ PDF: Article 2, definitions 3(1)–(2), and Article 12(1)–(4) read. Scope excludes the specified medical-device products; deemed cybersecurity compliance requires product requirements, vulnerability-handling processes and declaration evidence. Paragraphs 2–3 preserve distinct assessment/important-critical-product rules. Remaining CRA, later changes and dates need a case-specific version check; no complete CRA conformity conclusion.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F10", "F24"],
+      "publication_date": null,
+      "version": "2024/2847"
+    },
+    {
+      "id": "MDR",
+      "title": "Medical Devices Regulation (EU) 2017/745",
+      "language": "en",
+      "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng",
+      "status": "sector-classification-not-determined",
+      "reading_status": "AI Act Annex I and Article 43(3) references read. Fictional case stipulates sector coverage and required third-party assessment; no real medical-device class, sector exemption or complete medical-product conformity conclusion is assigned.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F04", "F06", "F24"],
+      "publication_date": null,
+      "version": "2017/745"
+    },
+    {
+      "id": "CE-GENERAL",
+      "title": "Accreditation and market surveillance Regulation (EC) No 765/2008",
+      "language": "en",
+      "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R0765-20210716",
+      "status": "targeted-incorporated-law-reading",
+      "reading_status": "Article 30(1)–(6) read in original and 16 July 2021 consolidated text; responsibility, eligible products, sole conformity marking, misleading-marking prohibition and national enforcement verified. Annex II text checked; no physical-marking artwork audit.",
+      "checked_on": "2026-10-07",
+      "lessons": ["F27"],
+      "publication_date": null,
+      "version": "02008R0765-20210716"
+    }
+  ]
+}

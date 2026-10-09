@@ -1,0 +1,232 @@
+{
+  "module": "Choose and document conformity evidence",
+  "lesson": {
+    "slug": "f10",
+    "title": "Limit data and cybersecurity presumptions",
+    "summary": "Limit data and cybersecurity claims to their conditions and scope.",
+    "covers": [
+      "contextual-data-presumption",
+      "cybersecurity-presumption",
+      "cra-interplay-lookup"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f07",
+        "reason": "The data presumption must be limited to its particular requirement. A cybersecurity certificate must be evaluated as a limited presumption."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "Article 42(1)'s **contextual data presumption** concerns relevant Article 10(4) requirements for systems trained and tested on data reflecting the intended geographical, behavioural, contextual or functional setting. It does not presume every data-governance or system requirement satisfied. Data from another setting needs an evidence-based relevance check."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 42(1)–(3); CRA Articles 2 and 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Article 42(2)'s **cybersecurity presumption** requires a certificate or statement under a Regulation 2019/881 cybersecurity scheme whose references are published in the Official Journal. It extends only as far as that evidence covers Article 15 cybersecurity requirements. It is not a presumption about accuracy, robustness or every other requirement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 42(1)–(3); CRA Articles 2 and 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Article 42(3) points to the **Cyber Resilience Act**, or CRA. Its scope and Article 12(1) conditions must be met: product cybersecurity requirements, relevant manufacturer vulnerability-handling processes and declaration evidence. That bridge deems the AI Act cybersecurity requirement satisfied; it is not full AI Act conformity."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 42(1)–(3); CRA Articles 2 and 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "CRA Article 12(2)–(3) preserves particular assessment interactions and important/critical-product procedure rules. Read those conditions before choosing a route. The specified medical-device products are excluded by CRA Article 2(2), so Harbour's medical case does not automatically receive this CRA bridge. Current version and CRA application dates require a real-release lookup."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 42(1)–(3); CRA Articles 2 and 12",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "contextual-data-presumption"
+      ],
+      "teaches": [
+        "screen-1"
+      ],
+      "prompt": "Northbridge tests data reflecting its intended setting. What is the stated presumption's boundary?",
+      "options": [
+        {
+          "blocks": "Relevant Article 10(4) requirements only.",
+          "correct": true,
+          "reason": "Article 42(1) gives this particular limited presumption."
+        },
+        {
+          "blocks": "Every AI Act obligation automatically.",
+          "correct": false,
+          "reason": "The provision does not extend to every obligation."
+        },
+        {
+          "blocks": "Only the provider's marketing obligations.",
+          "correct": false,
+          "reason": "The stated presumption concerns the relevant data requirements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does context-matched training and testing establish all data and system duties?",
+          "options": [
+            {
+              "blocks": "Every AI Act obligation automatically.",
+              "correct": false,
+              "reason": "The provision does not extend to every obligation."
+            },
+            {
+              "blocks": "Only the provider's marketing obligations.",
+              "correct": false,
+              "reason": "The stated presumption concerns the relevant data requirements."
+            },
+            {
+              "blocks": "Relevant Article 10(4) requirements only.",
+              "correct": true,
+              "reason": "Article 42(1) gives this particular limited presumption."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cybersecurity-presumption"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "A qualifying cybersecurity certificate covers only part of Article 15 cybersecurity. What remains?",
+      "options": [
+        {
+          "blocks": "Declare all accuracy and robustness requirements satisfied.",
+          "correct": false,
+          "reason": "Those claims exceed this cybersecurity presumption."
+        },
+        {
+          "blocks": "Ignore coverage because the certificate is independent.",
+          "correct": false,
+          "reason": "Independence does not expand the scope of the certificate."
+        },
+        {
+          "blocks": "Obtain evidence for the uncovered requirements.",
+          "correct": true,
+          "reason": "The presumption is limited to what the certificate or statement covers."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should you do with requirements outside the certificate's coverage?",
+          "options": [
+            {
+              "blocks": "Ignore coverage because the certificate is independent.",
+              "correct": false,
+              "reason": "Independence does not expand the scope of the certificate."
+            },
+            {
+              "blocks": "Obtain evidence for the uncovered requirements.",
+              "correct": true,
+              "reason": "The presumption is limited to what the certificate or statement covers."
+            },
+            {
+              "blocks": "Declare all accuracy and robustness requirements satisfied.",
+              "correct": false,
+              "reason": "Those claims exceed this cybersecurity presumption."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "cra-interplay-lookup"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "Harbour claims CRA compliance proves complete medical AI conformity. What is the right response?",
+      "options": [
+        {
+          "blocks": "Treat CRA evidence as proof of every AI requirement.",
+          "correct": false,
+          "reason": "The bridge concerns cybersecurity and has specified conditions."
+        },
+        {
+          "blocks": "Check CRA exclusions and the limited bridge conditions.",
+          "correct": true,
+          "reason": "The specified medical products are excluded; the bridge is limited even when applicable."
+        },
+        {
+          "blocks": "Accept the claim for every medical AI product.",
+          "correct": false,
+          "reason": "Scope and exclusions must be checked first."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can the medical case automatically rely on the CRA bridge for its whole dossier?",
+          "options": [
+            {
+              "blocks": "Check CRA exclusions and the limited bridge conditions.",
+              "correct": true,
+              "reason": "The specified medical products are excluded; the bridge is limited even when applicable."
+            },
+            {
+              "blocks": "Accept the claim for every medical AI product.",
+              "correct": false,
+              "reason": "Scope and exclusions must be checked first."
+            },
+            {
+              "blocks": "Treat CRA evidence as proof of every AI requirement.",
+              "correct": false,
+              "reason": "The bridge concerns cybersecurity and has specified conditions."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

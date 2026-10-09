@@ -1,0 +1,259 @@
+{
+  "module": "Carry out and maintain the assessment",
+  "lesson": {
+    "slug": "f24",
+    "title": "Case: choose and defend the assessment route",
+    "summary": "Defend the procedure using the actual case conditions.",
+    "covers": [
+      "assessment-route-case"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f19",
+        "reason": "The HR case requires the provider internal-control procedure."
+      },
+      {
+        "lesson": "f20",
+        "reason": "The biometric case requires the standards-dependent assessment branch."
+      },
+      {
+        "lesson": "f21",
+        "reason": "The case requires evidence and access decisions under an external assessment."
+      },
+      {
+        "lesson": "f23",
+        "reason": "The case includes a change after the initial assessment."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**Three route decisions:** Northbridge has the stipulated Annex III employment use. Beacon has a lawful point 1 biometric use and only partial application of the relevant standard. Harbour has the stipulated Section A medical product with sector-required third-party assessment. Assume a supported temporal interpretation for these exercises; actual release dates still need F03's check."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 43–45; Annexes VI and VII; CRA Article 12(2)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "Northbridge follows Annex VI internal control; its provider verifies quality management, technical compliance and actual consistency. Beacon follows Annex VII because partial standard application triggers that procedure. Harbour follows the required sector procedure with incorporated AI requirements. Their common high-risk label does not make their procedures identical."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 43–45; Annexes VI and VII; CRA Article 12(2)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "A proposed unplanned change affects an assessed system's compliance. Review whether it is substantial and apply reassessment even for continued use. Under Annex VII, involve the body in deciding new assessment versus supplement. Check the old certificate's conditions rather than assuming it covers the changed release."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 43–45; Annexes VI and VII; CRA Article 12(2)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "A separate digital product claims CRA evidence allows any assessment route. Check CRA scope, deemed cybersecurity conditions and the distinct Article 12(2)–(3) interactions, especially important/critical products. The medical case's stipulated exclusion is not a CRA exemption for every other digital product."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Articles 43–45; Annexes VI and VII; CRA Article 12(2)–(3)",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Cyber Resilience Act Regulation (EU) 2024/2847",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=OJ:L_202402847"
+        },
+        {
+          "title": "Medical Devices Regulation (EU) 2017/745",
+          "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj/eng"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "assessment-route-case"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "Which route matches Northbridge's stipulated employment case?",
+      "options": [
+        {
+          "blocks": "Northbridge's internal-control route.",
+          "correct": true,
+          "reason": "Article 43(2) directs the stated employment use there."
+        },
+        {
+          "blocks": "Beacon's partial-standard biometric route.",
+          "correct": false,
+          "reason": "That condition requires Annex VII."
+        },
+        {
+          "blocks": "Harbour solely because it uses a commercial model.",
+          "correct": false,
+          "reason": "Its stipulated sector procedure controls."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which case follows Annex VI without the AI Act notified-body requirement?",
+          "options": [
+            {
+              "blocks": "Beacon's partial-standard biometric route.",
+              "correct": false,
+              "reason": "That condition requires Annex VII."
+            },
+            {
+              "blocks": "Harbour solely because it uses a commercial model.",
+              "correct": false,
+              "reason": "Its stipulated sector procedure controls."
+            },
+            {
+              "blocks": "Northbridge's internal-control route.",
+              "correct": true,
+              "reason": "Article 43(2) directs the stated employment use there."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessment-route-case"
+      ],
+      "teaches": [
+        "screen-2"
+      ],
+      "prompt": "Beacon has only partial qualifying-standard application. What is the required procedure?",
+      "options": [
+        {
+          "blocks": "Internal control automatically for every commercial product.",
+          "correct": false,
+          "reason": "Commercial status does not override Article 43(1)."
+        },
+        {
+          "blocks": "No procedure once a standards document was purchased.",
+          "correct": false,
+          "reason": "Purchase alone does not satisfy application conditions."
+        },
+        {
+          "blocks": "Annex VII assessment with the applicable body.",
+          "correct": true,
+          "reason": "Partial application is a specified trigger."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which route condition distinguishes Beacon from the employment case?",
+          "options": [
+            {
+              "blocks": "No procedure once a standards document was purchased.",
+              "correct": false,
+              "reason": "Purchase alone does not satisfy application conditions."
+            },
+            {
+              "blocks": "Annex VII assessment with the applicable body.",
+              "correct": true,
+              "reason": "Partial application is a specified trigger."
+            },
+            {
+              "blocks": "Internal control automatically for every commercial product.",
+              "correct": false,
+              "reason": "Commercial status does not override Article 43(1)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "assessment-route-case"
+      ],
+      "teaches": [
+        "screen-3",
+        "screen-4"
+      ],
+      "prompt": "A supplier says its old certificate and CRA statement cover any changed release. What should happen?",
+      "options": [
+        {
+          "blocks": "Assume all procedures are interchangeable.",
+          "correct": false,
+          "reason": "The route conditions and incorporated laws remain distinct."
+        },
+        {
+          "blocks": "Check modification, certificate scope and the relevant CRA conditions.",
+          "correct": true,
+          "reason": "Each document and procedure has a specific boundary."
+        },
+        {
+          "blocks": "Accept the claim because two documents are better than one.",
+          "correct": false,
+          "reason": "Document count does not establish scope."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Can these documents eliminate change and route checks?",
+          "options": [
+            {
+              "blocks": "Check modification, certificate scope and the relevant CRA conditions.",
+              "correct": true,
+              "reason": "Each document and procedure has a specific boundary."
+            },
+            {
+              "blocks": "Accept the claim because two documents are better than one.",
+              "correct": false,
+              "reason": "Document count does not establish scope."
+            },
+            {
+              "blocks": "Assume all procedures are interchangeable.",
+              "correct": false,
+              "reason": "The route conditions and incorporated laws remain distinct."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+{
+  "module": "Choose and document conformity evidence",
+  "lesson": {
+    "slug": "f07",
+    "title": "Check what a standard actually proves",
+    "summary": "Check the legal citation and the requirements it actually covers.",
+    "covers": [
+      "oj-citation-check",
+      "limited-presumption"
+    ],
+    "prerequisites": []
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "A **harmonised standard** is a technical standard developed through the Union standardisation framework. Standards are generally voluntary. Article 40 gives a presumption of conformity where the relevant reference is published in the **Official Journal**, the Union's official publication, and the system conforms to the standard or applicable parts."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "A **limited presumption** concerns only requirements covered by that standard or part. A standard's title, publication by a standards body, or development work does not establish the necessary Official Journal reference. Check the exact identifier, edition, citation, restrictions and coverage before relying on the presumption."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "Keep a citation record and a requirement-by-requirement coverage map. The Commission's standardisation request must address coherence, sector frameworks and relevant technical requirements. Article 40(3) concerns participation in standards development; it does not turn every international standard into a harmonised AI Act standard."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Fictional **Standard S** has a stipulated Official Journal citation covering one logging requirement, with a stated restriction. This is an exercise, not a real cited standard. Its coverage does not establish conformity of Northbridge's oversight or data practices. For an actual release, look up the current citation rather than assuming this toy standard exists."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 40",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Commission AI Act standardisation",
+          "url": "https://digital-strategy.ec.europa.eu/en/policies/ai-act-standardisation"
+        },
+        {
+          "title": "Commission: Understanding standardisation in the AI Act",
+          "url": "https://digital-strategy.ec.europa.eu/en/faqs/understanding-standardisation-ai-act"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "oj-citation-check"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A standards body publishes an edition, but no Official Journal reference has been verified. What can you claim?",
+      "options": [
+        {
+          "blocks": "The legal citation still needs verification.",
+          "correct": true,
+          "reason": "The presumption requires the specified Official Journal reference."
+        },
+        {
+          "blocks": "The whole system is presumed compliant.",
+          "correct": false,
+          "reason": "Publication and coverage conditions remain unverified."
+        },
+        {
+          "blocks": "The technical standard must be unlawful.",
+          "correct": false,
+          "reason": "Lacking this presumption does not itself prohibit technical use."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Is a standards-body publication alone enough for the Article 40 presumption?",
+          "options": [
+            {
+              "blocks": "The whole system is presumed compliant.",
+              "correct": false,
+              "reason": "Publication and coverage conditions remain unverified."
+            },
+            {
+              "blocks": "The technical standard must be unlawful.",
+              "correct": false,
+              "reason": "Lacking this presumption does not itself prohibit technical use."
+            },
+            {
+              "blocks": "The legal citation still needs verification.",
+              "correct": true,
+              "reason": "The presumption requires the specified Official Journal reference."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "limited-presumption"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-4"
+      ],
+      "prompt": "Standard S covers logging only. What follows for oversight?",
+      "options": [
+        {
+          "blocks": "Oversight is presumed compliant by association.",
+          "correct": false,
+          "reason": "A different requirement is outside the stated coverage."
+        },
+        {
+          "blocks": "Oversight no longer applies to this system.",
+          "correct": false,
+          "reason": "A narrow standard does not remove other applicable requirements."
+        },
+        {
+          "blocks": "Oversight still needs its own supporting evidence.",
+          "correct": true,
+          "reason": "The presumption is limited to covered requirements."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does a logging presumption automatically cover human oversight?",
+          "options": [
+            {
+              "blocks": "Oversight no longer applies to this system.",
+              "correct": false,
+              "reason": "A narrow standard does not remove other applicable requirements."
+            },
+            {
+              "blocks": "Oversight still needs its own supporting evidence.",
+              "correct": true,
+              "reason": "The presumption is limited to covered requirements."
+            },
+            {
+              "blocks": "Oversight is presumed compliant by association.",
+              "correct": false,
+              "reason": "A different requirement is outside the stated coverage."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "oj-citation-check",
+        "limited-presumption"
+      ],
+      "teaches": [
+        "screen-2",
+        "screen-3"
+      ],
+      "prompt": "Which record best supports a standards claim?",
+      "options": [
+        {
+          "blocks": "Only a count of standards purchased.",
+          "correct": false,
+          "reason": "Buying documents does not demonstrate conformity or coverage."
+        },
+        {
+          "blocks": "Exact edition, citation, restrictions and requirement coverage.",
+          "correct": true,
+          "reason": "Those facts define the legal and technical boundary."
+        },
+        {
+          "blocks": "Only the supplier's standards logo.",
+          "correct": false,
+          "reason": "The logo does not establish edition, citation or coverage."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What should a reviewer retain before using a presumption?",
+          "options": [
+            {
+              "blocks": "Exact edition, citation, restrictions and requirement coverage.",
+              "correct": true,
+              "reason": "Those facts define the legal and technical boundary."
+            },
+            {
+              "blocks": "Only the supplier's standards logo.",
+              "correct": false,
+              "reason": "The logo does not establish edition, citation or coverage."
+            },
+            {
+              "blocks": "Only a count of standards purchased.",
+              "correct": false,
+              "reason": "Buying documents does not demonstrate conformity or coverage."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

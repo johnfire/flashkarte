@@ -1,0 +1,253 @@
+{
+  "module": "Complete and defend the release record",
+  "lesson": {
+    "slug": "f27",
+    "title": "Apply the correct CE marking",
+    "summary": "Check marking accessibility, applicable laws and the conditional body number.",
+    "covers": [
+      "ce-marking-accessibility",
+      "ce-notified-body-number"
+    ],
+    "prerequisites": [
+      {
+        "lesson": "f13",
+        "reason": "A body number must identify the appropriate notified assessor where the route requires it."
+      },
+      {
+        "lesson": "f26",
+        "reason": "CE marking follows the conformity conclusion and provider declaration."
+      }
+    ]
+  },
+  "screens": [
+    {
+      "ref": "screen-1",
+      "blocks": [
+        "**CE marking accessibility:** Article 48 requires a visible, legible and indelible marking for the high-risk system. If the system's nature makes this impossible or unwarranted, the marking goes on the packaging or accompanying documentation as appropriate. The general principles in Article 30 of Regulation 765/2008 also apply."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 48(1)–(5); Regulation (EC) 765/2008 Article 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Accreditation and market surveillance Regulation (EC) No 765/2008",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R0765-20210716"
+        }
+      ]
+    },
+    {
+      "ref": "screen-2",
+      "blocks": [
+        "For a digitally provided high-risk system, use an easily accessible digital marking through its access interface or easily accessible machine-readable code or other electronic means. A hidden repository file that users cannot access is not evidence that this access condition has been met. Record the actual delivered marking and its accessibility."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 48(1)–(5); Regulation (EC) 765/2008 Article 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Accreditation and market surveillance Regulation (EC) No 765/2008",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R0765-20210716"
+        }
+      ]
+    },
+    {
+      "ref": "screen-3",
+      "blocks": [
+        "The **CE notified-body number** follows the marking where applicable, and also appears in promotional material mentioning the system's CE compliance. The body affixes its number, or the provider/representative does so under its instructions. Do not invent a body number for an Annex VI internal-control route with no such body involvement."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 48(1)–(5); Regulation (EC) 765/2008 Article 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Accreditation and market surveillance Regulation (EC) No 765/2008",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R0765-20210716"
+        }
+      ]
+    },
+    {
+      "ref": "screen-4",
+      "blocks": [
+        "Where other Union legislation also requires CE marking, the marking indicates satisfaction of that other legislation's requirements too. A medical-product release cannot use a mark to suggest the AI requirements are all that matter. Identify the applicable legislation and evidence before making the claim."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 48(1)–(5); Regulation (EC) 765/2008 Article 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Accreditation and market surveillance Regulation (EC) No 765/2008",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R0765-20210716"
+        }
+      ]
+    },
+    {
+      "ref": "screen-5",
+      "blocks": [
+        "Under Regulation 765/2008 Article 30, affixing CE marking signifies the manufacturer's responsibility for compliance with all applicable requirements providing for it. It is not a general quality award, and it must not be affixed to products for which the relevant Union legislation does not provide it. A correct mark cannot repair an incomplete assessment or declaration."
+      ],
+      "sources": [
+        {
+          "title": "AI Act, 27 July 2026 baseline: Article 48(1)–(5); Regulation (EC) 765/2008 Article 30",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02024R1689-20260727"
+        },
+        {
+          "title": "Accreditation and market surveillance Regulation (EC) No 765/2008",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:02008R0765-20210716"
+        }
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "covers": [
+        "ce-marking-accessibility"
+      ],
+      "teaches": [
+        "screen-1",
+        "screen-2"
+      ],
+      "prompt": "A digital product's CE file is inaccessible to its users. What should be checked?",
+      "options": [
+        {
+          "blocks": "An easily accessible marking via the interface or permitted electronic means.",
+          "correct": true,
+          "reason": "Article 48(2) specifies digital accessibility."
+        },
+        {
+          "blocks": "Only whether a designer created the file.",
+          "correct": false,
+          "reason": "Creation alone does not establish access."
+        },
+        {
+          "blocks": "Only whether marketing uses the word compliant.",
+          "correct": false,
+          "reason": "A claim does not supply the required marking."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Which evidence supports the digital marking condition?",
+          "options": [
+            {
+              "blocks": "Only whether a designer created the file.",
+              "correct": false,
+              "reason": "Creation alone does not establish access."
+            },
+            {
+              "blocks": "Only whether marketing uses the word compliant.",
+              "correct": false,
+              "reason": "A claim does not supply the required marking."
+            },
+            {
+              "blocks": "An easily accessible marking via the interface or permitted electronic means.",
+              "correct": true,
+              "reason": "Article 48(2) specifies digital accessibility."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "ce-notified-body-number"
+      ],
+      "teaches": [
+        "screen-3"
+      ],
+      "prompt": "Northbridge uses Annex VI without a notified body. Should it invent an identification number?",
+      "options": [
+        {
+          "blocks": "Yes; any four-digit number is acceptable.",
+          "correct": false,
+          "reason": "The number identifies the actual applicable body."
+        },
+        {
+          "blocks": "Yes; use the model supplier's customer account number.",
+          "correct": false,
+          "reason": "A customer account is not a notified-body identifier."
+        },
+        {
+          "blocks": "No; the number requirement applies where applicable body involvement exists.",
+          "correct": true,
+          "reason": "Article 48(4) is conditional, not a universal invented-number requirement."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "Does every high-risk CE marking necessarily include a notified-body number?",
+          "options": [
+            {
+              "blocks": "Yes; use the model supplier's customer account number.",
+              "correct": false,
+              "reason": "A customer account is not a notified-body identifier."
+            },
+            {
+              "blocks": "No; the number requirement applies where applicable body involvement exists.",
+              "correct": true,
+              "reason": "Article 48(4) is conditional, not a universal invented-number requirement."
+            },
+            {
+              "blocks": "Yes; any four-digit number is acceptable.",
+              "correct": false,
+              "reason": "The number identifies the actual applicable body."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "covers": [
+        "ce-marking-accessibility",
+        "ce-notified-body-number"
+      ],
+      "teaches": [
+        "screen-4",
+        "screen-5"
+      ],
+      "prompt": "Harbour's marking ignores another applicable CE law. What is the problem?",
+      "options": [
+        {
+          "blocks": "CE is simply an optional quality prize.",
+          "correct": false,
+          "reason": "It is a statutory conformity marking under applicable legislation."
+        },
+        {
+          "blocks": "Compliance with all applicable marking legislation must be supported.",
+          "correct": true,
+          "reason": "Article 48(5) and the general CE principles prevent an AI-only claim from replacing other requirements."
+        },
+        {
+          "blocks": "Only the AI Act matters once the AI logo is added.",
+          "correct": false,
+          "reason": "Other applicable legislation remains relevant."
+        }
+      ],
+      "variants": [
+        {
+          "prompt": "What does CE marking signify when several applicable laws require it?",
+          "options": [
+            {
+              "blocks": "Compliance with all applicable marking legislation must be supported.",
+              "correct": true,
+              "reason": "Article 48(5) and the general CE principles prevent an AI-only claim from replacing other requirements."
+            },
+            {
+              "blocks": "Only the AI Act matters once the AI logo is added.",
+              "correct": false,
+              "reason": "Other applicable legislation remains relevant."
+            },
+            {
+              "blocks": "CE is simply an optional quality prize.",
+              "correct": false,
+              "reason": "It is a statutory conformity marking under applicable legislation."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
