@@ -3,6 +3,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { AdminRoute } from "./components/AdminRoute";
 import { AdminPage } from "./pages/AdminPage";
 import { SchoolDetailPage } from "./pages/SchoolDetailPage";
+import { SchoolTeacherOptionsPage } from "./pages/SchoolTeacherOptionsPage";
 import { AuthPage } from "./pages/AuthPage";
 import { CreateDeckPage } from "./pages/CreateDeckPage";
 import { StudyPage } from "./pages/StudyPage";
@@ -56,6 +57,10 @@ export default function App() {
         <Route path="/login" element={<AuthPage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/impressum" element={<ImpressumPage />} />
+        <Route
+          path="/schools-and-teachers"
+          element={<SchoolTeacherOptionsPage />}
+        />
         <Route path="/guide" element={<Navigate to="/help" replace />} />
         <Route path="/help" element={<HelpIndexPage />} />
         <Route path="/help/getting-started" element={<GettingStartedPage />} />

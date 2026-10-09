@@ -5,6 +5,7 @@ import { LandingFeatures } from "./landing/LandingFeatures";
 import { LandingVideo } from "./landing/LandingVideo";
 import { LandingAI } from "./landing/LandingAI";
 import { LandingFooter } from "./landing/LandingFooter";
+import { LandingSchoolTeacherCallout } from "./landing/LandingSchoolTeacherCallout";
 
 // Decorative cards that drift behind the hero — "learning is happening here".
 const FLOATERS = [
@@ -147,6 +148,7 @@ export function LandingPage() {
         <LandingHero />
         <LandingVideo />
         <LandingFeatures />
+        <LandingSchoolTeacherCallout />
         <LandingAI />
         <LandingFooter />
       </div>

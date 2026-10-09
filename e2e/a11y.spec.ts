@@ -26,6 +26,7 @@ function report(violations: Awaited<ReturnType<typeof scan>>["violations"]) {
 // which is exactly the shape that trips link-in-text-block.
 for (const [name, path] of [
   ["landing", "/"],
+  ["schools and teachers", "/schools-and-teachers"],
   ["auth", "/login"],
   ["signup", "/login?mode=signup"],
   ["help index", "/help"],

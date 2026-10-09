@@ -11,6 +11,7 @@ export const APP_ROUTES = [
   "/login",
   "/privacy",
   "/impressum",
+  "/schools-and-teachers",
   "/guide",
   "/help",
   "/help/getting-started",

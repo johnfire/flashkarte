@@ -25,6 +25,12 @@ describe("staticMeta", () => {
     expect(m.canonical).toBe("https://learnwohl.app/help");
     expect(m.jsonLd).toBeUndefined();
   });
+  it("the school and teacher page has its own title and canonical", () => {
+    const m = staticMeta("/schools-and-teachers");
+    expect(m.title).toBe("LearnWohl for schools and teachers");
+    expect(m.canonical).toBe("https://learnwohl.app/schools-and-teachers");
+    expect(m.jsonLd).toBeUndefined();
+  });
   it("/guide no longer has page meta of its own (it is a 301 to /help)", () => {
     expect(staticMeta("/guide").title).not.toContain("Guide");
   });

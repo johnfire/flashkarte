@@ -45,6 +45,11 @@ const PAGES: Record<
     title: "Impressum — LearnWohl",
     description: "Legal provider information for LearnWohl (Impressum).",
   },
+  "/schools-and-teachers": {
+    title: "LearnWohl for schools and teachers",
+    description:
+      "LearnWohl gives schools, school-based teachers, and independent tutors a clear place to share learning material with their learners.",
+  },
   // Help center. Titles and descriptions mirror help.*.metaTitle/metaDescription in
   // web/src/i18n/locales/en.json; help-meta.test.ts fails if the two drift apart.
   "/help": {
