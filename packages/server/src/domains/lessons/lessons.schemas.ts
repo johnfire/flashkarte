@@ -10,7 +10,14 @@ const slugList = z.array(slugSchema).max(50, "too many concepts");
 export const newModuleSchema = z.object({ title: titleSchema });
 export const modulePatchSchema = z.object({
   title: titleSchema.optional(),
+  /** Zero-based place in the module list. The other modules move up or down to make room. */
   position: z.number().int().min(0).optional(),
+});
+export const moduleOrderSchema = z.object({
+  module_ids: z
+    .array(z.string().uuid("module_ids must be module ids"))
+    .min(1, "module_ids must not be empty")
+    .max(100, "too many modules"),
 });
 
 export const newLessonSchema = z.object({

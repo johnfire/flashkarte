@@ -52,13 +52,35 @@ describe("lesson MCP tools", () => {
       "list_help_requests",
       "list_images",
       "list_screen_comments",
+      "reorder_modules",
       "resolve_screen_comment",
       "retire_question",
       "retire_screen",
       "set_lesson_prerequisite",
+      "update_module",
       "update_question",
       "update_screen",
     ]);
+  });
+
+  it("update_module and reorder_modules call the module routes", async () => {
+    mockApi.patch.mockResolvedValue({});
+    mockApi.put.mockResolvedValue({});
+    const { handlers } = setup();
+    const m1 = "30000000-0000-4000-8000-000000000001";
+    const m2 = "30000000-0000-4000-8000-000000000002";
+    await handlers.update_module({ subject_id: S, module: m1, position: 0 });
+    expect(mockApi.patch).toHaveBeenCalledWith(
+      `/api/subjects/${S}/modules/${m1}`,
+      { title: undefined, position: 0 },
+    );
+    await handlers.reorder_modules({ subject_id: S, module_ids: [m2, m1] });
+    expect(mockApi.put).toHaveBeenCalledWith(
+      `/api/subjects/${S}/modules/order`,
+      {
+        module_ids: [m2, m1],
+      },
+    );
   });
 
   it("get_question_insights reads the lesson's insights", async () => {

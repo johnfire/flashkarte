@@ -80,6 +80,22 @@ export async function writeModule(
   return result.rows[0];
 }
 
+/** Give the modules positions 0..n-1 in the order of `orderedIds`, so no two ever share a position. */
+export async function renumberModules(
+  db: Queryable,
+  subjectId: string,
+  orderedIds: string[],
+): Promise<ModuleRow[]> {
+  const result = await db.query<ModuleRow>(
+    `UPDATE lesson_modules AS m SET position = o.position
+     FROM (SELECT id, ordinality - 1 AS position FROM unnest($2::uuid[]) WITH ORDINALITY AS t(id, ordinality)) AS o
+     WHERE m.id = o.id AND m.subject_id = $1
+     RETURNING m.id, m.subject_id, m.title, m.position`,
+    [subjectId, orderedIds],
+  );
+  return result.rows.sort((a, b) => a.position - b.position);
+}
+
 export async function removeModule(db: Queryable, id: string): Promise<void> {
   await db.query(`DELETE FROM lesson_modules WHERE id = $1`, [id]);
 }
