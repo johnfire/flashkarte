@@ -5,6 +5,7 @@ import { LandingFeatures } from "./landing/LandingFeatures";
 import { LandingVideo } from "./landing/LandingVideo";
 import { LandingAI } from "./landing/LandingAI";
 import { LandingFooter } from "./landing/LandingFooter";
+import { LandingLegalInfo } from "./landing/LandingLegalInfo";
 import { LandingSchoolTeacherCallout } from "./landing/LandingSchoolTeacherCallout";
 import { LandingCourseFloaters } from "./landing/LandingCourseFloaters";
 
@@ -147,6 +148,7 @@ export function LandingPage() {
       <div className="fixed right-16 top-3 z-50">
         <LanguageSwitcher compact onDark />
       </div>
+      <LandingLegalInfo className="fixed left-6 top-3 z-50" />
 
       {/* Content */}
       <div className="relative mx-auto max-w-5xl px-6 py-6 sm:py-8">
