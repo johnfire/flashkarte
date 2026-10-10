@@ -22,6 +22,12 @@ export function LandingSchoolTeacherCallout() {
         {t("landing.schoolTeacherCalloutBody")}
       </p>
       <Link
+        to="/help/importing-content"
+        className="mt-4 inline-flex text-sm font-medium text-indigo-100 underline underline-offset-4 hover:text-white"
+      >
+        {t("landing.schoolTeacherCalloutGuideCta")}
+      </Link>
+      <Link
         to="/schools-and-teachers"
         className="mt-6 inline-flex rounded-lg bg-indigo-600 px-5 py-3 font-medium text-white transition hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:ring-offset-2 focus:ring-offset-slate-950"
       >

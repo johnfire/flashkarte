@@ -28,6 +28,7 @@ describe("HelpIndexPage", () => {
       ["/help/advanced-cards", "Multiple choice, mix-ups"],
       ["/help/branching-decks", "Branching decks"],
       ["/help/studying", "Studying & spaced repetition"],
+      ["/help/importing-content", "Create learning content from a spreadsheet"],
       ["/help/ai", "Creating learning content with AI"],
       ["/help/sharing", "Sharing & exploring"],
     ] as const) {

@@ -16,6 +16,7 @@ import { WritingDecksPage } from "./pages/help/WritingDecksPage";
 import { AdvancedCardsPage } from "./pages/help/AdvancedCardsPage";
 import { BranchingDecksPage } from "./pages/help/BranchingDecksPage";
 import { StudyingPage } from "./pages/help/StudyingPage";
+import { ContentImportGuidePage } from "./pages/help/ContentImportGuidePage";
 import { AiPage } from "./pages/help/AiPage";
 import { SharingPage } from "./pages/help/SharingPage";
 import { VerifyEmailPage } from "./pages/VerifyEmailPage";
@@ -69,6 +70,10 @@ export default function App() {
         <Route path="/help/advanced-cards" element={<AdvancedCardsPage />} />
         <Route path="/help/branching-decks" element={<BranchingDecksPage />} />
         <Route path="/help/studying" element={<StudyingPage />} />
+        <Route
+          path="/help/importing-content"
+          element={<ContentImportGuidePage />}
+        />
         <Route path="/help/ai" element={<AiPage />} />
         <Route path="/help/sharing" element={<SharingPage />} />
         <Route path="/explore" element={<ExplorePage />} />

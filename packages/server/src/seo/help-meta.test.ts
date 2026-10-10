@@ -19,6 +19,7 @@ const KEY_FOR_PATH: Record<string, string> = {
   "/help/advanced-cards": "advancedCards",
   "/help/branching-decks": "branchingDecks",
   "/help/studying": "studying",
+  "/help/importing-content": "importingContent",
   "/help/ai": "ai",
   "/help/sharing": "sharing",
 };

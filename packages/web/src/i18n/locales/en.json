@@ -221,7 +221,8 @@
     "feature4Body": "Tell your AI what you want to learn. It reads the real material, builds a course that gets harder step by step, and can even walk you through the app itself.",
     "schoolTeacherCalloutEyebrow": "For teaching and learning",
     "schoolTeacherCalloutTitle": "Available for schools and teachers",
-    "schoolTeacherCalloutBody": "Give your learners a focused place to study the decks and courses you create.",
+    "schoolTeacherCalloutBody": "Create learning material with your own AI, a simple CSV, or an Excel spreadsheet. Then give your learners a focused place to study it.",
+    "schoolTeacherCalloutGuideCta": "See the AI and spreadsheet guide",
     "schoolTeacherCalloutCta": "Explore options for schools & teachers",
     "aiSectionTitle": "Your AI already knows how to use this app.",
     "aiSectionBody": "Most apps hand an AI an API and hope for the best. LearnWohl ships its own instructions — a connected AI reads what the app is for, what it can do, and how to do it well, before it touches a single card.",
@@ -248,6 +249,7 @@
     "independentTeachersBody": "Use LearnWohl with private learners or your own study groups — from language teaching to maths tutoring and beyond.",
     "createContentTitle": "Create content your way",
     "createContentBody": "Connect your own AI and it receives clear instructions for building material in your LearnWohl account. Or start with a spreadsheet: import a simple CSV for flashcards, or an Excel workbook or ZIP of CSV files for an ordered flashcard course. You can combine both approaches and review everything before sharing it.",
+    "createContentGuideCta": "Read the AI and spreadsheet guide",
     "gettingStartedTitle": "Start with your teaching setup",
     "gettingStartedBody": "Tell us about the learners you teach and how you work. We’ll talk through the best way to set up LearnWohl for your school, classes, or tutoring practice.",
     "contactCta": "Talk to us about LearnWohl"
@@ -727,6 +729,10 @@
           "title": "Studying & spaced repetition",
           "description": "How SM-2 scheduling works, what the rating buttons do, and what the deck counters mean."
         },
+        "importingContent": {
+          "title": "Create learning content from a spreadsheet",
+          "description": "Use a CSV file or Excel workbook to create a flashcard deck or an ordered deck collection, with downloadable starters."
+        },
         "ai": {
           "title": "Creating learning content with AI",
           "description": "Connect your own AI assistant to build flashcard decks, deck collections, or structured learning courses."
@@ -824,6 +830,33 @@
       "counterNote": "Hard/Medium/Good/Perfect reflect only the latest review of each card, not a running total — so together they always add up to the Viewed count.",
       "choiceHeading": "Multiple-choice mode",
       "choiceBody": "Both the web app and the Android app offer a multiple-choice mode. For an ordinary card it builds answer options automatically from your other due cards; for a diagnostic card (see Advanced card types) it uses the options you wrote, and a wrong pick can show a follow-up card before you continue."
+    },
+    "importingContent": {
+      "metaTitle": "Create learning content from a spreadsheet — LearnWohl Help",
+      "metaDescription": "How to create flashcard decks and ordered deck collections in LearnWohl with CSV files or an Excel workbook, and when to use your own AI.",
+      "title": "Create learning content from a spreadsheet",
+      "intro": "You can build learning material in two ways: ask your connected AI to create it, or prepare it in the spreadsheet tool your team already uses.",
+      "aiHeading": "Use your own AI",
+      "aiBody": "Connect your own AI in Settings. LearnWohl gives it the instructions it needs to build material inside your account; the app does not run the AI itself.",
+      "aiSettingsLink": "Open Settings to connect your AI →",
+      "aiGuideLink": "Read the full guide to creating learning content with AI →",
+      "deckHeading": "Start with one flashcard deck",
+      "deckBody": "Make a CSV with the first row exactly as shown below. Each later row is one card: front is what learners see first, answer is what they reveal, and explanation is optional extra detail after the answer.",
+      "deckTemplateLink": "Download the flashcard-deck CSV starter",
+      "deckSteps": "Fill in the file, save or download it as CSV, then sign in and upload it from New deck.",
+      "newDeckLink": "Open New deck →",
+      "collectionHeading": "Build an ordered flashcard course",
+      "collectionBody": "For a course made from several decks, use one .xlsx workbook with three tabs named Course, Decks, and Cards. The first row of every tab must use the headings shown below.",
+      "courseSheet": "one row with course_title and description.",
+      "decksSheet": "one row per deck with deck_key, title, and order. Start order at 1. Each deck_key must be unique.",
+      "cardsSheet": "one row per card with deck_key, front, answer, and optional explanation. The deck_key puts each card in the right deck.",
+      "collectionFormat": "If you prefer CSV files, download the three starters, complete them, name them course.csv, decks.csv, and cards.csv, and put those three files in one ZIP. You can then upload either the Excel workbook or the ZIP.",
+      "collectionSteps": "After import, the deck collection stays private so you can review and edit it before sharing it with learners.",
+      "collectionImportLink": "Open deck collection import →",
+      "combineHeading": "Use AI and spreadsheets together",
+      "combineBody": "Start with a spreadsheet your team already knows, then ask your AI to extend or improve the material. Or let the AI make a first draft and refine it in your spreadsheet before importing. Review the private result before you share it.",
+      "limitHeading": "What the spreadsheet import creates",
+      "limitBody": "Spreadsheet import creates flashcard decks and ordered deck collections. For a structured course with lessons, questions, prerequisites, and reviews, use your connected AI for now."
     },
     "ai": {
       "metaTitle": "Creating learning content with AI — LearnWohl Help",

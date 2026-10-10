@@ -19,6 +19,7 @@ export const APP_ROUTES = [
   "/help/advanced-cards",
   "/help/branching-decks",
   "/help/studying",
+  "/help/importing-content",
   "/help/ai",
   "/help/sharing",
   "/explore",

@@ -80,6 +80,11 @@ const PAGES: Record<
     description:
       "How LearnWohl schedules reviews, what the rating buttons do, and what the deck counters mean.",
   },
+  "/help/importing-content": {
+    title: "Create learning content from a spreadsheet — LearnWohl Help",
+    description:
+      "How to create flashcard decks and ordered deck collections in LearnWohl with CSV files or an Excel workbook, and when to use your own AI.",
+  },
   "/help/ai": {
     title: "Creating learning content with AI — LearnWohl Help",
     description:

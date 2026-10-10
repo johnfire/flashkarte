@@ -221,7 +221,8 @@
     "feature4Body": "Dis à ton IA ce que tu veux apprendre. Elle lit le contenu réel, construit un cours qui se corse étape par étape, et peut même te faire visiter l'appli elle-même.",
     "schoolTeacherCalloutEyebrow": "Pour enseigner et apprendre",
     "schoolTeacherCalloutTitle": "Disponible pour les écoles et les enseignants",
-    "schoolTeacherCalloutBody": "Donne à tes apprenants un lieu clair pour étudier les paquets et les cours que tu crées.",
+    "schoolTeacherCalloutBody": "Crée du contenu d'apprentissage avec ta propre IA, un simple CSV ou une feuille Excel. Donne ensuite à tes apprenants un lieu clair pour l'étudier.",
+    "schoolTeacherCalloutGuideCta": "Voir le guide IA et tableur",
     "schoolTeacherCalloutCta": "Découvrir les options pour les écoles et les enseignants",
     "aiSectionTitle": "Ton IA sait déjà utiliser cette appli.",
     "aiSectionBody": "La plupart des applis donnent une API à une IA et espèrent que ça marche. LearnWohl fournit son propre mode d'emploi — une IA connectée lit à quoi sert l'appli, ce qu'elle peut faire et comment bien le faire, avant même de toucher une seule carte.",
@@ -248,6 +249,7 @@
     "independentTeachersBody": "Utilise LearnWohl avec des apprenants particuliers ou tes propres groupes d'étude, de l'enseignement des langues au soutien en mathématiques et bien plus encore.",
     "createContentTitle": "Créez du contenu à votre façon",
     "createContentBody": "Connectez votre propre IA : elle reçoit des instructions claires pour créer du matériel dans votre compte LearnWohl. Vous pouvez aussi partir d'un tableur : importez un simple CSV pour des cartes, ou un classeur Excel ou ZIP de CSV pour un cours de cartes ordonné. Vous pouvez combiner les deux et tout relire avant de partager.",
+    "createContentGuideCta": "Lire le guide IA et tableur",
     "gettingStartedTitle": "Commence par ta façon d'enseigner",
     "gettingStartedBody": "Dis-nous quels apprenants tu accompagnes et comment tu travailles. Nous parlerons de la meilleure façon de mettre LearnWohl en place pour ton école, tes classes ou ton activité de tutorat.",
     "contactCta": "Parlons de LearnWohl"
@@ -727,6 +729,10 @@
           "title": "Réviser & répétition espacée",
           "description": "Comment fonctionne la planification SM-2, ce que font les boutons de notation et ce que signifient les compteurs du paquet."
         },
+        "importingContent": {
+          "title": "Créer du contenu d'apprentissage depuis un tableur",
+          "description": "Utilise un fichier CSV ou un classeur Excel pour créer un paquet de cartes ou une collection ordonnée, avec des fichiers de démarrage à télécharger."
+        },
         "ai": {
           "title": "Créer du contenu d'apprentissage avec l'IA",
           "description": "Connecte ton assistant IA pour créer des paquets de cartes, des collections ou des cours structurés."
@@ -824,6 +830,33 @@
       "counterNote": "Difficiles/Moyennes/Correctes/Parfaites ne reflètent que la révision la plus récente de chaque carte, pas un total cumulé — ensemble, elles correspondent toujours au nombre de cartes Vues.",
       "choiceHeading": "Mode à choix multiples",
       "choiceBody": "L'application web et l'application Android proposent toutes deux un mode à choix multiples. Pour une carte ordinaire, les options de réponse sont générées automatiquement à partir de tes autres cartes dues ; pour une carte de diagnostic (voir Types de cartes avancés), ce sont les options que tu as écrites qui sont utilisées, et une mauvaise réponse peut afficher une carte de suivi avant de continuer."
+    },
+    "importingContent": {
+      "metaTitle": "Créer du contenu d'apprentissage depuis un tableur — Aide LearnWohl",
+      "metaDescription": "Comment créer des paquets de cartes et des collections ordonnées dans LearnWohl avec des fichiers CSV ou un classeur Excel, et quand utiliser sa propre IA.",
+      "title": "Créer du contenu d'apprentissage depuis un tableur",
+      "intro": "Tu peux créer du matériel d'apprentissage de deux façons : demander à ton IA connectée de le créer, ou le préparer dans le tableur que ton équipe utilise déjà.",
+      "aiHeading": "Utiliser ta propre IA",
+      "aiBody": "Connecte ta propre IA dans les Réglages. LearnWohl lui donne les instructions nécessaires pour créer du matériel dans ton compte ; l'appli ne fait pas tourner l'IA elle-même.",
+      "aiSettingsLink": "Ouvrir les Réglages pour connecter ton IA →",
+      "aiGuideLink": "Lire le guide complet de création avec l'IA →",
+      "deckHeading": "Commencer avec un paquet de cartes",
+      "deckBody": "Crée un CSV dont la première ligne est exactement comme ci-dessous. Chaque ligne suivante est une carte : front est ce que les apprenants voient d'abord, answer est ce qu'ils révèlent et explanation est un détail supplémentaire facultatif après la réponse.",
+      "deckTemplateLink": "Télécharger le fichier CSV de démarrage pour paquet de cartes",
+      "deckSteps": "Remplis le fichier, enregistre-le ou télécharge-le au format CSV, puis connecte-toi et importe-le depuis Nouveau paquet.",
+      "newDeckLink": "Ouvrir Nouveau paquet →",
+      "collectionHeading": "Créer un cours ordonné de cartes",
+      "collectionBody": "Pour un cours formé de plusieurs paquets, utilise un classeur .xlsx avec trois onglets nommés Course, Decks et Cards. La première ligne de chaque onglet doit employer les en-têtes ci-dessous.",
+      "courseSheet": "une ligne avec course_title et description.",
+      "decksSheet": "une ligne par paquet avec deck_key, title et order. Commence order à 1. Chaque deck_key doit être unique.",
+      "cardsSheet": "une ligne par carte avec deck_key, front, answer et explanation facultatif. deck_key place chaque carte dans le bon paquet.",
+      "collectionFormat": "Si tu préfères les fichiers CSV, télécharge les trois fichiers de démarrage, remplis-les, nomme-les course.csv, decks.csv et cards.csv, puis place ces trois fichiers dans un ZIP. Tu peux alors importer le classeur Excel ou le ZIP.",
+      "collectionSteps": "Après l'import, la collection de paquets reste privée afin que tu puisses la vérifier et la modifier avant de la partager avec les apprenants.",
+      "collectionImportLink": "Ouvrir l'import de collection de paquets →",
+      "combineHeading": "Utiliser ensemble IA et tableur",
+      "combineBody": "Commence avec un tableur que ton équipe connaît déjà, puis demande à ton IA d'étendre ou d'améliorer le matériel. Ou laisse l'IA faire une première version et affine-la dans ton tableur avant l'import. Vérifie le résultat privé avant de le partager.",
+      "limitHeading": "Ce que crée l'import depuis un tableur",
+      "limitBody": "L'import depuis un tableur crée des paquets de cartes et des collections ordonnées. Pour un cours structuré avec leçons, questions, prérequis et révisions, utilise pour l'instant ton IA connectée."
     },
     "ai": {
       "metaTitle": "Créer du contenu d'apprentissage avec l'IA — Aide LearnWohl",

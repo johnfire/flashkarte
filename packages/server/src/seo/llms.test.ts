@@ -26,6 +26,7 @@ describe("buildLlmsTxt", () => {
     expect(text).toContain("`https://fk.test/oauth/register`");
     expect(text).toContain("2FA code");
     expect(text).toContain("An agent should ask its person to sign up");
+    expect(text).toContain("/help/importing-content");
   });
 
   it("lists public decks with absolute links, kept to one line each", () => {

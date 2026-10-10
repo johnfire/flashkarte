@@ -34,6 +34,7 @@ for (const [name, path] of [
   ["help: writing decks", "/help/writing-decks"],
   ["help: branching decks", "/help/branching-decks"],
   ["help: studying", "/help/studying"],
+  ["help: importing content", "/help/importing-content"],
   ["help: ai", "/help/ai"],
   ["help: sharing", "/help/sharing"],
   ["explore", "/explore"],

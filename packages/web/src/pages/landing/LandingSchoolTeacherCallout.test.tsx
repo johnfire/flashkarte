@@ -22,5 +22,8 @@ describe("LandingSchoolTeacherCallout", () => {
         name: "Explore options for schools & teachers",
       }),
     ).toHaveAttribute("href", "/schools-and-teachers");
+    expect(
+      screen.getByRole("link", { name: "See the AI and spreadsheet guide" }),
+    ).toHaveAttribute("href", "/help/importing-content");
   });
 });

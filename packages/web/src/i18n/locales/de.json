@@ -221,7 +221,8 @@
     "feature4Body": "Sag deiner KI, was du lernen willst. Sie liest das eigentliche Material, baut einen Kurs, der Schritt für Schritt schwerer wird, und kann dir sogar die App selbst erklären.",
     "schoolTeacherCalloutEyebrow": "Für Lehren und Lernen",
     "schoolTeacherCalloutTitle": "Für Schulen und Lehrkräfte verfügbar",
-    "schoolTeacherCalloutBody": "Gib deinen Lernenden einen klaren Ort, um die Stapel und Kurse zu lernen, die du erstellst.",
+    "schoolTeacherCalloutBody": "Erstelle Lernmaterial mit deiner eigenen KI, einer einfachen CSV-Datei oder einer Excel-Tabelle. Gib deinen Lernenden dann einen klaren Ort, um damit zu lernen.",
+    "schoolTeacherCalloutGuideCta": "Anleitung für KI und Tabellen ansehen",
     "schoolTeacherCalloutCta": "Optionen für Schulen und Lehrkräfte entdecken",
     "aiSectionTitle": "Deine KI weiß bereits, wie diese App funktioniert.",
     "aiSectionBody": "Die meisten Apps geben einer KI nur eine API und hoffen auf das Beste. LearnWohl liefert seine eigene Anleitung mit — eine verbundene KI liest, wofür die App da ist, was sie kann und wie man es richtig macht, bevor sie auch nur eine einzige Karte anfasst.",
@@ -248,6 +249,7 @@
     "independentTeachersBody": "Nutze LearnWohl mit einzelnen Lernenden oder eigenen Lerngruppen – vom Sprachunterricht über Mathe-Nachhilfe bis darüber hinaus.",
     "createContentTitle": "Erstelle Inhalte auf deine Weise",
     "createContentBody": "Verbinde deine eigene KI; sie erhält klare Anweisungen, um Material in deinem LearnWohl-Konto zu erstellen. Oder beginne mit einer Tabelle: Importiere eine einfache CSV-Datei für Karteikarten oder eine Excel-Arbeitsmappe bzw. ZIP-Datei mit CSV-Dateien für einen geordneten Karteikartenkurs. Du kannst beide Wege kombinieren und alles prüfen, bevor du es teilst.",
+    "createContentGuideCta": "Anleitung für KI und Tabellen lesen",
     "gettingStartedTitle": "Starte mit deiner Unterrichtssituation",
     "gettingStartedBody": "Erzähl uns von den Lernenden, die du unterrichtest, und davon, wie du arbeitest. Gemeinsam besprechen wir, wie LearnWohl für deine Schule, Klassen oder Nachhilfepraxis eingerichtet werden kann.",
     "contactCta": "Über LearnWohl sprechen"
@@ -727,6 +729,10 @@
           "title": "Lernen & verteilte Wiederholung",
           "description": "Wie die SM-2-Planung funktioniert, was die Bewertungs-Buttons bewirken und was die Zähler an einem Stapel bedeuten."
         },
+        "importingContent": {
+          "title": "Lerninhalte aus einer Tabelle erstellen",
+          "description": "Erstelle mit einer CSV-Datei oder Excel-Arbeitsmappe einen Lernkartenstapel oder eine geordnete Stapelsammlung – mit herunterladbaren Vorlagen."
+        },
         "ai": {
           "title": "Lerninhalte mit KI erstellen",
           "description": "Verbinde deinen eigenen KI-Assistenten, damit er Lernkartenstapel, Stapelsammlungen oder strukturierte Lernkurse erstellt."
@@ -824,6 +830,33 @@
       "counterNote": "Schwer/Mittel/Gut/Perfekt spiegeln nur die letzte Wiederholung jeder Karte wider, nicht eine laufende Summe — zusammen ergeben sie also immer den Wert von Angesehen.",
       "choiceHeading": "Multiple-Choice-Modus",
       "choiceBody": "Sowohl die Web-App als auch die Android-App bieten einen Multiple-Choice-Modus. Bei einer normalen Karte werden die Antwortoptionen automatisch aus deinen anderen fälligen Karten gebildet; bei einer diagnostischen Karte (siehe Erweiterte Kartentypen) werden die von dir geschriebenen Optionen verwendet, und eine falsche Antwort kann vor dem Weitergehen eine Vertiefungskarte anzeigen."
+    },
+    "importingContent": {
+      "metaTitle": "Lerninhalte aus einer Tabelle erstellen — LearnWohl-Hilfe",
+      "metaDescription": "So erstellst du mit CSV-Dateien oder einer Excel-Arbeitsmappe Lernkartenstapel und geordnete Stapelsammlungen in LearnWohl – und wann du deine eigene KI nutzt.",
+      "title": "Lerninhalte aus einer Tabelle erstellen",
+      "intro": "Du kannst Lernmaterial auf zwei Arten erstellen: Bitte deine verbundene KI darum oder bereite es im Tabellenprogramm vor, das dein Team bereits nutzt.",
+      "aiHeading": "Deine eigene KI nutzen",
+      "aiBody": "Verbinde deine eigene KI in den Einstellungen. LearnWohl gibt ihr die Anweisungen, die sie braucht, um Material in deinem Konto zu erstellen; die App führt die KI nicht selbst aus.",
+      "aiSettingsLink": "Einstellungen öffnen und KI verbinden →",
+      "aiGuideLink": "Vollständige Anleitung zum Erstellen mit KI lesen →",
+      "deckHeading": "Mit einem Lernkartenstapel beginnen",
+      "deckBody": "Erstelle eine CSV-Datei, deren erste Zeile genau wie unten aussieht. Jede weitere Zeile ist eine Karte: front sehen Lernende zuerst, answer decken sie auf und explanation ist eine optionale Zusatzinformation nach der Antwort.",
+      "deckTemplateLink": "CSV-Vorlage für einen Lernkartenstapel herunterladen",
+      "deckSteps": "Fülle die Datei aus, speichere oder lade sie als CSV herunter, melde dich dann an und lade sie unter Neuer Stapel hoch.",
+      "newDeckLink": "Neuen Stapel öffnen →",
+      "collectionHeading": "Einen geordneten Karteikartenkurs erstellen",
+      "collectionBody": "Für einen Kurs aus mehreren Stapeln verwendest du eine .xlsx-Arbeitsmappe mit drei Registerkarten namens Course, Decks und Cards. Die erste Zeile jeder Registerkarte muss die unten gezeigten Überschriften enthalten.",
+      "courseSheet": "eine Zeile mit course_title und description.",
+      "decksSheet": "eine Zeile pro Stapel mit deck_key, title und order. Beginne bei order mit 1. Jeder deck_key muss eindeutig sein.",
+      "cardsSheet": "eine Zeile pro Karte mit deck_key, front, answer und optionaler explanation. deck_key ordnet jede Karte dem richtigen Stapel zu.",
+      "collectionFormat": "Wenn du lieber CSV-Dateien nutzt, lade die drei Vorlagen herunter, fülle sie aus, nenne sie course.csv, decks.csv und cards.csv und lege diese drei Dateien in eine ZIP-Datei. Du kannst dann entweder die Excel-Arbeitsmappe oder die ZIP-Datei hochladen.",
+      "collectionSteps": "Nach dem Import bleibt die Stapelsammlung privat, damit du sie prüfen und bearbeiten kannst, bevor du sie mit Lernenden teilst.",
+      "collectionImportLink": "Import für Stapelsammlungen öffnen →",
+      "combineHeading": "KI und Tabellen zusammen nutzen",
+      "combineBody": "Beginne mit einer Tabelle, die dein Team bereits kennt, und bitte deine KI dann, das Material zu erweitern oder zu verbessern. Oder lass die KI einen ersten Entwurf erstellen und verfeinere ihn vor dem Import in deiner Tabelle. Prüfe das private Ergebnis, bevor du es teilst.",
+      "limitHeading": "Was der Tabellenimport erstellt",
+      "limitBody": "Der Tabellenimport erstellt Lernkartenstapel und geordnete Stapelsammlungen. Für einen strukturierten Kurs mit Lektionen, Fragen, Voraussetzungen und Wiederholungen nutze vorerst deine verbundene KI."
     },
     "ai": {
       "metaTitle": "Lerninhalte mit KI erstellen — LearnWohl-Hilfe",

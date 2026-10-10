@@ -44,6 +44,9 @@ describe("SchoolTeacherOptionsPage", () => {
       }),
     ).toBeInTheDocument();
     expect(
+      screen.getByRole("link", { name: "Read the AI and spreadsheet guide" }),
+    ).toHaveAttribute("href", "/help/importing-content");
+    expect(
       screen.getByRole("link", { name: "Talk to us about LearnWohl" }),
     ).toHaveAttribute(
       "href",

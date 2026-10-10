@@ -63,6 +63,12 @@ export function SchoolTeacherOptionsPage() {
           <p className="mt-4 max-w-3xl leading-relaxed text-slate-300">
             {t("schoolTeacherPage.createContentBody")}
           </p>
+          <Link
+            to="/help/importing-content"
+            className="mt-5 inline-flex font-medium text-indigo-200 underline underline-offset-4 hover:text-white"
+          >
+            {t("schoolTeacherPage.createContentGuideCta")}
+          </Link>
         </section>
 
         <section className="mx-auto mt-14 max-w-3xl rounded-2xl border border-indigo-300/30 bg-indigo-500/10 p-8 text-center sm:p-10">

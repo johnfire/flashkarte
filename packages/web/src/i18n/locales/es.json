@@ -221,7 +221,8 @@
     "feature4Body": "Dile a tu IA qué quieres aprender. Lee el material real, construye un curso que se vuelve más difícil paso a paso, e incluso puede guiarte por la propia app.",
     "schoolTeacherCalloutEyebrow": "Para enseñar y aprender",
     "schoolTeacherCalloutTitle": "Disponible para colegios y docentes",
-    "schoolTeacherCalloutBody": "Ofrece a tus alumnos un lugar claro para estudiar los mazos y cursos que creas.",
+    "schoolTeacherCalloutBody": "Crea material de aprendizaje con tu propia IA, un CSV sencillo o una hoja de cálculo de Excel. Después ofrece a tus alumnos un lugar claro para estudiarlo.",
+    "schoolTeacherCalloutGuideCta": "Ver la guía de IA y hojas de cálculo",
     "schoolTeacherCalloutCta": "Explora las opciones para colegios y docentes",
     "aiSectionTitle": "Tu IA ya sabe usar esta app.",
     "aiSectionBody": "La mayoría de las apps le dan a una IA una API y esperan lo mejor. LearnWohl incluye sus propias instrucciones — una IA conectada lee para qué sirve la app, qué puede hacer y cómo hacerlo bien, antes de tocar una sola tarjeta.",
@@ -248,6 +249,7 @@
     "independentTeachersBody": "Usa LearnWohl con alumnos particulares o con tus propios grupos de estudio, desde la enseñanza de idiomas hasta las tutorías de matemáticas y mucho más.",
     "createContentTitle": "Crea contenido a tu manera",
     "createContentBody": "Conecta tu propia IA y recibirá instrucciones claras para crear material en tu cuenta de LearnWohl. O empieza con una hoja de cálculo: importa un CSV sencillo para tarjetas, o un libro de Excel o ZIP de CSV para un curso de tarjetas ordenado. Puedes combinar ambas opciones y revisar todo antes de compartirlo.",
+    "createContentGuideCta": "Leer la guía de IA y hojas de cálculo",
     "gettingStartedTitle": "Empieza con tu forma de enseñar",
     "gettingStartedBody": "Cuéntanos a quién enseñas y cómo trabajas. Hablaremos de la mejor forma de configurar LearnWohl para tu colegio, clases o práctica de tutoría.",
     "contactCta": "Habla con nosotros sobre LearnWohl"
@@ -727,6 +729,10 @@
           "title": "Estudiar y repetición espaciada",
           "description": "Cómo funciona la programación SM-2, qué hacen los botones de valoración y qué significan los contadores del mazo."
         },
+        "importingContent": {
+          "title": "Crear contenido de aprendizaje desde una hoja de cálculo",
+          "description": "Usa un archivo CSV o un libro de Excel para crear un mazo de tarjetas o una colección ordenada, con archivos de inicio descargables."
+        },
         "ai": {
           "title": "Crear contenido de aprendizaje con IA",
           "description": "Conecta tu asistente de IA para crear mazos de tarjetas, colecciones o cursos estructurados."
@@ -824,6 +830,33 @@
       "counterNote": "Difíciles/Medias/Bien/Perfectas reflejan solo el repaso más reciente de cada tarjeta, no un total acumulado — juntos siempre suman el valor de Vistas.",
       "choiceHeading": "Modo de opción múltiple",
       "choiceBody": "Tanto la app web como la de Android ofrecen un modo de opción múltiple. Para una tarjeta normal, genera opciones automáticamente a partir de tus otras tarjetas pendientes; para una tarjeta de diagnóstico (ver Tipos de tarjeta avanzados) usa las opciones que escribiste, y elegir mal puede mostrar una tarjeta de refuerzo antes de continuar."
+    },
+    "importingContent": {
+      "metaTitle": "Crear contenido de aprendizaje desde una hoja de cálculo — Ayuda de LearnWohl",
+      "metaDescription": "Cómo crear mazos de tarjetas y colecciones ordenadas en LearnWohl con archivos CSV o un libro de Excel, y cuándo usar tu propia IA.",
+      "title": "Crear contenido de aprendizaje desde una hoja de cálculo",
+      "intro": "Puedes crear material de aprendizaje de dos formas: pide a tu IA conectada que lo cree o prepáralo con la herramienta de hojas de cálculo que ya usa tu equipo.",
+      "aiHeading": "Usa tu propia IA",
+      "aiBody": "Conecta tu propia IA en Ajustes. LearnWohl le da las instrucciones necesarias para crear material dentro de tu cuenta; la app no ejecuta la IA por sí misma.",
+      "aiSettingsLink": "Abrir Ajustes para conectar tu IA →",
+      "aiGuideLink": "Leer la guía completa para crear contenido con IA →",
+      "deckHeading": "Empieza con un mazo de tarjetas",
+      "deckBody": "Crea un CSV cuya primera fila sea exactamente como se muestra abajo. Cada fila posterior es una tarjeta: front es lo primero que ven los alumnos, answer es lo que revelan y explanation es un detalle adicional opcional tras la respuesta.",
+      "deckTemplateLink": "Descargar el archivo de inicio CSV para mazo de tarjetas",
+      "deckSteps": "Completa el archivo, guárdalo o descárgalo como CSV, inicia sesión y súbelo desde Nuevo mazo.",
+      "newDeckLink": "Abrir Nuevo mazo →",
+      "collectionHeading": "Crear un curso ordenado de tarjetas",
+      "collectionBody": "Para un curso formado por varios mazos, usa un libro .xlsx con tres pestañas llamadas Course, Decks y Cards. La primera fila de cada pestaña debe usar los encabezados que se muestran abajo.",
+      "courseSheet": "una fila con course_title y description.",
+      "decksSheet": "una fila por mazo con deck_key, title y order. Empieza order en 1. Cada deck_key debe ser único.",
+      "cardsSheet": "una fila por tarjeta con deck_key, front, answer y explanation opcional. deck_key coloca cada tarjeta en el mazo correcto.",
+      "collectionFormat": "Si prefieres archivos CSV, descarga los tres archivos de inicio, complétalos, llámalos course.csv, decks.csv y cards.csv, y coloca esos tres archivos en un ZIP. Puedes subir el libro de Excel o el ZIP.",
+      "collectionSteps": "Después de importar, la colección de mazos permanece privada para que puedas revisarla y editarla antes de compartirla con los alumnos.",
+      "collectionImportLink": "Abrir importación de colección de mazos →",
+      "combineHeading": "Usa IA y hojas de cálculo juntas",
+      "combineBody": "Empieza con una hoja de cálculo que ya conozca tu equipo y luego pide a tu IA que amplíe o mejore el material. O deja que la IA haga un primer borrador y refínalo en tu hoja antes de importarlo. Revisa el resultado privado antes de compartirlo.",
+      "limitHeading": "Qué crea la importación desde hoja de cálculo",
+      "limitBody": "La importación desde hoja de cálculo crea mazos de tarjetas y colecciones ordenadas. Para un curso estructurado con lecciones, preguntas, requisitos previos y repasos, usa por ahora tu IA conectada."
     },
     "ai": {
       "metaTitle": "Crear contenido de aprendizaje con IA — Ayuda de LearnWohl",

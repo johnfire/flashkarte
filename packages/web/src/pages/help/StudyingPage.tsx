@@ -12,8 +12,8 @@ export function StudyingPage() {
   return (
     <HelpTopicShell
       title={t("help.studying.title")}
-      nextTo="/help/ai"
-      nextTitle={t("help.index.topics.ai.title")}
+      nextTo="/help/importing-content"
+      nextTitle={t("help.index.topics.importingContent.title")}
     >
       <section id="srs" className="scroll-mt-6">
         <h2 className={helpH2}>{t("help.studying.srsHeading")}</h2>

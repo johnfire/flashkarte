@@ -8,6 +8,7 @@ const TOPICS = [
   { path: "advanced-cards", key: "advancedCards" },
   { path: "branching-decks", key: "branchingDecks" },
   { path: "studying", key: "studying" },
+  { path: "importing-content", key: "importingContent" },
   { path: "ai", key: "ai" },
   { path: "sharing", key: "sharing" },
 ] as const;

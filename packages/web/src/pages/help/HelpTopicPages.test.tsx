@@ -7,6 +7,7 @@ import { WritingDecksPage } from "./WritingDecksPage";
 import { AdvancedCardsPage } from "./AdvancedCardsPage";
 import { BranchingDecksPage } from "./BranchingDecksPage";
 import { StudyingPage } from "./StudyingPage";
+import { ContentImportGuidePage } from "./ContentImportGuidePage";
 import { AiPage } from "./AiPage";
 import { SharingPage } from "./SharingPage";
 
@@ -70,6 +71,35 @@ describe("help topic pages", () => {
     expect(
       screen.getByText(/always add up to the Viewed count/),
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", {
+        name: /Next: Create learning content from a spreadsheet/,
+      }),
+    ).toHaveAttribute("href", "/help/importing-content");
+  });
+
+  it("ContentImportGuidePage explains both spreadsheet formats", () => {
+    renderPage(<ContentImportGuidePage />);
+    expect(
+      screen.getByRole("heading", {
+        level: 1,
+        name: "Create learning content from a spreadsheet",
+      }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: "Open New deck →" }),
+    ).toHaveAttribute("href", "/decks/new");
+    expect(
+      screen.getByRole("link", { name: "Open deck collection import →" }),
+    ).toHaveAttribute("href", "/courses/import");
+    expect(
+      screen.getByRole("link", {
+        name: "Download the flashcard-deck CSV starter",
+      }),
+    ).toHaveAttribute("href", "/templates/flashcard-deck.csv");
+    expect(
+      screen.getByRole("link", { name: "Course CSV starter" }),
+    ).toHaveAttribute("href", "/templates/flashcard-course.csv");
   });
 
   it("AiPage points AI agents at /llms.txt", () => {

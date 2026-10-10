@@ -58,6 +58,7 @@ function aboutSection(site: LlmsSite): string[] {
     `- [Sign up](${origin}/login): accounts are for people. An agent should ask its person to sign up`,
     "  and connect it, rather than creating an account itself.",
     `- [Creating learning content with AI](${origin}/help/ai): what the MCP tools build`,
+    `- [Creating learning content from a spreadsheet](${origin}/help/importing-content): CSV and Excel formats`,
     `- [Writing decks](${origin}/help/writing-decks): the Markdown deck format`,
     "",
   );
