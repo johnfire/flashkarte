@@ -15,6 +15,7 @@ import { clientErrorsRouter } from "./domains/client-errors/client-errors.routes
 import { adminRouter } from "./domains/admin/admin.routes";
 import { libraryRouter } from "./domains/library/library.routes";
 import { coursesRouter } from "./domains/courses/courses.routes";
+import { contentImportsRouter } from "./domains/content-imports/content-imports.routes";
 import { subjectsRouter } from "./domains/subjects/subjects.routes";
 import { courseCollectionsRouter } from "./domains/course-collections/course-collections.routes";
 import { lessonsRouter } from "./domains/lessons/lessons.routes";
@@ -318,6 +319,9 @@ export function createApp() {
   app.use("/api/account", accountRouter);
   app.use("/api/billing", billingRouter);
   app.use("/api/keys", keysRouter);
+  // Spreadsheet imports create account-owned content in bulk, so deck-scoped
+  // AI credentials may not use them.
+  app.use("/api/imports", contentImportsRouter);
   app.use("/api/bug-reports", bugReportLimiter, bugReportsRouter);
   app.use("/api/admin/email", adminEmailLimiter);
   app.use("/api/admin", requireAdmin, adminRouter);

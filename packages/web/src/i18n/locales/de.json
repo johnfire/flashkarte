@@ -246,6 +246,8 @@
     "schoolTeachersBody": "Erstelle Lernmaterial für deine Klassen und Gruppen und gib deinen Lernenden einen unkomplizierten Ort, es zu lernen.",
     "independentTeachersTitle": "Für unabhängige Lehrkräfte und Nachhilfelehrkräfte",
     "independentTeachersBody": "Nutze LearnWohl mit einzelnen Lernenden oder eigenen Lerngruppen – vom Sprachunterricht über Mathe-Nachhilfe bis darüber hinaus.",
+    "createContentTitle": "Erstelle Inhalte auf deine Weise",
+    "createContentBody": "Verbinde deine eigene KI; sie erhält klare Anweisungen, um Material in deinem LearnWohl-Konto zu erstellen. Oder beginne mit einer Tabelle: Importiere eine einfache CSV-Datei für Karteikarten oder eine Excel-Arbeitsmappe bzw. ZIP-Datei mit CSV-Dateien für einen geordneten Karteikartenkurs. Du kannst beide Wege kombinieren und alles prüfen, bevor du es teilst.",
     "gettingStartedTitle": "Starte mit deiner Unterrichtssituation",
     "gettingStartedBody": "Erzähl uns von den Lernenden, die du unterrichtest, und davon, wie du arbeitest. Gemeinsam besprechen wir, wie LearnWohl für deine Schule, Klassen oder Nachhilfepraxis eingerichtet werden kann.",
     "contactCta": "Über LearnWohl sprechen"
@@ -448,6 +450,29 @@
     "emptyInLanguage": "In dieser Sammlung gibt es keine Kurse in der gewählten Sprache.",
     "emptyMine": "Du hast noch keine Kurse aus dieser Sammlung."
   },
+  "imports": {
+    "importCourse": "Stapel-Sammlung importieren",
+    "backToCourses": "← Stapel-Sammlungen",
+    "courseTitle": "Stapel-Sammlung importieren",
+    "courseIntro": "Importiere eine geordnete Sammlung von Karteikarten-Stapeln aus der Tabelle, die dein Team bereits verwendet.",
+    "formatsLabel": "Unterstützte Importformate",
+    "workbookTitle": "Eine Excel-Arbeitsmappe",
+    "workbookDescription": "Lade eine .xlsx-Arbeitsmappe mit drei Tabs namens Course, Decks und Cards hoch.",
+    "zipTitle": "Drei CSV-Dateien in einer ZIP-Datei",
+    "zipDescription": "Lade eine ZIP-Datei mit course.csv, decks.csv und cards.csv hoch.",
+    "columnsTitle": "Welche Daten wohin gehören",
+    "courseColumns": "Course: course_title, description",
+    "deckColumns": "Decks: deck_key, title, order",
+    "cardColumns": "Cards: deck_key, front, answer, explanation (optional)",
+    "explanationHint": "Die optionale Erklärung erscheint unter der Antwort, wenn Lernende die Karte umdrehen.",
+    "downloadCourse": "CSV-Vorlage für Course",
+    "downloadDecks": "CSV-Vorlage für Decks",
+    "downloadCards": "CSV-Vorlage für Cards",
+    "chooseFile": "Arbeitsmappe oder ZIP-Datei auswählen",
+    "draftHint": "Die Sammlung bleibt nach dem Import privat. Du kannst sie prüfen, bearbeiten und erst dann teilen.",
+    "importing": "Importieren…",
+    "courseError": "Die Stapel-Sammlung konnte nicht importiert werden. Prüfe die Datei und versuche es erneut."
+  },
   "createDeck": {
     "title": "Neuer Stapel",
     "instructions": "Füge Markdown ein oder lade eine <0>.md</0>/<1>.txt</1>-Datei hoch. Verwende <2># Title</2>, <3>## Category</3> und <4>**1. Question**</4> gefolgt von der Antwort.",
@@ -460,7 +485,11 @@
     "saveError": "Der Stapel konnte nicht gespeichert werden",
     "saving": "Wird gespeichert…",
     "saveDeck": "Stapel speichern",
-    "cancel": "Abbrechen"
+    "cancel": "Abbrechen",
+    "csvHint": "Oder importiere eine CSV-Datei mit den Spalten front, answer und einer optionalen explanation.",
+    "downloadCsv": "CSV-Vorlage herunterladen",
+    "importCourse": "Stattdessen eine ganze Stapel-Sammlung importieren.",
+    "csvReady": "Deine CSV-Datei kann importiert werden."
   },
   "study": {
     "loadError": "Karten konnten nicht geladen werden",

@@ -6,7 +6,10 @@ import "../i18n";
 import { CreateDeckPage } from "./CreateDeckPage";
 
 vi.mock("../api/client", () => ({
-  api: { decks: { create: vi.fn(), createFromFile: vi.fn() } },
+  api: {
+    decks: { create: vi.fn(), createFromFile: vi.fn() },
+    imports: { deckCsv: vi.fn() },
+  },
   ApiError: class ApiError extends Error {},
 }));
 

@@ -246,6 +246,8 @@
     "schoolTeachersBody": "Crée du matériel d'apprentissage pour les classes et les groupes que tu enseignes, puis donne à tes apprenants un endroit simple pour l'étudier.",
     "independentTeachersTitle": "Pour les enseignants et tuteurs indépendants",
     "independentTeachersBody": "Utilise LearnWohl avec des apprenants particuliers ou tes propres groupes d'étude, de l'enseignement des langues au soutien en mathématiques et bien plus encore.",
+    "createContentTitle": "Créez du contenu à votre façon",
+    "createContentBody": "Connectez votre propre IA : elle reçoit des instructions claires pour créer du matériel dans votre compte LearnWohl. Vous pouvez aussi partir d'un tableur : importez un simple CSV pour des cartes, ou un classeur Excel ou ZIP de CSV pour un cours de cartes ordonné. Vous pouvez combiner les deux et tout relire avant de partager.",
     "gettingStartedTitle": "Commence par ta façon d'enseigner",
     "gettingStartedBody": "Dis-nous quels apprenants tu accompagnes et comment tu travailles. Nous parlerons de la meilleure façon de mettre LearnWohl en place pour ton école, tes classes ou ton activité de tutorat.",
     "contactCta": "Parlons de LearnWohl"
@@ -448,6 +450,29 @@
     "emptyInLanguage": "Aucun cours de cette collection n’utilise la langue sélectionnée.",
     "emptyMine": "Vous n’avez encore aucun cours de cette collection."
   },
+  "imports": {
+    "importCourse": "Importer une collection de paquets",
+    "backToCourses": "← Collections de paquets",
+    "courseTitle": "Importer une collection de paquets",
+    "courseIntro": "Importez un ensemble ordonné de paquets de cartes depuis le tableur que votre équipe utilise déjà.",
+    "formatsLabel": "Formats d'import pris en charge",
+    "workbookTitle": "Un classeur Excel",
+    "workbookDescription": "Importez un classeur .xlsx avec trois onglets nommés Course, Decks et Cards.",
+    "zipTitle": "Trois fichiers CSV dans un ZIP",
+    "zipDescription": "Importez un ZIP contenant course.csv, decks.csv et cards.csv.",
+    "columnsTitle": "Où placer les données",
+    "courseColumns": "Course : course_title, description",
+    "deckColumns": "Decks : deck_key, title, order",
+    "cardColumns": "Cards : deck_key, front, answer, explanation (facultatif)",
+    "explanationHint": "L'explication facultative apparaît sous la réponse lorsque l'élève retourne la carte.",
+    "downloadCourse": "Modèle CSV Course",
+    "downloadDecks": "Modèle CSV Decks",
+    "downloadCards": "Modèle CSV Cards",
+    "chooseFile": "Choisissez votre classeur ou ZIP",
+    "draftHint": "La collection reste privée après l'import. Vous pouvez la relire, la modifier, puis la partager lorsqu'elle est prête.",
+    "importing": "Importation…",
+    "courseError": "Impossible d'importer la collection de paquets. Vérifiez le fichier et réessayez."
+  },
   "createDeck": {
     "title": "Nouveau paquet",
     "instructions": "Colle du Markdown ou importe un fichier <0>.md</0>/<1>.txt</1>. Utilise <2># Title</2>, <3>## Category</3> et <4>**1. Question**</4> suivi de la réponse.",
@@ -460,7 +485,11 @@
     "saveError": "Impossible d'enregistrer le paquet",
     "saving": "Enregistrement…",
     "saveDeck": "Enregistrer le paquet",
-    "cancel": "Annuler"
+    "cancel": "Annuler",
+    "csvHint": "Vous pouvez aussi importer un CSV avec front, answer et une colonne explanation facultative.",
+    "downloadCsv": "Télécharger un modèle CSV",
+    "importCourse": "Importer plutôt une collection complète.",
+    "csvReady": "Votre CSV est prêt à être importé."
   },
   "study": {
     "loadError": "Impossible de charger les cartes",

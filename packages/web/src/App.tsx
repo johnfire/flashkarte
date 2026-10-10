@@ -34,6 +34,7 @@ import { MyCoursesPage } from "./pages/MyCoursesPage";
 import { CourseCatalogPage } from "./pages/CourseCatalogPage";
 import { CourseCollectionPage } from "./pages/CourseCollectionPage";
 import { CoursesPage } from "./pages/CoursesPage";
+import { FlashcardCourseImportPage } from "./pages/FlashcardCourseImportPage";
 import { CourseDetailPage } from "./pages/CourseDetailPage";
 import { PublicCoursesPage } from "./pages/PublicCoursesPage";
 import { EditCardPage } from "./pages/EditCardPage";
@@ -97,6 +98,10 @@ export default function App() {
             element={<CourseCatalogPage />}
           />
           <Route path="/courses/decks" element={<CoursesPage />} />
+          <Route
+            path="/courses/import"
+            element={<FlashcardCourseImportPage />}
+          />
           <Route path="/courses/:id" element={<CourseDetailPage />} />
           <Route path="/library/courses" element={<PublicCoursesPage />} />
           <Route path="/app-decks" element={<AppDecksPage />} />

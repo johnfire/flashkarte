@@ -73,6 +73,9 @@ export function CoursesPage() {
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">{t("courses.title")}</h1>
         <div className="flex gap-4 text-sm">
+          <Link to="/courses/import" className="text-indigo-600">
+            {t("imports.importCourse")}
+          </Link>
           <Link to="/library/courses" className="text-indigo-600">
             {t("courses.browsePublic")}
           </Link>

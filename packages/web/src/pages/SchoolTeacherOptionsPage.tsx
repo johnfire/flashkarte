@@ -56,6 +56,15 @@ export function SchoolTeacherOptionsPage() {
           ))}
         </section>
 
+        <section className="mt-14 rounded-2xl border border-white/10 bg-white/5 p-7 sm:p-10">
+          <h2 className="text-2xl font-bold text-white">
+            {t("schoolTeacherPage.createContentTitle")}
+          </h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-slate-300">
+            {t("schoolTeacherPage.createContentBody")}
+          </p>
+        </section>
+
         <section className="mx-auto mt-14 max-w-3xl rounded-2xl border border-indigo-300/30 bg-indigo-500/10 p-8 text-center sm:p-10">
           <h2 className="text-2xl font-bold text-white">
             {t("schoolTeacherPage.gettingStartedTitle")}

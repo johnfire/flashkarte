@@ -38,6 +38,12 @@ describe("SchoolTeacherOptionsPage", () => {
       }),
     ).toBeInTheDocument();
     expect(
+      screen.getByRole("heading", {
+        level: 2,
+        name: "Create content your way",
+      }),
+    ).toBeInTheDocument();
+    expect(
       screen.getByRole("link", { name: "Talk to us about LearnWohl" }),
     ).toHaveAttribute(
       "href",

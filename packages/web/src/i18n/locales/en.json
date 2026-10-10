@@ -246,6 +246,8 @@
     "schoolTeachersBody": "Create learning material for the classes and groups you teach, then give your learners a straightforward place to study it.",
     "independentTeachersTitle": "For independent teachers and tutors",
     "independentTeachersBody": "Use LearnWohl with private learners or your own study groups — from language teaching to maths tutoring and beyond.",
+    "createContentTitle": "Create content your way",
+    "createContentBody": "Connect your own AI and it receives clear instructions for building material in your LearnWohl account. Or start with a spreadsheet: import a simple CSV for flashcards, or an Excel workbook or ZIP of CSV files for an ordered flashcard course. You can combine both approaches and review everything before sharing it.",
     "gettingStartedTitle": "Start with your teaching setup",
     "gettingStartedBody": "Tell us about the learners you teach and how you work. We’ll talk through the best way to set up LearnWohl for your school, classes, or tutoring practice.",
     "contactCta": "Talk to us about LearnWohl"
@@ -448,6 +450,29 @@
     "emptyInLanguage": "No courses in this collection use the selected language.",
     "emptyMine": "You do not have any courses from this collection yet."
   },
+  "imports": {
+    "importCourse": "Import deck collection",
+    "backToCourses": "← Deck Collections",
+    "courseTitle": "Import a deck collection",
+    "courseIntro": "Bring in an ordered set of flashcard decks from the spreadsheet your team already uses.",
+    "formatsLabel": "Supported import formats",
+    "workbookTitle": "One Excel workbook",
+    "workbookDescription": "Upload an .xlsx workbook with three tabs named Course, Decks, and Cards.",
+    "zipTitle": "Three CSV files in a ZIP",
+    "zipDescription": "Upload a ZIP containing course.csv, decks.csv, and cards.csv.",
+    "columnsTitle": "What goes where",
+    "courseColumns": "Course: course_title, description",
+    "deckColumns": "Decks: deck_key, title, order",
+    "cardColumns": "Cards: deck_key, front, answer, explanation (optional)",
+    "explanationHint": "The optional explanation appears beneath the answer when a learner flips the card.",
+    "downloadCourse": "Course CSV starter",
+    "downloadDecks": "Decks CSV starter",
+    "downloadCards": "Cards CSV starter",
+    "chooseFile": "Choose your workbook or ZIP",
+    "draftHint": "The collection stays private after import. You can review it, edit it, then share it when ready.",
+    "importing": "Importing…",
+    "courseError": "Couldn't import the deck collection. Check the file and try again."
+  },
   "createDeck": {
     "title": "New Deck",
     "instructions": "Paste Markdown or upload a <0>.md</0>/<1>.txt</1> file. Use <2># Title</2>, <3>## Category</3>, and <4>**1. Question**</4> followed by the answer.",
@@ -460,7 +485,11 @@
     "saveError": "Couldn't save the deck",
     "saving": "Saving…",
     "saveDeck": "Save deck",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "csvHint": "Or import a CSV with front, answer, and an optional explanation column.",
+    "downloadCsv": "Download a CSV starter",
+    "importCourse": "Import a whole deck collection instead.",
+    "csvReady": "Your CSV is ready to import."
   },
   "study": {
     "loadError": "Couldn't load cards",

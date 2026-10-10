@@ -518,6 +518,31 @@ export const api = {
         body: JSON.stringify({ shares }),
       }),
   },
+  imports: {
+    deckCsv: (
+      file: File,
+      title?: string,
+      contentLanguage?: "en" | "de" | "ar",
+    ) => {
+      const form = new FormData();
+      form.append("file", file);
+      if (title) form.append("title", title);
+      if (contentLanguage) form.append("contentLanguage", contentLanguage);
+      return request<{ id: string; title: string; card_count: number }>(
+        "/imports/deck-csv",
+        { method: "POST", body: form },
+      );
+    },
+    flashcardCourse: (file: File, contentLanguage?: "en" | "de" | "ar") => {
+      const form = new FormData();
+      form.append("file", file);
+      if (contentLanguage) form.append("contentLanguage", contentLanguage);
+      return request<{
+        course: { id: string; title: string };
+        decks_imported: number;
+      }>("/imports/flashcard-course", { method: "POST", body: form });
+    },
+  },
   categories: {
     tree: (language?: "en" | "de" | "ar") =>
       request<{ categories: DeckCategory[] }>(

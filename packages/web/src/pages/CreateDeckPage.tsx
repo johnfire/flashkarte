@@ -16,6 +16,7 @@ export function CreateDeckPage() {
   const [contentLanguage, setContentLanguage] = useState<
     "en" | "de" | "ar" | null
   >(null);
+  const isCsvFile = file?.name.toLowerCase().endsWith(".csv") ?? false;
 
   const preview = useMemo(
     () => (markdown.trim() ? parseDeck(markdown, "") : null),
@@ -26,7 +27,9 @@ export function CreateDeckPage() {
 
   async function onFileChange(f: File | null) {
     setFile(f);
-    if (f) setMarkdown(await f.text());
+    if (f && !f.name.toLowerCase().endsWith(".csv"))
+      setMarkdown(await f.text());
+    if (f?.name.toLowerCase().endsWith(".csv")) setMarkdown("");
   }
 
   async function onSubmit(e: FormEvent) {
@@ -35,7 +38,13 @@ export function CreateDeckPage() {
     setBusy(true);
     try {
       const deck = file
-        ? await api.decks.createFromFile(file, contentLanguage ?? undefined)
+        ? isCsvFile
+          ? await api.imports.deckCsv(
+              file,
+              undefined,
+              contentLanguage ?? undefined,
+            )
+          : await api.decks.createFromFile(file, contentLanguage ?? undefined)
         : await api.decks.create(
             markdown,
             undefined,
@@ -80,10 +89,24 @@ export function CreateDeckPage() {
         />
         <input
           type="file"
-          accept=".md,.txt,text/markdown,text/plain"
+          accept=".md,.txt,.csv,text/markdown,text/plain,text/csv"
           onChange={(e) => onFileChange(e.target.files?.[0] ?? null)}
           className="block text-sm"
         />
+        <p className="text-sm text-gray-600 dark:text-gray-400">
+          {t("createDeck.csvHint")}{" "}
+          <a
+            className="text-indigo-600"
+            href="/templates/flashcard-deck.csv"
+            download
+          >
+            {t("createDeck.downloadCsv")}
+          </a>
+          .{" "}
+          <Link className="text-indigo-600" to="/courses/import">
+            {t("createDeck.importCourse")}
+          </Link>
+        </p>
 
         <textarea
           value={markdown}
@@ -100,7 +123,11 @@ export function CreateDeckPage() {
           className="rounded-lg bg-gray-50 dark:bg-gray-900 p-3 text-sm"
           aria-live="polite"
         >
-          {preview ? (
+          {isCsvFile ? (
+            <p className="text-gray-600 dark:text-gray-300">
+              {t("createDeck.csvReady")}
+            </p>
+          ) : preview ? (
             preview.cards.length > 0 ? (
               <>
                 <p className="font-medium">

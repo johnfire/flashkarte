@@ -246,6 +246,8 @@
     "schoolTeachersBody": "Crea material de aprendizaje para las clases y grupos que enseñas y ofrece a tus alumnos un lugar sencillo para estudiarlo.",
     "independentTeachersTitle": "Para docentes y tutores independientes",
     "independentTeachersBody": "Usa LearnWohl con alumnos particulares o con tus propios grupos de estudio, desde la enseñanza de idiomas hasta las tutorías de matemáticas y mucho más.",
+    "createContentTitle": "Crea contenido a tu manera",
+    "createContentBody": "Conecta tu propia IA y recibirá instrucciones claras para crear material en tu cuenta de LearnWohl. O empieza con una hoja de cálculo: importa un CSV sencillo para tarjetas, o un libro de Excel o ZIP de CSV para un curso de tarjetas ordenado. Puedes combinar ambas opciones y revisar todo antes de compartirlo.",
     "gettingStartedTitle": "Empieza con tu forma de enseñar",
     "gettingStartedBody": "Cuéntanos a quién enseñas y cómo trabajas. Hablaremos de la mejor forma de configurar LearnWohl para tu colegio, clases o práctica de tutoría.",
     "contactCta": "Habla con nosotros sobre LearnWohl"
@@ -448,6 +450,29 @@
     "emptyInLanguage": "No hay cursos de esta colección en el idioma seleccionado.",
     "emptyMine": "Aún no tienes cursos de esta colección."
   },
+  "imports": {
+    "importCourse": "Importar una colección de mazos",
+    "backToCourses": "← Colecciones de mazos",
+    "courseTitle": "Importar una colección de mazos",
+    "courseIntro": "Importa un conjunto ordenado de mazos de tarjetas desde la hoja de cálculo que ya usa tu equipo.",
+    "formatsLabel": "Formatos de importación compatibles",
+    "workbookTitle": "Un libro de Excel",
+    "workbookDescription": "Sube un libro .xlsx con tres pestañas llamadas Course, Decks y Cards.",
+    "zipTitle": "Tres archivos CSV en un ZIP",
+    "zipDescription": "Sube un ZIP que contenga course.csv, decks.csv y cards.csv.",
+    "columnsTitle": "Dónde va cada dato",
+    "courseColumns": "Course: course_title, description",
+    "deckColumns": "Decks: deck_key, title, order",
+    "cardColumns": "Cards: deck_key, front, answer, explanation (opcional)",
+    "explanationHint": "La explicación opcional aparece debajo de la respuesta cuando el alumno da la vuelta a la tarjeta.",
+    "downloadCourse": "Plantilla CSV Course",
+    "downloadDecks": "Plantilla CSV Decks",
+    "downloadCards": "Plantilla CSV Cards",
+    "chooseFile": "Elige tu libro o ZIP",
+    "draftHint": "La colección permanece privada tras la importación. Puedes revisarla, editarla y compartirla cuando esté lista.",
+    "importing": "Importando…",
+    "courseError": "No se pudo importar la colección de mazos. Revisa el archivo e inténtalo de nuevo."
+  },
   "createDeck": {
     "title": "Nuevo mazo",
     "instructions": "Pega Markdown o sube un archivo <0>.md</0>/<1>.txt</1>. Usa <2># Title</2>, <3>## Category</3> y <4>**1. Question**</4> seguido de la respuesta.",
@@ -460,7 +485,11 @@
     "saveError": "No se pudo guardar el mazo",
     "saving": "Guardando…",
     "saveDeck": "Guardar mazo",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "csvHint": "También puedes importar un CSV con front, answer y una columna explanation opcional.",
+    "downloadCsv": "Descargar plantilla CSV",
+    "importCourse": "Importa una colección completa en su lugar.",
+    "csvReady": "Tu CSV está listo para importarse."
   },
   "study": {
     "loadError": "No se pudieron cargar las tarjetas",

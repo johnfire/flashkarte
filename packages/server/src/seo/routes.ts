@@ -38,6 +38,7 @@ export const APP_ROUTES = [
   "/library/courses/:source/collections/:id",
   "/library/courses/:source",
   "/courses/decks",
+  "/courses/import",
   "/courses/:id",
   "/library/courses",
   "/app-decks",
