@@ -1,5 +1,5 @@
 # ---- build (all workspaces) ----
-FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS build
+FROM node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS build
 WORKDIR /app
 ARG VITE_MCP_URL
 ENV VITE_MCP_URL=${VITE_MCP_URL}
@@ -22,7 +22,7 @@ RUN npm run build --workspace=packages/shared \
  && npm run build --workspace=packages/mcp
 
 # ---- app production deps ----
-FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS proddeps
+FROM node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS proddeps
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY scripts/security/apply-dependency-patches.cjs scripts/security/
@@ -31,7 +31,7 @@ COPY packages/server/package.json packages/server/
 RUN npm ci --omit=dev --workspace=packages/server
 
 # ---- app runtime (serves SPA + /api) ----
-FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS production
+FROM node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS production
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=proddeps /app/node_modules ./node_modules
@@ -47,7 +47,7 @@ EXPOSE 3001
 CMD ["node", "dist/server.js"]
 
 # ---- mcp production deps ----
-FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS mcpdeps
+FROM node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS mcpdeps
 WORKDIR /app
 COPY package.json package-lock.json ./
 COPY scripts/security/apply-dependency-patches.cjs scripts/security/
@@ -56,7 +56,7 @@ COPY packages/mcp/package.json packages/mcp/
 RUN npm ci --omit=dev --workspace=packages/mcp
 
 # ---- mcp runtime (hosted MCP server) ----
-FROM node:24-bookworm-slim@sha256:6f7b03f7c2c8e2e784dcf9295400527b9b1270fd37b7e9a7285cf83b6951452d AS mcp
+FROM node:24-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205 AS mcp
 WORKDIR /app
 ENV NODE_ENV=production
 COPY --from=mcpdeps /app/node_modules ./node_modules
