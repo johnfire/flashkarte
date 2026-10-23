@@ -16,7 +16,7 @@
     "test:e2e": "playwright test --config e2e/playwright.config.ts"
   },
   "overrides": {
-    "hono": "^4.13.5",
+    "hono": "^4.13.11",
     "qs": "^6.16.0",
     "proxy-addr": "^2.0.8",
     "source-map-js": "^1.2.2",
