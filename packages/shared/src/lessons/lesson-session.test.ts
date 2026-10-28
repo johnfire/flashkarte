@@ -121,6 +121,14 @@ describe("the screens", () => {
     expect(previousScreen(s, sc).currentScreen).toBe("1");
   });
 
+  it("records a screen as read only once when the learner goes back and forward", () => {
+    const sc = content();
+    let s = nextScreen(startSession(sc, rand()), sc, rand());
+    s = nextScreen(previousScreen(s, sc), sc, rand());
+    expect(s.currentScreen).toBe("2");
+    expect(s.readScreens).toEqual(["1"]);
+  });
+
   it("follows decimal screen numbers (an inserted clarifying screen appears in place)", () => {
     const sc = content({ screens: ["1", "1.010", "2"] });
     let s = startSession(sc, rand());
@@ -157,6 +165,10 @@ describe("answering", () => {
       total: 2,
       firstTryRight: 2,
     });
+    expect(describeStep(second.session, sc)).toEqual({
+      kind: "passed",
+      result: lessonResult(second.session),
+    });
   });
 
   it("rejects a choice that is not one of the options", () => {
@@ -164,6 +176,17 @@ describe("answering", () => {
     const s = toQuestions(sc);
     expect(() => answerQuestion(s, sc, 99, rand())).toThrow(/does not exist/);
     expect(() => answerQuestion(s, sc, -1, rand())).toThrow(SessionError);
+  });
+
+  it("rejects the position just past the last option, and a fractional one", () => {
+    const sc = content();
+    const s = toQuestions(sc);
+    const optionCount = s.presented!.optionOrder.length;
+    expect(() => answerQuestion(s, sc, optionCount, rand())).toThrow(
+      /does not exist/,
+    );
+    expect(() => answerQuestion(s, sc, 1.5, rand())).toThrow(/does not exist/);
+    expect(() => answerQuestion(s, sc, optionCount - 1, rand())).not.toThrow();
   });
 
   it("reveals the correct option only in the outcome, never in the step", () => {
@@ -202,6 +225,31 @@ describe("a wrong answer", () => {
     const firstAsked = s.presented!.presentationId;
     s = continueRemediation(wrong(s, sc).session, sc, seededRandom(2));
     expect(s.presented!.presentationId).not.toBe(firstAsked);
+  });
+
+  it("re-asks a question that has a variant straight away, ahead of the others", () => {
+    const sc = content({
+      questions: [question("q1", ["1"], [4, 4]), question("q2", ["2"])],
+    });
+    let s = toQuestions(sc);
+    s = continueRemediation(wrong(s, sc).session, sc, rand());
+    expect(s.presented?.questionId).toBe("q1");
+    expect(s.queue).toEqual(["q1", "q2"]);
+  });
+
+  it("shows every wording before repeating one, and never the same wording twice in a row", () => {
+    const sc = content({ questions: [question("q1", [], [4, 4, 4])] });
+    for (let seed = 1; seed <= 50; seed++) {
+      const r = seededRandom(seed);
+      let s = toQuestions(sc, r);
+      const asked = [s.presented!.presentationId];
+      for (let miss = 0; miss < 3; miss++) {
+        s = wrong(s, sc, r).session;
+        asked.push(s.presented!.presentationId);
+      }
+      expect(new Set(asked.slice(0, 3)).size).toBe(3);
+      expect(asked[3]).not.toBe(asked[2]);
+    }
   });
 
   it("with no variant, sends the question to the back of the set and asks the others first", () => {
@@ -251,6 +299,26 @@ describe("a wrong answer", () => {
       misses: 2,
     });
     expect(lessonResult(done).firstTryRight).toBe(0);
+  });
+
+  it("shows no help offer on the screen before the second miss", () => {
+    const sc = content({ questions: [question("q1", ["1"], [4, 4])] });
+    let s = toQuestions(sc);
+    expect(describeStep(s, sc)).toMatchObject({
+      kind: "question",
+      helpOffered: false,
+    });
+    s = wrong(s, sc).session;
+    expect(describeStep(s, sc)).toMatchObject({
+      kind: "remediation",
+      helpOffered: false,
+    });
+    s = continueRemediation(s, sc, rand());
+    expect(describeStep(s, sc)).toMatchObject({
+      kind: "question",
+      misses: 1,
+      helpOffered: false,
+    });
   });
 
   it("does not offer help on the first miss, and clears the offer once the question is right", () => {
@@ -315,9 +383,97 @@ describe("step descriptions", () => {
       total: 2,
     });
   });
+
+  it("allows going back from any screen after the first", () => {
+    const sc = content();
+    const second = nextScreen(startSession(sc, rand()), sc, rand());
+    expect(describeStep(second, sc)).toEqual({
+      kind: "screen",
+      number: "2",
+      index: 1,
+      total: 3,
+      canGoBack: true,
+    });
+  });
 });
 
 describe("reconciling a saved session with edited content", () => {
+  it("leaves the learner on the current screen when it still exists", () => {
+    const sc = content();
+    const s = nextScreen(startSession(sc, rand()), sc, rand());
+    const r = reconcile(
+      s,
+      content({ screens: ["1", "2", "2.5", "3"] }),
+      rand(),
+    );
+    expect(r.phase).toBe("screens");
+    expect(r.currentScreen).toBe("2");
+  });
+
+  it("keeps the question on screen exactly as shown when nothing about it changed (a reload shows the same layout)", () => {
+    const sc = content();
+    const s = toQuestions(sc);
+    const r = reconcile(s, sc, rand());
+    expect(r.presented).toEqual(s.presented);
+    expect(r.runs).toEqual(s.runs);
+    const onSecond = right(s, sc).session;
+    expect(onSecond.presented?.questionId).toBe("q2");
+    expect(reconcile(onSecond, sc, rand()).presented).toEqual(
+      onSecond.presented,
+    );
+  });
+
+  it("re-asks with a remaining wording when the variant on screen was retired", () => {
+    const sc = content({ questions: [question("q1", ["1"], [4, 4])] });
+    const seed = [...Array(50).keys()].find(
+      (n) =>
+        toQuestions(sc, seededRandom(n)).presented!.presentationId === "q1-v1",
+    )!;
+    const s = toQuestions(sc, seededRandom(seed));
+    expect(s.presented!.presentationId).toBe("q1-v1");
+    const variantRetired = content({ questions: [question("q1", ["1"], [4])] });
+    const r = reconcile(s, variantRetired, rand());
+    expect(r.phase).toBe("questions");
+    expect(r.presented).toMatchObject({
+      questionId: "q1",
+      presentationId: "q1",
+    });
+  });
+
+  it("re-asks the question when every teaching screen it was showing has been removed", () => {
+    const sc = content({ questions: [question("q1", ["2", "3"])] });
+    const s = wrong(toQuestions(sc), sc).session;
+    expect(s.phase).toBe("remediation");
+    const r = reconcile(
+      s,
+      content({ screens: ["1"], questions: sc.questions }),
+      rand(),
+    );
+    expect(r.phase).toBe("questions");
+    expect(r.remediation).toBeNull();
+    expect(r.presented?.questionId).toBe("q1");
+  });
+
+  it("moves the learner back to the last teaching screen left when later ones were removed", () => {
+    const sc = content({ questions: [question("q1", ["2", "3"])] });
+    let s = wrong(toQuestions(sc), sc).session;
+    s = continueRemediation(s, sc, rand());
+    expect(describeStep(s, sc)).toMatchObject({ number: "3", position: 1 });
+    const edited = content({ screens: ["1", "2"], questions: sc.questions });
+    const r = reconcile(s, edited, rand());
+    expect(r.remediation).toEqual({
+      questionId: "q1",
+      screens: ["2"],
+      position: 0,
+    });
+    expect(describeStep(r, edited)).toMatchObject({
+      kind: "remediation",
+      number: "2",
+      position: 0,
+      of: 1,
+    });
+  });
+
   it("moves on when the current screen is gone, and to the questions when none is left", () => {
     const sc = content();
     const s = nextScreen(startSession(sc, rand()), sc, rand());
@@ -370,6 +526,13 @@ describe("reconciling a saved session with edited content", () => {
     expect(reconcile(s, content({ questions: [] }), rand()).phase).toBe(
       "passed",
     );
+  });
+
+  it("passes a session still on the screens when every screen and question was removed", () => {
+    const s = startSession(content(), rand());
+    const r = reconcile(s, content({ screens: [], questions: [] }), rand());
+    expect(r.phase).toBe("passed");
+    expect(r.queue).toEqual([]);
   });
 });
 
