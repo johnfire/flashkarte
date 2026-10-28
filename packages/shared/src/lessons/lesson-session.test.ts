@@ -271,6 +271,20 @@ describe("a wrong answer", () => {
     expect(s.presented!.optionOrder).not.toEqual(before);
   });
 
+  it("never re-asks with the identical layout, whatever the random draw, with or without teaching screens", () => {
+    for (const teaching of [["1"], []]) {
+      const sc = content({ questions: [question("q1", teaching, [4])] });
+      for (let seed = 1; seed <= 200; seed++) {
+        const r = seededRandom(seed);
+        let s = toQuestions(sc, r);
+        const before = s.presented!.optionOrder;
+        s = wrong(s, sc, r).session;
+        if (s.phase === "remediation") s = continueRemediation(s, sc, r);
+        expect(s.presented!.optionOrder).not.toEqual(before);
+      }
+    }
+  });
+
   it("counts misses, offers help from the second miss, and remembers the first attempt was wrong", () => {
     const sc = content({ questions: [question("q1", ["1"], [4, 4])] });
     let s = toQuestions(sc);

@@ -373,7 +373,8 @@ export function answerQuestion(
     ...session,
     runs,
     queue: requeueAfterMiss(session.queue, question),
-    presented: null,
+    // Kept, not cleared: the re-ask reads this layout so it can shuffle to a different one.
+    presented,
     helpOffered: outcome.helpOffered ? question.id : null,
     remediation: {
       questionId: question.id,
