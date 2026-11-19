@@ -7,7 +7,10 @@ import { KeyAccessChoice, KeyScopeBadge } from "./KeyAccess";
 
 export function ApiKeysSection() {
   const { t } = useTranslation();
-  const mcpUrl = import.meta.env.VITE_MCP_URL?.trim();
+  const configuredMcpUrl = import.meta.env.VITE_MCP_URL?.trim();
+  const mcpUrl = configuredMcpUrl?.startsWith("/")
+    ? new URL(configuredMcpUrl, window.location.origin).href
+    : configuredMcpUrl;
   const [keys, setKeys] = useState<ApiKey[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [newName, setNewName] = useState("My AI");

@@ -1,0 +1,52 @@
+services:
+  app:
+    mem_limit: 512m
+    environment:
+      GITHUB_TOKEN: ""
+      ADMIN_EMAILS: ""
+      SIGNUP_NOTIFICATION_EMAIL: ""
+      # Account lifecycle tests exercise repeated sign-ins from a single runner.
+      RATE_LIMIT_AUTH: "120"
+      RATE_LIMIT_2FA: "30"
+      STRIPE_SECRET_KEY: ""
+      STRIPE_WEBHOOK_SECRET: ""
+      STRIPE_PRICE_MONTHLY: ""
+      STRIPE_PRICE_YEARLY: ""
+      STRIPE_SUCCESS_URL: ""
+      STRIPE_CANCEL_URL: ""
+      STRIPE_PORTAL_RETURN_URL: ""
+      EMAIL_SERVICE_TENANTS: ""
+      MAIL_HOST: test-mail
+      MAIL_PORT: "1025"
+      MAIL_USER: flashkarte@example.test
+      MAIL_PASS: local-mail-capture
+      MAIL_SECURE: "false"
+      MAIL_FROM: flashkarte@example.test
+    depends_on:
+      test-mail:
+        condition: service_started
+  worker:
+    mem_limit: 256m
+    environment:
+      EMAIL_SERVICE_TENANTS: ""
+      MAIL_HOST: test-mail
+      MAIL_PORT: "1025"
+      MAIL_USER: flashkarte@example.test
+      MAIL_PASS: local-mail-capture
+      MAIL_SECURE: "false"
+      MAIL_FROM: flashkarte@example.test
+  mcp:
+    mem_limit: 256m
+  db:
+    mem_limit: 512m
+  test-mail:
+    image: ghcr.io/axllent/mailpit:v1.33.1@sha256:aef2aacc11f075ec0fb6874275ee4a421e688e11a96ebb296134d1735c7761ce
+    mem_limit: 96m
+    environment:
+      MP_SMTP_AUTH_ALLOW_INSECURE: "true"
+      MP_SMTP_AUTH: flashkarte@example.test:local-mail-capture
+      MP_MAX_MESSAGES: "100"
+      MP_MAX_AGE: 1h
+    ports:
+      - "127.0.0.1:8046:8025"
+    restart: unless-stopped

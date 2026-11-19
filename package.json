@@ -13,7 +13,8 @@
     "lint": "eslint \"packages/**/*.{ts,tsx}\"",
     "format": "prettier --write \"packages/**/src/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"packages/**/src/**/*.{ts,tsx}\"",
-    "test:e2e": "playwright test --config e2e/playwright.config.ts"
+    "test:e2e": "playwright test --config e2e/playwright.config.ts",
+    "test:staging": "bash scripts/release/test-staging.sh"
   },
   "overrides": {
     "hono": "^4.13.11",

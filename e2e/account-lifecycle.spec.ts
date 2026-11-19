@@ -1,30 +1,20 @@
 import fs from "fs";
+import { randomUUID } from "node:crypto";
 import { test, expect, Page } from "@playwright/test";
 import { generate } from "otplib";
-import { MAIL_SINK } from "./playwright.config";
+import { verificationLink } from "./mail-inbox";
 
 // The full account lifecycle against the real stack: signup → verify email →
 // create deck → study a card → change password → enable 2FA → login with the
 // code → export data → delete account → confirm gone. Sequential by design;
 // each step depends on the one before it.
 
-const email = `e2e-${Date.now()}@example.com`;
-const password = "E2ePassword-1";
-const newPassword = "E2ePassword-2";
+const email = `e2e-${randomUUID()}@example.test`;
+const password = `Stage-E2E-${randomUUID()}`;
+const newPassword = `Stage-E2E-${randomUUID()}`;
 let totpSecret = "";
 
 test.describe.configure({ mode: "serial" });
-
-function lastMailTo(address: string): { text: string } {
-  const lines = fs
-    .readFileSync(MAIL_SINK, "utf8")
-    .trim()
-    .split("\n")
-    .map((l) => JSON.parse(l) as { to: string; text: string });
-  const mail = lines.filter((m) => m.to === address).pop();
-  if (!mail) throw new Error(`no mail captured for ${address}`);
-  return mail;
-}
 
 async function login(
   page: Page,
@@ -66,11 +56,12 @@ test("signup gates product access until the email is verified", async ({
   ).toHaveCount(0);
 });
 
-test("the emailed verification link verifies the address", async ({ page }) => {
-  const mail = lastMailTo(email);
-  const link = mail.text.match(/https?:\/\/\S+verify-email\S+/)?.[0];
-  expect(link, "verification link present in the captured mail").toBeTruthy();
-  await page.goto(link!);
+test("the emailed verification link verifies the address", async ({
+  page,
+  request,
+  baseURL,
+}) => {
+  await page.goto(await verificationLink(request, email, baseURL));
   await expect(page.getByText(/verified/i).first()).toBeVisible();
 });
 
@@ -98,6 +89,11 @@ test("a markdown deck can be created and studied", async ({ page }) => {
 test("changing the password re-issues the session", async ({ page }) => {
   await login(page, password);
   await page.goto("/settings");
+  if (process.env.STAGING_MAIL_URL) {
+    await expect(
+      page.getByText(`${new URL(page.url()).origin}/mcp`, { exact: true }),
+    ).toBeVisible();
+  }
   await page.getByLabel("Current password").fill(password);
   await page.getByLabel("New password (min 8 chars)").fill(newPassword);
   await page.getByLabel("Confirm new password").fill(newPassword);

@@ -1,6 +1,7 @@
 import path from "path";
 import fs from "fs";
 import { defineConfig, devices } from "@playwright/test";
+import { MAIL_SINK } from "./mail-inbox";
 
 // E2E tier (§9.0): the real server binary against a real Postgres, serving
 // the real built SPA — the seams the mock-based unit/route tests can't cover.
@@ -10,7 +11,7 @@ import { defineConfig, devices } from "@playwright/test";
 //   cp -r packages/web/dist packages/server/public
 //   Postgres reachable (defaults match the CI service container).
 
-export const MAIL_SINK = path.join(__dirname, ".artifacts", "mail-sink.jsonl");
+export { MAIL_SINK } from "./mail-inbox";
 const artifactsDir = path.dirname(MAIL_SINK);
 fs.mkdirSync(artifactsDir, { recursive: true });
 // Fresh sink per run so tests never read a previous run's mail.

@@ -1,10 +1,12 @@
 # Deployment
 
-LearnWohl deploys to the VPS via **GitHub Actions → GHCR → SSH**. On every push
-to `main`, CI runs the test suite, builds the **app** and **mcp** Docker images,
-and pushes them to the GitHub Container Registry. The deploy job SSHes to the
-VPS and updates the stack in `/opt/learnwohl`. The VPS itself never builds — it
-only pulls. `/opt/flashkarte` is retired and CI must not enter it.
+LearnWohl deploys to the VPS through GitHub Actions, GHCR, and SSH. A push to
+`main` runs the test and security gates and builds the app and MCP images.
+The workflow packages their image digests with the Compose files and checks
+the bundle checksum on the VPS. It deploys that bundle to private staging,
+runs the live browser gate, and then automatically deploys the same bundle
+to production. The VPS pulls images. Production uses `/opt/learnwohl` and
+the existing `learnwohl_learnwohl_pgdata` volume.
 
 The stack (defined in `docker-compose.prod.yml`) has an **app** container
 (Express, serving the built web SPA + `/api`), a **worker** container for queued
@@ -18,8 +20,13 @@ requests by path.
 | `/` and app routes                         | `8096`      | app       |
 | `/mcp`, `/oauth/*`, `/.well-known/oauth-*` | `8097`      | mcp       |
 
-> **Going live is a deliberate one-time setup** (DNS + VPS bootstrap + secrets +
-> Apache vhosts + certbot). After that, deploys are automatic on push to `main`.
+Private staging is `https://staging.learnwohl.app` on the same VPS. Apache
+requires a staging TLS client certificate and uses loopback ports 8106 for
+the app and 8107 for MCP. Its PostgreSQL volume, session keys, MCP OAuth
+store, and logs belong to the `learnwohl-staging` Compose project. The
+stage app and email worker deliver only to the private test inbox on loopback
+port 8046. Live email tenants, billing, issue creation and signup alerts
+are disabled in staging.
 
 ## Images
 
@@ -86,26 +93,34 @@ cp .env.example .env && nano .env        # fill in the values below
   `docker compose` commands on a new VPS installation.
 - `TZ` — `Europe/Berlin`
 
-`/opt/learnwohl` is already a Git checkout on the current VPS. Its `.env`,
-database volume, backup directory, and previous hand-built Compose file were
-preserved during bootstrap. Do not replace its `.env` with `.env.example`.
-Its `.env` currently has `COMPOSE_FILE=docker-compose.pre-git.yml`, so plain
-`docker compose` commands use the preserved live configuration instead of the
-repository's development `docker-compose.yml`. After a successful CI deploy and
-health check, the deploy job changes that value to `docker-compose.prod.yml`.
-CI always specifies `-f docker-compose.prod.yml` explicitly.
+`/opt/learnwohl` is already a Git checkout on the current VPS. Keep its
+existing `.env`, database volume, and backup directory. The release job
+uses the Compose files from the bundle and that directory as the Compose
+project directory so the production paths still resolve correctly.
+Migrations run automatically on app startup.
 
-First deploy (subsequent ones are automatic via CI):
+## Private staging and agent tests
+
+- Set the DNS A record to the VPS, install the Apache challenge vhost in
+  `deploy/apache/`, and issue the public server certificate. Install
+  a dedicated staging client CA and enable the staging HTTPS vhost.
+- Create `/opt/learnwohl-staging` with its own writable `logs` directory
+  and create `/opt/learnwohl-releases` for the deployment user. Run
+  `scripts/release/init-staging-env.sh /opt/learnwohl-staging/.env` on the VPS.
+  It generates independent keys and refuses to overwrite an existing file.
+- Give CI and each authorized workstation its own client certificate. Local
+  agents can put the PEM credentials in `~/.local/share/learnwohl/staging-tls/`
+  as `agent.pem` and `agent.key`, or set `STAGING_TLS_CERT_PATH` and
+  `STAGING_TLS_KEY_PATH`.
+- Run the following from the repository. The command authenticates with the
+  certificate, opens the test inbox tunnel over SSH, and drives a disposable
+  account through signup, verification, study, password change, 2FA, export,
+  and deletion. The verification email must point back to staging. Staging
+  raises the auth and 2FA rate limits to accommodate repeated test sign-ins.
 
 ```bash
-export IMAGE_TAG=latest
-docker compose --profile mcp -f docker-compose.prod.yml pull app worker mcp db db-backup
-docker compose --profile mcp -f docker-compose.prod.yml up -d app worker mcp db db-backup
-curl http://127.0.0.1:8096/health        # -> {"status":"ok"}
-curl http://127.0.0.1:8097/health        # -> ok
+npm run test:staging
 ```
-
-Migrations run automatically on app startup (idempotent).
 
 ## Contacting users
 
@@ -139,12 +154,15 @@ docker compose -f docker-compose.prod.yml logs --tail=100 worker
 Set these in the repo (Settings → Secrets and variables → Actions) so the
 `deploy` job can reach the VPS:
 
-| Secret        | Value                                                                                                            |
-| ------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `VPS_HOST`    | `82.165.32.162`                                                                                                  |
-| `VPS_USER`    | `claude`                                                                                                         |
-| `VPS_PORT`    | `22`                                                                                                             |
-| `VPS_SSH_KEY` | private key of a dedicated deploy keypair whose public key is in `claude@`'s `~/.ssh/authorized_keys` on the VPS |
+| Secret             | Value                                                                                                            |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `VPS_HOST`         | `82.165.32.162`                                                                                                  |
+| `VPS_USER`         | `claude`                                                                                                         |
+| `VPS_PORT`         | `22`                                                                                                             |
+| `VPS_SSH_KEY`      | private key of a dedicated deploy keypair whose public key is in `claude@`'s `~/.ssh/authorized_keys` on the VPS |
+| `VPS_HOST_KEY`     | Pinned VPS SSH host key in known_hosts format                                                                    |
+| `STAGING_TLS_CERT` | PEM client certificate for the CI staging runner                                                                 |
+| `STAGING_TLS_KEY`  | PEM client private key for the CI staging runner                                                                 |
 
 `GITHUB_TOKEN` (used to push to GHCR) is provided automatically.
 
@@ -193,22 +211,26 @@ In the HTTPS vhost, keep the same `RewriteEngine` rule but use only the
 the request reaches the app, while the bare HTTPS host continues to proxy the
 app and MCP routes normally.
 
-The app image build sets `VITE_MCP_URL=https://learnwohl.app/mcp` for Settings.
-The server reads `MCP_PUBLIC_URL` at runtime for `/llms.txt`.
+The app image builds with `VITE_MCP_URL=/mcp`. Settings expands that path using the active site origin. The server reads `MCP_PUBLIC_URL` at runtime for `/llms.txt`.
 
 ## Rollback
 
-Each deploy pins images to a commit SHA. To roll back, on the VPS:
+Keep previous tested bundles and their registry digests available. GitHub
+retains the release artifact for 30 days. On the VPS, the bundle digest
+for each active stack is recorded in `/opt/learnwohl-releases/staging-current`
+or `/opt/learnwohl-releases/production-current`.
+
+To redeploy a tested registry bundle, check database migration compatibility,
+then run the matching deploy script on the VPS with its bundle path and digest.
+Set `release_digest` and `registry_user` for the selected bundle and supply a
+GHCR read token on standard input. Verify production from the checkout
+afterwards.
 
 ```bash
-cd /opt/learnwohl
-export IMAGE_TAG=<previous-sha>
-docker compose --profile mcp -f docker-compose.prod.yml pull app worker mcp
-docker compose --profile mcp -f docker-compose.prod.yml up -d app worker mcp db db-backup
+release="/opt/learnwohl-releases/${release_digest:?Choose a tested release digest}"
+bash "$release-deploy.sh" production "$release.tgz" "$release_digest" "${registry_user:?Set your GHCR username}"
+bash scripts/release/verify.sh production
 ```
-
-The deploy job checks that the VPS checkout matches its GitHub commit, so an
-older workflow run is not a rollback mechanism after `main` has advanced.
 
 ## Logs
 

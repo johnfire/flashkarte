@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
 
-# One deploy at a time; newer pushes supersede in-flight ones.
+# Serialize staging and production releases without cancelling an active deploy.
 concurrency:
   group: deploy-${{ github.ref }}
   cancel-in-progress: false
@@ -200,19 +200,23 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build + push app image
+        id: app-image
         uses: docker/build-push-action@v7
         with:
           context: .
           target: production
-          build-args: VITE_MCP_URL=https://learnwohl.app/mcp
+          build-args: VITE_MCP_URL=/mcp
           push: true
           tags: |
             ghcr.io/johnfire/flashkarte-app:latest
             ghcr.io/johnfire/flashkarte-app:${{ github.sha }}
-          labels: org.opencontainers.image.source=https://github.com/johnfire/flashkarte
+          labels: |
+            org.opencontainers.image.source=https://github.com/johnfire/flashkarte
+            org.opencontainers.image.revision=${{ github.sha }}
           cache-from: type=gha,scope=app
           cache-to: type=gha,scope=app,mode=max
       - name: Build + push mcp image
+        id: mcp-image
         uses: docker/build-push-action@v7
         with:
           context: .
@@ -221,7 +225,9 @@ jobs:
           tags: |
             ghcr.io/johnfire/flashkarte-mcp:latest
             ghcr.io/johnfire/flashkarte-mcp:${{ github.sha }}
-          labels: org.opencontainers.image.source=https://github.com/johnfire/flashkarte
+          labels: |
+            org.opencontainers.image.source=https://github.com/johnfire/flashkarte
+            org.opencontainers.image.revision=${{ github.sha }}
           cache-from: type=gha,scope=mcp
           cache-to: type=gha,scope=mcp,mode=max
       - name: Smoke test MCP image imports
@@ -229,8 +235,24 @@ jobs:
           docker pull ghcr.io/johnfire/flashkarte-mcp:${{ github.sha }}
           docker run --rm --entrypoint node ghcr.io/johnfire/flashkarte-mcp:${{ github.sha }} -e "require('./dist/tools/decks')"
 
-  # Deploy the app and same-domain MCP service to LearnWohl.
+      - name: Package release with immutable image references
+        env:
+          APP_DIGEST: ${{ steps.app-image.outputs.digest }}
+          MCP_DIGEST: ${{ steps.mcp-image.outputs.digest }}
+        run: |
+          bash scripts/release/bundle.sh "$RUNNER_TEMP/learnwohl-release.tgz" \
+            "ghcr.io/johnfire/flashkarte-app@$APP_DIGEST" "ghcr.io/johnfire/flashkarte-mcp@$MCP_DIGEST"
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: learnwohl-release
+          path: ${{ runner.temp }}/learnwohl-release.tgz
+          if-no-files-found: error
+          retention-days: 30
+          overwrite: true
+
   deploy:
+    name: Stage, test, and release LearnWohl
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build-push
     runs-on: ubuntu-latest
@@ -238,62 +260,79 @@ jobs:
       contents: read
       packages: read
     steps:
-      - name: Deploy over SSH
-        uses: appleboy/ssh-action@v1
-        env:
-          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GHCR_USER: ${{ github.actor }}
+      - uses: actions/checkout@v7
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
-          port: ${{ secrets.VPS_PORT }}
-          envs: GHCR_TOKEN,GHCR_USER
-          script: |
-            set -euo pipefail
-            cd /opt/learnwohl
-            git pull --ff-only
-            test "$(git rev-parse HEAD)" = "${{ github.sha }}"
-            # Refuse a deploy that would attach the app to the retired database
-            # or create a fresh empty volume in place of the live one.
-            grep -qx 'NGINX_HOST=learnwohl.app' .env
-            grep -qx 'APP_PORT=8096' .env
-            grep -qx 'POSTGRES_DB=learnwohl' .env
-            grep -qx 'POSTGRES_USER=learnwohl' .env
-            grep -qx 'POSTGRES_VOLUME_NAME=learnwohl_learnwohl_pgdata' .env
-            grep -qx 'POSTGRES_VOLUME_EXTERNAL=true' .env
-            grep -Eq '^COMPOSE_FILE=docker-compose\.(pre-git|prod)\.yml$' .env
-            grep -qx 'MCP_BASE_URL=https://learnwohl.app' .env
-            grep -qx 'MCP_PUBLIC_URL=https://learnwohl.app/mcp' .env
-            grep -qx 'MCP_PORT=8097' .env
-            grep -qx 'MCP_OAUTH_CLIENT_ID=learnwohl-app-mcp' .env
-            grep -Eq '^MCP_JWT_SECRET=.{32,}$' .env
-            grep -qx 'COMPOSE_PROFILES=mcp' .env
-            docker volume inspect learnwohl_learnwohl_pgdata >/dev/null
-            docker compose --profile mcp -f docker-compose.prod.yml config --quiet
-            # Log in to GHCR with the workflow's ephemeral token (images are private).
-            echo "$GHCR_TOKEN" | docker login ghcr.io -u "$GHCR_USER" --password-stdin
-            export IMAGE_TAG=${{ github.sha }}
-            docker compose --profile mcp -f docker-compose.prod.yml pull app worker mcp db db-backup
-            docker compose --profile mcp -f docker-compose.prod.yml up -d app worker mcp db db-backup
-            for attempt in $(seq 1 30); do
-              if curl -fsS http://127.0.0.1:8096/health >/dev/null 2>&1; then
-                break
-              fi
-              sleep 3
-            done
-            curl -fsS http://127.0.0.1:8096/health >/dev/null
-            test "$(docker compose --profile mcp -f docker-compose.prod.yml ps --services --filter status=running worker)" = "worker"
-            for attempt in $(seq 1 30); do
-              if curl -fsS http://127.0.0.1:8097/health >/dev/null 2>&1; then
-                break
-              fi
-              sleep 3
-            done
-            curl -fsS http://127.0.0.1:8097/health >/dev/null
-            curl -fsS https://learnwohl.app/.well-known/oauth-authorization-server | python3 -c 'import json,sys; metadata=json.load(sys.stdin); assert metadata["issuer"] == "https://learnwohl.app"; assert metadata["token_endpoint"] == "https://learnwohl.app/oauth/token"'
-            test "$(curl -s -o /dev/null -w '%{http_code}' https://learnwohl.app/mcp)" = 401
-            sed -i 's/^COMPOSE_FILE=.*/COMPOSE_FILE=docker-compose.prod.yml/' .env
-            docker logout ghcr.io
-            docker image prune -f
-            echo "Deployed IMAGE_TAG=${IMAGE_TAG}"
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/download-artifact@v7
+        with:
+          name: learnwohl-release
+          path: ${{ runner.temp }}
+
+      - name: Upload release to VPS
+        env:
+          VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+          VPS_HOST_KEY: ${{ secrets.VPS_HOST_KEY }}
+          VPS_HOST: ${{ secrets.VPS_HOST }}
+          VPS_USER: ${{ secrets.VPS_USER }}
+          VPS_PORT: ${{ secrets.VPS_PORT }}
+        run: |
+          [[ "$VPS_HOST" =~ ^[[:alnum:].-]+$ ]]
+          [[ "$VPS_USER" =~ ^[[:alnum:]_-]+$ ]]
+          [[ "$VPS_PORT" =~ ^[0-9]+$ ]]
+          umask 077
+          mkdir -p ~/.ssh
+          printf '%s\n' "${VPS_SSH_KEY:?}" > ~/.ssh/learnwohl-deploy-key
+          printf '%s\n' "${VPS_HOST_KEY:?}" > ~/.ssh/learnwohl-known-hosts
+          cat > ~/.ssh/learnwohl-deploy-config <<CONFIG
+          Host learnwohl-vps
+              HostName $VPS_HOST
+              User $VPS_USER
+              Port $VPS_PORT
+              BatchMode yes
+              StrictHostKeyChecking yes
+              UserKnownHostsFile ~/.ssh/learnwohl-known-hosts
+              IdentityFile ~/.ssh/learnwohl-deploy-key
+              IdentitiesOnly yes
+          CONFIG
+          bundle="$RUNNER_TEMP/learnwohl-release.tgz"
+          digest="$(sha256sum "$bundle" | cut -d' ' -f1)"
+          scp -F ~/.ssh/learnwohl-deploy-config "$bundle" "learnwohl-vps:/opt/learnwohl-releases/$digest.tgz"
+          scp -F ~/.ssh/learnwohl-deploy-config scripts/release/deploy.sh "learnwohl-vps:/opt/learnwohl-releases/$digest-deploy.sh"
+          printf 'LEARNWOHL_RELEASE_DIGEST=%s\n' "$digest" >> "$GITHUB_ENV"
+
+      - name: Deploy staging
+        env:
+          GHCR_TOKEN: ${{ github.token }}
+        run: bash scripts/release/deploy-from-ci.sh staging
+
+      - name: Install staging browser dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Gate production on live staging tests
+        env:
+          STAGING_TLS_CERT: ${{ secrets.STAGING_TLS_CERT }}
+          STAGING_TLS_KEY: ${{ secrets.STAGING_TLS_KEY }}
+        run: LEARNWOHL_DEPLOY_SSH_CONFIG="$HOME/.ssh/learnwohl-deploy-config" npm run test:staging
+
+      - name: Deploy the same bundle to production
+        env:
+          GHCR_TOKEN: ${{ github.token }}
+        run: bash scripts/release/deploy-from-ci.sh production
+
+      - name: Verify production health and MCP
+        run: bash scripts/release/verify.sh production
+
+      - name: Upload staging traces on failure
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: staging-playwright-traces
+          path: e2e/.artifacts/staging-results
+          if-no-files-found: ignore
+          retention-days: 7

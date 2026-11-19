@@ -168,6 +168,15 @@ describe("SettingsPage", () => {
     expect(screen.queryByText("MCP server URL:")).not.toBeInTheDocument();
   });
 
+  test("resolves the same-origin MCP path against the active site", async () => {
+    vi.stubEnv("VITE_MCP_URL", "/mcp");
+    mockApi.keys.list.mockResolvedValue([]);
+    renderPage();
+    expect(
+      await screen.findByText(`${window.location.origin}/mcp`),
+    ).toBeInTheDocument();
+  });
+
   test("shows the configured MCP connect URL", async () => {
     vi.stubEnv("VITE_MCP_URL", "https://learnwohl.app/mcp");
     mockApi.keys.list.mockResolvedValue([]);
